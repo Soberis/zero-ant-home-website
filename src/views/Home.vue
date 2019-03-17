@@ -2,7 +2,6 @@
   <div class="home">
     <section id="home" class="video-hero" style="height: 700px; background-image: ../../imgs/cover_img_1.jpg;  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
 		<div class="overlay"></div>
-			<!-- <a class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=vqqt5p0q-eU',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default'}"></a>  -->
 			<div class="display-t text-center">
 				<div class="display-tc">
 					<div class="container">
@@ -11,8 +10,8 @@
 								<h2 class="slogan">简单便捷的头影测量软件</h2>
 								<p class="slogan2">带来非同凡响的使用体验</p>
 								<p class="btn-g">
-                  <a href="http://pc.huazhengcl.com/update/win/%E5%8D%8E%E6%AD%A3%E5%A4%B4%E5%BD%B1%E6%B5%8B%E9%87%8F%20Setup%200.0.102.exe" class="btn btn-primary btn-lg btn-custom">下载Windows版</a>
-                  <a href="http://pc.huazhengcl.com/update/mac/%E5%8D%8E%E6%AD%A3%E5%A4%B4%E5%BD%B1%E6%B5%8B%E9%87%8F-0.0.102-mac.zip" class="btn btn-info btn-lg btn-custom">下载Mac版</a>
+                  <a href="http://pc.huazhengcl.com/update/win/%E5%8D%8E%E6%AD%A3%E5%A4%B4%E5%BD%B1%E6%B5%8B%E9%87%8F%20Setup%200.0.103.exe" class="btn btn-primary btn-lg btn-custom">下载Windows版</a>
+                  <a href="http://pc.huazhengcl.com/update/mac/%E5%8D%8E%E6%AD%A3%E5%A4%B4%E5%BD%B1%E6%B5%8B%E9%87%8F-0.0.103-mac.zip" class="btn btn-info btn-lg btn-custom">下载Mac版</a>
                 </p>
 							</div>
 						</div>
@@ -26,11 +25,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
 @Component({
   components: {
-    HelloWorld,
   },
 })
 export default class Home extends Vue {}
@@ -40,6 +36,7 @@ export default class Home extends Vue {}
 .btn {
   width: 180px;
 }
+
 @media screen and (max-width: 991px){
 .animate-box {
   .slogan {
