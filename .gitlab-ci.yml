@@ -1,15 +1,15 @@
 image: $HARBOR_HOST/$HARBOR_PROJECT/node
 
 variables:
+  NPM_CONFIG_CACHE: .npm
   CI: true
 
+
 cache:
-  key:
-    files:
-      - package-lock.json
-    prefix: $CI_COMMIT_REF_SLUG
+  key: ${CI_COMMIT_REF_SLUG}-${CI_PROJECT_ID}
   paths:
     - node_modules/
+    - .npm/
 
 stages:
   - build
@@ -26,10 +26,23 @@ build:
 
 pages:
   stage: deploy
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: npm
+    paths:
+      - node_modules/
   script:
-    - mv dist public
+    - npm install
+    - npm run build
+    - cp -a dist/. public/
   artifacts:
     paths:
       - public
   only:
-    - develop  # Only deploy on develop branch
+    refs:
+      - develop
+  environment:
+    name: staging
+    url: https://$CI_PROJECT_NAMESPACE.pages.rosc.org.cn/$CI_PROJECT_NAME
