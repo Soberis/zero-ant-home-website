@@ -1,0 +1,36 @@
+image: $HARBOR_HOST/$HARBOR_PROJECT/node
+
+variables:
+  CI: true
+
+cache:
+  key:
+    files:
+      - package-lock.json
+    prefix: $CI_COMMIT_REF_SLUG
+  paths:
+    - node_modules/
+    - .npm/
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+
+pages:
+  stage: deploy
+  script:
+    - mv dist public
+  artifacts:
+    paths:
+      - public
+  only:
+    - develop  # Only deploy on develop branch
