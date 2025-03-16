@@ -11,6 +11,7 @@ const languageMap = {
 
 function switchLanguage(lang) {
   locale.value = lang;
+  localStorage.setItem("language", lang); // Store the selected language
   showDropdown.value = false;
 }
 
@@ -23,6 +24,10 @@ const handleClickOutside = (event) => {
 };
 
 onMounted(() => {
+  const savedLanguage = localStorage.getItem("language"); // Retrieve the stored language
+  if (savedLanguage) {
+    locale.value = savedLanguage;
+  }
   document.addEventListener("click", handleClickOutside);
 });
 
