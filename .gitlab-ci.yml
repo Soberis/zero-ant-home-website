@@ -4,7 +4,6 @@ variables:
   NPM_CONFIG_CACHE: .npm
   CI: true
 
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}-${CI_PROJECT_ID}
   paths:
@@ -25,7 +24,7 @@ build:
       - dist/
 
 # 开发环境部署（GitLab Pages）
-deploy_staging:
+pages:
   stage: deploy
   script:
     - echo "Pages accessible through ${CI_PAGES_URL}/${PAGES_PREFIX}"
