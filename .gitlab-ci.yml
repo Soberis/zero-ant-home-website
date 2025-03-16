@@ -24,8 +24,12 @@ build:
     paths:
       - dist/
 
-pages:
+# 开发环境部署（GitLab Pages）
+deploy_staging:
   stage: deploy
+  script:
+    - echo "Pages accessible through ${CI_PAGES_URL}/${PAGES_PREFIX}"
+    - cp -a dist/. public/
   cache:
     key:
       files:
@@ -33,16 +37,21 @@ pages:
       prefix: npm
     paths:
       - node_modules/
-  script:
-    - npm install
-    - npm run build
-    - cp -a dist/. public/
+  variables:
+    PAGES_PREFIX: "" # no prefix by default (master)
+  pages:
+    path_prefix: "$PAGES_PREFIX"
+  environment:
+    name: "Pages ${PAGES_PREFIX}"
+    url: "${CI_PAGES_URL}/${PAGES_PREFIX}"
   artifacts:
     paths:
       - public
-  only:
-    refs:
-      - develop
-  environment:
-    name: staging
-    url: https://$CI_PROJECT_NAMESPACE.pages.rosc.org.cn/$CI_PROJECT_NAME
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" # ensure to run on master (with default PAGES_PREFIX)
+      variables:
+        PAGES_PREFIX: '_dev' # prefix with _stg for the staging branch
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" # conditionally change the prefix on Merge Requests
+      when: manual # run pages manually on Merge Requests
+      variables:
+        PAGES_PREFIX: 'mr-$CI_MERGE_REQUEST_IID' # prefix with the mr-<iid>, like `mr-123`
