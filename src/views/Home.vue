@@ -1,4 +1,3 @@
-\views\Home.vue
 <template>
   <div class="home">
     <section class="video-hero">
@@ -28,8 +27,28 @@
 }
 .home {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   .video-hero {
-    height: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+  }
+
+  .display-t {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .display-tc {
+    text-align: center;
   }
 
   .download_btn {
