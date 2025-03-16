@@ -23,7 +23,7 @@ build:
     paths:
       - dist/
 
-# 开发环境部署（GitLab Pages）
+# 部署到GitLab Pages
 pages:
   stage: deploy
   script:
