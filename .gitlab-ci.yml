@@ -1,0 +1,57 @@
+image: $HARBOR_HOST/$HARBOR_PROJECT/node
+
+variables:
+  NPM_CONFIG_CACHE: .npm
+  CI: true
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}-${CI_PROJECT_ID}
+  paths:
+    - node_modules/
+    - .npm/
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - dist/
+
+# 部署到GitLab Pages
+pages:
+  stage: deploy
+  script:
+    - echo "Pages accessible through ${CI_PAGES_URL}/${PAGES_PREFIX}"
+    - cp -a dist/. public/
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: npm
+    paths:
+      - node_modules/
+  variables:
+    PAGES_PREFIX: "" # no prefix by default (master)
+  pages:
+    path_prefix: "$PAGES_PREFIX"
+  environment:
+    name: "Pages ${PAGES_PREFIX}"
+    url: "${CI_PAGES_URL}/${PAGES_PREFIX}"
+    auto_stop_in: 2 days  # 2天后自动清理
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" # ensure to run on master (with default PAGES_PREFIX)
+      variables:
+        PAGES_PREFIX: '_dev' # prefix with _stg for the staging branch
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" # conditionally change the prefix on Merge Requests
+      when: manual # run pages manually on Merge Requests
+      variables:
+        PAGES_PREFIX: 'mr-$CI_MERGE_REQUEST_IID' # prefix with the mr-<iid>, like `mr-123`
