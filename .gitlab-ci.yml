@@ -43,6 +43,7 @@ pages:
   environment:
     name: "Pages ${PAGES_PREFIX}"
     url: "${CI_PAGES_URL}/${PAGES_PREFIX}"
+    auto_stop_in: 2 days  # 2天后自动清理
   artifacts:
     paths:
       - public
