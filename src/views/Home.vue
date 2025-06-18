@@ -16,7 +16,7 @@
       </div>
     </section>
     <div class="buttom-info">
-      {{ $t("contact", { email: "liqingfengzzu@163.com" }) }}
+      {{ $t("contact", { email: "liqingfeng@zeroant.com" }) }}
     </div>
   </div>
 </template>
