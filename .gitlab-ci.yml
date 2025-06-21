@@ -43,15 +43,43 @@ pages:
   environment:
     name: "Pages ${PAGES_PREFIX}"
     url: "${CI_PAGES_URL}/${PAGES_PREFIX}"
-    auto_stop_in: 2 days  # 2天后自动清理
+    auto_stop_in: 2 days # 2天后自动清理
   artifacts:
     paths:
       - public
   rules:
     - if: $CI_COMMIT_BRANCH == "develop" # ensure to run on master (with default PAGES_PREFIX)
       variables:
-        PAGES_PREFIX: '_dev' # prefix with _stg for the staging branch
+        PAGES_PREFIX: "_dev" # prefix with _stg for the staging branch
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" # conditionally change the prefix on Merge Requests
       when: manual # run pages manually on Merge Requests
       variables:
-        PAGES_PREFIX: 'mr-$CI_MERGE_REQUEST_IID' # prefix with the mr-<iid>, like `mr-123`
+        PAGES_PREFIX: "mr-$CI_MERGE_REQUEST_IID" # prefix with the mr-<iid>, like `mr-123`
+
+# 仅在主分支上部署
+deploy:
+  stage: deploy
+  environment:
+    name: production
+    url: https://zeroant.com
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: npm
+    paths:
+      - node_modules/
+  before_script:
+    - echo "Deploying to production environment"
+    - eval $(ssh-agent -s) # 启动SSH代理
+    - echo
+    - echo "${BAIDU_PRIVATE_CLOUD_SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan ${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER} >> ~/.ssh/known_hosts
+  script:
+    - echo "Deploying to production"
+    # 部署到阿里云上
+    - rsync -avz --delete dist/ root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
+  only:
+    - master
