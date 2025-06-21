@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zeroant.com/sitemap.xml
