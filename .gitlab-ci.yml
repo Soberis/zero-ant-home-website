@@ -71,7 +71,8 @@ deploy:
       - node_modules/
   before_script:
     - echo "Deploying to production environment"
-    - apk add --no-cache openssh-client rsync
+    - apt-get update -y
+    - apt-get install -y openssh-client rsync
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     # 直接使用文件变量（路径自动保存在 $ALI_CLOUD_ECS_SSH_PRIVATE_KEY_FILE 环境变量中）
