@@ -71,15 +71,16 @@ deploy:
       - node_modules/
   before_script:
     - echo "Deploying to production environment"
-    - eval $(ssh-agent -s) # 启动SSH代理
-    - echo
-    - echo "${BAIDU_PRIVATE_CLOUD_SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+    - apk add --no-cache openssh-client rsync
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh-keyscan ${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER} >> ~/.ssh/known_hosts
+    # 直接使用文件变量（路径自动保存在 $ALI_CLOUD_ECS_SSH_PRIVATE_KEY_FILE 环境变量中）
+    - cp $ALI_CLOUD_ECS_SSH_PRIVATE_KEY_FILE ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan ${ALI_CLOUD_ECS_DEPLOY_SERVER} >> ~/.ssh/known_hosts
   script:
     - echo "Deploying to production"
     # 部署到阿里云上
-    - rsync -avz --delete dist/ root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
+    - rsync -avz --delete dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
   only:
     - master
