@@ -14,7 +14,7 @@
 
       <ul class="nav-links">
         <li>
-          <a href="#">{{ $t("nav.home") }}</a>
+          <router-link to="/">{{ $t("nav.home") }}</router-link>
         </li>
         <li>
           <a href="#">
@@ -22,16 +22,16 @@
           </a>
           <ul class="dropdown">
             <li>
-              <a href="#">{{ $t("nav.gen72") }}</a>
+              <router-link to="/products">{{ $t("nav.gen72") }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.rml63") }}</a>
+              <router-link to="/products">{{ $t("nav.rml63") }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.lightArm") }}</a>
+              <router-link to="/products">{{ $t("nav.lightArm") }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.humanoid") }}</a>
+              <router-link to="/products">{{ $t("nav.humanoid") }}</router-link>
             </li>
           </ul>
         </li>
@@ -41,16 +41,22 @@
           </a>
           <ul class="dropdown">
             <li>
-              <a href="#">{{ $t("nav.dualArm") }}</a>
+              <router-link to="/solutions">{{ $t("nav.dualArm") }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.dualArmLift") }}</a>
+              <router-link to="/solutions">{{
+                $t("nav.dualArmLift")
+              }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.singleArm") }}</a>
+              <router-link to="/solutions">{{
+                $t("nav.singleArm")
+              }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.compoundLift") }}</a>
+              <router-link to="/solutions">{{
+                $t("nav.compoundLift")
+              }}</router-link>
             </li>
           </ul>
         </li>
@@ -60,30 +66,40 @@
           </a>
           <ul class="dropdown">
             <li>
-              <a href="#">{{ $t("nav.autoParts") }}</a>
+              <router-link to="/applications">{{
+                $t("nav.autoParts")
+              }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.electronics") }}</a>
+              <router-link to="/applications">{{
+                $t("nav.electronics")
+              }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.metal") }}</a>
+              <router-link to="/applications">{{
+                $t("nav.metal")
+              }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.food") }}</a>
+              <router-link to="/applications">{{ $t("nav.food") }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.medical") }}</a>
+              <router-link to="/applications">{{
+                $t("nav.medical")
+              }}</router-link>
             </li>
             <li>
-              <a href="#">{{ $t("nav.retail") }}</a>
+              <router-link to="/applications">{{
+                $t("nav.retail")
+              }}</router-link>
             </li>
           </ul>
         </li>
         <li>
-          <a href="#">{{ $t("nav.about") }}</a>
+          <router-link to="/about">{{ $t("nav.about") }}</router-link>
         </li>
         <li>
-          <a href="#">{{ $t("nav.contact") }}</a>
+          <router-link to="/contact">{{ $t("nav.contact") }}</router-link>
         </li>
       </ul>
 
@@ -132,7 +148,6 @@ import { useI18n } from "vue-i18n";
 import logoUrl from "@/assets/zeroant_logo.png";
 
 const { locale } = useI18n();
-console.log("Current locale:", locale.value);
 const showDropdown = ref(false);
 const languageMap = { zh: "中文", en: "English" };
 
@@ -163,7 +178,6 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-// 移动端菜单按钮功能可根据需要实现
 function toggleMenu() {}
 </script>
 
@@ -255,7 +269,7 @@ function toggleMenu() {}
   transform: translateY(10px);
   transition: all 0.3s ease;
   z-index: 100;
-  list-style: none; /* 新增，去掉圆圈 */
+  list-style: none;
 }
 
 .nav-links li:hover .dropdown {

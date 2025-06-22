@@ -7,25 +7,58 @@
   "nav": {
     "home": "Home",
     "products": "Products",
-    "gen72": "GEN72 Collaborative Robot",
-    "rml63": "RML63 Collaborative Robot",
-    "lightArm": "Lightweight Robot Arm",
-    "humanoid": "Humanoid Robot",
     "solutions": "Solutions",
-    "dualArm": "Dual-arm Collaboration",
-    "dualArmLift": "Dual-arm Lifting",
-    "singleArm": "Single-arm Collaboration",
-    "compoundLift": "Compound Lifting",
     "applications": "Applications",
-    "autoParts": "Auto Parts",
-    "electronics": "Electronics Manufacturing",
-    "metal": "Metal Processing",
-    "food": "Food & Beverage",
-    "medical": "Medical & Health",
-    "retail": "Retail & Logistics",
     "about": "About Us",
     "contact": "Contact Us",
-    "download": "Downloads",
-    "consult": "Consult Online"
+    "download": "Download",
+    "consult": "Consult Online",
+    "gen72": "GEN72 Model",
+    "rml63": "RML63 Model",
+    "lightArm": "Light Arm",
+    "humanoid": "Humanoid Arm",
+    "dualArm": "Dual Arm Solutions",
+    "dualArmLift": "Dual Arm Lift Solutions",
+    "singleArm": "Single Arm Solutions",
+    "compoundLift": "Compound Lift Solutions",
+    "autoParts": "Automotive Parts",
+    "electronics": "Electronics",
+    "metal": "Metal Industry",
+    "food": "Food Industry",
+    "medical": "Medical Applications",
+    "retail": "Retail Solutions"
+  },
+  "hero": {
+    "title": "Revolutionizing Pharmaceutical Automation",
+    "description": "Our four-axis robotic arms are designed to enhance efficiency and precision in the medical field.",
+    "cta": "Learn More"
+  },
+  "footer": {
+    "copyright": "© 2023 Zero Ant Robotics. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "about": {
+    "mission": "To innovate and provide cutting-edge robotic solutions for the pharmaceutical industry.",
+    "vision": "To be a leader in automation technology, improving productivity and safety in medical applications.",
+    "values": "Integrity, Innovation, Excellence"
+  },
+  "contactSection": {
+    "getInTouch": "Get in Touch",
+    "email": "Email Us",
+    "phone": "Call Us"
+  },
+  "contacts": {
+    "title": "Contact Us",
+    "description": "For more information or inquiries, please fill out the form below and we will get back to you as soon as possible.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "reset": "Reset",
+    "getInTouch": "Get in Touch",
+    "phone": "Phone",
+    "address": "Address"
   }
 }

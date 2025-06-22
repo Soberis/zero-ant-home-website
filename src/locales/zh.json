@@ -1,5 +1,5 @@
 {
-  "logoAlt": "零蚁科技",
+  "logoAlt": "零蚁科技标志",
   "logoText": "零蚁科技",
   "slogan": "让机器人遍布角落",
   "slogan2": "做最酷的机器人",
@@ -7,25 +7,47 @@
   "nav": {
     "home": "首页",
     "products": "产品",
-    "gen72": "GEN72 协作机器人",
-    "rml63": "RML63 协作机器人",
+    "gen72": "GEN72",
+    "rml63": "RML63",
     "lightArm": "轻型机械臂",
-    "humanoid": "人形机器人",
+    "humanoid": "类人机械臂",
     "solutions": "解决方案",
-    "dualArm": "双臂协作",
-    "dualArmLift": "双臂升降",
-    "singleArm": "单臂协作",
-    "compoundLift": "复合升降",
+    "dualArm": "双臂机械臂",
+    "dualArmLift": "双臂升降机械臂",
+    "singleArm": "单臂机械臂",
+    "compoundLift": "复合升降机械臂",
     "applications": "应用领域",
     "autoParts": "汽车零部件",
-    "electronics": "电子制造",
+    "electronics": "电子产品",
     "metal": "金属加工",
-    "food": "食品饮料",
-    "medical": "医疗健康",
-    "retail": "零售物流",
+    "food": "食品行业",
+    "medical": "医疗行业",
+    "retail": "零售行业",
     "about": "关于我们",
     "contact": "联系我们",
-    "download": "资料下载",
-    "consult": "在线咨询"
+    "download": "下载",
+    "consult": "咨询"
+  },
+  "hero": {
+    "title": "四轴机械臂，助力医药自动化",
+    "description": "我们的四轴机械臂专为医药行业设计，提供高效、精准的自动化解决方案。"
+  },
+  "about": {
+    "mission": "我们的使命是通过创新的自动化技术，提升医药行业的生产效率和安全性。",
+    "vision": "成为全球领先的医药自动化解决方案提供商。",
+    "values": "诚信、创新、合作、卓越"
+  },
+  "contacts": {
+    "title": "联系我们",
+    "description": "如需了解更多信息或咨询，请填写以下表单，我们将尽快与您联系。",
+    "name": "姓名",
+    "email": "邮箱",
+    "message": "留言内容",
+    "submit": "提交",
+    "submitting": "提交中...",
+    "reset": "重置",
+    "getInTouch": "联系方式",
+    "phone": "电话",
+    "address": "地址"
   }
 }
