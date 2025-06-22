@@ -82,15 +82,16 @@ deploy_test_server:
   script:
     - echo "Deploying to test server"
     - export SERVER_NAME="test_www.zeroant.com"
-    # 只替换 SERVER_NAME，REWRITE_HTTPS 为空
     # 只替换 SERVER_NAME，REWRITE_HTTPS 为空，并删除 443 server 块
     - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}//g" config/nginx.conf.template \
       | awk '
-      BEGIN{in443=0; brace=0}
-      /^\s*server\s*{/ {block=1; brace=1; buf=$0; next}
+      BEGIN{block=0; brace=0}
+      /^\s*server\s*{/ {
+      block=1; brace=1; buf=$0; next
+      }
       block {
       buf=buf"\n"$0
-      brace+=gsub(/{/,"")-gsub(/}/,"")
+      brace=brace+gsub(/{/,"")-gsub(/}/,"")
       if (brace==0) {
       if (buf ~ /listen 443/) {block=0; buf=""; next}
       print buf
