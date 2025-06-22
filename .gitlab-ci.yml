@@ -99,6 +99,7 @@ deploy_test_server:
         }
         { print }
       ' > dist/nginx.conf
+    - cat dist/nginx.conf # 输出生成的 nginx 配置文件内容
     # 部署到测试服务器上
     - rsync -avz --delete dist/ root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
     - ssh root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
