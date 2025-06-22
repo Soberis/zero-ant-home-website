@@ -14,6 +14,7 @@ stages:
   - build
   - deploy
 
+# 构建阶段
 build:
   stage: build
   script:
@@ -56,8 +57,45 @@ pages:
       variables:
         PAGES_PREFIX: "mr-$CI_MERGE_REQUEST_IID" # prefix with the mr-<iid>, like `mr-123`
 
-# 仅在主分支上部署
-deploy:
+# 部署到测试服务器(内部百度云服务器)
+# 仅仅在 develop 分支上进行部署
+deploy_test_server:
+  stage: deploy
+  environment:
+    name: test
+    url: https://test_www.zeroant.com
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: npm
+    paths:
+      - node_modules/
+  before_script:
+    - echo "Deploying to test environment"
+    - apt-get update -y
+    - apt-get install -y openssh-client rsync
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    # 直接使用文件变量（路径自动保存在 $BAIDU_PRIVATE_CLOUD_SSH_PRIVATE_KEY_FILE 环境变量中）
+    - cp $BAIDU_PRIVATE_CLOUD_SSH_PRIVATE_KEY_FILE ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan ${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER} >> ~/.ssh/known_hosts
+  script:
+    - echo "Deploying to test server"
+    - export SERVER_NAME="test_www.zeroant.com"
+    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g" config/nginx.conf.template > dist/nginx.conf
+    # 部署到测试服务器上
+    - rsync -avz --delete dist/ root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
+    - ssh root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" # 仅在 develop 分支上进行部署
+      when: on_success # 仅在成功时触发
+      allow_failure: false # 不允许失败
+    - when: never # 默认不执行，除非满足上面的条件
+
+# 仅仅在主分支上打指定标签的时候进行部署， 部署到阿里云ECS服务器
+deploy_ALI_CLOUD_ECS:
   stage: deploy
   environment:
     name: production
@@ -81,7 +119,15 @@ deploy:
     - ssh-keyscan ${ALI_CLOUD_ECS_DEPLOY_SERVER} >> ~/.ssh/known_hosts
   script:
     - echo "Deploying to production"
+    - export SERVER_NAME="zeroant.com www.zeroant.com"
+    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g" config/nginx.conf.template > dist/nginx.conf
     # 部署到阿里云上
     - rsync -avz --delete dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
-  only:
-    - master
+    - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
+  # 仅仅在主分支上打指定标签的时候进行部署
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+(-\w+)?$/
+      when: on_success # 仅在成功时触发
+      allow_failure: false # 不允许失败
+    - when: never # 默认不执行，除非满足上面的条件
+

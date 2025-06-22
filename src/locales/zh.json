@@ -3,5 +3,29 @@
   "logoText": "零蚁科技",
   "slogan": "让机器人遍布角落",
   "slogan2": "做最酷的机器人",
-  "contact": "合作请联系 {email}"
+  "contact": "合作请联系 {email}",
+  "nav": {
+    "home": "首页",
+    "products": "产品",
+    "gen72": "GEN72 协作机器人",
+    "rml63": "RML63 协作机器人",
+    "lightArm": "轻型机械臂",
+    "humanoid": "人形机器人",
+    "solutions": "解决方案",
+    "dualArm": "双臂协作",
+    "dualArmLift": "双臂升降",
+    "singleArm": "单臂协作",
+    "compoundLift": "复合升降",
+    "applications": "应用领域",
+    "autoParts": "汽车零部件",
+    "electronics": "电子制造",
+    "metal": "金属加工",
+    "food": "食品饮料",
+    "medical": "医疗健康",
+    "retail": "零售物流",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "download": "资料下载",
+    "consult": "在线咨询"
+  }
 }

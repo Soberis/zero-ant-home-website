@@ -1,100 +1,36 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+// onBeforeUnmount(() => {
+//   document.removeEventListener("click", handleClickOutside);
 
-const { t, locale } = useI18n();
-const showDropdown = ref(false);
-const languageMap = {
-  en: "English",
-  zh: "中文",
-};
+import NavBar from "./components/NavBar.vue";
 
-function switchLanguage(lang) {
-  locale.value = lang;
-  localStorage.setItem("language", lang); // Store the selected language
-  showDropdown.value = false;
-}
-
-// 点击外部区域关闭下拉
-const handleClickOutside = (event) => {
-  const languageSwitcher = document.querySelector(".language-switcher");
-  if (languageSwitcher && !languageSwitcher.contains(event.target)) {
-    showDropdown.value = false;
-  }
-};
-
-onMounted(() => {
-  const savedLanguage = localStorage.getItem("language"); // Retrieve the stored language
-  if (savedLanguage) {
-    locale.value = savedLanguage;
-  }
-  document.addEventListener("click", handleClickOutside);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside);
-});
+// });
 </script>
 
 <template>
   <div id="app" class="page">
-    <nav class="colorlib-nav" role="navigation">
-      <div class="top-menu">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-2">
-              <div id="colorlib-logo">
-                <img
-                  src="@/assets/zeroant_logo.png"
-                  style="width: 50px; height: 50px"
-                  :alt="t('logoAlt')"
-                />
-                <router-link
-                  to="/"
-                  style="margin-left: 5px"
-                  class="logo-text"
-                  >{{ t("logoText") }}</router-link
-                >
-              </div>
-            </div>
-            <div class="col-md-10 text-right">
-              <div class="language-switcher">
-                <button
-                  class="switcher-button"
-                  @click.stop="showDropdown = !showDropdown"
-                >
-                  <span class="icon">🌐</span>
-                  <span class="current-language">{{
-                    languageMap[locale]
-                  }}</span>
-                  <span class="arrow" :class="{ rotated: showDropdown }"
-                    >▼</span
-                  >
-                </button>
-                <transition name="slide-fade">
-                  <div v-if="showDropdown" class="dropdown-menu">
-                    <button
-                      v-for="(value, lang) in languageMap"
-                      :key="lang"
-                      @click="switchLanguage(lang)"
-                      :class="{ active: locale === lang }"
-                    >
-                      {{ value }}
-                    </button>
-                  </div>
-                </transition>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <!-- 导航栏主体 -->
+    <NavBar />
+    <!-- 页面内容 -->
     <router-view />
   </div>
 </template>
 
 <style scoped>
+/* 基础样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+
 #app {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -107,15 +43,42 @@ onBeforeUnmount(() => {
   left: 0;
 }
 
-#colorlib-logo img {
-  filter: invert(100%);
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo-text {
-  text-transform: none; /* 确保文本不默认大写 */
+/* 顶部蓝色导航条 */
+.top-bar {
+  background: linear-gradient(to right, #1a3a8f, #1e6bc9);
+  color: white;
+  padding: 8px 0;
+  font-size: 14px;
 }
 
-.language-switcher {
+.top-bar .container {
+  justify-content: space-between;
+}
+
+.contact-info a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* 语言切换器 */
+.language-switcher-wrapper {
   position: relative;
   display: inline-block;
 }
@@ -123,24 +86,19 @@ onBeforeUnmount(() => {
 .switcher-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 5px;
+  padding: 5px 10px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 4px;
   color: #fff;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
 }
 
 .switcher-button:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.3);
-}
-
-.icon {
-  font-size: 16px;
 }
 
 .current-language {
@@ -157,23 +115,23 @@ onBeforeUnmount(() => {
 }
 
 .dropdown-menu {
-  display: block !important;
   position: absolute;
   z-index: 1000;
   right: 0;
   top: 100%;
   background-color: #fff;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 5px 0 0 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
 }
 
 .dropdown-menu button {
   width: 100%;
-  padding: 10px 16px;
+  padding: 8px 12px;
   text-align: left;
   background: none;
   border: none;
@@ -203,5 +161,214 @@ onBeforeUnmount(() => {
 .slide-fade-leave-to {
   transform: translateY(-10px);
   opacity: 0;
+}
+
+/* 主导航栏 */
+.main-nav {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo i {
+  font-size: 32px;
+  color: #1a3a8f;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1a3a8f;
+}
+
+.logo-text span {
+  color: #1e6bc9;
+}
+
+/* 导航链接 */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.nav-links > li {
+  position: relative;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-links a:hover {
+  color: #1e6bc9;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1e6bc9;
+  transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* 下拉菜单 */
+.dropdown-parent {
+  position: relative;
+}
+
+.dropdown-parent > .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 220px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.dropdown-parent:hover > .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-parent .dropdown-menu li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-parent .dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-parent .dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  font-size: 14px;
+}
+
+.dropdown-parent .dropdown-menu a:hover {
+  background-color: #f5f9ff;
+}
+
+/* 导航按钮 */
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background-color: #1e6bc9;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1a5db0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(30, 107, 201, 0.3);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #1e6bc9;
+  border: 1px solid #1e6bc9;
+}
+
+.btn-outline:hover {
+  background-color: #f5f9ff;
+  transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+  .nav-links,
+  .nav-buttons {
+    display: none;
+  }
+
+  .logo {
+    flex: 1;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .top-bar .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 10px 15px;
+  }
+
+  .contact-info a {
+    margin-right: 10px;
+    font-size: 12px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
+
+  .btn {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
 }
 </style>

@@ -1,13 +1,13 @@
 server {
         listen 80;
-        server_name zeroant.com www.zeroant.com;
+        server_name {{ SERVER_NAME }};
         rewrite ^(.*)$ https://$host$1 permanent;
         charset utf-8;
 }
 
 server {
     listen 443;
-    server_name zeroant.com www.zeroant.com;
+    server_name {{ SERVER_NAME }};
     client_max_body_size 30M;
     client_header_buffer_size 16K;
     large_client_header_buffers 4 64K;

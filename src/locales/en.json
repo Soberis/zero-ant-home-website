@@ -3,5 +3,29 @@
   "logoText": "ZeroAnt",
   "slogan": "Let robots be everywhere",
   "slogan2": "Make the coolest robots",
-  "contact": "For cooperation, please contact {email}"
+  "contact": "For cooperation, please contact {email}",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "gen72": "GEN72 Collaborative Robot",
+    "rml63": "RML63 Collaborative Robot",
+    "lightArm": "Lightweight Robot Arm",
+    "humanoid": "Humanoid Robot",
+    "solutions": "Solutions",
+    "dualArm": "Dual-arm Collaboration",
+    "dualArmLift": "Dual-arm Lifting",
+    "singleArm": "Single-arm Collaboration",
+    "compoundLift": "Compound Lifting",
+    "applications": "Applications",
+    "autoParts": "Auto Parts",
+    "electronics": "Electronics Manufacturing",
+    "metal": "Metal Processing",
+    "food": "Food & Beverage",
+    "medical": "Medical & Health",
+    "retail": "Retail & Logistics",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "download": "Downloads",
+    "consult": "Consult Online"
+  }
 }
