@@ -91,7 +91,7 @@ deploy_test_server:
           buf=buf"\n"$0;
           brace=brace+gsub(/{/,"")-gsub(/}/,"");
           if (brace==0) {
-            if (buf ~ /listen 443/) { block=0; buf=""; next }
+            if (buf ~ /listen[[:space:]]+443/) { block=0; buf=""; next }
             print buf;
             block=0; buf="";
           }
