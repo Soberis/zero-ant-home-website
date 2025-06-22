@@ -82,9 +82,9 @@ deploy_test_server:
   script:
     - echo "Deploying to test server"
     - export SERVER_NAME="test_www.zeroant.com"
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g" config/nginx.conf.template > dist/nginx.conf
-    # 只替换 SERVER_NAME，REWRITE_HTTPS 为空
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}//g" config/nginx.conf.template > dist/nginx.conf
+    # 只保留 80 端口 server 块，去掉 443 端口 server 块
+    - awk '/server {/,/}/ {print} /listen 443/,/}/ {next}' config/nginx.conf.template | \
+      sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}//g" > dist/nginx.conf
     # 部署到测试服务器上
     - rsync -avz --delete dist/ root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
     - ssh root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
