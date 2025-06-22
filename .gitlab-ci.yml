@@ -1,4 +1,4 @@
-image: $HARBOR_HOST/$HARBOR_PROJECT/zeroant-homewebsite:latest
+image: $HARBOR_HOST/$HARBOR_PROJECT/zeroant_homewebsite:latest
 
 variables:
   NPM_CONFIG_CACHE: .npm
