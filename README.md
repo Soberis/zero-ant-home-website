@@ -40,8 +40,8 @@
 
 ### 分支与环境对应
 
-- `develop` 分支：自动部署到测试服务器（https://test_www.zeroant.com），在内网环境运行。
-- `main` 分支打 tag（如 v1.0.0）：自动部署到生产服务器（https://zeroant.com, https://www.zeroant.com）
+- `develop` 分支：自动部署到测试服务器（[http://test_www.zeroant.com](http://test_www.zeroant.com)），在内网环境运行。
+- `main` 分支打 tag（如 v1.0.0）：自动部署到生产服务器（[https://zeroant.com](https://zeroant.com), [https://www.zeroant.com](https://www.zeroant.com)）
 
 ### nginx 配置
 
