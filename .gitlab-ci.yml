@@ -83,24 +83,21 @@ deploy_test_server:
     - echo "Deploying to test server"
     - export SERVER_NAME="test_www.zeroant.com"
     # 只替换 SERVER_NAME，REWRITE_HTTPS 为空，并删除 443 server 块
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}//g" config/nginx.conf.template \
-      | awk '
-      BEGIN{block=0; brace=0}
-      /^\s*server\s*{/ {
-      block=1; brace=1; buf=$0; next
-      }
+    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}//g" config/nginx.conf.template | awk '
+      BEGIN { block=0; brace=0 }
+      /^\s*server\s*{/ { block=1; brace=1; buf=$0; next }
       block {
-      buf=buf"\n"$0
-      brace=brace+gsub(/{/,"")-gsub(/}/,"")
-      if (brace==0) {
-      if (buf ~ /listen 443/) {block=0; buf=""; next}
-      print buf
-      block=0; buf=""
+        buf=buf"\n"$0
+        brace=brace+gsub(/{/,"")-gsub(/}/,"")
+        if (brace==0) {
+          if (buf ~ /listen 443/) { block=0; buf=""; next }
+          print buf
+          block=0; buf=""
+        }
+        next
       }
-      next
-      }
-      {print}
-      ' > dist/nginx.conf
+      { print }
+    ' > dist/nginx.conf
     # 部署到测试服务器上
     - rsync -avz --delete dist/ root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
     - ssh root@${BAIDU_PRIVATE_CLOUD_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
