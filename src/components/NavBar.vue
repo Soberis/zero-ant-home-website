@@ -104,12 +104,6 @@
       </ul>
 
       <div class="nav-buttons">
-        <button class="btn btn-outline">
-          <i class="fas fa-download"></i> {{ $t("nav.download") }}
-        </button>
-        <button class="btn btn-primary">
-          <i class="fas fa-comment-dots"></i> {{ $t("nav.consult") }}
-        </button>
       </div>
 
       <button class="mobile-menu-btn" @click="toggleMenu">
@@ -118,25 +112,11 @@
 
       <div class="language-switcher">
         <button
-          class="switcher-button"
-          @click.stop="showDropdown = !showDropdown"
+          class="nav-link language-btn"
+          @click="switchLanguage()"
         >
-          <span class="icon">🌐</span>
-          <span class="current-language">{{ languageMap[locale] }}</span>
-          <span class="arrow" :class="{ rotated: showDropdown }">▼</span>
+          {{ locale === 'zh' ? 'English' : '中文' }}
         </button>
-        <transition name="slide-fade">
-          <div v-if="showDropdown" class="dropdown-menu">
-            <button
-              v-for="(value, lang) in languageMap"
-              :key="lang"
-              @click="switchLanguage(lang)"
-              :class="{ active: locale === lang }"
-            >
-              {{ value }}
-            </button>
-          </div>
-        </transition>
       </div>
     </nav>
   </header>
@@ -148,21 +128,17 @@ import { useI18n } from "vue-i18n";
 import logoUrl from "@/assets/zeroant_logo.png";
 
 const { locale } = useI18n();
-const showDropdown = ref(false);
-const languageMap = { zh: "中文", en: "English" };
 
-function switchLanguage(lang) {
-  locale.value = lang;
-  localStorage.setItem("language", lang);
-  showDropdown.value = false;
-}
-
-function handleClickOutside(event) {
-  const languageSwitcher = document.querySelector(".language-switcher");
-  if (languageSwitcher && !languageSwitcher.contains(event.target)) {
-    showDropdown.value = false;
+function switchLanguage() {
+  if (locale.value === 'zh') {
+    locale.value = 'en';
+    localStorage.setItem('language', 'en');
+  } else {
+    locale.value = 'zh';
+    localStorage.setItem('language', 'zh');
   }
 }
+
 onMounted(() => {
   const savedLanguage = localStorage.getItem("language");
   if (savedLanguage && (savedLanguage === "zh" || savedLanguage === "en")) {
@@ -171,11 +147,6 @@ onMounted(() => {
     locale.value = "zh";
     localStorage.setItem("language", "zh");
   }
-  document.addEventListener("click", handleClickOutside);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside);
 });
 
 function toggleMenu() {}
@@ -327,12 +298,6 @@ function toggleMenu() {}
   box-shadow: 0 4px 8px rgba(30, 107, 201, 0.3);
 }
 
-.btn-outline {
-  background-color: transparent;
-  color: #1e6bc9;
-  border: 1px solid #1e6bc9;
-}
-
 .btn-outline:hover {
   background-color: #f5f9ff;
   transform: translateY(-2px);
@@ -445,5 +410,40 @@ function toggleMenu() {}
 .slide-fade-leave-to {
   transform: translateY(-10px);
   opacity: 0;
+}
+
+/* 让语言切换按钮与导航栏链接样式一致 */
+.language-switcher .language-btn {
+  background: none;
+  border: none;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s;
+  white-space: nowrap;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.language-switcher .language-btn:hover {
+  color: #1e6bc9;
+}
+
+.language-switcher .language-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1e6bc9;
+  transition: width 0.3s;
+}
+
+.language-switcher .language-btn:hover::after {
+  width: 100%;
 }
 </style>
