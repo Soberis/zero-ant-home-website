@@ -21,43 +21,25 @@
             {{ $t("nav.products") }} <i class="fas fa-chevron-down"></i>
           </a>
           <ul class="dropdown">
-            <li>
-              <router-link to="/products">{{ $t("nav.gen72") }}</router-link>
-            </li>
-            <li>
-              <router-link to="/products">{{ $t("nav.rml63") }}</router-link>
-            </li>
-            <li>
-              <router-link to="/products">{{ $t("nav.lightArm") }}</router-link>
-            </li>
-            <li>
-              <router-link to="/products">{{ $t("nav.humanoid") }}</router-link>
-            </li>
+            <li><router-link to="/products">{{ $t("nav.mobileRobot") }}</router-link></li>
+            <li><router-link to="/products">{{ $t("nav.fourAxisArm") }}</router-link></li>
+            <li><router-link to="/products">{{ $t("nav.sixAxisArm") }}</router-link></li>
+            <li><router-link to="/products">{{ $t("nav.rtOs") }}</router-link></li>
+            <li><router-link to="/products">{{ $t("nav.controlSystem") }}</router-link></li>
+            <li><router-link to="/products">{{ $t("nav.humanoid") }}</router-link></li>
+            <li><router-link to="/products">{{ $t("nav.fourAxisMobileCompound") }}</router-link></li>
           </ul>
         </li>
         <li>
           <a href="#">
-            {{ $t("nav.solutions") }} <i class="fas fa-chevron-down"></i>
+            {{ $t("nav.videoCases") }} <i class="fas fa-chevron-down"></i>
           </a>
           <ul class="dropdown">
-            <li>
-              <router-link to="/solutions">{{ $t("nav.dualArm") }}</router-link>
-            </li>
-            <li>
-              <router-link to="/solutions">{{
-                $t("nav.dualArmLift")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/solutions">{{
-                $t("nav.singleArm")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/solutions">{{
-                $t("nav.compoundLift")
-              }}</router-link>
-            </li>
+            <li><router-link to="/video">{{ $t("nav.paintRobot") }}</router-link></li>
+            <li><router-link to="/video">{{ $t("nav.realtimeTestBench") }}</router-link></li>
+            <li><router-link to="/video">{{ $t("nav.dualMotorBench") }}</router-link></li>
+            <li><router-link to="/video">{{ $t("nav.grabBench") }}</router-link></li>
+            <li><router-link to="/video">{{ $t("nav.compoundGrabBench") }}</router-link></li>
           </ul>
         </li>
         <li>
@@ -65,41 +47,41 @@
             {{ $t("nav.applications") }} <i class="fas fa-chevron-down"></i>
           </a>
           <ul class="dropdown">
-            <li>
-              <router-link to="/applications">{{
-                $t("nav.autoParts")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/applications">{{
-                $t("nav.electronics")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/applications">{{
-                $t("nav.metal")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/applications">{{ $t("nav.food") }}</router-link>
-            </li>
-            <li>
-              <router-link to="/applications">{{
-                $t("nav.medical")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/applications">{{
-                $t("nav.retail")
-              }}</router-link>
-            </li>
+            <li><router-link to="/applications">{{ $t("nav.medicalAuto") }}</router-link></li>
+            <li><router-link to="/applications">{{ $t("nav.semiProcessing") }}</router-link></li>
           </ul>
         </li>
         <li>
-          <router-link to="/about">{{ $t("nav.about") }}</router-link>
+          <a href="#">
+            {{ $t("nav.support") }} <i class="fas fa-chevron-down"></i>
+          </a>
+          <ul class="dropdown">
+            <li><router-link to="/support">{{ $t("nav.afterSales") }}</router-link></li>
+            <li><router-link to="/support">{{ $t("nav.download") }}</router-link></li>
+            <li><router-link to="/support">{{ $t("nav.faq") }}</router-link></li>
+          </ul>
         </li>
         <li>
-          <router-link to="/contact">{{ $t("nav.contact") }}</router-link>
+          <a href="#">
+            {{ $t("nav.news") }} <i class="fas fa-chevron-down"></i>
+          </a>
+          <ul class="dropdown">
+            <li><router-link to="/news">{{ $t("nav.newsDynamic") }}</router-link></li>
+            <li><router-link to="/news">{{ $t("nav.exhibition") }}</router-link></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">
+            {{ $t("nav.about") }} <i class="fas fa-chevron-down"></i>
+          </a>
+          <ul class="dropdown">
+            <li><router-link to="/about">{{ $t("nav.companyIntro") }}</router-link></li>
+            <li><router-link to="/about">{{ $t("nav.history") }}</router-link></li>
+            <li><router-link to="/about">{{ $t("nav.honor") }}</router-link></li>
+            <li><router-link to="/about">{{ $t("nav.culture") }}</router-link></li>
+            <li><router-link to="/about">{{ $t("nav.jobs") }}</router-link></li>
+            <li><router-link to="/about">{{ $t("nav.contact") }}</router-link></li>
+          </ul>
         </li>
       </ul>
 
