@@ -146,17 +146,21 @@ function toggleMenu() {}
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
   padding: 15px 20px;
+  height: 70px;
 }
 
 .logo {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
 }
 
 .logo-text {
@@ -167,7 +171,10 @@ function toggleMenu() {}
 }
 
 .nav-links {
+  flex: 2;
   display: flex;
+  justify-content: center;
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -307,9 +314,11 @@ function toggleMenu() {}
 }
 
 .language-switcher {
-  position: relative;
-  display: inline-block;
-  margin-left: 15px;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 0;
 }
 
 .switcher-button {
