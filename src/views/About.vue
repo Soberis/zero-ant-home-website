@@ -1,245 +1,260 @@
 <template>
-  <div class="about-bg">
-    <div class="about-container">
-      <h1 class="about-title">
-        <span>关于零蚁科技</span>
-      </h1>
-      <section class="about-section">
-        <p class="about-intro">
-          专注微物流智能传送，连接专业设备与应用场景，致力于为客户提供高效、可靠的微物流解决方案。
-        </p>
-      </section>
-      <div class="about-cards">
-        <section class="about-card card-mission">
-          <div class="icon-circle">
-            <svg width="32" height="32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#4F8CFF" />
-              <path
-                d="M10 16l4 4 8-8"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+  <div class="about-page">
+    <header class="about-header">
+      <h1>关于零蚁科技</h1>
+    </header>
+    <nav class="about-nav">
+      <ul>
+        <li @click="scrollTo('company-intro')">公司介绍</li>
+        <li @click="scrollTo('history')">发展历史</li>
+        <li @click="scrollTo('honors')">资质荣誉</li>
+        <li @click="scrollTo('culture')">企业文化</li>
+        <li @click="scrollTo('jobs')">人才招聘</li>
+        <li @click="scrollTo('contact')">联系方式</li>
+      </ul>
+    </nav>
+    <section class="about-section company-intro" id="company-intro">
+      <h2>公司介绍</h2>
+      <p>
+        零蚁科技是一家专注于微物流智能传送系统研发、生产与销售的高新技术企业。我们致力于通过创新的智能物流解决方案，连接专业设备与完成应用场景，助力各行业实现高效、可靠的智能化升级。公司核心团队由来自北航的科研人员与行业专家组成，拥有深厚的技术积累与丰富的工程经验。
+      </p>
+    </section>
+    <section class="about-section history" id="history">
+      <h2>发展历史</h2>
+      <div class="timeline">
+        <div class="timeline-item" v-for="item in timelineData" :key="item.year">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">{{ item.year }}</div>
+          <div class="timeline-content">
+            <ul>
+              <li v-for="event in item.events" :key="event">{{ event }}</li>
+            </ul>
           </div>
-          <h2>使命</h2>
-          <p>高效 · 可靠</p>
-        </section>
-        <section class="about-card card-vision">
-          <div class="icon-circle">
-            <svg width="32" height="32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#FFB347" />
-              <path
-                d="M16 10v12M10 16h12"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
-          <h2>愿景</h2>
-          <p>微物流智能化引领者</p>
-        </section>
-        <section class="about-card card-values">
-          <div class="icon-circle">
-            <svg width="32" height="32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#34D399" />
-              <path
-                d="M12 20l4-8 4 8"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-          <h2>价值观</h2>
-          <ul>
-            <li>创新驱动</li>
-            <li>极致可靠</li>
-            <li>合作共赢</li>
-          </ul>
-        </section>
-        <section class="about-card card-team">
-          <div class="icon-circle">
-            <svg width="32" height="32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#FF6B81" />
-              <path
-                d="M16 18c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-                fill="#fff"
-              />
-            </svg>
-          </div>
-          <h2>团队</h2>
-          <p>北航科研 · 行业专家</p>
-        </section>
+        </div>
       </div>
-    </div>
+    </section>
+    <section class="about-section honors" id="honors">
+      <h2>资质荣誉</h2>
+      <div class="honor-cards">
+        <div class="honor-card" v-for="(honor, idx) in honors" :key="idx">
+          {{ honor }}
+        </div>
+      </div>
+    </section>
+    <section class="about-section culture" id="culture">
+      <h2>企业文化</h2>
+      <p>
+        创新驱动，极致可靠，合作共赢。我们坚持以客户为中心，持续推动技术创新，致力于成为微物流智能化领域的引领者。
+      </p>
+    </section>
+    <section class="about-section jobs" id="jobs">
+      <h2>人才招聘</h2>
+      <p>
+        零蚁科技欢迎有志于智能物流与机器人行业的优秀人才加入我们！请将简历发送至 hr@zeroant.com。
+      </p>
+    </section>
+    <section class="about-section contact" id="contact">
+      <h2>联系方式</h2>
+      <ul class="contact-list">
+        <li>电话：400-xxx-xxxx</li>
+        <li>邮箱：info@zeroant.com</li>
+        <li>地址：北京市海淀区xxx路xxx号</li>
+      </ul>
+    </section>
   </div>
 </template>
 
 <script setup>
-// 可根据需要引入图片或动画
+import { ref } from 'vue';
+const timelineData = [
+  {
+    year: '2020',
+    events: ['公司成立，专注微物流智能传送系统研发'],
+  },
+  {
+    year: '2022',
+    events: ['完成多项行业智能物流项目落地，团队规模突破50人'],
+  },
+  {
+    year: '2024',
+    events: ['发布新一代智能微物流机器人，拓展国际市场'],
+  },
+];
+const honors = [
+  '国家高新技术企业',
+  'ISO9001质量管理体系认证',
+  '多项发明专利与软件著作权',
+  '行业创新奖、技术突破奖',
+];
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 </script>
 
 <style scoped>
-.about-bg {
+.about-page {
+  background: #fff;
+  color: #222;
+  font-family: '微软雅黑', '思源黑体', Arial, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(120deg, #e0e7ff 0%, #f5f7fa 100%);
-  overflow-y: auto;
-  position: relative;
-  padding: 0;
 }
-
-.about-bg-pattern {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: url("https://www.transparenttextures.com/patterns/cubes.png"),
-    radial-gradient(circle at 80% 20%, #c3cfe2 0%, transparent 60%),
-    radial-gradient(circle at 20% 80%, #b4e0ff 0%, transparent 70%);
-  opacity: 0.18;
-  mix-blend-mode: lighten;
-}
-
-.about-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 56px 24px 80px 24px;
-  margin-top: 40px;
-}
-
-.about-title {
-  font-size: 2.8em;
-  font-weight: 800;
+.about-header {
   text-align: center;
+  padding: 100px 0 24px 0;
+  background: #fff;
+}
+.about-header h1 {
+  font-size: 2.8em;
+  color: #1a237e;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+.about-nav {
+  background: #fff;
+  border-bottom: 1px solid #eee;
   margin-bottom: 32px;
-  color: #1a237e;
-  letter-spacing: 2px;
-  text-shadow: 0 4px 24px rgba(80, 120, 200, 0.08);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-.about-title span {
-  color: #1a237e;
-  /* 去除渐变，仅用深色 */
+.about-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
-
-.about-intro {
+.about-nav li {
   font-size: 1.2em;
+  color: #222;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 18px 0;
+  transition: color 0.2s, border-bottom 0.2s;
+  border-bottom: 2px solid transparent;
+}
+.about-nav li:hover {
+  color: #ffb347;
+  border-bottom: 2px solid #ffb347;
+}
+.about-section {
+  max-width: 900px;
+  margin: 0 auto 48px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.07);
+  padding: 40px 32px;
+}
+.about-section h2 {
+  font-size: 1.5em;
+  color: #1a237e;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.about-section p {
+  font-size: 1.12em;
   font-weight: 500;
   line-height: 1.7;
   color: #222;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18px;
-  box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.07);
-  padding: 28px 24px;
-  margin-bottom: 38px;
-  text-align: center;
   letter-spacing: 1px;
+  margin: 0;
+  text-align: center;
 }
-
-.about-cards {
+.timeline {
   display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
+  flex-direction: row;
   justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  margin: 32px 0;
 }
-
-.about-card {
-  background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.1);
-  padding: 36px 28px 28px 28px;
-  flex: 1 1 260px;
-  min-width: 240px;
-  max-width: 300px;
-  transition: transform 0.22s, box-shadow 0.22s;
+.timeline-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  overflow: hidden;
-  border-top: 5px solid transparent;
 }
-.card-mission {
-  border-top-color: #4f8cff;
-}
-.card-vision {
-  border-top-color: #ffb347;
-}
-.card-values {
-  border-top-color: #34d399;
-}
-.card-team {
-  border-top-color: #ff6b81;
-}
-
-.about-card:hover {
-  transform: translateY(-8px) scale(1.035);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.16);
-}
-
-.icon-circle {
-  width: 54px;
-  height: 54px;
+.timeline-dot {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(90deg, #ffb347 0%, #4f8cff 100%);
   border-radius: 50%;
-  background: #f6f8ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
-  box-shadow: 0 2px 12px 0 rgba(80, 120, 200, 0.07);
+  margin-bottom: 8px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px #ffb347;
 }
-
-.about-card h2 {
-  font-size: 1.22em;
+.timeline-year {
+  font-size: 1.1em;
   color: #1a237e;
-  margin-bottom: 10px;
   font-weight: 700;
-  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.timeline-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
   text-align: center;
 }
-
-.about-card p,
-.about-card ul {
+.timeline-content li {
   font-size: 1.08em;
   color: #333;
-  margin: 0;
-  line-height: 1.7;
-  text-align: center;
-  font-weight: 500;
+  margin-bottom: 6px;
 }
-
-.about-card ul {
+.honor-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.honor-card {
+  background: linear-gradient(90deg, #e0e7ff 0%, #f5f7fa 100%);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(80, 120, 200, 0.07);
+  padding: 14px 28px;
+  font-size: 1.08em;
+  color: #1a237e;
+  font-weight: 600;
+  min-width: 160px;
+  text-align: center;
+}
+.contact-list {
   list-style: none;
   padding-left: 0;
-  margin-top: 6px;
+  margin-top: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
-.about-card li {
-  margin-bottom: 6px;
-  background: linear-gradient(90deg, #4f8cff22 0%, #ffb34722 100%);
-  border-radius: 8px;
-  padding: 2px 0;
-  color: #1a237e;
+.contact-list li {
+  font-size: 1.08em;
+  color: #333;
   font-weight: 500;
 }
-
 @media (max-width: 900px) {
-  .about-cards {
+  .about-section {
+    padding: 14px 6px;
+  }
+  .about-header h1 {
+    font-size: 1.5em;
+    margin: 24px 0 18px 0;
+  }
+  .about-nav ul {
+    gap: 18px;
+  }
+  .timeline {
     flex-direction: column;
     gap: 18px;
   }
-  .about-card {
-    max-width: 100%;
-  }
-  .about-container {
-    padding: 18px 4px 28px 4px;
-  }
-  .about-title {
-    font-size: 1.6em;
+  .honor-cards {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 </style>
