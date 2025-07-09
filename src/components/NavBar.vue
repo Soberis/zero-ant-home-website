@@ -31,16 +31,7 @@
           </ul>
         </li>
         <li>
-          <a href="#">
-            {{ $t("nav.videoCases") }} <i class="fas fa-chevron-down"></i>
-          </a>
-          <ul class="dropdown">
-            <li><router-link to="/video">{{ $t("nav.paintRobot") }}</router-link></li>
-            <li><router-link to="/video">{{ $t("nav.realtimeTestBench") }}</router-link></li>
-            <li><router-link to="/video">{{ $t("nav.dualMotorBench") }}</router-link></li>
-            <li><router-link to="/video">{{ $t("nav.grabBench") }}</router-link></li>
-            <li><router-link to="/video">{{ $t("nav.compoundGrabBench") }}</router-link></li>
-          </ul>
+          <router-link to="/video">{{ $t("nav.videoCases") }}</router-link>
         </li>
         <li>
           <a href="#">
