@@ -1,26 +1,26 @@
 <template>
   <div class="about-page">
     <header class="about-header">
-      <h1>关于零蚁科技</h1>
+      <h1>{{ $t('nav.about') }}</h1>
     </header>
     <nav class="about-nav">
       <ul>
-        <li @click="scrollTo('company-intro')">公司介绍</li>
-        <li @click="scrollTo('history')">发展历史</li>
-        <li @click="scrollTo('honors')">资质荣誉</li>
-        <li @click="scrollTo('culture')">企业文化</li>
-        <li @click="scrollTo('jobs')">人才招聘</li>
-        <li @click="scrollTo('contact')">联系方式</li>
+        <li @click="scrollTo('company-intro')">{{ $t('nav.companyIntro') }}</li>
+        <li @click="scrollTo('history')">{{ $t('nav.history') }}</li>
+        <li @click="scrollTo('honor')">{{ $t('nav.honor') }}</li>
+        <li @click="scrollTo('culture')">{{ $t('nav.culture') }}</li>
+        <li @click="scrollTo('jobs')">{{ $t('nav.jobs') }}</li>
+        <li @click="scrollTo('contact')">{{ $t('nav.contact') }}</li>
       </ul>
     </nav>
     <section class="about-section company-intro" id="company-intro">
-      <h2>公司介绍</h2>
+      <h2>{{ $t('nav.companyIntro') }}</h2>
       <p>
-        零蚁科技是一家专注于微物流智能传送系统研发、生产与销售的高新技术企业。我们致力于通过创新的智能物流解决方案，连接专业设备与完成应用场景，助力各行业实现高效、可靠的智能化升级。公司核心团队由来自北航的科研人员与行业专家组成，拥有深厚的技术积累与丰富的工程经验。
+        {{ $t('about.companyIntro') }}
       </p>
     </section>
     <section class="about-section history" id="history">
-      <h2>发展历史</h2>
+      <h2>{{ $t('nav.history') }}</h2>
       <div class="timeline">
         <div class="timeline-item" v-for="item in timelineData" :key="item.year">
           <div class="timeline-dot"></div>
@@ -34,7 +34,7 @@
       </div>
     </section>
     <section class="about-section honors" id="honors">
-      <h2>资质荣誉</h2>
+      <h2>{{ $t('nav.honor') }}</h2>
       <div class="honor-cards">
         <div class="honor-card" v-for="(honor, idx) in honors" :key="idx">
           {{ honor }}
@@ -42,50 +42,54 @@
       </div>
     </section>
     <section class="about-section culture" id="culture">
-      <h2>企业文化</h2>
+      <h2>{{ $t('nav.culture') }}</h2>
       <p>
-        创新驱动，极致可靠，合作共赢。我们坚持以客户为中心，持续推动技术创新，致力于成为微物流智能化领域的引领者。
+        {{ $t('about.culture') }}
       </p>
     </section>
     <section class="about-section jobs" id="jobs">
-      <h2>人才招聘</h2>
+      <h2>{{ $t('nav.jobs') }}</h2>
       <p>
-        零蚁科技欢迎有志于智能物流与机器人行业的优秀人才加入我们！请将简历发送至 hr@zeroant.com。
+        {{ $t('about.jobs') }}
       </p>
     </section>
     <section class="about-section contact" id="contact">
-      <h2>联系方式</h2>
+      <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
-        <li>电话：400-xxx-xxxx</li>
-        <li>邮箱：info@zeroant.com</li>
-        <li>地址：北京市海淀区xxx路xxx号</li>
+        <li>{{ $t('footer.tel') }}：：{{ $t('footer.telValue') }}</li>
+        <li>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</li>
+        <li>{{ $t('footer.address') }}</li>
       </ul>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const timelineData = [
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
+const timelineData = computed(() => [
   {
     year: '2020',
-    events: ['公司成立，专注微物流智能传送系统研发'],
+    events: [t('about.timeline.2020')],
   },
   {
     year: '2022',
-    events: ['完成多项行业智能物流项目落地，团队规模突破50人'],
+    events: [t('about.timeline.2022')],
   },
   {
     year: '2024',
-    events: ['发布新一代智能微物流机器人，拓展国际市场'],
+    events: [t('about.timeline.2024')],
   },
-];
-const honors = [
-  '国家高新技术企业',
-  'ISO9001质量管理体系认证',
-  '多项发明专利与软件著作权',
-  '行业创新奖、技术突破奖',
-];
+]);
+
+const honors = computed(() => [
+  t('about.honor1'),
+  t('about.honor2'),
+  t('about.honor3'),
+  t('about.honor4'),
+]);
 function scrollTo(id) {
   const el = document.getElementById(id);
   if (el) {
@@ -163,6 +167,8 @@ function scrollTo(id) {
   letter-spacing: 1px;
   margin: 0;
   text-align: center;
+  word-break: break-all;
+  white-space: pre-line;
 }
 .timeline {
   display: flex;
@@ -203,6 +209,8 @@ function scrollTo(id) {
   font-size: 1.08em;
   color: #333;
   margin-bottom: 6px;
+  word-break: break-word;
+  white-space: pre-line;
 }
 .honor-cards {
   display: flex;
@@ -221,6 +229,8 @@ function scrollTo(id) {
   font-weight: 600;
   min-width: 160px;
   text-align: center;
+  word-break: break-word;
+  white-space: pre-line;
 }
 .contact-list {
   list-style: none;
@@ -236,6 +246,8 @@ function scrollTo(id) {
   font-size: 1.08em;
   color: #333;
   font-weight: 500;
+  word-break: break-all;
+  white-space: pre-line;
 }
 @media (max-width: 900px) {
   .about-section {

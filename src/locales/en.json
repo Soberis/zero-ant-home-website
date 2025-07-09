@@ -70,12 +70,26 @@
     "wx": "WeChat Official Account",
     "dy": "Douyin",
     "sp": "Video Channel",
-    "copyright": "All rights reserved"
+    "email": "liqingfeng@zeroant.com",
+    "copyright": "All rights reserved",
+    "telValue": "400-666-888"
   },
   "about": {
     "mission": "To innovate and provide cutting-edge robotic solutions for the pharmaceutical industry.",
     "vision": "To be a leader in automation technology, improving productivity and safety in medical applications.",
-    "values": "Integrity, Innovation, Excellence"
+    "values": "Integrity, Innovation, Excellence",
+    "companyIntro": "ZeroAnt Technology is a high-tech enterprise specializing in the R&D, production, and sales of micro-logistics intelligent conveying systems. We are committed to connecting professional equipment and application scenarios through innovative intelligent logistics solutions, helping various industries achieve efficient and reliable intelligent upgrades. Our core team consists of researchers from Beihang University and industry experts, with profound technical expertise and rich engineering experience.",
+    "culture": "Driven by innovation, extremely reliable, and win-win cooperation. We insist on customer-centricity, continuously promote technological innovation, and strive to become a leader in the field of micro-logistics intelligence.",
+    "jobs": "ZeroAnt Technology welcomes outstanding talents who are interested in intelligent logistics and robotics to join us! Please send your resume to hr@zeroant.com.",
+    "timeline": {
+      "2020": "Company founded, focusing on micro-logistics intelligent conveying system R&D",
+      "2022": "Completed multiple industry intelligent logistics projects, team size exceeded 50 people",
+      "2024": "Launched a new generation of intelligent micro-logistics robots and expanded into international markets"
+    },
+    "honor1": "National High-tech Enterprise",
+    "honor2": "ISO9001 Quality Management System Certification",
+    "honor3": "Multiple Invention Patents and Software Copyrights",
+    "honor4": "Industry Innovation Award, Technology Breakthrough Award"
   },
   "contactSection": {
     "getInTouch": "Get in Touch",
