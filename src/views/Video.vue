@@ -59,10 +59,8 @@ const goToVideo = idx => {
 .video-page {
   padding: 48px 0 64px 0;
   background: #f7f8fa;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
 }
 .card-list {
   display: grid;
@@ -90,7 +88,7 @@ const goToVideo = idx => {
 }
 .card-img {
   width: 100%;
-  height: 180px;
+  height: 160px;
   object-fit: cover;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
@@ -128,11 +126,17 @@ const goToVideo = idx => {
 }
 @media (max-width: 1200px) {
   .card-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+@media (max-width: 900px) {
+  .card-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .card-list {
     grid-template-columns: 1fr;
     gap: 16px;
