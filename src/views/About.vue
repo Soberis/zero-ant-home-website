@@ -58,7 +58,7 @@
       <ul class="contact-list">
         <li>{{ $t('footer.tel') }}：：{{ $t('footer.telValue') }}</li>
         <li>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</li>
-        <li>{{ $t('footer.address') }}</li>
+        <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
       </ul>
     </section>
   </div>

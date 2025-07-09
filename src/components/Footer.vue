@@ -54,7 +54,7 @@
           <div class="contact-info">
             <div>{{ $t('footer.tel') }}：{{ $t('footer.telValue') }}</div>
             <div>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</div>
-            <div style="margin-top:8px;">{{ $t('footer.address') }}</div>
+            <div style="margin-top:8px;">{{ $t('contacts.address') }}：{{ $t('footer.address') }}</div>
           </div>
           <div class="footer-qrcodes">
             <div class="qrcode-item">
