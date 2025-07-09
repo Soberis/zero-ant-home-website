@@ -194,6 +194,23 @@
   resolved "https://registry.npmmirror.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz"
   integrity sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==
 
+"@stagewise-plugins/vue@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@stagewise-plugins/vue/-/vue-0.5.0.tgz#a9e1efce31cd468f955571d0bde9dc93a497bd03"
+  integrity sha512-lZa5STLJzGuQlzZdm71QgQusnQ7HRKPWR1pvodCcjctI24BlFGCy5VdiSIYm9GK7J0IfHkwprueAUfPpj6dytQ==
+
+"@stagewise/toolbar-vue@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@stagewise/toolbar-vue/-/toolbar-vue-0.5.0.tgz#b050d552bca0d381a3a4e7b6dd6610fe73d101e6"
+  integrity sha512-uz6dvG9viRfXetgsd9UyJh/KtlC8kDTNIut3W3sEu/I1UnYGG52oHdcU4d72C6xEStN85NxKNkbwSpVoybhyTg==
+  dependencies:
+    "@stagewise/toolbar" "0.5.0"
+
+"@stagewise/toolbar@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@stagewise/toolbar/-/toolbar-0.5.0.tgz#f4ff81c2df6478f60b13fe0b482e18babc1c771b"
+  integrity sha512-Z8299P7IkXaxy2dTpS4lKyPHMeQ9R3MEtE9CJr9iRAnM8s4Xbc0CRutwzViPF34k/dP83vRZXJFQmEG55YlIOg==
+
 "@types/lodash-es@^4.17.6":
   version "4.17.7"
   resolved "https://registry.npmmirror.com/@types/lodash-es/-/lodash-es-4.17.7.tgz"

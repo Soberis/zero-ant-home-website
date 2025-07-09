@@ -1,10 +1,11 @@
 <script setup lang="ts">
 // onBeforeUnmount(() => {
 //   document.removeEventListener("click", handleClickOutside);
-
-import NavBar from "./components/NavBar.vue";
-
 // });
+import NavBar from "./components/NavBar.vue";
+import { StagewiseToolbar } from '@stagewise/toolbar-vue';
+import VuePlugin from '@stagewise-plugins/vue';
+
 </script>
 
 <template>
@@ -13,6 +14,8 @@ import NavBar from "./components/NavBar.vue";
     <NavBar />
     <!-- 页面内容 -->
     <router-view />
+    <!-- Stagewise 工具栏，仅开发环境下显示 -->
+    <StagewiseToolbar :config="{ plugins: [VuePlugin] }" />
   </div>
 </template>
 
