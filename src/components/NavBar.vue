@@ -143,7 +143,6 @@ function toggleMenu() {}
   margin: 0 auto;
   padding: 15px 20px;
   height: 70px;
-  overflow: hidden;
   box-sizing: border-box;
   flex-wrap: nowrap; /* 新增，防止换行 */
 }
