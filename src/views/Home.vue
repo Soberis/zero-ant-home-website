@@ -15,9 +15,10 @@
         </div>
       </div>
     </section>
-    <div class="buttom-info">
+    <!-- 已经做了页脚，暂时隐藏 -->
+    <!-- <div class="buttom-info">
       {{ $t("contact", { email: "liqingfeng@zeroant.com" }) }}
-    </div>
+    </div> -->
   </div>
 </template>
 
