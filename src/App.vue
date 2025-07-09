@@ -44,6 +44,7 @@ import VuePlugin from '@stagewise-plugins/vue';
   position: absolute;
   top: 0;
   left: 0;
+  padding-top: 70px; /* 与导航栏高度一致 */
 }
 
 .container {
@@ -345,6 +346,9 @@ import VuePlugin from '@stagewise-plugins/vue';
     font-size: 24px;
     cursor: pointer;
     color: #333;
+  }
+  #app {
+    padding-top: 60px; /* 假如移动端导航栏高度为60px */
   }
 }
 

@@ -103,7 +103,7 @@ function scrollTo(id) {
 }
 .about-header {
   text-align: center;
-  padding: 100px 0 24px 0;
+  padding: 48px 0 24px 0;
   background: #fff;
 }
 .about-header h1 {
