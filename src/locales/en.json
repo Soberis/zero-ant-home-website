@@ -64,9 +64,13 @@
     "cta": "Learn More"
   },
   "footer": {
-    "copyright": "© 2023 Zero Ant Robotics. All rights reserved.",
-    "privacyPolicy": "Privacy Policy",
-    "termsOfService": "Terms of Service"
+    "companyFull": "Hangzhou ZeroAnt Technology Co., Ltd.",
+    "tel": "Tel",
+    "address": "Room 310, Building 1, No. 99 Juhang Lane, Changhe Street, Binjiang District, Hangzhou, Zhejiang Province, China",
+    "wx": "WeChat Official Account",
+    "dy": "Douyin",
+    "sp": "Video Channel",
+    "copyright": "All rights reserved"
   },
   "about": {
     "mission": "To innovate and provide cutting-edge robotic solutions for the pharmaceutical industry.",
