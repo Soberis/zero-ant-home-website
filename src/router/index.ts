@@ -5,6 +5,8 @@ import Solutions from '../views/Solutions.vue';
 import Applications from '../views/Applications.vue';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
+import Video from '../views/Video.vue';
+import VideoDetail from '../views/VideoDetail.vue';
 
 const routes = [
   {
@@ -36,6 +38,16 @@ const routes = [
     path: '/contact',
     name: 'Contact',
     component: Contact,
+  },
+  {
+    path: '/video',
+    name: 'Video',
+    component: Video,
+  },
+  {
+    path: '/video/:id',
+    name: 'VideoDetail',
+    component: VideoDetail,
   },
 ];
 

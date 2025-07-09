@@ -140,14 +140,16 @@ function toggleMenu() {}
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 100vw;
   margin: 0 auto;
   padding: 15px 20px;
   height: 70px;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex-wrap: nowrap; /* 新增，防止换行 */
 }
 
 .logo {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -162,7 +164,8 @@ function toggleMenu() {}
 }
 
 .nav-links {
-  flex: 2;
+  flex: 1 1 auto;
+  min-width: 0; /* 新增，保证收缩 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -305,7 +308,8 @@ function toggleMenu() {}
 }
 
 .language-switcher {
-  flex: 1;
+  flex: 0 0 auto;
+  margin-left: auto; /* 新增，保证始终在最右侧 */
   display: flex;
   justify-content: flex-end;
   align-items: center;
