@@ -1,25 +1,32 @@
 <template>
   <div class="about-page">
-    <header class="about-header">
-      <h1>{{ $t('nav.about') }}</h1>
-    </header>
+    <!-- 口号大屏 -->
+    <section class="about-hero">
+      <div class="hero-content">
+        <h1>让机器人遍布角落</h1>
+        <div class="hero-sub">做最酷的机器人</div>
+        <div class="hero-line"></div>
+        <div class="hero-en">Make Robots Everywhere</div>
+      </div>
+    </section>
+    <!-- 目录栏 -->
     <nav class="about-nav">
       <ul>
-        <li @click="scrollTo('company-intro')">{{ $t('nav.companyIntro') }}</li>
-        <li @click="scrollTo('history')">{{ $t('nav.history') }}</li>
-        <li @click="scrollTo('honor')">{{ $t('nav.honor') }}</li>
-        <li @click="scrollTo('culture')">{{ $t('nav.culture') }}</li>
-        <li @click="scrollTo('jobs')">{{ $t('nav.jobs') }}</li>
-        <li @click="scrollTo('contact')">{{ $t('nav.contact') }}</li>
+        <li><a href="#tab1">{{ $t('nav.companyIntro') }}</a></li>
+        <li><a href="#tab2">{{ $t('nav.history') }}</a></li>
+        <li><a href="#tab3">{{ $t('nav.honor') }}</a></li>
+        <li><a href="#tab4">{{ $t('nav.culture') }}</a></li>
+        <li><a href="#tab5">{{ $t('nav.jobs') }}</a></li>
+        <li><a href="#tab6">{{ $t('nav.contact') }}</a></li>
       </ul>
     </nav>
-    <section class="about-section company-intro" id="company-intro">
+    <section class="about-section company-intro" id="tab1">
       <h2>{{ $t('nav.companyIntro') }}</h2>
       <p>
         {{ $t('about.companyIntro') }}
       </p>
     </section>
-    <section class="about-section history" id="history">
+    <section class="about-section history" id="tab2">
       <h2>{{ $t('nav.history') }}</h2>
       <div class="timeline">
         <div class="timeline-item" v-for="item in timelineData" :key="item.year">
@@ -33,7 +40,7 @@
         </div>
       </div>
     </section>
-    <section class="about-section honors" id="honors">
+    <section class="about-section honors" id="tab3">
       <h2>{{ $t('nav.honor') }}</h2>
       <div class="honor-cards">
         <div class="honor-card" v-for="(honor, idx) in honors" :key="idx">
@@ -41,31 +48,31 @@
         </div>
       </div>
     </section>
-    <section class="about-section culture" id="culture">
+    <section class="about-section culture" id="tab4">
       <h2>{{ $t('nav.culture') }}</h2>
       <p>
         {{ $t('about.culture') }}
       </p>
     </section>
-    <section class="about-section jobs" id="jobs">
+    <section class="about-section jobs" id="tab5">
       <h2>{{ $t('nav.jobs') }}</h2>
       <p>
         {{ $t('about.jobs') }}
       </p>
     </section>
-    <section class="about-section contact" id="contact">
+    <!-- <section class="about-section contact" id="tab6">
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
         <div>电话：400-666-888</div>
         <div>Email：liqingfeng@zeroant.com</div>
         <div>地址：浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室</div>
       </ul>
-    </section>
+    </section> -->
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
@@ -90,12 +97,6 @@ const honors = computed(() => [
   t('about.honor3'),
   t('about.honor4'),
 ]);
-function scrollTo(id) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
 </script>
 
 <style scoped>
@@ -145,6 +146,10 @@ function scrollTo(id) {
   color: #ffb347;
   border-bottom: 2px solid #ffb347;
 }
+.about-nav li.active {
+  color: #1a3a8f;
+  border-bottom: 2px solid #1a3a8f;
+}
 .about-section {
   max-width: 900px;
   margin: 0 auto 48px auto;
@@ -152,6 +157,7 @@ function scrollTo(id) {
   border-radius: 18px;
   box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.07);
   padding: 40px 32px;
+  scroll-margin-top: 120px;
 }
 .about-section h2 {
   font-size: 1.5em;
@@ -249,7 +255,89 @@ function scrollTo(id) {
   word-break: break-all;
   white-space: pre-line;
 }
+.about-hero {
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #f5f7fa 0%, #e3e8ee 100%);
+}
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100vw;
+  z-index: 2;
+  animation: fadein 1.2s;
+}
+.hero-content h1 {
+  font-size: 5vw;
+  font-weight: 900;
+  color: #222;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6em;
+  opacity: 0;
+  animation: fadein 0.8s 0.1s forwards;
+}
+.hero-sub {
+  font-size: 2vw;
+  font-weight: 400;
+  color: #222;
+  opacity: 0.7;
+  margin-bottom: 1.2em;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: fadein 0.8s 0.5s forwards;
+}
+.hero-line {
+  width: 180px;
+  height: 3px;
+  margin: 0 auto 1.2em auto;
+  background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
+  border-radius: 2px;
+  opacity: 0.4;
+  opacity: 0;
+  animation: fadein 0.8s 0.9s forwards;
+}
+.hero-en {
+  font-size: 1.2vw;
+  color: #222;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+  font-family: 'Segoe UI', 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  opacity: 0;
+  animation: fadein 0.8s 1.3s forwards;
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @media (max-width: 900px) {
+  .about-hero {
+    height: 60vh;
+    min-height: 300px;
+  }
+  .hero-content h1 {
+    font-size: 2em;
+  }
+  .hero-sub {
+    font-size: 1em;
+  }
+  .hero-en {
+    font-size: 0.9em;
+  }
+  .hero-line {
+    width: 90px;
+    height: 2px;
+  }
   .about-section {
     padding: 14px 6px;
   }
@@ -268,5 +356,8 @@ function scrollTo(id) {
     flex-direction: column;
     gap: 10px;
   }
+}
+.about-page, .about-page * {
+  color: #222 !important;
 }
 </style>
