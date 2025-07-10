@@ -40,14 +40,11 @@ const clearHover = () => {
 }
 
 const cards = [
-  { title: '新餐饮', img: zeroantLogo },
-  { title: '货架整理', img: zeroantLogo },
-  { title: '变压器喷漆', img: zeroantLogo },
-  { title: '助残养老', img: zeroantLogo },
-  { title: '测试', img: zeroantLogo },
-  { title: '零蚁机器人-智能巡检', img: zeroantLogo },
-  { title: '零蚁机器人-智能安防', img: zeroantLogo },
-  { title: '零蚁机器人-智慧园区', img: zeroantLogo }
+  { title: '绘画机器人', img: zeroantLogo },
+  { title: '实时测试台站', img: zeroantLogo },
+  { title: '双电机对转台站', img: zeroantLogo },
+  { title: '机器人抓取台站', img: zeroantLogo },
+  { title: '复合移动抓取台站', img: zeroantLogo }
 ]
 
 const goToVideo = idx => {
