@@ -56,9 +56,9 @@
     <section class="about-section contact" id="contact">
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
-        <div>电话：{{ $t('footer.telValue') }}</div>
-        <div>Email：{{ $t('footer.email') }}</div>
-        <div>地址：{{ $t('footer.address') }}</div>
+        <div>电话：400-666-888</div>
+        <div>Email：liqingfeng@zeroant.com</div>
+        <div>地址：浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室</div>
       </ul>
     </section>
   </div>
