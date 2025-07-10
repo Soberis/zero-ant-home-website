@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cursor AI rules (避免提交AI规则文件)
+.cursor/rules/
