@@ -1,25 +1,16 @@
 <template>
   <div class="video-page">
     <div class="card-list">
-      <div
+      <VideoCard
         v-for="(card, idx) in cards"
-        :key="card.title"
-        class="app-card"
-        @mouseenter="setHover(idx)"
-        @mouseleave="clearHover"
-        @click="goToVideo(idx)"
-      >
-        <img
-          :src="card.img"
-          :alt="card.title + '图片'"
-          class="card-img"
-        />
-        <div class="card-title-bar" :class="{ active: hoverIdx === idx }">
-          <div class="card-title" :class="{ active: hoverIdx === idx }">
-            {{ card.title }}
-          </div>
-        </div>
-      </div>
+        :key="card.slug"
+        :card="card"
+        :index="idx"
+        :active="hoverIdx === idx"
+        @hover="setHover"
+        @leave="clearHover"
+        @click="goToVideo"
+      />
     </div>
   </div>
 </template>
@@ -27,7 +18,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import zeroantLogo from '@/assets/zeroant_logo.png'
+import { videoCards } from '@/data/videos'
+import VideoCard from '@/components/VideoCard.vue'
 
 const router = useRouter()
 const hoverIdx = ref(-1)
@@ -39,16 +31,10 @@ const clearHover = () => {
   hoverIdx.value = -1
 }
 
-const cards = [
-  { title: '绘画机器人', img: zeroantLogo },
-  { title: '实时测试台站', img: zeroantLogo },
-  { title: '双电机对转台站', img: zeroantLogo },
-  { title: '机器人抓取台站', img: zeroantLogo },
-  { title: '复合移动抓取台站', img: zeroantLogo }
-]
+const cards = videoCards
 
 const goToVideo = idx => {
-  router.push({ path: `/video/${idx + 1}` })
+  router.push({ path: `/video/${cards[idx].slug}` })
 }
 </script>
 
