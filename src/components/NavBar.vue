@@ -62,9 +62,9 @@
           </ul>
         </li>
         <li>
-          <a href="#">
+          <router-link to="/about">
             {{ $t("nav.about") }} <i class="fas fa-chevron-down"></i>
-          </a>
+          </router-link>
           <ul class="dropdown">
             <li><router-link :to="{ path: '/about', hash: '#tab1' }">{{ $t('nav.companyIntro') }}</router-link></li>
             <li><router-link :to="{ path: '/about', hash: '#tab2' }">{{ $t('nav.history') }}</router-link></li>

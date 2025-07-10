@@ -60,14 +60,14 @@
         {{ $t('about.jobs') }}
       </p>
     </section>
-    <!-- <section class="about-section contact" id="tab6">
+    <section class="about-section contact" id="tab6">
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
-        <div>电话：400-666-888</div>
-        <div>Email：liqingfeng@zeroant.com</div>
-        <div>地址：浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室</div>
+        <li>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</li>
+        <li>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</li>
+        <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
       </ul>
-    </section> -->
+    </section>
   </div>
 </template>
 
@@ -105,6 +105,8 @@ const honors = computed(() => [
   color: #222;
   font-family: '微软雅黑', '思源黑体', Arial, sans-serif;
   min-height: 100vh;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 .about-header {
   text-align: center;
@@ -359,5 +361,9 @@ const honors = computed(() => [
 }
 .about-page, .about-page * {
   color: #222 !important;
+}
+.about-section:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 </style>
