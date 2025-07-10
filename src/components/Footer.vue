@@ -51,11 +51,11 @@
         </div>
         <div class="footer-col contact-col">
           <h4>{{ $t('footer.companyFull') }}</h4>
-          <!-- <div class="contact-info">
-            <div>{{ $t('footer.tel') }}：{{ $t('footer.telValue') }}</div>
-            <div>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</div>
-            <div style="margin-top:8px;">{{ $t('contacts.address') }}：{{ $t('footer.address') }}</div>
-          </div> -->
+          <div class="contact-info">
+            <div>电话：{{ $t('footer.telValue') }}</div>
+            <div>Email：{{ $t('footer.email') }}</div>
+            <div style="margin-top:8px;">地址：{{ $t('footer.address') }}</div>
+          </div>
           <div class="footer-qrcodes">
             <div class="qrcode-item">
               <div class="qrcode-img"></div>

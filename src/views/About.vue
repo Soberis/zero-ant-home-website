@@ -56,9 +56,9 @@
     <section class="about-section contact" id="contact">
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
-        <li>{{ $t('footer.tel') }}：：{{ $t('footer.telValue') }}</li>
-        <!-- <li>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</li> -->
-        <!-- <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li> -->
+        <div>电话：{{ $t('footer.telValue') }}</div>
+        <div>Email：{{ $t('footer.email') }}</div>
+        <div>地址：{{ $t('footer.address') }}</div>
       </ul>
     </section>
   </div>
