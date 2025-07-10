@@ -5,13 +5,13 @@
         <div class="footer-col">
           <h4>{{ $t('nav.products') }}</h4>
           <ul>
-            <li><router-link to="/products">{{ $t('nav.mobileRobot') }}</router-link></li>
-            <li><router-link to="/products">{{ $t('nav.fourAxisArm') }}</router-link></li>
-            <li><router-link to="/products">{{ $t('nav.sixAxisArm') }}</router-link></li>
-            <li><router-link to="/products">{{ $t('nav.rtOs') }}</router-link></li>
-            <li><router-link to="/products">{{ $t('nav.controlSystem') }}</router-link></li>
-            <li><router-link to="/products">{{ $t('nav.humanoid') }}</router-link></li>
-            <li><router-link to="/products">{{ $t('nav.fourAxisMobileCompound') }}</router-link></li>
+            <li><router-link :to="{ path: '/products', hash: '#mobile-robot' }">{{ $t('nav.mobileRobot') }}</router-link></li>
+            <li><router-link :to="{ path: '/products', hash: '#scara-robot-arm' }">{{ $t('nav.fourAxisArm') }}</router-link></li>
+            <li><router-link :to="{ path: '/products', hash: '#six-axis-robot-arm' }">{{ $t('nav.sixAxisArm') }}</router-link></li>
+            <li><router-link :to="{ path: '/products', hash: '#rtos' }">{{ $t('nav.rtOs') }}</router-link></li>
+            <li><router-link :to="{ path: '/products', hash: '#robot-control-system' }">{{ $t('nav.controlSystem') }}</router-link></li>
+            <li><router-link :to="{ path: '/products', hash: '#dual-arm-humanoid' }">{{ $t('nav.humanoid') }}</router-link></li>
+            <li><router-link :to="{ path: '/products', hash: '#scara-mobile-composite' }">{{ $t('nav.fourAxisMobileCompound') }}</router-link></li>
           </ul>
         </div>
         <div class="footer-col">

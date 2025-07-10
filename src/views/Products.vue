@@ -4,6 +4,7 @@
       class="product-series"
       v-for="product in products"
       :key="product.slug"
+      :id="product.slug"
     >
       <div class="series-title">{{ product.seriesTitle }}</div>
       <div class="series-subtitle">{{ product.seriesSubtitle }}</div>
@@ -37,6 +38,7 @@ function goDetail(slug) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  scroll-margin-top: 140px;
 }
 .series-title {
   font-size: 3.6rem;
