@@ -9,6 +9,7 @@ const About = () => import('../views/About.vue');
 const Contact = () => import('../views/Contact.vue');
 const Video = () => import('../views/Video.vue');
 const VideoDetail = () => import('../views/VideoDetail.vue');
+const ProductDetailPage = () => import('../views/ProductDetailPage.vue');
 
 const routes = [
   // 首页
@@ -23,41 +24,11 @@ const routes = [
     name: 'Products',
     component: Products,
   },
-  // 具体产品详情页（独立页面）
+  // 统一产品详情页
   {
-    path: '/products/mobile-robot',
-    name: 'MobileRobot',
-    component: () => import('../views/products/MobileRobot.vue'),
-  },
-  {
-    path: '/products/scara-robot-arm',
-    name: 'FourAxisRobot',
-    component: () => import('../views/products/FourAxisRobot.vue'),
-  },
-  {
-    path: '/products/six-axis-robot-arm',
-    name: 'SixAxisRobot',
-    component: () => import('../views/products/SixAxisRobot.vue'),
-  },
-  {
-    path: '/products/rtos',
-    name: 'RTOS',
-    component: () => import('../views/products/RTOS.vue'),
-  },
-  {
-    path: '/products/robot-control-system',
-    name: 'RobotControlSystem',
-    component: () => import('../views/products/RobotControlSystem.vue'),
-  },
-  {
-    path: '/products/dual-arm-humanoid',
-    name: 'DualArmHumanoidRobot',
-    component: () => import('../views/products/DualArmHumanoidRobot.vue'),
-  },
-  {
-    path: '/products/scara-mobile-composite',
-    name: 'FourAxisMobileCompositeRobot',
-    component: () => import('../views/products/FourAxisMobileCompositeRobot.vue'),
+    path: '/products/:slug',
+    name: 'ProductDetail',
+    component: ProductDetailPage,
   },
   // 解决方案
   {
