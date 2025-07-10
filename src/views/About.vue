@@ -57,8 +57,8 @@
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
         <li>{{ $t('footer.tel') }}：：{{ $t('footer.telValue') }}</li>
-        <li>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</li>
-        <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
+        <!-- <li>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</li> -->
+        <!-- <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li> -->
       </ul>
     </section>
   </div>
