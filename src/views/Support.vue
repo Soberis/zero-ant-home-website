@@ -31,9 +31,9 @@
     <h2 class="section-title">相关下载</h2>
     <div class="section-block">
       <div v-for="(item, idx) in downloads" :key="item.title" class="card-item download-card" :class="{open: item.open}">
-        <div class="card-header">
-          <router-link :to="{ path: '/support', hash: item.link }" class="card-title download-title">{{ item.title }}</router-link>
-          <span class="card-icon" @click="toggleDownload(idx)">{{ item.open ? '-' : '+' }}</span>
+        <div class="card-header" @click="toggleDownload(idx)">
+          <router-link :to="{ path: '/support', hash: item.link }" class="card-title download-title" @click.stop>{{ item.title }}</router-link>
+          <span class="card-icon">{{ item.open ? '-' : '+' }}</span>
         </div>
         <transition name="fade-slide">
           <div v-if="item.open" class="card-content">
@@ -45,9 +45,9 @@
     <h2 class="section-title">常见问题</h2>
     <div class="section-block">
       <div v-for="(faq, idx) in faqs" :key="faq.q" class="card-item faq-card" :class="{open: faq.open}">
-        <div class="card-header">
-          <router-link :to="{ path: '/support', hash: faq.link }" class="card-title faq-title">{{ faq.q }}</router-link>
-          <span class="card-icon" @click="toggleFaq(idx)">{{ faq.open ? '-' : '+' }}</span>
+        <div class="card-header" @click="toggleFaq(idx)">
+          <router-link :to="{ path: '/support', hash: faq.link }" class="card-title faq-title" @click.stop>{{ faq.q }}</router-link>
+          <span class="card-icon">{{ faq.open ? '-' : '+' }}</span>
         </div>
         <transition name="fade-slide">
           <div v-if="faq.open" class="card-content">
@@ -129,7 +129,7 @@ function toggleFaq(idx) {
 }
 .hero-title {
   color: #111;
-  font-size: 3.6rem;
+  font-size: 4.2rem;
   font-weight: 800;
   text-align: center;
   margin-bottom: 28px;
@@ -137,7 +137,7 @@ function toggleFaq(idx) {
 }
 .hero-desc {
   color: #222;
-  font-size: 1.45rem;
+  font-size: 1.65rem;
   text-align: center;
   margin-bottom: 48px;
   font-weight: 400;
@@ -173,7 +173,7 @@ function toggleFaq(idx) {
 }
 .card-desc {
   color: #111;
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
 }
@@ -188,7 +188,7 @@ function toggleFaq(idx) {
 }
 .section-title {
   color: #111;
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   font-weight: 700;
   text-align: center;
   margin: 48px 0 32px 0;
@@ -226,12 +226,13 @@ function toggleFaq(idx) {
   padding: 28px 40px;
   cursor: pointer;
   transition: background 0.2s;
+  user-select: none;
 }
 .card-header:hover {
   background: #f0f3fa;
 }
 .card-title {
-  font-size: 1.22rem;
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -253,7 +254,7 @@ function toggleFaq(idx) {
 .card-content {
   padding: 0 40px 24px 40px;
   color: #111;
-  font-size: 1.12rem;
+  font-size: 1.25rem;
   line-height: 1.8;
   background: #f7f8fa;
   transition: all 0.2s;
@@ -300,18 +301,18 @@ function toggleFaq(idx) {
     margin-bottom: 14px;
   }
   .card-desc {
-    font-size: 1.08rem;
+    font-size: 1.2rem;
   }
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.4rem;
     margin-bottom: 12px;
   }
   .hero-desc {
-    font-size: 1.08rem;
+    font-size: 1.25rem;
     margin-bottom: 24px;
   }
   .section-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin: 32px 0 18px 0;
   }
   .card-header, .card-content {
@@ -324,11 +325,11 @@ function toggleFaq(idx) {
     padding: 16px 0 0 0;
   }
   .hero-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 8px;
   }
   .hero-desc {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     margin-bottom: 14px;
   }
   .service-card {
@@ -337,14 +338,14 @@ function toggleFaq(idx) {
     min-height: 80px;
   }
   .card-desc {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
   .support-page {
     padding: 10px 0 16px 0;
     gap: 12px;
   }
   .section-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 18px 0 8px 0;
     padding-left: 0;
   }
