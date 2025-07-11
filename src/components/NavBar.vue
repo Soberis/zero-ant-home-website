@@ -17,9 +17,9 @@
           <router-link to="/">{{ $t("nav.home") }}</router-link>
         </li>
         <li>
-          <a href="#">
+          <router-link to="/products">
             {{ $t("nav.products") }} <i class="fas fa-chevron-down"></i>
-          </a>
+          </router-link>
           <ul class="dropdown">
             <li><router-link :to="{ path: '/products', hash: '#mobile-robot' }">{{ $t('nav.mobileRobot') }}</router-link></li>
             <li><router-link :to="{ path: '/products', hash: '#scara-robot-arm' }">{{ $t('nav.fourAxisArm') }}</router-link></li>
@@ -34,18 +34,18 @@
           <router-link to="/video">{{ $t("nav.videoCases") }}</router-link>
         </li>
         <li>
-          <a href="#">
+          <router-link to="/applications">
             {{ $t("nav.applications") }} <i class="fas fa-chevron-down"></i>
-          </a>
+          </router-link>
           <ul class="dropdown">
             <li><router-link to="/applications">{{ $t("nav.medicalAuto") }}</router-link></li>
             <li><router-link to="/applications">{{ $t("nav.semiProcessing") }}</router-link></li>
           </ul>
         </li>
         <li>
-          <a href="#">
+          <router-link to="/support">
             {{ $t("nav.support") }} <i class="fas fa-chevron-down"></i>
-          </a>
+          </router-link>
           <ul class="dropdown">
             <li><router-link to="/support">{{ $t("nav.afterSales") }}</router-link></li>
             <li><router-link to="/support">{{ $t("nav.download") }}</router-link></li>
@@ -53,9 +53,9 @@
           </ul>
         </li>
         <li>
-          <a href="#">
+          <router-link to="/news">
             {{ $t("nav.news") }} <i class="fas fa-chevron-down"></i>
-          </a>
+          </router-link>
           <ul class="dropdown">
             <li><router-link to="/news">{{ $t("nav.newsDynamic") }}</router-link></li>
             <li><router-link to="/news">{{ $t("nav.exhibition") }}</router-link></li>

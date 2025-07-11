@@ -11,7 +11,7 @@ const Video = () => import('../views/Video.vue');
 const VideoDetail = () => import('../views/VideoDetail.vue');
 const ProductDetailPage = () => import('../views/ProductDetailPage.vue');
 const Support = () => import('../views/Support.vue');
-import ApplicationDetail from '../views/ApplicationDetail.vue'
+const ApplicationDetail = () => import('../views/ApplicationDetail.vue');
 
 const routes = [
   // 首页
