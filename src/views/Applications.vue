@@ -1,72 +1,69 @@
 <template>
   <div class="applications">
-    <h1>{{ $t("applications.title") }}</h1>
-    <p>{{ $t("applications.introduction") }}</p>
-
-    <section class="application-list">
-      <h2>{{ $t("applications.listTitle") }}</h2>
-      <ul>
-        <li>
-          <h3>{{ $t("applications.autoParts.title") }}</h3>
-          <p>{{ $t("applications.autoParts.description") }}</p>
-        </li>
-        <li>
-          <h3>{{ $t("applications.electronics.title") }}</h3>
-          <p>{{ $t("applications.electronics.description") }}</p>
-        </li>
-        <li>
-          <h3>{{ $t("applications.metal.title") }}</h3>
-          <p>{{ $t("applications.metal.description") }}</p>
-        </li>
-        <li>
-          <h3>{{ $t("applications.food.title") }}</h3>
-          <p>{{ $t("applications.food.description") }}</p>
-        </li>
-        <li>
-          <h3>{{ $t("applications.medical.title") }}</h3>
-          <p>{{ $t("applications.medical.description") }}</p>
-        </li>
-        <li>
-          <h3>{{ $t("applications.retail.title") }}</h3>
-          <p>{{ $t("applications.retail.description") }}</p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="conclusion">
-      <h2>{{ $t("applications.conclusionTitle") }}</h2>
-      <p>{{ $t("applications.conclusionText") }}</p>
-    </section>
+    <h1 class="title">应用场景</h1>
+    <p class="subtitle">专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案</p>
+    <div class="card-grid">
+      <ApplicationCard
+        v-for="(item, idx) in applications"
+        :key="item.title + idx"
+        :title="item.title"
+        :svg="item.svg"
+        :slug="item.slug"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
+import applications from '../data/applications.js'
+import ApplicationCard from '../components/ApplicationCard.vue'
 </script>
 
 <style scoped>
 .applications {
-  padding: 20px;
+  padding: 48px 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f7f8fa;
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
 }
-
-.application-list {
-  margin-top: 20px;
+.title {
+  color: #111;
+  font-size: 4.2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: 2px;
 }
-
-.application-list ul {
-  list-style-type: none;
-  padding: 0;
+.subtitle {
+  font-size: 1.25rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  text-align: center;
+  max-width: 800px;
+  font-weight: 400;
 }
-
-.application-list li {
-  margin-bottom: 15px;
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
 }
-
-.application-list h3 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.conclusion {
-  margin-top: 30px;
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
 }
 </style>
