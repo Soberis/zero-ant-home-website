@@ -22,8 +22,8 @@
 }
 .section-title {
   text-align: center;
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2.6rem;
+  font-weight: 800;
   margin-bottom: 12px;
   color: #222;
   letter-spacing: 2px;

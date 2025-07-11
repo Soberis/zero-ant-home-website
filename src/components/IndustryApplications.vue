@@ -1,24 +1,16 @@
 <template>
   <section class="industry-apps">
     <h2 class="section-title">行业应用</h2>
-    <div class="section-desc">为汽车零部件、3C电子、金属加工、食品包装、医疗健康以及新零售等行业提供回报更快的自动化、智能化升级解决方案</div>
+    <div class="section-desc">专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案</div>
     <div class="apps-list-wrap">
       <button class="scroll-btn left" @mouseenter="pauseScroll" @mouseleave="resumeScroll" @click="scrollLeft">
         <span>&lt;</span>
       </button>
       <div ref="scrollWrap" class="apps-list" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
         <div class="apps-track">
-          <div v-for="app in apps" :key="app.name" class="app-card">
-            <div class="app-img">
-              <img :src="app.img" :alt="app.name" />
-            </div>
-            <div class="app-title">{{ app.name }}</div>
-          </div>
-          <div v-for="app in apps" :key="'copy-' + app.name" class="app-card">
-            <div class="app-img">
-              <img :src="app.img" :alt="app.name" />
-            </div>
-            <div class="app-title">{{ app.name }}</div>
+          <div v-for="app in displayApps" :key="app.slug" class="app-card" @click="goDetail(app.slug)" style="cursor:pointer">
+            <span class="icon" v-html="app.svg"></span>
+            <div class="app-title">{{ app.title }}</div>
           </div>
         </div>
       </div>
@@ -31,17 +23,19 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue';
-const apps = [
-  { name: '吸盘上下料', img: 'https://via.placeholder.com/220x140/1a3a8f/fff?text=应用1' },
-  { name: '助残养老', img: 'https://via.placeholder.com/220x140/222/fff?text=应用2' },
-  { name: '变压器喷漆', img: 'https://via.placeholder.com/220x140/555/fff?text=应用3' },
-  { name: '货架整理', img: 'https://via.placeholder.com/220x140/888/fff?text=应用4' },
-  { name: '智能仓储盘点', img: 'https://via.placeholder.com/220x140/aaa/fff?text=应用5' },
-  { name: '医疗样本管理', img: 'https://via.placeholder.com/220x140/ccc/fff?text=应用6' },
-];
+import { useRouter } from 'vue-router';
+import applications from '../data/applications.js';
+
+const displayApps = applications; // 显示全部行业应用
 const scrollWrap = ref(null);
 let timer = null;
+const router = useRouter();
 
+function goDetail(slug) {
+  if (slug) {
+    router.push(`/applications/${slug}`);
+  }
+}
 function autoScroll() {
   if (!scrollWrap.value) return;
   const el = scrollWrap.value;
@@ -57,13 +51,34 @@ function resumeScroll() {
   if (timer) clearInterval(timer);
   timer = setInterval(autoScroll, 20);
 }
+function smoothScrollBy(distance, duration = 600) {
+  const el = scrollWrap.value;
+  if (!el) return;
+  const start = el.scrollLeft;
+  const end = start + distance;
+  const startTime = performance.now();
+
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutCubic(progress);
+    el.scrollLeft = start + (end - start) * eased;
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
 function scrollLeft() {
-  if (!scrollWrap.value) return;
-  scrollWrap.value.scrollBy({ left: -260, behavior: 'smooth' });
+  smoothScrollBy(-260, 600);
 }
 function scrollRight() {
-  if (!scrollWrap.value) return;
-  scrollWrap.value.scrollBy({ left: 260, behavior: 'smooth' });
+  smoothScrollBy(260, 600);
 }
 onMounted(() => {
   nextTick(() => {
@@ -83,15 +98,16 @@ onUnmounted(() => {
 }
 .section-title {
   text-align: center;
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2.6rem;
+  font-weight: 800;
   margin-bottom: 18px;
   color: #222;
+  letter-spacing: 2px;
 }
 .section-desc {
   text-align: center;
-  color: #111;
-  font-size: 1.1rem;
+  color: #222;
+  font-size: 1.8rem;
   margin-bottom: 38px;
 }
 .apps-list-wrap {
@@ -116,7 +132,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
   box-shadow: 0 2px 8px 0 rgba(30,40,90,0.08);
 }
 .scroll-btn.left {
@@ -128,10 +144,17 @@ onUnmounted(() => {
 .scroll-btn:hover {
   background: #1a3a8f;
   color: #fff;
+  transform: scale(1.12);
+  box-shadow: 0 4px 18px 0 rgba(26,58,143,0.18);
+}
+.scroll-btn:active {
+  transform: scale(0.95);
+  background: #16306b;
 }
 .apps-list {
   overflow-x: hidden;
   width: 100%;
+  scroll-behavior: smooth;
 }
 .apps-track {
   display: flex;
@@ -150,11 +173,16 @@ onUnmounted(() => {
   align-items: center;
   padding: 24px 10px 18px 10px;
   box-shadow: 0 2px 8px 0 rgba(30,40,90,0.04);
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.22s cubic-bezier(.4,2,.6,1), transform 0.22s cubic-bezier(.4,2,.6,1), border-color 0.18s;
   flex: 0 0 auto;
 }
 .app-card:hover {
   box-shadow: 0 4px 18px 0 rgba(26,58,143,0.10);
+}
+.app-card:active {
+  transform: translateY(2px) scale(0.96);
+  box-shadow: 0 2px 8px 0 rgba(26,58,143,0.18);
+  border-color: #1a3a8f55;
 }
 .app-img {
   width: 100%;
@@ -171,10 +199,24 @@ onUnmounted(() => {
   border-radius: 10px;
 }
 .app-title {
-  font-size: 1.08rem;
+  font-size: 1.7rem;
   color: #222;
   text-align: center;
-  font-weight: 500;
+  font-weight: 700;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+.icon {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+}
+.icon svg {
+  width: 72px;
+  height: 72px;
 }
 @media (max-width: 900px) {
   .apps-track {
