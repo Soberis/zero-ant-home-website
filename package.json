@@ -21,7 +21,7 @@
   "devDependencies": {
     "@stagewise-plugins/vue": "^0.5.1",
     "@stagewise/toolbar-vue": "^0.5.1",
-    "@vitejs/plugin-vue": "^4.1.0",
+    "@vitejs/plugin-vue": "^6.0.0",
     "fs": "^0.0.1-security",
     "less": "^4.3.0",
     "less-loader": "^12.3.0",
