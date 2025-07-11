@@ -52,9 +52,9 @@
         <div class="footer-col contact-col">
           <h4>{{ $t('footer.companyFull') }}</h4>
           <div class="contact-info">
-            <div>电话：400-666-888</div>
-            <div>Email：liqingfeng@zeroant.com</div>
-            <div style="margin-top:8px;">地址：浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室</div>
+              <div>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</div>
+              <div>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</div>
+              <div style="margin-top:8px;">{{ $t('contacts.address') }}：{{ $t('footer.address') }}</div>
           </div>
           <div class="footer-qrcodes">
             <div class="qrcode-item">
