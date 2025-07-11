@@ -4,8 +4,8 @@
     <!-- 口号大屏 -->
     <section class="about-hero">
       <div class="hero-content">
-        <h1>让机器人遍布角落</h1>
-        <div class="hero-sub">做最酷的机器人</div>
+        <h1>{{ $t('slogan') }}</h1>
+        <div class="hero-sub">{{ $t('slogan2') }}</div>
         <div class="hero-line"></div>
         <div class="hero-en">Make Robots Everywhere</div>
       </div>
@@ -13,12 +13,12 @@
     <!-- 目录栏 -->
     <nav class="about-nav">
       <ul>
-        <li><a href="#tab1">{{ $t('nav.companyIntro') }}</a></li>
-        <li><a href="#tab2">{{ $t('nav.history') }}</a></li>
-        <li><a href="#tab3">{{ $t('nav.honor') }}</a></li>
-        <li><a href="#tab4">{{ $t('nav.culture') }}</a></li>
-        <li><a href="#tab5">{{ $t('nav.jobs') }}</a></li>
-        <li><a href="#tab6">{{ $t('nav.contact') }}</a></li>
+        <li :class="{active: activeTab==='tab1'}"><a href="#tab1" @click.prevent="scrollToSection('tab1')">{{ $t('nav.companyIntro') }}</a></li>
+        <li :class="{active: activeTab==='tab2'}"><a href="#tab2" @click.prevent="scrollToSection('tab2')">{{ $t('nav.history') }}</a></li>
+        <li :class="{active: activeTab==='tab3'}"><a href="#tab3" @click.prevent="scrollToSection('tab3')">{{ $t('nav.honor') }}</a></li>
+        <li :class="{active: activeTab==='tab4'}"><a href="#tab4" @click.prevent="scrollToSection('tab4')">{{ $t('nav.culture') }}</a></li>
+        <li :class="{active: activeTab==='tab5'}"><a href="#tab5" @click.prevent="scrollToSection('tab5')">{{ $t('nav.jobs') }}</a></li>
+        <li :class="{active: activeTab==='tab6'}"><a href="#tab6" @click.prevent="scrollToSection('tab6')">{{ $t('nav.contact') }}</a></li>
       </ul>
     </nav>
     <section class="about-section company-intro" id="tab1">
@@ -74,38 +74,62 @@
 
 <script setup>
 // 关于我们页面，包含公司介绍、发展历程、荣誉、文化、招聘、联系方式等内容，支持国际化
-import { computed } from 'vue';
+import { computed, watch, ref, onMounted, onUnmounted, defineProps, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
+import { getTimelineData, getHonors } from '../data/about';
+const { t, locale } = useI18n();
 
-const timelineData = computed(() => [
-  {
-    year: '2020',
-    events: [t('about.timeline.2020')],
-  },
-  {
-    year: '2022',
-    events: [t('about.timeline.2022')],
-  },
-  {
-    year: '2024',
-    events: [t('about.timeline.2024')],
-  },
-]);
+// 预留 props/emits，便于后续 About 拆分为更小组件时复用
+const props = defineProps({});
+const emit = defineEmits([]);
 
-const honors = computed(() => [
-  t('about.honor1'),
-  t('about.honor2'),
-  t('about.honor3'),
-  t('about.honor4'),
-]);
+// timelineData/honors 用 map 结构，便于后续扩展
+const timelineData = computed(() => getTimelineData(t).map(item => ({ ...item })));
+const honors = computed(() => getHonors(t).map(honor => honor));
+
+// 目录栏高亮当前锚点
+const activeTab = ref('tab1');
+const tabIds = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5', 'tab6'];
+
+function updateActiveTab() {
+  const scrollY = window.scrollY || window.pageYOffset;
+  let found = false;
+  for (let i = tabIds.length - 1; i >= 0; i--) {
+    const el = document.getElementById(tabIds[i]);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top + window.scrollY - 120 <= scrollY + 10) {
+        activeTab.value = tabIds[i];
+        found = true;
+        break;
+      }
+    }
+  }
+  if (!found) activeTab.value = tabIds[0];
+}
+
+// 平滑滚动到指定 section
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', updateActiveTab, { passive: true });
+  updateActiveTab();
+});
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateActiveTab);
+});
 </script>
 
 <style scoped>
 .about-page {
   background: #fff;
   color: #222;
-  font-family: '微软雅黑', '思源黑体', Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif;
   min-height: 100vh;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
@@ -147,8 +171,8 @@ const honors = computed(() => [
   border-bottom: 2px solid transparent;
 }
 .about-nav li:hover {
-  color: #ffb347;
-  border-bottom: 2px solid #ffb347;
+  color: #1a3a8f;
+  border-bottom: 2px solid #1a3a8f;
 }
 .about-nav li.active {
   color: #1a3a8f;
@@ -158,9 +182,9 @@ const honors = computed(() => [
   max-width: 900px;
   margin: 0 auto 48px auto;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.07);
-  padding: 40px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(80, 120, 200, 0.06);
+  padding: 32px 20px;
   scroll-margin-top: 120px;
 }
 .about-section h2 {
@@ -230,14 +254,14 @@ const honors = computed(() => [
   margin-top: 18px;
 }
 .honor-card {
-  background: linear-gradient(90deg, #e0e7ff 0%, #f5f7fa 100%);
-  border-radius: 12px;
-  box-shadow: 0 2px 12px 0 rgba(80, 120, 200, 0.07);
-  padding: 14px 28px;
-  font-size: 1.08em;
-  color: #1a237e;
+  background: #f5f7fa;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px 0 rgba(80, 120, 200, 0.04);
+  padding: 10px 18px;
+  font-size: 1.05em;
+  color: #1a3a8f;
   font-weight: 600;
-  min-width: 160px;
+  min-width: 120px;
   text-align: center;
   word-break: break-word;
   white-space: pre-line;
@@ -261,8 +285,8 @@ const honors = computed(() => [
 }
 .about-hero {
   width: 100vw;
-  height: 100vh;
-  min-height: 600px;
+  height: 60vh;
+  min-height: 320px;
   position: relative;
   overflow: hidden;
   margin-bottom: 0;
@@ -326,8 +350,8 @@ const honors = computed(() => [
 }
 @media (max-width: 900px) {
   .about-hero {
-    height: 60vh;
-    min-height: 300px;
+    height: 40vh;
+    min-height: 180px;
   }
   .hero-content h1 {
     font-size: 2em;
@@ -343,7 +367,7 @@ const honors = computed(() => [
     height: 2px;
   }
   .about-section {
-    padding: 14px 6px;
+    padding: 10px 2px;
   }
   .about-header h1 {
     font-size: 1.5em;

@@ -4,83 +4,95 @@
       <div class="logo">
         <img
           :src="logoUrl"
-          style="width: 50px; height: 50px"
+          width="50"
+          height="50"
           :alt="$t('logoAlt')"
         />
-        <router-link to="/" style="margin-left: 5px" class="logo-text">
+        <router-link to="/" class="logo-text">
           {{ $t("logoText") }}
         </router-link>
       </div>
-
       <ul class="nav-links">
         <li>
-          <router-link to="/">{{ $t("nav.home") }}</router-link>
+          <router-link to="/">
+            {{ $t("nav.home") }}
+          </router-link>
         </li>
         <li>
           <router-link to="/products">
-            {{ $t("nav.products") }} <i class="fas fa-chevron-down"></i>
+            {{ $t("nav.products") }}
           </router-link>
           <ul class="dropdown">
-            <li><router-link :to="{ path: '/products', hash: '#mobile-robot' }">{{ $t('nav.mobileRobot') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#scara-robot-arm' }">{{ $t('nav.fourAxisArm') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#six-axis-robot-arm' }">{{ $t('nav.sixAxisArm') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#rtos' }">{{ $t('nav.rtOs') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#robot-control-system' }">{{ $t('nav.controlSystem') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#dual-arm-humanoid' }">{{ $t('nav.humanoid') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#scara-mobile-composite' }">{{ $t('nav.fourAxisMobileCompound') }}</router-link></li>
+            <li v-for="item in productNav" :key="item.hash">
+              <router-link
+                :to="{ path: '/products', hash: item.hash }"
+              >
+                {{ $t(item.label) }}
+              </router-link>
+            </li>
           </ul>
         </li>
         <li>
-          <router-link to="/video">{{ $t("nav.videoCases") }}</router-link>
+          <router-link to="/video">
+            {{ $t("nav.videoCases") }}
+          </router-link>
         </li>
         <li>
           <router-link to="/applications">
-            {{ $t("nav.applications") }} <i class="fas fa-chevron-down"></i>
+            {{ $t("nav.applications") }}
           </router-link>
           <ul class="dropdown">
-            <li><router-link to="/applications">{{ $t("nav.medicalAuto") }}</router-link></li>
-            <li><router-link to="/applications">{{ $t("nav.semiProcessing") }}</router-link></li>
+            <li v-for="item in applicationNav" :key="item.label">
+              <router-link to="/applications">
+                {{ $t(item.label) }}
+              </router-link>
+            </li>
           </ul>
         </li>
         <li>
           <router-link to="/support">
-            {{ $t("nav.support") }} <i class="fas fa-chevron-down"></i>
+            {{ $t("nav.support") }}
           </router-link>
           <ul class="dropdown">
-            <li><router-link to="/support">{{ $t("nav.afterSales") }}</router-link></li>
-            <li><router-link to="/support">{{ $t("nav.download") }}</router-link></li>
-            <li><router-link to="/support">{{ $t("nav.faq") }}</router-link></li>
+            <li v-for="item in supportNav" :key="item.label">
+              <router-link to="/support">
+                {{ $t(item.label) }}
+              </router-link>
+            </li>
           </ul>
         </li>
         <li>
           <router-link to="/news">
-            {{ $t("nav.news") }} <i class="fas fa-chevron-down"></i>
+            {{ $t("nav.news") }}
           </router-link>
           <ul class="dropdown">
-            <li><router-link to="/news">{{ $t("nav.newsDynamic") }}</router-link></li>
-            <li><router-link to="/news">{{ $t("nav.exhibition") }}</router-link></li>
+            <li v-for="item in newsNav" :key="item.label">
+              <router-link to="/news">
+                {{ $t(item.label) }}
+              </router-link>
+            </li>
           </ul>
         </li>
         <li>
           <router-link to="/about">
-            {{ $t("nav.about") }} <i class="fas fa-chevron-down"></i>
+            {{ $t("nav.about") }}
           </router-link>
           <ul class="dropdown">
-            <li><router-link :to="{ path: '/about', hash: '#tab1' }">{{ $t('nav.companyIntro') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab2' }">{{ $t('nav.history') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab3' }">{{ $t('nav.honor') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab4' }">{{ $t('nav.culture') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab5' }">{{ $t('nav.jobs') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab6' }">{{ $t('nav.contact') }}</router-link></li>
+            <li v-for="item in aboutNav" :key="item.hash">
+              <router-link
+                :to="{ path: '/about', hash: item.hash }"
+              >
+                {{ $t(item.label) }}
+              </router-link>
+            </li>
           </ul>
         </li>
       </ul>
 
-      <div class="nav-buttons">
-      </div>
+      <div class="nav-buttons"></div>
 
       <button class="mobile-menu-btn" @click="toggleMenu">
-        <i class="fas fa-bars"></i>
+        <span style="font-size: 24px; font-weight: bold;">≡</span>
       </button>
 
       <div class="language-switcher">
@@ -96,9 +108,49 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import logoUrl from "@/assets/zeroant_logo.png";
+
+// 产品导航子项
+const productNav = [
+  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
+  { hash: '#scara-robot-arm', label: 'nav.fourAxisArm' },
+  { hash: '#six-axis-robot-arm', label: 'nav.sixAxisArm' },
+  { hash: '#rtos', label: 'nav.rtOs' },
+  { hash: '#robot-control-system', label: 'nav.controlSystem' },
+  { hash: '#dual-arm-humanoid', label: 'nav.humanoid' },
+  { hash: '#scara-mobile-composite', label: 'nav.fourAxisMobileCompound' }
+];
+
+// 行业应用导航子项
+const applicationNav = [
+  { label: 'nav.medicalAuto' },
+  { label: 'nav.semiProcessing' }
+];
+
+// 技术支持导航子项
+const supportNav = [
+  { label: 'nav.afterSales' },
+  { label: 'nav.download' },
+  { label: 'nav.faq' }
+];
+
+// 新闻动态导航子项
+const newsNav = [
+  { label: 'nav.newsDynamic' },
+  { label: 'nav.exhibition' }
+];
+
+// 关于我们导航子项
+const aboutNav = [
+  { hash: '#tab1', label: 'nav.companyIntro' },
+  { hash: '#tab2', label: 'nav.history' },
+  { hash: '#tab3', label: 'nav.honor' },
+  { hash: '#tab4', label: 'nav.culture' },
+  { hash: '#tab5', label: 'nav.jobs' },
+  { hash: '#tab6', label: 'nav.contact' }
+];
 
 const { locale } = useI18n();
 
@@ -144,7 +196,8 @@ function toggleMenu() {}
   padding: 15px 20px;
   height: 70px;
   box-sizing: border-box;
-  flex-wrap: nowrap; /* 新增，防止换行 */
+  flex-wrap: nowrap;
+  max-width: 1200px;
 }
 
 .logo {
@@ -164,7 +217,7 @@ function toggleMenu() {}
 
 .nav-links {
   flex: 1 1 auto;
-  min-width: 0; /* 新增，保证收缩 */
+  min-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -191,7 +244,7 @@ function toggleMenu() {}
 }
 
 .nav-links a:hover {
-  color: #1e6bc9;
+  color: #1a3a8f;
 }
 
 .nav-links a::after {
@@ -201,7 +254,7 @@ function toggleMenu() {}
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #1e6bc9;
+  background-color: #1a3a8f;
   transition: width 0.3s;
 }
 
@@ -213,10 +266,10 @@ function toggleMenu() {}
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background-color: #fff;
   min-width: 220px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  border-radius: 12px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
@@ -234,7 +287,7 @@ function toggleMenu() {}
 .dropdown li {
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #f0f2f5;
 }
 
 .dropdown li:last-child {
@@ -256,35 +309,6 @@ function toggleMenu() {}
   gap: 15px;
 }
 
-.btn {
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-primary {
-  background-color: #1e6bc9;
-  color: white;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #1a5db0;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(30, 107, 201, 0.3);
-}
-
-.btn-outline:hover {
-  background-color: #f5f9ff;
-  transform: translateY(-2px);
-}
-
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -292,6 +316,7 @@ function toggleMenu() {}
   font-size: 24px;
   cursor: pointer;
   color: #333;
+  margin-left: 10px;
 }
 
 @media (max-width: 992px) {
@@ -308,96 +333,13 @@ function toggleMenu() {}
 
 .language-switcher {
   flex: 0 0 auto;
-  margin-left: auto; /* 新增，保证始终在最右侧 */
+  margin-left: auto;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   min-width: 0;
 }
 
-.switcher-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: #f5f9ff;
-  border: 1px solid #1e6bc9;
-  border-radius: 8px;
-  color: #1e6bc9;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.switcher-button:hover {
-  background: #e6f0fa;
-  border-color: #1a3a8f;
-}
-
-.icon {
-  font-size: 16px;
-}
-
-.current-language {
-  font-size: 14px;
-}
-
-.arrow {
-  font-size: 10px;
-  transition: transform 0.2s ease;
-}
-
-.arrow.rotated {
-  transform: rotate(180deg);
-}
-
-.dropdown-menu {
-  position: absolute;
-  z-index: 1000;
-  right: 0;
-  top: 100%;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  z-index: 9999 !important;
-}
-
-.dropdown-menu button {
-  width: 100%;
-  padding: 10px 16px;
-  text-align: left;
-  background: none;
-  border: none;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.dropdown-menu button:hover,
-.dropdown-menu button.active {
-  background: #f5f9ff;
-  font-weight: 600;
-}
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-.slide-fade-leave-active {
-  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(-10px);
-  opacity: 0;
-}
-
-/* 让语言切换按钮与导航栏链接样式一致 */
 .language-switcher .language-btn {
   background: none;
   border: none;
@@ -414,7 +356,7 @@ function toggleMenu() {}
 }
 
 .language-switcher .language-btn:hover {
-  color: #1e6bc9;
+  color: #1a3a8f;
 }
 
 .language-switcher .language-btn::after {
@@ -424,7 +366,7 @@ function toggleMenu() {}
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #1e6bc9;
+  background-color: #1a3a8f;
   transition: width 0.3s;
 }
 
