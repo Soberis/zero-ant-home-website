@@ -1,3 +1,4 @@
+<!-- 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互 -->
 <template>
   <div class="support-hero-bg">
     <div class="support-hero">
@@ -67,6 +68,7 @@
 </template>
 
 <script setup>
+// 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互
 import { reactive } from 'vue';
 
 const downloads = reactive([

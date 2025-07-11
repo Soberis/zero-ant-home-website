@@ -31,12 +31,18 @@ const scrollWrap = ref(null);
 let timer = null;
 const router = useRouter();
 
-function goDetail(slug) {
+/**
+ * 跳转到应用详情页
+ */
+const goDetail = (slug) => {
   if (slug) {
     router.push(`/applications/${slug}`);
   }
 }
-function autoScroll() {
+/**
+ * 自动滚动（到一半重置，若需无缝体验可后续优化）
+ */
+const autoScroll = () => {
   if (!scrollWrap.value) return;
   const el = scrollWrap.value;
   el.scrollLeft += 1.5;
@@ -44,14 +50,23 @@ function autoScroll() {
     el.scrollLeft = 0;
   }
 }
-function pauseScroll() {
+/**
+ * 暂停自动滚动
+ */
+const pauseScroll = () => {
   if (timer) clearInterval(timer);
 }
-function resumeScroll() {
+/**
+ * 恢复自动滚动
+ */
+const resumeScroll = () => {
   if (timer) clearInterval(timer);
   timer = setInterval(autoScroll, 20);
 }
-function smoothScrollBy(distance, duration = 600) {
+/**
+ * 平滑滚动指定距离
+ */
+const smoothScrollBy = (distance, duration = 600) => {
   const el = scrollWrap.value;
   if (!el) return;
   const start = el.scrollLeft;
@@ -73,13 +88,19 @@ function smoothScrollBy(distance, duration = 600) {
   }
   requestAnimationFrame(animate);
 }
-
-function scrollLeft() {
+/**
+ * 向左滚动
+ */
+const scrollLeft = () => {
   smoothScrollBy(-260, 600);
 }
-function scrollRight() {
+/**
+ * 向右滚动
+ */
+const scrollRight = () => {
   smoothScrollBy(260, 600);
 }
+
 onMounted(() => {
   nextTick(() => {
     timer = setInterval(autoScroll, 20);
@@ -87,6 +108,7 @@ onMounted(() => {
 });
 onUnmounted(() => {
   if (timer) clearInterval(timer);
+  timer = null;
 });
 </script>
 

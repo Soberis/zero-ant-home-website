@@ -1,3 +1,4 @@
+<!-- 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型 -->
 <template>
   <div class="video-detail-page">
     <div class="video-detail-main">
@@ -27,6 +28,7 @@
 </template>
 
 <script setup>
+// 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型
 import { useRoute } from 'vue-router'
 import { videoMap } from '@/data/videos'
 

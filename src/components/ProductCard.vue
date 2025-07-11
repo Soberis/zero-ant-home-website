@@ -10,8 +10,12 @@
   </div>
 </template>
 <script setup>
+// 组件属性定义
+/**
+ * @prop {Object} product 产品数据，必填
+ */
 defineProps({
-  product: Object
+  product: { type: Object, required: true }
 });
 </script>
 <style scoped>

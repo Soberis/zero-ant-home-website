@@ -1,31 +1,42 @@
+// 产品详情数据模块，包含所有产品的详细信息，按slug索引
+
+/**
+ * @property {string} title 产品名称
+ * @property {string} desc 产品简介
+ * @property {Array<string>} features 优势特点
+ * @property {Array<{title:string,desc:string}>} cases 相关案例
+ * @property {Array<string>} scenes 应用场景
+ * @property {Array<{key:string,value:string}>} params 产品参数
+ * @property {Array<{name:string,url:string}>} downloads 相关下载
+ */
 export const productDetails = {
   "mobile-robot": {
-    title: "移动机器人",
-    desc: "高精度导航与避障，适用于智能物流、巡检、搬运等多场景的自主移动机器人解决方案。",
-    features: [
+    title: "移动机器人", // 产品名称
+    desc: "高精度导航与避障，适用于智能物流、巡检、搬运等多场景的自主移动机器人解决方案。", // 产品简介
+    features: [ // 优势特点
       "高精度SLAM导航与定位",
       "多传感器融合避障，安全可靠",
       "灵活路径规划与动态避障",
       "支持多种负载与扩展接口",
       "远程监控与智能调度系统"
     ],
-    cases: [
+    cases: [ // 相关案例
       { title: "智能仓储物流", desc: "实现自动搬运、分拣与库存管理，提高仓储效率。" },
       { title: "工厂巡检", desc: "自动巡检生产线设备，提升安全性与管理效率。" }
     ],
-    scenes: [
+    scenes: [ // 应用场景
       "智能物流中心",
       "制造工厂",
       "医院配送",
       "大型商超"
     ],
-    params: [
+    params: [ // 产品参数
       { key: "最大载重", value: "100kg" },
       { key: "导航精度", value: "±2cm" },
       { key: "续航时间", value: "8小时" },
       { key: "最大速度", value: "1.5m/s" }
     ],
-    downloads: [
+    downloads: [ // 相关下载
       { name: "移动机器人产品手册.pdf", url: "/downloads/mobile-robot.pdf" }
     ]
   },

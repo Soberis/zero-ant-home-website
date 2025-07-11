@@ -51,11 +51,13 @@
         </div>
         <div class="footer-col contact-col">
           <h4>{{ $t('footer.companyFull') }}</h4>
+          <!-- 联系方式静态展示，如需动态可抽离为props或数据源 -->
           <div class="contact-info">
               <div>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</div>
               <div>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</div>
               <div style="margin-top:8px;">{{ $t('contacts.address') }}：{{ $t('footer.address') }}</div>
           </div>
+          <!-- 二维码静态展示，如需动态可抽离为props或数据源 -->
           <div class="footer-qrcodes">
             <div class="qrcode-item">
               <div class="qrcode-img"></div>
@@ -80,6 +82,7 @@
 </template>
 
 <script setup>
+// 仅用于国际化，无复杂逻辑
 import { useI18n } from 'vue-i18n';
 </script>
 

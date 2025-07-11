@@ -1,4 +1,13 @@
-// 视频详情映射（以 slug 作为 key）
+// 视频数据模块，包含视频详情映射和视频卡片列表
+
+/**
+ * 视频详情映射（以 slug 作为 key）
+ * @property {string} slug 唯一标识
+ * @property {string} type 视频平台类型
+ * @property {string} url 视频播放地址
+ * @property {string} title 视频标题
+ * @property {string} desc 视频简介
+ */
 export const videoMap = {
   "drawing-robot": {
     slug: 'drawing-robot',
@@ -39,6 +48,12 @@ export const videoMap = {
 
 // 视频卡片列表（用于 Video.vue）
 import zeroantLogo from '@/assets/zeroant_logo.png'
+/**
+ * 视频卡片列表
+ * @property {string} title 视频标题
+ * @property {string} img 视频封面图片
+ * @property {string} slug 唯一标识
+ */
 export const videoCards = [
   { title: '绘画机器人', img: zeroantLogo, slug: 'drawing-robot' },
   { title: '实时测试台站', img: zeroantLogo, slug: 'test-station' },

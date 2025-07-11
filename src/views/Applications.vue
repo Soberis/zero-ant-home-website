@@ -1,11 +1,12 @@
+<!-- 应用场景页面，展示所有行业应用卡片 -->
 <template>
   <div class="applications">
     <h1 class="title">应用场景</h1>
     <p class="subtitle">专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案</p>
     <div class="card-grid">
       <ApplicationCard
-        v-for="(item, idx) in applications"
-        :key="item.title + idx"
+        v-for="item in applications"
+        :key="item.slug"
         :title="item.title"
         :svg="item.svg"
         :slug="item.slug"
@@ -15,6 +16,7 @@
 </template>
 
 <script setup>
+// 引入行业应用数据和卡片组件
 import applications from '../data/applications.js'
 import ApplicationCard from '../components/ApplicationCard.vue'
 </script>

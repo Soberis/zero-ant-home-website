@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-// 占位，无需数据
+// 当前为占位实现，如需接入真实合作伙伴logo，建议将数据抽离为props或外部数据源
 </script>
 
 <style scoped>

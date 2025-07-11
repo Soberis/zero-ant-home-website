@@ -43,11 +43,21 @@
       </section>
     </div>
     <div class="back-btn-wrapper">
-      <button class="back-btn" @click="$emit('back')">返回产品列表</button>
+      <button class="back-btn" @click="$emit('back')">返回产品列表</button> <!-- 触发父组件返回事件 -->
     </div>
   </div>
 </template>
 <script setup>
+// 组件属性定义
+/**
+ * @prop {String} title 产品标题
+ * @prop {String} desc 产品描述
+ * @prop {Array} features 优势特点
+ * @prop {Array} cases 相关案例
+ * @prop {Array} scenes 应用场景
+ * @prop {Array} params 产品参数
+ * @prop {Array} downloads 相关下载
+ */
 defineProps({
   title: String,
   desc: String,

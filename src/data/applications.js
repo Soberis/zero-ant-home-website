@@ -1,15 +1,23 @@
-// 行业应用数据模块
+// 行业应用数据模块，包含所有行业应用场景信息
+
+/**
+ * @property {string} slug 路由唯一标识
+ * @property {string} title 行业应用名称
+ * @property {string} description 行业应用介绍（HTML字符串）
+ * @property {string} video 相关视频链接
+ * @property {string} svg 图标SVG字符串
+ */
 export default [
   {
-    slug: 'medical-automation',
-    title: '医疗自动化',
+    slug: 'medical-automation', // 路由唯一标识
+    title: '医疗自动化', // 行业应用名称
     description: `
 <p>医疗自动化通过智能设备和信息系统，实现医疗流程的自动化与智能化，极大提升了诊疗效率与安全性。自动化设备可减少人为失误，提升医疗服务的标准化水平，广泛应用于检验、手术、药品管理、样本处理等环节。</p>
 <p>智能检验仪器与自动化样本传输系统、医疗机器人辅助手术与护理、医院信息系统（HIS）与物联网设备集成、自动化药品分拣与配送等技术，推动了医疗行业的高效发展。</p>
 <p>典型应用包括智能化检验科自动流水线、手术机器人辅助微创手术、自动化药房与智能药品柜等。随着AI、5G和大数据的深度融合，医疗自动化将向更高智能化、远程化、个性化方向发展，推动智慧医院和远程医疗的普及。</p>
-    `,
-    video: 'https://www.bilibili.com/video/BV1d8411h7Jr/?spm_id_from=333.337.search-card.all.click&vd_source=7daba5cbb058d519718a2849fb57ed71',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>`
+    `, // 行业应用介绍
+    video: 'https://www.bilibili.com/video/BV1d8411h7Jr/?spm_id_from=333.337.search-card.all.click&vd_source=7daba5cbb058d519718a2849fb57ed71', // 相关视频链接
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>` // 图标SVG字符串
   },
   {
     slug: 'semiconductor',

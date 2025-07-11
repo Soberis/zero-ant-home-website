@@ -15,11 +15,23 @@
 </template>
 
 <script setup>
+// 组件属性定义
+/**
+ * @prop {Object} card 视频卡片数据
+ * @prop {Number} index 当前卡片索引
+ * @prop {Boolean} active 是否高亮
+ */
 const props = defineProps({
   card: { type: Object, required: true },
   index: { type: Number, required: true },
   active: { type: Boolean, default: false }
 })
+// 事件定义
+/**
+ * @emits hover 鼠标悬停
+ * @emits leave 鼠标离开
+ * @emits click 点击卡片
+ */
 const emit = defineEmits(['hover', 'leave', 'click'])
 </script>
 

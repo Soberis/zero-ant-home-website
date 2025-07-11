@@ -7,12 +7,21 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+// 组件属性定义
+/**
+ * @prop {String} title 应用名称，必填
+ * @prop {String} svg 图标SVG字符串，必填
+ * @prop {String} slug 路由slug，必填
+ */
 const props = defineProps({
-  title: String,
-  svg: String,
-  slug: String
+  title: { type: String, required: true },
+  svg: { type: String, required: true },
+  slug: { type: String, required: true }
 })
 const router = useRouter()
+/**
+ * 跳转到应用详情页
+ */
 function goDetail() {
   if (props.slug) {
     router.push(`/applications/${props.slug}`)

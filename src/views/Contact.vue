@@ -1,3 +1,4 @@
+<!-- 联系我们页面，包含表单提交、表单校验、联系方式和社交信息展示 -->
 <template>
   <div class="contact-bg">
     <div class="contact-main">
@@ -90,6 +91,7 @@
 </template>
 
 <script setup>
+// 联系我们页面，包含表单提交、表单校验、联系方式和社交信息展示
 import { ref } from "vue";
 
 const formData = ref({

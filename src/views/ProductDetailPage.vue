@@ -1,3 +1,4 @@
+<!-- 产品详情页，根据slug展示产品详细信息，未找到时显示提示 -->
 <template>
   <div>
     <ProductDetail
@@ -15,6 +16,7 @@
   </div>
 </template>
 <script setup>
+// 通过路由参数slug查找产品详情，未找到时显示提示
 import { useRoute, useRouter } from 'vue-router';
 import { productDetails } from '@/data/productDetails';
 import ProductDetail from '@/components/ProductDetail.vue';

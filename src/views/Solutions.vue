@@ -1,3 +1,4 @@
+<!-- 解决方案页面，展示公司核心解决方案与案例，全部内容国际化 -->
 <template>
   <div class="solutions">
     <h1>{{ $t("solutions.title") }}</h1>
@@ -44,6 +45,7 @@
 </template>
 
 <script setup>
+// 纯展示页面，无业务逻辑
 </script>
 
 <style scoped>

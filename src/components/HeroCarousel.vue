@@ -26,6 +26,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
+// 轮播图数据（如需动态可抽离为props或外部数据源）
 const slides = [
   {
     img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=Slide+1',
@@ -44,15 +45,25 @@ const slides = [
   },
 ];
 const current = ref(0);
+// 自动轮播定时器
 let timer = null;
 
+/**
+ * 切换到下一张
+ */
 function next() {
   current.value = (current.value + 1) % slides.length;
 }
+/**
+ * 跳转到指定索引
+ */
 function goTo(idx) {
   current.value = idx;
   resetTimer();
 }
+/**
+ * 重置自动轮播定时器
+ */
 function resetTimer() {
   if (timer) clearInterval(timer);
   timer = setInterval(next, 4000);

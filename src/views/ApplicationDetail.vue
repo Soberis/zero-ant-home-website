@@ -1,3 +1,4 @@
+<!-- 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换 -->
 <template>
   <div class="application-detail">
     <h1 class="title">{{ detail?.title }}</h1>
@@ -40,6 +41,7 @@
 </template>
 
 <script setup>
+// 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换
 import { useRoute, useRouter } from 'vue-router'
 import applications from '../data/applications.js'
 import { computed } from 'vue'

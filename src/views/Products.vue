@@ -1,3 +1,4 @@
+<!-- 产品列表页面，展示所有产品系列及卡片，支持跳转到详情页 -->
 <template>
   <div class="products">
     <div
@@ -16,6 +17,7 @@
 </template>
 
 <script setup>
+// 产品列表页面，渲染所有产品卡片，支持跳转到详情页
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { products, productRouteMap } from '@/data/products';

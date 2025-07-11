@@ -1,3 +1,4 @@
+<!-- 首页，聚合轮播、核心产品、视频案例、行业应用、合作伙伴等模块 -->
 <template>
   <div class="home-bg">
     <div class="home">
@@ -15,6 +16,7 @@
 </template>
 
 <script setup>
+// 首页聚合各核心模块组件
 import HeroCarousel from '../components/HeroCarousel.vue'; // 轮播图
 import CoreProducts from '../components/CoreProducts.vue'; // 核心产品
 import VideoCases from '../components/VideoCases.vue'; // 视频案例

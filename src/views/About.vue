@@ -1,3 +1,4 @@
+<!-- 关于我们页面，包含公司介绍、发展历程、荣誉、文化、招聘、联系方式等内容，支持国际化 -->
 <template>
   <div class="about-page">
     <!-- 口号大屏 -->
@@ -72,6 +73,7 @@
 </template>
 
 <script setup>
+// 关于我们页面，包含公司介绍、发展历程、荣誉、文化、招聘、联系方式等内容，支持国际化
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();

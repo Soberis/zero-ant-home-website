@@ -14,6 +14,7 @@
 </template>
 
 <script setup>
+// 视频案例数据
 import { videoCards } from '../data/videos.js';
 </script>
 
@@ -33,15 +34,6 @@ import { videoCards } from '../data/videos.js';
   margin-bottom: 56px;
   letter-spacing: 2px;
   color: #222;
-}
-.section-desc {
-  text-align: center;
-  color: #555;
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.7;
-  margin-bottom: 38px;
-  letter-spacing: 1px;
 }
 .videos-list {
   display: grid;

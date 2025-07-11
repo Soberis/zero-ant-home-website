@@ -1,3 +1,4 @@
+<!-- 视频案例页面，展示所有视频卡片，支持高亮与跳转详情 -->
 <template>
   <div class="video-page">
     <div class="card-list">
@@ -16,6 +17,7 @@
 </template>
 
 <script setup>
+// 视频案例页面，渲染所有视频卡片，支持高亮与跳转详情
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { videoCards } from '@/data/videos'

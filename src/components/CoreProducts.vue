@@ -4,7 +4,7 @@
     <div class="products-list">
       <div v-for="product in products" :key="product.slug" class="product-card">
         <div class="product-img">
-          <!-- SVG线稿占位图 -->
+          <!-- SVG线稿占位图，后续可替换为产品主图 -->
           <svg width="80" height="100" viewBox="0 0 80 100" fill="none">
             <rect x="10" y="30" width="60" height="50" rx="10" stroke="#1a3a8f" stroke-width="2" fill="none"/>
             <circle cx="40" cy="25" r="12" stroke="#1a3a8f" stroke-width="2" fill="none"/>
@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+// 核心产品数据
 import { products } from '../data/products.js';
 </script>
 
