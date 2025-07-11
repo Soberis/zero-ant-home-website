@@ -43,14 +43,14 @@ function goDetail(slug) {
 .series-title {
   font-size: 3.6rem;
   font-weight: 900;
-  color: #222;
+  color: #111;
   margin-bottom: 10px;
   letter-spacing: 3px;
   line-height: 1.1;
 }
 .series-subtitle {
   font-size: 1.6rem;
-  color: #222;
+  color: #111;
   margin-bottom: 48px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -103,11 +103,11 @@ function goDetail(slug) {
   font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 22px;
-  color: #222;
+  color: #111;
   letter-spacing: 1.5px;
 }
 .product-desc {
-  color: #555;
+  color: #111;
   font-size: 1.18rem;
   margin-bottom: 44px;
   text-align: center;

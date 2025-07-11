@@ -179,7 +179,7 @@ function toggleMenu() {}
 }
 
 .nav-links a {
-  color: #333;
+  color: #111;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;

@@ -66,7 +66,7 @@ const emit = defineEmits(['hover', 'leave', 'click'])
 }
 .video-card-title {
   font-size: 22px;
-  color: #232323;
+  color: #111;
   text-align: center;
   font-weight: 500;
   letter-spacing: 1px;

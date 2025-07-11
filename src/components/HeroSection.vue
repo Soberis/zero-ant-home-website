@@ -39,7 +39,7 @@ const heroCta = ref("Discover Our Products");
 
 .hero-content p {
   font-size: 18px;
-  color: #333;
+  color: #111;
   margin: 20px 0;
 }
 

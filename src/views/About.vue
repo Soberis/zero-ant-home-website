@@ -171,7 +171,7 @@ const honors = computed(() => [
   font-size: 1.12em;
   font-weight: 500;
   line-height: 1.7;
-  color: #222;
+  color: #111;
   letter-spacing: 1px;
   margin: 0;
   text-align: center;

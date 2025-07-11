@@ -10,6 +10,7 @@ const Contact = () => import('../views/Contact.vue');
 const Video = () => import('../views/Video.vue');
 const VideoDetail = () => import('../views/VideoDetail.vue');
 const ProductDetailPage = () => import('../views/ProductDetailPage.vue');
+const Support = () => import('../views/Support.vue');
 
 const routes = [
   // 首页
@@ -41,6 +42,12 @@ const routes = [
     path: '/applications',
     name: 'Applications',
     component: Applications,
+  },
+  // 服务支持
+  {
+    path: '/support',
+    name: 'Support',
+    component: Support,
   },
   // 关于我们
   {

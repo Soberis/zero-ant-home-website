@@ -18,13 +18,13 @@ defineProps({
 .product-name {
   font-size: 2.4rem;
   font-weight: 900;
-  color: #222;
+  color: #111;
   margin-bottom: 22px;
   letter-spacing: 1.5px;
   text-align: center;
 }
 .product-desc {
-  color: #222;
+  color: #111;
   font-size: 1.18rem;
   margin-bottom: 44px;
   text-align: center;

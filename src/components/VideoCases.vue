@@ -32,7 +32,7 @@ import { videoCards } from '../data/videos.js';
   font-weight: 800;
   margin-bottom: 56px;
   letter-spacing: 2px;
-  color: #222;
+  color: #111;
 }
 .videos-list {
   display: grid;
@@ -93,7 +93,7 @@ import { videoCards } from '../data/videos.js';
 .video-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #222 !important;
+  color: #111 !important;
   margin-bottom: 18px;
   text-align: center;
 }

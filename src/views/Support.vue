@@ -1,16 +1,358 @@
 <template>
-  <div class="support">
-    <h1>服务支持</h1>
-    <p>这里是服务支持页面内容。</p>
+  <div class="support-hero-bg">
+    <div class="support-hero">
+      <h1 class="hero-title">售后服务</h1>
+      <div class="hero-desc">售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应</div>
+      <div class="service-cards">
+        <div class="service-card">
+          <div class="icon-box">
+            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+              <path d="M28 6L46 12V26C46 38.5 36.5 47.5 28 50C19.5 47.5 10 38.5 10 26V12L28 6Z" fill="#fff" stroke="#1a3a8f" stroke-width="2.5"/>
+              <text x="50%" y="44%" text-anchor="middle" fill="#1a3a8f" font-size="16" font-weight="bold" dominant-baseline="middle">12</text>
+              <text x="50%" y="64%" text-anchor="middle" fill="#1a3a8f" font-size="8" font-weight="bold" dominant-baseline="middle">HOURS</text>
+            </svg>
+          </div>
+          <div class="card-desc">12小时内快速解决问题</div>
+        </div>
+        <div class="service-card">
+          <div class="icon-box">
+            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+              <circle cx="28" cy="28" r="26" fill="#fff" stroke="#1a3a8f" stroke-width="2.5"/>
+              <path d="M18 32c2.5 3.5 6.5 7.5 10 10l3-3c0.5-0.5 1.2-0.6 1.8-0.3 1.6 0.8 3.4 1.3 5.2 1.3 0.7 0 1.3 0.6 1.3 1.3v4.2c0 0.7-0.6 1.3-1.3 1.3C25.2 47.5 14.5 36.8 14.5 23.3c0-0.7 0.6-1.3 1.3-1.3h4.2c0.7 0 1.3 0.6 1.3 1.3 0 1.8 0.5 3.6 1.3 5.2 0.3 0.6 0.2 1.3-0.3 1.8l-3 3z" fill="#1a3a8f"/>
+              <text x="65%" y="54%" text-anchor="middle" fill="#1a3a8f" font-size="14" font-weight="bold" dominant-baseline="middle">24h</text>
+            </svg>
+          </div>
+          <div class="card-desc">7×24小时专属服务群响应</div>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="support-page">
+    <h2 class="section-title">相关下载</h2>
+    <div class="section-block">
+      <div v-for="(item, idx) in downloads" :key="item.title" class="card-item download-card" :class="{open: item.open}">
+        <div class="card-header">
+          <router-link :to="{ path: '/support', hash: item.link }" class="card-title download-title">{{ item.title }}</router-link>
+          <span class="card-icon" @click="toggleDownload(idx)">{{ item.open ? '-' : '+' }}</span>
+        </div>
+        <transition name="fade-slide">
+          <div v-if="item.open" class="card-content">
+            <a :href="item.link">{{ item.desc }}</a>
+          </div>
+        </transition>
+      </div>
+    </div>
+    <h2 class="section-title">常见问题</h2>
+    <div class="section-block">
+      <div v-for="(faq, idx) in faqs" :key="faq.q" class="card-item faq-card" :class="{open: faq.open}">
+        <div class="card-header">
+          <router-link :to="{ path: '/support', hash: faq.link }" class="card-title faq-title">{{ faq.q }}</router-link>
+          <span class="card-icon" @click="toggleFaq(idx)">{{ faq.open ? '-' : '+' }}</span>
+        </div>
+        <transition name="fade-slide">
+          <div v-if="faq.open" class="card-content">
+            {{ faq.a }}
+          </div>
+        </transition>
+      </div>
+    </div>
+  </div>
+  <!-- 在页面下方添加锚点内容区块 -->
+  <div style="height: 60px;"></div>
+  <div id="manual"></div>
+  <div id="joint"></div>
+  <div id="faq1"></div>
+  <div id="faq2"></div>
+  <div id="faq3"></div>
 </template>
 
 <script setup>
-// 可根据需要引入相关逻辑
+import { reactive } from 'vue';
+
+const downloads = reactive([
+  {
+    title: '产品手册',
+    desc: 'PDF文档下载',
+    link: '#manual',
+    open: false
+  },
+  {
+    title: '关节资料',
+    desc: 'ZIP资料包下载',
+    link: '#joint',
+    open: false
+  }
+]);
+
+const faqs = reactive([
+  {
+    q: '睿尔曼机械臂如何操作碰撞级别？更高的碰撞级别是否更好？',
+    a: '机械臂碰撞级别设置需根据实际应用场景调整。更高的碰撞级别灵敏度更高，但可能导致误报，建议根据需求合理设置。',
+    link: '#faq1',
+    open: false
+  },
+  {
+    q: '如何使用睿尔曼机械臂实现力位混合控制？',
+    a: '可通过API或ROS接口实现力位混合控制，具体请参考开发文档相关章节。',
+    link: '#faq2',
+    open: false
+  },
+  {
+    q: '机械臂拖拽教学后轨迹能否保存？如何实施和操作？',
+    a: '支持轨迹保存，拖拽教学完成后可通过控制软件导出轨迹文件，具体操作详见用户手册。',
+    link: '#faq3',
+    open: false
+  }
+]);
+
+function toggleDownload(idx) {
+  downloads[idx].open = !downloads[idx].open;
+}
+function toggleFaq(idx) {
+  faqs[idx].open = !faqs[idx].open;
+}
 </script>
 
 <style scoped>
-.support {
-  padding: 20px;
+.support-hero-bg {
+  width: 100vw;
+  background: linear-gradient(135deg, #f7f8fa 60%, #e9eef7 100%);
+  padding: 0 0 48px 0;
+}
+.support-hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 16px 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-title {
+  color: #111;
+  font-size: 3.6rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: 2px;
+}
+.hero-desc {
+  color: #222;
+  font-size: 1.45rem;
+  text-align: center;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+.service-cards {
+  display: flex;
+  gap: 64px;
+  width: 100%;
+  justify-content: center;
+}
+.service-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(26,58,143,0.10);
+  width: 420px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 32px 24px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.service-card:hover {
+  box-shadow: 0 12px 40px rgba(26,58,143,0.16);
+  transform: translateY(-4px) scale(1.03);
+}
+.icon-box {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-desc {
+  color: #111;
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: center;
+}
+.support-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0 0 48px 0;
+  background: #fff;
+  min-height: 100vh;
+}
+.section-title {
+  color: #111;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 48px 0 32px 0;
+  letter-spacing: 1px;
+  padding-left: 0;
+}
+.section-block {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.card-item {
+  background: #f7f8fa;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(26,58,143,0.04);
+  width: 100%;
+  margin-bottom: 24px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.card-item.open {
+  box-shadow: 0 8px 32px rgba(26,58,143,0.10);
+  transform: translateY(-2px) scale(1.01);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 40px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.card-header:hover {
+  background: #f0f3fa;
+}
+.card-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.download-title {
+  color: #1a3a8f;
+}
+.faq-title {
+  color: #111;
+}
+.card-icon {
+  font-size: 1.5rem;
+  color: #bbb;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+.card-header:hover .card-icon {
+  color: #1a3a8f;
+}
+.card-content {
+  padding: 0 40px 24px 40px;
+  color: #111;
+  font-size: 1.12rem;
+  line-height: 1.8;
+  background: #f7f8fa;
+  transition: all 0.2s;
+}
+.card-content a {
+  color: #1a3a8f;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.card-content a:hover {
+  color: #0d1e4a;
+}
+/* 展开收起动画 */
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: all 0.25s cubic-bezier(.4,0,.2,1);
+}
+.fade-slide-enter-from, .fade-slide-leave-to {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-10px);
+}
+.fade-slide-enter-to, .fade-slide-leave-from {
+  opacity: 1;
+  max-height: 200px;
+  transform: translateY(0);
+}
+@media (max-width: 900px) {
+  .support-hero {
+    padding: 32px 4px 0 4px;
+  }
+  .service-cards {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+  .service-card {
+    width: 90vw;
+    min-width: 0;
+    padding: 24px 8px 16px 8px;
+    min-height: 140px;
+  }
+  .icon-box {
+    margin-bottom: 14px;
+  }
+  .card-desc {
+    font-size: 1.08rem;
+  }
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .hero-desc {
+    font-size: 1.08rem;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.2rem;
+    margin: 32px 0 18px 0;
+  }
+  .card-header, .card-content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .support-hero {
+    padding: 16px 0 0 0;
+  }
+  .hero-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+  .service-card {
+    padding: 10px 2px 6px 2px;
+    border-radius: 10px;
+    min-height: 80px;
+  }
+  .card-desc {
+    font-size: 0.95rem;
+  }
+  .support-page {
+    padding: 10px 0 16px 0;
+    gap: 12px;
+  }
+  .section-title {
+    font-size: 1rem;
+    margin: 18px 0 8px 0;
+    padding-left: 0;
+  }
+  .card-header {
+    padding: 8px 4px;
+  }
+  .card-content {
+    padding: 0 4px 6px 4px;
+  }
 }
 </style> 

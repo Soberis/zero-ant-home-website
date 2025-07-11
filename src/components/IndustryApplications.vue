@@ -90,7 +90,7 @@ onUnmounted(() => {
 }
 .section-desc {
   text-align: center;
-  color: #444;
+  color: #111;
   font-size: 1.1rem;
   margin-bottom: 38px;
 }
