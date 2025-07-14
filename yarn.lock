@@ -194,12 +194,12 @@
   resolved "https://registry.npmmirror.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz"
   integrity sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==
 
-"@stagewise-plugins/vue@^0.6.0":
+"@stagewise-plugins/vue@^0.5.2":
   version "0.5.2"
   resolved "https://registry.npmmirror.com/@stagewise-plugins/vue/-/vue-0.5.2.tgz#9e8aba5ba6309858f53a2ec18493e4781e2187a1"
   integrity sha512-5raAU1Uy2x9eOLI/3lJ8EhXRH7zC4GvBQKmRXm3vwEEQw2tye78G6AIpAcgQm13mVrl66IkjL0JmVvf5nIG4Cw==
 
-"@stagewise/toolbar-vue@^0.6.0":
+"@stagewise/toolbar-vue@^0.5.2":
   version "0.5.2"
   resolved "https://registry.npmmirror.com/@stagewise/toolbar-vue/-/toolbar-vue-0.5.2.tgz#a311080652d9adcdb931f7c7c1b7fc827f5c39a6"
   integrity sha512-7VNGgNer/e9FoMdAbjkCQekTrGA3jiqHdLnv+llPDKX57P8mx4bNGNw6Duum6h7CiM5mfBsKtNgDirHYedjQOg==
