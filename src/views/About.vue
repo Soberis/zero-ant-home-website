@@ -285,7 +285,7 @@ onUnmounted(() => {
 }
 .about-hero {
   width: 100vw;
-  height: 60vh;
+  height: 100vh;
   min-height: 320px;
   position: relative;
   overflow: hidden;
@@ -350,7 +350,7 @@ onUnmounted(() => {
 }
 @media (max-width: 900px) {
   .about-hero {
-    height: 40vh;
+    height: 100vh;
     min-height: 180px;
   }
   .hero-content h1 {

@@ -19,8 +19,8 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@stagewise-plugins/vue": "^0.5.1",
-    "@stagewise/toolbar-vue": "^0.5.1",
+    "@stagewise-plugins/vue": "^0.6.0",
+    "@stagewise/toolbar-vue": "^0.6.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "fs": "^0.0.1-security",
     "less": "^4.1.3",

@@ -194,22 +194,22 @@
   resolved "https://registry.npmmirror.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz"
   integrity sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==
 
-"@stagewise-plugins/vue@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.npmmirror.com/@stagewise-plugins/vue/-/vue-0.5.1.tgz#e137c6aec4d121359c9fc63a7bbe5ef325cfd5d3"
-  integrity sha512-8qMw6GOqVoYXni30UUlNd4mZrvF+RJgWz7vnFX76/BUUo8saeFKWcbTEm9N587Qp+aq3QbOmfGcAmsNAjtFN+Q==
+"@stagewise-plugins/vue@^0.6.0":
+  version "0.5.2"
+  resolved "https://registry.npmmirror.com/@stagewise-plugins/vue/-/vue-0.5.2.tgz#9e8aba5ba6309858f53a2ec18493e4781e2187a1"
+  integrity sha512-5raAU1Uy2x9eOLI/3lJ8EhXRH7zC4GvBQKmRXm3vwEEQw2tye78G6AIpAcgQm13mVrl66IkjL0JmVvf5nIG4Cw==
 
-"@stagewise/toolbar-vue@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.npmmirror.com/@stagewise/toolbar-vue/-/toolbar-vue-0.5.1.tgz#68f875e1b460e859badd9ac879a298ee2ea3147a"
-  integrity sha512-ynXMOgbqY0VoesnBpC/VxtyviN8gqojV/ljp0UvzCFJUTwQjGB3n3YZVZP8p65R1vemkFjY3bSSg0g/in7/p2w==
+"@stagewise/toolbar-vue@^0.6.0":
+  version "0.5.2"
+  resolved "https://registry.npmmirror.com/@stagewise/toolbar-vue/-/toolbar-vue-0.5.2.tgz#a311080652d9adcdb931f7c7c1b7fc827f5c39a6"
+  integrity sha512-7VNGgNer/e9FoMdAbjkCQekTrGA3jiqHdLnv+llPDKX57P8mx4bNGNw6Duum6h7CiM5mfBsKtNgDirHYedjQOg==
   dependencies:
-    "@stagewise/toolbar" "0.5.1"
+    "@stagewise/toolbar" "0.5.2"
 
-"@stagewise/toolbar@0.5.1":
-  version "0.5.1"
-  resolved "https://registry.npmmirror.com/@stagewise/toolbar/-/toolbar-0.5.1.tgz#63eeca96efa7838cc5ffb56cfba580e4a4956ab5"
-  integrity sha512-4B7g5fuFAs30Di0J9Lb1rt7uSWx/WcnXB+WGlyB7VbVhBEqkpnKPlytDl+yQIgnrHobcfwr0BTmzmmAXb/kc8A==
+"@stagewise/toolbar@0.5.2":
+  version "0.5.2"
+  resolved "https://registry.npmmirror.com/@stagewise/toolbar/-/toolbar-0.5.2.tgz#fc2f85dd4f31fe2bf940575e1e4435a30eba083c"
+  integrity sha512-QxowY55dhYJS4iD3KuYCvmLl3jA74boYziEr9lent+NZpO1rjtF0KpDyld+hClA4lWnCVLPxhMwW69Qv2+xzjg==
 
 "@types/lodash-es@^4.17.6":
   version "4.17.7"
