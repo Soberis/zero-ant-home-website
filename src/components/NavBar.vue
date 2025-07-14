@@ -191,23 +191,37 @@ function toggleMenu() {}
 .nav-container {
   display: flex;
   align-items: center;
-  width: 100%;
-  margin: 0 auto;
-  padding: 15px 20px;
+  width: 100vw;
+  margin: 0;
+  padding: 0 0;
   height: 70px;
   box-sizing: border-box;
-  flex-wrap: nowrap;
-  max-width: 1200px;
+  justify-content: space-between;
+  background: #fff;
 }
 
 .logo {
-  flex: 0 0 auto;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   min-width: 0;
+  margin-left: 70px;
 }
 
+.language-switcher {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin-right: 70px;
+}
+
+@media (max-width: 1200px) {
+  .logo {
+    margin-left: 16px;
+  }
+  .language-switcher {
+    margin-right: 16px;
+  }
+}
 .logo-text {
   font-size: 24px;
   font-weight: bold;
