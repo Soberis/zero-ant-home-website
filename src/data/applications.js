@@ -152,17 +152,6 @@ export default [
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="24" cy="32" rx="12" ry="6" stroke="#1a3a8f" stroke-width="2"/><rect x="18" y="14" width="12" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/></svg>`
   },
   {
-    slug: 'entertainment-robot',
-    title: '表演娱乐机器人',
-    description: `
-<p>表演娱乐机器人通过人工智能和机器学习，实现对人类行为的理解和模仿，提供沉浸式的娱乐体验，广泛应用于演艺、游戏等领域。</p>
-<p>智能动作捕捉与模仿、多模态交互与情感识别、虚拟现实与增强现实集成、智能编舞与自动演出等技术，推动娱乐行业智能升级。</p>
-<p>典型应用包括智能舞蹈机器人表演、娱乐机器人互动展览、虚拟偶像与AI演艺。未来，表演娱乐机器人将与AI、XR、5G等新技术融合，推动数字娱乐和虚拟演艺产业发展。</p>
-    `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="10" stroke="#1a3a8f" stroke-width="2"/><path d="M18 24c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6z" stroke="#1a3a8f" stroke-width="2"/><path d="M24 34v6" stroke="#1a3a8f" stroke-width="2"/></svg>`
-  },
-  {
     slug: 'special-industry',
     title: '特种行业',
     description: `

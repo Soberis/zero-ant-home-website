@@ -67,7 +67,7 @@
             <router-link to="/applications" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.applications") }}</span>
             </router-link>
-            <div class="dropdown">
+            <!-- <div class="dropdown">
               <div class="dropdown-content">
                 <ul>
                   <li v-for="item in applicationNav" :key="item.label">
@@ -80,7 +80,7 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> -->
           </li>
           <li class="nav-item has-dropdown">
             <router-link to="/support" class="nav-link" active-class="active">
