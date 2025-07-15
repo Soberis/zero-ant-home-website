@@ -404,7 +404,7 @@ onMounted(() => {
 
 .dropdown-item {
   display: block;
-  padding: 12px 20px; /* 调整内边距适应80px高度 */
+  padding: 12px 20px;
   white-space: nowrap;
   line-height: 1.5;
   border-radius: 12px;
@@ -414,13 +414,13 @@ onMounted(() => {
   border: 2px solid transparent;
   min-width: 140px;
   flex: 0 0 auto;
-  font-size: 15px;
+  font-size: 14px; /* 从15px调整为14px */
   color: #333;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  height: auto; /* 让高度自适应内容 */
+  height: auto;
 }
 
 .dropdown-item::before {
@@ -543,6 +543,7 @@ onMounted(() => {
   }
 }
 
+/* 在响应式部分也需要相应调整 */
 @media (min-width: 992px) and (max-width: 1199px) {
   .nav-links {
     gap: 28px;
@@ -552,7 +553,7 @@ onMounted(() => {
   .dropdown-item {
     padding: 14px 20px;
     min-width: 120px;
-    font-size: 14px;
+    font-size: 13px; /* 从14px调整为13px */
   }
   
   .logo {
