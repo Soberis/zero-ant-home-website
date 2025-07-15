@@ -25,3 +25,6 @@ dist-ssr
 
 # Cursor AI rules (避免提交AI规则文件)
 .cursor/rules/
+
+# Trae AI 规则文件 (避免提交AI助手配置)
+.trae/
