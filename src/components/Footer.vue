@@ -34,17 +34,12 @@
             <li><router-link to="/support">{{ $t('nav.download') }}</router-link></li>
             <li><router-link to="/support">{{ $t('nav.faq') }}</router-link></li>
           </ul>
-          <h4 class="footer-subtitle">{{ $t('nav.news') }}</h4>
-          <ul>
-            <li><router-link to="/news">{{ $t('nav.newsDynamic') }}</router-link></li>
-            <li><router-link to="/news">{{ $t('nav.exhibition') }}</router-link></li>
-          </ul>
-        </div>
-        <div class="footer-col">
           <h4>{{ $t('nav.careers') }}</h4>
           <ul>
             <li><router-link to="/careers">{{ $t('nav.careers') }}</router-link></li>
           </ul>
+        </div>
+        <div class="footer-col">
           <h4>{{ $t('nav.about') }}</h4>
           <ul>
             <li><router-link to="/about">{{ $t('nav.companyIntro') }}</router-link></li>
