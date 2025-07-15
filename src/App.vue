@@ -29,7 +29,7 @@ import Footer from "./components/Footer.vue";
   font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
 }
 
-body {
+html, body {
   overflow-x: hidden;
 }
 

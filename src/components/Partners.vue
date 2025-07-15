@@ -3,15 +3,30 @@
     <h2 class="section-title">合作伙伴</h2>
     <div class="section-underline"></div>
     <div class="partners-list">
-      <div v-for="n in 15" :key="n" class="partner-logo">
-        <img :src="`https://via.placeholder.com/140x56?text=Logo+${n}`" :alt="`合作伙伴${n}`" />
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/huawei-2.svg" alt="华为" />
       </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/meituan-2020-logo.svg" alt="美团" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/perkinelmer.svg" alt="PerkinElmer" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-140212233413555.png" alt="施耐德电气" />
+      </div>
+      <!-- 预留：后续可继续添加其他logo，如下所示 -->
+      <!--
+      <div class="partner-logo">
+        <img src="@/assets/icons/schneider-electric-logo.svg" alt="施耐德电气" />
+      </div>
+      -->
     </div>
   </section>
 </template>
 
 <script setup>
-// 当前为占位实现，如需接入真实合作伙伴logo，建议将数据抽离为props或外部数据源
+// logo数据可后续抽离为props或外部数据源
 </script>
 
 <style scoped>
