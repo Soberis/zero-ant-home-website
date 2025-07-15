@@ -51,7 +51,9 @@
     "history": "发展历史",
     "honor": "资质荣誉",
     "culture": "企业文化",
-    "jobs": "人才招聘"
+    "jobs": "人才招聘",
+    "systemProducts": "系统产品",
+    "robotProducts": "机器人产品"
   },
   "hero": {
     "title": "四轴机械臂，助力医药自动化",

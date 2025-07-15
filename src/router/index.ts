@@ -12,6 +12,8 @@ const VideoDetail = () => import('../views/VideoDetail.vue');
 const ProductDetailPage = () => import('../views/ProductDetailPage.vue');
 const Support = () => import('../views/Support.vue');
 const ApplicationDetail = () => import('../views/ApplicationDetail.vue');
+const SystemProducts = () => import('../views/SystemProducts.vue');
+const RobotProducts = () => import('../views/RobotProducts.vue');
 
 const routes = [
   // 首页
@@ -77,6 +79,18 @@ const routes = [
     path: '/video/:slug',
     name: 'VideoDetail',
     component: VideoDetail,
+  },
+  // 系统产品
+  {
+    path: '/system-products',
+    name: 'SystemProducts',
+    component: SystemProducts
+  },
+  // 机器人产品
+  {
+    path: '/robot-products',
+    name: 'RobotProducts',
+    component: RobotProducts
   },
 ];
 

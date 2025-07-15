@@ -51,7 +51,9 @@
     "history": "Development History",
     "honor": "Honors",
     "culture": "Corporate Culture",
-    "jobs": "Careers"
+    "jobs": "Careers",
+    "systemProducts": "System Products",
+    "robotProducts": "Robot Products"
   },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",

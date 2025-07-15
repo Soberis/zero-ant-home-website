@@ -20,16 +20,35 @@
               <span class="nav-text">{{ $t("nav.home") }}</span>
             </router-link>
           </li>
-          <li class="nav-item has-dropdown">
-            <router-link to="/products" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.products") }}</span>
+          <li class="nav-item">
+            <router-link to="/system-products" class="nav-link" active-class="active">
+              <span class="nav-text">{{ $t("nav.systemProducts") }}</span>
             </router-link>
             <div class="dropdown">
               <div class="dropdown-content">
                 <ul>
-                  <li v-for="item in productNav" :key="item.label">
+                  <li v-for="item in systemProductNav" :key="item.label">
                     <router-link
-                      :to="{ path: '/products', hash: item.hash }"
+                      :to="{ path: '/system-products', hash: item.hash }"
+                      class="dropdown-item"
+                    >
+                      {{ $t(item.label) }}
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <router-link to="/robot-products" class="nav-link" active-class="active">
+              <span class="nav-text">{{ $t("nav.robotProducts") }}</span>
+            </router-link>
+            <div class="dropdown">
+              <div class="dropdown-content">
+                <ul>
+                  <li v-for="item in robotProductNav" :key="item.label">
+                    <router-link
+                      :to="{ path: '/robot-products', hash: item.hash }"
                       class="dropdown-item"
                     >
                       {{ $t(item.label) }}
@@ -183,6 +202,18 @@ const aboutNav = [
   { hash: '#tab4', label: 'nav.culture' },
   { hash: '#tab5', label: 'nav.jobs' },
   { hash: '#tab6', label: 'nav.contact' }
+];
+
+const systemProductNav = [
+  { hash: '#rtos', label: 'nav.rtOs' },
+  { hash: '#robot-control-system', label: 'nav.controlSystem' }
+];
+const robotProductNav = [
+  { hash: '#scara-robot-arm', label: 'nav.fourAxisArm' },
+  { hash: '#six-axis-robot-arm', label: 'nav.sixAxisArm' },
+  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
+  { hash: '#scara-mobile-composite', label: 'nav.fourAxisMobileCompound' },
+  { hash: '#dual-arm-humanoid', label: 'nav.humanoid' }
 ];
 
 const { locale } = useI18n();
