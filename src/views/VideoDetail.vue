@@ -22,6 +22,17 @@
       <div class="video-detail-info">
         <h1 class="video-title">{{ videoInfo.title }} - 介绍</h1>
         <div v-for="(para, idx) in descParagraphs" :key="idx" class="video-desc">{{ para }}</div>
+        <button class="more-btn" @click="showContact = true">了解更多</button>
+        <transition name="fade-dialog">
+          <div v-if="showContact" class="contact-dialog-mask" @click.self="showContact = false">
+            <div class="contact-dialog">
+              <button class="contact-close-x" @click="showContact = false">×</button>
+              <h3 class="contact-title">联系方式</h3>
+              <div class="contact-qrcode-placeholder">暂无二维码</div>
+              <div class="contact-qrcode-desc">扫码添加企业微信，获取更多信息</div>
+            </div>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -31,6 +42,7 @@
 // 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型
 import { useRoute } from 'vue-router'
 import { videoMap } from '@/data/videos'
+import { ref } from 'vue'
 
 const route = useRoute()
 
@@ -48,6 +60,8 @@ const descParagraphs = videoInfo.desc
       .filter(Boolean)
       .map((p) => (p.endsWith('。') ? p : p + '。'))
   : []
+
+const showContact = ref(false)
 
 function getMediaType(info) {
   if (info.type === 'bilibili' && info.url) return 'bilibili'
@@ -163,6 +177,111 @@ function bilibiliEmbedUrl(url) {
 }
 .video-desc:last-child {
   margin-bottom: 0;
+}
+.more-btn {
+  margin-top: 32px;
+  padding: 12px 40px;
+  min-width: 120px;
+  border: 2px solid #1a3a8f;
+  background: #fff;
+  color: #1a3a8f;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  box-shadow: 0 2px 8px rgba(26,58,143,0.06);
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  display: inline-block;
+  user-select: none;
+}
+.more-btn:hover {
+  background: #1a3a8f;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(26,58,143,0.13);
+  transform: translateY(-2px) scale(1.03);
+}
+.more-btn:active {
+  background: #274fc5;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26,58,143,0.10);
+  transform: scale(0.98);
+}
+.contact-dialog-mask {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(30,40,90,0.18);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-dialog {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(26,58,143,0.18);
+  padding: 38px 36px 28px 36px;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.25s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96);}
+  to { opacity: 1; transform: scale(1);}
+}
+.contact-close-x {
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  font-size: 22px;
+  color: #b3b8d1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.18s;
+  z-index: 10;
+}
+.contact-close-x:hover {
+  color: #1a3a8f;
+}
+.contact-qrcode-placeholder {
+  width: 180px;
+  height: 180px;
+  background: #f3f4fa;
+  border: 1.5px dashed #b3b8d1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 16px;
+  margin: 0 auto 10px auto;
+}
+.contact-qrcode-desc {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+.fade-dialog-enter-active, .fade-dialog-leave-active {
+  transition: opacity 0.22s;
+}
+.fade-dialog-enter-from, .fade-dialog-leave-to {
+  opacity: 0;
+}
+@media (max-width: 600px) {
+  .contact-dialog {
+    min-width: 0;
+    width: 96vw;
+    padding: 24px 8vw 18px 8vw;
+  }
+  .contact-qrcode-placeholder {
+    width: 120px;
+    height: 120px;
+    font-size: 13px;
+  }
 }
 @media (max-width: 1100px) {
   .video-detail-main {

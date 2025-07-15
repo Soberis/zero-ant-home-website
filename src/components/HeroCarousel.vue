@@ -29,19 +29,19 @@ import { ref, onMounted, onUnmounted } from 'vue';
 // 轮播图数据（如需动态可抽离为props或外部数据源）
 const slides = [
   {
-    img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=Slide+1',
-    title: 'RML63系列',
-    desc: '六自由度超长臂展机械臂'
+    img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=RTOS',
+    title: '实时操作系统',
+    desc: '高可靠、低延迟的工业级实时操作系统，赋能智能设备高效运行。'
   },
   {
-    img: 'https://via.placeholder.com/1920x900/222/fff?text=Slide+2',
-    title: 'ECO65系列',
-    desc: '一体化控制柜与机械臂，轻量高负载'
+    img: 'https://via.placeholder.com/1920x900/222/fff?text=Robot+Control',
+    title: '机器人控制系统',
+    desc: '灵活可扩展的机器人控制平台，支持多种应用场景与复杂任务。'
   },
   {
-    img: 'https://via.placeholder.com/1920x900/555/fff?text=Slide+3',
-    title: 'GEN72系列',
-    desc: '创新设计，简化结构，耐用高性价比'
+    img: 'https://via.placeholder.com/1920x900/555/fff?text=Mobile+Robot',
+    title: '移动机器人',
+    desc: '自主导航与智能调度，助力智慧物流与智能制造升级。'
   },
 ];
 const current = ref(0);
