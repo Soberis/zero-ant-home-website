@@ -29,6 +29,10 @@ import Footer from "./components/Footer.vue";
   font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 #app {
   width: 100%;
   min-height: 100vh;
