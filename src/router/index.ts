@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 // 路由懒加载
 const Home = () => import('../views/Home.vue');
-const Products = () => import('../views/Products.vue');
 const Solutions = () => import('../views/Solutions.vue');
 const Applications = () => import('../views/Applications.vue');
 const About = () => import('../views/About.vue');
@@ -23,19 +22,6 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  // 产品相关
-  {
-    path: '/products',
-    name: 'Products',
-    component: Products,
-  },
-  // 统一产品详情页
-  {
-    path: '/products/:slug',
-    name: 'ProductDetail',
-    component: ProductDetailPage,
-  },
-  // 解决方案
   {
     path: '/solutions',
     name: 'Solutions',
@@ -93,11 +79,21 @@ const routes = [
     name: 'SystemProducts',
     component: SystemProducts
   },
+  {
+    path: '/system-products/:slug',
+    name: 'SystemProductDetail',
+    component: ProductDetailPage
+  },
   // 机器人产品
   {
     path: '/robot-products',
     name: 'RobotProducts',
     component: RobotProducts
+  },
+  {
+    path: '/robot-products/:slug',
+    name: 'RobotProductDetail',
+    component: ProductDetailPage
   },
 ];
 

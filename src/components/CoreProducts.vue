@@ -13,7 +13,7 @@
         </div>
         <div class="product-title">{{ product.name }}</div>
         <div class="product-desc">{{ product.desc }}</div>
-        <router-link :to="`/products/${product.slug}`" class="more-btn">了解更多 +</router-link>
+        <router-link :to="getProductDetailLink(product)" class="more-btn">了解更多 +</router-link>
       </div>
     </div>
   </section>
@@ -22,6 +22,7 @@
 <script setup>
 // 核心产品数据
 import { products } from '../data/products.js';
+import { getProductDetailLink } from '../utils/product.js';
 </script>
 
 <style scoped>

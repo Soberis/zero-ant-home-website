@@ -19,7 +19,9 @@
 // 通过路由参数slug查找产品详情，未找到时显示提示
 import { useRoute, useRouter } from 'vue-router';
 import { productDetails } from '@/data/productDetails';
+import { products } from '@/data/products';
 import ProductDetail from '@/components/ProductDetail.vue';
+import { getProductDetailLink } from '../utils/product.js';
 
 const route = useRoute();
 const router = useRouter();
@@ -27,7 +29,19 @@ const slug = route.params.slug;
 const detail = productDetails[slug];
 
 function goBack() {
-  router.push('/products');
+  const product = products.find(p => p.slug === slug);
+  if (product) {
+    // 返回到对应产品列表页
+    if (product.category === 'robot') {
+      router.push('/robot-products');
+    } else if (product.category === 'system') {
+      router.push('/system-products');
+    } else {
+      router.push('/');
+    }
+  } else {
+    router.push('/system-products');
+  }
 }
 </script>
 <style scoped>

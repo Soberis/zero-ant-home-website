@@ -3,7 +3,9 @@
     <div class="hero-content">
       <h1>{{ $t("hero.title") }}</h1>
       <p>{{ $t("hero.subtitle") }}</p>
-      <router-link to="/products" class="btn btn-primary">{{ $t("hero.cta") }}</router-link>
+      <router-link :to="getProductDetailLink(heroProduct)" class="btn btn-primary">
+        {{ $t("hero.cta") }}
+      </router-link>
     </div>
     <img :src="heroImage" alt="Hero Image" class="hero-image" />
   </section>
@@ -12,10 +14,17 @@
 <script setup>
 import { ref } from "vue";
 import heroImage from "@/assets/hero_image.png"; // Replace with the actual path to your hero image
+import { getProductDetailLink } from '../utils/product.js';
 
 const heroTitle = ref("Revolutionizing Pharmaceutical Automation");
 const heroSubtitle = ref("Explore our advanced four-axis robotic arms designed for precision and efficiency.");
 const heroCta = ref("Discover Our Products");
+
+const heroProduct = {
+  category: 'system', // 可改为'robot'等
+  slug: 'rtos'        // 可改为其他产品slug
+};
+
 </script>
 
 <style scoped>

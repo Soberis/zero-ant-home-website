@@ -21,12 +21,16 @@ import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { products, productRouteMap } from '@/data/products';
 import ProductCard from '@/components/ProductCard.vue';
+import { getProductDetailLink } from '../utils/product.js';
 const router = useRouter();
 
 const systemProducts = computed(() => products.filter(p => p.category === 'system'));
 
 function goDetail(slug) {
-  router.push(productRouteMap[slug] || `/products/${slug}`);
+  const product = products.find(p => p.slug === slug);
+  if (product) {
+    router.push(getProductDetailLink(product));
+  }
 }
 </script>
 
