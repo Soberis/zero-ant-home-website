@@ -192,6 +192,7 @@ onUnmounted(() => {
   color: #1a237e;
   font-weight: 700;
   margin-bottom: 24px;
+  text-align: center;
 }
 .about-section p {
   font-size: 1.12em;
@@ -294,6 +295,114 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   background: linear-gradient(120deg, #f5f7fa 0%, #e3e8ee 100%);
+}
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100vw;
+  z-index: 2;
+  animation: fadein 1.2s;
+}
+.hero-content h1 {
+  font-size: 5vw;
+  font-weight: 900;
+  color: #222;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6em;
+  opacity: 0;
+  animation: fadein 0.8s 0.1s forwards;
+}
+.hero-sub {
+  font-size: 2vw;
+  font-weight: 400;
+  color: #222;
+  opacity: 0.7;
+  margin-bottom: 1.2em;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: fadein 0.8s 0.5s forwards;
+}
+.hero-line {
+  width: 180px;
+  height: 3px;
+  margin: 0 auto 1.2em auto;
+  background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
+  border-radius: 2px;
+  opacity: 0.4;
+  opacity: 0;
+  animation: fadein 0.8s 0.9s forwards;
+}
+.hero-en {
+  font-size: 1.2vw;
+  color: #222;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+  font-family: 'Segoe UI', 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  opacity: 0;
+  animation: fadein 0.8s 1.3s forwards;
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 900px) {
+  .about-hero {
+    height: 100vh;
+    min-height: 180px;
+  }
+  .hero-content h1 {
+    font-size: 2em;
+  }
+  .hero-sub {
+    font-size: 1em;
+  }
+  .hero-en {
+    font-size: 0.9em;
+  }
+  .hero-line {
+    width: 90px;
+    height: 2px;
+  }
+  .about-section {
+    padding: 10px 2px;
+  }
+  .about-header h1 {
+    font-size: 1.5em;
+    margin: 24px 0 18px 0;
+  }
+  .about-nav ul {
+    gap: 18px;
+  }
+  .timeline {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .honor-cards {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.about-page, .about-page * {
+  color: #222 !important;
+}
+.about-section:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.about-hero {
+  background: linear-gradient(120deg, #f5f7fa 0%, #e3e8ee 100%);
+  color: white;
+  text-align: center;
+  padding: 120px 32px 80px 32px;
+  position: relative;
+  min-height: 60vh; /* 改为min-height，而不是固定的100vh */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .hero-content {
   position: absolute;

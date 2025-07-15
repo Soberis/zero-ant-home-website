@@ -92,6 +92,8 @@ import { useI18n } from 'vue-i18n';
   color: #bdbdbd;
   font-size: 14px;
   padding: 40px 0 0 0;
+  margin-top: auto; /* 确保页脚在底部 */
+  width: 100%;
 }
 .footer-main {
   max-width: 1200px;
