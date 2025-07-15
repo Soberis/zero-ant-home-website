@@ -72,7 +72,7 @@
                 <ul>
                   <li v-for="item in supportNav" :key="item.label">
                     <router-link
-                      to="/support"
+                      :to="{ path: '/support', hash: item.hash }"
                       class="dropdown-item"
                     >
                       {{ $t(item.label) }}
@@ -82,6 +82,8 @@
               </div>
             </div>
           </li>
+          <!-- 新闻资讯菜单项已隐藏 -->
+          <!-- 
           <li class="nav-item has-dropdown">
             <router-link to="/news" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.news") }}</span>
@@ -101,6 +103,7 @@
               </div>
             </div>
           </li>
+          -->
           <li class="nav-item has-dropdown">
             <router-link to="/about" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.about") }}</span>
@@ -132,14 +135,6 @@
             <span class="lang-text">{{ locale === 'zh' ? 'EN' : '中文' }}</span>
           </button>
         </div>
-        
-        <button class="mobile-menu-btn" @click="toggleMenu">
-          <span class="hamburger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </button>
       </div>
     </nav>
   </header>
@@ -163,15 +158,15 @@ const productNav = [
 
 // 行业应用导航子项
 const applicationNav = [
-  { label: 'nav.medicalAuto' },
-  { label: 'nav.semiProcessing' }
+  { hash: '#medical-auto', label: 'nav.medicalAuto' },
+  { hash: '#semi-processing', label: 'nav.semiProcessing' }
 ];
 
 // 技术支持导航子项
 const supportNav = [
-  { label: 'nav.afterSales' },
-  { label: 'nav.download' },
-  { label: 'nav.faq' }
+  { hash: '#after-sales', label: 'nav.afterSales' },
+  { hash: '#download', label: 'nav.download' },
+  { hash: '#faq', label: 'nav.faq' }
 ];
 
 // 新闻动态导航子项
@@ -523,50 +518,7 @@ onMounted(() => {
   z-index: 1;
 }
 
-.mobile-menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.mobile-menu-btn:hover {
-  background-color: rgba(26, 58, 143, 0.1);
-}
-
-.hamburger-icon {
-  display: flex;
-  flex-direction: column;
-  width: 24px;
-  height: 18px;
-  position: relative;
-}
-
-.hamburger-icon span {
-  display: block;
-  height: 2px;
-  width: 100%;
-  background-color: #333;
-  border-radius: 1px;
-  transition: all 0.3s ease;
-}
-
-.hamburger-icon span:nth-child(1) {
-  transform-origin: top left;
-}
-
-.hamburger-icon span:nth-child(2) {
-  margin: 6px 0;
-}
-
-.hamburger-icon span:nth-child(3) {
-  transform-origin: bottom left;
-}
-
-/* 响应式优化 */
+/* 响应式优化 - 仅保留PC端优化 */
 @media (min-width: 1600px) {
   .nav-links {
     gap: 48px;
@@ -612,36 +564,157 @@ onMounted(() => {
   }
 }
 
-@media (max-width: 1200px) {
+/* 新增响应式优化 */
+@media (max-width: 991px) {
+  .nav-links {
+    gap: 20px;
+    padding: 0 20px;
+  }
+  
   .logo {
     margin-left: 24px;
+    padding: 0 8px;
+  }
+  
+  .logo-text {
+    font-size: 22px;
+    margin-left: 8px;
+    white-space: nowrap;
   }
   
   .nav-actions {
     margin-right: 24px;
+    gap: 16px;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .nav-links {
-    display: none;
+    gap: 12px;
+    padding: 0 12px;
   }
   
-  .mobile-menu-btn {
-    display: block;
-  }
-  
-  .nav-container {
-    height: 70px;
+  .nav-link {
+    font-size: 14px;
+    padding: 8px 4px;
   }
   
   .logo {
     margin-left: 16px;
+    padding: 0 4px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+    margin-left: 6px;
+    letter-spacing: -0.8px;
   }
   
   .nav-actions {
     margin-right: 16px;
-    gap: 16px;
+  }
+  
+  .language-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-container {
+    height: 60px;
+    padding: 0 12px;
+  }
+  
+  .logo {
+    margin-left: 0;
+    padding: 0;
+    flex: 1;
+  }
+  
+  .logo img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .logo-text {
+    font-size: 18px;
+    margin-left: 6px;
+    font-weight: 600;
+  }
+  
+  /* 隐藏所有导航链接 */
+  .nav-wrapper {
+    display: none;
+  }
+  
+  .nav-actions {
+    margin-right: 0;
+    gap: 0;
+  }
+  
+  .language-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    min-width: 35px;
+    border-radius: 16px;
+  }
+}
+
+/* 超窄屏幕：进一步优化 */
+@media (max-width: 480px) {
+  .nav-container {
+    height: 55px;
+    padding: 0 8px;
+  }
+  
+  .logo img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .logo-text {
+    font-size: 16px;
+    margin-left: 4px;
+    letter-spacing: -1px;
+  }
+  
+  .language-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+    min-width: 30px;
+    border-radius: 14px;
+  }
+}
+
+/* 极限窄屏：最小化显示 */
+@media (max-width: 360px) {
+  .nav-container {
+    height: 50px;
+    padding: 0 6px;
+  }
+  
+  .logo img {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .logo-text {
+    font-size: 15px;
+    margin-left: 3px;
+    letter-spacing: -1.2px;
+  }
+  
+  .language-btn {
+    padding: 4px 6px;
+    font-size: 9px;
+    min-width: 28px;
+    border-radius: 12px;
+  }
+  
+  .lang-text {
+    font-weight: 600;
   }
 }
 
