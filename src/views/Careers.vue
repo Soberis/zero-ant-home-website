@@ -4,20 +4,20 @@
     <section class="careers-hero">
       <div class="container">
         <div class="hero-content">
-          <h1 class="hero-title">{{ $t('careers.title') }}</h1>
-          <p class="hero-subtitle">{{ $t('careers.subtitle') }}</p>
+          <h1 class="hero-title">加入零蚁科技</h1>
+          <p class="hero-subtitle">与我们一起打造未来机器人技术，让机器人遍布每个角落</p>
           <div class="hero-stats">
             <div class="stat-item">
               <span class="stat-number">20+</span>
-              <span class="stat-label">{{ $t('careers.yearsExperience') }}</span>
+              <span class="stat-label">年技术积累</span>
             </div>
             <div class="stat-item">
               <span class="stat-number">100+</span>
-              <span class="stat-label">{{ $t('careers.teamMembers') }}</span>
+              <span class="stat-label">团队成员</span>
             </div>
             <div class="stat-item">
               <span class="stat-number">50+</span>
-              <span class="stat-label">{{ $t('careers.projects') }}</span>
+              <span class="stat-label">成功项目</span>
             </div>
           </div>
         </div>
@@ -27,12 +27,12 @@
     <!-- 为什么选择我们 -->
     <section class="why-join">
       <div class="container">
-        <h2 class="section-title">{{ $t('careers.whyJoin') }}</h2>
+        <h2 class="section-title">为什么选择零蚁科技</h2>
         <div class="benefits-grid">
           <div class="benefit-card" v-for="benefit in benefits" :key="benefit.id">
             <div class="benefit-content">
-              <h3 class="benefit-title">{{ $t(benefit.title) }}</h3>
-              <p class="benefit-description">{{ $t(benefit.description) }}</p>
+              <h3 class="benefit-title">{{ benefit.title }}</h3>
+              <p class="benefit-description">{{ benefit.description }}</p>
             </div>
           </div>
         </div>
@@ -42,37 +42,31 @@
     <!-- 职位列表 -->
     <section class="job-positions">
       <div class="container">
-        <h2 class="section-title">{{ $t('careers.openPositions') }}</h2>
+        <h2 class="section-title">热招职位</h2>
         <div class="positions-grid">
           <div class="position-card" v-for="position in positions" :key="position.id">
             <div class="position-header">
-              <h3 class="position-title">{{ $t(position.title) }}</h3>
-              <span class="position-type">{{ $t(position.type) }}</span>
+              <h3 class="position-title">{{ position.title }}</h3>
+              <span class="position-type">{{ position.type }}</span>
             </div>
             <div class="position-details">
               <div class="detail-item">
-                <span class="detail-label">{{ $t('careers.location') }}:</span>
-                <span class="detail-value">{{ $t(position.location) }}</span>
+                <span class="detail-label">工作地点:</span>
+                <span class="detail-value">{{ position.location }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">{{ $t('careers.experience') }}:</span>
-                <span class="detail-value">{{ $t(position.experience) }}</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">{{ $t('careers.salary') }}:</span>
-                <span class="detail-value">{{ $t(position.salary) }}</span>
+                <span class="detail-label">工作经验:</span>
+                <span class="detail-value">{{ position.experience }}</span>
               </div>
             </div>
             <div class="position-requirements">
-              <h4 class="requirements-title">{{ $t('careers.requirements') }}</h4>
+              <h4 class="requirements-title">职位要求</h4>
               <ul class="requirements-list">
-                <li v-for="req in position.requirements" :key="req">{{ $t(req) }}</li>
+                <li v-for="req in position.requirements" :key="req">{{ req }}</li>
               </ul>
             </div>
             <div class="position-actions">
-              <button class="apply-btn" @click="applyForPosition(position)">
-                {{ $t('careers.applyNow') }}
-              </button>
+              <button class="apply-btn" @click="applyForPosition(position)">立即申请</button>
             </div>
           </div>
         </div>
@@ -83,16 +77,16 @@
     <section class="contact-section">
       <div class="container">
         <div class="contact-content">
-          <h2 class="section-title">{{ $t('careers.contactUs') }}</h2>
-          <p class="contact-description">{{ $t('careers.contactDescription') }}</p>
+          <h2 class="section-title">联系我们</h2>
+          <p class="contact-description">如果您对我们的职位感兴趣，或者想了解更多信息，请随时联系我们的人力资源团队。</p>
           <div class="contact-info">
             <div class="contact-item">
-              <span class="contact-label">{{ $t('careers.email') }}:</span>
+              <span class="contact-label">邮箱:</span>
               <span class="contact-value">hr@zeroant.com</span>
             </div>
             <div class="contact-item">
-              <span class="contact-label">{{ $t('careers.phone') }}:</span>
-              <span class="contact-value">+86 400-123-4567</span>
+              <span class="contact-label">电话:</span>
+              <span class="contact-value">400-666-888</span>
             </div>
           </div>
         </div>
@@ -103,31 +97,28 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
 
 // 公司优势
 const benefits = ref([
   {
     id: 1,
-    title: 'careers.benefits.innovation.title',
-    description: 'careers.benefits.innovation.description'
+    title: '技术创新',
+    description: '参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界'
   },
   {
     id: 2,
-    title: 'careers.benefits.growth.title',
-    description: 'careers.benefits.growth.description'
+    title: '职业发展',
+    description: '完善的培训体系和晋升通道，助力个人职业发展和技能提升'
   },
   {
     id: 3,
-    title: 'careers.benefits.team.title',
-    description: 'careers.benefits.team.description'
+    title: '优秀团队',
+    description: '与来自全球的优秀工程师合作，在开放包容的环境中共同成长'
   },
   {
     id: 4,
-    title: 'careers.benefits.welfare.title',
-    description: 'careers.benefits.welfare.description'
+    title: '丰厚待遇',
+    description: '具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排'
   }
 ])
 
@@ -135,66 +126,61 @@ const benefits = ref([
 const positions = ref([
   {
     id: 1,
-    title: 'careers.positions.roboticsEngineer.title',
-    type: 'careers.positions.fullTime',
-    location: 'careers.locations.beijing',
-    experience: 'careers.experience.3to5',
-    salary: 'careers.salary.20to35k',
+    title: '机器人工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '3-5年',
     requirements: [
-      'careers.positions.roboticsEngineer.req1',
-      'careers.positions.roboticsEngineer.req2',
-      'careers.positions.roboticsEngineer.req3',
-      'careers.positions.roboticsEngineer.req4'
+      '机械工程、自动化或相关专业本科及以上学历',
+      '3年以上机器人系统开发经验',
+      '熟悉ROS、运动控制、路径规划等技术',
+      '具备良好的团队协作和沟通能力'
     ]
   },
   {
     id: 2,
-    title: 'careers.positions.softwareEngineer.title',
-    type: 'careers.positions.fullTime',
-    location: 'careers.locations.beijing',
-    experience: 'careers.experience.2to4',
-    salary: 'careers.salary.18to30k',
+    title: '软件工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '2-4年',
     requirements: [
-      'careers.positions.softwareEngineer.req1',
-      'careers.positions.softwareEngineer.req2',
-      'careers.positions.softwareEngineer.req3',
-      'careers.positions.softwareEngineer.req4'
+      '计算机科学或相关专业本科及以上学历',
+      '熟练掌握C++、Python等编程语言',
+      '有嵌入式系统或实时系统开发经验',
+      '了解机器人操作系统和控制算法'
     ]
   },
   {
     id: 3,
-    title: 'careers.positions.algorithmEngineer.title',
-    type: 'careers.positions.fullTime',
-    location: 'careers.locations.beijing',
-    experience: 'careers.experience.3to6',
-    salary: 'careers.salary.25to40k',
+    title: '算法工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '3-6年',
     requirements: [
-      'careers.positions.algorithmEngineer.req1',
-      'careers.positions.algorithmEngineer.req2',
-      'careers.positions.algorithmEngineer.req3',
-      'careers.positions.algorithmEngineer.req4'
+      '计算机、数学、自动化等相关专业硕士及以上学历',
+      '深度学习、计算机视觉或SLAM算法经验',
+      '熟悉TensorFlow、PyTorch等深度学习框架',
+      '有机器人感知、决策算法开发经验优先'
     ]
   },
   {
     id: 4,
-    title: 'careers.positions.hardwareEngineer.title',
-    type: 'careers.positions.fullTime',
-    location: 'careers.locations.beijing',
-    experience: 'careers.experience.2to5',
-    salary: 'careers.salary.15to25k',
+    title: '硬件工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '2-5年',
     requirements: [
-      'careers.positions.hardwareEngineer.req1',
-      'careers.positions.hardwareEngineer.req2',
-      'careers.positions.hardwareEngineer.req3',
-      'careers.positions.hardwareEngineer.req4'
+      '电子工程、自动化等相关专业本科及以上学历',
+      '熟悉电路设计、PCB布局和硬件调试',
+      '有嵌入式系统硬件开发经验',
+      '了解传感器集成和信号处理技术'
     ]
   }
 ])
 
 // 申请职位
 const applyForPosition = (position) => {
-  // 这里可以跳转到申请表单或发送邮件
-  window.open(`mailto:hr@zeroant.com?subject=申请职位：${t(position.title)}`)
+  window.open(`mailto:hr@zeroant.com?subject=申请职位：${position.title}`)
 }
 </script>
 
