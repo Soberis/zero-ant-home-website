@@ -101,28 +101,11 @@
               </div>
             </div>
           </li>
-          <!-- 新闻资讯菜单项已隐藏 -->
-          <!-- 
-          <li class="nav-item has-dropdown">
-            <router-link to="/news" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.news") }}</span>
+          <li class="nav-item">
+            <router-link to="/careers" class="nav-link" active-class="active">
+              <span class="nav-text">{{ $t("nav.careers") }}</span>
             </router-link>
-            <div class="dropdown">
-              <div class="dropdown-content">
-                <ul>
-                  <li v-for="item in newsNav" :key="item.label">
-                    <router-link
-                      to="/news"
-                      class="dropdown-item"
-                    >
-                      {{ $t(item.label) }}
-                    </router-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </li>
-          -->
           <li class="nav-item has-dropdown">
             <router-link to="/about" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.about") }}</span>
@@ -200,7 +183,6 @@ const aboutNav = [
   { hash: '#tab2', label: 'nav.history' },
   { hash: '#tab3', label: 'nav.honor' },
   { hash: '#tab4', label: 'nav.culture' },
-  { hash: '#tab5', label: 'nav.jobs' },
   { hash: '#tab6', label: 'nav.contact' }
 ];
 

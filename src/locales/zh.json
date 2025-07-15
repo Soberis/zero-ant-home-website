@@ -51,7 +51,7 @@
     "history": "发展历史",
     "honor": "资质荣誉",
     "culture": "企业文化",
-    "jobs": "人才招聘",
+    "careers": "人才招聘",
     "systemProducts": "系统产品",
     "robotProducts": "机器人产品"
   },
@@ -99,5 +99,87 @@
     "sp": "视频号",
     "copyright": "版权所有",
     "telValue": "400-666-888"
+  },
+  "careers": {
+    "title": "加入零蚁科技",
+    "subtitle": "与我们一起打造未来机器人技术，让机器人遍布每个角落",
+    "yearsExperience": "年技术积累",
+    "teamMembers": "团队成员",
+    "projects": "成功项目",
+    "whyJoin": "为什么选择零蚁科技",
+    "openPositions": "热招职位",
+    "location": "工作地点",
+    "experience": "工作经验",
+    "salary": "薪资范围",
+    "requirements": "职位要求",
+    "applyNow": "立即申请",
+    "contactUs": "联系我们",
+    "contactDescription": "如果您对我们的职位感兴趣，或者想了解更多信息，请随时联系我们的人力资源团队。",
+    "email": "邮箱",
+    "phone": "电话",
+    "benefits": {
+      "innovation": {
+        "title": "技术创新",
+        "description": "参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界"
+      },
+      "growth": {
+        "title": "职业发展",
+        "description": "完善的培训体系和晋升通道，助力个人职业发展和技能提升"
+      },
+      "team": {
+        "title": "优秀团队",
+        "description": "与来自全球的优秀工程师合作，在开放包容的环境中共同成长"
+      },
+      "welfare": {
+        "title": "丰厚待遇",
+        "description": "具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排"
+      }
+    },
+    "positions": {
+      "fullTime": "全职",
+      "roboticsEngineer": {
+        "title": "机器人工程师",
+        "req1": "机械工程、自动化或相关专业本科及以上学历",
+        "req2": "3年以上机器人系统开发经验",
+        "req3": "熟悉ROS、运动控制、路径规划等技术",
+        "req4": "具备良好的团队协作和沟通能力"
+      },
+      "softwareEngineer": {
+        "title": "软件工程师",
+        "req1": "计算机科学或相关专业本科及以上学历",
+        "req2": "熟练掌握C++、Python等编程语言",
+        "req3": "有嵌入式系统或实时系统开发经验",
+        "req4": "了解机器人操作系统和控制算法"
+      },
+      "algorithmEngineer": {
+        "title": "算法工程师",
+        "req1": "计算机、数学、自动化等相关专业硕士及以上学历",
+        "req2": "深度学习、计算机视觉或SLAM算法经验",
+        "req3": "熟悉TensorFlow、PyTorch等深度学习框架",
+        "req4": "有机器人感知、决策算法开发经验优先"
+      },
+      "hardwareEngineer": {
+        "title": "硬件工程师",
+        "req1": "电子工程、自动化等相关专业本科及以上学历",
+        "req2": "熟悉电路设计、PCB布局和硬件调试",
+        "req3": "有嵌入式系统硬件开发经验",
+        "req4": "了解传感器集成和信号处理技术"
+      }
+    },
+    "locations": {
+      "beijing": "北京"
+    },
+    "experience": {
+      "2to4": "2-4年",
+      "2to5": "2-5年",
+      "3to5": "3-5年",
+      "3to6": "3-6年"
+    },
+    "salary": {
+      "15to25k": "15-25K",
+      "18to30k": "18-30K",
+      "20to35k": "20-35K",
+      "25to40k": "25-40K"
+    }
   }
 }

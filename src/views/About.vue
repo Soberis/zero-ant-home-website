@@ -17,7 +17,6 @@
         <li :class="{active: activeTab==='tab2'}"><a href="#tab2" @click.prevent="scrollToSection('tab2')">{{ $t('nav.history') }}</a></li>
         <li :class="{active: activeTab==='tab3'}"><a href="#tab3" @click.prevent="scrollToSection('tab3')">{{ $t('nav.honor') }}</a></li>
         <li :class="{active: activeTab==='tab4'}"><a href="#tab4" @click.prevent="scrollToSection('tab4')">{{ $t('nav.culture') }}</a></li>
-        <li :class="{active: activeTab==='tab5'}"><a href="#tab5" @click.prevent="scrollToSection('tab5')">{{ $t('nav.jobs') }}</a></li>
         <li :class="{active: activeTab==='tab6'}"><a href="#tab6" @click.prevent="scrollToSection('tab6')">{{ $t('nav.contact') }}</a></li>
       </ul>
     </nav>
@@ -55,12 +54,6 @@
         {{ $t('about.culture') }}
       </p>
     </section>
-    <section class="about-section jobs" id="tab5">
-      <h2>{{ $t('nav.jobs') }}</h2>
-      <p>
-        {{ $t('about.jobs') }}
-      </p>
-    </section>
     <section class="about-section contact" id="tab6">
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
@@ -89,7 +82,7 @@ const honors = computed(() => getHonors(t).map(honor => honor));
 
 // 目录栏高亮当前锚点
 const activeTab = ref('tab1');
-const tabIds = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5', 'tab6'];
+const tabIds = ['tab1', 'tab2', 'tab3', 'tab4', 'tab6'];
 
 function updateActiveTab() {
   const scrollY = window.scrollY || window.pageYOffset;

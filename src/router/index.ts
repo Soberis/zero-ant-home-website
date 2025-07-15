@@ -14,6 +14,7 @@ const Support = () => import('../views/Support.vue');
 const ApplicationDetail = () => import('../views/ApplicationDetail.vue');
 const SystemProducts = () => import('../views/SystemProducts.vue');
 const RobotProducts = () => import('../views/RobotProducts.vue');
+const Careers = () => import('../views/Careers.vue');
 
 const routes = [
   // 首页
@@ -56,6 +57,12 @@ const routes = [
     path: '/support',
     name: 'Support',
     component: Support,
+  },
+  // 人才招聘
+  {
+    path: '/careers',
+    name: 'Careers',
+    component: Careers,
   },
   // 关于我们
   {

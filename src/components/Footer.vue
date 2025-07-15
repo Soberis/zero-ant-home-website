@@ -3,15 +3,17 @@
     <div class="footer-main">
       <div class="footer-columns">
         <div class="footer-col">
-          <h4>{{ $t('nav.products') }}</h4>
+          <h4>{{ $t('nav.systemProducts') }}</h4>
           <ul>
-            <li><router-link :to="{ path: '/products', hash: '#mobile-robot' }">{{ $t('nav.mobileRobot') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#scara-robot-arm' }">{{ $t('nav.fourAxisArm') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#six-axis-robot-arm' }">{{ $t('nav.sixAxisArm') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#rtos' }">{{ $t('nav.rtOs') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#robot-control-system' }">{{ $t('nav.controlSystem') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#dual-arm-humanoid' }">{{ $t('nav.humanoid') }}</router-link></li>
-            <li><router-link :to="{ path: '/products', hash: '#scara-mobile-composite' }">{{ $t('nav.fourAxisMobileCompound') }}</router-link></li>
+            <li v-for="item in systemProductNav" :key="item.hash">
+              <router-link :to="{ path: '/system-products', hash: item.hash }">{{ $t(item.label) }}</router-link>
+            </li>
+          </ul>
+          <h4>{{ $t('nav.robotProducts') }}</h4>
+          <ul>
+            <li v-for="item in robotProductNav" :key="item.hash">
+              <router-link :to="{ path: '/robot-products', hash: item.hash }">{{ $t(item.label) }}</router-link>
+            </li>
           </ul>
         </div>
         <div class="footer-col">
@@ -39,13 +41,16 @@
           </ul>
         </div>
         <div class="footer-col">
+          <h4>{{ $t('nav.careers') }}</h4>
+          <ul>
+            <li><router-link to="/careers">{{ $t('nav.careers') }}</router-link></li>
+          </ul>
           <h4>{{ $t('nav.about') }}</h4>
           <ul>
             <li><router-link to="/about">{{ $t('nav.companyIntro') }}</router-link></li>
             <li><router-link to="/about">{{ $t('nav.history') }}</router-link></li>
             <li><router-link to="/about">{{ $t('nav.honor') }}</router-link></li>
             <li><router-link to="/about">{{ $t('nav.culture') }}</router-link></li>
-            <li><router-link to="/about">{{ $t('nav.jobs') }}</router-link></li>
             <li><router-link to="/about">{{ $t('nav.contact') }}</router-link></li>
           </ul>
         </div>
@@ -84,6 +89,19 @@
 <script setup>
 // 仅用于国际化，无复杂逻辑
 import { useI18n } from 'vue-i18n';
+
+const systemProductNav = [
+  { hash: '#rtos', label: 'nav.rtOs' },
+  { hash: '#robot-control-system', label: 'nav.controlSystem' }
+];
+const robotProductNav = [
+  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
+  { hash: '#scara-robot-arm', label: 'nav.fourAxisArm' },
+  { hash: '#six-axis-robot-arm', label: 'nav.sixAxisArm' },
+  { hash: '#dual-arm-humanoid', label: 'nav.humanoid' },
+  { hash: '#scara-mobile-composite', label: 'nav.fourAxisMobileCompound' }
+
+];
 </script>
 
 <style scoped>

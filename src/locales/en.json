@@ -51,7 +51,7 @@
     "history": "Development History",
     "honor": "Honors",
     "culture": "Corporate Culture",
-    "jobs": "Careers",
+    "careers": "Careers",
     "systemProducts": "System Products",
     "robotProducts": "Robot Products"
   },
@@ -105,5 +105,87 @@
     "getInTouch": "Get in Touch",
     "phone": "Phone",
     "address": "Address"
+  },
+  "careers": {
+    "title": "Join ZeroAnt",
+    "subtitle": "Build the future of robotics with us and let robots be everywhere",
+    "yearsExperience": "Years of Experience",
+    "teamMembers": "Team Members",
+    "projects": "Successful Projects",
+    "whyJoin": "Why Choose ZeroAnt",
+    "openPositions": "Open Positions",
+    "location": "Location",
+    "experience": "Experience",
+    "salary": "Salary Range",
+    "requirements": "Requirements",
+    "applyNow": "Apply Now",
+    "contactUs": "Contact Us",
+    "contactDescription": "If you're interested in our positions or want to learn more, please feel free to contact our HR team.",
+    "email": "Email",
+    "phone": "Phone",
+    "benefits": {
+      "innovation": {
+        "title": "Technical Innovation",
+        "description": "Participate in cutting-edge robotics R&D, work with industry experts, and push technological boundaries"
+      },
+      "growth": {
+        "title": "Career Development",
+        "description": "Comprehensive training system and promotion channels to support personal career development and skill enhancement"
+      },
+      "team": {
+        "title": "Excellent Team",
+        "description": "Collaborate with outstanding engineers from around the world in an open and inclusive environment"
+      },
+      "welfare": {
+        "title": "Competitive Benefits",
+        "description": "Competitive compensation and benefits, comprehensive social security system and flexible work arrangements"
+      }
+    },
+    "positions": {
+      "fullTime": "Full-time",
+      "roboticsEngineer": {
+        "title": "Robotics Engineer",
+        "req1": "Bachelor's degree or above in Mechanical Engineering, Automation or related fields",
+        "req2": "3+ years of experience in robotics system development",
+        "req3": "Familiar with ROS, motion control, path planning technologies",
+        "req4": "Good teamwork and communication skills"
+      },
+      "softwareEngineer": {
+        "title": "Software Engineer",
+        "req1": "Bachelor's degree or above in Computer Science or related fields",
+        "req2": "Proficient in C++, Python and other programming languages",
+        "req3": "Experience in embedded systems or real-time system development",
+        "req4": "Knowledge of robot operating systems and control algorithms"
+      },
+      "algorithmEngineer": {
+        "title": "Algorithm Engineer",
+        "req1": "Master's degree or above in Computer Science, Mathematics, Automation or related fields",
+        "req2": "Experience in deep learning, computer vision or SLAM algorithms",
+        "req3": "Familiar with TensorFlow, PyTorch and other deep learning frameworks",
+        "req4": "Experience in robot perception and decision algorithms preferred"
+      },
+      "hardwareEngineer": {
+        "title": "Hardware Engineer",
+        "req1": "Bachelor's degree or above in Electronic Engineering, Automation or related fields",
+        "req2": "Familiar with circuit design, PCB layout and hardware debugging",
+        "req3": "Experience in embedded system hardware development",
+        "req4": "Knowledge of sensor integration and signal processing technologies"
+      }
+    },
+    "locations": {
+      "beijing": "Beijing"
+    },
+    "experience": {
+      "2to4": "2-4 years",
+      "2to5": "2-5 years",
+      "3to5": "3-5 years",
+      "3to6": "3-6 years"
+    },
+    "salary": {
+      "15to25k": "15-25K RMB",
+      "18to30k": "18-30K RMB",
+      "20to35k": "20-35K RMB",
+      "25to40k": "25-40K RMB"
+    }
   }
 }
