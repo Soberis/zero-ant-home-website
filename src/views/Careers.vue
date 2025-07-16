@@ -86,7 +86,7 @@
             </div>
             <div class="contact-item">
               <span class="contact-label">电话:</span>
-              <span class="contact-value">400-666-888</span>
+              <span class="contact-value">13001001954</span>
             </div>
           </div>
         </div>

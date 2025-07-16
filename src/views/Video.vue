@@ -1,17 +1,23 @@
 <!-- 视频案例页面，展示所有视频卡片，支持高亮与跳转详情 -->
 <template>
   <div class="video-page">
-    <div class="card-list">
-      <VideoCard
-        v-for="(card, idx) in cards"
-        :key="card.slug"
-        :card="card"
-        :index="idx"
-        :active="hoverIdx === idx"
-        @hover="setHover"
-        @leave="clearHover"
-        @click="goToVideo"
-      />
+    <div class="page-container">
+      <div class="page-header">
+        <h1 class="page-title">视频案例</h1>
+        <p class="page-subtitle">探索我们的技术应用与创新成果</p>
+      </div>
+      <div class="card-list">
+        <VideoCard
+          v-for="(card, idx) in cards"
+          :key="card.slug"
+          :card="card"
+          :index="idx"
+          :active="hoverIdx === idx"
+          @hover="setHover"
+          @leave="clearHover"
+          @click="goToVideo"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -42,92 +48,102 @@ const goToVideo = idx => {
 
 <style scoped>
 .video-page {
-  padding: 48px 0 64px 0;
-  background: #f7f8fa;
-  display: flex;
-  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f8 100%);
+  padding: 80px 0;
+  overflow-x: hidden;
 }
+
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #111 0%, #111 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: #666;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
 .card-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  width: 100%;
 }
-.app-card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
-  overflow: hidden;
-  min-width: 0;
-}
-.app-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  transform: translateY(-4px) scale(1.02);
-}
-.card-img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  background: #f0f0f0;
-  display: block;
-  transition: transform 0.15s cubic-bezier(0.4,0,0.2,1);
-}
-.card-title-bar {
-  width: 100%;
-  background: #fff;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  padding: 24px 0 16px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background 0.4s;
-}
-.card-title-bar.active {
-  background: #1a3a8f;
-}
-.card-title {
-  font-size: 22px;
-  color: #111;
-  text-align: center;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin: 0;
-  z-index: 2;
-  position: relative;
-  transition: color 0.4s;
-}
-.card-title.active {
-  color: #fff;
-}
+
+/* 响应式设计 */
 @media (max-width: 1200px) {
+  .page-container {
+    padding: 0 30px;
+  }
   .card-list {
-    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .page-title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 0 20px;
+  }
+  .video-page {
+    padding: 60px 0;
+  }
+  .page-header {
+    margin-bottom: 40px;
+  }
+  .page-title {
+    font-size: 36px;
+    letter-spacing: 1px;
+  }
+  .page-subtitle {
+    font-size: 16px;
+  }
+  .card-list {
+    grid-template-columns: 1fr;
     gap: 24px;
   }
 }
-@media (max-width: 900px) {
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 0 16px;
+  }
+  .video-page {
+    padding: 40px 0;
+  }
+  .page-title {
+    font-size: 28px;
+  }
+  .page-subtitle {
+    font-size: 14px;
+  }
   .card-list {
-    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-  }
-}
-@media (max-width: 600px) {
-  .card-list {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .card-img {
-    height: 120px;
   }
 }
 </style>

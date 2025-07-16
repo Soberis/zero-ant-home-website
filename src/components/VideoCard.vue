@@ -37,62 +37,114 @@ const emit = defineEmits(['hover', 'leave', 'click'])
 
 <style scoped>
 .video-card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  background: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
-  align-items: center;
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  min-width: 0;
+  min-height: 320px;
+  position: relative;
 }
+
+.video-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1a3a8f 0%, #2d5aa0 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
 .video-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(26, 58, 143, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: rgba(26, 58, 143, 0.2);
 }
+
+.video-card:hover::before {
+  transform: scaleX(1);
+}
+
 .video-card-img {
   width: 100%;
-  height: 160px;
+  height: 200px;
   object-fit: cover;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  background: #f0f0f0;
+  background: linear-gradient(135deg, #f0f2f5 0%, #e8eaed 100%);
   display: block;
-  transition: transform 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.3s ease;
 }
+
+.video-card:hover .video-card-img {
+  transform: scale(1.05);
+}
+
 .video-card-title-bar {
-  width: 100%;
-  background: #fff;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  padding: 24px 0 16px 0;
+  flex: 1;
+  background: transparent;
+  padding: 24px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 0.4s;
+  transition: all 0.3s ease;
 }
+
 .video-card-title-bar.active {
-  background: #1a3a8f;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  border-radius: 0 0 20px 20px;
 }
+
 .video-card-title {
-  font-size: 22px;
-  color: #111;
+  font-size: 18px;
+  color: #2c3e50;
   text-align: center;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   margin: 0;
-  z-index: 2;
-  position: relative;
-  transition: color 0.4s;
+  line-height: 1.4;
+  transition: color 0.3s ease;
 }
+
 .video-card-title.active {
   color: #fff;
 }
-@media (max-width: 1200px) {
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .video-card {
+    min-height: 280px;
+  }
   .video-card-img {
-    height: 120px;
+    height: 160px;
+  }
+  .video-card-title-bar {
+    padding: 20px 16px;
+  }
+  .video-card-title {
+    font-size: 16px;
   }
 }
-</style> 
+
+@media (max-width: 480px) {
+  .video-card {
+    min-height: 240px;
+  }
+  .video-card-img {
+    height: 140px;
+  }
+  .video-card-title-bar {
+    padding: 16px 12px;
+  }
+  .video-card-title {
+    font-size: 15px;
+    letter-spacing: 0.3px;
+  }
+}
+</style>

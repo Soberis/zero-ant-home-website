@@ -82,6 +82,7 @@ import Partners from '../components/Partners.vue'; // 合作伙伴
   max-width: 1200px;
   margin: 0 auto;
   padding: 64px 0 48px 0;
+  background: transparent;
 }
 @media screen and (max-width: 991px) {
   .container {
