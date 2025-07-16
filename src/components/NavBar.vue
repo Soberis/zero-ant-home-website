@@ -530,7 +530,6 @@ onMounted(() => {
   .nav-links {
     gap: 48px;
     padding: 0 60px;
-    max-width: 1400px;
   }
   
   .dropdown ul {
@@ -553,8 +552,8 @@ onMounted(() => {
 /* 在响应式部分也需要相应调整 */
 @media (min-width: 1101px) and (max-width: 1199px) {
   .nav-links {
-    gap: 28px;
-    padding: 0 30px;
+    gap: 24px;
+    padding: 0 20px;
   }
   
   .dropdown-item {
@@ -575,8 +574,8 @@ onMounted(() => {
 /* 新增中等屏幕优化 */
 @media (min-width: 951px) and (max-width: 1100px) {
   .nav-links {
-    gap: 20px;
-    padding: 0 24px;
+    gap: 14px;      /* 进一步缩小 */
+    padding: 0 8px; /* 进一步缩小 */
   }
   
   .nav-link {

@@ -54,10 +54,10 @@ function goDetail() {
   justify-content: center;
 }
 .label {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   color: #555;
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
-</style> 
+</style>

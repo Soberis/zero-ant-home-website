@@ -158,7 +158,7 @@ function goToDetail(slug) {
 }
 
 .core-title {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #111;
   margin-bottom: 16px;
@@ -166,7 +166,7 @@ function goToDetail(slug) {
 }
 
 .core-description {
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: #111;
   line-height: 1.6;
   margin-bottom: 24px;
@@ -185,7 +185,7 @@ function goToDetail(slug) {
   color: #111;
   padding: 6px 12px;
   border-radius: 16px;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   font-weight: 500;
   border: 1px solid #d4e3ff;
 }
