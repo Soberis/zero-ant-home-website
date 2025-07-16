@@ -20,25 +20,7 @@
 </template>
 
 <script setup>
-const partners = [
-  { src: '/src/assets/images/partners/shinaide.png', alt: '施耐德电气' },
-  { src: '/src/assets/images/partners/huawei.svg', alt: '华为' },
-  { src: '/src/assets/images/partners/meituan.svg', alt: '美团', class: 'logo-meituan' },
-  { src: '/src/assets/images/partners/perkinelmer.svg', alt: 'PerkinElmer' },
-  { src: '/src/assets/images/partners/nabote.png', alt: '纳博特' },
-  { src: '/src/assets/images/partners/qisheng.png', alt: '启晟' },
-  // { src: '/src/assets/images/partners/yihui.svg', alt: '翼辉' },
-  { src: '/src/assets/images/partners/xinsong.png', alt: '新松' },
-  { src: '/src/assets/images/partners/pudu.svg', alt: '普渡机器人' },
-  { src: '/src/assets/images/partners/qingzhi.jpg', alt: '清之', class: 'logo-qingzhi' },
-  { src: '/src/assets/images/partners/dizhi.png', alt: '中国地质大学' },
-  { src: '/src/assets/images/partners/dongnan.jpg', alt: '东南大学' },
-  { src: '/src/assets/images/partners/fudan.png', alt: '复旦大学' },
-  { src: '/src/assets/images/partners/zhongshan.jpg', alt: '中山大学' },
-  { src: '/src/assets/images/partners/hunan.png', alt: '湖南大学' },
-  { src: '/src/assets/images/partners/qinghua.svg', alt: '清华大学' },
-  { src: '/src/assets/images/partners/buaa.png', alt: '北京航空航天大学' },
-];
+import { partners } from '@/data/partners.js';
 </script>
 
 <style scoped>
