@@ -16,6 +16,21 @@
         <img src="@/assets/images/partners/perkinelmer.svg" alt="PerkinElmer" />
       </div>
       <div class="partner-logo">
+        <img src="@/assets/images/partners/nabote.png" alt="纳博特" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/qisheng.png" alt="启晟" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/yihui.svg" alt="翌慧" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/xinsong.png" alt="新松" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/pudu.svg" alt="普渡机器人" />
+      </div>
+      <div class="partner-logo">
         <img src="@/assets/images/partners/qingzhi.jpg" alt="清之" class="logo-qingzhi" />
       </div>
       <div class="partner-logo">
@@ -34,7 +49,7 @@
         <img src="@/assets/images/partners/hunan.png" alt="湖南大学" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/qinghua.png" alt="清华大学" />
+        <img src="@/assets/images/partners/qinghua.svg" alt="清华大学" />
       </div>
       <div class="partner-logo">
         <img src="@/assets/images/partners/buaa.png" alt="北京航空航天大学" />
@@ -51,7 +66,7 @@
 .global-partners {
   padding: 64px 0 48px 0;
   background: #fff;
-  width: 100vw;
+  width: 100%;
 }
 .section-title {
   text-align: center;
@@ -91,20 +106,22 @@
   border-color: #1a3a8f;
 }
 .partner-logo img {
-  width: 100%;
-  height: 100%;
+  max-width: 80%;
+  max-height: 80%;
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 .partner-logo img.logo-meituan {
-  width: 60%;
-  height: 60%;
+  width: 70%;
+  height: 70%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
 }
 .partner-logo img.logo-qingzhi {
-  width: 70%;
-  height: 70%;
+  width: 90%;
+  height: 90%;
   object-fit: contain;
   display: block;
   margin: 0 auto;

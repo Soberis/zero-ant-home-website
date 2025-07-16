@@ -40,7 +40,7 @@ export const products = [
   },
   {
     slug: "restaurant-delivery-robot",
-    name: "餐饮与社区配送机器人",
+    name: "餐饮配送机器人",
     image: "",
     desc: "构建\"消费-生产-配送\"黄金三角闭环，与美团、普渡等知名企业合作。",
     seriesTitle: "餐饮配送机器人",
