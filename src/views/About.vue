@@ -30,20 +30,20 @@
         <h3>{{ $t('about.teamOverview') }}</h3>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-number">{{ 18 }}{{ $t('about.people') }}</div>
+            <div class="stat-number">{{ 18 }} {{ $t('about.people') }}</div>
             <div class="stat-label">{{ $t('about.teamSize') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">94%</div>
-            <div class="stat-label">{{ $t('about.teamOverview') }}</div>
+            <div class="stat-label">{{ $t('about.masterDegree') }}</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">{{ 30 }}{{ $t('about.yearsOld') }}</div>
+            <div class="stat-number">{{ 30 }} {{ $t('about.yearsOld') }}</div>
             <div class="stat-label">{{ $t('about.averageAge') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">90%</div>
-            <div class="stat-label">{{ $t('about.teamOverview') }}</div>
+            <div class="stat-label">{{ $t('about.topUniversity') }}</div>
           </div>
         </div>
       </div>
