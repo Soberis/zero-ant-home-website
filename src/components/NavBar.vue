@@ -230,6 +230,7 @@ onMounted(() => {
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.95);
   position: relative;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -239,10 +240,15 @@ onMounted(() => {
   margin-left: 48px;
   padding: 0 16px;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .logo:hover {
   transform: scale(1.02);
+}
+
+.logo img {
+  flex-shrink: 0;
 }
 
 .logo-text {
@@ -252,6 +258,10 @@ onMounted(() => {
   margin-left: 12px;
   letter-spacing: -0.5px;
   transition: color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
 }
 
 .nav-wrapper {
@@ -541,7 +551,7 @@ onMounted(() => {
 }
 
 /* 在响应式部分也需要相应调整 */
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 1101px) and (max-width: 1199px) {
   .nav-links {
     gap: 28px;
     padding: 0 30px;
@@ -550,7 +560,7 @@ onMounted(() => {
   .dropdown-item {
     padding: 14px 20px;
     min-width: 120px;
-    font-size: 13px; /* 从14px调整为13px */
+    font-size: 13px;
   }
   
   .logo {
@@ -562,11 +572,16 @@ onMounted(() => {
   }
 }
 
-/* 新增响应式优化 */
-@media (max-width: 991px) {
+/* 新增中等屏幕优化 */
+@media (min-width: 951px) and (max-width: 1100px) {
   .nav-links {
     gap: 20px;
-    padding: 0 20px;
+    padding: 0 24px;
+  }
+  
+  .nav-link {
+    font-size: 14px;
+    padding: 8px 6px;
   }
   
   .logo {
@@ -577,45 +592,65 @@ onMounted(() => {
   .logo-text {
     font-size: 22px;
     margin-left: 8px;
-    white-space: nowrap;
   }
   
   .nav-actions {
     margin-right: 24px;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    gap: 12px;
-    padding: 0 12px;
-  }
-  
-  .nav-link {
-    font-size: 14px;
-    padding: 8px 4px;
-  }
-  
-  .logo {
-    margin-left: 16px;
-    padding: 0 4px;
-  }
-  
-  .logo-text {
-    font-size: 20px;
-    margin-left: 6px;
-    letter-spacing: -0.8px;
-  }
-  
-  .nav-actions {
-    margin-right: 16px;
+    gap: 14px;
   }
   
   .language-btn {
-    padding: 6px 12px;
+    padding: 7px 12px;
     font-size: 12px;
-    min-width: 40px;
+  }
+}
+
+/* 优化响应式设计 - 更早隐藏导航菜单 */
+
+@media (max-width: 950px) {
+  /* 在950px以下隐藏导航菜单，只保留logo和语言切换 */
+  .nav-wrapper {
+    display: none;
+  }
+  
+  .nav-container {
+    height: 70px;
+    padding: 0 16px;
+  }
+  
+  .logo {
+    margin-left: 0;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  
+  .logo-text {
+    font-size: 22px;
+    margin-left: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .nav-actions {
+    margin-right: 0;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  
+  .language-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    min-width: 45px;
   }
 }
 
@@ -623,12 +658,6 @@ onMounted(() => {
   .nav-container {
     height: 60px;
     padding: 0 12px;
-  }
-  
-  .logo {
-    margin-left: 0;
-    padding: 0;
-    flex: 1;
   }
   
   .logo img {
@@ -642,9 +671,10 @@ onMounted(() => {
     font-weight: 600;
   }
   
-  /* 隐藏所有导航链接 */
-  .nav-wrapper {
-    display: none;
+  .language-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 40px;
   }
   
   .nav-actions {

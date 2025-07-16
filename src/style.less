@@ -11,12 +11,22 @@ html, body {
 // 全局防止横向滚动
 * {
   box-sizing: border-box;
-  max-width: 100vw !important;
+}
+
+// 防止元素超出视口宽度
+*:not(html):not(body) {
+  max-width: 100% !important;
 }
 
 // 隐藏所有横向滚动条
-::-webkit-scrollbar {
+::-webkit-scrollbar:horizontal {
   height: 0 !important;
+  display: none !important;
+}
+
+// Firefox 隐藏横向滚动条
+* {
+  scrollbar-width: none;
 }
 
 body, html, #app {
@@ -28,6 +38,24 @@ body, html, #app {
 .container, .nav-container, .page, .main-content {
   max-width: 100%;
   overflow-x: hidden;
+}
+
+// 防止固定定位元素导致横向滚动
+.fixed, .absolute {
+  max-width: 100vw;
+}
+
+// 防止表格和预格式化文本导致横向滚动
+table {
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 #app {
@@ -64,4 +92,41 @@ body, html, #app {
     height: auto; // 移除固定高度
     min-height: 60vh;
   }
+}
+
+// 防止横向滚动的全局规则
+.section, .container-fluid, .row {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+// 确保所有图片和媒体元素不会导致横向滚动
+img, video, iframe, embed, object {
+  max-width: 100%;
+  height: auto;
+}
+
+// 防止长文本导致横向滚动
+p, div, span, h1, h2, h3, h4, h5, h6 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+// 防止代码块导致横向滚动
+code, pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+// 确保flex容器不会导致横向滚动
+.flex, .d-flex, [style*="display: flex"] {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+// 防止绝对定位元素导致横向滚动
+[style*="position: absolute"], [style*="position: fixed"] {
+  max-width: 100vw;
 }

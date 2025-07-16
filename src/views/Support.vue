@@ -117,9 +117,11 @@ function toggleFaq(idx) {
 
 <style scoped>
 .support-hero-bg {
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   background: linear-gradient(135deg, #f7f8fa 60%, #e9eef7 100%);
   padding: 0 0 48px 0;
+  overflow-x: hidden;
 }
 .support-hero {
   max-width: 1200px;
@@ -154,7 +156,8 @@ function toggleFaq(idx) {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(26,58,143,0.10);
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
   min-height: 260px;
   display: flex;
   flex-direction: column;
@@ -358,4 +361,4 @@ function toggleFaq(idx) {
     padding: 0 4px 6px 4px;
   }
 }
-</style> 
+</style>

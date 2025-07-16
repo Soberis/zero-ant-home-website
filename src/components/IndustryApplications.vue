@@ -116,7 +116,9 @@ onUnmounted(() => {
 .industry-apps {
   padding: 64px 0 48px 0;
   background: #f7f8fa;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 .section-title {
   text-align: center;
@@ -247,9 +249,16 @@ onUnmounted(() => {
     padding-right: 10px;
   }
   .app-card {
-    width: 95vw;
-    min-width: 0;
+    width: calc(100% - 20px);
+    max-width: 280px;
+    min-width: 200px;
     margin: 0 auto;
   }
+  .scroll-btn.left {
+    left: 5vw;
+  }
+  .scroll-btn.right {
+    right: 5vw;
+  }
 }
-</style> 
+</style>

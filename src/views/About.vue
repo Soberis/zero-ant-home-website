@@ -189,7 +189,8 @@ onUnmounted(() => {
 }
 
 .about-hero {
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   height: 100vh;
   position: relative;
@@ -207,7 +208,8 @@ onUnmounted(() => {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   z-index: 2;
   animation: fadein 1.2s;
 }

@@ -80,7 +80,8 @@ onUnmounted(() => {
 <style scoped>
 .hero-carousel {
   position: relative;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   height: 100vh;
   overflow: hidden;
   background: #fff;
@@ -89,7 +90,8 @@ onUnmounted(() => {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   height: 300px;
   pointer-events: none;
   z-index: 3;
@@ -179,4 +181,4 @@ onUnmounted(() => {
     bottom: 20px;
   }
 }
-</style> 
+</style>

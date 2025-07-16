@@ -57,20 +57,26 @@ import Partners from '../components/Partners.vue'; // 合作伙伴
 }
 .section-grey {
   background: #f7f8fa;
-  width: 100vw;
-  margin: 0 calc(50% - 50vw);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   padding: 64px 0 48px 0;
+  overflow-x: hidden;
 }
 .section-white {
   background: #fff;
-  width: 100vw;
-  margin: 0 calc(50% - 50vw);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   padding: 64px 0 48px 0;
+  overflow-x: hidden;
 }
 .home-bg {
   background: #f7f8fa;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 .section {
   max-width: 1200px;
@@ -79,8 +85,9 @@ import Partners from '../components/Partners.vue'; // 合作伙伴
 }
 @media screen and (max-width: 991px) {
   .container {
-    max-width: 100vw;
+    max-width: 100%;
     padding: 0 8px;
+    overflow-x: hidden;
   }
   .main-section {
     flex-direction: column;

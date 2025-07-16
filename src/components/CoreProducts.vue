@@ -27,11 +27,11 @@ import { getProductDetailLink } from '../utils/product.js';
 
 <style scoped>
 .core-products {
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   padding: 80px 0 64px 0;
+  overflow-x: hidden;
 }
 .section-title {
   text-align: center;
@@ -45,9 +45,11 @@ import { getProductDetailLink } from '../utils/product.js';
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 @media (min-width: 2200px) {
   .products-list {
@@ -146,4 +148,4 @@ import { getProductDetailLink } from '../utils/product.js';
     padding-right: 10px;
   }
 }
-</style> 
+</style>
