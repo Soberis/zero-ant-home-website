@@ -75,4 +75,14 @@ defineProps({
   justify-content: center;
   margin-top: 40px;
 }
+.section-title {
+  text-align: center;
+}
+.feature-list li,
+.scene-list li {
+  text-align: left;
+}
+.case-item {
+  text-align: left;
+}
 </style> 
