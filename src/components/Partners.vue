@@ -3,69 +3,48 @@
     <h2 class="section-title">合作伙伴</h2>
     <div class="section-underline"></div>
     <div class="partners-list">
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/shinaide.png" alt="施耐德电气" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/huawei.svg" alt="华为" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/meituan.svg" alt="美团" class="logo-meituan" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/perkinelmer.svg" alt="PerkinElmer" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/nabote.png" alt="纳博特" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/qisheng.png" alt="启晟" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/yihui.svg" alt="翌慧" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/xinsong.png" alt="新松" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/pudu.svg" alt="普渡机器人" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/qingzhi.jpg" alt="清之" class="logo-qingzhi" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/dizhi.png" alt="中国地质大学" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/dongnan.jpg" alt="东南大学" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/fudan.png" alt="复旦大学" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/zhongshan.jpg" alt="中山大学" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/hunan.png" alt="湖南大学" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/qinghua.svg" alt="清华大学" />
-      </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/buaa.png" alt="北京航空航天大学" />
+      <div
+        v-for="(partner, idx) in partners"
+        :key="partner.alt + idx"
+        class="partner-logo"
+      >
+        <img
+          :src="partner.src"
+          :alt="partner.alt"
+          :class="partner.class"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-// logo数据可后续抽离为props或外部数据源
+const partners = [
+  { src: '/src/assets/images/partners/shinaide.png', alt: '施耐德电气' },
+  { src: '/src/assets/images/partners/huawei.svg', alt: '华为' },
+  { src: '/src/assets/images/partners/meituan.svg', alt: '美团', class: 'logo-meituan' },
+  { src: '/src/assets/images/partners/perkinelmer.svg', alt: 'PerkinElmer' },
+  { src: '/src/assets/images/partners/nabote.png', alt: '纳博特' },
+  { src: '/src/assets/images/partners/qisheng.png', alt: '启晟' },
+  { src: '/src/assets/images/partners/yihui.svg', alt: '翌慧' },
+  { src: '/src/assets/images/partners/xinsong.png', alt: '新松' },
+  { src: '/src/assets/images/partners/pudu.svg', alt: '普渡机器人' },
+  { src: '/src/assets/images/partners/qingzhi.jpg', alt: '清之', class: 'logo-qingzhi' },
+  { src: '/src/assets/images/partners/dizhi.png', alt: '中国地质大学' },
+  { src: '/src/assets/images/partners/dongnan.jpg', alt: '东南大学' },
+  { src: '/src/assets/images/partners/fudan.png', alt: '复旦大学' },
+  { src: '/src/assets/images/partners/zhongshan.jpg', alt: '中山大学' },
+  { src: '/src/assets/images/partners/hunan.png', alt: '湖南大学' },
+  { src: '/src/assets/images/partners/qinghua.svg', alt: '清华大学' },
+  { src: '/src/assets/images/partners/buaa.png', alt: '北京航空航天大学' },
+];
 </script>
 
 <style scoped>
 .global-partners {
   padding: 64px 0 48px 0;
-  background: #fff;
+  background: #f7f8fa;
   width: 100%;
 }
 .section-title {
@@ -88,7 +67,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 32px 48px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 .partner-logo {
@@ -100,10 +79,12 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #e5e6eb;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(30, 42, 80, 0.06);
 }
 .partner-logo:hover {
   border-color: #1a3a8f;
+  box-shadow: 0 4px 16px 0 rgba(26, 58, 143, 0.12);
 }
 .partner-logo img {
   max-width: 80%;

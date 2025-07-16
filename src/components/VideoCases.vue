@@ -40,37 +40,20 @@ import { videoCards } from '../data/videos.js';
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
   width: 100%;
-  max-width: 100%;
-  margin: 0;
+  max-width: 1800px;
+  margin: 0 auto;
   padding: 0;
   overflow-x: hidden;
 }
-@media (min-width: 2200px) {
-  .videos-list {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-@media (max-width: 1500px) {
-  .videos-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (max-width: 900px) {
-  .videos-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .videos-list {
-    grid-template-columns: 1fr;
-  }
-}
 .video-card {
+  flex: 0 0 320px;
+  width: 320px;
+  min-width: 240px;
+  max-width: 340px;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 4px 24px 0 rgba(30,40,90,0.08);
   min-height: 420px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,13 +97,6 @@ import { videoCards } from '../data/videos.js';
 .more-btn:hover {
   background: #1a3a8f;
   color: #fff;
-}
-@media (max-width: 1200px) {
-  .video-card {
-    width: 30vw;
-    min-width: 240px;
-    max-width: 340px;
-  }
 }
 @media (max-width: 900px) {
   .video-cases {

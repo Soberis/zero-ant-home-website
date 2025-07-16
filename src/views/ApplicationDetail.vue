@@ -24,7 +24,7 @@
       <template v-else>
         <div class="video-placeholder">暂无视频</div>
       </template>
-      <div class="video-bottom-bar">
+      <div class="video-bottom-bar" :class="bottomBarClass">
         <button
           v-if="prevSlug"
           class="video-bottom-btn prev"
@@ -69,6 +69,13 @@ const prevSlug = computed(() =>
 const nextSlug = computed(() =>
   currentIndex.value < applications.length - 1 ? applications[currentIndex.value + 1].slug : null
 )
+// 新增：判断按钮类型
+const bottomBarClass = computed(() => {
+  if (prevSlug.value && nextSlug.value) return 'both';
+  if (prevSlug.value) return 'only-prev';
+  if (nextSlug.value) return 'only-next';
+  return '';
+});
 function goTo(targetSlug) {
   if (targetSlug) {
     router.push({ name: route.name, params: { slug: targetSlug } })
@@ -156,36 +163,50 @@ function goTo(targetSlug) {
   width: 100%;
   max-width: 800px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   margin-top: 18px;
   min-height: 48px;
   position: relative;
+  gap: 18px;
+}
+.video-bottom-bar.both {
+  justify-content: space-between;
+}
+.video-bottom-bar.only-prev {
+  justify-content: flex-start;
+}
+.video-bottom-bar.only-next {
+  justify-content: flex-end;
 }
 .video-bottom-btn {
-  color: #111;
+  color: #1a3a8f;
   background: #fff;
-  border: none;
+  border: 2px solid #1a3a8f;
   border-radius: 24px;
   font-size: 1.08rem;
   font-weight: 700;
-  padding: 8px 32px;
-  box-shadow: 0 2px 12px 0 rgba(26,58,143,0.08);
+  padding: 10px 40px;
+  box-shadow: 0 2px 12px 0 rgba(26,58,143,0.06);
   cursor: pointer;
   letter-spacing: 1px;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border-color 0.18s;
   outline: none;
-  opacity: 0.96;
+  opacity: 1;
+  min-width: 110px;
+  text-align: center;
+  margin: 0;
 }
 .video-bottom-btn:hover {
-  background: #f3f4f8;
-  color: #1a3a8f;
+  background: #1a3a8f;
+  color: #fff;
+  border-color: #1a3a8f;
   box-shadow: 0 4px 16px rgba(26,58,143,0.10);
 }
 .video-bottom-btn:active {
-  background: #eaeaea;
-  color: #111;
+  background: #16306b;
+  color: #fff;
+  border-color: #16306b;
 }
 @media (max-width: 600px) {
   .video-container {
@@ -203,7 +224,8 @@ function goTo(targetSlug) {
   }
   .video-bottom-btn {
     font-size: 0.98rem;
-    padding: 6px 12px;
+    padding: 8px 0;
+    min-width: 80px;
     border-radius: 16px;
   }
 }

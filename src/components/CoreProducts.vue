@@ -46,30 +46,10 @@ import { getProductDetailLink } from '../utils/product.js';
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
   width: 100%;
-  max-width: 100%;
-  margin: 0;
+  max-width: 1600px;
+  margin: 0 auto;
   padding: 0;
   overflow-x: hidden;
-}
-@media (min-width: 2200px) {
-  .products-list {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-@media (max-width: 1500px) {
-  .products-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (max-width: 900px) {
-  .products-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .products-list {
-    grid-template-columns: 1fr;
-  }
 }
 .product-card {
   background: #fff;
@@ -82,6 +62,10 @@ import { getProductDetailLink } from '../utils/product.js';
   align-items: center;
   padding: 56px 32px 40px 32px;
   transition: box-shadow 0.2s;
+  /* 移除flex宽度限制 */
+  min-width: 0;
+  max-width: 100%;
+  margin: 0 auto;
 }
 .product-card:hover {
   box-shadow: 0 4px 24px 0 rgba(26,58,143,0.13);
@@ -125,27 +109,5 @@ import { getProductDetailLink } from '../utils/product.js';
 .more-btn:hover {
   background: #1a3a8f;
   color: #fff;
-}
-@media (max-width: 1200px) {
-  .product-card {
-    width: 30vw;
-    min-width: 240px;
-    max-width: 340px;
-  }
-}
-@media (max-width: 900px) {
-  .products-list {
-    gap: 18px;
-    justify-content: center;
-  }
-  .product-card {
-    width: 95vw;
-    min-width: 0;
-    margin: 0 auto;
-  }
-  .core-products {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 }
 </style>
