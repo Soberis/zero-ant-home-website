@@ -7,13 +7,37 @@
         <img src="@/assets/images/partners/huawei-2.svg" alt="华为" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/meituan-2020-logo.svg" alt="美团" />
+        <img src="@/assets/images/partners/meituan-2020-logo.svg" alt="美团" class="logo-meituan" />
       </div>
       <div class="partner-logo">
         <img src="@/assets/images/partners/perkinelmer.svg" alt="PerkinElmer" />
       </div>
       <div class="partner-logo">
         <img src="@/assets/images/partners/7-140212233413555.png" alt="施耐德电气" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/10032S0C-1.png" alt="10032S0C-1" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-200Z9132121P1.jpg" alt="7-200Z9132121P1" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-1401291I627.png" alt="7-1401291I627" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-200Z9145910538.jpg" alt="7-200Z9145910538" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-140202223102328.png" alt="7-140202223102328" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-1401291F325.png" alt="7-1401291F325" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-140129231040534.png" alt="7-140129231040534" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/7-140212233413555 copy.png" alt="7-140212233413555 copy" />
       </div>
       <!-- 预留：后续可继续添加其他logo，如下所示 -->
       <!--
@@ -59,8 +83,8 @@
   margin: 0 auto;
 }
 .partner-logo {
-  width: 140px;
-  height: 56px;
+  width: 200px;
+  height: 90px;
   background: #fff;
   border-radius: 0;
   display: flex;
@@ -73,18 +97,25 @@
   border-color: #1a3a8f;
 }
 .partner-logo img {
-  max-width: 90%;
-  max-height: 80%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+}
+.partner-logo img.logo-meituan {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 @media (max-width: 900px) {
   .partners-list {
     gap: 16px 8px;
   }
   .partner-logo {
-    width: 40vw;
+    width: 60vw;
     min-width: 80px;
-    height: 40px;
+    height: 60px;
   }
   .section-title {
     font-size: 1.3rem;
