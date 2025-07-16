@@ -5,7 +5,6 @@ import meituan from '@/assets/images/partners/meituan.svg';
 import perkinelmer from '@/assets/images/partners/perkinelmer.svg';
 import nabote from '@/assets/images/partners/nabote.png';
 import qisheng from '@/assets/images/partners/qisheng.png';
-import yihui from '@/assets/images/partners/yihui.png';
 import xinsong from '@/assets/images/partners/xinsong.png';
 import pudu from '@/assets/images/partners/pudu.svg';
 import qingzhi from '@/assets/images/partners/qingzhi.jpg';
@@ -24,7 +23,6 @@ export const partners = [
   { src: perkinelmer, alt: 'PerkinElmer' },
   { src: nabote, alt: '纳博特' },
   { src: qisheng, alt: '启晟' },
-  { src: yihui, alt: '翼辉' },
   { src: xinsong, alt: '新松' },
   { src: pudu, alt: '普渡机器人' },
   { src: qingzhi, alt: '清之', class: 'logo-qingzhi' },
