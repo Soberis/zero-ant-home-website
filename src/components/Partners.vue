@@ -27,7 +27,7 @@ const partners = [
   { src: '/src/assets/images/partners/perkinelmer.svg', alt: 'PerkinElmer' },
   { src: '/src/assets/images/partners/nabote.png', alt: '纳博特' },
   { src: '/src/assets/images/partners/qisheng.png', alt: '启晟' },
-  { src: '/src/assets/images/partners/yihui.svg', alt: '翌慧' },
+  // { src: '/src/assets/images/partners/yihui.svg', alt: '翼辉' },
   { src: '/src/assets/images/partners/xinsong.png', alt: '新松' },
   { src: '/src/assets/images/partners/pudu.svg', alt: '普渡机器人' },
   { src: '/src/assets/images/partners/qingzhi.jpg', alt: '清之', class: 'logo-qingzhi' },

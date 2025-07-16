@@ -91,6 +91,10 @@ function goToDetail(slug) {
   align-items: center;
   background: #f7f8fa;
   font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .title {
@@ -117,6 +121,8 @@ function goToDetail(slug) {
   width: 100%;
   max-width: 1200px;
   margin-bottom: 64px;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .section-title {
@@ -132,6 +138,7 @@ function goToDetail(slug) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
+  overflow-x: hidden;
 }
 
 .core-card {
@@ -194,13 +201,16 @@ function goToDetail(slug) {
 .more-scenarios {
   width: 100%;
   max-width: 1200px;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   gap: 32px;
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* 响应式设计 */
