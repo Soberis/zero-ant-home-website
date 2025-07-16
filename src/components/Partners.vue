@@ -4,47 +4,41 @@
     <div class="section-underline"></div>
     <div class="partners-list">
       <div class="partner-logo">
-        <img src="@/assets/images/partners/huawei-2.svg" alt="华为" />
+        <img src="@/assets/images/partners/shinaide.png" alt="施耐德电气" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/meituan-2020-logo.svg" alt="美团" class="logo-meituan" />
+        <img src="@/assets/images/partners/huawei.svg" alt="华为" />
+      </div>
+      <div class="partner-logo">
+        <img src="@/assets/images/partners/meituan.svg" alt="美团" class="logo-meituan" />
       </div>
       <div class="partner-logo">
         <img src="@/assets/images/partners/perkinelmer.svg" alt="PerkinElmer" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/7-140212233413555.png" alt="施耐德电气" />
+        <img src="@/assets/images/partners/qingzhi.jpg" alt="清之" class="logo-qingzhi" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/10032S0C-1.png" alt="10032S0C-1" />
+        <img src="@/assets/images/partners/dizhi.png" alt="中国地质大学" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/7-200Z9132121P1.jpg" alt="7-200Z9132121P1" />
+        <img src="@/assets/images/partners/dongnan.jpg" alt="东南大学" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/7-1401291I627.png" alt="7-1401291I627" />
+        <img src="@/assets/images/partners/fudan.png" alt="复旦大学" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/7-200Z9145910538.jpg" alt="7-200Z9145910538" />
+        <img src="@/assets/images/partners/zhongshan.jpg" alt="中山大学" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/7-140202223102328.png" alt="7-140202223102328" />
+        <img src="@/assets/images/partners/hunan.png" alt="湖南大学" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/7-1401291F325.png" alt="7-1401291F325" />
+        <img src="@/assets/images/partners/qinghua.png" alt="清华大学" />
       </div>
       <div class="partner-logo">
-        <img src="@/assets/images/partners/7-140129231040534.png" alt="7-140129231040534" />
+        <img src="@/assets/images/partners/buaa.png" alt="北京航空航天大学" />
       </div>
-      <div class="partner-logo">
-        <img src="@/assets/images/partners/7-140212233413555 copy.png" alt="7-140212233413555 copy" />
-      </div>
-      <!-- 预留：后续可继续添加其他logo，如下所示 -->
-      <!--
-      <div class="partner-logo">
-        <img src="@/assets/icons/schneider-electric-logo.svg" alt="施耐德电气" />
-      </div>
-      -->
     </div>
   </section>
 </template>
@@ -104,6 +98,13 @@
 .partner-logo img.logo-meituan {
   width: 60%;
   height: 60%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+.partner-logo img.logo-qingzhi {
+  width: 70%;
+  height: 70%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
