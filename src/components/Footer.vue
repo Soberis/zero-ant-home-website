@@ -86,16 +86,12 @@
 import { useI18n } from 'vue-i18n';
 
 const systemProductNav = [
-  { hash: '#rtos', label: 'nav.rtOs' },
-  { hash: '#robot-control-system', label: 'nav.controlSystem' }
+  { hash: '#airos', label: 'nav.airos' },
 ];
 const robotProductNav = [
-  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
-  { hash: '#scara-robot-arm', label: 'nav.fourAxisArm' },
-  { hash: '#six-axis-robot-arm', label: 'nav.sixAxisArm' },
-  { hash: '#dual-arm-humanoid', label: 'nav.humanoid' },
-  { hash: '#scara-mobile-composite', label: 'nav.fourAxisMobileCompound' }
-
+  { hash: '#wafer-transport-robot', label: 'nav.waferTransport' },
+  { hash: '#lab-plate-transport-robot', label: 'nav.labTransport' },
+  { hash: '#restaurant-delivery-robot', label: 'nav.deliveryRobot' },
 ];
 </script>
 

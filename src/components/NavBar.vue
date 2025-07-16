@@ -67,20 +67,6 @@
             <router-link to="/applications" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.applications") }}</span>
             </router-link>
-            <!-- <div class="dropdown">
-              <div class="dropdown-content">
-                <ul>
-                  <li v-for="item in applicationNav" :key="item.label">
-                    <router-link
-                      to="/applications"
-                      class="dropdown-item"
-                    >
-                      {{ $t(item.label) }}
-                    </router-link>
-                  </li>
-                </ul>
-              </div>
-            </div> -->
           </li>
           <li class="nav-item has-dropdown">
             <router-link to="/support" class="nav-link" active-class="active">
@@ -182,20 +168,18 @@ const aboutNav = [
   { hash: '#tab1', label: 'nav.companyIntro' },
   { hash: '#tab2', label: 'nav.history' },
   { hash: '#tab3', label: 'nav.honor' },
-  { hash: '#tab4', label: 'nav.culture' },
+  { hash: '#tab4', label: 'nav.team' },
+  { hash: '#tab5', label: 'nav.culture' },
   { hash: '#tab6', label: 'nav.contact' }
 ];
 
 const systemProductNav = [
-  { hash: '#rtos', label: 'nav.rtOs' },
-  { hash: '#robot-control-system', label: 'nav.controlSystem' }
+  { hash: '#airos', label: 'nav.airos' },
 ];
 const robotProductNav = [
-  { hash: '#scara-robot-arm', label: 'nav.fourAxisArm' },
-  { hash: '#six-axis-robot-arm', label: 'nav.sixAxisArm' },
-  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
-  { hash: '#scara-mobile-composite', label: 'nav.fourAxisMobileCompound' },
-  { hash: '#dual-arm-humanoid', label: 'nav.humanoid' }
+  { hash: '#wafer-transport-robot', label: 'nav.waferTransport' },
+  { hash: '#lab-plate-transport-robot', label: 'nav.labTransport' },
+  { hash: '#restaurant-delivery-robot', label: 'nav.deliveryRobot' },
 ];
 
 const { locale } = useI18n();

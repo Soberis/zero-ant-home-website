@@ -16,7 +16,7 @@ export default [
 <p>智能检验仪器与自动化样本传输系统、医疗机器人辅助手术与护理、医院信息系统（HIS）与物联网设备集成、自动化药品分拣与配送等技术，推动了医疗行业的高效发展。</p>
 <p>典型应用包括智能化检验科自动流水线、手术机器人辅助微创手术、自动化药房与智能药品柜等。随着AI、5G和大数据的深度融合，医疗自动化将向更高智能化、远程化、个性化方向发展，推动智慧医院和远程医疗的普及。</p>
     `, // 行业应用介绍
-    video: 'https://www.bilibili.com/video/BV1d8411h7Jr/?spm_id_from=333.337.search-card.all.click&vd_source=7daba5cbb058d519718a2849fb57ed71', // 相关视频链接
+    video: '', // 相关视频链接
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>` // 图标SVG字符串
   },
   {
@@ -27,7 +27,7 @@ export default [
 <p>晶圆搬运与自动检测系统、精密机械臂与洁净室自动物流、智能缺陷检测与数据追溯、MES生产执行系统集成等技术，助力半导体行业智能升级。</p>
 <p>典型应用包括晶圆厂自动化搬运与检测、芯片封装测试自动化产线、智能仓储与洁净物流系统。未来，半导体自动化将更多依赖AI视觉检测、智能调度与自适应工艺优化，推动智能制造升级。</p>
     `,
-    video: 'https://www.bilibili.com/video/BV1WZGEzzE3o/?spm_id_from=333.337.search-card.all.click&vd_source=7daba5cbb058d519718a2849fb57ed71',
+    video: '',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/><path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/><path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/></svg>`
   },
   {
@@ -38,7 +38,7 @@ export default [
 <p>自动化移液、分液与样本处理设备、实验数据自动采集与云端管理、智能环境监控与安全预警、远程实验协作与数据共享等技术，推动实验室智能升级。</p>
 <p>典型应用包括医学检验自动化实验室、药物筛选高通量实验平台、智能化生物样本库管理。未来，智能实验室将与AI深度融合，实现实验设计、执行、分析全流程智能化，推动科研创新与成果转化。</p>
     `,
-    video: 'https://www.bilibili.com/video/BV1fT411r7Y4/?spm_id_from=333.337.search-card.all.click&vd_source=7daba5cbb058d519718a2849fb57ed71',
+    video: '',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="24" cy="34" rx="12" ry="6" stroke="#1a3a8f" stroke-width="2"/><rect x="18" y="10" width="12" height="18" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/></svg>`
   },
   {
@@ -49,7 +49,7 @@ export default [
 <p>PLC自动化控制与工业机器人、传感器网络与实时数据采集、智能制造执行系统（MES）、柔性生产线与自动化物流等技术，助力制造业高效发展。</p>
 <p>典型应用包括汽车制造自动化装配线、智能化电子产品生产线、自动化包装与分拣系统。工业自动化将与工业互联网、AI、5G等新技术深度融合，推动智能工厂和数字化车间的普及。</p>
     `,
-    video: 'https://www.bilibili.com/video/BV1EM411S7yg/?spm_id_from=333.337.search-card.all.click&vd_source=7daba5cbb058d519718a2849fb57ed71',
+    video: '',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="24" width="28" height="12" rx="3" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><path d="M14 24v-6h20v6" stroke="#1a3a8f" stroke-width="2"/></svg>`
   },
   {

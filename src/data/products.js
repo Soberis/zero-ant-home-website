@@ -12,66 +12,39 @@ import zeroantLogo from '@/assets/zeroant_logo.png';
  */
 export const products = [
   {
-    slug: "mobile-robot",
-    name: "移动机器人",
+    slug: "airos",
+    name: "AiROS机器人操作系统",
     image: zeroantLogo,
-    desc: "高精度导航与避障，适用于智能物流、巡检、搬运等多场景的自主移动机器人解决方案。",
-    seriesTitle: "移动机器人",
-    seriesSubtitle: "智能移动平台",
-    category: "robot"
-  },
-  {
-    slug: "scara-robot-arm",
-    name: "四轴机械臂",
-    image: "",
-    desc: "结构紧凑、速度快、重复定位精度高，广泛应用于装配、搬运、分拣等自动化生产线。",
-    seriesTitle: "四轴机械臂",
-    seriesSubtitle: "高效自动化作业",
-    category: "robot"
-  },
-  {
-    slug: "six-axis-robot-arm",
-    name: "六轴机械臂",
-    image: "",
-    desc: "灵活多自由度，适合复杂轨迹作业，支持焊接、喷涂、上下料等多种工业自动化场景。",
-    seriesTitle: "六轴机械臂",
-    seriesSubtitle: "多自由度协作",
-    category: "robot"
-  },
-  {
-    slug: "rtos",
-    name: "实时操作系统",
-    image: "",
-    desc: "为机器人和嵌入式设备量身打造的高可靠实时操作系统，保障任务调度与系统安全。",
-    seriesTitle: "实时操作系统",
-    seriesSubtitle: "高可靠智能内核",
+    desc: "国产\"开箱即用\"机器人智能操作系统，打造机器人界的Android系统，让机器人走进千行百业。",
+    seriesTitle: "AiROS机器人操作系统",
+    seriesSubtitle: "具身智能时代的操作系统",
     category: "system"
   },
   {
-    slug: "robot-control-system",
-    name: "机器人控制系统",
+    slug: "wafer-transport-robot",
+    name: "半导体晶圆传送机器人",
     image: "",
-    desc: "集成运动控制、路径规划与多传感器融合，支持多类型机器人高效协同作业。",
-    seriesTitle: "机器人控制系统",
-    seriesSubtitle: "智能控制中枢",
-    category: "system"
-  },
-  {
-    slug: "dual-arm-humanoid",
-    name: "双臂人形机器人",
-    image: "",
-    desc: "具备双臂协作能力，模拟人类操作，适用于服务、科研及复杂装配等高端应用。",
-    seriesTitle: "双臂人形机器人",
-    seriesSubtitle: "仿人协作平台",
+    desc: "专为半导体行业设计的高精度晶圆传送机器人，控制精度高、连续工作9万小时无损坏。",
+    seriesTitle: "半导体晶圆传送机器人",
+    seriesSubtitle: "解决\"卡脖子\"问题",
     category: "robot"
   },
   {
-    slug: "scara-mobile-composite",
-    name: "四轴移动复合机器人",
+    slug: "lab-plate-transport-robot",
+    name: "医药实验室实验板传送机器人",
     image: "",
-    desc: "融合移动底盘与四轴机械臂，兼具灵活移动与高效作业能力，适合柔性制造与智能仓储。",
-    seriesTitle: "四轴移动复合机器人",
-    seriesSubtitle: "柔性复合作业",
+    desc: "实现国外设备本土化替代，成本从30万降至14万，专为生物医药实验室设计。",
+    seriesTitle: "医药实验室传送机器人",
+    seriesSubtitle: "本土化替代方案",
+    category: "robot"
+  },
+  {
+    slug: "restaurant-delivery-robot",
+    name: "餐饮与社区配送机器人",
+    image: "",
+    desc: "构建\"消费-生产-配送\"黄金三角闭环，与美团、普渡等知名企业合作。",
+    seriesTitle: "餐饮配送机器人",
+    seriesSubtitle: "智能配送解决方案",
     category: "robot"
   }
 ];
@@ -80,4 +53,4 @@ export const products = [
  * 产品slug到路由的映射表，便于页面跳转
  * @example productRouteMap["mobile-robot"] => "/products/mobile-robot"
  */
-export const productRouteMap = Object.fromEntries(products.map(p => [p.slug, `/products/${p.slug}`])); 
+export const productRouteMap = Object.fromEntries(products.map(p => [p.slug, `/products/${p.slug}`]));
