@@ -2,7 +2,7 @@
   "logoAlt": "ZeroAnt",
   "logoText": "ZeroAnt",
   "slogan": "Let robots be everywhere",
-  "slogan2": "Make the coolest robots",
+  "slogan2": "",
   "contact": "For cooperation, please contact {email}",
   "nav": {
     "home": "Home",
@@ -53,23 +53,28 @@
     "culture": "Corporate Culture",
     "careers": "Careers",
     "systemProducts": "System Products",
-    "robotProducts": "Robot Products"
+    "robotProducts": "Robot Products",
+    "team": "Core Team",
+    "coreTeam": "Core Team",
+    "teamOverview": "Team Overview",
+    "teamSize": "Team Size",
+    "masterDegree": "Master's Degree Ratio",
+    "averageAge": "Average Age",
+    "topUniversity": "Top University Background",
+    "marketProspect": "Market Prospect",
+    "financingPlan": "Financing Plan",
+    "ordersInHand": "Orders in Hand",
+    "financingAmount": "Financing Amount",
+    "preliminaryValuation": "Preliminary Valuation",
+    "airos": "AiROS Operating System",
+    "waferTransport": "Wafer Transport Robot",
+    "labTransport": "Lab Transport Robot",
+    "deliveryRobot": "Delivery Robot"
   },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
     "description": "Our four-axis robotic arms are designed to enhance efficiency and precision in the medical field.",
     "cta": "Learn More"
-  },
-  "footer": {
-    "companyFull": "Hangzhou ZeroAnt Technology Co., Ltd.",
-    "tel": "Tel",
-    "address": "Room 310, Building 1, No. 99 Juhang Lane, Changhe Street, Binjiang District, Hangzhou, Zhejiang Province, China",
-    "wx": "WeChat Official Account",
-    "dy": "Douyin",
-    "sp": "Video Channel",
-    "email": "liqingfeng@zeroant.com",
-    "copyright": "All rights reserved",
-    "telValue": "400-666-888"
   },
   "about": {
     "mission": "To innovate and provide cutting-edge robotic solutions for the pharmaceutical industry.",
@@ -77,6 +82,10 @@
     "values": "Integrity, Innovation, Excellence",
     "companyIntro": "ZeroAnt Technology is a high-tech enterprise specializing in the R&D, production, and sales of micro-logistics intelligent conveying systems. We are committed to connecting professional equipment and application scenarios through innovative intelligent logistics solutions, helping various industries achieve efficient and reliable intelligent upgrades. Our core team consists of researchers from Beihang University and industry experts, with profound technical expertise and rich engineering experience.",
     "culture": "Driven by innovation, extremely reliable, and win-win cooperation. We insist on customer-centricity, continuously promote technological innovation, and strive to become a leader in the field of micro-logistics intelligence.",
+    "people": "people",
+    "yearsOld": "years old",
+    "millionYuan": "million yuan",
+    "hundredMillionYuan": "hundred million yuan",
     "timeline": {
       "2020": "Company founded, focusing on micro-logistics intelligent conveying system R&D",
       "2022": "Completed multiple industry intelligent logistics projects, team size exceeded 50 people",
@@ -85,7 +94,43 @@
     "honor1": "National High-tech Enterprise",
     "honor2": "ISO9001 Quality Management System Certification",
     "honor3": "Multiple Invention Patents and Software Copyrights",
-    "honor4": "Industry Innovation Award, Technology Breakthrough Award"
+    "honor4": "Industry Innovation Award, Technology Breakthrough Award",
+    "teamInfo": "Team size: 18 people, 94% with master's degree or above, average age 30, 90% from top universities",
+    "coreTeam": "Core Team",
+    "teamOverview": "Team Overview",
+    "teamSize": "Team size: 18 people",
+    "masterDegree": "94% with master's degree or above",
+    "averageAge": "Average age: 30",
+    "topUniversity": "90% from top universities",
+    "marketProspect": "Market Prospect",
+    "financingPlan": "Financing Plan",
+    "ordersInHand": "Orders in hand: 16 million yuan",
+    "financingAmount": "Financing amount: 20 million yuan",
+    "preliminaryValuation": "Preliminary valuation: 200 million yuan",
+    "marketInfo": "In 2024, the global industrial robot market is about $70 billion, and the total potential market size of embodied robots is about $60 trillion.",
+    "financing": "Plans to divest 10% equity, raise 20 million yuan, preliminary valuation of 200 million yuan.",
+    "team": {
+      "ceo": {
+        "name": "Qingfeng Li",
+        "position": "CEO",
+        "background": "Ph.D. from Beihang University, Associate Researcher, key member of national projects, 50+ papers, 32 patents. Rich experience in robot system R&D and project management."
+      },
+      "cto": {
+        "name": "Chen Chen",
+        "position": "CTO",
+        "background": "Expert in embodied intelligence, researcher in multimodal control models. Deep expertise in robot OS architecture and AI algorithm optimization."
+      },
+      "productDirector": {
+        "name": "Yukang Wang",
+        "position": "Product Director",
+        "background": "5 years of low-level system development, core maintainer of openEuler. Focused on productization and user experience of robot OS."
+      },
+      "operationDirector": {
+        "name": "Mengxiang Chen",
+        "position": "Operation Director",
+        "background": "National technical talent, former Alibaba digital expert. Responsible for company operations and commercialization, rich management experience."
+      }
+    }
   },
   "contactSection": {
     "getInTouch": "Get in Touch",
@@ -104,5 +149,19 @@
     "getInTouch": "Get in Touch",
     "phone": "Phone",
     "address": "Address"
+  },
+  "footer": {
+    "companyFull": "Hangzhou ZeroAnt Technology Co., Ltd.",
+    "email": "liqingfeng@zeroant.com",
+    "address": "Room 310, Building 1, No. 99 Juhang Lane, Changhe Street, Binjiang District, Hangzhou, Zhejiang Province, China",
+    "creditCode": "Unified Social Credit Code: 91330108MAEC2L2H3U",
+    "teamSize": "Team size: 18 people, 94% with master's degree or above",
+    "orders": "Orders in hand: 16 million yuan",
+    "financing": "Plans to divest 10%, raise 20 million yuan, preliminary valuation of 200 million yuan",
+    "wx": "WeChat Official Account",
+    "dy": "Douyin",
+    "sp": "Video Channel",
+    "copyright": "All rights reserved",
+    "telValue": "13001001954"
   }
 }

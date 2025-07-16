@@ -82,6 +82,10 @@
     "ordersInHand": "在手订单",
     "financingAmount": "融资金额",
     "preliminaryValuation": "初步估值",
+    "people": "人",
+    "yearsOld": "岁",
+    "millionYuan": "万",
+    "hundredMillionYuan": "亿",
     "timeline": {
       "2017": "启动机器人操作系统研发，获得国家项目支持2414万",
       "2020": "公司成立前期准备，专注微物流智能传送系统研发",

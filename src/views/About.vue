@@ -30,20 +30,20 @@
         <h3>{{ $t('about.teamOverview') }}</h3>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-number">18人</div>
+            <div class="stat-number">{{ 18 }}{{ $t('about.people') }}</div>
             <div class="stat-label">{{ $t('about.teamSize') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">94%</div>
-            <div class="stat-label">{{ $t('about.masterDegree') }}</div>
+            <div class="stat-label">{{ $t('about.teamOverview') }}</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">30岁</div>
+            <div class="stat-number">{{ 30 }}{{ $t('about.yearsOld') }}</div>
             <div class="stat-label">{{ $t('about.averageAge') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">90%</div>
-            <div class="stat-label">{{ $t('about.topUniversity') }}</div>
+            <div class="stat-label">{{ $t('about.teamOverview') }}</div>
           </div>
         </div>
       </div>
@@ -60,15 +60,15 @@
         <p>{{ $t('about.financing') }}</p>
         <div class="stats-grid">
           <div class="stat-card highlight">
-            <div class="stat-number">1600万</div>
+            <div class="stat-number">{{ 1600 }}{{ $t('about.millionYuan') }}</div>
             <div class="stat-label">{{ $t('about.ordersInHand') }}</div>
           </div>
           <div class="stat-card highlight">
-            <div class="stat-number">2000万</div>
+            <div class="stat-number">{{ 2000 }}{{ $t('about.millionYuan') }}</div>
             <div class="stat-label">{{ $t('about.financingAmount') }}</div>
           </div>
           <div class="stat-card highlight">
-            <div class="stat-number">2亿</div>
+            <div class="stat-number">{{ 2 }}{{ $t('about.hundredMillionYuan') }}</div>
             <div class="stat-label">{{ $t('about.preliminaryValuation') }}</div>
           </div>
         </div>
@@ -339,7 +339,7 @@ onUnmounted(() => {
   padding: 32px;
   background: #f8f9fa;
   border-radius: 12px;
-  border-left: 4px solid #1a3a8f;
+  /* border-left: 4px solid #1a3a8f; 删除蓝色竖线 */
 }
 
 .info-section h3 {
@@ -382,14 +382,14 @@ onUnmounted(() => {
 }
 
 .stat-card.highlight {
-  background: linear-gradient(135deg, #1a3a8f 0%, #4f8cff 100%);
-  color: white;
+  background: linear-gradient(135deg, #e3e8ee 0%, #b3c6e6 100%);
+  color: #1a3a8f;
   border: none;
 }
 
 .stat-card.highlight .stat-number,
 .stat-card.highlight .stat-label {
-  color: white;
+  color: #1a3a8f;
 }
 
 .stat-number {
