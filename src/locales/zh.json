@@ -63,7 +63,8 @@
   "hero": {
     "title": "四轴机械臂，助力医药自动化",
     "description": "我们的四轴机械臂专为医药行业设计，提供高效、精准的自动化解决方案。",
-    "cta": "Learn More"
+    "cta": "Learn More",
+    "subtitle": "探索我们为精准高效而设计的先进四轴机械臂"
   },
   "about": {
     "mission": "让机器人无处不在",
@@ -92,8 +93,8 @@
       "2022": "多项行业智能物流项目落地，团队规模突破18人",
       "2024": "发布AiROS机器人操作系统，获ACM MobiCom 2024最佳技术成果奖，院士专家组技术鉴定国际领先",
       "2025": "正式成立杭州零蚁科技有限公司，在手订单1600万，计划融资2000万，初步估值2亿人民币"
-    },
-    "honor1": "国家高新技术企业",
+  },
+  "honor1": "国家高新技术企业",
     "honor2": "信息安全EAL5+认证（鸿蒙之外中国第二家）",
     "honor3": "openEuler社区年度优秀项目",
     "honor4": "ACM MobiCom 2024最佳技术成果奖",
@@ -109,24 +110,45 @@
         "name": "李青锋",
         "position": "CEO",
         "background": "北航博士、副研究员，国家项目骨干，发表论文50+，专利32项。具有丰富的机器人系统研发经验和项目管理能力。"
-      },
-      "cto": {
+    },
+    "cto": {
         "name": "陈晨",
         "position": "CTO",
         "background": "具身智能专家，多模态控制模型研究者。在机器人操作系统架构设计和AI算法优化方面有深厚造诣。"
-      },
-      "productDirector": {
+    },
+    "productDirector": {
         "name": "王宇康",
         "position": "产品总监",
         "background": "5年底层系统开发经验，openEuler核心维护者。专注于机器人操作系统产品化和用户体验优化。"
-      },
-      "operationDirector": {
+    },
+    "operationDirector": {
         "name": "陈梦祥",
         "position": "运营总监",
         "background": "国家技术人才，前阿里巴巴数字化专家。负责公司运营管理和商业化推广，具有丰富的企业管理经验。"
-      }
+    }
+  },
+  "teamTitle": "核心团队"
+  },
+  "solutions": {
+    "title": "解决方案",
+    "introduction": "我们提供全面的机器人自动化解决方案，专注于医药自动化和半导体加工领域",
+    "header": "智能解决方案",
+    "advantages": {
+      "title": "核心优势",
+      "precision": "高精度控制",
+      "efficiency": "高效率运行",
+      "reliability": "极致可靠性",
+      "flexibility": "灵活适配性"
     },
-    "teamTitle": "核心团队"
+    "caseStudies": {
+      "title": "成功案例",
+      "medical": "医药行业案例",
+      "semiconductor": "半导体行业案例"
+    },
+    "contact": {
+      "title": "联系我们",
+      "description": "了解更多解决方案详情"
+    }
   },
   "contacts": {
     "title": "联系我们",

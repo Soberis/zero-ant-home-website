@@ -74,7 +74,8 @@
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
     "description": "Our four-axis robotic arms are designed to enhance efficiency and precision in the medical field.",
-    "cta": "Learn More"
+    "cta": "Learn More",
+    "subtitle": "Explore our advanced four-axis robotic arms designed for precision and efficiency"
   },
   "about": {
     "mission": "To innovate and provide cutting-edge robotic solutions for the pharmaceutical industry.",
@@ -92,8 +93,8 @@
       "2022": "Completed multiple industry intelligent logistics projects, team size exceeded 18 people",
       "2024": "Released AiROS robot operating system, won ACM MobiCom 2024 Best Technical Achievement Award, expert panel rated technology as internationally leading",
       "2025": "Officially established Hangzhou ZeroAnt Technology Co., Ltd., orders in hand 16 million, planned financing 20 million, preliminary valuation 200 million RMB"
-    },
-    "honor1": "National High-tech Enterprise",
+  },
+  "honor1": "National High-tech Enterprise",
     "honor2": "ISO9001 Quality Management System Certification",
     "honor3": "Multiple Invention Patents and Software Copyrights",
     "honor4": "Industry Innovation Award, Technology Breakthrough Award",
@@ -116,26 +117,47 @@
         "name": "Qingfeng Li",
         "position": "CEO",
         "background": "Ph.D. from Beihang University, Associate Researcher, key member of national projects, 50+ papers, 32 patents. Rich experience in robot system R&D and project management."
-      },
-      "cto": {
+    },
+    "cto": {
         "name": "Chen Chen",
         "position": "CTO",
         "background": "Expert in embodied intelligence, researcher in multimodal control models. Deep expertise in robot OS architecture and AI algorithm optimization."
-      },
-      "productDirector": {
+    },
+    "productDirector": {
         "name": "Yukang Wang",
         "position": "Product Director",
         "background": "5 years of low-level system development, core maintainer of openEuler. Focused on productization and user experience of robot OS."
-      },
-      "operationDirector": {
+    },
+    "operationDirector": {
         "name": "Mengxiang Chen",
         "position": "Operation Director",
         "background": "National technical talent, former Alibaba digital expert. Responsible for company operations and commercialization, rich management experience."
-      }
-    },
-    "teamTitle": "Core Team"
+    }
   },
-  "contactSection": {
+  "teamTitle": "Core Team"
+},
+"solutions": {
+  "title": "Solutions",
+  "introduction": "We provide comprehensive robotic automation solutions, focusing on pharmaceutical automation and semiconductor processing",
+  "header": "Intelligent Solutions",
+  "advantages": {
+    "title": "Core Advantages",
+    "precision": "High Precision Control",
+    "efficiency": "High Efficiency Operation",
+    "reliability": "Ultimate Reliability",
+    "flexibility": "Flexible Adaptability"
+  },
+  "caseStudies": {
+    "title": "Success Cases",
+    "medical": "Medical Industry Cases",
+    "semiconductor": "Semiconductor Industry Cases"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Learn more about our solution details"
+  }
+},
+"contactSection": {
     "getInTouch": "Get in Touch",
     "email": "Email Us",
     "phone": "Call Us"
