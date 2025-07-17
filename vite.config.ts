@@ -18,5 +18,15 @@ export default defineConfig({
         additionalData: `@import "./src/style.less";`
       },
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // 确保i18n文件被正确打包
+          'i18n': ['vue-i18n']
+        }
+      }
+    }
   }
 })
