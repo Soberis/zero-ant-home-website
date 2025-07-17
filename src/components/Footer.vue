@@ -42,11 +42,11 @@
         <div class="footer-col">
           <h4>{{ $t('nav.about') }}</h4>
           <ul>
-            <li><router-link to="/about">{{ $t('nav.companyIntro') }}</router-link></li>
-            <li><router-link to="/about">{{ $t('nav.history') }}</router-link></li>
-            <li><router-link to="/about">{{ $t('nav.honor') }}</router-link></li>
-            <li><router-link to="/about">{{ $t('nav.culture') }}</router-link></li>
-            <li><router-link to="/about">{{ $t('nav.contact') }}</router-link></li>
+            <li><router-link :to="{ path: '/about', hash: '#tab1' }">{{ $t('nav.companyIntro') }}</router-link></li>
+            <li><router-link :to="{ path: '/about', hash: '#tab2' }">{{ $t('nav.history') }}</router-link></li>
+            <li><router-link :to="{ path: '/about', hash: '#tab3' }">{{ $t('nav.honor') }}</router-link></li>
+            <li><router-link :to="{ path: '/about', hash: '#tab5' }">{{ $t('nav.culture') }}</router-link></li>
+            <li><router-link :to="{ path: '/about', hash: '#tab6' }">{{ $t('nav.contact') }}</router-link></li>
           </ul>
         </div>
         <div class="footer-col contact-col">
