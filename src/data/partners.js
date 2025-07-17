@@ -15,6 +15,7 @@ import zhongshan from '@/assets/images/partners/zhongshan.jpg';
 import hunan from '@/assets/images/partners/hunan.png';
 import qinghua from '@/assets/images/partners/qinghua.svg';
 import buaa from '@/assets/images/partners/buaa.png';
+import buaahyy from '@/assets/images/partners/buaahyy.jpg';
 
 export const partners = [
   { src: shinaide, alt: '施耐德电气' },
@@ -33,4 +34,5 @@ export const partners = [
   { src: hunan, alt: '湖南大学' },
   { src: qinghua, alt: '清华大学' },
   { src: buaa, alt: '北京航空航天大学' },
+  { src: buaahyy, alt: '北京航空航天大学州创新研究院' },
 ]; 
