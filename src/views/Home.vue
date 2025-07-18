@@ -10,18 +10,18 @@
         <VideoCases />
       </div>
       <IndustryApplications />
-      <Partners />
+        <Partners />
     </div>
   </div>
 </template>
 
 <script setup>
 // 首页聚合各核心模块组件
-import HeroCarousel from '../components/HeroCarousel.vue'; // 轮播图
-import CoreProducts from '../components/CoreProducts.vue'; // 核心产品
-import VideoCases from '../components/VideoCases.vue'; // 视频案例
-import IndustryApplications from '../components/IndustryApplications.vue'; // 行业应用
-import Partners from '../components/Partners.vue'; // 合作伙伴
+import HeroCarousel from '@/components/business/HeroCarousel.vue'; // 轮播图
+import CoreProducts from '@/components/business/CoreProducts.vue'; // 核心产品
+import VideoCases from '@/components/business/VideoCases.vue'; // 视频案例
+import IndustryApplications from '@/components/business/IndustryApplications.vue'; // 行业应用
+import Partners from '@/components/business/Partners.vue'; // 合作伙伴
 </script>
 
 <style lang="less" scoped>

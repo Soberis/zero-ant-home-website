@@ -1,16 +1,22 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
 import zeroantLogo from '@/assets/zeroant_logo.png';
+import type { Product } from '@/helpers/product';
+
+/**
+ * 扩展产品接口，添加产品特有字段
+ */
+export interface ProductData extends Product {
+  name: string;
+  image: string;
+  desc: string;
+  seriesTitle: string;
+  seriesSubtitle: string;
+}
 
 /**
  * 产品列表
- * @property {string} slug 路由唯一标识
- * @property {string} name 产品名称
- * @property {string} image 产品主图（如无则为空或占位）
- * @property {string} desc 产品简介
- * @property {string} seriesTitle 产品系列标题
- * @property {string} seriesSubtitle 产品系列副标题
  */
-export const products = [
+export const products: ProductData[] = [
   {
     slug: "airos",
     name: "AiROS机器人操作系统",
@@ -53,4 +59,6 @@ export const products = [
  * 产品slug到路由的映射表，便于页面跳转
  * @example productRouteMap["mobile-robot"] => "/products/mobile-robot"
  */
-export const productRouteMap = Object.fromEntries(products.map(p => [p.slug, `/products/${p.slug}`]));
+export const productRouteMap: Record<string, string> = Object.fromEntries(
+  products.map(p => [p.slug, `/products/${p.slug}`])
+);

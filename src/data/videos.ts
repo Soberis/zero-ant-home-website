@@ -1,14 +1,35 @@
 // 视频数据模块，包含视频详情映射和视频卡片列表
+import zeroantLogo from '@/assets/zeroant_logo.png';
+
+/**
+ * 视频详情接口
+ */
+export interface VideoDetail {
+  slug: string;
+  type: string;
+  url: string;
+  title: string;
+  desc: string;
+}
+
+/**
+ * 视频卡片接口
+ */
+export interface VideoCard {
+  title: string;
+  img: string;
+  slug: string;
+}
+
+/**
+ * 视频详情映射类型
+ */
+export type VideoMapData = Record<string, VideoDetail>;
 
 /**
  * 视频详情映射（以 slug 作为 key）
- * @property {string} slug 唯一标识
- * @property {string} type 视频平台类型
- * @property {string} url 视频播放地址
- * @property {string} title 视频标题
- * @property {string} desc 视频简介
  */
-export const videoMap = {
+export const videoMap: VideoMapData = {
   "drawing-robot": {
     slug: 'drawing-robot',
     type: '',
@@ -44,20 +65,15 @@ export const videoMap = {
     title: '复合移动抓取台站',
     desc: '复合移动抓取台站介绍：本视频展示了零蚁复合移动抓取台站的综合能力。该台站结合了移动机器人和抓取机器人的优势，能够在复杂环境中自主导航并完成精确抓取任务。通过多传感器融合技术和智能路径规划算法，机器人能够适应不同的工作环境和任务需求。该技术为智能制造和柔性生产提供了创新的解决方案。'
   }
-}
+};
 
-// 视频卡片列表（用于 Video.vue）
-import zeroantLogo from '@/assets/zeroant_logo.png'
 /**
- * 视频卡片列表
- * @property {string} title 视频标题
- * @property {string} img 视频封面图片
- * @property {string} slug 唯一标识
+ * 视频卡片列表（用于 Video.vue）
  */
-export const videoCards = [
+export const videoCards: VideoCard[] = [
   { title: '绘画机器人', img: zeroantLogo, slug: 'drawing-robot' },
   { title: '实时测试台站', img: zeroantLogo, slug: 'test-station' },
   { title: '双电机对转台站', img: zeroantLogo, slug: 'dual-motor-platform' },
   { title: '机器人抓取台站', img: zeroantLogo, slug: 'robot-grab-station' },
   { title: '复合移动抓取台站', img: zeroantLogo, slug: 'mobile-grab-station' }
-] 
+];

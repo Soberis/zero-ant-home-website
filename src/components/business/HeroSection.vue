@@ -14,7 +14,7 @@
 <script setup>
 import { ref } from "vue";
 import heroImage from "@/assets/hero_image.png"; // Replace with the actual path to your hero image
-import { getProductDetailLink } from '../utils/product.js';
+import { getProductDetailLink } from '@/helpers/product';
 
 const heroTitle = ref("Revolutionizing Pharmaceutical Automation");
 const heroSubtitle = ref("Explore our advanced four-axis robotic arms designed for precision and efficiency.");

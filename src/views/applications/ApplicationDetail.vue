@@ -43,7 +43,7 @@
 <script setup>
 // 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换
 import { useRoute, useRouter } from 'vue-router'
-import applications from '../data/applications.js'
+import applications from '@/data/applications'
 import { computed } from 'vue'
 
 const route = useRoute()
@@ -229,4 +229,4 @@ function goTo(targetSlug) {
     border-radius: 16px;
   }
 }
-</style> 
+</style>

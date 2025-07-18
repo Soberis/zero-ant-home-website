@@ -20,8 +20,8 @@
 import { useRoute, useRouter } from 'vue-router';
 import { productDetails } from '@/data/productDetails';
 import { products } from '@/data/products';
-import ProductDetail from '@/components/ProductDetail.vue';
-import { getProductDetailLink } from '../utils/product.js';
+import ProductDetail from '@/components/common/ProductDetail.vue';
+import { getProductDetailLink } from '@/helpers/product';
 
 const route = useRoute();
 const router = useRouter();
@@ -51,4 +51,4 @@ function goBack() {
   font-size: 1.5rem;
   margin-top: 120px;
 }
-</style> 
+</style>

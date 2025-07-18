@@ -21,8 +21,8 @@
 
 <script setup>
 // 核心产品数据
-import { products } from '../data/products.js';
-import { getProductDetailLink } from '../utils/product.js';
+import { products } from '@/data/products';
+import { getProductDetailLink } from '@/helpers/product';
 </script>
 
 <style scoped>

@@ -24,7 +24,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
-import applications from '../data/applications.js';
+import applications from '@/data/applications';
 
 const displayApps = applications; // 显示全部行业应用
 const scrollWrap = ref(null);

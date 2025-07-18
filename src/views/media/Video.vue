@@ -27,7 +27,7 @@
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { videoCards } from '@/data/videos'
-import VideoCard from '@/components/VideoCard.vue'
+import VideoCard from '@/components/common/VideoCard.vue'
 
 const router = useRouter()
 const hoverIdx = ref(-1)

@@ -1,5 +1,41 @@
 // 关于我们页面数据模块，导出 timelineData 和 honors，支持国际化
-export function getTimelineData(t) {
+
+/**
+ * 时间线事件接口
+ */
+export interface TimelineEvent {
+  year: string;
+  events: string[];
+}
+
+/**
+ * 团队信息接口
+ */
+export interface TeamInfo {
+  size: number;
+  masterRatio: string;
+  avgAge: number;
+  background: string;
+}
+
+/**
+ * 核心团队成员接口
+ */
+export interface CoreTeamMember {
+  name: string;
+  position: string;
+  background: string;
+}
+
+/**
+ * 国际化函数类型
+ */
+type TranslationFunction = (key: string) => string;
+
+/**
+ * 获取时间线数据
+ */
+export function getTimelineData(t: TranslationFunction): TimelineEvent[] {
   return [
     {
       year: '2017',
@@ -24,7 +60,10 @@ export function getTimelineData(t) {
   ];
 }
 
-export function getHonors(t) {
+/**
+ * 获取荣誉列表
+ */
+export function getHonors(t: TranslationFunction): string[] {
   return [
     t('about.honor1'),
     t('about.honor2'),
@@ -37,8 +76,10 @@ export function getHonors(t) {
   ];
 }
 
-// 新增团队信息
-export function getTeamInfo(t) {
+/**
+ * 获取团队信息
+ */
+export function getTeamInfo(): TeamInfo {
   return {
     size: 18,
     masterRatio: '94%',
@@ -47,8 +88,10 @@ export function getTeamInfo(t) {
   };
 }
 
-// 新增核心团队信息
-export function getCoreTeam(t) {
+/**
+ * 获取核心团队信息
+ */
+export function getCoreTeam(t: TranslationFunction): CoreTeamMember[] {
   return [
     {
       name: t('about.team.ceo.name'),

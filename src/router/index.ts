@@ -1,19 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // 路由懒加载
-const Home = () => import('../views/Home.vue');
-const Solutions = () => import('../views/Solutions.vue');
-const Applications = () => import('../views/Applications.vue');
-const About = () => import('../views/About.vue');
-const Contact = () => import('../views/Contact.vue');
-const Video = () => import('../views/Video.vue');
-const VideoDetail = () => import('../views/VideoDetail.vue');
-const ProductDetailPage = () => import('../views/ProductDetailPage.vue');
-const Support = () => import('../views/Support.vue');
-const ApplicationDetail = () => import('../views/ApplicationDetail.vue');
-const SystemProducts = () => import('../views/SystemProducts.vue');
-const RobotProducts = () => import('../views/RobotProducts.vue');
-const Careers = () => import('../views/Careers.vue');
+const Home = () => import('@/views/Home.vue');
+const Applications = () => import('@/views/applications/Applications.vue');
+const About = () => import('@/views/company/About.vue');
+const Contact = () => import('@/views/company/Contact.vue');
+const Video = () => import('@/views/media/Video.vue');
+const VideoDetail = () => import('@/views/media/VideoDetail.vue');
+const ProductDetail = () => import('@/views/products/ProductDetail.vue');
+const Support = () => import('@/views/support/Support.vue');
+const ApplicationDetail = () => import('@/views/applications/ApplicationDetail.vue');
+const SystemProducts = () => import('@/views/products/SystemProducts.vue');
+const RobotProducts = () => import('@/views/products/RobotProducts.vue');
+const Careers = () => import('@/views/company/Careers.vue');
 
 const routes = [
   // 首页
@@ -21,11 +20,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-  },
-  {
-    path: '/solutions',
-    name: 'Solutions',
-    component: Solutions,
   },
   // 应用场景
   {
@@ -82,7 +76,7 @@ const routes = [
   {
     path: '/system-products/:slug',
     name: 'SystemProductDetail',
-    component: ProductDetailPage
+    component: ProductDetail
   },
   // 机器人产品
   {
@@ -93,7 +87,7 @@ const routes = [
   {
     path: '/robot-products/:slug',
     name: 'RobotProductDetail',
-    component: ProductDetailPage
+    component: ProductDetail
   },
 ];
 

@@ -4,7 +4,12 @@
     <div class="videos-list">
       <div v-for="video in videoCards" :key="video.slug" class="video-card">
         <div class="video-img">
-          <img :src="video.img" :alt="video.title" />
+          <img 
+            :src="video.img" 
+            :alt="video.title" 
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="video-title">{{ video.title }}</div>
         <router-link :to="`/video/${video.slug}`" class="more-btn">观看视频 +</router-link>
@@ -15,7 +20,7 @@
 
 <script setup>
 // 视频案例数据
-import { videoCards } from '../data/videos.js';
+import { videoCards } from '@/data/videos';
 </script>
 
 <style scoped>

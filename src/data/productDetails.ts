@@ -1,19 +1,51 @@
 // 产品详情数据模块，包含所有产品的详细信息，按slug索引
 
 /**
- * @property {string} title 产品名称
- * @property {string} desc 产品简介
- * @property {Array<string>} features 优势特点
- * @property {Array<{title:string,desc:string}>} cases 相关案例
- * @property {Array<string>} scenes 应用场景
- * @property {Array<{key:string,value:string}>} params 产品参数
- * @property {Array<{name:string,url:string}>} downloads 相关下载
+ * 产品案例接口
  */
+export interface ProductCase {
+  title: string;
+  desc: string;
+}
 
-export const productDetails = {
+/**
+ * 产品参数接口
+ */
+export interface ProductParam {
+  key: string;
+  value: string;
+}
+
+/**
+ * 产品下载资源接口
+ */
+export interface ProductDownload {
+  name: string;
+  url: string;
+}
+
+/**
+ * 产品详情接口
+ */
+export interface ProductDetail {
+  title: string;
+  desc: string;
+  features: string[];
+  cases: ProductCase[];
+  scenes: string[];
+  params: ProductParam[];
+  downloads: ProductDownload[];
+}
+
+/**
+ * 产品详情数据类型
+ */
+export type ProductDetailsData = Record<string, ProductDetail>;
+
+export const productDetails: ProductDetailsData = {
   "airos": {
     title: "AiROS机器人操作系统",
-    desc: "致力于打造‘开箱即用‘的具身机器人基础系统平台，让机器人走进千行百业。打造一套机器人界的Android系统，装进机器人本身，赋予TA灵魂。",
+    desc: "致力于打造'开箱即用'的具身机器人基础系统平台，让机器人走进千行百业。打造一套机器人界的Android系统，装进机器人本身，赋予TA灵魂。",
     features: [
       "安全性：Rust语言安全底座保障",
       "集成化：并行运行的混合部署技术",
@@ -136,6 +168,5 @@ export const productDetails = {
     downloads: [
       { name: "产品手册.pdf", url: "/downloads/restaurant-delivery-robot-manual.pdf" }
     ]
-  },
-  
+  }
 };

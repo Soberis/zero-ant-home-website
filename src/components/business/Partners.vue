@@ -13,6 +13,9 @@
           :alt="partner.alt"
           :class="partner.class"
           loading="lazy"
+          decoding="async"
+          @load="onImageLoad"
+          @error="onImageError"
         />
       </div>
     </div>
@@ -20,7 +23,22 @@
 </template>
 
 <script setup>
-import { partners } from '@/data/partners.js';
+import { ref } from 'vue';
+import { partners } from '@/data/partners';
+
+const loadedImages = ref(new Set());
+const errorImages = ref(new Set());
+
+const onImageLoad = (event) => {
+  const src = event.target.src;
+  loadedImages.value.add(src);
+};
+
+const onImageError = (event) => {
+  const src = event.target.src;
+  errorImages.value.add(src);
+  console.warn(`Failed to load partner image: ${src}`);
+};
 </script>
 
 <style scoped>
@@ -107,4 +125,4 @@ import { partners } from '@/data/partners.js';
     margin-bottom: 18px;
   }
 }
-</style> 
+</style>

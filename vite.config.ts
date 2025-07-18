@@ -15,7 +15,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         charset: 'utf-8',
-        additionalData: `@import "./src/style.less";`
+        additionalData: `@import "./src/assets/style.less";`
       },
     }
   },
@@ -23,10 +23,14 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // 确保i18n文件被正确打包
+          // 将大型库分离到独立的 chunk
+          'vue-vendor': ['vue', 'vue-router'],
+          'element-plus': ['element-plus'],
           'i18n': ['vue-i18n']
         }
       }
-    }
+    },
+    // 提高 chunk 大小警告阈值
+    chunkSizeWarningLimit: 1000
   }
 })

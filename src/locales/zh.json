@@ -11,7 +11,7 @@
     "rml63": "RML63",
     "lightArm": "轻型机械臂",
     "humanoid": "双臂人形机器人", 
-    "solutions": "解决方案",
+  
     "dualArm": "双臂机械臂",
     "dualArmLift": "双臂升降机械臂",
     "singleArm": "单臂机械臂",
@@ -129,27 +129,7 @@
   },
   "teamTitle": "核心团队"
   },
-  "solutions": {
-    "title": "解决方案",
-    "introduction": "我们提供全面的机器人自动化解决方案，专注于医药自动化和半导体加工领域",
-    "header": "智能解决方案",
-    "advantages": {
-      "title": "核心优势",
-      "precision": "高精度控制",
-      "efficiency": "高效率运行",
-      "reliability": "极致可靠性",
-      "flexibility": "灵活适配性"
-    },
-    "caseStudies": {
-      "title": "成功案例",
-      "medical": "医药行业案例",
-      "semiconductor": "半导体行业案例"
-    },
-    "contact": {
-      "title": "联系我们",
-      "description": "了解更多解决方案详情"
-    }
-  },
+
   "contacts": {
     "title": "联系我们",
     "description": "如需了解更多信息或咨询，请填写下方表单，我们会尽快与您联系。",

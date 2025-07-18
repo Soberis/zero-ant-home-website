@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import i18n from './i18n';
+import App from '@/App.vue'
+import router from '@/router'
+import i18n from '@/config/i18n'
 
-createApp(App).use(store).use(router).use(ElementPlus).use(i18n).mount('#app')
+// Element Plus 组件通过按需导入自动处理，但样式需要全量导入
+createApp(App).use(router).use(i18n).mount('#app')

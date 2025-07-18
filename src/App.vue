@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import NavBar from "./components/NavBar.vue";
+import NavBar from "@/components/layout/NavBar.vue";
 import { StagewiseToolbar } from '@stagewise/toolbar-vue';
 import VuePlugin from '@stagewise-plugins/vue';
-import Footer from "./components/Footer.vue";
+import Footer from "@/components/layout/Footer.vue";
 </script>
 
 <template>

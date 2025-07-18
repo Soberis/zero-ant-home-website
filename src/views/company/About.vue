@@ -132,7 +132,7 @@
 <script setup>
 import { computed, watch, ref, onMounted, onUnmounted, defineProps, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { getTimelineData, getHonors, getCoreTeam } from '../data/about';
+import { getTimelineData, getHonors, getCoreTeam } from '@/data/about';
 const { t, locale } = useI18n();
 
 const props = defineProps({});

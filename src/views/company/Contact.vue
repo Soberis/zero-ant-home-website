@@ -60,7 +60,7 @@
       <!-- 左侧信息区（原右侧） -->
       <aside class="contact-info-panel">
         <div class="info-brand">
-          <img src="../assets/zeroant_logo.png" alt="logo" class="brand-logo" />
+          <img src="../../assets/zeroant_logo.png" alt="logo" class="brand-logo" />
           <div class="brand-title">{{ $t("logoText") }}</div>
         </div>
         <div class="info-section-title">{{ $t("contacts.getInTouch") }}</div>

@@ -17,7 +17,19 @@ import qinghua from '@/assets/images/partners/qinghua.svg';
 import buaa from '@/assets/images/partners/buaa.png';
 import buaahyy from '@/assets/images/partners/buaahyy.jpg';
 
-export const partners = [
+/**
+ * 合作伙伴接口
+ */
+export interface Partner {
+  src: string;
+  alt: string;
+  class?: string;
+}
+
+/**
+ * 合作伙伴列表
+ */
+export const partners: Partner[] = [
   { src: shinaide, alt: '施耐德电气' },
   { src: huawei, alt: '华为' },
   { src: meituan, alt: '美团', class: 'logo-meituan' },
@@ -35,4 +47,4 @@ export const partners = [
   { src: qinghua, alt: '清华大学' },
   { src: buaa, alt: '北京航空航天大学' },
   { src: buaahyy, alt: '北京航空航天大学州创新研究院' },
-]; 
+];

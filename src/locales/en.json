@@ -7,7 +7,7 @@
   "nav": {
     "home": "Home",
     "products": "Products",
-    "solutions": "Solutions",
+  
     "applications": "Applications",
     "about": "About Us",
     "contact": "Contact Us",
@@ -136,27 +136,7 @@
   },
   "teamTitle": "Core Team"
 },
-"solutions": {
-  "title": "Solutions",
-  "introduction": "We provide comprehensive robotic automation solutions, focusing on pharmaceutical automation and semiconductor processing",
-  "header": "Intelligent Solutions",
-  "advantages": {
-    "title": "Core Advantages",
-    "precision": "High Precision Control",
-    "efficiency": "High Efficiency Operation",
-    "reliability": "Ultimate Reliability",
-    "flexibility": "Flexible Adaptability"
-  },
-  "caseStudies": {
-    "title": "Success Cases",
-    "medical": "Medical Industry Cases",
-    "semiconductor": "Semiconductor Industry Cases"
-  },
-  "contact": {
-    "title": "Contact Us",
-    "description": "Learn more about our solution details"
-  }
-},
+
 "contactSection": {
     "getInTouch": "Get in Touch",
     "email": "Email Us",

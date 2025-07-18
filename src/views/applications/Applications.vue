@@ -65,8 +65,8 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 // 引入行业应用数据和卡片组件
-import applications from '../data/applications.js'
-import ApplicationCard from '../components/ApplicationCard.vue'
+import applications from '@/data/applications'
+import ApplicationCard from '@/components/common/ApplicationCard.vue'
 
 const router = useRouter()
 

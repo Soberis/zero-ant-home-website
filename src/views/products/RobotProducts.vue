@@ -1,9 +1,9 @@
-<!-- 系统产品页面，结构与Products.vue一致，仅数据不同 -->
+<!-- 机器人产品页面，结构与Products.vue一致，仅数据不同 -->
 <template>
   <div class="products">
     <div
       class="product-series"
-      v-for="product in systemProducts"
+      v-for="product in robotProducts"
       :key="product.slug"
       :id="product.slug"
     >
@@ -20,11 +20,11 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { products, productRouteMap } from '@/data/products';
-import ProductCard from '@/components/ProductCard.vue';
-import { getProductDetailLink } from '../utils/product.js';
+import ProductCard from '@/components/common/ProductCard.vue';
+import { getProductDetailLink } from '@/helpers/product';
 const router = useRouter();
 
-const systemProducts = computed(() => products.filter(p => p.category === 'system'));
+const robotProducts = computed(() => products.filter(p => p.category === 'robot'));
 
 function goDetail(slug) {
   const product = products.find(p => p.slug === slug);

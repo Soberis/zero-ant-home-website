@@ -1,13 +1,20 @@
 // 行业应用数据模块，包含所有行业应用场景信息
 
 /**
- * @property {string} slug 路由唯一标识
- * @property {string} title 行业应用名称
- * @property {string} description 行业应用介绍（HTML字符串）
- * @property {string} video 相关视频链接
- * @property {string} svg 图标SVG字符串
+ * 行业应用接口
  */
-export default [
+export interface Application {
+  slug: string;
+  title: string;
+  description: string;
+  video: string;
+  svg: string;
+}
+
+/**
+ * 行业应用数据列表
+ */
+const applications: Application[] = [
   {
     slug: 'medical-automation',
     title: '医疗自动化',
@@ -98,4 +105,6 @@ export default [
     video: '',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="24" width="20" height="10" rx="3" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 24v-6" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="16" r="3" stroke="#1a3a8f" stroke-width="2"/></svg>`
   }
-]; 
+];
+
+export default applications;
