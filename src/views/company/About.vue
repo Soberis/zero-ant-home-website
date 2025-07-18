@@ -505,7 +505,6 @@ onUnmounted(() => {
   word-break: break-all;
   white-space: pre-line;
   padding: 12px 24px;
-  background: #f8f9fa;
   border-radius: 8px;
   min-width: 300px;
 }

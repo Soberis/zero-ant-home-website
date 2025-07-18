@@ -1,5 +1,4 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
-import zeroantLogo from '@/assets/zeroant_logo.png';
 import type { Product } from '@/helpers/product';
 
 /**
@@ -20,7 +19,7 @@ export const products: ProductData[] = [
   {
     slug: "airos",
     name: "AiROS机器人操作系统",
-    image: zeroantLogo,
+    image: "",
     desc: "国产\"开箱即用\"机器人智能操作系统，打造机器人界的Android系统，让机器人走进千行百业。",
     seriesTitle: "AiROS机器人操作系统",
     seriesSubtitle: "具身智能时代的操作系统",

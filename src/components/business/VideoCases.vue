@@ -7,8 +7,6 @@
           <img 
             :src="video.img" 
             :alt="video.title" 
-            loading="lazy"
-            decoding="async"
           />
         </div>
         <div class="video-title">{{ video.title }}</div>
