@@ -46,5 +46,5 @@ export const partners: Partner[] = [
   { src: hunan, alt: '湖南大学' },
   { src: qinghua, alt: '清华大学' },
   { src: buaa, alt: '北京航空航天大学' },
-  { src: buaahyy, alt: '北京航空航天大学州创新研究院' },
+  { src: buaahyy, alt: '北京航空航天大学杭州创新研究院' },
 ];
