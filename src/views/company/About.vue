@@ -122,7 +122,7 @@
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
         <li>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</li>
-        <li>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</li>
+        <li>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</li>
         <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
       </ul>
     </section>

@@ -54,7 +54,7 @@
           <!-- 联系方式静态展示，如需动态可抽离为props或数据源 -->
           <div class="contact-info">
               <div>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</div>
-              <div>{{ $t('contacts.email') }}：{{ $t('footer.email') }}</div>
+              <div>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</div>
               <div style="margin-top:8px;">{{ $t('contacts.address') }}：{{ $t('footer.address') }}</div>
           </div>
           <!-- 二维码静态展示，如需动态可抽离为props或数据源 -->
