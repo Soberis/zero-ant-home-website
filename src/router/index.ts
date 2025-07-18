@@ -7,7 +7,7 @@ const About = () => import('@/views/company/About.vue');
 const Contact = () => import('@/views/company/Contact.vue');
 const Video = () => import('@/views/media/Video.vue');
 const VideoDetail = () => import('@/views/media/VideoDetail.vue');
-const ProductDetail = () => import('@/views/products/ProductDetail.vue');
+const ProductDetail = () => import('@/views/products/ProductDetailView.vue');
 const Support = () => import('@/views/support/Support.vue');
 const ApplicationDetail = () => import('@/views/applications/ApplicationDetail.vue');
 const SystemProducts = () => import('@/views/products/SystemProducts.vue');

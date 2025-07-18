@@ -16,7 +16,7 @@
   </div>
 </template>
 <script setup>
-// 通过路由参数slug查找产品详情，未找到时显示提示
+// 页面级组件：产品详情视图，根据slug查找产品详情，未找到时显示提示
 import { useRoute, useRouter } from 'vue-router';
 import { productDetails } from '@/data/productDetails';
 import { products } from '@/data/products';
