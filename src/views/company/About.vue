@@ -15,7 +15,6 @@
         <li :class="{active: activeTab==='tab1'}"><a href="#tab1" @click.prevent="scrollToSection('tab1')">{{ $t('nav.companyIntro') }}</a></li>
         <li :class="{active: activeTab==='tab2'}"><a href="#tab2" @click.prevent="scrollToSection('tab2')">{{ $t('nav.history') }}</a></li>
         <li :class="{active: activeTab==='tab3'}"><a href="#tab3" @click.prevent="scrollToSection('tab3')">{{ $t('nav.honor') }}</a></li>
-        <li :class="{active: activeTab==='tab4'}"><a href="#tab4" @click.prevent="scrollToSection('tab4')">{{ $t('about.coreTeam') }}</a></li>
         <li :class="{active: activeTab==='tab5'}"><a href="#tab5" @click.prevent="scrollToSection('tab5')">{{ $t('nav.culture') }}</a></li>
         <li :class="{active: activeTab==='tab6'}"><a href="#tab6" @click.prevent="scrollToSection('tab6')">{{ $t('nav.contact') }}</a></li>
       </ul>
@@ -99,19 +98,7 @@
       </div>
     </section>
     
-    <!-- 新增核心团队区块 -->
-    <section class="about-section core-team" id="tab4">
-      <h2>{{ $t('about.coreTeam') }}</h2>
-      <div class="team-grid">
-        <div class="team-member-card" v-for="(member, idx) in coreTeamData" :key="idx">
-          <div class="member-info">
-            <h3 class="member-name">{{ member.name }}</h3>
-            <div class="member-position">{{ member.position }}</div>
-            <p class="member-background">{{ member.background }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
+
     
     <section class="about-section culture" id="tab5">
       <h2>{{ $t('nav.culture') }}</h2>

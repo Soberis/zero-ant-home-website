@@ -19,15 +19,6 @@ export interface TeamInfo {
 }
 
 /**
- * 核心团队成员接口
- */
-export interface CoreTeamMember {
-  name: string;
-  position: string;
-  background: string;
-}
-
-/**
  * 国际化函数类型
  */
 type TranslationFunction = (key: string) => string;
@@ -86,32 +77,4 @@ export function getTeamInfo(): TeamInfo {
     avgAge: 30,
     background: '90%双一流高校背景'
   };
-}
-
-/**
- * 获取核心团队信息
- */
-export function getCoreTeam(t: TranslationFunction): CoreTeamMember[] {
-  return [
-    {
-      name: t('about.team.ceo.name'),
-      position: t('about.team.ceo.position'),
-      background: t('about.team.ceo.background')
-    },
-    {
-      name: t('about.team.cto.name'),
-      position: t('about.team.cto.position'),
-      background: t('about.team.cto.background')
-    },
-    {
-      name: t('about.team.productDirector.name'),
-      position: t('about.team.productDirector.position'),
-      background: t('about.team.productDirector.background')
-    },
-    {
-      name: t('about.team.operationDirector.name'),
-      position: t('about.team.operationDirector.position'),
-      background: t('about.team.operationDirector.background')
-    }
-  ];
 }

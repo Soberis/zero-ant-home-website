@@ -168,7 +168,6 @@ const aboutNav = [
   { hash: '#tab1', label: 'nav.companyIntro' },
   { hash: '#tab2', label: 'nav.history' },
   { hash: '#tab3', label: 'nav.honor' },
-  { hash: '#tab4', label: 'about.teamTitle' },
   { hash: '#tab5', label: 'nav.culture' },
   { hash: '#tab6', label: 'nav.contact' }
 ];
