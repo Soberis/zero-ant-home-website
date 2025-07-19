@@ -48,7 +48,7 @@ const heroProduct = {
 
 .hero-content p {
   font-size: 18px;
-  color: #111;
+  color: #222;
   margin: 20px 0;
 }
 

@@ -82,7 +82,7 @@ import { videoCards } from '@/data/videos';
 .video-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #111 !important;
+  color: #222 !important;
   margin-bottom: 18px;
   text-align: center;
 }

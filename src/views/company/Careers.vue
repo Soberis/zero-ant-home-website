@@ -8,12 +8,12 @@
           <p class="hero-subtitle">与我们一起打造未来机器人技术，让机器人遍布每个角落</p>
           <div class="hero-stats">
             <div class="stat-item">
-              <span class="stat-number">20+</span>
-              <span class="stat-label">年技术积累</span>
+              <span class="stat-number">8年</span>
+              <span class="stat-label">技术积累</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">100+</span>
-              <span class="stat-label">团队成员</span>
+              <span class="stat-number">20+</span>
+              <span class="stat-label">志同道合</span>
             </div>
             <div class="stat-item">
               <span class="stat-number">50+</span>
@@ -84,10 +84,6 @@
               <span class="contact-label">邮箱:</span>
               <span class="contact-value">hr@zeroant.com</span>
             </div>
-            <div class="contact-item">
-              <span class="contact-label">电话:</span>
-              <span class="contact-value">13001001954</span>
-            </div>
           </div>
         </div>
       </div>
@@ -119,6 +115,16 @@ const benefits = ref([
     id: 4,
     title: '丰厚待遇',
     description: '具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排'
+  },
+  {
+    id: 5,
+    title: '个人挑战',
+    description: '不设限制的创新环境，在全栈自研体系中突破自我'
+  },
+  {
+    id: 6,
+    title: '社会价值',
+    description: '直击行业痛点，推动工业制造产质升级'
   }
 ])
 
@@ -129,7 +135,7 @@ const positions = ref([
     title: '机器人工程师',
     type: '全职',
     location: '杭州',
-    experience: '3-5年',
+    experience: '不限制',
     requirements: [
       '机械工程、自动化或相关专业本科及以上学历',
       '3年以上机器人系统开发经验',
@@ -142,7 +148,7 @@ const positions = ref([
     title: '软件工程师',
     type: '全职',
     location: '杭州',
-    experience: '2-4年',
+    experience: '不限制',
     requirements: [
       '计算机科学或相关专业本科及以上学历',
       '熟练掌握C++、Python等编程语言',
@@ -155,7 +161,7 @@ const positions = ref([
     title: '算法工程师',
     type: '全职',
     location: '杭州',
-    experience: '3-6年',
+    experience: '不限制',
     requirements: [
       '计算机、数学、自动化等相关专业硕士及以上学历',
       '深度学习、计算机视觉或SLAM算法经验',
@@ -168,12 +174,38 @@ const positions = ref([
     title: '硬件工程师',
     type: '全职',
     location: '杭州',
-    experience: '2-5年',
+    experience: '不限制',
     requirements: [
       '电子工程、自动化等相关专业本科及以上学历',
       '熟悉电路设计、PCB布局和硬件调试',
       '有嵌入式系统硬件开发经验',
       '了解传感器集成和信号处理技术'
+    ]
+  },
+  {
+    id: 5,
+    title: '产品经理',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
+    requirements: [
+      '本科及以上学历，理工类、管理类相关专业优先',
+      '有2年以上产品经理或相关岗位经验优先',
+      '具备良好的需求分析、产品规划和跨部门沟通能力',
+      '有机器人、工业自动化或软件产品经验者优先'
+    ]
+  },
+  {
+    id: 6,
+    title: '测试工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
+    requirements: [
+      '本科及以上学历，计算机、自动化等相关专业',
+      '熟悉软件/硬件测试流程，能独立编写测试用例',
+      '有自动化测试、持续集成经验优先',
+      '工作细致认真，具备良好的沟通与团队协作能力'
     ]
   }
 ])
@@ -249,13 +281,28 @@ const applyForPosition = (position) => {
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  color: #1a3a8f;
+  color: #222;
 }
 
 // 为什么选择我们
 .why-join {
   padding: 80px 0;
   background: white;
+
+  .why-extra-list {
+    max-width: 900px;
+    margin: 0 auto 2.5rem auto;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+    font-size: 1.15rem;
+    color: #222;
+    font-weight: 500;
+  }
+  .why-extra-list li {
+    margin-bottom: 0.7em;
+    line-height: 1.8;
+  }
 
   .benefits-grid {
     display: grid;
@@ -279,7 +326,7 @@ const applyForPosition = (position) => {
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 1rem;
-        color: #1a3a8f;
+        color: #222;
       }
 
       .benefit-description {
@@ -322,7 +369,7 @@ const applyForPosition = (position) => {
         .position-title {
           font-size: 1.5rem;
           font-weight: 600;
-          color: #1a3a8f;
+          color: #222;
           margin: 0;
         }
 

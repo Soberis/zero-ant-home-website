@@ -29,7 +29,7 @@
 :deep(.series-title) {
   font-size: 3.2rem;
   font-weight: 900;
-  color: #111;
+  color: #222;
   margin-bottom: 16px;
   letter-spacing: 2px;
   line-height: 1.1;
@@ -92,12 +92,12 @@
   font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 22px;
-  color: #111;
+  color: #222;
   letter-spacing: 1.5px;
 }
 
 :deep(.product-desc) {
-  color: #111;
+  color: #222;
   font-size: 1.18rem;
   margin-bottom: 44px;
   text-align: center;

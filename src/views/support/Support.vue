@@ -132,7 +132,7 @@ function toggleFaq(idx) {
   align-items: center;
 }
 .hero-title {
-  color: #111;
+  color: #222;
   font-size: 4.2rem;
   font-weight: 800;
   text-align: center;
@@ -177,7 +177,7 @@ function toggleFaq(idx) {
   justify-content: center;
 }
 .card-desc {
-  color: #111;
+  color: #222;
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
@@ -192,7 +192,7 @@ function toggleFaq(idx) {
   min-height: 100vh;
 }
 .section-title {
-  color: #111;
+  color: #222;
   font-size: 2.6rem;
   font-weight: 700;
   text-align: center;
@@ -245,7 +245,7 @@ function toggleFaq(idx) {
   color: #1a3a8f;
 }
 .faq-title {
-  color: #111;
+  color: #222;
 }
 .card-icon {
   font-size: 1.5rem;
@@ -258,7 +258,7 @@ function toggleFaq(idx) {
 }
 .card-content {
   padding: 0 40px 24px 40px;
-  color: #111;
+  color: #222;
   font-size: 1.25rem;
   line-height: 1.8;
   background: #f7f8fa;

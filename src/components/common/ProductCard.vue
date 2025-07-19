@@ -162,11 +162,11 @@ defineProps({
 .product-name {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #111;
+  color: #222;
   margin-bottom: 20px;
   letter-spacing: 1px;
   text-align: center;
-  background: linear-gradient(135deg, #111 0%, #1a3a8f 100%);
+  background: linear-gradient(135deg, #222 0%, #1a3a8f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

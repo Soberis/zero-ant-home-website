@@ -98,7 +98,7 @@ function goToDetail(slug) {
 }
 
 .title {
-  color: #111;
+  color: #222;
   font-size: 4.2rem;
   font-weight: 800;
   text-align: center;
@@ -108,7 +108,7 @@ function goToDetail(slug) {
 
 .subtitle {
   font-size: 1.25rem;
-  color: #111;
+  color: #222;
   line-height: 1.7;
   margin-bottom: 48px;
   text-align: center;
@@ -128,7 +128,7 @@ function goToDetail(slug) {
 .section-title {
   font-size: 2.4rem;
   font-weight: 700;
-  color: #111;
+  color: #222;
   text-align: center;
   margin-bottom: 32px;
   letter-spacing: 1px;
@@ -167,14 +167,14 @@ function goToDetail(slug) {
 .core-title {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #111;
+  color: #222;
   margin-bottom: 16px;
   letter-spacing: 1px;
 }
 
 .core-description {
   font-size: 1.25rem;
-  color: #111;
+  color: #222;
   line-height: 1.6;
   margin-bottom: 24px;
   text-align: left;
@@ -189,7 +189,7 @@ function goToDetail(slug) {
 
 .feature-tag {
   background: #f0f4ff;
-  color: #111;
+  color: #222;
   padding: 6px 12px;
   border-radius: 16px;
   font-size: 1.1rem;

@@ -70,7 +70,7 @@ const goToVideo = idx => {
   font-weight: 700;
   margin-bottom: 16px;
   letter-spacing: 2px;
-  background: linear-gradient(135deg, #111 0%, #111 100%);
+  background: linear-gradient(135deg, #222 0%, #222 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

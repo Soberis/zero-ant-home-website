@@ -95,7 +95,7 @@ function goTo(targetSlug) {
 .title {
   font-size: 2.6rem;
   font-weight: 800;
-  color: #111;
+  color: #222;
   margin-bottom: 32px;
   letter-spacing: 2px;
   text-align: left;

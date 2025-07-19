@@ -41,6 +41,10 @@ export function getTimelineData(t: TranslationFunction): TimelineEvent[] {
       events: [t('about.timeline.2022')],
     },
     {
+      year: '2023',
+      events: [t('about.timeline.2023')]
+    },
+    {
       year: '2024',
       events: [t('about.timeline.2024')],
     },
@@ -62,8 +66,6 @@ export function getHonors(t: TranslationFunction): string[] {
     t('about.honor4'),
     t('about.honor5'),
     t('about.honor6'),
-    t('about.honor7'),
-    t('about.honor8'),
   ];
 }
 
@@ -72,9 +74,9 @@ export function getHonors(t: TranslationFunction): string[] {
  */
 export function getTeamInfo(): TeamInfo {
   return {
-    size: 18,
-    masterRatio: '94%',
+    size: 20,
+    masterRatio: '90%',
     avgAge: 30,
-    background: '90%双一流高校背景'
+    background: '90%'
   };
 }

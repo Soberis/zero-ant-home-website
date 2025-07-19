@@ -90,10 +90,11 @@
       "2017": "Started robot operating system R&D, received national project support of 24.14 million",
       "2020": "Company founded, focusing on micro-logistics intelligent conveying system R&D",
       "2022": "Completed multiple industry intelligent logistics projects, team size exceeded 18 people",
-      "2024": "Released AiROS robot operating system, won ACM MobiCom 2024 Best Technical Achievement Award, expert panel rated technology as internationally leading",
+      "2023": "Released AiROS robot operating system, won ACM MobiCom 2024 Best Technical Achievement Award, expert panel rated technology as internationally leading",
+      "2024": "Company founded, focusing on micro-logistics intelligent conveying system R&D",
       "2025": "Officially established Hangzhou ZeroAnt Technology Co., Ltd., orders in hand 16 million, planned financing 20 million, preliminary valuation 200 million RMB"
   },
-  "honor1": "National High-tech Enterprise",
+    "honor1": "National High-tech Enterprise",
     "honor2": "ISO9001 Quality Management System Certification",
     "honor3": "Multiple Invention Patents and Software Copyrights",
     "honor4": "Industry Innovation Award, Technology Breakthrough Award",
@@ -110,33 +111,9 @@
     "financingAmount": "Financing amount: 20 million yuan",
     "preliminaryValuation": "Preliminary valuation: 200 million yuan",
     "marketInfo": "In 2024, the global industrial robot market is about $70 billion, and the total potential market size of embodied robots is about $60 trillion.",
-    "financing": "Plans to divest 10% equity, raise 20 million yuan, preliminary valuation of 200 million yuan.",
-    "team": {
-      "ceo": {
-        "name": "Qingfeng Li",
-        "position": "CEO",
-        "background": "Ph.D. from Beihang University, Associate Researcher, key member of national projects, 50+ papers, 32 patents. Rich experience in robot system R&D and project management."
-    },
-    "cto": {
-        "name": "Chen Chen",
-        "position": "CTO",
-        "background": "Expert in embodied intelligence, researcher in multimodal control models. Deep expertise in robot OS architecture and AI algorithm optimization."
-    },
-    "productDirector": {
-        "name": "Yukang Wang",
-        "position": "Product Director",
-        "background": "5 years of low-level system development, core maintainer of openEuler. Focused on productization and user experience of robot OS."
-    },
-    "operationDirector": {
-        "name": "Mengxiang Chen",
-        "position": "Operation Director",
-        "background": "National technical talent, former Alibaba digital expert. Responsible for company operations and commercialization, rich management experience."
-    }
+    "financing": "Plans to divest 10% equity, raise 20 million yuan, preliminary valuation of 200 million yuan."
   },
-  "teamTitle": "Core Team"
-},
-
-"contactSection": {
+  "contactSection": {
     "getInTouch": "Get in Touch",
     "email": "Email Us",
     "phone": "Call Us"

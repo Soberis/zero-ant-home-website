@@ -127,7 +127,7 @@ onUnmounted(() => {
   left: 80px;
   bottom: 120px;
   z-index: 2;
-  color: #111;
+  color: #222;
   text-align: left;
   max-width: 600px;
 }

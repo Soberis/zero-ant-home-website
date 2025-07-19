@@ -15,62 +15,46 @@
         <li :class="{active: activeTab==='tab1'}"><a href="#tab1" @click.prevent="scrollToSection('tab1')">{{ $t('nav.companyIntro') }}</a></li>
         <li :class="{active: activeTab==='tab2'}"><a href="#tab2" @click.prevent="scrollToSection('tab2')">{{ $t('nav.history') }}</a></li>
         <li :class="{active: activeTab==='tab3'}"><a href="#tab3" @click.prevent="scrollToSection('tab3')">{{ $t('nav.honor') }}</a></li>
-        <li :class="{active: activeTab==='tab5'}"><a href="#tab5" @click.prevent="scrollToSection('tab5')">{{ $t('nav.culture') }}</a></li>
-        <li :class="{active: activeTab==='tab6'}"><a href="#tab6" @click.prevent="scrollToSection('tab6')">{{ $t('nav.contact') }}</a></li>
+        <li :class="{active: activeTab==='tab4'}"><a href="#tab4" @click.prevent="scrollToSection('tab4')">{{ $t('nav.culture') }}</a></li>
+        <li :class="{active: activeTab==='tab5'}"><a href="#tab5" @click.prevent="scrollToSection('tab5')">{{ $t('nav.contact') }}</a></li>
       </ul>
     </nav>
     
     <section class="about-section company-intro" id="tab1">
       <h2>{{ $t('nav.companyIntro') }}</h2>
-      <p>{{ $t('about.companyIntro') }}</p>
+      <p>杭州零蚁科技有限公司是一家由<b>北京航空航天大学杭州创新研究院</b>科研团队创立的高科技企业，聚焦于智能机器人整机解决方案研发，目前为生物医药、半导体等行业提供了高可靠的机器人智能系统方案。</p>
+      <p>公司依托于浙江省<b>全省工业大数据与机器人智能系统重点实验室</b>，自主研发“智能机器人操作系统”（AiROS），攻克移动机器人自动导航、机械臂高速高精度控制、三维空间语义感知、多机协同调度等核心技术，打造了全栈式软件生态及模块化硬件平台。</p>
+      <p>团队与国内多个顶尖机构建立有常态化合作机制，形成“产学研用”闭环创新体系。作为工业智能基础设施的开拓者，零蚁科技正在以<b>全自主可控的技术</b>推动行业智能化升级，持续赋能制造产业高质量发展。</p>
       
       <!-- 团队信息 -->
       <div class="info-section team-info">
         <h3>{{ $t('about.teamOverview') }}</h3>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-number">{{ 18 }} {{ $t('about.people') }}</div>
+            <div class="stat-number">{{ 20 }}+{{ $t('about.people') }}</div>
             <div class="stat-label">{{ $t('about.teamSize') }}</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">94%</div>
+            <div class="stat-number">90%+</div>
             <div class="stat-label">{{ $t('about.masterDegree') }}</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">{{ 30 }} {{ $t('about.yearsOld') }}</div>
+            <div class="stat-number">≤{{ 32 }}{{ $t('about.yearsOld') }}</div>
             <div class="stat-label">{{ $t('about.averageAge') }}</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">90%</div>
+            <div class="stat-number">≥90%</div>
             <div class="stat-label">{{ $t('about.topUniversity') }}</div>
           </div>
         </div>
       </div>
       
-      <!-- 市场信息 -->
-      <div class="info-section market-info">
-        <h3>{{ $t('about.marketProspect') }}</h3>
-        <p>{{ $t('about.marketInfo') }}</p>
-      </div>
+
       
       <!-- 融资信息 -->
       <div class="info-section financing-info">
         <h3>{{ $t('about.financingPlan') }}</h3>
-        <p>{{ $t('about.financing') }}</p>
-        <div class="stats-grid">
-          <div class="stat-card highlight">
-            <div class="stat-number">{{ 1600 }}{{ $t('about.millionYuan') }}</div>
-            <div class="stat-label">{{ $t('about.ordersInHand') }}</div>
-          </div>
-          <div class="stat-card highlight">
-            <div class="stat-number">{{ 2000 }}{{ $t('about.millionYuan') }}</div>
-            <div class="stat-label">{{ $t('about.financingAmount') }}</div>
-          </div>
-          <div class="stat-card highlight">
-            <div class="stat-number">{{ 2 }}{{ $t('about.hundredMillionYuan') }}</div>
-            <div class="stat-label">{{ $t('about.preliminaryValuation') }}</div>
-          </div>
-        </div>
+        <p>目前团队处于天使轮融资阶段，如对团队感兴趣或有合作意向，可邮件联系liqingfeng@zeroant.com。创业团队时间宝贵，非诚勿扰！</p>
       </div>
     </section>
     
@@ -100,12 +84,21 @@
     
 
     
-    <section class="about-section culture" id="tab5">
+    <section class="about-section culture" id="tab4">
       <h2>{{ $t('nav.culture') }}</h2>
-      <p>{{ $t('about.culture') }}</p>
+      <div class="culture-content culture-block">
+        <p class="culture-title"><b>核心价值观</b>：{{ $t('about.culture') }}</p>
+        <div class="culture-subtitle">零蚁科技以“创新驱动智造”为核心理念，构建开放协作的工程师文化：</div>
+        <ul class="culture-list">
+          <li><b>厚积薄发</b> 深耕基础技术研发，十年磨一剑打造核心系统</li>
+          <li><b>场景革命</b> 以工业痛点为导向，用机器人技术重构生产流程</li>
+          <li><b>生态共建</b> 携手高校院所打造“产学研用”闭环创新体系</li>
+          <li><b>极限进化</b> 每天进步一点点，持续迭代知识体系</li>
+        </ul>
+      </div>
     </section>
     
-    <section class="about-section contact" id="tab6">
+    <section class="about-section contact" id="tab5">
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
         <li>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</li>
@@ -119,7 +112,7 @@
 <script setup>
 import { computed, watch, ref, onMounted, onUnmounted, defineProps, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { getTimelineData, getHonors, getCoreTeam } from '@/data/about';
+import { getTimelineData, getHonors } from '@/data/about';
 const { t, locale } = useI18n();
 
 const props = defineProps({});
@@ -127,10 +120,9 @@ const emit = defineEmits([]);
 
 const timelineData = computed(() => getTimelineData(t).map(item => ({ ...item })));
 const honors = computed(() => getHonors(t).map(honor => honor));
-const coreTeamData = computed(() => getCoreTeam(t));
 
 const activeTab = ref('tab1');
-const tabIds = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5', 'tab6'];
+const tabIds = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
 
 function updateActiveTab() {
   const scrollY = window.scrollY || window.pageYOffset;
@@ -687,5 +679,43 @@ onUnmounted(() => {
   .team-member-card {
     padding: 24px 16px;
   }
+}
+
+.culture-content {
+  text-align: center;
+  font-size: 1.4em;
+  margin: 48px 0 32px 0;
+}
+
+.culture-block {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 900px;
+  font-size: 1.03em;
+}
+.culture-title {
+  font-size: 1.13em;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.culture-subtitle {
+  font-size: 1.06em;
+  color: #333;
+  margin-bottom: 28px;
+}
+.culture-list {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+  padding-left: 0;
+  list-style: disc inside;
+  font-size: 1.09em;
+  line-height: 1.95;
+  font-weight: 500;
+  color: #222;
+}
+.culture-list li {
+  margin-bottom: 9px;
+  padding-left: 0;
 }
 </style>

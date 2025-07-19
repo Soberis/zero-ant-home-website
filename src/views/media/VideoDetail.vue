@@ -158,7 +158,7 @@ function bilibiliEmbedUrl(url) {
   font-weight: 700;
   margin-bottom: 20px;
   margin-top: 0;
-  color: #111;
+  color: #222;
   letter-spacing: 0.5px;
   line-height: 1.2;
   text-align: left;
