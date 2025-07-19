@@ -1,18 +1,77 @@
-# Vue 3 + TypeScript + Vite
+# ZeroAnt Home Website
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+本项目为 ZeroAnt 官网前端，基于 Vue 3、Vite、Element Plus 等现代前端技术栈开发，支持多环境自动化部署。
 
-## Recommended IDE Setup
+## 目录结构
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- `src/` —— 主要源码目录
+- `public/` —— 静态资源
+- `dist/` —— 构建输出目录
+- `config/` —— 配置文件（如 nginx.conf.template）
+- `.gitlab-ci.yml` —— GitLab CI/CD 自动化部署配置
 
-## Type Support For `.vue` Imports in TS
+## 本地开发
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+1. 安装依赖
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+   ```bash
+   yarn install
+   ```
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+2. 启动开发环境
+
+   ```bash
+   yarn dev
+   ```
+
+3. 类型检查 & 构建
+
+   ```bash
+   yarn build
+   ```
+
+4. 本地预览
+
+   ```bash
+   yarn preview
+   ```
+
+## 自动化部署流程
+
+### 分支与环境对应
+
+- `develop` 分支：自动部署到测试服务器（[http://test_www.zeroant.com](http://test_www.zeroant.com)），在内网环境运行。
+- `main` 分支打 tag（如 v1.0.0）：自动部署到生产服务器（[https://zeroant.com](https://zeroant.com), [https://www.zeroant.com](https://www.zeroant.com)）
+
+### nginx 配置
+
+- 使用 `config/nginx.conf.template` 作为模板，CI/CD 流程会根据环境自动替换域名并上传到服务器。
+- 测试环境只配置 `test_www.zeroant.com`，生产环境配置 `zeroant.com www.zeroant.com`。
+
+### CI/CD 说明
+
+- 依赖 `.gitlab-ci.yml`，自动完成依赖安装、构建、部署、nginx 配置渲染及热重载。
+- 服务器 SSH 密钥等敏感信息通过 GitLab CI/CD 变量管理。
+
+## 注意事项
+
+- **不要直接修改 `dist/` 目录内容**，所有内容均由构建生成。
+- **nginx 配置请修改 `config/nginx.conf.template`**，不要直接修改服务器上的 nginx.conf。
+- **如需新增环境变量或敏感信息，请在 GitLab 项目设置中配置，不要写入代码仓库。**
+- **生产环境部署需打 tag，且仅支持 `main` 分支。**
+
+## 主要依赖
+
+详见 `package.json`，主要依赖包括：
+
+- vue
+- vue-router
+- vuex
+- element-plus
+- @fortawesome/fontawesome-svg-core
+
+## 反馈与贡献
+
+如有问题或建议，请提交 Issue 或 Pull Request。
+
+---

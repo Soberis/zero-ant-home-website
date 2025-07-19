@@ -1,79 +1,111 @@
+<!-- 首页，聚合轮播、核心产品、视频案例、行业应用、合作伙伴等模块 -->
 <template>
-  <div class="home">
-    <section class="video-hero">
-      <div class="overlay"></div>
-      <div class="display-t text-center">
-        <div class="display-tc">
-          <div class="container">
-            <div class="col-md-12 col-md-offset-0">
-              <div class="animate-box">
-                <h2 class="slogan">{{ $t("slogan") }}</h2>
-                <p class="slogan2">{{ $t("slogan2") }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="home-bg">
+    <div class="home">
+      <HeroCarousel />
+      <div class="section">
+        <CoreProducts />
       </div>
-    </section>
-    <div class="buttom-info">
-      {{ $t("contact", { email: "liqingfeng@zeroant.com" }) }}
+      <div class="section">
+        <VideoCases />
+      </div>
+      <IndustryApplications />
+        <Partners />
     </div>
   </div>
 </template>
+
+<script setup>
+// 首页聚合各核心模块组件
+import HeroCarousel from '@/components/business/HeroCarousel.vue'; // 轮播图
+import CoreProducts from '@/components/business/CoreProducts.vue'; // 核心产品
+import VideoCases from '@/components/business/VideoCases.vue'; // 视频案例
+import IndustryApplications from '@/components/business/IndustryApplications.vue'; // 行业应用
+import Partners from '@/components/business/Partners.vue'; // 合作伙伴
+</script>
 
 <style lang="less" scoped>
 .btn {
   width: 180px;
 }
 .home {
-  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .video-hero {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full screen height */
-  }
-
-  .display-t {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-  .display-tc {
-    text-align: center;
-  }
-
-  .download_btn {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+.main-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(26,58,143,0.04);
+  padding: 32px 24px;
+}
+.main-section > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.section-grey {
+  background: #f7f8fa;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 64px 0 48px 0;
+  overflow-x: hidden;
+}
+.section-white {
+  background: #fff;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 64px 0 48px 0;
+  overflow-x: hidden;
+}
+.home-bg {
+  background: #f7f8fa;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 0 48px 0;
+  background: transparent;
 }
 @media screen and (max-width: 991px) {
-  .animate-box {
-    .slogan {
-      font-size: 22px;
-    }
-    .slogan2 {
-      font-size: 18px;
-    }
-    .btn-g {
-      .btn {
-        width: 150px;
-        height: 50px;
-        font-size: 12px;
-      }
-    }
+  .container {
+    max-width: 100%;
+    padding: 0 8px;
+    overflow-x: hidden;
+  }
+  .main-section {
+    flex-direction: column;
+    gap: 24px;
+    padding: 16px 4px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .section-grey,
+  .section-white {
+    padding: 32px 0 24px 0;
   }
   .buttom-info {
     margin-top: 10px;
+  }
+  .section {
+    padding: 32px 0 24px 0;
   }
 }
 </style>
