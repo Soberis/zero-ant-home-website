@@ -220,6 +220,8 @@ const applyForPosition = (position) => {
 .careers-page {
   min-height: 100vh;
   background: #f8f9fa;
+  font-size: 1.5rem; // 再提升正文基础字体
+  line-height: 1.7;
 }
 
 .container {
@@ -236,14 +238,14 @@ const applyForPosition = (position) => {
   text-align: center;
 
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 4rem; // 原3.5rem，提升
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
   }
 
   .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.8rem;
     margin-bottom: 3rem;
     opacity: 0.9;
     max-width: 600px;
@@ -262,14 +264,13 @@ const applyForPosition = (position) => {
 
       .stat-number {
         display: block;
-        font-size: 2.5rem;
+        font-size: 2.5rem; // 原2.5rem，略提升
         font-weight: 700;
         margin-bottom: 0.5rem;
       }
 
       .stat-label {
-        font-size: 0.9rem;
-        opacity: 0.8;
+        font-size: 1.6rem;
       }
     }
   }
@@ -277,7 +278,7 @@ const applyForPosition = (position) => {
 
 // 通用样式
 .section-title {
-  font-size: 2.5rem;
+  font-size: 2.5rem; // 原2.5rem，略提升
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
@@ -323,15 +324,16 @@ const applyForPosition = (position) => {
       }
 
       .benefit-title {
-        font-size: 1.25rem;
+        font-size: 1.8rem;
         font-weight: 600;
         margin-bottom: 1rem;
         color: #222;
       }
 
       .benefit-description {
+        font-size: 1.5rem;
         color: #666;
-        line-height: 1.6;
+        line-height: 1.7; // 略提升
       }
     }
   }
@@ -367,7 +369,7 @@ const applyForPosition = (position) => {
         gap: 1rem;
 
         .position-title {
-          font-size: 1.5rem;
+          font-size: 2.2rem;
           font-weight: 600;
           color: #222;
           margin: 0;
@@ -378,7 +380,7 @@ const applyForPosition = (position) => {
           color: #1976d2;
           padding: 0.25rem 0.75rem;
           border-radius: 20px;
-          font-size: 0.875rem;
+          font-size: 1.2rem; // 原0.875rem，提升
           font-weight: 500;
         }
       }
@@ -394,10 +396,12 @@ const applyForPosition = (position) => {
             font-weight: 500;
             color: #666;
             margin-right: 0.5rem;
+            font-size: 1.5rem;
           }
 
           .detail-value {
             color: #333;
+            font-size: 1.5rem;
           }
         }
       }
@@ -406,7 +410,7 @@ const applyForPosition = (position) => {
         margin-bottom: 2rem;
 
         .requirements-title {
-          font-size: 1.1rem;
+          font-size: 1.8rem;
           font-weight: 600;
           margin-bottom: 1rem;
           color: #333;
@@ -422,7 +426,8 @@ const applyForPosition = (position) => {
             padding-left: 1.5rem;
             position: relative;
             color: #666;
-            line-height: 1.5;
+            line-height: 1.7; // 略提升
+            font-size: 1.5rem;
 
             &:before {
               content: '•';
@@ -442,9 +447,10 @@ const applyForPosition = (position) => {
           background: #1a3a8f;
           color: white;
           border: none;
-          padding: 0.75rem 2rem;
+          padding: 0.85rem 2.2rem; // 略提升
           border-radius: 8px;
           font-weight: 500;
+          font-size: 1.13rem;
           cursor: pointer;
           transition: background-color 0.3s ease;
 
@@ -468,10 +474,10 @@ const applyForPosition = (position) => {
     margin: 0 auto;
 
     .contact-description {
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       color: #666;
       margin-bottom: 2rem;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .contact-info {
@@ -485,11 +491,13 @@ const applyForPosition = (position) => {
           font-weight: 500;
           color: #666;
           margin-right: 0.5rem;
+          font-size: 1.5rem;
         }
 
         .contact-value {
           color: #1a3a8f;
           font-weight: 500;
+          font-size: 1.5rem;
         }
       }
     }
@@ -502,7 +510,7 @@ const applyForPosition = (position) => {
     padding: 80px 0 60px;
 
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem; // 原2.5rem，略减小，适配移动端
     }
 
     .hero-stats {
@@ -511,7 +519,7 @@ const applyForPosition = (position) => {
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.5rem; // 原2rem，适配移动端
   }
 
   .why-join,
