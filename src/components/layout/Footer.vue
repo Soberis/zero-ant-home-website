@@ -60,7 +60,7 @@
           <!-- 二维码静态展示，如需动态可抽离为props或数据源 -->
           <div class="footer-qrcodes">
             <div class="qrcode-item">
-              <div class="qrcode-img"></div>
+              <img :src="wxQrcode" alt="微信公众号二维码" class="qrcode-img" />
               <div class="qrcode-label">{{ $t('footer.wx') }}</div>
             </div>
             <div class="qrcode-item">
@@ -81,6 +81,7 @@
 // 仅用于国际化，无复杂逻辑
 import { useI18n } from 'vue-i18n';
 import bilibiliQrcode from '@/assets/images/qrcodes/bilibili.png';
+import wxQrcode from '@/assets/images/qrcodes/wx.jpg';
 
 const systemProductNav = [
   { hash: '#robot-scheduler', label: 'nav.robotScheduler' },
