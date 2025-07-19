@@ -16,14 +16,14 @@ export interface ProductData extends Product {
  * 产品列表
  */
 export const products: ProductData[] = [
-  // system产品（保持不变）
+  // system产品（顺序调整）
   {
-    slug: "robot-scheduler",
-    name: "移动机器人调度系统",
+    slug: "multi-os-vm",
+    name: "多OS混合部署嵌入式虚拟机",
     image: "",
-    desc: "支持多品牌、多类型移动机器人统一调度与协同作业，提升工厂自动化水平。",
-    seriesTitle: "移动机器人调度系统",
-    seriesSubtitle: "多机协同与智能调度",
+    desc: "支持多操作系统并行运行，提升工业设备灵活性与资源利用率。",
+    seriesTitle: "多OS混合部署嵌入式虚拟机",
+    seriesSubtitle: "异构系统一体化解决方案",
     category: "system"
   },
   {
@@ -45,22 +45,22 @@ export const products: ProductData[] = [
     category: "system"
   },
   {
-    slug: "multi-os-vm",
-    name: "多OS混合部署嵌入式虚拟机",
+    slug: "robot-scheduler",
+    name: "移动机器人调度系统",
     image: "",
-    desc: "支持多操作系统并行运行，提升工业设备灵活性与资源利用率。",
-    seriesTitle: "多OS混合部署嵌入式虚拟机",
-    seriesSubtitle: "异构系统一体化解决方案",
+    desc: "支持多品牌、多类型移动机器人统一调度与协同作业，提升工厂自动化水平。",
+    seriesTitle: "移动机器人调度系统",
+    seriesSubtitle: "多机协同与智能调度",
     category: "system"
   },
-  // 只保留以下五个robot产品
+  // robot产品（顺序调整）
   {
-    slug: "mobile-robot",
-    name: "移动机器人",
+    slug: "gantry-2d",
+    name: "二自由度龙门架",
     image: "",
-    desc: "自主导航、多传感器融合，适用于工厂、仓储等多场景智能物流。",
-    seriesTitle: "移动机器人",
-    seriesSubtitle: "智能物流与搬运",
+    desc: "高精度、高刚性的二自由度龙门架，适用于多场景自动化搬运与定位。",
+    seriesTitle: "二自由度龙门架",
+    seriesSubtitle: "高效自动化搬运平台",
     category: "robot"
   },
   {
@@ -82,21 +82,21 @@ export const products: ProductData[] = [
     category: "robot"
   },
   {
-    slug: "gantry-2d",
-    name: "二自由度龙门架",
-    image: "",
-    desc: "高精度、高刚性的二自由度龙门架，适用于多场景自动化搬运与定位。",
-    seriesTitle: "二自由度龙门架",
-    seriesSubtitle: "高效自动化搬运平台",
-    category: "robot"
-  },
-  {
     slug: "dual-arm-humanoid",
     name: "双臂人型机器人",
     image: "",
     desc: "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求。",
     seriesTitle: "双臂人型机器人",
     seriesSubtitle: "高柔性协作平台",
+    category: "robot"
+  },
+  {
+    slug: "mobile-robot",
+    name: "移动机器人",
+    image: "",
+    desc: "自主导航、多传感器融合，适用于工厂、仓储等多场景智能物流。",
+    seriesTitle: "移动机器人",
+    seriesSubtitle: "智能物流与搬运",
     category: "robot"
   }
 ];

@@ -4,22 +4,20 @@
     <h1 class="title">{{ detail?.title }}</h1>
     <div class="desc" v-html="detail?.description"></div>
     <div class="video-wrap">
-      <template v-if="detail?.video">
-        <template v-if="isBilibili(detail.video)">
-          <div class="video-container">
-            <iframe
-              class="video-iframe"
-              :src="bilibiliEmbedUrl(detail.video)"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </template>
-        <template v-else>
-          <div class="video-container">
-            <video :src="detail.video" controls class="video-player" />
-          </div>
-        </template>
+      <template v-if="videoDetail && videoDetail.type === 'bilibili'">
+        <div class="video-container">
+          <iframe
+            class="video-iframe"
+            :src="bilibiliEmbedUrl(videoDetail.url)"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </template>
+      <template v-else-if="videoDetail && videoDetail.type === 'local'">
+        <div class="video-container">
+          <video :src="videoDetail.url" controls class="video-player" />
+        </div>
       </template>
       <template v-else>
         <div class="video-placeholder">暂无视频</div>
@@ -45,11 +43,15 @@
 import { useRoute, useRouter } from 'vue-router'
 import applications from '@/data/applications'
 import { computed } from 'vue'
+import { videoMap } from '@/data/videos' // 新增导入
 
 const route = useRoute()
 const router = useRouter()
 const slug = computed(() => route.params.slug)
 const detail = computed(() => applications.find(item => item.slug === slug.value))
+
+// 新增：获取视频详情对象
+const videoDetail = computed(() => videoMap[detail.value?.video])
 
 function isBilibili(url) {
   return url && url.includes('bilibili.com/video/')

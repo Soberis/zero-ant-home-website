@@ -86,15 +86,23 @@
     
     <section class="about-section culture" id="tab4">
       <h2>{{ $t('nav.culture') }}</h2>
-      <div class="culture-content culture-block">
-        <p class="culture-title"><b>核心价值观</b>：{{ $t('about.culture') }}</p>
-        <div class="culture-subtitle"><b>零蚁科技以"创新驱动智造"为核心理念，构建开放协作的工程师文化：</b></div>
-        <ul class="culture-list">
-          <p><b>厚积薄发</b> 深耕基础技术研发，十年磨一剑打造核心系统</p>
-          <p><b>场景革命</b> 以工业痛点为导向，用机器人技术重构生产流程</p>
-          <p><b>生态共建</b> 携手高校院所打造"产学研用"闭环创新体系</p>
-          <p><b>极限进化</b> 每天进步一点点，持续迭代知识体系</p>
-        </ul>
+      <div class="culture-cards" style="display:flex;flex-direction:column;gap:32px;align-items:center;margin-top:32px;">
+        <div class="culture-card" style="background:#f8f9fa;border-radius:16px;box-shadow:0 2px 12px rgba(80,120,200,0.08);padding:36px 32px;min-width:320px;max-width:1200px;width:100%;text-align:center;margin:0 auto;">
+          <div class="culture-title" style="font-size:1.25em;font-weight:700;margin-bottom:18px;">核心价值观</div>
+          <ul class="culture-list" style="list-style:none;padding:0;margin:0 auto;font-size:1em;line-height:2;display:flex;gap:0;width:fit-content;justify-content:center;">
+            <li style="min-width:80px;text-align:center;">经世致用、正直诚信、务实发展、保持迭代</li>
+          </ul>
+        </div>
+        <div class="culture-card" style="background:#f8f9fa;border-radius:16px;box-shadow:0 2px 12px rgba(80,120,200,0.08);padding:36px 32px;min-width:320px;max-width:1200px;width:100%;text-align:center;margin:0 auto;">
+          <div class="culture-title" style="font-size:1.15em;font-weight:700;margin-bottom:12px;">工程师文化</div>
+          <div style="font-size:1.08em;line-height:2;margin-bottom:18px;">零蚁科技以"创新驱动智造"为核心理念，构建开放协作的工程师文化：</div>
+          <ul class="culture-list" style="list-style:none;padding:0;margin:0;font-size:1.08em;line-height:2;text-align:left;display:inline-block;">
+            <li><b>厚积薄发</b>：深耕基础技术，十年磨一剑，打造核心系统</li>
+            <li><b>场景革命</b>：聚焦工业痛点，以机器人技术重塑生产流程</li>
+            <li><b>生态共建</b>：携手高校院所，打造“产学研用”闭环创新体系</li>
+            <li><b>极限进化</b>：每天进步一点点，持续迭代知识体系</li>
+          </ul>
+        </div>
       </div>
     </section>
     

@@ -21,7 +21,7 @@ const applications: Application[] = [
     description: `
 <p>聚焦医院、实验室等医疗场景，提供高效、安全的自动化物品传送与智能调度解决方案。通过自主研发的AiROS操作系统，实现样本、药品、医疗器械等的智能搬运与追溯，助力医疗机构提升诊疗效率、降低人工成本、保障医疗安全。典型应用包括智能检验科自动流水线、自动化药房、医疗物资配送等。</p>
     `,
-    video: '',
+    video: 'medical-automation-bilibili',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>`
   },
   {
@@ -30,7 +30,7 @@ const applications: Application[] = [
     description: `
 <p>面向晶圆、芯片等高端制造领域，提供高精度、高可靠性的物品传送与智能调度系统，实现国产设备替代和智能制造升级。AiROS操作系统支持复杂工艺流程的自动化搬运、精准定位和数据追溯，助力客户提升生产效率和产品良率。典型应用包括晶圆厂自动化搬运、芯片封装测试、洁净室物流等。</p>
     `,
-    video: '',
+    video: 'semiconductor-bilibili',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/><path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/><path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/></svg>`
   },
   {

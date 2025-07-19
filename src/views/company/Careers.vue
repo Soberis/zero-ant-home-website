@@ -8,7 +8,7 @@
           <p class="hero-subtitle">与我们一起打造未来机器人技术，让机器人遍布每个角落</p>
           <div class="hero-stats">
             <div class="stat-item">
-              <span class="stat-number">8年</span>
+              <span class="stat-number">8</span>
               <span class="stat-label">技术积累</span>
             </div>
             <div class="stat-item">
