@@ -12,15 +12,16 @@
     <!-- 目录栏 -->
     <nav class="about-nav">
       <ul>
-        <li :class="{active: activeTab==='tab1'}"><a href="#tab1" @click.prevent="scrollToSection('tab1')">{{ $t('nav.companyIntro') }}</a></li>
-        <li :class="{active: activeTab==='tab2'}"><a href="#tab2" @click.prevent="scrollToSection('tab2')">{{ $t('nav.history') }}</a></li>
-        <li :class="{active: activeTab==='tab3'}"><a href="#tab3" @click.prevent="scrollToSection('tab3')">{{ $t('nav.honor') }}</a></li>
-        <li :class="{active: activeTab==='tab4'}"><a href="#tab4" @click.prevent="scrollToSection('tab4')">{{ $t('nav.culture') }}</a></li>
-        <li :class="{active: activeTab==='tab5'}"><a href="#tab5" @click.prevent="scrollToSection('tab5')">{{ $t('nav.contact') }}</a></li>
+        <li :class="{active: activeTab==='company-intro'}"><a href="#company-intro" @click.prevent="scrollToSection('company-intro')">{{ $t('nav.companyIntro') }}</a></li>
+        <li :class="{active: activeTab==='history'}"><a href="#history" @click.prevent="scrollToSection('history')">{{ $t('nav.history') }}</a></li>
+        <li :class="{active: activeTab==='honors'}"><a href="#honors" @click.prevent="scrollToSection('honors')">{{ $t('nav.honor') }}</a></li>
+        <li :class="{active: activeTab==='core-values'}"><a href="#core-values" @click.prevent="scrollToSection('core-values')">{{ $t('nav.coreValues') }}</a></li>
+        <li :class="{active: activeTab==='culture'}"><a href="#culture" @click.prevent="scrollToSection('culture')">{{ $t('nav.culture') }}</a></li>
+        <li :class="{active: activeTab==='contact'}"><a href="#contact" @click.prevent="scrollToSection('contact')">{{ $t('nav.contact') }}</a></li>
       </ul>
     </nav>
     
-    <section class="about-section company-intro" id="tab1">
+    <section class="about-section company-intro" id="company-intro">
       <h2>{{ $t('nav.companyIntro') }}</h2>
       <p>杭州零蚁科技有限公司是一家由<b>北京航空航天大学杭州创新研究院</b>科研团队创立的高科技企业，聚焦于智能机器人整机解决方案研发，目前为生物医药、半导体等行业提供了高可靠的机器人智能系统方案。</p>
       <p>公司依托于浙江省<b>全省工业大数据与机器人智能系统重点实验室</b>，自主研发“智能机器人操作系统”（AiROS），攻克移动机器人自动导航、机械臂高速高精度控制、三维空间语义感知、多机协同调度等核心技术，打造了全栈式软件生态及模块化硬件平台。</p>
@@ -58,7 +59,7 @@
       </div>
     </section>
     
-    <section class="about-section history" id="tab2">
+    <section class="about-section history" id="history">
       <h2>{{ $t('nav.history') }}</h2>
       <div class="timeline">
         <div class="timeline-item" v-for="item in timelineData" :key="item.year">
@@ -73,7 +74,7 @@
       </div>
     </section>
     
-    <section class="about-section honors" id="tab3">
+    <section class="about-section honors" id="honors">
       <h2>{{ $t('nav.honor') }}</h2>
       <div class="honor-cards">
         <div class="honor-card" v-for="(honor, idx) in honors" :key="idx">
@@ -81,35 +82,28 @@
         </div>
       </div>
     </section>
-    
 
-    
-    <section class="about-section culture" id="tab4">
-      <h2>{{ $t('nav.culture') }}</h2>
-      <div class="culture-cards" style="display:flex;flex-direction:column;gap:32px;align-items:center;margin-top:32px;">
-        <div class="culture-card" style="background:#f8f9fa;border-radius:16px;box-shadow:0 2px 12px rgba(80,120,200,0.08);padding:36px 32px;min-width:320px;max-width:1200px;width:100%;text-align:center;margin:0 auto;">
-          <div class="culture-title" style="font-size:1.25em;font-weight:700;margin-bottom:18px;">核心价值观</div>
-          <ul class="culture-list" style="list-style:none;padding:0;margin:0 auto;font-size:1em;line-height:2;display:flex;gap:0;width:fit-content;justify-content:center;">
-            <li style="min-width:80px;text-align:center;">经世致用、正直诚信、务实发展、保持迭代</li>
-          </ul>
-        </div>
-        <div class="culture-card" style="background:#f8f9fa;border-radius:16px;box-shadow:0 2px 12px rgba(80,120,200,0.08);padding:36px 32px;min-width:320px;max-width:1200px;width:100%;text-align:center;margin:0 auto;">
-          <div class="culture-title" style="font-size:1.15em;font-weight:700;margin-bottom:12px;">工程师文化</div>
-          <div style="font-size:1.08em;line-height:2;margin-bottom:18px;">零蚁科技以"创新驱动智造"为核心理念，构建开放协作的工程师文化：</div>
-          <ul class="culture-list" style="list-style:none;padding:0;margin:0;font-size:1.08em;line-height:2;text-align:left;display:inline-block;">
-            <li><b>厚积薄发</b>：深耕基础技术，十年磨一剑，打造核心系统</li>
-            <li><b>场景革命</b>：聚焦工业痛点，以机器人技术重塑生产流程</li>
-            <li><b>生态共建</b>：携手高校院所，打造“产学研用”闭环创新体系</li>
-            <li><b>极限进化</b>：每天进步一点点，持续迭代知识体系</li>
-          </ul>
-        </div>
+    <section class="about-section core-values" id="core-values">
+      <h2 class="core-values-title">核心价值观</h2>
+      <div class="core-values-content financing-desc">经世致用、正直诚信、务实发展、保持迭代</div>
+    </section>
+
+    <section class="about-section culture" id="culture">
+      <h2 class="culture-title">{{ $t('nav.culture') }}</h2>
+      <div class="culture-card no-bg">
+        <div class="culture-desc financing-desc">零蚁科技以"创新驱动智造"为核心理念，构建开放协作的工程师文化：</div>
+        <ul class="culture-list">
+          <li><b>厚积薄发</b>：深耕基础技术，十年磨一剑，打造核心系统</li>
+          <li><b>场景革命</b>：聚焦工业痛点，以机器人技术重塑生产流程</li>
+          <li><b>生态共建</b>：携手高校院所，打造“产学研用”闭环创新体系</li>
+          <li><b>极限进化</b>：每天进步一点点，持续迭代知识体系</li>
+        </ul>
       </div>
     </section>
     
-    <section class="about-section contact" id="tab5">
+    <section class="about-section contact" id="contact">
       <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
-        <li>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</li>
         <li>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</li>
         <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
       </ul>
@@ -131,8 +125,8 @@ const honors = computed(() => getHonors(t).map(honor => honor));
 
 
 
-const activeTab = ref('tab1');
-const tabIds = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
+const activeTab = ref('company-intro');
+const tabIds = ['company-intro', 'history', 'honors', 'core-values', 'culture', 'contact'];
 
 function updateActiveTab() {
   const scrollY = window.scrollY || window.pageYOffset;
@@ -735,5 +729,40 @@ onUnmounted(() => {
   word-break: break-word;
   white-space: pre-line;
   max-width: 100%;
+}
+
+/* style部分新增/优化 */
+.core-values-title {
+  text-align: center;
+}
+.core-values-content {
+  text-align: center;
+  margin: 24px 0 0 0;
+}
+.culture-title {
+  text-align: center;
+}
+.culture-card.no-bg {
+  padding: 0;
+  min-width: 320px;
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: none;
+  background: none;
+}
+.culture-desc {
+  margin: 24px 0 18px 0;
+  text-align: center;
+}
+.culture-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.08em;
+  line-height: 2;
+  text-align: left;
+  display: inline-block;
 }
 </style>

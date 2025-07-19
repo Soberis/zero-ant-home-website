@@ -89,27 +89,32 @@
           <h4>{{ $t('nav.about') }}</h4>
           <ul>
             <li>
-              <router-link :to="{ path: '/about', hash: '#tab1' }">
+              <router-link :to="{ path: '/about', hash: '#company-intro' }">
                 {{ $t('nav.companyIntro') }}
               </router-link>
             </li>
             <li>
-              <router-link :to="{ path: '/about', hash: '#tab2' }">
+              <router-link :to="{ path: '/about', hash: '#history' }">
                 {{ $t('nav.history') }}
               </router-link>
             </li>
             <li>
-              <router-link :to="{ path: '/about', hash: '#tab3' }">
+              <router-link :to="{ path: '/about', hash: '#honors' }">
                 {{ $t('nav.honor') }}
               </router-link>
             </li>
             <li>
-              <router-link :to="{ path: '/about', hash: '#tab5' }">
+              <router-link :to="{ path: '/about', hash: '#core-values' }">
+                {{ $t('nav.coreValues') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{ path: '/about', hash: '#culture' }">
                 {{ $t('nav.culture') }}
               </router-link>
             </li>
             <li>
-              <router-link :to="{ path: '/about', hash: '#tab6' }">
+              <router-link :to="{ path: '/about', hash: '#contact' }">
                 {{ $t('nav.contact') }}
               </router-link>
             </li>
