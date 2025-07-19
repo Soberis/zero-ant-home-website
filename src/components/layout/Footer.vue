@@ -147,7 +147,7 @@
               <img
                 :src="bilibiliQrcode"
                 alt="B站二维码"
-                class="qrcode-img"
+                class="qrcode-img bilibili-qrcode-img"
               />
               <div class="qrcode-label">
                 {{ $t('footer.bilibili') }}
@@ -281,5 +281,14 @@ const robotProductNav = [
   text-align: center;
   color: #888;
   font-size: 13px;
+}
+.qrcode-col {
+  margin-left: 550px;
+}
+.bilibili-qrcode-img {
+  padding: 2px;
+  background: #fff;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 </style>
