@@ -68,7 +68,15 @@
     "airos": "AiROS Operating System",
     "waferTransport": "Wafer Transport Robot",
     "labTransport": "Lab Transport Robot",
-    "deliveryRobot": "Delivery Robot"
+    "deliveryRobot": "Delivery Robot",
+    "robotScheduler": "Robot Scheduler System",
+    "industrialRTOS": "Industrial Real-Time OS",
+    "airos": "AiROS Robot OS",
+    "multiOSVM": "Multi-OS Embedded VM",
+    "scara4Axis": "SCARA 4-Axis Arm",
+    "arm6Axis": "6-Axis Arm",
+    "gantry2D": "2D Gantry",
+    "dualArmHumanoid": "Dual-Arm Humanoid Robot"
   },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
@@ -141,6 +149,7 @@
     "wx": "WeChat Official Account",
     "dy": "Douyin",
     "sp": "Video Channel",
+    "bilibili": "Bilibili",
     "copyright": "All rights reserved",
     "telValue": "13001001954"
   }

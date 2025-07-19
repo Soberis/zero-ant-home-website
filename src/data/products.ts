@@ -16,6 +16,25 @@ export interface ProductData extends Product {
  * 产品列表
  */
 export const products: ProductData[] = [
+  // system产品（保持不变）
+  {
+    slug: "robot-scheduler",
+    name: "移动机器人调度系统",
+    image: "",
+    desc: "支持多品牌、多类型移动机器人统一调度与协同作业，提升工厂自动化水平。",
+    seriesTitle: "移动机器人调度系统",
+    seriesSubtitle: "多机协同与智能调度",
+    category: "system"
+  },
+  {
+    slug: "industrial-rtos",
+    name: "国产工业实时操作系统",
+    image: "",
+    desc: "自主可控的工业级实时操作系统，保障关键任务高可靠运行。",
+    seriesTitle: "国产工业实时操作系统",
+    seriesSubtitle: "高可靠性与自主可控",
+    category: "system"
+  },
   {
     slug: "airos",
     name: "AiROS机器人操作系统",
@@ -26,30 +45,58 @@ export const products: ProductData[] = [
     category: "system"
   },
   {
-    slug: "wafer-transport-robot",
-    name: "半导体晶圆传送机器人",
+    slug: "multi-os-vm",
+    name: "多OS混合部署嵌入式虚拟机",
     image: "",
-    desc: "专为半导体行业设计的高精度晶圆传送机器人，控制精度高、连续工作9万小时无损坏。",
-    seriesTitle: "半导体晶圆传送机器人",
-    seriesSubtitle: "解决\"卡脖子\"问题",
+    desc: "支持多操作系统并行运行，提升工业设备灵活性与资源利用率。",
+    seriesTitle: "多OS混合部署嵌入式虚拟机",
+    seriesSubtitle: "异构系统一体化解决方案",
+    category: "system"
+  },
+  // 只保留以下五个robot产品
+  {
+    slug: "mobile-robot",
+    name: "移动机器人",
+    image: "",
+    desc: "自主导航、多传感器融合，适用于工厂、仓储等多场景智能物流。",
+    seriesTitle: "移动机器人",
+    seriesSubtitle: "智能物流与搬运",
     category: "robot"
   },
   {
-    slug: "lab-plate-transport-robot",
-    name: "医药实验室实验板传送机器人",
+    slug: "scara-4axis",
+    name: "四轴机械臂",
     image: "",
-    desc: "实现国外设备本土化替代，成本从30万降至14万，专为生物医药实验室设计。",
-    seriesTitle: "医药实验室传送机器人",
-    seriesSubtitle: "本土化替代方案",
+    desc: "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用。",
+    seriesTitle: "四轴机械臂",
+    seriesSubtitle: "灵活高效的工业助手",
     category: "robot"
   },
   {
-    slug: "restaurant-delivery-robot",
-    name: "餐饮配送机器人",
+    slug: "arm-6axis",
+    name: "六轴机械臂",
     image: "",
-    desc: "构建\"消费-生产-配送\"黄金三角闭环，与美团、普渡等知名企业合作。",
-    seriesTitle: "餐饮配送机器人",
-    seriesSubtitle: "智能配送解决方案",
+    desc: "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景。",
+    seriesTitle: "六轴机械臂",
+    seriesSubtitle: "多场景智能作业",
+    category: "robot"
+  },
+  {
+    slug: "gantry-2d",
+    name: "二自由度龙门架",
+    image: "",
+    desc: "高精度、高刚性的二自由度龙门架，适用于多场景自动化搬运与定位。",
+    seriesTitle: "二自由度龙门架",
+    seriesSubtitle: "高效自动化搬运平台",
+    category: "robot"
+  },
+  {
+    slug: "dual-arm-humanoid",
+    name: "双臂人型机器人",
+    image: "",
+    desc: "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求。",
+    seriesTitle: "双臂人型机器人",
+    seriesSubtitle: "高柔性协作平台",
     category: "robot"
   }
 ];

@@ -19,7 +19,6 @@
           <p class="core-description">智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节</p>
           <div class="core-features">
             <span class="feature-tag">智能检验</span>
-            <span class="feature-tag">手术机器人</span>
             <span class="feature-tag">自动化药房</span>
           </div>
         </div>

@@ -19,7 +19,7 @@ const applications: Application[] = [
     slug: 'medical-automation',
     title: '医疗自动化',
     description: `
-<p>聚焦医院、实验室等医疗场景，提供高效、安全的自动化物品传送与智能调度解决方案。通过自主研发的AiROS操作系统，实现样本、药品、医疗器械等的智能搬运与追溯，助力医疗机构提升诊疗效率、降低人工成本、保障医疗安全。典型应用包括智能检验科自动流水线、自动化药房、手术物资配送等。</p>
+<p>聚焦医院、实验室等医疗场景，提供高效、安全的自动化物品传送与智能调度解决方案。通过自主研发的AiROS操作系统，实现样本、药品、医疗器械等的智能搬运与追溯，助力医疗机构提升诊疗效率、降低人工成本、保障医疗安全。典型应用包括智能检验科自动流水线、自动化药房、医疗物资配送等。</p>
     `,
     video: '',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>`

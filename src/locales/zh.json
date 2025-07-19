@@ -53,10 +53,17 @@
     "careers": "人才招聘",
     "systemProducts": "系统产品",
     "robotProducts": "机器人产品",
-    "airos": "AiROS操作系统",
+    "airos": "AiROS机器人操作系统",
     "waferTransport": "晶圆传送机器人",
     "labTransport": "实验室传送机器人",
-    "deliveryRobot": "餐饮配送机器人"
+    "deliveryRobot": "餐饮配送机器人",
+    "robotScheduler": "移动机器人调度系统",
+    "industrialRTOS": "国产工业实时操作系统",
+    "multiOSVM": "多OS混合部署嵌入式虚拟机",
+    "scara4Axis": "四轴机械臂",
+    "arm6Axis": "六轴机械臂",
+    "gantry2D": "二自由度龙门架",
+    "dualArmHumanoid": "双臂人型机器人"
   },
   "hero": {
     "title": "四轴机械臂，助力医药自动化",
@@ -123,6 +130,7 @@
     "wx": "微信公众号",
     "dy": "抖音号",
     "sp": "视频号",
+    "bilibili": "B站官方号",
     "copyright": "版权所有",
     "telValue": "13001001954"
   }

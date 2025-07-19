@@ -190,7 +190,6 @@ onUnmounted(() => {
   width: 100%;
   max-width: 100%;
   z-index: 2;
-  animation: fadein 1.2s;
 }
 
 .hero-content h1 {
@@ -199,8 +198,7 @@ onUnmounted(() => {
   color: #222;
   letter-spacing: 0.08em;
   margin-bottom: 0.6em;
-  opacity: 0;
-  animation: fadein 0.8s 0.1s forwards;
+  opacity: 1;
 }
 
 .hero-sub {
@@ -210,8 +208,7 @@ onUnmounted(() => {
   opacity: 0.7;
   margin-bottom: 1.2em;
   letter-spacing: 0.04em;
-  opacity: 0;
-  animation: fadein 0.8s 0.5s forwards;
+  opacity: 1;
 }
 
 .hero-line {
@@ -220,8 +217,7 @@ onUnmounted(() => {
   margin: 0 auto 1.2em auto;
   background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
   border-radius: 2px;
-  opacity: 0;
-  animation: fadein 0.8s 0.9s forwards;
+  opacity: 1;
 }
 
 .hero-en {
@@ -231,8 +227,7 @@ onUnmounted(() => {
   letter-spacing: 0.18em;
   opacity: 0.7;
   font-family: 'Segoe UI', 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  opacity: 0;
-  animation: fadein 0.8s 1.3s forwards;
+  opacity: 1;
 }
 
 .about-nav {

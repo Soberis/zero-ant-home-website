@@ -64,12 +64,8 @@
               <div class="qrcode-label">{{ $t('footer.wx') }}</div>
             </div>
             <div class="qrcode-item">
-              <div class="qrcode-img"></div>
-              <div class="qrcode-label">{{ $t('footer.dy') }}</div>
-            </div>
-            <div class="qrcode-item">
-              <div class="qrcode-img"></div>
-              <div class="qrcode-label">{{ $t('footer.sp') }}</div>
+              <img :src="bilibiliQrcode" alt="B站二维码" class="qrcode-img" />
+              <div class="qrcode-label">{{ $t('footer.bilibili') }}</div>
             </div>
           </div>
         </div>
@@ -84,14 +80,20 @@
 <script setup>
 // 仅用于国际化，无复杂逻辑
 import { useI18n } from 'vue-i18n';
+import bilibiliQrcode from '@/assets/images/qrcodes/bilibili.png';
 
 const systemProductNav = [
+  { hash: '#robot-scheduler', label: 'nav.robotScheduler' },
+  { hash: '#industrial-rtos', label: 'nav.industrialRTOS' },
   { hash: '#airos', label: 'nav.airos' },
+  { hash: '#multi-os-vm', label: 'nav.multiOSVM' },
 ];
 const robotProductNav = [
-  { hash: '#wafer-transport-robot', label: 'nav.waferTransport' },
-  { hash: '#lab-plate-transport-robot', label: 'nav.labTransport' },
-  { hash: '#restaurant-delivery-robot', label: 'nav.deliveryRobot' },
+  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
+  { hash: '#scara-4axis', label: 'nav.scara4Axis' },
+  { hash: '#arm-6axis', label: 'nav.arm6Axis' },
+  { hash: '#gantry-2d', label: 'nav.gantry2D' },
+  { hash: '#dual-arm-humanoid', label: 'nav.dualArmHumanoid' },
 ];
 </script>
 
