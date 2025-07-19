@@ -145,24 +145,27 @@ onUnmounted(() => {
 .carousel-controls {
   position: absolute;
   right: 60px;
-  bottom: 40px;
+  bottom: 100px;
   display: flex;
-  gap: 12px;
+  gap: 18px;
   z-index: 10;
 }
 .carousel-controls button {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+  width: 28px;
+  height: 8px;
+  border-radius: 6px;
   border: none;
-  background: #fff;
-  opacity: 0.6;
+  background: #b0b8c6;
+  opacity: 0.7;
   cursor: pointer;
-  transition: opacity 0.2s, background 0.2s;
+  transition: all 0.2s;
+  padding: 0;
 }
 .carousel-controls button.active {
-  background: #1a3a8f;
+  width: 44px;
+  background: #1a7cff;
   opacity: 1;
+  box-shadow: 0 2px 8px 0 rgba(26, 122, 255, 0.18);
 }
 @media (max-width: 900px) {
   .slide-content {
@@ -178,7 +181,15 @@ onUnmounted(() => {
   }
   .carousel-controls {
     right: 20px;
-    bottom: 20px;
+    bottom: 48px;
+    gap: 12px;
+  }
+  .carousel-controls button {
+    width: 18px;
+    height: 6px;
+  }
+  .carousel-controls button.active {
+    width: 32px;
   }
 }
 </style>
