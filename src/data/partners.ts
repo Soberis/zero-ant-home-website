@@ -16,6 +16,11 @@ import hunan from '@/assets/images/partners/hunan.png';
 import qinghua from '@/assets/images/partners/qinghua.svg';
 import buaa from '@/assets/images/partners/buaa.png';
 import buaahyy from '@/assets/images/partners/buaahyy.jpg';
+import openEuler from '@/assets/images/partners/openEuler.svg';
+import hongxu from '@/assets/images/partners/hongxu.png';
+import yihui from '@/assets/images/partners/yihui.svg';
+import huazhi from '@/assets/images/partners/changshahuazhi.png';
+
 
 /**
  * 合作伙伴接口
@@ -31,14 +36,18 @@ export interface Partner {
  */
 export const partners: Partner[] = [
   { src: shinaide, alt: '施耐德电气' },
-  { src: huawei, alt: '华为' },
+  { src: huawei, alt: '华为', class: 'logo-huawei' },
   { src: meituan, alt: '美团', class: 'logo-meituan' },
-  { src: perkinelmer, alt: 'PerkinElmer' },
+  { src: perkinelmer, alt: '铂金埃尔默' },
   { src: nabote, alt: '纳博特' },
   { src: qisheng, alt: '启晟' },
   { src: xinsong, alt: '新松' },
+  { src: yihui, alt: '翼辉信息' },
   { src: pudu, alt: '普渡机器人' },
-  { src: qingzhi, alt: '清之', class: 'logo-qingzhi' },
+  { src: huazhi, alt: '长沙华智' },
+  { src: qingzhi, alt: '成都清之', class: 'logo-qingzhi' },
+  { src: hongxu, alt: '泓浒半导体', class: 'logo-hongxu' },
+  { src: openEuler, alt: 'openEuler', class: 'logo-open' },
   { src: dizhi, alt: '中国地质大学' },
   { src: dongnan, alt: '东南大学' },
   { src: fudan, alt: '复旦大学' },

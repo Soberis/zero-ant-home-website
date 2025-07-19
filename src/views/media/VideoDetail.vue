@@ -28,7 +28,9 @@
             <div class="contact-dialog">
               <button class="contact-close-x" @click="showContact = false">×</button>
               <h3 class="contact-title">联系方式</h3>
-              <div class="contact-qrcode-placeholder">暂无二维码</div>
+              <div class="contact-qrcode-placeholder">
+                <img :src="wxworkQrcode" alt="企业微信二维码" style="width: 160px; height: 160px; object-fit: contain;" />
+              </div>
               <div class="contact-qrcode-desc">扫码添加企业微信，获取更多信息</div>
             </div>
           </div>
@@ -43,6 +45,7 @@
 import { useRoute } from 'vue-router'
 import { videoMap } from '@/data/videos'
 import { ref } from 'vue'
+import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
 
 const route = useRoute()
 
