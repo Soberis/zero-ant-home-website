@@ -96,16 +96,13 @@ deploy_ALI_CLOUD_ECS:
     # 直接使用文件变量（路径自动保存在 $ALI_CLOUD_ECS_SSH_PRIVATE_KEY_FILE 环境变量中）
     - cp $ALI_CLOUD_ECS_SSH_PRIVATE_KEY_FILE ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan ${ALI_CLOUD_ECS_DEPLOY_SERVER} >> ~/.ssh/known_hosts
   script:
     - echo "Deploying to production"
     - export SERVER_NAME="zeroant.com www.zeroant.com"
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g" config/nginx.conf.template > dist/nginx.conf
-    # 替换 SERVER_NAME，并将 {{REWRITE_HTTPS}} 替换为 rewrite 规则
     - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}/rewrite ^(.*)$ https:\/\/\$host\$1 permanent;/g" config/nginx.conf.template > dist/nginx.conf
-    # 部署到阿里云上
-    - rsync -avz --delete dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
-    - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
+    # 部署到阿里云上，使用 -e ssh 参数并设置 SSH 选项来避免 shell 输出干扰
+    - rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR" dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
+    - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
   # 仅仅在打指定标签的时候进行部署
   rules:
     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+(-\w+)?$/
