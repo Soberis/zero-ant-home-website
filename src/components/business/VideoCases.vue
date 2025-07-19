@@ -41,7 +41,7 @@ import { videoCards } from '@/data/videos';
 .videos-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
+  gap: 36px;
   width: 100%;
   max-width: 1800px;
   margin: 0 auto;
