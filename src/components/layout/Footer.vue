@@ -5,74 +5,162 @@
         <div class="footer-col">
           <h4>{{ $t('nav.systemProducts') }}</h4>
           <ul>
-            <li v-for="item in systemProductNav" :key="item.hash">
-              <router-link :to="{ path: '/system-products', hash: item.hash }">{{ $t(item.label) }}</router-link>
+            <li
+              v-for="item in systemProductNav"
+              :key="item.hash"
+            >
+              <router-link
+                :to="{ path: '/system-products', hash: item.hash }"
+                class="footer-link"
+              >
+                {{ $t(item.label) }}
+              </router-link>
             </li>
           </ul>
+        </div>
+        <div class="footer-col">
           <h4>{{ $t('nav.robotProducts') }}</h4>
           <ul>
-            <li v-for="item in robotProductNav" :key="item.hash">
-              <router-link :to="{ path: '/robot-products', hash: item.hash }">{{ $t(item.label) }}</router-link>
+            <li
+              v-for="item in robotProductNav"
+              :key="item.hash"
+            >
+              <router-link
+                :to="{ path: '/robot-products', hash: item.hash }"
+                class="footer-link"
+              >
+                {{ $t(item.label) }}
+              </router-link>
             </li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>{{ $t('nav.videoCases') }}</h4>
           <ul>
-            <li><router-link to="/video">{{ $t('nav.videoCases') }}</router-link></li>
+            <li>
+              <router-link to="/video">
+                {{ $t('nav.videoCases') }}
+              </router-link>
+            </li>
           </ul>
           <h4 class="footer-subtitle">{{ $t('nav.applications') }}</h4>
           <ul>
-            <li><router-link to="/applications">{{ $t('nav.medicalAuto') }}</router-link></li>
-            <li><router-link to="/applications">{{ $t('nav.semiProcessing') }}</router-link></li>
+            <li>
+              <router-link to="/applications">
+                {{ $t('nav.medicalAuto') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/applications">
+                {{ $t('nav.semiProcessing') }}
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>{{ $t('nav.support') }}</h4>
           <ul>
-            <li><router-link to="/support">{{ $t('nav.afterSales') }}</router-link></li>
-            <li><router-link :to="{ path: '/support', hash: '#download' }">{{ $t('nav.download') }}</router-link></li>
-            <li><router-link :to="{ path: '/support', hash: '#faq' }">{{ $t('nav.faq') }}</router-link></li>
+            <li>
+              <router-link to="/support">
+                {{ $t('nav.afterSales') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{ path: '/support', hash: '#download' }">
+                {{ $t('nav.download') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{ path: '/support', hash: '#faq' }">
+                {{ $t('nav.faq') }}
+              </router-link>
+            </li>
           </ul>
           <h4>{{ $t('nav.careers') }}</h4>
           <ul>
-            <li><router-link to="/careers">{{ $t('nav.careers') }}</router-link></li>
+            <li>
+              <router-link to="/careers">
+                {{ $t('nav.careers') }}
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>{{ $t('nav.about') }}</h4>
           <ul>
-            <li><router-link :to="{ path: '/about', hash: '#tab1' }">{{ $t('nav.companyIntro') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab2' }">{{ $t('nav.history') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab3' }">{{ $t('nav.honor') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab5' }">{{ $t('nav.culture') }}</router-link></li>
-            <li><router-link :to="{ path: '/about', hash: '#tab6' }">{{ $t('nav.contact') }}</router-link></li>
+            <li>
+              <router-link :to="{ path: '/about', hash: '#tab1' }">
+                {{ $t('nav.companyIntro') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{ path: '/about', hash: '#tab2' }">
+                {{ $t('nav.history') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{ path: '/about', hash: '#tab3' }">
+                {{ $t('nav.honor') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{ path: '/about', hash: '#tab5' }">
+                {{ $t('nav.culture') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{ path: '/about', hash: '#tab6' }">
+                {{ $t('nav.contact') }}
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="footer-col contact-col">
           <h4>{{ $t('footer.companyFull') }}</h4>
           <!-- 联系方式静态展示，如需动态可抽离为props或数据源 -->
           <div class="contact-info">
-              <div>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</div>
-              <div>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</div>
-              <div style="margin-top:8px;">{{ $t('contacts.address') }}：{{ $t('footer.address') }}</div>
+            <div>
+              {{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}
+            </div>
+            <div>
+              {{ $t('contacts.email') }}：liqingfeng@zeroant.com
+            </div>
+            <div style="margin-top:8px;">
+              {{ $t('contacts.address') }}：{{ $t('footer.address') }}
+            </div>
           </div>
+        </div>
+        <div class="footer-col qrcode-col">
           <!-- 二维码静态展示，如需动态可抽离为props或数据源 -->
           <div class="footer-qrcodes">
             <div class="qrcode-item">
-              <img :src="wxQrcode" alt="微信公众号二维码" class="qrcode-img" />
-              <div class="qrcode-label">{{ $t('footer.wx') }}</div>
+              <img
+                :src="wxQrcode"
+                alt="微信公众号二维码"
+                class="qrcode-img"
+              />
+              <div class="qrcode-label">
+                {{ $t('footer.wx') }}
+              </div>
             </div>
             <div class="qrcode-item">
-              <img :src="bilibiliQrcode" alt="B站二维码" class="qrcode-img" />
-              <div class="qrcode-label">{{ $t('footer.bilibili') }}</div>
+              <img
+                :src="bilibiliQrcode"
+                alt="B站二维码"
+                class="qrcode-img"
+              />
+              <div class="qrcode-label">
+                {{ $t('footer.bilibili') }}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>©2025 {{ $t('footer.companyFull') }} {{ $t('footer.copyright') }}</div>
+      <div>
+        ©2025 {{ $t('footer.companyFull') }} {{ $t('footer.copyright') }}
+      </div>
     </div>
   </footer>
 </template>
