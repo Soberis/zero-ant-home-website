@@ -54,7 +54,7 @@
       <!-- 融资信息 -->
       <div class="info-section financing-info">
         <h3>{{ $t('about.financingPlan') }}</h3>
-        <p>目前团队处于天使轮融资阶段，如对团队感兴趣或有合作意向，可邮件联系liqingfeng@zeroant.com。创业团队时间宝贵，非诚勿扰！</p>
+        <p class="financing-desc">团队目前处于天使轮融资阶段，对团队感兴趣或有合作意向，请邮件联系liqingfeng@zeroant.com。创业团队时间宝贵，非诚勿扰！</p>
       </div>
     </section>
     
@@ -88,12 +88,12 @@
       <h2>{{ $t('nav.culture') }}</h2>
       <div class="culture-content culture-block">
         <p class="culture-title"><b>核心价值观</b>：{{ $t('about.culture') }}</p>
-        <div class="culture-subtitle">零蚁科技以“创新驱动智造”为核心理念，构建开放协作的工程师文化：</div>
+        <div class="culture-subtitle"><b>零蚁科技以"创新驱动智造"为核心理念，构建开放协作的工程师文化：</b></div>
         <ul class="culture-list">
-          <li><b>厚积薄发</b> 深耕基础技术研发，十年磨一剑打造核心系统</li>
-          <li><b>场景革命</b> 以工业痛点为导向，用机器人技术重构生产流程</li>
-          <li><b>生态共建</b> 携手高校院所打造“产学研用”闭环创新体系</li>
-          <li><b>极限进化</b> 每天进步一点点，持续迭代知识体系</li>
+          <p><b>厚积薄发</b> 深耕基础技术研发，十年磨一剑打造核心系统</p>
+          <p><b>场景革命</b> 以工业痛点为导向，用机器人技术重构生产流程</p>
+          <p><b>生态共建</b> 携手高校院所打造"产学研用"闭环创新体系</p>
+          <p><b>极限进化</b> 每天进步一点点，持续迭代知识体系</p>
         </ul>
       </div>
     </section>
@@ -120,6 +120,8 @@ const emit = defineEmits([]);
 
 const timelineData = computed(() => getTimelineData(t).map(item => ({ ...item })));
 const honors = computed(() => getHonors(t).map(honor => honor));
+
+
 
 const activeTab = ref('tab1');
 const tabIds = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
@@ -689,12 +691,12 @@ onUnmounted(() => {
   font-size: 1.03em;
 }
 .culture-title {
-  font-size: 1.13em;
+  font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 16px;
 }
 .culture-subtitle {
-  font-size: 1.06em;
+  font-size: 1.01em;
   color: #333;
   margin-bottom: 28px;
 }
@@ -712,5 +714,18 @@ onUnmounted(() => {
 .culture-list li {
   margin-bottom: 9px;
   padding-left: 0;
+}
+
+.financing-desc {
+  font-size: 1.1em;
+  font-weight: 400;
+  line-height: 1.8;
+  color: #333;
+  letter-spacing: 0.5px;
+  margin-bottom: 0;
+  text-align: left;
+  word-break: break-word;
+  white-space: pre-line;
+  max-width: 100%;
 }
 </style>
