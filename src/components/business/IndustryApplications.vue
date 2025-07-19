@@ -223,7 +223,7 @@ onUnmounted(() => {
   border-radius: 10px;
 }
 .app-title {
-  font-size: 1.85rem;
+  font-size: 1.5rem;
   color: #222;
   text-align: center;
   font-weight: 700;
