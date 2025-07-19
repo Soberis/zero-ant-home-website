@@ -43,7 +43,10 @@
       </section>
     </div>
     <div class="back-btn-wrapper">
-      <button class="back-btn" @click="$emit('back')">返回产品列表</button> <!-- 触发父组件返回事件 -->
+      <button class="more-btn" @click="$emit('back')">
+        <span class="btn-text">←</span>
+        <span class="btn-arrow">返回产品列表</span>
+      </button>
     </div>
   </div>
 </template>
@@ -223,5 +226,71 @@ defineProps({
     padding: 8px 12px;
     font-size: 0.95rem;
   }
+}
+
+.more-btn {
+  position: relative;
+  border: none;
+  background: linear-gradient(135deg, #1a3a8f 0%, #4a90e2 100%);
+  color: #fff;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  min-width: 160px;
+  justify-content: center;
+}
+
+.more-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.more-btn:hover::before {
+  left: 100%;
+}
+
+.more-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3);
+}
+
+.more-btn:active {
+  transform: translateY(0) scale(1.02);
+}
+
+.btn-text {
+  transition: transform 0.3s ease;
+}
+
+.btn-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  font-weight: normal;
+}
+
+.more-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.more-btn:hover .btn-text {
+  transform: translateX(-2px);
 }
 </style> 
