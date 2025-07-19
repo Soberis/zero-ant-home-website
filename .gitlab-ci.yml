@@ -111,9 +111,15 @@ deploy_ALI_CLOUD_ECS:
         PasswordAuthentication no
       EOF
     - chmod 600 ~/.ssh/config
-    # 部署到阿里云上，使用 scp 替代 rsync 来避免协议问题
+    # 部署到阿里云上，使用 SFTP 替代 SCP 来避免协议问题
     - tar -czf dist.tar.gz -C dist .
-    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o BatchMode=yes dist.tar.gz root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/tmp/
+    # 使用 SFTP 传输文件（SFTP 不依赖 shell 输出）
+    - |
+      sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o BatchMode=yes root@${ALI_CLOUD_ECS_DEPLOY_SERVER} << 'SFTP_EOF'
+      put dist.tar.gz /tmp/dist.tar.gz
+      quit
+      SFTP_EOF
+    # 在服务器上部署文件
     - |
       ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o BatchMode=yes root@${ALI_CLOUD_ECS_DEPLOY_SERVER} '
         cd /mnt/disk1/zeroant/home_web/ &&
