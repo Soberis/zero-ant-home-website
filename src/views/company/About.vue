@@ -85,7 +85,14 @@
 
     <section class="about-section core-values" id="core-values">
       <h2 class="core-values-title">核心价值观</h2>
-      <div class="core-values-content financing-desc">经世致用、正直诚信、务实发展、保持迭代</div>
+      <div class="core-values-content">
+        <div class="core-values-row">
+          <div class="core-value-card">经世致用</div>
+          <div class="core-value-card">正直诚信</div>
+          <div class="core-value-card">务实发展</div>
+          <div class="core-value-card">保持迭代</div>
+        </div>
+      </div>
     </section>
 
     <section class="about-section culture" id="culture">
@@ -739,6 +746,49 @@ onUnmounted(() => {
   text-align: center;
   margin: 24px 0 0 0;
 }
+.core-values-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.core-value-card {
+  min-width: 120px;
+  padding: 20px 28px;
+  background: linear-gradient(135deg, #f7faff 60%, #e9ecef 100%);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px 0 rgba(26,58,143,0.05);
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #1a3a8f;
+  text-align: center;
+  letter-spacing: 0.18em;
+  transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.core-value-card:hover {
+  box-shadow: 0 8px 24px 0 rgba(26,58,143,0.13);
+  background: linear-gradient(135deg, #e3e8ee 60%, #f7faff 100%);
+  transform: translateY(-4px);
+}
+@media (max-width: 900px) {
+  .core-values-row {
+    gap: 16px;
+  }
+  .core-value-card {
+    font-size: 1em;
+    padding: 14px 10px;
+    min-width: 100px;
+    flex: 1 1 40%;
+    margin-bottom: 8px;
+  }
+}
+
 .culture-title {
   text-align: center;
 }
