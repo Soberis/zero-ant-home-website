@@ -6,7 +6,6 @@
   "nav": {
     "home": "Home",
     "products": "Products",
-  
     "applications": "Applications",
     "about": "About Us",
     "contact": "Contact Us",
@@ -65,7 +64,6 @@
     "ordersInHand": "Orders in Hand",
     "financingAmount": "Financing Amount",
     "preliminaryValuation": "Preliminary Valuation",
-    "airos": "AiROS Operating System",
     "waferTransport": "Wafer Transport Robot",
     "labTransport": "Lab Transport Robot",
     "deliveryRobot": "Delivery Robot",
