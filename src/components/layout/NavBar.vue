@@ -173,12 +173,18 @@ const aboutNav = [
 ];
 
 const systemProductNav = [
+  { hash: '#robot-scheduler', label: 'nav.robotScheduler' },
+  { hash: '#industrial-rtos', label: 'nav.industrialRTOS' },
   { hash: '#airos', label: 'nav.airos' },
+  { hash: '#multi-os-vm', label: 'nav.multiOSVM' }
 ];
+
 const robotProductNav = [
-  { hash: '#wafer-transport-robot', label: 'nav.waferTransport' },
-  { hash: '#lab-plate-transport-robot', label: 'nav.labTransport' },
-  { hash: '#restaurant-delivery-robot', label: 'nav.deliveryRobot' },
+  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
+  { hash: '#scara-4axis', label: 'nav.scara4Axis' },
+  { hash: '#arm-6axis', label: 'nav.arm6Axis' },
+  { hash: '#gantry-2d', label: 'nav.gantry2D' },
+  { hash: '#dual-arm-humanoid', label: 'nav.dualArmHumanoid' },
 ];
 
 const { locale } = useI18n();

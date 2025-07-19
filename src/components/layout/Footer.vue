@@ -31,8 +31,8 @@
           <h4>{{ $t('nav.support') }}</h4>
           <ul>
             <li><router-link to="/support">{{ $t('nav.afterSales') }}</router-link></li>
-            <li><router-link to="/support">{{ $t('nav.download') }}</router-link></li>
-            <li><router-link to="/support">{{ $t('nav.faq') }}</router-link></li>
+            <li><router-link :to="{ path: '/support', hash: '#download' }">{{ $t('nav.download') }}</router-link></li>
+            <li><router-link :to="{ path: '/support', hash: '#faq' }">{{ $t('nav.faq') }}</router-link></li>
           </ul>
           <h4>{{ $t('nav.careers') }}</h4>
           <ul>

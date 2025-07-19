@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="support-page">
-    <h2 class="section-title">相关下载</h2>
+    <h2 class="section-title" id="download">相关下载</h2>
     <div class="section-block">
       <div v-for="(item, idx) in downloads" :key="item.title" class="card-item download-card" :class="{open: item.open}">
         <div class="card-header" @click="toggleDownload(idx)">
@@ -43,7 +43,7 @@
         </transition>
       </div>
     </div>
-    <h2 class="section-title">常见问题</h2>
+    <h2 class="section-title" id="faq">常见问题</h2>
     <div class="section-block">
       <div v-for="(faq, idx) in faqs" :key="faq.q" class="card-item faq-card" :class="{open: faq.open}">
         <div class="card-header" @click="toggleFaq(idx)">
