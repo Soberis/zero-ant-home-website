@@ -554,6 +554,11 @@ onUnmounted(() => {
   .timeline {
     flex-direction: column;
     gap: 24px;
+    align-items: center; /* 新增：让时间轴整体居中 */
+  }
+  
+  .timeline-item {
+    align-items: center; /* 新增：让每个时间点内容居中 */
   }
   
   .stats-grid {

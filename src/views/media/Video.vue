@@ -50,7 +50,7 @@ const goToVideo = idx => {
 .video-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f8 100%);
-  padding: 80px 0;
+  padding: 40px 0;
   overflow-x: hidden;
 }
 
@@ -62,87 +62,71 @@ const goToVideo = idx => {
 
 .page-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .page-title {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 16px;
+  font-size: 4.2rem;
+  font-weight: 800;
+  margin-bottom: 20px;
   letter-spacing: 2px;
-  background: linear-gradient(135deg, #222 0%, #222 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
+  color: #222;
 }
 
 .page-subtitle {
-  font-size: 18px;
-  color: #666;
+  font-size: 1.65rem;
+  color: #222;
   font-weight: 400;
-  margin: 0;
+  margin-bottom: 32px;
   letter-spacing: 1px;
 }
 
 .card-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 40px;
+  gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* 响应式设计 */
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
   .page-container {
     padding: 0 30px;
   }
   .card-list {
-    gap: 30px;
+    gap: 24px;
   }
   .page-title {
-    font-size: 42px;
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+  }
+  .page-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .page-container {
     padding: 0 20px;
   }
   .video-page {
-    padding: 60px 0;
+    padding: 30px 0;
   }
   .page-header {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
   .page-title {
-    font-size: 36px;
-    letter-spacing: 1px;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
   }
   .page-subtitle {
-    font-size: 16px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
   }
   .card-list {
     grid-template-columns: 1fr;
-    gap: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .page-container {
-    padding: 0 16px;
-  }
-  .video-page {
-    padding: 40px 0;
-  }
-  .page-title {
-    font-size: 28px;
-  }
-  .page-subtitle {
-    font-size: 14px;
-  }
-  .card-list {
     gap: 20px;
   }
 }
