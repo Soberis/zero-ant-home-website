@@ -153,12 +153,7 @@
 </template>
 
 <script setup>
-import {
-  computed,
-  ref,
-  onMounted,
-  onUnmounted,
-} from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors } from "@/data/about";
 const { t, locale } = useI18n();
