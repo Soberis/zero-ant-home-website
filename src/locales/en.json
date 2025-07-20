@@ -87,23 +87,31 @@
     "vision": "To be a leader in automation technology, improving productivity and safety in medical applications.",
     "values": "Integrity, Innovation, Excellence",
     "companyIntro": "ZeroAnt Technology is a high-tech enterprise specializing in the R&D, production, and sales of micro-logistics intelligent conveying systems. We are committed to connecting professional equipment and application scenarios through innovative intelligent logistics solutions, helping various industries achieve efficient and reliable intelligent upgrades. Our core team consists of researchers from Beihang University and industry experts, with profound technical expertise and rich engineering experience.",
-    "culture": "Practical and useful, honest and trustworthy, pragmatic development, continuous iteration",
+    "companyIntroDetailed": {
+      "para1": "Hangzhou ZeroAnt Technology Co., Ltd. is a high-tech enterprise founded by the research team from <b>Beihang University Hangzhou Innovation Research Institute</b>, focusing on the R&D of intelligent robot complete solutions. Currently, it provides highly reliable robot intelligent system solutions for biopharmaceutical, semiconductor and other industries.",
+      "para2": "The company relies on the <b>Zhejiang Provincial Key Laboratory of Industrial Big Data and Robot Intelligent Systems</b>, independently developing the <b>\"Intelligent Robot Operating System\" (AiROS)</b>, conquering core technologies such as mobile robot autonomous navigation, high-speed and high-precision control of robotic arms, 3D spatial semantic perception, and multi-robot collaborative scheduling, creating a full-stack software ecosystem and modular hardware platform.",
+      "para3": "The team has established normalized cooperation mechanisms with multiple top domestic institutions, forming a <b>closed-loop innovation system of \"industry-university-research-application\"</b>. As a pioneer of industrial intelligent infrastructure, ZeroAnt Technology is promoting industry intelligent upgrades with <b>fully autonomous and controllable technology</b>, continuously empowering high-quality development of the manufacturing industry.",
+      "financingDesc": "The team is currently in the angel round financing stage. If you are interested in the team or have cooperation intentions, please contact liqingfeng@zeroant.com. Startup teams value time, no casual inquiries please!"
+    },
+    "culture": "Practical application, Integrity and honesty, Pragmatic development, Agile iteration",
     "people": "people",
     "yearsOld": "years old",
     "millionYuan": "million yuan",
     "hundredMillionYuan": "hundred million yuan",
     "timeline": {
-      "2017": "Started robot operating system R&D, received national project support of 24.14 million",
-      "2020": "Company founded, focusing on micro-logistics intelligent conveying system R&D",
-      "2022": "Completed multiple industry intelligent logistics projects, team size exceeded 18 people",
-      "2023": "Released AiROS robot operating system, won ACM MobiCom 2024 Best Technical Achievement Award, expert panel rated technology as internationally leading",
-      "2024": "Company founded, focusing on micro-logistics intelligent conveying system R&D",
-      "2025": "Officially established Hangzhou ZeroAnt Technology Co., Ltd., orders in hand 16 million, planned financing 20 million, preliminary valuation 200 million RMB"
-  },
-    "honor1": "National High-tech Enterprise",
-    "honor2": "ISO9001 Quality Management System Certification",
-    "honor3": "Multiple Invention Patents and Software Copyrights",
-    "honor4": "Industry Innovation Award, Technology Breakthrough Award",
+      "2017": "Started industrial operating system kernel R&D",
+      "2020": "Launched robot control system R&D, received support from Zhejiang Province major project",
+      "2022": "Started semiconductor wafer transport robot project R&D",
+      "2023": "Launched four-axis transport robot project R&D",
+      "2024": "Released AiROS robot operating system, technology certified as internationally leading by academician expert panel",
+      "2025": "Officially established Hangzhou ZeroAnt Technology Co., Ltd., launched industrialization initiatives"
+    },
+    "honor1": "First Rust-based embedded hypervisor in China",
+    "honor2": "System software certified with EAL5+ information security standard",
+    "honor3": "Fully self-developed intelligent robot operating system",
+    "honor4": "Kernel real-time jitter ≤2us, supporting high-precision device applications",
+    "honor5": "Backed by provincial key laboratories with deep technical expertise",
+    "honor6": "Core team leads multiple national and provincial key projects",
     "teamInfo": "Team size: 18 people, 94% with master's degree or above, average age 30, 90% from top universities",
     "coreTeam": "Core Team",
     "teamOverview": "Team Overview",
@@ -117,7 +125,22 @@
     "financingAmount": "Financing amount: 20 million yuan",
     "preliminaryValuation": "Preliminary valuation: 200 million yuan",
     "marketInfo": "In 2024, the global industrial robot market is about $70 billion, and the total potential market size of embodied robots is about $60 trillion.",
-    "financing": "Plans to divest 10% equity, raise 20 million yuan, preliminary valuation of 200 million yuan."
+    "financing": "Plans to divest 10% equity, raise 20 million yuan, preliminary valuation of 200 million yuan.",
+    "coreValues": {
+      "title": "Core Values",
+      "value1": "Practical Application",
+      "value2": "Integrity & Honesty",
+      "value3": "Pragmatic Efficiency",
+      "value4": "Agile Iteration"
+    },
+    "enterpriseCulture": {
+      "title": "Corporate Culture",
+      "description": "ZeroAnt Technology builds an open and collaborative engineering culture with \"Innovation Drives Smart Manufacturing\" as its core concept:",
+      "item1": "<b>Deep Accumulation</b>: Deeply cultivating fundamental technologies, ten years to forge a sword, creating core systems",
+      "item2": "<b>Scenario Revolution</b>: Focusing on industrial pain points, reshaping production processes with robotics technology",
+      "item3": "<b>Ecosystem Co-construction</b>: Partnering with universities and research institutes to create a closed-loop innovation system of \"industry-university-research-application\"",
+      "item4": "<b>Extreme Evolution</b>: Making a little progress every day, continuously iterating knowledge systems"
+    }
   },
   "contactSection": {
     "getInTouch": "Get in Touch",
