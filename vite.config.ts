@@ -8,10 +8,13 @@ import { fileURLToPath } from 'url'
 export default defineConfig({
   plugins: [
     vue(),
+    // 暂时禁用VueI18nPlugin以避免@符号解析问题
     // VueI18nPlugin({
     //   runtimeOnly: false,
     //   include: path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'src/locales/**'),
-    //   strictMessage: false
+    //   strictMessage: false,
+    //   escapeHtml: false,
+    //   allowDynamic: true
     // })
   ],
   resolve: {

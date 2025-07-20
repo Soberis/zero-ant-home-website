@@ -84,6 +84,12 @@
         <p class="financing-desc">
           {{ $t("about.companyIntroDetailed.financingDesc") }}
         </p>
+        <p class="financing-desc">
+          {{ $t("about.companyIntroDetailed.emailTips")
+          }}<a href="mailto:liqingfeng@zeroant.com"
+            >&nbsp;liqingfeng@zeroant.com</a
+          >
+        </p>
       </div>
     </section>
 
