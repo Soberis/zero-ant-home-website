@@ -3,12 +3,9 @@
     <div class="footer-main">
       <div class="footer-columns">
         <div class="footer-col">
-          <h4>{{ $t('nav.systemProducts') }}</h4>
+          <h4>{{ $t("nav.systemProducts") }}</h4>
           <ul>
-            <li
-              v-for="item in systemProductNav"
-              :key="item.hash"
-            >
+            <li v-for="item in systemProductNav" :key="item.hash">
               <router-link
                 :to="{ path: '/system-products', hash: item.hash }"
                 class="footer-link"
@@ -19,12 +16,9 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>{{ $t('nav.robotProducts') }}</h4>
+          <h4>{{ $t("nav.robotProducts") }}</h4>
           <ul>
-            <li
-              v-for="item in robotProductNav"
-              :key="item.hash"
-            >
+            <li v-for="item in robotProductNav" :key="item.hash">
               <router-link
                 :to="{ path: '/robot-products', hash: item.hash }"
                 class="footer-link"
@@ -35,103 +29,99 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>{{ $t('nav.videoCases') }}</h4>
+          <h4>{{ $t("nav.videoCases") }}</h4>
           <ul>
             <li>
               <router-link to="/video">
-                {{ $t('nav.videoCases') }}
+                {{ $t("nav.videoCases") }}
               </router-link>
             </li>
           </ul>
-          <h4 class="footer-subtitle">{{ $t('nav.applications') }}</h4>
+          <h4 class="footer-subtitle">{{ $t("nav.applications") }}</h4>
           <ul>
             <li>
               <router-link to="/applications">
-                {{ $t('nav.medicalAuto') }}
+                {{ $t("nav.medicalAuto") }}
               </router-link>
             </li>
             <li>
               <router-link to="/applications">
-                {{ $t('nav.semiProcessing') }}
+                {{ $t("nav.semiProcessing") }}
               </router-link>
             </li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>{{ $t('nav.support') }}</h4>
+          <h4>{{ $t("nav.support") }}</h4>
           <ul>
             <li>
               <router-link to="/support">
-                {{ $t('nav.afterSales') }}
+                {{ $t("nav.afterSales") }}
               </router-link>
             </li>
             <li>
               <router-link :to="{ path: '/support', hash: '#download' }">
-                {{ $t('nav.download') }}
+                {{ $t("nav.download") }}
               </router-link>
             </li>
             <li>
               <router-link :to="{ path: '/support', hash: '#faq' }">
-                {{ $t('nav.faq') }}
+                {{ $t("nav.faq") }}
               </router-link>
             </li>
           </ul>
-          <h4>{{ $t('nav.careers') }}</h4>
+          <h4>{{ $t("nav.careers") }}</h4>
           <ul>
             <li>
               <router-link to="/careers">
-                {{ $t('nav.careers') }}
+                {{ $t("nav.careers") }}
               </router-link>
             </li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>{{ $t('nav.about') }}</h4>
+          <h4>{{ $t("nav.about") }}</h4>
           <ul>
             <li>
               <router-link :to="{ path: '/about', hash: '#company-intro' }">
-                {{ $t('nav.companyIntro') }}
+                {{ $t("nav.companyIntro") }}
               </router-link>
             </li>
             <li>
               <router-link :to="{ path: '/about', hash: '#history' }">
-                {{ $t('nav.history') }}
+                {{ $t("nav.history") }}
               </router-link>
             </li>
             <li>
               <router-link :to="{ path: '/about', hash: '#honors' }">
-                {{ $t('nav.honor') }}
+                {{ $t("nav.honor") }}
               </router-link>
             </li>
             <li>
               <router-link :to="{ path: '/about', hash: '#core-values' }">
-                {{ $t('nav.coreValues') }}
+                {{ $t("nav.coreValues") }}
               </router-link>
             </li>
             <li>
               <router-link :to="{ path: '/about', hash: '#culture' }">
-                {{ $t('nav.culture') }}
+                {{ $t("nav.culture") }}
               </router-link>
             </li>
             <li>
               <router-link :to="{ path: '/about', hash: '#contact' }">
-                {{ $t('nav.contact') }}
+                {{ $t("nav.contact") }}
               </router-link>
             </li>
           </ul>
         </div>
         <div class="footer-col contact-col">
-          <h4>{{ $t('footer.companyFull') }}</h4>
+          <h4>{{ $t("footer.companyFull") }}</h4>
           <!-- 联系方式静态展示，如需动态可抽离为props或数据源 -->
           <div class="contact-info">
-            <div>
-              {{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}
-            </div>
-            <div>
-              {{ $t('contacts.email') }}：liqingfeng@zeroant.com
-            </div>
-            <div style="margin-top:8px;">
-              {{ $t('contacts.address') }}：{{ $t('footer.address') }}
+            <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
+            <div>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</div>
+            <div style="margin-top: 8px">
+              {{ $t("contacts.address") }}：{{ $t("footer.address") }}
             </div>
           </div>
         </div>
@@ -139,13 +129,9 @@
           <!-- 二维码静态展示，如需动态可抽离为props或数据源 -->
           <div class="footer-qrcodes">
             <div class="qrcode-item">
-              <img
-                :src="wxQrcode"
-                alt="微信公众号二维码"
-                class="qrcode-img"
-              />
+              <img :src="wxQrcode" alt="微信公众号二维码" class="qrcode-img" />
               <div class="qrcode-label">
-                {{ $t('footer.wx') }}
+                {{ $t("footer.wx") }}
               </div>
             </div>
             <div class="qrcode-item">
@@ -155,7 +141,7 @@
                 class="qrcode-img bilibili-qrcode-img"
               />
               <div class="qrcode-label">
-                {{ $t('footer.bilibili') }}
+                {{ $t("footer.bilibili") }}
               </div>
             </div>
           </div>
@@ -164,7 +150,14 @@
     </div>
     <div class="footer-bottom">
       <div>
-        ©2025 {{ $t('footer.companyFull') }} {{ $t('footer.copyright') }}
+        ©2025 {{ $t("footer.companyFull") }} {{ $t("footer.copyright") }}
+        <a
+          href="https://beian.miit.gov.cn"
+          target="_blank"
+          rel="noopener"
+          class="icp-link"
+          >备案号：浙ICP备2022031941号-4</a
+        >
       </div>
     </div>
   </footer>
@@ -172,22 +165,22 @@
 
 <script setup>
 // 仅用于国际化，无复杂逻辑
-import { useI18n } from 'vue-i18n';
-import bilibiliQrcode from '@/assets/images/qrcodes/bilibili.png';
-import wxQrcode from '@/assets/images/qrcodes/wx.jpg';
+import { useI18n } from "vue-i18n";
+import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.png";
+import wxQrcode from "@/assets/images/qrcodes/wx.jpg";
 
 const systemProductNav = [
-  { hash: '#multi-os-vm', label: 'nav.multiOSVM' },
-  { hash: '#industrial-rtos', label: 'nav.industrialRTOS' },
-  { hash: '#airos', label: 'nav.airos' },
-  { hash: '#robot-scheduler', label: 'nav.robotScheduler' },
+  { hash: "#multi-os-vm", label: "nav.multiOSVM" },
+  { hash: "#industrial-rtos", label: "nav.industrialRTOS" },
+  { hash: "#airos", label: "nav.airos" },
+  { hash: "#robot-scheduler", label: "nav.robotScheduler" },
 ];
 const robotProductNav = [
-  { hash: '#gantry-2d', label: 'nav.gantry2D' },
-  { hash: '#scara-4axis', label: 'nav.scara4Axis' },
-  { hash: '#arm-6axis', label: 'nav.arm6Axis' },
-  { hash: '#dual-arm-humanoid', label: 'nav.dualArmHumanoid' },
-  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
+  { hash: "#gantry-2d", label: "nav.gantry2D" },
+  { hash: "#scara-4axis", label: "nav.scara4Axis" },
+  { hash: "#arm-6axis", label: "nav.arm6Axis" },
+  { hash: "#dual-arm-humanoid", label: "nav.dualArmHumanoid" },
+  { hash: "#mobile-robot", label: "nav.mobileRobot" },
 ];
 </script>
 
@@ -286,6 +279,16 @@ const robotProductNav = [
   text-align: center;
   color: #888;
   font-size: 13px;
+}
+
+.icp-link {
+  color: #888 !important;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.icp-link:hover {
+  color: #bbb !important;
 }
 .qrcode-col {
   margin-left: 550px;
