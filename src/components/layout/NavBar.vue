@@ -13,7 +13,8 @@
         </router-link>
       </div>
       
-      <div class="nav-wrapper">
+      <!-- 桌面端导航 -->
+      <div class="nav-wrapper desktop-nav">
         <ul class="nav-links">
           <li class="nav-item">
             <router-link to="/" class="nav-link" active-class="active">
@@ -123,15 +124,102 @@
             <span class="lang-text">{{ locale === 'zh' ? 'EN' : '中文' }}</span>
           </button>
         </div>
+        
+        <!-- 汉堡菜单按钮 -->
+        <button 
+          class="hamburger-menu"
+          :class="{ 'active': isMobileMenuOpen }"
+          @click="toggleMobileMenu"
+          aria-label="Toggle navigation menu"
+        >
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </div>
     </nav>
+
+    <!-- 移动端导航菜单 -->
+    <div class="mobile-nav" :class="{ 'open': isMobileMenuOpen }" @click="handleBackgroundClick">
+      <div class="mobile-nav-content">
+        <ul class="mobile-nav-links">
+          <li class="mobile-nav-item">
+            <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.home") }}
+            </router-link>
+          </li>
+          <li class="mobile-nav-item">
+            <router-link to="/system-products" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.systemProducts") }}
+            </router-link>
+          </li>
+          <li class="mobile-nav-item">
+            <router-link to="/robot-products" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.robotProducts") }}
+            </router-link>
+          </li>
+          <li class="mobile-nav-item">
+            <router-link to="/video" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.videoCases") }}
+            </router-link>
+          </li>
+          <li class="mobile-nav-item">
+            <router-link to="/applications" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.applications") }}
+            </router-link>
+          </li>
+          <li class="mobile-nav-item">
+            <router-link to="/support" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.support") }}
+            </router-link>
+          </li>
+          <li class="mobile-nav-item">
+            <router-link to="/careers" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.careers") }}
+            </router-link>
+          </li>
+          <li class="mobile-nav-item">
+            <router-link to="/about" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.about") }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
   </header>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import logoUrl from "@/assets/zeroant_logo.png";
+
+// 移动端菜单状态
+const isMobileMenuOpen = ref(false);
+
+// 切换移动端菜单
+function toggleMobileMenu() {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+  // 防止背景滚动
+  if (isMobileMenuOpen.value) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+// 关闭移动端菜单
+function closeMobileMenu() {
+  isMobileMenuOpen.value = false;
+  document.body.style.overflow = '';
+}
+
+// 点击背景关闭菜单
+function handleBackgroundClick(event) {
+  if (event.target.classList.contains('mobile-nav')) {
+    closeMobileMenu();
+  }
+}
 
 // 产品导航子项
 const productNav = [
@@ -208,6 +296,11 @@ onMounted(() => {
     locale.value = "zh";
     localStorage.setItem("language", "zh");
   }
+});
+
+onUnmounted(() => {
+  // 清理body样式
+  document.body.style.overflow = '';
 });
 </script>
 
@@ -610,12 +703,127 @@ onMounted(() => {
   }
 }
 
+/* 汉堡菜单样式 */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 16px;
+  position: relative;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: #1a3a8f;
+  margin: 3px 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* 移动端导航菜单 */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffffff, #f8faff);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: 80px;
+  overflow-y: auto;
+}
+
+.mobile-nav.open .mobile-nav-content {
+  transform: translateX(0);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.mobile-nav-item {
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 16px 24px;
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(26, 58, 143, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.mobile-nav-link:hover {
+  background: rgba(26, 58, 143, 0.05);
+  color: #1a3a8f;
+  padding-left: 32px;
+}
+
+.mobile-nav-link.router-link-active {
+  background: rgba(26, 58, 143, 0.08);
+  color: #1a3a8f;
+  font-weight: 600;
+  border-left: 4px solid #1a3a8f;
+}
+
 /* 优化响应式设计 - 更早隐藏导航菜单 */
 
 @media (max-width: 950px) {
-  /* 在950px以下隐藏导航菜单，只保留logo和语言切换 */
-  .nav-wrapper {
+  /* 在950px以下隐藏桌面导航菜单，显示汉堡菜单 */
+  .desktop-nav {
     display: none;
+  }
+  
+  .hamburger-menu {
+    display: flex;
   }
   
   .nav-container {
@@ -677,9 +885,10 @@ onMounted(() => {
   }
   
   .language-btn {
-    padding: 6px 12px;
-    font-size: 12px;
-    min-width: 40px;
+    padding: 6px 10px;
+    font-size: 11px;
+    min-width: 35px;
+    border-radius: 16px;
   }
   
   .nav-actions {
@@ -687,11 +896,21 @@ onMounted(() => {
     gap: 0;
   }
   
-  .language-btn {
-    padding: 6px 10px;
-    font-size: 11px;
-    min-width: 35px;
-    border-radius: 16px;
+  .hamburger-menu {
+    width: 28px;
+    height: 28px;
+    margin-left: 12px;
+  }
+  
+  .hamburger-line {
+    width: 20px;
+    height: 2px;
+    margin: 2px 0;
+  }
+  
+  .mobile-nav-content {
+    width: 260px;
+    padding-top: 70px;
   }
 }
 
@@ -718,6 +937,28 @@ onMounted(() => {
     font-size: 10px;
     min-width: 30px;
     border-radius: 14px;
+  }
+  
+  .hamburger-menu {
+    width: 26px;
+    height: 26px;
+    margin-left: 8px;
+  }
+  
+  .hamburger-line {
+    width: 18px;
+    height: 2px;
+    margin: 2px 0;
+  }
+  
+  .mobile-nav-content {
+    width: 240px;
+    padding-top: 65px;
+  }
+  
+  .mobile-nav-link {
+    padding: 14px 20px;
+    font-size: 15px;
   }
 }
 
@@ -748,6 +989,28 @@ onMounted(() => {
   
   .lang-text {
     font-weight: 600;
+  }
+  
+  .hamburger-menu {
+    width: 24px;
+    height: 24px;
+    margin-left: 6px;
+  }
+  
+  .hamburger-line {
+    width: 16px;
+    height: 2px;
+    margin: 1.5px 0;
+  }
+  
+  .mobile-nav-content {
+    width: 220px;
+    padding-top: 60px;
+  }
+  
+  .mobile-nav-link {
+    padding: 12px 16px;
+    font-size: 14px;
   }
 }
 

@@ -110,4 +110,16 @@ import { getProductDetailLink } from '@/helpers/product';
   background: #1a3a8f;
   color: #fff;
 }
+
+@media (max-width: 900px) {
+  .section-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
 </style>

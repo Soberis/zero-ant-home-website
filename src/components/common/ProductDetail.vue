@@ -220,11 +220,17 @@ defineProps({
     font-size: 1.3rem;
   }
   .section-title {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .btn, .back-btn {
     padding: 8px 12px;
     font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 1rem;
   }
 }
 

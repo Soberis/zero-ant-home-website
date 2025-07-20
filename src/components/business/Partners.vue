@@ -99,12 +99,18 @@ import { partners } from '@/data/partners';
     height: 60px;
   }
   .section-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   .section-underline {
     height: 2px;
     width: 32px;
     margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 1.2rem;
   }
 }
 </style>

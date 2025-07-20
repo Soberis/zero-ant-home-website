@@ -228,7 +228,7 @@ function goToDetail(slug) {
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -246,6 +246,10 @@ function goToDetail(slug) {
   .subtitle {
     font-size: 1rem;
     margin-bottom: 32px;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
   }
   
   .core-scenarios {

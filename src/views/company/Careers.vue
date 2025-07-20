@@ -535,7 +535,7 @@ const applyForPosition = (position) => {
   }
 
   .section-title {
-    font-size: 1.5rem; // 原2rem，适配移动端
+    font-size: 1.4rem; // 统一为1.4rem
   }
 
   .why-join,
@@ -562,6 +562,12 @@ const applyForPosition = (position) => {
   .contact-info {
     flex-direction: column;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 1.2rem; // 600px以下进一步缩小
   }
 }
 </style>

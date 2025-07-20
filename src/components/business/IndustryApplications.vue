@@ -243,6 +243,12 @@ onUnmounted(() => {
   height: 72px;
 }
 @media (max-width: 900px) {
+  .section-title {
+    font-size: 1.4rem;
+  }
+  .section-desc {
+    font-size: 1.1rem;
+  }
   .apps-track {
     gap: 14px;
     padding-left: 10px;
@@ -259,6 +265,15 @@ onUnmounted(() => {
   }
   .scroll-btn.right {
     right: 5vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 1.2rem;
+  }
+  .section-desc {
+    font-size: 1rem;
   }
 }
 </style>
