@@ -155,19 +155,13 @@
 <script setup>
 import {
   computed,
-  watch,
   ref,
   onMounted,
   onUnmounted,
-  defineProps,
-  defineEmits,
 } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors } from "@/data/about";
 const { t, locale } = useI18n();
-
-const props = defineProps({});
-const emit = defineEmits([]);
 
 const timelineData = computed(() =>
   getTimelineData(t).map((item) => ({ ...item }))
