@@ -280,7 +280,6 @@ const robotProductNav = [
   color: #bdbdbd;
 }
 .footer-bottom {
-  border-top: 1px solid #444;
   margin-top: 32px;
   padding: 16px 0 8px 0;
   text-align: center;
@@ -295,5 +294,103 @@ const robotProductNav = [
   background: #fff;
   border-radius: 8px;
   box-sizing: border-box;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .footer-main {
+    padding: 0 16px;
+  }
+  
+  .footer-columns {
+    gap: 24px;
+  }
+  
+  .footer-col {
+    min-width: 140px;
+    flex: 1 1 calc(50% - 12px);
+  }
+  
+  .contact-col {
+    flex: 1 1 100%;
+  }
+  
+  .qrcode-col {
+    margin-left: 0;
+    flex: 1 1 100%;
+    order: 999; /* 将二维码移到最后面 */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .footer-qrcodes {
+    justify-content: center;
+    gap: 24px;
+  }
+  
+  .qrcode-item {
+    min-width: 70px;
+  }
+  
+  .qrcode-img {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .qrcode-label {
+    font-size: 11px;
+  }
+  
+  .contact-info {
+    text-align: center;
+  }
+  
+  .contact-col h4 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-columns {
+    gap: 20px;
+  }
+  
+  .footer-col {
+    flex: 1 1 100%;
+  }
+  
+  .footer-qrcodes {
+    gap: 20px;
+  }
+  
+  .qrcode-item {
+    min-width: 60px;
+  }
+  
+  .qrcode-img {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .qrcode-label {
+    font-size: 10px;
+  }
+  
+  .contact-info {
+    font-size: 12px;
+  }
+  
+  .footer-col h4 {
+    font-size: 15px;
+  }
+  
+  .contact-col h4 {
+    text-align: center;
+  }
+  
+  .contact-info {
+    text-align: center;
+  }
 }
 </style>
