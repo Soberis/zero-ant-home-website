@@ -1,3 +1,94 @@
+# Robots.txt for ZeroAnt Technology Co., Ltd.
+# https://zeroant.com
+
+# Allow all search engines to crawl the entire site
 User-agent: *
 Allow: /
+
+# Explicitly allow important pages for better SEO
+Allow: /about
+Allow: /careers
+Allow: /contact
+Allow: /applications
+Allow: /system-products
+Allow: /robot-products
+Allow: /video
+Allow: /support
+
+# Allow crawling of static assets
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /assets/
+
+# Disallow crawling of development and build files
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+Disallow: /build/
+Disallow: /.vscode/
+Disallow: /coverage/
+Disallow: /test/
+Disallow: /tests/
+
+# Disallow crawling of configuration files
+Disallow: /*.json
+Disallow: /*.js.map
+Disallow: /*.css.map
+Disallow: /tsconfig*
+Disallow: /vite.config*
+Disallow: /package*
+Disallow: /.env*
+
+# Disallow crawling of temporary or cache files
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /*?debug*
+Disallow: /*?test*
+
+# Special rules for different search engines
+
+# Google Bot - allow everything by default
+User-agent: Googlebot
+Allow: /
+
+# Bing Bot - allow everything by default
+User-agent: Bingbot
+Allow: /
+
+# Baidu Bot - specifically allow for Chinese market
+User-agent: Baiduspider
+Allow: /
+Allow: /about
+Allow: /careers
+Allow: /applications
+Allow: /system-products
+Allow: /robot-products
+Allow: /video
+Allow: /support
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Crawl delay to be respectful to server resources
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://zeroant.com/sitemap.xml
+
+# Additional sitemap for images if available
+# Sitemap: https://zeroant.com/sitemap-images.xml
+
+# Host directive (optional, for specifying preferred domain)
+Host: https://zeroant.com
