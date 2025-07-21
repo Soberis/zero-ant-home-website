@@ -150,8 +150,8 @@ function goToApplicationDetail(slug) {
 
 .page-subtitle {
   font-size: 1.65rem;
-  color: #222;
-  font-weight: 400;
+  color: #1a3a8f;
+  font-weight: 600;
   margin-bottom: 36px;
   letter-spacing: 1px;
 }
@@ -176,6 +176,12 @@ function goToApplicationDetail(slug) {
   height: 3px;
   background: linear-gradient(90deg, #1a3a8f 0%, #4f8cff 100%);
   border-radius: 2px;
+  opacity: 0;
+  animation: fadein-line 0.8s 0.1s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes fadein-line {
+  from { opacity: 0; transform: translateX(-50%) scaleX(0.5); }
+  to { opacity: 1; transform: translateX(-50%) scaleX(1); }
 }
 
 .core-scenarios,
@@ -221,15 +227,14 @@ function goToApplicationDetail(slug) {
   padding: 40px 32px;
   box-shadow: 0 4px 20px rgba(26, 58, 143, 0.08);
   border: 1px solid #e3e8f0;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1), border-color 0.25s;
   cursor: pointer;
   text-align: center;
 }
-
 .core-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 32px rgba(26, 58, 143, 0.15);
-  border-color: #1a3a8f;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(26, 58, 143, 0.13);
+  border-color: #4f8cff;
 }
 
 .core-icon {
