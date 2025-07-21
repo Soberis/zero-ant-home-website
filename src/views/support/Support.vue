@@ -33,7 +33,7 @@
     <div class="section-block">
       <div v-for="(item, idx) in downloads" :key="item.title" class="card-item download-card" :class="{open: item.open}">
         <div class="card-header" @click="toggleDownload(idx)">
-          <router-link :to="{ path: '/support', hash: item.link }" class="card-title download-title" @click.stop>{{ item.title }}</router-link>
+          <span class="card-title download-title">{{ item.title }}</span>
           <span class="card-icon">{{ item.open ? '-' : '+' }}</span>
         </div>
         <transition name="fade-slide">
@@ -47,7 +47,7 @@
     <div class="section-block">
       <div v-for="(faq, idx) in faqs" :key="faq.q" class="card-item faq-card" :class="{open: faq.open}">
         <div class="card-header" @click="toggleFaq(idx)">
-          <router-link :to="{ path: '/support', hash: faq.link }" class="card-title faq-title" @click.stop>{{ faq.q }}</router-link>
+          <span class="card-title faq-title">{{ faq.q }}</span>
           <span class="card-icon">{{ faq.open ? '-' : '+' }}</span>
         </div>
         <transition name="fade-slide">
