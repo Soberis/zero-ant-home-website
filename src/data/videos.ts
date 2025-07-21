@@ -6,6 +6,9 @@ import agvImg from '@/assets/images/videos/agv产品介绍.png';
 import ultrasoundImg from '@/assets/images/videos/b超机器人.png';
 import compositeRobotImg from '@/assets/images/videos/复合机器人传板.png';
 import waferTransferImg from '@/assets/images/videos/晶圆传送机器人运动控制.png';
+import dualRobotCollabImg from '@/assets/images/videos/双机协作.png';
+import polishingRobotImg from '@/assets/images/videos/打磨机器人.png';
+import compositeRobotAppImg from '@/assets/images/videos/复合机器人应用.png';
 
 // 常量定义
 const BILIBILI_BASE_PARAMS = '?spm_id_from=333.1387.homepage.video_card.click&vd_source=7daba5cbb058d519718a2849fb57ed71';
@@ -81,7 +84,7 @@ export const videoMap: VideoMapData = {
     slug: 'medical-automation-bilibili',
     type: 'bilibili',
     url: `https://www.bilibili.com/video/BV1KKuXzaEG1/${BILIBILI_BASE_PARAMS}`,
-    title: '医疗自动化解决方案演示',
+    title: '医疗自动化',
     desc: '本视频展示了零蚁科技在医疗自动化领域的应用案例，包括自动化物品传送、智能调度等创新技术，助力医院与实验室提升效率与安全。',
     tags: ['医疗自动化', '智能调度', '医院物流'],
     publishDate: '2024-04-01'
@@ -89,11 +92,38 @@ export const videoMap: VideoMapData = {
   'semiconductor-bilibili': {
     slug: 'semiconductor-bilibili',
     type: 'bilibili',
-    url: `https://www.bilibili.com/video/BV1NKuXzaEff/?spm_id_from=333.1387.homepage.video_card.click&vd_source=15852e0bc5c379f1710410a2ddc0e62a`,
-    title: '半导体加工自动化解决方案演示',
+    url: `https://www.bilibili.com/video/BV1NKuXzaEff/${BILIBILI_BASE_PARAMS}`,
+    title: '半导体加工自动化',
     desc: '本视频展示了零蚁科技在半导体加工领域的自动化搬运、智能调度等创新应用，助力芯片制造与封装测试提质增效。',
     tags: ['半导体加工', '自动化', '智能制造'],
     publishDate: '2024-04-01'
+  },
+  'dual-robot-collaboration': {
+    slug: 'dual-robot-collaboration',
+    type: 'bilibili',
+    url: `https://www.bilibili.com/video/BV1CvgqznEpw/${BILIBILI_BASE_PARAMS}`,
+    title: '双机协作',
+    desc: '本视频展示了零蚁科技双机协作的实际应用场景，通过多机器人协同作业，实现高效、智能的自动化搬运与任务分配，提升生产效率与柔性化水平。',
+    tags: ['机器人协作', '多机调度', '智能制造'],
+    publishDate: '2024-04-15'
+  },
+  'polishing-robot': {
+    slug: 'polishing-robot',
+    type: 'bilibili',
+    url: `https://www.bilibili.com/video/BV1AYgqzQE3E/${BILIBILI_BASE_PARAMS}`,
+    title: '打磨机器人',
+    desc: '本视频展示了零蚁科技自主研发的打磨机器人在工业自动化生产线中的应用，通过智能控制与高精度打磨技术，实现高效、稳定的表面处理作业，提升产品质量与生产效率。',
+    tags: ['打磨机器人', '工业自动化', '表面处理'],
+    publishDate: '2024-04-15'
+  },
+  'composite-robot-application': {
+    slug: 'composite-robot-application',
+    type: 'bilibili',
+    url: `https://www.bilibili.com/video/BV1AYgqzQECX/${BILIBILI_BASE_PARAMS}`,
+    title: '复合机器人应用',
+    desc: '本视频展示了零蚁科技复合机器人在智能制造与自动化物流中的创新应用，通过多功能集成与智能调度，实现复杂场景下的高效协作与柔性生产。',
+    tags: ['复合机器人', '智能制造', '自动化物流'],
+    publishDate: '2024-04-15'
   },
   'radar-360-scanning': {
     slug: 'radar-360-scanning',
@@ -124,7 +154,7 @@ export const videoMap: VideoMapData = {
     duration: '4:38',
     tags: ['医疗机器人', 'B超检查', '医疗自动化'],
     publishDate: '2024-03-10'
-  }  
+  }
 };
 
 /**
@@ -132,14 +162,29 @@ export const videoMap: VideoMapData = {
  */
 export const videoCards: VideoCard[] = [
   {
-    title: '医疗自动化解决方案演示',
+    title: '医疗自动化',
     img: compositeRobotImg,
     slug: 'medical-automation-bilibili'
   },
   {
-    title: '半导体加工自动化解决方案演示',
+    title: '半导体加工自动化',
     img: waferTransferImg,
     slug: 'semiconductor-bilibili'
+  },
+  {
+    title: '双机协作',
+    img: dualRobotCollabImg,
+    slug: 'dual-robot-collaboration'
+  },
+  {
+    title: '打磨机器人',
+    img: polishingRobotImg,
+    slug: 'polishing-robot'
+  },
+  {
+    title: '复合机器人应用',
+    img: compositeRobotAppImg,
+    slug: 'composite-robot-application'
   },
   {
     title: '360度雷达扫描',
