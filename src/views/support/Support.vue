@@ -120,7 +120,7 @@ function toggleFaq(idx) {
   width: 100%;
   max-width: 100%;
   background: linear-gradient(135deg, #f7f8fa 60%, #e9eef7 100%);
-  padding: 0 0 48px 0;
+  padding: 48px 0 48px 0;
   overflow-x: hidden;
 }
 .support-hero {
@@ -288,6 +288,9 @@ function toggleFaq(idx) {
   transform: translateY(0);
 }
 @media (max-width: 900px) {
+  .support-hero-bg {
+    padding: 28px 0 32px 0;
+  }
   .support-hero {
     padding: 32px 4px 0 4px;
   }
@@ -326,6 +329,9 @@ function toggleFaq(idx) {
   }
 }
 @media (max-width: 600px) {
+  .support-hero-bg {
+    padding: 12px 0 16px 0;
+  }
   .support-hero {
     padding: 16px 0 0 0;
   }

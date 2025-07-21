@@ -50,7 +50,7 @@ const goToVideo = idx => {
 .video-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f8 100%);
-  padding: 40px 0;
+  padding: 48px 0 48px 0;
   overflow-x: hidden;
 }
 
@@ -97,6 +97,9 @@ const goToVideo = idx => {
   .card-list {
     gap: 24px;
   }
+  .video-page {
+    padding: 28px 0 32px 0;
+  }
   .page-title {
     font-size: 2.4rem;
     margin-bottom: 12px;
@@ -112,10 +115,10 @@ const goToVideo = idx => {
     padding: 0 20px;
   }
   .video-page {
-    padding: 30px 0;
+    padding: 12px 0 16px 0;
   }
   .page-header {
-    margin-bottom: 30px;
+    margin-bottom: 16px;
   }
   .page-title {
     font-size: 1.5rem;
