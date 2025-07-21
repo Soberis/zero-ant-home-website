@@ -308,22 +308,22 @@
     estree-walker "^2.0.2"
     picomatch "^4.0.2"
 
-"@stagewise-plugins/vue@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.npmjs.org/@stagewise-plugins/vue/-/vue-0.5.2.tgz"
-  integrity sha512-5raAU1Uy2x9eOLI/3lJ8EhXRH7zC4GvBQKmRXm3vwEEQw2tye78G6AIpAcgQm13mVrl66IkjL0JmVvf5nIG4Cw==
+"@stagewise-plugins/vue@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.npmmirror.com/@stagewise-plugins/vue/-/vue-0.6.2.tgz#5d742242ae1ded6e8046f769e070b34e3b78a4ab"
+  integrity sha512-QaBDRtL1fdMz/l3skcHTU7SwKe39hJx+LfmwhsMs+94xu9rg531jTiVVp9iLxrcEQQX2BzvpLQAOJcdGoyyacQ==
 
-"@stagewise/toolbar-vue@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.npmjs.org/@stagewise/toolbar-vue/-/toolbar-vue-0.5.2.tgz"
-  integrity sha512-7VNGgNer/e9FoMdAbjkCQekTrGA3jiqHdLnv+llPDKX57P8mx4bNGNw6Duum6h7CiM5mfBsKtNgDirHYedjQOg==
+"@stagewise/toolbar-vue@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.npmmirror.com/@stagewise/toolbar-vue/-/toolbar-vue-0.6.2.tgz#c6d7416f9e2eaa4ab2808f72cbbd4f2e6fca08e5"
+  integrity sha512-dmEQEWn3hXB6NogoQmBmkyPzaFs72Xvh/abrIvmYSjLze9kILOt7ijaKV/ENqnq6GfPGfXTPKqGKESpBecyFVQ==
   dependencies:
-    "@stagewise/toolbar" "0.5.2"
+    "@stagewise/toolbar" "0.6.2"
 
-"@stagewise/toolbar@0.5.2":
-  version "0.5.2"
-  resolved "https://registry.npmjs.org/@stagewise/toolbar/-/toolbar-0.5.2.tgz"
-  integrity sha512-QxowY55dhYJS4iD3KuYCvmLl3jA74boYziEr9lent+NZpO1rjtF0KpDyld+hClA4lWnCVLPxhMwW69Qv2+xzjg==
+"@stagewise/toolbar@0.6.2":
+  version "0.6.2"
+  resolved "https://registry.npmmirror.com/@stagewise/toolbar/-/toolbar-0.6.2.tgz#65c2deda0c565e4b229e7a91ec57eac7a5f7dd28"
+  integrity sha512-WN7PWaOT6YQKjJYL4/85V5UU0eZEws+/UBT/J4wJOEbFxoluLuchqh7xVTmUZTtw0q0xpzlgX8Vb0kAZf/pjmw==
 
 "@types/estree@^1.0.0":
   version "1.0.8"
