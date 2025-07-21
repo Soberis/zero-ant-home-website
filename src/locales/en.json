@@ -74,7 +74,11 @@
     "scara4Axis": "SCARA 4-Axis Arm",
     "arm6Axis": "6-Axis Arm",
     "gantry2D": "2D Gantry",
-    "dualArmHumanoid": "Dual-Arm Humanoid Robot"
+    "dualArmHumanoid": "Dual-Arm Humanoid Robot",
+    "solutions": "Solutions",
+    "industrySolutions": "Industry Solutions",
+    "coreScenarios": "Core Scenarios",
+    "moreScenarios": "More Scenarios"
   },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",

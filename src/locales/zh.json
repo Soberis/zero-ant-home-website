@@ -58,7 +58,11 @@
     "exhibition": "展会活动",
     "contact": "联系方式",
     "download": "相关下载",
-    "consult": "咨询"
+    "consult": "咨询",
+    "solutions": "解决方案",
+    "industrySolutions": "行业解决方案",
+    "coreScenarios": "核心场景",
+    "moreScenarios": "更多场景"
   },
   "hero": {
     "title": "四轴机械臂，助力医药自动化",

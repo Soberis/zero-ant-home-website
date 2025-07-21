@@ -64,24 +64,21 @@
             </ul>
           </div>
           <div class="footer-col">
-            <h4>{{ $t("nav.videoCases") }}</h4>
+            <h4>{{ $t('nav.industrySolutions') }}</h4>
             <ul>
               <li>
-                <router-link to="/video">
-                  {{ $t("nav.videoCases") }}
-                </router-link>
-              </li>
-            </ul>
-            <h4 class="footer-subtitle">{{ $t("nav.applications") }}</h4>
-            <ul>
-              <li>
-                <router-link to="/applications">
-                  {{ $t("nav.medicalAuto") }}
+                <router-link :to="{ path: '/solutions', hash: '#core-scenarios' }">
+                  {{ $t('nav.coreScenarios') }}
                 </router-link>
               </li>
               <li>
-                <router-link to="/applications">
-                  {{ $t("nav.semiProcessing") }}
+                <router-link :to="{ path: '/solutions', hash: '#more-scenarios' }">
+                  {{ $t('nav.moreScenarios') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ path: '/solutions', hash: '#video-section' }">
+                  {{ $t('nav.videoCases') }}
                 </router-link>
               </li>
             </ul>

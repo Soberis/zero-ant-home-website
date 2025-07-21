@@ -59,16 +59,42 @@
               </div>
             </div>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link to="/video" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.videoCases") }}</span>
             </router-link>
-          </li>
+          </li> -->
           <li class="nav-item has-dropdown">
+            <router-link to="/solutions" class="nav-link" active-class="active">
+              <span class="nav-text">{{ $t("nav.industrySolutions") }}</span>
+            </router-link>
+            <div class="dropdown">
+              <div class="dropdown-content">
+                <ul>
+                  <li>
+                    <router-link :to="{ path: '/solutions', hash: '#core-scenarios' }" class="dropdown-item">
+                      {{ $t('nav.coreScenarios') }}
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ path: '/solutions', hash: '#more-scenarios' }" class="dropdown-item">
+                      {{ $t('nav.moreScenarios') }}
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ path: '/solutions', hash: '#video-section' }" class="dropdown-item">
+                      {{ $t('nav.videoCases') }}
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <!-- <li class="nav-item has-dropdown">
             <router-link to="/applications" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.applications") }}</span>
             </router-link>
-          </li>
+          </li> -->
           <li class="nav-item has-dropdown">
             <router-link to="/support" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.support") }}</span>
@@ -158,16 +184,38 @@
               {{ $t("nav.robotProducts") }}
             </router-link>
           </li>
-          <li class="mobile-nav-item">
+          <!-- <li class="mobile-nav-item">
             <router-link to="/video" class="mobile-nav-link" @click="closeMobileMenu">
               {{ $t("nav.videoCases") }}
             </router-link>
+          </li> -->
+          <li class="mobile-nav-item has-dropdown">
+            <router-link to="/solutions" class="mobile-nav-link" @click="closeMobileMenu">
+              {{ $t("nav.industrySolutions") }}
+            </router-link>
+            <ul class="mobile-submenu">
+              <li>
+                <router-link :to="{ path: '/solutions', hash: '#core-scenarios' }" class="mobile-nav-link" @click="closeMobileMenu">
+                  {{ $t('nav.coreScenarios') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ path: '/solutions', hash: '#more-scenarios' }" class="mobile-nav-link" @click="closeMobileMenu">
+                  {{ $t('nav.moreScenarios') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ path: '/solutions', hash: '#video-section' }" class="mobile-nav-link" @click="closeMobileMenu">
+                  {{ $t('nav.videoCases') }}
+                </router-link>
+              </li>
+            </ul>
           </li>
-          <li class="mobile-nav-item">
+          <!-- <li class="mobile-nav-item">
             <router-link to="/applications" class="mobile-nav-link" @click="closeMobileMenu">
               {{ $t("nav.applications") }}
             </router-link>
-          </li>
+          </li> -->
           <li class="mobile-nav-item">
             <router-link to="/support" class="mobile-nav-link" @click="closeMobileMenu">
               {{ $t("nav.support") }}

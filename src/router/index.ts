@@ -13,6 +13,7 @@ const ApplicationDetail = () => import('@/views/applications/ApplicationDetail.v
 const SystemProducts = () => import('@/views/products/SystemProducts.vue');
 const RobotProducts = () => import('@/views/products/RobotProducts.vue');
 const Careers = () => import('@/views/company/Careers.vue');
+const Solutions = () => import('@/views/solutions/Solutions.vue');
 
 const routes = [
   // 首页
@@ -20,6 +21,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  // 解决方案（集成页面）
+  {
+    path: '/solutions',
+    name: 'Solutions',
+    component: Solutions,
   },
   // 应用场景
   {
