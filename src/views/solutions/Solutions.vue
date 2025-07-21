@@ -13,16 +13,16 @@
         <h2 class="section-title">核心场景</h2>
         <div class="core-grid">
           <div class="core-card" @click="goToApplicationDetail('medical-automation')">
-            <div class="core-icon">
-              <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span class="core-icon">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/>
                 <rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/>
                 <path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/>
                 <path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/>
               </svg>
-            </div>
-            <h3 class="core-title">医疗自动化</h3>
-            <p class="core-description">智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节</p>
+            </span>
+            <div class="core-title">医疗自动化</div>
+            <div class="core-description">智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节</div>
             <div class="core-features">
               <span class="feature-tag">智能检验</span>
               <span class="feature-tag">自动化药房</span>
@@ -30,17 +30,17 @@
           </div>
           
           <div class="core-card" @click="goToApplicationDetail('semiconductor')">
-            <div class="core-icon">
-              <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span class="core-icon">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/>
                 <rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/>
                 <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/>
                 <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/>
                 <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/>
               </svg>
-            </div>
-            <h3 class="core-title">半导体加工</h3>
-            <p class="core-description">高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求</p>
+            </span>
+            <div class="core-title">半导体加工</div>
+            <div class="core-description">高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求</div>
             <div class="core-features">
               <span class="feature-tag">晶圆搬运</span>
               <span class="feature-tag">智能检测</span>
@@ -122,11 +122,44 @@ function goToApplicationDetail(slug) {
 </script>
 
 <style scoped>
+:root {
+  --primary-color: #1a3a8f;
+  --primary-light: #4f8cff;
+  --text-color: #222;
+  --border-color: #e3e8f0;
+  --shadow-light: rgba(26, 58, 143, 0.08);
+  --shadow-medium: rgba(26, 58, 143, 0.13);
+  --shadow-heavy: rgba(26, 58, 143, 0.15);
+  --section-spacing: 80px;
+  --card-padding: 40px 32px;
+  --border-radius: 20px;
+}
+
 .solutions-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f8 100%);
   padding: 48px 0;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* 性能优化 */
+.core-card,
+.video-grid > *,
+.application-grid > * {
+  will-change: transform;
+}
+
+/* 微交互效果 */
+.section-title:hover {
+  color: var(--primary-color);
+}
+
+.feature-tag:hover {
+  background: #f8f9fc;
+  color: #222;
+  border: 1px solid #1a3a8f;
+  transform: scale(1.05);
 }
 
 .page-container {
@@ -150,7 +183,7 @@ function goToApplicationDetail(slug) {
 
 .page-subtitle {
   font-size: 1.65rem;
-  color: #1a3a8f;
+  color: var(--primary-color);
   font-weight: 600;
   margin-bottom: 36px;
   letter-spacing: 1px;
@@ -165,6 +198,7 @@ function goToApplicationDetail(slug) {
   letter-spacing: 1px;
   padding-left: 0;
   position: relative;
+  transition: color 0.3s ease;
 }
 .section-title::after {
   content: "";
@@ -197,7 +231,7 @@ function goToApplicationDetail(slug) {
 
 /* 视频案例区域样式 */
 .video-section {
-  margin-bottom: 80px;
+  margin-bottom: var(--section-spacing);
 }
 
 .video-grid {
@@ -206,11 +240,23 @@ function goToApplicationDetail(slug) {
   gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 核心场景样式 */
 .core-scenarios {
-  margin-bottom: 80px;
+  margin-bottom: var(--section-spacing);
 }
 
 .core-grid {
@@ -219,66 +265,81 @@ function goToApplicationDetail(slug) {
   gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
+/* 完全模仿更多场景卡片样式 */
 .core-card {
   background: #fff;
-  border-radius: 20px;
-  padding: 40px 32px;
-  box-shadow: 0 4px 20px rgba(26, 58, 143, 0.08);
-  border: 1px solid #e3e8f0;
-  transition: box-shadow 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1), border-color 0.25s;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px 0 rgba(26,58,143,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 0 26px 0;
+  transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
+  border: 1px solid #e3e8f0;
   text-align: center;
 }
 .core-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 8px 32px rgba(26, 58, 143, 0.13);
-  border-color: #4f8cff;
+  box-shadow: 0 6px 24px 0 rgba(26,58,143,0.13);
+  transform: translateY(-4px) scale(1.03);
+  border-color: #1a3a8f33;
 }
-
 .core-icon {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
-
 .core-title {
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 1.6rem;
   color: #222;
-  margin-bottom: 16px;
+  font-weight: 600;
   letter-spacing: 1px;
+  margin-bottom: 8px;
 }
-
 .core-description {
-  font-size: 1.25rem;
-  color: #222;
-  line-height: 1.6;
-  margin-bottom: 24px;
-  text-align: left;
+  font-size: 1.15rem;
+  color: #888;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  text-align: center;
+  max-width: 90%;
 }
-
 .core-features {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
+  margin-top: 4px;
 }
 
 .feature-tag {
   background: #f0f4ff;
-  color: #222;
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 1.1rem;
-  font-weight: 500;
+  color: var(--text-color);
   border: 1px solid #d4e3ff;
+  border-radius: 16px;
+  padding: 6px 18px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.feature-tag:hover {
+  background: #f8f9fc;
+  color: #222;
+  border: 1px solid #1a3a8f;
 }
 
 /* 更多场景样式 */
 .more-scenarios {
-  margin-bottom: 40px;
+  margin-bottom: var(--section-spacing);
 }
 
 .application-grid {
@@ -287,10 +348,34 @@ function goToApplicationDetail(slug) {
   gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
 }
 
 /* 响应式设计 */
+@media (max-width: 1024px) {
+  :root {
+    --section-spacing: 60px;
+    --card-padding: 32px 24px;
+  }
+  
+  .page-title {
+    font-size: 4rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2.4rem;
+  }
+}
+
 @media (max-width: 900px) {
+  :root {
+    --section-spacing: 50px;
+  }
+  
   .page-container {
     padding: 0 30px;
   }
@@ -317,17 +402,17 @@ function goToApplicationDetail(slug) {
   }
   
   .page-title {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     margin-bottom: 18px;
   }
   
   .page-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     margin-bottom: 20px;
   }
   
   .section-title {
-    font-size: 1.4rem;
+    font-size: 2rem;
     margin: 32px 0 18px 0;
   }
   .section-title::after {
@@ -340,6 +425,11 @@ function goToApplicationDetail(slug) {
     padding-bottom: 24px;
     margin-bottom: 32px;
   }
+  
+  .application-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -350,6 +440,11 @@ function goToApplicationDetail(slug) {
 }
 
 @media (max-width: 600px) {
+  :root {
+    --section-spacing: 40px;
+    --card-padding: 24px 20px;
+  }
+  
   .page-container {
     padding: 0 20px;
   }
@@ -363,29 +458,43 @@ function goToApplicationDetail(slug) {
   }
   
   .page-title {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
+    font-size: 2.8rem;
+    margin-bottom: 18px;
   }
   
   .page-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
   }
   
   .section-title {
-    font-size: 1.2rem;
-    margin: 18px 0 8px 0;
+    font-size: 2rem;
+    margin: 32px 0 18px 0;
     padding-left: 0;
   }
   .section-title::after {
-    width: 24px;
+    width: 36px;
     height: 2px;
   }
   .core-scenarios,
   .more-scenarios,
   .video-section {
-    padding-bottom: 16px;
-    margin-bottom: 18px;
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .core-title {
+    font-size: 1.8rem;
+  }
+  
+  .core-description {
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+  
+  .application-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   
   .video-grid {
