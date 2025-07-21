@@ -64,7 +64,7 @@
             </ul>
           </div>
           <div class="footer-col">
-            <h4>{{ $t('nav.industrySolutions') }}</h4>
+            <h4>{{ $t('nav.solutions') }}</h4>
             <ul>
               <li>
                 <router-link :to="{ path: '/solutions', hash: '#core-scenarios' }">

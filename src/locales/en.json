@@ -50,8 +50,8 @@
     "honor": "Honors",
     "culture": "Corporate Culture",
     "careers": "Careers",
-    "systemProducts": "System Products",
-    "robotProducts": "Robot Products",
+    "systemProducts": "System",
+    "robotProducts": "Robot",
     "team": "Core Team",
     "coreTeam": "Core Team",
     "teamOverview": "Team Overview",
@@ -76,7 +76,6 @@
     "gantry2D": "2D Gantry",
     "dualArmHumanoid": "Dual-Arm Humanoid Robot",
     "solutions": "Solutions",
-    "industrySolutions": "Industry Solutions",
     "coreScenarios": "Core Scenarios",
     "moreScenarios": "More Scenarios"
   },

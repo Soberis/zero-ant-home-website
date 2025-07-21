@@ -66,7 +66,7 @@
           </li> -->
           <li class="nav-item has-dropdown">
             <router-link to="/solutions" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.industrySolutions") }}</span>
+              <span class="nav-text">{{ $t("nav.solutions") }}</span>
             </router-link>
             <div class="dropdown">
               <div class="dropdown-content">
@@ -191,7 +191,7 @@
           </li> -->
           <li class="mobile-nav-item">
             <router-link to="/solutions" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.industrySolutions") }}
+              {{ $t("nav.solutions") }}
             </router-link>
           </li>
           <!-- <li class="mobile-nav-item">
