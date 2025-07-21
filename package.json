@@ -12,7 +12,7 @@
     "element-plus": "^2.10.4",
     "vue": "^3.4.21",
     "vue-i18n": "^11.1.9",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@intlify/unplugin-vue-i18n": "^6.0.8",
