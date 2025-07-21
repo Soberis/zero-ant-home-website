@@ -141,9 +141,9 @@ function goToApplicationDetail(slug) {
 }
 
 .page-title {
-  font-size: 4.2rem;
+  font-size: 4.6rem;
   font-weight: 800;
-  margin-bottom: 20px;
+  margin-bottom: 36px;
   letter-spacing: 2px;
   color: #222;
 }
@@ -152,7 +152,7 @@ function goToApplicationDetail(slug) {
   font-size: 1.65rem;
   color: #222;
   font-weight: 400;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   letter-spacing: 1px;
 }
 
@@ -164,6 +164,29 @@ function goToApplicationDetail(slug) {
   margin: 48px 0 32px 0;
   letter-spacing: 1px;
   padding-left: 0;
+  position: relative;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #1a3a8f 0%, #4f8cff 100%);
+  border-radius: 2px;
+}
+
+.core-scenarios,
+.more-scenarios,
+.video-section {
+  border-bottom: 1px solid #e3e8f0;
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+}
+.video-section {
+  border-bottom: none;
 }
 
 /* 视频案例区域样式 */
@@ -289,8 +312,8 @@ function goToApplicationDetail(slug) {
   }
   
   .page-title {
-    font-size: 2.4rem;
-    margin-bottom: 12px;
+    font-size: 2.8rem;
+    margin-bottom: 18px;
   }
   
   .page-subtitle {
@@ -301,6 +324,16 @@ function goToApplicationDetail(slug) {
   .section-title {
     font-size: 1.4rem;
     margin: 32px 0 18px 0;
+  }
+  .section-title::after {
+    width: 36px;
+    height: 2px;
+  }
+  .core-scenarios,
+  .more-scenarios,
+  .video-section {
+    padding-bottom: 24px;
+    margin-bottom: 32px;
   }
 }
 
@@ -339,16 +372,20 @@ function goToApplicationDetail(slug) {
     margin: 18px 0 8px 0;
     padding-left: 0;
   }
+  .section-title::after {
+    width: 24px;
+    height: 2px;
+  }
+  .core-scenarios,
+  .more-scenarios,
+  .video-section {
+    padding-bottom: 16px;
+    margin-bottom: 18px;
+  }
   
   .video-grid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-  
-  .video-section,
-  .core-scenarios,
-  .more-scenarios {
-    margin-bottom: 48px;
   }
 }
 </style>
