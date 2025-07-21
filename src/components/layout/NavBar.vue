@@ -189,27 +189,10 @@
               {{ $t("nav.videoCases") }}
             </router-link>
           </li> -->
-          <li class="mobile-nav-item has-dropdown">
+          <li class="mobile-nav-item">
             <router-link to="/solutions" class="mobile-nav-link" @click="closeMobileMenu">
               {{ $t("nav.industrySolutions") }}
             </router-link>
-            <ul class="mobile-submenu">
-              <li>
-                <router-link :to="{ path: '/solutions', hash: '#core-scenarios' }" class="mobile-nav-link" @click="closeMobileMenu">
-                  {{ $t('nav.coreScenarios') }}
-                </router-link>
-              </li>
-              <li>
-                <router-link :to="{ path: '/solutions', hash: '#more-scenarios' }" class="mobile-nav-link" @click="closeMobileMenu">
-                  {{ $t('nav.moreScenarios') }}
-                </router-link>
-              </li>
-              <li>
-                <router-link :to="{ path: '/solutions', hash: '#video-section' }" class="mobile-nav-link" @click="closeMobileMenu">
-                  {{ $t('nav.videoCases') }}
-                </router-link>
-              </li>
-            </ul>
           </li>
           <!-- <li class="mobile-nav-item">
             <router-link to="/applications" class="mobile-nav-link" @click="closeMobileMenu">

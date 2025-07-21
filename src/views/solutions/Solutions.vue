@@ -5,7 +5,7 @@
       <!-- 页面头部 -->
       <div class="page-header">
         <h1 class="page-title">行业解决方案</h1>
-        <p class="page-subtitle">探索我们的技术应用与创新成果</p>
+        <p class="page-subtitle">探索前沿技术应用，见证创新驱动未来</p>
       </div>
 
       <!-- 核心应用场景区域 -->
@@ -157,12 +157,13 @@ function goToApplicationDetail(slug) {
 }
 
 .section-title {
-  font-size: 2.4rem;
-  font-weight: 700;
   color: #222;
+  font-size: 2.6rem;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 32px;
+  margin: 48px 0 32px 0;
   letter-spacing: 1px;
+  padding-left: 0;
 }
 
 /* 视频案例区域样式 */
@@ -298,7 +299,8 @@ function goToApplicationDetail(slug) {
   }
   
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    margin: 32px 0 18px 0;
   }
 }
 
@@ -333,8 +335,9 @@ function goToApplicationDetail(slug) {
   }
   
   .section-title {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    margin: 18px 0 8px 0;
+    padding-left: 0;
   }
   
   .video-grid {
