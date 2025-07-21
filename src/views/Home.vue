@@ -10,7 +10,7 @@
         <VideoCases />
       </div>
       <IndustryApplications />
-        <Partners />
+      <Partners />
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ import Partners from '@/components/business/Partners.vue'; // 合作伙伴
   margin: 40px auto 0 auto;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 24px 0 rgba(26,58,143,0.04);
+  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.04);
   padding: 32px 24px;
 }
 .main-section > * {

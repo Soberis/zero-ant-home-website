@@ -4,8 +4,8 @@
     <!-- 口号大屏 -->
     <section class="about-hero">
       <div class="hero-content">
-        <h1>{{ $t("slogan") }}</h1>
-        <div class="hero-sub">{{ $t("slogan2") }}</div>
+        <h1>{{ $t('slogan') }}</h1>
+        <div class="hero-sub">{{ $t('slogan2') }}</div>
         <div class="hero-line"></div>
       </div>
     </section>
@@ -16,76 +16,76 @@
           <a
             href="#company-intro"
             @click.prevent="scrollToSection('company-intro')"
-            >{{ $t("nav.companyIntro") }}</a
+            >{{ $t('nav.companyIntro') }}</a
           >
         </li>
         <li :class="{ active: activeTab === 'history' }">
           <a href="#history" @click.prevent="scrollToSection('history')">{{
-            $t("nav.history")
+            $t('nav.history')
           }}</a>
         </li>
         <li :class="{ active: activeTab === 'honors' }">
           <a href="#honors" @click.prevent="scrollToSection('honors')">{{
-            $t("nav.honor")
+            $t('nav.honor')
           }}</a>
         </li>
         <li :class="{ active: activeTab === 'core-values' }">
           <a
             href="#core-values"
             @click.prevent="scrollToSection('core-values')"
-            >{{ $t("nav.coreValues") }}</a
+            >{{ $t('nav.coreValues') }}</a
           >
         </li>
         <li :class="{ active: activeTab === 'culture' }">
           <a href="#culture" @click.prevent="scrollToSection('culture')">{{
-            $t("nav.culture")
+            $t('nav.culture')
           }}</a>
         </li>
         <li :class="{ active: activeTab === 'contact' }">
           <a href="#contact" @click.prevent="scrollToSection('contact')">{{
-            $t("nav.contact")
+            $t('nav.contact')
           }}</a>
         </li>
       </ul>
     </nav>
 
-    <section class="about-section company-intro" id="company-intro">
-      <h2>{{ $t("nav.companyIntro") }}</h2>
+    <section id="company-intro" class="about-section company-intro">
+      <h2>{{ $t('nav.companyIntro') }}</h2>
       <p v-html="$t('about.companyIntroDetailed.para1')"></p>
       <p v-html="$t('about.companyIntroDetailed.para2')"></p>
       <p v-html="$t('about.companyIntroDetailed.para3')"></p>
 
       <!-- 团队信息 -->
       <div class="info-section team-info">
-        <h3>{{ $t("about.teamOverview") }}</h3>
+        <h3>{{ $t('about.teamOverview') }}</h3>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-number">{{ 20 }}+{{ $t("about.people") }}</div>
-            <div class="stat-label">{{ $t("about.teamSize") }}</div>
+            <div class="stat-number">{{ 20 }}+{{ $t('about.people') }}</div>
+            <div class="stat-label">{{ $t('about.teamSize') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">90%+</div>
-            <div class="stat-label">{{ $t("about.masterDegree") }}</div>
+            <div class="stat-label">{{ $t('about.masterDegree') }}</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">≤{{ 32 }}{{ $t("about.yearsOld") }}</div>
-            <div class="stat-label">{{ $t("about.averageAge") }}</div>
+            <div class="stat-number">≤{{ 32 }}{{ $t('about.yearsOld') }}</div>
+            <div class="stat-label">{{ $t('about.averageAge') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">≥90%</div>
-            <div class="stat-label">{{ $t("about.topUniversity") }}</div>
+            <div class="stat-label">{{ $t('about.topUniversity') }}</div>
           </div>
         </div>
       </div>
 
       <!-- 融资信息 -->
       <div class="info-section financing-info">
-        <h3>{{ $t("about.financingPlan") }}</h3>
+        <h3>{{ $t('about.financingPlan') }}</h3>
         <p class="financing-desc">
-          {{ $t("about.companyIntroDetailed.financingDesc") }}
+          {{ $t('about.companyIntroDetailed.financingDesc') }}
         </p>
         <p class="financing-desc">
-          {{ $t("about.companyIntroDetailed.emailTips")
+          {{ $t('about.companyIntroDetailed.emailTips')
           }}<a href="mailto:liqingfeng@zeroant.com"
             >&nbsp;liqingfeng@zeroant.com</a
           >
@@ -93,13 +93,13 @@
       </div>
     </section>
 
-    <section class="about-section history" id="history">
-      <h2>{{ $t("nav.history") }}</h2>
+    <section id="history" class="about-section history">
+      <h2>{{ $t('nav.history') }}</h2>
       <div class="timeline">
         <div
-          class="timeline-item"
           v-for="item in timelineData"
           :key="item.year"
+          class="timeline-item"
         >
           <div class="timeline-dot"></div>
           <div class="timeline-year">{{ item.year }}</div>
@@ -112,32 +112,32 @@
       </div>
     </section>
 
-    <section class="about-section honors" id="honors">
-      <h2>{{ $t("nav.honor") }}</h2>
+    <section id="honors" class="about-section honors">
+      <h2>{{ $t('nav.honor') }}</h2>
       <div class="honor-cards">
-        <div class="honor-card" v-for="(honor, idx) in honors" :key="idx">
+        <div v-for="(honor, idx) in honors" :key="idx" class="honor-card">
           {{ honor }}
         </div>
       </div>
     </section>
 
-    <section class="about-section core-values" id="core-values">
-      <h2 class="core-values-title">{{ $t("about.coreValues.title") }}</h2>
+    <section id="core-values" class="about-section core-values">
+      <h2 class="core-values-title">{{ $t('about.coreValues.title') }}</h2>
       <div class="core-values-content">
         <div class="core-values-row">
-          <div class="core-value-card">{{ $t("about.coreValues.value1") }}</div>
-          <div class="core-value-card">{{ $t("about.coreValues.value2") }}</div>
-          <div class="core-value-card">{{ $t("about.coreValues.value3") }}</div>
-          <div class="core-value-card">{{ $t("about.coreValues.value4") }}</div>
+          <div class="core-value-card">{{ $t('about.coreValues.value1') }}</div>
+          <div class="core-value-card">{{ $t('about.coreValues.value2') }}</div>
+          <div class="core-value-card">{{ $t('about.coreValues.value3') }}</div>
+          <div class="core-value-card">{{ $t('about.coreValues.value4') }}</div>
         </div>
       </div>
     </section>
 
-    <section class="about-section culture" id="culture">
-      <h2 class="culture-title">{{ $t("nav.culture") }}</h2>
+    <section id="culture" class="about-section culture">
+      <h2 class="culture-title">{{ $t('nav.culture') }}</h2>
       <div class="culture-card no-bg">
         <div class="culture-desc financing-desc">
-          {{ $t("about.enterpriseCulture.description") }}
+          {{ $t('about.enterpriseCulture.description') }}
         </div>
         <ul class="culture-list">
           <li v-html="$t('about.enterpriseCulture.item1')"></li>
@@ -148,35 +148,35 @@
       </div>
     </section>
 
-    <section class="about-section contact" id="contact">
-      <h2>{{ $t("nav.contact") }}</h2>
+    <section id="contact" class="about-section contact">
+      <h2>{{ $t('nav.contact') }}</h2>
       <ul class="contact-list">
-        <li>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</li>
-        <li>{{ $t("contacts.address") }}：{{ $t("footer.address") }}</li>
+        <li>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</li>
+        <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
       </ul>
     </section>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from "vue";
-import { useI18n } from "vue-i18n";
-import { getTimelineData, getHonors } from "@/data/about";
-const { t, locale } = useI18n();
+import { computed, ref, onMounted, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { getTimelineData, getHonors } from '@/data/about';
+const { t } = useI18n();
 
 const timelineData = computed(() =>
-  getTimelineData(t).map((item) => ({ ...item }))
+  getTimelineData(t).map(item => ({ ...item }))
 );
-const honors = computed(() => getHonors(t).map((honor) => honor));
+const honors = computed(() => getHonors(t).map(honor => honor));
 
-const activeTab = ref("company-intro");
+const activeTab = ref('company-intro');
 const tabIds = [
-  "company-intro",
-  "history",
-  "honors",
-  "core-values",
-  "culture",
-  "contact",
+  'company-intro',
+  'history',
+  'honors',
+  'core-values',
+  'culture',
+  'contact',
 ];
 
 function updateActiveTab() {
@@ -199,16 +199,16 @@ function updateActiveTab() {
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
 onMounted(() => {
-  window.addEventListener("scroll", updateActiveTab, { passive: true });
+  window.addEventListener('scroll', updateActiveTab, { passive: true });
   updateActiveTab();
 });
 onUnmounted(() => {
-  window.removeEventListener("scroll", updateActiveTab);
+  window.removeEventListener('scroll', updateActiveTab);
 });
 </script>
 
@@ -216,8 +216,9 @@ onUnmounted(() => {
 .about-page {
   background: #f7f8fa;
   color: #222;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Microsoft YaHei", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', Arial, sans-serif;
   min-height: 100vh;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
@@ -282,7 +283,8 @@ onUnmounted(() => {
   font-weight: 300;
   letter-spacing: 0.18em;
   opacity: 0.7;
-  font-family: "Segoe UI", "Arial", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family:
+    'Segoe UI', 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   opacity: 1;
 }
 
@@ -310,7 +312,9 @@ onUnmounted(() => {
   font-weight: 600;
   cursor: pointer;
   padding: 18px 0;
-  transition: color 0.2s, border-bottom 0.2s;
+  transition:
+    color 0.2s,
+    border-bottom 0.2s;
   border-bottom: 2px solid transparent;
 }
 
@@ -340,7 +344,7 @@ onUnmounted(() => {
 }
 
 .about-section h2::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -8px;
   left: 50%;
@@ -402,7 +406,9 @@ onUnmounted(() => {
   padding: 24px 20px;
   text-align: center;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid #f0f0f0;
 }
 
@@ -691,7 +697,9 @@ onUnmounted(() => {
   border-radius: 16px;
   padding: 32px 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid #f0f0f0;
   text-align: center;
 }
@@ -822,7 +830,10 @@ onUnmounted(() => {
   color: #1a3a8f;
   text-align: center;
   letter-spacing: 0.18em;
-  transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    background 0.2s,
+    transform 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;

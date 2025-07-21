@@ -9,7 +9,8 @@ const Video = () => import('@/views/media/Video.vue');
 const VideoDetail = () => import('@/views/media/VideoDetail.vue');
 const ProductDetail = () => import('@/views/products/ProductDetailView.vue');
 const Support = () => import('@/views/support/Support.vue');
-const ApplicationDetail = () => import('@/views/applications/ApplicationDetail.vue');
+const ApplicationDetail = () =>
+  import('@/views/applications/ApplicationDetail.vue');
 const SystemProducts = () => import('@/views/products/SystemProducts.vue');
 const RobotProducts = () => import('@/views/products/RobotProducts.vue');
 const Careers = () => import('@/views/company/Careers.vue');
@@ -37,7 +38,7 @@ const routes = [
   {
     path: '/applications/:slug',
     name: 'ApplicationDetail',
-    component: ApplicationDetail
+    component: ApplicationDetail,
   },
   // 服务支持
   {
@@ -78,40 +79,39 @@ const routes = [
   {
     path: '/system-products',
     name: 'SystemProducts',
-    component: SystemProducts
+    component: SystemProducts,
   },
   {
     path: '/system-products/:slug',
     name: 'SystemProductDetail',
-    component: ProductDetail
+    component: ProductDetail,
   },
   // 机器人产品
   {
     path: '/robot-products',
     name: 'RobotProducts',
-    component: RobotProducts
+    component: RobotProducts,
   },
   {
     path: '/robot-products/:slug',
     name: 'RobotProductDetail',
-    component: ProductDetail
+    component: ProductDetail,
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, _from, _savedPosition) {
+  scrollBehavior(to) {
     if (to.hash) {
       return {
         el: to.hash,
-        top: 120, 
+        top: 120,
         behavior: 'smooth',
-      }
+      };
     }
-    return { top: 0 }
-  }
+    return { top: 0 };
+  },
 });
 
 export default router;
-

@@ -27,12 +27,16 @@
           v-if="prevSlug"
           class="video-bottom-btn prev"
           @click="goTo(prevSlug)"
-        >◀ 上一个</button>
+        >
+          ◀ 上一个
+        </button>
         <button
           v-if="nextSlug"
           class="video-bottom-btn next"
           @click="goTo(nextSlug)"
-        >下一个 ▶</button>
+        >
+          下一个 ▶
+        </button>
       </div>
     </div>
   </div>
@@ -40,37 +44,41 @@
 
 <script setup>
 // 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换
-import { useRoute, useRouter } from 'vue-router'
-import applications from '@/data/applications'
-import { computed } from 'vue'
-import { videoMap } from '@/data/videos' // 新增导入
+import { useRoute, useRouter } from 'vue-router';
+import applications from '@/data/applications';
+import { computed } from 'vue';
+import { videoMap } from '@/data/videos'; // 新增导入
 
-const route = useRoute()
-const router = useRouter()
-const slug = computed(() => route.params.slug)
-const detail = computed(() => applications.find(item => item.slug === slug.value))
+const route = useRoute();
+const router = useRouter();
+const slug = computed(() => route.params.slug);
+const detail = computed(() =>
+  applications.find(item => item.slug === slug.value)
+);
 
 // 新增：获取视频详情对象
-const videoDetail = computed(() => videoMap[detail.value?.video])
+const videoDetail = computed(() => videoMap[detail.value?.video]);
 
-function isBilibili(url) {
-  return url && url.includes('bilibili.com/video/')
-}
+// Bilibili相关函数已移除，如需要可重新添加
 function bilibiliEmbedUrl(url) {
-  const match = url.match(/bilibili.com\/video\/(BV[\w]+)/)
+  const match = url.match(/bilibili.com\/video\/(BV[\w]+)/);
   if (match) {
-    return `https://player.bilibili.com/player.html?bvid=${match[1]}&autoplay=0`
+    return `https://player.bilibili.com/player.html?bvid=${match[1]}&autoplay=0`;
   }
-  return ''
+  return '';
 }
 
-const currentIndex = computed(() => applications.findIndex(item => item.slug === slug.value))
+const currentIndex = computed(() =>
+  applications.findIndex(item => item.slug === slug.value)
+);
 const prevSlug = computed(() =>
   currentIndex.value > 0 ? applications[currentIndex.value - 1].slug : null
-)
+);
 const nextSlug = computed(() =>
-  currentIndex.value < applications.length - 1 ? applications[currentIndex.value + 1].slug : null
-)
+  currentIndex.value < applications.length - 1
+    ? applications[currentIndex.value + 1].slug
+    : null
+);
 // 新增：判断按钮类型
 const bottomBarClass = computed(() => {
   if (prevSlug.value && nextSlug.value) return 'both';
@@ -80,7 +88,7 @@ const bottomBarClass = computed(() => {
 });
 function goTo(targetSlug) {
   if (targetSlug) {
-    router.push({ name: route.name, params: { slug: targetSlug } })
+    router.push({ name: route.name, params: { slug: targetSlug } });
   }
 }
 </script>
@@ -92,7 +100,7 @@ function goTo(targetSlug) {
   padding: 48px 16px 64px 16px;
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 2px 12px 0 rgba(26,58,143,0.06);
+  box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
 }
 .title {
   font-size: 2.6rem;
@@ -139,7 +147,7 @@ function goTo(targetSlug) {
   aspect-ratio: 16/9;
   border-radius: 12px;
   background: #000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   display: block;
   margin: 0 auto;
   z-index: 1;
@@ -189,10 +197,14 @@ function goTo(targetSlug) {
   font-size: 1.08rem;
   font-weight: 700;
   padding: 10px 40px;
-  box-shadow: 0 2px 12px 0 rgba(26,58,143,0.06);
+  box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
   cursor: pointer;
   letter-spacing: 1px;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border-color 0.18s;
+  transition:
+    background 0.18s,
+    color 0.18s,
+    box-shadow 0.18s,
+    border-color 0.18s;
   outline: none;
   opacity: 1;
   min-width: 110px;
@@ -203,7 +215,7 @@ function goTo(targetSlug) {
   background: #1a3a8f;
   color: #fff;
   border-color: #1a3a8f;
-  box-shadow: 0 4px 16px rgba(26,58,143,0.10);
+  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.1);
 }
 .video-bottom-btn:active {
   background: #16306b;

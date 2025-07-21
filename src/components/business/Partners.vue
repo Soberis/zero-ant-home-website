@@ -61,7 +61,9 @@ import { partners } from '@/data/partners';
   align-items: center;
   justify-content: center;
   border: 1px solid #e5e6eb;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   box-shadow: 0 2px 8px 0 rgba(30, 42, 80, 0.06);
   overflow: hidden; /* 防止图片溢出 */
 }

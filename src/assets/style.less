@@ -1,10 +1,11 @@
 // 全局基础样式
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+  font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
   overflow-x: hidden;
 }
 
@@ -29,19 +30,25 @@ html, body {
   scrollbar-width: none;
 }
 
-body, html, #app {
+body,
+html,
+#app {
   max-width: 100vw;
   overflow-x: hidden;
 }
 
 // 确保所有容器不会超出视口宽度
-.container, .nav-container, .page, .main-content {
+.container,
+.nav-container,
+.page,
+.main-content {
   max-width: 100%;
   overflow-x: hidden;
 }
 
 // 防止固定定位元素导致横向滚动
-.fixed, .absolute {
+.fixed,
+.absolute {
   max-width: 100vw;
 }
 
@@ -69,7 +76,7 @@ pre {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  
+
   .main-content {
     flex: 1;
   }
@@ -87,7 +94,7 @@ pre {
 // 修复About页面的高度问题
 .about-page {
   min-height: calc(100vh - 70px); // 减去导航栏高度
-  
+
   .about-hero {
     height: auto; // 移除固定高度
     min-height: 60vh;
@@ -95,39 +102,57 @@ pre {
 }
 
 // 防止横向滚动的全局规则
-.section, .container-fluid, .row {
+.section,
+.container-fluid,
+.row {
   max-width: 100%;
   overflow-x: hidden;
 }
 
 // 确保所有图片和媒体元素不会导致横向滚动
-img, video, iframe, embed, object {
+img,
+video,
+iframe,
+embed,
+object {
   max-width: 100%;
   height: auto;
 }
 
 // 防止长文本导致横向滚动
-p, div, span, h1, h2, h3, h4, h5, h6 {
+p,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 // 防止代码块导致横向滚动
-code, pre {
+code,
+pre {
   max-width: 100%;
   overflow-x: auto;
   white-space: pre-wrap;
 }
 
 // 确保flex容器不会导致横向滚动
-.flex, .d-flex, [style*="display: flex"] {
+.flex,
+.d-flex,
+[style*='display: flex'] {
   flex-wrap: wrap;
   max-width: 100%;
 }
 
 // 防止绝对定位元素导致横向滚动
-[style*="position: absolute"], [style*="position: fixed"] {
+[style*='position: absolute'],
+[style*='position: fixed'] {
   max-width: 100vw;
 }
 

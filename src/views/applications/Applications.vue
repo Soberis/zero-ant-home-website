@@ -1,40 +1,85 @@
 <!-- 应用场景页面，展示所有行业应用卡片 -->
 <template>
   <div class="applications">
-
     <!-- 核心场景展示区域 -->
     <div class="core-scenarios">
       <h1 class="section-title">核心场景</h1>
       <div class="core-grid">
         <div class="core-card" @click="goToDetail('medical-automation')">
           <div class="core-icon">
-            <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/>
-              <rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/>
-              <path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/>
-              <path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/>
+            <svg
+              width="64"
+              height="64"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="10"
+                y="18"
+                width="28"
+                height="20"
+                rx="6"
+                stroke="#1a3a8f"
+                stroke-width="2"
+              />
+              <rect
+                x="20"
+                y="10"
+                width="8"
+                height="12"
+                rx="4"
+                stroke="#1a3a8f"
+                stroke-width="2"
+              />
+              <path d="M24 28v6" stroke="#1a3a8f" stroke-width="2" />
+              <path d="M20 32h8" stroke="#1a3a8f" stroke-width="2" />
             </svg>
           </div>
           <h3 class="core-title">医疗自动化</h3>
-          <p class="core-description">智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节</p>
+          <p class="core-description">
+            智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节
+          </p>
           <div class="core-features">
             <span class="feature-tag">智能检验</span>
             <span class="feature-tag">自动化药房</span>
           </div>
         </div>
-        
+
         <div class="core-card" @click="goToDetail('semiconductor')">
           <div class="core-icon">
-            <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/>
-              <rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/>
-              <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/>
-              <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/>
-              <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/>
+            <svg
+              width="64"
+              height="64"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="24"
+                cy="24"
+                r="14"
+                stroke="#1a3a8f"
+                stroke-width="2"
+              />
+              <rect
+                x="20"
+                y="12"
+                width="8"
+                height="8"
+                rx="2"
+                stroke="#1a3a8f"
+                stroke-width="2"
+              />
+              <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2" />
+              <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2" />
+              <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2" />
             </svg>
           </div>
           <h3 class="core-title">半导体加工</h3>
-          <p class="core-description">高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求</p>
+          <p class="core-description">
+            高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求
+          </p>
           <div class="core-features">
             <span class="feature-tag">晶圆搬运</span>
             <span class="feature-tag">智能检测</span>
@@ -43,7 +88,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- 更多场景展示区域 -->
     <div class="more-scenarios">
       <h1 class="section-title">更多场景</h1>
@@ -61,24 +106,24 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 // 引入行业应用数据和卡片组件
-import applications from '@/data/applications'
-import ApplicationCard from '@/components/common/ApplicationCard.vue'
+import applications from '@/data/applications';
+import ApplicationCard from '@/components/common/ApplicationCard.vue';
 
-const router = useRouter()
+const router = useRouter();
 
 // 过滤出除了医疗自动化和半导体加工之外的其他应用
 const otherApplications = computed(() => {
-  return applications.filter(app => 
-    app.slug !== 'medical-automation' && app.slug !== 'semiconductor'
-  )
-})
+  return applications.filter(
+    app => app.slug !== 'medical-automation' && app.slug !== 'semiconductor'
+  );
+});
 
 // 跳转到详情页
 function goToDetail(slug) {
-  router.push(`/applications/${slug}`)
+  router.push(`/applications/${slug}`);
 }
 </script>
 
@@ -218,15 +263,15 @@ function goToDetail(slug) {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
+
   .core-card {
     padding: 32px 24px;
   }
-  
+
   .core-title {
     font-size: 1.5rem;
   }
-  
+
   .section-title {
     font-size: 1.4rem;
   }
@@ -237,21 +282,21 @@ function goToDetail(slug) {
     grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
-  
+
   .title {
     font-size: 2.2rem;
     margin-bottom: 16px;
   }
-  
+
   .subtitle {
     font-size: 1rem;
     margin-bottom: 32px;
   }
-  
+
   .section-title {
     font-size: 1.2rem;
   }
-  
+
   .core-scenarios {
     margin-bottom: 48px;
   }

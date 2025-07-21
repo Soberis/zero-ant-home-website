@@ -2,10 +2,10 @@
 <template>
   <ProductsLayout>
     <div
-      class="product-series"
       v-for="product in robotProducts"
-      :key="product.slug"
       :id="product.slug"
+      :key="product.slug"
+      class="product-series"
     >
       <div class="series-title">{{ product.seriesTitle }}</div>
       <div class="series-subtitle">{{ product.seriesSubtitle }}</div>
@@ -17,15 +17,17 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useRouter } from "vue-router";
-import { products, productRouteMap } from '@/data/products';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { products } from '@/data/products';
 import ProductsLayout from '@/components/layout/ProductsLayout.vue';
 import ProductCard from '@/components/common/ProductCard.vue';
 import { getProductDetailLink } from '@/helpers/product';
 const router = useRouter();
 
-const robotProducts = computed(() => products.filter(p => p.category === 'robot'));
+const robotProducts = computed(() =>
+  products.filter(p => p.category === 'robot')
+);
 
 function goDetail(slug) {
   const product = products.find(p => p.slug === slug);

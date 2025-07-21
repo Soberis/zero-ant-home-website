@@ -2,28 +2,27 @@
   <header class="header">
     <nav class="nav-container">
       <div class="logo">
-        <img
-          :src="logoUrl"
-          width="50"
-          height="50"
-          :alt="$t('logoAlt')"
-        />
+        <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
         <router-link to="/" class="logo-text">
-          {{ $t("logoText") }}
+          {{ $t('logoText') }}
         </router-link>
       </div>
-      
+
       <!-- 桌面端导航 -->
       <div class="nav-wrapper desktop-nav">
         <ul class="nav-links">
           <li class="nav-item">
             <router-link to="/" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.home") }}</span>
+              <span class="nav-text">{{ $t('nav.home') }}</span>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/system-products" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.systemProducts") }}</span>
+            <router-link
+              to="/system-products"
+              class="nav-link"
+              active-class="active"
+            >
+              <span class="nav-text">{{ $t('nav.systemProducts') }}</span>
             </router-link>
             <div class="dropdown">
               <div class="dropdown-content">
@@ -41,8 +40,12 @@
             </div>
           </li>
           <li class="nav-item">
-            <router-link to="/robot-products" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.robotProducts") }}</span>
+            <router-link
+              to="/robot-products"
+              class="nav-link"
+              active-class="active"
+            >
+              <span class="nav-text">{{ $t('nav.robotProducts') }}</span>
             </router-link>
             <div class="dropdown">
               <div class="dropdown-content">
@@ -66,23 +69,32 @@
           </li> -->
           <li class="nav-item has-dropdown">
             <router-link to="/solutions" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.solutions") }}</span>
+              <span class="nav-text">{{ $t('nav.solutions') }}</span>
             </router-link>
             <div class="dropdown">
               <div class="dropdown-content">
                 <ul>
                   <li>
-                    <router-link :to="{ path: '/solutions', hash: '#core-scenarios' }" class="dropdown-item">
+                    <router-link
+                      :to="{ path: '/solutions', hash: '#core-scenarios' }"
+                      class="dropdown-item"
+                    >
                       {{ $t('nav.coreScenarios') }}
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ path: '/solutions', hash: '#more-scenarios' }" class="dropdown-item">
+                    <router-link
+                      :to="{ path: '/solutions', hash: '#more-scenarios' }"
+                      class="dropdown-item"
+                    >
                       {{ $t('nav.moreScenarios') }}
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ path: '/solutions', hash: '#video-section' }" class="dropdown-item">
+                    <router-link
+                      :to="{ path: '/solutions', hash: '#video-section' }"
+                      class="dropdown-item"
+                    >
                       {{ $t('nav.videoCases') }}
                     </router-link>
                   </li>
@@ -97,7 +109,7 @@
           </li> -->
           <li class="nav-item has-dropdown">
             <router-link to="/support" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.support") }}</span>
+              <span class="nav-text">{{ $t('nav.support') }}</span>
             </router-link>
             <div class="dropdown">
               <div class="dropdown-content">
@@ -116,12 +128,12 @@
           </li>
           <li class="nav-item">
             <router-link to="/careers" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.careers") }}</span>
+              <span class="nav-text">{{ $t('nav.careers') }}</span>
             </router-link>
           </li>
           <li class="nav-item has-dropdown">
             <router-link to="/about" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.about") }}</span>
+              <span class="nav-text">{{ $t('nav.about') }}</span>
             </router-link>
             <div class="dropdown">
               <div class="dropdown-content">
@@ -143,20 +155,17 @@
 
       <div class="nav-actions">
         <div class="language-switcher">
-          <button
-            class="language-btn"
-            @click="switchLanguage()"
-          >
+          <button class="language-btn" @click="switchLanguage()">
             <span class="lang-text">{{ locale === 'zh' ? 'EN' : '中文' }}</span>
           </button>
         </div>
-        
+
         <!-- 汉堡菜单按钮 -->
-        <button 
+        <button
           class="hamburger-menu"
-          :class="{ 'active': isMobileMenuOpen }"
-          @click="toggleMobileMenu"
+          :class="{ active: isMobileMenuOpen }"
           aria-label="Toggle navigation menu"
+          @click="toggleMobileMenu"
         >
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -166,22 +175,38 @@
     </nav>
 
     <!-- 移动端导航菜单 -->
-    <div class="mobile-nav" :class="{ 'open': isMobileMenuOpen }" @click="handleBackgroundClick">
+    <div
+      class="mobile-nav"
+      :class="{ open: isMobileMenuOpen }"
+      @click="handleBackgroundClick"
+    >
       <div class="mobile-nav-content">
         <ul class="mobile-nav-links">
           <li class="mobile-nav-item">
-            <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.home") }}
+            <router-link
+              to="/"
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              {{ $t('nav.home') }}
             </router-link>
           </li>
           <li class="mobile-nav-item">
-            <router-link to="/system-products" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.systemProducts") }}
+            <router-link
+              to="/system-products"
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              {{ $t('nav.systemProducts') }}
             </router-link>
           </li>
           <li class="mobile-nav-item">
-            <router-link to="/robot-products" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.robotProducts") }}
+            <router-link
+              to="/robot-products"
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              {{ $t('nav.robotProducts') }}
             </router-link>
           </li>
           <!-- <li class="mobile-nav-item">
@@ -190,8 +215,12 @@
             </router-link>
           </li> -->
           <li class="mobile-nav-item">
-            <router-link to="/solutions" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.solutions") }}
+            <router-link
+              to="/solutions"
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              {{ $t('nav.solutions') }}
             </router-link>
           </li>
           <!-- <li class="mobile-nav-item">
@@ -200,18 +229,30 @@
             </router-link>
           </li> -->
           <li class="mobile-nav-item">
-            <router-link to="/support" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.support") }}
+            <router-link
+              to="/support"
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              {{ $t('nav.support') }}
             </router-link>
           </li>
           <li class="mobile-nav-item">
-            <router-link to="/careers" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.careers") }}
+            <router-link
+              to="/careers"
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              {{ $t('nav.careers') }}
             </router-link>
           </li>
           <li class="mobile-nav-item">
-            <router-link to="/about" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.about") }}
+            <router-link
+              to="/about"
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              {{ $t('nav.about') }}
             </router-link>
           </li>
         </ul>
@@ -221,9 +262,9 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import logoUrl from "@/assets/zeroant_logo.png";
+import { onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import logoUrl from '@/assets/zeroant_logo.png';
 
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
@@ -252,35 +293,14 @@ function handleBackgroundClick(event) {
   }
 }
 
-// 产品导航子项
-const productNav = [
-  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
-  { hash: '#scara-robot-arm', label: 'nav.fourAxisArm' },
-  { hash: '#six-axis-robot-arm', label: 'nav.sixAxisArm' },
-  { hash: '#rtos', label: 'nav.rtOs' },
-  { hash: '#robot-control-system', label: 'nav.controlSystem' },
-  { hash: '#dual-arm-humanoid', label: 'nav.humanoid' },
-  { hash: '#scara-mobile-composite', label: 'nav.fourAxisMobileCompound' }
-];
-
-// 行业应用导航子项
-const applicationNav = [
-  { hash: '#medical-auto', label: 'nav.medicalAuto' },
-  { hash: '#semi-processing', label: 'nav.semiProcessing' }
-];
-
 // 技术支持导航子项
 const supportNav = [
   { hash: '#after-sales', label: 'nav.afterSales' },
   { hash: '#download', label: 'nav.download' },
-  { hash: '#faq', label: 'nav.faq' }
+  { hash: '#faq', label: 'nav.faq' },
 ];
 
-// 新闻动态导航子项
-const newsNav = [
-  { label: 'nav.newsDynamic' },
-  { label: 'nav.exhibition' }
-];
+// 导航配置已整合到具体的产品导航中
 
 // 关于我们导航子项
 const aboutNav = [
@@ -289,14 +309,14 @@ const aboutNav = [
   { hash: '#honors', label: 'nav.honor' },
   { hash: '#core-values', label: 'nav.coreValues' },
   { hash: '#culture', label: 'nav.culture' },
-  { hash: '#contact', label: 'nav.contact' }
+  { hash: '#contact', label: 'nav.contact' },
 ];
 
 const systemProductNav = [
   { hash: '#multi-os-vm', label: 'nav.multiOSVM' },
   { hash: '#industrial-rtos', label: 'nav.industrialRTOS' },
   { hash: '#airos', label: 'nav.airos' },
-  { hash: '#robot-scheduler', label: 'nav.robotScheduler' }
+  { hash: '#robot-scheduler', label: 'nav.robotScheduler' },
 ];
 
 const robotProductNav = [
@@ -320,12 +340,12 @@ function switchLanguage() {
 }
 
 onMounted(() => {
-  const savedLanguage = localStorage.getItem("language");
-  if (savedLanguage && (savedLanguage === "zh" || savedLanguage === "en")) {
+  const savedLanguage = localStorage.getItem('language');
+  if (savedLanguage && (savedLanguage === 'zh' || savedLanguage === 'en')) {
     locale.value = savedLanguage;
   } else {
-    locale.value = "zh";
-    localStorage.setItem("language", "zh");
+    locale.value = 'zh';
+    localStorage.setItem('language', 'zh');
   }
 });
 
@@ -472,7 +492,7 @@ onUnmounted(() => {
 }
 
 .nav-link::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -2px;
   left: 50%;
@@ -567,7 +587,12 @@ onUnmounted(() => {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(26, 58, 143, 0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(26, 58, 143, 0.1),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
@@ -629,7 +654,12 @@ onUnmounted(() => {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(26, 58, 143, 0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(26, 58, 143, 0.1),
+    transparent
+  );
   transition: left 0.4s ease;
 }
 
@@ -661,12 +691,12 @@ onUnmounted(() => {
     gap: 48px;
     padding: 0 60px;
   }
-  
+
   .dropdown ul {
     max-width: 1400px;
     gap: 32px;
   }
-  
+
   .nav-container {
     height: 85px;
   }
@@ -685,17 +715,17 @@ onUnmounted(() => {
     gap: 24px;
     padding: 0 20px;
   }
-  
+
   .dropdown-item {
     padding: 14px 20px;
     min-width: 120px;
     font-size: 13px;
   }
-  
+
   .logo {
     margin-left: 32px;
   }
-  
+
   .nav-actions {
     margin-right: 32px;
   }
@@ -704,30 +734,30 @@ onUnmounted(() => {
 /* 新增中等屏幕优化 */
 @media (min-width: 951px) and (max-width: 1100px) {
   .nav-links {
-    gap: 14px;      /* 进一步缩小 */
+    gap: 14px; /* 进一步缩小 */
     padding: 0 8px; /* 进一步缩小 */
   }
-  
+
   .nav-link {
     font-size: 14px;
     padding: 8px 6px;
   }
-  
+
   .logo {
     margin-left: 24px;
     padding: 0 8px;
   }
-  
+
   .logo-text {
     font-size: 22px;
     margin-left: 8px;
   }
-  
+
   .nav-actions {
     margin-right: 24px;
     gap: 14px;
   }
-  
+
   .language-btn {
     padding: 7px 12px;
     font-size: 12px;
@@ -852,16 +882,16 @@ onUnmounted(() => {
   .desktop-nav {
     display: none;
   }
-  
+
   .hamburger-menu {
     display: flex;
   }
-  
+
   .nav-container {
     height: 70px;
     padding: 0 16px;
   }
-  
+
   .logo {
     margin-left: 0;
     padding: 0;
@@ -869,13 +899,13 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
   }
-  
+
   .logo img {
     width: 40px;
     height: 40px;
     flex-shrink: 0;
   }
-  
+
   .logo-text {
     font-size: 22px;
     margin-left: 8px;
@@ -884,13 +914,13 @@ onUnmounted(() => {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .nav-actions {
     margin-right: 0;
     gap: 0;
     flex-shrink: 0;
   }
-  
+
   .language-btn {
     padding: 8px 14px;
     font-size: 13px;
@@ -903,42 +933,42 @@ onUnmounted(() => {
     height: 60px;
     padding: 0 12px;
   }
-  
+
   .logo img {
     width: 35px;
     height: 35px;
   }
-  
+
   .logo-text {
     font-size: 18px;
     margin-left: 6px;
     font-weight: 600;
   }
-  
+
   .language-btn {
     padding: 6px 10px;
     font-size: 11px;
     min-width: 35px;
     border-radius: 16px;
   }
-  
+
   .nav-actions {
     margin-right: 0;
     gap: 0;
   }
-  
+
   .hamburger-menu {
     width: 28px;
     height: 28px;
     margin-left: 12px;
   }
-  
+
   .hamburger-line {
     width: 20px;
     height: 2px;
     margin: 2px 0;
   }
-  
+
   .mobile-nav-content {
     width: 260px;
     padding-top: 70px;
@@ -951,42 +981,42 @@ onUnmounted(() => {
     height: 55px;
     padding: 0 8px;
   }
-  
+
   .logo img {
     width: 30px;
     height: 30px;
   }
-  
+
   .logo-text {
     font-size: 16px;
     margin-left: 4px;
     letter-spacing: -1px;
   }
-  
+
   .language-btn {
     padding: 5px 8px;
     font-size: 10px;
     min-width: 30px;
     border-radius: 14px;
   }
-  
+
   .hamburger-menu {
     width: 26px;
     height: 26px;
     margin-left: 8px;
   }
-  
+
   .hamburger-line {
     width: 18px;
     height: 2px;
     margin: 2px 0;
   }
-  
+
   .mobile-nav-content {
     width: 240px;
     padding-top: 65px;
   }
-  
+
   .mobile-nav-link {
     padding: 14px 20px;
     font-size: 15px;
@@ -999,46 +1029,46 @@ onUnmounted(() => {
     height: 50px;
     padding: 0 6px;
   }
-  
+
   .logo img {
     width: 28px;
     height: 28px;
   }
-  
+
   .logo-text {
     font-size: 15px;
     margin-left: 3px;
     letter-spacing: -1.2px;
   }
-  
+
   .language-btn {
     padding: 4px 6px;
     font-size: 9px;
     min-width: 28px;
     border-radius: 12px;
   }
-  
+
   .lang-text {
     font-weight: 600;
   }
-  
+
   .hamburger-menu {
     width: 24px;
     height: 24px;
     margin-left: 6px;
   }
-  
+
   .hamburger-line {
     width: 16px;
     height: 2px;
     margin: 1.5px 0;
   }
-  
+
   .mobile-nav-content {
     width: 220px;
     padding-top: 60px;
   }
-  
+
   .mobile-nav-link {
     padding: 12px 16px;
     font-size: 14px;
@@ -1075,7 +1105,7 @@ onUnmounted(() => {
   .nav-link {
     border: 1px solid transparent;
   }
-  
+
   .nav-link:hover,
   .nav-link.active {
     border-color: #1a3a8f;

@@ -21,7 +21,6 @@ import hongxu from '@/assets/images/partners/hongxu.png';
 import yihui from '@/assets/images/partners/yihui.svg';
 import huazhi from '@/assets/images/partners/changshahuazhi.png';
 
-
 /**
  * 合作伙伴接口
  */
@@ -55,5 +54,9 @@ export const partners: Partner[] = [
   { src: hunan, alt: '湖南大学', class: 'logo-hunan' },
   { src: qinghua, alt: '清华大学', class: 'logo-qinghua' },
   { src: buaa, alt: '北京航空航天大学', class: 'logo-buaa' },
-  { src: buaahyy, alt: '北京航空航天大学杭州创新研究院', class: 'logo-buaahyy' },
+  {
+    src: buaahyy,
+    alt: '北京航空航天大学杭州创新研究院',
+    class: 'logo-buaahyy',
+  },
 ];

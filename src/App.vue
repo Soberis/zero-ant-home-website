@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import NavBar from "@/components/layout/NavBar.vue";
+import NavBar from '@/components/layout/NavBar.vue';
 import { StagewiseToolbar } from '@stagewise/toolbar-vue';
 import VuePlugin from '@stagewise-plugins/vue';
-import Footer from "@/components/layout/Footer.vue";
+import Footer from '@/components/layout/Footer.vue';
 
 // 只在开发环境下显示 Stagewise 工具栏
 const isDev = import.meta.env.DEV;
@@ -29,17 +29,18 @@ const isDev = import.meta.env.DEV;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+  font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
 #app {
   width: 100%;
   min-height: 100vh;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

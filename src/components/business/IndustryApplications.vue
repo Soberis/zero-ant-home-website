@@ -1,20 +1,43 @@
 <template>
   <section class="industry-apps">
     <h2 class="section-title">行业应用</h2>
-    <div class="section-desc">专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案</div>
+    <div class="section-desc">
+      专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案
+    </div>
     <div class="apps-list-wrap">
-      <button class="scroll-btn left" @mouseenter="pauseScroll" @mouseleave="resumeScroll" @click="scrollLeft">
+      <button
+        class="scroll-btn left"
+        @mouseenter="pauseScroll"
+        @mouseleave="resumeScroll"
+        @click="scrollLeft"
+      >
         <span>&lt;</span>
       </button>
-      <div ref="scrollWrap" class="apps-list" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
+      <div
+        ref="scrollWrap"
+        class="apps-list"
+        @mouseenter="pauseScroll"
+        @mouseleave="resumeScroll"
+      >
         <div class="apps-track">
-          <div v-for="app in displayApps" :key="app.slug" class="app-card" @click="goDetail(app.slug)" style="cursor:pointer">
+          <div
+            v-for="app in displayApps"
+            :key="app.slug"
+            class="app-card"
+            style="cursor: pointer"
+            @click="goDetail(app.slug)"
+          >
             <span class="icon" v-html="app.svg"></span>
             <div class="app-title">{{ app.title }}</div>
           </div>
         </div>
       </div>
-      <button class="scroll-btn right" @mouseenter="pauseScroll" @mouseleave="resumeScroll" @click="scrollRight">
+      <button
+        class="scroll-btn right"
+        @mouseenter="pauseScroll"
+        @mouseleave="resumeScroll"
+        @click="scrollRight"
+      >
         <span>&gt;</span>
       </button>
     </div>
@@ -34,11 +57,11 @@ const router = useRouter();
 /**
  * 跳转到应用详情页
  */
-const goDetail = (slug) => {
+const goDetail = slug => {
   if (slug) {
     router.push(`/applications/${slug}`);
   }
-}
+};
 /**
  * 自动滚动（到一半重置，若需无缝体验可后续优化）
  */
@@ -49,20 +72,20 @@ const autoScroll = () => {
   if (el.scrollLeft >= el.scrollWidth / 2) {
     el.scrollLeft = 0;
   }
-}
+};
 /**
  * 暂停自动滚动
  */
 const pauseScroll = () => {
   if (timer) clearInterval(timer);
-}
+};
 /**
  * 恢复自动滚动
  */
 const resumeScroll = () => {
   if (timer) clearInterval(timer);
   timer = setInterval(autoScroll, 20);
-}
+};
 /**
  * 平滑滚动指定距离
  */
@@ -87,19 +110,19 @@ const smoothScrollBy = (distance, duration = 600) => {
     }
   }
   requestAnimationFrame(animate);
-}
+};
 /**
  * 向左滚动
  */
 const scrollLeft = () => {
   smoothScrollBy(-260, 600);
-}
+};
 /**
  * 向右滚动
  */
 const scrollRight = () => {
   smoothScrollBy(260, 600);
-}
+};
 
 onMounted(() => {
   nextTick(() => {
@@ -149,15 +172,19 @@ onUnmounted(() => {
   height: 64px;
   border-radius: 50%;
   border: none;
-  background: rgba(26,58,143,0.12);
+  background: rgba(26, 58, 143, 0.12);
   color: #1a3a8f;
   font-size: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
-  box-shadow: 0 2px 8px 0 rgba(30,40,90,0.08);
+  transition:
+    background 0.18s,
+    color 0.18s,
+    box-shadow 0.18s,
+    transform 0.18s;
+  box-shadow: 0 2px 8px 0 rgba(30, 40, 90, 0.08);
 }
 .scroll-btn.left {
   left: 12vw;
@@ -169,7 +196,7 @@ onUnmounted(() => {
   background: #1a3a8f;
   color: #fff;
   transform: scale(1.12);
-  box-shadow: 0 4px 18px 0 rgba(26,58,143,0.18);
+  box-shadow: 0 4px 18px 0 rgba(26, 58, 143, 0.18);
 }
 .scroll-btn:active {
   transform: scale(0.95);
@@ -196,16 +223,19 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   padding: 24px 10px 18px 10px;
-  box-shadow: 0 2px 8px 0 rgba(30,40,90,0.04);
-  transition: box-shadow 0.22s cubic-bezier(.4,2,.6,1), transform 0.22s cubic-bezier(.4,2,.6,1), border-color 0.18s;
+  box-shadow: 0 2px 8px 0 rgba(30, 40, 90, 0.04);
+  transition:
+    box-shadow 0.22s cubic-bezier(0.4, 2, 0.6, 1),
+    transform 0.22s cubic-bezier(0.4, 2, 0.6, 1),
+    border-color 0.18s;
   flex: 0 0 auto;
 }
 .app-card:hover {
-  box-shadow: 0 4px 18px 0 rgba(26,58,143,0.10);
+  box-shadow: 0 4px 18px 0 rgba(26, 58, 143, 0.1);
 }
 .app-card:active {
   transform: translateY(2px) scale(0.96);
-  box-shadow: 0 2px 8px 0 rgba(26,58,143,0.18);
+  box-shadow: 0 2px 8px 0 rgba(26, 58, 143, 0.18);
   border-color: #1a3a8f55;
 }
 .app-img {

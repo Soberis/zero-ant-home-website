@@ -6,19 +6,42 @@
       class="carousel-slide"
       :class="{ active: idx === current }"
     >
-      <div class="slide-bg" :style="{ backgroundImage: `url(${slide.img})` }"></div>
+      <div
+        class="slide-bg"
+        :style="{ backgroundImage: `url(${slide.img})` }"
+      ></div>
       <div class="slide-content">
         <h1 class="slide-title">{{ slide.title }}</h1>
         <p class="slide-desc">{{ slide.desc }}</p>
       </div>
     </div>
     <div class="carousel-controls">
-      <button v-for="(slide, idx) in slides" :key="idx" :class="{ active: idx === current }" @click="goTo(idx)"></button>
+      <button
+        v-for="(slide, idx) in slides"
+        :key="idx"
+        :class="{ active: idx === current }"
+        @click="goTo(idx)"
+      ></button>
     </div>
     <!-- 顶部装饰弧线 -->
-    <svg class="arc-bg" viewBox="0 0 1920 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 300 Q960 0 1920 300" stroke="#e5e7eb" stroke-width="2" fill="none"/>
-      <path d="M0 250 Q960 50 1920 250" stroke="#f3f4f6" stroke-width="1" fill="none"/>
+    <svg
+      class="arc-bg"
+      viewBox="0 0 1920 300"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 300 Q960 0 1920 300"
+        stroke="#e5e7eb"
+        stroke-width="2"
+        fill="none"
+      />
+      <path
+        d="M0 250 Q960 50 1920 250"
+        stroke="#f3f4f6"
+        stroke-width="1"
+        fill="none"
+      />
     </svg>
   </div>
 </template>
@@ -31,17 +54,17 @@ const slides = [
   {
     img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=RTOS',
     title: '实时操作系统',
-    desc: '高可靠、低延迟的工业级实时操作系统，赋能智能设备高效运行。'
+    desc: '高可靠、低延迟的工业级实时操作系统，赋能智能设备高效运行。',
   },
   {
     img: 'https://via.placeholder.com/1920x900/222/fff?text=Robot+Control',
     title: '机器人控制系统',
-    desc: '灵活可扩展的机器人控制平台，支持多种应用场景与复杂任务。'
+    desc: '灵活可扩展的机器人控制平台，支持多种应用场景与复杂任务。',
   },
   {
     img: 'https://via.placeholder.com/1920x900/555/fff?text=Mobile+Robot',
     title: '移动机器人',
-    desc: '自主导航与智能调度，助力智慧物流与智能制造升级。'
+    desc: '自主导航与智能调度，助力智慧物流与智能制造升级。',
   },
 ];
 const current = ref(0);
@@ -98,7 +121,8 @@ onUnmounted(() => {
 }
 .carousel-slide {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -114,7 +138,8 @@ onUnmounted(() => {
 }
 .slide-bg {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-size: cover;

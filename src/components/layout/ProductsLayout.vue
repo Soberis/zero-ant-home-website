@@ -114,16 +114,19 @@
   padding: 12px 48px;
   font-size: 1.15rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
   font-weight: 700;
   letter-spacing: 1px;
-  box-shadow: 0 2px 8px rgba(26,58,143,0.04);
+  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.04);
 }
 
 :deep(.more-btn:hover) {
   background: #1a3a8f;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(26,58,143,0.10);
+  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.1);
 }
 
 /* 响应式设计 */
@@ -132,16 +135,16 @@
     padding-left: 20px;
     padding-right: 20px;
   }
-  
+
   :deep(.product-card-wrapper) {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  
+
   :deep(.series-title) {
     font-size: 2.4rem;
   }
-  
+
   :deep(.series-subtitle) {
     font-size: 1.2rem;
   }
@@ -152,26 +155,26 @@
     max-width: 98vw;
     border-radius: 18px;
   }
-  
+
   :deep(.product-card) {
     padding: 36px 10vw 36px 10vw;
   }
-  
+
   :deep(.product-image-wrapper) {
     width: 160px;
     height: 160px;
   }
-  
+
   :deep(.product-image),
   :deep(.product-image-placeholder) {
     width: 140px;
     height: 140px;
   }
-  
+
   :deep(.series-title) {
     font-size: 2.2rem;
   }
-  
+
   :deep(.product-name) {
     font-size: 1.3rem;
   }
@@ -181,19 +184,19 @@
   .products {
     padding: 32px 0 24px 0;
   }
-  
+
   :deep(.product-series) {
     margin-bottom: 36px;
   }
-  
+
   :deep(.product-card) {
     padding: 24px 4vw 24px 4vw;
   }
-  
+
   :deep(.series-title) {
     font-size: 1.3rem;
   }
-  
+
   :deep(.series-subtitle) {
     font-size: 1rem;
   }

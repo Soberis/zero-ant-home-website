@@ -21,7 +21,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { productDetails } from '@/data/productDetails';
 import { products } from '@/data/products';
 import ProductDetail from '@/components/common/ProductDetail.vue';
-import { getProductDetailLink } from '@/helpers/product';
+// getProductDetailLink 在此页面暂未使用
 
 const route = useRoute();
 const router = useRouter();

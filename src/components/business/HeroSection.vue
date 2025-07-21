@@ -1,10 +1,13 @@
 <template>
   <section class="hero-section">
     <div class="hero-content">
-      <h1>{{ $t("hero.title") }}</h1>
-      <p>{{ $t("hero.subtitle") }}</p>
-      <router-link :to="getProductDetailLink(heroProduct)" class="btn btn-primary">
-        {{ $t("hero.cta") }}
+      <h1>{{ $t('hero.title') }}</h1>
+      <p>{{ $t('hero.subtitle') }}</p>
+      <router-link
+        :to="getProductDetailLink(heroProduct)"
+        class="btn btn-primary"
+      >
+        {{ $t('hero.cta') }}
       </router-link>
     </div>
     <img :src="heroImage" alt="Hero Image" class="hero-image" />
@@ -12,19 +15,16 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import heroImage from "@/assets/hero_image.png"; // Replace with the actual path to your hero image
+// Vue响应式功能按需导入
+import heroImage from '@/assets/hero_image.png'; // Replace with the actual path to your hero image
 import { getProductDetailLink } from '@/helpers/product';
 
-const heroTitle = ref("Revolutionizing Pharmaceutical Automation");
-const heroSubtitle = ref("Explore our advanced four-axis robotic arms designed for precision and efficiency.");
-const heroCta = ref("Discover Our Products");
+// 英雄区域内容通过国际化配置
 
 const heroProduct = {
   category: 'system', // 可改为'robot'等
-  slug: 'rtos'        // 可改为其他产品slug
+  slug: 'rtos', // 可改为其他产品slug
 };
-
 </script>
 
 <style scoped>

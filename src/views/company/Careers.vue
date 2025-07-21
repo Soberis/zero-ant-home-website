@@ -32,9 +32,9 @@
         <h2 class="section-title">为什么选择零蚁科技</h2>
         <div class="benefits-grid">
           <div
-            class="benefit-card"
             v-for="benefit in benefits"
             :key="benefit.id"
+            class="benefit-card"
           >
             <div class="benefit-content">
               <h3 class="benefit-title">{{ benefit.title }}</h3>
@@ -51,9 +51,9 @@
         <h2 class="section-title">热招职位</h2>
         <div class="positions-grid">
           <div
-            class="position-card"
             v-for="position in positions"
             :key="position.id"
+            class="position-card"
           >
             <div class="position-header">
               <h3 class="position-title">{{ position.title }}</h3>
@@ -108,39 +108,39 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
 // 公司优势
 const benefits = ref([
   {
     id: 1,
-    title: "技术创新",
-    description: "参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界",
+    title: '技术创新',
+    description: '参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界',
   },
   {
     id: 2,
-    title: "职业发展",
-    description: "完善的培训体系和晋升通道，助力个人职业发展和技能提升",
+    title: '职业发展',
+    description: '完善的培训体系和晋升通道，助力个人职业发展和技能提升',
   },
   {
     id: 3,
-    title: "优秀团队",
-    description: "与来自全球的优秀工程师合作，在开放包容的环境中共同成长",
+    title: '优秀团队',
+    description: '与来自全球的优秀工程师合作，在开放包容的环境中共同成长',
   },
   {
     id: 4,
-    title: "丰厚待遇",
-    description: "具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排",
+    title: '丰厚待遇',
+    description: '具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排',
   },
   {
     id: 5,
-    title: "个人挑战",
-    description: "不设限制的创新环境，在全栈自研体系中突破自我",
+    title: '个人挑战',
+    description: '不设限制的创新环境，在全栈自研体系中突破自我',
   },
   {
     id: 6,
-    title: "社会价值",
-    description: "直击行业痛点，推动工业制造产质升级",
+    title: '社会价值',
+    description: '直击行业痛点，推动工业制造产质升级',
   },
 ]);
 
@@ -148,86 +148,86 @@ const benefits = ref([
 const positions = ref([
   {
     id: 1,
-    title: "机器人工程师",
-    type: "全职",
-    location: "杭州",
-    experience: "不限制",
+    title: '机器人工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
     requirements: [
-      "机械工程、自动化或相关专业本科及以上学历",
-      "3年以上机器人系统开发经验",
-      "熟悉ROS、运动控制、路径规划等技术",
-      "具备良好的团队协作和沟通能力",
+      '机械工程、自动化或相关专业本科及以上学历',
+      '3年以上机器人系统开发经验',
+      '熟悉ROS、运动控制、路径规划等技术',
+      '具备良好的团队协作和沟通能力',
     ],
   },
   {
     id: 2,
-    title: "软件工程师",
-    type: "全职",
-    location: "杭州",
-    experience: "不限制",
+    title: '软件工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
     requirements: [
-      "计算机科学或相关专业本科及以上学历",
-      "熟练掌握C++、Python等编程语言",
-      "有嵌入式系统或实时系统开发经验",
-      "了解机器人操作系统和控制算法",
+      '计算机科学或相关专业本科及以上学历',
+      '熟练掌握C++、Python等编程语言',
+      '有嵌入式系统或实时系统开发经验',
+      '了解机器人操作系统和控制算法',
     ],
   },
   {
     id: 3,
-    title: "算法工程师",
-    type: "全职",
-    location: "杭州",
-    experience: "不限制",
+    title: '算法工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
     requirements: [
-      "计算机、数学、自动化等相关专业硕士及以上学历",
-      "深度学习、计算机视觉或SLAM算法经验",
-      "熟悉TensorFlow、PyTorch等深度学习框架",
-      "有机器人感知、决策算法开发经验优先",
+      '计算机、数学、自动化等相关专业硕士及以上学历',
+      '深度学习、计算机视觉或SLAM算法经验',
+      '熟悉TensorFlow、PyTorch等深度学习框架',
+      '有机器人感知、决策算法开发经验优先',
     ],
   },
   {
     id: 4,
-    title: "硬件工程师",
-    type: "全职",
-    location: "杭州",
-    experience: "不限制",
+    title: '硬件工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
     requirements: [
-      "电子工程、自动化等相关专业本科及以上学历",
-      "熟悉电路设计、PCB布局和硬件调试",
-      "有嵌入式系统硬件开发经验",
-      "了解传感器集成和信号处理技术",
+      '电子工程、自动化等相关专业本科及以上学历',
+      '熟悉电路设计、PCB布局和硬件调试',
+      '有嵌入式系统硬件开发经验',
+      '了解传感器集成和信号处理技术',
     ],
   },
   {
     id: 5,
-    title: "产品经理",
-    type: "全职",
-    location: "杭州",
-    experience: "不限制",
+    title: '产品经理',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
     requirements: [
-      "本科及以上学历，理工类、管理类相关专业优先",
-      "有2年以上产品经理或相关岗位经验优先",
-      "具备良好的需求分析、产品规划和跨部门沟通能力",
-      "有机器人、工业自动化或软件产品经验者优先",
+      '本科及以上学历，理工类、管理类相关专业优先',
+      '有2年以上产品经理或相关岗位经验优先',
+      '具备良好的需求分析、产品规划和跨部门沟通能力',
+      '有机器人、工业自动化或软件产品经验者优先',
     ],
   },
   {
     id: 6,
-    title: "测试工程师",
-    type: "全职",
-    location: "杭州",
-    experience: "不限制",
+    title: '测试工程师',
+    type: '全职',
+    location: '杭州',
+    experience: '不限制',
     requirements: [
-      "本科及以上学历，计算机、自动化等相关专业",
-      "熟悉软件/硬件测试流程，能独立编写测试用例",
-      "有自动化测试、持续集成经验优先",
-      "工作细致认真，具备良好的沟通与团队协作能力",
+      '本科及以上学历，计算机、自动化等相关专业',
+      '熟悉软件/硬件测试流程，能独立编写测试用例',
+      '有自动化测试、持续集成经验优先',
+      '工作细致认真，具备良好的沟通与团队协作能力',
     ],
   },
 ]);
 
 // 申请职位
-const applyForPosition = (position) => {
+const applyForPosition = position => {
   window.open(`mailto:hr@zeroant.com?subject=申请职位：${position.title}`);
 };
 </script>
@@ -331,7 +331,9 @@ const applyForPosition = (position) => {
       border-radius: 12px;
       padding: 2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
       border: 1px solid #f0f0f0;
 
       &:hover {
@@ -369,7 +371,9 @@ const applyForPosition = (position) => {
       border-radius: 12px;
       padding: 2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 
       &:hover {
         transform: translateY(-3px);
@@ -446,7 +450,7 @@ const applyForPosition = (position) => {
             font-size: 1.5rem;
 
             &:before {
-              content: "•";
+              content: '•';
               color: #1a3a8f;
               font-weight: bold;
               position: absolute;

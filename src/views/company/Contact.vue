@@ -5,27 +5,27 @@
       <!-- 右侧信息区（原左侧） -->
       <section class="contact-form-panel">
         <div class="form-card">
-          <h1 class="form-title">{{ $t("contacts.title") }}</h1>
-          <p class="form-desc">{{ $t("contacts.description") }}</p>
-          <form @submit.prevent="submitForm" class="contact-form">
+          <h1 class="form-title">{{ $t('contacts.title') }}</h1>
+          <p class="form-desc">{{ $t('contacts.description') }}</p>
+          <form class="contact-form" @submit.prevent="submitForm">
             <div class="form-group">
-              <label for="email">{{ $t("contacts.email") }}</label>
+              <label for="email">{{ $t('contacts.email') }}</label>
               <input
-                type="email"
                 id="email"
                 v-model="formData.email"
+                type="email"
                 :disabled="loading"
                 required
                 :placeholder="
                   errors.email ? errors.email : $t('contacts.email')
                 "
                 :class="{ 'input-error': errors.email }"
-                @blur="validateField('email')"
                 autocomplete="off"
+                @blur="validateField('email')"
               />
             </div>
             <div class="form-group">
-              <label for="message">{{ $t("contacts.message") }}</label>
+              <label for="message">{{ $t('contacts.message') }}</label>
               <textarea
                 id="message"
                 v-model="formData.message"
@@ -41,8 +41,8 @@
             </div>
             <div class="form-actions">
               <button type="submit" class="btn btn-primary" :disabled="loading">
-                <span v-if="loading">{{ $t("contacts.submitting") }}</span>
-                <span v-else>{{ $t("contacts.submit") }}</span>
+                <span v-if="loading">{{ $t('contacts.submitting') }}</span>
+                <span v-else>{{ $t('contacts.submit') }}</span>
               </button>
               <button
                 type="button"
@@ -50,7 +50,7 @@
                 :disabled="loading"
                 @click="resetForm"
               >
-                {{ $t("contacts.reset") }}
+                {{ $t('contacts.reset') }}
               </button>
             </div>
             <div v-if="successMsg" class="success-msg">{{ successMsg }}</div>
@@ -60,10 +60,14 @@
       <!-- 左侧信息区（原右侧） -->
       <aside class="contact-info-panel">
         <div class="info-brand">
-          <img src="../../assets/zeroant_logo.png" alt="logo" class="brand-logo" />
-          <div class="brand-title">{{ $t("logoText") }}</div>
+          <img
+            src="../../assets/zeroant_logo.png"
+            alt="logo"
+            class="brand-logo"
+          />
+          <div class="brand-title">{{ $t('logoText') }}</div>
         </div>
-        <div class="info-section-title">{{ $t("contacts.getInTouch") }}</div>
+        <div class="info-section-title">{{ $t('contacts.getInTouch') }}</div>
         <div class="info-list">
           <div class="info-item">
             <span class="info-icon">📞</span>
@@ -92,59 +96,59 @@
 
 <script setup>
 // 联系我们页面，包含表单提交、表单校验、联系方式和社交信息展示
-import { ref } from "vue";
+import { ref } from 'vue';
 
 const formData = ref({
-  name: "",
-  email: "",
-  message: "",
+  name: '',
+  email: '',
+  message: '',
 });
 const errors = ref({});
 const loading = ref(false);
-const successMsg = ref("");
+const successMsg = ref('');
 
 function validateField(field) {
-  if (field === "name" && !formData.value.name.trim()) {
-    errors.value.name = "请输入姓名";
-  } else if (field === "email") {
+  if (field === 'name' && !formData.value.name.trim()) {
+    errors.value.name = '请输入姓名';
+  } else if (field === 'email') {
     if (!formData.value.email.trim()) {
-      errors.value.email = "请输入邮箱";
+      errors.value.email = '请输入邮箱';
     } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.value.email)) {
-      errors.value.email = "邮箱格式不正确";
+      errors.value.email = '邮箱格式不正确';
     } else {
-      errors.value.email = "";
+      errors.value.email = '';
     }
-  } else if (field === "message" && !formData.value.message.trim()) {
-    errors.value.message = "请输入留言内容";
+  } else if (field === 'message' && !formData.value.message.trim()) {
+    errors.value.message = '请输入留言内容';
   } else {
-    errors.value[field] = "";
+    errors.value[field] = '';
   }
 }
 
 function validateForm() {
-  validateField("name");
-  validateField("email");
-  validateField("message");
+  validateField('name');
+  validateField('email');
+  validateField('message');
   return !errors.value.name && !errors.value.email && !errors.value.message;
 }
 
 function submitForm() {
   if (!validateForm()) return;
   loading.value = true;
-  successMsg.value = "";
+  successMsg.value = '';
   setTimeout(() => {
     loading.value = false;
-    successMsg.value = "提交成功，感谢您的联系！";
-    formData.value = { name: "", email: "", message: "" };
+    successMsg.value = '提交成功，感谢您的联系！';
+    formData.value = { name: '', email: '', message: '' };
     errors.value = {};
-    setTimeout(() => (successMsg.value = ""), 3000);
+    setTimeout(() => (successMsg.value = ''), 3000);
   }, 1200);
 }
 
 function resetForm() {
-  formData.value = { name: "", email: "", message: "" };
+  formData.value = { name: '', email: '', message: '' };
   errors.value = {};
-  successMsg.value = "";
+  successMsg.value = '';
 }
 </script>
 
@@ -239,7 +243,9 @@ function resetForm() {
   text-decoration: none;
   margin-top: 0;
   display: block;
-  transition: text-decoration 0.2s, color 0.2s;
+  transition:
+    text-decoration 0.2s,
+    color 0.2s;
   word-break: break-all;
   white-space: pre-line; /* 支持换行 */
   text-align: left; /* 始终左对齐 */
@@ -317,7 +323,9 @@ textarea {
   border: 1.5px solid #e5e7eb;
   border-radius: 7px;
   font-size: 1.05rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   outline: none;
   background: #fafdff;
   font-family: inherit;

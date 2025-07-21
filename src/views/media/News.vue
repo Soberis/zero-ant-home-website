@@ -14,4 +14,4 @@
 .news {
   padding: 20px;
 }
-</style> 
+</style>

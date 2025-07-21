@@ -3,28 +3,28 @@
     <div class="detail-content">
       <h1 class="product-title">{{ title }}</h1>
       <div class="product-desc">{{ desc }}</div>
-      <section class="section" v-if="features && features.length">
+      <section v-if="features && features.length" class="section">
         <h2 class="section-title">优势特点</h2>
         <ul class="feature-list">
           <li v-for="(feature, idx) in features" :key="idx">{{ feature }}</li>
         </ul>
       </section>
-      <section class="section" v-if="cases && cases.length">
+      <section v-if="cases && cases.length" class="section">
         <h2 class="section-title">相关案例</h2>
         <div class="case-list">
-          <div class="case-item" v-for="(item, idx) in cases" :key="idx">
+          <div v-for="(item, idx) in cases" :key="idx" class="case-item">
             <div class="case-title">{{ item.title }}</div>
             <div class="case-desc">{{ item.desc }}</div>
           </div>
         </div>
       </section>
-      <section class="section" v-if="scenes && scenes.length">
+      <section v-if="scenes && scenes.length" class="section">
         <h2 class="section-title">应用场景</h2>
         <ul class="scene-list">
           <li v-for="(scene, idx) in scenes" :key="idx">{{ scene }}</li>
         </ul>
       </section>
-      <section class="section" v-if="params && params.length">
+      <section v-if="params && params.length" class="section">
         <h2 class="section-title">产品参数</h2>
         <table class="param-table">
           <tr v-for="(param, idx) in params" :key="idx">
@@ -33,11 +33,13 @@
           </tr>
         </table>
       </section>
-      <section class="section" v-if="downloads && downloads.length">
+      <section v-if="downloads && downloads.length" class="section">
         <h2 class="section-title">相关下载</h2>
         <ul class="download-list">
           <li v-for="(item, idx) in downloads" :key="idx">
-            <a :href="item.url" target="_blank" class="download-link">{{ item.name }}</a>
+            <a :href="item.url" target="_blank" class="download-link">{{
+              item.name
+            }}</a>
           </li>
         </ul>
       </section>
@@ -68,8 +70,11 @@ defineProps({
   cases: Array,
   scenes: Array,
   params: Array,
-  downloads: Array
+  downloads: Array,
 });
+
+// 组件事件定义
+defineEmits(['back']);
 </script>
 <style scoped>
 .product-detail {
@@ -83,7 +88,7 @@ defineProps({
 .detail-content {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(26,58,143,0.06);
+  box-shadow: 0 4px 24px rgba(26, 58, 143, 0.06);
   padding: 56px 36px;
   max-width: 900px;
   width: 100%;
@@ -111,12 +116,16 @@ defineProps({
 .section {
   margin-bottom: 40px;
 }
-.feature-list, .scene-list, .download-list {
+.feature-list,
+.scene-list,
+.download-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.feature-list li, .scene-list li, .download-list li {
+.feature-list li,
+.scene-list li,
+.download-list li {
   background: #f7f9fc;
   margin-bottom: 10px;
   padding: 12px 18px;
@@ -124,11 +133,15 @@ defineProps({
   font-size: 1.05rem;
   color: #222;
   font-weight: 500;
-  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border 0.2s,
+    background 0.2s;
 }
-.feature-list li:hover, .scene-list li:hover {
+.feature-list li:hover,
+.scene-list li:hover {
   background: #f0f2f5;
-  box-shadow: 0 2px 8px rgba(26,58,143,0.06);
+  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.06);
 }
 .case-list {
   display: flex;
@@ -139,12 +152,14 @@ defineProps({
   background: #f7f9fc;
   border-radius: 8px;
   padding: 16px 18px;
-  transition: box-shadow 0.2s, background 0.2s;
+  transition:
+    box-shadow 0.2s,
+    background 0.2s;
   text-align: left;
 }
 .case-item:hover {
   background: #f0f2f5;
-  box-shadow: 0 2px 8px rgba(26,58,143,0.06);
+  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.06);
 }
 .case-title {
   font-weight: 700;
@@ -203,13 +218,16 @@ defineProps({
   cursor: pointer;
   font-weight: 700;
   letter-spacing: 1px;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(26,58,143,0.06);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.06);
 }
 .back-btn:hover {
   background: #1a3a8f;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(26,58,143,0.10);
+  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.1);
 }
 @media (max-width: 900px) {
   .detail-content {
@@ -222,7 +240,8 @@ defineProps({
   .section-title {
     font-size: 1.1rem;
   }
-  .btn, .back-btn {
+  .btn,
+  .back-btn {
     padding: 8px 12px;
     font-size: 0.95rem;
   }
@@ -262,10 +281,12 @@ defineProps({
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.2), 
-    transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s;
 }
 
@@ -299,4 +320,4 @@ defineProps({
 .more-btn:hover .btn-text {
   transform: translateX(-2px);
 }
-</style> 
+</style>

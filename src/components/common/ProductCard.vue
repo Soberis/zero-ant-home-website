@@ -7,10 +7,37 @@
       </div>
       <div v-else class="product-image-placeholder">
         <div class="placeholder-icon">
-          <svg width="80" height="80" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="12" width="32" height="24" rx="4" stroke="#1a3a8f" stroke-width="2" opacity="0.3"/>
-            <circle cx="24" cy="24" r="6" stroke="#1a3a8f" stroke-width="2" opacity="0.5"/>
-            <path d="M24 18v12M18 24h12" stroke="#1a3a8f" stroke-width="2" opacity="0.4"/>
+          <svg
+            width="80"
+            height="80"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="8"
+              y="12"
+              width="32"
+              height="24"
+              rx="4"
+              stroke="#1a3a8f"
+              stroke-width="2"
+              opacity="0.3"
+            />
+            <circle
+              cx="24"
+              cy="24"
+              r="6"
+              stroke="#1a3a8f"
+              stroke-width="2"
+              opacity="0.5"
+            />
+            <path
+              d="M24 18v12M18 24h12"
+              stroke="#1a3a8f"
+              stroke-width="2"
+              opacity="0.4"
+            />
           </svg>
         </div>
       </div>
@@ -31,8 +58,11 @@
  * @prop {Object} product 产品数据，必填
  */
 defineProps({
-  product: { type: Object, required: true }
+  product: { type: Object, required: true },
 });
+
+// 组件事件定义
+defineEmits(['more']);
 </script>
 <style scoped>
 .product-card {
@@ -86,10 +116,12 @@ defineProps({
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    rgba(26, 58, 143, 0.05) 0%, 
-    rgba(74, 144, 226, 0.08) 50%, 
-    rgba(26, 58, 143, 0.03) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 58, 143, 0.05) 0%,
+    rgba(74, 144, 226, 0.08) 50%,
+    rgba(26, 58, 143, 0.03) 100%
+  );
   border-radius: 20px;
   z-index: 1;
 }
@@ -107,10 +139,7 @@ defineProps({
 .product-image-placeholder {
   width: 200px;
   height: 200px;
-  background: linear-gradient(135deg, 
-    #f8f9ff 0%, 
-    #f0f4ff 50%, 
-    #e8f0ff 100%);
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 50%, #e8f0ff 100%);
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -127,16 +156,22 @@ defineProps({
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(45deg, 
-    transparent 30%, 
-    rgba(26, 58, 143, 0.05) 50%, 
-    transparent 70%);
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(26, 58, 143, 0.05) 50%,
+    transparent 70%
+  );
   animation: shimmer 3s infinite;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .placeholder-icon {
@@ -213,10 +248,12 @@ defineProps({
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.2), 
-    transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s;
 }
 

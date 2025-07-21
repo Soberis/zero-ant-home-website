@@ -6,14 +6,41 @@
         <div class="product-img">
           <!-- SVG线稿占位图，后续可替换为产品主图 -->
           <svg width="80" height="100" viewBox="0 0 80 100" fill="none">
-            <rect x="10" y="30" width="60" height="50" rx="10" stroke="#1a3a8f" stroke-width="2" fill="none"/>
-            <circle cx="40" cy="25" r="12" stroke="#1a3a8f" stroke-width="2" fill="none"/>
-            <rect x="30" y="80" width="20" height="10" rx="4" stroke="#1a3a8f" stroke-width="2" fill="none"/>
+            <rect
+              x="10"
+              y="30"
+              width="60"
+              height="50"
+              rx="10"
+              stroke="#1a3a8f"
+              stroke-width="2"
+              fill="none"
+            />
+            <circle
+              cx="40"
+              cy="25"
+              r="12"
+              stroke="#1a3a8f"
+              stroke-width="2"
+              fill="none"
+            />
+            <rect
+              x="30"
+              y="80"
+              width="20"
+              height="10"
+              rx="4"
+              stroke="#1a3a8f"
+              stroke-width="2"
+              fill="none"
+            />
           </svg>
         </div>
         <div class="product-title">{{ product.name }}</div>
         <div class="product-desc">{{ product.desc }}</div>
-        <router-link :to="getProductDetailLink(product)" class="more-btn">了解更多 +</router-link>
+        <router-link :to="getProductDetailLink(product)" class="more-btn"
+          >了解更多 +</router-link
+        >
       </div>
     </div>
   </section>
@@ -54,7 +81,7 @@ import { getProductDetailLink } from '@/helpers/product';
 .product-card {
   background: #fff;
   border-radius: 24px;
-  box-shadow: 0 4px 24px 0 rgba(30,40,90,0.08);
+  box-shadow: 0 4px 24px 0 rgba(30, 40, 90, 0.08);
   min-height: 420px;
   width: 100%;
   display: flex;
@@ -68,7 +95,7 @@ import { getProductDetailLink } from '@/helpers/product';
   margin: 0 auto;
 }
 .product-card:hover {
-  box-shadow: 0 4px 24px 0 rgba(26,58,143,0.13);
+  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.13);
 }
 .product-img {
   margin-bottom: 32px;
@@ -104,7 +131,9 @@ import { getProductDetailLink } from '@/helpers/product';
   font-size: 1.1rem;
   text-decoration: none;
   font-weight: 600;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 .more-btn:hover {
   background: #1a3a8f;

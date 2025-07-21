@@ -20,7 +20,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
-    "lint": "eslint --ext .ts,.vue src"
+    "lint": "eslint --ext .ts,.vue src --fix",
+    "lint:check": "eslint --ext .ts,.vue src",
+    "format": "prettier --write \"src/**/*.{ts,vue,js,json,css,less,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,vue,js,json,css,less,scss,md}\""
   },
   "dependencies": {
     "element-plus": "^2.10.4",
@@ -32,9 +35,18 @@
     "@intlify/unplugin-vue-i18n": "^6.0.8",
     "@stagewise-plugins/vue": "^0.6.2",
     "@stagewise/toolbar-vue": "^0.6.2",
+    "@eslint/js": "^9.15.0",
     "@types/node": "^24.0.15",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
     "@vitejs/plugin-vue": "^5.0.5",
+    "eslint": "^9.15.0",
+    "eslint-plugin-vue": "^9.31.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "vue-eslint-parser": "^9.4.3",
     "less": "^4.2.0",
+    "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "vite": "^5.4.0",
     "vue-tsc": "^2.0.29"

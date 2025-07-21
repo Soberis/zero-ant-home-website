@@ -9,38 +9,90 @@
       </div>
 
       <!-- 核心应用场景区域 -->
-      <div class="core-scenarios" id="core-scenarios">
+      <div id="core-scenarios" class="core-scenarios">
         <h2 class="section-title">核心场景</h2>
         <div class="core-grid">
-          <div class="core-card" @click="goToApplicationDetail('medical-automation')">
+          <div
+            class="core-card"
+            @click="goToApplicationDetail('medical-automation')"
+          >
             <span class="core-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/>
-                <rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/>
-                <path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/>
-                <path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="10"
+                  y="18"
+                  width="28"
+                  height="20"
+                  rx="6"
+                  stroke="#1a3a8f"
+                  stroke-width="2"
+                />
+                <rect
+                  x="20"
+                  y="10"
+                  width="8"
+                  height="12"
+                  rx="4"
+                  stroke="#1a3a8f"
+                  stroke-width="2"
+                />
+                <path d="M24 28v6" stroke="#1a3a8f" stroke-width="2" />
+                <path d="M20 32h8" stroke="#1a3a8f" stroke-width="2" />
               </svg>
             </span>
             <div class="core-title">医疗自动化</div>
-            <div class="core-description">智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节</div>
+            <div class="core-description">
+              智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节
+            </div>
             <div class="core-features">
               <span class="feature-tag">智能检验</span>
               <span class="feature-tag">自动化药房</span>
             </div>
           </div>
-          
-          <div class="core-card" @click="goToApplicationDetail('semiconductor')">
+
+          <div
+            class="core-card"
+            @click="goToApplicationDetail('semiconductor')"
+          >
             <span class="core-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/>
-                <rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/>
-                <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/>
-                <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/>
-                <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="14"
+                  stroke="#1a3a8f"
+                  stroke-width="2"
+                />
+                <rect
+                  x="20"
+                  y="12"
+                  width="8"
+                  height="8"
+                  rx="2"
+                  stroke="#1a3a8f"
+                  stroke-width="2"
+                />
+                <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2" />
+                <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2" />
+                <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2" />
               </svg>
             </span>
             <div class="core-title">半导体加工</div>
-            <div class="core-description">高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求</div>
+            <div class="core-description">
+              高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求
+            </div>
             <div class="core-features">
               <span class="feature-tag">晶圆搬运</span>
               <span class="feature-tag">智能检测</span>
@@ -49,9 +101,9 @@
           </div>
         </div>
       </div>
-      
+
       <!-- 更多应用场景区域 -->
-      <div class="more-scenarios" id="more-scenarios">
+      <div id="more-scenarios" class="more-scenarios">
         <h2 class="section-title">更多场景</h2>
         <div class="application-grid">
           <ApplicationCard
@@ -65,7 +117,7 @@
       </div>
 
       <!-- 视频案例区域 -->
-      <div class="video-section" id="video-section">
+      <div id="video-section" class="video-section">
         <h2 class="section-title">视频案例</h2>
         <div class="video-grid">
           <VideoCard
@@ -85,39 +137,39 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
 // 引入数据和组件
-import { videoCards } from '@/data/videos'
-import applications from '@/data/applications'
-import VideoCard from '@/components/common/VideoCard.vue'
-import ApplicationCard from '@/components/common/ApplicationCard.vue'
+import { videoCards } from '@/data/videos';
+import applications from '@/data/applications';
+import VideoCard from '@/components/common/VideoCard.vue';
+import ApplicationCard from '@/components/common/ApplicationCard.vue';
 
-const router = useRouter()
-const hoverVideoIdx = ref(-1)
+const router = useRouter();
+const hoverVideoIdx = ref(-1);
 
 // 视频相关方法
 const setVideoHover = idx => {
-  hoverVideoIdx.value = idx
-}
+  hoverVideoIdx.value = idx;
+};
 const clearVideoHover = () => {
-  hoverVideoIdx.value = -1
-}
+  hoverVideoIdx.value = -1;
+};
 
 const goToVideo = idx => {
-  router.push({ path: `/video/${videoCards[idx].slug}` })
-}
+  router.push({ path: `/video/${videoCards[idx].slug}` });
+};
 
 // 过滤出除了医疗自动化和半导体加工之外的其他应用
 const otherApplications = computed(() => {
-  return applications.filter(app => 
-    app.slug !== 'medical-automation' && app.slug !== 'semiconductor'
-  )
-})
+  return applications.filter(
+    app => app.slug !== 'medical-automation' && app.slug !== 'semiconductor'
+  );
+});
 
 // 跳转到应用详情页
 function goToApplicationDetail(slug) {
-  router.push(`/applications/${slug}`)
+  router.push(`/applications/${slug}`);
 }
 </script>
 
@@ -201,7 +253,7 @@ function goToApplicationDetail(slug) {
   transition: color 0.3s ease;
 }
 .section-title::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -8px;
   left: 50%;
@@ -211,11 +263,17 @@ function goToApplicationDetail(slug) {
   background: linear-gradient(90deg, #1a3a8f 0%, #4f8cff 100%);
   border-radius: 2px;
   opacity: 0;
-  animation: fadein-line 0.8s 0.1s cubic-bezier(.4,0,.2,1) forwards;
+  animation: fadein-line 0.8s 0.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 @keyframes fadein-line {
-  from { opacity: 0; transform: translateX(-50%) scaleX(0.5); }
-  to { opacity: 1; transform: translateX(-50%) scaleX(1); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
 }
 
 .core-scenarios,
@@ -273,18 +331,20 @@ function goToApplicationDetail(slug) {
 .core-card {
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 2px 12px 0 rgba(26,58,143,0.06);
+  box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 36px 0 26px 0;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
   cursor: pointer;
   border: 1px solid #e3e8f0;
   text-align: center;
 }
 .core-card:hover {
-  box-shadow: 0 6px 24px 0 rgba(26,58,143,0.13);
+  box-shadow: 0 6px 24px 0 rgba(26, 58, 143, 0.13);
   transform: translateY(-4px) scale(1.03);
   border-color: #1a3a8f33;
 }
@@ -325,7 +385,10 @@ function goToApplicationDetail(slug) {
   padding: 6px 18px;
   font-size: 1.15rem;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s, border 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -357,15 +420,15 @@ function goToApplicationDetail(slug) {
     --section-spacing: 60px;
     --card-padding: 32px 24px;
   }
-  
+
   .page-title {
     font-size: 4rem;
   }
-  
+
   .page-subtitle {
     font-size: 1.5rem;
   }
-  
+
   .section-title {
     font-size: 2.4rem;
   }
@@ -375,42 +438,42 @@ function goToApplicationDetail(slug) {
   :root {
     --section-spacing: 50px;
   }
-  
+
   .page-container {
     padding: 0 30px;
   }
-  
+
   .video-grid {
     gap: 24px;
   }
-  
+
   .core-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
+
   .core-card {
     padding: 32px 24px;
   }
-  
+
   .core-title {
     font-size: 1.8rem;
   }
-  
+
   .solutions-page {
     padding: 28px 0 32px 0;
   }
-  
+
   .page-title {
     font-size: 3.2rem;
     margin-bottom: 18px;
   }
-  
+
   .page-subtitle {
     font-size: 1.35rem;
     margin-bottom: 20px;
   }
-  
+
   .section-title {
     font-size: 2rem;
     margin: 32px 0 18px 0;
@@ -425,7 +488,7 @@ function goToApplicationDetail(slug) {
     padding-bottom: 24px;
     margin-bottom: 32px;
   }
-  
+
   .application-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
@@ -444,29 +507,29 @@ function goToApplicationDetail(slug) {
     --section-spacing: 40px;
     --card-padding: 24px 20px;
   }
-  
+
   .page-container {
     padding: 0 20px;
   }
-  
+
   .solutions-page {
     padding: 12px 0 16px 0;
   }
-  
+
   .page-header {
     margin-bottom: 32px;
   }
-  
+
   .page-title {
     font-size: 1.8rem;
     margin-bottom: 18px;
   }
-  
+
   .page-subtitle {
     font-size: 1.25rem;
     margin-bottom: 20px;
   }
-  
+
   .section-title {
     font-size: 1.4rem;
     margin: 32px 0 18px 0;
@@ -482,21 +545,21 @@ function goToApplicationDetail(slug) {
     padding-bottom: 24px;
     margin-bottom: 32px;
   }
-  
+
   .core-title {
     font-size: 1.8rem;
   }
-  
+
   .core-description {
     font-size: 1.1rem;
     margin-bottom: 32px;
   }
-  
+
   .application-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .video-grid {
     grid-template-columns: 1fr;
     gap: 20px;

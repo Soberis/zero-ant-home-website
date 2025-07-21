@@ -4,13 +4,12 @@
     <div class="videos-list">
       <div v-for="video in videoCards" :key="video.slug" class="video-card">
         <div class="video-img">
-          <img 
-            :src="video.img" 
-            :alt="video.title" 
-          />
+          <img :src="video.img" :alt="video.title" />
         </div>
         <div class="video-title">{{ video.title }}</div>
-        <router-link :to="`/video/${video.slug}`" class="more-btn">观看视频 +</router-link>
+        <router-link :to="`/video/${video.slug}`" class="more-btn"
+          >观看视频 +</router-link
+        >
       </div>
     </div>
   </section>
@@ -55,7 +54,7 @@ import { videoCards } from '@/data/videos';
   max-width: 340px;
   background: #fff;
   border-radius: 24px;
-  box-shadow: 0 4px 24px 0 rgba(30,40,90,0.08);
+  box-shadow: 0 4px 24px 0 rgba(30, 40, 90, 0.08);
   min-height: 420px;
   display: flex;
   flex-direction: column;
@@ -64,7 +63,7 @@ import { videoCards } from '@/data/videos';
   transition: box-shadow 0.2s;
 }
 .video-card:hover {
-  box-shadow: 0 4px 24px 0 rgba(26,58,143,0.13);
+  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.13);
 }
 .video-img {
   margin-bottom: 32px;
@@ -95,7 +94,9 @@ import { videoCards } from '@/data/videos';
   font-size: 1.1rem;
   text-decoration: none;
   font-weight: 600;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 .more-btn:hover {
   background: #1a3a8f;

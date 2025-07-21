@@ -24,26 +24,26 @@
 
 <script setup>
 // 视频案例页面，渲染所有视频卡片，支持高亮与跳转详情
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-import { videoCards } from '@/data/videos'
-import VideoCard from '@/components/common/VideoCard.vue'
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { videoCards } from '@/data/videos';
+import VideoCard from '@/components/common/VideoCard.vue';
 
-const router = useRouter()
-const hoverIdx = ref(-1)
+const router = useRouter();
+const hoverIdx = ref(-1);
 
 const setHover = idx => {
-  hoverIdx.value = idx
-}
+  hoverIdx.value = idx;
+};
 const clearHover = () => {
-  hoverIdx.value = -1
-}
+  hoverIdx.value = -1;
+};
 
-const cards = videoCards
+const cards = videoCards;
 
 const goToVideo = idx => {
-  router.push({ path: `/video/${cards[idx].slug}` })
-}
+  router.push({ path: `/video/${cards[idx].slug}` });
+};
 </script>
 
 <style scoped>

@@ -21,25 +21,27 @@
  * @prop {Number} index 当前卡片索引
  * @prop {Boolean} active 是否高亮
  */
-const props = defineProps({
+defineProps({
   card: { type: Object, required: true },
   index: { type: Number, required: true },
-  active: { type: Boolean, default: false }
-})
+  active: { type: Boolean, default: false },
+});
 // 事件定义
 /**
  * @emits hover 鼠标悬停
  * @emits leave 鼠标离开
  * @emits click 点击卡片
  */
-const emit = defineEmits(['hover', 'leave', 'click'])
+const emit = defineEmits(['hover', 'leave', 'click']);
 </script>
 
 <style scoped>
 .video-card {
   background: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
@@ -65,7 +67,9 @@ const emit = defineEmits(['hover', 'leave', 'click'])
 
 .video-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(26, 58, 143, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 12px 40px rgba(26, 58, 143, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.08);
   border-color: rgba(26, 58, 143, 0.2);
 }
 

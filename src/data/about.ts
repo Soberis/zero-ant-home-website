@@ -18,9 +18,7 @@ export interface TeamInfo {
   background: string;
 }
 
-/**
- * 国际化函数类型
- */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type TranslationFunction = (key: string) => string;
 
 /**
@@ -42,7 +40,7 @@ export function getTimelineData(t: TranslationFunction): TimelineEvent[] {
     },
     {
       year: '2023',
-      events: [t('about.timeline.2023')]
+      events: [t('about.timeline.2023')],
     },
     {
       year: '2024',
@@ -72,11 +70,11 @@ export function getHonors(t: TranslationFunction): string[] {
 /**
  * 获取团队信息
  */
-export function getTeamInfo(): TeamInfo {
+export function getTeamInfo(t: TranslationFunction): TeamInfo {
   return {
     size: 20,
     masterRatio: '90%',
     avgAge: 30,
-    background: '90%'
+    background: t('about.team.background'),
   };
 }

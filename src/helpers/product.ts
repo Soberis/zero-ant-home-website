@@ -6,7 +6,7 @@ export interface Product {
   slug: string;
   name?: string;
   desc?: string;
-  [key: string]: any;
+  [key: string]: string | number | boolean | undefined;
 }
 
 /**
@@ -14,7 +14,10 @@ export interface Product {
  * @param product - 产品对象，需包含 category 和 slug 字段
  * @returns 跳转路由
  */
-export function getProductDetailLink(product: Product): string {
+export function getProductDetailLink(product: {
+  id: string;
+  category: string;
+}): string {
   if (product.category === 'system') {
     return `/system-products/${product.slug}`;
   } else if (product.category === 'robot') {

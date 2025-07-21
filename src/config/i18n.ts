@@ -4,14 +4,14 @@ import zh from '@/locales/zh.json';
 
 const messages = {
   en,
-  zh
+  zh,
 };
 
 const i18n = createI18n({
   legacy: false, // 使用 Composition API 模式
   locale: 'zh', // 设置默认语言
   fallbackLocale: 'en',
-  messages
+  messages,
 });
 
 export default i18n;
