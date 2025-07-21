@@ -3,7 +3,12 @@
     <div class="product-header">
       <div v-if="product.image" class="product-image-wrapper">
         <div class="image-backdrop"></div>
-        <img :src="product.image" :alt="product.name" class="product-image" />
+        <img
+          :src="product.image"
+          :alt="product.name"
+          class="product-image"
+          loading="lazy"
+        />
       </div>
       <div v-else class="product-image-placeholder">
         <div class="placeholder-icon">

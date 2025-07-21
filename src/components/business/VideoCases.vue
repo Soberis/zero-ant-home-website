@@ -4,7 +4,7 @@
     <div class="videos-list">
       <div v-for="video in videoCards" :key="video.slug" class="video-card">
         <div class="video-img">
-          <img :src="video.img" :alt="video.title" />
+          <img :src="video.img" :alt="video.title" loading="lazy" />
         </div>
         <div class="video-title">{{ video.title }}</div>
         <router-link :to="`/video/${video.slug}`" class="more-btn"

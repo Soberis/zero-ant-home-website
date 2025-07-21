@@ -45,94 +45,33 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import applications from '@/data/applications';
+import { useAutoScroll } from '@/helpers/useAutoScroll';
 
-const displayApps = applications; // 显示全部行业应用
+const displayApps = applications;
 const scrollWrap = ref(null);
-let timer = null;
 const router = useRouter();
 
-/**
- * 跳转到应用详情页
- */
 const goDetail = slug => {
   if (slug) {
     router.push(`/applications/${slug}`);
   }
 };
-/**
- * 自动滚动（到一半重置，若需无缝体验可后续优化）
- */
-const autoScroll = () => {
-  if (!scrollWrap.value) return;
-  const el = scrollWrap.value;
-  el.scrollLeft += 1.5;
-  if (el.scrollLeft >= el.scrollWidth / 2) {
-    el.scrollLeft = 0;
-  }
-};
-/**
- * 暂停自动滚动
- */
-const pauseScroll = () => {
-  if (timer) clearInterval(timer);
-};
-/**
- * 恢复自动滚动
- */
-const resumeScroll = () => {
-  if (timer) clearInterval(timer);
-  timer = setInterval(autoScroll, 20);
-};
-/**
- * 平滑滚动指定距离
- */
-const smoothScrollBy = (distance, duration = 600) => {
-  const el = scrollWrap.value;
-  if (!el) return;
-  const start = el.scrollLeft;
-  const end = start + distance;
-  const startTime = performance.now();
 
-  function easeOutCubic(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
+// 使用组合式函数管理滚动逻辑
+const { pauseScroll, resumeScroll, smoothScrollBy } = useAutoScroll(
+  scrollWrap,
+  { interval: 20, step: 1.5 }
+);
 
-  function animate(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = easeOutCubic(progress);
-    el.scrollLeft = start + (end - start) * eased;
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    }
-  }
-  requestAnimationFrame(animate);
-};
-/**
- * 向左滚动
- */
 const scrollLeft = () => {
   smoothScrollBy(-260, 600);
 };
-/**
- * 向右滚动
- */
 const scrollRight = () => {
   smoothScrollBy(260, 600);
 };
-
-onMounted(() => {
-  nextTick(() => {
-    timer = setInterval(autoScroll, 20);
-  });
-});
-onUnmounted(() => {
-  if (timer) clearInterval(timer);
-  timer = null;
-});
 </script>
 
 <style scoped>
