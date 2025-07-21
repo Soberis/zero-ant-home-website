@@ -82,7 +82,7 @@ import { partners } from '@/data/partners';
   max-height: 100%;
 }
 .partner-logo .logo-huawei {
-  max-width: 80%;
+  max-width: 72%;
   max-height: 100%;
 }
 .partner-logo .logo-meituan {
@@ -128,7 +128,7 @@ import { partners } from '@/data/partners';
 
 @media (max-width: 600px) {
   .section-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 }
 </style>

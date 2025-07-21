@@ -107,4 +107,14 @@ import { videoCards } from '@/data/videos';
     padding-right: 10px;
   }
 }
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .videos-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 </style>

@@ -119,7 +119,7 @@ import { getProductDetailLink } from '@/helpers/product';
 
 @media (max-width: 600px) {
   .section-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 }
 </style>

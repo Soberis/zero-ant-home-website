@@ -336,7 +336,7 @@ function toggleFaq(idx) {
     padding: 16px 0 0 0;
   }
   .hero-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 8px;
   }
   .hero-desc {

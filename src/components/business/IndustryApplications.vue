@@ -270,7 +270,7 @@ onUnmounted(() => {
 
 @media (max-width: 600px) {
   .section-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .section-desc {
     font-size: 1rem;

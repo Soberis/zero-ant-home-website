@@ -458,7 +458,7 @@ function goToApplicationDetail(slug) {
   }
   
   .page-title {
-    font-size: 2.8rem;
+    font-size: 1.8rem;
     margin-bottom: 18px;
   }
   
@@ -468,7 +468,7 @@ function goToApplicationDetail(slug) {
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 1.4rem;
     margin: 32px 0 18px 0;
     padding-left: 0;
   }
