@@ -77,7 +77,8 @@
     "dualArmHumanoid": "Dual-Arm Humanoid Robot",
     "solutions": "Solutions",
     "coreScenarios": "Core Scenarios",
-    "moreScenarios": "More Scenarios"
+    "moreScenarios": "More Scenarios",
+    "coreValues": "Core Values"
   },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
