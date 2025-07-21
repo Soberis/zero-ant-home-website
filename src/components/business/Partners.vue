@@ -54,7 +54,7 @@ import { partners } from '@/data/partners';
 }
 .partner-logo {
   width: 200px;
-  height: 90px;
+  height: 100px; /* 增加高度 */
   background: #fff;
   border-radius: 0;
   display: flex;
@@ -63,6 +63,7 @@ import { partners } from '@/data/partners';
   border: 1px solid #e5e6eb;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 8px 0 rgba(30, 42, 80, 0.06);
+  overflow: hidden; /* 防止图片溢出 */
 }
 .partner-logo:hover {
   border-color: #1a3a8f;
@@ -75,19 +76,36 @@ import { partners } from '@/data/partners';
   display: block;
   margin: 0 auto;
 }
-.partner-logo img.logo-meituan {
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
+/* 移除特殊logo的单独宽高设置 */
+.partner-logo .logo-schneider {
+  max-width: 100%;
+  max-height: 100%;
 }
-.partner-logo img.logo-qingzhi {
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
+.partner-logo .logo-huawei {
+  max-width: 80%;
+  max-height: 100%;
+}
+.partner-logo .logo-meituan {
+  max-width: 58%;
+  margin-top: -10px;
+}
+.partner-logo .logo-nabote {
+  max-width: 50%;
+}
+.partner-logo .logo-huazhi {
+  max-width: 62%;
+}
+.partner-logo .logo-qingzhi {
+  max-width: 38%;
+  margin-top: -6px;
+}
+.partner-logo .logo-qisheng {
+  max-width: 65%;
+}
+.partner-logo .logo-buaa,
+.partner-logo .logo-buaahyy {
+  max-width: 80%;
+  max-height: 100%;
 }
 @media (max-width: 900px) {
   .partners-list {
