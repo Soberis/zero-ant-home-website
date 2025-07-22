@@ -3,13 +3,8 @@
   <div>
     <ProductDetail
       v-if="detail"
-      :title="detail.title"
-      :desc="detail.desc"
-      :features="detail.features"
-      :cases="detail.cases"
-      :scenes="detail.scenes"
-      :params="detail.params"
-      :downloads="detail.downloads"
+      :product="detail"
+      :product-slug="slug"
       @back="goBack"
     />
     <div v-else class="not-found">未找到该产品</div>
@@ -25,7 +20,7 @@ import ProductDetail from '@/components/common/ProductDetail.vue';
 
 const route = useRoute();
 const router = useRouter();
-const slug = route.params.slug;
+const slug = String(route.params.slug);
 const detail = productDetails[slug];
 
 function goBack() {

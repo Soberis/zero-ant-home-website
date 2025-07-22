@@ -1,8 +1,0 @@
-node_modules
-dist
-public
-.vercel
-.vscode
-*.d.ts
-*.svg
-*.md
