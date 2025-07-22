@@ -1,6 +1,6 @@
 # 产品关联数据配置指南
 
-本指南说明如何为不同产品配置对应的应用场景、相关案例和优势特点。
+本指南说明如何为不同产品配置对应的应用场景、视频案例和优势特点。
 
 ## 概述
 
@@ -80,8 +80,8 @@ export const productRelations: ProductRelationsData = {
 
 从 `src/data/videos.ts` 中选择相关的视频案例，使用它们的 slug：
 
-- `medical-automation-bilibili` - 医疗自动化案例
-- `semiconductor-bilibili` - 半导体行业案例
+- `medical-automation-bilibili` - 医疗自动化视频案例
+- `semiconductor-bilibili` - 半导体行业视频案例
 - `ur-robot-llm-motion-capture` - UR机器人大模型动作捕捉
 - `dual-robot-collaboration` - 双机器人协作
 - `composite-robot-application` - 复合机器人应用

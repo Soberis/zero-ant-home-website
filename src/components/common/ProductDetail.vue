@@ -25,8 +25,10 @@
             >
               <div class="feature-icon">{{ getFeatureIcon(idx, feature) }}</div>
               <div class="feature-content">
-                <h3 class="feature-title">{{ feature.title || feature }}</h3>
-                <p v-if="feature.desc" class="feature-desc">
+                <h3 class="feature-title">
+                  {{ typeof feature === 'string' ? feature : (feature.title || '') }}
+                </h3>
+                <p v-if="typeof feature === 'object' && feature.desc" class="feature-desc">
                   {{ feature.desc }}
                 </p>
               </div>
@@ -51,12 +53,12 @@
           </div>
         </section>
 
-        <!-- 相关案例 -->
+        <!-- 视频案例 -->
         <section
           v-if="props.showVideos && relatedVideos.length > 0"
           class="section cases-section"
         >
-          <h2 class="section-title">相关案例</h2>
+          <h2 class="section-title">视频案例</h2>
           <div class="videos-grid">
             <VideoCard
               v-for="(video, index) in relatedVideos"
@@ -113,7 +115,7 @@
     <!-- 返回按钮 -->
     <div class="back-section">
       <div class="container">
-        <button class="back-btn" @click="$emit('back')">
+        <button class="back-btn" @click="emits('back')">
           <span class="back-icon">←</span>
           <span class="back-text">返回产品列表</span>
         </button>
@@ -127,6 +129,9 @@ import ApplicationCard from '@/components/common/ApplicationCard.vue';
 import { videoCards } from '@/data/videos';
 import applications from '@/data/applications';
 import type { ProductDetail } from '@/data/productDetails';
+
+// 特性项类型定义
+type FeatureItem = string | { title?: string; desc?: string };
 import {
   getRelatedApplications,
   getRelatedVideos,
@@ -150,92 +155,97 @@ const props = withDefaults(
 );
 
 // 组件事件定义
-const emits = defineEmits(['back']);
+const emits = defineEmits<{
+  back: []
+}>();
 
 // 获取特性图标 - 根据特点内容语义分配
-const getFeatureIcon = (index: number, feature: string) => {
+const getFeatureIcon = (index: number, feature: FeatureItem): string => {
+  // 获取特性文本内容
+  const featureText = typeof feature === 'string' ? feature : (feature.title || feature.desc || '');
+  
   // 根据特点内容关键词匹配合适的图标
   if (
-    feature.includes('实时') ||
-    feature.includes('响应') ||
-    feature.includes('速度') ||
-    feature.includes('高速')
+    featureText.includes('实时') ||
+    featureText.includes('响应') ||
+    featureText.includes('速度') ||
+    featureText.includes('高速')
   ) {
     return '⚡'; // 闪电 - 实时性、高速
   }
   if (
-    feature.includes('安全') ||
-    feature.includes('可控') ||
-    feature.includes('防护') ||
-    feature.includes('认证')
+    featureText.includes('安全') ||
+    featureText.includes('可控') ||
+    featureText.includes('防护') ||
+    featureText.includes('认证')
   ) {
     return '🔒'; // 锁 - 安全性
   }
   if (
-    feature.includes('精度') ||
-    feature.includes('定位') ||
-    feature.includes('控制') ||
-    feature.includes('轴')
+    featureText.includes('精度') ||
+    featureText.includes('定位') ||
+    featureText.includes('控制') ||
+    featureText.includes('轴')
   ) {
     return '🎯'; // 靶心 - 精准控制
   }
   if (
-    feature.includes('智能') ||
-    feature.includes('AI') ||
-    feature.includes('视觉') ||
-    feature.includes('语言') ||
-    feature.includes('学习')
+    featureText.includes('智能') ||
+    featureText.includes('AI') ||
+    featureText.includes('视觉') ||
+    featureText.includes('语言') ||
+    featureText.includes('学习')
   ) {
     return '🧠'; // 大脑 - 智能化
   }
   if (
-    feature.includes('云') ||
-    feature.includes('远程') ||
-    feature.includes('网络') ||
-    feature.includes('5G') ||
-    feature.includes('连接')
+    featureText.includes('云') ||
+    featureText.includes('远程') ||
+    featureText.includes('网络') ||
+    featureText.includes('5G') ||
+    featureText.includes('连接')
   ) {
     return '☁️'; // 云 - 云端/网络
   }
   if (
-    feature.includes('成本') ||
-    feature.includes('效率') ||
-    feature.includes('周期') ||
-    feature.includes('优化')
+    featureText.includes('成本') ||
+    featureText.includes('效率') ||
+    featureText.includes('周期') ||
+    featureText.includes('优化')
   ) {
     return '📈'; // 上升图表 - 效率提升
   }
   if (
-    feature.includes('集成') ||
-    feature.includes('部署') ||
-    feature.includes('模块') ||
-    feature.includes('平台') ||
-    feature.includes('系统')
+    featureText.includes('集成') ||
+    featureText.includes('部署') ||
+    featureText.includes('模块') ||
+    featureText.includes('平台') ||
+    featureText.includes('系统')
   ) {
     return '🔧'; // 扳手 - 技术集成
   }
   if (
-    feature.includes('协作') ||
-    feature.includes('协同') ||
-    feature.includes('多') ||
-    feature.includes('统一') ||
-    feature.includes('调度')
+    featureText.includes('协作') ||
+    featureText.includes('协同') ||
+    featureText.includes('多') ||
+    featureText.includes('统一') ||
+    featureText.includes('调度')
   ) {
     return '🤝'; // 握手 - 协作
   }
   if (
-    feature.includes('监控') ||
-    feature.includes('数据') ||
-    feature.includes('分析') ||
-    feature.includes('诊断')
+    featureText.includes('监控') ||
+    featureText.includes('数据') ||
+    featureText.includes('分析') ||
+    featureText.includes('诊断')
   ) {
     return '📊'; // 图表 - 数据监控
   }
   if (
-    feature.includes('灵活') ||
-    feature.includes('扩展') ||
-    feature.includes('自由度') ||
-    feature.includes('适应')
+    featureText.includes('灵活') ||
+    featureText.includes('扩展') ||
+    featureText.includes('自由度') ||
+    featureText.includes('适应')
   ) {
     return '🔄'; // 循环箭头 - 灵活性
   }
@@ -266,20 +276,20 @@ const relatedVideos = computed(() => {
 });
 
 // 获取产品的优势特点（优先使用自定义特点）
-const productFeatures = computed(() => {
+const productFeatures = computed((): FeatureItem[] => {
   const customFeatures = getCustomFeatures(props.productSlug);
   return customFeatures || props.product.features;
 });
 
 // 视频卡片交互
 const activeVideoIndex = ref(-1);
-const handleVideoHover = index => {
+const handleVideoHover = (index: number) => {
   activeVideoIndex.value = index;
 };
 const handleVideoLeave = () => {
   activeVideoIndex.value = -1;
 };
-const handleVideoClick = index => {
+const handleVideoClick = (index: number) => {
   const video = relatedVideos.value[index];
   if (video) {
     window.open(`/video/${video.slug}`, '_blank');
@@ -748,23 +758,7 @@ const handleVideoClick = index => {
     gap: 1.5rem;
   }
 
-  .scene-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
 
-  .scene-item:hover {
-    transform: translateY(-3px);
-  }
-
-  .cases-timeline {
-    padding-left: 1rem;
-  }
-
-  .case-timeline-marker {
-    left: -1rem;
-  }
 
   /* 产品参数响应式 */
   .param-item {
@@ -851,27 +845,6 @@ const handleVideoClick = index => {
     font-size: 0.85rem;
   }
 
-  .scene-item,
-  .case-timeline-content {
-    padding: 1.5rem;
-  }
 
-  .scene-number {
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.5rem;
-  }
-
-  .cases-timeline {
-    padding-left: 0.5rem;
-  }
-
-  .case-timeline-marker {
-    left: -0.5rem;
-  }
-
-  .case-timeline-content {
-    margin-left: 0.5rem;
-  }
 }
 </style>
