@@ -9,6 +9,9 @@ import waferTransferImg from '@/assets/images/videos/晶圆传送机器人运动
 import dualRobotCollabImg from '@/assets/images/videos/双机协作.png';
 import polishingRobotImg from '@/assets/images/videos/打磨机器人.png';
 import compositeRobotAppImg from '@/assets/images/videos/复合机器人应用.png';
+import urRobotLLMImg from '@/assets/images/videos/UR机器人大语言模型动作抓取.png';
+import fourAxisRobotFridgeImg from '@/assets/images/videos/四轴机器人开冰箱.png';
+import servoMotorStationImg from '@/assets/images/videos/伺服电机台站.png';
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -154,6 +157,33 @@ export const videoMap: VideoMapData = {
     tags: ['医疗机器人', 'B超检查', '医疗自动化'],
     publishDate: '2024-03-10',
   },
+  'ur-robot-llm-motion-capture': {
+    slug: 'ur-robot-llm-motion-capture',
+    type: 'bilibili',
+    url: `https://www.bilibili.com/video/BV1KXg7zTECP/${BILIBILI_BASE_PARAMS}`,
+    title: 'UR机器人大语言模型动作抓取',
+    desc: '本视频展示了零蚁科技基于大语言模型的UR机器人动作抓取与智能控制，通过AI与机器人深度融合，实现复杂任务的自主学习与高效执行，推动智能制造与人机协作新发展。',
+    tags: ['UR机器人', '大语言模型', '动作抓取', '智能制造'],
+    publishDate: '2024-05-01',
+  },
+  'four-axis-robot-open-fridge': {
+    slug: 'four-axis-robot-open-fridge',
+    type: 'bilibili',
+    url: `https://www.bilibili.com/video/BV1KXg7zTEJw/${BILIBILI_BASE_PARAMS}`,
+    title: '四轴机器人开冰箱',
+    desc: '本视频展示了零蚁科技四轴机器人在自动化场景下开冰箱的创新应用，通过高精度运动控制与智能感知，实现复杂动作的自主执行，体现了机器人柔性作业与智能制造的深度融合。',
+    tags: ['四轴机器人', '自动化', '智能制造', '运动控制'],
+    publishDate: '2024-05-01',
+  },
+  'servo-motor-station': {
+    slug: 'servo-motor-station',
+    type: 'bilibili',
+    url: `https://www.bilibili.com/video/BV1KXg7zTECP/${BILIBILI_BASE_PARAMS}`,
+    title: '伺服电机台站',
+    desc: '本视频展示了零蚁科技伺服电机台站的自动化控制与应用，通过高性能伺服系统实现精准定位与高效作业，助力智能制造与工业自动化升级。',
+    tags: ['伺服电机', '自动化', '智能制造', '工业控制'],
+    publishDate: '2024-05-01',
+  },
 };
 
 /**
@@ -171,9 +201,19 @@ export const videoCards: VideoCard[] = [
     slug: 'semiconductor-bilibili',
   },
   {
+    title: 'UR机器人大语言模型动作抓取',
+    img: urRobotLLMImg,
+    slug: 'ur-robot-llm-motion-capture',
+  },
+  {
     title: '双机协作',
     img: dualRobotCollabImg,
     slug: 'dual-robot-collaboration',
+  },
+  {
+    title: '伺服电机台站',
+    img: servoMotorStationImg,
+    slug: 'servo-motor-station',
   },
   {
     title: '打磨机器人',
@@ -186,19 +226,24 @@ export const videoCards: VideoCard[] = [
     slug: 'composite-robot-application',
   },
   {
+    title: '四轴机器人开冰箱',
+    img: fourAxisRobotFridgeImg,
+    slug: 'four-axis-robot-open-fridge',
+  },
+  {
     title: '360度雷达扫描',
     img: radar360Img,
     slug: 'radar-360-scanning',
   },
   {
-    title: 'AGV产品介绍',
-    img: agvImg,
-    slug: 'agv-product-introduction',
-  },
-  {
     title: 'B超机器人',
     img: ultrasoundImg,
     slug: 'ultrasound-medical-robot',
+  },
+  {
+    title: 'AGV产品介绍',
+    img: agvImg,
+    slug: 'agv-product-introduction',
   },
 ].filter(card => {
   const video = getVideoById(card.slug);
