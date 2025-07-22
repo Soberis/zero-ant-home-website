@@ -248,7 +248,7 @@ export const videoCards: VideoCard[] = [
 ].filter(card => {
   const video = getVideoById(card.slug);
   if (!video || !validateVideoData(video)) {
-    console.warn(`视频数据验证失败: ${card.slug}`);
+    // 跳过无效的视频数据
     return false;
   }
   return true;

@@ -15,7 +15,7 @@ declare module 'vue-i18n' {
   }
 
   interface DefineLocaleMessage {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    
     [key: string]: any;
   }
 }
