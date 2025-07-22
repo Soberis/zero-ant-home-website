@@ -1,16 +1,20 @@
 <!-- 产品详情页，根据slug展示产品详细信息，未找到时显示提示 -->
 <template>
+
   <div>
-    <ProductDetail
+     <ProductDetail
       v-if="detail"
       :product="detail"
       :product-slug="slug"
       @back="goBack"
     />
     <div v-else class="not-found">未找到该产品</div>
+
   </div>
+
 </template>
-<script setup>
+
+<script setup lang="ts">
 // 页面级组件：产品详情视图，根据slug查找产品详情，未找到时显示提示
 import { useRoute, useRouter } from 'vue-router';
 import { productDetails } from '@/data/productDetails';
@@ -39,6 +43,7 @@ function goBack() {
   }
 }
 </script>
+
 <style scoped>
 .not-found {
   text-align: center;
@@ -47,3 +52,4 @@ function goBack() {
   margin-top: 120px;
 }
 </style>
+

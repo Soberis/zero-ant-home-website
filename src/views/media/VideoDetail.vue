@@ -1,98 +1,121 @@
 <!-- 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型 -->
 <template>
+
   <div class="video-detail-page">
+
     <div class="video-detail-main">
+
       <div class="video-detail-media">
-        <template v-if="getMediaType(videoInfo) === 'bilibili'">
-          <iframe
+         <template v-if="getMediaType(videoInfo) === 'bilibili'"
+          > <iframe
             class="video-iframe"
             :src="bilibiliEmbedUrl(videoInfo.url)"
             frameborder="0"
             allowfullscreen
-          ></iframe>
-        </template>
-        <template v-else-if="getMediaType(videoInfo) === 'video'">
-          <video controls :src="videoInfo.url" class="video-player"></video>
-        </template>
-        <template v-else-if="getMediaType(videoInfo) === 'image'">
-          <img :src="videoInfo.url" class="video-image" alt="图片展示" />
-        </template>
+          ></iframe
+          > </template
+        > <template v-else-if="getMediaType(videoInfo) === 'video'"
+          > <video controls :src="videoInfo.url" class="video-player"></video>
+          </template
+        > <template v-else-if="getMediaType(videoInfo) === 'image'"
+          > <img :src="videoInfo.url" class="video-image" alt="图片展示" />
+          </template
+        >
         <div v-else class="video-placeholder">暂无视频/图片</div>
+
       </div>
+
       <div class="video-detail-info">
+
         <h1 class="video-title">{{ videoInfo.title }} - 介绍</h1>
+
         <div
           v-for="(para, idx) in descParagraphs"
           :key="idx"
           class="video-desc"
         >
-          {{ para }}
+           {{ para }}
         </div>
-        <button class="more-btn" @click="showContact = true">了解更多</button>
-        <transition name="fade-dialog">
+         <button class="more-btn" @click="showContact = true">了解更多</button>
+        <transition name="fade-dialog"
+          >
           <div
             v-if="showContact"
             class="contact-dialog-mask"
             @click.self="showContact = false"
           >
+
             <div class="contact-dialog">
-              <button class="contact-close-x" @click="showContact = false">
-                ×
-              </button>
+               <button class="contact-close-x" @click="showContact = false">
+                 × </button
+              >
               <h3 class="contact-title">联系方式</h3>
+
               <div class="contact-qrcode-placeholder">
-                <img
+                 <img
                   :src="wxworkQrcode"
                   alt="企业微信二维码"
                   style="width: 160px; height: 160px; object-fit: contain"
                 />
               </div>
+
               <div class="contact-qrcode-desc">
-                扫码添加企业微信，获取更多信息
+                 扫码添加企业微信，获取更多信息
               </div>
+
             </div>
+
           </div>
-        </transition>
+           </transition
+        >
       </div>
+
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型
 import { useRoute } from 'vue-router';
-import { videoMap } from '@/data/videos';
-import { ref } from 'vue';
+import { videoMap, type VideoDetail } from '@/data/videos';
+import { ref, computed } from 'vue';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
 
 const route = useRoute();
 
-const videoInfo = videoMap[String(route.params.slug)] || {
-  type: '',
+const videoInfo: VideoDetail = videoMap[String(route.params.slug)] || {
+  type: 'bilibili', // Provide a default type
+  slug: 'not-found',
   title: '未找到视频',
   url: '',
   desc: '暂无介绍',
 };
 
-const descParagraphs = videoInfo.desc
-  ? videoInfo.desc
-      .split(/[。.!！\n]/)
-      .filter(Boolean)
-      .map(p => (p.endsWith('。') ? p : p + '。'))
-  : [];
+const descParagraphs = computed(() =>
+  videoInfo.desc
+    ? videoInfo.desc
+        .split(/[。.!！\n]/)
+        .filter(Boolean)
+        .map(p => (p.endsWith('。') ? p : p + '。'))
+    : []
+);
 
-const showContact = ref(false);
+const showContact = ref<boolean>(false);
 
-function getMediaType(info) {
+type MediaType = 'bilibili' | 'video' | 'image' | 'none';
+
+function getMediaType(info: VideoDetail): MediaType {
   if (info.type === 'bilibili' && info.url) return 'bilibili';
   if (info.type === 'video' && info.url) return 'video';
   if (info.type === 'image' && info.url) return 'image';
   return 'none';
 }
 
-function bilibiliEmbedUrl(url) {
+function bilibiliEmbedUrl(url: string): string {
   const match = url.match(/bilibili.com\/video\/(BV[\w]+)/);
-  if (match) {
+  if (match && match[1]) {
     return `https://player.bilibili.com/player.html?bvid=${match[1]}&autoplay=0`;
   }
   return '';
@@ -351,3 +374,4 @@ function bilibiliEmbedUrl(url) {
   }
 }
 </style>
+

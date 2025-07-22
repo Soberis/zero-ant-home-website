@@ -1,29 +1,37 @@
 <!-- 解决方案页面，集成视频案例和应用场景展示 -->
 <template>
-  <div class="solutions-page">
-    <div class="page-container">
-      <!-- 页面头部 -->
-      <div class="page-header">
-        <h1 class="page-title">行业解决方案</h1>
-        <p class="page-subtitle">探索前沿技术应用，见证创新驱动未来</p>
-      </div>
 
-      <!-- 核心应用场景区域 -->
+  <div class="solutions-page">
+
+    <div class="page-container">
+       <!-- 页面头部 -->
+      <div class="page-header">
+
+        <h1 class="page-title">行业解决方案</h1>
+
+        <p class="page-subtitle">探索前沿技术应用，见证创新驱动未来</p>
+
+      </div>
+       <!-- 核心应用场景区域 -->
       <div id="core-scenarios" class="core-scenarios">
+
         <h2 class="section-title">核心场景</h2>
+
         <div class="core-grid">
+
           <div
             class="core-card"
             @click="goToApplicationDetail('medical-automation')"
           >
-            <span class="core-icon">
-              <svg
+             <span class="core-icon"
+              > <svg
                 width="48"
                 height="48"
                 viewBox="0 0 48 48"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
+
                 <rect
                   x="10"
                   y="18"
@@ -33,6 +41,7 @@
                   stroke="#1a3a8f"
                   stroke-width="2"
                 />
+
                 <rect
                   x="20"
                   y="10"
@@ -42,32 +51,43 @@
                   stroke="#1a3a8f"
                   stroke-width="2"
                 />
+
                 <path d="M24 28v6" stroke="#1a3a8f" stroke-width="2" />
+
                 <path d="M20 32h8" stroke="#1a3a8f" stroke-width="2" />
-              </svg>
-            </span>
+                 </svg
+              > </span
+            >
             <div class="core-title">医疗自动化</div>
+
             <div class="core-description">
+
               智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节
+
             </div>
+
             <div class="core-features">
-              <span class="feature-tag">智能检验</span>
-              <span class="feature-tag">自动化药房</span>
+               <span class="feature-tag">智能检验</span> <span
+                class="feature-tag"
+                >自动化药房</span
+              >
             </div>
+
           </div>
 
           <div
             class="core-card"
             @click="goToApplicationDetail('semiconductor')"
           >
-            <span class="core-icon">
-              <svg
+             <span class="core-icon"
+              > <svg
                 width="48"
                 height="48"
                 viewBox="0 0 48 48"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
+
                 <circle
                   cx="24"
                   cy="24"
@@ -75,6 +95,7 @@
                   stroke="#1a3a8f"
                   stroke-width="2"
                 />
+
                 <rect
                   x="20"
                   y="12"
@@ -84,29 +105,42 @@
                   stroke="#1a3a8f"
                   stroke-width="2"
                 />
-                <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2" />
-                <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2" />
-                <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2" />
-              </svg>
-            </span>
-            <div class="core-title">半导体加工</div>
-            <div class="core-description">
-              高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求
-            </div>
-            <div class="core-features">
-              <span class="feature-tag">晶圆搬运</span>
-              <span class="feature-tag">智能检测</span>
-              <span class="feature-tag">洁净物流</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- 更多应用场景区域 -->
+                <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2" />
+
+                <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2" />
+
+                <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2" />
+                 </svg
+              > </span
+            >
+            <div class="core-title">半导体加工</div>
+
+            <div class="core-description">
+
+              高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求
+
+            </div>
+
+            <div class="core-features">
+               <span class="feature-tag">晶圆搬运</span> <span
+                class="feature-tag"
+                >智能检测</span
+              > <span class="feature-tag">洁净物流</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+       <!-- 更多应用场景区域 -->
       <div id="more-scenarios" class="more-scenarios">
+
         <h2 class="section-title">更多场景</h2>
+
         <div class="application-grid">
-          <ApplicationCard
+           <ApplicationCard
             v-for="item in otherApplications"
             :key="item.slug"
             :title="item.title"
@@ -114,13 +148,15 @@
             :slug="item.slug"
           />
         </div>
-      </div>
 
-      <!-- 视频案例区域 -->
+      </div>
+       <!-- 视频案例区域 -->
       <div id="video-section" class="video-section">
+
         <h2 class="section-title">视频案例</h2>
+
         <div class="video-grid">
-          <VideoCard
+           <VideoCard
             v-for="(card, idx) in videoCards"
             :key="card.slug"
             :card="card"
@@ -131,12 +167,16 @@
             @click="goToVideo"
           />
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 // 引入数据和组件
@@ -149,14 +189,14 @@ const router = useRouter();
 const hoverVideoIdx = ref(-1);
 
 // 视频相关方法
-const setVideoHover = idx => {
+const setVideoHover = (idx: number): void => {
   hoverVideoIdx.value = idx;
 };
-const clearVideoHover = () => {
+const clearVideoHover = (): void => {
   hoverVideoIdx.value = -1;
 };
 
-const goToVideo = idx => {
+const goToVideo = (idx: number): void => {
   router.push({ path: `/video/${videoCards[idx].slug}` });
 };
 
@@ -168,7 +208,7 @@ const otherApplications = computed(() => {
 });
 
 // 跳转到应用详情页
-function goToApplicationDetail(slug) {
+function goToApplicationDetail(slug: string): void {
   router.push(`/applications/${slug}`);
 }
 </script>
@@ -258,7 +298,7 @@ function goToApplicationDetail(slug) {
   transition: color 0.3s ease;
 }
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 50%;
@@ -341,9 +381,7 @@ function goToApplicationDetail(slug) {
   flex-direction: column;
   align-items: center;
   padding: 36px 0 26px 0;
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
   border: 1px solid #e3e8f0;
   text-align: center;
@@ -390,10 +428,7 @@ function goToApplicationDetail(slug) {
   padding: 6px 18px;
   font-size: 1.15rem;
   font-weight: 500;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border 0.2s;
+  transition: background 0.2s, color 0.2s, border 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -571,3 +606,4 @@ function goToApplicationDetail(slug) {
   }
 }
 </style>
+

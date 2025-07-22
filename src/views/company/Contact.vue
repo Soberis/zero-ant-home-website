@@ -1,16 +1,23 @@
 <!-- 联系我们页面，包含表单提交、表单校验、联系方式和社交信息展示 -->
 <template>
+
   <div class="contact-bg">
+
     <div class="contact-main">
-      <!-- 右侧信息区（原左侧） -->
+       <!-- 右侧信息区（原左侧） -->
       <section class="contact-form-panel">
+
         <div class="form-card">
+
           <h1 class="form-title">{{ $t('contacts.title') }}</h1>
+
           <p class="form-desc">{{ $t('contacts.description') }}</p>
+
           <form class="contact-form" @submit.prevent="submitForm">
+
             <div class="form-group">
-              <label for="email">{{ $t('contacts.email') }}</label>
-              <input
+               <label for="email">{{ $t('contacts.email') }}</label
+              > <input
                 id="email"
                 v-model="formData.email"
                 type="email"
@@ -24,9 +31,10 @@
                 @blur="validateField('email')"
               />
             </div>
+
             <div class="form-group">
-              <label for="message">{{ $t('contacts.message') }}</label>
-              <textarea
+               <label for="message">{{ $t('contacts.message') }}</label
+              > <textarea
                 id="message"
                 v-model="formData.message"
                 :disabled="loading"
@@ -37,77 +45,115 @@
                 "
                 :class="{ 'input-error': errors.message }"
                 @blur="validateField('message')"
-              ></textarea>
+              ></textarea
+              >
             </div>
+
             <div class="form-actions">
-              <button type="submit" class="btn btn-primary" :disabled="loading">
-                <span v-if="loading">{{ $t('contacts.submitting') }}</span>
-                <span v-else>{{ $t('contacts.submit') }}</span>
-              </button>
-              <button
+               <button
+                type="submit"
+                class="btn btn-primary"
+                :disabled="loading"
+              >
+                 <span v-if="loading">{{ $t('contacts.submitting') }}</span
+                > <span v-else>{{ $t('contacts.submit') }}</span
+                > </button
+              > <button
                 type="button"
                 class="btn btn-reset"
                 :disabled="loading"
                 @click="resetForm"
               >
-                {{ $t('contacts.reset') }}
-              </button>
+                 {{ $t('contacts.reset') }} </button
+              >
             </div>
+
             <div v-if="successMsg" class="success-msg">{{ successMsg }}</div>
+
           </form>
+
         </div>
+
       </section>
-      <!-- 左侧信息区（原右侧） -->
+       <!-- 左侧信息区（原右侧） -->
       <aside class="contact-info-panel">
+
         <div class="info-brand">
-          <img
+           <img
             src="../../assets/zeroant_logo.png"
             alt="logo"
             class="brand-logo"
           />
           <div class="brand-title">{{ $t('logoText') }}</div>
+
         </div>
+
         <div class="info-section-title">{{ $t('contacts.getInTouch') }}</div>
+
         <div class="info-list">
+
           <div class="info-item">
-            <span class="info-icon">📞</span>
-            <a href="tel:+1234567890" class="info-link">+123 456 7890</a>
+             <span class="info-icon">📞</span> <a
+              href="tel:+1234567890"
+              class="info-link"
+              >+123 456 7890</a
+            >
           </div>
+
           <div class="info-item">
-            <span class="info-icon">✉️</span>
-            <a href="mailto:info@yourcompany.com" class="info-link"
+             <span class="info-icon">✉️</span> <a
+              href="mailto:info@yourcompany.com"
+              class="info-link"
               >info@yourcompany.com</a
             >
           </div>
+
           <div class="info-item">
-            <span class="info-icon">🏢</span>
+             <span class="info-icon">🏢</span>
             <div class="info-link">123 ZeroAnt Road, City, Country</div>
+
           </div>
+
         </div>
+
         <div class="info-social">
-          <a href="https://weibo.com/" target="_blank" title="Weibo">🐦</a>
-          <a href="https://wechat.com/" target="_blank" title="WeChat">💬</a>
-          <a href="https://github.com/" target="_blank" title="GitHub">🐙</a>
+           <a href="https://weibo.com/" target="_blank" title="Weibo">🐦</a> <a
+            href="https://wechat.com/"
+            target="_blank"
+            title="WeChat"
+            >💬</a
+          > <a href="https://github.com/" target="_blank" title="GitHub">🐙</a>
         </div>
+
       </aside>
+
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 联系我们页面，包含表单提交、表单校验、联系方式和社交信息展示
 import { ref } from 'vue';
 
-const formData = ref({
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+const formData = ref<FormData>({
   name: '',
   email: '',
   message: '',
 });
-const errors = ref({});
-const loading = ref(false);
-const successMsg = ref('');
 
-function validateField(field) {
+const errors = ref<Record<string, string>>({});
+const loading = ref<boolean>(false);
+const successMsg = ref<string>('');
+
+function validateField(field: keyof FormData): void {
   if (field === 'name' && !formData.value.name.trim()) {
     errors.value.name = '请输入姓名';
   } else if (field === 'email') {
@@ -125,14 +171,14 @@ function validateField(field) {
   }
 }
 
-function validateForm() {
+function validateForm(): boolean {
   validateField('name');
   validateField('email');
   validateField('message');
   return !errors.value.name && !errors.value.email && !errors.value.message;
 }
 
-function submitForm() {
+function submitForm(): void {
   if (!validateForm()) return;
   loading.value = true;
   successMsg.value = '';
@@ -145,7 +191,7 @@ function submitForm() {
   }, 1200);
 }
 
-function resetForm() {
+function resetForm(): void {
   formData.value = { name: '', email: '', message: '' };
   errors.value = {};
   successMsg.value = '';
@@ -421,3 +467,4 @@ textarea:focus {
   }
 }
 </style>
+

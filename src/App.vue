@@ -1,27 +1,23 @@
+<template>
+
+  <div id="app" class="page">
+     <!-- 导航栏 --> <NavBar /> <!-- 主体内容 -->
+    <main class="main-content"> <router-view /> </main>
+     <!-- 页脚 --> <Footer /> <!-- Stagewise 工具栏（仅开发环境） -->
+    <StagewiseToolbar v-if="isDev" :config="{ plugins: [VuePlugin] }" />
+  </div>
+
+</template>
+
 <script setup lang="ts">
 import NavBar from '@/components/layout/NavBar.vue';
+import Footer from '@/components/layout/Footer.vue';
 import { StagewiseToolbar } from '@stagewise/toolbar-vue';
 import VuePlugin from '@stagewise-plugins/vue';
-import Footer from '@/components/layout/Footer.vue';
 
 // 只在开发环境下显示 Stagewise 工具栏
 const isDev = import.meta.env.DEV;
 </script>
-
-<template>
-  <div id="app" class="page">
-    <!-- 导航栏主体 -->
-    <NavBar />
-    <!-- 页面内容 -->
-    <main class="main-content">
-      <router-view />
-    </main>
-    <!-- 全局页脚 -->
-    <Footer />
-    <!-- Stagewise 工具栏，仅开发环境下显示 -->
-    <StagewiseToolbar v-if="isDev" :config="{ plugins: [VuePlugin] }" />
-  </div>
-</template>
 
 <style scoped>
 /* 基础样式重置 */
@@ -29,7 +25,7 @@ const isDev = import.meta.env.DEV;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+  font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
 }
 
 html,
@@ -40,7 +36,7 @@ body {
 #app {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -59,3 +55,4 @@ body {
   padding-top: 70px; /* 与导航栏高度一致 */
 }
 </style>
+

@@ -1,27 +1,32 @@
 <template>
+
   <section class="hero-section">
+
     <div class="hero-content">
+
       <h1>{{ $t('hero.title') }}</h1>
+
       <p>{{ $t('hero.subtitle') }}</p>
-      <router-link
+       <router-link
         :to="getProductDetailLink(heroProduct)"
         class="btn btn-primary"
+        > {{ $t('hero.cta') }} </router-link
       >
-        {{ $t('hero.cta') }}
-      </router-link>
     </div>
-    <img :src="heroImage" alt="Hero Image" class="hero-image" />
+     <img :src="heroImage" alt="Hero Image" class="hero-image" />
   </section>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Vue响应式功能按需导入
 import heroImage from '@/assets/hero_image.png'; // Replace with the actual path to your hero image
 import { getProductDetailLink } from '@/helpers/product';
+import type { Product } from '@/helpers/product';
 
 // 英雄区域内容通过国际化配置
 
-const heroProduct = {
+const heroProduct: Product = {
   category: 'system', // 可改为'robot'等
   slug: 'rtos', // 可改为其他产品slug
 };
@@ -75,3 +80,4 @@ const heroProduct = {
   background-color: #1a5db0;
 }
 </style>
+

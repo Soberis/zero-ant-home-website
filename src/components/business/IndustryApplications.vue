@@ -1,25 +1,31 @@
 <template>
+
   <section class="industry-apps">
+
     <h2 class="section-title">行业应用</h2>
+
     <div class="section-desc">
-      专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案
+       专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案
     </div>
+
     <div class="apps-list-wrap">
-      <button
+       <button
         class="scroll-btn left"
         @mouseenter="pauseScroll"
         @mouseleave="resumeScroll"
         @click="scrollLeft"
       >
-        <span>&lt;</span>
-      </button>
+         <span>&lt;</span> </button
+      >
       <div
         ref="scrollWrap"
         class="apps-list"
         @mouseenter="pauseScroll"
         @mouseleave="resumeScroll"
       >
+
         <div class="apps-track">
+
           <div
             v-for="app in displayApps"
             :key="app.slug"
@@ -27,34 +33,39 @@
             style="cursor: pointer"
             @click="goDetail(app.slug)"
           >
-            <span class="icon" v-html="app.svg"></span>
+             <span class="icon" v-html="app.svg"></span>
             <div class="app-title">{{ app.title }}</div>
+
           </div>
+
         </div>
+
       </div>
-      <button
+       <button
         class="scroll-btn right"
         @mouseenter="pauseScroll"
         @mouseleave="resumeScroll"
         @click="scrollRight"
       >
-        <span>&gt;</span>
-      </button>
+         <span>&gt;</span> </button
+      >
     </div>
+
   </section>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import applications from '@/data/applications';
 import { useAutoScroll } from '@/helpers/useAutoScroll';
 
 const displayApps = applications;
-const scrollWrap = ref(null);
+const scrollWrap = ref<HTMLElement | null>(null);
 const router = useRouter();
 
-const goDetail = slug => {
+const goDetail = (slug: string): void => {
   if (slug) {
     router.push(`/applications/${slug}`);
   }
@@ -66,10 +77,10 @@ const { pauseScroll, resumeScroll, smoothScrollBy } = useAutoScroll(
   { interval: 20, step: 1.5 }
 );
 
-const scrollLeft = () => {
+const scrollLeft = (): void => {
   smoothScrollBy(-260, 600);
 };
-const scrollRight = () => {
+const scrollRight = (): void => {
   smoothScrollBy(260, 600);
 };
 </script>
@@ -246,3 +257,4 @@ const scrollRight = () => {
   }
 }
 </style>
+

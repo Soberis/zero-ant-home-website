@@ -1,21 +1,30 @@
 <!-- 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互 -->
 <template>
+
   <div class="support-hero-bg">
+
     <div class="support-hero">
+
       <h1 class="hero-title">售后服务</h1>
+
       <div class="hero-desc">
-        售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应
+         售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应
       </div>
+
       <div class="service-cards">
+
         <div class="service-card">
+
           <div class="icon-box">
-            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+             <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+
               <path
                 d="M28 6L46 12V26C46 38.5 36.5 47.5 28 50C19.5 47.5 10 38.5 10 26V12L28 6Z"
                 fill="#fff"
                 stroke="#1a3a8f"
                 stroke-width="2.5"
               />
+
               <text
                 x="50%"
                 y="44%"
@@ -25,8 +34,9 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                12
+                 12
               </text>
+
               <text
                 x="50%"
                 y="64%"
@@ -36,15 +46,21 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                HOURS
+                 HOURS
               </text>
-            </svg>
+               </svg
+            >
           </div>
+
           <div class="card-desc">12小时内快速解决问题</div>
+
         </div>
+
         <div class="service-card">
+
           <div class="icon-box">
-            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+             <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+
               <circle
                 cx="28"
                 cy="28"
@@ -53,10 +69,12 @@
                 stroke="#1a3a8f"
                 stroke-width="2.5"
               />
+
               <path
                 d="M18 32c2.5 3.5 6.5 7.5 10 10l3-3c0.5-0.5 1.2-0.6 1.8-0.3 1.6 0.8 3.4 1.3 5.2 1.3 0.7 0 1.3 0.6 1.3 1.3v4.2c0 0.7-0.6 1.3-1.3 1.3C25.2 47.5 14.5 36.8 14.5 23.3c0-0.7 0.6-1.3 1.3-1.3h4.2c0.7 0 1.3 0.6 1.3 1.3 0 1.8 0.5 3.6 1.3 5.2 0.3 0.6 0.2 1.3-0.3 1.8l-3 3z"
                 fill="#1a3a8f"
               />
+
               <text
                 x="65%"
                 y="54%"
@@ -66,65 +84,94 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                24h
+                 24h
               </text>
-            </svg>
+               </svg
+            >
           </div>
+
           <div class="card-desc">7×24小时专属服务群响应</div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
   <div class="support-page">
+
     <h2 id="download" class="section-title">相关下载</h2>
+
     <div class="section-block">
+
       <div
         v-for="(item, idx) in downloads"
         :key="item.title"
         class="card-item download-card"
         :class="{ open: item.open }"
       >
+
         <div class="card-header" @click="toggleDownload(idx)">
-          <span class="card-title download-title">{{ item.title }}</span>
-          <span class="card-icon">{{ item.open ? '-' : '+' }}</span>
+           <span class="card-title download-title">{{ item.title }}</span
+          > <span class="card-icon">{{ item.open ? '-' : '+' }}</span
+          >
         </div>
-        <transition name="fade-slide">
+         <transition name="fade-slide"
+          >
           <div v-if="item.open" class="card-content">
-            <a :href="item.link">{{ item.desc }}</a>
+             <a :href="item.link">{{ item.desc }}</a
+            >
           </div>
-        </transition>
+           </transition
+        >
       </div>
+
     </div>
+
     <h2 id="faq" class="section-title">常见问题</h2>
+
     <div class="section-block">
+
       <div
         v-for="(faq, idx) in faqs"
         :key="faq.q"
         class="card-item faq-card"
         :class="{ open: faq.open }"
       >
+
         <div class="card-header" @click="toggleFaq(idx)">
-          <span class="card-title faq-title">{{ faq.q }}</span>
-          <span class="card-icon">{{ faq.open ? '-' : '+' }}</span>
+           <span class="card-title faq-title">{{ faq.q }}</span
+          > <span class="card-icon">{{ faq.open ? '-' : '+' }}</span
+          >
         </div>
-        <transition name="fade-slide">
-          <div v-if="faq.open" class="card-content">
-            {{ faq.a }}
-          </div>
-        </transition>
+         <transition name="fade-slide"
+          >
+          <div v-if="faq.open" class="card-content"> {{ faq.a }} </div>
+           </transition
+        >
       </div>
+
     </div>
+
   </div>
-  <!-- 在页面下方添加锚点内容区块 -->
+   <!-- 在页面下方添加锚点内容区块 -->
   <div style="height: 60px"></div>
+
   <div id="manual"></div>
+
   <div id="joint"></div>
+
   <div id="faq1"></div>
+
   <div id="faq2"></div>
+
   <div id="faq3"></div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互
 import { reactive } from 'vue';
 
@@ -164,10 +211,10 @@ const faqs = reactive([
   },
 ]);
 
-function toggleDownload(idx) {
+function toggleDownload(idx: number): void {
   downloads[idx].open = !downloads[idx].open;
 }
-function toggleFaq(idx) {
+function toggleFaq(idx: number): void {
   faqs[idx].open = !faqs[idx].open;
 }
 </script>
@@ -433,3 +480,4 @@ function toggleFaq(idx) {
   }
 }
 </style>
+

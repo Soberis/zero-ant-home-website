@@ -1,23 +1,37 @@
 <template>
+
   <section class="video-cases">
+
     <h2 class="section-title">视频案例</h2>
+
     <div class="videos-list">
-      <div v-for="video in videoCards" :key="video.slug" class="video-card">
+
+      <div
+        v-for="video in videoCardsTyped"
+        :key="video.slug"
+        class="video-card"
+      >
+
         <div class="video-img">
-          <img :src="video.img" :alt="video.title" loading="lazy" />
+           <img :src="video.img" :alt="video.title" loading="lazy" />
         </div>
+
         <div class="video-title">{{ video.title }}</div>
-        <router-link :to="`/video/${video.slug}`" class="more-btn"
+         <router-link :to="`/video/${video.slug}`" class="more-btn"
           >观看视频 +</router-link
         >
       </div>
+
     </div>
+
   </section>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 视频案例数据
-import { videoCards } from '@/data/videos';
+import { videoCards, type VideoCard } from '@/data/videos';
+const videoCardsTyped: VideoCard[] = videoCards;
 </script>
 
 <style scoped>
@@ -119,3 +133,4 @@ import { videoCards } from '@/data/videos';
   }
 }
 </style>
+

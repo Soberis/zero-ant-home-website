@@ -1,0 +1,42 @@
+# 依赖目录
+node_modules/
+
+# 构建输出
+dist/
+build/
+
+# 静态资源
+public/
+*.min.js
+*.min.css
+
+# 配置文件
+*.config.js
+*.config.ts
+vite.config.ts
+
+# 锁定文件
+yarn.lock
+package-lock.json
+
+# 日志文件
+*.log
+
+# 环境变量文件
+.env*
+
+# IDE 配置
+.vscode/
+.idea/
+
+# Git 相关
+.git/
+.gitignore
+
+# 文档
+*.md
+README*
+
+# 其他
+.DS_Store
+Thumbs.db

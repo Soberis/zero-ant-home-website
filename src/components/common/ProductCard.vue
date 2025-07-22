@@ -1,24 +1,31 @@
 <template>
+
   <div class="product-card">
+
     <div class="product-header">
+
       <div v-if="product.image" class="product-image-wrapper">
+
         <div class="image-backdrop"></div>
-        <img
+         <img
           :src="product.image"
           :alt="product.name"
           class="product-image"
           loading="lazy"
         />
       </div>
+
       <div v-else class="product-image-placeholder">
+
         <div class="placeholder-icon">
-          <svg
+           <svg
             width="80"
             height="80"
             viewBox="0 0 48 48"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
+
             <rect
               x="8"
               y="12"
@@ -29,6 +36,7 @@
               stroke-width="2"
               opacity="0.3"
             />
+
             <circle
               cx="24"
               cy="24"
@@ -37,38 +45,43 @@
               stroke-width="2"
               opacity="0.5"
             />
+
             <path
               d="M24 18v12M18 24h12"
               stroke="#1a3a8f"
               stroke-width="2"
               opacity="0.4"
             />
-          </svg>
+             </svg
+          >
         </div>
-      </div>
-    </div>
-    <div class="product-content">
-      <div class="product-name">{{ product.name }}</div>
-      <div class="product-desc">{{ product.desc }}</div>
-      <button class="more-btn" @click="$emit('more', product.slug)">
-        <span class="btn-text">了解更多</span>
-        <span class="btn-arrow">→</span>
-      </button>
-    </div>
-  </div>
-</template>
-<script setup>
-// 组件属性定义
-/**
- * @prop {Object} product 产品数据，必填
- */
-defineProps({
-  product: { type: Object, required: true },
-});
 
-// 组件事件定义
-defineEmits(['more']);
+      </div>
+
+    </div>
+
+    <div class="product-content">
+
+      <div class="product-name">{{ product.name }}</div>
+
+      <div class="product-desc">{{ product.desc }}</div>
+       <button class="more-btn" @click="emit('more', product.slug)">
+         <span class="btn-text">了解更多</span> <span class="btn-arrow">→</span>
+        </button
+      >
+    </div>
+
+  </div>
+
+</template>
+
+<script setup lang="ts">
+import type { ProductData } from '@/data/products';
+
+const { product } = defineProps<{ product: ProductData }>();
+const emit = defineEmits<{ (e: 'more', slug: string): void }>();
 </script>
+
 <style scoped>
 .product-card {
   display: flex;
@@ -293,3 +306,4 @@ defineEmits(['more']);
   transform: translateX(-2px);
 }
 </style>
+

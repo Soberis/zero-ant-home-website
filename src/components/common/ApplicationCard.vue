@@ -1,30 +1,27 @@
 <template>
+
   <div class="app-card" @click="goDetail">
-    <span class="icon" v-html="svg"></span>
+     <span class="icon" v-html="svg"></span>
     <div class="label">{{ title }}</div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router';
-// 组件属性定义
-/**
- * @prop {String} title 应用名称，必填
- * @prop {String} svg 图标SVG字符串，必填
- * @prop {String} slug 路由slug，必填
- */
-const props = defineProps({
-  title: { type: String, required: true },
-  svg: { type: String, required: true },
-  slug: { type: String, required: true },
-});
+
+const { title, svg, slug } = defineProps<{
+  title: string;
+  svg: string;
+  slug: string;
+}>();
+
 const router = useRouter();
-/**
- * 跳转到应用详情页
- */
-function goDetail() {
-  if (props.slug) {
-    router.push(`/applications/${props.slug}`);
+
+function goDetail(): void {
+  if (slug) {
+    router.push(`/applications/${slug}`);
   }
 }
 </script>
@@ -63,3 +60,4 @@ function goDetail() {
   margin-bottom: 8px;
 }
 </style>
+

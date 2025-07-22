@@ -1,7 +1,7 @@
 <template>
-  <div class="products">
-    <slot />
-  </div>
+
+  <div class="products"> <slot /> </div>
+
 </template>
 
 <script setup lang="ts">
@@ -202,3 +202,4 @@
   }
 }
 </style>
+

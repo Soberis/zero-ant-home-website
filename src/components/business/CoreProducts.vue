@@ -1,27 +1,38 @@
 <template>
+
   <section class="core-products">
+
     <h2 class="section-title">核心产品</h2>
+
     <div class="products-list">
+
       <div v-for="product in products" :key="product.slug" class="product-card">
+
         <div class="product-img">
-          <!-- 根据产品类型显示对应的SVG图标 -->
-          <component :is="getProductIcon(product.slug)" />
+           <!-- 根据产品类型显示对应的SVG图标 --> <component
+            :is="getProductIcon(product.slug)"
+          />
         </div>
+
         <div class="product-title">{{ product.name }}</div>
+
         <div class="product-desc">{{ product.desc }}</div>
-        <router-link :to="getProductDetailLink(product)" class="more-btn"
+         <router-link :to="getProductDetailLink(product)" class="more-btn"
           >了解更多 +</router-link
         >
       </div>
+
     </div>
+
   </section>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 核心产品数据
 import { products } from '@/data/products';
 import { getProductDetailLink } from '@/helpers/product';
-import { h } from 'vue';
+import { h, type Component } from 'vue';
 
 // 多OS混合部署嵌入式虚拟机图标 - 专业工业设计
 const MultiOsVmIcon = () =>
@@ -1396,8 +1407,8 @@ const MobileRobotIcon = () =>
   );
 
 // 根据产品slug返回对应的图标组件
-const getProductIcon = slug => {
-  const iconMap = {
+const getProductIcon = (slug: string): Component => {
+  const iconMap: Record<string, Component> = {
     'multi-os-vm': MultiOsVmIcon,
     'industrial-rtos': IndustrialRtosIcon,
     airos: AirosIcon,
@@ -1512,3 +1523,4 @@ const getProductIcon = slug => {
   }
 }
 </style>
+

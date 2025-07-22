@@ -1,49 +1,72 @@
 <template>
-  <div class="product-detail">
-    <!-- 产品头部信息 -->
-    <div class="product-header">
-      <div class="container">
-        <h1 class="product-title">{{ product.title }}</h1>
-        <p class="product-desc">{{ product.desc }}</p>
-      </div>
-    </div>
 
-    <!-- 主要内容区域 -->
-    <div class="main-content">
+  <div class="product-detail">
+     <!-- 产品头部信息 -->
+    <div class="product-header">
+
       <div class="container">
-        <!-- 优势特点 -->
+
+        <h1 class="product-title">{{ product.title }}</h1>
+
+        <p class="product-desc">{{ product.desc }}</p>
+
+      </div>
+
+    </div>
+     <!-- 主要内容区域 -->
+    <div class="main-content">
+
+      <div class="container">
+         <!-- 优势特点 -->
         <section
           v-if="productFeatures && productFeatures.length"
           class="section features-section"
         >
+
           <h2 class="section-title">产品特点</h2>
+
           <div class="features-grid">
+
             <div
               v-for="(feature, idx) in productFeatures"
               :key="idx"
               class="feature-card"
             >
-              <div class="feature-icon">{{ getFeatureIcon(idx, feature) }}</div>
-              <div class="feature-content">
-                <h3 class="feature-title">
-                  {{ typeof feature === 'string' ? feature : (feature.title || '') }}
-                </h3>
-                <p v-if="typeof feature === 'object' && feature.desc" class="feature-desc">
-                  {{ feature.desc }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        <!-- 应用场景 -->
+              <div class="feature-icon">{{ getFeatureIcon(idx, feature) }}</div>
+
+              <div class="feature-content">
+
+                <h3 class="feature-title">
+                   {{
+                    typeof feature === 'string' ? feature : feature.title || ''
+                  }}
+                </h3>
+
+                <p
+                  v-if="typeof feature === 'object' && feature.desc"
+                  class="feature-desc"
+                >
+                   {{ feature.desc }}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+         <!-- 应用场景 -->
         <section
           v-if="props.showApplications && relatedApplications.length > 0"
           class="section scenes-section"
         >
+
           <h2 class="section-title">应用场景</h2>
+
           <div class="application-grid">
-            <ApplicationCard
+             <ApplicationCard
               v-for="item in relatedApplications"
               :key="item.slug"
               :title="item.title"
@@ -51,16 +74,18 @@
               :slug="item.slug"
             />
           </div>
-        </section>
 
-        <!-- 视频案例 -->
+        </section>
+         <!-- 视频案例 -->
         <section
           v-if="props.showVideos && relatedVideos.length > 0"
           class="section cases-section"
         >
+
           <h2 class="section-title">视频案例</h2>
+
           <div class="videos-grid">
-            <VideoCard
+             <VideoCard
               v-for="(video, index) in relatedVideos"
               :key="video.slug"
               :card="video"
@@ -71,58 +96,79 @@
               @click="handleVideoClick"
             />
           </div>
-        </section>
 
-        <!-- 产品参数 -->
+        </section>
+         <!-- 产品参数 -->
         <section v-if="product.params && product.params.length" class="section">
+
           <h2 class="section-title">产品参数</h2>
+
           <div class="params-container">
+
             <div class="params-grid">
+
               <div
                 v-for="(param, idx) in product.params"
                 :key="idx"
                 class="param-item"
               >
-                <div class="param-key">{{ param.key }}</div>
-                <div class="param-value">{{ param.value }}</div>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        <!-- 相关下载 -->
+                <div class="param-key">{{ param.key }}</div>
+
+                <div class="param-value">{{ param.value }}</div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+         <!-- 相关下载 -->
         <section
           v-if="product.downloads && product.downloads.length"
           class="section downloads-section"
         >
+
           <h2 class="section-title">相关下载</h2>
+
           <div class="downloads-grid">
-            <a
+             <a
               v-for="(item, idx) in product.downloads"
               :key="idx"
               :href="item.url"
               target="_blank"
               class="download-card"
-            >
+              >
               <div class="download-icon">📄</div>
+
               <div class="download-name">{{ item.name }}</div>
-            </a>
+               </a
+            >
           </div>
+
         </section>
+
       </div>
+
+    </div>
+     <!-- 返回按钮 -->
+    <div class="back-section">
+
+      <div class="container">
+         <button class="back-btn" @click="emits('back')">
+           <span class="back-icon">←</span> <span class="back-text"
+            >返回产品列表</span
+          > </button
+        >
+      </div>
+
     </div>
 
-    <!-- 返回按钮 -->
-    <div class="back-section">
-      <div class="container">
-        <button class="back-btn" @click="emits('back')">
-          <span class="back-icon">←</span>
-          <span class="back-text">返回产品列表</span>
-        </button>
-      </div>
-    </div>
   </div>
+
 </template>
+
 <script setup lang="ts">
 import VideoCard from '@/components/common/VideoCard.vue';
 import ApplicationCard from '@/components/common/ApplicationCard.vue';
@@ -156,14 +202,15 @@ const props = withDefaults(
 
 // 组件事件定义
 const emits = defineEmits<{
-  back: []
+  back: [];
 }>();
 
 // 获取特性图标 - 根据特点内容语义分配
 const getFeatureIcon = (index: number, feature: FeatureItem): string => {
   // 获取特性文本内容
-  const featureText = typeof feature === 'string' ? feature : (feature.title || feature.desc || '');
-  
+  const featureText =
+    typeof feature === 'string' ? feature : feature.title || feature.desc || '';
+
   // 根据特点内容关键词匹配合适的图标
   if (
     featureText.includes('实时') ||
@@ -296,6 +343,7 @@ const handleVideoClick = (index: number) => {
   }
 };
 </script>
+
 <style scoped>
 /* 全局样式 */
 .product-detail {
@@ -848,3 +896,4 @@ const handleVideoClick = (index: number) => {
 
 }
 </style>
+

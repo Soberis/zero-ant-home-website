@@ -1,20 +1,25 @@
 <template>
+
   <div
     class="video-card"
     @mouseenter="emit('hover', index)"
     @mouseleave="emit('leave')"
     @click="emit('click', index)"
   >
-    <img :src="card.img" :alt="card.title + '图片'" class="video-card-img" />
+     <img :src="card.img" :alt="card.title + '图片'" class="video-card-img" />
     <div class="video-card-title-bar" :class="{ active: active }">
+
       <div class="video-card-title" :class="{ active: active }">
-        {{ card.title }}
+         {{ card.title }}
       </div>
+
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 组件属性定义
 /**
  * @prop {Object} card 视频卡片数据
@@ -152,3 +157,4 @@ const emit = defineEmits(['hover', 'leave', 'click']);
   }
 }
 </style>
+

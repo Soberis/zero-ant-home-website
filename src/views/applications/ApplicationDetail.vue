@@ -1,66 +1,81 @@
 <!-- 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换 -->
+
 <template>
+
   <div class="application-detail">
+
     <h1 class="title">{{ detail?.title }}</h1>
+
     <div class="desc" v-html="detail?.description"></div>
+
     <div class="video-wrap">
-      <template v-if="videoDetail && videoDetail.type === 'bilibili'">
+       <template v-if="videoDetail && videoDetail.type === 'bilibili'"
+        >
         <div class="video-container">
-          <iframe
+           <iframe
             class="video-iframe"
             :src="bilibiliEmbedUrl(videoDetail.url)"
             frameborder="0"
             allowfullscreen
-          ></iframe>
+          ></iframe
+          >
         </div>
-      </template>
-      <template v-else-if="videoDetail && videoDetail.type === 'local'">
+         </template
+      > <template v-else-if="videoDetail && videoDetail.type === 'local'"
+        >
         <div class="video-container">
-          <video :src="videoDetail.url" controls class="video-player" />
+           <video :src="videoDetail.url" controls class="video-player" />
         </div>
-      </template>
-      <template v-else>
+         </template
+      > <template v-else
+        >
         <div class="video-placeholder">暂无视频</div>
-      </template>
+         </template
+      >
       <div class="video-bottom-bar" :class="bottomBarClass">
-        <button
+         <button
           v-if="prevSlug"
           class="video-bottom-btn prev"
           @click="goTo(prevSlug)"
         >
-          ◀ 上一个
-        </button>
-        <button
+           ◀ 上一个 </button
+        > <button
           v-if="nextSlug"
           class="video-bottom-btn next"
           @click="goTo(nextSlug)"
         >
-          下一个 ▶
-        </button>
+           下一个 ▶ </button
+        >
       </div>
+
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换
 import { useRoute, useRouter } from 'vue-router';
-import applications from '@/data/applications';
-import { computed } from 'vue';
-import { videoMap } from '@/data/videos'; // 新增导入
+import applications, { type Application } from '@/data/applications';
+import { computed, type ComputedRef } from 'vue';
+import { videoMap, type VideoDetail } from '@/data/videos'; // 新增导入
 
 const route = useRoute();
 const router = useRouter();
-const slug = computed(() => route.params.slug);
-const detail = computed(() =>
+const slug: ComputedRef<string> = computed(() => route.params.slug as string);
+const detail: ComputedRef<Application | undefined> = computed(() =>
   applications.find(item => item.slug === slug.value)
 );
 
 // 新增：获取视频详情对象
-const videoDetail = computed(() => videoMap[detail.value?.video]);
+const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
+  const videoKey = detail.value?.video;
+  return videoKey ? videoMap[videoKey] : undefined;
+});
 
 // Bilibili相关函数已移除，如需要可重新添加
-function bilibiliEmbedUrl(url) {
+function bilibiliEmbedUrl(url: string): string {
   const match = url.match(/bilibili.com\/video\/(BV[\w]+)/);
   if (match) {
     return `https://player.bilibili.com/player.html?bvid=${match[1]}&autoplay=0`;
@@ -68,27 +83,30 @@ function bilibiliEmbedUrl(url) {
   return '';
 }
 
-const currentIndex = computed(() =>
+const currentIndex: ComputedRef<number> = computed(() =>
   applications.findIndex(item => item.slug === slug.value)
 );
-const prevSlug = computed(() =>
+const prevSlug: ComputedRef<string | null> = computed(() =>
   currentIndex.value > 0 ? applications[currentIndex.value - 1].slug : null
 );
-const nextSlug = computed(() =>
+const nextSlug: ComputedRef<string | null> = computed(() =>
   currentIndex.value < applications.length - 1
     ? applications[currentIndex.value + 1].slug
     : null
 );
 // 新增：判断按钮类型
-const bottomBarClass = computed(() => {
+const bottomBarClass: ComputedRef<string> = computed(() => {
   if (prevSlug.value && nextSlug.value) return 'both';
   if (prevSlug.value) return 'only-prev';
   if (nextSlug.value) return 'only-next';
   return '';
 });
-function goTo(targetSlug) {
+function goTo(targetSlug: string | null): void {
   if (targetSlug) {
-    router.push({ name: route.name, params: { slug: targetSlug } });
+    router.push({
+      name: route.name || undefined,
+      params: { slug: targetSlug },
+    });
   }
 }
 </script>
@@ -244,3 +262,4 @@ function goTo(targetSlug) {
   }
 }
 </style>
+

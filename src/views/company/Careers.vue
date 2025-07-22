@@ -1,117 +1,200 @@
 <template>
-  <div class="careers-page">
-    <!-- 页面头部 -->
-    <section class="careers-hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title">加入零蚁科技</h1>
-          <p class="hero-subtitle">
-            与我们一起打造未来机器人技术，让机器人遍布每个角落
-          </p>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-number">8+</span>
-              <span class="stat-label">技术积累</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">20+ </span>
-              <span class="stat-label">团队伙伴</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">50+</span>
-              <span class="stat-label">成功项目</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 为什么选择我们 -->
-    <section class="why-join">
+  <div class="careers-page">
+     <!-- 页面头部 -->
+    <section class="careers-hero">
+
       <div class="container">
+
+        <div class="hero-content">
+
+          <h1 class="hero-title">加入零蚁科技</h1>
+
+          <p class="hero-subtitle">
+             与我们一起打造未来机器人技术，让机器人遍布每个角落
+          </p>
+
+          <div class="hero-stats">
+
+            <div class="stat-item">
+               <span class="stat-number">8+</span> <span class="stat-label"
+                >技术积累</span
+              >
+            </div>
+
+            <div class="stat-item">
+               <span class="stat-number">20+ </span> <span class="stat-label"
+                >团队伙伴</span
+              >
+            </div>
+
+            <div class="stat-item">
+               <span class="stat-number">50+</span> <span class="stat-label"
+                >成功项目</span
+              >
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+     <!-- 为什么选择我们 -->
+    <section class="why-join">
+
+      <div class="container">
+
         <h2 class="section-title">为什么选择零蚁科技</h2>
+
         <div class="benefits-grid">
+
           <div
             v-for="benefit in benefits"
             :key="benefit.id"
             class="benefit-card"
           >
-            <div class="benefit-content">
-              <h3 class="benefit-title">{{ benefit.title }}</h3>
-              <p class="benefit-description">{{ benefit.description }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 职位列表 -->
+            <div class="benefit-content">
+
+              <h3 class="benefit-title">{{ benefit.title }}</h3>
+
+              <p class="benefit-description">{{ benefit.description }}</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+     <!-- 职位列表 -->
     <section class="job-positions">
+
       <div class="container">
+
         <h2 class="section-title">热招职位</h2>
+
         <div class="positions-grid">
+
           <div
             v-for="position in positions"
             :key="position.id"
             class="position-card"
           >
+
             <div class="position-header">
+
               <h3 class="position-title">{{ position.title }}</h3>
-              <span class="position-type">{{ position.type }}</span>
+               <span class="position-type">{{ position.type }}</span
+              >
             </div>
+
             <div class="position-details">
+
               <div class="detail-item">
-                <span class="detail-label">工作地点:</span>
-                <span class="detail-value">{{ position.location }}</span>
+                 <span class="detail-label">工作地点:</span> <span
+                  class="detail-value"
+                  >{{ position.location }}</span
+                >
               </div>
+
               <div class="detail-item">
-                <span class="detail-label">工作经验:</span>
-                <span class="detail-value">{{ position.experience }}</span>
+                 <span class="detail-label">工作经验:</span> <span
+                  class="detail-value"
+                  >{{ position.experience }}</span
+                >
               </div>
+
             </div>
+
             <div class="position-requirements">
+
               <h4 class="requirements-title">职位要求</h4>
+
               <ul class="requirements-list">
+
                 <li v-for="req in position.requirements" :key="req">
-                  {{ req }}
+                   {{ req }}
                 </li>
+
               </ul>
+
             </div>
+
             <div class="position-actions">
-              <button class="apply-btn" @click="applyForPosition(position)">
-                立即申请
-              </button>
+               <button class="apply-btn" @click="applyForPosition(position)">
+                 立即申请 </button
+              >
             </div>
+
           </div>
+
         </div>
+
       </div>
+
+    </section>
+     <!-- 联系我们 -->
+    <section class="contact-section">
+
+      <div class="container">
+
+        <div class="contact-content">
+
+          <h2 class="section-title">联系我们</h2>
+
+          <p class="contact-description">
+
+            如果您对我们的职位感兴趣，或者想了解更多信息，请随时联系我们的人力资源团队。
+
+          </p>
+
+          <div class="contact-info">
+
+            <div class="contact-item">
+               <span class="contact-label">邮箱:</span> <span
+                class="contact-value"
+                >hr@zeroant.com</span
+              >
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <!-- 联系我们 -->
-    <section class="contact-section">
-      <div class="container">
-        <div class="contact-content">
-          <h2 class="section-title">联系我们</h2>
-          <p class="contact-description">
-            如果您对我们的职位感兴趣，或者想了解更多信息，请随时联系我们的人力资源团队。
-          </p>
-          <div class="contact-info">
-            <div class="contact-item">
-              <span class="contact-label">邮箱:</span>
-              <span class="contact-value">hr@zeroant.com</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 
+// 定义接口
+interface Benefit {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface Position {
+  id: number;
+  title: string;
+  type: string;
+  location: string;
+  experience: string;
+  requirements: string[];
+}
+
 // 公司优势
-const benefits = ref([
+const benefits = ref<Benefit[]>([
   {
     id: 1,
     title: '技术创新',
@@ -145,7 +228,7 @@ const benefits = ref([
 ]);
 
 // 职位列表
-const positions = ref([
+const positions = ref<Position[]>([
   {
     id: 1,
     title: '机器人工程师',
@@ -227,7 +310,7 @@ const positions = ref([
 ]);
 
 // 申请职位
-const applyForPosition = position => {
+const applyForPosition = (position: Position): void => {
   window.open(`mailto:hr@zeroant.com?subject=申请职位：${position.title}`);
 };
 </script>
@@ -575,3 +658,4 @@ const applyForPosition = position => {
   }
 }
 </style>
+

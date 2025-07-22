@@ -1,267 +1,318 @@
 <template>
-  <header class="header">
-    <nav class="nav-container">
-      <div class="logo">
-        <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
-        <router-link to="/" class="logo-text">
-          {{ $t('logoText') }}
-        </router-link>
-      </div>
 
-      <!-- 桌面端导航 -->
+  <header class="header">
+
+    <nav class="nav-container">
+
+      <div class="logo">
+         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
+        <router-link to="/" class="logo-text"
+          > {{ $t('logoText') }} </router-link
+        >
+      </div>
+       <!-- 桌面端导航 -->
       <div class="nav-wrapper desktop-nav">
+
         <ul class="nav-links">
+
           <li class="nav-item">
-            <router-link to="/" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t('nav.home') }}</span>
-            </router-link>
+             <router-link to="/" class="nav-link" active-class="active"
+              > <span class="nav-text">{{ $t('nav.home') }}</span
+              > </router-link
+            >
           </li>
+
           <li class="nav-item">
-            <router-link
+             <router-link
               to="/system-products"
               class="nav-link"
               active-class="active"
+              > <span class="nav-text">{{ $t('nav.systemProducts') }}</span
+              > </router-link
             >
-              <span class="nav-text">{{ $t('nav.systemProducts') }}</span>
-            </router-link>
             <div class="dropdown">
+
               <div class="dropdown-content">
+
                 <ul>
+
                   <li v-for="item in systemProductNav" :key="item.label">
-                    <router-link
+                     <router-link
                       :to="{ path: '/system-products', hash: item.hash }"
                       class="dropdown-item"
+                      > {{ $t(item.label) }} </router-link
                     >
-                      {{ $t(item.label) }}
-                    </router-link>
                   </li>
+
                 </ul>
+
               </div>
+
             </div>
+
           </li>
+
           <li class="nav-item">
-            <router-link
+             <router-link
               to="/robot-products"
               class="nav-link"
               active-class="active"
+              > <span class="nav-text">{{ $t('nav.robotProducts') }}</span
+              > </router-link
             >
-              <span class="nav-text">{{ $t('nav.robotProducts') }}</span>
-            </router-link>
             <div class="dropdown">
+
               <div class="dropdown-content">
+
                 <ul>
+
                   <li v-for="item in robotProductNav" :key="item.label">
-                    <router-link
+                     <router-link
                       :to="{ path: '/robot-products', hash: item.hash }"
                       class="dropdown-item"
+                      > {{ $t(item.label) }} </router-link
                     >
-                      {{ $t(item.label) }}
-                    </router-link>
                   </li>
+
                 </ul>
+
               </div>
+
             </div>
+
           </li>
-          <!-- <li class="nav-item">
+           <!-- <li class="nav-item">
             <router-link to="/video" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.videoCases") }}</span>
             </router-link>
           </li> -->
           <li class="nav-item has-dropdown">
-            <router-link to="/solutions" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t('nav.solutions') }}</span>
-            </router-link>
+             <router-link to="/solutions" class="nav-link" active-class="active"
+              > <span class="nav-text">{{ $t('nav.solutions') }}</span
+              > </router-link
+            >
             <div class="dropdown">
+
               <div class="dropdown-content">
+
                 <ul>
+
                   <li>
-                    <router-link
+                     <router-link
                       :to="{ path: '/solutions', hash: '#core-scenarios' }"
                       class="dropdown-item"
+                      > {{ $t('nav.coreScenarios') }} </router-link
                     >
-                      {{ $t('nav.coreScenarios') }}
-                    </router-link>
                   </li>
+
                   <li>
-                    <router-link
+                     <router-link
                       :to="{ path: '/solutions', hash: '#more-scenarios' }"
                       class="dropdown-item"
+                      > {{ $t('nav.moreScenarios') }} </router-link
                     >
-                      {{ $t('nav.moreScenarios') }}
-                    </router-link>
                   </li>
+
                   <li>
-                    <router-link
+                     <router-link
                       :to="{ path: '/solutions', hash: '#video-section' }"
                       class="dropdown-item"
+                      > {{ $t('nav.videoCases') }} </router-link
                     >
-                      {{ $t('nav.videoCases') }}
-                    </router-link>
                   </li>
+
                 </ul>
+
               </div>
+
             </div>
+
           </li>
-          <!-- <li class="nav-item has-dropdown">
+           <!-- <li class="nav-item has-dropdown">
             <router-link to="/applications" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.applications") }}</span>
             </router-link>
           </li> -->
           <li class="nav-item has-dropdown">
-            <router-link to="/support" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t('nav.support') }}</span>
-            </router-link>
+             <router-link to="/support" class="nav-link" active-class="active"
+              > <span class="nav-text">{{ $t('nav.support') }}</span
+              > </router-link
+            >
             <div class="dropdown">
+
               <div class="dropdown-content">
+
                 <ul>
+
                   <li v-for="item in supportNav" :key="item.label">
-                    <router-link
+                     <router-link
                       :to="{ path: '/support', hash: item.hash }"
                       class="dropdown-item"
+                      > {{ $t(item.label) }} </router-link
                     >
-                      {{ $t(item.label) }}
-                    </router-link>
                   </li>
+
                 </ul>
+
               </div>
+
             </div>
+
           </li>
+
           <li class="nav-item">
-            <router-link to="/careers" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t('nav.careers') }}</span>
-            </router-link>
+             <router-link to="/careers" class="nav-link" active-class="active"
+              > <span class="nav-text">{{ $t('nav.careers') }}</span
+              > </router-link
+            >
           </li>
+
           <li class="nav-item has-dropdown">
-            <router-link to="/about" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t('nav.about') }}</span>
-            </router-link>
+             <router-link to="/about" class="nav-link" active-class="active"
+              > <span class="nav-text">{{ $t('nav.about') }}</span
+              > </router-link
+            >
             <div class="dropdown">
+
               <div class="dropdown-content">
+
                 <ul>
+
                   <li v-for="item in aboutNav" :key="item.hash">
-                    <router-link
+                     <router-link
                       :to="{ path: '/about', hash: item.hash }"
                       class="dropdown-item"
+                      > {{ $t(item.label) }} </router-link
                     >
-                      {{ $t(item.label) }}
-                    </router-link>
                   </li>
+
                 </ul>
+
               </div>
+
             </div>
+
           </li>
+
         </ul>
+
       </div>
 
       <div class="nav-actions">
-        <div class="language-switcher">
-          <button class="language-btn" @click="switchLanguage()">
-            <span class="lang-text">{{ locale === 'zh' ? 'EN' : '中文' }}</span>
-          </button>
-        </div>
 
-        <!-- 汉堡菜单按钮 -->
-        <button
+        <div class="language-switcher">
+           <button class="language-btn" @click="switchLanguage()">
+             <span class="lang-text">{{ locale === 'zh' ? 'EN' : '中文' }}</span
+            > </button
+          >
+        </div>
+         <!-- 汉堡菜单按钮 --> <button
           class="hamburger-menu"
           :class="{ active: isMobileMenuOpen }"
           aria-label="Toggle navigation menu"
           @click="toggleMobileMenu"
         >
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
+           <span class="hamburger-line"></span> <span
+            class="hamburger-line"
+          ></span
+          > <span class="hamburger-line"></span> </button
+        >
       </div>
-    </nav>
 
-    <!-- 移动端导航菜单 -->
+    </nav>
+     <!-- 移动端导航菜单 -->
     <div
       class="mobile-nav"
       :class="{ open: isMobileMenuOpen }"
       @click="handleBackgroundClick"
     >
+
       <div class="mobile-nav-content">
+
         <ul class="mobile-nav-links">
+
           <li class="mobile-nav-item">
-            <router-link
+             <router-link
               to="/"
               class="mobile-nav-link"
               @click="closeMobileMenu"
+              > {{ $t('nav.home') }} </router-link
             >
-              {{ $t('nav.home') }}
-            </router-link>
           </li>
+
           <li class="mobile-nav-item">
-            <router-link
+             <router-link
               to="/system-products"
               class="mobile-nav-link"
               @click="closeMobileMenu"
+              > {{ $t('nav.systemProducts') }} </router-link
             >
-              {{ $t('nav.systemProducts') }}
-            </router-link>
           </li>
+
           <li class="mobile-nav-item">
-            <router-link
+             <router-link
               to="/robot-products"
               class="mobile-nav-link"
               @click="closeMobileMenu"
+              > {{ $t('nav.robotProducts') }} </router-link
             >
-              {{ $t('nav.robotProducts') }}
-            </router-link>
           </li>
-          <!-- <li class="mobile-nav-item">
+           <!-- <li class="mobile-nav-item">
             <router-link to="/video" class="mobile-nav-link" @click="closeMobileMenu">
               {{ $t("nav.videoCases") }}
             </router-link>
           </li> -->
           <li class="mobile-nav-item">
-            <router-link
+             <router-link
               to="/solutions"
               class="mobile-nav-link"
               @click="closeMobileMenu"
+              > {{ $t('nav.solutions') }} </router-link
             >
-              {{ $t('nav.solutions') }}
-            </router-link>
           </li>
-          <!-- <li class="mobile-nav-item">
+           <!-- <li class="mobile-nav-item">
             <router-link to="/applications" class="mobile-nav-link" @click="closeMobileMenu">
               {{ $t("nav.applications") }}
             </router-link>
           </li> -->
           <li class="mobile-nav-item">
-            <router-link
+             <router-link
               to="/support"
               class="mobile-nav-link"
               @click="closeMobileMenu"
+              > {{ $t('nav.support') }} </router-link
             >
-              {{ $t('nav.support') }}
-            </router-link>
           </li>
+
           <li class="mobile-nav-item">
-            <router-link
+             <router-link
               to="/careers"
               class="mobile-nav-link"
               @click="closeMobileMenu"
+              > {{ $t('nav.careers') }} </router-link
             >
-              {{ $t('nav.careers') }}
-            </router-link>
           </li>
+
           <li class="mobile-nav-item">
-            <router-link
+             <router-link
               to="/about"
               class="mobile-nav-link"
               @click="closeMobileMenu"
+              > {{ $t('nav.about') }} </router-link
             >
-              {{ $t('nav.about') }}
-            </router-link>
           </li>
+
         </ul>
+
       </div>
+
     </div>
+
   </header>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import logoUrl from '@/assets/zeroant_logo.png';
@@ -287,8 +338,9 @@ function closeMobileMenu() {
 }
 
 // 点击背景关闭菜单
-function handleBackgroundClick(event) {
-  if (event.target.classList.contains('mobile-nav')) {
+function handleBackgroundClick(event: Event): void {
+  const target = event.target as HTMLElement;
+  if (target.classList.contains('mobile-nav')) {
     closeMobileMenu();
   }
 }
@@ -1112,3 +1164,4 @@ onUnmounted(() => {
   }
 }
 </style>
+

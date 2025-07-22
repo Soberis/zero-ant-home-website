@@ -19,7 +19,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint . --ext .vue,.js,.ts --fix",
+    "lint:check": "eslint . --ext .vue,.js,.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:format": "yarn lint && yarn format"
   },
   "dependencies": {
     "element-plus": "^2.10.4",
@@ -32,8 +37,17 @@
     "@stagewise-plugins/vue": "^0.6.2",
     "@stagewise/toolbar-vue": "^0.6.2",
     "@types/node": "^24.0.15",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "eslint": "^9.31.0",
+    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-vue": "^10.3.0",
     "less": "^4.2.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-vue": "^1.1.6",
     "typescript": "^5.8.3",
     "vite": "^5.4.0",
     "vue-tsc": "^2.0.29"

@@ -1,13 +1,20 @@
 <!-- 视频案例页面，展示所有视频卡片，支持高亮与跳转详情 -->
 <template>
+
   <div class="video-page">
+
     <div class="page-container">
+
       <div class="page-header">
+
         <h1 class="page-title">视频案例</h1>
+
         <p class="page-subtitle">探索我们的技术应用与创新成果</p>
+
       </div>
+
       <div class="card-list">
-        <VideoCard
+         <VideoCard
           v-for="(card, idx) in cards"
           :key="card.slug"
           :card="card"
@@ -18,30 +25,33 @@
           @click="goToVideo"
         />
       </div>
+
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 视频案例页面，渲染所有视频卡片，支持高亮与跳转详情
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import { videoCards } from '@/data/videos';
+import { videoCards, type VideoCard as VideoCardData } from '@/data/videos';
 import VideoCard from '@/components/common/VideoCard.vue';
 
 const router = useRouter();
-const hoverIdx = ref(-1);
+const hoverIdx = ref<number>(-1);
 
-const setHover = idx => {
+const setHover = (idx: number): void => {
   hoverIdx.value = idx;
 };
-const clearHover = () => {
+const clearHover = (): void => {
   hoverIdx.value = -1;
 };
 
-const cards = videoCards;
+const cards: VideoCardData[] = videoCards;
 
-const goToVideo = idx => {
+const goToVideo = (idx: number): void => {
   router.push({ path: `/video/${cards[idx].slug}` });
 };
 </script>
@@ -134,3 +144,4 @@ const goToVideo = idx => {
   }
 }
 </style>
+
