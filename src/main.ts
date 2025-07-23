@@ -3,7 +3,6 @@ import App from "@/App.vue";
 import router from "@/router";
 import i18n from "@/config/i18n";
 import { setupDirectives } from "@/directives";
-import { performanceMonitor } from "@/utils/performance";
 import { initSecurity } from "@/utils/security";
 
 // 创建应用实例
@@ -17,15 +16,8 @@ setupDirectives(app);
 // Element Plus 组件和样式通过按需导入自动处理
 app.mount("#app");
 
-// 初始化性能监控和安全监控（仅在浏览器环境）
+// 初始化安全监控（仅在浏览器环境）
 if (typeof window !== "undefined") {
   // 初始化安全监控
   initSecurity();
-
-  // 页面加载完成后报告性能指标
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      performanceMonitor.reportMetrics();
-    }, 1000);
-  });
 }

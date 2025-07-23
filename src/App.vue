@@ -5,6 +5,8 @@
     <main class="main-content"> <router-view /> </main>
      <!-- 页脚 --> <Footer /> <!-- Stagewise 工具栏（仅开发环境） -->
     <StagewiseToolbar v-if="isDev" :config="{ plugins: [VuePlugin] }" />
+
+
   </div>
 
 </template>
@@ -12,6 +14,7 @@
 <script setup lang="ts">
 import NavBar from '@/components/layout/NavBar.vue';
 import Footer from '@/components/layout/Footer.vue';
+
 import { StagewiseToolbar } from '@stagewise/toolbar-vue';
 import VuePlugin from '@stagewise-plugins/vue';
 

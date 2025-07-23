@@ -244,30 +244,34 @@ export function setupCSPViolationReporting() {
  */
 export function initSecurity() {
   // 检查安全特性
-  const securityFeatures = checkSecurityFeatures();
+  const features = checkSecurityFeatures();
 
   if (import.meta.env.DEV) {
     console.group("🔒 安全特性检查");
-    console.table(securityFeatures);
+    console.table(features);
 
     // 安全建议
-    const warnings: string[] = [];
+    const suggestions: string[] = [];
 
-    if (!securityFeatures.https) {
-      warnings.push("⚠️ 建议使用 HTTPS 协议");
+    if (!features.https) {
+      suggestions.push("⚠️ 建议使用 HTTPS 协议");
     }
 
-    if (!securityFeatures.csp) {
-      warnings.push("⚠️ 建议配置 Content Security Policy");
+    if (!features.crypto) {
+      suggestions.push("⚠️ 浏览器不支持 Web Crypto API");
     }
 
-    if (!securityFeatures.crypto) {
-      warnings.push("⚠️ 浏览器不支持 Web Crypto API");
+    if (!features.csp) {
+      suggestions.push("💡 建议添加 Content Security Policy");
     }
 
-    if (warnings.length > 0) {
-      console.group("💡 安全建议");
-      warnings.forEach((warning) => console.log(warning));
+    if (!features.referrerPolicy) {
+      suggestions.push("💡 建议设置 Referrer Policy");
+    }
+
+    if (suggestions.length > 0) {
+      console.group("📋 安全建议");
+      suggestions.forEach(tip => console.log(tip));
       console.groupEnd();
     } else {
       console.log("✅ 安全配置良好！");
@@ -276,11 +280,113 @@ export function initSecurity() {
     console.groupEnd();
   }
 
+  // 设置全局错误处理
+  setupGlobalErrorHandling();
+  
+  // 初始化安全策略
+  setupSecurityPolicies();
+
   // 设置 CSP 违规报告
   setupCSPViolationReporting();
 
   // 记录安全初始化事件
-  logSecurityEvent("SECURITY_INIT", securityFeatures);
+  logSecurityEvent("SECURITY_INIT", features);
+}
+
+/**
+ * 设置全局错误处理
+ */
+function setupGlobalErrorHandling() {
+  window.addEventListener('error', (event) => {
+    const errorInfo = {
+      message: event.message,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+      error: event.error?.stack,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      url: window.location.href
+    };
+    
+    console.error('全局错误:', errorInfo);
+    
+    // 生产环境错误上报
+    if (import.meta.env.PROD) {
+      reportError('javascript_error', errorInfo);
+    }
+  });
+  
+  window.addEventListener('unhandledrejection', (event) => {
+    const errorInfo = {
+      reason: event.reason,
+      promise: event.promise,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      url: window.location.href
+    };
+    
+    console.error('未处理的 Promise 拒绝:', errorInfo);
+    
+    // 生产环境错误上报
+    if (import.meta.env.PROD) {
+      reportError('promise_rejection', errorInfo);
+    }
+  });
+}
+
+/**
+ * 设置安全策略
+ */
+function setupSecurityPolicies() {
+  // 禁用控制台（生产环境）
+  if (import.meta.env.PROD) {
+    disableConsole();
+  }
+  
+  // 防止右键菜单（可选）
+  // document.addEventListener('contextmenu', (e) => e.preventDefault())
+  
+  // 防止选择文本（可选）
+  // document.addEventListener('selectstart', (e) => e.preventDefault())
+}
+
+/**
+ * 禁用控制台（生产环境安全措施）
+ */
+function disableConsole() {
+  const noop = () => {};
+  const methods = ['log', 'warn', 'error', 'info', 'debug', 'trace'];
+  
+  methods.forEach(method => {
+    (console as any)[method] = noop;
+  });
+}
+
+/**
+ * 错误上报函数
+ */
+function reportError(type: string, errorInfo: any) {
+  // 这里可以集成第三方错误监控服务
+  // 例如：Sentry, LogRocket, Bugsnag 等
+  
+  try {
+    fetch('/api/errors', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        type,
+        error: errorInfo,
+        timestamp: Date.now()
+      })
+    }).catch(() => {
+      // 静默处理上报失败
+    });
+  } catch {
+    // 静默处理
+  }
 }
 
 /**

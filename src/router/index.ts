@@ -1,8 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { setupPageSEO } from "./seo";
 
-// 路由懒加载
-const Home = () => import("@/views/Home.vue");
+// 核心页面直接导入（首屏关键路径）
+import Home from "@/views/Home.vue";
+
+// 其他页面使用懒加载（按需加载）
+const Solutions = () => import("@/views/solutions/Solutions.vue");
 const Applications = () => import("@/views/applications/Applications.vue");
 const About = () => import("@/views/company/About.vue");
 const Contact = () => import("@/views/company/Contact.vue");
@@ -15,7 +18,6 @@ const ApplicationDetail = () =>
 const SystemProducts = () => import("@/views/products/SystemProducts.vue");
 const RobotProducts = () => import("@/views/products/RobotProducts.vue");
 const Careers = () => import("@/views/company/Careers.vue");
-const Solutions = () => import("@/views/solutions/Solutions.vue");
 
 const routes = [
   // 首页

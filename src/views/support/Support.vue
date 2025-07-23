@@ -5,7 +5,7 @@
 
     <div class="support-hero">
 
-      <h1 class="hero-title">售后服务</h1>
+      <h1 id="after-sales" class="hero-title">售后服务</h1>
 
       <div class="hero-desc">
          售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应

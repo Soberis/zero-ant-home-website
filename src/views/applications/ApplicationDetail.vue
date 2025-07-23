@@ -12,13 +12,10 @@
        <template v-if="videoDetail && videoDetail.type === 'bilibili'"
         >
         <div class="video-container">
-           <iframe
-            class="video-iframe"
-            :src="bilibiliEmbedUrl(videoDetail.url)"
-            frameborder="0"
-            allowfullscreen
-          ></iframe
-          >
+           <BilibiliPlayer
+            :url="videoDetail.url"
+            :title="videoDetail.title"
+          />
         </div>
          </template
       > <template v-else-if="videoDetail && videoDetail.type === 'local'"
@@ -59,7 +56,8 @@
 import { useRoute, useRouter } from 'vue-router';
 import applications, { type Application } from '@/data/applications';
 import { computed, type ComputedRef } from 'vue';
-import { videoMap, type VideoDetail } from '@/data/videos'; // 新增导入
+import { videoMap, type VideoDetail } from '@/data/videos';
+import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -74,14 +72,7 @@ const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
   return videoKey ? videoMap[videoKey] : undefined;
 });
 
-// Bilibili相关函数已移除，如需要可重新添加
-function bilibiliEmbedUrl(url: string): string {
-  const match = url.match(/bilibili.com\/video\/(BV[\w]+)/);
-  if (match) {
-    return `https://player.bilibili.com/player.html?bvid=${match[1]}&autoplay=0`;
-  }
-  return '';
-}
+// 移除bilibiliEmbedUrl函数，现在使用BilibiliPlayer组件处理
 
 const currentIndex: ComputedRef<number> = computed(() =>
   applications.findIndex(item => item.slug === slug.value)

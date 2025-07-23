@@ -45,23 +45,58 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vue-vendor": ["vue", "vue-router"],
-          "element-plus": ["element-plus"],
-          i18n: ["vue-i18n"],
-          // 将大型工具库单独分包
-          utils: ["@/helpers/product", "@/helpers/useAutoScroll"],
-          // 将数据文件单独分包
-          data: [
-            "@/data/about",
-            "@/data/applications",
-            "@/data/partners",
-            "@/data/productDetails",
-            "@/data/productRelations",
-            "@/data/products",
-            "@/data/videos",
-          ],
+        // 优化代码分割策略
+        manualChunks: (id) => {
+          // 第三方库分组
+          if (id.includes('node_modules')) {
+            // Vue 核心生态
+            if (id.includes('vue') || id.includes('vue-router') || id.includes('vue-i18n')) {
+              return 'vue-vendor'
+            }
+            // UI 组件库
+            if (id.includes('element-plus')) {
+              return 'ui-vendor'
+            }
+            // 工具库
+            if (id.includes('lodash') || id.includes('dayjs') || id.includes('axios')) {
+              return 'utils-vendor'
+            }
+            // 其他第三方库
+            return 'vendor'
+          }
+          
+          // 项目内部模块分组
+          if (id.includes('/data/')) {
+            return 'data'
+          }
+          if (id.includes('/components/')) {
+            return 'components'
+          }
+          if (id.includes('/utils/')) {
+            return 'utils'
+          }
         },
+        // 优化文件命名
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId
+          if (facadeModuleId) {
+            const fileName = facadeModuleId.split('/').pop()?.replace(/\.[^.]*$/, '')
+            return `js/[name]-[hash].js`
+          }
+          return 'js/[name]-[hash].js'
+        },
+        entryFileNames: 'js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name?.split('.') || []
+          const ext = info[info.length - 1]
+          if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(assetInfo.name || '')) {
+            return 'images/[name]-[hash].[ext]'
+          }
+          if (/\.(woff2?|eot|ttf|otf)$/i.test(assetInfo.name || '')) {
+            return 'fonts/[name]-[hash].[ext]'
+          }
+          return 'assets/[name]-[hash].[ext]'
+        }
       },
     },
     chunkSizeWarningLimit: 1000,

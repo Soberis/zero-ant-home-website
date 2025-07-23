@@ -205,101 +205,48 @@ const emits = defineEmits<{
   back: [];
 }>();
 
-// 获取特性图标 - 根据特点内容语义分配
+// 特性图标映射表（优化性能，避免重复计算）
+const FEATURE_ICON_MAP = new Map([
+  // 实时性、高速相关
+  [['实时', '响应', '速度', '高速'], '⚡'],
+  // 安全性相关
+  [['安全', '可控', '防护', '认证'], '🔒'],
+  // 精准控制相关
+  [['精度', '定位', '控制', '轴'], '🎯'],
+  // 智能化相关
+  [['智能', 'AI', '视觉', '语言', '学习'], '🧠'],
+  // 云端/网络相关
+  [['云', '远程', '网络', '5G', '连接'], '☁️'],
+  // 效率提升相关
+  [['成本', '效率', '周期', '优化'], '📈'],
+  // 技术集成相关
+  [['集成', '部署', '模块', '平台', '系统'], '🔧'],
+  // 协作相关
+  [['协作', '协同', '多', '统一', '调度'], '🤝'],
+  // 数据监控相关
+  [['监控', '数据', '分析', '诊断'], '📊'],
+  // 灵活性相关
+  [['灵活', '扩展', '自由度', '适应'], '🔄']
+]);
+
+// 默认图标序列
+const DEFAULT_ICONS = ['⚡', '🔒', '🎯', '🧠', '☁️', '📈'];
+
+// 获取特性图标 - 优化版本，使用Map提升查找性能
 const getFeatureIcon = (index: number, feature: FeatureItem): string => {
   // 获取特性文本内容
   const featureText =
     typeof feature === 'string' ? feature : feature.title || feature.desc || '';
 
-  // 根据特点内容关键词匹配合适的图标
-  if (
-    featureText.includes('实时') ||
-    featureText.includes('响应') ||
-    featureText.includes('速度') ||
-    featureText.includes('高速')
-  ) {
-    return '⚡'; // 闪电 - 实时性、高速
-  }
-  if (
-    featureText.includes('安全') ||
-    featureText.includes('可控') ||
-    featureText.includes('防护') ||
-    featureText.includes('认证')
-  ) {
-    return '🔒'; // 锁 - 安全性
-  }
-  if (
-    featureText.includes('精度') ||
-    featureText.includes('定位') ||
-    featureText.includes('控制') ||
-    featureText.includes('轴')
-  ) {
-    return '🎯'; // 靶心 - 精准控制
-  }
-  if (
-    featureText.includes('智能') ||
-    featureText.includes('AI') ||
-    featureText.includes('视觉') ||
-    featureText.includes('语言') ||
-    featureText.includes('学习')
-  ) {
-    return '🧠'; // 大脑 - 智能化
-  }
-  if (
-    featureText.includes('云') ||
-    featureText.includes('远程') ||
-    featureText.includes('网络') ||
-    featureText.includes('5G') ||
-    featureText.includes('连接')
-  ) {
-    return '☁️'; // 云 - 云端/网络
-  }
-  if (
-    featureText.includes('成本') ||
-    featureText.includes('效率') ||
-    featureText.includes('周期') ||
-    featureText.includes('优化')
-  ) {
-    return '📈'; // 上升图表 - 效率提升
-  }
-  if (
-    featureText.includes('集成') ||
-    featureText.includes('部署') ||
-    featureText.includes('模块') ||
-    featureText.includes('平台') ||
-    featureText.includes('系统')
-  ) {
-    return '🔧'; // 扳手 - 技术集成
-  }
-  if (
-    featureText.includes('协作') ||
-    featureText.includes('协同') ||
-    featureText.includes('多') ||
-    featureText.includes('统一') ||
-    featureText.includes('调度')
-  ) {
-    return '🤝'; // 握手 - 协作
-  }
-  if (
-    featureText.includes('监控') ||
-    featureText.includes('数据') ||
-    featureText.includes('分析') ||
-    featureText.includes('诊断')
-  ) {
-    return '📊'; // 图表 - 数据监控
-  }
-  if (
-    featureText.includes('灵活') ||
-    featureText.includes('扩展') ||
-    featureText.includes('自由度') ||
-    featureText.includes('适应')
-  ) {
-    return '🔄'; // 循环箭头 - 灵活性
+  // 使用Map进行快速查找
+  for (const [keywords, icon] of FEATURE_ICON_MAP) {
+    if (keywords.some(keyword => featureText.includes(keyword))) {
+      return icon;
+    }
   }
 
-  // 默认图标序列（作为后备）
-  const defaultIcons = ['⚡', '🔒', '🎯', '🧠', '☁️', '📈'];
-  return defaultIcons[index % defaultIcons.length];
+  // 返回默认图标
+  return DEFAULT_ICONS[index % DEFAULT_ICONS.length];
 };
 
 // 获取相关应用场景（用于应用场景展示）

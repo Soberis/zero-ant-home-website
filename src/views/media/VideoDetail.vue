@@ -7,13 +7,11 @@
 
       <div class="video-detail-media">
          <template v-if="getMediaType(videoInfo) === 'bilibili'"
-          > <iframe
-            class="video-iframe"
-            :src="bilibiliEmbedUrl(videoInfo.url)"
-            frameborder="0"
-            allowfullscreen
-          ></iframe
-          > </template
+          > <BilibiliPlayer
+            :url="videoInfo.url"
+            :title="videoInfo.title"
+          />
+          </template
         > <template v-else-if="getMediaType(videoInfo) === 'video'"
           > <video controls :src="videoInfo.url" class="video-player"></video>
           </template
@@ -82,6 +80,7 @@ import { useRoute } from 'vue-router';
 import { videoMap, type VideoDetail } from '@/data/videos';
 import { ref, computed } from 'vue';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
+import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
 
 const route = useRoute();
 
@@ -113,13 +112,7 @@ function getMediaType(info: VideoDetail): MediaType {
   return 'none';
 }
 
-function bilibiliEmbedUrl(url: string): string {
-  const match = url.match(/bilibili.com\/video\/(BV[\w]+)/);
-  if (match && match[1]) {
-    return `https://player.bilibili.com/player.html?bvid=${match[1]}&autoplay=0`;
-  }
-  return '';
-}
+// 移除bilibiliEmbedUrl函数，现在使用BilibiliPlayer组件处理
 </script>
 
 <style scoped>
