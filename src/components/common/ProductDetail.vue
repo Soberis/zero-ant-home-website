@@ -226,26 +226,65 @@ const FEATURE_ICON_MAP = new Map([
   // 数据监控相关
   [['监控', '数据', '分析', '诊断'], '📊'],
   // 灵活性相关
-  [['灵活', '扩展', '自由度', '适应'], '🔄']
+  [['灵活', '扩展', '自由度', '适应'], '🔄'],
+  // 稳定性相关
+  [['稳定', '可靠', '持续', '耐用'], '🛡️'],
+  // 创新技术相关
+  [['创新', '前沿', '突破', '先进'], '🚀'],
+  // 用户体验相关
+  [['简单', '易用', '友好', '便捷'], '✨'],
+  // 环保节能相关
+  [['节能', '环保', '绿色', '低耗'], '🌱'],
+  // 兼容性相关
+  [['兼容', '通用', '标准', '接口'], '🔗']
 ]);
 
-// 默认图标序列
-const DEFAULT_ICONS = ['⚡', '🔒', '🎯', '🧠', '☁️', '📈'];
+// 扩展的默认图标序列（避免重复）
+const DEFAULT_ICONS = [
+  '⚡', '🔒', '🎯', '🧠', '☁️', '📈', 
+  '🔧', '🤝', '📊', '🔄', '🛡️', '🚀', 
+  '✨', '🌱', '🔗', '💎', '🎨', '⭐', 
+  '🔥', '💡', '🎪', '🎭', '🎲', '🎸'
+];
 
-// 获取特性图标 - 优化版本，使用Map提升查找性能
+// 已使用的图标记录（避免重复）
+const usedIcons = ref(new Set<string>());
+
+// 获取特性图标 - 优化版本，避免重复使用相同图标
 const getFeatureIcon = (index: number, feature: FeatureItem): string => {
   // 获取特性文本内容
   const featureText =
     typeof feature === 'string' ? feature : feature.title || feature.desc || '';
 
-  // 使用Map进行快速查找
+  // 首先尝试关键词匹配
   for (const [keywords, icon] of FEATURE_ICON_MAP) {
     if (keywords.some(keyword => featureText.includes(keyword))) {
-      return icon;
+      // 如果该图标未被使用，则使用它
+      if (!usedIcons.value.has(icon)) {
+        usedIcons.value.add(icon);
+        return icon;
+      }
     }
   }
 
-  // 返回默认图标
+  // 如果关键词匹配的图标都已使用，或没有匹配，则从默认图标中选择未使用的
+  for (let i = 0; i < DEFAULT_ICONS.length; i++) {
+    const candidateIcon = DEFAULT_ICONS[(index + i) % DEFAULT_ICONS.length];
+    if (!usedIcons.value.has(candidateIcon)) {
+      usedIcons.value.add(candidateIcon);
+      return candidateIcon;
+    }
+  }
+
+  // 如果所有图标都已使用（极少情况），重置并返回基于索引的图标
+  if (usedIcons.value.size >= DEFAULT_ICONS.length) {
+    usedIcons.value.clear();
+    const icon = DEFAULT_ICONS[index % DEFAULT_ICONS.length];
+    usedIcons.value.add(icon);
+    return icon;
+  }
+
+  // 兜底方案
   return DEFAULT_ICONS[index % DEFAULT_ICONS.length];
 };
 
@@ -271,6 +310,8 @@ const relatedVideos = computed(() => {
 
 // 获取产品的优势特点（优先使用自定义特点）
 const productFeatures = computed((): FeatureItem[] => {
+  // 每次重新计算时重置已使用图标
+  usedIcons.value.clear();
   const customFeatures = getCustomFeatures(props.productSlug);
   return customFeatures || props.product.features;
 });
