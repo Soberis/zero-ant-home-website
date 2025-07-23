@@ -165,6 +165,108 @@
     "phone": "Phone",
     "address": "Address"
   },
+  "careers": {
+    "heroTitle": "Join ZeroAnt Technology",
+    "heroSubtitle": "Build the future of robotics with us, making robots ubiquitous",
+    "techAccumulation": "Years of Tech",
+    "teamPartners": "Team Members",
+    "successfulProjects": "Successful Projects",
+    "whyJoinTitle": "Why Choose ZeroAnt Technology",
+    "hotPositionsTitle": "Hot Positions",
+    "contactUsTitle": "Contact Us",
+    "contactDescription": "If you are interested in our positions or want to learn more, please feel free to contact our HR team.",
+    "email": "Email",
+    "workLocation": "Location",
+    "workExperience": "Experience",
+    "positionRequirements": "Requirements",
+    "applyNow": "Apply Now",
+    "fullTime": "Full-time",
+    "unlimited": "No Limit",
+    "hangzhou": "Hangzhou",
+    "applySubject": "Application for Position: ",
+    "benefits": {
+      "techInnovation": {
+        "title": "Technical Innovation",
+        "description": "Participate in cutting-edge robotics R&D, work with industry experts, and push technological boundaries"
+      },
+      "careerDevelopment": {
+        "title": "Career Development",
+        "description": "Comprehensive training system and promotion channels to support personal career development and skill enhancement"
+      },
+      "excellentTeam": {
+        "title": "Excellent Team",
+        "description": "Collaborate with outstanding engineers from around the world in an open and inclusive environment"
+      },
+      "generousTreatment": {
+        "title": "Competitive Benefits",
+        "description": "Competitive salary and benefits, comprehensive social security system and flexible work arrangements"
+      },
+      "personalChallenge": {
+        "title": "Personal Challenge",
+        "description": "Unlimited innovation environment, breakthrough yourself in a full-stack self-developed system"
+      },
+      "socialValue": {
+        "title": "Social Value",
+        "description": "Address industry pain points and promote industrial manufacturing quality upgrades"
+      }
+    },
+    "positions": {
+      "robotEngineer": {
+        "title": "Robotics Engineer",
+        "requirements": [
+          "Bachelor's degree or above in Mechanical Engineering, Automation or related fields",
+          "3+ years of experience in robotics system development",
+          "Familiar with ROS, motion control, path planning technologies",
+          "Good teamwork and communication skills"
+        ]
+      },
+      "softwareEngineer": {
+        "title": "Software Engineer",
+        "requirements": [
+          "Bachelor's degree or above in Computer Science or related fields",
+          "Proficient in C++, Python and other programming languages",
+          "Experience in embedded systems or real-time system development",
+          "Understanding of robot operating systems and control algorithms"
+        ]
+      },
+      "algorithmEngineer": {
+        "title": "Algorithm Engineer",
+        "requirements": [
+          "Master's degree or above in Computer Science, Mathematics, Automation or related fields",
+          "Experience in deep learning, computer vision or SLAM algorithms",
+          "Familiar with TensorFlow, PyTorch and other deep learning frameworks",
+          "Experience in robot perception and decision-making algorithm development preferred"
+        ]
+      },
+      "hardwareEngineer": {
+        "title": "Hardware Engineer",
+        "requirements": [
+          "Bachelor's degree or above in Electronic Engineering, Automation or related fields",
+          "Familiar with circuit design, PCB layout and hardware debugging",
+          "Experience in embedded system hardware development",
+          "Understanding of sensor integration and signal processing technologies"
+        ]
+      },
+      "productManager": {
+        "title": "Product Manager",
+        "requirements": [
+          "Bachelor's degree or above, preferably in engineering or management",
+          "2+ years of product manager or related position experience preferred",
+          "Good requirements analysis, product planning and cross-department communication skills",
+          "Experience in robotics, industrial automation or software products preferred"
+        ]
+      },
+      "testEngineer": {
+        "title": "Test Engineer",
+        "requirements": [
+          "Bachelor's degree or above in Computer Science, Automation or related fields",
+          "Familiar with software/hardware testing processes, able to write test cases independently",
+          "Experience in automated testing and continuous integration preferred",
+          "Detail-oriented with good communication and teamwork skills"
+        ]
+      }
+    }
+  },
   "footer": {
     "companyFull": "Hangzhou ZeroAnt Technology Co., Ltd.",
     "address": "Room 310, Building 1, No. 99 Juhang Lane, Changhe Street, Binjiang District, Hangzhou, Zhejiang Province, China",

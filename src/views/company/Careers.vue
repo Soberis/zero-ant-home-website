@@ -8,29 +8,29 @@
 
         <div class="hero-content">
 
-          <h1 class="hero-title">加入零蚁科技</h1>
+          <h1 class="hero-title">{{ $t('careers.heroTitle') }}</h1>
 
           <p class="hero-subtitle">
-             与我们一起打造未来机器人技术，让机器人遍布每个角落
+             {{ $t('careers.heroSubtitle') }}
           </p>
 
           <div class="hero-stats">
 
             <div class="stat-item">
                <span class="stat-number">8+</span> <span class="stat-label"
-                >技术积累</span
+                >{{ $t('careers.techAccumulation') }}</span
               >
             </div>
 
             <div class="stat-item">
                <span class="stat-number">20+ </span> <span class="stat-label"
-                >团队伙伴</span
+                >{{ $t('careers.teamPartners') }}</span
               >
             </div>
 
             <div class="stat-item">
                <span class="stat-number">50+</span> <span class="stat-label"
-                >成功项目</span
+                >{{ $t('careers.successfulProjects') }}</span
               >
             </div>
 
@@ -46,7 +46,7 @@
 
       <div class="container">
 
-        <h2 class="section-title">为什么选择零蚁科技</h2>
+        <h2 class="section-title">{{ $t('careers.whyJoinTitle') }}</h2>
 
         <div class="benefits-grid">
 
@@ -76,7 +76,7 @@
 
       <div class="container">
 
-        <h2 class="section-title">热招职位</h2>
+        <h2 class="section-title">{{ $t('careers.hotPositionsTitle') }}</h2>
 
         <div class="positions-grid">
 
@@ -96,14 +96,14 @@
             <div class="position-details">
 
               <div class="detail-item">
-                 <span class="detail-label">工作地点:</span> <span
+                 <span class="detail-label">{{ $t('careers.workLocation') }}:</span> <span
                   class="detail-value"
                   >{{ position.location }}</span
                 >
               </div>
 
               <div class="detail-item">
-                 <span class="detail-label">工作经验:</span> <span
+                 <span class="detail-label">{{ $t('careers.workExperience') }}:</span> <span
                   class="detail-value"
                   >{{ position.experience }}</span
                 >
@@ -113,7 +113,7 @@
 
             <div class="position-requirements">
 
-              <h4 class="requirements-title">职位要求</h4>
+              <h4 class="requirements-title">{{ $t('careers.positionRequirements') }}</h4>
 
               <ul class="requirements-list">
 
@@ -127,7 +127,7 @@
 
             <div class="position-actions">
                <button class="apply-btn" @click="applyForPosition(position)">
-                 立即申请 </button
+                 {{ $t('careers.applyNow') }} </button
               >
             </div>
 
@@ -145,18 +145,18 @@
 
         <div class="contact-content">
 
-          <h2 class="section-title">联系我们</h2>
+          <h2 class="section-title">{{ $t('careers.contactUsTitle') }}</h2>
 
           <p class="contact-description">
 
-            如果您对我们的职位感兴趣，或者想了解更多信息，请随时联系我们的人力资源团队。
+            {{ $t('careers.contactDescription') }}
 
           </p>
 
           <div class="contact-info">
 
             <div class="contact-item">
-               <span class="contact-label">邮箱:</span> <span
+               <span class="contact-label">{{ $t('careers.email') }}:</span> <span
                 class="contact-value"
                 >hr@zeroant.com</span
               >
@@ -175,7 +175,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t, tm } = useI18n();
 
 // 定义接口
 interface Benefit {
@@ -194,124 +197,94 @@ interface Position {
 }
 
 // 公司优势
-const benefits = ref<Benefit[]>([
+const benefits = computed<Benefit[]>(() => [
   {
     id: 1,
-    title: '技术创新',
-    description: '参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界',
+    title: t('careers.benefits.techInnovation.title'),
+    description: t('careers.benefits.techInnovation.description'),
   },
   {
     id: 2,
-    title: '职业发展',
-    description: '完善的培训体系和晋升通道，助力个人职业发展和技能提升',
+    title: t('careers.benefits.careerDevelopment.title'),
+    description: t('careers.benefits.careerDevelopment.description'),
   },
   {
     id: 3,
-    title: '优秀团队',
-    description: '与来自全球的优秀工程师合作，在开放包容的环境中共同成长',
+    title: t('careers.benefits.excellentTeam.title'),
+    description: t('careers.benefits.excellentTeam.description'),
   },
   {
     id: 4,
-    title: '丰厚待遇',
-    description: '具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排',
+    title: t('careers.benefits.generousTreatment.title'),
+    description: t('careers.benefits.generousTreatment.description'),
   },
   {
     id: 5,
-    title: '个人挑战',
-    description: '不设限制的创新环境，在全栈自研体系中突破自我',
+    title: t('careers.benefits.personalChallenge.title'),
+    description: t('careers.benefits.personalChallenge.description'),
   },
   {
     id: 6,
-    title: '社会价值',
-    description: '直击行业痛点，推动工业制造产质升级',
+    title: t('careers.benefits.socialValue.title'),
+    description: t('careers.benefits.socialValue.description'),
   },
 ]);
 
 // 职位列表
-const positions = ref<Position[]>([
+const positions = computed<Position[]>(() => [
   {
     id: 1,
-    title: '机器人工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '机械工程、自动化或相关专业本科及以上学历',
-      '3年以上机器人系统开发经验',
-      '熟悉ROS、运动控制、路径规划等技术',
-      '具备良好的团队协作和沟通能力',
-    ],
+    title: t('careers.positions.robotEngineer.title'),
+    type: t('careers.fullTime'),
+    location: t('careers.hangzhou'),
+    experience: t('careers.unlimited'),
+    requirements: tm('careers.positions.robotEngineer.requirements') as string[],
   },
   {
     id: 2,
-    title: '软件工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '计算机科学或相关专业本科及以上学历',
-      '熟练掌握C++、Python等编程语言',
-      '有嵌入式系统或实时系统开发经验',
-      '了解机器人操作系统和控制算法',
-    ],
+    title: t('careers.positions.softwareEngineer.title'),
+    type: t('careers.fullTime'),
+    location: t('careers.hangzhou'),
+    experience: t('careers.unlimited'),
+    requirements: tm('careers.positions.softwareEngineer.requirements') as string[],
   },
   {
     id: 3,
-    title: '算法工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '计算机、数学、自动化等相关专业硕士及以上学历',
-      '深度学习、计算机视觉或SLAM算法经验',
-      '熟悉TensorFlow、PyTorch等深度学习框架',
-      '有机器人感知、决策算法开发经验优先',
-    ],
+    title: t('careers.positions.algorithmEngineer.title'),
+    type: t('careers.fullTime'),
+    location: t('careers.hangzhou'),
+    experience: t('careers.unlimited'),
+    requirements: tm('careers.positions.algorithmEngineer.requirements') as string[],
   },
   {
     id: 4,
-    title: '硬件工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '电子工程、自动化等相关专业本科及以上学历',
-      '熟悉电路设计、PCB布局和硬件调试',
-      '有嵌入式系统硬件开发经验',
-      '了解传感器集成和信号处理技术',
-    ],
+    title: t('careers.positions.hardwareEngineer.title'),
+    type: t('careers.fullTime'),
+    location: t('careers.hangzhou'),
+    experience: t('careers.unlimited'),
+    requirements: tm('careers.positions.hardwareEngineer.requirements') as string[],
   },
   {
     id: 5,
-    title: '产品经理',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '本科及以上学历，理工类、管理类相关专业优先',
-      '有2年以上产品经理或相关岗位经验优先',
-      '具备良好的需求分析、产品规划和跨部门沟通能力',
-      '有机器人、工业自动化或软件产品经验者优先',
-    ],
+    title: t('careers.positions.productManager.title'),
+    type: t('careers.fullTime'),
+    location: t('careers.hangzhou'),
+    experience: t('careers.unlimited'),
+    requirements: tm('careers.positions.productManager.requirements') as string[],
   },
   {
     id: 6,
-    title: '测试工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '本科及以上学历，计算机、自动化等相关专业',
-      '熟悉软件/硬件测试流程，能独立编写测试用例',
-      '有自动化测试、持续集成经验优先',
-      '工作细致认真，具备良好的沟通与团队协作能力',
-    ],
+    title: t('careers.positions.testEngineer.title'),
+    type: t('careers.fullTime'),
+    location: t('careers.hangzhou'),
+    experience: t('careers.unlimited'),
+    requirements: tm('careers.positions.testEngineer.requirements') as string[],
   },
 ]);
 
 // 申请职位
 const applyForPosition = (position: Position): void => {
-  window.open(`mailto:hr@zeroant.com?subject=申请职位：${position.title}`);
+  window.open(`mailto:hr@zeroant.com?subject=${t('careers.applySubject')}${position.title}`);
 };
 </script>
 

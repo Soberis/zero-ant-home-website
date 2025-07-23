@@ -140,6 +140,108 @@
     "phone": "电话",
     "address": "地址"
   },
+  "careers": {
+    "heroTitle": "加入零蚁科技",
+    "heroSubtitle": "与我们一起打造未来机器人技术，让机器人遍布每个角落",
+    "techAccumulation": "技术积累",
+    "teamPartners": "团队伙伴",
+    "successfulProjects": "成功项目",
+    "whyJoinTitle": "为什么选择零蚁科技",
+    "hotPositionsTitle": "热招职位",
+    "contactUsTitle": "联系我们",
+    "contactDescription": "如果您对我们的职位感兴趣，或者想了解更多信息，请随时联系我们的人力资源团队。",
+    "email": "邮箱",
+    "workLocation": "工作地点",
+    "workExperience": "工作经验",
+    "positionRequirements": "职位要求",
+    "applyNow": "立即申请",
+    "fullTime": "全职",
+    "unlimited": "不限制",
+    "hangzhou": "杭州",
+    "applySubject": "申请职位：",
+    "benefits": {
+      "techInnovation": {
+        "title": "技术创新",
+        "description": "参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界"
+      },
+      "careerDevelopment": {
+        "title": "职业发展",
+        "description": "完善的培训体系和晋升通道，助力个人职业发展和技能提升"
+      },
+      "excellentTeam": {
+        "title": "优秀团队",
+        "description": "与来自全球的优秀工程师合作，在开放包容的环境中共同成长"
+      },
+      "generousTreatment": {
+        "title": "丰厚待遇",
+        "description": "具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排"
+      },
+      "personalChallenge": {
+        "title": "个人挑战",
+        "description": "不设限制的创新环境，在全栈自研体系中突破自我"
+      },
+      "socialValue": {
+        "title": "社会价值",
+        "description": "直击行业痛点，推动工业制造产质升级"
+      }
+    },
+    "positions": {
+      "robotEngineer": {
+        "title": "机器人工程师",
+        "requirements": [
+          "机械工程、自动化或相关专业本科及以上学历",
+          "3年以上机器人系统开发经验",
+          "熟悉ROS、运动控制、路径规划等技术",
+          "具备良好的团队协作和沟通能力"
+        ]
+      },
+      "softwareEngineer": {
+        "title": "软件工程师",
+        "requirements": [
+          "计算机科学或相关专业本科及以上学历",
+          "熟练掌握C++、Python等编程语言",
+          "有嵌入式系统或实时系统开发经验",
+          "了解机器人操作系统和控制算法"
+        ]
+      },
+      "algorithmEngineer": {
+        "title": "算法工程师",
+        "requirements": [
+          "计算机、数学、自动化等相关专业硕士及以上学历",
+          "深度学习、计算机视觉或SLAM算法经验",
+          "熟悉TensorFlow、PyTorch等深度学习框架",
+          "有机器人感知、决策算法开发经验优先"
+        ]
+      },
+      "hardwareEngineer": {
+        "title": "硬件工程师",
+        "requirements": [
+          "电子工程、自动化等相关专业本科及以上学历",
+          "熟悉电路设计、PCB布局和硬件调试",
+          "有嵌入式系统硬件开发经验",
+          "了解传感器集成和信号处理技术"
+        ]
+      },
+      "productManager": {
+        "title": "产品经理",
+        "requirements": [
+          "本科及以上学历，理工类、管理类相关专业优先",
+          "有2年以上产品经理或相关岗位经验优先",
+          "具备良好的需求分析、产品规划和跨部门沟通能力",
+          "有机器人、工业自动化或软件产品经验者优先"
+        ]
+      },
+      "testEngineer": {
+        "title": "测试工程师",
+        "requirements": [
+          "本科及以上学历，计算机、自动化等相关专业",
+          "熟悉软件/硬件测试流程，能独立编写测试用例",
+          "有自动化测试、持续集成经验优先",
+          "工作细致认真，具备良好的沟通与团队协作能力"
+        ]
+      }
+    }
+  },
   "footer": {
     "companyFull": "杭州零蚁科技有限公司",
     "address": "浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室",
