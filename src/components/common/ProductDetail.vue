@@ -33,7 +33,7 @@
               class="feature-card"
             >
 
-              <div class="feature-icon">{{ getFeatureIcon(idx, feature) }}</div>
+              <div class="feature-icon">{{ getFeatureIcon(idx) }}</div>
 
               <div class="feature-content">
 
@@ -250,42 +250,51 @@ const DEFAULT_ICONS = [
 // 已使用的图标记录（避免重复）
 const usedIcons = ref(new Set<string>());
 
-// 获取特性图标 - 优化版本，避免重复使用相同图标
-const getFeatureIcon = (index: number, feature: FeatureItem): string => {
-  // 获取特性文本内容
-  const featureText =
-    typeof feature === 'string' ? feature : feature.title || feature.desc || '';
-
-  // 首先尝试关键词匹配
-  for (const [keywords, icon] of FEATURE_ICON_MAP) {
-    if (keywords.some(keyword => featureText.includes(keyword))) {
-      // 如果该图标未被使用，则使用它
-      if (!usedIcons.value.has(icon)) {
-        usedIcons.value.add(icon);
-        return icon;
+// 预计算特性图标映射，避免在渲染时重复计算
+const featureIcons = computed(() => {
+  const icons: string[] = [];
+  const localUsedIcons = new Set<string>();
+  
+  productFeatures.value.forEach((feature, index) => {
+    const featureText = typeof feature === 'string' ? feature : (feature.title || feature.desc || '');
+    
+    // 首先尝试根据关键词匹配
+    let matchedIcon = '';
+    for (const [keywords, icon] of FEATURE_ICON_MAP) {
+      if (keywords.some(keyword => featureText.includes(keyword))) {
+        matchedIcon = icon;
+        break;
       }
     }
-  }
-
-  // 如果关键词匹配的图标都已使用，或没有匹配，则从默认图标中选择未使用的
-  for (let i = 0; i < DEFAULT_ICONS.length; i++) {
-    const candidateIcon = DEFAULT_ICONS[(index + i) % DEFAULT_ICONS.length];
-    if (!usedIcons.value.has(candidateIcon)) {
-      usedIcons.value.add(candidateIcon);
-      return candidateIcon;
+    
+    if (matchedIcon) {
+      icons.push(matchedIcon);
+    } else {
+      // 如果没有匹配到，从默认图标中选择一个未使用的
+      let selectedIcon = '';
+      for (const icon of DEFAULT_ICONS) {
+        if (!localUsedIcons.has(icon)) {
+          selectedIcon = icon;
+          localUsedIcons.add(icon);
+          break;
+        }
+      }
+      
+      // 如果所有图标都已使用，使用循环索引
+      if (!selectedIcon) {
+        selectedIcon = DEFAULT_ICONS[index % DEFAULT_ICONS.length];
+      }
+      
+      icons.push(selectedIcon);
     }
-  }
+  });
+  
+  return icons;
+});
 
-  // 如果所有图标都已使用（极少情况），重置并返回基于索引的图标
-  if (usedIcons.value.size >= DEFAULT_ICONS.length) {
-    usedIcons.value.clear();
-    const icon = DEFAULT_ICONS[index % DEFAULT_ICONS.length];
-    usedIcons.value.add(icon);
-    return icon;
-  }
-
-  // 兜底方案
-  return DEFAULT_ICONS[index % DEFAULT_ICONS.length];
+// 获取特性图标的函数（现在只是简单的索引访问）
+const getFeatureIcon = (index: number): string => {
+  return featureIcons.value[index] || '⭐';
 };
 
 // 获取相关应用场景（用于应用场景展示）
@@ -310,10 +319,17 @@ const relatedVideos = computed(() => {
 
 // 获取产品的优势特点（优先使用自定义特点）
 const productFeatures = computed((): FeatureItem[] => {
-  // 每次重新计算时重置已使用图标
-  usedIcons.value.clear();
-  const customFeatures = getCustomFeatures(props.productSlug);
-  return customFeatures || props.product.features;
+  try {
+    const customFeatures = getCustomFeatures(props.productSlug);
+    if (customFeatures && customFeatures.length > 0) {
+      return customFeatures;
+    }
+    // 否则使用默认特点
+    return props.product.features || [];
+  } catch (error) {
+    console.warn('获取产品特性时出错:', error);
+    return props.product.features || [];
+  }
 });
 
 // 视频卡片交互
