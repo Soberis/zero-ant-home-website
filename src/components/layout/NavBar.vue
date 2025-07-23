@@ -347,7 +347,6 @@ function handleBackgroundClick(event: Event): void {
 
 // 技术支持导航子项
 const supportNav = [
-  { hash: '#after-sales', label: 'nav.afterSales' },
   { hash: '#download', label: 'nav.download' },
   { hash: '#faq', label: 'nav.faq' },
 ];
