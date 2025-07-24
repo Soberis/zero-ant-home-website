@@ -10,7 +10,7 @@
     <div class="video-card-title-bar" :class="{ active: active }">
 
       <div class="video-card-title" :class="{ active: active }">
-         {{ card.title }}
+         {{ t(`videos.${card.slug}.title`, card.title) }}
       </div>
 
     </div>
@@ -20,6 +20,10 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 // 组件属性定义
 /**
  * @prop {Object} card 视频卡片数据

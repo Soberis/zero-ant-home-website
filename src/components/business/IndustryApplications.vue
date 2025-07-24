@@ -2,10 +2,10 @@
 
   <section class="industry-apps">
 
-    <h2 class="section-title">行业应用</h2>
+    <h2 class="section-title">{{ $t('industryApplications.title') }}</h2>
 
     <div class="section-desc">
-       专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案
+       {{ $t('industryApplications.description') }}
     </div>
 
     <div class="apps-list-wrap">
@@ -34,7 +34,7 @@
             @click="goDetail(app.slug)"
           >
              <span class="icon" v-html="app.svg"></span>
-            <div class="app-title">{{ app.title }}</div>
+            <div class="app-title">{{ $t(`applications.${app.slug}.title`) }}</div>
 
           </div>
 

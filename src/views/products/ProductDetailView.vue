@@ -8,7 +8,7 @@
       :product-slug="slug"
       @back="goBack"
     />
-    <div v-else class="not-found">未找到该产品</div>
+    <div v-else class="not-found">{{ t('productDetail.notFound') }}</div>
 
   </div>
 
@@ -17,9 +17,13 @@
 <script setup lang="ts">
 // 页面级组件：产品详情视图，根据slug查找产品详情，未找到时显示提示
 import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { productDetails } from '@/data/productDetails';
 import { products } from '@/data/products';
 import ProductDetail from '@/components/common/ProductDetail.vue';
+
+// 国际化
+const { t } = useI18n();
 // getProductDetailLink 在此页面暂未使用
 
 const route = useRoute();

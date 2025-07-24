@@ -2,7 +2,7 @@
 
   <div class="app-card" @click="goDetail">
      <span class="icon" v-html="svg"></span>
-    <div class="label">{{ title }}</div>
+    <div class="label">{{ t(`applications.${slug}.title`, title) }}</div>
 
   </div>
 
@@ -10,12 +10,15 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 const { title, svg, slug } = defineProps<{
   title: string;
   svg: string;
   slug: string;
 }>();
+
+const { t } = useI18n();
 
 const router = useRouter();
 

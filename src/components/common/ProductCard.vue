@@ -9,7 +9,7 @@
         <div class="image-backdrop"></div>
          <img
           :src="product.image"
-          :alt="product.name"
+          :alt="t(product.name)"
           class="product-image"
           loading="lazy"
         />
@@ -62,11 +62,11 @@
 
     <div class="product-content">
 
-      <div class="product-name">{{ product.name }}</div>
+      <div class="product-name">{{ t(product.name) }}</div>
 
-      <div class="product-desc">{{ product.desc }}</div>
+      <div class="product-desc">{{ t(product.desc) }}</div>
        <button class="more-btn" @click="emit('more', product.slug)">
-         <span class="btn-text">了解更多</span> <span class="btn-arrow">→</span>
+         <span class="btn-text">{{ t('hero.cta') }}</span> <span class="btn-arrow">→</span>
         </button
       >
     </div>
@@ -77,9 +77,11 @@
 
 <script setup lang="ts">
 import type { ProductData } from '@/data/products';
+import { useI18n } from 'vue-i18n';
 
 const { product } = defineProps<{ product: ProductData }>();
 const emit = defineEmits<{ (e: 'more', slug: string): void }>();
+const { t } = useI18n();
 </script>
 
 <style scoped>

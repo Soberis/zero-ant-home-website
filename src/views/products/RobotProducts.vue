@@ -9,9 +9,9 @@
       class="product-series"
     >
 
-      <div class="series-title">{{ product.seriesTitle }}</div>
+      <div class="series-title">{{ t(product.seriesTitle) }}</div>
 
-      <div class="series-subtitle">{{ product.seriesSubtitle }}</div>
+      <div class="series-subtitle">{{ t(product.seriesSubtitle) }}</div>
 
       <div class="product-card-wrapper">
          <ProductCard :product="product" @more="goDetail" />
@@ -25,11 +25,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { products } from '@/data/products';
 import ProductsLayout from '@/components/layout/ProductsLayout.vue';
 import ProductCard from '@/components/common/ProductCard.vue';
 import { getProductDetailLink } from '@/helpers/product';
 const router = useRouter();
+const { t } = useI18n();
 
 const robotProducts = computed(() =>
   products.filter(p => p.category === 'robot')

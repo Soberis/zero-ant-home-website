@@ -3,9 +3,9 @@
     <!-- 产品头部信息 -->
     <div class="product-header">
       <div class="container">
-        <h1 class="product-title">{{ product.title }}</h1>
+        <h1 class="product-title">{{ localizedProduct.title }}</h1>
 
-        <p class="product-desc">{{ product.desc }}</p>
+        <p class="product-desc">{{ localizedProduct.desc }}</p>
       </div>
     </div>
     <!-- 主要内容区域 -->
@@ -16,7 +16,7 @@
           v-if="productFeatures && productFeatures.length"
           class="section features-section"
         >
-          <h2 class="section-title">产品特点</h2>
+          <h2 class="section-title">{{ t('productDetail.features') }}</h2>
 
           <div class="features-grid">
             <div
@@ -48,7 +48,7 @@
           v-if="props.showApplications && relatedApplications.length > 0"
           class="section scenes-section"
         >
-          <h2 class="section-title">应用场景</h2>
+          <h2 class="section-title">{{ t('productDetail.applications') }}</h2>
 
           <div class="application-grid">
             <ApplicationCard
@@ -65,7 +65,7 @@
           v-if="props.showVideos && relatedVideos.length > 0"
           class="section cases-section"
         >
-          <h2 class="section-title">视频案例</h2>
+          <h2 class="section-title">{{ t('productDetail.videoCases') }}</h2>
 
           <div class="videos-grid">
             <VideoCard
@@ -81,41 +81,41 @@
           </div>
         </section>
         <!-- 产品参数 -->
-        <section v-if="product.params && product.params.length" class="section">
-          <h2 class="section-title">产品参数</h2>
+        <section v-if="localizedProduct.params && localizedProduct.params.length" class="section">
+          <h2 class="section-title">{{ t('productDetail.parameters') }}</h2>
 
           <div class="params-container">
             <div class="params-grid">
               <div
-                v-for="(param, idx) in product.params"
-                :key="idx"
-                class="param-item"
-              >
-                <div class="param-key">{{ param.key }}</div>
+              v-for="(param, idx) in localizedProduct.params"
+              :key="idx"
+              class="param-item"
+            >
+              <div class="param-key">{{ typeof param === 'string' ? param : param.key }}</div>
 
-                <div class="param-value">{{ param.value }}</div>
-              </div>
+              <div class="param-value">{{ typeof param === 'string' ? '' : param.value }}</div>
+            </div>
             </div>
           </div>
         </section>
         <!-- 相关下载 -->
         <section
-          v-if="product.downloads && product.downloads.length"
+          v-if="localizedProduct.downloads && localizedProduct.downloads.length"
           class="section downloads-section"
         >
-          <h2 class="section-title">相关下载</h2>
+          <h2 class="section-title">{{ t('productDetail.downloads') }}</h2>
 
           <div class="downloads-grid">
             <div
-              v-for="(item, idx) in product.downloads"
+              v-for="(item, idx) in localizedProduct.downloads"
               :key="idx"
               class="download-card"
               style="cursor: default; opacity: 0.7;"
             >
               <div class="download-icon">📄</div>
-              <div class="download-name" style="color: #666;">{{ item.name }}</div>
+              <div class="download-name" style="color: #666;">{{ typeof item === 'string' ? item : item.name }}</div>
               <div style="color: #999; font-size: 0.9rem; margin-top: 0.5rem; font-style: italic;">
-                工程师正在精心准备中，敬请期待
+                {{ t('productDetail.preparingMessage') }}
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@
       <div class="container">
         <button class="back-btn" @click="emits('back')">
           <span class="back-icon">←</span>
-          <span class="back-text">返回产品列表</span>
+          <span class="back-text">{{ t('productDetail.backToList') }}</span>
         </button>
       </div>
     </div>
@@ -140,16 +140,60 @@ import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import { videoCards } from "@/data/videos";
 import applications from "@/data/applications";
 import type { ProductDetail } from "@/data/productDetails";
-
-// 特性项类型定义
-type FeatureItem = string | { title?: string; desc?: string };
+import { useI18n } from "vue-i18n";
+import { ref, computed } from "vue";
 import {
   getRelatedApplications,
   getRelatedVideos,
   getCustomFeatures,
   hasProductRelations,
 } from "@/data/productRelations";
-import { ref, computed } from "vue";
+
+// 特性项类型定义
+type FeatureItem = string | { title?: string; desc?: string };
+
+// 国际化
+const { t } = useI18n();
+
+// 计算属性：根据productSlug获取国际化的产品数据
+ const localizedProduct = computed(() => {
+   const detailKey = `productDetail.productDetails.${props.productSlug}`;
+   const productKey = `products.${props.productSlug}`;
+   
+   // 尝试从productDetail.productDetails获取详细信息，如果没有则使用原始数据
+   // 检查是否存在详细翻译
+    let hasDetailTranslation = false;
+    try {
+      const translatedTitle = t(`${detailKey}.title`);
+      hasDetailTranslation = translatedTitle !== `${detailKey}.title`;
+    } catch {
+      hasDetailTranslation = false;
+    }
+   
+   // 获取翻译数据的辅助函数
+   const getTranslatedData = (key: string, fallback: any) => {
+     if (!hasDetailTranslation) return fallback;
+     try {
+       const translated = t(`${detailKey}.${key}`);
+       // 如果翻译结果是字符串且等于键名，说明没有找到翻译，使用fallback
+       if (typeof translated === 'string' && translated === `${detailKey}.${key}`) {
+         return fallback;
+       }
+       return translated;
+     } catch {
+       return fallback;
+     }
+   };
+   
+   return {
+     title: hasDetailTranslation ? t(`${detailKey}.title`) : t(`${productKey}.name`, props.product.title),
+     desc: hasDetailTranslation ? t(`${detailKey}.desc`) : t(`${productKey}.desc`, props.product.desc),
+     features: getTranslatedData('features', props.product.features),
+     cases: getTranslatedData('cases', props.product.cases),
+     params: getTranslatedData('params', props.product.params),
+     downloads: getTranslatedData('downloads', props.product.downloads)
+   };
+ });
 
 // 组件属性定义
 const props = withDefaults(
@@ -310,14 +354,22 @@ const relatedVideos = computed(() => {
   return videoCards.slice(0, 6);
 });
 
-// 获取产品的优势特点（优先使用自定义特点）
+// 获取产品的优势特点（优先使用国际化特点）
 const productFeatures = computed((): FeatureItem[] => {
   try {
+    // 优先使用国际化特点
+    const features = localizedProduct.value.features;
+    if (Array.isArray(features) && features.length > 0) {
+      return features as FeatureItem[];
+    }
+    
+    // 其次使用自定义特点
     const customFeatures = getCustomFeatures(props.productSlug);
     if (customFeatures && customFeatures.length > 0) {
       return customFeatures;
     }
-    // 否则使用默认特点
+    
+    // 最后使用原始数据
     return props.product.features || [];
   } catch (error) {
     console.warn("获取产品特性时出错:", error);

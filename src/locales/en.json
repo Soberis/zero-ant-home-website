@@ -86,6 +86,10 @@
     "videoCases": "Video Cases",
     "moreScenarios": "More Scenarios"
   },
+  "industryApplications": {
+    "title": "Industry Applications",
+    "description": "Focusing on medical automation and semiconductor processing, while covering intelligent upgrade solutions for multiple industries"
+  },
   "supportPage": {
       "title": "After-sales Service",
       "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
@@ -359,6 +363,62 @@
       "typicalApplications": "Integrated production lines, multi-robot collaboration, flexible manufacturing, process automation, smart factories"
     }
   },
+  "products": {
+    "multiOsVm": {
+      "name": "Multi-OS Hybrid Deployment Embedded Hypervisor",
+      "desc": "Supports parallel operation of multiple operating systems, enhancing industrial equipment flexibility and resource utilization.",
+      "seriesTitle": "Multi-OS Hybrid Deployment Embedded Hypervisor",
+      "seriesSubtitle": "Integrated Heterogeneous System Solution"
+    },
+    "industrialRtos": {
+      "name": "Domestic Industrial Real-Time Operating System",
+      "desc": "Autonomous and controllable industrial-grade real-time operating system ensuring high-reliability operation of critical tasks.",
+      "seriesTitle": "Domestic Industrial Real-Time Operating System",
+      "seriesSubtitle": "High Reliability & Autonomous Control"
+    },
+    "airos": {
+      "name": "AiROS Robot Operating System",
+      "desc": "Domestic 'out-of-the-box' intelligent robot operating system, creating the Android of robotics to bring robots into every industry.",
+      "seriesTitle": "AiROS Robot Operating System",
+      "seriesSubtitle": "Operating System for the Era of Embodied Intelligence"
+    },
+    "robotScheduler": {
+      "name": "Mobile Robot Scheduling System",
+      "desc": "Supports unified scheduling and collaborative operation of multi-brand, multi-type mobile robots, enhancing factory automation levels.",
+      "seriesTitle": "Mobile Robot Scheduling System",
+      "seriesSubtitle": "Multi-Robot Collaboration & Intelligent Scheduling"
+    },
+    "gantry2d": {
+      "name": "2-DOF Gantry System",
+      "desc": "High-precision, high-rigidity 2-DOF gantry system suitable for multi-scenario automated handling and positioning.",
+      "seriesTitle": "2-DOF Gantry System",
+      "seriesSubtitle": "Efficient Automated Handling Platform"
+    },
+    "scara4axis": {
+      "name": "4-Axis SCARA Robot",
+      "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications.",
+      "seriesTitle": "4-Axis SCARA Robot",
+      "seriesSubtitle": "Flexible & Efficient Industrial Assistant"
+    },
+    "arm6axis": {
+      "name": "6-Axis Robotic Arm",
+      "desc": "Complex trajectory control capability, suitable for welding, spraying, assembly and various industrial scenarios.",
+      "seriesTitle": "6-Axis Robotic Arm",
+      "seriesSubtitle": "Multi-Scenario Intelligent Operations"
+    },
+    "dualArmHumanoid": {
+      "name": "Dual-Arm Humanoid Robot",
+      "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements.",
+      "seriesTitle": "Dual-Arm Humanoid Robot",
+      "seriesSubtitle": "High-Flexibility Collaboration Platform"
+    },
+    "mobileRobot": {
+      "name": "Mobile Robot",
+      "desc": "Autonomous navigation with multi-sensor fusion, suitable for intelligent logistics in factories, warehouses and other scenarios.",
+      "seriesTitle": "Mobile Robot",
+      "seriesSubtitle": "Intelligent Logistics & Handling"
+    }
+  },
   "careers": {
     "heroTitle": "Join ZeroAnt Technology",
     "heroSubtitle": "Build the future of robotics with us, bringing robots to every corner",
@@ -457,6 +517,297 @@
           "Familiar with software/hardware testing processes, able to write test cases independently",
           "Experience in automated testing and continuous integration preferred",
           "Detail-oriented with good communication and teamwork skills"
+        ]
+      }
+    }
+  },
+  "productDetail": {
+    "features": "Product Features",
+    "applications": "Application Scenarios",
+    "videoCases": "Video Cases",
+    "parameters": "Product Parameters",
+    "downloads": "Related Downloads",
+    "backToList": "Back to Product List",
+    "preparingMessage": "Engineers are carefully preparing, please stay tuned",
+    "notFound": "Product not found",
+    "productDetails": {
+      "multi-os-vm": {
+        "title": "Multi-OS Hybrid Deployment Embedded Hypervisor",
+        "desc": "Supports parallel operation of multiple operating systems, enhancing industrial equipment flexibility and resource utilization with unified heterogeneous system management.",
+        "features": [
+          "Multi-OS parallel operation with resource isolation and sharing",
+          "Real-time performance guarantee for industrial control requirements",
+          "Unified heterogeneous system management, simplified operations",
+          "High reliability and fault tolerance mechanisms",
+          "Flexible resource allocation and scheduling"
+        ],
+        "cases": [
+          {
+            "title": "Heterogeneous System Integration",
+            "desc": "Help customers achieve unified management of heterogeneous equipment systems, improving production line automation levels."
+          },
+          {
+            "title": "Industrial Gateway Virtualization",
+            "desc": "Deploy multiple systems on a single hardware platform, reducing hardware costs and maintenance complexity."
+          }
+        ],
+        "params": [
+          { "key": "Supported OS Types", "value": "Linux, Windows, RTOS" },
+          { "key": "VM Quantity", "value": "Up to 8 VMs" },
+          { "key": "Real-time Performance", "value": "Microsecond response" },
+          { "key": "Memory Management", "value": "Dynamic allocation, max 32GB" }
+        ],
+        "downloads": [
+          { "name": "Product Manual.pdf", "url": "/downloads/multi-os-vm-manual.pdf" }
+        ]
+      },
+      "industrial-rtos": {
+        "title": "Domestic Industrial Real-Time Operating System",
+        "desc": "Autonomous and controllable industrial-grade real-time operating system ensuring high-reliability operation of critical tasks, suitable for industrial automation and robotics with high real-time requirements.",
+        "features": [
+          "Millisecond real-time response for industrial control requirements",
+          "Autonomous and controllable, security auditable, compatible with domestic chips",
+          "Rich industrial protocols and driver support",
+          "High reliability and fault tolerance mechanisms ensuring system stability",
+          "Flexible task scheduling and resource management"
+        ],
+        "cases": [
+          {
+            "title": "High-end Equipment Control Systems",
+            "desc": "Provide high-reliability real-time operating system foundation for high-end CNC machines and industrial robots."
+          },
+          {
+            "title": "Domestic Substitution",
+            "desc": "Help customers achieve autonomous and controllable domestic substitution of critical industrial systems."
+          }
+        ],
+        "params": [
+          { "key": "Real-time Performance", "value": "Hard real-time, max latency <1ms" },
+          { "key": "Supported Architectures", "value": "ARM, x86, RISC-V" },
+          { "key": "Kernel Size", "value": "<2MB" },
+          { "key": "Task Quantity", "value": "Up to 256 tasks" }
+        ],
+        "downloads": [
+          { "name": "Technical Whitepaper.pdf", "url": "/downloads/industrial-rtos-whitepaper.pdf" }
+        ]
+      },
+      "airos": {
+        "title": "AiROS Robot Operating System",
+        "desc": "Domestic 'out-of-the-box' intelligent robot operating system, creating the Android of robotics to bring robots into every industry.",
+        "features": [
+          "Out-of-the-box, rapid deployment of robot applications",
+          "Modular architecture supporting flexible customization",
+          "Rich algorithm libraries and development tools",
+          "Cross-platform compatibility supporting various hardware",
+          "Cloud collaboration supporting remote management and updates"
+        ],
+        "cases": [
+          {
+            "title": "Service Robot Platform",
+            "desc": "Provide standardized robot solutions for service industries like restaurants and hotels."
+          },
+          {
+            "title": "Industrial Robot Control",
+            "desc": "Simplify industrial robot development processes and improve productization efficiency."
+          }
+        ],
+        "params": [
+          { "key": "Supported Robot Types", "value": "Mobile, Robotic Arms, Humanoid, etc." },
+          { "key": "Development Languages", "value": "Python, C++, JavaScript" },
+          { "key": "Communication Protocols", "value": "ROS2, DDS, MQTT" },
+          { "key": "Cloud Support", "value": "Supported" }
+        ],
+        "downloads": [
+          { "name": "Developer Guide.pdf", "url": "/downloads/airos-developer-guide.pdf" }
+        ]
+      },
+      "robot-scheduler": {
+        "title": "Mobile Robot Scheduling System",
+        "desc": "Supports unified scheduling and collaborative operation of multi-brand, multi-type mobile robots, enhancing factory automation levels and enabling intelligent logistics.",
+        "features": [
+          "Unified scheduling management for multi-brand robots",
+          "Intelligent path planning and task allocation",
+          "Real-time monitoring and fault diagnosis",
+          "Flexible scheduling adapting to dynamic demands",
+          "5G network support for real-time data transmission"
+        ],
+        "cases": [
+          {
+            "title": "Factory Intelligent Logistics Handling",
+            "desc": "Achieve intelligent handling and scheduling of raw materials, semi-finished products, and finished goods in manufacturing factories."
+          },
+          {
+            "title": "Warehouse Automation Management",
+            "desc": "Improve warehouse efficiency, enabling automatic inbound, outbound, and inventory operations."
+          }
+        ],
+        "params": [
+          { "key": "Supported Robot Quantity", "value": "Up to 100 robots" },
+          { "key": "Scheduling Algorithms", "value": "A*, Dijkstra, Genetic Algorithm" },
+          { "key": "Communication Methods", "value": "WiFi, 5G, Ethernet" },
+          { "key": "Response Time", "value": "<100ms" }
+        ],
+        "downloads": [
+          { "name": "System Architecture.pdf", "url": "/downloads/robot-scheduler-architecture.pdf" }
+        ]
+      },
+      "gantry-2d": {
+        "title": "2-DOF Gantry System",
+        "desc": "High-precision, high-rigidity 2-DOF gantry system suitable for multi-scenario automated handling and positioning, meeting industrial production line requirements.",
+        "features": [
+          "High-rigidity structural design with strong load capacity",
+          "High-precision positioning with repeatability ±0.02mm",
+          "Fast response with motion speed up to 2m/s",
+          "Modular design for easy installation and maintenance",
+          "Support for multiple control interfaces"
+        ],
+        "cases": [
+          {
+            "title": "Electronic Manufacturing Assembly Line",
+            "desc": "Achieve high-speed handling and positioning of precision components in electronic product manufacturing."
+          },
+          {
+            "title": "Automotive Parts Processing",
+            "desc": "Provide high-precision parts handling solutions for the automotive manufacturing industry."
+          }
+        ],
+        "params": [
+          { "key": "Working Stroke", "value": "X-axis: 1000mm, Y-axis: 800mm" },
+          { "key": "Repeatability", "value": "±0.02mm" },
+          { "key": "Max Speed", "value": "2m/s" },
+          { "key": "Max Load", "value": "50kg" }
+        ],
+        "downloads": [
+          { "name": "Installation Manual.pdf", "url": "/downloads/gantry-2d-installation.pdf" }
+        ]
+      },
+      "scara-4axis": {
+        "title": "4-Axis SCARA Robot",
+        "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications with high-speed motion and precision positioning capabilities.",
+        "features": [
+          "High-speed motion with short cycle time",
+          "High-precision repeatability suitable for precision operations",
+          "Compact structure, easy to integrate",
+          "Support for quick change of various end tools",
+          "Open control interface for easy secondary development",
+          "Intelligent vision guidance with adaptive working environment"
+        ],
+        "cases": [
+          {
+            "title": "Electronic Component Assembly",
+            "desc": "Applied in electronics manufacturing for efficient automated assembly."
+          },
+          {
+            "title": "Automatic Sorting and Packaging",
+            "desc": "Achieve high-speed sorting and automatic packaging in logistics sorting lines."
+          }
+        ],
+        "params": [
+          { "key": "Working Radius", "value": "600mm" },
+          { "key": "Repeatability", "value": "±0.05mm" },
+          { "key": "Max Load", "value": "3kg" },
+          { "key": "Max Speed", "value": "10m/s" }
+        ],
+        "downloads": [
+          { "name": "Product Manual.pdf", "url": "/downloads/scara-4axis-manual.pdf" }
+        ]
+      },
+      "arm-6axis": {
+        "title": "6-Axis Robotic Arm",
+        "desc": "Complex trajectory control capability, suitable for welding, spraying, assembly and various industrial scenarios. Six-degree-of-freedom design provides maximum flexibility.",
+        "features": [
+          "Six-degree-of-freedom design with high flexibility",
+          "High-precision trajectory control",
+          "Strong load capacity",
+          "Multiple programming method support",
+          "Rich communication interfaces",
+          "Industrial-grade protection design"
+        ],
+        "cases": [
+          {
+            "title": "Automotive Welding Production Line",
+            "desc": "Achieve automated welding operations for car body manufacturing in automotive industry."
+          },
+          {
+            "title": "Precision Assembly Operations",
+            "desc": "Suitable for high-precision assembly requirements in aerospace and other industries."
+          }
+        ],
+        "params": [
+          { "key": "Working Radius", "value": "1400mm" },
+          { "key": "Repeatability", "value": "±0.03mm" },
+          { "key": "Max Load", "value": "10kg" },
+          { "key": "Programming Methods", "value": "Teaching + Offline + Graphical Programming" },
+          { "key": "Communication Interfaces", "value": "Ethernet, Modbus, Profinet" },
+          { "key": "Protection Rating", "value": "IP54" },
+          { "key": "Operating Temperature", "value": "0°C~45°C" },
+          { "key": "Power Specifications", "value": "AC 380V, Three-phase" },
+          { "key": "Installation Method", "value": "Floor/Inverted/Side Mount" }
+        ],
+        "downloads": [
+          { "name": "Technical Specifications.pdf", "url": "/downloads/arm-6axis-specs.pdf" }
+        ]
+      },
+      "dual-arm-humanoid": {
+        "title": "Dual-Arm Humanoid Robot",
+        "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements. Humanoid design facilitates human-robot collaboration.",
+        "features": [
+          "Dual-arm collaborative operation with high flexibility",
+          "Humanoid design facilitating human-robot collaboration",
+          "Advanced perception systems",
+          "Intelligent decision-making and path planning",
+          "Modular joint design",
+          "Safety protection mechanisms"
+        ],
+        "cases": [
+          {
+            "title": "Complex Assembly Operations",
+            "desc": "Achieve dual-hand collaborative assembly of complex products in precision manufacturing."
+          },
+          {
+            "title": "Service Robot Applications",
+            "desc": "Provide humanized services in hotels, hospitals and other venues."
+          }
+        ],
+        "params": [
+          { "key": "Degrees of Freedom", "value": "14 DOF total for dual arms" },
+          { "key": "Arm Span", "value": "1600mm" },
+          { "key": "Single Arm Load", "value": "5kg" },
+          { "key": "Repeatability", "value": "±0.1mm" }
+        ],
+        "downloads": [
+          { "name": "Application Cases.pdf", "url": "/downloads/dual-arm-cases.pdf" }
+        ]
+      },
+      "mobile-robot": {
+        "title": "Mobile Robot",
+        "desc": "Autonomous navigation with multi-sensor fusion, suitable for intelligent logistics in factories, warehouses and other scenarios with strong environmental adaptability.",
+        "features": [
+          "Laser SLAM autonomous navigation",
+          "Multi-sensor fusion perception",
+          "Intelligent obstacle avoidance and path planning",
+          "Modular carrier design",
+          "Cloud scheduling management",
+          "Long endurance capability"
+        ],
+        "cases": [
+          {
+            "title": "Smart Factory Logistics Scheduling",
+            "desc": "Achieve intelligent transportation of raw materials and finished products in manufacturing factories."
+          },
+          {
+            "title": "Warehouse Goods Handling",
+            "desc": "Improve warehouse operation efficiency and achieve automated goods handling."
+          }
+        ],
+        "params": [
+          { "key": "Max Load", "value": "500kg" },
+          { "key": "Max Speed", "value": "1.5m/s" },
+          { "key": "Endurance", "value": "8 hours" },
+          { "key": "Positioning Accuracy", "value": "±10mm" }
+        ],
+        "downloads": [
+          { "name": "Navigation System Guide.pdf", "url": "/downloads/mobile-robot-navigation.pdf" }
         ]
       }
     }
