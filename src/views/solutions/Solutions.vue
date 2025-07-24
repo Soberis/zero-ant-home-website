@@ -12,145 +12,7 @@
         <p class="page-subtitle">探索前沿技术应用，见证创新驱动未来</p>
 
       </div>
-       <!-- 核心应用场景区域 -->
-      <div id="core-scenarios" class="core-scenarios">
-
-        <h2 class="section-title">核心场景</h2>
-
-        <div class="core-grid">
-
-          <div
-            class="core-card"
-            @click="goToApplicationDetail('medical-automation')"
-          >
-             <span class="core-icon"
-              > <svg
-                width="48"
-                height="48"
-                viewBox="0 0 48 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <rect
-                  x="10"
-                  y="18"
-                  width="28"
-                  height="20"
-                  rx="6"
-                  stroke="#1a3a8f"
-                  stroke-width="2"
-                />
-
-                <rect
-                  x="20"
-                  y="10"
-                  width="8"
-                  height="12"
-                  rx="4"
-                  stroke="#1a3a8f"
-                  stroke-width="2"
-                />
-
-                <path d="M24 28v6" stroke="#1a3a8f" stroke-width="2" />
-
-                <path d="M20 32h8" stroke="#1a3a8f" stroke-width="2" />
-                 </svg
-              > </span
-            >
-            <div class="core-title">医疗自动化</div>
-
-            <div class="core-description">
-
-              智能设备和信息系统实现医疗流程自动化，提升诊疗效率与安全性，广泛应用于检验、手术、药品管理等环节
-
-            </div>
-
-            <div class="core-features">
-               <span class="feature-tag">智能检验</span> <span
-                class="feature-tag"
-                >自动化药房</span
-              >
-            </div>
-
-          </div>
-
-          <div
-            class="core-card"
-            @click="goToApplicationDetail('semiconductor')"
-          >
-             <span class="core-icon"
-              > <svg
-                width="48"
-                height="48"
-                viewBox="0 0 48 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="14"
-                  stroke="#1a3a8f"
-                  stroke-width="2"
-                />
-
-                <rect
-                  x="20"
-                  y="12"
-                  width="8"
-                  height="8"
-                  rx="2"
-                  stroke="#1a3a8f"
-                  stroke-width="2"
-                />
-
-                <path d="M24 26v6" stroke="#1a3a8f" stroke-width="2" />
-
-                <path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2" />
-
-                <path d="M30 24h6" stroke="#1a3a8f" stroke-width="2" />
-                 </svg
-              > </span
-            >
-            <div class="core-title">半导体加工</div>
-
-            <div class="core-description">
-
-              高精度、高洁净度的自动化生产环境，实现24小时连续运行，满足芯片制造的极高工艺要求
-
-            </div>
-
-            <div class="core-features">
-               <span class="feature-tag">晶圆搬运</span> <span
-                class="feature-tag"
-                >智能检测</span
-              > <span class="feature-tag">洁净物流</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-       <!-- 更多应用场景区域 -->
-      <div id="more-scenarios" class="more-scenarios">
-
-        <h2 class="section-title">更多场景</h2>
-
-        <div class="application-grid">
-           <ApplicationCard
-            v-for="item in otherApplications"
-            :key="item.slug"
-            :title="item.title"
-            :svg="item.svg"
-            :slug="item.slug"
-          />
-        </div>
-
-      </div>
-       <!-- 视频案例区域 -->
+       <!-- 视频案例区域 - 移到顶部 -->
       <div id="video-section" class="video-section">
 
         <h2 class="section-title">视频案例</h2>
@@ -165,6 +27,23 @@
             @hover="setVideoHover"
             @leave="clearVideoHover"
             @click="goToVideo"
+          />
+        </div>
+
+      </div>
+       <!-- 更多应用场景区域 - 包含原核心产品内容 -->
+      <div id="more-scenarios" class="more-scenarios">
+
+        <h2 class="section-title">更多场景</h2>
+
+        <div class="application-grid">
+           <!-- 所有应用场景 -->
+          <ApplicationCard
+            v-for="item in otherApplications"
+            :key="item.slug"
+            :title="item.title"
+            :svg="item.svg"
+            :slug="item.slug"
           />
         </div>
 
@@ -200,11 +79,9 @@ const goToVideo = (idx: number): void => {
   router.push({ path: `/video/${videoCards[idx].slug}` });
 };
 
-// 过滤出除了医疗自动化和半导体加工之外的其他应用
+// 所有应用场景
 const otherApplications = computed(() => {
-  return applications.filter(
-    app => app.slug !== 'medical-automation' && app.slug !== 'semiconductor'
-  );
+  return applications;
 });
 
 // 跳转到应用详情页
@@ -357,23 +234,8 @@ function goToApplicationDetail(slug: string): void {
   }
 }
 
-/* 核心场景样式 */
-.core-scenarios {
-  margin-bottom: var(--section-spacing);
-}
-
-.core-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  animation: fadeInUp 0.6s ease-out 0.2s both;
-}
-
-/* 完全模仿更多场景卡片样式 */
-.core-card {
+/* 应用卡片样式 */
+.application-card {
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
@@ -386,58 +248,31 @@ function goToApplicationDetail(slug: string): void {
   border: 1px solid #e3e8f0;
   text-align: center;
 }
-.core-card:hover {
+.application-card:hover {
   box-shadow: 0 6px 24px 0 rgba(26, 58, 143, 0.13);
   transform: translateY(-4px) scale(1.03);
   border-color: #1a3a8f33;
 }
-.core-icon {
+.app-icon {
   margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.core-title {
+.app-title {
   font-size: 1.6rem;
   color: #222;
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
-.core-description {
+.app-desc {
   font-size: 1.15rem;
   color: #888;
   margin-bottom: 10px;
   line-height: 1.5;
   text-align: center;
   max-width: 90%;
-}
-.core-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 4px;
-}
-
-.feature-tag {
-  background: #f0f4ff;
-  color: var(--text-color);
-  border: 1px solid #d4e3ff;
-  border-radius: 16px;
-  padding: 6px 18px;
-  font-size: 1.15rem;
-  font-weight: 500;
-  transition: background 0.2s, color 0.2s, border 0.2s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-}
-.feature-tag:hover {
-  background: #f8f9fc;
-  color: #222;
-  border: 1px solid #1a3a8f;
 }
 
 /* 更多场景样式 */

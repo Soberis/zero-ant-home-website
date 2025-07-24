@@ -99,9 +99,9 @@
 
                   <li>
                      <router-link
-                      :to="{ path: '/solutions', hash: '#core-scenarios' }"
+                      :to="{ path: '/solutions', hash: '#video-section' }"
                       class="dropdown-item"
-                      > {{ $t('nav.coreScenarios') }} </router-link
+                      > {{ $t('nav.videoCases') }} </router-link
                     >
                   </li>
 
@@ -110,14 +110,6 @@
                       :to="{ path: '/solutions', hash: '#more-scenarios' }"
                       class="dropdown-item"
                       > {{ $t('nav.moreScenarios') }} </router-link
-                    >
-                  </li>
-
-                  <li>
-                     <router-link
-                      :to="{ path: '/solutions', hash: '#video-section' }"
-                      class="dropdown-item"
-                      > {{ $t('nav.videoCases') }} </router-link
                     >
                   </li>
 
