@@ -24,7 +24,7 @@ const applications: Application[] = [
 <p><strong>核心优势：</strong>连续工作9万小时无损坏、支持多楼层多科室智能调度、降低人工交叉感染风险</p>
 <p><strong>典型应用：</strong>智能检验科自动流水线、自动化药房、医疗物资配送、B超机器人检查</p>
     `,
-    video: 'ultrasound-medical-robot',
+    video: 'medical-automation',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
@@ -35,7 +35,7 @@ const applications: Application[] = [
 <p><strong>核心优势：</strong>连续工作9万小时无损坏、控制器成本降低50%、支持洁净室IP54防护等级</p>
 <p><strong>典型应用：</strong>晶圆厂FOUP搬运、芯片封装测试、洁净室物流、半导体设备上下料</p>
     `,
-    video: 'semiconductor-bilibili',
+    video: 'semiconductor',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/><path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/><path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
@@ -101,7 +101,7 @@ const applications: Application[] = [
 <p><strong>核心优势：</strong>大语言模型驱动、14轴双臂设计、自主学习能力、人机协作</p>
 <p><strong>典型应用：</strong>智能抓取、教育科研、服务机器人、人机协作、具身智能</p>
     `,
-    video: 'ur-robot-llm-motion-capture',
+    video: '',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="18" r="6" stroke="#1a3a8f" stroke-width="2"/><rect x="18" y="24" width="12" height="16" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M21 30h6" stroke="#1a3a8f" stroke-width="2"/><path d="M21 34h6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
@@ -112,7 +112,7 @@ const applications: Application[] = [
 <p><strong>核心优势：</strong>毫秒级实时响应、18轴同时控制、自主可控、国产化替代</p>
 <p><strong>典型应用：</strong>多轴运动控制、伺服电机台站、工业自动化、精密加工、实时控制系统</p>
     `,
-    video: 'servo-motor-station',
+    video: 'four-axis-robot-open-fridge',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="16" width="32" height="16" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h16" stroke="#1a3a8f" stroke-width="2"/><circle cx="20" cy="24" r="2" fill="#1a3a8f"/><circle cx="28" cy="24" r="2" fill="#1a3a8f"/></svg>`,
   },
   {

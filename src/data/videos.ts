@@ -166,7 +166,7 @@ export const videoMap: VideoMapData = {
   "ur-robot-llm-motion-capture": {
     slug: "ur-robot-llm-motion-capture",
     type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1KXg7zTECP/${BILIBILI_BASE_PARAMS}`,
+    url: `https://www.bilibili.com/video/BV1TXg7zTEL2/${BILIBILI_BASE_PARAMS}`,
     title: "UR机器人大语言模型动作抓取",
     desc: "本视频展示了零蚁科技基于大语言模型的UR机器人动作抓取与智能控制，通过AI与机器人深度融合，实现复杂任务的自主学习与高效执行，推动智能制造与人机协作新发展。",
     tags: ["UR机器人", "大语言模型", "动作抓取", "智能制造"],
@@ -220,7 +220,7 @@ export const videoMap: VideoMapData = {
   "offline-programming": {
     slug: "offline-programming",
     type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1KXg7zTECP/${BILIBILI_BASE_PARAMS}`,
+    url: `https://www.bilibili.com/video/BV1Et8TzGEkm/${BILIBILI_BASE_PARAMS}`,
     title: "离线编程",
     desc: "本视频展示了零蚁科技先进的离线编程技术，通过数字化仿真与虚拟调试，实现机器人程序的高效开发与优化，大幅提升编程效率与作业安全性。",
     tags: ["离线编程", "数字化仿真", "虚拟调试", "智能制造"],
@@ -229,7 +229,7 @@ export const videoMap: VideoMapData = {
   "rtos-ethercat-validation": {
     slug: "rtos-ethercat-validation",
     type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1KXg7zTEJw/${BILIBILI_BASE_PARAMS}`,
+    url: `https://www.bilibili.com/video/BV17t8TzGE2i/${BILIBILI_BASE_PARAMS}`,
     title: "RTOS-EtherCAT电机控制验证",
     desc: "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线的电机控制验证，通过高精度同步控制技术，实现多轴电机的实时协调与精准运动。",
     tags: ["RTOS", "EtherCAT", "电机控制", "实时系统", "工业控制"],
@@ -238,7 +238,7 @@ export const videoMap: VideoMapData = {
   "robot-polishing-demo": {
     slug: "robot-polishing-demo",
     type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1t2bdz8Ef4/${BILIBILI_BASE_PARAMS}`,
+    url: `https://www.bilibili.com/video/BV1Bt8TzGEEb/${BILIBILI_BASE_PARAMS}`,
     title: "机器人打磨工艺演示",
     desc: "本视频展示了零蚁科技机器人打磨工艺的完整流程，从路径规划到力控打磨，体现了先进的表面处理技术和工业级打磨解决方案。",
     tags: ["机器人打磨", "表面处理", "力控技术", "工业自动化"],
