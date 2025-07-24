@@ -84,10 +84,7 @@ const otherApplications = computed(() => {
   return applications;
 });
 
-// 跳转到应用详情页
-function goToApplicationDetail(slug: string): void {
-  router.push(`/applications/${slug}`);
-}
+
 </script>
 
 <style scoped>

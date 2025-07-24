@@ -72,19 +72,24 @@ interface SlideItem {
 // 轮播图数据（如需动态可抽离为props或外部数据源）
 const slides: SlideItem[] = [
   {
-    img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=RTOS',
-    title: '实时操作系统',
-    desc: '高可靠、低延迟的工业级实时操作系统，赋能智能设备高效运行。',
+    img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=Multi-OS',
+    title: '多OS混合部署嵌入式虚拟机',
+    desc: '支持多操作系统并行运行，提升工业设备灵活性与资源利用率。',
   },
   {
-    img: 'https://via.placeholder.com/1920x900/222/fff?text=Robot+Control',
-    title: '机器人控制系统',
-    desc: '灵活可扩展的机器人控制平台，支持多种应用场景与复杂任务。',
+    img: 'https://via.placeholder.com/1920x900/0066cc/ffffff?text=AiROS',
+    title: 'AiROS机器人操作系统',
+    desc: '国产"开箱即用"机器人智能操作系统，打造机器人界的Android系统，让机器人走进千行百业。',
   },
   {
-    img: 'https://via.placeholder.com/1920x900/555/fff?text=Mobile+Robot',
-    title: '移动机器人',
-    desc: '自主导航与智能调度，助力智慧物流与智能制造升级。',
+    img: 'https://via.placeholder.com/1920x900/00aa44/ffffff?text=4-Axis+Robot',
+    title: '四轴机械臂',
+    desc: '灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用。',
+  },
+  {
+    img: 'https://via.placeholder.com/1920x900/aa4400/ffffff?text=Dual-Arm+Robot',
+    title: '双臂人型机器人',
+    desc: '具备双臂协作能力，适合复杂装配、服务等高柔性作业需求。',
   },
 ];
 const current = ref<number>(0);
