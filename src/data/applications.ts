@@ -112,7 +112,7 @@ const applications: Application[] = [
 <p><strong>核心优势：</strong>毫秒级实时响应、18轴同时控制、自主可控、国产化替代</p>
 <p><strong>典型应用：</strong>多轴运动控制、伺服电机台站、工业自动化、精密加工、实时控制系统</p>
     `,
-    video: 'four-axis-robot-open-fridge',
+    video: 'rtos-ethercat-validation',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="16" width="32" height="16" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h16" stroke="#1a3a8f" stroke-width="2"/><circle cx="20" cy="24" r="2" fill="#1a3a8f"/><circle cx="28" cy="24" r="2" fill="#1a3a8f"/></svg>`,
   },
   {

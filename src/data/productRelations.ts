@@ -29,9 +29,9 @@ export type ProductRelationsData = Record<string, ProductRelation>;
 export const productRelations: ProductRelationsData = {
   'multi-os-vm': {
     applicationSlugs: [
-      'smart-factory-logistics',
-      'biomed-lab',
-      'special-industry',
+      'composite-systems',
+      'intelligent-manufacturing',
+      'offline-programming',
     ],
     videoSlugs: ['composite-robot-application', 'servo-motor-station'],
     customFeatures: [
@@ -45,9 +45,7 @@ export const productRelations: ProductRelationsData = {
   },
   'industrial-rtos': {
     applicationSlugs: [
-      'smart-factory-logistics',
-      'special-industry',
-      'smart-patrol-security',
+      'industrial-control',
     ],
     videoSlugs: ['servo-motor-station', 'polishing-robot'],
     customFeatures: [
@@ -59,21 +57,18 @@ export const productRelations: ProductRelationsData = {
       '云端远程监控与维护能力',
     ],
   },
-  airos: {
+  'airos': {
     applicationSlugs: [
       'semiconductor',
-      'biomed-lab',
-      'retail-service-robot',
-      'smart-factory-logistics',
       'medical-automation',
-      'smart-food-coldchain',
+      'intelligent-manufacturing',
+      'ai-robotics',
     ],
     videoSlugs: [
-      'medical-automation-bilibili',
-      'semiconductor-bilibili',
       'ur-robot-llm-motion-capture',
-      'dual-robot-collaboration',
       'composite-robot-application',
+      'semiconductor',
+      'medical-automation',
     ],
     customFeatures: [
       '安全性：Rust语言安全底座保障',
@@ -86,11 +81,10 @@ export const productRelations: ProductRelationsData = {
   },
   'robot-scheduler': {
     applicationSlugs: [
-      'smart-factory-logistics',
-      'smart-medical-logistics',
-      'smart-food-coldchain',
+      'smart-logistics',
+      'intelligent-navigation',
     ],
-    videoSlugs: ['dual-robot-collaboration', 'agv-product-introduction'],
+    videoSlugs: ['mobile-transfer-robot', 'agv-product-introduction'],
     customFeatures: [
       '多品牌机器人统一接入与管理',
       '智能路径规划与动态避障',
@@ -102,9 +96,9 @@ export const productRelations: ProductRelationsData = {
   },
   'gantry-2d': {
     applicationSlugs: [
-      'smart-factory-logistics',
       'semiconductor',
-      'biomed-lab',
+      'precision-assembly',
+      'surface-treatment',
     ],
     videoSlugs: ['composite-robot-application', 'servo-motor-station'],
     customFeatures: [
@@ -118,9 +112,8 @@ export const productRelations: ProductRelationsData = {
   },
   'scara-4axis': {
     applicationSlugs: [
-      'semiconductor',
-      'smart-factory-logistics',
-      'retail-service-robot',
+      'precision-assembly',
+      'pharmaceutical-automation',
     ],
     videoSlugs: ['four-axis-robot-open-fridge', 'composite-robot-application'],
     customFeatures: [
@@ -134,9 +127,9 @@ export const productRelations: ProductRelationsData = {
   },
   'arm-6axis': {
     applicationSlugs: [
-      'smart-factory-logistics',
       'semiconductor',
-      'special-industry',
+      'surface-treatment',
+      'precision-assembly',
     ],
     videoSlugs: ['polishing-robot', 'composite-robot-application'],
     customFeatures: [
@@ -150,9 +143,8 @@ export const productRelations: ProductRelationsData = {
   },
   'dual-arm-humanoid': {
     applicationSlugs: [
-      'edu-popular-science',
-      'retail-service-robot',
-      'biomed-lab',
+      'ai-robotics',
+      'intelligent-manufacturing',
     ],
     videoSlugs: ['ur-robot-llm-motion-capture', 'dual-robot-collaboration'],
     customFeatures: [
@@ -166,9 +158,8 @@ export const productRelations: ProductRelationsData = {
   },
   'mobile-robot': {
     applicationSlugs: [
-      'smart-factory-logistics',
-      'smart-medical-logistics',
-      'smart-food-coldchain',
+      'smart-logistics',
+      'intelligent-navigation',
     ],
     videoSlugs: [
       'agv-product-introduction',
