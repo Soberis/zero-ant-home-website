@@ -14,9 +14,9 @@
           />
         </div>
 
-        <div class="product-title">{{ product.name }}</div>
+        <div class="product-title">{{ t(product.name) }}</div>
 
-        <div class="product-desc">{{ product.desc }}</div>
+        <div class="product-desc">{{ t(product.desc) }}</div>
          <router-link :to="getProductDetailLink(product)" class="more-btn"
           >了解更多 +</router-link
         >
@@ -32,7 +32,10 @@
 // 核心产品数据
 import { products } from '@/data/products';
 import { getProductDetailLink } from '@/helpers/product';
+import { useI18n } from 'vue-i18n';
 import { h, type Component } from 'vue';
+
+const { t } = useI18n();
 
 // 多OS混合部署嵌入式虚拟机图标 - 专业工业设计
 const MultiOsVmIcon = () =>

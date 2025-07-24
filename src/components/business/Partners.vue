@@ -2,7 +2,7 @@
 
   <section class="global-partners">
 
-    <h2 class="section-title">合作伙伴</h2>
+    <h2 class="section-title">{{ $t('nav.partners') }}</h2>
 
     <div class="section-underline"></div>
 

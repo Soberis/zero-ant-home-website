@@ -2,7 +2,7 @@
 
   <section class="video-cases">
 
-    <h2 class="section-title">视频案例</h2>
+    <h2 class="section-title">{{ $t('nav.videoCases') }}</h2>
 
     <div class="videos-list">
 
@@ -16,7 +16,7 @@
            <img :src="video.img" :alt="video.title" loading="lazy" />
         </div>
 
-        <div class="video-title">{{ video.title }}</div>
+        <div class="video-title">{{ $t(video.title) }}</div>
          <router-link :to="`/video/${video.slug}`" class="more-btn"
           >观看视频 +</router-link
         >
