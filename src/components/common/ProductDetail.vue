@@ -106,17 +106,18 @@
           <h2 class="section-title">相关下载</h2>
 
           <div class="downloads-grid">
-            <a
+            <div
               v-for="(item, idx) in product.downloads"
               :key="idx"
-              :href="item.url"
-              target="_blank"
               class="download-card"
+              style="cursor: default; opacity: 0.7;"
             >
               <div class="download-icon">📄</div>
-
-              <div class="download-name">{{ item.name }}</div>
-            </a>
+              <div class="download-name" style="color: #666;">{{ item.name }}</div>
+              <div style="color: #999; font-size: 0.9rem; margin-top: 0.5rem; font-style: italic;">
+                工程师正在精心准备中，敬请期待
+              </div>
+            </div>
           </div>
         </section>
       </div>
