@@ -121,8 +121,7 @@
          <transition name="fade-slide"
           >
           <div v-if="item.open" class="card-content">
-             <a :href="item.link">{{ item.desc }}</a
-            >
+             <span style="color: #666; font-style: italic;">工程师正在精心准备中，敬请期待</span>
           </div>
            </transition
         >
