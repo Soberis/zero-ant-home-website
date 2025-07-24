@@ -63,6 +63,12 @@
     "coreScenarios": "核心场景",
     "moreScenarios": "更多场景"
   },
+  "solutionsPage": {
+    "title": "行业解决方案",
+    "subtitle": "探索前沿技术应用，见证创新驱动未来",
+    "videoCases": "视频案例",
+    "moreScenarios": "更多场景"
+  },
   "supportPage": {
       "title": "售后服务",
       "description": "售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应",

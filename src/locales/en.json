@@ -80,6 +80,12 @@
     "moreScenarios": "More Scenarios",
     "coreValues": "Core Values"
   },
+  "solutionsPage": {
+    "title": "Industry Solutions",
+    "subtitle": "Explore cutting-edge technology applications and witness innovation driving the future",
+    "videoCases": "Video Cases",
+    "moreScenarios": "More Scenarios"
+  },
   "supportPage": {
       "title": "After-sales Service",
       "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",

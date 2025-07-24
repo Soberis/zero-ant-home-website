@@ -7,15 +7,15 @@
        <!-- 页面头部 -->
       <div class="page-header">
 
-        <h1 class="page-title">行业解决方案</h1>
+        <h1 class="page-title">{{ t('solutionsPage.title') }}</h1>
 
-        <p class="page-subtitle">探索前沿技术应用，见证创新驱动未来</p>
+        <p class="page-subtitle">{{ t('solutionsPage.subtitle') }}</p>
 
       </div>
        <!-- 视频案例区域 - 移到顶部 -->
       <div id="video-section" class="video-section">
 
-        <h2 class="section-title">视频案例</h2>
+        <h2 class="section-title">{{ t('solutionsPage.videoCases') }}</h2>
 
         <div class="video-grid">
            <VideoCard
@@ -34,7 +34,7 @@
        <!-- 更多应用场景区域 - 包含原核心产品内容 -->
       <div id="more-scenarios" class="more-scenarios">
 
-        <h2 class="section-title">更多场景</h2>
+        <h2 class="section-title">{{ t('solutionsPage.moreScenarios') }}</h2>
 
         <div class="application-grid">
            <!-- 所有应用场景 -->
@@ -58,6 +58,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 // 引入数据和组件
 import { videoCards } from '@/data/videos';
 import applications from '@/data/applications';
