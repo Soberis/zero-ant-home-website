@@ -712,7 +712,7 @@ const Gantry2dIcon = () =>
     ]
   );
 
-// 四轴机械臂图标 - 专业工业设计
+// 四轴机械臂图标 - 移动平台SCARA设计
 const Scara4axisIcon = () =>
   h(
     'svg',
@@ -723,131 +723,191 @@ const Scara4axisIcon = () =>
       fill: 'none',
     },
     [
-      // 底座平台
+      // 移动平台底盘 - AGV样式
       h('rect', {
-        x: '25',
-        y: '70',
-        width: '30',
-        height: '15',
+        x: '15',
+        y: '75',
+        width: '50',
+        height: '18',
+        rx: '6',
         stroke: '#1a3a8f',
-        'stroke-width': '3',
+        'stroke-width': '2.5',
         fill: 'none',
       }),
-      // 旋转底座
-      h('rect', {
-        x: '35',
-        y: '65',
-        width: '10',
-        height: '10',
+      // 平台轮子
+      h('circle', {
+        cx: '22',
+        cy: '88',
+        r: '4',
         stroke: '#1a3a8f',
         'stroke-width': '2',
         fill: 'none',
       }),
-      // 第一臂段（垂直）
+      h('circle', {
+        cx: '58',
+        cy: '88',
+        r: '4',
+        stroke: '#1a3a8f',
+        'stroke-width': '2',
+        fill: 'none',
+      }),
+      // 导航指示灯
       h('rect', {
         x: '37',
-        y: '45',
+        y: '77',
         width: '6',
-        height: '20',
+        height: '3',
+        rx: '1.5',
+        stroke: '#1a3a8f',
+        'stroke-width': '1',
+        fill: '#1a3a8f',
+      }),
+      // 升降立柱 - 伸缩部分，高于机械臂
+      h('rect', {
+        x: '37',
+        y: '25',
+        width: '6',
+        height: '50',
+        rx: '2',
+        stroke: '#1a3a8f',
+        'stroke-width': '2.5',
+        fill: 'none',
+      }),
+      // 升降导轨 - 延长到更高位置
+      h('line', {
+        x1: '35',
+        y1: '30',
+        x2: '35',
+        y2: '70',
+        stroke: '#1a3a8f',
+        'stroke-width': '1',
+        'stroke-dasharray': '2,2',
+      }),
+      h('line', {
+        x1: '45',
+        y1: '30',
+        x2: '45',
+        y2: '70',
+        stroke: '#1a3a8f',
+        'stroke-width': '1',
+        'stroke-dasharray': '2,2',
+      }),
+      // 升降平台 - 机械臂安装在中间位置
+      h('rect', {
+        x: '32',
+        y: '47',
+        width: '16',
+        height: '6',
+        rx: '2',
         stroke: '#1a3a8f',
         'stroke-width': '2',
         fill: 'none',
       }),
-      // 第一关节
-      h('rect', {
-        x: '36',
-        y: '43',
-        width: '8',
-        height: '4',
+      // 第一关节 - 旋转底座，位于中间位置
+      h('circle', {
+        cx: '40',
+        cy: '50',
+        r: '5',
         stroke: '#1a3a8f',
         'stroke-width': '2',
         fill: 'none',
       }),
-      // 第二臂段（水平）
+      // 第一臂段 - 水平臂
       h('rect', {
-        x: '44',
-        y: '43',
-        width: '15',
-        height: '4',
+        x: '40',
+        y: '47',
+        width: '18',
+        height: '6',
+        rx: '3',
         stroke: '#1a3a8f',
         'stroke-width': '2',
         fill: 'none',
       }),
       // 第二关节
-      h('rect', {
-        x: '57',
-        y: '41',
-        width: '4',
-        height: '8',
+      h('circle', {
+        cx: '58',
+        cy: '50',
+        r: '4',
         stroke: '#1a3a8f',
         'stroke-width': '2',
         fill: 'none',
       }),
-      // 第三臂段
-      h('rect', {
-        x: '57',
-        y: '30',
-        width: '4',
-        height: '11',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第三关节（旋转）
-      h('rect', {
-        x: '55',
-        y: '28',
-        width: '8',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 末端执行器
-      h('rect', {
-        x: '57',
-        y: '20',
-        width: '4',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 工具接口
+      // 第二臂段 - 垂直臂
       h('rect', {
         x: '56',
-        y: '15',
-        width: '6',
-        height: '5',
+        y: '32',
+        width: '4',
+        height: '18',
+        rx: '2',
+        stroke: '#1a3a8f',
+        'stroke-width': '2',
+        fill: 'none',
+      }),
+      // 第三关节 - Z轴旋转
+      h('circle', {
+        cx: '58',
+        cy: '30',
+        r: '3',
         stroke: '#1a3a8f',
         'stroke-width': '1.5',
         fill: 'none',
       }),
-      // 运动范围指示
+      // 第四轴 - 末端旋转轴
+      h('rect', {
+        x: '56',
+        y: '22',
+        width: '4',
+        height: '8',
+        rx: '2',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+        fill: 'none',
+      }),
+      // 末端执行器 - 夹爪
+      h('rect', {
+        x: '54',
+        y: '18',
+        width: '3',
+        height: '6',
+        rx: '1',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+        fill: 'none',
+      }),
+      h('rect', {
+        x: '61',
+        y: '18',
+        width: '3',
+        height: '6',
+        rx: '1',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+        fill: 'none',
+      }),
+      // 工作范围指示
       h('path', {
-        d: 'M 25 45 A 20 20 0 0 1 65 45',
+        d: 'M 22 50 A 20 20 0 0 1 62 50',
         stroke: '#1a3a8f',
         'stroke-width': '1',
         'stroke-dasharray': '3,2',
         fill: 'none',
       }),
-      // 轴标识
-      h('line', {
-        x1: '15',
-        y1: '60',
-        x2: '25',
-        y2: '60',
+      // 上下移动指示箭头 - 显示升降范围
+      h('polygon', {
+        points: '30,40 32,37 28,37',
         stroke: '#1a3a8f',
-        'stroke-width': '1.5',
+        'stroke-width': '1',
+        fill: '#1a3a8f',
       }),
       h('polygon', {
-        points: '25,58 25,62 28,60',
+        points: '30,60 32,63 28,63',
         stroke: '#1a3a8f',
         'stroke-width': '1',
         fill: '#1a3a8f',
       }),
     ]
   );
+
 
 // 六轴机械臂图标 - 专业工业设计
 const Arm6axisIcon = () =>
@@ -1219,189 +1279,152 @@ const MobileRobotIcon = () =>
       fill: 'none',
     },
     [
-      // 主体底盘
+      // 主体底盘 - 圆角矩形现代设计
       h('rect', {
-        x: '20',
-        y: '35',
-        width: '40',
-        height: '25',
+        x: '18',
+        y: '40',
+        width: '44',
+        height: '28',
+        rx: '8',
         stroke: '#1a3a8f',
         'stroke-width': '3',
         fill: 'none',
       }),
-      // 激光雷达模块
-      h('rect', {
-        x: '32',
-        y: '20',
-        width: '16',
-        height: '10',
+      // 激光雷达 - 圆形设计
+      h('circle', {
+        cx: '40',
+        cy: '30',
+        r: '8',
         stroke: '#1a3a8f',
-        'stroke-width': '2',
+        'stroke-width': '2.5',
         fill: 'none',
       }),
-      // 雷达扫描头
-      h('rect', {
-        x: '36',
-        y: '15',
-        width: '8',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 扫描范围指示
+      // 雷达扫描指示
       h('path', {
-        d: 'M 25 25 A 15 15 0 0 1 55 25',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '2,1',
-        fill: 'none',
-      }),
-      h('line', {
-        x1: '30',
-        y1: '22',
-        x2: '22',
-        y2: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '2,1',
-      }),
-      h('line', {
-        x1: '50',
-        y1: '22',
-        x2: '58',
-        y2: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '2,1',
-      }),
-      // 视觉传感器阵列
-      h('rect', {
-        x: '25',
-        y: '40',
-        width: '8',
-        height: '4',
+        d: 'M 25 35 A 15 15 0 0 1 55 35',
         stroke: '#1a3a8f',
         'stroke-width': '1.5',
+        'stroke-dasharray': '3,2',
         fill: 'none',
       }),
-      h('rect', {
-        x: '36',
-        y: '40',
-        width: '8',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '47',
-        y: '40',
-        width: '8',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 驱动轮系统
-      h('rect', {
-        x: '18',
-        y: '65',
-        width: '12',
-        height: '12',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '50',
-        y: '65',
-        width: '12',
-        height: '12',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 轮毂电机
-      h('rect', {
-        x: '21',
-        y: '68',
-        width: '6',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '53',
-        y: '68',
-        width: '6',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 万向支撑轮
-      h('rect', {
-        x: '37',
-        y: '75',
-        width: '6',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 连接支架
+      // 扫描射线
       h('line', {
         x1: '40',
-        y1: '60',
-        x2: '40',
-        y2: '75',
+        y1: '30',
+        x2: '28',
+        y2: '20',
         stroke: '#1a3a8f',
-        'stroke-width': '2',
+        'stroke-width': '1',
+        'stroke-dasharray': '2,1',
       }),
       h('line', {
-        x1: '24',
-        y1: '60',
-        x2: '24',
-        y2: '65',
+        x1: '40',
+        y1: '30',
+        x2: '52',
+        y2: '20',
         stroke: '#1a3a8f',
-        'stroke-width': '2',
+        'stroke-width': '1',
+        'stroke-dasharray': '2,1',
       }),
-      h('line', {
-        x1: '56',
-        y1: '60',
-        x2: '56',
-        y2: '65',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      // 导航路径规划
-      h('path', {
-        d: 'M 10 85 L 20 82 L 35 85 L 50 82 L 70 85',
+      // 前置传感器
+      h('rect', {
+        x: '35',
+        y: '42',
+        width: '10',
+        height: '3',
+        rx: '1.5',
         stroke: '#1a3a8f',
         'stroke-width': '1.5',
-        'stroke-dasharray': '4,2',
+        fill: 'none',
+      }),
+      // 驱动轮 - 圆形设计
+      h('circle', {
+        cx: '26',
+        cy: '75',
+        r: '8',
+        stroke: '#1a3a8f',
+        'stroke-width': '2.5',
+        fill: 'none',
+      }),
+      h('circle', {
+        cx: '54',
+        cy: '75',
+        r: '8',
+        stroke: '#1a3a8f',
+        'stroke-width': '2.5',
+        fill: 'none',
+      }),
+      // 轮毂中心
+      h('circle', {
+        cx: '26',
+        cy: '75',
+        r: '3',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+        fill: 'none',
+      }),
+      h('circle', {
+        cx: '54',
+        cy: '75',
+        r: '3',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+        fill: 'none',
+      }),
+      // 万向轮
+      h('circle', {
+        cx: '40',
+        cy: '82',
+        r: '4',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+        fill: 'none',
+      }),
+      // 底盘连接
+      h('line', {
+        x1: '26',
+        y1: '68',
+        x2: '26',
+        y2: '67',
+        stroke: '#1a3a8f',
+        'stroke-width': '2',
+      }),
+      h('line', {
+        x1: '54',
+        y1: '68',
+        x2: '54',
+        y2: '67',
+        stroke: '#1a3a8f',
+        'stroke-width': '2',
+      }),
+      h('line', {
+        x1: '40',
+        y1: '78',
+        x2: '40',
+        y2: '68',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+      }),
+      // 导航路径
+      h('path', {
+        d: 'M 10 88 Q 25 85 40 88 Q 55 85 70 88',
+        stroke: '#1a3a8f',
+        'stroke-width': '1.5',
+        'stroke-dasharray': '4,3',
         fill: 'none',
       }),
       // 路径节点
-      h('rect', {
-        x: '18',
-        y: '83',
-        width: '4',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: 'none',
+      h('circle', {
+        cx: '25',
+        cy: '86',
+        r: '1.5',
+        fill: '#1a3a8f',
       }),
-      h('rect', {
-        x: '48',
-        y: '83',
-        width: '4',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: 'none',
+      h('circle', {
+        cx: '55',
+        cy: '86',
+        r: '1.5',
+        fill: '#1a3a8f',
       }),
     ]
   );
