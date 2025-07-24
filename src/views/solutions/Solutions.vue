@@ -19,7 +19,7 @@
 
         <div class="video-grid">
            <VideoCard
-            v-for="(card, idx) in videoCards"
+            v-for="(card, idx) in localizedVideoCards"
             :key="card.slug"
             :card="card"
             :index="idx"
@@ -70,6 +70,23 @@ import ApplicationCard from '@/components/common/ApplicationCard.vue';
 const router = useRouter();
 const hoverVideoIdx = ref(-1);
 
+// 国际化的视频卡片数据
+const localizedVideoCards = computed(() => {
+  return videoCards.map(card => ({
+    ...card,
+    title: t(`videos.${card.slug}.title`, card.title)
+  }));
+});
+
+// 国际化的应用场景数据
+const localizedApplications = computed(() => {
+  return applications.map(app => ({
+    ...app,
+    title: t(`applications.${app.slug}.title`, app.title),
+    description: t(`applications.${app.slug}.description`, app.description)
+  }));
+});
+
 // 视频相关方法
 const setVideoHover = (idx: number): void => {
   hoverVideoIdx.value = idx;
@@ -79,12 +96,12 @@ const clearVideoHover = (): void => {
 };
 
 const goToVideo = (idx: number): void => {
-  router.push({ path: `/video/${videoCards[idx].slug}` });
+  router.push({ path: `/video/${localizedVideoCards.value[idx].slug}` });
 };
 
 // 所有应用场景
 const otherApplications = computed(() => {
-  return applications;
+  return localizedApplications.value;
 });
 
 

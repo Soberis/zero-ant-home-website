@@ -54,6 +54,7 @@
 <script setup lang="ts">
 // 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换
 import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import applications, { type Application } from '@/data/applications';
 import { computed, type ComputedRef } from 'vue';
 import { videoMap, type VideoDetail } from '@/data/videos';
@@ -61,10 +62,21 @@ import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
 
 const route = useRoute();
 const router = useRouter();
+const { t } = useI18n();
 const slug: ComputedRef<string> = computed(() => route.params.slug as string);
-const detail: ComputedRef<Application | undefined> = computed(() =>
+const rawDetail: ComputedRef<Application | undefined> = computed(() =>
   applications.find(item => item.slug === slug.value)
 );
+
+// 国际化的应用详情
+const detail: ComputedRef<Application | undefined> = computed(() => {
+  if (!rawDetail.value) return undefined;
+  return {
+    ...rawDetail.value,
+    title: t(`applications.${rawDetail.value.slug}.title`, rawDetail.value.title),
+    description: t(`applications.${rawDetail.value.slug}.description`, rawDetail.value.description)
+  };
+});
 
 // 新增：获取视频详情对象
 const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {

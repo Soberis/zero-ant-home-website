@@ -12,20 +12,39 @@
             :title="videoInfo.title"
           />
           </template
-        > <template v-else-if="getMediaType(videoInfo) === 'video'"
-          > <video controls :src="videoInfo.url" class="video-player"></video>
-          </template
-        > <template v-else-if="getMediaType(videoInfo) === 'image'"
-          > <img :src="videoInfo.url" class="video-image" alt="图片展示" />
+        >
+         <template v-else-if="getMediaType(videoInfo) === 'video'"
+          >
+          <video
+            class="video-player"
+            :src="videoInfo.url"
+            controls
+            preload="metadata"
+          >
+             您的浏览器不支持视频播放。
+          </video>
           </template
         >
-        <div v-else class="video-placeholder">暂无视频/图片</div>
+         <template v-else-if="getMediaType(videoInfo) === 'image'"
+          >
+          <img
+            class="video-image"
+            :src="videoInfo.url"
+            :alt="videoInfo.title"
+          />
+          </template
+        >
+         <template v-else
+          >
+          <div class="video-placeholder">暂无视频</div>
+          </template
+        >
 
       </div>
 
       <div class="video-detail-info">
 
-        <h1 class="video-title">{{ videoInfo.title }} - 介绍</h1>
+        <h1 class="video-title">{{ videoInfo.title }}</h1>
 
         <div
           v-for="(para, idx) in descParagraphs"
@@ -77,14 +96,16 @@
 <script setup lang="ts">
 // 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型
 import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { videoMap, type VideoDetail } from '@/data/videos';
 import { ref, computed } from 'vue';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
 
 const route = useRoute();
+const { t } = useI18n();
 
-const videoInfo: VideoDetail = videoMap[String(route.params.slug)] || {
+const rawVideoInfo = videoMap[String(route.params.slug)] || {
   type: 'bilibili', // Provide a default type
   slug: 'not-found',
   title: '未找到视频',
@@ -92,23 +113,34 @@ const videoInfo: VideoDetail = videoMap[String(route.params.slug)] || {
   desc: '暂无介绍',
 };
 
+// 国际化的视频信息
+const videoInfo = computed((): VideoDetail => ({
+  ...rawVideoInfo,
+  title: t(`videos.${rawVideoInfo.slug}.title`, rawVideoInfo.title),
+  desc: t(`videos.${rawVideoInfo.slug}.desc`, rawVideoInfo.desc)
+}));
+
+// 更新descParagraphs计算属性
 const descParagraphs = computed(() =>
-  videoInfo.desc
-    ? videoInfo.desc
+  videoInfo.value.desc
+    ? videoInfo.value.desc
         .split(/[。.!！\n]/)
         .filter(Boolean)
         .map(p => (p.endsWith('。') ? p : p + '。'))
     : []
 );
 
+
+
 const showContact = ref<boolean>(false);
 
 type MediaType = 'bilibili' | 'video' | 'image' | 'none';
 
-function getMediaType(info: VideoDetail): MediaType {
-  if (info.type === 'bilibili' && info.url) return 'bilibili';
-  if (info.type === 'video' && info.url) return 'video';
-  if (info.type === 'image' && info.url) return 'image';
+function getMediaType(info: VideoDetail | { value: VideoDetail }): MediaType {
+  const videoData = 'value' in info ? info.value : info;
+  if (videoData.type === 'bilibili' && videoData.url) return 'bilibili';
+  if (videoData.type === 'video' && videoData.url) return 'video';
+  if (videoData.type === 'image' && videoData.url) return 'image';
   return 'none';
 }
 
