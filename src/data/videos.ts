@@ -15,6 +15,9 @@ import servoMotorStationImg from "@/assets/images/videos/伺服电机台站.png"
 import personalizedPrescriptionImg from "@/assets/images/videos/个性化处方制药.png";
 import mobileTransferRobotImg from "@/assets/images/videos/移动传送机器人.png";
 import highSpeedPrecisionRobotArmImg from "@/assets/images/videos/机械臂高速高精度演示.png";
+import offlineProgrammingImg from "@/assets/images/videos/离线编程.png";
+import rtosEthercatImg from "@/assets/images/videos/RTOS-EtherCAT电机控制验证.png";
+import robotPolishingDemoImg from "@/assets/images/videos/机器人打磨工艺演示.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -214,12 +217,47 @@ export const videoMap: VideoMapData = {
     tags: ["机械臂", "高速高精度", "运动控制", "工业自动化"],
     publishDate: "2024-05-20",
   },
+  "offline-programming": {
+    slug: "offline-programming",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1KXg7zTECP/${BILIBILI_BASE_PARAMS}`,
+    title: "离线编程",
+    desc: "本视频展示了零蚁科技先进的离线编程技术，通过数字化仿真与虚拟调试，实现机器人程序的高效开发与优化，大幅提升编程效率与作业安全性。",
+    tags: ["离线编程", "数字化仿真", "虚拟调试", "智能制造"],
+    publishDate: "2024-05-25",
+  },
+  "rtos-ethercat-validation": {
+    slug: "rtos-ethercat-validation",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1KXg7zTEJw/${BILIBILI_BASE_PARAMS}`,
+    title: "RTOS-EtherCAT电机控制验证",
+    desc: "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线的电机控制验证，通过高精度同步控制技术，实现多轴电机的实时协调与精准运动。",
+    tags: ["RTOS", "EtherCAT", "电机控制", "实时系统", "工业控制"],
+    publishDate: "2024-05-28",
+  },
+  "robot-polishing-demo": {
+    slug: "robot-polishing-demo",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1t2bdz8Ef4/${BILIBILI_BASE_PARAMS}`,
+    title: "机器人打磨工艺演示",
+    desc: "本视频展示了零蚁科技机器人打磨工艺的完整流程，从路径规划到力控打磨，体现了先进的表面处理技术和工业级打磨解决方案。",
+    tags: ["机器人打磨", "表面处理", "力控技术", "工业自动化"],
+    publishDate: "2024-05-30",
+  },
 };
 
 /**
  * 视频卡片列表（用于 Video.vue）
+ * 按照 AI智能 → 复合系统 → 单一应用 → 基础技术 的顺序排列
  */
 export const videoCards: VideoCard[] = [
+  // AI智能
+  {
+    title: "UR机器人大语言模型动作抓取",
+    img: urRobotLLMImg,
+    slug: "ur-robot-llm-motion-capture",
+  },
+  // 复合系统
   {
     title: "医疗自动化",
     img: compositeRobotImg,
@@ -231,11 +269,6 @@ export const videoCards: VideoCard[] = [
     slug: "semiconductor-bilibili",
   },
   {
-    title: "UR机器人大语言模型动作抓取",
-    img: urRobotLLMImg,
-    slug: "ur-robot-llm-motion-capture",
-  },
-  {
     title: "双机协作",
     img: dualRobotCollabImg,
     slug: "dual-robot-collaboration",
@@ -245,35 +278,62 @@ export const videoCards: VideoCard[] = [
     img: compositeRobotAppImg,
     slug: "composite-robot-application",
   },
+  // 单一应用
   {
-    title: "机械臂高速高精度演示",
-    img: highSpeedPrecisionRobotArmImg,
-    slug: "high-speed-precision-robot-arm",
+    title: "个性化处方制药",
+    img: personalizedPrescriptionImg,
+    slug: "personalized-prescription-pharmaceutical",
+  },
+  { 
+    title: "B超机器人", 
+    img: ultrasoundImg, 
+    slug: "ultrasound-medical-robot" },
+  {
+    title: "移动传送机器人",
+    img: mobileTransferRobotImg,
+    slug: "mobile-transfer-robot",
+  },
+  { title: "打磨机器人", img: polishingRobotImg, slug: "polishing-robot" },
+  {
+    title: "机器人打磨工艺演示",
+    img: robotPolishingDemoImg,
+    slug: "robot-polishing-demo",
   },
   {
     title: "四轴机器人开冰箱",
     img: fourAxisRobotFridgeImg,
     slug: "four-axis-robot-open-fridge",
   },
-  { title: "打磨机器人", img: polishingRobotImg, slug: "polishing-robot" },
   {
-    title: "个性化处方制药",
-    img: personalizedPrescriptionImg,
-    slug: "personalized-prescription-pharmaceutical",
+    title: "机械臂高速高精度演示",
+    img: highSpeedPrecisionRobotArmImg,
+    slug: "high-speed-precision-robot-arm",
   },
-  { title: "B超机器人", img: ultrasoundImg, slug: "ultrasound-medical-robot" },
+  // 基础技术
   {
-    title: "移动传送机器人",
-    img: mobileTransferRobotImg,
-    slug: "mobile-transfer-robot",
+    title: "离线编程",
+    img: offlineProgrammingImg,
+    slug: "offline-programming",
   },
+  {
+    title: "RTOS-EtherCAT电机控制验证",
+    img: rtosEthercatImg,
+    slug: "rtos-ethercat-validation",
+  },
+  {
+    title: "360度雷达扫描",
+    img: radar360Img,
+    slug: "radar-360-scanning",
+  },
+  { 
+    title: "AGV产品介绍", 
+    img: agvImg, 
+    slug: "agv-product-introduction" },
   {
     title: "伺服电机台站",
     img: servoMotorStationImg,
     slug: "servo-motor-station",
   },
-  { title: "AGV产品介绍", img: agvImg, slug: "agv-product-introduction" },
-  { title: "360度雷达扫描", img: radar360Img, slug: "radar-360-scanning" },
 ].filter((card) => {
   const video = getVideoById(card.slug);
   if (!video || !validateVideoData(video)) {
