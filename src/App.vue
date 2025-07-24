@@ -3,8 +3,8 @@
   <div id="app" class="page">
      <!-- 导航栏 --> <NavBar /> <!-- 主体内容 -->
     <main class="main-content"> <router-view /> </main>
-     <!-- 页脚 --> <Footer /> <!-- Stagewise 工具栏（仅开发环境） -->
-    <StagewiseToolbar v-if="isDev" :config="{ plugins: [VuePlugin] }" />
+     <!-- 页脚 -->
+  <Footer />
 
 
   </div>
@@ -15,11 +15,7 @@
 import NavBar from '@/components/layout/NavBar.vue';
 import Footer from '@/components/layout/Footer.vue';
 
-import { StagewiseToolbar } from '@stagewise/toolbar-vue';
-import VuePlugin from '@stagewise-plugins/vue';
 
-// 只在开发环境下显示 Stagewise 工具栏
-const isDev = import.meta.env.DEV;
 </script>
 
 <style scoped>

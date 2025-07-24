@@ -33,8 +33,6 @@
   },
   "devDependencies": {
     "@intlify/unplugin-vue-i18n": "^6.0.8",
-    "@stagewise-plugins/vue": "^0.6.2",
-    "@stagewise/toolbar-vue": "^0.6.2",
     "@types/node": "^24.0.15",
     "@vitejs/plugin-vue": "^5.0.5",
     "less": "^4.4.0",
