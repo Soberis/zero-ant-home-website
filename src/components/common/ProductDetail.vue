@@ -1,45 +1,35 @@
 <template>
-
   <div class="product-detail">
-     <!-- 产品头部信息 -->
+    <!-- 产品头部信息 -->
     <div class="product-header">
-
       <div class="container">
-
         <h1 class="product-title">{{ product.title }}</h1>
 
         <p class="product-desc">{{ product.desc }}</p>
-
       </div>
-
     </div>
-     <!-- 主要内容区域 -->
+    <!-- 主要内容区域 -->
     <div class="main-content">
-
       <div class="container">
-         <!-- 优势特点 -->
+        <!-- 优势特点 -->
         <section
           v-if="productFeatures && productFeatures.length"
           class="section features-section"
         >
-
           <h2 class="section-title">产品特点</h2>
 
           <div class="features-grid">
-
             <div
               v-for="(feature, idx) in productFeatures"
               :key="idx"
               class="feature-card"
             >
-
               <div class="feature-icon">{{ getFeatureIcon(idx) }}</div>
 
               <div class="feature-content">
-
                 <h3 class="feature-title">
-                   {{
-                    typeof feature === 'string' ? feature : feature.title || ''
+                  {{
+                    typeof feature === "string" ? feature : feature.title || ""
                   }}
                 </h3>
 
@@ -47,26 +37,21 @@
                   v-if="typeof feature === 'object' && feature.desc"
                   class="feature-desc"
                 >
-                   {{ feature.desc }}
+                  {{ feature.desc }}
                 </p>
-
               </div>
-
             </div>
-
           </div>
-
         </section>
-         <!-- 应用场景 -->
+        <!-- 应用场景 -->
         <section
           v-if="props.showApplications && relatedApplications.length > 0"
           class="section scenes-section"
         >
-
           <h2 class="section-title">应用场景</h2>
 
           <div class="application-grid">
-             <ApplicationCard
+            <ApplicationCard
               v-for="item in relatedApplications"
               :key="item.slug"
               :title="item.title"
@@ -74,18 +59,16 @@
               :slug="item.slug"
             />
           </div>
-
         </section>
-         <!-- 视频案例 -->
+        <!-- 视频案例 -->
         <section
           v-if="props.showVideos && relatedVideos.length > 0"
           class="section cases-section"
         >
-
           <h2 class="section-title">视频案例</h2>
 
           <div class="videos-grid">
-             <VideoCard
+            <VideoCard
               v-for="(video, index) in relatedVideos"
               :key="video.slug"
               :card="video"
@@ -96,85 +79,66 @@
               @click="handleVideoClick"
             />
           </div>
-
         </section>
-         <!-- 产品参数 -->
+        <!-- 产品参数 -->
         <section v-if="product.params && product.params.length" class="section">
-
           <h2 class="section-title">产品参数</h2>
 
           <div class="params-container">
-
             <div class="params-grid">
-
               <div
                 v-for="(param, idx) in product.params"
                 :key="idx"
                 class="param-item"
               >
-
                 <div class="param-key">{{ param.key }}</div>
 
                 <div class="param-value">{{ param.value }}</div>
-
               </div>
-
             </div>
-
           </div>
-
         </section>
-         <!-- 相关下载 -->
+        <!-- 相关下载 -->
         <section
           v-if="product.downloads && product.downloads.length"
           class="section downloads-section"
         >
-
           <h2 class="section-title">相关下载</h2>
 
           <div class="downloads-grid">
-             <a
+            <a
               v-for="(item, idx) in product.downloads"
               :key="idx"
               :href="item.url"
               target="_blank"
               class="download-card"
-              >
+            >
               <div class="download-icon">📄</div>
 
               <div class="download-name">{{ item.name }}</div>
-               </a
-            >
+            </a>
           </div>
-
         </section>
-
       </div>
-
     </div>
-     <!-- 返回按钮 -->
+    <!-- 返回按钮 -->
     <div class="back-section">
-
       <div class="container">
-         <button class="back-btn" @click="emits('back')">
-           <span class="back-icon">←</span> <span class="back-text"
-            >返回产品列表</span
-          > </button
-        >
+        <button class="back-btn" @click="emits('back')">
+          <span class="back-icon">←</span>
+          <span class="back-text">返回产品列表</span>
+        </button>
       </div>
-
     </div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-import VideoCard from '@/components/common/VideoCard.vue';
-import ApplicationCard from '@/components/common/ApplicationCard.vue';
-import { videoCards } from '@/data/videos';
-import applications from '@/data/applications';
-import type { ProductDetail } from '@/data/productDetails';
+import VideoCard from "@/components/common/VideoCard.vue";
+import ApplicationCard from "@/components/common/ApplicationCard.vue";
+import { videoCards } from "@/data/videos";
+import applications from "@/data/applications";
+import type { ProductDetail } from "@/data/productDetails";
 
 // 特性项类型定义
 type FeatureItem = string | { title?: string; desc?: string };
@@ -183,8 +147,8 @@ import {
   getRelatedVideos,
   getCustomFeatures,
   hasProductRelations,
-} from '@/data/productRelations';
-import { ref, computed } from 'vue';
+} from "@/data/productRelations";
+import { ref, computed } from "vue";
 
 // 组件属性定义
 const props = withDefaults(
@@ -208,93 +172,121 @@ const emits = defineEmits<{
 // 特性图标映射表（优化性能，避免重复计算）
 const FEATURE_ICON_MAP = new Map([
   // 实时性、高速相关
-  [['实时', '响应', '速度', '高速'], '⚡'],
+  [["实时", "响应", "速度", "高速"], "⚡"],
   // 安全性相关
-  [['安全', '可控', '防护', '认证'], '🔒'],
+  [["安全", "可控", "防护", "认证"], "🔒"],
   // 精准控制相关
-  [['精度', '定位', '控制', '轴'], '🎯'],
+  [["精度", "定位", "控制", "轴"], "🎯"],
   // 智能化相关
-  [['智能', 'AI', '视觉', '语言', '学习'], '🧠'],
+  [["智能", "AI", "视觉", "语言", "学习"], "🧠"],
   // 云端/网络相关
-  [['云', '远程', '网络', '5G', '连接'], '☁️'],
+  [["云", "远程", "网络", "5G", "连接"], "☁️"],
   // 效率提升相关
-  [['成本', '效率', '周期', '优化'], '📈'],
+  [["成本", "效率", "周期", "优化"], "📈"],
   // 技术集成相关
-  [['集成', '部署', '模块', '平台', '系统'], '🔧'],
+  [["集成", "部署", "模块", "平台", "系统"], "🔧"],
   // 协作相关
-  [['协作', '协同', '多', '统一', '调度'], '🤝'],
+  [["协作", "协同", "多", "统一", "调度"], "🤝"],
   // 数据监控相关
-  [['监控', '数据', '分析', '诊断'], '📊'],
+  [["监控", "数据", "分析", "诊断"], "📊"],
   // 灵活性相关
-  [['灵活', '扩展', '自由度', '适应'], '🔄'],
+  [["灵活", "扩展", "自由度", "适应"], "🔄"],
   // 稳定性相关
-  [['稳定', '可靠', '持续', '耐用'], '🛡️'],
+  [["稳定", "可靠", "持续", "耐用"], "🛡️"],
   // 创新技术相关
-  [['创新', '前沿', '突破', '先进'], '🚀'],
+  [["创新", "前沿", "突破", "先进"], "🚀"],
   // 用户体验相关
-  [['简单', '易用', '友好', '便捷'], '✨'],
+  [["简单", "易用", "友好", "便捷"], "✨"],
   // 环保节能相关
-  [['节能', '环保', '绿色', '低耗'], '🌱'],
+  [["节能", "环保", "绿色", "低耗"], "🌱"],
   // 兼容性相关
-  [['兼容', '通用', '标准', '接口'], '🔗']
+  [["兼容", "通用", "标准", "接口"], "🔗"],
 ]);
 
 // 扩展的默认图标序列（避免重复）
 const DEFAULT_ICONS = [
-  '⚡', '🔒', '🎯', '🧠', '☁️', '📈', 
-  '🔧', '🤝', '📊', '🔄', '🛡️', '🚀', 
-  '✨', '🌱', '🔗', '💎', '🎨', '⭐', 
-  '🔥', '💡', '🎪', '🎭', '🎲', '🎸'
+  "⚡",
+  "🔒",
+  "🎯",
+  "🧠",
+  "☁️",
+  "📈",
+  "🔧",
+  "🤝",
+  "📊",
+  "🔄",
+  "🛡️",
+  "🚀",
+  "✨",
+  "🌱",
+  "🔗",
+  "🎨",
+  "⭐",
+  "🔥",
+  "💡",
 ];
-
-// 已使用的图标记录（避免重复）
-const usedIcons = ref(new Set<string>());
 
 // 预计算特性图标映射，避免在渲染时重复计算
 const featureIcons = computed(() => {
   const icons: string[] = [];
-  const localUsedIcons = new Set<string>();
-  
+  const globalUsedIcons = new Set<string>();
+
   productFeatures.value.forEach((feature, index) => {
-    const featureText = typeof feature === 'string' ? feature : (feature.title || feature.desc || '');
-    
-    // 首先尝试根据关键词匹配
-    let matchedIcon = '';
+    const featureText =
+      typeof feature === "string"
+        ? feature
+        : feature.title || feature.desc || "";
+
+    // 首先尝试根据关键词匹配，但要确保图标未被使用
+    let matchedIcon = "";
     for (const [keywords, icon] of FEATURE_ICON_MAP) {
-      if (keywords.some(keyword => featureText.includes(keyword))) {
+      if (
+        keywords.some((keyword) => featureText.includes(keyword)) &&
+        !globalUsedIcons.has(icon)
+      ) {
         matchedIcon = icon;
         break;
       }
     }
-    
+
     if (matchedIcon) {
       icons.push(matchedIcon);
+      globalUsedIcons.add(matchedIcon);
     } else {
-      // 如果没有匹配到，从默认图标中选择一个未使用的
-      let selectedIcon = '';
+      // 如果没有匹配到或匹配的图标已被使用，从默认图标中选择一个未使用的
+      let selectedIcon = "";
       for (const icon of DEFAULT_ICONS) {
-        if (!localUsedIcons.has(icon)) {
+        if (!globalUsedIcons.has(icon)) {
           selectedIcon = icon;
-          localUsedIcons.add(icon);
+          globalUsedIcons.add(icon);
           break;
         }
       }
-      
-      // 如果所有图标都已使用，使用循环索引
+
+      // 如果所有图标都已使用，使用循环索引但跳过已使用的
       if (!selectedIcon) {
-        selectedIcon = DEFAULT_ICONS[index % DEFAULT_ICONS.length];
+        let fallbackIndex = index;
+        do {
+          selectedIcon = DEFAULT_ICONS[fallbackIndex % DEFAULT_ICONS.length];
+          fallbackIndex++;
+        } while (
+          globalUsedIcons.has(selectedIcon) &&
+          fallbackIndex < DEFAULT_ICONS.length + index
+        );
+
+        globalUsedIcons.add(selectedIcon);
       }
-      
+
       icons.push(selectedIcon);
     }
   });
-  
+
   return icons;
 });
 
 // 获取特性图标的函数（现在只是简单的索引访问）
 const getFeatureIcon = (index: number): string => {
-  return featureIcons.value[index] || '⭐';
+  return featureIcons.value[index] || "⭐";
 };
 
 // 获取相关应用场景（用于应用场景展示）
@@ -327,7 +319,7 @@ const productFeatures = computed((): FeatureItem[] => {
     // 否则使用默认特点
     return props.product.features || [];
   } catch (error) {
-    console.warn('获取产品特性时出错:', error);
+    console.warn("获取产品特性时出错:", error);
     return props.product.features || [];
   }
 });
@@ -343,7 +335,7 @@ const handleVideoLeave = () => {
 const handleVideoClick = (index: number) => {
   const video = relatedVideos.value[index];
   if (video) {
-    window.open(`/video/${video.slug}`, '_blank');
+    window.open(`/video/${video.slug}`, "_blank");
   }
 };
 </script>
@@ -355,9 +347,8 @@ const handleVideoClick = (index: number) => {
   background: #f7f8fa;
   color: #222;
   scroll-behavior: smooth;
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
-    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
   line-height: 1.6;
   font-size: 20px; /* 提升基础字体大小 */
@@ -396,7 +387,7 @@ const handleVideoClick = (index: number) => {
 }
 
 .product-header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -732,7 +723,7 @@ const handleVideoClick = (index: number) => {
 }
 
 .back-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -809,8 +800,6 @@ const handleVideoClick = (index: number) => {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-
-
 
   /* 产品参数响应式 */
   .param-item {
@@ -896,8 +885,5 @@ const handleVideoClick = (index: number) => {
   .feature-desc {
     font-size: 0.85rem;
   }
-
-
 }
 </style>
-
