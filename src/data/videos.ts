@@ -88,8 +88,8 @@ export const getAllVideos = (): VideoDetail[] => {
  * 视频详情映射（以 slug 作为 key）
  */
 export const videoMap: VideoMapData = {
-  "medical-automation-bilibili": {
-    slug: "medical-automation-bilibili",
+  "medical-automation": {
+    slug: "medical-automation",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1KKuXzaEG1/${BILIBILI_BASE_PARAMS}`,
     title: "医疗自动化",
@@ -97,8 +97,8 @@ export const videoMap: VideoMapData = {
     tags: ["医疗自动化", "智能调度", "医院物流"],
     publishDate: "2024-04-01",
   },
-  "semiconductor-bilibili": {
-    slug: "semiconductor-bilibili",
+  "semiconductor": {
+    slug: "semiconductor",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1NKuXzaEff/${BILIBILI_BASE_PARAMS}`,
     title: "半导体加工自动化",
@@ -257,12 +257,12 @@ export const videoCards: VideoCard[] = [
   {
     title: "医疗自动化",
     img: compositeRobotImg,
-    slug: "medical-automation-bilibili",
+    slug: "medical-automation",
   },
   {
     title: "半导体加工自动化",
     img: waferTransferImg,
-    slug: "semiconductor-bilibili",
+    slug: "semiconductor",
   },
   {
     title: "双机协作",
