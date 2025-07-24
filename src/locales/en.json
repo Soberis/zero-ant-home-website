@@ -80,6 +80,33 @@
     "moreScenarios": "More Scenarios",
     "coreValues": "Core Values"
   },
+  "supportPage": {
+      "title": "After-sales Service",
+      "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
+      "fastResponse": "Rapid problem resolution within 12 hours",
+      "dedicatedService": "7×24 hours dedicated service group response",
+      "relatedDownloads": "Related Downloads",
+      "preparingMessage": "Engineers are carefully preparing, please stay tuned",
+      "faqTitle": "Frequently Asked Questions",
+      "downloads": {
+        "productManual": "Product Manual",
+        "jointMaterials": "Joint Materials"
+      },
+      "faqs": {
+        "navigation": {
+          "question": "What navigation methods do your mobile robots support?",
+          "answer": "Our mobile robots support multiple navigation methods including laser SLAM, visual navigation, QR code navigation, etc. They can be flexibly configured according to customer site environments to meet diverse application needs."
+        },
+        "development": {
+          "question": "Does the robot control system support secondary development and system integration?",
+          "answer": "Yes. We provide open SDK and API for customers to facilitate secondary development and integration with third-party systems, helping to achieve personalized function expansion."
+        },
+        "customization": {
+          "question": "Can robots or systems be customized according to customer requirements?",
+          "answer": "Yes. We support custom software and hardware development, including structure, functions, interfaces and other aspects. Please contact us to discuss specific requirements."
+        }
+      }
+    },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
     "description": "Our four-axis robotic arms are designed to enhance efficiency and precision in the medical field.",

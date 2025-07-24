@@ -63,6 +63,33 @@
     "coreScenarios": "核心场景",
     "moreScenarios": "更多场景"
   },
+  "supportPage": {
+      "title": "售后服务",
+      "description": "售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应",
+      "fastResponse": "12小时内快速解决问题",
+      "dedicatedService": "7×24小时专属服务群响应",
+      "relatedDownloads": "相关下载",
+      "preparingMessage": "工程师正在精心准备中，敬请期待",
+      "faqTitle": "常见问题",
+      "downloads": {
+        "productManual": "产品手册",
+        "jointMaterials": "关节资料"
+      },
+      "faqs": {
+        "navigation": {
+          "question": "你们的移动机器人支持哪些导航方式？",
+          "answer": "我们的移动机器人支持激光SLAM、视觉导航、二维码导航等多种导航方式，可根据客户现场环境灵活选配，满足多样化应用需求。"
+        },
+        "development": {
+          "question": "机器人控制系统是否支持二次开发和系统集成？",
+          "answer": "支持。我们为客户提供开放的SDK和API，方便进行二次开发和与第三方系统集成，助力实现个性化功能扩展。"
+        },
+        "customization": {
+          "question": "可以根据客户需求定制机器人或系统吗？",
+          "answer": "可以。我们支持软硬件定制开发，包括结构、功能、接口等多方面，欢迎联系我们沟通具体需求。"
+        }
+      }
+    },
   "hero": {
     "title": "四轴机械臂，助力医药自动化",
     "description": "我们的四轴机械臂专为医药行业设计，提供高效、精准的自动化解决方案。",

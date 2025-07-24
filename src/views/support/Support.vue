@@ -5,10 +5,10 @@
 
     <div class="support-hero">
 
-      <h1 id="after-sales" class="hero-title">售后服务</h1>
+      <h1 id="after-sales" class="hero-title">{{ t('supportPage.title') }}</h1>
 
       <div class="hero-desc">
-         售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应
+         {{ t('supportPage.description') }}
       </div>
 
       <div class="service-cards">
@@ -52,7 +52,7 @@
             >
           </div>
 
-          <div class="card-desc">12小时内快速解决问题</div>
+          <div class="card-desc">{{ t('supportPage.fastResponse') }}</div>
 
         </div>
 
@@ -90,7 +90,7 @@
             >
           </div>
 
-          <div class="card-desc">7×24小时专属服务群响应</div>
+          <div class="card-desc">{{ t('supportPage.dedicatedService') }}</div>
 
         </div>
 
@@ -102,7 +102,7 @@
 
   <div class="support-page">
 
-    <h2 id="download" class="section-title">相关下载</h2>
+    <h2 id="download" class="section-title">{{ t('supportPage.relatedDownloads') }}</h2>
 
     <div class="section-block">
 
@@ -121,7 +121,7 @@
          <transition name="fade-slide"
           >
           <div v-if="item.open" class="card-content">
-             <span style="color: #666; font-style: italic;">工程师正在精心准备中，敬请期待</span>
+             <span style="color: #666; font-style: italic;">{{ t('supportPage.preparingMessage') }}</span>
           </div>
            </transition
         >
@@ -129,7 +129,7 @@
 
     </div>
 
-    <h2 id="faq" class="section-title">常见问题</h2>
+    <h2 id="faq" class="section-title">{{ t('supportPage.faqTitle') }}</h2>
 
     <div class="section-block">
 
@@ -173,16 +173,19 @@
 <script setup lang="ts">
 // 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互
 import { reactive } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const downloads = reactive([
   {
-    title: '产品手册',
+    title: t('supportPage.downloads.productManual'),
     desc: 'PDF文档下载',
     link: '#manual',
     open: false,
   },
   {
-    title: '关节资料',
+    title: t('supportPage.downloads.jointMaterials'),
     desc: 'ZIP资料包下载',
     link: '#joint',
     open: false,
@@ -191,20 +194,20 @@ const downloads = reactive([
 
 const faqs = reactive([
   {
-    q: '你们的移动机器人支持哪些导航方式？',
-    a: '我们的移动机器人支持激光SLAM、视觉导航、二维码导航等多种导航方式，可根据客户现场环境灵活选配，满足多样化应用需求。',
+    q: t('supportPage.faqs.navigation.question'),
+    a: t('supportPage.faqs.navigation.answer'),
     link: '#faq1',
     open: false,
   },
   {
-    q: '机器人控制系统是否支持二次开发和系统集成？',
-    a: '支持。我们为客户提供开放的SDK和API，方便进行二次开发和与第三方系统集成，助力实现个性化功能扩展。',
+    q: t('supportPage.faqs.development.question'),
+    a: t('supportPage.faqs.development.answer'),
     link: '#faq2',
     open: false,
   },
   {
-    q: '可以根据客户需求定制机器人或系统吗？',
-    a: '可以。我们支持软硬件定制开发，包括结构、功能、接口等多方面，欢迎联系我们沟通具体需求。',
+    q: t('supportPage.faqs.customization.question'),
+    a: t('supportPage.faqs.customization.answer'),
     link: '#faq3',
     open: false,
   },
