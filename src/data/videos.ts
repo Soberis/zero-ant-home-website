@@ -260,7 +260,7 @@ export const videoCards: VideoCard[] = [
     slug: "medical-automation",
   },
   {
-    title: "半导体加工自动化",
+    title: "半导体加工",
     img: waferTransferImg,
     slug: "semiconductor",
   },

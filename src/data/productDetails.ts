@@ -157,7 +157,7 @@ export const productDetails: ProductDetailsData = {
       },
     ],
     scenes: [
-      '半导体制造',
+      '半导体加工',
       '生物医药实验室',
       '智能餐饮',
       '社区配送',

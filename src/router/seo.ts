@@ -1,29 +1,34 @@
 import { RouteLocationNormalized } from "vue-router";
-import { setSEO, seoConfigs, setStructuredData } from "@/utils/seo";
+import { setSEO, getSeoConfigs, setStructuredData } from "@/utils/seo";
+import i18n from "@/config/i18n";
 
 /**
- * 路由 SEO 配置映射
+ * 获取路由 SEO 配置映射
  */
-const routeSEOMap: Record<string, any> = {
-  Home: seoConfigs.home,
-  About: seoConfigs.about,
-  SystemProducts: seoConfigs.products,
-  RobotProducts: seoConfigs.products,
-  Applications: seoConfigs.applications,
-  Solutions: seoConfigs.solutions,
-  Support: seoConfigs.support,
-  Contact: seoConfigs.contact,
-  Video: {
-    title: "视频中心",
-    description: "零蚁科技视频中心 - 观看产品演示和技术介绍视频。",
-    keywords: "零蚁科技,视频中心,产品演示,技术介绍",
-  },
-  Careers: {
-    title: "人才招聘",
-    description: "零蚁科技人才招聘 - 加入我们，共同打造最酷的机器人。",
-    keywords: "零蚁科技,人才招聘,职业机会,工作岗位",
-  },
-};
+function getRouteSEOMap(): Record<string, any> {
+  const { t } = i18n.global;
+  const seoConfigs = getSeoConfigs(t);
+  return {
+    Home: seoConfigs.home,
+    About: seoConfigs.about,
+    SystemProducts: seoConfigs.products,
+    RobotProducts: seoConfigs.products,
+    Applications: seoConfigs.applications,
+    Solutions: seoConfigs.solutions,
+    Support: seoConfigs.support,
+    Contact: seoConfigs.contact,
+    Video: {
+      title: "视频中心",
+      description: "零蚁科技视频中心 - 观看产品演示和技术介绍视频。",
+      keywords: "零蚁科技,视频中心,产品演示,技术介绍",
+    },
+    Careers: {
+      title: "人才招聘",
+      description: "零蚁科技人才招聘 - 加入我们，共同打造最酷的机器人。",
+      keywords: "零蚁科技,人才招聘,职业机会,工作岗位",
+    },
+  };
+}
 
 /**
  * 设置页面 SEO 信息
@@ -31,6 +36,7 @@ const routeSEOMap: Record<string, any> = {
  */
 export function setupPageSEO(to: RouteLocationNormalized) {
   const routeName = to.name as string;
+  const routeSEOMap = getRouteSEOMap();
   const seoConfig = routeSEOMap[routeName];
 
   if (seoConfig) {

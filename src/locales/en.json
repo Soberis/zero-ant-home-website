@@ -289,6 +289,108 @@
       "tags": ["Robot Polishing", "Surface Treatment", "Force Control Technology", "Industrial Automation"]
     }
   },
+  "seo": {
+    "siteName": "ZeroAnt Technology",
+    "defaultTitle": "ZeroAnt Technology - Making Robots Everywhere, Building the Coolest Robots",
+    "defaultDescription": "Making robots everywhere, building the coolest robots",
+    "defaultKeywords": "robots,automation,smart manufacturing,AGV,robotic arm,ZeroAnt Technology",
+    "pages": {
+      "home": {
+        "title": "Home",
+        "description": "Making robots everywhere, building the coolest robots",
+        "keywords": "robots,automation,smart manufacturing,AGV,robotic arm,ZeroAnt Technology"
+      },
+      "about": {
+        "title": "About Us",
+        "description": "Hangzhou ZeroAnt Technology Co., Ltd., focusing on robot intelligent system R&D, building domestic ready-to-use robot intelligent operating system AiROS",
+        "keywords": "ZeroAnt Technology,about us,robot operating system,AiROS,smart manufacturing"
+      },
+      "products": {
+        "title": "Products",
+        "description": "ZeroAnt Technology product center, providing AGV automated guided vehicles, robotic arms, smart manufacturing solutions and other advanced robot products",
+        "keywords": "products,AGV,robotic arm,smart manufacturing,robot products"
+      },
+  "pages": {
+    "videos": {
+      "title": "Videos",
+      "noVideo": "No video available",
+      "loading": "Loading...",
+      "error": "Video loading failed"
+    },
+    "applications": {
+      "title": "Applications",
+      "coreScenarios": "Core Scenarios",
+      "medicalAutomation": "Medical Automation",
+      "semiconductorManufacturing": "Semiconductor Manufacturing",
+      "intelligentManufacturing": "Intelligent Manufacturing",
+      "surfaceTreatment": "Surface Treatment",
+      "smartLogistics": "Smart Logistics"
+    },
+    "contact": {
+      "wechatQr": "Scan to add WeChat",
+      "biliQr": "Follow us on Bilibili"
+    },
+    "news": {
+      "title": "News",
+      "content": "This is the news page content",
+      "noNews": "No news available"
+    }
+  },
+  "applications": {
+        "title": "Applications",
+        "description": "ZeroAnt Technology robot application scenarios, covering medical automation, semiconductor manufacturing, smart manufacturing, surface treatment and other fields",
+        "keywords": "applications,medical automation,semiconductor manufacturing,smart manufacturing,surface treatment"
+      },
+      "videos": {
+        "title": "Videos",
+        "description": "ZeroAnt Technology robot product video demonstrations, including medical automation, semiconductor processing, dual robot collaboration and other application cases",
+        "keywords": "videos,robot demonstration,medical automation,semiconductor processing,dual robot collaboration"
+      },
+      "contact": {
+        "title": "Contact Us",
+        "description": "Contact ZeroAnt Technology for robot intelligent system solutions, Phone: 0571-87759090",
+        "keywords": "contact us,ZeroAnt Technology,robot solutions,smart manufacturing consulting"
+      },
+      "solutions": {
+        "title": "Solutions",
+        "description": "ZeroAnt Technology solutions, innovative intelligent logistics solutions connecting professional equipment and application scenarios",
+        "keywords": "ZeroAnt Technology,solutions,intelligent logistics,innovative technology"
+      },
+      "support": {
+        "title": "Support",
+        "description": "ZeroAnt Technology support services, providing comprehensive technical support and after-sales service",
+        "keywords": "ZeroAnt Technology,support,technical support,after-sales service"
+      }
+    }
+   },
+  "validation": {
+    "required": {
+      "name": "Please enter your name",
+      "email": "Please enter your email",
+      "message": "Please enter your message",
+      "phone": "Please enter your phone number"
+    },
+    "format": {
+      "email": "Invalid email format",
+      "phone": "Invalid phone number format"
+    },
+    "length": {
+      "nameMin": "Name must be at least 2 characters",
+      "nameMax": "Name cannot exceed 50 characters",
+      "messageMin": "Message must be at least 10 characters",
+      "messageMax": "Message cannot exceed 500 characters"
+    }
+  },
+  "security": {
+    "password": {
+      "tooShort": "Password must be at least 8 characters",
+      "tooWeak": "Password is too weak",
+      "noUppercase": "Password must contain uppercase letters",
+      "noLowercase": "Password must contain lowercase letters",
+      "noNumbers": "Password must contain numbers",
+      "noSpecialChars": "Password must contain special characters"
+    }
+  },
   "applications": {
     "medical-automation": {
       "title": "Medical Automation",
@@ -824,6 +926,7 @@
     "sp": "Video Channel",
     "bilibili": "Bilibili",
     "copyright": "All rights reserved",
-    "telValue": "13001001954"
+    "telValue": "13001001954",
+    "icpNumber": "ICP Filing: 浙ICP备2022031941号-4"
   }
 }

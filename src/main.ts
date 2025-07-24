@@ -4,6 +4,7 @@ import router from "@/router";
 import i18n from "@/config/i18n";
 import { setupDirectives } from "@/directives";
 import { initSecurity } from "@/utils/security";
+import { setSEO } from "@/utils/seo";
 
 // 创建应用实例
 const app = createApp(App);
@@ -16,8 +17,19 @@ setupDirectives(app);
 // Element Plus 组件和样式通过按需导入自动处理
 app.mount("#app");
 
-// 初始化安全监控（仅在浏览器环境）
+// 初始化安全监控和SEO（仅在浏览器环境）
 if (typeof window !== "undefined") {
   // 初始化安全监控
   initSecurity();
+  
+  // 初始化默认SEO
+  router.isReady().then(() => {
+    const { t } = i18n.global;
+    setSEO({
+      title: t('seo.defaultTitle'),
+      description: t('seo.defaultDescription'),
+      keywords: t('seo.defaultKeywords'),
+      siteName: t('seo.siteName')
+    });
+  });
 }

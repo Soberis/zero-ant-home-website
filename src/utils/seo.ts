@@ -1,3 +1,5 @@
+import { useI18n } from 'vue-i18n'
+
 /**
  * SEO 元数据接口
  */
@@ -21,7 +23,7 @@ export interface SEOMetaData {
  * @param meta SEO 元数据对象
  */
 export function setSEO(meta: SEOMetaData) {
-  const siteName = meta.siteName || "零蚁科技";
+  const siteName = meta.siteName || "ZeroAnt Technology";
 
   // 设置页面标题
   if (meta.title) {
@@ -126,45 +128,42 @@ export function setStructuredData(data: Record<string, any>) {
 /**
  * 预定义的页面 SEO 配置
  */
-export const seoConfigs = {
-  home: {
-    title: "首页",
-    description:
-      "零蚁科技 - 让机器人遍布角落，做最酷的机器人。专注于微物流智能输送系统的研发、生产和销售。",
-    keywords:
-      "零蚁科技,机器人,具身智能,机器人操作系统,智能系统,微物流,智能输送",
-  },
-  about: {
-    title: "关于我们",
-    description:
-      "零蚁科技是一家专注于微物流智能输送系统研发、生产、销售的高新技术企业。",
-    keywords: "零蚁科技,关于我们,公司介绍,企业文化",
-  },
-  products: {
-    title: "产品中心",
-    description:
-      "零蚁科技产品中心 - 提供系统产品和机器人产品，助力各行业实现高效可靠的智能化升级。",
-    keywords: "零蚁科技,产品中心,系统产品,机器人产品,智能化升级",
-  },
-  applications: {
-    title: "应用场景",
-    description: "零蚁科技应用场景 - 覆盖多个行业的智能物流解决方案。",
-    keywords: "零蚁科技,应用场景,智能物流,解决方案",
-  },
-  solutions: {
-    title: "解决方案",
-    description:
-      "零蚁科技解决方案 - 创新的智能物流解决方案，连接专业设备与应用场景。",
-    keywords: "零蚁科技,解决方案,智能物流,创新技术",
-  },
-  support: {
-    title: "服务支持",
-    description: "零蚁科技服务支持 - 提供全方位的技术支持和售后服务。",
-    keywords: "零蚁科技,服务支持,技术支持,售后服务",
-  },
-  contact: {
-    title: "联系我们",
-    description: "联系零蚁科技 - 获取更多产品信息和技术支持。",
-    keywords: "零蚁科技,联系我们,联系方式,技术咨询",
-  },
-};
+export function getSeoConfigs(t: any) {
+  return {
+    home: {
+      title: t('seo.pages.home.title'),
+      description: t('seo.pages.home.description'),
+      keywords: t('seo.pages.home.keywords'),
+    },
+    about: {
+      title: t('seo.pages.about.title'),
+      description: t('seo.pages.about.description'),
+      keywords: t('seo.pages.about.keywords'),
+    },
+    products: {
+      title: t('seo.pages.products.title'),
+      description: t('seo.pages.products.description'),
+      keywords: t('seo.pages.products.keywords'),
+    },
+    applications: {
+      title: t('seo.pages.applications.title'),
+      description: t('seo.pages.applications.description'),
+      keywords: t('seo.pages.applications.keywords'),
+    },
+    solutions: {
+      title: t('seo.pages.solutions.title'),
+      description: t('seo.pages.solutions.description'),
+      keywords: t('seo.pages.solutions.keywords'),
+    },
+    support: {
+      title: t('seo.pages.support.title'),
+      description: t('seo.pages.support.description'),
+      keywords: t('seo.pages.support.keywords'),
+    },
+    contact: {
+      title: t('seo.pages.contact.title'),
+      description: t('seo.pages.contact.description'),
+      keywords: t('seo.pages.contact.keywords'),
+    },
+  }
+}

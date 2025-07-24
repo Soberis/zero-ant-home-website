@@ -260,7 +260,7 @@
           target="_blank"
           rel="noopener"
           class="icp-link"
-          >备案号：浙ICP备2022031941号-4</a
+          >{{ $t('footer.icpNumber') }}</a
         >
       </div>
 

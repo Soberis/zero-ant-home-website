@@ -184,7 +184,7 @@
       "tags": ["医疗自动化", "智能调度", "医院物流"]
     },
     "semiconductor": {
-      "title": "半导体加工自动化",
+      "title": "半导体加工",
       "desc": "本视频展示了零蚁科技在半导体加工领域的自动化搬运、智能调度等创新应用，助力芯片制造与封装测试提质增效。",
       "tags": ["半导体加工", "自动化", "智能制造"]
     },
@@ -264,6 +264,108 @@
       "tags": ["机器人打磨", "表面处理", "力控技术", "工业自动化"]
     }
   },
+  "seo": {
+    "siteName": "零蚁科技",
+    "defaultTitle": "零蚁科技 - 让机器人遍布角落，做最酷的机器人",
+    "defaultDescription": "让机器人遍布角落，做最酷的机器人",
+    "defaultKeywords": "机器人,自动化,智能制造,AGV,机械臂,零蚁科技",
+    "pages": {
+      "home": {
+        "title": "首页",
+        "description": "让机器人遍布角落，做最酷的机器人",
+        "keywords": "机器人,自动化,智能制造,AGV,机械臂,零蚁科技"
+      },
+      "about": {
+        "title": "关于我们",
+        "description": "杭州零蚁科技有限公司，专注机器人智能系统研发，打造国产开箱即用机器人智能操作系统AiROS",
+        "keywords": "零蚁科技,关于我们,机器人操作系统,AiROS,智能制造"
+      },
+      "products": {
+        "title": "产品中心",
+        "description": "零蚁科技产品中心，提供AGV自动导引车、机械臂、智能制造解决方案等先进机器人产品",
+        "keywords": "产品中心,AGV,机械臂,智能制造,机器人产品"
+      },
+  "pages": {
+    "videos": {
+      "title": "视频展示",
+      "noVideo": "暂无视频",
+      "loading": "加载中...",
+      "error": "视频加载失败"
+    },
+    "applications": {
+      "title": "应用场景",
+      "coreScenarios": "核心场景",
+      "medicalAutomation": "医疗自动化",
+      "semiconductorManufacturing": "半导体制造",
+      "intelligentManufacturing": "智能制造",
+      "surfaceTreatment": "表面处理",
+      "smartLogistics": "智能物流"
+    },
+    "contact": {
+      "wechatQr": "扫码添加企业微信",
+      "biliQr": "扫码关注B站"
+    },
+    "news": {
+      "title": "新闻资讯",
+      "content": "这里是新闻资讯页面内容",
+      "noNews": "暂无新闻"
+    }
+  },
+  "applications": {
+        "title": "应用场景",
+        "description": "零蚁科技机器人应用场景，涵盖医疗自动化、半导体制造、智能制造、表面处理等多个领域",
+        "keywords": "应用场景,医疗自动化,半导体制造,智能制造,表面处理"
+      },
+      "videos": {
+        "title": "视频展示",
+        "description": "零蚁科技机器人产品视频展示，包括医疗自动化、半导体加工、双机协作等应用案例",
+        "keywords": "视频展示,机器人演示,医疗自动化,半导体加工,双机协作"
+      },
+      "contact": {
+        "title": "联系我们",
+        "description": "联系零蚁科技，获取机器人智能系统解决方案，电话：0571-87759090",
+        "keywords": "联系我们,零蚁科技,机器人解决方案,智能制造咨询"
+      },
+      "solutions": {
+        "title": "解决方案",
+        "description": "零蚁科技解决方案，创新的智能物流解决方案，连接专业设备与应用场景",
+        "keywords": "零蚁科技,解决方案,智能物流,创新技术"
+      },
+      "support": {
+        "title": "服务支持",
+        "description": "零蚁科技服务支持，提供全方位的技术支持和售后服务",
+        "keywords": "零蚁科技,服务支持,技术支持,售后服务"
+      }
+    }
+   },
+  "validation": {
+    "required": {
+      "name": "请输入姓名",
+      "email": "请输入邮箱",
+      "message": "请输入留言内容",
+      "phone": "请输入电话号码"
+    },
+    "format": {
+      "email": "邮箱格式不正确",
+      "phone": "电话号码格式不正确"
+    },
+    "length": {
+      "nameMin": "姓名至少需要2个字符",
+      "nameMax": "姓名不能超过50个字符",
+      "messageMin": "留言内容至少需要10个字符",
+      "messageMax": "留言内容不能超过500个字符"
+    }
+  },
+  "security": {
+    "password": {
+      "tooShort": "密码长度至少需要8位",
+      "tooWeak": "密码强度太弱",
+      "noUppercase": "密码需要包含大写字母",
+      "noLowercase": "密码需要包含小写字母",
+      "noNumbers": "密码需要包含数字",
+      "noSpecialChars": "密码需要包含特殊字符"
+    }
+  },
   "applications": {
     "medical-automation": {
       "title": "医疗自动化",
@@ -272,7 +374,7 @@
       "typicalApplications": "智能检验科自动流水线、自动化药房、医疗物资配送、B超机器人检查"
     },
     "semiconductor": {
-      "title": "半导体制造",
+      "title": "半导体加工",
       "description": "面向晶圆、芯片等高端制造领域，基于AiROS操作系统的实时性抖动≤10us技术，提供高精度、高可靠性的物品传送与智能调度系统。已出货200余台晶圆传送机器人，覆盖国内主要晶圆/芯片制造厂商，实现国产设备替代和智能制造升级。通过0.02mm重复定位精度和18轴同时控制能力，支持复杂工艺流程的自动化搬运、精准定位和数据追溯。",
       "coreAdvantages": "连续工作9万小时无损坏、控制器成本降低50%、支持洁净室IP54防护等级",
       "typicalApplications": "晶圆厂FOUP搬运、芯片封装测试、洁净室物流、半导体设备上下料"
@@ -799,6 +901,7 @@
     "sp": "视频号",
     "bilibili": "B站官方号",
     "copyright": "版权所有",
-    "telValue": "13001001954"
+    "telValue": "13001001954",
+    "icpNumber": "备案号：浙ICP备2022031941号-4"
   }
 }
