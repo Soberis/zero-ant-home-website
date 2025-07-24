@@ -252,11 +252,7 @@ export const videoMap: VideoMapData = {
  */
 export const videoCards: VideoCard[] = [
   // AI智能
-  {
-    title: "UR机器人大语言模型动作抓取",
-    img: urRobotLLMImg,
-    slug: "ur-robot-llm-motion-capture",
-  },
+
   // 复合系统
   {
     title: "医疗自动化",
@@ -272,6 +268,11 @@ export const videoCards: VideoCard[] = [
     title: "双机协作",
     img: dualRobotCollabImg,
     slug: "dual-robot-collaboration",
+  },
+  {
+    title: "UR机器人大语言模型动作抓取",
+    img: urRobotLLMImg,
+    slug: "ur-robot-llm-motion-capture",
   },
   {
     title: "复合机器人应用",
