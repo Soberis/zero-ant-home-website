@@ -307,6 +307,30 @@
       "coreAdvantages": "360-degree LiDAR scanning, laser SLAM positioning, intelligent path planning, multi-machine collaborative navigation",
       "typicalApplications": "AGV intelligent navigation, dynamic environment mapping, real-time obstacle avoidance, optimal path planning, multi-robot scheduling"
     },
+    "surface-treatment": {
+      "title": "Surface Treatment",
+      "description": "Based on six-axis and four-axis robotic arm technology, providing high-precision, high-reliability industrial robot solutions. Through advanced force control technology and path planning algorithms, it enables grinding, polishing, welding, assembly and other industrial applications. Supporting 0.02mm repeat positioning accuracy and continuous 90,000-hour fault-free operation, providing stable and reliable automation equipment for manufacturing.",
+      "coreAdvantages": "High-precision positioning, force control technology, multi-axis coordination, long-term stable operation",
+      "typicalApplications": "Metal parts grinding, precision assembly, welding operations, surface treatment, deburring"
+    },
+    "smart-logistics": {
+      "title": "Smart Logistics",
+      "description": "Based on mobile robot scheduling systems and AGV automatic guidance technology, providing intelligent logistics solutions for unified scheduling of multi-brand, multi-type robots. Through advanced technologies such as 360-degree radar scanning and laser SLAM navigation, it enables autonomous navigation and precise positioning in complex environments. Supporting 500kg load capacity and multi-machine collaborative operations, significantly improving factory logistics efficiency and warehouse automation levels.",
+      "coreAdvantages": "Multi-machine unified scheduling, intelligent path planning, large load capacity, multi-scenario adaptation",
+      "typicalApplications": "Factory internal logistics, warehouse handling, distribution centers, multi-machine collaborative operations, intelligent scheduling"
+    },
+    "pharmaceutical-automation": {
+      "title": "Pharmaceutical Automation",
+      "description": "Focusing on automation needs in the biopharmaceutical industry, based on AiROS robot operating system and high-precision control technology, providing intelligent solutions for biological laboratories and pharmaceutical companies. Through personalized prescription pharmaceutical technology and laboratory automation equipment, it enables full-process automation of drug research, production, and testing, serving well-known customers such as Huazhi Biology and PerkinElmer.",
+      "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic substitution",
+      "typicalApplications": "Laboratory automation, personalized prescription drugs, drug preparation, biological sample processing, quality testing"
+    },
+    "precision-assembly": {
+      "title": "Precision Assembly",
+      "description": "Based on four-axis and six-axis robotic arm technology, providing high-precision assembly solutions with 0.02mm repeat positioning accuracy. Through advanced motion control algorithms and vision-guided technology, supporting 6000mm/s high-speed motion to achieve precise assembly of complex products. Widely applied in 3C electronics, optical devices, precision instruments and other high-end manufacturing fields, helping customers achieve high-quality, high-efficiency automated production.",
+      "coreAdvantages": "0.02mm repeat positioning accuracy, 6000mm/s high-speed motion, multi-axis coordinated control, vision guidance",
+      "typicalApplications": "3C electronics assembly, optical device assembly, precision instrument manufacturing, high-speed high-precision operations, flexible assembly lines"
+    },
     "composite-systems": {
       "title": "Composite Systems",
       "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
