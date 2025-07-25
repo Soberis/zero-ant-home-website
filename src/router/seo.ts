@@ -1,27 +1,18 @@
 import { RouteLocationNormalized } from "vue-router";
 import { setSEO, getSeoConfigs, setStructuredData } from "@/utils/seo";
-import i18n from "@/config/i18n";
 
 /**
  * 获取路由 SEO 配置映射
  */
 function getRouteSEOMap(): Record<string, any> {
-  const { t } = i18n.global;
-  const seoConfigs = getSeoConfigs(t);
+  const seoConfigs = getSeoConfigs();
   return {
     Home: seoConfigs.home,
     About: seoConfigs.about,
     SystemProducts: seoConfigs.products,
     RobotProducts: seoConfigs.products,
-    Applications: seoConfigs.applications,
     Solutions: seoConfigs.solutions,
     Support: seoConfigs.support,
-    Contact: seoConfigs.contact,
-    Video: {
-      title: "视频中心",
-      description: "零蚁科技视频中心 - 观看产品演示和技术介绍视频。",
-      keywords: "零蚁科技,视频中心,产品演示,技术介绍",
-    },
     Careers: {
       title: "人才招聘",
       description: "零蚁科技人才招聘 - 加入我们，共同打造最酷的机器人。",
@@ -123,52 +114,6 @@ export function setupProductSEO(
     description: productDescription,
     url: currentUrl,
     manufacturer: {
-      "@type": "Organization",
-      name: "零蚁科技",
-      url: baseUrl,
-    },
-  };
-
-  setStructuredData(structuredData);
-}
-
-/**
- * 设置应用场景详情页 SEO
- * @param applicationName 应用场景名称
- * @param applicationDescription 应用场景描述
- * @param to 目标路由
- */
-export function setupApplicationSEO(
-  applicationName: string,
-  applicationDescription: string,
-  to: RouteLocationNormalized
-) {
-  const baseUrl = "https://zeroant.com";
-  const currentUrl = `${baseUrl}${to.path}`;
-
-  setSEO({
-    title: `${applicationName} - 应用场景`,
-    description: applicationDescription,
-    keywords: `零蚁科技,${applicationName},应用场景,智能物流`,
-    ogTitle: `${applicationName} - 零蚁科技`,
-    ogDescription: applicationDescription,
-    ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
-    twitterTitle: `${applicationName} - 零蚁科技`,
-    twitterDescription: applicationDescription,
-    twitterImage: `${baseUrl}/logo.png`,
-    canonical: currentUrl,
-    siteName: "零蚁科技",
-  });
-
-  // 应用场景结构化数据
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: applicationName,
-    description: applicationDescription,
-    url: currentUrl,
-    author: {
       "@type": "Organization",
       name: "零蚁科技",
       url: baseUrl,

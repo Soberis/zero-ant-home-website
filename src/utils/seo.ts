@@ -1,5 +1,3 @@
-import { useI18n } from 'vue-i18n'
-
 /**
  * SEO 元数据接口
  */
@@ -128,42 +126,33 @@ export function setStructuredData(data: Record<string, any>) {
 /**
  * 预定义的页面 SEO 配置
  */
-export function getSeoConfigs(t: any) {
+export function getSeoConfigs() {
   return {
     home: {
-      title: t('seo.pages.home.title'),
-      description: t('seo.pages.home.description'),
-      keywords: t('seo.pages.home.keywords'),
+      title: '首页',
+      description: 'ZeroAnt Technology - 专业的机器人技术解决方案提供商，致力于工业自动化和智能制造',
+      keywords: '机器人技术,工业自动化,智能制造,ZeroAnt,零蚁科技',
     },
     about: {
-      title: t('seo.pages.about.title'),
-      description: t('seo.pages.about.description'),
-      keywords: t('seo.pages.about.keywords'),
+      title: '关于我们',
+      description: '了解ZeroAnt Technology的发展历程、企业文化和技术实力',
+      keywords: '关于我们,企业介绍,公司简介,ZeroAnt Technology',
     },
     products: {
-      title: t('seo.pages.products.title'),
-      description: t('seo.pages.products.description'),
-      keywords: t('seo.pages.products.keywords'),
+      title: '产品中心',
+      description: '探索ZeroAnt Technology的创新产品线，包括工业机器人、自动化设备等',
+      keywords: '产品中心,工业机器人,自动化设备,机器人产品',
     },
-    applications: {
-      title: t('seo.pages.applications.title'),
-      description: t('seo.pages.applications.description'),
-      keywords: t('seo.pages.applications.keywords'),
-    },
+
     solutions: {
-      title: t('seo.pages.solutions.title'),
-      description: t('seo.pages.solutions.description'),
-      keywords: t('seo.pages.solutions.keywords'),
+      title: '解决方案',
+      description: '专业的机器人技术解决方案，满足不同行业的自动化需求',
+      keywords: '解决方案,技术方案,自动化方案,机器人方案',
     },
     support: {
-      title: t('seo.pages.support.title'),
-      description: t('seo.pages.support.description'),
-      keywords: t('seo.pages.support.keywords'),
-    },
-    contact: {
-      title: t('seo.pages.contact.title'),
-      description: t('seo.pages.contact.description'),
-      keywords: t('seo.pages.contact.keywords'),
+      title: '技术支持',
+      description: '获取专业的技术支持服务，包括产品咨询、技术文档和售后服务',
+      keywords: '技术支持,售后服务,产品咨询,技术文档',
     },
   }
 }

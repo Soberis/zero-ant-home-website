@@ -5,64 +5,35 @@
   "slogan2": "Let robots be everywhere",
   "nav": {
     "home": "首页",
-    "products": "产品",
     "systemProducts": "系统产品",
-    "robotScheduler": "移动机器人调度系统",
+    "multiOSVM": "多OS混合部署嵌入式虚拟机",
     "industrialRTOS": "国产工业实时操作系统",
     "airos": "AiROS机器人操作系统",
-    "multiOSVM": "多OS混合部署嵌入式虚拟机",
+    "robotScheduler": "移动机器人调度系统",
     "robotProducts": "机器人产品",
-    "mobileRobot": "移动机器人",
-    "waferTransport": "晶圆传送机器人",
-    "labTransport": "实验室传送机器人",
-    "deliveryRobot": "餐饮配送机器人",
+    "gantry2D": "二自由度龙门架",
     "scara4Axis": "四轴机械臂",
     "arm6Axis": "六轴机械臂",
-    "lightArm": "轻型机械臂",
-    "dualArm": "双臂机械臂",
-    "dualArmLift": "双臂升降机械臂",
-    "singleArm": "单臂机械臂",
-    "compoundLift": "复合升降机械臂",
-    "humanoid": "双臂人形机器人",
     "dualArmHumanoid": "双臂人型机器人",
-    "gantry2D": "二自由度龙门架",
-    "fourAxisMobileCompound": "四轴移动复合机器人",
-    "paintRobot": "绘画机器人",
-    "realtimeTestBench": "实时测试台站",
-    "dualMotorBench": "双电机对转台站",
-    "grabBench": "机器人抓取台站",
-    "compoundGrabBench": "复合移动抓取台站",
-    "applications": "应用领域",
-    "autoParts": "汽车零部件",
-    "electronics": "电子产品",
-    "metal": "金属加工",
-    "food": "食品行业",
-    "medical": "医疗行业",
-    "retail": "零售行业",
-    "medicalAuto": "医药自动化",
-    "semiProcessing": "半导体加工",
+    "mobileRobot": "移动机器人",
+    "solutions": "行业解决方案",
     "videoCases": "视频案例",
-    "partners": "合作伙伴",
+    "moreScenarios": "更多场景",
+    "support": "服务支持",
+    "afterSales": "售后服务",
+    "download": "相关下载",
+    "faq": "常见问题",
+    "careers": "人才招聘",
     "about": "关于我们",
     "companyIntro": "公司介绍",
     "history": "发展历史",
     "honor": "成果荣誉",
     "coreValues": "核心价值观",
-    "team": "核心团队",
     "culture": "企业文化",
-    "careers": "人才招聘",
-    "support": "服务支持",
-    "afterSales": "售后服务",
-    "faq": "常见问题",
-    "news": "新闻资讯",
-    "newsDynamic": "新闻动态",
-    "exhibition": "展会活动",
-    "contact": "联系方式",
-    "download": "相关下载",
-    "consult": "咨询",
-    "solutions": "行业解决方案",
-    "coreScenarios": "核心场景",
-    "moreScenarios": "更多场景"
+    "contact": "联系我们",
+    "applications": "应用领域",
+    "medicalAuto": "医药自动化",
+    "semiProcessing": "半导体加工"
   },
   "solutionsPage": {
     "title": "行业解决方案",
@@ -126,15 +97,9 @@
     "masterDegree": "硕士以上学位占比",
     "averageAge": "平均年龄",
     "topUniversity": "双一流高校",
-    "marketProspect": "市场前景",
     "financingPlan": "融资计划",
-    "ordersInHand": "在手订单",
-    "financingAmount": "融资金额",
-    "preliminaryValuation": "初步估值",
     "people": "人",
     "yearsOld": "岁",
-    "millionYuan": "万",
-    "hundredMillionYuan": "亿",
     "timeline": {
       "2017": "启动工业操作系统内核研发",
       "2020": "启动机器人控制系统研发，获得浙江省重大专项支持",
@@ -164,19 +129,6 @@
       "item3": "<b>生态共建</b>：携手高校院所，打造『产学研用』闭环创新体系",
       "item4": "<b>极限进化</b>：每天进步一点点，持续迭代知识体系"
     }
-  },
-  "contacts": {
-    "title": "联系我们",
-    "description": "如需了解更多信息或咨询，请填写下方表单，我们会尽快与您联系。",
-    "name": "姓名",
-    "email": "邮箱",
-    "message": "留言内容",
-    "submit": "提交",
-    "submitting": "提交中...",
-    "reset": "重置",
-    "getInTouch": "联系方式",
-    "phone": "电话",
-    "address": "地址"
   },
   "videos": {
     "medical-automation": {
@@ -239,11 +191,6 @@
       "desc": "本视频展示了零蚁科技在个性化处方制药领域的创新应用，通过智能自动化技术实现个性化药物定制，提升医疗精准度和患者治疗效果。",
       "tags": ["个性化制药", "医疗自动化", "智能定制", "精准医疗"]
     },
-    "wafer-transfer": {
-      "title": "晶圆传送机器人运动控制",
-      "desc": "展示零蚁科技在半导体制造领域的晶圆传送机器人运动控制技术，实现高精度、高洁净度的晶圆搬运作业，确保半导体制造过程的可靠性与效率。",
-      "tags": ["晶圆传送", "半导体", "运动控制", "洁净作业"]
-    },
     "composite-robot-transfer": {
       "title": "复合机器人传板",
       "desc": "展示零蚁科技复合机器人在工业自动化中的传板应用，通过多功能集成与智能控制，实现复杂物料搬运任务的高效执行。",
@@ -278,108 +225,16 @@
       "title": "抛球抓球演示",
       "desc": "本视频展示了零蚁科技机器人在视觉识别与运动控制方面的先进技术，通过实时视觉追踪与精准抓取控制，实现机器人对高速运动物体的精确捕获，体现机器人控制系统的快速响应能力。",
       "tags": ["机器人控制", "视觉识别", "运动控制", "智能抓取"]
-    }
-  },
-  "seo": {
-    "siteName": "零蚁科技",
-    "defaultTitle": "零蚁科技 - 让机器人遍布角落，做最酷的机器人",
-    "defaultDescription": "让机器人遍布角落，做最酷的机器人",
-    "defaultKeywords": "机器人,自动化,智能制造,AGV,机械臂,零蚁科技",
-    "pages": {
-      "home": {
-        "title": "首页",
-        "description": "让机器人遍布角落，做最酷的机器人",
-        "keywords": "机器人,自动化,智能制造,AGV,机械臂,零蚁科技"
-      },
-      "about": {
-        "title": "关于我们",
-        "description": "杭州零蚁科技有限公司，专注机器人智能系统研发，打造国产开箱即用机器人智能操作系统AiROS",
-        "keywords": "零蚁科技,关于我们,机器人操作系统,AiROS,智能制造"
-      },
-      "products": {
-        "title": "产品中心",
-        "description": "零蚁科技产品中心，提供AGV自动导引车、机械臂、智能制造解决方案等先进机器人产品",
-        "keywords": "产品中心,AGV,机械臂,智能制造,机器人产品"
-      },
-      "pages": {
-        "videos": {
-          "title": "视频展示",
-          "noVideo": "暂无视频",
-          "loading": "加载中...",
-          "error": "视频加载失败"
-        },
-        "applications": {
-          "title": "应用场景",
-          "coreScenarios": "核心场景",
-          "medicalAutomation": "医疗自动化",
-          "semiconductorManufacturing": "半导体制造",
-          "intelligentManufacturing": "智能制造",
-          "surfaceTreatment": "表面处理",
-          "smartLogistics": "智能物流"
-        },
-        "contact": {
-          "wechatQr": "扫码添加企业微信",
-          "biliQr": "扫码关注B站"
-        },
-        "news": {
-          "title": "新闻资讯",
-          "content": "这里是新闻资讯页面内容",
-          "noNews": "暂无新闻"
-        }
-      },
-      "applications": {
-        "title": "应用场景",
-        "description": "零蚁科技机器人应用场景，涵盖医疗自动化、半导体制造、智能制造、表面处理等多个领域",
-        "keywords": "应用场景,医疗自动化,半导体制造,智能制造,表面处理"
-      },
-      "videos": {
-        "title": "视频展示",
-        "description": "零蚁科技机器人产品视频展示，包括医疗自动化、半导体加工、双机协作等应用案例",
-        "keywords": "视频展示,机器人演示,医疗自动化,半导体加工,双机协作"
-      },
-      "contact": {
-        "title": "联系我们",
-        "description": "联系零蚁科技，获取机器人智能系统解决方案，电话：0571-87759090",
-        "keywords": "联系我们,零蚁科技,机器人解决方案,智能制造咨询"
-      },
-      "solutions": {
-        "title": "解决方案",
-        "description": "零蚁科技解决方案，创新的智能物流解决方案，连接专业设备与应用场景",
-        "keywords": "零蚁科技,解决方案,智能物流,创新技术"
-      },
-      "support": {
-        "title": "服务支持",
-        "description": "零蚁科技服务支持，提供全方位的技术支持和售后服务",
-        "keywords": "零蚁科技,服务支持,技术支持,售后服务"
-      }
-    }
-  },
-  "validation": {
-    "required": {
-      "name": "请输入姓名",
-      "email": "请输入邮箱",
-      "message": "请输入留言内容",
-      "phone": "请输入电话号码"
     },
-    "format": {
-      "email": "邮箱格式不正确",
-      "phone": "电话号码格式不正确"
+    "robot-polishing-demo": {
+      "title": "机器人打磨工艺演示",
+      "desc": "本视频展示了零蚁科技机器人打磨工艺的完整流程，通过先进的路径规划算法和力控技术，实现高精度的表面处理作业，展现工业自动化中机器人打磨技术的卓越性能。",
+      "tags": ["机器人打磨", "表面处理", "力控技术", "工业自动化"]
     },
-    "length": {
-      "nameMin": "姓名至少需要2个字符",
-      "nameMax": "姓名不能超过50个字符",
-      "messageMin": "留言内容至少需要10个字符",
-      "messageMax": "留言内容不能超过500个字符"
-    }
-  },
-  "security": {
-    "password": {
-      "tooShort": "密码长度至少需要8位",
-      "tooWeak": "密码强度太弱",
-      "noUppercase": "密码需要包含大写字母",
-      "noLowercase": "密码需要包含小写字母",
-      "noNumbers": "密码需要包含数字",
-      "noSpecialChars": "密码需要包含特殊字符"
+    "rtos-ethercat-validation": {
+      "title": "RTOS-EtherCAT电机控制验证",
+      "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线技术的电机控制验证系统，通过毫秒级实时响应和多轴同步控制，实现高精度的工业运动控制解决方案。",
+      "tags": ["RTOS", "EtherCAT", "电机控制", "实时系统", "工业控制"]
     }
   },
   "applications": {
@@ -920,16 +775,15 @@
       }
     }
   },
+  "contacts": {
+    "phone": "电话",
+    "email": "邮箱",
+    "address": "地址"
+  },
   "footer": {
-    "companyFull": "杭州零蚁科技有限公司",
+    "companyFullName": "杭州零蚁科技有限公司",
     "address": "浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室",
-    "creditCode": "统一社会信用代码：91330108MAEC2L2H3U",
-    "teamSize": "团队规模18人，硕士以上学位占比94%",
-    "orders": "在手订单1600万",
-    "financing": "计划出让10%，融资2000万，初步估值2亿人民币",
     "wx": "微信公众号",
-    "dy": "抖音号",
-    "sp": "视频号",
     "bilibili": "B站官方号",
     "copyright": "版权所有",
     "telValue": "13001001954",

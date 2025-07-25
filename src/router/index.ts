@@ -8,7 +8,7 @@ import Home from "@/views/Home.vue";
 const Solutions = () => import("@/views/solutions/Solutions.vue");
 const Applications = () => import("@/views/applications/Applications.vue");
 const About = () => import("@/views/company/About.vue");
-const Contact = () => import("@/views/company/Contact.vue");
+
 const Video = () => import("@/views/media/Video.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
 const ProductDetail = () => import("@/views/products/ProductDetailView.vue");
@@ -61,12 +61,7 @@ const routes = [
     name: "About",
     component: About,
   },
-  // 联系我们
-  {
-    path: "/contact",
-    name: "Contact",
-    component: Contact,
-  },
+
   // 视频相关
   {
     path: "/video",

@@ -9,7 +9,7 @@
           >
           <div class="footer-col contact-col">
 
-            <h4>{{ $t('footer.companyFull') }}</h4>
+            <h4>{{ $t('footer.companyFullName') }}</h4>
 
             <div class="contact-info">
 
@@ -203,7 +203,7 @@
 
           <div class="footer-col contact-col">
 
-            <h4>{{ $t('footer.companyFull') }}</h4>
+            <h4>{{ $t('footer.companyFullName') }}</h4>
 
             <div class="contact-info">
 
@@ -255,7 +255,7 @@
     <div class="footer-bottom">
 
       <div>
-         ©2025 {{ $t('footer.companyFull') }} {{ $t('footer.copyright') }} <a
+         ©2025 {{ $t('footer.companyFullName') }} {{ $t('footer.copyright') }} <a
           href="https://beian.miit.gov.cn"
           target="_blank"
           rel="noopener"

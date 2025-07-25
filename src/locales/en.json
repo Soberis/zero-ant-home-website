@@ -5,81 +5,35 @@
   "slogan2": "Make the coolest robots",
   "nav": {
     "home": "Home",
-    "products": "Products",
-    "applications": "Applications",
-    "about": "About Us",
-    "contact": "Contact Us",
-    "download": "Downloads",
-    "consult": "Consult Online",
-    "gen72": "GEN72 Model",
-    "rml63": "RML63 Model",
-    "lightArm": "Light Arm",
-    "humanoid": "Dual-arm Humanoid Robot",
-    "dualArm": "Dual Arm Solutions",
-    "dualArmLift": "Dual Arm Lift Solutions",
-    "singleArm": "Single Arm Solutions",
-    "compoundLift": "Compound Lift Solutions",
-    "autoParts": "Automotive Parts",
-    "electronics": "Electronics",
-    "metal": "Metal Industry",
-    "food": "Food Industry",
-    "medical": "Medical Applications",
-    "retail": "Retail Solutions",
+    "systemProducts": "System Products",
+    "multiOSVM": "Multi-OS Embedded VM",
+    "industrialRTOS": "Industrial Real-Time OS",
+    "airos": "AiROS Robot OS",
+    "robotScheduler": "Robot Scheduler System",
+    "robotProducts": "Robot Products",
+    "gantry2D": "2D Gantry",
+    "scara4Axis": "SCARA 4-Axis Arm",
+    "arm6Axis": "6-Axis Arm",
+    "dualArmHumanoid": "Dual-Arm Humanoid Robot",
     "mobileRobot": "Mobile Robot",
-    "fourAxisArm": "4-Axis Robot Arm",
-    "sixAxisArm": "6-Axis Robot Arm",
-    "rtOs": "Real-Time OS",
-    "controlSystem": "Robot Control System",
-    "fourAxisMobileCompound": "4-Axis Mobile Compound Robot",
+    "solutions": "Solutions",
     "videoCases": "Video Cases",
-    "partners": "Partners",
-    "paintRobot": "Painting Robot",
-    "realtimeTestBench": "Real-time Test Bench",
-    "dualMotorBench": "Dual-motor Turntable",
-    "grabBench": "Robot Grabbing Bench",
-    "compoundGrabBench": "Compound Mobile Grabbing Bench",
-    "medicalAuto": "Medical Automation",
-    "semiProcessing": "Semiconductor Processing",
+    "moreScenarios": "More Scenarios",
     "support": "Support",
     "afterSales": "After-sales Service",
+    "download": "Downloads",
     "faq": "FAQ",
-    "news": "News",
-    "newsDynamic": "News & Updates",
-    "exhibition": "Exhibitions",
+    "careers": "Careers",
+    "about": "About Us",
     "companyIntro": "Company Introduction",
     "history": "Development History",
     "honor": "Honors",
+    "coreValues": "Core Values",
     "culture": "Corporate Culture",
-    "careers": "Careers",
-    "systemProducts": "System",
-    "robotProducts": "Robot",
-    "team": "Core Team",
-    "coreTeam": "Core Team",
-    "teamOverview": "Team Overview",
-    "teamSize": "Team Size",
-    "masterDegree": "Master's Degree Ratio",
-    "averageAge": "Average Age",
-    "topUniversity": "Top University Background",
-    "marketProspect": "Market Prospect",
-    "financingPlan": "Financing Plan",
-    "ordersInHand": "Orders in Hand",
-    "financingAmount": "Financing Amount",
-    "preliminaryValuation": "Preliminary Valuation",
-    "waferTransport": "Wafer Transport Robot",
-    "labTransport": "Lab Transport Robot",
-    "deliveryRobot": "Delivery Robot",
-    "robotScheduler": "Robot Scheduler System",
-    "industrialRTOS": "Industrial Real-Time OS",
-    "airos": "AiROS Robot OS",
-    "multiOSVM": "Multi-OS Embedded VM",
-    "scara4Axis": "SCARA 4-Axis Arm",
-    "arm6Axis": "6-Axis Arm",
-    "gantry2D": "2D Gantry",
-    "dualArmHumanoid": "Dual-Arm Humanoid Robot",
-    "solutions": "Solutions",
-    "coreScenarios": "Core Scenarios",
-    "moreScenarios": "More Scenarios",
-    "coreValues": "Core Values"
+    "contact": "Contact Us",
+    "applications": "Applications",
+    "medicalAuto": "Medical Automation",
+    "semiProcessing": "Semiconductor Processing"
   },
   "solutionsPage": {
     "title": "Industry Solutions",
@@ -137,10 +91,15 @@
       "emailTips": "Contact email:"
     },
     "culture": "Practical application, Integrity and honesty, Pragmatic development, Agile iteration",
+    "coreTeam": "Core Team",
+    "teamOverview": "Team Overview",
+    "teamSize": "Team Size",
+    "masterDegree": "Master's Degree and Above",
+    "averageAge": "Average Age",
+    "topUniversity": "Top Universities",
+    "financingPlan": "Financing Plan",
     "people": "people",
     "yearsOld": "years old",
-    "millionYuan": "million yuan",
-    "hundredMillionYuan": "hundred million yuan",
     "timeline": {
       "2017": "Started industrial operating system kernel R&D",
       "2020": "Launched robot control system R&D, received support from Zhejiang Province major project",
@@ -155,18 +114,6 @@
     "honor4": "Kernel real-time jitter ≤2us, supporting high-precision device applications",
     "honor5": "Backed by provincial key laboratories with deep technical expertise",
     "honor6": "Core team leads multiple national and provincial key projects",
-    "teamInfo": "Team size: 18 people, 94% with master's degree or above, average age 30, 90% from top universities",
-    "coreTeam": "Core Team",
-    "teamOverview": "Team Overview",
-    "teamSize": "Team size",
-    "masterDegree": "with master's degree or above",
-    "averageAge": "Average age",
-    "topUniversity": "from top universities",
-    "marketProspect": "Market Prospect",
-    "financingPlan": "Financing Plan",
-    "ordersInHand": "Orders in hand: 16 million yuan",
-    "financingAmount": "Financing amount: 20 million yuan",
-    "preliminaryValuation": "Preliminary valuation: 200 million yuan",
     "marketInfo": "In 2024, the global industrial robot market is about $70 billion, and the total potential market size of embodied robots is about $60 trillion.",
     "financing": "Plans to divest 10% equity, raise 20 million yuan, preliminary valuation of 200 million yuan.",
     "coreValues": {
@@ -184,24 +131,6 @@
       "item3": "<b>Ecosystem Co-construction</b>: Partnering with universities and research institutes to create a closed-loop innovation system of \"industry-university-research-application\"",
       "item4": "<b>Extreme Evolution</b>: Making a little progress every day, continuously iterating knowledge systems"
     }
-  },
-  "contactSection": {
-    "getInTouch": "Get in Touch",
-    "email": "Email Us",
-    "phone": "Call Us"
-  },
-  "contacts": {
-    "title": "Contact Us",
-    "description": "For more information or inquiries, please fill out the form below and we will get back to you as soon as possible.",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "submit": "Submit",
-    "submitting": "Submitting...",
-    "reset": "Reset",
-    "getInTouch": "Get in Touch",
-    "phone": "Phone",
-    "address": "Address"
   },
   "videos": {
     "medical-automation": {
@@ -247,233 +176,75 @@
       "desc": "Introduction to AGV automated guided vehicles with core features and application demonstrations.",
       "tags": ["AGV Product", "Automated Guidance", "Smart Manufacturing"]
     },
+    "composite-robot-transfer": {
+      "title": "Composite Robot Transfer",
+      "desc": "Advanced composite robot systems for complex material handling tasks with integrated mobile and manipulator capabilities.",
+      "tags": ["Composite Robot", "Transfer System", "Mobile Manipulation"]
+    },
     "ultrasound-medical-robot": {
       "title": "Ultrasound Medical Robot",
-      "desc": "Medical robots for automated ultrasound examinations, improving efficiency and accuracy.",
+      "desc": "Showcases ZeroAnt Technology's innovation in medical automation with ultrasound robots enabling automated ultrasound examinations, improving medical efficiency and examination accuracy.",
       "tags": ["Medical Robot", "Ultrasound Examination", "Medical Automation"]
     },
     "ur-robot-llm-motion-capture": {
       "title": "UR Robot LLM Motion Capture",
-      "desc": "UR robot with AI-powered motion capture for autonomous learning and complex task execution.",
-      "tags": [
-        "UR Robot",
-        "Large Language Model",
-        "Motion Capture",
-        "Smart Manufacturing"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's UR robot motion capture and intelligent control based on large language models, achieving autonomous learning and efficient execution of complex tasks through deep integration of AI and robotics.",
+      "tags": ["UR Robot", "Large Language Model", "Motion Capture", "Smart Manufacturing"]
     },
     "four-axis-robot-open-fridge": {
       "title": "Four-Axis Robot Opening Fridge",
-      "desc": "Four-axis robot demonstrating autonomous complex actions with high-precision motion control.",
-      "tags": [
-        "Four-Axis Robot",
-        "Automation",
-        "Smart Manufacturing",
-        "Motion Control"
-      ]
+      "desc": "Showcases ZeroAnt Technology's four-axis robot opening a fridge in automation scenarios, demonstrating autonomous execution of complex actions through high-precision motion control and intelligent perception.",
+      "tags": ["Four-Axis Robot", "Automation", "Smart Manufacturing", "Motion Control"]
     },
     "servo-motor-station": {
       "title": "Servo Motor Station",
-      "desc": "High-performance servo systems for precise positioning and efficient industrial automation.",
-      "tags": [
-        "Servo Motor",
-        "Automation",
-        "Smart Manufacturing",
-        "Industrial Control"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's servo motor station automation control and applications, achieving precise positioning and efficient operations through high-performance servo systems.",
+      "tags": ["Servo Motor", "Automation", "Smart Manufacturing", "Industrial Control"]
     },
     "personalized-prescription-pharmaceutical": {
       "title": "Personalized Prescription Pharmaceutical",
-      "desc": "Intelligent automation for personalized drug customization and precision medicine.",
-      "tags": [
-        "Personalized Pharmaceuticals",
-        "Medical Automation",
-        "Intelligent Customization",
-        "Precision Medicine"
-      ]
+      "desc": "Showcases ZeroAnt Technology's innovation in personalized prescription pharmaceuticals, achieving personalized drug customization through intelligent automation technology.",
+      "tags": ["Personalized Pharmaceuticals", "Medical Automation", "Intelligent Customization", "Precision Medicine"]
     },
     "mobile-transfer-robot": {
       "title": "Mobile Transfer Robot",
-      "desc": "Mobile robots with intelligent navigation for efficient automated handling in complex environments.",
-      "tags": [
-        "Mobile Robot",
-        "Automated Transfer",
-        "Intelligent Navigation",
-        "Logistics Automation"
-      ]
+      "desc": "Showcases ZeroAnt Technology's mobile transfer robot automation workflow, achieving efficient and precise material transfer between different workstations.",
+      "tags": ["Mobile Robot", "Transfer Operations", "Flexible Production", "Smart Logistics"]
     },
     "high-speed-precision-robot-arm": {
-      "title": "High-Speed Precision Robot Arm",
-      "desc": "High-speed, high-precision robot arm with advanced motion control for industrial automation.",
-      "tags": [
-        "Robot Arm",
-        "High-Speed High-Precision",
-        "Motion Control",
-        "Industrial Automation"
-      ]
+      "title": "High-Speed Precision Robot Arm Demo",
+      "desc": "Demonstrates ZeroAnt Technology's robot arm high-speed precision operation capabilities through advanced motion control algorithms and precision mechanical design.",
+      "tags": ["Robot Arm", "High-Speed Precision", "Motion Control", "Industrial Automation"]
     },
     "offline-programming": {
       "title": "Offline Programming",
-      "desc": "Advanced offline programming with digital simulation and virtual debugging for efficient robot development.",
-      "tags": [
-        "Offline Programming",
-        "Digital Simulation",
-        "Virtual Debugging",
-        "Smart Manufacturing"
-      ]
+      "desc": "Showcases ZeroAnt Technology's advanced offline programming technology, achieving efficient robot program development and optimization through digital simulation and virtual debugging.",
+      "tags": ["Offline Programming", "Digital Simulation", "Virtual Debugging", "Smart Manufacturing"]
     },
     "offline-programming-logo-drawing": {
       "title": "Offline Programming Logo Drawing",
-      "desc": "Advanced offline programming technology applied to precise logo drawing, featuring trajectory control and path planning for accurate rendering of complex logo patterns.",
-      "tags": [
-        "Offline Programming",
-        "Trajectory Control",
-        "Logo Drawing",
-        "Precision Control"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's offline programming technology in precisely drawing logo patterns through trajectory control and path planning.",
+      "tags": ["Offline Programming", "Trajectory Control", "Logo Drawing", "Precision Control"]
     },
     "palletizing-robot": {
       "title": "Palletizing Robot",
-      "desc": "Efficient palletizing robot application in logistics automation, featuring intelligent path planning and precise gripping control for high-efficiency stacking and handling operations.",
-      "tags": [
-        "Palletizing Robot",
-        "Logistics Automation",
-        "Smart Manufacturing",
-        "Industrial Robotics"
-      ]
+      "desc": "Showcases ZeroAnt Technology's palletizing robot efficient application in logistics automation through intelligent path planning and precise grasping control.",
+      "tags": ["Palletizing Robot", "Logistics Automation", "Smart Manufacturing", "Industrial Robot"]
     },
     "ball-catching-demo": {
-      "title": "Ball Catching Demonstration",
-      "desc": "Advanced robot vision recognition and motion control technology, demonstrating real-time visual tracking and precise grasping control for accurate capture of high-speed moving objects.",
-      "tags": [
-        "Robot Control",
-        "Vision Recognition",
-        "Motion Control",
-        "Intelligent Grasping"
-      ]
-    },
-    "rtos-ethercat-validation": {
-      "title": "RTOS-EtherCAT Motor Control",
-      "desc": "Real-time motor control validation with RTOS and EtherCAT for precise multi-axis coordination.",
-      "tags": [
-        "RTOS",
-        "EtherCAT",
-        "Motor Control",
-        "Real-time System",
-        "Industrial Control"
-      ]
+      "title": "Ball Catching Demo",
+      "desc": "Demonstrates ZeroAnt Technology's advanced robot technology in visual recognition and motion control through real-time visual tracking and precise grasping control.",
+      "tags": ["Robot Control", "Visual Recognition", "Motion Control", "Intelligent Grasping"]
     },
     "robot-polishing-demo": {
-      "title": "Robot Polishing Process",
-      "desc": "Complete robot polishing process with path planning and force control for advanced surface treatment.",
-      "tags": [
-        "Robot Polishing",
-        "Surface Treatment",
-        "Force Control Technology",
-        "Industrial Automation"
-      ]
-    }
-  },
-  "seo": {
-    "siteName": "ZeroAnt Technology",
-    "defaultTitle": "ZeroAnt Technology - Making Robots Everywhere, Building the Coolest Robots",
-    "defaultDescription": "Making robots everywhere, building the coolest robots",
-    "defaultKeywords": "robots,automation,smart manufacturing,AGV,robotic arm,ZeroAnt Technology",
-    "pages": {
-      "home": {
-        "title": "Home",
-        "description": "Making robots everywhere, building the coolest robots",
-        "keywords": "robots,automation,smart manufacturing,AGV,robotic arm,ZeroAnt Technology"
-      },
-      "about": {
-        "title": "About Us",
-        "description": "Hangzhou ZeroAnt Technology Co., Ltd., focusing on robot intelligent system R&D, building domestic ready-to-use robot intelligent operating system AiROS",
-        "keywords": "ZeroAnt Technology,about us,robot operating system,AiROS,smart manufacturing"
-      },
-      "products": {
-        "title": "Products",
-        "description": "ZeroAnt Technology product center, providing AGV automated guided vehicles, robotic arms, smart manufacturing solutions and other advanced robot products",
-        "keywords": "products,AGV,robotic arm,smart manufacturing,robot products"
-      },
-      "pages": {
-        "videos": {
-          "title": "Videos",
-          "noVideo": "No video available",
-          "loading": "Loading...",
-          "error": "Video loading failed"
-        },
-        "applications": {
-          "title": "Applications",
-          "coreScenarios": "Core Scenarios",
-          "medicalAutomation": "Medical Automation",
-          "semiconductorManufacturing": "Semiconductor Manufacturing",
-          "intelligentManufacturing": "Intelligent Manufacturing",
-          "surfaceTreatment": "Surface Treatment",
-          "smartLogistics": "Smart Logistics"
-        },
-        "contact": {
-          "wechatQr": "Scan to add WeChat",
-          "biliQr": "Follow us on Bilibili"
-        },
-        "news": {
-          "title": "News",
-          "content": "This is the news page content",
-          "noNews": "No news available"
-        }
-      },
-      "applications": {
-        "title": "Applications",
-        "description": "ZeroAnt Technology robot application scenarios, covering medical automation, semiconductor manufacturing, smart manufacturing, surface treatment and other fields",
-        "keywords": "applications,medical automation,semiconductor manufacturing,smart manufacturing,surface treatment"
-      },
-      "videos": {
-        "title": "Videos",
-        "description": "ZeroAnt Technology robot product video demonstrations, including medical automation, semiconductor processing, dual robot collaboration and other application cases",
-        "keywords": "videos,robot demonstration,medical automation,semiconductor processing,dual robot collaboration"
-      },
-      "contact": {
-        "title": "Contact Us",
-        "description": "Contact ZeroAnt Technology for robot intelligent system solutions, Phone: 0571-87759090",
-        "keywords": "contact us,ZeroAnt Technology,robot solutions,smart manufacturing consulting"
-      },
-      "solutions": {
-        "title": "Solutions",
-        "description": "ZeroAnt Technology solutions, innovative intelligent logistics solutions connecting professional equipment and application scenarios",
-        "keywords": "ZeroAnt Technology,solutions,intelligent logistics,innovative technology"
-      },
-      "support": {
-        "title": "Support",
-        "description": "ZeroAnt Technology support services, providing comprehensive technical support and after-sales service",
-        "keywords": "ZeroAnt Technology,support,technical support,after-sales service"
-      }
-    }
-  },
-  "validation": {
-    "required": {
-      "name": "Please enter your name",
-      "email": "Please enter your email",
-      "message": "Please enter your message",
-      "phone": "Please enter your phone number"
+      "title": "Robot Polishing Process Demo",
+      "desc": "Showcases ZeroAnt Technology's complete robot polishing process through advanced path planning algorithms and force control technology.",
+      "tags": ["Robot Polishing", "Surface Treatment", "Force Control Technology", "Industrial Automation"]
     },
-    "format": {
-      "email": "Invalid email format",
-      "phone": "Invalid phone number format"
-    },
-    "length": {
-      "nameMin": "Name must be at least 2 characters",
-      "nameMax": "Name cannot exceed 50 characters",
-      "messageMin": "Message must be at least 10 characters",
-      "messageMax": "Message cannot exceed 500 characters"
-    }
-  },
-  "security": {
-    "password": {
-      "tooShort": "Password must be at least 8 characters",
-      "tooWeak": "Password is too weak",
-      "noUppercase": "Password must contain uppercase letters",
-      "noLowercase": "Password must contain lowercase letters",
-      "noNumbers": "Password must contain numbers",
-      "noSpecialChars": "Password must contain special characters"
+    "rtos-ethercat-validation": {
+      "title": "RTOS-EtherCAT Motor Control Validation",
+      "desc": "Demonstrates ZeroAnt Technology's motor control validation system based on RTOS real-time operating system and EtherCAT bus technology.",
+      "tags": ["RTOS", "EtherCAT", "Motor Control", "Real-time System", "Industrial Control"]
     }
   },
   "applications": {
@@ -519,35 +290,59 @@
       "coreAdvantages": "Sub-millimeter precision, visual guidance, force control, flexible configuration",
       "typicalApplications": "Electronics assembly, automotive parts, precision instruments, optical devices, micro-components"
     },
+    "surface-treatment": {
+      "title": "Surface Treatment",
+      "description": "Six-axis and four-axis robot arms with advanced force control and path planning for polishing, grinding, welding, and assembly. Features 0.02mm positioning accuracy and 90,000-hour fault-free operation.",
+      "coreAdvantages": "High-precision positioning, force control, multi-axis coordination, long-term stability",
+      "typicalApplications": "Metal polishing, precision assembly, welding, surface treatment, deburring"
+    },
+    "smart-logistics": {
+      "title": "Smart Logistics",
+      "description": "Mobile robot scheduling with AGV guidance for unified multi-brand robot management. Features 360-degree radar and laser SLAM navigation with 500kg load capacity for autonomous operations in complex environments.",
+      "coreAdvantages": "Multi-robot scheduling, intelligent path planning, 500kg capacity, multi-scenario adaptation",
+      "typicalApplications": "Factory logistics, warehouse handling, distribution centers, collaborative operations"
+    },
+    "pharmaceutical-automation": {
+      "title": "Pharmaceutical Automation",
+      "description": "Biopharmaceutical automation using AiROS and high-precision control for labs and pharma companies. Enables personalized prescription technology and full-process automation for drug R&D, production, and testing. Serves customers like Huazhi Biology and PerkinElmer.",
+      "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic replacement",
+      "typicalApplications": "Lab automation, personalized prescriptions, drug preparation, sample processing, quality testing"
+    },
+    "precision-assembly": {
+      "title": "Precision Assembly",
+      "description": "High-precision robot arms with advanced vision systems for electronics, automotive, and precision instruments. Features sub-millimeter positioning and intelligent force control for complex component assembly with multi-axis coordination.",
+      "coreAdvantages": "Sub-millimeter precision, visual guidance, force control, flexible configuration",
+      "typicalApplications": "Electronics assembly, automotive parts, precision instruments, optical devices, micro-components"
+    },
     "ai-robotics": {
       "title": "AI Robotics",
-      "description": "AI-integrated robot control with autonomous learning and decision-making capabilities. Features deep learning algorithms and real-time perception for environmental adaptation and motion optimization with human-robot collaboration support.",
-      "coreAdvantages": "Autonomous learning, intelligent decisions, environmental adaptation, human-robot collaboration",
-      "typicalApplications": "Intelligent inspection, autonomous navigation, complex tasks, collaborative operations, adaptive manufacturing"
+      "description": "Based on large language models and artificial intelligence technology, developing embodied intelligent robot solutions. Through UR robot large language model action grasping technology, it enables autonomous learning and intelligent decision-making capabilities of robots. Combined with 14-axis design of dual-arm humanoid robots and AiROS operating system, it provides highly intelligent human-robot collaboration solutions, promoting robots into various industries.",
+      "coreAdvantages": "Large language model driven, 14-axis dual-arm design, autonomous learning capability, human-robot collaboration",
+      "typicalApplications": "Intelligent grasping, education and research, service robots, human-robot collaboration, embodied intelligence"
     },
     "industrial-control": {
       "title": "Industrial Control",
-      "description": "Domestic real-time OS with EtherCAT communication for high-performance industrial control. Features RTOS real-time control and multi-axis coordination with ≤10us jitter and 18-axis simultaneous control for complex equipment.",
-      "coreAdvantages": "≤10us real-time jitter, 18-axis control, domestic OS, EtherCAT communication",
-      "typicalApplications": "Multi-axis motion control, industrial automation, real-time systems, precision positioning, motion coordination"
+      "description": "Based on domestic industrial real-time operating system and EtherCAT bus technology, providing autonomous and controllable high-performance industrial control solutions. Through millisecond real-time response and 18-axis simultaneous control capabilities, it enables precise synchronous control and real-time coordinated motion of multi-axis motors. Supporting real-time jitter ≤10us, it meets stringent requirements of industrial automation and achieves domestic substitution of key technologies.",
+      "coreAdvantages": "Millisecond real-time response, 18-axis simultaneous control, autonomous and controllable, domestic substitution",
+      "typicalApplications": "Multi-axis motion control, servo motor stations, industrial automation, precision machining, real-time control systems"
     },
     "offline-programming": {
       "title": "Offline Programming",
-      "description": "Advanced digital simulation and virtual debugging for efficient robot programming. Features 3D simulation and virtual commissioning for rapid development without physical equipment, supporting multi-brand compatibility and complex scenes.",
-      "coreAdvantages": "Digital simulation, virtual debugging, multi-brand compatibility, rapid development",
-      "typicalApplications": "Robot path planning, virtual commissioning, program optimization, multi-robot coordination, scene simulation"
+      "description": "Based on multi-OS hybrid deployment embedded virtual machine technology, providing advanced offline programming and virtual simulation solutions. Through digital twin technology and virtual debugging environment, it enables efficient development and optimization of robot programs without requiring on-site physical objects. Supporting unified management of heterogeneous systems, it significantly improves programming efficiency and operational safety, reducing on-site debugging time and costs.",
+      "coreAdvantages": "Virtual simulation environment, digital twin technology, offline debugging, unified management of heterogeneous systems",
+      "typicalApplications": "Robot offline programming, process path simulation, virtual debugging verification, complex trajectory planning, system integration testing"
     },
     "intelligent-navigation": {
       "title": "Intelligent Navigation",
-      "description": "360-degree radar and laser SLAM technology for high-precision autonomous navigation. Features advanced path planning and real-time obstacle avoidance for safe movement in complex environments with multi-robot collaboration support.",
-      "coreAdvantages": "360-degree radar, laser SLAM, real-time obstacle avoidance, multi-robot collaboration",
-      "typicalApplications": "Autonomous mobile robots, warehouse navigation, factory logistics, outdoor patrol, robot coordination"
+      "description": "Based on 360-degree LiDAR scanning and laser SLAM technology, providing advanced robot intelligent navigation and environmental perception solutions. Through comprehensive environmental perception and millimeter-level precise positioning technology, combined with mobile robot scheduling systems, it provides reliable autonomous navigation capabilities for AGVs and mobile robots. It enables intelligent path planning, dynamic obstacle avoidance, and multi-machine collaborative operations in complex environments, supporting 500kg load capacity.",
+      "coreAdvantages": "360-degree LiDAR scanning, laser SLAM positioning, intelligent path planning, multi-machine collaborative navigation",
+      "typicalApplications": "AGV intelligent navigation, dynamic environment mapping, real-time obstacle avoidance, optimal path planning, multi-robot scheduling"
     },
     "composite-systems": {
       "title": "Composite Systems",
-      "description": "Multi-OS embedded systems integrating multiple robot types and automation equipment. Features unified scheduling and coordinated control for seamless collaboration between different robots, supporting complex production and flexible manufacturing.",
-      "coreAdvantages": "Multi-OS integration, unified scheduling, seamless collaboration, flexible manufacturing",
-      "typicalApplications": "Integrated production lines, multi-robot collaboration, flexible manufacturing, process automation, smart factories"
+      "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
+      "coreAdvantages": "Multi-functional integration, intelligent scheduling, flexible production, unified management of heterogeneous systems",
+      "typicalApplications": "Composite robot applications, intelligent manufacturing, automated logistics, multi-task collaboration, flexible production lines"
     }
   },
   "products": {
@@ -659,6 +454,12 @@
           "3+ years of experience in robotics system development",
           "Familiar with ROS, motion control, path planning technologies",
           "Good teamwork and communication skills"
+        ],
+        "downloads": [
+          {
+            "name": "Technical Specifications.pdf",
+            "url": "/downloads/dual-arm-humanoid-specs.pdf"
+          }
         ]
       },
       "softwareEngineer": {
@@ -882,14 +683,14 @@
           },
           {
             "title": "Automotive Parts Processing",
-            "desc": "Provide high-precision parts handling solutions for the automotive manufacturing industry."
+            "desc": "Provide high-precision parts handling solutions for automotive manufacturing."
           }
         ],
         "params": [
           { "key": "Working Stroke", "value": "X-axis: 1000mm, Y-axis: 800mm" },
-          { "key": "Repeatability", "value": "±0.02mm" },
-          { "key": "Max Speed", "value": "2m/s" },
-          { "key": "Max Load", "value": "50kg" }
+          { "key": "Repeat Positioning Accuracy", "value": "±0.02mm" },
+          { "key": "Maximum Speed", "value": "2m/s" },
+          { "key": "Maximum Load", "value": "50kg" }
         ],
         "downloads": [
           {
@@ -900,19 +701,19 @@
       },
       "scara-4axis": {
         "title": "4-Axis SCARA Robot",
-        "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications with high-speed motion and precision positioning capabilities.",
+        "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications, with high-speed motion and precision positioning capabilities.",
         "features": [
-          "High-speed motion with short cycle time",
-          "High-precision repeatability suitable for precision operations",
-          "Compact structure, easy to integrate",
+          "High-speed motion with short cycle times",
+          "High-precision repeat positioning suitable for precision operations",
+          "Compact structure for easy integration",
           "Support for quick change of various end tools",
           "Open control interface for easy secondary development",
-          "Intelligent vision guidance with adaptive working environment"
+          "Intelligent visual guidance for adaptive operation environment"
         ],
         "cases": [
           {
             "title": "Electronic Component Assembly",
-            "desc": "Applied in electronics manufacturing for efficient automated assembly."
+            "desc": "Applied in electronics manufacturing to achieve efficient automated assembly."
           },
           {
             "title": "Automatic Sorting and Packaging",
@@ -921,9 +722,9 @@
         ],
         "params": [
           { "key": "Working Radius", "value": "600mm" },
-          { "key": "Repeatability", "value": "±0.05mm" },
-          { "key": "Max Load", "value": "3kg" },
-          { "key": "Max Speed", "value": "10m/s" }
+          { "key": "Repeat Positioning Accuracy", "value": "±0.05mm" },
+          { "key": "Maximum Load", "value": "3kg" },
+          { "key": "Maximum Speed", "value": "10m/s" }
         ],
         "downloads": [
           {
@@ -934,135 +735,120 @@
       },
       "arm-6axis": {
         "title": "6-Axis Robotic Arm",
-        "desc": "Complex trajectory control capability, suitable for welding, spraying, assembly and various industrial scenarios. Six-degree-of-freedom design provides maximum flexibility.",
+        "desc": "Complex trajectory control capability, suitable for welding, spraying, assembly and various industrial scenarios, six-degree-of-freedom design provides maximum flexibility.",
         "features": [
           "Six-degree-of-freedom design with high flexibility",
           "High-precision trajectory control",
           "Strong load capacity",
-          "Multiple programming method support",
+          "Support for multiple programming methods",
           "Rich communication interfaces",
           "Industrial-grade protection design"
         ],
         "cases": [
           {
             "title": "Automotive Welding Production Line",
-            "desc": "Achieve automated welding operations for car body manufacturing in automotive industry."
+            "desc": "Achieve automated body welding operations in automotive manufacturing."
           },
           {
             "title": "Precision Assembly Operations",
-            "desc": "Suitable for high-precision assembly requirements in aerospace and other industries."
+            "desc": "Suitable for high-precision assembly requirements in aerospace and other fields."
           }
         ],
         "params": [
           { "key": "Working Radius", "value": "1400mm" },
-          { "key": "Repeatability", "value": "±0.03mm" },
-          { "key": "Max Load", "value": "10kg" },
-          {
-            "key": "Programming Methods",
-            "value": "Teaching + Offline + Graphical Programming"
-          },
-          {
-            "key": "Communication Interfaces",
-            "value": "Ethernet, Modbus, Profinet"
-          },
-          { "key": "Protection Rating", "value": "IP54" },
-          { "key": "Operating Temperature", "value": "0°C~45°C" },
-          { "key": "Power Specifications", "value": "AC 380V, Three-phase" },
-          { "key": "Installation Method", "value": "Floor/Inverted/Side Mount" }
+          { "key": "Repeat Positioning Accuracy", "value": "±0.03mm" },
+          { "key": "Maximum Load", "value": "10kg" },
+          { "key": "Protection Level", "value": "IP54" }
         ],
         "downloads": [
           {
-            "name": "Technical Specifications.pdf",
-            "url": "/downloads/arm-6axis-specs.pdf"
+            "name": "Product Manual.pdf",
+            "url": "/downloads/arm-6axis-manual.pdf"
           }
         ]
       },
       "dual-arm-humanoid": {
         "title": "Dual-Arm Humanoid Robot",
-        "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements. Humanoid design facilitates human-robot collaboration.",
+        "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements.",
         "features": [
-          "Dual-arm collaborative operation with high flexibility",
-          "Humanoid design facilitating human-robot collaboration",
-          "Advanced perception systems",
-          "Intelligent decision-making and path planning",
-          "Modular joint design",
-          "Safety protection mechanisms"
+          "14-axis dual-arm design with high flexibility",
+          "Advanced motion control algorithms",
+          "Intelligent force control technology",
+          "Rich end-effector compatibility",
+          "Human-robot collaboration capability",
+          "Modular hardware architecture"
         ],
         "cases": [
           {
             "title": "Complex Assembly Operations",
-            "desc": "Achieve dual-hand collaborative assembly of complex products in precision manufacturing."
+            "desc": "Suitable for complex assembly tasks requiring dual-arm coordination."
           },
           {
             "title": "Service Robot Applications",
-            "desc": "Provide humanized services in hotels, hospitals and other venues."
+            "desc": "Applied in service industries requiring flexible human-robot interaction."
           }
         ],
         "params": [
-          {
-            "key": "Degrees of Freedom",
-            "value": "14 DOF total for dual arms"
-          },
-          { "key": "Arm Span", "value": "1600mm" },
-          { "key": "Single Arm Load", "value": "5kg" },
-          { "key": "Repeatability", "value": "±0.1mm" }
+          { "key": "Degrees of Freedom", "value": "14 axes (7 per arm)" },
+          { "key": "Repeat Positioning Accuracy", "value": "±0.05mm" },
+          { "key": "Maximum Load", "value": "5kg per arm" },
+          { "key": "Working Range", "value": "800mm per arm" }
         ],
         "downloads": [
           {
-            "name": "Application Cases.pdf",
-            "url": "/downloads/dual-arm-cases.pdf"
+            "name": "Product Manual.pdf",
+            "url": "/downloads/dual-arm-humanoid-manual.pdf"
           }
         ]
       },
       "mobile-robot": {
         "title": "Mobile Robot",
-        "desc": "Autonomous navigation with multi-sensor fusion, suitable for intelligent logistics in factories, warehouses and other scenarios with strong environmental adaptability.",
+        "desc": "Autonomous navigation with multi-sensor fusion, suitable for intelligent logistics in factories, warehouses and other scenarios.",
         "features": [
-          "Laser SLAM autonomous navigation",
-          "Multi-sensor fusion perception",
-          "Intelligent obstacle avoidance and path planning",
-          "Modular carrier design",
-          "Cloud scheduling management",
-          "Long endurance capability"
+          "360-degree LiDAR scanning for environmental perception",
+          "Laser SLAM navigation and positioning",
+          "Multi-sensor fusion technology",
+          "Intelligent path planning and obstacle avoidance",
+          "500kg load capacity",
+          "Multi-robot collaborative scheduling"
         ],
         "cases": [
           {
-            "title": "Smart Factory Logistics Scheduling",
-            "desc": "Achieve intelligent transportation of raw materials and finished products in manufacturing factories."
+            "title": "Factory Intelligent Logistics",
+            "desc": "Achieve automated material handling in manufacturing environments."
           },
           {
-            "title": "Warehouse Goods Handling",
-            "desc": "Improve warehouse operation efficiency and achieve automated goods handling."
+            "title": "Warehouse Automation",
+            "desc": "Intelligent storage and retrieval operations in warehouse environments."
           }
         ],
         "params": [
-          { "key": "Max Load", "value": "500kg" },
-          { "key": "Max Speed", "value": "1.5m/s" },
-          { "key": "Endurance", "value": "8 hours" },
-          { "key": "Positioning Accuracy", "value": "±10mm" }
+          { "key": "Navigation Method", "value": "Laser SLAM + Visual Navigation" },
+          { "key": "Load Capacity", "value": "500kg" },
+          { "key": "Positioning Accuracy", "value": "±10mm" },
+          { "key": "Operating Time", "value": "8 hours continuous" }
         ],
         "downloads": [
           {
-            "name": "Navigation System Guide.pdf",
-            "url": "/downloads/mobile-robot-navigation.pdf"
+            "name": "Product Manual.pdf",
+            "url": "/downloads/mobile-robot-manual.pdf"
           }
         ]
       }
     }
   },
+  "contacts": {
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address"
+  },
   "footer": {
-    "companyFull": "Hangzhou ZeroAnt Technology Co., Ltd.",
-    "address": "Room 310, Building 1, No. 99 Juhang Lane, Changhe Street, Binjiang District, Hangzhou, Zhejiang Province, China",
-    "creditCode": "Unified Social Credit Code: 91330108MAEC2L2H3U",
-    "teamSize": "Team size: 18 people, 94% with master's degree or above",
-    "orders": "Orders in hand: 16 million yuan",
-    "financing": "Plans to divest 10%, raise 20 million yuan, preliminary valuation of 200 million yuan",
+    "companyFullName": "Hangzhou ZeroAnt Technology Co., Ltd.",
+    "address": "Room 1-501, Building 1, No. 998 Wenyi West Road, Yuhang District, Hangzhou, Zhejiang Province",
     "wx": "WeChat Official Account",
-    "dy": "Douyin",
-    "sp": "Video Channel",
-    "bilibili": "Bilibili",
-    "copyright": "All rights reserved",
+    "bilibili": "Bilibili Official Account",
+    "copyright": "All Rights Reserved",
     "telValue": "13001001954",
-    "icpNumber": "ICP Filing: 浙ICP备2022031941号-4"
+    "icpNumber": "ICP Record No.: Zhe ICP Bei 2022031941-4"
   }
 }
