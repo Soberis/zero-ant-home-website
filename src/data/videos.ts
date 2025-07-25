@@ -16,8 +16,11 @@ import personalizedPrescriptionImg from "@/assets/images/videos/个性化处方�
 import mobileTransferRobotImg from "@/assets/images/videos/移动传送机器人.png";
 import highSpeedPrecisionRobotArmImg from "@/assets/images/videos/机械臂高速高精度演示.png";
 import offlineProgrammingImg from "@/assets/images/videos/离线编程.png";
+import offlineProgrammingLogoDrawingImg from "@/assets/images/videos/离线编程绘制logo.png";
 import rtosEthercatImg from "@/assets/images/videos/RTOS-EtherCAT电机控制验证.png";
 import robotPolishingDemoImg from "@/assets/images/videos/机器人打磨工艺演示.png";
+import palletizingRobotImg from "@/assets/images/videos/码垛机器人.png";
+import ballCatchingDemoImg from "@/assets/images/videos/抛球抓球演示.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -226,6 +229,15 @@ export const videoMap: VideoMapData = {
     tags: ["离线编程", "数字化仿真", "虚拟调试", "智能制造"],
     publishDate: "2024-05-25",
   },
+  "offline-programming-logo-drawing": {
+    slug: "offline-programming-logo-drawing",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1R6bUznE1C/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.offline-programming-logo-drawing.title",
+    desc: "videos.offline-programming-logo-drawing.desc",
+    tags: ["离线编程", "轨迹控制", "数字化仿真", "智能制造", "logo绘制"],
+    publishDate: "2024-06-20",
+  },
   "rtos-ethercat-validation": {
     slug: "rtos-ethercat-validation",
     type: "bilibili",
@@ -243,6 +255,24 @@ export const videoMap: VideoMapData = {
     desc: "videos.robot-polishing-demo.desc",
     tags: ["机器人打磨", "表面处理", "力控技术", "工业自动化"],
     publishDate: "2024-05-30",
+  },
+  "palletizing-robot": {
+    slug: "palletizing-robot",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1d6bUznEue/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.palletizing-robot.title",
+    desc: "videos.palletizing-robot.desc",
+    tags: ["码垛机器人", "物流自动化", "智能制造", "工业机器人"],
+    publishDate: "2024-06-15",
+  },
+  "ball-catching-demo": {
+    slug: "ball-catching-demo",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1R6bUznEkM/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.ball-catching-demo.title",
+    desc: "videos.ball-catching-demo.desc",
+    tags: ["机器人控制", "视觉识别", "运动控制", "智能抓取"],
+    publishDate: "2024-06-15",
   },
 };
 
@@ -310,11 +340,26 @@ export const videoCards: VideoCard[] = [
     img: highSpeedPrecisionRobotArmImg,
     slug: "high-speed-precision-robot-arm",
   },
+  {
+    title: "码垛机器人",
+    img: palletizingRobotImg,
+    slug: "palletizing-robot",
+  },
+  {
+    title: "抛球抓球演示",
+    img: ballCatchingDemoImg,
+    slug: "ball-catching-demo",
+  },
   // 基础技术
   {
     title: "离线编程",
     img: offlineProgrammingImg,
     slug: "offline-programming",
+  },
+  {
+    title: "离线编程绘制logo",
+    img: offlineProgrammingLogoDrawingImg,
+    slug: "offline-programming-logo-drawing",
   },
   {
     title: "RTOS-EtherCAT电机控制验证",

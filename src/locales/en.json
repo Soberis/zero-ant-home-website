@@ -92,32 +92,32 @@
     "description": "Focusing on medical automation and semiconductor processing, while covering intelligent upgrade solutions for multiple industries"
   },
   "supportPage": {
-      "title": "After-sales Service",
-      "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
-      "fastResponse": "Rapid problem resolution within 12 hours",
-      "dedicatedService": "7×24 hours dedicated service group response",
-      "relatedDownloads": "Related Downloads",
-      "preparingMessage": "Engineers are carefully preparing, please stay tuned",
-      "faqTitle": "Frequently Asked Questions",
-      "downloads": {
-        "productManual": "Product Manual",
-        "jointMaterials": "Joint Materials"
-      },
-      "faqs": {
-        "navigation": {
-          "question": "What navigation methods do your mobile robots support?",
-          "answer": "Our mobile robots support multiple navigation methods including laser SLAM, visual navigation, QR code navigation, etc. They can be flexibly configured according to customer site environments to meet diverse application needs."
-        },
-        "development": {
-          "question": "Does the robot control system support secondary development and system integration?",
-          "answer": "Yes. We provide open SDK and API for customers to facilitate secondary development and integration with third-party systems, helping to achieve personalized function expansion."
-        },
-        "customization": {
-          "question": "Can robots or systems be customized according to customer requirements?",
-          "answer": "Yes. We support custom software and hardware development, including structure, functions, interfaces and other aspects. Please contact us to discuss specific requirements."
-        }
-      }
+    "title": "After-sales Service",
+    "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
+    "fastResponse": "Rapid problem resolution within 12 hours",
+    "dedicatedService": "7×24 hours dedicated service group response",
+    "relatedDownloads": "Related Downloads",
+    "preparingMessage": "Engineers are carefully preparing, please stay tuned",
+    "faqTitle": "Frequently Asked Questions",
+    "downloads": {
+      "productManual": "Product Manual",
+      "jointMaterials": "Joint Materials"
     },
+    "faqs": {
+      "navigation": {
+        "question": "What navigation methods do your mobile robots support?",
+        "answer": "Our mobile robots support multiple navigation methods including laser SLAM, visual navigation, QR code navigation, etc. They can be flexibly configured according to customer site environments to meet diverse application needs."
+      },
+      "development": {
+        "question": "Does the robot control system support secondary development and system integration?",
+        "answer": "Yes. We provide open SDK and API for customers to facilitate secondary development and integration with third-party systems, helping to achieve personalized function expansion."
+      },
+      "customization": {
+        "question": "Can robots or systems be customized according to customer requirements?",
+        "answer": "Yes. We support custom software and hardware development, including structure, functions, interfaces and other aspects. Please contact us to discuss specific requirements."
+      }
+    }
+  },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
     "description": "Our four-axis robotic arms are designed to enhance efficiency and precision in the medical field.",
@@ -207,7 +207,11 @@
     "medical-automation": {
       "title": "Medical Automation",
       "desc": "Showcases automated item transfer and intelligent scheduling in hospitals and labs, improving efficiency and safety.",
-      "tags": ["Medical Automation", "Intelligent Scheduling", "Hospital Logistics"]
+      "tags": [
+        "Medical Automation",
+        "Intelligent Scheduling",
+        "Hospital Logistics"
+      ]
     },
     "semiconductor": {
       "title": "Semiconductor Processing",
@@ -217,7 +221,11 @@
     "dual-robot-collaboration": {
       "title": "Dual Robot Collaboration",
       "desc": "Showcases multi-robot collaborative operations for efficient automated handling and task allocation.",
-      "tags": ["Robot Collaboration", "Multi-robot Scheduling", "Smart Manufacturing"]
+      "tags": [
+        "Robot Collaboration",
+        "Multi-robot Scheduling",
+        "Smart Manufacturing"
+      ]
     },
     "polishing-robot": {
       "title": "Polishing Robot",
@@ -247,47 +255,123 @@
     "ur-robot-llm-motion-capture": {
       "title": "UR Robot LLM Motion Capture",
       "desc": "UR robot with AI-powered motion capture for autonomous learning and complex task execution.",
-      "tags": ["UR Robot", "Large Language Model", "Motion Capture", "Smart Manufacturing"]
+      "tags": [
+        "UR Robot",
+        "Large Language Model",
+        "Motion Capture",
+        "Smart Manufacturing"
+      ]
     },
     "four-axis-robot-open-fridge": {
       "title": "Four-Axis Robot Opening Fridge",
       "desc": "Four-axis robot demonstrating autonomous complex actions with high-precision motion control.",
-      "tags": ["Four-Axis Robot", "Automation", "Smart Manufacturing", "Motion Control"]
+      "tags": [
+        "Four-Axis Robot",
+        "Automation",
+        "Smart Manufacturing",
+        "Motion Control"
+      ]
     },
     "servo-motor-station": {
       "title": "Servo Motor Station",
       "desc": "High-performance servo systems for precise positioning and efficient industrial automation.",
-      "tags": ["Servo Motor", "Automation", "Smart Manufacturing", "Industrial Control"]
+      "tags": [
+        "Servo Motor",
+        "Automation",
+        "Smart Manufacturing",
+        "Industrial Control"
+      ]
     },
     "personalized-prescription-pharmaceutical": {
       "title": "Personalized Prescription Pharmaceutical",
       "desc": "Intelligent automation for personalized drug customization and precision medicine.",
-      "tags": ["Personalized Pharmaceuticals", "Medical Automation", "Intelligent Customization", "Precision Medicine"]
+      "tags": [
+        "Personalized Pharmaceuticals",
+        "Medical Automation",
+        "Intelligent Customization",
+        "Precision Medicine"
+      ]
     },
     "mobile-transfer-robot": {
       "title": "Mobile Transfer Robot",
       "desc": "Mobile robots with intelligent navigation for efficient automated handling in complex environments.",
-      "tags": ["Mobile Robot", "Automated Transfer", "Intelligent Navigation", "Logistics Automation"]
+      "tags": [
+        "Mobile Robot",
+        "Automated Transfer",
+        "Intelligent Navigation",
+        "Logistics Automation"
+      ]
     },
     "high-speed-precision-robot-arm": {
       "title": "High-Speed Precision Robot Arm",
       "desc": "High-speed, high-precision robot arm with advanced motion control for industrial automation.",
-      "tags": ["Robot Arm", "High-Speed High-Precision", "Motion Control", "Industrial Automation"]
+      "tags": [
+        "Robot Arm",
+        "High-Speed High-Precision",
+        "Motion Control",
+        "Industrial Automation"
+      ]
     },
     "offline-programming": {
       "title": "Offline Programming",
       "desc": "Advanced offline programming with digital simulation and virtual debugging for efficient robot development.",
-      "tags": ["Offline Programming", "Digital Simulation", "Virtual Debugging", "Smart Manufacturing"]
+      "tags": [
+        "Offline Programming",
+        "Digital Simulation",
+        "Virtual Debugging",
+        "Smart Manufacturing"
+      ]
+    },
+    "offline-programming-logo-drawing": {
+      "title": "Offline Programming Logo Drawing",
+      "desc": "Advanced offline programming technology applied to precise logo drawing, featuring trajectory control and path planning for accurate rendering of complex logo patterns.",
+      "tags": [
+        "Offline Programming",
+        "Trajectory Control",
+        "Logo Drawing",
+        "Precision Control"
+      ]
+    },
+    "palletizing-robot": {
+      "title": "Palletizing Robot",
+      "desc": "Efficient palletizing robot application in logistics automation, featuring intelligent path planning and precise gripping control for high-efficiency stacking and handling operations.",
+      "tags": [
+        "Palletizing Robot",
+        "Logistics Automation",
+        "Smart Manufacturing",
+        "Industrial Robotics"
+      ]
+    },
+    "ball-catching-demo": {
+      "title": "Ball Catching Demonstration",
+      "desc": "Advanced robot vision recognition and motion control technology, demonstrating real-time visual tracking and precise grasping control for accurate capture of high-speed moving objects.",
+      "tags": [
+        "Robot Control",
+        "Vision Recognition",
+        "Motion Control",
+        "Intelligent Grasping"
+      ]
     },
     "rtos-ethercat-validation": {
       "title": "RTOS-EtherCAT Motor Control",
       "desc": "Real-time motor control validation with RTOS and EtherCAT for precise multi-axis coordination.",
-      "tags": ["RTOS", "EtherCAT", "Motor Control", "Real-time System", "Industrial Control"]
+      "tags": [
+        "RTOS",
+        "EtherCAT",
+        "Motor Control",
+        "Real-time System",
+        "Industrial Control"
+      ]
     },
     "robot-polishing-demo": {
       "title": "Robot Polishing Process",
       "desc": "Complete robot polishing process with path planning and force control for advanced surface treatment.",
-      "tags": ["Robot Polishing", "Surface Treatment", "Force Control Technology", "Industrial Automation"]
+      "tags": [
+        "Robot Polishing",
+        "Surface Treatment",
+        "Force Control Technology",
+        "Industrial Automation"
+      ]
     }
   },
   "seo": {
@@ -311,33 +395,33 @@
         "description": "ZeroAnt Technology product center, providing AGV automated guided vehicles, robotic arms, smart manufacturing solutions and other advanced robot products",
         "keywords": "products,AGV,robotic arm,smart manufacturing,robot products"
       },
-  "pages": {
-    "videos": {
-      "title": "Videos",
-      "noVideo": "No video available",
-      "loading": "Loading...",
-      "error": "Video loading failed"
-    },
-    "applications": {
-      "title": "Applications",
-      "coreScenarios": "Core Scenarios",
-      "medicalAutomation": "Medical Automation",
-      "semiconductorManufacturing": "Semiconductor Manufacturing",
-      "intelligentManufacturing": "Intelligent Manufacturing",
-      "surfaceTreatment": "Surface Treatment",
-      "smartLogistics": "Smart Logistics"
-    },
-    "contact": {
-      "wechatQr": "Scan to add WeChat",
-      "biliQr": "Follow us on Bilibili"
-    },
-    "news": {
-      "title": "News",
-      "content": "This is the news page content",
-      "noNews": "No news available"
-    }
-  },
-  "applications": {
+      "pages": {
+        "videos": {
+          "title": "Videos",
+          "noVideo": "No video available",
+          "loading": "Loading...",
+          "error": "Video loading failed"
+        },
+        "applications": {
+          "title": "Applications",
+          "coreScenarios": "Core Scenarios",
+          "medicalAutomation": "Medical Automation",
+          "semiconductorManufacturing": "Semiconductor Manufacturing",
+          "intelligentManufacturing": "Intelligent Manufacturing",
+          "surfaceTreatment": "Surface Treatment",
+          "smartLogistics": "Smart Logistics"
+        },
+        "contact": {
+          "wechatQr": "Scan to add WeChat",
+          "biliQr": "Follow us on Bilibili"
+        },
+        "news": {
+          "title": "News",
+          "content": "This is the news page content",
+          "noNews": "No news available"
+        }
+      },
+      "applications": {
         "title": "Applications",
         "description": "ZeroAnt Technology robot application scenarios, covering medical automation, semiconductor manufacturing, smart manufacturing, surface treatment and other fields",
         "keywords": "applications,medical automation,semiconductor manufacturing,smart manufacturing,surface treatment"
@@ -363,7 +447,7 @@
         "keywords": "ZeroAnt Technology,support,technical support,after-sales service"
       }
     }
-   },
+  },
   "validation": {
     "required": {
       "name": "Please enter your name",
@@ -436,11 +520,11 @@
       "typicalApplications": "Electronics assembly, automotive parts, precision instruments, optical devices, micro-components"
     },
     "ai-robotics": {
-        "title": "AI Robotics",
-        "description": "AI-integrated robot control with autonomous learning and decision-making capabilities. Features deep learning algorithms and real-time perception for environmental adaptation and motion optimization with human-robot collaboration support.",
-        "coreAdvantages": "Autonomous learning, intelligent decisions, environmental adaptation, human-robot collaboration",
-        "typicalApplications": "Intelligent inspection, autonomous navigation, complex tasks, collaborative operations, adaptive manufacturing"
-      },
+      "title": "AI Robotics",
+      "description": "AI-integrated robot control with autonomous learning and decision-making capabilities. Features deep learning algorithms and real-time perception for environmental adaptation and motion optimization with human-robot collaboration support.",
+      "coreAdvantages": "Autonomous learning, intelligent decisions, environmental adaptation, human-robot collaboration",
+      "typicalApplications": "Intelligent inspection, autonomous navigation, complex tasks, collaborative operations, adaptive manufacturing"
+    },
     "industrial-control": {
       "title": "Industrial Control",
       "description": "Domestic real-time OS with EtherCAT communication for high-performance industrial control. Features RTOS real-time control and multi-axis coordination with ≤10us jitter and 18-axis simultaneous control for complex equipment.",
@@ -658,10 +742,16 @@
           { "key": "Supported OS Types", "value": "Linux, Windows, RTOS" },
           { "key": "VM Quantity", "value": "Up to 8 VMs" },
           { "key": "Real-time Performance", "value": "Microsecond response" },
-          { "key": "Memory Management", "value": "Dynamic allocation, max 32GB" }
+          {
+            "key": "Memory Management",
+            "value": "Dynamic allocation, max 32GB"
+          }
         ],
         "downloads": [
-          { "name": "Product Manual.pdf", "url": "/downloads/multi-os-vm-manual.pdf" }
+          {
+            "name": "Product Manual.pdf",
+            "url": "/downloads/multi-os-vm-manual.pdf"
+          }
         ]
       },
       "industrial-rtos": {
@@ -685,13 +775,19 @@
           }
         ],
         "params": [
-          { "key": "Real-time Performance", "value": "Hard real-time, max latency <1ms" },
+          {
+            "key": "Real-time Performance",
+            "value": "Hard real-time, max latency <1ms"
+          },
           { "key": "Supported Architectures", "value": "ARM, x86, RISC-V" },
           { "key": "Kernel Size", "value": "<2MB" },
           { "key": "Task Quantity", "value": "Up to 256 tasks" }
         ],
         "downloads": [
-          { "name": "Technical Whitepaper.pdf", "url": "/downloads/industrial-rtos-whitepaper.pdf" }
+          {
+            "name": "Technical Whitepaper.pdf",
+            "url": "/downloads/industrial-rtos-whitepaper.pdf"
+          }
         ]
       },
       "airos": {
@@ -715,13 +811,22 @@
           }
         ],
         "params": [
-          { "key": "Supported Robot Types", "value": "Mobile, Robotic Arms, Humanoid, etc." },
-          { "key": "Development Languages", "value": "Python, C++, JavaScript" },
+          {
+            "key": "Supported Robot Types",
+            "value": "Mobile, Robotic Arms, Humanoid, etc."
+          },
+          {
+            "key": "Development Languages",
+            "value": "Python, C++, JavaScript"
+          },
           { "key": "Communication Protocols", "value": "ROS2, DDS, MQTT" },
           { "key": "Cloud Support", "value": "Supported" }
         ],
         "downloads": [
-          { "name": "Developer Guide.pdf", "url": "/downloads/airos-developer-guide.pdf" }
+          {
+            "name": "Developer Guide.pdf",
+            "url": "/downloads/airos-developer-guide.pdf"
+          }
         ]
       },
       "robot-scheduler": {
@@ -746,12 +851,18 @@
         ],
         "params": [
           { "key": "Supported Robot Quantity", "value": "Up to 100 robots" },
-          { "key": "Scheduling Algorithms", "value": "A*, Dijkstra, Genetic Algorithm" },
+          {
+            "key": "Scheduling Algorithms",
+            "value": "A*, Dijkstra, Genetic Algorithm"
+          },
           { "key": "Communication Methods", "value": "WiFi, 5G, Ethernet" },
           { "key": "Response Time", "value": "<100ms" }
         ],
         "downloads": [
-          { "name": "System Architecture.pdf", "url": "/downloads/robot-scheduler-architecture.pdf" }
+          {
+            "name": "System Architecture.pdf",
+            "url": "/downloads/robot-scheduler-architecture.pdf"
+          }
         ]
       },
       "gantry-2d": {
@@ -781,7 +892,10 @@
           { "key": "Max Load", "value": "50kg" }
         ],
         "downloads": [
-          { "name": "Installation Manual.pdf", "url": "/downloads/gantry-2d-installation.pdf" }
+          {
+            "name": "Installation Manual.pdf",
+            "url": "/downloads/gantry-2d-installation.pdf"
+          }
         ]
       },
       "scara-4axis": {
@@ -812,7 +926,10 @@
           { "key": "Max Speed", "value": "10m/s" }
         ],
         "downloads": [
-          { "name": "Product Manual.pdf", "url": "/downloads/scara-4axis-manual.pdf" }
+          {
+            "name": "Product Manual.pdf",
+            "url": "/downloads/scara-4axis-manual.pdf"
+          }
         ]
       },
       "arm-6axis": {
@@ -840,15 +957,24 @@
           { "key": "Working Radius", "value": "1400mm" },
           { "key": "Repeatability", "value": "±0.03mm" },
           { "key": "Max Load", "value": "10kg" },
-          { "key": "Programming Methods", "value": "Teaching + Offline + Graphical Programming" },
-          { "key": "Communication Interfaces", "value": "Ethernet, Modbus, Profinet" },
+          {
+            "key": "Programming Methods",
+            "value": "Teaching + Offline + Graphical Programming"
+          },
+          {
+            "key": "Communication Interfaces",
+            "value": "Ethernet, Modbus, Profinet"
+          },
           { "key": "Protection Rating", "value": "IP54" },
           { "key": "Operating Temperature", "value": "0°C~45°C" },
           { "key": "Power Specifications", "value": "AC 380V, Three-phase" },
           { "key": "Installation Method", "value": "Floor/Inverted/Side Mount" }
         ],
         "downloads": [
-          { "name": "Technical Specifications.pdf", "url": "/downloads/arm-6axis-specs.pdf" }
+          {
+            "name": "Technical Specifications.pdf",
+            "url": "/downloads/arm-6axis-specs.pdf"
+          }
         ]
       },
       "dual-arm-humanoid": {
@@ -873,13 +999,19 @@
           }
         ],
         "params": [
-          { "key": "Degrees of Freedom", "value": "14 DOF total for dual arms" },
+          {
+            "key": "Degrees of Freedom",
+            "value": "14 DOF total for dual arms"
+          },
           { "key": "Arm Span", "value": "1600mm" },
           { "key": "Single Arm Load", "value": "5kg" },
           { "key": "Repeatability", "value": "±0.1mm" }
         ],
         "downloads": [
-          { "name": "Application Cases.pdf", "url": "/downloads/dual-arm-cases.pdf" }
+          {
+            "name": "Application Cases.pdf",
+            "url": "/downloads/dual-arm-cases.pdf"
+          }
         ]
       },
       "mobile-robot": {
@@ -910,7 +1042,10 @@
           { "key": "Positioning Accuracy", "value": "±10mm" }
         ],
         "downloads": [
-          { "name": "Navigation System Guide.pdf", "url": "/downloads/mobile-robot-navigation.pdf" }
+          {
+            "name": "Navigation System Guide.pdf",
+            "url": "/downloads/mobile-robot-navigation.pdf"
+          }
         ]
       }
     }

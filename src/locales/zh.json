@@ -75,32 +75,32 @@
     "description": "专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案"
   },
   "supportPage": {
-      "title": "售后服务",
-      "description": "售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应",
-      "fastResponse": "12小时内快速解决问题",
-      "dedicatedService": "7×24小时专属服务群响应",
-      "relatedDownloads": "相关下载",
-      "preparingMessage": "工程师正在精心准备中，敬请期待",
-      "faqTitle": "常见问题",
-      "downloads": {
-        "productManual": "产品手册",
-        "jointMaterials": "关节资料"
-      },
-      "faqs": {
-        "navigation": {
-          "question": "你们的移动机器人支持哪些导航方式？",
-          "answer": "我们的移动机器人支持激光SLAM、视觉导航、二维码导航等多种导航方式，可根据客户现场环境灵活选配，满足多样化应用需求。"
-        },
-        "development": {
-          "question": "机器人控制系统是否支持二次开发和系统集成？",
-          "answer": "支持。我们为客户提供开放的SDK和API，方便进行二次开发和与第三方系统集成，助力实现个性化功能扩展。"
-        },
-        "customization": {
-          "question": "可以根据客户需求定制机器人或系统吗？",
-          "answer": "可以。我们支持软硬件定制开发，包括结构、功能、接口等多方面，欢迎联系我们沟通具体需求。"
-        }
-      }
+    "title": "售后服务",
+    "description": "售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应",
+    "fastResponse": "12小时内快速解决问题",
+    "dedicatedService": "7×24小时专属服务群响应",
+    "relatedDownloads": "相关下载",
+    "preparingMessage": "工程师正在精心准备中，敬请期待",
+    "faqTitle": "常见问题",
+    "downloads": {
+      "productManual": "产品手册",
+      "jointMaterials": "关节资料"
     },
+    "faqs": {
+      "navigation": {
+        "question": "你们的移动机器人支持哪些导航方式？",
+        "answer": "我们的移动机器人支持激光SLAM、视觉导航、二维码导航等多种导航方式，可根据客户现场环境灵活选配，满足多样化应用需求。"
+      },
+      "development": {
+        "question": "机器人控制系统是否支持二次开发和系统集成？",
+        "answer": "支持。我们为客户提供开放的SDK和API，方便进行二次开发和与第三方系统集成，助力实现个性化功能扩展。"
+      },
+      "customization": {
+        "question": "可以根据客户需求定制机器人或系统吗？",
+        "answer": "可以。我们支持软硬件定制开发，包括结构、功能、接口等多方面，欢迎联系我们沟通具体需求。"
+      }
+    }
+  },
   "hero": {
     "title": "四轴机械臂，助力医药自动化",
     "description": "我们的四轴机械臂专为医药行业设计，提供高效、精准的自动化解决方案。",
@@ -264,80 +264,20 @@
       "desc": "本视频展示了零蚁科技先进的离线编程技术，通过数字化仿真与虚拟调试，实现机器人程序的高效开发与优化，大幅提升编程效率与作业安全性。",
       "tags": ["离线编程", "数字化仿真", "虚拟调试", "智能制造"]
     },
-    "rtos-ethercat-validation": {
-      "title": "RTOS-EtherCAT电机控制验证",
-      "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线的电机控制验证，通过高精度同步控制技术，实现多轴电机的实时协调与精准运动。",
-      "tags": ["RTOS", "EtherCAT", "电机控制", "实时系统", "工业控制"]
+    "offline-programming-logo-drawing": {
+      "title": "离线编程绘制logo",
+      "desc": "本视频展示了零蚁科技离线编程技术在精确绘制logo图案中的应用，通过轨迹控制与路径规划，实现机器人精确绘制复杂logo图案，体现离线编程技术的高精度控制能力。",
+      "tags": ["离线编程", "轨迹控制", "logo绘制", "精密控制"]
     },
-    "robot-polishing-demo": {
-      "title": "机器人打磨工艺演示",
-      "desc": "本视频展示了零蚁科技机器人打磨工艺的完整流程，从路径规划到力控打磨，体现了先进的表面处理技术和工业级打磨解决方案。",
-      "tags": ["机器人打磨", "表面处理", "力控技术", "工业自动化"]
+    "palletizing-robot": {
+      "title": "码垛机器人",
+      "desc": "本视频展示了零蚁科技码垛机器人在物流自动化中的高效应用，通过智能路径规划与精准抓取控制，实现货物的高效堆垛与搬运，大幅提升仓储物流效率与作业安全性。",
+      "tags": ["码垛机器人", "物流自动化", "智能制造", "工业机器人"]
     },
-    "composite-robot-application": {
-      "title": "复合机器人应用",
-      "desc": "本视频展示了零蚁科技复合机器人在智能制造与自动化物流中的创新应用，通过多功能集成与智能调度，实现复杂场景下的高效协作与柔性生产。",
-      "tags": ["复合机器人", "智能制造", "自动化物流"]
-    },
-    "radar-360-scanning": {
-      "title": "360度雷达扫描",
-      "desc": "展示零蚁科技先进的360度雷达扫描技术，实现全方位环境感知和精准定位，为机器人导航提供可靠的技术支撑。",
-      "tags": ["雷达技术", "AGV导航", "环境感知"]
-    },
-    "agv-product-introduction": {
-      "title": "AGV产品介绍",
-      "desc": "详细介绍零蚁科技自主研发的AGV自动导引车产品，包括核心技术特点、应用场景和实际运行效果展示。",
-      "tags": ["AGV产品", "自动导引", "智能制造"]
-    },
-    "ultrasound-medical-robot": {
-      "title": "B超机器人",
-      "desc": "展示零蚁科技在医疗自动化领域的创新成果，B超机器人实现自动化超声检查，提升医疗效率和检查精度。",
-      "tags": ["医疗机器人", "B超检查", "医疗自动化"]
-    },
-    "ur-robot-llm-motion-capture": {
-      "title": "UR机器人大语言模型动作抓取",
-      "desc": "本视频展示了零蚁科技基于大语言模型的UR机器人动作抓取与智能控制，通过AI与机器人深度融合，实现复杂任务的自主学习与高效执行，推动智能制造与人机协作新发展。",
-      "tags": ["UR机器人", "大语言模型", "动作抓取", "智能制造"]
-    },
-    "four-axis-robot-open-fridge": {
-      "title": "四轴机器人开冰箱",
-      "desc": "本视频展示了零蚁科技四轴机器人在自动化场景下开冰箱的创新应用，通过高精度运动控制与智能感知，实现复杂动作的自主执行，体现了机器人柔性作业与智能制造的深度融合。",
-      "tags": ["四轴机器人", "自动化", "智能制造", "运动控制"]
-    },
-    "servo-motor-station": {
-      "title": "伺服电机台站",
-      "desc": "本视频展示了零蚁科技伺服电机台站的自动化控制与应用，通过高性能伺服系统实现精准定位与高效作业，助力智能制造与工业自动化升级。",
-      "tags": ["伺服电机", "自动化", "智能制造", "工业控制"]
-    },
-    "personalized-prescription-pharmaceutical": {
-      "title": "个性化处方制药",
-      "desc": "本视频展示了零蚁科技在个性化处方制药领域的创新应用，通过智能自动化技术实现个性化药物定制，提升医疗精准度和患者治疗效果。",
-      "tags": ["个性化制药", "医疗自动化", "智能定制", "精准医疗"]
-    },
-    "mobile-transfer-robot": {
-      "title": "移动传送机器人",
-      "desc": "本视频展示了零蚁科技移动传送机器人的高效自动化搬运能力，通过智能导航与精准定位技术，实现复杂环境下的灵活作业，提升物流效率与智能化水平。",
-      "tags": ["移动机器人", "自动传送", "智能导航", "物流自动化"]
-    },
-    "high-speed-precision-robot-arm": {
-      "title": "机械臂高速高精度演示",
-      "desc": "本视频展示了零蚁科技机械臂的高速高精度作业能力，通过先进的运动控制算法与精密机械设计，实现复杂任务的快速精准执行，体现工业自动化的卓越性能。",
-      "tags": ["机械臂", "高速高精度", "运动控制", "工业自动化"]
-    },
-    "offline-programming": {
-      "title": "离线编程",
-      "desc": "本视频展示了零蚁科技先进的离线编程技术，通过数字化仿真与虚拟调试，实现机器人程序的高效开发与优化，大幅提升编程效率与作业安全性。",
-      "tags": ["离线编程", "数字化仿真", "虚拟调试", "智能制造"]
-    },
-    "rtos-ethercat-validation": {
-      "title": "RTOS-EtherCAT电机控制验证",
-      "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线的电机控制验证，通过高精度同步控制技术，实现多轴电机的实时协调与精准运动。",
-      "tags": ["RTOS", "EtherCAT", "电机控制", "实时系统", "工业控制"]
-    },
-    "robot-polishing-demo": {
-      "title": "机器人打磨工艺演示",
-      "desc": "本视频展示了零蚁科技机器人打磨工艺的完整流程，从路径规划到力控打磨，体现了先进的表面处理技术和工业级打磨解决方案。",
-      "tags": ["机器人打磨", "表面处理", "力控技术", "工业自动化"]
+    "ball-catching-demo": {
+      "title": "抛球抓球演示",
+      "desc": "本视频展示了零蚁科技机器人在视觉识别与运动控制方面的先进技术，通过实时视觉追踪与精准抓取控制，实现机器人对高速运动物体的精确捕获，体现机器人控制系统的快速响应能力。",
+      "tags": ["机器人控制", "视觉识别", "运动控制", "智能抓取"]
     }
   },
   "seo": {
@@ -361,33 +301,33 @@
         "description": "零蚁科技产品中心，提供AGV自动导引车、机械臂、智能制造解决方案等先进机器人产品",
         "keywords": "产品中心,AGV,机械臂,智能制造,机器人产品"
       },
-  "pages": {
-    "videos": {
-      "title": "视频展示",
-      "noVideo": "暂无视频",
-      "loading": "加载中...",
-      "error": "视频加载失败"
-    },
-    "applications": {
-      "title": "应用场景",
-      "coreScenarios": "核心场景",
-      "medicalAutomation": "医疗自动化",
-      "semiconductorManufacturing": "半导体制造",
-      "intelligentManufacturing": "智能制造",
-      "surfaceTreatment": "表面处理",
-      "smartLogistics": "智能物流"
-    },
-    "contact": {
-      "wechatQr": "扫码添加企业微信",
-      "biliQr": "扫码关注B站"
-    },
-    "news": {
-      "title": "新闻资讯",
-      "content": "这里是新闻资讯页面内容",
-      "noNews": "暂无新闻"
-    }
-  },
-  "applications": {
+      "pages": {
+        "videos": {
+          "title": "视频展示",
+          "noVideo": "暂无视频",
+          "loading": "加载中...",
+          "error": "视频加载失败"
+        },
+        "applications": {
+          "title": "应用场景",
+          "coreScenarios": "核心场景",
+          "medicalAutomation": "医疗自动化",
+          "semiconductorManufacturing": "半导体制造",
+          "intelligentManufacturing": "智能制造",
+          "surfaceTreatment": "表面处理",
+          "smartLogistics": "智能物流"
+        },
+        "contact": {
+          "wechatQr": "扫码添加企业微信",
+          "biliQr": "扫码关注B站"
+        },
+        "news": {
+          "title": "新闻资讯",
+          "content": "这里是新闻资讯页面内容",
+          "noNews": "暂无新闻"
+        }
+      },
+      "applications": {
         "title": "应用场景",
         "description": "零蚁科技机器人应用场景，涵盖医疗自动化、半导体制造、智能制造、表面处理等多个领域",
         "keywords": "应用场景,医疗自动化,半导体制造,智能制造,表面处理"
@@ -413,7 +353,7 @@
         "keywords": "零蚁科技,服务支持,技术支持,售后服务"
       }
     }
-   },
+  },
   "validation": {
     "required": {
       "name": "请输入姓名",
@@ -741,7 +681,10 @@
           { "key": "任务数量", "value": "最多256个" }
         ],
         "downloads": [
-          { "name": "技术白皮书.pdf", "url": "/downloads/industrial-rtos-whitepaper.pdf" }
+          {
+            "name": "技术白皮书.pdf",
+            "url": "/downloads/industrial-rtos-whitepaper.pdf"
+          }
         ]
       },
       "airos": {
@@ -771,7 +714,10 @@
           { "key": "云端支持", "value": "支持" }
         ],
         "downloads": [
-          { "name": "开发者指南.pdf", "url": "/downloads/airos-developer-guide.pdf" }
+          {
+            "name": "开发者指南.pdf",
+            "url": "/downloads/airos-developer-guide.pdf"
+          }
         ]
       },
       "robot-scheduler": {
@@ -801,7 +747,10 @@
           { "key": "响应时间", "value": "<100ms" }
         ],
         "downloads": [
-          { "name": "系统架构图.pdf", "url": "/downloads/robot-scheduler-architecture.pdf" }
+          {
+            "name": "系统架构图.pdf",
+            "url": "/downloads/robot-scheduler-architecture.pdf"
+          }
         ]
       },
       "gantry-2d": {
@@ -831,7 +780,10 @@
           { "key": "最大负载", "value": "50kg" }
         ],
         "downloads": [
-          { "name": "安装手册.pdf", "url": "/downloads/gantry-2d-installation.pdf" }
+          {
+            "name": "安装手册.pdf",
+            "url": "/downloads/gantry-2d-installation.pdf"
+          }
         ]
       },
       "scara-4axis": {
@@ -960,7 +912,10 @@
           { "key": "定位精度", "value": "±10mm" }
         ],
         "downloads": [
-          { "name": "导航系统说明.pdf", "url": "/downloads/mobile-robot-navigation.pdf" }
+          {
+            "name": "导航系统说明.pdf",
+            "url": "/downloads/mobile-robot-navigation.pdf"
+          }
         ]
       }
     }
