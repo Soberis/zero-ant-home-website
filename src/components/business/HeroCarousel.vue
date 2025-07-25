@@ -60,7 +60,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed,onMounted, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+// 获取国际化函数
+const { t } = useI18n();
 
 // 轮播图数据类型定义
 interface SlideItem {
@@ -69,29 +73,30 @@ interface SlideItem {
   desc: string;
 }
 
-// 轮播图数据（如需动态可抽离为props或外部数据源）
-const slides: SlideItem[] = [
+// 轮播图数据（使用翻译函数）
+const slides = computed<SlideItem[]
+>(() => [
   {
     img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=Multi-OS',
-    title: '多OS混合部署嵌入式虚拟机',
-    desc: '支持多操作系统并行运行，提升工业设备灵活性与资源利用率。',
+    title: t('productDetail.productDetails.multi-os-vm.title'),
+    desc: t('productDetail.productDetails.multi-os-vm.desc'),
   },
   {
     img: 'https://via.placeholder.com/1920x900/0066cc/ffffff?text=AiROS',
-    title: 'AiROS机器人操作系统',
-    desc: '国产"开箱即用"机器人智能操作系统，打造机器人界的Android系统，让机器人走进千行百业。',
+    title: t('productDetail.productDetails.airos.title'),
+    desc: t('productDetail.productDetails.airos.desc'),
   },
   {
     img: 'https://via.placeholder.com/1920x900/00aa44/ffffff?text=4-Axis+Robot',
-    title: '四轴机械臂',
-    desc: '灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用。',
+    title: t('productDetail.productDetails.scara-4axis.title'),
+    desc: t('productDetail.productDetails.scara-4axis.desc'),
   },
   {
     img: 'https://via.placeholder.com/1920x900/aa4400/ffffff?text=Dual-Arm+Robot',
-    title: '双臂人型机器人',
-    desc: '具备双臂协作能力，适合复杂装配、服务等高柔性作业需求。',
+    title: t('productDetail.productDetails.dual-arm-humanoid.title'),
+    desc: t('productDetail.productDetails.dual-arm-humanoid.desc'),
   },
-];
+]);
 const current = ref<number>(0);
 // 自动轮播定时器
 let timer: NodeJS.Timeout | null = null;

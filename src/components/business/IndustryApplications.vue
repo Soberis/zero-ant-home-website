@@ -2,10 +2,10 @@
 
   <section class="industry-apps">
 
-    <h2 class="section-title">{{ $t('industryApplications.title') }}</h2>
+    <h2 class="section-title">{{ $t('home.industryApplications.title') }}</h2>
 
     <div class="section-desc">
-       {{ $t('industryApplications.description') }}
+       {{ $t('home.industryApplications.description') }}
     </div>
 
     <div class="apps-list-wrap">

@@ -35,15 +35,28 @@
     "medicalAuto": "Medical Automation",
     "semiProcessing": "Semiconductor Processing"
   },
+  "home": {
+    "coreProducts": {
+      "title": "Core Products",
+      "learnMore": "Learn More"
+    },
+    "videoCases": {
+      "title": "Video Cases",
+      "watchVideo": "Watch Video"
+    },
+    "industryApplications": {
+      "title": "Industry Applications",
+      "description": "Focused on medical automation and semiconductor processing, while covering intelligent upgrade solutions for multiple industries"
+    },
+    "partners": {
+      "title": "Partners"
+    }
+  },
   "solutionsPage": {
     "title": "Industry Solutions",
     "subtitle": "Explore cutting-edge technology applications and witness innovation driving the future",
     "videoCases": "Video Cases",
     "moreScenarios": "More Scenarios"
-  },
-  "industryApplications": {
-    "title": "Industry Applications",
-    "description": "Focusing on medical automation and semiconductor processing, while covering intelligent upgrade solutions for multiple industries"
   },
   "supportPage": {
     "title": "After-sales Service",
@@ -269,54 +282,6 @@
       "description": "Multi-OS embedded systems with domestic real-time OS for high-precision automation. Features dual-robot collaboration and high-speed arms supporting 6000mm/s motion and sub-millimeter control for electronics, automotive, and 3C manufacturing.",
       "coreAdvantages": "Multi-robot collaboration, ≤10us real-time jitter, complex process support, domestic replacement",
       "typicalApplications": "Electronics assembly, automotive welding, precision assembly, quality inspection, flexible lines"
-    },
-    "surface-treatment": {
-      "title": "Surface Treatment",
-      "description": "Six-axis and four-axis robot arms with advanced force control and path planning for polishing, grinding, welding, and assembly. Features 0.02mm positioning accuracy and 90,000-hour fault-free operation.",
-      "coreAdvantages": "High-precision positioning, force control, multi-axis coordination, long-term stability",
-      "typicalApplications": "Metal polishing, precision assembly, welding, surface treatment, deburring"
-    },
-    "smart-logistics": {
-      "title": "Smart Logistics",
-      "description": "Mobile robot scheduling with AGV guidance for unified multi-brand robot management. Features 360-degree radar and laser SLAM navigation with 500kg load capacity for autonomous operations in complex environments.",
-      "coreAdvantages": "Multi-robot scheduling, intelligent path planning, 500kg capacity, multi-scenario adaptation",
-      "typicalApplications": "Factory logistics, warehouse handling, distribution centers, collaborative operations"
-    },
-    "pharmaceutical-automation": {
-      "title": "Pharmaceutical Automation",
-      "description": "Biopharmaceutical automation using AiROS and high-precision control for labs and pharma companies. Enables personalized prescription technology and full-process automation for drug R&D, production, and testing. Serves customers like Huazhi Biology and PerkinElmer.",
-      "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic replacement",
-      "typicalApplications": "Lab automation, personalized prescriptions, drug preparation, sample processing, quality testing"
-    },
-    "precision-assembly": {
-      "title": "Precision Assembly",
-      "description": "High-precision robot arms with advanced vision systems for electronics, automotive, and precision instruments. Features sub-millimeter positioning and intelligent force control for complex component assembly with multi-axis coordination.",
-      "coreAdvantages": "Sub-millimeter precision, visual guidance, force control, flexible configuration",
-      "typicalApplications": "Electronics assembly, automotive parts, precision instruments, optical devices, micro-components"
-    },
-    "surface-treatment": {
-      "title": "Surface Treatment",
-      "description": "Six-axis and four-axis robot arms with advanced force control and path planning for polishing, grinding, welding, and assembly. Features 0.02mm positioning accuracy and 90,000-hour fault-free operation.",
-      "coreAdvantages": "High-precision positioning, force control, multi-axis coordination, long-term stability",
-      "typicalApplications": "Metal polishing, precision assembly, welding, surface treatment, deburring"
-    },
-    "smart-logistics": {
-      "title": "Smart Logistics",
-      "description": "Mobile robot scheduling with AGV guidance for unified multi-brand robot management. Features 360-degree radar and laser SLAM navigation with 500kg load capacity for autonomous operations in complex environments.",
-      "coreAdvantages": "Multi-robot scheduling, intelligent path planning, 500kg capacity, multi-scenario adaptation",
-      "typicalApplications": "Factory logistics, warehouse handling, distribution centers, collaborative operations"
-    },
-    "pharmaceutical-automation": {
-      "title": "Pharmaceutical Automation",
-      "description": "Biopharmaceutical automation using AiROS and high-precision control for labs and pharma companies. Enables personalized prescription technology and full-process automation for drug R&D, production, and testing. Serves customers like Huazhi Biology and PerkinElmer.",
-      "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic replacement",
-      "typicalApplications": "Lab automation, personalized prescriptions, drug preparation, sample processing, quality testing"
-    },
-    "precision-assembly": {
-      "title": "Precision Assembly",
-      "description": "High-precision robot arms with advanced vision systems for electronics, automotive, and precision instruments. Features sub-millimeter positioning and intelligent force control for complex component assembly with multi-axis coordination.",
-      "coreAdvantages": "Sub-millimeter precision, visual guidance, force control, flexible configuration",
-      "typicalApplications": "Electronics assembly, automotive parts, precision instruments, optical devices, micro-components"
     },
     "ai-robotics": {
       "title": "AI Robotics",

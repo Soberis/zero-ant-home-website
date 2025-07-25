@@ -35,15 +35,28 @@
     "medicalAuto": "医药自动化",
     "semiProcessing": "半导体加工"
   },
+  "home": {
+    "coreProducts": {
+      "title": "核心产品",
+      "learnMore": "了解更多"
+    },
+    "videoCases": {
+      "title": "视频案例",
+      "watchVideo": "观看视频"
+    },
+    "industryApplications": {
+      "title": "行业应用",
+      "description": "专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案"
+    },
+    "partners": {
+      "title": "合作伙伴"
+    }
+  },
   "solutionsPage": {
     "title": "行业解决方案",
     "subtitle": "探索前沿技术应用，见证创新驱动未来",
     "videoCases": "视频案例",
     "moreScenarios": "更多场景"
-  },
-  "industryApplications": {
-    "title": "行业应用",
-    "description": "专注于医疗自动化与半导体加工，同时覆盖多行业的智能化升级解决方案"
   },
   "supportPage": {
     "title": "售后服务",

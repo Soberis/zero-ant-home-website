@@ -2,7 +2,7 @@
 
   <section class="core-products">
 
-    <h2 class="section-title">核心产品</h2>
+    <h2 class="section-title">{{ t('home.coreProducts.title') }}</h2>
 
     <div class="products-list">
 
@@ -18,7 +18,7 @@
 
         <div class="product-desc">{{ t(product.desc) }}</div>
          <router-link :to="getProductDetailLink(product)" class="more-btn"
-          >了解更多 +</router-link
+          >{{ t('home.coreProducts.learnMore') }} +</router-link
         >
       </div>
 

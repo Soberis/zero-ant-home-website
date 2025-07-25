@@ -16,9 +16,9 @@
            <img :src="video.img" :alt="video.title" loading="lazy" />
         </div>
 
-        <div class="video-title">{{ $t(video.title) }}</div>
+        <div class="video-title">{{ $t(`videos.${video.slug}.title`) }}</div>
          <router-link :to="`/video/${video.slug}`" class="more-btn"
-          >观看视频 +</router-link
+          >{{ $t(`home.videoCases.watchVideo`) }} +</router-link
         >
       </div>
 
