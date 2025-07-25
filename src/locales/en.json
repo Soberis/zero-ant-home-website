@@ -806,6 +806,11 @@
       }
     }
   },
+  "applicationsPage": {
+    "prev": "Previous",
+    "next": "Next",
+    "noVideo": "No Video Available"
+  },
   "contacts": {
     "phone": "Phone",
     "email": "Email",

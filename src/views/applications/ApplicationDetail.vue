@@ -26,7 +26,7 @@
          </template
       > <template v-else
         >
-        <div class="video-placeholder">暂无视频</div>
+        <div class="video-placeholder">{{ t('applicationsPage.noVideo') }}</div>
          </template
       >
       <div class="video-bottom-bar" :class="bottomBarClass">
@@ -35,13 +35,13 @@
           class="video-bottom-btn prev"
           @click="goTo(prevSlug)"
         >
-           ◀ 上一个 </button
+           ◀ {{ t('applicationsPage.prev') }} </button
         > <button
           v-if="nextSlug"
           class="video-bottom-btn next"
           @click="goTo(nextSlug)"
         >
-           下一个 ▶ </button
+           {{ t('applicationsPage.next') }} ▶ </button
         >
       </div>
 

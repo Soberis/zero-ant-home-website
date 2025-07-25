@@ -792,6 +792,11 @@
       }
     }
   },
+  "applicationsPage": {
+    "prev": "上一个",
+    "next": "下一个",
+    "noVideo": "暂无视频"
+  },
   "contacts": {
     "phone": "电话",
     "email": "邮箱",
