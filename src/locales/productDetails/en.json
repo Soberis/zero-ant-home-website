@@ -1,0 +1,851 @@
+{
+  "multiOsVm": {
+    "title": "Multi-OS Embedded Virtual Machine",
+    "desc": "Supports parallel operation of multiple operating systems, enhancing industrial equipment flexibility and resource utilization, suitable for heterogeneous system integration scenarios.",
+    "features": [
+      "Parallel operation of multiple OS with efficient resource isolation",
+      "Support for hybrid deployment of RTOS and general-purpose OS",
+      "Embedded virtualization technology with low overhead and high security",
+      "Flexible system switching and hot-plug capabilities",
+      "Support for various mainstream industrial protocols and interfaces",
+      "Cloud-edge collaborative management with remote monitoring and maintenance"
+    ],
+    "cases": {
+      "smartManufacturing": {
+        "title": "Smart Manufacturing Line Upgrade",
+        "desc": "Help customers achieve unified management of heterogeneous equipment systems and improve production line automation levels."
+      },
+      "industrialGateway": {
+        "title": "Industrial Gateway Virtualization",
+        "desc": "Deploy multiple systems on a single hardware platform, reducing hardware costs and maintenance complexity."
+      }
+    },
+    "scenes": [
+      "Smart Manufacturing Lines",
+      "Industrial Automation Equipment",
+      "Industrial Gateways and Edge Computing"
+    ],
+    "params": {
+      "supportedOS": {
+        "key": "Supported OS",
+        "value": "Linux, RTOS, Android, etc."
+      },
+      "vmCount": {
+        "key": "VM Count",
+        "value": "Up to 8 parallel VMs"
+      },
+      "switchTime": {
+        "key": "System Switch Time",
+        "value": "< 1 second"
+      },
+      "securityLevel": {
+        "key": "Security Isolation Level",
+        "value": "High"
+      },
+      "virtualizationTech": {
+        "key": "Virtualization Technology",
+        "value": "Type-1 Hypervisor"
+      },
+      "resourceIsolation": {
+        "key": "Resource Isolation",
+        "value": "Hardware-level isolation"
+      },
+      "realTimeGuarantee": {
+        "key": "Real-time Guarantee",
+        "value": "Microsecond response time"
+      },
+      "supportedArch": {
+        "key": "Supported Architecture",
+        "value": "ARM Cortex-A, x86_64"
+      },
+      "memoryManagement": {
+        "key": "Memory Management",
+        "value": "MMU + IOMMU dual protection"
+      },
+      "bootTime": {
+        "key": "Boot Time",
+        "value": "≤ 5 seconds"
+      },
+      "cpuScheduling": {
+        "key": "CPU Scheduling",
+        "value": "Real-time priority scheduling"
+      },
+      "networkVirtualization": {
+        "key": "Network Virtualization",
+        "value": "SR-IOV + Virtual Switch"
+      },
+      "storageVirtualization": {
+        "key": "Storage Virtualization",
+        "value": "Block device virtualization"
+      },
+      "securityFeatures": {
+        "key": "Security Features",
+        "value": "TrustZone + Secure Boot"
+      },
+      "debugSupport": {
+        "key": "Debug Support",
+        "value": "GDB + JTAG debugging"
+      }
+    },
+    "downloads": {
+      "whitepaper": {
+        "name": "Product Whitepaper.pdf",
+        "url": "/downloads/multi-os-vm-whitepaper.pdf"
+      }
+    }
+  },
+  "industrialRtos": {
+    "title": "Domestic Industrial Real-Time OS",
+    "desc": "Autonomous and controllable industrial-grade real-time operating system, ensuring high-reliability operation of critical tasks, suitable for industrial automation, robotics and other high real-time scenarios.",
+    "features": [
+      "Millisecond real-time response meeting industrial control requirements",
+      "Autonomous and controllable, security auditable, compatible with domestic chips",
+      "Rich industrial protocol and driver support",
+      "High reliability and fault tolerance mechanisms ensuring system stable operation",
+      "Flexible task scheduling and resource management"
+    ],
+    "cases": {
+      "highEndEquipment": {
+        "title": "High-end Equipment Control System",
+        "desc": "Provide highly reliable real-time operating system foundation for high-end CNC machines, industrial robots, etc."
+      },
+      "domesticReplacement": {
+        "title": "Domestic Replacement",
+        "desc": "Help customers achieve autonomous and controllable domestic replacement of critical industrial systems."
+      }
+    },
+    "scenes": [
+      "Industrial Automation Control",
+      "Robot Control Systems",
+      "High-end Equipment Manufacturing"
+    ],
+    "params": {
+      "realTimeResponse": {
+        "key": "Real-time Response",
+        "value": "Interrupt response <10us"
+      },
+      "supportedArch": {
+        "key": "Supported Architecture",
+        "value": "ARM, x86, RISC-V"
+      },
+      "securityLevel": {
+        "key": "Security Level",
+        "value": "EAL4+"
+      },
+      "compatibility": {
+        "key": "Compatibility",
+        "value": "Support mainstream industrial protocols"
+      },
+      "maxTasks": {
+        "key": "Maximum Tasks",
+        "value": "256 concurrent tasks"
+      },
+      "memoryManagement": {
+        "key": "Memory Management",
+        "value": "MPU + Dynamic memory allocation"
+      },
+      "fileSystem": {
+        "key": "File System",
+        "value": "FAT32, YAFFS2, LittleFS"
+      },
+      "networkStack": {
+        "key": "Network Protocol Stack",
+        "value": "TCP/IP, UDP, MQTT, CoAP"
+      },
+      "deviceDrivers": {
+        "key": "Device Drivers",
+        "value": "UART, SPI, I2C, CAN, Ethernet"
+      },
+      "powerManagement": {
+        "key": "Power Management",
+        "value": "Multi-level sleep modes"
+      },
+      "securityFeatures": {
+        "key": "Security Features",
+        "value": "Code signing + Secure boot"
+      },
+      "debugTools": {
+        "key": "Debug Tools",
+        "value": "GDB + System tracing"
+      },
+      "devEnvironment": {
+        "key": "Development Environment",
+        "value": "Eclipse + VS Code plugins"
+      },
+      "certificationStandard": {
+        "key": "Certification Standard",
+        "value": "IEC 61508 SIL3"
+      },
+      "bootTime": {
+        "key": "Boot Time",
+        "value": "< 500ms"
+      }
+    },
+    "downloads": {
+      "whitepaper": {
+        "name": "Product Whitepaper.pdf",
+        "url": "/downloads/industrial-rtos-whitepaper.pdf"
+      }
+    }
+  },
+  "airos": {
+    "title": "AiROS Robot Operating System",
+    "desc": "Committed to creating an 'out-of-the-box' embodied robot basic system platform, bringing robots into thousands of industries. Building an Android system for the robotics world, installed in robots themselves, giving them souls.",
+    "features": [
+      "Security: Rust language security foundation guarantee",
+      "Integration: Parallel running hybrid deployment technology",
+      "Real-time: Maximum interrupt jitter ≤ 10us",
+      "Controller cost reduced by 50%",
+      "Robot R&D cycle reduced by over 70%",
+      "Support 18-axis simultaneous control with 0.02mm repeat positioning accuracy"
+    ],
+    "cases": {
+      "semiconductorWafer": {
+        "title": "Semiconductor Wafer Transfer",
+        "desc": "Over 200 units shipped, helping customers transform from repair shops to high-tech manufacturers, operating continuously for 90,000 hours without damage."
+      },
+      "medicalLabAutomation": {
+        "title": "Medical Laboratory Automation",
+        "desc": "Achieving domestic replacement of foreign equipment, reducing costs from 300,000 to 140,000 yuan, serving customers like Huazhi Biology and PerkinElmer."
+      },
+      "foodDeliveryRobot": {
+        "title": "Food Delivery Robot",
+        "desc": "Cooperating with Meituan and Pudu to build a 'consumption-production-delivery' golden triangle closed loop."
+      }
+    },
+    "scenes": [
+      "Semiconductor Processing",
+      "Biomedical Laboratories",
+      "Smart Catering",
+      "Community Delivery",
+      "Industrial Automation",
+      "Smart Manufacturing"
+    ],
+    "params": {
+      "realTime": {
+        "key": "Real-time Performance",
+        "value": "Maximum interrupt jitter ≤ 10us"
+      },
+      "controlPrecision": {
+        "key": "Control Precision",
+        "value": "0.02mm repeat positioning accuracy"
+      },
+      "supportedAxes": {
+        "key": "Supported Axes",
+        "value": "18-axis simultaneous control"
+      },
+      "securityCertification": {
+        "key": "Security Certification",
+        "value": "Information Security EAL5+ certification"
+      },
+      "costOptimization": {
+        "key": "Cost Optimization",
+        "value": "Controller cost reduced by 50%"
+      },
+      "devEfficiency": {
+        "key": "Development Efficiency",
+        "value": "R&D cycle reduced by over 70%"
+      },
+      "programmingLanguage": {
+        "key": "Programming Language",
+        "value": "Rust + C/C++"
+      },
+      "supportedArch": {
+        "key": "Supported Architecture",
+        "value": "ARM64, x86_64, RISC-V"
+      },
+      "memoryUsage": {
+        "key": "Memory Usage",
+        "value": "≤ 512MB"
+      },
+      "bootTime": {
+        "key": "Boot Time",
+        "value": "≤ 3 seconds"
+      },
+      "communicationProtocol": {
+        "key": "Communication Protocol",
+        "value": "EtherCAT, CAN, Modbus, OPC UA"
+      },
+      "visionAlgorithm": {
+        "key": "Vision Algorithm",
+        "value": "Deep learning object detection and tracking"
+      },
+      "multiModalFusion": {
+        "key": "Multi-modal Fusion",
+        "value": "Vision + Laser + IMU + Force sensing"
+      },
+      "cloudConnection": {
+        "key": "Cloud Connection",
+        "value": "Support 5G/WiFi6 remote monitoring"
+      },
+      "workingTemperature": {
+        "key": "Working Temperature",
+        "value": "-20°C ~ +60°C"
+      }
+    },
+    "downloads": {
+      "systemWhitepaper": {
+        "name": "AiROS System Whitepaper.pdf",
+        "url": "/downloads/airos-whitepaper.pdf"
+      },
+      "architectureDoc": {
+        "name": "Technical Architecture Documentation.pdf",
+        "url": "/downloads/airos-architecture.pdf"
+      }
+    }
+  },
+  "robotScheduler": {
+    "title": "Mobile Robot Scheduling System",
+    "desc": "Supports unified scheduling and collaborative operation of multi-brand, multi-type mobile robots, improving factory automation and logistics efficiency.",
+    "features": [
+      "Unified access and management of multi-brand robots",
+      "Intelligent path planning and dynamic obstacle avoidance",
+      "Multi-robot collaborative operation and task allocation",
+      "Support for external device linkage such as elevators and access control",
+      "Real-time monitoring and data analysis platform",
+      "Cloud deployment supporting large-scale cluster management"
+    ],
+    "cases": {
+      "smartFactoryLogistics": {
+        "title": "Smart Factory Logistics Scheduling",
+        "desc": "Achieve efficient collaborative operation of multiple robots in complex factory environments, improving logistics automation levels."
+      },
+      "crossFloorDelivery": {
+        "title": "Cross-floor Delivery",
+        "desc": "Support robot linkage with elevator and access control systems for cross-floor material delivery."
+      }
+    },
+    "scenes": [
+      "Smart Factory Logistics",
+      "Warehouse Automation",
+      "Hospital and Office Building Delivery"
+    ],
+    "params": {
+      "supportedBrands": {
+        "key": "Supported Robot Brands",
+        "value": "10+ mainstream brands"
+      },
+      "maxSchedulingScale": {
+        "key": "Maximum Scheduling Scale",
+        "value": "100+ units"
+      },
+      "systemInterface": {
+        "key": "System Interface",
+        "value": "RESTful API, MQTT, OPC UA"
+      },
+      "externalDeviceSupport": {
+        "key": "External Device Support",
+        "value": "Elevators, access control, etc."
+      },
+      "pathPlanningAlgorithm": {
+        "key": "Path Planning Algorithm",
+        "value": "A* algorithm + dynamic obstacle avoidance"
+      },
+      "taskSchedulingStrategy": {
+        "key": "Task Scheduling Strategy",
+        "value": "Priority + load balancing"
+      },
+      "mapManagement": {
+        "key": "Map Management",
+        "value": "Multi-layer maps + real-time updates"
+      },
+      "dataStorage": {
+        "key": "Data Storage",
+        "value": "MySQL + Redis cache"
+      },
+      "monitoringInterface": {
+        "key": "Monitoring Interface",
+        "value": "Web + mobile app"
+      },
+      "alarmMechanism": {
+        "key": "Alarm Mechanism",
+        "value": "Real-time alerts + email/SMS notifications"
+      },
+      "systemCapacity": {
+        "key": "System Capacity",
+        "value": "Support 100,000+ tasks/day"
+      },
+      "responseTime": {
+        "key": "Response Time",
+        "value": "≤100ms (task allocation)"
+      },
+      "availability": {
+        "key": "Availability",
+        "value": "99.9% system availability"
+      },
+      "deploymentMethod": {
+        "key": "Deployment Method",
+        "value": "Private cloud/Public cloud/Hybrid cloud"
+      },
+      "securityCertification": {
+        "key": "Security Certification",
+        "value": "HTTPS + OAuth2.0"
+      }
+    },
+    "downloads": {
+      "productManual": {
+        "name": "Product Manual.pdf",
+        "url": "/downloads/robot-scheduler-manual.pdf"
+      }
+    }
+  },
+  "gantry2d": {
+    "title": "2-DOF Gantry",
+    "desc": "High-precision, high-rigidity 2-degree-of-freedom gantry suitable for multi-scenario automated handling and positioning, meeting industrial-grade efficient operation requirements.",
+    "features": [
+      "High-rigidity structural design with strong load capacity",
+      "Sub-millimeter positioning accuracy with smooth operation",
+      "Modular design for easy expansion and maintenance",
+      "Support for various end-effector integrations",
+      "Compatible with various industrial control systems",
+      "Intelligent fault diagnosis and predictive maintenance"
+    ],
+    "cases": {
+      "automatedAssemblyLine": {
+        "title": "Automated Assembly Line Handling",
+        "desc": "Help customers achieve efficient automated handling and precise positioning, improving production line efficiency."
+      },
+      "warehouseSorting": {
+        "title": "Warehouse Sorting System",
+        "desc": "Applied in smart warehousing for automatic sorting and handling of large items."
+      }
+    },
+    "scenes": [
+      "Automated Assembly Lines",
+      "Smart Warehouse Logistics",
+      "Precision Machining and Testing"
+    ],
+    "params": {
+      "effectiveStroke": {
+        "key": "Effective Stroke",
+        "value": "X: 1~6m, Y: 0.5~2m (customizable)"
+      },
+      "positioningAccuracy": {
+        "key": "Positioning Accuracy",
+        "value": "±0.05mm"
+      },
+      "maxLoad": {
+        "key": "Maximum Load",
+        "value": "50kg"
+      },
+      "driveMethod": {
+        "key": "Drive Method",
+        "value": "Servo motor + timing belt/ball screw"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "X-axis: 3m/s, Y-axis: 2m/s"
+      },
+      "repeatPositioningAccuracy": {
+        "key": "Repeat Positioning Accuracy",
+        "value": "±0.02mm"
+      },
+      "structuralMaterial": {
+        "key": "Structural Material",
+        "value": "High-strength aluminum alloy profiles"
+      },
+      "guideRailType": {
+        "key": "Guide Rail Type",
+        "value": "Linear guide + ball screw"
+      },
+      "controlSystem": {
+        "key": "Control System",
+        "value": "Servo driver + PLC control"
+      },
+      "safetyProtection": {
+        "key": "Safety Protection",
+        "value": "Light curtain protection + emergency stop button"
+      },
+      "workingEnvironment": {
+        "key": "Working Environment",
+        "value": "0°C~40°C, humidity ≤80%"
+      },
+      "powerRequirement": {
+        "key": "Power Requirement",
+        "value": "AC 380V/220V, 50/60Hz"
+      },
+      "communicationInterface": {
+        "key": "Communication Interface",
+        "value": "Ethernet, RS485, CAN"
+      },
+      "installationMethod": {
+        "key": "Installation Method",
+        "value": "Floor mounting/suspended installation"
+      }
+    },
+    "downloads": {
+      "productManual": {
+        "name": "Product Manual.pdf",
+        "url": "/downloads/gantry-2d-manual.pdf"
+      }
+    }
+  },
+  "scara4axis": {
+    "title": "4-Axis SCARA Arm",
+    "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications, featuring high-speed and high-precision characteristics.",
+    "features": [
+      "High-speed motion with short cycle time",
+      "High-precision repeat positioning suitable for precision operations",
+      "Compact structure, easy to integrate",
+      "Support for quick change of various end tools",
+      "Open control interface for easy secondary development",
+      "Intelligent vision guidance, adaptive to working environments"
+    ],
+    "cases": {
+      "electronicAssembly": {
+        "title": "Electronic Component Assembly",
+        "desc": "Applied in electronics manufacturing for efficient automated assembly."
+      },
+      "automaticSortingPackaging": {
+        "title": "Automatic Sorting and Packaging",
+        "desc": "Achieve high-speed sorting and automatic packaging in logistics sorting lines."
+      }
+    },
+    "scenes": [
+      "Electronic Manufacturing Assembly",
+      "Logistics Sorting",
+      "Automated Packaging"
+    ],
+    "params": {
+      "armReach": {
+        "key": "Arm Reach",
+        "value": "400~800mm (optional)"
+      },
+      "repeatPositioningAccuracy": {
+        "key": "Repeat Positioning Accuracy",
+        "value": "±0.02mm"
+      },
+      "maxLoad": {
+        "key": "Maximum Load",
+        "value": "5kg"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "6000mm/s"
+      },
+      "workingRadius": {
+        "key": "Working Radius",
+        "value": "400~800mm"
+      },
+      "verticalStroke": {
+        "key": "Vertical Stroke",
+        "value": "200mm"
+      },
+      "rotationAngle": {
+        "key": "Rotation Angle",
+        "value": "±180°"
+      },
+      "cycleTime": {
+        "key": "Cycle Time",
+        "value": "0.45 seconds (standard motion)"
+      },
+      "driveMethod": {
+        "key": "Drive Method",
+        "value": "AC servo motor"
+      },
+      "reducer": {
+        "key": "Reducer",
+        "value": "Harmonic reducer"
+      },
+      "controller": {
+        "key": "Controller",
+        "value": "Dedicated SCARA controller"
+      },
+      "programmingMethod": {
+        "key": "Programming Method",
+        "value": "Teaching programming + offline programming"
+      },
+      "protectionLevel": {
+        "key": "Protection Level",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "Working Temperature",
+        "value": "0°C~45°C"
+      },
+      "powerSpec": {
+        "key": "Power Specification",
+        "value": "AC 220V, single phase"
+      }
+    },
+    "downloads": {
+      "productManual": {
+        "name": "Product Manual.pdf",
+        "url": "/downloads/scara-4axis-manual.pdf"
+      }
+    }
+  },
+  "arm6axis": {
+    "title": "6-Axis Robotic Arm",
+    "desc": "Equipped with complex trajectory control capabilities, suitable for welding, spraying, assembly and other industrial scenarios, supporting multi-degree-of-freedom collaborative operations.",
+    "features": [
+      "Six-degree-of-freedom design, flexibly handling complex processes",
+      "High-precision trajectory control with smooth motion",
+      "Support for various end-effector and sensor integrations",
+      "Open programming and control interfaces",
+      "High reliability, adapting to harsh industrial environments",
+      "AI-assisted programming, lowering usage barriers"
+    ],
+    "cases": {
+      "automotiveWelding": {
+        "title": "Automotive Parts Welding",
+        "desc": "Applied in automotive manufacturing for high-precision automatic welding."
+      },
+      "sprayingAssembly": {
+        "title": "Spraying and Assembly",
+        "desc": "Achieve automatic spraying and assembly operations in home appliance and machinery industries."
+      }
+    },
+    "scenes": [
+      "Automotive Manufacturing",
+      "Home Appliance Assembly",
+      "Mechanical Processing"
+    ],
+    "params": {
+      "armReach": {
+        "key": "Arm Reach",
+        "value": "700~1800mm (optional)"
+      },
+      "repeatPositioningAccuracy": {
+        "key": "Repeat Positioning Accuracy",
+        "value": "±0.03mm"
+      },
+      "maxLoad": {
+        "key": "Maximum Load",
+        "value": "10kg"
+      },
+      "degreesOfFreedom": {
+        "key": "Degrees of Freedom",
+        "value": "6-axis"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "180°/s (joint speed)"
+      },
+      "workingRadius": {
+        "key": "Working Radius",
+        "value": "700~1800mm"
+      },
+      "verticalStroke": {
+        "key": "Vertical Stroke",
+        "value": "1600mm"
+      },
+      "driveMethod": {
+        "key": "Drive Method",
+        "value": "AC servo motor + precision reducer"
+      },
+      "controlSystem": {
+        "key": "Control System",
+        "value": "Dedicated 6-axis controller"
+      },
+      "programmingMethod": {
+        "key": "Programming Method",
+        "value": "Teaching + offline + graphical programming"
+      },
+      "communicationInterface": {
+        "key": "Communication Interface",
+        "value": "Ethernet, Modbus, Profinet"
+      },
+      "protectionLevel": {
+        "key": "Protection Level",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "Working Temperature",
+        "value": "0°C~45°C"
+      },
+      "powerSpec": {
+        "key": "Power Specification",
+        "value": "AC 380V, three phase"
+      },
+      "installationMethod": {
+        "key": "Installation Method",
+        "value": "Floor/inverted/side mounting"
+      }
+    },
+    "downloads": {
+      "productManual": {
+        "name": "Product Manual.pdf",
+        "url": "/downloads/arm-6axis-manual.pdf"
+      }
+    }
+  },
+  "dualArmHumanoid": {
+    "title": "Dual-Arm Humanoid Robot",
+    "desc": "Equipped with dual-arm collaboration capabilities, suitable for complex assembly, service and other high-flexibility operation requirements, supporting multi-modal perception and intelligent interaction.",
+    "features": [
+      "Dual-arm high-flexibility collaboration, simulating human operations",
+      "Multi-modal perception and intelligent decision-making",
+      "Support for various end tools and sensor integrations",
+      "Open software platform for easy secondary development",
+      "Safety protection and human-robot collaboration design",
+      "Natural language interaction with intelligent task understanding"
+    ],
+    "cases": {
+      "complexAssembly": {
+        "title": "Complex Assembly Operations",
+        "desc": "Achieve high-flexibility automated assembly in 3C electronics, precision manufacturing and other industries."
+      },
+      "serviceDemo": {
+        "title": "Service and Demonstration Robot",
+        "desc": "Applied in exhibition halls, education and other scenarios for intelligent service and human-robot interaction."
+      }
+    },
+    "scenes": [
+      "Precision Assembly",
+      "Education and Demonstration",
+      "Intelligent Service"
+    ],
+    "params": {
+      "armReach": {
+        "key": "Arm Reach",
+        "value": "600~1200mm (single arm)"
+      },
+      "repeatPositioningAccuracy": {
+        "key": "Repeat Positioning Accuracy",
+        "value": "±0.05mm"
+      },
+      "maxLoad": {
+        "key": "Maximum Load",
+        "value": "3kg (single arm)"
+      },
+      "degreesOfFreedom": {
+        "key": "Degrees of Freedom",
+        "value": "14-axis (dual arms)"
+      },
+      "robotHeight": {
+        "key": "Robot Height",
+        "value": "1.6~1.8m (adjustable)"
+      },
+      "baseType": {
+        "key": "Base Type",
+        "value": "Mobile base/Fixed base"
+      },
+      "visionSystem": {
+        "key": "Vision System",
+        "value": "Binocular stereo vision + depth camera"
+      },
+      "voiceInteraction": {
+        "key": "Voice Interaction",
+        "value": "Multi-language speech recognition and synthesis"
+      },
+      "movingSpeed": {
+        "key": "Moving Speed",
+        "value": "0.5~1.2m/s (mobile base)"
+      },
+      "batteryLife": {
+        "key": "Battery Life",
+        "value": "6~8 hours"
+      },
+      "chargingMethod": {
+        "key": "Charging Method",
+        "value": "Automatic charging station docking"
+      },
+      "safetyFeatures": {
+        "key": "Safety Features",
+        "value": "Collision detection + force control + emergency stop"
+      },
+      "operatingSystem": {
+        "key": "Operating System",
+        "value": "ROS2 + Ubuntu"
+      },
+      "devInterface": {
+        "key": "Development Interface",
+        "value": "Python SDK + C++ API"
+      },
+      "networkConnection": {
+        "key": "Network Connection",
+        "value": "WiFi6 + 5G + Ethernet"
+      }
+    },
+    "downloads": {
+      "productManual": {
+        "name": "Product Manual.pdf",
+        "url": "/downloads/dual-arm-humanoid-manual.pdf"
+      }
+    }
+  },
+  "mobileRobot": {
+    "title": "Mobile Robot",
+    "desc": "Autonomous navigation with multi-sensor fusion, suitable for factories, warehouses and other multi-scenario intelligent logistics, achieving efficient automated handling.",
+    "features": [
+      "High-precision laser SLAM navigation with autonomous path planning",
+      "Multi-sensor fusion obstacle avoidance, safe and reliable",
+      "Support for various cargo pallet and rack docking",
+      "Remote monitoring and intelligent scheduling platform",
+      "Modular design for easy maintenance and expansion",
+      "5G network support with real-time data transmission"
+    ],
+    "cases": {
+      "factoryLogistics": {
+        "title": "Factory Intelligent Logistics Handling",
+        "desc": "Achieve automatic handling of raw materials and finished products in manufacturing factories, improving logistics efficiency."
+      },
+      "warehouseAutomation": {
+        "title": "Warehouse Automation",
+        "desc": "Applied in large warehouses for automatic goods sorting and delivery."
+      }
+    },
+    "scenes": [
+      "Manufacturing Factory Logistics",
+      "Smart Warehousing",
+      "Hospital Material Delivery"
+    ],
+    "params": {
+      "navigationMethod": {
+        "key": "Navigation Method",
+        "value": "Laser SLAM + vision fusion"
+      },
+      "maxLoad": {
+        "key": "Maximum Load",
+        "value": "500kg (customizable)"
+      },
+      "batteryLife": {
+        "key": "Battery Life",
+        "value": "8~12 hours"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "1.5m/s"
+      },
+      "positioningAccuracy": {
+        "key": "Positioning Accuracy",
+        "value": "±0.05mm"
+      },
+      "driveMethod": {
+        "key": "Drive Method",
+        "value": "Servo motor + timing belt/ball screw"
+      },
+      "workingEnvironment": {
+        "key": "Working Environment",
+        "value": "-10°C~50°C, humidity ≤85%"
+      },
+      "communicationInterface": {
+        "key": "Communication Interface",
+        "value": "WiFi, 4G/5G, Ethernet"
+      },
+      "protectionLevel": {
+        "key": "Protection Level",
+        "value": "IP54 protection rating"
+      },
+      "chargingMethod": {
+        "key": "Charging Method",
+        "value": "Automatic charging station docking"
+      },
+      "climbingAbility": {
+        "key": "Climbing Ability",
+        "value": "≤5° slope"
+      },
+      "obstacleHeight": {
+        "key": "Obstacle Height",
+        "value": "≤15mm"
+      }
+    },
+    "downloads": {
+      "productManual": {
+        "name": "Product Manual.pdf",
+        "url": "/downloads/mobile-robot-manual.pdf"
+      }
+    }
+  }
+}
