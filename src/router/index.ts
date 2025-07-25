@@ -6,10 +6,7 @@ import Home from "@/views/Home.vue";
 
 // 其他页面使用懒加载（按需加载）
 const Solutions = () => import("@/views/solutions/Solutions.vue");
-const Applications = () => import("@/views/applications/Applications.vue");
 const About = () => import("@/views/company/About.vue");
-
-const Video = () => import("@/views/media/Video.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
 const ProductDetail = () => import("@/views/products/ProductDetailView.vue");
 const Support = () => import("@/views/support/Support.vue");
@@ -33,11 +30,6 @@ const routes = [
     component: Solutions,
   },
   // 应用场景
-  {
-    path: "/applications",
-    name: "Applications",
-    component: Applications,
-  },
   {
     path: "/applications/:slug",
     name: "ApplicationDetail",
@@ -63,11 +55,6 @@ const routes = [
   },
 
   // 视频相关
-  {
-    path: "/video",
-    name: "Video",
-    component: Video,
-  },
   {
     path: "/video/:slug",
     name: "VideoDetail",

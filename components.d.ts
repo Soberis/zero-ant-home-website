@@ -13,7 +13,6 @@ declare module 'vue' {
     CoreProducts: typeof import('./src/components/business/CoreProducts.vue')['default']
     Footer: typeof import('./src/components/layout/Footer.vue')['default']
     HeroCarousel: typeof import('./src/components/business/HeroCarousel.vue')['default']
-    HeroSection: typeof import('./src/components/business/HeroSection.vue')['default']
     IndustryApplications: typeof import('./src/components/business/IndustryApplications.vue')['default']
     NavBar: typeof import('./src/components/layout/NavBar.vue')['default']
     Partners: typeof import('./src/components/business/Partners.vue')['default']

@@ -105,7 +105,7 @@ let timer: NodeJS.Timeout | null = null;
  * 切换到下一张
  */
 function next(): void {
-  current.value = (current.value + 1) % slides.length;
+  current.value = (current.value + 1) % slides.value.length;
 }
 /**
  * 跳转到指定索引

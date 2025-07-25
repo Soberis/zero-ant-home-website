@@ -18,7 +18,7 @@
 
         <div class="video-title">{{ $t(`videos.${video.slug}.title`) }}</div>
          <router-link :to="`/video/${video.slug}`" class="more-btn"
-          >{{ $t(`home.videoCases.watchVideo`) }} +</router-link
+        >{{ $t(`home.videoCases.watchVideo`) }} +</router-link
         >
       </div>
 

@@ -12,7 +12,7 @@
         <p class="page-subtitle">{{ t('solutionsPage.subtitle') }}</p>
 
       </div>
-       <!-- 视频案例区域 - 移到顶部 -->
+       <!-- 视频案例区域 -->
       <div id="video-section" class="video-section">
 
         <h2 class="section-title">{{ t('solutionsPage.videoCases') }}</h2>
@@ -31,7 +31,7 @@
         </div>
 
       </div>
-       <!-- 更多应用场景区域 - 包含原核心产品内容 -->
+       <!-- 更多应用场景区域 -->
       <div id="more-scenarios" class="more-scenarios">
 
         <h2 class="section-title">{{ t('solutionsPage.moreScenarios') }}</h2>
@@ -39,7 +39,7 @@
         <div class="application-grid">
            <!-- 所有应用场景 -->
           <ApplicationCard
-            v-for="item in otherApplications"
+            v-for="item in Applications"
             :key="item.slug"
             :title="item.title"
             :svg="item.svg"
@@ -100,7 +100,7 @@ const goToVideo = (idx: number): void => {
 };
 
 // 所有应用场景
-const otherApplications = computed(() => {
+const Applications = computed(() => {
   return localizedApplications.value;
 });
 
