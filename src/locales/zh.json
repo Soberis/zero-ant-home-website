@@ -235,6 +235,14 @@
       "title": "RTOS-EtherCAT电机控制验证",
       "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线技术的电机控制验证系统，通过毫秒级实时响应和多轴同步控制，实现高精度的工业运动控制解决方案。",
       "tags": ["RTOS", "EtherCAT", "电机控制", "实时系统", "工业控制"]
+    },
+    "videoDetail": {
+      "learnMore": "了解更多",
+      "contact": "联系我们",
+      "qrCodeTitle": "联系方式",
+      "qrCodeDesc": "扫码添加企业微信，获取更多信息",
+      "noVideo": "暂无视频",
+      "browserNotSupport": "您的浏览器不支持视频播放。"
     }
   },
   "applications": {

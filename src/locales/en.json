@@ -245,6 +245,14 @@
       "title": "RTOS-EtherCAT Motor Control Validation",
       "desc": "Demonstrates ZeroAnt Technology's motor control validation system based on RTOS real-time operating system and EtherCAT bus technology.",
       "tags": ["RTOS", "EtherCAT", "Motor Control", "Real-time System", "Industrial Control"]
+    },
+    "videoDetail": {
+      "learnMore": "Learn More",
+      "contact": "Contact Us",
+      "qrCodeTitle": "Contact Information",
+      "qrCodeDesc": "Scan QR code to add WeChat Work for more information",
+      "noVideo": "No Video Available",
+      "browserNotSupport": "Your browser does not support video playback."
     }
   },
   "applications": {

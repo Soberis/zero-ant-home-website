@@ -21,7 +21,7 @@
             controls
             preload="metadata"
           >
-             您的浏览器不支持视频播放。
+             {{ t('videos.videoDetail.browserNotSupport') }}
           </video>
           </template
         >
@@ -36,7 +36,7 @@
         >
          <template v-else
           >
-          <div class="video-placeholder">暂无视频</div>
+          <div class="video-placeholder">{{ t('videos.videoDetail.noVideo') }}</div>
           </template
         >
 
@@ -53,7 +53,7 @@
         >
            {{ para }}
         </div>
-         <button class="more-btn" @click="showContact = true">了解更多</button>
+         <button class="more-btn" @click="showContact = true">{{ t('videos.videoDetail.learnMore') }}</button>
         <transition name="fade-dialog"
           >
           <div
@@ -66,7 +66,7 @@
                <button class="contact-close-x" @click="showContact = false">
                  × </button
               >
-              <h3 class="contact-title">联系方式</h3>
+              <h3 class="contact-title">{{ t('videos.videoDetail.qrCodeTitle') }}</h3>
 
               <div class="contact-qrcode-placeholder">
                  <img
@@ -77,7 +77,7 @@
               </div>
 
               <div class="contact-qrcode-desc">
-                 扫码添加企业微信，获取更多信息
+                 {{ t('videos.videoDetail.qrCodeDesc') }}
               </div>
 
             </div>
