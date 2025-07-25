@@ -1,5 +1,9 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
 import type { Product } from '@/helpers/product';
+// 产品图片资源导入
+import scara4axisImg from '@/assets/images/products/四轴机器人.png';
+import dualArmHumanoidImg from '@/assets/images/products/双臂人形机器人.png';
+import mobileRobotImg from '@/assets/images/products/移动机器人.png';
 
 /**
  * 扩展产品接口，添加产品特有字段
@@ -66,7 +70,7 @@ export const products: ProductData[] = [
   {
     slug: 'scara-4axis',
     name: 'products.scara4axis.name',
-    image: '',
+    image: scara4axisImg,
     desc: 'products.scara4axis.desc',
     seriesTitle: 'products.scara4axis.seriesTitle',
     seriesSubtitle: 'products.scara4axis.seriesSubtitle',
@@ -84,7 +88,7 @@ export const products: ProductData[] = [
   {
     slug: 'dual-arm-humanoid',
     name: 'products.dualArmHumanoid.name',
-    image: '',
+    image: dualArmHumanoidImg,
     desc: 'products.dualArmHumanoid.desc',
     seriesTitle: 'products.dualArmHumanoid.seriesTitle',
     seriesSubtitle: 'products.dualArmHumanoid.seriesSubtitle',
@@ -93,7 +97,7 @@ export const products: ProductData[] = [
   {
     slug: 'mobile-robot',
     name: 'products.mobileRobot.name',
-    image: '',
+    image: mobileRobotImg,
     desc: 'products.mobileRobot.desc',
     seriesTitle: 'products.mobileRobot.seriesTitle',
     seriesSubtitle: 'products.mobileRobot.seriesSubtitle',
