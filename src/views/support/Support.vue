@@ -110,17 +110,31 @@
         v-for="(item, idx) in downloads"
         :key="item.title"
         class="card-item download-card"
-        :class="{ open: item.open }"
+        :class="{ open: downloadStates[idx] }"
       >
 
-        <div class="card-header" @click="toggleDownload(idx)">
+        <div 
+          class="card-header" 
+          @click="toggleDownload(idx)"
+          @keydown="handleKeydown($event, idx, 'download')"
+          role="button"
+          tabindex="0"
+          :aria-expanded="downloadStates[idx]"
+          :aria-controls="`download-content-${idx}`"
+        >
            <span class="card-title download-title">{{ item.title }}</span
-          > <span class="card-icon">{{ item.open ? '-' : '+' }}</span
+          > <span class="card-icon" aria-hidden="true">{{ downloadStates[idx] ? '-' : '+' }}</span
           >
         </div>
          <transition name="fade-slide"
           >
-          <div v-if="item.open" class="card-content">
+          <div 
+            v-if="downloadStates[idx]" 
+            class="card-content"
+            :id="`download-content-${idx}`"
+            role="region"
+            :aria-hidden="!downloadStates[idx]"
+          >
              <span style="color: #666; font-style: italic;">{{ t('supportPage.preparingMessage') }}</span>
           </div>
            </transition
@@ -137,17 +151,31 @@
         v-for="(faq, idx) in faqs"
         :key="faq.q"
         class="card-item faq-card"
-        :class="{ open: faq.open }"
+        :class="{ open: faqStates[idx] }"
       >
 
-        <div class="card-header" @click="toggleFaq(idx)">
+        <div 
+          class="card-header" 
+          @click="toggleFaq(idx)"
+          @keydown="handleKeydown($event, idx, 'faq')"
+          role="button"
+          tabindex="0"
+          :aria-expanded="faqStates[idx]"
+          :aria-controls="`faq-content-${idx}`"
+        >
            <span class="card-title faq-title">{{ faq.q }}</span
-          > <span class="card-icon">{{ faq.open ? '-' : '+' }}</span
+          > <span class="card-icon" aria-hidden="true">{{ faqStates[idx] ? '-' : '+' }}</span
           >
         </div>
          <transition name="fade-slide"
           >
-          <div v-if="faq.open" class="card-content"> {{ faq.a }} </div>
+          <div 
+            v-if="faqStates[idx]" 
+            class="card-content"
+            :id="`faq-content-${idx}`"
+            role="region"
+            :aria-hidden="!faqStates[idx]"
+          > {{ faq.a }} </div>
            </transition
         >
       </div>
@@ -155,69 +183,79 @@
     </div>
 
   </div>
-   <!-- 在页面下方添加锚点内容区块 -->
-  <div style="height: 60px"></div>
-
-  <div id="manual"></div>
-
-  <div id="joint"></div>
-
-  <div id="faq1"></div>
-
-  <div id="faq2"></div>
-
-  <div id="faq3"></div>
 
 </template>
 
 <script setup lang="ts">
 // 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互
-import { reactive } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-const downloads = reactive([
+interface DownloadItem {
+  title: string;
+  desc: string;
+}
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+const downloads = computed<DownloadItem[]>(() => [
   {
     title: t('supportPage.downloads.productManual'),
     desc: 'PDF文档下载',
-    link: '#manual',
-    open: false,
   },
   {
     title: t('supportPage.downloads.jointMaterials'),
     desc: 'ZIP资料包下载',
-    link: '#joint',
-    open: false,
   },
 ]);
 
-const faqs = reactive([
+const faqs = computed<FaqItem[]>(() => [
   {
     q: t('supportPage.faqs.navigation.question'),
     a: t('supportPage.faqs.navigation.answer'),
-    link: '#faq1',
-    open: false,
   },
   {
     q: t('supportPage.faqs.development.question'),
     a: t('supportPage.faqs.development.answer'),
-    link: '#faq2',
-    open: false,
   },
   {
     q: t('supportPage.faqs.customization.question'),
     a: t('supportPage.faqs.customization.answer'),
-    link: '#faq3',
-    open: false,
   },
 ]);
 
+// 使用响应式数据跟踪展开/收起状态
+const downloadStates = ref<boolean[]>([]);
+const faqStates = ref<boolean[]>([]);
+
+// 监听数据变化并初始化状态
+watchEffect(() => {
+  downloadStates.value = downloads.value.map(() => false);
+  faqStates.value = faqs.value.map(() => false);
+});
+
 function toggleDownload(idx: number): void {
-  downloads[idx].open = !downloads[idx].open;
+  downloadStates.value[idx] = !downloadStates.value[idx];
 }
 function toggleFaq(idx: number): void {
-  faqs[idx].open = !faqs[idx].open;
+  faqStates.value[idx] = !faqStates.value[idx];
+}
+
+// 键盘导航支持
+function handleKeydown(event: KeyboardEvent, idx: number, type: 'download' | 'faq'): void {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    if (type === 'download') {
+      toggleDownload(idx);
+    } else {
+      toggleFaq(idx);
+    }
+  }
 }
 </script>
 
