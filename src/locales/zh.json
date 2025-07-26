@@ -254,6 +254,19 @@
       "browserNotSupport": "您的浏览器不支持视频播放。"
     }
   },
+  "bilibiliPlayer": {
+    "loadingVideo": "视频加载中...",
+    "videoNotAvailable": "视频无法播放",
+    "securityRestriction": "由于浏览器安全限制，无法直接嵌入播放",
+    "watchOnBilibili": "前往B站观看",
+    "tryDirectPlay": "尝试直接播放",
+    "retryEmbed": "重试嵌入",
+    "solutions": "解决方案：",
+    "watchOnBilibiliDesc": "在新标签页打开B站观看",
+    "tryDirectPlayDesc": "使用备用播放方案",
+    "retryEmbedDesc": "重新尝试嵌入播放",
+    "allowPopups": "请允许弹窗或检查浏览器设置"
+  },
   "applications": {
     "medical-automation": {
       "title": "医疗自动化",

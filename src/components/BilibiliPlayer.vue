@@ -19,7 +19,7 @@
       <!-- 加载状态 -->
       <div v-if="isLoading" class="loading-overlay">
         <div class="loading-spinner"></div>
-        <div class="loading-text">正在加载视频...</div>
+        <div class="loading-text">{{ t('bilibiliPlayer.loadingVideo') }}</div>
       </div>
     </div>
 
@@ -39,8 +39,8 @@
             <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
           </svg>
         </div>
-        <h3 class="fallback-title">视频暂时无法播放</h3>
-        <p class="fallback-desc">由于浏览器安全策略限制，无法直接嵌入播放视频</p>
+        <h3 class="fallback-title">{{ t('bilibiliPlayer.videoNotAvailable') }}</h3>
+        <p class="fallback-desc">{{ t('bilibiliPlayer.securityRestriction') }}</p>
         <div class="fallback-actions">
           <a 
             :href="originalUrl" 
@@ -48,28 +48,28 @@
             rel="noopener noreferrer"
             class="fallback-btn primary"
           >
-            在B站观看
+            {{ t('bilibiliPlayer.watchOnBilibili') }}
           </a>
           <button 
             @click="tryDirectPlay" 
             class="fallback-btn secondary"
           >
-            尝试直接播放
+            {{ t('bilibiliPlayer.tryDirectPlay') }}
           </button>
           <button 
             @click="retryIframe" 
             class="fallback-btn tertiary"
           >
-            重试嵌入
+            {{ t('bilibiliPlayer.retryEmbed') }}
           </button>
         </div>
         <div class="fallback-tips">
-          <p>💡 解决方案：</p>
+          <p>{{ t('bilibiliPlayer.solutions') }}</p>
           <ul>
-            <li><strong>在B站观看</strong>：直接跳转到B站官网播放（推荐）</li>
-            <li><strong>尝试直接播放</strong>：使用移动端播放器尝试嵌入播放</li>
-            <li><strong>重试嵌入</strong>：重新尝试标准嵌入方式</li>
-            <li>如遇到浏览器安全限制，请允许弹窗和第三方内容</li>
+            <li><strong>{{ t('bilibiliPlayer.watchOnBilibili') }}</strong>：{{ t('bilibiliPlayer.watchOnBilibiliDesc') }}</li>
+            <li><strong>{{ t('bilibiliPlayer.tryDirectPlay') }}</strong>：{{ t('bilibiliPlayer.tryDirectPlayDesc') }}</li>
+            <li><strong>{{ t('bilibiliPlayer.retryEmbed') }}</strong>：{{ t('bilibiliPlayer.retryEmbedDesc') }}</li>
+            <li>{{ t('bilibiliPlayer.allowPopups') }}</li>
           </ul>
         </div>
       </div>
@@ -79,15 +79,19 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 interface Props {
   url: string;
   title?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  title: '视频播放'
-});
+const { t } = useI18n();
+
+const props = defineProps<Props>();
+
+// 使用计算属性提供默认值
+const displayTitle = computed(() => props.title || t('bilibiliPlayer.videoPlay'));
 
 const iframeRef = ref<HTMLIFrameElement>();
 const showFallback = ref(false);

@@ -198,62 +198,123 @@
     "ur-robot-llm-motion-capture": {
       "title": "UR Robot LLM Motion Capture",
       "desc": "Demonstrates ZeroAnt Technology's UR robot motion capture and intelligent control based on large language models, achieving autonomous learning and efficient execution of complex tasks through deep integration of AI and robotics.",
-      "tags": ["UR Robot", "Large Language Model", "Motion Capture", "Smart Manufacturing"]
+      "tags": [
+        "UR Robot",
+        "Large Language Model",
+        "Motion Capture",
+        "Smart Manufacturing"
+      ]
     },
     "four-axis-robot-open-fridge": {
       "title": "Four-Axis Robot Opening Fridge",
       "desc": "Showcases ZeroAnt Technology's four-axis robot opening a fridge in automation scenarios, demonstrating autonomous execution of complex actions through high-precision motion control and intelligent perception.",
-      "tags": ["Four-Axis Robot", "Automation", "Smart Manufacturing", "Motion Control"]
+      "tags": [
+        "Four-Axis Robot",
+        "Automation",
+        "Smart Manufacturing",
+        "Motion Control"
+      ]
     },
     "servo-motor-station": {
       "title": "Servo Motor Station",
       "desc": "Demonstrates ZeroAnt Technology's servo motor station automation control and applications, achieving precise positioning and efficient operations through high-performance servo systems.",
-      "tags": ["Servo Motor", "Automation", "Smart Manufacturing", "Industrial Control"]
+      "tags": [
+        "Servo Motor",
+        "Automation",
+        "Smart Manufacturing",
+        "Industrial Control"
+      ]
     },
     "personalized-prescription-pharmaceutical": {
       "title": "Personalized Prescription Pharmaceutical",
       "desc": "Showcases ZeroAnt Technology's innovation in personalized prescription pharmaceuticals, achieving personalized drug customization through intelligent automation technology.",
-      "tags": ["Personalized Pharmaceuticals", "Medical Automation", "Intelligent Customization", "Precision Medicine"]
+      "tags": [
+        "Personalized Pharmaceuticals",
+        "Medical Automation",
+        "Intelligent Customization",
+        "Precision Medicine"
+      ]
     },
     "mobile-transfer-robot": {
       "title": "Mobile Transfer Robot",
       "desc": "Showcases ZeroAnt Technology's mobile transfer robot automation workflow, achieving efficient and precise material transfer between different workstations.",
-      "tags": ["Mobile Robot", "Transfer Operations", "Flexible Production", "Smart Logistics"]
+      "tags": [
+        "Mobile Robot",
+        "Transfer Operations",
+        "Flexible Production",
+        "Smart Logistics"
+      ]
     },
     "high-speed-precision-robot-arm": {
       "title": "High-Speed Precision Robot Arm Demo",
       "desc": "Demonstrates ZeroAnt Technology's robot arm high-speed precision operation capabilities through advanced motion control algorithms and precision mechanical design.",
-      "tags": ["Robot Arm", "High-Speed Precision", "Motion Control", "Industrial Automation"]
+      "tags": [
+        "Robot Arm",
+        "High-Speed Precision",
+        "Motion Control",
+        "Industrial Automation"
+      ]
     },
     "offline-programming": {
       "title": "Offline Programming",
       "desc": "Showcases ZeroAnt Technology's advanced offline programming technology, achieving efficient robot program development and optimization through digital simulation and virtual debugging.",
-      "tags": ["Offline Programming", "Digital Simulation", "Virtual Debugging", "Smart Manufacturing"]
+      "tags": [
+        "Offline Programming",
+        "Digital Simulation",
+        "Virtual Debugging",
+        "Smart Manufacturing"
+      ]
     },
     "offline-programming-logo-drawing": {
       "title": "Offline Programming Logo Drawing",
       "desc": "Demonstrates ZeroAnt Technology's offline programming technology in precisely drawing logo patterns through trajectory control and path planning.",
-      "tags": ["Offline Programming", "Trajectory Control", "Logo Drawing", "Precision Control"]
+      "tags": [
+        "Offline Programming",
+        "Trajectory Control",
+        "Logo Drawing",
+        "Precision Control"
+      ]
     },
     "palletizing-robot": {
       "title": "Palletizing Robot",
       "desc": "Showcases ZeroAnt Technology's palletizing robot efficient application in logistics automation through intelligent path planning and precise grasping control.",
-      "tags": ["Palletizing Robot", "Logistics Automation", "Smart Manufacturing", "Industrial Robot"]
+      "tags": [
+        "Palletizing Robot",
+        "Logistics Automation",
+        "Smart Manufacturing",
+        "Industrial Robot"
+      ]
     },
     "ball-catching-demo": {
       "title": "Ball Catching Demo",
       "desc": "Demonstrates ZeroAnt Technology's advanced robot technology in visual recognition and motion control through real-time visual tracking and precise grasping control.",
-      "tags": ["Robot Control", "Visual Recognition", "Motion Control", "Intelligent Grasping"]
+      "tags": [
+        "Robot Control",
+        "Visual Recognition",
+        "Motion Control",
+        "Intelligent Grasping"
+      ]
     },
     "robot-polishing-demo": {
       "title": "Robot Polishing Process Demo",
       "desc": "Showcases ZeroAnt Technology's complete robot polishing process through advanced path planning algorithms and force control technology.",
-      "tags": ["Robot Polishing", "Surface Treatment", "Force Control Technology", "Industrial Automation"]
+      "tags": [
+        "Robot Polishing",
+        "Surface Treatment",
+        "Force Control Technology",
+        "Industrial Automation"
+      ]
     },
     "rtos-ethercat-validation": {
       "title": "RTOS-EtherCAT Motor Control Validation",
       "desc": "Demonstrates ZeroAnt Technology's motor control validation system based on RTOS real-time operating system and EtherCAT bus technology.",
-      "tags": ["RTOS", "EtherCAT", "Motor Control", "Real-time System", "Industrial Control"]
+      "tags": [
+        "RTOS",
+        "EtherCAT",
+        "Motor Control",
+        "Real-time System",
+        "Industrial Control"
+      ]
     },
     "videoDetail": {
       "learnMore": "Learn More",
@@ -263,6 +324,19 @@
       "noVideo": "No Video Available",
       "browserNotSupport": "Your browser does not support video playback."
     }
+  },
+  "bilibiliPlayer": {
+    "loadingVideo": "Loading video...",
+    "videoNotAvailable": "Video Not Available",
+    "securityRestriction": "Due to browser security restrictions, direct embedding is not possible",
+    "watchOnBilibili": "Watch on Bilibili",
+    "tryDirectPlay": "Try Direct Play",
+    "retryEmbed": "Retry Embed",
+    "solutions": "Solutions:",
+    "watchOnBilibiliDesc": "Open in new tab to watch on Bilibili",
+    "tryDirectPlayDesc": "Use backup playback solution",
+    "retryEmbedDesc": "Retry embedded playback",
+    "allowPopups": "Please allow popups or check browser settings"
   },
   "applications": {
     "medical-automation": {
@@ -816,7 +890,10 @@
           }
         ],
         "params": [
-          { "key": "Navigation Method", "value": "Laser SLAM + Visual Navigation" },
+          {
+            "key": "Navigation Method",
+            "value": "Laser SLAM + Visual Navigation"
+          },
           { "key": "Load Capacity", "value": "500kg" },
           { "key": "Positioning Accuracy", "value": "±10mm" },
           { "key": "Operating Time", "value": "8 hours continuous" }
