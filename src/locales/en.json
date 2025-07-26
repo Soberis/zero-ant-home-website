@@ -928,39 +928,38 @@
   },
   "seo": {
     "siteName": "ZeroAnt Technology",
-    "defaultTitle": "ZeroAnt Technology - Professional Robotics Technology Solutions Provider",
-    "defaultDescription": "ZeroAnt Technology is a professional robotics technology solutions provider, committed to industrial automation and intelligent manufacturing.",
-    "defaultKeywords": "robotics technology, industrial automation, intelligent manufacturing, ZeroAnt",
+    "defaultTitle": "ZeroAnt Technology - Professional Robot Technology Solutions Provider",
+    "defaultDescription": "ZeroAnt Technology is a professional robot technology solutions provider dedicated to industrial automation and smart manufacturing. We offer innovative product lines including industrial robots and automation equipment to meet automation needs in medical automation, semiconductor processing and other industries.",
+    "defaultKeywords": "robot technology, industrial automation, smart manufacturing, ZeroAnt, ZeroAnt Technology, industrial robots, automation equipment, medical automation, semiconductor processing",
     "home": {
-      "title": "Home",
-      "description": "ZeroAnt Technology - Professional robotics technology solutions provider, committed to industrial automation and intelligent manufacturing",
-      "keywords": "robotics technology, industrial automation, intelligent manufacturing, ZeroAnt, ZeroAnt Technology"
+      "title": "ZeroAnt Technology - Let robots be everywhere",
+      "description": "ZeroAnt Technology specializes in industrial robotics R&D and smart manufacturing solutions, offering 4-axis robots, 6-axis robotic arms, dual-arm humanoid robots, and mobile robots. Based on AiROS robotic operating system, we provide high-precision, high-reliability automation equipment and technical services for medical automation, semiconductor processing, precision manufacturing and other industries.",
+      "keywords": "ZeroAnt Technology, industrial robots, smart manufacturing, robotics technology, automation equipment, 4-axis robot, 6-axis robotic arm, dual-arm humanoid robot, mobile robot, AiROS, robotic operating system, medical automation, semiconductor processing, precision manufacturing, industrial automation solutions, robot control system, Hangzhou robotics company"
     },
     "products": {
-      "title": "Products",
-      "description": "Explore ZeroAnt Technology's innovative product line, including industrial robots, automation equipment, etc.",
-      "keywords": "products, industrial robots, automation equipment, robot products"
+      "title": "Products Center - ZeroAnt Technology Professional Manufacturer",
+      "description": "ZeroAnt Technology industrial robot products center offers comprehensive SCARA 4-axis robots, 6-axis articulated robots, dual-arm collaborative robots, AGV mobile robots and complete product series. Features high-precision positioning, rapid response, and intelligent control, widely applied in electronics manufacturing, automotive production, medical devices, semiconductors and other automated production lines.",
+      "keywords": "industrial robots, robot products, SCARA robot, 4-axis robot, 6-axis robot, articulated robot, dual-arm robot, collaborative robot, AGV robot, mobile robot, robotic arm, automation equipment, robot manufacturer, industrial automation products, precision positioning, intelligent control, electronics manufacturing, automotive production, medical device automation"
     },
     "solutions": {
-      "title": "Solutions",
-      "description": "Professional robotics technology solutions to meet automation needs in different industries",
-      "keywords": "solutions, technical solutions, automation solutions, robot solutions"
+      "title": "Solutions - ZeroAnt Technology Industry Expert",
+      "description": "ZeroAnt Technology provides smart manufacturing solutions for medical automation, semiconductor processing, precision manufacturing and other industries. Based on AiROS robotic operating system, integrating machine vision, force control technology, path planning and other core technologies, we offer one-stop automation services from production line design to system integration, helping enterprises achieve digital transformation and upgrading.",
+      "keywords": "smart manufacturing solutions, automation solutions, robot system integration, medical automation, semiconductor automation, precision manufacturing, production line automation, AiROS operating system, machine vision, force control technology, path planning, digital transformation, Industry 4.0, flexible manufacturing, unmanned factory, smart production line, automation system integrator"
     },
     "support": {
-      "title": "Support",
-      "description": "Get professional technical support services, including product consultation, technical documentation and after-sales service",
-      "keywords": "technical support, after-sales service, product consultation, technical documentation"
+      "title": "Technical Support - ZeroAnt Technology Professional Team",
+      "description": "ZeroAnt Technology technical support center provides 7x24 professional services, including robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare parts supply and comprehensive technical support. With experienced engineering team, we provide rapid response technical consultation and on-site services for industrial robot users, ensuring stable equipment operation and maximum production efficiency.",
+      "keywords": "technical support, after-sales service, robot maintenance, technical training, remote diagnostics, on-site service, spare parts supply, installation commissioning, preventive maintenance, technical consultation, engineering services, equipment repair, troubleshooting, technical documentation, user manual, online support"
     },
     "careers": {
-      "title": "Careers",
-      "description": "ZeroAnt Technology Careers - Join us to build the coolest robots together.",
-      "keywords": "ZeroAnt Technology, careers, job opportunities, positions"
+      "title": "Talent Recruitment - ZeroAnt Technology Seeking Excellence",
+      "description": "ZeroAnt Technology is recruiting excellent talents including robotics engineers, algorithm engineers, software development engineers, hardware engineers, sales engineers and more. We offer competitive compensation and benefits, broad career development opportunities and innovative work environment. Join us to drive industrial robotics technology innovation and create a bright future for smart manufacturing.",
+      "keywords": "talent recruitment, robotics engineer, algorithm engineer, software development, hardware engineer, sales engineer, R&D engineer, automation engineer, machine vision engineer, control system engineer, Hangzhou recruitment, robotics company jobs, technical positions, engineering careers, career development, innovation team"
     },
-
     "about": {
-      "title": "About Us",
-      "description": "Learn about ZeroAnt Technology's development history, corporate culture and technical strength",
-      "keywords": "about us, company profile, company introduction, ZeroAnt Technology"
+      "title": "About ZeroAnt Technology - Industrial Robotics Technology Innovation Enterprise",
+      "description": "ZeroAnt Technology was founded in Hangzhou as a high-tech enterprise focusing on industrial robotics technology innovation. The company owns independently developed AiROS robotic operating system and has core technological advantages in robot control, machine vision, artificial intelligence and other fields. We are committed to providing high-quality industrial robot products and smart manufacturing solutions for global manufacturing customers, driving industrial intelligent upgrading.",
+      "keywords": "ZeroAnt Technology, about us, company introduction, industrial robotics company, Hangzhou robotics enterprise, high-tech company, AiROS system, robotics technology innovation, smart manufacturing enterprise, automation company, robot control technology, artificial intelligence, corporate culture, development history, technical strength, core team"
     }
   }
 }

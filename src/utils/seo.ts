@@ -122,22 +122,25 @@ export function setSEO(meta: SEOMetaData) {
 
 /**
  * 生成结构化数据
- * @param data 结构化数据对象
+ * @param data 结构化数据对象或对象数组
  */
-export function setStructuredData(data: Record<string, any>) {
+export function setStructuredData(data: Record<string, any> | Record<string, any>[]) {
   // 移除现有的结构化数据
-  const existingScript = document.querySelector(
+  const existingScripts = document.querySelectorAll(
     'script[type="application/ld+json"]'
   );
-  if (existingScript) {
-    existingScript.remove();
-  }
+  existingScripts.forEach(script => script.remove());
 
-  // 创建新的结构化数据脚本
-  const script = document.createElement("script");
-  script.type = "application/ld+json";
-  script.textContent = JSON.stringify(data);
-  document.head.appendChild(script);
+  // 处理单个对象或对象数组
+  const dataArray = Array.isArray(data) ? data : [data];
+  
+  // 为每个数据对象创建结构化数据脚本
+  dataArray.forEach(item => {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(item);
+    document.head.appendChild(script);
+  });
 }
 
 /**

@@ -7,6 +7,7 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { visualizer } from "rollup-plugin-visualizer";
+import viteImagemin from "vite-plugin-imagemin";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -28,6 +29,34 @@ export default defineConfig({
       gzipSize: true,
       brotliSize: true,
     }),
+    // 图片压缩
+    viteImagemin({
+      gifsicle: {
+        optimizationLevel: 7,
+        interlaced: false,
+      },
+      optipng: {
+        optimizationLevel: 7,
+      },
+      mozjpeg: {
+        quality: 80,
+      },
+      pngquant: {
+        quality: [0.8, 0.9],
+        speed: 4,
+      },
+      svgo: {
+        plugins: [
+          {
+            name: "removeViewBox",
+          },
+          {
+            name: "removeEmptyAttrs",
+            active: false,
+          },
+        ],
+      },
+    }),
   ],
   resolve: {
     alias: {
@@ -43,6 +72,22 @@ export default defineConfig({
     },
   },
   build: {
+    // 启用压缩
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // 生产环境移除console
+        drop_debugger: true, // 移除debugger
+        pure_funcs: ['console.log'], // 移除特定函数调用
+      },
+      mangle: {
+        safari10: true, // 兼容Safari 10
+      },
+    },
+    // 启用源码映射（可选，生产环境可关闭）
+    sourcemap: false,
+    // 设置构建目标
+    target: 'es2015',
     rollupOptions: {
       output: {
         // 优化代码分割策略
@@ -102,6 +147,8 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     // 启用 CSS 代码分割
     cssCodeSplit: true,
+    // 启用资源内联阈值
+    assetsInlineLimit: 4096,
   },
   // 优化依赖预构建
   optimizeDeps: {

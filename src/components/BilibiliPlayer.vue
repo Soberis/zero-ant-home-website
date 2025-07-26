@@ -90,9 +90,6 @@ const { t } = useI18n();
 
 const props = defineProps<Props>();
 
-// 使用计算属性提供默认值
-const displayTitle = computed(() => props.title || t('bilibiliPlayer.videoPlay'));
-
 const iframeRef = ref<HTMLIFrameElement>();
 const showFallback = ref(false);
 const isLoading = ref(true);

@@ -65,7 +65,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
     });
 
     // 设置结构化数据
-    const structuredData = {
+    let structuredData: Record<string, any> = {
       "@context": "https://schema.org",
       "@type": "WebPage",
       name: seoConfig.title,
@@ -87,8 +87,458 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       },
     };
 
-    setStructuredData(structuredData);
+    // 为首页添加额外的结构化数据
+    if (routeName === "Home") {
+      // Organization 类型结构化数据
+      const organizationData = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": i18n.global.t("seo.siteName"),
+        "alternateName": "ZeroAnt Technology",
+        "url": baseUrl,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${baseUrl}/logo.png`,
+          "width": 200,
+          "height": 200
+        },
+        "description": i18n.global.t("seo.defaultDescription"),
+        "foundingDate": "2020",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Room 1-501, Building 1, No. 998 Wenyi West Road",
+          "addressLocality": "Hangzhou",
+          "addressRegion": "Zhejiang",
+          "postalCode": "310000",
+          "addressCountry": "CN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+86-13001001954",
+          "contactType": "customer service",
+          "availableLanguage": ["Chinese", "English"]
+        },
+        "industry": "Industrial Automation",
+        "numberOfEmployees": {
+          "@type": "QuantitativeValue",
+          "minValue": 50,
+          "maxValue": 200
+        },
+        "knowsAbout": [
+          "Industrial Robots",
+          "Automation Equipment",
+          "Smart Manufacturing",
+          "Machine Vision",
+          "Robotic Operating Systems"
+        ],
+        "sameAs": [
+          // 可以添加社交媒体链接
+          // "https://www.linkedin.com/company/zeroant",
+          // "https://github.com/zeroant",
+        ],
+      };
+
+      // LocalBusiness 结构化数据
+      const localBusinessData = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": i18n.global.t("seo.siteName"),
+        "image": `${baseUrl}/logo.png`,
+        "@id": baseUrl,
+        "url": baseUrl,
+        "telephone": "+86-13001001954",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Room 1-501, Building 1, No. 998 Wenyi West Road",
+          "addressLocality": "Hangzhou",
+          "addressRegion": "Zhejiang",
+          "postalCode": "310000",
+          "addressCountry": "CN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 30.2741,
+          "longitude": 120.1551
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      };
+      
+      // 同时设置WebPage、Organization和LocalBusiness结构化数据
+      setStructuredData([structuredData, organizationData, localBusinessData]);
+    } else {
+      setStructuredData(structuredData);
+    }
   }
+}
+
+/**
+ * 设置解决方案页面 SEO 和结构化数据
+ * @param to 目标路由
+ */
+export function setupSolutionsSEO(to: RouteLocationNormalized) {
+  const baseUrl = "https://zeroant.com";
+  const currentUrl = `${baseUrl}${to.path}`;
+  const t = i18n.global.t;
+
+  // 设置解决方案页面 SEO
+  setSEO({
+    title: t("seo.solutions.title"),
+    description: t("seo.solutions.description"),
+    keywords: t("seo.solutions.keywords"),
+    ogTitle: t("seo.solutions.title"),
+    ogDescription: t("seo.solutions.description"),
+    ogUrl: currentUrl,
+    ogImage: `${baseUrl}/logo.png`,
+    twitterTitle: t("seo.solutions.title"),
+    twitterDescription: t("seo.solutions.description"),
+    twitterImage: `${baseUrl}/logo.png`,
+    canonical: currentUrl,
+    siteName: t("seo.siteName"),
+  });
+
+  // 解决方案页面结构化数据
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": t("seo.solutions.title"),
+    "description": t("seo.solutions.description"),
+    "url": currentUrl,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`,
+      },
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "Service",
+          "name": "Medical Automation Solutions",
+          "description": "Comprehensive automation solutions for medical device manufacturing and laboratory automation",
+          "provider": {
+            "@type": "Organization",
+            "name": t("seo.siteName")
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Semiconductor Processing Solutions",
+          "description": "High-precision automation solutions for semiconductor manufacturing processes",
+          "provider": {
+            "@type": "Organization",
+            "name": t("seo.siteName")
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Smart Manufacturing Solutions",
+          "description": "End-to-end smart manufacturing solutions with AI and robotics integration",
+          "provider": {
+            "@type": "Organization",
+            "name": t("seo.siteName")
+          }
+        }
+      ]
+    }
+  };
+
+  setStructuredData(structuredData);
+}
+
+/**
+ * 设置关于我们页面 SEO 和结构化数据
+ * @param to 目标路由
+ */
+export function setupAboutSEO(to: RouteLocationNormalized) {
+  const baseUrl = "https://zeroant.com";
+  const currentUrl = `${baseUrl}${to.path}`;
+  const t = i18n.global.t;
+
+  // 设置关于我们页面 SEO
+  setSEO({
+    title: t("seo.about.title"),
+    description: t("seo.about.description"),
+    keywords: t("seo.about.keywords"),
+    ogTitle: t("seo.about.title"),
+    ogDescription: t("seo.about.description"),
+    ogUrl: currentUrl,
+    ogImage: `${baseUrl}/logo.png`,
+    twitterTitle: t("seo.about.title"),
+    twitterDescription: t("seo.about.description"),
+    twitterImage: `${baseUrl}/logo.png`,
+    canonical: currentUrl,
+    siteName: t("seo.siteName"),
+  });
+
+  // 关于我们页面结构化数据
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": t("seo.about.title"),
+    "description": t("seo.about.description"),
+    "url": currentUrl,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`,
+      },
+    },
+  };
+
+  setStructuredData(structuredData);
+}
+
+/**
+ * 设置招聘页面 SEO 和结构化数据
+ * @param to 目标路由
+ */
+export function setupCareersSEO(to: RouteLocationNormalized) {
+  const baseUrl = "https://zeroant.com";
+  const currentUrl = `${baseUrl}${to.path}`;
+  const t = i18n.global.t;
+
+  // 设置招聘页面 SEO
+  setSEO({
+    title: t("seo.careers.title"),
+    description: t("seo.careers.description"),
+    keywords: t("seo.careers.keywords"),
+    ogTitle: t("seo.careers.title"),
+    ogDescription: t("seo.careers.description"),
+    ogUrl: currentUrl,
+    ogImage: `${baseUrl}/logo.png`,
+    twitterTitle: t("seo.careers.title"),
+    twitterDescription: t("seo.careers.description"),
+    twitterImage: `${baseUrl}/logo.png`,
+    canonical: currentUrl,
+    siteName: t("seo.siteName"),
+  });
+
+  // 招聘页面结构化数据 - 使用CollectionPage包含多个JobPosting
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": t("seo.careers.title"),
+    "description": t("seo.careers.description"),
+    "url": currentUrl,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`,
+      },
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "JobPosting",
+          "title": "Robotics Engineer",
+          "description": "Develop and optimize industrial robot systems, work on robot control algorithms and mechanical design.",
+          "datePosted": new Date().toISOString().split('T')[0],
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hangzhou",
+              "addressRegion": "Zhejiang",
+              "postalCode": "310000",
+              "streetAddress": "Room 1-501, Building 1, No. 998 Wenyi West Road",
+              "addressCountry": "CN"
+            }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": t("seo.siteName"),
+            "sameAs": baseUrl,
+            "logo": `${baseUrl}/logo.png`
+          },
+          "qualifications": "Bachelor's degree in Robotics, Mechanical Engineering, or related field. 3+ years experience in industrial robotics.",
+          "responsibilities": "Design and develop robotic systems, optimize control algorithms, collaborate with cross-functional teams."
+        },
+        {
+          "@type": "JobPosting",
+          "title": "Algorithm Engineer",
+          "description": "Develop AI algorithms for robot perception, planning, and control systems.",
+          "datePosted": new Date().toISOString().split('T')[0],
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hangzhou",
+              "addressRegion": "Zhejiang",
+              "postalCode": "310000",
+              "streetAddress": "Room 1-501, Building 1, No. 998 Wenyi West Road",
+              "addressCountry": "CN"
+            }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": t("seo.siteName"),
+            "sameAs": baseUrl,
+            "logo": `${baseUrl}/logo.png`
+          },
+          "qualifications": "Master's degree in Computer Science, AI, or related field. Strong background in machine learning and robotics.",
+          "responsibilities": "Develop AI algorithms, implement machine learning models, optimize robot performance."
+        },
+        {
+          "@type": "JobPosting",
+          "title": "Software Development Engineer",
+          "description": "Develop software systems for robot control, user interfaces, and system integration.",
+          "datePosted": new Date().toISOString().split('T')[0],
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hangzhou",
+              "addressRegion": "Zhejiang",
+              "postalCode": "310000",
+              "streetAddress": "Room 1-501, Building 1, No. 998 Wenyi West Road",
+              "addressCountry": "CN"
+            }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": t("seo.siteName"),
+            "sameAs": baseUrl,
+            "logo": `${baseUrl}/logo.png`
+          },
+          "qualifications": "Bachelor's degree in Software Engineering or Computer Science. Proficiency in C++, Python, and embedded systems.",
+          "responsibilities": "Develop robot control software, create user interfaces, integrate hardware and software systems."
+        }
+      ]
+    }
+  };
+
+  setStructuredData(structuredData);
+}
+
+/**
+ * 设置产品详情页 SEO
+ * @param productName 产品名称
+ * @param productDescription 产品描述
+ * @param to 目标路由
+ */
+/**
+ * 设置支持页面 SEO 和结构化数据
+ * @param to 目标路由
+ */
+export function setupSupportSEO(to: RouteLocationNormalized) {
+  const baseUrl = "https://zeroant.com";
+  const currentUrl = `${baseUrl}${to.path}`;
+  const t = i18n.global.t;
+
+  // 设置支持页面 SEO
+  setSEO({
+    title: t("seo.support.title"),
+    description: t("seo.support.description"),
+    keywords: t("seo.support.keywords"),
+    ogTitle: t("seo.support.title"),
+    ogDescription: t("seo.support.description"),
+    ogUrl: currentUrl,
+    ogImage: `${baseUrl}/logo.png`,
+    twitterTitle: t("seo.support.title"),
+    twitterDescription: t("seo.support.description"),
+    twitterImage: `${baseUrl}/logo.png`,
+    canonical: currentUrl,
+    siteName: t("seo.siteName"),
+  });
+
+  // 支持页面结构化数据
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "name": t("seo.support.title"),
+    "description": t("seo.support.description"),
+    "url": currentUrl,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": t("seo.siteName"),
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`,
+      },
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What technical support services does ZeroAnt Technology provide?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We provide 7x24 professional services including robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare parts supply and comprehensive technical support."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I get technical support for my industrial robot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can contact our technical support team through phone, email, or online support system. Our experienced engineers provide rapid response technical consultation and on-site services."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide training for robot operation and maintenance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer comprehensive technical training programs covering robot operation, programming, maintenance, and troubleshooting to ensure optimal equipment performance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the warranty period for ZeroAnt robots?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our industrial robots come with comprehensive warranty coverage. Please contact our support team for specific warranty terms and conditions for your product model."
+        }
+      }
+    ]
+  };
+
+  setStructuredData(structuredData);
 }
 
 /**
