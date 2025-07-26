@@ -50,6 +50,18 @@ export default defineConfig({
     sourcemap: false,
     // 设置构建目标
     target: "es2020",
+    // 启用压缩
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true, // 移除console.log
+        drop_debugger: true, // 移除debugger语句
+        pure_funcs: ["console.log", "console.warn"], // 移除指定函数
+      },
+      mangle: {
+        safari10: true, // 解决Safari 10的兼容性问题
+      },
+    },
     rollupOptions: {
       output: {
         // 优化代码分割策略
@@ -113,7 +125,7 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 800, // 降低警告阈值
     // 启用 CSS 代码分割
     cssCodeSplit: true,
     // 启用资源内联阈值
