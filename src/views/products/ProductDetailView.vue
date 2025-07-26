@@ -1,28 +1,26 @@
 <!-- 产品详情页，根据slug展示产品详细信息，未找到时显示提示 -->
 <template>
-
   <div>
-     <ProductDetailComponent
+    <ProductDetailComponent
       v-if="detail"
       :product="detail"
       :product-slug="slug"
       @back="goBack"
     />
     <div v-else class="not-found">{{ t('productDetail.notFound') }}</div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
 // 页面级组件：产品详情视图，根据slug查找产品详情，未找到时显示提示
-import { computed } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { getProductDetailKeys } from '@/data/productDetails';
 import type { ProductDetail } from '@/data/productDetails';
 import { products } from '@/data/products';
 import ProductDetailComponent from '@/components/common/ProductDetail.vue';
+import { setSEO, setStructuredData } from '@/utils/seo';
 
 // 国际化
 const { t, messages, locale } = useI18n();
@@ -92,6 +90,88 @@ const detail = computed(() => {
   }
   
   return null;
+});
+
+// 获取当前产品基础信息
+const currentProduct = computed(() => {
+  return products.find(p => p.slug === slug);
+});
+
+// 动态SEO元数据
+const seoMetadata = computed(() => {
+  if (!detail.value || !currentProduct.value) return null;
+  
+  const productName = t(currentProduct.value.name);
+  const productDesc = t(currentProduct.value.desc);
+  const siteName = 'ZeroAnt Technology';
+  const currentUrl = `${window.location.origin}${route.fullPath}`;
+  
+  return {
+    title: `${productName} - ${siteName}`,
+    description: productDesc,
+    keywords: `${productName}, ${currentProduct.value.category === 'robot' ? '机器人, 自动化' : '操作系统, 软件'}, ZeroAnt, 零蚁科技`,
+    ogTitle: productName,
+    ogDescription: productDesc,
+    ogType: 'product',
+    ogUrl: currentUrl,
+    ogImage: currentProduct.value.image || `${window.location.origin}/logo.png`,
+    twitterCard: 'summary_large_image',
+    twitterTitle: productName,
+    twitterDescription: productDesc,
+    canonical: currentUrl
+  };
+});
+
+// Product结构化数据
+const productStructuredData = computed(() => {
+  if (!detail.value || !currentProduct.value) return null;
+  
+  const productName = t(currentProduct.value.name);
+  const productDesc = t(currentProduct.value.desc);
+  
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: productName,
+    description: productDesc,
+    brand: {
+      '@type': 'Brand',
+      name: 'ZeroAnt Technology'
+    },
+    manufacturer: {
+      '@type': 'Organization',
+      name: 'ZeroAnt Technology',
+      url: window.location.origin
+    },
+    category: currentProduct.value.category === 'robot' ? 'Industrial Robot' : 'Operating System Software',
+    url: `${window.location.origin}${route.fullPath}`,
+    image: currentProduct.value.image || `${window.location.origin}/logo.png`,
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'ZeroAnt Technology'
+      }
+    }
+  };
+});
+
+// 设置SEO和结构化数据
+const updateSEO = () => {
+  if (seoMetadata.value) {
+    setSEO(seoMetadata.value);
+  }
+  if (productStructuredData.value) {
+    setStructuredData(productStructuredData.value);
+  }
+};
+
+// 监听数据变化并更新SEO
+watch([detail, locale], updateSEO, { immediate: false });
+
+onMounted(() => {
+  updateSEO();
 });
 
 function goBack() {

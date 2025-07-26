@@ -1,9 +1,32 @@
 import { DirectiveBinding } from 'vue'
+import { performanceMarker } from '@/utils/optimization'
 
 /**
  * 图片懒加载指令
  * 使用 Intersection Observer API 实现高性能的图片懒加载
+ * 集成性能监控和错误处理增强
  */
+
+// 性能统计数据
+interface LazyLoadStats {
+  totalImages: number
+  loadedImages: number
+  failedImages: number
+  averageLoadTime: number
+  loadTimes: number[]
+}
+
+// 全局统计
+const stats: LazyLoadStats = {
+  totalImages: 0,
+  loadedImages: 0,
+  failedImages: 0,
+  averageLoadTime: 0,
+  loadTimes: []
+}
+
+// 重试计数器
+const retryCounters = new WeakMap<HTMLImageElement, number>()
 
 // 创建 Intersection Observer 实例
 const createObserver = () => {
@@ -48,49 +71,115 @@ function getOptimalRootMargin(): string {
 
 // 图片加载函数
 function loadImage(img: HTMLImageElement, src: string) {
+  // 性能标记开始
+  const markName = `lazy-load-${Date.now()}-${Math.random()}`
+  performanceMarker.mark(`${markName}-start`)
+  
   // 创建新的图片对象来预加载
   const newImg = new Image()
   
   // 设置加载状态
   img.classList.add('lazy-loading')
   
+  // 获取重试次数
+  const retryCount = retryCounters.get(img) || 0
+  
   // 添加超时处理
   const timeout = setTimeout(() => {
     newImg.onload = null
     newImg.onerror = null
-    img.classList.add('lazy-error')
-    img.classList.remove('lazy-loading')
+    handleLoadError(img, src, 'timeout')
   }, 10000) // 10秒超时
   
   newImg.onload = () => {
     clearTimeout(timeout)
+    
+    // 性能标记结束
+    performanceMarker.mark(`${markName}-end`)
+    const loadTime = performanceMarker.measure(`${markName}-duration`, `${markName}-start`, `${markName}-end`)
+    
+    // 更新统计数据
+    updateStats('success', loadTime)
+    
     // 图片加载成功后设置 src
     img.src = src
     img.classList.add('lazy-loaded')
     img.classList.remove('lazy-loading')
     
+    // 重置重试计数器
+    retryCounters.delete(img)
+    
     // 触发自定义事件
-    img.dispatchEvent(new CustomEvent('lazyload:success', { detail: { src } }))
+    img.dispatchEvent(new CustomEvent('lazyload:success', { 
+      detail: { src, loadTime, retryCount } 
+    }))
   }
   
   newImg.onerror = () => {
     clearTimeout(timeout)
-    // 图片加载失败时的处理
-    img.classList.add('lazy-error')
-    img.classList.remove('lazy-loading')
-    
-    // 尝试加载备用图片
-    const fallbackSrc = img.dataset.fallback
-    if (fallbackSrc && fallbackSrc !== src) {
-      setTimeout(() => loadImage(img, fallbackSrc), 1000)
-    } else {
-      // 触发自定义事件
-      img.dispatchEvent(new CustomEvent('lazyload:error', { detail: { src } }))
-    }
+    handleLoadError(img, src, 'error')
   }
   
   // 开始加载图片
   newImg.src = src
+}
+
+// 处理加载错误
+function handleLoadError(img: HTMLImageElement, src: string, errorType: 'error' | 'timeout') {
+  const retryCount = retryCounters.get(img) || 0
+  const maxRetries = parseInt(img.dataset.maxRetries || '3')
+  const retryDelay = parseInt(img.dataset.retryDelay || '1000')
+  const enableRetry = img.dataset.enableRetry !== 'false'
+  
+  // 更新统计数据
+  updateStats('error')
+  
+  img.classList.add('lazy-error')
+  img.classList.remove('lazy-loading')
+  
+  // 尝试重试
+  if (enableRetry && retryCount < maxRetries) {
+    retryCounters.set(img, retryCount + 1)
+    setTimeout(() => {
+      img.classList.remove('lazy-error')
+      loadImage(img, src)
+    }, retryDelay * Math.pow(2, retryCount)) // 指数退避
+    return
+  }
+  
+  // 尝试加载备用图片
+  const fallbackSrc = img.dataset.fallback
+  if (fallbackSrc && fallbackSrc !== src && retryCount === 0) {
+    retryCounters.set(img, 1)
+    setTimeout(() => {
+      img.classList.remove('lazy-error')
+      loadImage(img, fallbackSrc)
+    }, 1000)
+    return
+  }
+  
+  // 最终失败，触发错误事件
+  img.dispatchEvent(new CustomEvent('lazyload:error', { 
+    detail: { src, errorType, retryCount, maxRetries } 
+  }))
+}
+
+// 更新性能统计
+function updateStats(type: 'success' | 'error', loadTime?: number) {
+  if (type === 'success') {
+    stats.loadedImages++
+    if (loadTime) {
+      stats.loadTimes.push(loadTime)
+      stats.averageLoadTime = stats.loadTimes.reduce((a, b) => a + b, 0) / stats.loadTimes.length
+      
+      // 保持最近100次记录
+      if (stats.loadTimes.length > 100) {
+        stats.loadTimes = stats.loadTimes.slice(-100)
+      }
+    }
+  } else {
+    stats.failedImages++
+  }
 }
 
 // 全局 observer 实例
@@ -107,6 +196,8 @@ interface LazyLoadOptions {
   enableRetry?: boolean
   retryDelay?: number
   maxRetries?: number
+  enablePreload?: boolean
+  preloadCount?: number
 }
 
 /**
@@ -118,6 +209,9 @@ export const lazyLoad = {
     if (!observer) {
       observer = createObserver()
     }
+    
+    // 增加总图片计数
+    stats.totalImages++
     
     // 解析配置选项
     const options: LazyLoadOptions = typeof binding.value === 'string' 
@@ -158,6 +252,11 @@ export const lazyLoad = {
     
     // 开始观察元素
     observer.observe(el)
+    
+    // 定期监控内存使用情况
+    if (stats.totalImages % 10 === 0) {
+      monitorMemoryUsage()
+    }
   },
   
   unmounted(el: HTMLImageElement) {
@@ -200,20 +299,60 @@ export const lazyLoad = {
 
 // 懒加载成功事件处理
 function handleLazyLoadSuccess(event: CustomEvent) {
+  const { src, loadTime, retryCount } = event.detail
+  
   if (import.meta.env.DEV) {
-    console.log('🖼️ 图片懒加载成功:', event.detail.src)
+    console.log('🖼️ 图片懒加载成功:', {
+      src,
+      loadTime: `${loadTime.toFixed(2)}ms`,
+      retryCount,
+      stats: getPerformanceStats()
+    })
+  }
+  
+  // 性能监控上报
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', 'image_load_success', {
+      event_category: 'performance',
+      event_label: src,
+      value: Math.round(loadTime)
+    })
   }
 }
 
 // 懒加载错误事件处理
 function handleLazyLoadError(event: CustomEvent) {
-  console.warn('❌ 图片懒加载失败:', event.detail.src)
+  const { src, errorType, retryCount, maxRetries } = event.detail
   
-  // 可以在这里添加错误上报逻辑
+  console.warn('❌ 图片懒加载失败:', {
+    src,
+    errorType,
+    retryCount,
+    maxRetries,
+    stats: getPerformanceStats()
+  })
+  
+  // 错误上报
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', 'image_load_error', {
       event_category: 'performance',
-      event_label: event.detail.src
+      event_label: src,
+      custom_map: {
+        error_type: errorType,
+        retry_count: retryCount
+      }
+    })
+  }
+  
+  // 错误日志收集（可以发送到日志服务）
+  if (import.meta.env.PROD) {
+    // 这里可以集成错误监控服务，如 Sentry
+    console.error('LazyLoad Error:', {
+      url: src,
+      type: errorType,
+      retries: retryCount,
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString()
     })
   }
 }
@@ -258,4 +397,48 @@ export async function getOptimalImageSrc(baseName: string, extension: string = '
   const format = isWebPSupported ? 'webp' : extension
   
   return `${baseName}${resolution}.${format}`
+}
+
+/**
+ * 获取懒加载性能统计
+ */
+export function getPerformanceStats(): LazyLoadStats {
+  return { ...stats }
+}
+
+/**
+ * 重置性能统计
+ */
+export function resetPerformanceStats(): void {
+  stats.totalImages = 0
+  stats.loadedImages = 0
+  stats.failedImages = 0
+  stats.averageLoadTime = 0
+  stats.loadTimes = []
+}
+
+/**
+ * 获取懒加载成功率
+ */
+export function getSuccessRate(): number {
+  const total = stats.loadedImages + stats.failedImages
+  return total > 0 ? (stats.loadedImages / total) * 100 : 0
+}
+
+/**
+ * 监控内存使用情况
+ */
+export function monitorMemoryUsage(): void {
+  if ('memory' in performance) {
+    const memory = (performance as any).memory
+    const usageRatio = memory.usedJSHeapSize / memory.totalJSHeapSize
+    
+    if (usageRatio > 0.9) {
+      console.warn('⚠️ 内存使用率过高:', {
+        used: `${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)}MB`,
+        total: `${(memory.totalJSHeapSize / 1024 / 1024).toFixed(2)}MB`,
+        ratio: `${(usageRatio * 100).toFixed(1)}%`
+      })
+    }
+  }
 }

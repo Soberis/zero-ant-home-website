@@ -56,13 +56,14 @@
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import applications, { type Application } from '@/data/applications';
-import { computed, type ComputedRef } from 'vue';
+import { computed, type ComputedRef, onMounted, watch } from 'vue';
 import { videoMap, type VideoDetail } from '@/data/videos';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import { setSEO, setStructuredData } from '@/utils/seo';
 
 const route = useRoute();
 const router = useRouter();
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const slug: ComputedRef<string> = computed(() => route.params.slug as string);
 const rawDetail: ComputedRef<Application | undefined> = computed(() =>
   applications.find(item => item.slug === slug.value)
@@ -82,6 +83,86 @@ const detail: ComputedRef<Application | undefined> = computed(() => {
 const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
   const videoKey = detail.value?.video;
   return videoKey ? videoMap[videoKey] : undefined;
+});
+
+// 动态SEO元数据
+const seoMetadata = computed(() => {
+  if (!detail.value) return null;
+  
+  const appTitle = detail.value.title;
+  const appDesc = detail.value.description.replace(/<[^>]*>/g, ''); // 移除HTML标签
+  const siteName = 'ZeroAnt Technology';
+  const currentUrl = `${window.location.origin}${route.fullPath}`;
+  
+  return {
+    title: `${appTitle} - ${siteName}`,
+    description: appDesc,
+    keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化, ZeroAnt, 零蚁科技`,
+    ogTitle: appTitle,
+    ogDescription: appDesc,
+    ogType: 'article',
+    ogUrl: currentUrl,
+    ogImage: `${window.location.origin}/logo.png`,
+    twitterCard: 'summary_large_image',
+    twitterTitle: appTitle,
+    twitterDescription: appDesc,
+    canonical: currentUrl
+  };
+});
+
+// Article结构化数据
+const articleStructuredData = computed(() => {
+  if (!detail.value) return null;
+  
+  const appTitle = detail.value.title;
+  const appDesc = detail.value.description.replace(/<[^>]*>/g, ''); // 移除HTML标签
+  
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: appTitle,
+    description: appDesc,
+    author: {
+      '@type': 'Organization',
+      name: 'ZeroAnt Technology',
+      url: window.location.origin
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ZeroAnt Technology',
+      url: window.location.origin,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${window.location.origin}/logo.png`
+      }
+    },
+    datePublished: new Date().toISOString().split('T')[0],
+    dateModified: new Date().toISOString().split('T')[0],
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${window.location.origin}${route.fullPath}`
+    },
+    image: `${window.location.origin}/logo.png`,
+    articleSection: '应用场景',
+    keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化`
+  };
+});
+
+// 设置SEO和结构化数据
+const updateSEO = () => {
+  if (seoMetadata.value) {
+    setSEO(seoMetadata.value);
+  }
+  if (articleStructuredData.value) {
+    setStructuredData(articleStructuredData.value);
+  }
+};
+
+// 监听数据变化并更新SEO
+watch([detail, locale], updateSEO, { immediate: false });
+
+onMounted(() => {
+  updateSEO();
 });
 
 // 移除bilibiliEmbedUrl函数，现在使用BilibiliPlayer组件处理

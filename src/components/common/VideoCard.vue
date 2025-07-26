@@ -6,7 +6,12 @@
     @mouseleave="emit('leave')"
     @click="emit('click', index)"
   >
-     <img :src="card.img" :alt="card.title + '图片'" class="video-card-img" />
+     <img 
+       v-lazy="card.img" 
+       :alt="card.title + '图片'" 
+       class="video-card-img"
+       loading="lazy"
+     />
     <div class="video-card-title-bar" :class="{ active: active }">
 
       <div class="video-card-title" :class="{ active: active }">

@@ -98,12 +98,13 @@
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { videoMap, type VideoDetail } from '@/data/videos';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import { setSEO, setStructuredData } from '@/utils/seo';
 
 const route = useRoute();
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const rawVideoInfo = videoMap[String(route.params.slug)] || {
   type: 'bilibili', // Provide a default type
@@ -143,6 +144,90 @@ function getMediaType(info: VideoDetail | { value: VideoDetail }): MediaType {
   if (videoData.type === 'image' && videoData.url) return 'image';
   return 'none';
 }
+
+// 动态SEO元数据
+const seoMetadata = computed(() => {
+  const videoTitle = videoInfo.value.title;
+  const videoDesc = videoInfo.value.desc;
+  const siteName = 'ZeroAnt Technology';
+  const currentUrl = `${window.location.origin}${route.fullPath}`;
+  
+  return {
+    title: `${videoTitle} - ${siteName}`,
+    description: videoDesc,
+    keywords: `${videoTitle}, 视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
+    ogTitle: videoTitle,
+    ogDescription: videoDesc,
+    ogType: 'video.other',
+    ogUrl: currentUrl,
+    ogVideo: getMediaType(videoInfo.value) === 'video' ? videoInfo.value.url : undefined,
+    ogImage: getMediaType(videoInfo.value) === 'image' ? videoInfo.value.url : `${window.location.origin}/logo.png`,
+    twitterCard: 'player',
+    twitterTitle: videoTitle,
+    twitterDescription: videoDesc,
+    canonical: currentUrl
+  };
+});
+
+// VideoObject结构化数据
+const videoStructuredData = computed(() => {
+  const videoTitle = videoInfo.value.title;
+  const videoDesc = videoInfo.value.desc;
+  const mediaType = getMediaType(videoInfo.value);
+  
+  if (mediaType === 'bilibili' || mediaType === 'video') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: videoTitle,
+      description: videoDesc,
+      thumbnailUrl: `${window.location.origin}/logo.png`,
+      uploadDate: new Date().toISOString().split('T')[0],
+      contentUrl: videoInfo.value.url,
+      embedUrl: mediaType === 'bilibili' ? videoInfo.value.url : undefined,
+      publisher: {
+        '@type': 'Organization',
+        name: 'ZeroAnt Technology',
+        url: window.location.origin
+      },
+      author: {
+        '@type': 'Organization',
+        name: 'ZeroAnt Technology'
+      }
+    };
+  } else if (mediaType === 'image') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ImageObject',
+      name: videoTitle,
+      description: videoDesc,
+      contentUrl: videoInfo.value.url,
+      author: {
+        '@type': 'Organization',
+        name: 'ZeroAnt Technology'
+      }
+    };
+  }
+  
+  return null;
+});
+
+// 设置SEO和结构化数据
+const updateSEO = () => {
+  if (seoMetadata.value) {
+    setSEO(seoMetadata.value);
+  }
+  if (videoStructuredData.value) {
+    setStructuredData(videoStructuredData.value);
+  }
+};
+
+// 监听数据变化并更新SEO
+watch([videoInfo, locale], updateSEO, { immediate: false });
+
+onMounted(() => {
+  updateSEO();
+});
 
 // 移除bilibiliEmbedUrl函数，现在使用BilibiliPlayer组件处理
 </script>
