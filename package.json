@@ -37,6 +37,7 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "less": "^4.4.0",
     "rollup-plugin-visualizer": "^6.0.3",
+    "terser": "^5.43.1",
     "typescript": "^5.8.3",
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.8.0",
