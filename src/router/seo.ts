@@ -1,23 +1,37 @@
 import { RouteLocationNormalized } from "vue-router";
 import { setSEO, getSeoConfigs, setStructuredData } from "@/utils/seo";
+import i18n from "@/config/i18n"; // 导入i18n实例
 
 /**
  * 获取路由 SEO 配置映射
  */
 function getRouteSEOMap(): Record<string, any> {
   const seoConfigs = getSeoConfigs();
+
+  // 创建一个函数来获取翻译文本
+  const t = (key: string) => {
+    // 使用i18n实例获取翻译文本
+    return i18n.global.t(key);
+  };
+
+  // 应用翻译函数到SEO配置
+  const translatedSeoConfigs: Record<string, any> = {};
+  for (const [key, config] of Object.entries(seoConfigs)) {
+    translatedSeoConfigs[key] = {
+      title: t(config.title),
+      description: t(config.description),
+      keywords: t(config.keywords),
+    };
+  }
+
   return {
-    Home: seoConfigs.home,
-    About: seoConfigs.about,
-    SystemProducts: seoConfigs.products,
-    RobotProducts: seoConfigs.products,
-    Solutions: seoConfigs.solutions,
-    Support: seoConfigs.support,
-    Careers: {
-      title: "人才招聘",
-      description: "零蚁科技人才招聘 - 加入我们，共同打造最酷的机器人。",
-      keywords: "零蚁科技,人才招聘,职业机会,工作岗位",
-    },
+    Home: translatedSeoConfigs.home,
+    SystemProducts: translatedSeoConfigs.products,
+    RobotProducts: translatedSeoConfigs.products,
+    Solutions: translatedSeoConfigs.solutions,
+    Support: translatedSeoConfigs.support,
+    Careers: translatedSeoConfigs.careers,
+    About: translatedSeoConfigs.about,
   };
 }
 
@@ -47,7 +61,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       twitterDescription: seoConfig.description,
       twitterImage: `${baseUrl}/logo.png`,
       canonical: currentUrl,
-      siteName: "零蚁科技",
+      siteName: i18n.global.t("seo.siteName"),
     });
 
     // 设置结构化数据
@@ -59,12 +73,12 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       url: currentUrl,
       isPartOf: {
         "@type": "WebSite",
-        name: "零蚁科技",
+        name: i18n.global.t("seo.siteName"),
         url: baseUrl,
       },
       publisher: {
         "@type": "Organization",
-        name: "零蚁科技",
+        name: i18n.global.t("seo.siteName"),
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
@@ -91,34 +105,33 @@ export function setupProductSEO(
   const baseUrl = "https://zeroant.com";
   const currentUrl = `${baseUrl}${to.path}`;
 
+  // 设置产品页面 SEO
   setSEO({
-    title: `${productName} - 产品详情`,
+    title: productName,
     description: productDescription,
-    keywords: `零蚁科技,${productName},产品详情,智能系统`,
-    ogTitle: `${productName} - 零蚁科技`,
+    ogTitle: productName,
     ogDescription: productDescription,
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
-    twitterTitle: `${productName} - 零蚁科技`,
+    ogImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
+    twitterTitle: productName,
     twitterDescription: productDescription,
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
     canonical: currentUrl,
-    siteName: "零蚁科技",
+    siteName: i18n.global.t("seo.siteName"),
   });
 
   // 产品结构化数据
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: productName,
-    description: productDescription,
-    url: currentUrl,
-    manufacturer: {
+    "name": productName,
+    "description": productDescription,
+    "url": currentUrl,
+    "manufacturer": {
       "@type": "Organization",
-      name: "零蚁科技",
-      url: baseUrl,
+      "name": i18n.global.t("seo.siteName"),
+      "url": baseUrl,
     },
   };
-
   setStructuredData(structuredData);
 }

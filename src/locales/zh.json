@@ -823,5 +823,41 @@
     "copyright": "版权所有",
     "telValue": "13001001954",
     "icpNumber": "备案号：浙ICP备2022031941号-4"
+  },
+  "seo": {
+    "siteName": "零蚁科技",
+    "defaultTitle": "零蚁科技 - 专业的机器人技术解决方案提供商",
+    "defaultDescription": "ZeroAnt Technology - 专业的机器人技术解决方案提供商，致力于工业自动化和智能制造",
+    "defaultKeywords": "机器人技术,工业自动化,智能制造,ZeroAnt,零蚁科技",
+    "home": {
+      "title": "首页",
+      "description": "ZeroAnt Technology - 专业的机器人技术解决方案提供商，致力于工业自动化和智能制造",
+      "keywords": "机器人技术,工业自动化,智能制造,ZeroAnt,零蚁科技"
+    },
+    "products": {
+      "title": "产品中心",
+      "description": "探索ZeroAnt Technology的创新产品线，包括工业机器人、自动化设备等",
+      "keywords": "产品中心,工业机器人,自动化设备,机器人产品"
+    },
+    "solutions": {
+      "title": "解决方案",
+      "description": "专业的机器人技术解决方案，满足不同行业的自动化需求",
+      "keywords": "解决方案,技术方案,自动化方案,机器人方案"
+    },
+    "support": {
+      "title": "技术支持",
+      "description": "获取专业的技术支持服务，包括产品咨询、技术文档和售后服务",
+      "keywords": "技术支持,售后服务,产品咨询,技术文档"
+    },
+    "careers": {
+      "title": "人才招聘",
+      "description": "加入零蚁科技，与我们一起推动机器人技术的发展，共创智能制造的未来",
+      "keywords": "人才招聘,加入我们,零蚁科技,机器人技术,智能制造"
+    },
+    "about": {
+      "title": "关于我们",
+      "description": "了解ZeroAnt Technology的发展历程、企业文化和技术实力",
+      "keywords": "关于我们,企业介绍,公司简介,ZeroAnt Technology"
+    }
   }
 }

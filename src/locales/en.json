@@ -925,5 +925,42 @@
     "copyright": "All Rights Reserved",
     "telValue": "13001001954",
     "icpNumber": "ICP Record No.: Zhe ICP Bei 2022031941-4"
+  },
+  "seo": {
+    "siteName": "ZeroAnt Technology",
+    "defaultTitle": "ZeroAnt Technology - Professional Robotics Technology Solutions Provider",
+    "defaultDescription": "ZeroAnt Technology is a professional robotics technology solutions provider, committed to industrial automation and intelligent manufacturing.",
+    "defaultKeywords": "robotics technology, industrial automation, intelligent manufacturing, ZeroAnt",
+    "home": {
+      "title": "Home",
+      "description": "ZeroAnt Technology - Professional robotics technology solutions provider, committed to industrial automation and intelligent manufacturing",
+      "keywords": "robotics technology, industrial automation, intelligent manufacturing, ZeroAnt, ZeroAnt Technology"
+    },
+    "products": {
+      "title": "Products",
+      "description": "Explore ZeroAnt Technology's innovative product line, including industrial robots, automation equipment, etc.",
+      "keywords": "products, industrial robots, automation equipment, robot products"
+    },
+    "solutions": {
+      "title": "Solutions",
+      "description": "Professional robotics technology solutions to meet automation needs in different industries",
+      "keywords": "solutions, technical solutions, automation solutions, robot solutions"
+    },
+    "support": {
+      "title": "Support",
+      "description": "Get professional technical support services, including product consultation, technical documentation and after-sales service",
+      "keywords": "technical support, after-sales service, product consultation, technical documentation"
+    },
+    "careers": {
+      "title": "Careers",
+      "description": "ZeroAnt Technology Careers - Join us to build the coolest robots together.",
+      "keywords": "ZeroAnt Technology, careers, job opportunities, positions"
+    },
+
+    "about": {
+      "title": "About Us",
+      "description": "Learn about ZeroAnt Technology's development history, corporate culture and technical strength",
+      "keywords": "about us, company profile, company introduction, ZeroAnt Technology"
+    }
   }
 }

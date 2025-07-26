@@ -1,3 +1,5 @@
+import i18n from "@/config/i18n"; // 导入i18n实例
+
 /**
  * SEO 元数据接口
  */
@@ -5,6 +7,8 @@ export interface SEOMetaData {
   title?: string;
   description?: string;
   keywords?: string;
+  author?: string;
+  robots?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
@@ -12,6 +16,7 @@ export interface SEOMetaData {
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
+  twitterCard?: string;
   canonical?: string;
   siteName?: string;
 }
@@ -21,7 +26,7 @@ export interface SEOMetaData {
  * @param meta SEO 元数据对象
  */
 export function setSEO(meta: SEOMetaData) {
-  const siteName = meta.siteName || "ZeroAnt Technology";
+  const siteName = meta.siteName || i18n.global.t("seo.siteName") || "ZeroAnt Technology";
 
   // 设置页面标题
   if (meta.title) {
@@ -57,6 +62,14 @@ export function setSEO(meta: SEOMetaData) {
     updateMetaTag("keywords", meta.keywords);
   }
 
+  if (meta.author) {
+    updateMetaTag("author", meta.author);
+  }
+
+  if (meta.robots) {
+    updateMetaTag("robots", meta.robots);
+  }
+
   // 更新 Open Graph 标签
   if (meta.ogTitle) {
     updateMetaTag("og:title", meta.ogTitle, true);
@@ -85,6 +98,10 @@ export function setSEO(meta: SEOMetaData) {
 
   if (meta.twitterImage) {
     updateMetaTag("twitter:image", meta.twitterImage);
+  }
+
+  if (meta.twitterCard) {
+    updateMetaTag("twitter:card", meta.twitterCard);
   }
 
   // 更新 canonical 链接
@@ -129,30 +146,34 @@ export function setStructuredData(data: Record<string, any>) {
 export function getSeoConfigs() {
   return {
     home: {
-      title: '首页',
-      description: 'ZeroAnt Technology - 专业的机器人技术解决方案提供商，致力于工业自动化和智能制造',
-      keywords: '机器人技术,工业自动化,智能制造,ZeroAnt,零蚁科技',
-    },
-    about: {
-      title: '关于我们',
-      description: '了解ZeroAnt Technology的发展历程、企业文化和技术实力',
-      keywords: '关于我们,企业介绍,公司简介,ZeroAnt Technology',
+      title: "seo.home.title",
+      description: "seo.home.description",
+      keywords: "seo.home.keywords",
     },
     products: {
-      title: '产品中心',
-      description: '探索ZeroAnt Technology的创新产品线，包括工业机器人、自动化设备等',
-      keywords: '产品中心,工业机器人,自动化设备,机器人产品',
+      title: "seo.products.title",
+      description: "seo.products.description",
+      keywords: "seo.products.keywords",
     },
-
     solutions: {
-      title: '解决方案',
-      description: '专业的机器人技术解决方案，满足不同行业的自动化需求',
-      keywords: '解决方案,技术方案,自动化方案,机器人方案',
+      title: "seo.solutions.title",
+      description: "seo.solutions.description",
+      keywords: "seo.solutions.keywords",
     },
     support: {
-      title: '技术支持',
-      description: '获取专业的技术支持服务，包括产品咨询、技术文档和售后服务',
-      keywords: '技术支持,售后服务,产品咨询,技术文档',
+      title: "seo.support.title",
+      description: "seo.support.description",
+      keywords: "seo.support.keywords",
     },
-  }
+    careers: {
+      title: "seo.careers.title",
+      description: "seo.careers.description",
+      keywords: "seo.careers.keywords",
+    },
+    about: {
+      title: "seo.about.title",
+      description: "seo.about.description",
+      keywords: "seo.about.keywords",
+    },
+  };
 }
