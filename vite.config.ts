@@ -49,7 +49,7 @@ export default defineConfig({
     // 启用源码映射（可选，生产环境可关闭）
     sourcemap: false,
     // 设置构建目标
-    target: "es2015",
+    target: "es2020",
     rollupOptions: {
       output: {
         // 优化代码分割策略
@@ -68,12 +68,8 @@ export default defineConfig({
             if (id.includes("element-plus")) {
               return "ui-vendor";
             }
-            // 工具库
-            if (
-              id.includes("lodash") ||
-              id.includes("dayjs") ||
-              id.includes("axios")
-            ) {
+            // 工具库 - 根据实际使用情况动态添加
+            if (id.includes("axios")) {
               return "utils-vendor";
             }
             // 其他第三方库
