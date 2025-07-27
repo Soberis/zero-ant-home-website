@@ -292,15 +292,24 @@ const applyForPosition = (position: Position): void => {
 .careers-page {
   min-height: 100vh;
   background: #f8f9fa;
-  font-size: 1.5rem; // 再提升正文基础字体
+  font-size: 1.8rem; // 再提升正文基础字体
   line-height: 1.7;
 }
 
 .container {
-  max-width: 1600px;
+  max-width: 1350px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 32px;
 }
+
+// 覆盖全局样式，确保在大屏幕上也使用较小的max-width
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1350px !important;
+    padding: 0 32px;
+  }
+}
+
 
 // 页面头部
 .careers-hero {
@@ -311,7 +320,7 @@ const applyForPosition = (position: Position): void => {
     align-items: flex-start;
     justify-content: center;
     text-align: center;
-    padding: 12vh 0 0 0;
+    padding: 13vh 0 0 0;
 
   .hero-title {
     font-size: 4rem; // 原3.5rem，提升
@@ -383,11 +392,11 @@ const applyForPosition = (position: Position): void => {
 
   .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    max-width: 1600px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 32px;
 
     .benefit-card {
       background: white;
@@ -428,7 +437,7 @@ const applyForPosition = (position: Position): void => {
   .positions-grid {
     display: grid;
     gap: 40px;
-    max-width: 1600px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 40px;
 
