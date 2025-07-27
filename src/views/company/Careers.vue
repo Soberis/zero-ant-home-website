@@ -304,10 +304,14 @@ const applyForPosition = (position: Position): void => {
 
 // 页面头部
 .careers-hero {
-  background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
-  color: white;
-  padding: 120px 0 80px;
-  text-align: center;
+    background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    padding: 12vh 0 0 0;
 
   .hero-title {
     font-size: 4rem; // 原3.5rem，提升
@@ -589,19 +593,38 @@ const applyForPosition = (position: Position): void => {
 // 响应式设计
 @media (max-width: 768px) {
   .careers-hero {
-    padding: 48px 0 36px;
+        min-height: 70vh; // 手机端改为70vh，避免过高
+        padding: 15vh 0 0 0; // 移动端文字下移
 
     .hero-title {
-      font-size: 2.2rem; // 原2.5rem，略减小，适配移动端
+      font-size: 2rem; // 进一步减小标题字体
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem; // 减小副标题字体
+      margin-bottom: 2rem;
+      padding: 0 1rem; // 添加水平内边距
     }
 
     .hero-stats {
-      gap: 2rem;
+      gap: 1.5rem;
+      
+      .stat-item {
+        .stat-number {
+          font-size: 2rem; // 减小数字字体
+          margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+          font-size: 1.3rem; // 减小标签字体
+        }
+      }
     }
   }
 
   .section-title {
-    font-size: 1.4rem; // 统一为1.4rem
+    font-size: 1.8rem; // 统一为1.8rem，更适合移动端
   }
 
   .why-join,
@@ -611,65 +634,168 @@ const applyForPosition = (position: Position): void => {
   }
   
   .container {
-    padding: 0 16px;
+    padding: 0 20px; // 增加移动端内边距
   }
 
   .why-join {
     .benefits-grid {
-      padding: 0 16px;
+      padding: 0 20px;
+      gap: 20px; // 减小卡片间距
+      
+      .benefit-card {
+        padding: 1.5rem; // 减小卡片内边距
+        
+        .benefit-title {
+          font-size: 1.6rem; // 减小标题字体
+          margin-bottom: 0.8rem;
+        }
+        
+        .benefit-description {
+          font-size: 1.3rem; // 减小描述字体
+        }
+      }
     }
   }
 
   .job-positions {
     .positions-grid {
-      padding: 0 16px;
-    }
-  }
-
-  .position-card {
-    .position-header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .position-details {
-      grid-template-columns: 1fr;
-    }
-
-    .position-actions {
-      text-align: center;
+      padding: 0 20px;
+      gap: 20px; // 减小卡片间距
+      
+      .position-card {
+        padding: 1.5rem; // 减小卡片内边距
+        
+        .position-header {
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+          
+          .position-title {
+            font-size: 1.8rem; // 减小职位标题字体
+          }
+          
+          .position-type {
+            font-size: 1.1rem; // 减小职位类型字体
+          }
+        }
+        
+        .position-details {
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+          
+          .detail-item {
+            .detail-label,
+            .detail-value {
+              font-size: 1.3rem; // 减小详情字体
+            }
+          }
+        }
+        
+        .position-requirements {
+          margin-bottom: 1.5rem;
+          
+          .requirements-title {
+            font-size: 1.5rem; // 减小要求标题字体
+            margin-bottom: 0.8rem;
+          }
+          
+          .requirements-list li {
+            font-size: 1.3rem; // 减小要求列表字体
+            padding: 0.3rem 0;
+          }
+        }
+        
+        .position-actions {
+          text-align: center;
+          
+          .apply-btn {
+            font-size: 1.1rem; // 减小按钮字体
+            padding: 0.7rem 1.8rem; // 减小按钮内边距
+          }
+        }
+      }
     }
   }
 
   .contact-info {
     flex-direction: column;
     gap: 1rem;
+    
+    .contact-item {
+      .contact-label,
+      .contact-value {
+        font-size: 1.3rem; // 减小联系信息字体
+      }
+    }
   }
 }
 
 @media (max-width: 600px) {
+  .careers-hero {
+    min-height: 60vh; // 更小屏幕进一步减小高度
+    padding: 13vh 0 0 0; // 更小屏幕文字下移
+    
+    .hero-title {
+      font-size: 1.8rem; // 进一步减小标题字体
+    }
+    
+    .hero-subtitle {
+      font-size: 1.3rem; // 进一步减小副标题字体
+    }
+  }
+  
   .section-title {
-    font-size: 1.2rem; // 600px以下进一步缩小
+    font-size: 1.6rem; // 进一步减小章节标题字体
   }
   
   .container {
-    padding: 0 12px;
+    padding: 0 16px; // 减小内边距
   }
   
   .why-join {
     .benefits-grid {
-      padding: 0 12px;
+      padding: 0 16px;
+      grid-template-columns: 1fr; // 单列布局
     }
   }
   
   .job-positions {
     .positions-grid {
-      padding: 0 12px;
+      padding: 0 16px;
     }
   }
 }
 
 @media (max-width: 480px) {
+  .careers-hero {
+    min-height: 55vh; // 最小屏幕的高度
+    padding: 11vh 0 0 0; // 最小屏幕文字下移
+    
+    .hero-title {
+      font-size: 1.6rem; // 最小标题字体
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem; // 最小副标题字体
+    }
+    
+    .hero-stats {
+      flex-direction: column; // 垂直排列统计数据
+      gap: 1rem;
+      
+      .stat-item {
+        .stat-number {
+          font-size: 1.8rem;
+        }
+        
+        .stat-label {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  
   .container {
     padding: 0 12px;
   }
