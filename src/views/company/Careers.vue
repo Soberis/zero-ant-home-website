@@ -297,9 +297,9 @@ const applyForPosition = (position: Position): void => {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 // 页面头部
@@ -379,8 +379,11 @@ const applyForPosition = (position: Position): void => {
 
   .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
 
     .benefit-card {
       background: white;
@@ -421,6 +424,9 @@ const applyForPosition = (position: Position): void => {
   .positions-grid {
     display: grid;
     gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
 
     .position-card {
       background: white;
