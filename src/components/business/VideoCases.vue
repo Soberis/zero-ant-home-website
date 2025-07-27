@@ -54,18 +54,16 @@ const videoCardsTyped: VideoCard[] = videoCards;
 .videos-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 36px;
+  gap: 40px;
   width: 100%;
-  max-width: 1800px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 40px;
   overflow-x: hidden;
 }
 .video-card {
-  flex: 0 0 320px;
-  width: 320px;
-  min-width: 240px;
-  max-width: 340px;
+  width: 100%;
+  max-width: 100%;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 4px 24px 0 rgba(30, 40, 90, 0.08);
@@ -121,6 +119,9 @@ const videoCardsTyped: VideoCard[] = videoCards;
     padding-left: 10px;
     padding-right: 10px;
   }
+  .videos-list {
+    padding: 0 30px;
+  }
 }
 @media (max-width: 600px) {
   .section-title {
@@ -130,6 +131,7 @@ const videoCardsTyped: VideoCard[] = videoCards;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 20px;
   }
 }
 </style>

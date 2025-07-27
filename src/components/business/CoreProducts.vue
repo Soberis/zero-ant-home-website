@@ -1472,7 +1472,7 @@ const getProductIcon = (slug: string): Component => {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 40px;
   overflow-x: hidden;
 }
 .product-card {

@@ -297,7 +297,7 @@ const applyForPosition = (position: Position): void => {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 40px;
 }
@@ -380,8 +380,8 @@ const applyForPosition = (position: Position): void => {
   .benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
+    gap: 40px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 40px;
 
@@ -423,8 +423,8 @@ const applyForPosition = (position: Position): void => {
 
   .positions-grid {
     display: grid;
-    gap: 2rem;
-    max-width: 1000px;
+    gap: 40px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 40px;
 
@@ -589,7 +589,7 @@ const applyForPosition = (position: Position): void => {
 // 响应式设计
 @media (max-width: 768px) {
   .careers-hero {
-    padding: 80px 0 60px;
+    padding: 48px 0 36px;
 
     .hero-title {
       font-size: 2.2rem; // 原2.5rem，略减小，适配移动端
@@ -607,7 +607,11 @@ const applyForPosition = (position: Position): void => {
   .why-join,
   .job-positions,
   .contact-section {
-    padding: 60px 0;
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 24px;
   }
 
   .position-card {

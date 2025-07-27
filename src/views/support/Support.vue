@@ -476,8 +476,8 @@ function handleKeydown(event: KeyboardEvent, idx: number, type: 'download' | 'fa
   }
   .card-header,
   .card-content {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 @media (max-width: 600px) {
@@ -513,10 +513,10 @@ function handleKeydown(event: KeyboardEvent, idx: number, type: 'download' | 'fa
     padding-left: 0;
   }
   .card-header {
-    padding: 8px 4px;
+    padding: 12px 16px;
   }
   .card-content {
-    padding: 0 4px 6px 4px;
+    padding: 0 16px 12px 16px;
   }
 }
 </style>

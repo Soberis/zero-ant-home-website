@@ -3,7 +3,6 @@ import type { Product } from '@/helpers/product';
 // 产品图片资源导入
 import scara4axisImg from '@/assets/images/products/四轴机器人.png';
 import dualArmHumanoidImg from '@/assets/images/products/双臂人形机器人.png';
-import mobileRobotImg from '@/assets/images/products/移动机器人.png';
 
 /**
  * 扩展产品接口，添加产品特有字段
@@ -97,7 +96,7 @@ export const products: ProductData[] = [
   {
     slug: 'mobile-robot',
     name: 'products.mobileRobot.name',
-    image: mobileRobotImg,
+    image: '',
     desc: 'products.mobileRobot.desc',
     seriesTitle: 'products.mobileRobot.seriesTitle',
     seriesSubtitle: 'products.mobileRobot.seriesSubtitle',
