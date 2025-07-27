@@ -611,7 +611,19 @@ const applyForPosition = (position: Position): void => {
   }
   
   .container {
-    padding: 0 24px;
+    padding: 0 16px;
+  }
+
+  .why-join {
+    .benefits-grid {
+      padding: 0 16px;
+    }
+  }
+
+  .job-positions {
+    .positions-grid {
+      padding: 0 16px;
+    }
   }
 
   .position-card {
@@ -638,6 +650,40 @@ const applyForPosition = (position: Position): void => {
 @media (max-width: 600px) {
   .section-title {
     font-size: 1.2rem; // 600px以下进一步缩小
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+  
+  .why-join {
+    .benefits-grid {
+      padding: 0 12px;
+    }
+  }
+  
+  .job-positions {
+    .positions-grid {
+      padding: 0 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .why-join {
+    .benefits-grid {
+      padding: 0 12px;
+    }
+  }
+  
+  .job-positions {
+    .positions-grid {
+      padding: 0 12px;
+    }
   }
 }
 </style>
