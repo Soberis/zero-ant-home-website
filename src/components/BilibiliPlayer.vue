@@ -9,9 +9,9 @@
         :src="embedUrl"
         frameborder="0"
         allowfullscreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-        referrerpolicy="no-referrer-when-downgrade"
-        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation-by-user-activation allow-presentation"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen; autoplay; encrypted-media"
+        referrerpolicy="strict-origin-when-cross-origin"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation-by-user-activation allow-presentation allow-popups-to-escape-sandbox"
         loading="lazy"
         @error="handleIframeError"
         @load="handleIframeLoad"
@@ -19,7 +19,7 @@
       <!-- 加载状态 -->
       <div v-if="isLoading" class="loading-overlay">
         <div class="loading-spinner"></div>
-        <div class="loading-text">{{ t('bilibiliPlayer.loadingVideo') }}</div>
+        <div class="loading-text">{{ t("bilibiliPlayer.loadingVideo") }}</div>
       </div>
     </div>
 
@@ -39,37 +39,66 @@
             <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
           </svg>
         </div>
-        <h3 class="fallback-title">{{ t('bilibiliPlayer.videoNotAvailable') }}</h3>
-        <p class="fallback-desc">{{ t('bilibiliPlayer.securityRestriction') }}</p>
+        <h3 class="fallback-title">
+          {{ t("bilibiliPlayer.videoNotAvailable") }}
+        </h3>
+        <p class="fallback-desc">
+          {{
+            isMobileDevice
+              ? t("bilibiliPlayer.mobileSuggestion")
+              : t("bilibiliPlayer.securityRestriction")
+          }}
+        </p>
         <div class="fallback-actions">
-          <a 
-            :href="originalUrl" 
-            target="_blank" 
+          <a
+            :href="originalUrl"
+            target="_blank"
             rel="noopener noreferrer"
             class="fallback-btn primary"
           >
-            {{ t('bilibiliPlayer.watchOnBilibili') }}
+            {{
+              isMobileDevice
+                ? t("bilibiliPlayer.watchOnBilibiliMobile")
+                : t("bilibiliPlayer.watchOnBilibili")
+            }}
           </a>
-          <button 
-            @click="tryDirectPlay" 
-            class="fallback-btn secondary"
-          >
-            {{ t('bilibiliPlayer.tryDirectPlay') }}
+          <button @click="tryDirectPlay" class="fallback-btn secondary">
+            {{ t("bilibiliPlayer.tryDirectPlay") }}
           </button>
-          <button 
-            @click="retryIframe" 
-            class="fallback-btn tertiary"
-          >
-            {{ t('bilibiliPlayer.retryEmbed') }}
+          <button @click="retryIframe" class="fallback-btn tertiary">
+            {{ t("bilibiliPlayer.retryEmbed") }}
           </button>
         </div>
         <div class="fallback-tips">
-          <p>{{ t('bilibiliPlayer.solutions') }}</p>
+          <p>{{ t("bilibiliPlayer.solutions") }}</p>
           <ul>
-            <li><strong>{{ t('bilibiliPlayer.watchOnBilibili') }}</strong>：{{ t('bilibiliPlayer.watchOnBilibiliDesc') }}</li>
-            <li><strong>{{ t('bilibiliPlayer.tryDirectPlay') }}</strong>：{{ t('bilibiliPlayer.tryDirectPlayDesc') }}</li>
-            <li><strong>{{ t('bilibiliPlayer.retryEmbed') }}</strong>：{{ t('bilibiliPlayer.retryEmbedDesc') }}</li>
-            <li>{{ t('bilibiliPlayer.allowPopups') }}</li>
+            <li>
+              <strong>{{
+                isMobileDevice
+                  ? t("bilibiliPlayer.watchOnBilibiliMobile")
+                  : t("bilibiliPlayer.watchOnBilibili")
+              }}</strong
+              >：{{
+                isMobileDevice
+                  ? t("bilibiliPlayer.watchOnBilibiliMobileDesc")
+                  : t("bilibiliPlayer.watchOnBilibiliDesc")
+              }}
+            </li>
+            <li>
+              <strong>{{ t("bilibiliPlayer.tryDirectPlay") }}</strong
+              >：{{ t("bilibiliPlayer.tryDirectPlayDesc") }}
+            </li>
+            <li>
+              <strong>{{ t("bilibiliPlayer.retryEmbed") }}</strong
+              >：{{ t("bilibiliPlayer.retryEmbedDesc") }}
+            </li>
+            <li>
+              {{
+                isMobileDevice
+                  ? t("bilibiliPlayer.allowPopupsMobile")
+                  : t("bilibiliPlayer.allowPopups")
+              }}
+            </li>
           </ul>
         </div>
       </div>
@@ -78,8 +107,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ref, computed, onMounted, nextTick } from "vue";
+import { useI18n } from "vue-i18n";
 
 interface Props {
   url: string;
@@ -96,20 +125,18 @@ const isLoading = ref(true);
 const retryCount = ref(0);
 const maxRetries = 2;
 const useDirectPlay = ref(false);
+const isMobileDevice = ref(false);
 
 // 生成嵌入URL
 const embedUrl = computed(() => {
   const match = props.url.match(/bilibili.com\/video\/(BV[\w]+)/);
   if (match && match[1]) {
-    if (useDirectPlay.value) {
-      // 尝试使用更宽松的嵌入方式
-      return `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${match[1]}&page=1&autoplay=false&danmaku=false`;
-    } else {
-      // 使用B站官方嵌入播放器，添加更多兼容性参数
-      return `https://player.bilibili.com/player.html?bvid=${match[1]}&page=1&autoplay=0&muted=0&danmaku=1&t=0&high_quality=1&as_wide=1&allowfullscreen=true`;
-    }
+    const bvid = match[1];
+
+    // 统一使用player.bilibili.com的嵌入播放器，确保CSP兼容性
+    return `https://player.bilibili.com/player.html?bvid=${bvid}&page=1&autoplay=0&high_quality=1&as_wide=1&allowfullscreen=true&from=outer`;
   }
-  return '';
+  return "";
 });
 
 // 原始URL
@@ -118,53 +145,60 @@ const originalUrl = computed(() => props.url);
 // iframe加载成功
 const handleIframeLoad = () => {
   isLoading.value = false;
-  console.log('B站视频iframe加载成功');
+  console.log("B站视频iframe加载成功");
 };
 
 // iframe加载错误
 const handleIframeError = () => {
-  console.warn('B站视频iframe加载失败，切换到备用方案');
+  console.warn("B站视频iframe加载失败，切换到备用方案");
   isLoading.value = false;
   showFallback.value = true;
 };
 
 // 尝试直接播放
 const tryDirectPlay = async () => {
-  console.log('尝试直接播放模式');
+  console.log("尝试直接播放模式");
   useDirectPlay.value = true;
   showFallback.value = false;
   isLoading.value = true;
   retryCount.value = 0;
-  
+
   await nextTick();
-  
-  // 延迟检查是否加载成功
+
+  // 统一播放超时处理
+  const timeout = 8000;
+
   setTimeout(() => {
     if (isLoading.value) {
-      console.warn('直接播放模式超时，显示备用方案');
+      console.warn("播放器加载失败，显示备用方案");
       handleIframeError();
     }
-  }, 8000);
+  }, timeout);
 };
 
 // 重试iframe播放
 const retryIframe = async () => {
   if (retryCount.value >= maxRetries) {
-    console.warn('已达到最大重试次数');
+    console.warn("已达到最大重试次数");
     return;
   }
-  
+
   retryCount.value++;
   useDirectPlay.value = false;
   showFallback.value = false;
   isLoading.value = true;
-  
+
   await nextTick();
-  
+
+  // 强制刷新iframe，添加时间戳避免缓存
+  if (iframeRef.value) {
+    iframeRef.value.src = embedUrl.value + "&t=" + Date.now();
+  }
+
   // 延迟检查iframe是否加载成功
   setTimeout(() => {
     if (isLoading.value) {
-      console.warn('iframe重试超时，显示备用方案');
+      console.warn("iframe重试超时，显示备用方案");
       handleIframeError();
     }
   }, 5000);
@@ -175,16 +209,36 @@ const retryIframe = async () => {
 
 // 组件挂载时检查iframe加载状态
 onMounted(() => {
+  // 检测移动端并优化加载策略
+  isMobileDevice.value =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+  // 移动端优化：更短的超时时间
+  const timeout = isMobileDevice.value ? 8000 : 10000;
+
+  console.log(
+    `BilibiliPlayer组件已挂载，设备类型: ${
+      isMobileDevice.value ? "移动端" : "桌面端"
+    }`
+  );
+
   // 设置超时检查
   setTimeout(() => {
     if (isLoading.value && !showFallback.value) {
-      console.warn('iframe加载超时，显示备用方案');
+      console.warn(
+        `${isMobileDevice.value ? "移动端" : "桌面端"} iframe加载超时，显示备用方案`
+      );
       handleIframeError();
     }
-  }, 10000); // 增加超时时间到10秒
-  
-  // 移除跨域访问检查，仅依靠iframe的onload和onerror事件
-  console.log('BilibiliPlayer组件已挂载，等待iframe加载事件');
+  }, timeout);
+
+  // 移动端特殊处理：如果检测到是移动端，优先尝试移动端播放方式
+  if (isMobileDevice.value && !useDirectPlay.value) {
+    console.log("检测到移动端，使用移动端优化播放策略");
+    // 可以在这里添加移动端特定的优化
+  }
 });
 </script>
 
@@ -241,8 +295,12 @@ onMounted(() => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-text {
@@ -363,5 +421,121 @@ onMounted(() => {
 .fallback-tips li {
   margin-bottom: 4px;
   line-height: 1.4;
+}
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .bilibili-player {
+    min-height: 280px;
+    border-radius: 8px;
+  }
+
+  .video-iframe {
+    min-height: 280px;
+    border-radius: 8px;
+  }
+
+  .fallback-container {
+    padding: 16px;
+  }
+
+  .fallback-content {
+    max-width: 320px;
+  }
+
+  .fallback-title {
+    font-size: 18px;
+  }
+
+  .fallback-desc {
+    font-size: 13px;
+  }
+
+  .fallback-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fallback-btn {
+    width: 100%;
+    max-width: 200px;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .fallback-tips {
+    font-size: 11px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bilibili-player {
+    min-height: 220px;
+    border-radius: 6px;
+  }
+
+  .video-iframe {
+    min-height: 220px;
+    border-radius: 6px;
+  }
+
+  .fallback-container {
+    padding: 12px 8px;
+  }
+
+  .fallback-content {
+    max-width: 280px;
+  }
+
+  .fallback-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .fallback-desc {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .fallback-actions {
+    gap: 6px;
+  }
+
+  .fallback-btn {
+    font-size: 11px;
+    padding: 8px 10px;
+    min-width: 70px;
+  }
+
+  .fallback-tips {
+    font-size: 10px;
+    padding: 8px;
+  }
+
+  .fallback-tips ul {
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .bilibili-player {
+    min-height: 200px;
+  }
+
+  .video-iframe {
+    min-height: 200px;
+  }
+
+  .fallback-content {
+    max-width: 240px;
+  }
+
+  .fallback-title {
+    font-size: 15px;
+  }
+
+  .fallback-desc {
+    font-size: 11px;
+  }
 }
 </style>

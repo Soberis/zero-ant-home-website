@@ -1,24 +1,19 @@
 <!-- 解决方案页面，集成视频案例和应用场景展示 -->
 <template>
-
   <div class="solutions-page">
-
     <div class="page-container">
-       <!-- 页面头部 -->
+      <!-- 页面头部 -->
       <div class="page-header">
+        <h1 class="page-title">{{ t("solutionsPage.title") }}</h1>
 
-        <h1 class="page-title">{{ t('solutionsPage.title') }}</h1>
-
-        <p class="page-subtitle">{{ t('solutionsPage.subtitle') }}</p>
-
+        <p class="page-subtitle">{{ t("solutionsPage.subtitle") }}</p>
       </div>
-       <!-- 视频案例区域 -->
+      <!-- 视频案例区域 -->
       <div id="video-section" class="video-section">
-
-        <h2 class="section-title">{{ t('solutionsPage.videoCases') }}</h2>
+        <h2 class="section-title">{{ t("solutionsPage.videoCases") }}</h2>
 
         <div class="video-grid">
-           <VideoCard
+          <VideoCard
             v-for="(card, idx) in localizedVideoCards"
             :key="card.slug"
             :card="card"
@@ -29,15 +24,15 @@
             @click="goToVideo"
           />
         </div>
-
       </div>
-       <!-- 更多应用场景区域 -->
-      <div id="more-scenarios" class="more-scenarios">
-
-        <h2 class="section-title">{{ t('solutionsPage.moreScenarios') }}</h2>
+      <!-- 行业应用场景区域 -->
+      <div id="industry-applications" class="industry-applications">
+        <h2 class="section-title">
+          {{ $t("solutionsPage.industryApplications") }}
+        </h2>
 
         <div class="application-grid">
-           <!-- 所有应用场景 -->
+          <!-- 所有应用场景 -->
           <ApplicationCard
             v-for="item in Applications"
             :key="item.slug"
@@ -46,44 +41,40 @@
             :slug="item.slug"
           />
         </div>
-
       </div>
-
     </div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 // 引入数据和组件
-import { videoCards } from '@/data/videos';
-import applications from '@/data/applications';
-import VideoCard from '@/components/common/VideoCard.vue';
-import ApplicationCard from '@/components/common/ApplicationCard.vue';
+import { videoCards } from "@/data/videos";
+import applications from "@/data/applications";
+import VideoCard from "@/components/common/VideoCard.vue";
+import ApplicationCard from "@/components/common/ApplicationCard.vue";
 
 const router = useRouter();
 const hoverVideoIdx = ref(-1);
 
 // 国际化的视频卡片数据
 const localizedVideoCards = computed(() => {
-  return videoCards.map(card => ({
+  return videoCards.map((card) => ({
     ...card,
-    title: t(`videos.${card.slug}.title`, card.title)
+    title: t(`videos.${card.slug}.title`, card.title),
   }));
 });
 
 // 国际化的应用场景数据
 const localizedApplications = computed(() => {
-  return applications.map(app => ({
+  return applications.map((app) => ({
     ...app,
     title: t(`applications.${app.slug}.title`, app.title),
-    description: t(`applications.${app.slug}.description`, app.description)
+    description: t(`applications.${app.slug}.description`, app.description),
   }));
 });
 
@@ -103,8 +94,6 @@ const goToVideo = (idx: number): void => {
 const Applications = computed(() => {
   return localizedApplications.value;
 });
-
-
 </script>
 
 <style scoped>
@@ -215,8 +204,7 @@ const Applications = computed(() => {
   }
 }
 
-.core-scenarios,
-.more-scenarios,
+.industry-applications,
 .video-section {
   border-bottom: 1px solid #e3e8f0;
   padding-bottom: 32px;
@@ -292,8 +280,8 @@ const Applications = computed(() => {
   max-width: 90%;
 }
 
-/* 更多场景样式 */
-.more-scenarios {
+/* 行业应用场景样式 */
+.industry-applications {
   margin-bottom: var(--section-spacing);
 }
 
@@ -374,8 +362,7 @@ const Applications = computed(() => {
     width: 36px;
     height: 2px;
   }
-  .core-scenarios,
-  .more-scenarios,
+  .industry-applications,
   .video-section {
     padding-bottom: 24px;
     margin-bottom: 32px;
@@ -431,11 +418,10 @@ const Applications = computed(() => {
     width: 36px;
     height: 2px;
   }
-  .core-scenarios,
-  .more-scenarios,
+  .industry-applications,
   .video-section {
-    padding-bottom: 24px;
-    margin-bottom: 32px;
+    padding-bottom: 32px;
+    margin-bottom: 48px;
   }
 
   .core-title {
@@ -458,4 +444,3 @@ const Applications = computed(() => {
   }
 }
 </style>
-

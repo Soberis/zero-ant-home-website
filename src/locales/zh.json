@@ -18,7 +18,7 @@
     "mobileRobot": "移动机器人",
     "solutions": "行业解决方案",
     "videoCases": "视频案例",
-    "moreScenarios": "更多场景",
+    "industryApplications": "行业应用",
     "support": "服务支持",
     "afterSales": "售后服务",
     "download": "相关下载",
@@ -56,7 +56,7 @@
     "title": "行业解决方案",
     "subtitle": "探索前沿技术应用，见证创新驱动未来",
     "videoCases": "视频案例",
-    "moreScenarios": "更多场景"
+    "industryApplications": "行业应用"
   },
   "supportPage": {
     "title": "售后服务",

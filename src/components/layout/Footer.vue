@@ -1,293 +1,247 @@
 <template>
-
   <footer class="footer">
-
     <div class="footer-main">
-
       <div class="footer-columns">
-         <!-- 移动端只显示公司和二维码 --> <template v-if="isMobile"
-          >
+        <!-- 移动端只显示公司和二维码 -->
+        <template v-if="isMobile">
           <div class="footer-col contact-col">
-
-            <h4>{{ $t('footer.companyFullName') }}</h4>
+            <h4>{{ $t("footer.companyFullName") }}</h4>
 
             <div class="contact-info">
+              <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
 
-              <div>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</div>
-
-              <div>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</div>
+              <div>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</div>
 
               <div style="margin-top: 8px">
-                 {{ $t('contacts.address') }}：{{ $t('footer.address') }}
+                {{ $t("contacts.address") }}：{{ $t("footer.address") }}
               </div>
-
             </div>
-
           </div>
 
           <div class="footer-col qrcode-col">
-
             <div class="footer-qrcodes">
-
               <div class="qrcode-item">
-                 <img
+                <img
                   :src="wxQrcode"
                   alt="微信公众号二维码"
                   class="qrcode-img"
                 />
-                <div class="qrcode-label"> {{ $t('footer.wx') }} </div>
-
+                <div class="qrcode-label">{{ $t("footer.wx") }}</div>
               </div>
 
               <div class="qrcode-item">
-                 <img
+                <img
                   :src="bilibiliQrcode"
                   alt="B站二维码"
                   class="qrcode-img bilibili-qrcode-img"
                 />
-                <div class="qrcode-label"> {{ $t('footer.bilibili') }} </div>
-
+                <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
               </div>
-
             </div>
-
           </div>
-           </template
-        > <!-- 桌面端显示全部，包括公司和二维码 --> <template v-else
-          >
+        </template>
+        <!-- 桌面端显示全部，包括公司和二维码 -->
+        <template v-else>
           <div class="footer-col">
-
-            <h4>{{ $t('nav.systemProducts') }}</h4>
+            <h4>{{ $t("nav.systemProducts") }}</h4>
 
             <ul>
-
               <li v-for="item in systemProductNav" :key="item.hash">
-                 <router-link
+                <router-link
                   :to="{ path: '/system-products', hash: item.hash }"
                   class="footer-link"
-                  > {{ $t(item.label) }} </router-link
                 >
+                  {{ $t(item.label) }}
+                </router-link>
               </li>
-
             </ul>
-
           </div>
 
           <div class="footer-col">
-
-            <h4>{{ $t('nav.robotProducts') }}</h4>
+            <h4>{{ $t("nav.robotProducts") }}</h4>
 
             <ul>
-
               <li v-for="item in robotProductNav" :key="item.hash">
-                 <router-link
+                <router-link
                   :to="{ path: '/robot-products', hash: item.hash }"
                   class="footer-link"
-                  > {{ $t(item.label) }} </router-link
                 >
+                  {{ $t(item.label) }}
+                </router-link>
               </li>
-
             </ul>
-
           </div>
 
           <div class="footer-col">
-
-            <h4>{{ $t('nav.solutions') }}</h4>
+            <h4>{{ $t("nav.solutions") }}</h4>
 
             <ul>
-
               <li>
-                 <router-link
+                <router-link
                   :to="{ path: '/solutions', hash: '#video-section' }"
-                  > {{ $t('nav.videoCases') }} </router-link
                 >
+                  {{ $t("nav.videoCases") }}
+                </router-link>
               </li>
 
               <li>
-                 <router-link
-                  :to="{ path: '/solutions', hash: '#more-scenarios' }"
-                  > {{ $t('nav.moreScenarios') }} </router-link
+                <router-link
+                  :to="{ path: '/solutions', hash: '#industry-applications' }"
                 >
+                  {{ $t("nav.industryApplications") }}
+                </router-link>
               </li>
-
             </ul>
-
           </div>
 
           <div class="footer-col">
-
-            <h4>{{ $t('nav.support') }}</h4>
-
-            <ul>
-
-              <li>
-                 <router-link to="/support"
-                  > {{ $t('nav.afterSales') }} </router-link
-                >
-              </li>
-
-              <li>
-                 <router-link :to="{ path: '/support', hash: '#download' }"
-                  > {{ $t('nav.download') }} </router-link
-                >
-              </li>
-
-              <li>
-                 <router-link :to="{ path: '/support', hash: '#faq' }"
-                  > {{ $t('nav.faq') }} </router-link
-                >
-              </li>
-
-            </ul>
-
-            <h4>{{ $t('nav.careers') }}</h4>
+            <h4>{{ $t("nav.support") }}</h4>
 
             <ul>
-
               <li>
-                 <router-link to="/careers"
-                  > {{ $t('nav.careers') }} </router-link
-                >
+                <router-link to="/support">
+                  {{ $t("nav.afterSales") }}
+                </router-link>
               </li>
 
+              <li>
+                <router-link :to="{ path: '/support', hash: '#download' }">
+                  {{ $t("nav.download") }}
+                </router-link>
+              </li>
+
+              <li>
+                <router-link :to="{ path: '/support', hash: '#faq' }">
+                  {{ $t("nav.faq") }}
+                </router-link>
+              </li>
             </ul>
 
+            <h4>{{ $t("nav.careers") }}</h4>
+
+            <ul>
+              <li>
+                <router-link to="/careers">
+                  {{ $t("nav.careers") }}
+                </router-link>
+              </li>
+            </ul>
           </div>
 
           <div class="footer-col">
-
-            <h4>{{ $t('nav.about') }}</h4>
+            <h4>{{ $t("nav.about") }}</h4>
 
             <ul>
-
               <li>
-                 <router-link :to="{ path: '/about', hash: '#company-intro' }"
-                  > {{ $t('nav.companyIntro') }} </router-link
-                >
+                <router-link :to="{ path: '/about', hash: '#company-intro' }">
+                  {{ $t("nav.companyIntro") }}
+                </router-link>
               </li>
 
               <li>
-                 <router-link :to="{ path: '/about', hash: '#history' }"
-                  > {{ $t('nav.history') }} </router-link
-                >
+                <router-link :to="{ path: '/about', hash: '#history' }">
+                  {{ $t("nav.history") }}
+                </router-link>
               </li>
 
               <li>
-                 <router-link :to="{ path: '/about', hash: '#honors' }"
-                  > {{ $t('nav.honor') }} </router-link
-                >
+                <router-link :to="{ path: '/about', hash: '#honors' }">
+                  {{ $t("nav.honor") }}
+                </router-link>
               </li>
 
               <li>
-                 <router-link :to="{ path: '/about', hash: '#core-values' }"
-                  > {{ $t('nav.coreValues') }} </router-link
-                >
+                <router-link :to="{ path: '/about', hash: '#core-values' }">
+                  {{ $t("nav.coreValues") }}
+                </router-link>
               </li>
 
               <li>
-                 <router-link :to="{ path: '/about', hash: '#culture' }"
-                  > {{ $t('nav.culture') }} </router-link
-                >
+                <router-link :to="{ path: '/about', hash: '#culture' }">
+                  {{ $t("nav.culture") }}
+                </router-link>
               </li>
 
               <li>
-                 <router-link :to="{ path: '/about', hash: '#contact' }"
-                  > {{ $t('nav.contact') }} </router-link
-                >
+                <router-link :to="{ path: '/about', hash: '#contact' }">
+                  {{ $t("nav.contact") }}
+                </router-link>
               </li>
-
             </ul>
-
           </div>
 
           <div class="footer-col contact-col">
-
-            <h4>{{ $t('footer.companyFullName') }}</h4>
+            <h4>{{ $t("footer.companyFullName") }}</h4>
 
             <div class="contact-info">
+              <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
 
-              <div>{{ $t('contacts.phone') }}：{{ $t('footer.telValue') }}</div>
-
-              <div>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</div>
+              <div>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</div>
 
               <div style="margin-top: 8px">
-                 {{ $t('contacts.address') }}：{{ $t('footer.address') }}
+                {{ $t("contacts.address") }}：{{ $t("footer.address") }}
               </div>
-
             </div>
-
           </div>
 
           <div class="footer-col qrcode-col">
-
             <div class="footer-qrcodes">
-
               <div class="qrcode-item">
-                 <img
+                <img
                   :src="wxQrcode"
                   alt="微信公众号二维码"
                   class="qrcode-img"
                 />
-                <div class="qrcode-label"> {{ $t('footer.wx') }} </div>
-
+                <div class="qrcode-label">{{ $t("footer.wx") }}</div>
               </div>
 
               <div class="qrcode-item">
-                 <img
+                <img
                   :src="bilibiliQrcode"
                   alt="B站二维码"
                   class="qrcode-img bilibili-qrcode-img"
                 />
-                <div class="qrcode-label"> {{ $t('footer.bilibili') }} </div>
-
+                <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
               </div>
-
             </div>
-
           </div>
-           </template
-        >
+        </template>
       </div>
-
     </div>
 
     <div class="footer-bottom">
-
       <div>
-         ©2025 {{ $t('footer.companyFullName') }} {{ $t('footer.copyright') }} <a
+        ©2025 {{ $t("footer.companyFullName") }} {{ $t("footer.copyright") }}
+        <a
           href="https://beian.miit.gov.cn"
           target="_blank"
           rel="noopener"
           class="icp-link"
-          >{{ $t('footer.icpNumber') }}</a
+          >{{ $t("footer.icpNumber") }}</a
         >
       </div>
-
     </div>
-
   </footer>
-
 </template>
 
 <script setup lang="ts">
 // 仅用于国际化，无复杂逻辑
-import bilibiliQrcode from '@/assets/images/qrcodes/bilibili.png';
-import wxQrcode from '@/assets/images/qrcodes/wx.jpg';
-import { ref, onMounted, onUnmounted } from 'vue';
+import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.png";
+import wxQrcode from "@/assets/images/qrcodes/wx.jpg";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const systemProductNav = [
-  { hash: '#multi-os-vm', label: 'nav.multiOSVM' },
-  { hash: '#industrial-rtos', label: 'nav.industrialRTOS' },
-  { hash: '#airos', label: 'nav.airos' },
-  { hash: '#robot-scheduler', label: 'nav.robotScheduler' },
+  { hash: "#multi-os-vm", label: "nav.multiOSVM" },
+  { hash: "#industrial-rtos", label: "nav.industrialRTOS" },
+  { hash: "#airos", label: "nav.airos" },
+  { hash: "#robot-scheduler", label: "nav.robotScheduler" },
 ];
 const robotProductNav = [
-  { hash: '#gantry-2d', label: 'nav.gantry2D' },
-  { hash: '#scara-4axis', label: 'nav.scara4Axis' },
-  { hash: '#arm-6axis', label: 'nav.arm6Axis' },
-  { hash: '#dual-arm-humanoid', label: 'nav.dualArmHumanoid' },
-  { hash: '#mobile-robot', label: 'nav.mobileRobot' },
+  { hash: "#gantry-2d", label: "nav.gantry2D" },
+  { hash: "#scara-4axis", label: "nav.scara4Axis" },
+  { hash: "#arm-6axis", label: "nav.arm6Axis" },
+  { hash: "#dual-arm-humanoid", label: "nav.dualArmHumanoid" },
+  { hash: "#mobile-robot", label: "nav.mobileRobot" },
 ];
 
 const isMobile = ref(false);
@@ -296,10 +250,10 @@ function checkMobile() {
 }
 onMounted(() => {
   checkMobile();
-  window.addEventListener('resize', checkMobile);
+  window.addEventListener("resize", checkMobile);
 });
 onUnmounted(() => {
-  window.removeEventListener('resize', checkMobile);
+  window.removeEventListener("resize", checkMobile);
 });
 </script>
 
@@ -516,4 +470,3 @@ onUnmounted(() => {
   }
 }
 </style>
-

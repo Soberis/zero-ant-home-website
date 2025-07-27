@@ -18,7 +18,7 @@
     "mobileRobot": "Mobile Robot",
     "solutions": "Solutions",
     "videoCases": "Video Cases",
-    "moreScenarios": "More Scenarios",
+    "industryApplications": "Industry Applications",
     "support": "Support",
     "afterSales": "After-sales Service",
     "download": "Downloads",
@@ -56,7 +56,7 @@
     "title": "Industry Solutions",
     "subtitle": "Explore cutting-edge technology applications and witness innovation driving the future",
     "videoCases": "Video Cases",
-    "moreScenarios": "More Scenarios"
+    "industryApplications": "Industry Applications"
   },
   "supportPage": {
     "title": "After-sales Service",
