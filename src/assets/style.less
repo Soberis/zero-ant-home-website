@@ -25,9 +25,41 @@ body {
   display: none !important;
 }
 
-// Firefox 隐藏横向滚动条
+// 滚动条样式优化
 * {
-  scrollbar-width: none;
+  // Firefox滚动条样式
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+// WebKit浏览器滚动条样式
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+// 隐藏滚动条（可选）
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
 }
 
 body,
@@ -373,7 +405,26 @@ pre {
   // 优化滚动性能
   .scroll-container {
     -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
+  }
+
+  // 自定义滚动条样式（兼容WebKit浏览器）
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 
   // 禁用不必要的视觉效果
@@ -382,6 +433,7 @@ pre {
     transform: none;
     filter: none;
     backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -390,6 +442,8 @@ pre {
   .high-dpi-image {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
   }
 }
 
