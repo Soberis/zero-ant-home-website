@@ -830,10 +830,6 @@ const handleVideoClick = (index: number) => {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .product-detail {
-    font-size: 1.5rem;
-  }
-
   .container {
     padding: 0 1.5rem;
   }
