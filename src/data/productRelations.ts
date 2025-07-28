@@ -31,14 +31,13 @@ export const productRelations: ProductRelationsData = {
   "multi-os-vm": {
     applicationSlugs: [
       "composite-systems",
-      "intelligent-manufacturing",
       "offline-programming",
       "industrial-gateway",
     ],
     videoSlugs: [
       "composite-robot-application",
-      "servo-motor-station",
       "robotstudio-remote-control",
+      "offline-programming",
     ],
     customFeatures: [
       "多操作系统并行运行，资源高效隔离",
@@ -84,8 +83,6 @@ export const productRelations: ProductRelationsData = {
       "composite-robot-application",
       "semiconductor",
       "medical-automation",
-      "ultrasound-medical-robot",
-      "personalized-prescription-pharmaceutical",
     ],
     customFeatures: [
       "安全性：Rust语言安全底座保障",
@@ -123,7 +120,6 @@ export const productRelations: ProductRelationsData = {
     ],
     videoSlugs: [
       "composite-robot-application",
-      "servo-motor-station",
       "high-speed-precision-robot-arm",
     ],
     customFeatures: [
@@ -143,9 +139,9 @@ export const productRelations: ProductRelationsData = {
       "surface-treatment",
     ],
     videoSlugs: [
+      "mobile-transfer-robot",
       "four-axis-robot-open-fridge",
       "high-speed-precision-robot-arm",
-      "composite-robot-application",
     ],
     customFeatures: [
       "高速运动，循环节拍短",
@@ -183,7 +179,6 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [
       "ur-robot-llm-motion-capture",
       "dual-robot-collaboration",
-      "ball-catching-demo",
     ],
     customFeatures: [
       "双臂高柔性协作，模拟人类操作",
@@ -200,7 +195,6 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [
       "agv-product-introduction",
       "radar-360-scanning",
-      "mobile-transfer-robot",
       "outdoor-patrol-robot",
     ],
     customFeatures: [
