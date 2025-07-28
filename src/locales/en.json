@@ -85,7 +85,7 @@
         "answer": "Yes. We support custom software and hardware development, including structure, functions, interfaces and other aspects. Please contact us to discuss specific requirements."
       }
     }
-  },
+  },    
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
     "description": "Our four-axis robotic arms are designed to enhance efficiency and precision in the medical field.",
@@ -444,6 +444,12 @@
       "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
       "coreAdvantages": "Multi-functional integration, intelligent scheduling, flexible production, unified management of heterogeneous systems",
       "typicalApplications": "Composite robot applications, intelligent manufacturing, automated logistics, multi-task collaboration, flexible production lines"
+    },
+    "industrial-gateway": {
+      "title": "Industrial Gateway & Edge Computing",
+      "description": "Based on multi-OS hybrid deployment embedded virtualization technology, provides highly reliable and secure virtualization solutions for industrial gateways and edge computing devices. Through heterogeneous system unified management and efficient resource isolation, multiple systems can be deployed on a single hardware platform, reducing hardware costs and maintenance complexity. Successfully applied in industrial automation, smart grids, smart cities and other fields.",
+      "coreAdvantages": "Multi-operating system parallel operation, efficient resource isolation, support for hybrid deployment of real-time and general-purpose operating systems, embedded virtualization technology",
+      "typicalApplications": "Industrial gateway virtualization, edge computing devices, heterogeneous system unified management, smart grids, smart cities"
     }
   },
   "products": {
