@@ -51,7 +51,7 @@
           v-if="props.showApplications && relatedApplications.length > 0"
           class="section scenes-section"
         >
-          <h2 class="section-title">{{ t("productDetail.applications") }}</h2>
+          <h1 class="section-title">{{ t("productDetail.applications") }}</h1>
 
           <div class="application-grid">
             <ApplicationCard
@@ -465,6 +465,7 @@ const handleVideoClick = (index: number) => {
 }
 
 .product-title {
+  font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-align: center;
