@@ -27,29 +27,37 @@
       "UAVs and Mixed-Criticality Systems"
     ],
     "params": {
-      "supportedOS": {
-        "key": "Supported OS",
-        "value": "openEulerEmbedded, Ubuntu, Zephyr, SylixOS, ArceOS"
-      },
-      "vmCount": {
-        "key": "VM Count",
-        "value": "Up to 3 parallel VMs"
+      "realTimeGuarantee": {
+        "key": "Real-time VM Maximum Interrupt Latency",
+        "value": "833ns"
       },
       "switchTime": {
         "key": "Real-time VM Process Switch Overhead",
         "value": "256 clock cycles"
       },
-      "realTimeGuarantee": {
-        "key": "Real-time VM Maximum Interrupt Latency",
-        "value": "833ns"
+      "securityLevel": {
+        "key": "Stability",
+        "value": "7*24 hours, RTOS max interrupt latency 4.62us"
       },
       "memoryManagement": {
         "key": "Inter-kernel Communication Rate",
         "value": "10MB test data: avg write 3.226Gbps, avg read 7.631Gbps"
       },
-      "securityLevel": {
-        "key": "Stability",
-        "value": "7*24 hours, RTOS max interrupt latency 4.62us"
+      "vmCount": {
+        "key": "VM Count",
+        "value": "Up to 3 parallel VMs"
+      },
+      "supportedOS": {
+        "key": "Supported OS",
+        "value": "openEulerEmbedded, Ubuntu, Zephyr, SylixOS, ArceOS"
+      },
+      "supportedKernels": {
+        "key": "Supported Kernels",
+        "value": "openEuler, Ubuntu, Zephyr, SylixOS, ArceOS"
+      },
+      "supportedHardware": {
+        "key": "Supported Hardware",
+        "value": "Firefly ROC-RK3588S-PC, NVIDIA Jetson TX2, Raspberry Pi 4 Model B, QEMU Emulator"
       },
       "virtualizationTech": {
         "key": "Full Emulation Device Support",
@@ -58,14 +66,6 @@
       "resourceIsolation": {
         "key": "Virtio Emulated Device Support",
         "value": "Virtio Console, Virtio BLK, Virtio Net, Virtio GPIO"
-      },
-      "supportedHardware": {
-        "key": "Supported Hardware",
-        "value": "Firefly ROC-RK3588S-PC, NVIDIA Jetson TX2, Raspberry Pi 4 Model B, QEMU Emulator"
-      },
-      "supportedKernels": {
-        "key": "Supported Kernels",
-        "value": "openEuler, Ubuntu, Zephyr, SylixOS, ArceOS"
       }
     },
     "downloads": {
@@ -105,21 +105,21 @@
         "key": "Real-time Response",
         "value": "Interrupt response <10us"
       },
-      "supportedArch": {
-        "key": "Supported Architecture",
-        "value": "ARM, x86, RISC-V"
-      },
       "securityLevel": {
         "key": "Security Level",
         "value": "EAL4+"
       },
-      "compatibility": {
-        "key": "Compatibility",
-        "value": "Support mainstream industrial protocols"
-      },
       "maxTasks": {
         "key": "Maximum Tasks",
         "value": "256 concurrent tasks"
+      },
+      "bootTime": {
+        "key": "Boot Time",
+        "value": "< 500ms"
+      },
+      "supportedArch": {
+        "key": "Supported Architecture",
+        "value": "ARM, x86, RISC-V"
       },
       "memoryManagement": {
         "key": "Memory Management",
@@ -157,9 +157,9 @@
         "key": "Certification Standard",
         "value": "IEC 61508 SIL3"
       },
-      "bootTime": {
-        "key": "Boot Time",
-        "value": "< 500ms"
+      "compatibility": {
+        "key": "Compatibility",
+        "value": "Support mainstream industrial protocols"
       }
     },
     "downloads": {}
@@ -198,13 +198,13 @@
       "Smart Manufacturing"
     ],
     "params": {
-      "realTime": {
-        "key": "Real-time Performance",
-        "value": "Maximum interrupt jitter ≤ 10us"
-      },
       "controlPrecision": {
         "key": "Control Precision",
         "value": "0.02mm repeat positioning accuracy"
+      },
+      "realTime": {
+        "key": "Real-time Performance",
+        "value": "Maximum interrupt jitter ≤ 10us"
       },
       "supportedAxes": {
         "key": "Supported Axes",
@@ -214,13 +214,13 @@
         "key": "Security Certification",
         "value": "Information Security EAL5+ certification"
       },
-      "costOptimization": {
-        "key": "Cost Optimization",
-        "value": "Controller cost reduced by 50%"
+      "memoryUsage": {
+        "key": "Memory Usage",
+        "value": "≤ 512MB"
       },
-      "devEfficiency": {
-        "key": "Development Efficiency",
-        "value": "R&D cycle reduced by over 70%"
+      "bootTime": {
+        "key": "Boot Time",
+        "value": "≤ 3 seconds"
       },
       "programmingLanguage": {
         "key": "Programming Language",
@@ -229,14 +229,6 @@
       "supportedArch": {
         "key": "Supported Architecture",
         "value": "ARM64, x86_64, RISC-V"
-      },
-      "memoryUsage": {
-        "key": "Memory Usage",
-        "value": "≤ 512MB"
-      },
-      "bootTime": {
-        "key": "Boot Time",
-        "value": "≤ 3 seconds"
       },
       "communicationProtocol": {
         "key": "Communication Protocol",
@@ -257,6 +249,14 @@
       "workingTemperature": {
         "key": "Working Temperature",
         "value": "-20°C ~ +60°C"
+      },
+      "costOptimization": {
+        "key": "Cost Optimization",
+        "value": "Controller cost reduced by 50%"
+      },
+      "devEfficiency": {
+        "key": "Development Efficiency",
+        "value": "R&D cycle reduced by over 70%"
       }
     },
     "downloads": {}
@@ -288,21 +288,25 @@
       "Hospital and Office Building Delivery"
     ],
     "params": {
-      "supportedBrands": {
-        "key": "Supported Robot Brands",
-        "value": "10+ mainstream brands"
-      },
       "maxSchedulingScale": {
         "key": "Maximum Scheduling Scale",
         "value": "100+ units"
       },
-      "systemInterface": {
-        "key": "System Interface",
-        "value": "RESTful API, MQTT, OPC UA"
+      "responseTime": {
+        "key": "Response Time",
+        "value": "≤100ms (task allocation)"
       },
-      "externalDeviceSupport": {
-        "key": "External Device Support",
-        "value": "Elevators, access control, etc."
+      "availability": {
+        "key": "Availability",
+        "value": "99.9% system availability"
+      },
+      "systemCapacity": {
+        "key": "System Capacity",
+        "value": "Support 100,000+ tasks/day"
+      },
+      "supportedBrands": {
+        "key": "Supported Robot Brands",
+        "value": "10+ mainstream brands"
       },
       "pathPlanningAlgorithm": {
         "key": "Path Planning Algorithm",
@@ -311,6 +315,14 @@
       "taskSchedulingStrategy": {
         "key": "Task Scheduling Strategy",
         "value": "Priority + load balancing"
+      },
+      "systemInterface": {
+        "key": "System Interface",
+        "value": "RESTful API, MQTT, OPC UA"
+      },
+      "externalDeviceSupport": {
+        "key": "External Device Support",
+        "value": "Elevators, access control, etc."
       },
       "mapManagement": {
         "key": "Map Management",
@@ -327,18 +339,6 @@
       "alarmMechanism": {
         "key": "Alarm Mechanism",
         "value": "Real-time alerts + email/SMS notifications"
-      },
-      "systemCapacity": {
-        "key": "System Capacity",
-        "value": "Support 100,000+ tasks/day"
-      },
-      "responseTime": {
-        "key": "Response Time",
-        "value": "≤100ms (task allocation)"
-      },
-      "availability": {
-        "key": "Availability",
-        "value": "99.9% system availability"
       },
       "deploymentMethod": {
         "key": "Deployment Method",
@@ -378,10 +378,6 @@
       "Precision Machining and Testing"
     ],
     "params": {
-      "effectiveStroke": {
-        "key": "Effective Stroke",
-        "value": "X:385mm Y:495mm Z:215mm"
-      },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
         "value": "±0.1mm"
@@ -389,6 +385,14 @@
       "maxLoad": {
         "key": "Maximum Load",
         "value": "5kg"
+      },
+      "effectiveStroke": {
+        "key": "Effective Stroke",
+        "value": "X:385mm Y:495mm Z:215mm"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "X:1m/s; Y:1m/s; Z:1m/s"
       },
       "driveMethod": {
         "key": "Drive Method",
@@ -402,6 +406,10 @@
         "key": "Control System",
         "value": "PLC control"
       },
+      "communicationInterface": {
+        "key": "Communication Interface",
+        "value": "Ethernet"
+      },
       "workingEnvironment": {
         "key": "Working Environment",
         "value": "Temperature: 0-50°C; Humidity: ≤75%"
@@ -410,10 +418,6 @@
         "key": "Installation Method",
         "value": "Fixed installation"
       },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "X:1m/s; Y:1m/s; Z:1m/s"
-      },
       "structuralMaterial": {
         "key": "Structural Material",
         "value": "High-strength aluminum alloy profiles"
@@ -421,10 +425,6 @@
       "devInterface": {
         "key": "Development Interface",
         "value": "C++"
-      },
-      "communicationInterface": {
-        "key": "Communication Interface",
-        "value": "Ethernet"
       },
       "powerRequirement": {
         "key": "Power Requirement",
@@ -460,10 +460,6 @@
       "Automated Packaging"
     ],
     "params": {
-      "armReach": {
-        "key": "Arm Reach",
-        "value": "Large arm: 296mm, Small arm: 282mm"
-      },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
         "value": "±0.05mm"
@@ -476,13 +472,17 @@
         "key": "Degrees of Freedom",
         "value": "4"
       },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "1000mm/s"
+      "armReach": {
+        "key": "Arm Reach",
+        "value": "Large arm: 296mm, Small arm: 282mm"
       },
       "workingRadius": {
         "key": "Working Radius",
         "value": "578mm"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "1000mm/s"
       },
       "verticalStroke": {
         "key": "Vertical Stroke",
@@ -554,10 +554,6 @@
       "Mechanical Processing"
     ],
     "params": {
-      "armReach": {
-        "key": "Arm Reach",
-        "value": "540.5mm"
-      },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
         "value": "±0.03mm"
@@ -570,13 +566,17 @@
         "key": "Degrees of Freedom",
         "value": "6"
       },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "180°/s (single joint)"
+      "armReach": {
+        "key": "Arm Reach",
+        "value": "540.5mm"
       },
       "workingRadius": {
         "key": "Working Radius",
         "value": "540.5mm"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "180°/s (single joint)"
       },
       "driveMethod": {
         "key": "Drive Method",
@@ -640,18 +640,6 @@
       "Intelligent Service"
     ],
     "params": {
-      "armReach": {
-        "key": "Single Arm Reach",
-        "value": "840.5mm"
-      },
-      "verticalStroke": {
-        "key": "Vertical Stroke",
-        "value": "800mm"
-      },
-      "verticalAxisMaxSpeed": {
-        "key": "Vertical Axis Maximum Speed",
-        "value": "200mm/s"
-      },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
         "value": "±0.05mm"
@@ -664,13 +652,25 @@
         "key": "Degrees of Freedom",
         "value": "15 (dual arms)"
       },
-      "maxSpeed": {
-        "key": "Maximum Speed of Single Joint",
-        "value": "180°/s"
+      "armReach": {
+        "key": "Single Arm Reach",
+        "value": "840.5mm"
       },
       "workingRadius": {
         "key": "Working Radius",
         "value": "540.5mm"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed of Single Joint",
+        "value": "180°/s"
+      },
+      "verticalStroke": {
+        "key": "Vertical Stroke",
+        "value": "800mm"
+      },
+      "verticalAxisMaxSpeed": {
+        "key": "Vertical Axis Maximum Speed",
+        "value": "200mm/s"
       },
       "driveMethod": {
         "key": "Drive Method",
@@ -684,6 +684,22 @@
         "key": "Communication Interface",
         "value": "Ethernet"
       },
+      "devInterface": {
+        "key": "Development Interface",
+        "value": "ROS2, Python, C++"
+      },
+      "networkConnection": {
+        "key": "Network Connection",
+        "value": "WiFi, Ethernet"
+      },
+      "visionSystem": {
+        "key": "Vision System",
+        "value": "Depth camera"
+      },
+      "voiceInteraction": {
+        "key": "Voice Interaction",
+        "value": "Multi-language speech recognition and synthesis"
+      },
       "protectionLevel": {
         "key": "Protection Level",
         "value": "IP54"
@@ -696,33 +712,17 @@
         "key": "Charging Method",
         "value": "Automatic charging station docking"
       },
-      "movingSpeed": {
-        "key": "Moving Speed",
-        "value": "0.5m/s"
-      },
       "batteryLife": {
         "key": "Battery Life",
         "value": "6-8 hours"
       },
+      "movingSpeed": {
+        "key": "Moving Speed",
+        "value": "0.5m/s"
+      },
       "baseType": {
         "key": "Base Type",
         "value": "Mobile base/Fixed base"
-      },
-      "visionSystem": {
-        "key": "Vision System",
-        "value": "Depth camera"
-      },
-      "voiceInteraction": {
-        "key": "Voice Interaction",
-        "value": "Multi-language speech recognition and synthesis"
-      },
-      "devInterface": {
-        "key": "Development Interface",
-        "value": "ROS2, Python, C++"
-      },
-      "networkConnection": {
-        "key": "Network Connection",
-        "value": "WiFi, Ethernet"
       }
     },
     "downloads": {}
@@ -754,9 +754,45 @@
       "Hospital Material Delivery"
     ],
     "params": {
+      "maxLoad": {
+        "key": "Maximum Load",
+        "value": "70kg"
+      },
+      "ratedLoad": {
+        "key": "Rated Load",
+        "value": "30kg"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "1m/s"
+      },
+      "rangingAccuracy": {
+        "key": "Ranging Accuracy",
+        "value": "±2mm"
+      },
       "navigationMethod": {
         "key": "Navigation Method",
         "value": "Laser SLAM + vision fusion"
+      },
+      "communicationInterface": {
+        "key": "Communication Interface",
+        "value": "Ethernet, WiFi"
+      },
+      "chargingMethod": {
+        "key": "Charging Method",
+        "value": "Automatic charging station docking"
+      },
+      "workingTemperature": {
+        "key": "Working Temperature",
+        "value": "0°C~40°C"
+      },
+      "workingHumidity": {
+        "key": "Working Humidity",
+        "value": "5%~85%"
+      },
+      "protectionLevel": {
+        "key": "Protection Level",
+        "value": "IP54"
       },
       "size": {
         "key": "Size",
@@ -765,14 +801,6 @@
       "selfWeight": {
         "key": "Self Weight",
         "value": "20kg"
-      },
-      "ratedLoad": {
-        "key": "Rated Load",
-        "value": "30kg"
-      },
-      "maxLoad": {
-        "key": "Maximum Load",
-        "value": "70kg"
       },
       "staticBatteryLife": {
         "key": "Static Battery Life",
@@ -785,34 +813,6 @@
       "fullLoadBatteryLife": {
         "key": "Full-load Battery Life",
         "value": "5 hours"
-      },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "1m/s"
-      },
-      "rangingAccuracy": {
-        "key": "Ranging Accuracy",
-        "value": "±2mm"
-      },
-      "workingTemperature": {
-        "key": "Working Temperature",
-        "value": "0°C~40°C"
-      },
-      "workingHumidity": {
-        "key": "Working Humidity",
-        "value": "5%~85%"
-      },
-      "communicationInterface": {
-        "key": "Communication Interface",
-        "value": "Ethernet, WiFi"
-      },
-      "protectionLevel": {
-        "key": "Protection Level",
-        "value": "IP54"
-      },
-      "chargingMethod": {
-        "key": "Charging Method",
-        "value": "Automatic charging station docking"
       },
       "climbingAbility": {
         "key": "Climbing Ability",

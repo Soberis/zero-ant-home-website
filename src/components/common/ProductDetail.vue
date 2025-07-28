@@ -401,16 +401,16 @@ const handleVideoClick = (index: number) => {
 <style scoped>
 /* 全局样式 */
 .product-detail {
-  min-height: 100vh;
-  background: #f7f8fa;
-  color: #222;
-  scroll-behavior: smooth;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  line-height: 1.6;
-  font-size: 20px; /* 提升基础字体大小 */
-}
+    min-height: 100vh;
+    background: #f7f8fa;
+    color: #222;
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+      sans-serif;
+    line-height: 1.6;
+    font-size: 2rem;
+  }
 
 /* 页面进入动画 */
 .product-detail {
@@ -456,7 +456,7 @@ const handleVideoClick = (index: number) => {
 }
 
 .product-title {
-  font-size: 4.2rem; /* 原3.5rem，提升20% */
+  font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -467,7 +467,7 @@ const handleVideoClick = (index: number) => {
 }
 
 .product-desc {
-  font-size: 1.5rem; /* 原1.25rem，提升20% */
+  font-size: 1.5rem;
   text-align: left !important;
   margin-bottom: 3rem;
   color: #666;
@@ -477,7 +477,7 @@ const handleVideoClick = (index: number) => {
   position: relative;
   z-index: 1;
   max-width: 1000px;
-  padding-left: 3rem;
+  padding-left: 2rem;
   white-space: normal;
 }
 
@@ -526,7 +526,6 @@ const handleVideoClick = (index: number) => {
   text-align: center;
   margin: 48px 0 32px 0;
   letter-spacing: 1px;
-  padding-left: 0;
   position: relative;
   transition: color 0.3s ease;
 }
@@ -577,7 +576,7 @@ const handleVideoClick = (index: number) => {
 }
 
 .feature-title {
-  font-size: 1.32rem; /* 原1.1rem，提升20% */
+  font-size: 1.3rem;
   font-weight: 500;
   color: #222;
   margin-bottom: 0.75rem;
@@ -587,7 +586,7 @@ const handleVideoClick = (index: number) => {
 .feature-desc {
   color: #666;
   line-height: 1.6;
-  font-size: 1.08rem; /* 原0.9rem，提升20% */
+  font-size: 1rem;
 }
 
 /* 应用场景 - 应用网格 */
@@ -699,7 +698,7 @@ const handleVideoClick = (index: number) => {
 .param-key {
   font-weight: 600;
   color: #222;
-  font-size: 1.2rem; /* 原1rem，提升20% */
+  font-size: 1.2rem;
   flex: 1;
   margin-right: 1rem;
 }
@@ -707,7 +706,7 @@ const handleVideoClick = (index: number) => {
 .param-value {
   color: #222;
   font-weight: 600;
-  font-size: 1.2rem; /* 原1rem，提升20% */
+  font-size: 1.2rem;
   text-align: right;
   flex-shrink: 0;
   max-width: 60%;
@@ -927,6 +926,10 @@ const handleVideoClick = (index: number) => {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+  .product-detail {
+    font-size: 1.5rem;
+  }
+  
   .container {
     padding: 0 1.5rem;
   }
@@ -975,7 +978,7 @@ const handleVideoClick = (index: number) => {
 
 @media (min-width: 1200px) {
   .product-detail {
-    font-size: 22px; /* 大屏下再提升 */
+    font-size: 2rem;
   }
   .product-title {
     font-size: 5rem;
@@ -1001,6 +1004,10 @@ const handleVideoClick = (index: number) => {
 }
 
 @media (max-width: 480px) {
+  .product-detail {
+    font-size: 1.25rem;
+  }
+  
   .product-title {
     font-size: 2rem;
   }

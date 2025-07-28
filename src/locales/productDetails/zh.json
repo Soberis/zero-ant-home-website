@@ -27,29 +27,37 @@
       "无人机等混合关键系统"
     ],
     "params": {
-      "supportedOS": {
-        "key": "支持操作系统",
-        "value": "openEulerEmbedded、Ubuntu、Zephyr、SylixOS、ArceOS"
-      },
-      "vmCount": {
-        "key": "虚拟机数量",
-        "value": "最多支持3个并行虚拟机"
+      "realTimeGuarantee": {
+        "key": "实时虚拟机最大中断时延",
+        "value": "833ns"
       },
       "switchTime": {
         "key": "实时虚拟机进程切换开销",
         "value": "256个时钟周期"
       },
-      "realTimeGuarantee": {
-        "key": "实时虚拟机最大中断时延",
-        "value": "833ns"
+      "securityLevel": {
+        "key": "稳定性",
+        "value": "7*24小时，RTOS最大中断时延 4.62us"
       },
       "memoryManagement": {
         "key": "内核间通信速率",
         "value": "10MB测试数据的平均写速率为3.226Gbps、平均读速率为7.631Gbps"
       },
-      "securityLevel": {
-        "key": "稳定性",
-        "value": "7*24小时，RTOS最大中断时延 4.62us"
+      "vmCount": {
+        "key": "虚拟机数量",
+        "value": "最多支持3个并行虚拟机"
+      },
+      "supportedOS": {
+        "key": "支持操作系统",
+        "value": "openEulerEmbedded、Ubuntu、Zephyr、SylixOS、ArceOS"
+      },
+      "supportedKernels": {
+        "key": "支持内核",
+        "value": "openEuler、Ubuntu、Zephyr、SylixOS、ArceOS"
+      },
+      "supportedHardware": {
+        "key": "适配硬件",
+        "value": "Firefly ROC-RK3588S-PC、NVIDIA Jetson TX2、Raspberry Pi 4 Model B、QEMU模拟器"
       },
       "virtualizationTech": {
         "key": "全模拟设备支持",
@@ -58,14 +66,6 @@
       "resourceIsolation": {
         "key": "Virtio模拟设备支持",
         "value": "Virtio Console、Virtio BLK、Virtio Net、Virtio GPIO"
-      },
-      "supportedHardware": {
-        "key": "适配硬件",
-        "value": "Firefly ROC-RK3588S-PC、NVIDIA Jetson TX2、Raspberry Pi 4 Model B、QEMU模拟器"
-      },
-      "supportedKernels": {
-        "key": "支持内核",
-        "value": "openEuler、Ubuntu、Zephyr、SylixOS、ArceOS"
       }
     },
     "downloads": {
@@ -101,21 +101,21 @@
         "key": "实时响应",
         "value": "中断响应<10us"
       },
-      "supportedArch": {
-        "key": "支持架构",
-        "value": "ARM, x86, RISC-V"
-      },
       "securityLevel": {
         "key": "安全等级",
         "value": "EAL4+"
       },
-      "compatibility": {
-        "key": "兼容性",
-        "value": "支持主流工业协议"
-      },
       "maxTasks": {
         "key": "最大任务数",
         "value": "256个并发任务"
+      },
+      "bootTime": {
+        "key": "启动时间",
+        "value": "< 500ms"
+      },
+      "supportedArch": {
+        "key": "支持架构",
+        "value": "ARM, x86, RISC-V"
       },
       "memoryManagement": {
         "key": "内存管理",
@@ -153,9 +153,9 @@
         "key": "认证标准",
         "value": "IEC 61508 SIL3"
       },
-      "bootTime": {
-        "key": "启动时间",
-        "value": "< 500ms"
+      "compatibility": {
+        "key": "兼容性",
+        "value": "支持主流工业协议"
       }
     },
     "downloads": {}
@@ -194,13 +194,13 @@
       "智能制造"
     ],
     "params": {
-      "realTime": {
-        "key": "实时性",
-        "value": "最大中断抖动 ≤ 10us"
-      },
       "controlPrecision": {
         "key": "控制精度",
         "value": "重复定位精度0.02mm"
+      },
+      "realTime": {
+        "key": "实时性",
+        "value": "最大中断抖动 ≤ 10us"
       },
       "supportedAxes": {
         "key": "支持轴数",
@@ -210,13 +210,13 @@
         "key": "安全认证",
         "value": "信息安全EAL5+认证"
       },
-      "costOptimization": {
-        "key": "成本优化",
-        "value": "控制器成本降低50%"
+      "memoryUsage": {
+        "key": "内存占用",
+        "value": "≤ 512MB"
       },
-      "devEfficiency": {
-        "key": "开发效率",
-        "value": "研发周期缩减70%以上"
+      "bootTime": {
+        "key": "启动时间",
+        "value": "≤ 3秒"
       },
       "programmingLanguage": {
         "key": "编程语言",
@@ -225,14 +225,6 @@
       "supportedArch": {
         "key": "支持架构",
         "value": "ARM64, x86_64, RISC-V"
-      },
-      "memoryUsage": {
-        "key": "内存占用",
-        "value": "≤ 512MB"
-      },
-      "bootTime": {
-        "key": "启动时间",
-        "value": "≤ 3秒"
       },
       "communicationProtocol": {
         "key": "通信协议",
@@ -253,6 +245,14 @@
       "workingTemperature": {
         "key": "工作温度",
         "value": "-20°C ~ +60°C"
+      },
+      "costOptimization": {
+        "key": "成本优化",
+        "value": "控制器成本降低50%"
+      },
+      "devEfficiency": {
+        "key": "开发效率",
+        "value": "研发周期缩减70%以上"
       }
     },
     "downloads": {}
@@ -280,21 +280,25 @@
     },
     "scenes": ["智能工厂物流", "仓储自动化", "医院与写字楼配送"],
     "params": {
-      "supportedBrands": {
-        "key": "支持机器人品牌",
-        "value": "10+主流品牌"
-      },
       "maxSchedulingScale": {
         "key": "最大调度规模",
         "value": "100台+"
       },
-      "systemInterface": {
-        "key": "系统接口",
-        "value": "RESTful API, MQTT, OPC UA"
+      "responseTime": {
+        "key": "响应时间",
+        "value": "≤100ms（任务分配）"
       },
-      "externalDeviceSupport": {
-        "key": "支持外设联动",
-        "value": "电梯、门禁等"
+      "availability": {
+        "key": "可用性",
+        "value": "99.9%系统可用性"
+      },
+      "systemCapacity": {
+        "key": "系统容量",
+        "value": "支持10万+任务/天"
+      },
+      "supportedBrands": {
+        "key": "支持机器人品牌",
+        "value": "10+主流品牌"
       },
       "pathPlanningAlgorithm": {
         "key": "路径规划算法",
@@ -303,6 +307,14 @@
       "taskSchedulingStrategy": {
         "key": "任务调度策略",
         "value": "优先级+负载均衡"
+      },
+      "systemInterface": {
+        "key": "系统接口",
+        "value": "RESTful API, MQTT, OPC UA"
+      },
+      "externalDeviceSupport": {
+        "key": "支持外设联动",
+        "value": "电梯、门禁等"
       },
       "mapManagement": {
         "key": "地图管理",
@@ -319,18 +331,6 @@
       "alarmMechanism": {
         "key": "报警机制",
         "value": "实时告警+邮件/短信通知"
-      },
-      "systemCapacity": {
-        "key": "系统容量",
-        "value": "支持10万+任务/天"
-      },
-      "responseTime": {
-        "key": "响应时间",
-        "value": "≤100ms（任务分配）"
-      },
-      "availability": {
-        "key": "可用性",
-        "value": "99.9%系统可用性"
       },
       "deploymentMethod": {
         "key": "部署方式",
@@ -366,10 +366,6 @@
     },
     "scenes": ["自动化装配线", "智能仓储物流", "精密加工与检测"],
     "params": {
-      "effectiveStroke": {
-        "key": "有效行程",
-        "value": "x:385mm y:495mm z:215mm"
-      },
       "repeatPositioningAccuracy": {
         "key": "重复定位精度",
         "value": "±0.1mm"
@@ -377,6 +373,14 @@
       "maxLoad": {
         "key": "最大负载",
         "value": "5kg"
+      },
+      "effectiveStroke": {
+        "key": "有效行程",
+        "value": "x:385mm y:495mm z:215mm"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "x:1m/s；y: 1m/s；z：1m/s"
       },
       "driveMethod": {
         "key": "驱动方式",
@@ -390,6 +394,10 @@
         "key": "控制系统",
         "value": "PLC控制"
       },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet"
+      },
       "workingEnvironment": {
         "key": "工作环境",
         "value": "温度：0-50℃；湿度：<=75%"
@@ -398,10 +406,6 @@
         "key": "安装方式",
         "value": "固定安装"
       },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "x:1m/s；y: 1m/s；z：1m/s"
-      },
       "structuralMaterial": {
         "key": "结构材料",
         "value": "高强度铝合金型材"
@@ -409,10 +413,6 @@
       "devInterface": {
         "key": "开发接口",
         "value": "C++"
-      },
-      "communicationInterface": {
-        "key": "通信接口",
-        "value": "Ethernet"
       },
       "powerRequirement": {
         "key": "电源",
@@ -444,10 +444,6 @@
     },
     "scenes": ["电子制造装配", "物流分拣", "自动化包装"],
     "params": {
-      "armReach": {
-        "key": "臂展",
-        "value": "大臂展：296mm、小臂展：282mm"
-      },
       "repeatPositioningAccuracy": {
         "key": "重复定位精度",
         "value": "±0.05mm"
@@ -460,13 +456,17 @@
         "key": "自由度",
         "value": "4"
       },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "1000mm/s"
+      "armReach": {
+        "key": "臂展",
+        "value": "大臂展：296mm、小臂展：282mm"
       },
       "workingRadius": {
         "key": "工作半径",
         "value": "578mm"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "1000mm/s"
       },
       "verticalStroke": {
         "key": "垂直行程",
@@ -534,10 +534,6 @@
     },
     "scenes": ["汽车制造", "家电装配", "机械加工"],
     "params": {
-      "armReach": {
-        "key": "臂展",
-        "value": "540.5mm"
-      },
       "repeatPositioningAccuracy": {
         "key": "重复定位精度",
         "value": "±0.03mm"
@@ -550,13 +546,17 @@
         "key": "自由度",
         "value": "6"
       },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "双臂单关节180°/s"
+      "armReach": {
+        "key": "臂展",
+        "value": "540.5mm"
       },
       "workingRadius": {
         "key": "工作半径",
         "value": "540.5mm"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "双臂单关节180°/s"
       },
       "driveMethod": {
         "key": "驱动方式",
