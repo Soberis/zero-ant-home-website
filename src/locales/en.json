@@ -316,6 +316,39 @@
         "Industrial Control"
       ]
     },
+    "lab-tube-loading": {
+      "title": "Biological Laboratory Tube Loading",
+      "desc": "Showcases ZeroAnt Technology's innovative application in biological laboratory automation, achieving automatic tube loading through high-precision robotics to improve laboratory efficiency and accuracy.",
+      "tags": [
+        "Biological Laboratory",
+        "Tube Loading",
+        "Automation",
+        "Medical Robot",
+        "Laboratory Automation"
+      ]
+    },
+    "outdoor-patrol-robot": {
+      "title": "Outdoor Mobile Patrol Robot",
+      "desc": "Demonstrates the intelligent navigation and patrol capabilities of ZeroAnt Technology's outdoor mobile patrol robot, utilizing LiDAR SLAM and 360-degree environmental perception technology to achieve autonomous patrol tasks in complex environments.",
+      "tags": [
+        "Mobile Patrol",
+        "Outdoor Robot",
+        "LiDAR SLAM",
+        "Autonomous Navigation",
+        "Environmental Perception"
+      ]
+    },
+    "robotstudio-remote-control": {
+      "title": "Upper Computer RobotStudio IDE Remote Control and Simulation",
+      "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",
+      "tags": [
+        "RobotStudio IDE",
+        "Remote Control",
+        "Simulation",
+        "Industrial Robot",
+        "Upper Computer Integration"
+      ]
+    },
     "videoDetail": {
       "learnMore": "Learn More",
       "contact": "Contact Us",

@@ -21,6 +21,9 @@ import rtosEthercatImg from "@/assets/images/videos/RTOS-EtherCAT电机控制验
 import robotPolishingDemoImg from "@/assets/images/videos/机器人打磨工艺演示.png";
 import palletizingRobotImg from "@/assets/images/videos/码垛机器人.png";
 import ballCatchingDemoImg from "@/assets/images/videos/抛球抓球演示.png";
+import robotStudioRemoteControlImg from "@/assets/images/videos/上位机RobotStudioIDE远程控制及仿真.png";
+import labTubeLoadingImg from "@/assets/images/videos/生物实验室试管上料.png";
+import outdoorPatrolRobotImg from "@/assets/images/videos/室外移动巡检机器人.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -274,6 +277,33 @@ export const videoMap: VideoMapData = {
     tags: ["机器人控制", "视觉识别", "运动控制", "智能抓取"],
     publishDate: "2024-06-15",
   },
+  "robotstudio-remote-control": {
+    slug: "robotstudio-remote-control",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1J68LzKEHd/${BILIBILI_BASE_PARAMS}`,
+    title: "上位机RobotStudioIDE远程控制及仿真",
+    desc: "演示零蚁科技基于上位机的RobotStudio IDE远程控制技术，实现工业机器人的无缝集成与远程操作，展示实时机器人控制与仿真能力。",
+    tags: ["RobotStudio IDE", "远程控制", "仿真", "工业机器人", "上位机集成"],
+    publishDate: "2024-12-20",
+  },
+  "lab-tube-loading": {
+    slug: "lab-tube-loading",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1n68LzKEwe/${BILIBILI_BASE_PARAMS}`,
+    title: "生物实验室试管上料",
+    desc: "展示零蚁科技在生物实验室自动化领域的创新应用，通过高精度机器人实现试管自动上料，提高实验室工作效率和准确性。",
+    tags: ["生物实验室", "试管上料", "自动化", "医疗机器人", "实验室自动化"],
+    publishDate: "2024-12-20",
+  },
+  "outdoor-patrol-robot": {
+    slug: "outdoor-patrol-robot",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1n68LzKE5P/${BILIBILI_BASE_PARAMS}`,
+    title: "室外移动巡检机器人",
+    desc: "演示零蚁科技室外移动巡检机器人的智能导航与巡检能力，通过激光SLAM和360度环境感知技术，实现复杂环境下的自主巡检任务。",
+    tags: ["移动巡检", "室外机器人", "激光SLAM", "自主导航", "环境感知"],
+    publishDate: "2024-12-20",
+  },
 };
 
 /**
@@ -282,6 +312,11 @@ export const videoMap: VideoMapData = {
  */
 export const videoCards: VideoCard[] = [
   // AI智能
+  {
+    title: "上位机RobotStudioIDE远程控制及仿真",
+    img: robotStudioRemoteControlImg,
+    slug: "robotstudio-remote-control",
+  },
 
   // 复合系统
   {
@@ -311,6 +346,11 @@ export const videoCards: VideoCard[] = [
   },
   // 单一应用
   {
+    title: "生物实验室试管上料",
+    img: labTubeLoadingImg,
+    slug: "lab-tube-loading",
+  },
+  {
     title: "个性化处方制药",
     img: personalizedPrescriptionImg,
     slug: "personalized-prescription-pharmaceutical",
@@ -323,6 +363,11 @@ export const videoCards: VideoCard[] = [
     title: "移动传送机器人",
     img: mobileTransferRobotImg,
     slug: "mobile-transfer-robot",
+  },
+  {
+    title: "室外移动巡检机器人",
+    img: outdoorPatrolRobotImg,
+    slug: "outdoor-patrol-robot",
   },
   { title: "打磨机器人", img: polishingRobotImg, slug: "polishing-robot" },
   {
