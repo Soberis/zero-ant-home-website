@@ -3,6 +3,7 @@ import type { Product } from '@/helpers/product';
 // 产品图片资源导入
 import scara4axisImg from '@/assets/images/products/四轴机器人.png';
 import dualArmHumanoidImg from '@/assets/images/products/双臂人形机器人.png';
+import multiOsVmImg from '@/assets/images/products/多OS混合部署嵌入式虚拟机2.png';
 
 /**
  * 扩展产品接口，添加产品特有字段
@@ -23,7 +24,7 @@ export const products: ProductData[] = [
   {
     slug: 'multi-os-vm',
     name: 'products.multiOsVm.name',
-    image: '',
+    image: multiOsVmImg,
     desc: 'products.multiOsVm.desc',
     seriesTitle: 'products.multiOsVm.seriesTitle',
     seriesSubtitle: 'products.multiOsVm.seriesSubtitle',

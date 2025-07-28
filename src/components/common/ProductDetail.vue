@@ -5,7 +5,7 @@
       <div class="container">
         <h1 class="product-title">{{ localizedProduct.title }}</h1>
 
-        <p class="product-desc">{{ localizedProduct.desc }}</p>
+        <p class="product-desc" v-html="localizedProduct.desc.replace(/\n/g, '<br>')"></p>
       </div>
     </div>
     <!-- 主要内容区域 -->
@@ -99,25 +99,30 @@
           </div>
         </section>
         <!-- 相关下载 -->
-        <section
-          v-if="localizedProduct.downloads && localizedProduct.downloads.length"
-          class="section downloads-section"
-        >
+        <section class="section downloads-section">
           <h2 class="section-title">{{ t('productDetail.downloads') }}</h2>
 
-          <div class="downloads-grid">
-            <div
-              v-for="(item, idx) in localizedProduct.downloads"
-              :key="idx"
+          <div v-if="localizedProduct.downloads && Object.keys(localizedProduct.downloads).length > 0" class="downloads-grid">
+            <a
+              v-for="(item, key) in localizedProduct.downloads"
+              :key="key"
               class="download-card"
-              style="cursor: default; opacity: 0.7;"
+              :href="(typeof item === 'string' && item) || (item && item.url) ? (typeof item === 'string' ? item : item.url) : undefined"
+              :download="(typeof item === 'string' && item) || (item && item.url) ? (typeof item === 'string' ? '' : item.name) : undefined"
             >
               <div class="download-icon">📄</div>
-              <div class="download-name" style="color: #666;">{{ typeof item === 'string' ? item : item.name }}</div>
-              <div style="color: #999; font-size: 0.9rem; margin-top: 0.5rem; font-style: italic;">
-                {{ t('productDetail.preparingMessage') }}
+              <div class="download-name">
+                {{ (typeof item === 'string' && item) ? item : (item && item.name ? item.name : '文档') }}
               </div>
-            </div>
+              <div class="download-action">
+                {{ t('supportPage.downloads.downloadNow') }}
+              </div>
+            </a>
+          </div>
+          
+          <div v-else class="no-downloads-placeholder">
+            <div class="placeholder-icon">📋</div>
+            <p class="placeholder-text">{{ t('productDetail.preparingMessage') }}</p>
           </div>
         </section>
       </div>
@@ -157,7 +162,7 @@ const { t } = useI18n();
 
 // 计算属性：根据productSlug获取国际化的产品数据
  const localizedProduct = computed(() => {
-   const detailKey = `productDetail.productDetails.${props.productSlug}`;
+   const detailKey = `productDetails.${props.productSlug}`;
    const productKey = `products.${props.productSlug}`;
    
    // 尝试从productDetail.productDetails获取详细信息，如果没有则使用原始数据
@@ -463,15 +468,17 @@ const handleVideoClick = (index: number) => {
 
 .product-desc {
   font-size: 1.5rem; /* 原1.25rem，提升20% */
-  text-align: center;
+  text-align: left !important;
   margin-bottom: 3rem;
   color: #666;
-  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.7;
   position: relative;
   z-index: 1;
+  max-width: 1000px;
+  padding-left: 3rem;
+  white-space: normal;
 }
 
 /* 主要内容区域 */
@@ -718,32 +725,128 @@ const handleVideoClick = (index: number) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 1.25rem;
+  box-shadow: 0 6px 30px rgba(26, 58, 143, 0.12);
+  border: 1px solid #e3f2fd;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.download-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(26, 58, 143, 0.03), transparent);
+  transition: left 0.6s ease;
+}
+
+.download-card:hover::before {
+  left: 100%;
+}
+
+.download-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(26, 58, 143, 0.2);
+  border-color: #1976d2;
+  background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+}
+
+.download-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(26, 58, 143, 0.1));
+}
+
+.download-card:hover .download-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(26, 58, 143, 0.2));
+}
+
+.download-name {
+  font-weight: 700;
+  color: #1a3a8f;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.download-card:hover .download-name {
+  color: #1976d2;
+}
+
+.download-action {
+  display: inline-block;
+  background: linear-gradient(135deg, #1976d2 0%, #1a3a8f 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.download-action::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.download-card:hover .download-action {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+}
+
+.download-card:hover .download-action::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* 无下载占位符 */
+.no-downloads-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
   background: white;
   border-radius: 1rem;
   box-shadow: 0 4px 24px rgba(26, 58, 143, 0.08);
   border: 1px solid #e3f2fd;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  color: inherit;
-  cursor: pointer;
 }
 
-.download-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(26, 58, 143, 0.15);
-  border-color: #1976d2;
-}
-
-.download-icon {
-  font-size: 2.5rem;
+.placeholder-icon {
+  font-size: 3rem;
   margin-bottom: 1rem;
+  opacity: 0.7;
 }
 
-.download-name {
-  font-weight: 600;
-  color: #222;
+.placeholder-text {
+  color: #666;
+  font-size: 1.1rem;
   text-align: center;
+  margin: 0;
 }
 
 /* 返回按钮 */

@@ -1,14 +1,13 @@
 {
   "multiOsVm": {
     "title": "多OS混合部署嵌入式虚拟机",
-    "desc": "支持多操作系统并行运行，提升工业设备灵活性与资源利用率，适用于异构系统一体化场景。",
+    "desc": "使用高级语言Rust编写的Type-1型Hypervisor，面向资源受限的嵌入式系统，支持多OS虚拟机并行运行，在提高资源利用率的同时保障虚拟机自身的实时性、虚拟机间的隔离性与系统整体的可靠性。<br><strong>可靠性</strong>：选用Rust作为编程语言，利用语言本身的安全特性提升代码质量，从语言层面保障系统软件的可靠性；<br><strong>隔离性</strong>：从CPU、中断、设备、内存四个方面对系统资源进行隔离，保证虚拟机无法越界访问不属于当前虚拟机的资源；<br><strong>实时性</strong>：通过中断直通机制以及中介传递设备机制，有效降低虚拟化对实时性能的影响。",
     "features": [
       "多操作系统并行运行，资源高效隔离",
       "支持实时操作系统与通用操作系统混合部署",
       "嵌入式虚拟化技术，低开销高安全",
       "灵活的系统切换与热插拔能力",
-      "支持多种主流工业协议与接口",
-      "云边协同管理，远程监控与维护"
+      "支持多种主流工业协议与接口"
     ],
     "cases": {
       "smartManufacturing": {
@@ -20,73 +19,59 @@
         "desc": "在单一硬件平台上部署多套系统，降低硬件成本与维护难度。"
       }
     },
-    "scenes": ["智能制造产线", "工业自动化设备", "工业网关与边缘计算"],
+    "scenes": [
+      "车载系统",
+      "智能制造产线",
+      "工业自动化设备",
+      "工业网关与边缘计算",
+      "无人机等混合关键系统"
+    ],
     "params": {
       "supportedOS": {
         "key": "支持操作系统",
-        "value": "Linux, RTOS, Android等"
+        "value": "openEulerEmbedded、Ubuntu、Zephyr、SylixOS、ArceOS"
       },
       "vmCount": {
         "key": "虚拟机数量",
-        "value": "最多支持8个并行虚拟机"
+        "value": "最多支持3个并行虚拟机"
       },
       "switchTime": {
-        "key": "系统切换时间",
-        "value": "< 1秒"
-      },
-      "securityLevel": {
-        "key": "安全隔离等级",
-        "value": "高"
-      },
-      "virtualizationTech": {
-        "key": "虚拟化技术",
-        "value": "Type-1 Hypervisor"
-      },
-      "resourceIsolation": {
-        "key": "资源隔离",
-        "value": "硬件级别隔离"
+        "key": "实时虚拟机进程切换开销",
+        "value": "256个时钟周期"
       },
       "realTimeGuarantee": {
-        "key": "实时性保证",
-        "value": "微秒级响应时间"
-      },
-      "supportedArch": {
-        "key": "支持架构",
-        "value": "ARM Cortex-A, x86_64"
+        "key": "实时虚拟机最大中断时延",
+        "value": "833ns"
       },
       "memoryManagement": {
-        "key": "内存管理",
-        "value": "MMU + IOMMU双重保护"
+        "key": "内核间通信速率",
+        "value": "10MB测试数据的平均写速率为3.226Gbps、平均读速率为7.631Gbps"
       },
-      "bootTime": {
-        "key": "启动时间",
-        "value": "≤ 5秒"
+      "securityLevel": {
+        "key": "稳定性",
+        "value": "7*24小时，RTOS最大中断时延 4.62us"
       },
-      "cpuScheduling": {
-        "key": "CPU调度",
-        "value": "实时优先级调度"
+      "virtualizationTech": {
+        "key": "全模拟设备支持",
+        "value": "模拟GIC、模拟IOMMU"
       },
-      "networkVirtualization": {
-        "key": "网络虚拟化",
-        "value": "SR-IOV + 虚拟交换机"
+      "resourceIsolation": {
+        "key": "Virtio模拟设备支持",
+        "value": "Virtio Console、Virtio BLK、Virtio Net、Virtio GPIO"
       },
-      "storageVirtualization": {
-        "key": "存储虚拟化",
-        "value": "块设备虚拟化"
+      "supportedHardware": {
+        "key": "适配硬件",
+        "value": "Firefly ROC-RK3588S-PC、NVIDIA Jetson TX2、Raspberry Pi 4 Model B、QEMU模拟器"
       },
-      "securityFeatures": {
-        "key": "安全特性",
-        "value": "TrustZone + 安全启动"
-      },
-      "debugSupport": {
-        "key": "调试支持",
-        "value": "GDB + JTAG调试"
+      "supportedKernels": {
+        "key": "支持内核",
+        "value": "openEuler、Ubuntu、Zephyr、SylixOS、ArceOS"
       }
     },
     "downloads": {
       "whitepaper": {
-        "name": "产品白皮书.pdf",
-        "url": "/downloads/multi-os-vm-whitepaper.pdf"
+        "name": "多OS混合部署嵌入式虚拟机产业白皮书.pdf",
+        "url": "/downloads/多OS混合部署嵌入式虚拟机产业白皮书.pdf"
       }
     }
   },
@@ -173,12 +158,7 @@
         "value": "< 500ms"
       }
     },
-    "downloads": {
-      "whitepaper": {
-        "name": "产品白皮书.pdf",
-        "url": "/downloads/industrial-rtos-whitepaper.pdf"
-      }
-    }
+    "downloads": {}
   },
   "airos": {
     "title": "AiROS机器人操作系统",
@@ -275,16 +255,7 @@
         "value": "-20°C ~ +60°C"
       }
     },
-    "downloads": {
-      "systemWhitepaper": {
-        "name": "AiROS系统白皮书.pdf",
-        "url": "/downloads/airos-whitepaper.pdf"
-      },
-      "architectureDoc": {
-        "name": "技术架构说明.pdf",
-        "url": "/downloads/airos-architecture.pdf"
-      }
-    }
+    "downloads": {}
   },
   "robotScheduler": {
     "title": "移动机器人调度系统",
@@ -370,12 +341,7 @@
         "value": "HTTPS + OAuth2.0"
       }
     },
-    "downloads": {
-      "productManual": {
-        "name": "产品手册.pdf",
-        "url": "/downloads/robot-scheduler-manual.pdf"
-      }
-    }
+    "downloads": {}
   },
   "gantry2d": {
     "title": "二自由度龙门架",
@@ -453,36 +419,31 @@
         "value": "AC 220V"
       }
     },
-    "downloads": {
-      "productManual": {
-        "name": "产品手册.pdf",
-        "url": "/downloads/gantry-2d-manual.pdf"
-      }
-    }
+    "downloads": {}
   },
-    "scara4axis": {
-        "title": "四轴机械臂",
-        "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用，具备高速高精度特性。",
-        "features": [
-          "高速运动，循环节拍短",
-          "高精度重复定位，适合精密作业",
-          "结构紧凑，易于集成",
-          "支持多种末端工具快速更换",
-          "开放式控制接口，便于二次开发",
-          "智能视觉引导，自适应作业环境"
-        ],
-        "cases": {
-          "electronicAssembly": {
-            "title": "电子元件装配",
-            "desc": "应用于电子制造业，实现高效自动化装配。"
-          },
-          "automaticSortingPackaging": {
-            "title": "自动分拣与包装",
-            "desc": "在物流分拣线实现高速分拣与自动包装。"
-          }
-        },
-        "scenes": ["电子制造装配", "物流分拣", "自动化包装"],
-        "params": {
+  "scara4axis": {
+    "title": "四轴机械臂",
+    "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用，具备高速高精度特性。",
+    "features": [
+      "高速运动，循环节拍短",
+      "高精度重复定位，适合精密作业",
+      "结构紧凑，易于集成",
+      "支持多种末端工具快速更换",
+      "开放式控制接口，便于二次开发",
+      "智能视觉引导，自适应作业环境"
+    ],
+    "cases": {
+      "electronicAssembly": {
+        "title": "电子元件装配",
+        "desc": "应用于电子制造业，实现高效自动化装配。"
+      },
+      "automaticSortingPackaging": {
+        "title": "自动分拣与包装",
+        "desc": "在物流分拣线实现高速分拣与自动包装。"
+      }
+    },
+    "scenes": ["电子制造装配", "物流分拣", "自动化包装"],
+    "params": {
       "armReach": {
         "key": "臂展",
         "value": "大臂展：296mm、小臂展：282mm"
@@ -548,100 +509,90 @@
         "value": "J1: ±90°、J2：±165°、夹爪：±360°"
       }
     },
-        "downloads": {
-          "productManual": {
-            "name": "产品手册.pdf",
-            "url": "/downloads/scara-4axis-manual.pdf"
-          }
-        }
-      },
+        "downloads": {}
+  },
   "arm6axis": {
-      "title": "六轴机械臂",
-      "desc": "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景，支持多自由度协同作业。",
-      "features": [
-        "六自由度设计，灵活应对复杂工艺",
-        "高精度轨迹控制，运动平稳",
-        "支持多种末端执行器与传感器集成",
-        "开放式编程与控制接口",
-        "高可靠性，适应恶劣工业环境",
-        "AI辅助编程，降低使用门槛"
-      ],
-      "cases": {
-        "automotiveWelding": {
-          "title": "汽车零部件焊接",
-          "desc": "应用于汽车制造，实现高精度自动焊接。"
-        },
-        "sprayingAssembly": {
-          "title": "喷涂与装配",
-          "desc": "在家电、机械等行业实现自动喷涂与装配作业。"
-        }
+    "title": "六轴机械臂",
+    "desc": "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景，支持多自由度协同作业。",
+    "features": [
+      "六自由度设计，灵活应对复杂工艺",
+      "高精度轨迹控制，运动平稳",
+      "支持多种末端执行器与传感器集成",
+      "开放式编程与控制接口",
+      "高可靠性，适应恶劣工业环境",
+      "AI辅助编程，降低使用门槛"
+    ],
+    "cases": {
+      "automotiveWelding": {
+        "title": "汽车零部件焊接",
+        "desc": "应用于汽车制造，实现高精度自动焊接。"
       },
-      "scenes": ["汽车制造", "家电装配", "机械加工"],
-      "params": {
-        "armReach": {
-          "key": "臂展",
-          "value": "540.5mm"
-        },
-        "repeatPositioningAccuracy": {
-          "key": "重复定位精度",
-          "value": "±0.03mm"
-        },
-        "maxLoad": {
-          "key": "最大负载",
-          "value": "3kg"
-        },
-        "degreesOfFreedom": {
-          "key": "自由度",
-          "value": "6"
-        },
-        "maxSpeed": {
-          "key": "最大速度",
-          "value": "双臂单关节180°/s"
-        },
-        "workingRadius": {
-          "key": "工作半径",
-          "value": "540.5mm"
-        },
-        "driveMethod": {
-          "key": "驱动方式",
-          "value": "一体化机器人关节"
-        },
-        "controlSystem": {
-          "key": "控制系统",
-          "value": "专用六轴控制器"
-        },
-        "programmingMethod": {
-          "key": "编程方式",
-          "value": "示教编程+离线编程"
-        },
-        "communicationInterface": {
-          "key": "通信接口",
-          "value": "Ethernet"
-        },
-        "protectionLevel": {
-          "key": "防护等级",
-          "value": "IP54"
-        },
-        "workingTemperature": {
-          "key": "工作温度",
-          "value": "0-60℃"
-        },
-        "powerSpec": {
-          "key": "电源规格",
-          "value": "DC48V"
-        },
-        "installationMethod": {
-          "key": "安装方式",
-          "value": "地面安装/倒装/侧装"
-        }
-      },
-      "downloads": {
-        "productManual": {
-          "name": "产品手册.pdf",
-          "url": "/downloads/arm-6axis-manual.pdf"
-        }
+      "sprayingAssembly": {
+        "title": "喷涂与装配",
+        "desc": "在家电、机械等行业实现自动喷涂与装配作业。"
       }
     },
+    "scenes": ["汽车制造", "家电装配", "机械加工"],
+    "params": {
+      "armReach": {
+        "key": "臂展",
+        "value": "540.5mm"
+      },
+      "repeatPositioningAccuracy": {
+        "key": "重复定位精度",
+        "value": "±0.03mm"
+      },
+      "maxLoad": {
+        "key": "最大负载",
+        "value": "3kg"
+      },
+      "degreesOfFreedom": {
+        "key": "自由度",
+        "value": "6"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "双臂单关节180°/s"
+      },
+      "workingRadius": {
+        "key": "工作半径",
+        "value": "540.5mm"
+      },
+      "driveMethod": {
+        "key": "驱动方式",
+        "value": "一体化机器人关节"
+      },
+      "controlSystem": {
+        "key": "控制系统",
+        "value": "专用六轴控制器"
+      },
+      "programmingMethod": {
+        "key": "编程方式",
+        "value": "示教编程+离线编程"
+      },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet"
+      },
+      "protectionLevel": {
+        "key": "防护等级",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "0-60℃"
+      },
+      "powerSpec": {
+        "key": "电源规格",
+        "value": "DC48V"
+      },
+      "installationMethod": {
+        "key": "安装方式",
+        "value": "地面安装/倒装/侧装"
+      }
+    },
+      "downloads": {}
+  },
   "dualArmHumanoid": {
     "title": "双臂人型机器人",
     "desc": "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求，支持多模态感知与智能交互。",
@@ -750,12 +701,7 @@
         "value": "WIFI、Ethernet"
       }
     },
-    "downloads": {
-      "productManual": {
-        "name": "产品手册.pdf",
-        "url": "/downloads/dual-arm-humanoid-manual.pdf"
-      }
-    }
+    "downloads": {}
   },
   "mobileRobot": {
     "title": "移动机器人",
@@ -853,11 +799,6 @@
         "value": "5mm"
       }
     },
-    "downloads": {
-      "productManual": {
-        "name": "产品手册.pdf",
-        "url": "/downloads/mobile-robot-manual.pdf"
-      }
-    }
+    "downloads": {}
   }
 }
