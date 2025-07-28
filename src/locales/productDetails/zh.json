@@ -379,7 +379,7 @@
   },
   "gantry2d": {
     "title": "二自由度龙门架",
-    "desc": "高精度、高刚性的二自由度龙门架，适用于多场景自动化搬运与定位，满足工业级高效作业需求。",
+    "desc": "高精度、高刚性的龙门架系统，适用于多场景自动化搬运与定位，满足工业级高效作业需求。",
     "features": [
       "高刚性结构设计，承载能力强",
       "亚毫米级定位精度，运行平稳",
@@ -402,59 +402,55 @@
     "params": {
       "effectiveStroke": {
         "key": "有效行程",
-        "value": "X: 1~6m, Y: 0.5~2m（可定制）"
-      },
-      "positioningAccuracy": {
-        "key": "定位精度",
-        "value": "±0.05mm"
-      },
-      "maxLoad": {
-        "key": "最大负载",
-        "value": "50kg"
-      },
-      "driveMethod": {
-        "key": "驱动方式",
-        "value": "伺服电机+同步带/滚珠丝杠"
-      },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "X轴: 3m/s, Y轴: 2m/s"
+        "value": "x:385mm y:495mm z:215mm"
       },
       "repeatPositioningAccuracy": {
         "key": "重复定位精度",
-        "value": "±0.02mm"
+        "value": "±0.1mm"
+      },
+      "maxLoad": {
+        "key": "最大负载",
+        "value": "5kg"
+      },
+      "driveMethod": {
+        "key": "驱动方式",
+        "value": "伺服电机+同步带"
+      },
+      "guideRailType": {
+        "key": "导轨类型",
+        "value": "直线导轨+同步带"
+      },
+      "controlSystem": {
+        "key": "控制系统",
+        "value": "PLC控制"
+      },
+      "workingEnvironment": {
+        "key": "工作环境",
+        "value": "温度：0-50℃；湿度：<=75%"
+      },
+      "installationMethod": {
+        "key": "安装方式",
+        "value": "固定安装"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "x:1m/s；y: 1m/s；z：1m/s"
       },
       "structuralMaterial": {
         "key": "结构材料",
         "value": "高强度铝合金型材"
       },
-      "guideRailType": {
-        "key": "导轨类型",
-        "value": "直线导轨+滚珠丝杠"
-      },
-      "controlSystem": {
-        "key": "控制系统",
-        "value": "伺服驱动器+PLC控制"
-      },
-      "safetyProtection": {
-        "key": "安全防护",
-        "value": "光栅保护+急停按钮"
-      },
-      "workingEnvironment": {
-        "key": "工作环境",
-        "value": "0°C~40°C, 湿度≤80%"
-      },
-      "powerRequirement": {
-        "key": "电源要求",
-        "value": "AC 380V/220V, 50/60Hz"
+      "devInterface": {
+        "key": "开发接口",
+        "value": "C++"
       },
       "communicationInterface": {
         "key": "通信接口",
-        "value": "Ethernet, RS485, CAN"
+        "value": "Ethernet"
       },
-      "installationMethod": {
-        "key": "安装方式",
-        "value": "地面固定/悬挂安装"
+      "powerRequirement": {
+        "key": "电源",
+        "value": "AC 220V"
       }
     },
     "downloads": {
@@ -464,163 +460,72 @@
       }
     }
   },
-  "scara4axis": {
-    "title": "四轴机械臂",
-    "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用，具备高速高精度特性。",
-    "features": [
-      "高速运动，循环节拍短",
-      "高精度重复定位，适合精密作业",
-      "结构紧凑，易于集成",
-      "支持多种末端工具快速更换",
-      "开放式控制接口，便于二次开发",
-      "智能视觉引导，自适应作业环境"
-    ],
-    "cases": {
-      "electronicAssembly": {
-        "title": "电子元件装配",
-        "desc": "应用于电子制造业，实现高效自动化装配。"
-      },
-      "automaticSortingPackaging": {
-        "title": "自动分拣与包装",
-        "desc": "在物流分拣线实现高速分拣与自动包装。"
-      }
-    },
-    "scenes": ["电子制造装配", "物流分拣", "自动化包装"],
-    "params": {
+    "scara4axis": {
+        "title": "四轴机械臂",
+        "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用，具备高速高精度特性。",
+        "features": [
+          "高速运动，循环节拍短",
+          "高精度重复定位，适合精密作业",
+          "结构紧凑，易于集成",
+          "支持多种末端工具快速更换",
+          "开放式控制接口，便于二次开发",
+          "智能视觉引导，自适应作业环境"
+        ],
+        "cases": {
+          "electronicAssembly": {
+            "title": "电子元件装配",
+            "desc": "应用于电子制造业，实现高效自动化装配。"
+          },
+          "automaticSortingPackaging": {
+            "title": "自动分拣与包装",
+            "desc": "在物流分拣线实现高速分拣与自动包装。"
+          }
+        },
+        "scenes": ["电子制造装配", "物流分拣", "自动化包装"],
+        "params": {
       "armReach": {
         "key": "臂展",
-        "value": "400~800mm（可选）"
+        "value": "大臂展：296mm、小臂展：282mm"
       },
       "repeatPositioningAccuracy": {
         "key": "重复定位精度",
-        "value": "±0.02mm"
+        "value": "±0.05mm"
       },
       "maxLoad": {
         "key": "最大负载",
-        "value": "5kg"
+        "value": "1kg"
+      },
+      "degreesOfFreedom": {
+        "key": "自由度",
+        "value": "4"
       },
       "maxSpeed": {
         "key": "最大速度",
-        "value": "6000mm/s"
+        "value": "1000mm/s"
       },
       "workingRadius": {
         "key": "工作半径",
-        "value": "400~800mm"
+        "value": "578mm"
       },
       "verticalStroke": {
         "key": "垂直行程",
-        "value": "200mm"
-      },
-      "rotationAngle": {
-        "key": "旋转角度",
-        "value": "±180°"
-      },
-      "cycleTime": {
-        "key": "循环时间",
-        "value": "0.45秒（标准动作）"
+        "value": "800mm"
       },
       "driveMethod": {
         "key": "驱动方式",
-        "value": "AC伺服电机"
-      },
-      "reducer": {
-        "key": "减速器",
-        "value": "谐波减速器"
+        "value": "DC伺服电机+谐波减速器"
       },
       "controller": {
-        "key": "控制器",
-        "value": "专用SCARA控制器"
+        "key": "控制系统",
+        "value": "专用四轴控制器"
       },
       "programmingMethod": {
         "key": "编程方式",
         "value": "示教编程+离线编程"
       },
-      "protectionLevel": {
-        "key": "防护等级",
-        "value": "IP54"
-      },
-      "workingTemperature": {
-        "key": "工作温度",
-        "value": "0°C~45°C"
-      },
-      "powerSpec": {
-        "key": "电源规格",
-        "value": "AC 220V, 单相"
-      }
-    },
-    "downloads": {
-      "productManual": {
-        "name": "产品手册.pdf",
-        "url": "/downloads/scara-4axis-manual.pdf"
-      }
-    }
-  },
-  "arm6axis": {
-    "title": "六轴机械臂",
-    "desc": "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景，支持多自由度协同作业。",
-    "features": [
-      "六自由度设计，灵活应对复杂工艺",
-      "高精度轨迹控制，运动平稳",
-      "支持多种末端执行器与传感器集成",
-      "开放式编程与控制接口",
-      "高可靠性，适应恶劣工业环境",
-      "AI辅助编程，降低使用门槛"
-    ],
-    "cases": {
-      "automotiveWelding": {
-        "title": "汽车零部件焊接",
-        "desc": "应用于汽车制造，实现高精度自动焊接。"
-      },
-      "sprayingAssembly": {
-        "title": "喷涂与装配",
-        "desc": "在家电、机械等行业实现自动喷涂与装配作业。"
-      }
-    },
-    "scenes": ["汽车制造", "家电装配", "机械加工"],
-    "params": {
-      "armReach": {
-        "key": "臂展",
-        "value": "700~1800mm（可选）"
-      },
-      "repeatPositioningAccuracy": {
-        "key": "重复定位精度",
-        "value": "±0.03mm"
-      },
-      "maxLoad": {
-        "key": "最大负载",
-        "value": "10kg"
-      },
-      "degreesOfFreedom": {
-        "key": "自由度",
-        "value": "6轴"
-      },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "180°/s（关节速度）"
-      },
-      "workingRadius": {
-        "key": "工作半径",
-        "value": "700~1800mm"
-      },
-      "verticalStroke": {
-        "key": "垂直行程",
-        "value": "1600mm"
-      },
-      "driveMethod": {
-        "key": "驱动方式",
-        "value": "AC伺服电机+精密减速器"
-      },
-      "controlSystem": {
-        "key": "控制系统",
-        "value": "专用六轴控制器"
-      },
-      "programmingMethod": {
-        "key": "编程方式",
-        "value": "示教编程+离线编程+图形化编程"
-      },
       "communicationInterface": {
         "key": "通信接口",
-        "value": "Ethernet, Modbus, Profinet"
+        "value": "Ethernet"
       },
       "protectionLevel": {
         "key": "防护等级",
@@ -628,24 +533,115 @@
       },
       "workingTemperature": {
         "key": "工作温度",
-        "value": "0°C~45°C"
+        "value": "0-60℃"
       },
       "powerSpec": {
         "key": "电源规格",
-        "value": "AC 380V, 三相"
+        "value": "DC48V"
       },
       "installationMethod": {
         "key": "安装方式",
         "value": "地面安装/倒装/侧装"
+      },
+      "rotationAngle": {
+        "key": "旋转角度",
+        "value": "J1: ±90°、J2：±165°、夹爪：±360°"
       }
     },
-    "downloads": {
-      "productManual": {
-        "name": "产品手册.pdf",
-        "url": "/downloads/arm-6axis-manual.pdf"
+        "downloads": {
+          "productManual": {
+            "name": "产品手册.pdf",
+            "url": "/downloads/scara-4axis-manual.pdf"
+          }
+        }
+      },
+  "arm6axis": {
+      "title": "六轴机械臂",
+      "desc": "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景，支持多自由度协同作业。",
+      "features": [
+        "六自由度设计，灵活应对复杂工艺",
+        "高精度轨迹控制，运动平稳",
+        "支持多种末端执行器与传感器集成",
+        "开放式编程与控制接口",
+        "高可靠性，适应恶劣工业环境",
+        "AI辅助编程，降低使用门槛"
+      ],
+      "cases": {
+        "automotiveWelding": {
+          "title": "汽车零部件焊接",
+          "desc": "应用于汽车制造，实现高精度自动焊接。"
+        },
+        "sprayingAssembly": {
+          "title": "喷涂与装配",
+          "desc": "在家电、机械等行业实现自动喷涂与装配作业。"
+        }
+      },
+      "scenes": ["汽车制造", "家电装配", "机械加工"],
+      "params": {
+        "armReach": {
+          "key": "臂展",
+          "value": "540.5mm"
+        },
+        "repeatPositioningAccuracy": {
+          "key": "重复定位精度",
+          "value": "±0.03mm"
+        },
+        "maxLoad": {
+          "key": "最大负载",
+          "value": "3kg"
+        },
+        "degreesOfFreedom": {
+          "key": "自由度",
+          "value": "6"
+        },
+        "maxSpeed": {
+          "key": "最大速度",
+          "value": "双臂单关节180°/s"
+        },
+        "workingRadius": {
+          "key": "工作半径",
+          "value": "540.5mm"
+        },
+        "driveMethod": {
+          "key": "驱动方式",
+          "value": "一体化机器人关节"
+        },
+        "controlSystem": {
+          "key": "控制系统",
+          "value": "专用六轴控制器"
+        },
+        "programmingMethod": {
+          "key": "编程方式",
+          "value": "示教编程+离线编程"
+        },
+        "communicationInterface": {
+          "key": "通信接口",
+          "value": "Ethernet"
+        },
+        "protectionLevel": {
+          "key": "防护等级",
+          "value": "IP54"
+        },
+        "workingTemperature": {
+          "key": "工作温度",
+          "value": "0-60℃"
+        },
+        "powerSpec": {
+          "key": "电源规格",
+          "value": "DC48V"
+        },
+        "installationMethod": {
+          "key": "安装方式",
+          "value": "地面安装/倒装/侧装"
+        }
+      },
+      "downloads": {
+        "productManual": {
+          "name": "产品手册.pdf",
+          "url": "/downloads/arm-6axis-manual.pdf"
+        }
       }
-    }
-  },
+    },
   "dualArmHumanoid": {
     "title": "双臂人型机器人",
     "desc": "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求，支持多模态感知与智能交互。",
@@ -670,8 +666,16 @@
     "scenes": ["精密装配", "教育与演示", "智能服务"],
     "params": {
       "armReach": {
-        "key": "臂展",
-        "value": "600~1200mm（单臂）"
+        "key": "单臂臂展",
+        "value": "840.5mm"
+      },
+      "verticalStroke": {
+        "key": "垂直行程",
+        "value": "800mm"
+      },
+      "verticalAxisMaxSpeed": {
+        "key": "垂直轴最大速度",
+        "value": "200mm/s"
       },
       "repeatPositioningAccuracy": {
         "key": "重复定位精度",
@@ -679,15 +683,51 @@
       },
       "maxLoad": {
         "key": "最大负载",
-        "value": "3kg（单臂）"
+        "value": "3kg"
       },
       "degreesOfFreedom": {
         "key": "自由度",
-        "value": "14轴（双臂）"
+        "value": "15（双臂）"
       },
-      "robotHeight": {
-        "key": "机器人高度",
-        "value": "1.6~1.8m（可调节）"
+      "maxSpeed": {
+        "key": "双臂单关节最大速度",
+        "value": "180°/s"
+      },
+      "workingRadius": {
+        "key": "工作半径",
+        "value": "540.5mm"
+      },
+      "driveMethod": {
+        "key": "驱动方式",
+        "value": "一体化机器人关节/伺服电机"
+      },
+      "programmingMethod": {
+        "key": "编程方式",
+        "value": "示教编程+离线编程"
+      },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet"
+      },
+      "protectionLevel": {
+        "key": "防护等级",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "0-60℃"
+      },
+      "chargingMethod": {
+        "key": "充电方式",
+        "value": "自动充电桩对接"
+      },
+      "movingSpeed": {
+        "key": "移动速度",
+        "value": "0.5m/s"
+      },
+      "batteryLife": {
+        "key": "续航时间",
+        "value": "6-8小时"
       },
       "baseType": {
         "key": "底座类型",
@@ -695,39 +735,19 @@
       },
       "visionSystem": {
         "key": "视觉系统",
-        "value": "双目立体视觉+深度相机"
+        "value": "深度相机"
       },
       "voiceInteraction": {
         "key": "语音交互",
         "value": "支持多语言语音识别与合成"
       },
-      "movingSpeed": {
-        "key": "移动速度",
-        "value": "0.5~1.2m/s（移动底座）"
-      },
-      "batteryLife": {
-        "key": "续航时间",
-        "value": "6~8小时"
-      },
-      "chargingMethod": {
-        "key": "充电方式",
-        "value": "自动充电桩对接"
-      },
-      "safetyFeatures": {
-        "key": "安全特性",
-        "value": "碰撞检测+力控制+急停"
-      },
-      "operatingSystem": {
-        "key": "操作系统",
-        "value": "ROS2 + Ubuntu"
-      },
       "devInterface": {
         "key": "开发接口",
-        "value": "Python SDK + C++ API"
+        "value": "ROS2、Python、C++"
       },
       "networkConnection": {
-        "key": "网络连接",
-        "value": "WiFi6 + 5G + 以太网"
+        "key": "连接方式",
+        "value": "WIFI、Ethernet"
       }
     },
     "downloads": {
@@ -741,7 +761,7 @@
     "title": "移动机器人",
     "desc": "自主导航、多传感器融合，适用于工厂、仓储等多场景智能物流，实现高效自动化搬运。",
     "features": [
-      "高精度激光SLAM导航，路径自主规划",
+      "激光SLAM+视觉融合导航，路径自主规划",
       "多传感器融合避障，安全可靠",
       "支持多种货物托盘与货架对接",
       "远程监控与智能调度平台",
@@ -764,37 +784,57 @@
         "key": "导航方式",
         "value": "激光SLAM+视觉融合"
       },
-      "maxLoad": {
-        "key": "最大负载",
-        "value": "500kg（可定制）"
+      "size": {
+        "key": "尺寸",
+        "value": "直径452mm，高240mm"
       },
-      "batteryLife": {
-        "key": "续航时间",
-        "value": "8~12小时"
+      "selfWeight": {
+        "key": "自重",
+        "value": "20kg"
+      },
+      "ratedLoad": {
+        "key": "额定载重",
+        "value": "30kg"
+      },
+      "maxLoad": {
+        "key": "最大载重",
+        "value": "70kg"
+      },
+      "staticBatteryLife": {
+        "key": "静止续航时间",
+        "value": "8小时"
+      },
+      "noLoadBatteryLife": {
+        "key": "空载续航时间",
+        "value": "7小时"
+      },
+      "fullLoadBatteryLife": {
+        "key": "满载续航时间",
+        "value": "5小时"
       },
       "maxSpeed": {
         "key": "最大速度",
-        "value": "1.5m/s"
+        "value": "1m/s"
       },
-      "positioningAccuracy": {
-        "key": "定位精度",
-        "value": "±0.05mm"
+      "rangingAccuracy": {
+        "key": "测距精度",
+        "value": "±2mm"
       },
-      "driveMethod": {
-        "key": "驱动方式",
-        "value": "伺服电机+同步带/滚珠丝杠"
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "0-40℃"
       },
-      "workingEnvironment": {
-        "key": "工作环境",
-        "value": "-10°C~50°C, 湿度≤85%"
+      "workingHumidity": {
+        "key": "工作湿度",
+        "value": "5%-85%"
       },
       "communicationInterface": {
         "key": "通信接口",
-        "value": "WiFi, 4G/5G, 以太网"
+        "value": "Ethernet、WIFI"
       },
       "protectionLevel": {
         "key": "安全防护",
-        "value": "IP54防护等级"
+        "value": "IP54"
       },
       "chargingMethod": {
         "key": "充电方式",
@@ -802,11 +842,15 @@
       },
       "climbingAbility": {
         "key": "爬坡能力",
-        "value": "≤5°斜坡"
+        "value": "<=3°"
       },
       "obstacleHeight": {
         "key": "越障高度",
-        "value": "≤15mm"
+        "value": "5mm"
+      },
+      "ditchDepth": {
+        "key": "越沟深度",
+        "value": "5mm"
       }
     },
     "downloads": {

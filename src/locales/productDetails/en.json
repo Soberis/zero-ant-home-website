@@ -418,59 +418,55 @@
     "params": {
       "effectiveStroke": {
         "key": "Effective Stroke",
-        "value": "X: 1~6m, Y: 0.5~2m (customizable)"
-      },
-      "positioningAccuracy": {
-        "key": "Positioning Accuracy",
-        "value": "±0.05mm"
-      },
-      "maxLoad": {
-        "key": "Maximum Load",
-        "value": "50kg"
-      },
-      "driveMethod": {
-        "key": "Drive Method",
-        "value": "Servo motor + timing belt/ball screw"
-      },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "X-axis: 3m/s, Y-axis: 2m/s"
+        "value": "X:385mm Y:495mm Z:215mm"
       },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
-        "value": "±0.02mm"
+        "value": "±0.1mm"
+      },
+      "maxLoad": {
+        "key": "Maximum Load",
+        "value": "5kg"
+      },
+      "driveMethod": {
+        "key": "Drive Method",
+        "value": "Servo motor + timing belt"
+      },
+      "guideRailType": {
+        "key": "Guide Rail Type",
+        "value": "Linear guide + timing belt"
+      },
+      "controlSystem": {
+        "key": "Control System",
+        "value": "PLC control"
+      },
+      "workingEnvironment": {
+        "key": "Working Environment",
+        "value": "Temperature: 0-50°C; Humidity: ≤75%"
+      },
+      "installationMethod": {
+        "key": "Installation Method",
+        "value": "Fixed installation"
+      },
+      "maxSpeed": {
+        "key": "Maximum Speed",
+        "value": "X:1m/s; Y:1m/s; Z:1m/s"
       },
       "structuralMaterial": {
         "key": "Structural Material",
         "value": "High-strength aluminum alloy profiles"
       },
-      "guideRailType": {
-        "key": "Guide Rail Type",
-        "value": "Linear guide + ball screw"
-      },
-      "controlSystem": {
-        "key": "Control System",
-        "value": "Servo driver + PLC control"
-      },
-      "safetyProtection": {
-        "key": "Safety Protection",
-        "value": "Light curtain protection + emergency stop button"
-      },
-      "workingEnvironment": {
-        "key": "Working Environment",
-        "value": "0°C~40°C, humidity ≤80%"
-      },
-      "powerRequirement": {
-        "key": "Power Requirement",
-        "value": "AC 380V/220V, 50/60Hz"
+      "devInterface": {
+        "key": "Development Interface",
+        "value": "C++"
       },
       "communicationInterface": {
         "key": "Communication Interface",
-        "value": "Ethernet, RS485, CAN"
+        "value": "Ethernet"
       },
-      "installationMethod": {
-        "key": "Installation Method",
-        "value": "Floor mounting/suspended installation"
+      "powerRequirement": {
+        "key": "Power Requirement",
+        "value": "AC 220V"
       }
     },
     "downloads": {
@@ -509,51 +505,47 @@
     "params": {
       "armReach": {
         "key": "Arm Reach",
-        "value": "400~800mm (optional)"
+        "value": "Large arm: 296mm, Small arm: 282mm"
       },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
-        "value": "±0.02mm"
+        "value": "±0.05mm"
       },
       "maxLoad": {
         "key": "Maximum Load",
-        "value": "5kg"
+        "value": "1kg"
+      },
+      "degreesOfFreedom": {
+        "key": "Degrees of Freedom",
+        "value": "4"
       },
       "maxSpeed": {
         "key": "Maximum Speed",
-        "value": "6000mm/s"
+        "value": "1000mm/s"
       },
       "workingRadius": {
         "key": "Working Radius",
-        "value": "400~800mm"
+        "value": "578mm"
       },
       "verticalStroke": {
         "key": "Vertical Stroke",
-        "value": "200mm"
-      },
-      "rotationAngle": {
-        "key": "Rotation Angle",
-        "value": "±180°"
-      },
-      "cycleTime": {
-        "key": "Cycle Time",
-        "value": "0.45 seconds (standard motion)"
+        "value": "800mm"
       },
       "driveMethod": {
         "key": "Drive Method",
-        "value": "AC servo motor"
-      },
-      "reducer": {
-        "key": "Reducer",
-        "value": "Harmonic reducer"
+        "value": "DC servo motor + harmonic reducer"
       },
       "controller": {
         "key": "Controller",
-        "value": "Dedicated SCARA controller"
+        "value": "Dedicated 4-axis controller"
       },
       "programmingMethod": {
         "key": "Programming Method",
         "value": "Teaching programming + offline programming"
+      },
+      "communicationInterface": {
+        "key": "Communication Interface",
+        "value": "Ethernet"
       },
       "protectionLevel": {
         "key": "Protection Level",
@@ -561,11 +553,19 @@
       },
       "workingTemperature": {
         "key": "Working Temperature",
-        "value": "0°C~45°C"
+        "value": "0°C~60°C"
       },
       "powerSpec": {
         "key": "Power Specification",
-        "value": "AC 220V, single phase"
+        "value": "DC48V"
+      },
+      "installationMethod": {
+        "key": "Installation Method",
+        "value": "Floor mounting/inverted mounting/side mounting"
+      },
+      "rotationAngle": {
+        "key": "Rotation Angle",
+        "value": "J1: ±90°, J2: ±165°, Gripper: ±360°"
       }
     },
     "downloads": {
@@ -604,7 +604,7 @@
     "params": {
       "armReach": {
         "key": "Arm Reach",
-        "value": "700~1800mm (optional)"
+        "value": "540.5mm"
       },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
@@ -612,27 +612,23 @@
       },
       "maxLoad": {
         "key": "Maximum Load",
-        "value": "10kg"
+        "value": "3kg"
       },
       "degreesOfFreedom": {
         "key": "Degrees of Freedom",
-        "value": "6-axis"
+        "value": "6"
       },
       "maxSpeed": {
         "key": "Maximum Speed",
-        "value": "180°/s (joint speed)"
+        "value": "180°/s (single joint)"
       },
       "workingRadius": {
         "key": "Working Radius",
-        "value": "700~1800mm"
-      },
-      "verticalStroke": {
-        "key": "Vertical Stroke",
-        "value": "1600mm"
+        "value": "540.5mm"
       },
       "driveMethod": {
         "key": "Drive Method",
-        "value": "AC servo motor + precision reducer"
+        "value": "Integrated robotic joint"
       },
       "controlSystem": {
         "key": "Control System",
@@ -640,11 +636,11 @@
       },
       "programmingMethod": {
         "key": "Programming Method",
-        "value": "Teaching + offline + graphical programming"
+        "value": "Teaching programming + offline programming"
       },
       "communicationInterface": {
         "key": "Communication Interface",
-        "value": "Ethernet, Modbus, Profinet"
+        "value": "Ethernet"
       },
       "protectionLevel": {
         "key": "Protection Level",
@@ -652,15 +648,15 @@
       },
       "workingTemperature": {
         "key": "Working Temperature",
-        "value": "0°C~45°C"
+        "value": "0°C~60°C"
       },
       "powerSpec": {
         "key": "Power Specification",
-        "value": "AC 380V, three phase"
+        "value": "DC48V"
       },
       "installationMethod": {
         "key": "Installation Method",
-        "value": "Floor/inverted/side mounting"
+        "value": "Floor mounting/inverted mounting/side mounting"
       }
     },
     "downloads": {
@@ -698,8 +694,16 @@
     ],
     "params": {
       "armReach": {
-        "key": "Arm Reach",
-        "value": "600~1200mm (single arm)"
+        "key": "Single Arm Reach",
+        "value": "840.5mm"
+      },
+      "verticalStroke": {
+        "key": "Vertical Stroke",
+        "value": "800mm"
+      },
+      "verticalAxisMaxSpeed": {
+        "key": "Vertical Axis Maximum Speed",
+        "value": "200mm/s"
       },
       "repeatPositioningAccuracy": {
         "key": "Repeat Positioning Accuracy",
@@ -707,15 +711,51 @@
       },
       "maxLoad": {
         "key": "Maximum Load",
-        "value": "3kg (single arm)"
+        "value": "3kg"
       },
       "degreesOfFreedom": {
         "key": "Degrees of Freedom",
-        "value": "14-axis (dual arms)"
+        "value": "15 (dual arms)"
       },
-      "robotHeight": {
-        "key": "Robot Height",
-        "value": "1.6~1.8m (adjustable)"
+      "maxSpeed": {
+        "key": "Maximum Speed of Single Joint",
+        "value": "180°/s"
+      },
+      "workingRadius": {
+        "key": "Working Radius",
+        "value": "540.5mm"
+      },
+      "driveMethod": {
+        "key": "Drive Method",
+        "value": "Integrated robotic joint/servo motor"
+      },
+      "programmingMethod": {
+        "key": "Programming Method",
+        "value": "Teaching programming + offline programming"
+      },
+      "communicationInterface": {
+        "key": "Communication Interface",
+        "value": "Ethernet"
+      },
+      "protectionLevel": {
+        "key": "Protection Level",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "Working Temperature",
+        "value": "0°C~60°C"
+      },
+      "chargingMethod": {
+        "key": "Charging Method",
+        "value": "Automatic charging station docking"
+      },
+      "movingSpeed": {
+        "key": "Moving Speed",
+        "value": "0.5m/s"
+      },
+      "batteryLife": {
+        "key": "Battery Life",
+        "value": "6-8 hours"
       },
       "baseType": {
         "key": "Base Type",
@@ -723,39 +763,19 @@
       },
       "visionSystem": {
         "key": "Vision System",
-        "value": "Binocular stereo vision + depth camera"
+        "value": "Depth camera"
       },
       "voiceInteraction": {
         "key": "Voice Interaction",
         "value": "Multi-language speech recognition and synthesis"
       },
-      "movingSpeed": {
-        "key": "Moving Speed",
-        "value": "0.5~1.2m/s (mobile base)"
-      },
-      "batteryLife": {
-        "key": "Battery Life",
-        "value": "6~8 hours"
-      },
-      "chargingMethod": {
-        "key": "Charging Method",
-        "value": "Automatic charging station docking"
-      },
-      "safetyFeatures": {
-        "key": "Safety Features",
-        "value": "Collision detection + force control + emergency stop"
-      },
-      "operatingSystem": {
-        "key": "Operating System",
-        "value": "ROS2 + Ubuntu"
-      },
       "devInterface": {
         "key": "Development Interface",
-        "value": "Python SDK + C++ API"
+        "value": "ROS2, Python, C++"
       },
       "networkConnection": {
         "key": "Network Connection",
-        "value": "WiFi6 + 5G + Ethernet"
+        "value": "WiFi, Ethernet"
       }
     },
     "downloads": {
@@ -796,37 +816,57 @@
         "key": "Navigation Method",
         "value": "Laser SLAM + vision fusion"
       },
+      "size": {
+        "key": "Size",
+        "value": "Diameter 452mm, Height 240mm"
+      },
+      "selfWeight": {
+        "key": "Self Weight",
+        "value": "20kg"
+      },
+      "ratedLoad": {
+        "key": "Rated Load",
+        "value": "30kg"
+      },
       "maxLoad": {
         "key": "Maximum Load",
-        "value": "500kg (customizable)"
+        "value": "70kg"
       },
-      "batteryLife": {
-        "key": "Battery Life",
-        "value": "8~12 hours"
+      "staticBatteryLife": {
+        "key": "Static Battery Life",
+        "value": "8 hours"
+      },
+      "noLoadBatteryLife": {
+        "key": "No-load Battery Life",
+        "value": "7 hours"
+      },
+      "fullLoadBatteryLife": {
+        "key": "Full-load Battery Life",
+        "value": "5 hours"
       },
       "maxSpeed": {
         "key": "Maximum Speed",
-        "value": "1.5m/s"
+        "value": "1m/s"
       },
-      "positioningAccuracy": {
-        "key": "Positioning Accuracy",
-        "value": "±0.05mm"
+      "rangingAccuracy": {
+        "key": "Ranging Accuracy",
+        "value": "±2mm"
       },
-      "driveMethod": {
-        "key": "Drive Method",
-        "value": "Servo motor + timing belt/ball screw"
+      "workingTemperature": {
+        "key": "Working Temperature",
+        "value": "0°C~40°C"
       },
-      "workingEnvironment": {
-        "key": "Working Environment",
-        "value": "-10°C~50°C, humidity ≤85%"
+      "workingHumidity": {
+        "key": "Working Humidity",
+        "value": "5%~85%"
       },
       "communicationInterface": {
         "key": "Communication Interface",
-        "value": "WiFi, 4G/5G, Ethernet"
+        "value": "Ethernet, WiFi"
       },
       "protectionLevel": {
         "key": "Protection Level",
-        "value": "IP54 protection rating"
+        "value": "IP54"
       },
       "chargingMethod": {
         "key": "Charging Method",
@@ -834,11 +874,15 @@
       },
       "climbingAbility": {
         "key": "Climbing Ability",
-        "value": "≤5° slope"
+        "value": "≤3°"
       },
       "obstacleHeight": {
         "key": "Obstacle Height",
-        "value": "≤15mm"
+        "value": "5mm"
+      },
+      "ditchDepth": {
+        "key": "Ditch Depth",
+        "value": "5mm"
       }
     },
     "downloads": {
