@@ -5,7 +5,10 @@
       <div class="container">
         <h1 class="product-title">{{ localizedProduct.title }}</h1>
 
-        <p class="product-desc" v-html="localizedProduct.desc.replace(/\n/g, '<br>')"></p>
+        <p
+          class="product-desc"
+          v-html="localizedProduct.desc.replace(/\n/g, '<br>')"
+        ></p>
       </div>
     </div>
     <!-- 主要内容区域 -->
@@ -16,7 +19,7 @@
           v-if="productFeatures && productFeatures.length"
           class="section features-section"
         >
-          <h2 class="section-title">{{ t('productDetail.features') }}</h2>
+          <h2 class="section-title">{{ t("productDetail.features") }}</h2>
 
           <div class="features-grid">
             <div
@@ -48,7 +51,7 @@
           v-if="props.showApplications && relatedApplications.length > 0"
           class="section scenes-section"
         >
-          <h2 class="section-title">{{ t('productDetail.applications') }}</h2>
+          <h2 class="section-title">{{ t("productDetail.applications") }}</h2>
 
           <div class="application-grid">
             <ApplicationCard
@@ -65,7 +68,7 @@
           v-if="props.showVideos && relatedVideos.length > 0"
           class="section cases-section"
         >
-          <h2 class="section-title">{{ t('productDetail.videoCases') }}</h2>
+          <h2 class="section-title">{{ t("productDetail.videoCases") }}</h2>
 
           <div class="videos-grid">
             <VideoCard
@@ -81,48 +84,81 @@
           </div>
         </section>
         <!-- 产品参数 -->
-        <section v-if="localizedProduct.params && localizedProduct.params.length" class="section">
-          <h2 class="section-title">{{ t('productDetail.parameters') }}</h2>
+        <section
+          v-if="localizedProduct.params && localizedProduct.params.length"
+          class="section"
+        >
+          <h2 class="section-title">{{ t("productDetail.parameters") }}</h2>
 
           <div class="params-container">
             <div class="params-grid">
               <div
-              v-for="(param, idx) in localizedProduct.params"
-              :key="idx"
-              class="param-item"
-            >
-              <div class="param-key">{{ typeof param === 'string' ? param : param.key }}</div>
+                v-for="(param, idx) in localizedProduct.params"
+                :key="idx"
+                class="param-item"
+              >
+                <div class="param-key">
+                  {{ typeof param === "string" ? param : param.key }}
+                </div>
 
-              <div class="param-value">{{ typeof param === 'string' ? '' : param.value }}</div>
-            </div>
+                <div class="param-value">
+                  {{ typeof param === "string" ? "" : param.value }}
+                </div>
+              </div>
             </div>
           </div>
         </section>
         <!-- 相关下载 -->
         <section class="section downloads-section">
-          <h2 class="section-title">{{ t('productDetail.downloads') }}</h2>
+          <h2 class="section-title">{{ t("productDetail.downloads") }}</h2>
 
-          <div v-if="localizedProduct.downloads && Object.keys(localizedProduct.downloads).length > 0" class="downloads-grid">
+          <div
+            v-if="
+              localizedProduct.downloads &&
+              Object.keys(localizedProduct.downloads).length > 0
+            "
+            class="downloads-grid"
+          >
             <a
               v-for="(item, key) in localizedProduct.downloads"
               :key="key"
               class="download-card"
-              :href="(typeof item === 'string' && item) || (item && item.url) ? (typeof item === 'string' ? item : item.url) : undefined"
-              :download="(typeof item === 'string' && item) || (item && item.url) ? (typeof item === 'string' ? '' : item.name) : undefined"
+              :href="
+                (typeof item === 'string' && item) || (item && item.url)
+                  ? typeof item === 'string'
+                    ? item
+                    : item.url
+                  : undefined
+              "
+              :download="
+                (typeof item === 'string' && item) || (item && item.url)
+                  ? typeof item === 'string'
+                    ? ''
+                    : item.name
+                  : undefined
+              "
             >
               <div class="download-icon">📄</div>
               <div class="download-name">
-                {{ (typeof item === 'string' && item) ? item : (item && item.name ? item.name : '文档') }}
+                {{
+                  typeof item === "string" && item
+                    ? item
+                    : item && item.name
+                    ? item.name
+                    : "文档"
+                }}
               </div>
               <div class="download-action">
-                {{ t('supportPage.downloads.downloadNow') }}
+                {{ t("supportPage.downloads.downloadNow") }}
               </div>
             </a>
           </div>
-          
+
           <div v-else class="no-downloads-placeholder">
             <div class="placeholder-icon">📋</div>
-            <p class="placeholder-text">{{ t('productDetail.preparingMessage') }}</p>
+            <p class="placeholder-text">
+              {{ t("productDetail.preparingMessage") }}
+            </p>
           </div>
         </section>
       </div>
@@ -132,7 +168,7 @@
       <div class="container">
         <button class="back-btn" @click="emits('back')">
           <span class="back-icon">←</span>
-          <span class="back-text">{{ t('productDetail.backToList') }}</span>
+          <span class="back-text">{{ t("productDetail.backToList") }}</span>
         </button>
       </div>
     </div>
@@ -161,44 +197,51 @@ type FeatureItem = string | { title?: string; desc?: string };
 const { t } = useI18n();
 
 // 计算属性：根据productSlug获取国际化的产品数据
- const localizedProduct = computed(() => {
-   const detailKey = `productDetails.${props.productSlug}`;
-   const productKey = `products.${props.productSlug}`;
-   
-   // 尝试从productDetail.productDetails获取详细信息，如果没有则使用原始数据
-   // 检查是否存在详细翻译
-    let hasDetailTranslation = false;
+const localizedProduct = computed(() => {
+  const detailKey = `productDetails.${props.productSlug}`;
+  const productKey = `products.${props.productSlug}`;
+
+  // 尝试从productDetail.productDetails获取详细信息，如果没有则使用原始数据
+  // 检查是否存在详细翻译
+  let hasDetailTranslation = false;
+  try {
+    const translatedTitle = t(`${detailKey}.title`);
+    hasDetailTranslation = translatedTitle !== `${detailKey}.title`;
+  } catch {
+    hasDetailTranslation = false;
+  }
+
+  // 获取翻译数据的辅助函数
+  const getTranslatedData = (key: string, fallback: any) => {
+    if (!hasDetailTranslation) return fallback;
     try {
-      const translatedTitle = t(`${detailKey}.title`);
-      hasDetailTranslation = translatedTitle !== `${detailKey}.title`;
+      const translated = t(`${detailKey}.${key}`);
+      // 如果翻译结果是字符串且等于键名，说明没有找到翻译，使用fallback
+      if (
+        typeof translated === "string" &&
+        translated === `${detailKey}.${key}`
+      ) {
+        return fallback;
+      }
+      return translated;
     } catch {
-      hasDetailTranslation = false;
+      return fallback;
     }
-   
-   // 获取翻译数据的辅助函数
-   const getTranslatedData = (key: string, fallback: any) => {
-     if (!hasDetailTranslation) return fallback;
-     try {
-       const translated = t(`${detailKey}.${key}`);
-       // 如果翻译结果是字符串且等于键名，说明没有找到翻译，使用fallback
-       if (typeof translated === 'string' && translated === `${detailKey}.${key}`) {
-         return fallback;
-       }
-       return translated;
-     } catch {
-       return fallback;
-     }
-   };
-   
-   return {
-     title: hasDetailTranslation ? t(`${detailKey}.title`) : t(`${productKey}.name`, props.product.title),
-     desc: hasDetailTranslation ? t(`${detailKey}.desc`) : t(`${productKey}.desc`, props.product.desc),
-     features: getTranslatedData('features', props.product.features),
-     cases: getTranslatedData('cases', props.product.cases),
-     params: getTranslatedData('params', props.product.params),
-     downloads: getTranslatedData('downloads', props.product.downloads)
-   };
- });
+  };
+
+  return {
+    title: hasDetailTranslation
+      ? t(`${detailKey}.title`)
+      : t(`${productKey}.name`, props.product.title),
+    desc: hasDetailTranslation
+      ? t(`${detailKey}.desc`)
+      : t(`${productKey}.desc`, props.product.desc),
+    features: getTranslatedData("features", props.product.features),
+    cases: getTranslatedData("cases", props.product.cases),
+    params: getTranslatedData("params", props.product.params),
+    downloads: getTranslatedData("downloads", props.product.downloads),
+  };
+});
 
 // 组件属性定义
 const props = withDefaults(
@@ -367,13 +410,13 @@ const productFeatures = computed((): FeatureItem[] => {
     if (Array.isArray(features) && features.length > 0) {
       return features as FeatureItem[];
     }
-    
+
     // 其次使用自定义特点
     const customFeatures = getCustomFeatures(props.productSlug);
     if (customFeatures && customFeatures.length > 0) {
       return customFeatures;
     }
-    
+
     // 最后使用原始数据
     return props.product.features || [];
   } catch (error) {
@@ -401,37 +444,15 @@ const handleVideoClick = (index: number) => {
 <style scoped>
 /* 全局样式 */
 .product-detail {
-    min-height: 100vh;
-    background: #f7f8fa;
-    color: #222;
-    scroll-behavior: smooth;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-      "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-      sans-serif;
-    line-height: 1.6;
-    font-size: 2rem;
-  }
-
-/* 页面进入动画 */
-.product-detail {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  min-height: 100vh;
+  background: #f7f8fa;
+  color: #222;
+  scroll-behavior: smooth;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  line-height: 1.6;
+  font-size: 2rem;
 }
 
 /* 产品头部 */
@@ -442,17 +463,6 @@ const handleVideoClick = (index: number) => {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid #e3f2fd;
-}
-
-.product-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(100,116,139,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-  opacity: 0.5;
 }
 
 .product-title {
@@ -488,35 +498,6 @@ const handleVideoClick = (index: number) => {
 
 .section {
   margin-bottom: 5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: sectionFadeIn 0.6s ease-out forwards;
-}
-
-.section:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.section:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.section:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.section:nth-child(4) {
-  animation-delay: 0.4s;
-}
-.section:nth-child(5) {
-  animation-delay: 0.5s;
-}
-.section:nth-child(6) {
-  animation-delay: 0.6s;
-}
-
-@keyframes sectionFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .section-title {
@@ -599,66 +580,12 @@ const handleVideoClick = (index: number) => {
   margin-top: 2rem;
 }
 
-.application-grid > * {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: cardFadeIn 0.5s ease-out forwards;
-}
-
-.application-grid > *:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.application-grid > *:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.application-grid > *:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.application-grid > *:nth-child(4) {
-  animation-delay: 0.4s;
-}
-.application-grid > *:nth-child(5) {
-  animation-delay: 0.5s;
-}
-.application-grid > *:nth-child(6) {
-  animation-delay: 0.6s;
-}
-.application-grid > *:nth-child(7) {
-  animation-delay: 0.7s;
-}
-.application-grid > *:nth-child(8) {
-  animation-delay: 0.8s;
-}
-
-@keyframes cardFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* 相关案例 - 视频网格 */
 .videos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
-}
-
-.videos-grid > * {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: cardFadeIn 0.5s ease-out forwards;
-}
-
-.videos-grid > *:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.videos-grid > *:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.videos-grid > *:nth-child(3) {
-  animation-delay: 0.3s;
 }
 
 /* 产品参数 */
@@ -684,15 +611,13 @@ const handleVideoClick = (index: number) => {
   background: #fafbfc;
   border: 1px solid #e8eef5;
   border-radius: 0.75rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   min-height: 60px;
 }
 
 .param-item:hover {
   background: #f0f7ff;
   border-color: #1976d2;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.1);
 }
 
 .param-key {
@@ -730,33 +655,15 @@ const handleVideoClick = (index: number) => {
   box-shadow: 0 6px 30px rgba(26, 58, 143, 0.12);
   border: 1px solid #e3f2fd;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   color: inherit;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.download-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(26, 58, 143, 0.03), transparent);
-  transition: left 0.6s ease;
-}
-
-.download-card:hover::before {
-  left: 100%;
 }
 
 .download-card:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-5px);
   box-shadow: 0 12px 40px rgba(26, 58, 143, 0.2);
   border-color: #1976d2;
-  background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
 }
 
 .download-icon {
@@ -929,7 +836,7 @@ const handleVideoClick = (index: number) => {
   .product-detail {
     font-size: 1.5rem;
   }
-  
+
   .container {
     padding: 0 1.5rem;
   }
@@ -939,39 +846,31 @@ const handleVideoClick = (index: number) => {
   }
 
   .product-title {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
 
   .product-desc {
     font-size: 1.1rem;
   }
 
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .application-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
+  .features-grid,
+  .application-grid,
   .videos-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  /* 产品参数响应式 */
   .param-item {
     padding: 1rem;
     min-height: 50px;
   }
 
-  .param-key {
+  .param-key,
+  .param-value {
     font-size: 0.9rem;
   }
 
   .param-value {
-    font-size: 0.9rem;
     max-width: 65%;
   }
 }
@@ -981,10 +880,10 @@ const handleVideoClick = (index: number) => {
     font-size: 2rem;
   }
   .product-title {
-    font-size: 5rem;
+    font-size: 4rem;
   }
   .product-desc {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   .section-title {
     font-size: 2.6rem;
@@ -1007,9 +906,9 @@ const handleVideoClick = (index: number) => {
   .product-detail {
     font-size: 1.25rem;
   }
-  
+
   .product-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .param-item {
@@ -1019,15 +918,14 @@ const handleVideoClick = (index: number) => {
     gap: 0.5rem;
   }
 
-  .param-key {
-    margin-right: 0;
+  .param-key,
+  .param-value {
     font-size: 0.85rem;
   }
 
   .param-value {
     text-align: left;
     max-width: 100%;
-    font-size: 0.85rem;
   }
 
   .feature-card {
