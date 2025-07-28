@@ -78,23 +78,23 @@ const slides = computed<SlideItem[]
 >(() => [
   {
     img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=Multi-OS',
-    title: t('productDetail.productDetails.multi-os-vm.title'),
-    desc: t('productDetail.productDetails.multi-os-vm.desc'),
+    title: t('products.multiOsVm.name'),
+    desc: t('products.multiOsVm.desc'),
   },
   {
     img: 'https://via.placeholder.com/1920x900/0066cc/ffffff?text=AiROS',
-    title: t('productDetail.productDetails.airos.title'),
-    desc: t('productDetail.productDetails.airos.desc'),
+    title: t('products.airos.name'),
+    desc: t('products.airos.desc'),
   },
   {
     img: 'https://via.placeholder.com/1920x900/00aa44/ffffff?text=4-Axis+Robot',
-    title: t('productDetail.productDetails.scara-4axis.title'),
-    desc: t('productDetail.productDetails.scara-4axis.desc'),
+    title: t('products.scara4axis.name'),
+    desc: t('products.scara4axis.desc'),
   },
   {
     img: 'https://via.placeholder.com/1920x900/aa4400/ffffff?text=Dual-Arm+Robot',
-    title: t('productDetail.productDetails.dual-arm-humanoid.title'),
-    desc: t('productDetail.productDetails.dual-arm-humanoid.desc'),
+    title: t('products.dualArmHumanoid.name'),
+    desc: t('products.dualArmHumanoid.desc'),
   },
 ]);
 const current = ref<number>(0);

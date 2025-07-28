@@ -23,6 +23,7 @@ const applications: Application[] = [
 <p>聚焦医院、实验室等医疗场景，基于AiROS机器人操作系统提供高效、安全的自动化物品传送与智能调度解决方案。通过18轴同时控制、0.02mm重复定位精度的高精度控制技术，实现样本、药品、医疗器械等的智能搬运与追溯。已服务华智生物、珀金埃尔默等知名客户，实现国外设备本土化替代，成本从30万降至14万，助力医疗机构提升诊疗效率、降低人工成本、保障医疗安全。</p>
 <p><strong>核心优势：</strong>连续工作9万小时无损坏、支持多楼层多科室智能调度、降低人工交叉感染风险</p>
 <p><strong>典型应用：</strong>智能检验科自动流水线、自动化药房、医疗物资配送、B超机器人检查</p>
+<p><strong>相关产品：</strong>Airos机器人操作系统</p>
     `,
     video: 'medical-automation',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>`,
@@ -34,6 +35,7 @@ const applications: Application[] = [
 <p>面向晶圆、芯片等高端制造领域，基于AiROS操作系统的实时性抖动≤10us技术，提供高精度、高可靠性的物品传送与智能调度系统。已出货200余台晶圆传送机器人，覆盖国内主要晶圆/芯片制造厂商，实现国产设备替代和智能制造升级。通过0.02mm重复定位精度和18轴同时控制能力，支持复杂工艺流程的自动化搬运、精准定位和数据追溯。</p>
 <p><strong>核心优势：</strong>连续工作9万小时无损坏、控制器成本降低50%、支持洁净室IP54防护等级</p>
 <p><strong>典型应用：</strong>晶圆厂FOUP搬运、芯片封装测试、洁净室物流、半导体设备上下料</p>
+<p><strong>相关产品：</strong>Airos机器人操作系统</p>
     `,
     video: 'semiconductor',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/><path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/><path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
@@ -111,6 +113,7 @@ const applications: Application[] = [
 <p>基于国产工业实时操作系统和EtherCAT总线技术，提供自主可控的高性能工业控制解决方案。通过毫秒级实时响应和18轴同时控制能力，实现多轴电机的精准同步控制和实时协调运动。支持实时性抖动≤10us，满足工业自动化的严苛要求，实现关键技术的国产化替代。</p>
 <p><strong>核心优势：</strong>毫秒级实时响应、18轴同时控制、自主可控、国产化替代</p>
 <p><strong>典型应用：</strong>多轴运动控制、伺服电机台站、工业自动化、精密加工、实时控制系统</p>
+<p><strong>相关产品：</strong>国产工业实时操作系统</p>
     `,
     video: 'rtos-ethercat-validation',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="16" width="32" height="16" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h16" stroke="#1a3a8f" stroke-width="2"/><circle cx="20" cy="24" r="2" fill="#1a3a8f"/><circle cx="28" cy="24" r="2" fill="#1a3a8f"/></svg>`,
@@ -136,6 +139,17 @@ const applications: Application[] = [
     `,
     video: 'radar-360-scanning',
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#1a3a8f" stroke-width="2"/><path d="M24 12v24" stroke="#1a3a8f" stroke-width="2"/><path d="M12 24h24" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="24" r="3" fill="#1a3a8f"/></svg>`,
+  },
+  {
+    slug: 'industrial-gateway',
+    title: '工业网关与边缘计算',
+    description: `
+<p>基于多OS混合部署嵌入式虚拟机技术，为工业网关和边缘计算设备提供高可靠、高安全的虚拟化解决方案。通过异构系统统一管理和资源高效隔离，在单一硬件平台上部署多套系统，降低硬件成本与维护难度。已成功应用于工业自动化、智能电网、智慧城市等领域。</p>
+<p><strong>核心优势：</strong>多操作系统并行运行、资源高效隔离、支持实时操作系统与通用操作系统混合部署、嵌入式虚拟化技术</p>
+<p><strong>典型应用：</strong>工业网关虚拟化、边缘计算设备、异构系统统一管理、智能电网、智慧城市</p>
+    `,
+    video: 'robotstudio-remote-control',
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="12" width="24" height="24" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 16v16" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h16" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="24" r="3" fill="#1a3a8f"/></svg>`,
   },
   {
     slug: 'composite-systems',

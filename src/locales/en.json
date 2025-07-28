@@ -449,19 +449,57 @@
   "products": {
     "multiOsVm": {
       "name": "Multi-OS Hybrid Deployment Embedded Hypervisor",
-      "desc": "Supports parallel operation of multiple operating systems, enhancing industrial equipment flexibility and resource utilization."
+      "desc": "Supports parallel operation of multiple operating systems, enhancing industrial equipment flexibility and resource utilization.",
+      "seriesTitle": "Multi-OS Hybrid Deployment Embedded Hypervisor",
+      "seriesSubtitle": "Heterogeneous System Integration Solution"
     },
     "airos": {
       "name": "AiROS Robot Operating System",
-      "desc": "Domestic 'out-of-the-box' intelligent robot operating system, creating the Android of robotics to bring robots into every industry."
+      "desc": "Domestic 'out-of-the-box' intelligent robot operating system, creating the Android of robotics to bring robots into every industry.",
+      "seriesTitle": "AiROS Robot Operating System",
+      "seriesSubtitle": "Operating System for Embodied Intelligence Era"
+    },
+    "industrialRtos": {
+      "name": "Industrial Real-Time OS",
+      "desc": "Domestic industrial-grade real-time operating system ensuring high-reliability operation of critical tasks.",
+      "seriesTitle": "Industrial Real-Time OS",
+      "seriesSubtitle": "High Reliability and Autonomous Control"
+    },
+    "robotScheduler": {
+      "name": "Robot Scheduler System",
+      "desc": "Supports unified scheduling and collaborative operation of multi-brand, multi-type mobile robots, enhancing factory automation levels.",
+      "seriesTitle": "Robot Scheduler System",
+      "seriesSubtitle": "Multi-Robot Coordination and Intelligent Scheduling"
+    },
+    "gantry2d": {
+      "name": "2D Gantry",
+      "desc": "High-precision, high-rigidity 2D gantry suitable for multi-scenario automated handling and positioning.",
+      "seriesTitle": "2D Gantry",
+      "seriesSubtitle": "Efficient Automated Handling Platform"
     },
     "scara4axis": {
       "name": "4-Axis SCARA Robot",
-      "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications."
+      "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications.",
+      "seriesTitle": "4-Axis SCARA Robot",
+      "seriesSubtitle": "Flexible and Efficient Industrial Assistant"
+    },
+    "arm6axis": {
+      "name": "6-Axis Arm",
+      "desc": "Capable of complex trajectory control, suitable for welding, spraying, assembly and other industrial scenarios.",
+      "seriesTitle": "6-Axis Arm",
+      "seriesSubtitle": "Multi-Scenario Intelligent Operations"
     },
     "dualArmHumanoid": {
       "name": "Dual-Arm Humanoid Robot",
-      "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements."
+      "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements.",
+      "seriesTitle": "Dual-Arm Humanoid Robot",
+      "seriesSubtitle": "High-Flexibility Collaboration Platform"
+    },
+    "mobileRobot": {
+      "name": "Mobile Robot",
+      "desc": "Autonomous navigation, multi-sensor fusion, suitable for factory, warehouse and other multi-scenario intelligent logistics.",
+      "seriesTitle": "Mobile Robot",
+      "seriesSubtitle": "Intelligent Logistics and Handling"
     }
   },
   "careers": {
@@ -580,25 +618,7 @@
     "downloads": "Related Downloads",
     "backToList": "Back to Product List",
     "preparingMessage": "Engineers are carefully preparing, please stay tuned",
-    "notFound": "Product not found",
-    "productDetails": {
-      "multi-os-vm": {
-        "title": "Multi-OS Hybrid Deployment Embedded Hypervisor",
-        "desc": "Supports parallel operation of multiple operating systems, enhancing industrial equipment flexibility and resource utilization with unified heterogeneous system management."
-      },
-      "airos": {
-        "title": "AiROS Robot Operating System",
-        "desc": "Domestic 'out-of-the-box' intelligent robot operating system, creating the Android of robotics to bring robots into every industry."
-      },
-      "scara-4axis": {
-        "title": "4-Axis SCARA Robot",
-        "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications, with high-speed motion and precision positioning capabilities."
-      },
-      "dual-arm-humanoid": {
-        "title": "Dual-Arm Humanoid Robot",
-        "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements."
-      }
-    }
+    "notFound": "Product not found"
   },
   "applicationsPage": {
     "prev": "Previous",

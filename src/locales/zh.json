@@ -523,25 +523,7 @@
     "downloads": "相关下载",
     "backToList": "返回产品列表",
     "preparingMessage": "工程师正在精心准备中，敬请期待",
-    "notFound": "未找到该产品",
-    "productDetails": {
-      "multi-os-vm": {
-        "title": "多OS混合部署嵌入式虚拟机",
-        "desc": "支持多操作系统并行运行，提升工业设备灵活性与资源利用率，实现异构系统统一管理。"
-      },
-      "airos": {
-        "title": "AiROS机器人操作系统",
-        "desc": "国产『开箱即用』机器人智能操作系统，打造机器人界的Android系统，让机器人走进千行百业。"
-      },
-      "scara-4axis": {
-        "title": "四轴机械臂",
-        "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用，具备高速运动和精密定位能力。"
-      },
-      "dual-arm-humanoid": {
-        "title": "双臂人型机器人",
-        "desc": "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求，人形设计便于人机协作。"
-      }
-    }
+    "notFound": "未找到该产品"
   },
   "applicationsPage": {
     "prev": "上一个",
