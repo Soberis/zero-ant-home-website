@@ -380,7 +380,7 @@
       "typicalApplications": "Lab automation pipeline, automated pharmacy, medical supply distribution, ultrasound robots"
     },
     "semiconductor": {
-      "title": "Semiconductor Manufacturing",
+      "title": "Semiconductor Processing",
       "description": "High-precision wafer and chip handling systems using AiROS with ≤10us real-time jitter. Over 200 wafer transfer robots shipped to major domestic manufacturers. Features 0.02mm positioning accuracy and 18-axis control for complex process flows.",
       "coreAdvantages": "90,000-hour operation, 50% cost reduction, cleanroom IP54 protection",
       "typicalApplications": "Wafer FOUP handling, chip packaging/testing, cleanroom logistics, equipment loading"
