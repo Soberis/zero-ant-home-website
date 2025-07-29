@@ -85,7 +85,7 @@
         "answer": "Yes. We support custom software and hardware development, including structure, functions, interfaces and other aspects. Please contact us to discuss specific requirements."
       }
     }
-  },    
+  },
   "hero": {
     "title": "Revolutionizing Pharmaceutical Automation",
     "description": "Our four-axis robotic arms are designed to enhance efficiency and precision in the medical field.",
@@ -294,6 +294,36 @@
         "Visual Recognition",
         "Motion Control",
         "Intelligent Grasping"
+      ]
+    },
+    "dual-robot-ball-catching": {
+      "title": "Dual Robot Ball Catching",
+      "desc": "Demonstrates ZeroAnt Technology's innovative dual-robot collaboration system in complex grasping tasks, achieving coordinated capture of high-speed moving objects through intelligent collaboration and visual recognition technology, showcasing multi-robot system coordination and intelligent decision-making capabilities.",
+      "tags": [
+        "Dual Robot Collaboration",
+        "Visual Recognition",
+        "Motion Control",
+        "Intelligent Grasping"
+      ]
+    },
+    "rice-molecular-experiment": {
+      "title": "Rice Molecular Repetition Experiment",
+      "desc": "Showcases ZeroAnt Technology's innovative application in agricultural research, achieving automated rice molecular experiments through high-precision robotics technology, including sample processing, data collection, and standardization of experimental workflows, significantly enhancing agricultural research efficiency and experimental accuracy.",
+      "tags": [
+        "Biological Experiment",
+        "Molecular Detection",
+        "Agricultural Automation",
+        "Research Application"
+      ]
+    },
+    "sketching-robot": {
+      "title": "Sketching Robot",
+      "desc": "Demonstrates ZeroAnt Technology's innovative sketching robot application, achieving autonomous sketching creation through advanced visual recognition technology and precision motion control. Combined with AI algorithms and robotic arm control, showcasing breakthrough applications of robotics in artistic creation.",
+      "tags": [
+        "Sketching Robot",
+        "Visual Recognition",
+        "Artistic Creation",
+        "Smart Manufacturing"
       ]
     },
     "robot-polishing-demo": {

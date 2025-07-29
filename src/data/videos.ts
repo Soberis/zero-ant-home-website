@@ -24,6 +24,9 @@ import ballCatchingDemoImg from "@/assets/images/videos/抛球抓球演示.png";
 import robotStudioRemoteControlImg from "@/assets/images/videos/上位机RobotStudioIDE远程控制及仿真.png";
 import labTubeLoadingImg from "@/assets/images/videos/生物实验室试管上料.png";
 import outdoorPatrolRobotImg from "@/assets/images/videos/室外移动巡检机器人.png";
+import dualRobotBallCatchingImg from "@/assets/images/videos/双机协作抓球.png";
+import riceMolecularExperimentImg from "@/assets/images/videos/水稻分子重复实验.png";
+import sketchingRobotImg from "@/assets/images/videos/素描机器人.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -121,6 +124,15 @@ export const videoMap: VideoMapData = {
     tags: ["机器人协作", "多机调度", "智能制造"],
     publishDate: "2024-04-15",
   },
+  "dual-robot-ball-catching": {
+    slug: "dual-robot-ball-catching",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1zK8QzNEtD/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.dual-robot-ball-catching.title",
+    desc: "videos.dual-robot-ball-catching.desc",
+    tags: ["双机协作", "视觉识别", "运动控制", "智能抓取"],
+    publishDate: "2024-12-25",
+  },
   "polishing-robot": {
     slug: "polishing-robot",
     type: "bilibili",
@@ -178,6 +190,15 @@ export const videoMap: VideoMapData = {
     tags: ["UR机器人", "大语言模型", "动作抓取", "智能制造"],
     publishDate: "2024-05-01",
   },
+  "rice-molecular-experiment": {
+    slug: "rice-molecular-experiment",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1Bu8QzAEHq/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.rice-molecular-experiment.title",
+    desc: "videos.rice-molecular-experiment.desc",
+    tags: ["生物实验", "分子检测", "农业自动化", "科研应用"],
+    publishDate: "2024-12-25",
+  },
   "four-axis-robot-open-fridge": {
     slug: "four-axis-robot-open-fridge",
     type: "bilibili",
@@ -186,6 +207,15 @@ export const videoMap: VideoMapData = {
     desc: "videos.four-axis-robot-open-fridge.desc",
     tags: ["四轴机器人", "自动化", "智能制造", "运动控制"],
     publishDate: "2024-05-01",
+  },
+  "sketching-robot": {
+    slug: "sketching-robot",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1Zu8QzAE6g/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.sketching-robot.title",
+    desc: "videos.sketching-robot.desc",
+    tags: ["素描机器人", "视觉识别", "艺术创作", "智能制造"],
+    publishDate: "2024-12-25",
   },
   "servo-motor-station": {
     slug: "servo-motor-station",
@@ -335,9 +365,19 @@ export const videoCards: VideoCard[] = [
     slug: "dual-robot-collaboration",
   },
   {
+    title: "双机协作抓球",
+    img: dualRobotBallCatchingImg,
+    slug: "dual-robot-ball-catching",
+  },
+  {
     title: "UR机器人大语言模型动作抓取",
     img: urRobotLLMImg,
     slug: "ur-robot-llm-motion-capture",
+  },
+  {
+    title: "水稻分子重复实验",
+    img: riceMolecularExperimentImg,
+    slug: "rice-molecular-experiment",
   },
   {
     title: "复合机器人应用",
@@ -355,10 +395,11 @@ export const videoCards: VideoCard[] = [
     img: personalizedPrescriptionImg,
     slug: "personalized-prescription-pharmaceutical",
   },
-  { 
-    title: "B超机器人", 
-    img: ultrasoundImg, 
-    slug: "ultrasound-medical-robot" },
+  {
+    title: "B超机器人",
+    img: ultrasoundImg,
+    slug: "ultrasound-medical-robot",
+  },
   {
     title: "移动传送机器人",
     img: mobileTransferRobotImg,
@@ -379,6 +420,11 @@ export const videoCards: VideoCard[] = [
     title: "四轴机器人开冰箱",
     img: fourAxisRobotFridgeImg,
     slug: "four-axis-robot-open-fridge",
+  },
+  {
+    title: "素描机器人",
+    img: sketchingRobotImg,
+    slug: "sketching-robot",
   },
   {
     title: "机械臂高速高精度演示",
@@ -416,10 +462,11 @@ export const videoCards: VideoCard[] = [
     img: radar360Img,
     slug: "radar-360-scanning",
   },
-  { 
-    title: "AGV产品介绍", 
-    img: agvImg, 
-    slug: "agv-product-introduction" },
+  {
+    title: "AGV产品介绍",
+    img: agvImg,
+    slug: "agv-product-introduction",
+  },
   {
     title: "伺服电机台站",
     img: servoMotorStationImg,
