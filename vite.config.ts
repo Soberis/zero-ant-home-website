@@ -49,11 +49,13 @@ export default defineConfig({
   },
   build: {
     // 启用源码映射（可选，生产环境可关闭）
-    sourcemap: false,
+    sourcemap: true, // 启用源码映射以方便调试
     // 设置构建目标
     target: "es2020",
-    // 启用压缩
-    minify: "terser",
+    // 禁用压缩以便调试
+    minify: false,
+    // 注释掉 terser 选项以完全禁用压缩
+    /*
     terserOptions: {
       compress: {
         drop_console: true, // 移除console.log
@@ -64,6 +66,7 @@ export default defineConfig({
         safari10: true, // 解决Safari 10的兼容性问题
       },
     },
+    */
     rollupOptions: {
       output: {
         // 优化代码分割策略
