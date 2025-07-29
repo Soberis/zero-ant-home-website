@@ -11,7 +11,13 @@
 
       <div
         class="slide-bg"
-        :style="{ backgroundImage: `url(${slide.img})` }"
+        :style="{ 
+          backgroundImage: `url(${slide.img})`,
+          backgroundSize: slide.bgSize || 'contain'
+        }"
+        :aria-label="slide.title"
+        role="img"
+        @click="navigateToProduct(slide)"
       ></div>
 
       <div class="slide-content">
@@ -60,41 +66,57 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed,onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
+import multiOsImg from '@/assets/images/products/多OS混合部署嵌入式虚拟机.png';
+import airosImg from '@/assets/images/products/AiROS机器人操作系统.png';
+import scara4axisImg from '@/assets/images/products/四轴机器人.png';
+import dualArmImg from '@/assets/images/products/双臂人形机器人.png';
 
-// 获取国际化函数
+// 获取国际化函数和路由
 const { t } = useI18n();
+const router = useRouter();
 
 // 轮播图数据类型定义
 interface SlideItem {
   img: string;
   title: string;
   desc: string;
+  bgSize?: 'cover' | 'contain' | '100% auto' | 'auto 100%';
+  routePath: string;
 }
 
 // 轮播图数据（使用翻译函数）
 const slides = computed<SlideItem[]
 >(() => [
   {
-    img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=Multi-OS',
+    img: multiOsImg,
     title: t('products.multiOsVm.name'),
     desc: t('products.multiOsVm.desc'),
+    bgSize: '100% auto',
+    routePath: '/system-products/multi-os-vm',
   },
   {
-    img: 'https://via.placeholder.com/1920x900/0066cc/ffffff?text=AiROS',
+    img: airosImg,
     title: t('products.airos.name'),
     desc: t('products.airos.desc'),
+    bgSize: 'contain',
+    routePath: '/system-products/airos',
   },
   {
-    img: 'https://via.placeholder.com/1920x900/00aa44/ffffff?text=4-Axis+Robot',
+    img: scara4axisImg,
     title: t('products.scara4axis.name'),
     desc: t('products.scara4axis.desc'),
+    bgSize: 'contain',
+    routePath: '/robot-products/scara-4axis',
   },
   {
-    img: 'https://via.placeholder.com/1920x900/aa4400/ffffff?text=Dual-Arm+Robot',
+    img: dualArmImg,
     title: t('products.dualArmHumanoid.name'),
     desc: t('products.dualArmHumanoid.desc'),
+    bgSize: 'contain',
+    routePath: '/robot-products/dual-arm-humanoid',
   },
 ]);
 const current = ref<number>(0);
@@ -122,11 +144,35 @@ function resetTimer(): void {
   timer = setInterval(next, 4000);
 }
 
+/**
+ * 跳转到产品详情页
+ */
+function navigateToProduct(slide: SlideItem): void {
+  router.push(slide.routePath);
+}
+
 onMounted(() => {
   resetTimer();
-});
-onUnmounted(() => {
-  if (timer) clearInterval(timer);
+  
+  // 预加载下一张图片
+  const preloadNextImage = () => {
+    const nextIndex = (current.value + 1) % slides.value.length;
+    const img = new Image();
+    img.src = slides.value[nextIndex].img;
+  };
+  
+  // 初始预加载
+  preloadNextImage();
+  
+  // 监听轮播变化预加载下一张
+  const stopWatch = watch(current, () => {
+    preloadNextImage();
+  });
+  
+  onUnmounted(() => {
+    stopWatch();
+    if (timer) clearInterval(timer);
+  });
 });
 </script>
 
@@ -172,10 +218,38 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f8f9fa;
   z-index: 1;
   transition: opacity 0.8s;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.slide-bg:hover {
+  opacity: 0.95;
+}
+
+@media (min-width: 1920px) {
+  .slide-bg {
+    background-position: center center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .carousel-slide:nth-child(1) .slide-bg {
+    background-size: 100% auto;
+    background-position: center 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .carousel-slide:nth-child(1) .slide-bg {
+    background-size: 100% auto;
+    background-position: center 25%;
+  }
 }
 .slide-content {
   position: absolute;
