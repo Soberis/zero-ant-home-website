@@ -3,7 +3,13 @@ import type { Product } from '@/helpers/product';
 // 产品图片资源导入
 import scara4axisImg from '@/assets/images/products/四轴机器人.png';
 import dualArmHumanoidImg from '@/assets/images/products/双臂人形机器人.png';
-import multiOsVmImg from '@/assets/images/products/多OS混合部署嵌入式虚拟机2.png';
+import multiOsVmImg from '@/assets/images/products/多OS混合部署嵌入式虚拟机.png';
+import industrialRtosImg from '@/assets/images/products/国产工业实时操作系统.jpg';
+import airosImg from '@/assets/images/products/AiROS机器人操作系统.png';
+import robotSchedulerImg from '@/assets/images/products/移动机器人调度系统.png';
+import gantry2dImg from '@/assets/images/products/二或三自由度龙门架.png';
+import arm6axisImg from '@/assets/images/products/六轴机器人.png';
+import mobileRobotImg from '@/assets/images/products/移动机器人.png';
 
 /**
  * 扩展产品接口，添加产品特有字段
@@ -33,7 +39,7 @@ export const products: ProductData[] = [
   {
     slug: 'industrial-rtos',
     name: 'products.industrialRtos.name',
-    image: '',
+    image: industrialRtosImg,
     desc: 'products.industrialRtos.desc',
     seriesTitle: 'products.industrialRtos.seriesTitle',
     seriesSubtitle: 'products.industrialRtos.seriesSubtitle',
@@ -42,7 +48,7 @@ export const products: ProductData[] = [
   {
     slug: 'airos',
     name: 'products.airos.name',
-    image: '',
+    image: airosImg,
     desc: 'products.airos.desc',
     seriesTitle: 'products.airos.seriesTitle',
     seriesSubtitle: 'products.airos.seriesSubtitle',
@@ -51,7 +57,7 @@ export const products: ProductData[] = [
   {
     slug: 'robot-scheduler',
     name: 'products.robotScheduler.name',
-    image: '',
+    image: robotSchedulerImg,
     desc: 'products.robotScheduler.desc',
     seriesTitle: 'products.robotScheduler.seriesTitle',
     seriesSubtitle: 'products.robotScheduler.seriesSubtitle',
@@ -61,7 +67,7 @@ export const products: ProductData[] = [
   {
     slug: 'gantry-2d',
     name: 'products.gantry2d.name',
-    image: '',
+    image: gantry2dImg,
     desc: 'products.gantry2d.desc',
     seriesTitle: 'products.gantry2d.seriesTitle',
     seriesSubtitle: 'products.gantry2d.seriesSubtitle',
@@ -79,7 +85,7 @@ export const products: ProductData[] = [
   {
     slug: 'arm-6axis',
     name: 'products.arm6axis.name',
-    image: '',
+    image: arm6axisImg,
     desc: 'products.arm6axis.desc',
     seriesTitle: 'products.arm6axis.seriesTitle',
     seriesSubtitle: 'products.arm6axis.seriesSubtitle',
@@ -97,7 +103,7 @@ export const products: ProductData[] = [
   {
     slug: 'mobile-robot',
     name: 'products.mobileRobot.name',
-    image: '',
+    image: mobileRobotImg,
     desc: 'products.mobileRobot.desc',
     seriesTitle: 'products.mobileRobot.seriesTitle',
     seriesSubtitle: 'products.mobileRobot.seriesSubtitle',

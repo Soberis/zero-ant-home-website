@@ -11,7 +11,7 @@
     "airos": "AiROS机器人操作系统",
     "robotScheduler": "移动机器人调度系统",
     "robotProducts": "机器人产品",
-    "gantry2D": "二自由度龙门架",
+    "gantry2D": "二/三自由度龙门架",
     "scara4Axis": "四轴机械臂",
     "arm6Axis": "六轴机械臂",
     "dualArmHumanoid": "双臂人型机器人",
@@ -524,9 +524,9 @@
       "seriesSubtitle": "多机协同与智能调度"
     },
     "gantry2d": {
-      "name": "二自由度龙门架",
-      "desc": "高精度、高刚性的二自由度龙门架，适用于多场景自动化搬运与定位。",
-      "seriesTitle": "二自由度龙门架",
+      "name": "二/三自由度龙门架",
+      "desc": "高精度、高刚性的二/三自由度龙门架，适用于多场景自动化搬运与定位。",
+      "seriesTitle": "二/三自由度龙门架",
       "seriesSubtitle": "高效自动化搬运平台"
     },
     "scara4axis": {

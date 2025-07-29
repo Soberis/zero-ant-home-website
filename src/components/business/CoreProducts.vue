@@ -568,7 +568,7 @@ const RobotSchedulerIcon = () =>
     ]
   );
 
-// 二自由度龙门架图标 - 专业工业设计
+// 二/三自由度龙门架图标 - 专业工业设计
 const Gantry2dIcon = () =>
   h(
     'svg',

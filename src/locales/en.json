@@ -11,7 +11,7 @@
     "airos": "AiROS Robot OS",
     "robotScheduler": "Robot Scheduler System",
     "robotProducts": "Robot",
-    "gantry2D": "2D Gantry",
+    "gantry2D": "2/3-DOF Gantry",
     "scara4Axis": "SCARA 4-Axis Arm",
     "arm6Axis": "6-Axis Arm",
     "dualArmHumanoid": "Dual-Arm Humanoid Robot",
@@ -520,9 +520,9 @@
       "seriesSubtitle": "Multi-Robot Coordination and Intelligent Scheduling"
     },
     "gantry2d": {
-      "name": "2D Gantry",
-      "desc": "High-precision, high-rigidity 2D gantry suitable for multi-scenario automated handling and positioning.",
-      "seriesTitle": "2D Gantry",
+      "name": "2/3-DOF Gantry",
+      "desc": "High-precision, high-rigidity 2/3-DOF gantry suitable for multi-scenario automated handling and positioning.",
+      "seriesTitle": "2/3-DOF Gantry",
       "seriesSubtitle": "Efficient Automated Handling Platform"
     },
     "scara4axis": {

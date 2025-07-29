@@ -77,7 +77,7 @@
   },
   "industrialRtos": {
     "title": "Domestic Industrial Real-Time OS",
-    "desc": "Autonomous and controllable industrial-grade real-time operating system, ensuring high-reliability operation of critical tasks, suitable for industrial automation, robotics and other high real-time scenarios.",
+    "desc": "Real-Time Operating System Kernel: Optimizing embedded system real-time performance, developing lightweight secure container isolation technology, enhancing kernel preemption capability and multi-core scheduling, while supporting domestic CPUs and intelligent algorithm frameworks.<br>Motion Control Algorithms & Runtime Environment: Breakthrough in high-precision compliant control, intelligent motion planning (obstacle avoidance/energy optimization), and modular open runtime environment, ensuring high real-time performance and reliability in complex scenarios.<br>Componentized Function Libraries & Development Environment: Building standardized industrial model libraries (basic control, intelligent algorithms), visual programming tools, and unified interface protocols, supporting modular development and multi-language integration to enhance industrial application development efficiency.",
     "features": [
       "Millisecond real-time response meeting industrial control requirements",
       "Autonomous and controllable, security auditable, compatible with domestic chips",
@@ -352,7 +352,7 @@
     "downloads": {}
   },
   "gantry2d": {
-    "title": "2-DOF Gantry",
+    "title": "2/3-DOF Gantry",
     "desc": "High-precision, high-rigidity 2-degree-of-freedom gantry suitable for multi-scenario automated handling and positioning, meeting industrial-grade efficient operation requirements.",
     "features": [
       "High-rigidity structural design with strong load capacity",
