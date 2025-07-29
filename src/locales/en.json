@@ -423,9 +423,9 @@
     },
     "ai-robotics": {
       "title": "AI Robotics",
-      "description": "Based on large language models and artificial intelligence technology, developing embodied intelligent robot solutions. Through UR robot large language model action grasping technology, it enables autonomous learning and intelligent decision-making capabilities of robots. Combined with 14-axis design of dual-arm humanoid robots and AiROS operating system, it provides highly intelligent human-robot collaboration solutions, promoting robots into various industries.",
-      "coreAdvantages": "Large language model driven, 14-axis dual-arm design, autonomous learning capability, human-robot collaboration",
-      "typicalApplications": "Intelligent grasping, education and research, service robots, human-robot collaboration, embodied intelligence"
+      "description": "Based on large language models and AI technology, developing embodied intelligent robot solutions. Through UR robot LLM motion capture technology, it enables natural language instruction understanding, autonomous path planning, and precise object recognition. Combined with 14-axis dual-arm humanoid robot design and AiROS operating system, it provides highly intelligent human-robot collaboration solutions, enabling zero-shot learning capabilities for complex tasks.",
+      "coreAdvantages": "LLM real-time understanding, autonomous path planning, 14-axis dual-arm coordination, zero-shot learning capability",
+      "typicalApplications": "Intelligent grasping and assembly, human-robot collaboration workstations, service robots, education and research platforms, embodied intelligence"
     },
     "industrial-control": {
       "title": "Industrial Control",
@@ -474,6 +474,18 @@
       "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
       "coreAdvantages": "Multi-functional integration, intelligent scheduling, flexible production, unified management of heterogeneous systems",
       "typicalApplications": "Composite robot applications, intelligent manufacturing, automated logistics, multi-task collaboration, flexible production lines"
+    },
+    "agricultural-research": {
+      "title": "AgriTech Automation",
+      "description": "For modern agricultural research needs, based on AiROS robot operating system and high-precision control technology, providing intelligent molecular experiment solutions for agricultural research institutes and seed companies. Through innovative applications like rice molecular repetition experiments, it enables full-process automation of crop gene research, quality testing, and seed screening. Combined with vision recognition and precision control technology, it supports high-throughput, high-precision experimental needs in agricultural research, promoting agricultural technology innovation.",
+      "coreAdvantages": "High-precision experimental operations, automated molecular detection, agricultural research-specific adaptation, high-throughput processing capability",
+      "typicalApplications": "Rice molecular experiments, seed quality testing, gene research automation, crop phenotype analysis, agricultural research laboratories"
+    },
+    "cultural-creative": {
+      "title": "Creative Manufacturing",
+      "description": "Based on high-precision robotic arms and vision recognition technology, providing intelligent art creation solutions for the cultural and creative industries. Through innovative applications like sketching robots, it enables digitalization, intelligence, and scaled production of artistic creation. Combined with AiROS robot operating system and precision control algorithms, it supports precise rendering of complex artistic patterns and personalized customization, promoting deep integration of traditional culture and modern technology, injecting new vitality into the cultural and creative industries.",
+      "coreAdvantages": "High-precision art creation, personalized customization capability, digital art production, cultural creativity integration",
+      "typicalApplications": "Intelligent sketching and painting, cultural product manufacturing, art reproduction, personalized gift customization, digital art creation"
     },
     "industrial-gateway": {
       "title": "Industrial Gateway & Edge Computing",
@@ -659,7 +671,9 @@
   "applicationsPage": {
     "prev": "Previous",
     "next": "Next",
-    "noVideo": "No Video Available"
+    "noVideo": "No video available",
+    "coreAdvantages": "Core Advantages",
+    "typicalApplications": "Typical Applications"
   },
   "contacts": {
     "phone": "Phone",
