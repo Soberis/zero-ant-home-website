@@ -517,8 +517,8 @@ const handleVideoClick = (index: number) => {
 
 .product-desc {
   font-size: 1.5rem;
-  text-align: left;
-  margin-bottom: 4rem;
+  text-align: center;
+  margin-bottom: 3rem;
   color: #666;
   margin-left: auto;
   margin-right: auto;
@@ -528,8 +528,7 @@ const handleVideoClick = (index: number) => {
   max-width: 900px;
   white-space: normal;
   padding: 0 2rem;
-  display: inline-block;
-  text-align: left;
+  display: block;
 }
 
 /* 主要内容区域 */
@@ -640,6 +639,8 @@ const handleVideoClick = (index: number) => {
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .params-grid {
