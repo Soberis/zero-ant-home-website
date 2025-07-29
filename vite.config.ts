@@ -12,7 +12,6 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 // https://vitejs.dev/config/
 export default defineConfig({
   // 设置基础路径为相对路径，确保服务器部署时资源能正确加载
-  base: "./",
   plugins: [
     vue(),
     // Element Plus 按需导入
