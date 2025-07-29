@@ -197,10 +197,27 @@ type FeatureItem = string | { title?: string; desc?: string };
 // 国际化
 const { t } = useI18n();
 
+// 将URL slug转换为国际化键名的映射函数
+function slugToI18nKey(slug: string): string {
+  const slugToKeyMap: Record<string, string> = {
+    'multi-os-vm': 'multiOsVm',
+    'industrial-rtos': 'industrialRtos',
+    'airos': 'airos',
+    'robot-scheduler': 'robotScheduler',
+    'gantry-2d': 'gantry2d',
+    'scara-4axis': 'scara4axis',
+    'arm-6axis': 'arm6axis',
+    'dual-arm-humanoid': 'dualArmHumanoid',
+    'mobile-robot': 'mobileRobot'
+  };
+  return slugToKeyMap[slug] || slug;
+}
+
 // 计算属性：根据productSlug获取国际化的产品数据
 const localizedProduct = computed(() => {
-  const detailKey = `productDetails.${props.productSlug}`;
-  const productKey = `products.${props.productSlug}`;
+  const i18nKey = slugToI18nKey(props.productSlug);
+  const detailKey = `productDetails.${i18nKey}`;
+  const productKey = `products.${i18nKey}`;
 
   // 尝试从productDetail.productDetails获取详细信息，如果没有则使用原始数据
   // 检查是否存在详细翻译
