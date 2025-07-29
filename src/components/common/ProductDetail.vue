@@ -477,6 +477,7 @@ const handleVideoClick = (index: number) => {
     sans-serif;
   line-height: 1.6;
   width: 100%;
+  text-align: center;
 }
 
 /* 产品头部 */
@@ -527,6 +528,8 @@ const handleVideoClick = (index: number) => {
   max-width: 900px;
   white-space: normal;
   padding: 0 2rem;
+  display: inline-block;
+  text-align: left;
 }
 
 /* 主要内容区域 */
