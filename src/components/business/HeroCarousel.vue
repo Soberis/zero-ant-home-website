@@ -6,24 +6,8 @@
       class="carousel-slide"
       :class="{ active: idx === current }"
     >
-      <div
-        class="slide-bg"
-        :style="{
-          backgroundImage: `url(${slide.img})`,
-          backgroundPosition: slide.bgPosition || 'center',
-          backgroundSize:
-            slide.customWidth && slide.customHeight
-              ? `${slide.customWidth} ${slide.customHeight}`
-              : slide.bgSize || 'contain',
-        }"
-        :aria-label="slide.title"
-        role="img"
-        @click="navigateToProduct(slide)"
-      ></div>
-
       <div class="slide-content">
         <h1 class="slide-title">{{ slide.title }}</h1>
-
         <p class="slide-desc">{{ slide.desc }}</p>
       </div>
     </div>
@@ -38,7 +22,6 @@
     </div>
     <!-- 顶部装饰弧线 -->
     <svg
-      v-if="slides[current]?.showArc"
       class="arc-bg"
       viewBox="0 0 1920 300"
       fill="none"
@@ -50,7 +33,6 @@
         stroke-width="2"
         fill="none"
       />
-
       <path
         d="M0 250 Q960 50 1920 250"
         stroke="#f3f4f6"
@@ -227,31 +209,7 @@ onMounted(() => {
   opacity: 1;
   z-index: 2;
 }
-.slide-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #f8f9fa;
-  z-index: 1;
-  transition: opacity 0.8s;
-  will-change: transform;
-  cursor: pointer;
-}
 
-.slide-bg:hover {
-  opacity: 0.95;
-}
-
-@media (min-width: 1920px) {
-  .slide-bg {
-    background-position: center center;
-  }
-}
 .slide-content {
   position: absolute;
   left: 80px;

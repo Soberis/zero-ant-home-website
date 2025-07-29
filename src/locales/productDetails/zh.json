@@ -47,13 +47,9 @@
         "key": "虚拟机数量",
         "value": "最多支持3个并行虚拟机"
       },
-      "supportedOS": {
-        "key": "支持操作系统",
-        "value": "openEulerEmbedded、Ubuntu、Zephyr、SylixOS、ArceOS"
-      },
-      "supportedKernels": {
-        "key": "支持内核",
-        "value": "openEuler、Ubuntu、Zephyr、SylixOS、ArceOS"
+      "supportedOSKernels": {
+        "key": "支持操作系统内核",
+        "value": "openEuler、 Ubuntu、 Zephyr、 Sylixos、 Arceos"
       },
       "supportedHardware": {
         "key": "适配硬件",

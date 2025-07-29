@@ -47,12 +47,8 @@
         "key": "VM Count",
         "value": "Up to 3 parallel VMs"
       },
-      "supportedOS": {
-        "key": "Supported OS",
-        "value": "openEulerEmbedded, Ubuntu, Zephyr, SylixOS, ArceOS"
-      },
-      "supportedKernels": {
-        "key": "Supported Kernels",
+      "supportedOSKernels": {
+        "key": "Supported OS & Kernels",
         "value": "openEuler, Ubuntu, Zephyr, SylixOS, ArceOS"
       },
       "supportedHardware": {
