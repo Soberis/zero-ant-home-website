@@ -87,7 +87,13 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to) {
+  scrollBehavior(to, from, savedPosition) {
+    // 如果浏览器返回/前进且有保存的位置，恢复该位置
+    if (savedPosition) {
+      return savedPosition;
+    }
+    
+    // 处理hash导航
     if (to.hash) {
       return {
         el: to.hash,
@@ -95,6 +101,19 @@ const router = createRouter({
         behavior: "smooth",
       };
     }
+    
+    // 保存当前滚动位置到历史状态
+    if (from && from.name) {
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          scrollTop: window.scrollY || document.documentElement.scrollTop
+        },
+        ''
+      );
+    }
+    
+    // 默认滚动到顶部
     return { top: 0 };
   },
 });

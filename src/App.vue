@@ -12,10 +12,66 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
 import NavBar from '@/components/layout/NavBar.vue';
 import Footer from '@/components/layout/Footer.vue';
 
+const router = useRouter();
 
+// 全局ESC键返回功能
+const handleEscKey = (event: KeyboardEvent) => {
+  // 只在按下ESC键时处理
+  if (event.key !== 'Escape') return;
+  
+  // 检查当前是否有活动的模态框、视频全屏或其他需要ESC的交互
+  const activeElements = [
+    '.mfp-wrap', // magnific-popup 弹窗
+    '.video-player:-webkit-full-screen',
+    '.video-player:fullscreen',
+    'iframe[src*="bilibili.com"]:-webkit-full-screen',
+    'iframe[src*="bilibili.com"]:fullscreen',
+    '.modal.show',
+    '.modal-backdrop.show'
+  ];
+  
+  // 如果检测到这些元素处于活动状态，不触发返回
+  for (const selector of activeElements) {
+    if (document.querySelector(selector)) {
+      return;
+    }
+  }
+  
+  // 检查是否有输入框获得焦点
+  const activeElement = document.activeElement;
+  if (activeElement && (
+    activeElement.tagName === 'INPUT' ||
+    activeElement.tagName === 'TEXTAREA' ||
+    activeElement.getAttribute('contenteditable') === 'true'
+  )) {
+    return;
+  }
+  
+  // 安全触发返回
+  event.preventDefault();
+  
+  // 如果有历史记录则返回，否则回到首页
+  if (window.history.length > 1) {
+    router.go(-1);
+  } else {
+    router.push('/');
+  }
+};
+
+onMounted(() => {
+  // 添加全局键盘监听
+  document.addEventListener('keydown', handleEscKey);
+});
+
+onUnmounted(() => {
+  // 移除全局键盘监听
+  document.removeEventListener('keydown', handleEscKey);
+});
 </script>
 
 <style scoped>

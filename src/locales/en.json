@@ -500,7 +500,7 @@
       "typicalApplications": "Intelligent sketching and painting, cultural product manufacturing, art reproduction, personalized gift customization, digital art creation"
     },
     "industrial-gateway": {
-      "title": "Industrial Gateway & Edge Computing",
+      "title": "Edge Computing",
       "description": "Based on multi-OS hybrid deployment embedded virtualization technology, provides highly reliable and secure virtualization solutions for industrial gateways and edge computing devices. Through heterogeneous system unified management and efficient resource isolation, multiple systems can be deployed on a single hardware platform, reducing hardware costs and maintenance complexity. Successfully applied in industrial automation, smart grids, smart cities and other fields.",
       "coreAdvantages": "Multi-operating system parallel operation, efficient resource isolation, support for hybrid deployment of real-time and general-purpose operating systems, embedded virtualization technology",
       "typicalApplications": "Industrial gateway virtualization, edge computing devices, heterogeneous system unified management, smart grids, smart cities"
@@ -695,8 +695,8 @@
   "footer": {
     "companyFullName": "Hangzhou ZeroAnt Technology Co., Ltd.",
     "address": "Room 1-501, Building 1, No. 998 Wenyi West Road, Yuhang District, Hangzhou, Zhejiang Province",
-    "wx": "WeChat Official Account",
-    "bilibili": "Bilibili Official Account",
+    "wx": "WeChat",
+    "bilibili": "Bilibili",
     "copyright": "All Rights Reserved",
     "telValue": "13001001954",
     "icpNumber": "ICP Record No.: Zhe ICP Bei 2022031941-4"
