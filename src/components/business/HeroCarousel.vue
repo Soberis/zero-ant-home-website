@@ -38,6 +38,7 @@
     </div>
     <!-- 顶部装饰弧线 -->
     <svg
+      v-if="slides[current]?.showArc"
       class="arc-bg"
       viewBox="0 0 1920 300"
       fill="none"
@@ -82,6 +83,7 @@ interface SlideItem {
   bgPosition?: string;
   customWidth?: string;
   customHeight?: string;
+  showArc?: boolean;
   routePath: string;
 }
 
@@ -95,6 +97,7 @@ const slides = computed<SlideItem[]>(() => [
     bgPosition: "center 20%",
     customWidth: "85%",
     customHeight: "auto",
+    showArc: false,
     routePath: "/system-products/multi-os-vm",
   },
   {
@@ -105,6 +108,7 @@ const slides = computed<SlideItem[]>(() => [
     bgPosition: "center center",
     customWidth: "75%",
     customHeight: "auto",
+    showArc: false,
     routePath: "/system-products/airos",
   },
   {
@@ -115,6 +119,7 @@ const slides = computed<SlideItem[]>(() => [
     bgPosition: "center center",
     customWidth: "",
     customHeight: "auto",
+    showArc: true,
     routePath: "/robot-products/scara-4axis",
   },
   {
@@ -125,6 +130,7 @@ const slides = computed<SlideItem[]>(() => [
     bgPosition: "center center",
     customWidth: "",
     customHeight: "auto",
+    showArc: true,
     routePath: "/robot-products/dual-arm-humanoid",
   },
 ]);
