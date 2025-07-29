@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { setupPageSEO, setupSupportSEO, setupAboutSEO, setupCareersSEO, setupSolutionsSEO } from "./seo";
 
 // 核心页面直接导入（首屏关键路径）
 import Home from "@/views/Home.vue";
@@ -118,28 +117,6 @@ const router = createRouter({
   },
 });
 
-// 路由守卫：自动设置 SEO 信息
-router.afterEach((to) => {
-  // 使用 nextTick 确保 DOM 已更新
-  setTimeout(() => {
-    // 根据路由名称设置特定页面的 SEO
-    switch (to.name) {
-      case "Support":
-        setupSupportSEO(to);
-        break;
-      case "About":
-        setupAboutSEO(to);
-        break;
-      case "Careers":
-        setupCareersSEO(to);
-        break;
-      case "Solutions":
-        setupSolutionsSEO(to);
-        break;
-      default:
-        setupPageSEO(to);
-    }
-  }, 0);
-});
+// 路由守卫将在main.ts中设置，避免循环依赖
 
 export default router;
