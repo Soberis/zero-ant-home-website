@@ -35,6 +35,9 @@
     "medicalAuto": "Medical Automation",
     "semiProcessing": "Semiconductor Processing"
   },
+  "common": {
+    "backToTop": "Back to Top"
+  },
   "home": {
     "coreProducts": {
       "title": "Core Products",

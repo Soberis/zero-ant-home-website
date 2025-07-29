@@ -1,12 +1,16 @@
 <template>
 
   <div id="app" class="page">
-     <!-- 导航栏 --> <NavBar /> <!-- 主体内容 -->
-    <main class="main-content"> <router-view /> </main>
-     <!-- 页脚 -->
-  <Footer />
-
-
+    <!-- 导航栏 -->
+    <NavBar />
+    <!-- 主体内容 -->
+    <main class="main-content">
+      <router-view />
+    </main>
+    <!-- 页脚 -->
+    <Footer />
+    <!-- 返回顶部按钮 -->
+    <BackToTop />
   </div>
 
 </template>
@@ -16,6 +20,7 @@ import { onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import NavBar from '@/components/layout/NavBar.vue';
 import Footer from '@/components/layout/Footer.vue';
+import BackToTop from '@/components/common/BackToTop.vue';
 
 const router = useRouter();
 

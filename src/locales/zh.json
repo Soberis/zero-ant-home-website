@@ -35,6 +35,9 @@
     "medicalAuto": "医药自动化",
     "semiProcessing": "半导体加工"
   },
+  "common": {
+    "backToTop": "返回顶部"
+  },
   "home": {
     "coreProducts": {
       "title": "核心产品",
