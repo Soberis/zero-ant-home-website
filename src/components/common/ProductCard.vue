@@ -116,8 +116,6 @@ const { t } = useI18n();
 
 .product-image-wrapper {
   position: relative;
-  width: 200px;
-  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,8 +145,8 @@ const { t } = useI18n();
 }
 
 .product-image {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   position: relative;
   z-index: 2;

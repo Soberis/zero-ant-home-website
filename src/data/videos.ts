@@ -27,6 +27,7 @@ import outdoorPatrolRobotImg from "@/assets/images/videos/室外移动巡检机�
 import dualRobotBallCatchingImg from "@/assets/images/videos/双机协作抓球.png";
 import riceMolecularExperimentImg from "@/assets/images/videos/水稻分子重复实验.png";
 import sketchingRobotImg from "@/assets/images/videos/素描机器人.png";
+import gantry2d3dImg from "@/assets/images/videos/二三自由度龙门架.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -214,7 +215,16 @@ export const videoMap: VideoMapData = {
     url: `https://www.bilibili.com/video/BV1Zu8QzAE6g/${BILIBILI_BASE_PARAMS}`,
     title: "videos.sketching-robot.title",
     desc: "videos.sketching-robot.desc",
-    tags: ["素描机器人", "视觉识别", "艺术创作", "智能制造"],
+    tags: ["素描机器人", "艺术创作", "AI绘画"],
+    publishDate: "2024-12-25",
+  },
+  "gantry-2d3d": {
+    slug: "gantry-2d3d",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1yf8XzmEyD/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.gantry-2d3d.title",
+    desc: "videos.gantry-2d3d.desc",
+    tags: ["二自由度龙门架", "三自由度龙门架", "工业自动化", "精密控制"],
     publishDate: "2024-12-25",
   },
   "servo-motor-station": {
@@ -437,11 +447,16 @@ export const videoCards: VideoCard[] = [
     slug: "palletizing-robot",
   },
   {
+    title: "二/三自由度龙门架",
+    img: gantry2d3dImg,
+    slug: "gantry-2d3d",
+  },
+  // 基础技术
+  {
     title: "抛球抓球演示",
     img: ballCatchingDemoImg,
     slug: "ball-catching-demo",
   },
-  // 基础技术
   {
     title: "离线编程",
     img: offlineProgrammingImg,

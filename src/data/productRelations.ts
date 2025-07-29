@@ -113,15 +113,8 @@ export const productRelations: ProductRelationsData = {
 
   // 机器人产品
   "gantry-2d": {
-    applicationSlugs: [
-      "semiconductor",
-      "precision-assembly",
-      "surface-treatment",
-    ],
-    videoSlugs: [
-      "composite-robot-application",
-      "high-speed-precision-robot-arm",
-    ],
+    applicationSlugs: ["semiconductor", "precision-assembly"],
+    videoSlugs: ["gantry-2d3d"],
     customFeatures: [
       "高刚性结构设计，承载能力强",
       "亚毫米级定位精度，运行平稳",
@@ -176,10 +169,7 @@ export const productRelations: ProductRelationsData = {
 
   "dual-arm-humanoid": {
     applicationSlugs: ["intelligent-manufacturing"],
-    videoSlugs: [
-      "ur-robot-llm-motion-capture",
-      "dual-robot-collaboration",
-    ],
+    videoSlugs: ["ur-robot-llm-motion-capture", "dual-robot-collaboration"],
     customFeatures: [
       "双臂高柔性协作，模拟人类操作",
       "多模态感知与智能决策",

@@ -369,6 +369,18 @@
         "Environmental Perception"
       ]
     },
+    "gantry-2d3d": {
+      "title": "2/3-DOF Gantry Robot",
+      "desc": "Demonstrates ZeroAnt Technology's 2/3-DOF gantry robot's precise motion control and efficient operation capabilities in industrial automation. Through advanced trajectory planning algorithms and servo control technology, achieves precise positioning and repetitive operations over large workspace areas, suitable for material handling, precision assembly, inspection and measurement applications.",
+      "tags": [
+        "Gantry Robot",
+        "2-DOF",
+        "3-DOF",
+        "Precision Positioning",
+        "Industrial Automation",
+        "Trajectory Planning"
+      ]
+    },
     "robotstudio-remote-control": {
       "title": "Upper Computer RobotStudio IDE Remote Control and Simulation",
       "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",
