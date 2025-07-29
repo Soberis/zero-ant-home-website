@@ -1,15 +1,5 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
 import type { Product } from "@/helpers/product";
-// 产品图片资源导入 - 确保在函数定义前导入
-import scara4axisImg from "@/assets/images/products/四轴机器人.png";
-import dualArmHumanoidImg from "@/assets/images/products/双臂人形机器人.png";
-import multiOsVmImg from "@/assets/images/products/多OS混合部署嵌入式虚拟机.png";
-import industrialRtosImg from "@/assets/images/products/国产工业实时操作系统.jpg";
-import airosImg from "@/assets/images/products/AiROS机器人操作系统.png";
-import robotSchedulerImg from "@/assets/images/products/移动机器人调度系统.png";
-import gantry2dImg from "@/assets/images/products/二或三自由度龙门架.png";
-import arm6axisImg from "@/assets/images/products/六轴机器人.png";
-import mobileRobotImg from "@/assets/images/products/移动机器人.png";
 
 /**
  * 扩展产品接口，添加产品特有字段
@@ -22,19 +12,21 @@ export interface ProductData extends Product {
   seriesSubtitle: string;
 }
 
-// 产品数据缓存
-let productsCache: ProductData[] | null = null;
+// 1. 先定义所有图片变量
+const multiOsVmImg = new URL("@/assets/images/products/多OS混合部署嵌入式虚拟机.png", import.meta.url).href;
+const industrialRtosImg = new URL("@/assets/images/products/国产工业实时操作系统.jpg", import.meta.url).href;
+const airosImg = new URL("@/assets/images/products/AiROS机器人操作系统.png", import.meta.url).href;
+const robotSchedulerImg = new URL("@/assets/images/products/移动机器人调度系统.png", import.meta.url).href;
+const gantry2dImg = new URL("@/assets/images/products/二或三自由度龙门架.png", import.meta.url).href;
+const scara4axisImg = new URL("@/assets/images/products/四轴机器人.png", import.meta.url).href;
+const arm6axisImg = new URL("@/assets/images/products/六轴机器人.png", import.meta.url).href;
+const dualArmHumanoidImg = new URL("@/assets/images/products/双臂人形机器人.png", import.meta.url).href;
+const mobileRobotImg = new URL("@/assets/images/products/移动机器人.png", import.meta.url).href;
 
-/**
- * 产品列表 - 使用延迟初始化避免变量提升问题
- */
-export const getProducts = (): ProductData[] => {
-  if (productsCache) {
-    return productsCache;
-  }
-  
-  productsCache = [
-    // system产品（顺序调整）
+// 2. 然后定义 getProducts 函数
+export function getProducts(): ProductData[] {
+  return [
+    // system产品
     {
       slug: "multi-os-vm",
       name: "products.multiOsVm.name",
@@ -71,7 +63,7 @@ export const getProducts = (): ProductData[] => {
       seriesSubtitle: "products.robotScheduler.seriesSubtitle",
       category: "system",
     },
-    // robot产品（顺序调整）
+    // robot产品
     {
       slug: "gantry-2d",
       name: "products.gantry2d.name",
@@ -118,11 +110,9 @@ export const getProducts = (): ProductData[] => {
       category: "robot",
     },
   ];
-  
-  return productsCache;
-};
+}
 
-// 使用 getter 确保变量在需要时才被初始化
+// 3. 最后调用函数并导出
 export const products: ProductData[] = getProducts();
 
 /**
@@ -130,5 +120,5 @@ export const products: ProductData[] = getProducts();
  * @example productRouteMap["mobile-robot"] => "/products/mobile-robot"
  */
 export const productRouteMap: Record<string, string> = Object.fromEntries(
-  getProducts().map((p) => [p.slug, `/products/${p.slug}`])
+  products.map((p) => [p.slug, `/products/${p.slug}`])
 );
