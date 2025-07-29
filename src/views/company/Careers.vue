@@ -285,7 +285,6 @@ const applyForPosition = (position: Position): void => {
   padding: 120px 0 80px;
   text-align: center;
 
-
   .hero-title {
     font-size: 4rem; // 原3.5rem，提升
     font-weight: 700;

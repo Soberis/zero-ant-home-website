@@ -1,19 +1,20 @@
 <template>
-
   <div class="hero-carousel">
-
     <div
       v-for="(slide, idx) in slides"
       :key="idx"
       class="carousel-slide"
       :class="{ active: idx === current }"
     >
-
       <div
         class="slide-bg"
-        :style="{ 
+        :style="{
           backgroundImage: `url(${slide.img})`,
-          backgroundSize: slide.bgSize || 'contain'
+          backgroundPosition: slide.bgPosition || 'center',
+          backgroundSize:
+            slide.customWidth && slide.customHeight
+              ? `${slide.customWidth} ${slide.customHeight}`
+              : slide.bgSize || 'contain',
         }"
         :aria-label="slide.title"
         role="img"
@@ -21,31 +22,27 @@
       ></div>
 
       <div class="slide-content">
-
         <h1 class="slide-title">{{ slide.title }}</h1>
 
         <p class="slide-desc">{{ slide.desc }}</p>
-
       </div>
-
     </div>
 
     <div class="carousel-controls">
-       <button
+      <button
         v-for="(_, idx) in slides"
         :key="idx"
         :class="{ active: idx === current }"
         @click="goTo(idx)"
-      ></button
-      >
+      ></button>
     </div>
-     <!-- 顶部装饰弧线 --> <svg
+    <!-- 顶部装饰弧线 -->
+    <svg
       class="arc-bg"
       viewBox="0 0 1920 300"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-
       <path
         d="M0 300 Q960 0 1920 300"
         stroke="#e5e7eb"
@@ -59,20 +56,18 @@
         stroke-width="1"
         fill="none"
       />
-       </svg
-    >
+    </svg>
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
-import multiOsImg from '@/assets/images/products/多OS混合部署嵌入式虚拟机.png';
-import airosImg from '@/assets/images/products/AiROS机器人操作系统.png';
-import scara4axisImg from '@/assets/images/products/四轴机器人.png';
-import dualArmImg from '@/assets/images/products/双臂人形机器人.png';
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import multiOsImg from "@/assets/images/products/多OS混合部署嵌入式虚拟机.png";
+import airosImg from "@/assets/images/products/AiROS机器人操作系统.png";
+import scara4axisImg from "@/assets/images/products/四轴机器人.png";
+import dualArmImg from "@/assets/images/products/双臂人形机器人.png";
 
 // 获取国际化函数和路由
 const { t } = useI18n();
@@ -83,40 +78,54 @@ interface SlideItem {
   img: string;
   title: string;
   desc: string;
-  bgSize?: 'cover' | 'contain' | '100% auto' | 'auto 100%';
+  bgSize?: "cover" | "contain" | "100% auto" | "auto 100%";
+  bgPosition?: string;
+  customWidth?: string;
+  customHeight?: string;
   routePath: string;
 }
 
 // 轮播图数据（使用翻译函数）
-const slides = computed<SlideItem[]
->(() => [
+const slides = computed<SlideItem[]>(() => [
   {
     img: multiOsImg,
-    title: t('products.multiOsVm.name'),
-    desc: t('products.multiOsVm.desc'),
-    bgSize: '100% auto',
-    routePath: '/system-products/multi-os-vm',
+    title: t("products.multiOsVm.name"),
+    desc: t("products.multiOsVm.desc"),
+    bgSize: "100% auto",
+    bgPosition: "center 20%",
+    customWidth: "85%",
+    customHeight: "auto",
+    routePath: "/system-products/multi-os-vm",
   },
   {
     img: airosImg,
-    title: t('products.airos.name'),
-    desc: t('products.airos.desc'),
-    bgSize: 'contain',
-    routePath: '/system-products/airos',
+    title: t("products.airos.name"),
+    desc: t("products.airos.desc"),
+    bgSize: "contain",
+    bgPosition: "center center",
+    customWidth: "75%",
+    customHeight: "auto",
+    routePath: "/system-products/airos",
   },
   {
     img: scara4axisImg,
-    title: t('products.scara4axis.name'),
-    desc: t('products.scara4axis.desc'),
-    bgSize: 'contain',
-    routePath: '/robot-products/scara-4axis',
+    title: t("products.scara4axis.name"),
+    desc: t("products.scara4axis.desc"),
+    bgSize: "contain",
+    bgPosition: "center center",
+    customWidth: "",
+    customHeight: "auto",
+    routePath: "/robot-products/scara-4axis",
   },
   {
     img: dualArmImg,
-    title: t('products.dualArmHumanoid.name'),
-    desc: t('products.dualArmHumanoid.desc'),
-    bgSize: 'contain',
-    routePath: '/robot-products/dual-arm-humanoid',
+    title: t("products.dualArmHumanoid.name"),
+    desc: t("products.dualArmHumanoid.desc"),
+    bgSize: "contain",
+    bgPosition: "center center",
+    customWidth: "",
+    customHeight: "auto",
+    routePath: "/robot-products/dual-arm-humanoid",
   },
 ]);
 const current = ref<number>(0);
@@ -153,22 +162,22 @@ function navigateToProduct(slide: SlideItem): void {
 
 onMounted(() => {
   resetTimer();
-  
+
   // 预加载下一张图片
   const preloadNextImage = () => {
     const nextIndex = (current.value + 1) % slides.value.length;
     const img = new Image();
     img.src = slides.value[nextIndex].img;
   };
-  
+
   // 初始预加载
   preloadNextImage();
-  
+
   // 监听轮播变化预加载下一张
   const stopWatch = watch(current, () => {
     preloadNextImage();
   });
-  
+
   onUnmounted(() => {
     stopWatch();
     if (timer) clearInterval(timer);
@@ -235,20 +244,6 @@ onMounted(() => {
 @media (min-width: 1920px) {
   .slide-bg {
     background-position: center center;
-  }
-}
-
-@media (min-width: 1440px) {
-  .carousel-slide:nth-child(1) .slide-bg {
-    background-size: 100% auto;
-    background-position: center 20%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .carousel-slide:nth-child(1) .slide-bg {
-    background-size: 100% auto;
-    background-position: center 25%;
   }
 }
 .slide-content {
@@ -322,4 +317,3 @@ onMounted(() => {
   }
 }
 </style>
-
