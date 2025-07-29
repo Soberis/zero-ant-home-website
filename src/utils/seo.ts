@@ -26,7 +26,9 @@ export interface SEOMetaData {
  * @param meta SEO 元数据对象
  */
 export function setSEO(meta: SEOMetaData) {
-  const siteName = meta.siteName || i18n.global.t("seo.siteName") || "ZeroAnt Technology";
+  // 在函数内部获取siteName，确保i18n已初始化
+  const siteName =
+    meta.siteName || i18n.global.t("seo.siteName") || "ZeroAnt Technology";
 
   // 设置页面标题
   if (meta.title) {
@@ -124,18 +126,20 @@ export function setSEO(meta: SEOMetaData) {
  * 生成结构化数据
  * @param data 结构化数据对象或对象数组
  */
-export function setStructuredData(data: Record<string, any> | Record<string, any>[]) {
+export function setStructuredData(
+  data: Record<string, any> | Record<string, any>[]
+) {
   // 移除现有的结构化数据
   const existingScripts = document.querySelectorAll(
     'script[type="application/ld+json"]'
   );
-  existingScripts.forEach(script => script.remove());
+  existingScripts.forEach((script) => script.remove());
 
   // 处理单个对象或对象数组
   const dataArray = Array.isArray(data) ? data : [data];
-  
+
   // 为每个数据对象创建结构化数据脚本
-  dataArray.forEach(item => {
+  dataArray.forEach((item) => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.textContent = JSON.stringify(item);
