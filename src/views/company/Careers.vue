@@ -282,12 +282,9 @@ const applyForPosition = (position: Position): void => {
 .careers-hero {
   background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
   color: white;
-  min-height: 60vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  padding: 120px 0 80px;
   text-align: center;
-  padding: 12vh;
+
 
   .hero-title {
     font-size: 4rem; // 原3.5rem，提升
