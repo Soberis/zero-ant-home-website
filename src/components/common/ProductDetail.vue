@@ -476,6 +476,7 @@ const handleVideoClick = (index: number) => {
     "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
   line-height: 1.6;
+  width: 100%;
 }
 
 /* 产品头部 */
@@ -515,7 +516,7 @@ const handleVideoClick = (index: number) => {
 
 .product-desc {
   font-size: 1.5rem;
-  text-align: left !important;
+  text-align: left;
   margin-bottom: 4rem;
   color: #666;
   margin-left: auto;
