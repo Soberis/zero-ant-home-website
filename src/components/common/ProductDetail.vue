@@ -482,7 +482,7 @@ const handleVideoClick = (index: number) => {
 .product-header {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   color: #222;
-  padding: 6rem 0 4rem;
+  padding: 8rem 0 6rem;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid #e3f2fd;
@@ -494,7 +494,7 @@ const handleVideoClick = (index: number) => {
   max-height: 500px;
   width: 100%;
   height: auto;
-  margin: 0 auto 3rem;
+  margin: 0 auto 4rem;
   border-radius: 1.5rem;
   box-shadow: 0 12px 48px rgba(26, 58, 143, 0.2);
   object-fit: contain;
@@ -505,7 +505,7 @@ const handleVideoClick = (index: number) => {
 .product-title {
   font-size: 2.8rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
   letter-spacing: -0.02em;
   position: relative;
@@ -516,7 +516,7 @@ const handleVideoClick = (index: number) => {
 .product-desc {
   font-size: 1.5rem;
   text-align: left !important;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   color: #666;
   margin-left: auto;
   margin-right: auto;
@@ -525,15 +525,16 @@ const handleVideoClick = (index: number) => {
   z-index: 1;
   max-width: 900px;
   white-space: normal;
+  padding: 0 2rem;
 }
 
 /* 主要内容区域 */
 .main-content {
-  padding: 5rem 0;
+  padding: 6rem 0;
 }
 
 .section {
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
 }
 
 .section-title {
@@ -541,23 +542,26 @@ const handleVideoClick = (index: number) => {
   font-size: 2.6rem;
   font-weight: 700;
   text-align: center;
-  margin: 48px 0 32px 0;
+  margin: 0 0 3rem 0;
   letter-spacing: 1px;
   position: relative;
   transition: color 0.3s ease;
+  padding: 0 2rem;
 }
 
 /* 优势特点 */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .feature-card {
   background: white;
-  border-radius: 1rem;
-  padding: 2rem;
+  border-radius: 1.25rem;
+  padding: 2.5rem;
   box-shadow: 0 4px 24px rgba(26, 58, 143, 0.08);
   border: 1px solid #e3f2fd;
   transition: all 0.3s ease;
@@ -565,7 +569,7 @@ const handleVideoClick = (index: number) => {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .feature-card:hover {
@@ -593,17 +597,18 @@ const handleVideoClick = (index: number) => {
 }
 
 .feature-title {
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: #222;
-  margin-bottom: 0.75rem;
-  line-height: 1.4;
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .feature-desc {
   color: #666;
-  line-height: 1.6;
-  font-size: 1rem;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  margin: 0;
 }
 
 /* 应用场景 - 应用网格 */
@@ -789,6 +794,60 @@ const handleVideoClick = (index: number) => {
   font-size: 1.1rem;
   text-align: center;
   margin: 0;
+}
+
+/* 大屏幕响应式调整 */
+@media (min-width: 1440px) {
+  .product-title {
+    font-size: 2.8rem;
+  }
+
+  .product-desc {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.6rem;
+  }
+
+  .feature-title {
+    font-size: 1.5rem;
+  }
+
+  .feature-desc {
+    font-size: 1.3rem;
+  }
+
+  .param-key,
+  .param-value {
+    font-size: 1.3rem;
+  }
+
+  .download-name {
+    font-size: 1.3rem;
+  }
+
+  .placeholder-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .product-title {
+    font-size: 3rem;
+  }
+
+  .product-desc {
+    font-size: 1.6rem;
+  }
+
+  .section-title {
+    font-size: 2.8rem;
+  }
 }
 
 /* 返回按钮 */
