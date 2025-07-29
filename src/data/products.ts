@@ -13,15 +13,42 @@ export interface ProductData extends Product {
 }
 
 // 1. 先定义所有图片变量
-const multiOsVmImg = new URL("@/assets/images/products/多OS混合部署嵌入式虚拟机.png", import.meta.url).href;
-const industrialRtosImg = new URL("@/assets/images/products/国产工业实时操作系统.jpg", import.meta.url).href;
-const airosImg = new URL("@/assets/images/products/AiROS机器人操作系统.png", import.meta.url).href;
-const robotSchedulerImg = new URL("@/assets/images/products/移动机器人调度系统.png", import.meta.url).href;
-const gantry2dImg = new URL("@/assets/images/products/二或三自由度龙门架.png", import.meta.url).href;
-const scara4axisImg = new URL("@/assets/images/products/四轴机器人.png", import.meta.url).href;
-const arm6axisImg = new URL("@/assets/images/products/六轴机器人.png", import.meta.url).href;
-const dualArmHumanoidImg = new URL("@/assets/images/products/双臂人形机器人.png", import.meta.url).href;
-const mobileRobotImg = new URL("@/assets/images/products/移动机器人.png", import.meta.url).href;
+const multiOsVmImg = new URL(
+  "@/assets/images/products/多OS混合部署嵌入式虚拟机.png",
+  import.meta.url
+).href;
+const industrialRtosImg = new URL(
+  "@/assets/images/products/国产工业实时操作系统.jpg",
+  import.meta.url
+).href;
+const airosImg = new URL(
+  "@/assets/images/products/AiROS机器人操作系统.png",
+  import.meta.url
+).href;
+const robotSchedulerImg = new URL(
+  "@/assets/images/products/移动机器人调度系统.png",
+  import.meta.url
+).href;
+const gantry2dImg = new URL(
+  "@/assets/images/products/二或三自由度龙门架.png",
+  import.meta.url
+).href;
+const scara4axisImg = new URL(
+  "@/assets/images/products/四轴机器人.png",
+  import.meta.url
+).href;
+const arm6axisImg = new URL(
+  "@/assets/images/products/六轴机器人.png",
+  import.meta.url
+).href;
+const dualArmHumanoidImg = new URL(
+  "@/assets/images/products/双臂人形机器人.png",
+  import.meta.url
+).href;
+const mobileRobotImg = new URL(
+  "@/assets/images/products/移动机器人.png",
+  import.meta.url
+).href;
 
 // 2. 然后定义 getProducts 函数
 export function getProducts(): ProductData[] {

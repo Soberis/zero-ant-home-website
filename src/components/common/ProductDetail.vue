@@ -3,7 +3,11 @@
     <!-- 产品头部信息 -->
     <div class="product-header">
       <div class="container">
-        <img :src="localizedProduct.image" alt="产品图片" class="product-image" />
+        <img
+          :src="localizedProduct.image"
+          alt="产品图片"
+          class="product-image"
+        />
         <h2 class="product-title">{{ localizedProduct.title }}</h2>
 
         <p
@@ -200,15 +204,15 @@ const { t } = useI18n();
 // 将URL slug转换为国际化键名的映射函数
 function slugToI18nKey(slug: string): string {
   const slugToKeyMap: Record<string, string> = {
-    'multi-os-vm': 'multiOsVm',
-    'industrial-rtos': 'industrialRtos',
-    'airos': 'airos',
-    'robot-scheduler': 'robotScheduler',
-    'gantry-2d': 'gantry2d',
-    'scara-4axis': 'scara4axis',
-    'arm-6axis': 'arm6axis',
-    'dual-arm-humanoid': 'dualArmHumanoid',
-    'mobile-robot': 'mobileRobot'
+    "multi-os-vm": "multiOsVm",
+    "industrial-rtos": "industrialRtos",
+    airos: "airos",
+    "robot-scheduler": "robotScheduler",
+    "gantry-2d": "gantry2d",
+    "scara-4axis": "scara4axis",
+    "arm-6axis": "arm6axis",
+    "dual-arm-humanoid": "dualArmHumanoid",
+    "mobile-robot": "mobileRobot",
   };
   return slugToKeyMap[slug] || slug;
 }

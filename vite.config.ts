@@ -12,7 +12,7 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 // https://vitejs.dev/config/
 export default defineConfig({
   // 设置基础路径为相对路径，确保服务器部署时资源能正确加载
-  base: './',
+  base: "./",
   plugins: [
     vue(),
     // Element Plus 按需导入
@@ -49,13 +49,11 @@ export default defineConfig({
   },
   build: {
     // 启用源码映射（可选，生产环境可关闭）
-    sourcemap: true, // 启用源码映射以方便调试
+    sourcemap: false,
     // 设置构建目标
     target: "es2020",
-    // 禁用压缩以便调试
-    minify: false,
-    // 注释掉 terser 选项以完全禁用压缩
-    /*
+    // 启用压缩
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true, // 移除console.log
@@ -66,7 +64,6 @@ export default defineConfig({
         safari10: true, // 解决Safari 10的兼容性问题
       },
     },
-    */
     rollupOptions: {
       output: {
         // 优化代码分割策略
