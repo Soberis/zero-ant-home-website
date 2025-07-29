@@ -31,6 +31,7 @@ export interface ProductDownload {
 export interface ProductDetail {
   title: string;
   desc: string;
+  image?: string;
   features: string[];
   cases: ProductCase[];
   scenes: string[];
@@ -74,6 +75,7 @@ export function createEmptyProductDetail(): ProductDetail {
   return {
     title: '',
     desc: '',
+    image: '',
     features: [],
     cases: [],
     scenes: [],

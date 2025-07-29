@@ -79,6 +79,7 @@ const detail = computed(() => {
     return {
       title: productData.title || '',
       desc: productData.desc || '',
+      image: currentProduct.value?.image || '',
       features: productData.features || [],
       cases: casesArray,
       scenes: productData.scenes || [],

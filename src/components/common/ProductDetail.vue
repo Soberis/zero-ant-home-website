@@ -3,6 +3,7 @@
     <!-- 产品头部信息 -->
     <div class="product-header">
       <div class="container">
+        <img :src="localizedProduct.image" alt="产品图片" class="product-image" />
         <h2 class="product-title">{{ localizedProduct.title }}</h2>
 
         <p
@@ -236,6 +237,7 @@ const localizedProduct = computed(() => {
     desc: hasDetailTranslation
       ? t(`${detailKey}.desc`)
       : t(`${productKey}.desc`, props.product.desc),
+    image: getTranslatedData("image", props.product.image),
     features: getTranslatedData("features", props.product.features),
     cases: getTranslatedData("cases", props.product.cases),
     params: getTranslatedData("params", props.product.params),
@@ -250,6 +252,7 @@ const props = withDefaults(
     productSlug: string;
     showApplications?: boolean;
     showVideos?: boolean;
+    image?: string;
   }>(),
   {
     showApplications: true,
@@ -462,6 +465,20 @@ const handleVideoClick = (index: number) => {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid #e3f2fd;
+}
+
+.product-image {
+  display: block;
+  max-width: 800px;
+  max-height: 500px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 48px rgba(26, 58, 143, 0.2);
+  object-fit: contain;
+  background: white;
+  padding: 1.5rem;
 }
 
 .product-title {
