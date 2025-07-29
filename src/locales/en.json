@@ -502,6 +502,12 @@
       "coreAdvantages": "High-precision art creation, personalized customization capability, digital art production, cultural creativity integration",
       "typicalApplications": "Intelligent sketching and painting, cultural product manufacturing, art reproduction, personalized gift customization, digital art creation"
     },
+    "intelligent-patrol": {
+      "title": "Intelligent Patrol Security",
+      "description": "Based on mobile robot scheduling systems and 360-degree LiDAR scanning technology, providing intelligent patrol and security solutions for industrial parks, warehouses, and public facilities. Through laser SLAM navigation and environmental perception technology, combined with real-time video monitoring and AI analysis, it enables autonomous patrol, anomaly detection, and security alerts. Supporting 500kg load capacity and multi-machine collaborative operations, it provides 24/7 automated security patrol services, significantly improving security efficiency and reducing labor costs.",
+      "coreAdvantages": "360-degree environmental scanning, autonomous patrol navigation, real-time anomaly detection, multi-machine collaborative security",
+      "typicalApplications": "Industrial park patrol, warehouse security, facility monitoring, autonomous security rounds, emergency response"
+    },
     "industrial-gateway": {
       "title": "Edge Computing",
       "description": "Based on multi-OS hybrid deployment embedded virtualization technology, provides highly reliable and secure virtualization solutions for industrial gateways and edge computing devices. Through heterogeneous system unified management and efficient resource isolation, multiple systems can be deployed on a single hardware platform, reducing hardware costs and maintenance complexity. Successfully applied in industrial automation, smart grids, smart cities and other fields.",

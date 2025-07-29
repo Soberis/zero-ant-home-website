@@ -150,6 +150,15 @@ const applications: Application[] = [
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 36l8-8 8-8 8 8-8 8-8 8z" stroke="#1a3a8f" stroke-width="2"/><path d="M20 20l8-8" stroke="#1a3a8f" stroke-width="2"/><circle cx="36" cy="12" r="3" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
+    slug: "intelligent-patrol",
+    title: "智能巡检安防",
+    description: `
+<p>基于移动机器人调度系统和360度雷达扫描技术，为工业园区、电力设施、仓储物流等场景提供全天候智能巡检解决方案。通过激光SLAM导航、毫米级精准定位、多传感器融合等技术，实现自主路径规划、异常检测、实时报警等功能。支持500kg负载能力，可在复杂环境下进行24小时不间断巡检，大幅提升安防效率和作业安全性。</p>
+    `,
+    video: "outdoor-patrol-robot",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="#1a3a8f" stroke-width="1"/><path d="M24 8v4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 36v4" stroke="#1a3a8f" stroke-width="2"/><path d="M8 24h4" stroke="#1a3a8f" stroke-width="2"/><path d="M36 24h4" stroke="#1a3a8f" stroke-width="2"/><path d="M14 14l3 3" stroke="#1a3a8f" stroke-width="2"/><path d="M31 31l3 3" stroke="#1a3a8f" stroke-width="2"/><path d="M34 14l-3 3" stroke="#1a3a8f" stroke-width="2"/><path d="M17 31l-3 3" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+  },
+  {
     slug: "industrial-gateway",
     title: "工业网关与边缘计算",
     description: `
