@@ -13,97 +13,159 @@ export interface Application {
 
 /**
  * 行业应用数据列表
+ * 包含12个核心应用场景，根据产品特性和视频内容进行匹配
  */
 const applications: Application[] = [
   {
-    slug: 'medical-automation',
-    title: '医疗自动化',
+    slug: "medical-automation",
+    title: "医疗自动化",
     description: `
-<p>聚焦医院、实验室等医疗场景，提供高效、安全的自动化物品传送与智能调度解决方案。通过自主研发的AiROS操作系统，实现样本、药品、医疗器械等的智能搬运与追溯，助力医疗机构提升诊疗效率、降低人工成本、保障医疗安全。典型应用包括智能检验科自动流水线、自动化药房、医疗物资配送等。</p>
+<p>聚焦医院、实验室等医疗场景，基于AiROS机器人操作系统提供高效、安全的自动化物品传送与智能调度解决方案。通过18轴同时控制、0.02mm重复定位精度的高精度控制技术，实现样本、药品、医疗器械等的智能搬运与追溯。已服务华智生物、珀金埃尔默等知名客户，实现国外设备本土化替代，成本从30万降至14万，助力医疗机构提升诊疗效率、降低人工成本、保障医疗安全。</p>
+<p><strong>相关产品：</strong>Airos机器人操作系统</p>
     `,
-    video: 'medical-automation-bilibili',
+    video: "medical-automation",
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="28" height="20" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="10" width="8" height="12" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/><path d="M20 32h8" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
-    slug: 'semiconductor',
-    title: '半导体加工',
+    slug: "semiconductor",
+    title: "半导体加工",
     description: `
-<p>面向晶圆、芯片等高端制造领域，提供高精度、高可靠性的物品传送与智能调度系统，实现国产设备替代和智能制造升级。AiROS操作系统支持复杂工艺流程的自动化搬运、精准定位和数据追溯，助力客户提升生产效率和产品良率。典型应用包括晶圆厂自动化搬运、芯片封装测试、洁净室物流等。</p>
+<p>面向晶圆、芯片等高端制造领域，基于AiROS操作系统的实时性抖动≤10us技术，提供高精度、高可靠性的物品传送与智能调度系统。已出货200余台晶圆传送机器人，覆盖国内主要晶圆/芯片制造厂商，实现国产设备替代和智能制造升级。通过0.02mm重复定位精度和18轴同时控制能力，支持复杂工艺流程的自动化搬运、精准定位和数据追溯。</p>
+<p><strong>相关产品：</strong>Airos机器人操作系统</p>
     `,
-    video: 'semiconductor-bilibili',
+    video: "semiconductor",
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/><rect x="20" y="12" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/><path d="M18 24h-6" stroke="#1a3a8f" stroke-width="2"/><path d="M30 24h6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
+  // AI智能
   {
-    slug: 'smart-factory-logistics',
-    title: '智慧工厂与智能物流',
+    slug: "ai-robotics",
+    title: "AI机器人",
     description: `
-<p>面向制造业、仓储物流等场景，提供柔性制造、自动分拣、协作机器人、智能仓储等整体解决方案。AiROS系统支持多机器人协作、路径优化与实时调度，助力企业实现生产自动化、物流智能化，提升运营效率和响应速度。</p>
+<p>基于大语言模型和人工智能技术，通过UR机器人大语言模型动作抓取技术，实现机器人的自主学习和智能决策能力。系统能够理解自然语言指令，自动规划抓取路径，实现复杂物体的精准识别与抓取。结合双臂人型机器人的14轴设计和AiROS操作系统，支持多模态交互和实时学习优化，为智能制造、教育科研等领域提供高度智能化的人机协作解决方案。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="20" width="24" height="12" rx="3" stroke="#1a3a8f" stroke-width="2"/><path d="M16 32v4h16v-4" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="38" r="2" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="38" r="2" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "ur-robot-llm-motion-capture",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="18" r="6" stroke="#1a3a8f" stroke-width="2"/><rect x="18" y="24" width="12" height="16" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M21 30h6" stroke="#1a3a8f" stroke-width="2"/><path d="M21 34h6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+  },
+  // 复合系统
+  {
+    slug: "composite-systems",
+    title: "复合系统",
+    description: `
+<p>基于复合机器人技术和多OS混合部署虚拟机，集成多种功能模块，提供综合性的自动化解决方案。通过多功能集成、智能调度和异构系统统一管理，实现复杂场景下的高效协作与柔性生产。支持移动平台+机械臂的复合配置，满足多样化的工业应用需求，提升整体系统效率。</p>
+    `,
+    video: "composite-robot-application",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="32" height="32" rx="6" stroke="#1a3a8f" stroke-width="2"/><rect x="14" y="14" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><rect x="26" y="14" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><rect x="14" y="26" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/><rect x="26" y="26" width="8" height="8" rx="2" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
-    slug: 'biomed-lab',
-    title: '生物医药与智慧实验室',
+    slug: "intelligent-manufacturing",
+    title: "智能制造",
     description: `
-<p>服务于生物医药、科研实验室等高端场景，提供高通量样本处理、实验板传送、数据追溯等自动化解决方案。AiROS平台支持实验流程自动化、远程协作与数据管理，助力客户提升科研效率和数据可靠性。</p>
+<p>基于多OS混合部署嵌入式虚拟机和国产工业实时操作系统，为制造业提供高精度、高效率的自动化解决方案。通过双机协作、高速高精度机械臂等核心技术，实现复杂制造工艺的智能化升级。支持6000mm/s高速运动、亚毫米级精度控制，满足电子制造、汽车生产、3C制造等高端制造需求。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="24" cy="34" rx="12" ry="6" stroke="#1a3a8f" stroke-width="2"/><rect x="18" y="10" width="12" height="18" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 28v6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "dual-robot-collaboration",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="16" width="32" height="20" rx="4" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="26" r="3" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="26" r="3" stroke="#1a3a8f" stroke-width="2"/><path d="M12 12v4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 12v4" stroke="#1a3a8f" stroke-width="2"/><path d="M36 12v4" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+  },
+  // 单一应用
+  {
+    slug: "precision-assembly",
+    title: "精密装配",
+    description: `
+<p>基于四轴机械臂和六轴机械臂技术，提供0.02mm重复定位精度的高精度装配解决方案。通过先进的运动控制算法和视觉引导技术，支持6000mm/s高速运动，实现复杂产品的精密组装。广泛应用于3C电子、光学器件、精密仪器等高端制造领域，助力客户实现高质量、高效率的自动化生产。</p>
+    `,
+    video: "high-speed-precision-robot-arm",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 36l12-12 12 12" stroke="#1a3a8f" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" stroke="#1a3a8f" stroke-width="2"/><path d="M18 18l12-6" stroke="#1a3a8f" stroke-width="2"/><path d="M30 18l-12-6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
-    slug: 'retail-service-robot',
-    title: '新零售与服务机器人',
+    slug: "surface-treatment",
+    title: "表面处理",
     description: `
-<p>面向餐饮、社区、商超等消费级市场，提供餐饮配送、社区物流、自动补货等服务机器人解决方案。AiROS系统支持多场景适配、智能路径规划和人机协作，助力客户提升服务效率和用户体验。</p>
+<p>基于六轴机械臂和四轴机械臂技术，提供高精度、高可靠性的工业机器人解决方案。通过先进的力控技术和路径规划算法，实现打磨、抛光、焊接、装配等多种工业应用。支持0.02mm重复定位精度和连续9万小时无故障运行，为制造业提供稳定可靠的自动化设备。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="24" width="20" height="10" rx="3" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 24v-6" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="16" r="3" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "polishing-robot",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#1a3a8f" stroke-width="2"/><path d="M24 16v16" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h16" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="#1a3a8f"/></svg>`,
   },
   {
-    slug: 'edu-popular-science',
-    title: '科研教育与科普机器人',
+    slug: "smart-logistics",
+    title: "智能物流",
     description: `
-<p>面向高校、科研院所及科普教育场景，提供智能实验教学、科普互动、数据采集与分析等机器人解决方案。AiROS平台支持实验数据自动采集、虚拟仿真与远程协作，助力教育数字化和科研智能化。</p>
+<p>基于移动机器人调度系统和AGV自动导引技术，提供多品牌、多类型机器人统一调度的智能物流解决方案。通过360度雷达扫描、激光SLAM导航等先进技术，实现复杂环境下的自主导航和精准定位。支持500kg负载能力和多机协同作业，大幅提升工厂物流效率和仓储自动化水平。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="20" width="24" height="12" rx="3" stroke="#1a3a8f" stroke-width="2"/><path d="M24 14v6" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="14" r="3" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "agv-product-introduction",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="20" width="32" height="16" rx="4" stroke="#1a3a8f" stroke-width="2"/><circle cx="16" cy="38" r="3" stroke="#1a3a8f" stroke-width="2"/><circle cx="32" cy="38" r="3" stroke="#1a3a8f" stroke-width="2"/><path d="M20 16l4-4 4 4" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
-    slug: 'special-industry',
-    title: '特种行业与极端环境机器人',
+    slug: "pharmaceutical-automation",
+    title: "制药自动化",
     description: `
-<p>服务于核电、军工、航空航天等高风险领域，提供高可靠性、高安全性的智能机器人解决方案。AiROS系统具备高防护等级、远程操控和数据安全等能力，助力客户应对极端环境下的作业挑战。</p>
+<p>专注于生物医药行业的自动化需求，基于AiROS机器人操作系统和高精度控制技术，为生物实验室、制药企业提供智能化解决方案。通过个性化处方制药技术和实验室自动化设备，实现药物研发、生产、检测的全流程自动化，已服务华智生物、珀金埃尔默等知名客户。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="14" stroke="#1a3a8f" stroke-width="2"/><path d="M24 10v28" stroke="#1a3a8f" stroke-width="2"/><path d="M10 24h28" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "personalized-prescription-pharmaceutical",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="8" width="24" height="32" rx="6" stroke="#1a3a8f" stroke-width="2"/><path d="M24 16v8" stroke="#1a3a8f" stroke-width="2"/><path d="M20 20h8" stroke="#1a3a8f" stroke-width="2"/><circle cx="20" cy="28" r="2" fill="#1a3a8f"/><circle cx="28" cy="28" r="2" fill="#1a3a8f"/></svg>`,
+  },
+  // 基础技术
+  {
+    slug: "industrial-control",
+    title: "工业控制",
+    description: `
+<p>基于国产工业实时操作系统和EtherCAT总线技术，提供自主可控的高性能工业控制解决方案。通过毫秒级实时响应和18轴同时控制能力，实现多轴电机的精准同步控制和实时协调运动。支持实时性抖动≤10us，满足工业自动化的严苛要求，实现关键技术的国产化替代。</p>
+<p><strong>相关产品：</strong>国产工业实时操作系统</p>
+    `,
+    video: "rtos-ethercat-validation",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="16" width="32" height="16" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h16" stroke="#1a3a8f" stroke-width="2"/><circle cx="20" cy="24" r="2" fill="#1a3a8f"/><circle cx="28" cy="24" r="2" fill="#1a3a8f"/></svg>`,
   },
   {
-    slug: 'smart-medical-logistics',
-    title: '智慧医疗物流',
+    slug: "offline-programming",
+    title: "离线编程",
     description: `
-<p>面向医院、第三方医学检验中心等医疗物流场景，提供院内样本、药品、医疗器械等物品的自动化搬运、分拣与追溯。AiROS系统支持多楼层、多科室智能调度，提升医疗物流效率，降低人工交叉感染风险，助力智慧医院建设。</p>
+<p>基于多OS混合部署嵌入式虚拟机技术，提供先进的离线编程和虚拟仿真解决方案。通过数字孪生技术和虚拟调试环境，实现机器人程序的高效开发与优化，无需现场实物即可完成复杂工艺的编程调试。支持异构系统统一管理，大幅提升编程效率和作业安全性，降低现场调试时间和成本。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="20" width="24" height="12" rx="3" stroke="#1a3a8f" stroke-width="2"/><path d="M24 26v6" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "offline-programming",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="12" width="32" height="24" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M16 20h16" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h12" stroke="#1a3a8f" stroke-width="2"/><path d="M16 28h8" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {
-    slug: 'smart-food-coldchain',
-    title: '智能食品与冷链物流',
+    slug: "intelligent-navigation",
+    title: "智能导航",
     description: `
-<p>服务于食品加工、冷链仓储、药品冷链等行业，提供温控环境下的自动化搬运、分拣与追溯。AiROS平台支持温湿度监控、全流程可视化管理，保障食品与药品安全，提升冷链物流智能化水平。</p>
+<p>基于360度雷达扫描和激光SLAM技术，提供先进的机器人智能导航和环境感知解决方案。通过全方位环境感知和毫米级精准定位技术，结合移动机器人调度系统，为AGV、移动机器人等提供可靠的自主导航能力。实现复杂环境下的智能路径规划、动态避障和多机协同作业，支持500kg负载能力。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="24" width="28" height="12" rx="3" stroke="#1a3a8f" stroke-width="2"/><path d="M24 24v-6" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "radar-360-scanning",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#1a3a8f" stroke-width="2"/><path d="M24 12v24" stroke="#1a3a8f" stroke-width="2"/><path d="M12 24h24" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="24" r="3" fill="#1a3a8f"/></svg>`,
   },
   {
-    slug: 'smart-patrol-security',
-    title: '智能巡检与安防机器人',
+    slug: "agricultural-research",
+    title: "农业科研自动化",
     description: `
-<p>面向工业园区、数据中心、能源电力等场景，提供自动化巡检、环境监测、异常报警等服务。AiROS系统支持多传感器融合、智能路径规划和远程监控，提升巡检效率和安全保障能力，助力企业实现无人值守和智能安防。</p>
+<p>面向现代农业科研需求，基于AiROS机器人操作系统和高精度控制技术，为农业科研院所、种子企业提供智能化的分子实验解决方案。通过水稻分子重复实验等创新应用，实现农作物基因研究、品质检测、种子筛选的全流程自动化。结合视觉识别和精密控制技术，支持农业科研的高通量、高精度实验需求，助力农业科技创新。</p>
     `,
-    video: '',
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="24" width="20" height="10" rx="3" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="36" r="2" stroke="#1a3a8f" stroke-width="2"/><path d="M24 24v-6" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="16" r="3" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+    video: "rice-molecular-experiment",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 8c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16z" stroke="#1a3a8f" stroke-width="2"/><path d="M24 16v8" stroke="#1a3a8f" stroke-width="2"/><path d="M20 20h8" stroke="#1a3a8f" stroke-width="2"/><path d="M16 32l8-8 8 8" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+  },
+  {
+    slug: "cultural-creative",
+    title: "文创艺术智能制造",
+    description: `
+<p>基于高精度机械臂和视觉识别技术，为文化创意产业提供智能化的艺术创作解决方案。通过素描机器人等创新应用，实现艺术创作的数字化、智能化和规模化生产。结合AiROS机器人操作系统和精密控制算法，支持复杂艺术图案的精准绘制和个性化定制，推动传统文化与现代科技的深度融合，为文创产业注入新的活力。</p>
+    `,
+    video: "sketching-robot",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 36l8-8 8-8 8 8-8 8-8 8z" stroke="#1a3a8f" stroke-width="2"/><path d="M20 20l8-8" stroke="#1a3a8f" stroke-width="2"/><circle cx="36" cy="12" r="3" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+  },
+  {
+    slug: "intelligent-patrol",
+    title: "智能巡检安防",
+    description: `
+<p>基于移动机器人调度系统和360度雷达扫描技术，为工业园区、电力设施、仓储物流等场景提供全天候智能巡检解决方案。通过激光SLAM导航、毫米级精准定位、多传感器融合等技术，实现自主路径规划、异常检测、实时报警等功能。支持500kg负载能力，可在复杂环境下进行24小时不间断巡检，大幅提升安防效率和作业安全性。</p>
+    `,
+    video: "outdoor-patrol-robot",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="#1a3a8f" stroke-width="1"/><path d="M24 8v4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 36v4" stroke="#1a3a8f" stroke-width="2"/><path d="M8 24h4" stroke="#1a3a8f" stroke-width="2"/><path d="M36 24h4" stroke="#1a3a8f" stroke-width="2"/><path d="M14 14l3 3" stroke="#1a3a8f" stroke-width="2"/><path d="M31 31l3 3" stroke="#1a3a8f" stroke-width="2"/><path d="M34 14l-3 3" stroke="#1a3a8f" stroke-width="2"/><path d="M17 31l-3 3" stroke="#1a3a8f" stroke-width="2"/></svg>`,
+  },
+  {
+    slug: "industrial-gateway",
+    title: "工业网关与边缘计算",
+    description: `
+<p>基于多OS混合部署嵌入式虚拟机技术，为工业网关和边缘计算设备提供高可靠、高安全的虚拟化解决方案。通过异构系统统一管理和资源高效隔离，在单一硬件平台上部署多套系统，降低硬件成本与维护难度。已成功应用于工业自动化、智能电网、智慧城市等领域。</p>
+    `,
+    video: "robotstudio-remote-control",
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="12" width="24" height="24" rx="4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 16v16" stroke="#1a3a8f" stroke-width="2"/><path d="M16 24h16" stroke="#1a3a8f" stroke-width="2"/><circle cx="24" cy="24" r="3" fill="#1a3a8f"/></svg>`,
   },
 ];
 

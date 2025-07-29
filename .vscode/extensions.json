@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "Vue.volar",
-    "Vue.vscode-typescript-vue-plugin",
-    "stagewise.stagewise-vscode-extension"
+    "Vue.vscode-typescript-vue-plugin"
   ]
 }

@@ -1,26 +1,35 @@
 <template>
+
   <section class="global-partners">
-    <h2 class="section-title">合作伙伴</h2>
+
+    <h2 class="section-title">{{ $t('home.partners.title') }}</h2>
+
     <div class="section-underline"></div>
+
     <div class="partners-list">
+
       <div
-        v-for="(partner, idx) in partners"
+        v-for="(partner, idx) in partnersTyped"
         :key="partner.alt + idx"
         class="partner-logo"
       >
-        <img
+         <img
           :src="partner.src"
           :alt="partner.alt"
           :class="partner.class"
           loading="lazy"
         />
       </div>
+
     </div>
+
   </section>
+
 </template>
 
-<script setup>
-import { partners } from '@/data/partners';
+<script setup lang="ts">
+import { partners, type Partner } from '@/data/partners';
+const partnersTyped: Partner[] = partners;
 </script>
 
 <style scoped>
@@ -134,3 +143,4 @@ import { partners } from '@/data/partners';
   }
 }
 </style>
+

@@ -1,21 +1,30 @@
 <!-- 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互 -->
 <template>
+
   <div class="support-hero-bg">
+
     <div class="support-hero">
-      <h1 class="hero-title">售后服务</h1>
+
+      <h1 id="after-sales" class="hero-title">{{ t('supportPage.title') }}</h1>
+
       <div class="hero-desc">
-        售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应
+         {{ t('supportPage.description') }}
       </div>
+
       <div class="service-cards">
+
         <div class="service-card">
+
           <div class="icon-box">
-            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+             <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+
               <path
                 d="M28 6L46 12V26C46 38.5 36.5 47.5 28 50C19.5 47.5 10 38.5 10 26V12L28 6Z"
                 fill="#fff"
                 stroke="#1a3a8f"
                 stroke-width="2.5"
               />
+
               <text
                 x="50%"
                 y="44%"
@@ -25,8 +34,9 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                12
+                 12
               </text>
+
               <text
                 x="50%"
                 y="64%"
@@ -36,15 +46,21 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                HOURS
+                 HOURS
               </text>
-            </svg>
+               </svg
+            >
           </div>
-          <div class="card-desc">12小时内快速解决问题</div>
+
+          <div class="card-desc">{{ t('supportPage.fastResponse') }}</div>
+
         </div>
+
         <div class="service-card">
+
           <div class="icon-box">
-            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+             <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+
               <circle
                 cx="28"
                 cy="28"
@@ -53,10 +69,12 @@
                 stroke="#1a3a8f"
                 stroke-width="2.5"
               />
+
               <path
                 d="M18 32c2.5 3.5 6.5 7.5 10 10l3-3c0.5-0.5 1.2-0.6 1.8-0.3 1.6 0.8 3.4 1.3 5.2 1.3 0.7 0 1.3 0.6 1.3 1.3v4.2c0 0.7-0.6 1.3-1.3 1.3C25.2 47.5 14.5 36.8 14.5 23.3c0-0.7 0.6-1.3 1.3-1.3h4.2c0.7 0 1.3 0.6 1.3 1.3 0 1.8 0.5 3.6 1.3 5.2 0.3 0.6 0.2 1.3-0.3 1.8l-3 3z"
                 fill="#1a3a8f"
               />
+
               <text
                 x="65%"
                 y="54%"
@@ -66,109 +84,178 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                24h
+                 24h
               </text>
-            </svg>
+               </svg
+            >
           </div>
-          <div class="card-desc">7×24小时专属服务群响应</div>
+
+          <div class="card-desc">{{ t('supportPage.dedicatedService') }}</div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
   <div class="support-page">
-    <h2 id="download" class="section-title">相关下载</h2>
+
+    <h2 id="download" class="section-title">{{ t('supportPage.relatedDownloads') }}</h2>
+
     <div class="section-block">
+
       <div
         v-for="(item, idx) in downloads"
         :key="item.title"
         class="card-item download-card"
-        :class="{ open: item.open }"
+        :class="{ open: downloadStates[idx] }"
       >
-        <div class="card-header" @click="toggleDownload(idx)">
-          <span class="card-title download-title">{{ item.title }}</span>
-          <span class="card-icon">{{ item.open ? '-' : '+' }}</span>
+
+        <div 
+          class="card-header" 
+          @click="toggleDownload(idx)"
+          @keydown="handleKeydown($event, idx, 'download')"
+          role="button"
+          tabindex="0"
+          :aria-expanded="downloadStates[idx]"
+          :aria-controls="`download-content-${idx}`"
+        >
+           <span class="card-title download-title">{{ item.title }}</span
+          > <span class="card-icon" aria-hidden="true">{{ downloadStates[idx] ? '-' : '+' }}</span
+          >
         </div>
-        <transition name="fade-slide">
-          <div v-if="item.open" class="card-content">
-            <a :href="item.link">{{ item.desc }}</a>
+         <transition name="fade-slide"
+          >
+          <div 
+            v-if="downloadStates[idx]" 
+            class="card-content"
+            :id="`download-content-${idx}`"
+            role="region"
+            :aria-hidden="!downloadStates[idx]"
+          >
+             <span style="color: #666; font-style: italic;">{{ t('supportPage.preparingMessage') }}</span>
           </div>
-        </transition>
+           </transition
+        >
       </div>
+
     </div>
-    <h2 id="faq" class="section-title">常见问题</h2>
+
+    <h2 id="faq" class="section-title">{{ t('supportPage.faqTitle') }}</h2>
+
     <div class="section-block">
+
       <div
         v-for="(faq, idx) in faqs"
         :key="faq.q"
         class="card-item faq-card"
-        :class="{ open: faq.open }"
+        :class="{ open: faqStates[idx] }"
       >
-        <div class="card-header" @click="toggleFaq(idx)">
-          <span class="card-title faq-title">{{ faq.q }}</span>
-          <span class="card-icon">{{ faq.open ? '-' : '+' }}</span>
+
+        <div 
+          class="card-header" 
+          @click="toggleFaq(idx)"
+          @keydown="handleKeydown($event, idx, 'faq')"
+          role="button"
+          tabindex="0"
+          :aria-expanded="faqStates[idx]"
+          :aria-controls="`faq-content-${idx}`"
+        >
+           <span class="card-title faq-title">{{ faq.q }}</span
+          > <span class="card-icon" aria-hidden="true">{{ faqStates[idx] ? '-' : '+' }}</span
+          >
         </div>
-        <transition name="fade-slide">
-          <div v-if="faq.open" class="card-content">
-            {{ faq.a }}
-          </div>
-        </transition>
+         <transition name="fade-slide"
+          >
+          <div 
+            v-if="faqStates[idx]" 
+            class="card-content"
+            :id="`faq-content-${idx}`"
+            role="region"
+            :aria-hidden="!faqStates[idx]"
+          > {{ faq.a }} </div>
+           </transition
+        >
       </div>
+
     </div>
+
   </div>
-  <!-- 在页面下方添加锚点内容区块 -->
-  <div style="height: 60px"></div>
-  <div id="manual"></div>
-  <div id="joint"></div>
-  <div id="faq1"></div>
-  <div id="faq2"></div>
-  <div id="faq3"></div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互
-import { reactive } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-const downloads = reactive([
-  {
-    title: '产品手册',
-    desc: 'PDF文档下载',
-    link: '#manual',
-    open: false,
-  },
-  {
-    title: '关节资料',
-    desc: 'ZIP资料包下载',
-    link: '#joint',
-    open: false,
-  },
-]);
+const { t } = useI18n();
 
-const faqs = reactive([
-  {
-    q: '你们的移动机器人支持哪些导航方式？',
-    a: '我们的移动机器人支持激光SLAM、视觉导航、二维码导航等多种导航方式，可根据客户现场环境灵活选配，满足多样化应用需求。',
-    link: '#faq1',
-    open: false,
-  },
-  {
-    q: '机器人控制系统是否支持二次开发和系统集成？',
-    a: '支持。我们为客户提供开放的SDK和API，方便进行二次开发和与第三方系统集成，助力实现个性化功能扩展。',
-    link: '#faq2',
-    open: false,
-  },
-  {
-    q: '可以根据客户需求定制机器人或系统吗？',
-    a: '可以。我们支持软硬件定制开发，包括结构、功能、接口等多方面，欢迎联系我们沟通具体需求。',
-    link: '#faq3',
-    open: false,
-  },
-]);
-
-function toggleDownload(idx) {
-  downloads[idx].open = !downloads[idx].open;
+interface DownloadItem {
+  title: string;
+  desc: string;
 }
-function toggleFaq(idx) {
-  faqs[idx].open = !faqs[idx].open;
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+const downloads = computed<DownloadItem[]>(() => [
+  {
+    title: t('supportPage.downloads.productManual'),
+    desc: 'PDF文档下载',
+  },
+  {
+    title: t('supportPage.downloads.jointMaterials'),
+    desc: 'ZIP资料包下载',
+  },
+]);
+
+const faqs = computed<FaqItem[]>(() => [
+  {
+    q: t('supportPage.faqs.navigation.question'),
+    a: t('supportPage.faqs.navigation.answer'),
+  },
+  {
+    q: t('supportPage.faqs.development.question'),
+    a: t('supportPage.faqs.development.answer'),
+  },
+  {
+    q: t('supportPage.faqs.customization.question'),
+    a: t('supportPage.faqs.customization.answer'),
+  },
+]);
+
+// 使用响应式数据跟踪展开/收起状态
+const downloadStates = ref<boolean[]>([]);
+const faqStates = ref<boolean[]>([]);
+
+// 监听数据变化并初始化状态
+watchEffect(() => {
+  downloadStates.value = downloads.value.map(() => false);
+  faqStates.value = faqs.value.map(() => false);
+});
+
+function toggleDownload(idx: number): void {
+  downloadStates.value[idx] = !downloadStates.value[idx];
+}
+function toggleFaq(idx: number): void {
+  faqStates.value[idx] = !faqStates.value[idx];
+}
+
+// 键盘导航支持
+function handleKeydown(event: KeyboardEvent, idx: number, type: 'download' | 'faq'): void {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    if (type === 'download') {
+      toggleDownload(idx);
+    } else {
+      toggleFaq(idx);
+    }
+  }
 }
 </script>
 
@@ -389,8 +476,8 @@ function toggleFaq(idx) {
   }
   .card-header,
   .card-content {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 @media (max-width: 600px) {
@@ -426,10 +513,11 @@ function toggleFaq(idx) {
     padding-left: 0;
   }
   .card-header {
-    padding: 8px 4px;
+    padding: 12px 16px;
   }
   .card-content {
-    padding: 0 4px 6px 4px;
+    padding: 0 16px 12px 16px;
   }
 }
 </style>
+

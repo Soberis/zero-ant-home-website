@@ -1,100 +1,84 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 
-// 路由懒加载
-const Home = () => import('@/views/Home.vue');
-const Applications = () => import('@/views/applications/Applications.vue');
-const About = () => import('@/views/company/About.vue');
-const Contact = () => import('@/views/company/Contact.vue');
-const Video = () => import('@/views/media/Video.vue');
-const VideoDetail = () => import('@/views/media/VideoDetail.vue');
-const ProductDetail = () => import('@/views/products/ProductDetailView.vue');
-const Support = () => import('@/views/support/Support.vue');
+// 核心页面直接导入（首屏关键路径）
+import Home from "@/views/Home.vue";
+
+// 其他页面使用懒加载（按需加载）
+const Solutions = () => import("@/views/solutions/Solutions.vue");
+const About = () => import("@/views/company/About.vue");
+const VideoDetail = () => import("@/views/media/VideoDetail.vue");
+const ProductDetail = () => import("@/views/products/ProductDetailView.vue");
+const Support = () => import("@/views/support/Support.vue");
 const ApplicationDetail = () =>
-  import('@/views/applications/ApplicationDetail.vue');
-const SystemProducts = () => import('@/views/products/SystemProducts.vue');
-const RobotProducts = () => import('@/views/products/RobotProducts.vue');
-const Careers = () => import('@/views/company/Careers.vue');
-const Solutions = () => import('@/views/solutions/Solutions.vue');
+  import("@/views/applications/ApplicationDetail.vue");
+const SystemProducts = () => import("@/views/products/SystemProducts.vue");
+const RobotProducts = () => import("@/views/products/RobotProducts.vue");
+const Careers = () => import("@/views/company/Careers.vue");
 
 const routes = [
   // 首页
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
   },
   // 解决方案（集成页面）
   {
-    path: '/solutions',
-    name: 'Solutions',
+    path: "/solutions",
+    name: "Solutions",
     component: Solutions,
   },
   // 应用场景
   {
-    path: '/applications',
-    name: 'Applications',
-    component: Applications,
-  },
-  {
-    path: '/applications/:slug',
-    name: 'ApplicationDetail',
+    path: "/applications/:slug",
+    name: "ApplicationDetail",
     component: ApplicationDetail,
   },
   // 服务支持
   {
-    path: '/support',
-    name: 'Support',
+    path: "/support",
+    name: "Support",
     component: Support,
   },
   // 人才招聘
   {
-    path: '/careers',
-    name: 'Careers',
+    path: "/careers",
+    name: "Careers",
     component: Careers,
   },
   // 关于我们
   {
-    path: '/about',
-    name: 'About',
+    path: "/about",
+    name: "About",
     component: About,
   },
-  // 联系我们
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: Contact,
-  },
+
   // 视频相关
   {
-    path: '/video',
-    name: 'Video',
-    component: Video,
-  },
-  {
-    path: '/video/:slug',
-    name: 'VideoDetail',
+    path: "/video/:slug",
+    name: "VideoDetail",
     component: VideoDetail,
   },
   // 系统产品
   {
-    path: '/system-products',
-    name: 'SystemProducts',
+    path: "/system-products",
+    name: "SystemProducts",
     component: SystemProducts,
   },
   {
-    path: '/system-products/:slug',
-    name: 'SystemProductDetail',
+    path: "/system-products/:slug",
+    name: "SystemProductDetail",
     component: ProductDetail,
   },
   // 机器人产品
   {
-    path: '/robot-products',
-    name: 'RobotProducts',
+    path: "/robot-products",
+    name: "RobotProducts",
     component: RobotProducts,
   },
   {
-    path: '/robot-products/:slug',
-    name: 'RobotProductDetail',
+    path: "/robot-products/:slug",
+    name: "RobotProductDetail",
     component: ProductDetail,
   },
 ];
@@ -102,16 +86,37 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to) {
+  scrollBehavior(to, from, savedPosition) {
+    // 如果浏览器返回/前进且有保存的位置，恢复该位置
+    if (savedPosition) {
+      return savedPosition;
+    }
+    
+    // 处理hash导航
     if (to.hash) {
       return {
         el: to.hash,
         top: 120,
-        behavior: 'smooth',
+        behavior: "smooth",
       };
     }
+    
+    // 保存当前滚动位置到历史状态
+    if (from && from.name) {
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          scrollTop: window.scrollY || document.documentElement.scrollTop
+        },
+        ''
+      );
+    }
+    
+    // 默认滚动到顶部
     return { top: 0 };
   },
 });
+
+// 路由守卫将在main.ts中设置，避免循环依赖
 
 export default router;

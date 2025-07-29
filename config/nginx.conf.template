@@ -9,7 +9,14 @@ server {
 
     # 启用 gzip 压缩
     gzip on;
-    gzip_types text/css application/javascript;
+    gzip_types text/css application/javascript application/font-woff application/font-woff2 font/woff font/woff2;
+
+    # 字体文件MIME类型配置
+    location ~* \.(woff|woff2|ttf|eot|svg)$ {
+        add_header Access-Control-Allow-Origin *;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
 
     # 处理 SPA 路由：所有路由返回 index.html
     location / {
@@ -39,7 +46,14 @@ server {
     ssl_prefer_server_ciphers on;
 
     gzip on;
-    gzip_types text/css application/javascript;
+    gzip_types text/css application/javascript application/font-woff application/font-woff2 font/woff font/woff2;
+
+    # 字体文件MIME类型配置
+    location ~* \.(woff|woff2|ttf|eot|svg)$ {
+        add_header Access-Control-Allow-Origin *;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
 
     location / {
         try_files $uri $uri/ /index.html;

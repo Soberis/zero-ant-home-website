@@ -4,32 +4,40 @@
     <section class="careers-hero">
       <div class="container">
         <div class="hero-content">
-          <h1 class="hero-title">加入零蚁科技</h1>
+          <h1 class="hero-title">{{ $t("careers.heroTitle") }}</h1>
+
           <p class="hero-subtitle">
-            与我们一起打造未来机器人技术，让机器人遍布每个角落
+            {{ $t("careers.heroSubtitle") }}
           </p>
+
           <div class="hero-stats">
             <div class="stat-item">
               <span class="stat-number">8+</span>
-              <span class="stat-label">技术积累</span>
+              <span class="stat-label">{{
+                $t("careers.techAccumulation")
+              }}</span>
             </div>
+
             <div class="stat-item">
               <span class="stat-number">20+ </span>
-              <span class="stat-label">团队伙伴</span>
+              <span class="stat-label">{{ $t("careers.teamPartners") }}</span>
             </div>
+
             <div class="stat-item">
               <span class="stat-number">50+</span>
-              <span class="stat-label">成功项目</span>
+              <span class="stat-label">{{
+                $t("careers.successfulProjects")
+              }}</span>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <!-- 为什么选择我们 -->
     <section class="why-join">
       <div class="container">
-        <h2 class="section-title">为什么选择零蚁科技</h2>
+        <h2 class="section-title">{{ $t("careers.whyJoinTitle") }}</h2>
+
         <div class="benefits-grid">
           <div
             v-for="benefit in benefits"
@@ -38,17 +46,18 @@
           >
             <div class="benefit-content">
               <h3 class="benefit-title">{{ benefit.title }}</h3>
+
               <p class="benefit-description">{{ benefit.description }}</p>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <!-- 职位列表 -->
     <section class="job-positions">
       <div class="container">
-        <h2 class="section-title">热招职位</h2>
+        <h2 class="section-title">{{ $t("careers.hotPositionsTitle") }}</h2>
+
         <div class="positions-grid">
           <div
             v-for="position in positions"
@@ -59,45 +68,57 @@
               <h3 class="position-title">{{ position.title }}</h3>
               <span class="position-type">{{ position.type }}</span>
             </div>
+
             <div class="position-details">
               <div class="detail-item">
-                <span class="detail-label">工作地点:</span>
+                <span class="detail-label"
+                  >{{ $t("careers.workLocation") }}:</span
+                >
                 <span class="detail-value">{{ position.location }}</span>
               </div>
+
               <div class="detail-item">
-                <span class="detail-label">工作经验:</span>
+                <span class="detail-label"
+                  >{{ $t("careers.workExperience") }}:</span
+                >
                 <span class="detail-value">{{ position.experience }}</span>
               </div>
             </div>
+
             <div class="position-requirements">
-              <h4 class="requirements-title">职位要求</h4>
+              <h4 class="requirements-title">
+                {{ $t("careers.positionRequirements") }}
+              </h4>
+
               <ul class="requirements-list">
                 <li v-for="req in position.requirements" :key="req">
                   {{ req }}
                 </li>
               </ul>
             </div>
+
             <div class="position-actions">
               <button class="apply-btn" @click="applyForPosition(position)">
-                立即申请
+                {{ $t("careers.applyNow") }}
               </button>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <!-- 联系我们 -->
     <section class="contact-section">
       <div class="container">
         <div class="contact-content">
-          <h2 class="section-title">联系我们</h2>
+          <h2 class="section-title">{{ $t("careers.contactUsTitle") }}</h2>
+
           <p class="contact-description">
-            如果您对我们的职位感兴趣，或者想了解更多信息，请随时联系我们的人力资源团队。
+            {{ $t("careers.contactDescription") }}
           </p>
+
           <div class="contact-info">
             <div class="contact-item">
-              <span class="contact-label">邮箱:</span>
+              <span class="contact-label">{{ $t("careers.email") }}:</span>
               <span class="contact-value">hr@zeroant.com</span>
             </div>
           </div>
@@ -107,143 +128,154 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t, tm } = useI18n();
+
+// 定义接口
+interface Benefit {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface Position {
+  id: number;
+  title: string;
+  type: string;
+  location: string;
+  experience: string;
+  requirements: string[];
+}
 
 // 公司优势
-const benefits = ref([
+const benefits = computed<Benefit[]>(() => [
   {
     id: 1,
-    title: '技术创新',
-    description: '参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界',
+    title: t("careers.benefits.techInnovation.title"),
+    description: t("careers.benefits.techInnovation.description"),
   },
   {
     id: 2,
-    title: '职业发展',
-    description: '完善的培训体系和晋升通道，助力个人职业发展和技能提升',
+    title: t("careers.benefits.careerDevelopment.title"),
+    description: t("careers.benefits.careerDevelopment.description"),
   },
   {
     id: 3,
-    title: '优秀团队',
-    description: '与来自全球的优秀工程师合作，在开放包容的环境中共同成长',
+    title: t("careers.benefits.excellentTeam.title"),
+    description: t("careers.benefits.excellentTeam.description"),
   },
   {
     id: 4,
-    title: '丰厚待遇',
-    description: '具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排',
+    title: t("careers.benefits.generousTreatment.title"),
+    description: t("careers.benefits.generousTreatment.description"),
   },
   {
     id: 5,
-    title: '个人挑战',
-    description: '不设限制的创新环境，在全栈自研体系中突破自我',
+    title: t("careers.benefits.personalChallenge.title"),
+    description: t("careers.benefits.personalChallenge.description"),
   },
   {
     id: 6,
-    title: '社会价值',
-    description: '直击行业痛点，推动工业制造产质升级',
+    title: t("careers.benefits.socialValue.title"),
+    description: t("careers.benefits.socialValue.description"),
   },
 ]);
 
 // 职位列表
-const positions = ref([
+const positions = computed<Position[]>(() => [
   {
     id: 1,
-    title: '机器人工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '机械工程、自动化或相关专业本科及以上学历',
-      '3年以上机器人系统开发经验',
-      '熟悉ROS、运动控制、路径规划等技术',
-      '具备良好的团队协作和沟通能力',
-    ],
+    title: t("careers.positions.robotEngineer.title"),
+    type: t("careers.fullTime"),
+    location: t("careers.hangzhou"),
+    experience: t("careers.unlimited"),
+    requirements: tm(
+      "careers.positions.robotEngineer.requirements"
+    ) as string[],
   },
   {
     id: 2,
-    title: '软件工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '计算机科学或相关专业本科及以上学历',
-      '熟练掌握C++、Python等编程语言',
-      '有嵌入式系统或实时系统开发经验',
-      '了解机器人操作系统和控制算法',
-    ],
+    title: t("careers.positions.softwareEngineer.title"),
+    type: t("careers.fullTime"),
+    location: t("careers.hangzhou"),
+    experience: t("careers.unlimited"),
+    requirements: tm(
+      "careers.positions.softwareEngineer.requirements"
+    ) as string[],
   },
   {
     id: 3,
-    title: '算法工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '计算机、数学、自动化等相关专业硕士及以上学历',
-      '深度学习、计算机视觉或SLAM算法经验',
-      '熟悉TensorFlow、PyTorch等深度学习框架',
-      '有机器人感知、决策算法开发经验优先',
-    ],
+    title: t("careers.positions.algorithmEngineer.title"),
+    type: t("careers.fullTime"),
+    location: t("careers.hangzhou"),
+    experience: t("careers.unlimited"),
+    requirements: tm(
+      "careers.positions.algorithmEngineer.requirements"
+    ) as string[],
   },
   {
     id: 4,
-    title: '硬件工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '电子工程、自动化等相关专业本科及以上学历',
-      '熟悉电路设计、PCB布局和硬件调试',
-      '有嵌入式系统硬件开发经验',
-      '了解传感器集成和信号处理技术',
-    ],
+    title: t("careers.positions.hardwareEngineer.title"),
+    type: t("careers.fullTime"),
+    location: t("careers.hangzhou"),
+    experience: t("careers.unlimited"),
+    requirements: tm(
+      "careers.positions.hardwareEngineer.requirements"
+    ) as string[],
   },
   {
     id: 5,
-    title: '产品经理',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '本科及以上学历，理工类、管理类相关专业优先',
-      '有2年以上产品经理或相关岗位经验优先',
-      '具备良好的需求分析、产品规划和跨部门沟通能力',
-      '有机器人、工业自动化或软件产品经验者优先',
-    ],
+    title: t("careers.positions.productManager.title"),
+    type: t("careers.fullTime"),
+    location: t("careers.hangzhou"),
+    experience: t("careers.unlimited"),
+    requirements: tm(
+      "careers.positions.productManager.requirements"
+    ) as string[],
   },
   {
     id: 6,
-    title: '测试工程师',
-    type: '全职',
-    location: '杭州',
-    experience: '不限制',
-    requirements: [
-      '本科及以上学历，计算机、自动化等相关专业',
-      '熟悉软件/硬件测试流程，能独立编写测试用例',
-      '有自动化测试、持续集成经验优先',
-      '工作细致认真，具备良好的沟通与团队协作能力',
-    ],
+    title: t("careers.positions.testEngineer.title"),
+    type: t("careers.fullTime"),
+    location: t("careers.hangzhou"),
+    experience: t("careers.unlimited"),
+    requirements: tm("careers.positions.testEngineer.requirements") as string[],
   },
 ]);
 
 // 申请职位
-const applyForPosition = position => {
-  window.open(`mailto:hr@zeroant.com?subject=申请职位：${position.title}`);
+const applyForPosition = (position: Position): void => {
+  window.open(
+    `mailto:hr@zeroant.com?subject=${t("careers.applySubject")}${
+      position.title
+    }`
+  );
 };
 </script>
 
 <style scoped lang="less">
 .careers-page {
-  min-height: 100vh;
+  min-height: 70vh;
   background: #f8f9fa;
-  font-size: 1.5rem; // 再提升正文基础字体
+  font-size: 1.8rem; // 再提升正文基础字体
   line-height: 1.7;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1350px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 32px;
+}
+
+// 覆盖全局样式，确保在大屏幕上也使用较小的max-width
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1350px !important;
+    padding: 0 32px;
+  }
 }
 
 // 页面头部
@@ -323,17 +355,18 @@ const applyForPosition = position => {
 
   .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 32px;
 
     .benefit-card {
       background: white;
       border-radius: 12px;
       padding: 2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       border: 1px solid #f0f0f0;
 
       &:hover {
@@ -364,16 +397,17 @@ const applyForPosition = position => {
 
   .positions-grid {
     display: grid;
-    gap: 2rem;
+    gap: 40px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
 
     .position-card {
       background: white;
       border-radius: 12px;
       padding: 2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
 
       &:hover {
         transform: translateY(-3px);
@@ -450,7 +484,7 @@ const applyForPosition = position => {
             font-size: 1.5rem;
 
             &:before {
-              content: '•';
+              content: "•";
               color: #1a3a8f;
               font-weight: bold;
               position: absolute;
@@ -527,51 +561,223 @@ const applyForPosition = position => {
 // 响应式设计
 @media (max-width: 768px) {
   .careers-hero {
-    padding: 80px 0 60px;
+    min-height: 70vh; // 手机端改为70vh，避免过高
+    padding: 15vh 0 0 0; // 移动端文字下移
 
     .hero-title {
-      font-size: 2.2rem; // 原2.5rem，略减小，适配移动端
+      font-size: 2rem; // 进一步减小标题字体
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem; // 减小副标题字体
+      margin-bottom: 2rem;
+      padding: 0 1rem; // 添加水平内边距
     }
 
     .hero-stats {
-      gap: 2rem;
+      gap: 1.5rem;
+
+      .stat-item {
+        .stat-number {
+          font-size: 2rem; // 减小数字字体
+          margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+          font-size: 1.3rem; // 减小标签字体
+        }
+      }
     }
   }
 
   .section-title {
-    font-size: 1.4rem; // 统一为1.4rem
+    font-size: 1.8rem; // 统一为1.8rem，更适合移动端
   }
 
   .why-join,
   .job-positions,
   .contact-section {
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
-  .position-card {
-    .position-header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  .container {
+    padding: 0 20px; // 增加移动端内边距
+  }
 
-    .position-details {
-      grid-template-columns: 1fr;
-    }
+  .why-join {
+    .benefits-grid {
+      padding: 0 20px;
+      gap: 20px; // 减小卡片间距
 
-    .position-actions {
-      text-align: center;
+      .benefit-card {
+        padding: 1.5rem; // 减小卡片内边距
+
+        .benefit-title {
+          font-size: 1.6rem; // 减小标题字体
+          margin-bottom: 0.8rem;
+        }
+
+        .benefit-description {
+          font-size: 1.3rem; // 减小描述字体
+        }
+      }
+    }
+  }
+
+  .job-positions {
+    .positions-grid {
+      padding: 0 20px;
+      gap: 20px; // 减小卡片间距
+
+      .position-card {
+        padding: 1.5rem; // 减小卡片内边距
+
+        .position-header {
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+
+          .position-title {
+            font-size: 1.8rem; // 减小职位标题字体
+          }
+
+          .position-type {
+            font-size: 1.1rem; // 减小职位类型字体
+          }
+        }
+
+        .position-details {
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+
+          .detail-item {
+            .detail-label,
+            .detail-value {
+              font-size: 1.3rem; // 减小详情字体
+            }
+          }
+        }
+
+        .position-requirements {
+          margin-bottom: 1.5rem;
+
+          .requirements-title {
+            font-size: 1.5rem; // 减小要求标题字体
+            margin-bottom: 0.8rem;
+          }
+
+          .requirements-list li {
+            font-size: 1.3rem; // 减小要求列表字体
+            padding: 0.3rem 0;
+          }
+        }
+
+        .position-actions {
+          text-align: center;
+
+          .apply-btn {
+            font-size: 1.1rem; // 减小按钮字体
+            padding: 0.7rem 1.8rem; // 减小按钮内边距
+          }
+        }
+      }
     }
   }
 
   .contact-info {
     flex-direction: column;
     gap: 1rem;
+
+    .contact-item {
+      .contact-label,
+      .contact-value {
+        font-size: 1.3rem; // 减小联系信息字体
+      }
+    }
   }
 }
 
 @media (max-width: 600px) {
+  .careers-hero {
+    min-height: 60vh; // 更小屏幕进一步减小高度
+    padding: 13vh 0 0 0; // 更小屏幕文字下移
+
+    .hero-title {
+      font-size: 1.8rem; // 进一步减小标题字体
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem; // 进一步减小副标题字体
+    }
+  }
+
   .section-title {
-    font-size: 1.2rem; // 600px以下进一步缩小
+    font-size: 1.6rem; // 进一步减小章节标题字体
+  }
+
+  .container {
+    padding: 0 16px; // 减小内边距
+  }
+
+  .why-join {
+    .benefits-grid {
+      padding: 0 16px;
+      grid-template-columns: 1fr; // 单列布局
+    }
+  }
+
+  .job-positions {
+    .positions-grid {
+      padding: 0 16px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .careers-hero {
+    min-height: 55vh; // 最小屏幕的高度
+    padding: 11vh 0 0 0; // 最小屏幕文字下移
+
+    .hero-title {
+      font-size: 1.6rem; // 最小标题字体
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem; // 最小副标题字体
+    }
+
+    .hero-stats {
+      flex-direction: column; // 垂直排列统计数据
+      gap: 1rem;
+
+      .stat-item {
+        .stat-number {
+          font-size: 1.8rem;
+        }
+
+        .stat-label {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .why-join {
+    .benefits-grid {
+      padding: 0 12px;
+    }
+  }
+
+  .job-positions {
+    .positions-grid {
+      padding: 0 12px;
+    }
   }
 }
 </style>

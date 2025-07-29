@@ -1,23 +1,37 @@
 <template>
+
   <section class="video-cases">
-    <h2 class="section-title">视频案例</h2>
+
+    <h2 class="section-title">{{ $t('nav.videoCases') }}</h2>
+
     <div class="videos-list">
-      <div v-for="video in videoCards" :key="video.slug" class="video-card">
+
+      <div
+        v-for="video in videoCardsTyped"
+        :key="video.slug"
+        class="video-card"
+      >
+
         <div class="video-img">
-          <img :src="video.img" :alt="video.title" loading="lazy" />
+           <img :src="video.img" :alt="video.title" loading="lazy" />
         </div>
-        <div class="video-title">{{ video.title }}</div>
-        <router-link :to="`/video/${video.slug}`" class="more-btn"
-          >观看视频 +</router-link
+
+        <div class="video-title">{{ $t(`videos.${video.slug}.title`) }}</div>
+         <router-link :to="`/video/${video.slug}`" class="more-btn"
+        >{{ $t(`home.videoCases.watchVideo`) }} +</router-link
         >
       </div>
+
     </div>
+
   </section>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 视频案例数据
-import { videoCards } from '@/data/videos';
+import { videoCards, type VideoCard } from '@/data/videos';
+const videoCardsTyped: VideoCard[] = videoCards;
 </script>
 
 <style scoped>
@@ -40,18 +54,16 @@ import { videoCards } from '@/data/videos';
 .videos-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 36px;
+  gap: 40px;
   width: 100%;
-  max-width: 1800px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 40px;
   overflow-x: hidden;
 }
 .video-card {
-  flex: 0 0 320px;
-  width: 320px;
-  min-width: 240px;
-  max-width: 340px;
+  width: 100%;
+  max-width: 100%;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 4px 24px 0 rgba(30, 40, 90, 0.08);
@@ -107,6 +119,9 @@ import { videoCards } from '@/data/videos';
     padding-left: 10px;
     padding-right: 10px;
   }
+  .videos-list {
+    padding: 0 30px;
+  }
 }
 @media (max-width: 600px) {
   .section-title {
@@ -116,6 +131,8 @@ import { videoCards } from '@/data/videos';
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 20px;
   }
 }
 </style>
+

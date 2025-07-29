@@ -1,7 +1,7 @@
 <template>
-  <div class="products">
-    <slot />
-  </div>
+
+  <div class="products"> <slot /> </div>
+
 </template>
 
 <script setup lang="ts">
@@ -132,8 +132,8 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .products {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   :deep(.product-card-wrapper) {
@@ -157,7 +157,7 @@
   }
 
   :deep(.product-card) {
-    padding: 36px 10vw 36px 10vw;
+    padding: 36px 20px 36px 20px;
   }
 
   :deep(.product-image-wrapper) {
@@ -182,7 +182,7 @@
 
 @media (max-width: 600px) {
   .products {
-    padding: 32px 0 24px 0;
+    padding: 32px 16px 24px 16px;
   }
 
   :deep(.product-series) {
@@ -190,7 +190,7 @@
   }
 
   :deep(.product-card) {
-    padding: 24px 4vw 24px 4vw;
+    padding: 24px 16px 24px 16px;
   }
 
   :deep(.series-title) {
@@ -202,3 +202,4 @@
   }
 }
 </style>
+

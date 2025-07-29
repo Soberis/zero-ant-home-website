@@ -6,18 +6,15 @@
       class="carousel-slide"
       :class="{ active: idx === current }"
     >
-      <div
-        class="slide-bg"
-        :style="{ backgroundImage: `url(${slide.img})` }"
-      ></div>
       <div class="slide-content">
         <h1 class="slide-title">{{ slide.title }}</h1>
         <p class="slide-desc">{{ slide.desc }}</p>
       </div>
     </div>
+
     <div class="carousel-controls">
       <button
-        v-for="(slide, idx) in slides"
+        v-for="(_, idx) in slides"
         :key="idx"
         :class="{ active: idx === current }"
         @click="goTo(idx)"
@@ -46,57 +43,133 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import multiOsImg from "@/assets/images/products/多OS混合部署嵌入式虚拟机.png";
+import airosImg from "@/assets/images/products/AiROS机器人操作系统.png";
+import scara4axisImg from "@/assets/images/products/四轴机器人.png";
+import dualArmImg from "@/assets/images/products/双臂人形机器人.png";
 
-// 轮播图数据（如需动态可抽离为props或外部数据源）
-const slides = [
+// 获取国际化函数和路由
+const { t } = useI18n();
+const router = useRouter();
+
+// 轮播图数据类型定义
+interface SlideItem {
+  img: string;
+  title: string;
+  desc: string;
+  bgSize?: "cover" | "contain" | "100% auto" | "auto 100%";
+  bgPosition?: string;
+  customWidth?: string;
+  customHeight?: string;
+  showArc?: boolean;
+  routePath: string;
+}
+
+// 轮播图数据（使用翻译函数）
+const slides = computed<SlideItem[]>(() => [
   {
-    img: 'https://via.placeholder.com/1920x900/1a3a8f/ffffff?text=RTOS',
-    title: '实时操作系统',
-    desc: '高可靠、低延迟的工业级实时操作系统，赋能智能设备高效运行。',
+    img: multiOsImg,
+    title: t("products.multiOsVm.name"),
+    desc: t("products.multiOsVm.desc"),
+    bgSize: "100% auto",
+    bgPosition: "center 20%",
+    customWidth: "85%",
+    customHeight: "auto",
+    showArc: false,
+    routePath: "/system-products/multi-os-vm",
   },
   {
-    img: 'https://via.placeholder.com/1920x900/222/fff?text=Robot+Control',
-    title: '机器人控制系统',
-    desc: '灵活可扩展的机器人控制平台，支持多种应用场景与复杂任务。',
+    img: airosImg,
+    title: t("products.airos.name"),
+    desc: t("products.airos.desc"),
+    bgSize: "contain",
+    bgPosition: "center center",
+    customWidth: "75%",
+    customHeight: "auto",
+    showArc: false,
+    routePath: "/system-products/airos",
   },
   {
-    img: 'https://via.placeholder.com/1920x900/555/fff?text=Mobile+Robot',
-    title: '移动机器人',
-    desc: '自主导航与智能调度，助力智慧物流与智能制造升级。',
+    img: scara4axisImg,
+    title: t("products.scara4axis.name"),
+    desc: t("products.scara4axis.desc"),
+    bgSize: "contain",
+    bgPosition: "center center",
+    customWidth: "",
+    customHeight: "auto",
+    showArc: true,
+    routePath: "/robot-products/scara-4axis",
   },
-];
-const current = ref(0);
+  {
+    img: dualArmImg,
+    title: t("products.dualArmHumanoid.name"),
+    desc: t("products.dualArmHumanoid.desc"),
+    bgSize: "contain",
+    bgPosition: "center center",
+    customWidth: "",
+    customHeight: "auto",
+    showArc: true,
+    routePath: "/robot-products/dual-arm-humanoid",
+  },
+]);
+const current = ref<number>(0);
 // 自动轮播定时器
-let timer = null;
+let timer: NodeJS.Timeout | null = null;
 
 /**
  * 切换到下一张
  */
-function next() {
-  current.value = (current.value + 1) % slides.length;
+function next(): void {
+  current.value = (current.value + 1) % slides.value.length;
 }
 /**
  * 跳转到指定索引
  */
-function goTo(idx) {
+function goTo(idx: number): void {
   current.value = idx;
   resetTimer();
 }
 /**
  * 重置自动轮播定时器
  */
-function resetTimer() {
+function resetTimer(): void {
   if (timer) clearInterval(timer);
   timer = setInterval(next, 4000);
 }
 
+/**
+ * 跳转到产品详情页
+ */
+function navigateToProduct(slide: SlideItem): void {
+  router.push(slide.routePath);
+}
+
 onMounted(() => {
   resetTimer();
-});
-onUnmounted(() => {
-  if (timer) clearInterval(timer);
+
+  // 预加载下一张图片
+  const preloadNextImage = () => {
+    const nextIndex = (current.value + 1) % slides.value.length;
+    const img = new Image();
+    img.src = slides.value[nextIndex].img;
+  };
+
+  // 初始预加载
+  preloadNextImage();
+
+  // 监听轮播变化预加载下一张
+  const stopWatch = watch(current, () => {
+    preloadNextImage();
+  });
+
+  onUnmounted(() => {
+    stopWatch();
+    if (timer) clearInterval(timer);
+  });
 });
 </script>
 
@@ -136,17 +209,7 @@ onUnmounted(() => {
   opacity: 1;
   z-index: 2;
 }
-.slide-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  z-index: 1;
-  transition: opacity 0.8s;
-}
+
 .slide-content {
   position: absolute;
   left: 80px;

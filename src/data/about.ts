@@ -18,7 +18,6 @@ export interface TeamInfo {
   background: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type TranslationFunction = (key: string) => string;
 
 /**

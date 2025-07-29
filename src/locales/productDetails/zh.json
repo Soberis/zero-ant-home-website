@@ -1,0 +1,800 @@
+{
+  "multiOsVm": {
+    "title": "多OS混合部署嵌入式虚拟机",
+    "desc": "使用高级语言Rust编写的Type-1型Hypervisor，面向资源受限的嵌入式系统，支持多OS虚拟机并行运行，在提高资源利用率的同时保障虚拟机自身的实时性、虚拟机间的隔离性与系统整体的可靠性。<br><strong>可靠性</strong>：选用Rust作为编程语言，利用语言本身的安全特性提升代码质量，从语言层面保障系统软件的可靠性；<br><strong>隔离性</strong>：从CPU、中断、设备、内存四个方面对系统资源进行隔离，保证虚拟机无法越界访问不属于当前虚拟机的资源；<br><strong>实时性</strong>：通过中断直通机制以及中介传递设备机制，有效降低虚拟化对实时性能的影响。",
+    "features": [
+      "多操作系统并行运行，资源高效隔离",
+      "支持实时操作系统与通用操作系统混合部署",
+      "嵌入式虚拟化技术，低开销高安全",
+      "灵活的系统切换与热插拔能力",
+      "支持多种主流工业协议与接口"
+    ],
+    "cases": {
+      "smartManufacturing": {
+        "title": "智能制造产线升级",
+        "desc": "帮助客户实现设备异构系统统一管理，提升产线自动化水平。"
+      },
+      "industrialGateway": {
+        "title": "工业网关虚拟化",
+        "desc": "在单一硬件平台上部署多套系统，降低硬件成本与维护难度。"
+      }
+    },
+    "scenes": [
+      "车载系统",
+      "智能制造产线",
+      "工业自动化设备",
+      "工业网关与边缘计算",
+      "无人机等混合关键系统"
+    ],
+    "params": {
+      "realTimeGuarantee": {
+        "key": "实时虚拟机最大中断时延",
+        "value": "833ns"
+      },
+      "switchTime": {
+        "key": "实时虚拟机进程切换开销",
+        "value": "256个时钟周期"
+      },
+      "securityLevel": {
+        "key": "稳定性",
+        "value": "7*24小时，RTOS最大中断时延 4.62us"
+      },
+      "memoryManagement": {
+        "key": "内核间通信速率",
+        "value": "10MB测试数据的平均写速率为3.226Gbps、平均读速率为7.631Gbps"
+      },
+      "vmCount": {
+        "key": "虚拟机数量",
+        "value": "最多支持3个并行虚拟机"
+      },
+      "supportedOSKernels": {
+        "key": "支持操作系统内核",
+        "value": "openEuler、 Ubuntu、 Zephyr、 Sylixos、 Arceos"
+      },
+      "supportedHardware": {
+        "key": "适配硬件",
+        "value": "Firefly ROC-RK3588S-PC、NVIDIA Jetson TX2、Raspberry Pi 4 Model B、QEMU模拟器"
+      },
+      "virtualizationTech": {
+        "key": "全模拟设备支持",
+        "value": "模拟GIC、模拟IOMMU"
+      },
+      "resourceIsolation": {
+        "key": "Virtio模拟设备支持",
+        "value": "Virtio Console、Virtio BLK、Virtio Net、Virtio GPIO"
+      }
+    },
+    "downloads": {
+      "whitepaper": {
+        "name": "多OS混合部署嵌入式虚拟机产业白皮书.pdf",
+        "url": "/downloads/多OS混合部署嵌入式虚拟机产业白皮书.pdf"
+      }
+    }
+  },
+  "industrialRtos": {
+    "title": "国产工业实时操作系统",
+    "desc": "<br><strong>实时操作系统内核</strong>：优化嵌入式系统实时性，研发轻量级安全容器隔离技术，增强内核可抢占性及多核调度能力，并支持国产CPU和智能算法框架。<br><strong>运动控制算法与运行时环境</strong>：突破高精度柔顺控制、智能运动规划（避障/能耗优化）及模块化开放式运行时环境，保障复杂场景下的高实时性与可靠性。<br><strong>组件化功能库与开发环境</strong>：构建标准化工业模型库（基础控制、智能算法）、可视化编程工具及统一接口协议，支持模块化开发与多语言集成，提升工业应用开发效率。",
+    "features": [
+      "毫秒级实时响应，满足工业控制需求",
+      "自主可控，安全可审计，适配国产芯片",
+      "丰富的工业协议与驱动支持",
+      "高可靠性与容错机制，保障系统稳定运行",
+      "灵活的任务调度与资源管理"
+    ],
+    "cases": {
+      "highEndEquipment": {
+        "title": "高端装备控制系统",
+        "desc": "为高端数控机床、工业机器人等提供高可靠实时操作系统底座。"
+      },
+      "domesticReplacement": {
+        "title": "国产化替代",
+        "desc": "助力客户实现关键工业系统的国产化自主可控。"
+      }
+    },
+    "scenes": ["工业自动化控制", "机器人控制系统", "高端装备制造"],
+    "params": {
+      "realTimeResponse": {
+        "key": "实时响应",
+        "value": "中断响应<10us"
+      },
+      "securityLevel": {
+        "key": "安全等级",
+        "value": "EAL4+"
+      },
+      "maxTasks": {
+        "key": "最大任务数",
+        "value": "256个并发任务"
+      },
+      "bootTime": {
+        "key": "启动时间",
+        "value": "< 500ms"
+      },
+      "supportedArch": {
+        "key": "支持架构",
+        "value": "ARM, x86, RISC-V"
+      },
+      "memoryManagement": {
+        "key": "内存管理",
+        "value": "MPU + 动态内存分配"
+      },
+      "fileSystem": {
+        "key": "文件系统",
+        "value": "FAT32, YAFFS2, LittleFS"
+      },
+      "networkStack": {
+        "key": "网络协议栈",
+        "value": "TCP/IP, UDP, MQTT, CoAP"
+      },
+      "deviceDrivers": {
+        "key": "设备驱动",
+        "value": "UART, SPI, I2C, CAN, Ethernet"
+      },
+      "powerManagement": {
+        "key": "功耗管理",
+        "value": "多级休眠模式"
+      },
+      "securityFeatures": {
+        "key": "安全特性",
+        "value": "代码签名 + 安全启动"
+      },
+      "debugTools": {
+        "key": "调试工具",
+        "value": "GDB + 系统跟踪"
+      },
+      "devEnvironment": {
+        "key": "开发环境",
+        "value": "Eclipse + VS Code插件"
+      },
+      "certificationStandard": {
+        "key": "认证标准",
+        "value": "IEC 61508 SIL3"
+      },
+      "compatibility": {
+        "key": "兼容性",
+        "value": "支持主流工业协议"
+      }
+    },
+    "downloads": {}
+  },
+  "airos": {
+    "title": "AiROS机器人操作系统",
+    "desc": "致力于打造'开箱即用'的具身机器人基础系统平台，让机器人走进千行百业。打造一套机器人界的Android系统，装进机器人本身，赋予TA灵魂。",
+    "features": [
+      "安全性：Rust语言安全底座保障",
+      "集成化：并行运行的混合部署技术",
+      "实时性：实时性最大中断抖动 ≤ 10us",
+      "控制器成本降低50%",
+      "机器人研发周期缩减70%以上",
+      "支持18轴同时控制，重复定位精度达到0.02mm"
+    ],
+    "cases": {
+      "semiconductorWafer": {
+        "title": "半导体晶圆传送",
+        "desc": "已出货200余台，帮助客户从维修厂转型为高科技制造商，连续工作9万小时无损坏。"
+      },
+      "medicalLabAutomation": {
+        "title": "医药实验室自动化",
+        "desc": "实现国外设备本土化替代，成本从30万降至14万，服务华智生物、珀金埃尔默等客户。"
+      },
+      "foodDeliveryRobot": {
+        "title": "餐饮配送机器人",
+        "desc": "与美团、普渡合作，构建'消费-生产-配送'黄金三角闭环。"
+      }
+    },
+    "scenes": [
+      "半导体加工",
+      "生物医药实验室",
+      "智能餐饮",
+      "社区配送",
+      "工业自动化",
+      "智能制造"
+    ],
+    "params": {
+      "controlPrecision": {
+        "key": "控制精度",
+        "value": "重复定位精度0.02mm"
+      },
+      "realTime": {
+        "key": "实时性",
+        "value": "最大中断抖动 ≤ 10us"
+      },
+      "supportedAxes": {
+        "key": "支持轴数",
+        "value": "18轴同时控制"
+      },
+      "securityCertification": {
+        "key": "安全认证",
+        "value": "信息安全EAL5+认证"
+      },
+      "memoryUsage": {
+        "key": "内存占用",
+        "value": "≤ 512MB"
+      },
+      "bootTime": {
+        "key": "启动时间",
+        "value": "≤ 3秒"
+      },
+      "programmingLanguage": {
+        "key": "编程语言",
+        "value": "Rust + C/C++"
+      },
+      "supportedArch": {
+        "key": "支持架构",
+        "value": "ARM64, x86_64, RISC-V"
+      },
+      "communicationProtocol": {
+        "key": "通信协议",
+        "value": "EtherCAT, CAN, Modbus, OPC UA"
+      },
+      "visionAlgorithm": {
+        "key": "视觉算法",
+        "value": "深度学习目标检测与跟踪"
+      },
+      "multiModalFusion": {
+        "key": "多模态融合",
+        "value": "视觉+激光+IMU+力觉"
+      },
+      "cloudConnection": {
+        "key": "云端连接",
+        "value": "支持5G/WiFi6远程监控"
+      },
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "-20°C ~ +60°C"
+      },
+      "costOptimization": {
+        "key": "成本优化",
+        "value": "控制器成本降低50%"
+      },
+      "devEfficiency": {
+        "key": "开发效率",
+        "value": "研发周期缩减70%以上"
+      }
+    },
+    "downloads": {}
+  },
+  "robotScheduler": {
+    "title": "移动机器人调度系统",
+    "desc": "支持多品牌、多类型移动机器人统一调度与协同作业，提升工厂自动化与物流效率。",
+    "features": [
+      "多品牌机器人统一接入与管理",
+      "智能路径规划与动态避障",
+      "多机协同作业与任务分配",
+      "支持电梯、门禁等外部设备联动",
+      "实时监控与数据分析平台",
+      "云端部署，支持大规模集群管理"
+    ],
+    "cases": {
+      "smartFactoryLogistics": {
+        "title": "智能工厂物流调度",
+        "desc": "实现多台机器人在复杂工厂环境下高效协同作业，提升物流自动化水平。"
+      },
+      "crossFloorDelivery": {
+        "title": "跨楼层配送",
+        "desc": "支持机器人与电梯、门禁系统联动，实现跨楼层物资配送。"
+      }
+    },
+    "scenes": ["智能工厂物流", "仓储自动化", "医院与写字楼配送"],
+    "params": {
+      "maxSchedulingScale": {
+        "key": "最大调度规模",
+        "value": "100台+"
+      },
+      "responseTime": {
+        "key": "响应时间",
+        "value": "≤100ms（任务分配）"
+      },
+      "availability": {
+        "key": "可用性",
+        "value": "99.9%系统可用性"
+      },
+      "systemCapacity": {
+        "key": "系统容量",
+        "value": "支持10万+任务/天"
+      },
+      "supportedBrands": {
+        "key": "支持机器人品牌",
+        "value": "10+主流品牌"
+      },
+      "pathPlanningAlgorithm": {
+        "key": "路径规划算法",
+        "value": "A*算法+动态避障"
+      },
+      "taskSchedulingStrategy": {
+        "key": "任务调度策略",
+        "value": "优先级+负载均衡"
+      },
+      "systemInterface": {
+        "key": "系统接口",
+        "value": "RESTful API, MQTT, OPC UA"
+      },
+      "externalDeviceSupport": {
+        "key": "支持外设联动",
+        "value": "电梯、门禁等"
+      },
+      "mapManagement": {
+        "key": "地图管理",
+        "value": "多层地图+实时更新"
+      },
+      "dataStorage": {
+        "key": "数据存储",
+        "value": "MySQL + Redis缓存"
+      },
+      "monitoringInterface": {
+        "key": "监控界面",
+        "value": "Web端+移动端APP"
+      },
+      "alarmMechanism": {
+        "key": "报警机制",
+        "value": "实时告警+邮件/短信通知"
+      },
+      "deploymentMethod": {
+        "key": "部署方式",
+        "value": "私有云/公有云/混合云"
+      },
+      "securityCertification": {
+        "key": "安全认证",
+        "value": "HTTPS + OAuth2.0"
+      }
+    },
+    "downloads": {}
+  },
+  "gantry2d": {
+    "title": "二/三自由度龙门架",
+    "desc": "高精度、高刚性的龙门架系统，适用于多场景自动化搬运与定位，满足工业级高效作业需求。",
+    "features": [
+      "高刚性结构设计，承载能力强",
+      "亚毫米级定位精度，运行平稳",
+      "模块化设计，便于扩展与维护",
+      "支持多种末端执行器集成",
+      "适配多种工业控制系统",
+      "智能故障诊断与预测性维护"
+    ],
+    "cases": {
+      "automatedAssemblyLine": {
+        "title": "自动化装配线搬运",
+        "desc": "助力客户实现高效自动化搬运与精准定位，提升产线效率。"
+      },
+      "warehouseSorting": {
+        "title": "仓储分拣系统",
+        "desc": "应用于智能仓储，实现大件物品的自动分拣与搬运。"
+      }
+    },
+    "scenes": ["自动化装配线", "智能仓储物流", "精密加工与检测"],
+    "params": {
+      "repeatPositioningAccuracy": {
+        "key": "重复定位精度",
+        "value": "±0.1mm"
+      },
+      "maxLoad": {
+        "key": "最大负载",
+        "value": "5kg"
+      },
+      "effectiveStroke": {
+        "key": "有效行程",
+        "value": "x:385mm y:495mm z:215mm"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "x:1m/s；y: 1m/s；z：1m/s"
+      },
+      "driveMethod": {
+        "key": "驱动方式",
+        "value": "伺服电机+同步带"
+      },
+      "guideRailType": {
+        "key": "导轨类型",
+        "value": "直线导轨+同步带"
+      },
+      "controlSystem": {
+        "key": "控制系统",
+        "value": "PLC控制"
+      },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet"
+      },
+      "workingEnvironment": {
+        "key": "工作环境",
+        "value": "温度：0-50℃；湿度：<=75%"
+      },
+      "installationMethod": {
+        "key": "安装方式",
+        "value": "固定安装"
+      },
+      "structuralMaterial": {
+        "key": "结构材料",
+        "value": "高强度铝合金型材"
+      },
+      "devInterface": {
+        "key": "开发接口",
+        "value": "C++"
+      },
+      "powerRequirement": {
+        "key": "电源",
+        "value": "AC 220V"
+      }
+    },
+    "downloads": {}
+  },
+  "scara4axis": {
+    "title": "四轴机械臂",
+    "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用，具备高速高精度特性。",
+    "features": [
+      "高速运动，循环节拍短",
+      "高精度重复定位，适合精密作业",
+      "结构紧凑，易于集成",
+      "支持多种末端工具快速更换",
+      "开放式控制接口，便于二次开发",
+      "智能视觉引导，自适应作业环境"
+    ],
+    "cases": {
+      "electronicAssembly": {
+        "title": "电子元件装配",
+        "desc": "应用于电子制造业，实现高效自动化装配。"
+      },
+      "automaticSortingPackaging": {
+        "title": "自动分拣与包装",
+        "desc": "在物流分拣线实现高速分拣与自动包装。"
+      }
+    },
+    "scenes": ["电子制造装配", "物流分拣", "自动化包装"],
+    "params": {
+      "repeatPositioningAccuracy": {
+        "key": "重复定位精度",
+        "value": "±0.05mm"
+      },
+      "maxLoad": {
+        "key": "最大负载",
+        "value": "1kg"
+      },
+      "degreesOfFreedom": {
+        "key": "自由度",
+        "value": "4"
+      },
+      "armReach": {
+        "key": "臂展",
+        "value": "大臂展：296mm、小臂展：282mm"
+      },
+      "workingRadius": {
+        "key": "工作半径",
+        "value": "578mm"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "1000mm/s"
+      },
+      "verticalStroke": {
+        "key": "垂直行程",
+        "value": "800mm"
+      },
+      "driveMethod": {
+        "key": "驱动方式",
+        "value": "DC伺服电机+谐波减速器"
+      },
+      "controller": {
+        "key": "控制系统",
+        "value": "专用四轴控制器"
+      },
+      "programmingMethod": {
+        "key": "编程方式",
+        "value": "示教编程+离线编程"
+      },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet"
+      },
+      "protectionLevel": {
+        "key": "防护等级",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "0-60℃"
+      },
+      "powerSpec": {
+        "key": "电源规格",
+        "value": "DC48V"
+      },
+      "installationMethod": {
+        "key": "安装方式",
+        "value": "地面安装/倒装/侧装"
+      },
+      "rotationAngle": {
+        "key": "旋转角度",
+        "value": "J1: ±90°、J2：±165°、夹爪：±360°"
+      }
+    },
+        "downloads": {}
+  },
+  "arm6axis": {
+    "title": "六轴机械臂",
+    "desc": "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景，支持多自由度协同作业。",
+    "features": [
+      "六自由度设计，灵活应对复杂工艺",
+      "高精度轨迹控制，运动平稳",
+      "支持多种末端执行器与传感器集成",
+      "开放式编程与控制接口",
+      "高可靠性，适应恶劣工业环境",
+      "AI辅助编程，降低使用门槛"
+    ],
+    "cases": {
+      "automotiveWelding": {
+        "title": "汽车零部件焊接",
+        "desc": "应用于汽车制造，实现高精度自动焊接。"
+      },
+      "sprayingAssembly": {
+        "title": "喷涂与装配",
+        "desc": "在家电、机械等行业实现自动喷涂与装配作业。"
+      }
+    },
+    "scenes": ["汽车制造", "家电装配", "机械加工"],
+    "params": {
+      "repeatPositioningAccuracy": {
+        "key": "重复定位精度",
+        "value": "±0.03mm"
+      },
+      "maxLoad": {
+        "key": "最大负载",
+        "value": "3kg"
+      },
+      "degreesOfFreedom": {
+        "key": "自由度",
+        "value": "6"
+      },
+      "armReach": {
+        "key": "臂展",
+        "value": "540.5mm"
+      },
+      "workingRadius": {
+        "key": "工作半径",
+        "value": "540.5mm"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "双臂单关节180°/s"
+      },
+      "driveMethod": {
+        "key": "驱动方式",
+        "value": "一体化机器人关节"
+      },
+      "controlSystem": {
+        "key": "控制系统",
+        "value": "专用六轴控制器"
+      },
+      "programmingMethod": {
+        "key": "编程方式",
+        "value": "示教编程+离线编程"
+      },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet"
+      },
+      "protectionLevel": {
+        "key": "防护等级",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "0-60℃"
+      },
+      "powerSpec": {
+        "key": "电源规格",
+        "value": "DC48V"
+      },
+      "installationMethod": {
+        "key": "安装方式",
+        "value": "地面安装/倒装/侧装"
+      }
+    },
+      "downloads": {}
+  },
+  "dualArmHumanoid": {
+    "title": "双臂人型机器人",
+    "desc": "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求，支持多模态感知与智能交互。",
+    "features": [
+      "双臂高柔性协作，模拟人类操作",
+      "多模态感知与智能决策",
+      "支持多种末端工具与传感器集成",
+      "开放式软件平台，便于二次开发",
+      "安全防护与人机协作设计",
+      "自然语言交互，智能任务理解"
+    ],
+    "cases": {
+      "complexAssembly": {
+        "title": "复杂装配作业",
+        "desc": "在3C电子、精密制造等行业实现高柔性自动化装配。"
+      },
+      "serviceDemo": {
+        "title": "服务与演示机器人",
+        "desc": "应用于展厅、教育等场景，实现智能服务与人机互动。"
+      }
+    },
+    "scenes": ["精密装配", "教育与演示", "智能服务"],
+    "params": {
+      "armReach": {
+        "key": "单臂臂展",
+        "value": "840.5mm"
+      },
+      "verticalStroke": {
+        "key": "垂直行程",
+        "value": "800mm"
+      },
+      "verticalAxisMaxSpeed": {
+        "key": "垂直轴最大速度",
+        "value": "200mm/s"
+      },
+      "repeatPositioningAccuracy": {
+        "key": "重复定位精度",
+        "value": "±0.05mm"
+      },
+      "maxLoad": {
+        "key": "最大负载",
+        "value": "3kg"
+      },
+      "degreesOfFreedom": {
+        "key": "自由度",
+        "value": "15（双臂）"
+      },
+      "maxSpeed": {
+        "key": "双臂单关节最大速度",
+        "value": "180°/s"
+      },
+      "workingRadius": {
+        "key": "工作半径",
+        "value": "540.5mm"
+      },
+      "driveMethod": {
+        "key": "驱动方式",
+        "value": "一体化机器人关节/伺服电机"
+      },
+      "programmingMethod": {
+        "key": "编程方式",
+        "value": "示教编程+离线编程"
+      },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet"
+      },
+      "protectionLevel": {
+        "key": "防护等级",
+        "value": "IP54"
+      },
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "0-60℃"
+      },
+      "chargingMethod": {
+        "key": "充电方式",
+        "value": "自动充电桩对接"
+      },
+      "movingSpeed": {
+        "key": "移动速度",
+        "value": "0.5m/s"
+      },
+      "batteryLife": {
+        "key": "续航时间",
+        "value": "6-8小时"
+      },
+      "baseType": {
+        "key": "底座类型",
+        "value": "移动底座/固定底座"
+      },
+      "visionSystem": {
+        "key": "视觉系统",
+        "value": "深度相机"
+      },
+      "voiceInteraction": {
+        "key": "语音交互",
+        "value": "支持多语言语音识别与合成"
+      },
+      "devInterface": {
+        "key": "开发接口",
+        "value": "ROS2、Python、C++"
+      },
+      "networkConnection": {
+        "key": "连接方式",
+        "value": "WIFI、Ethernet"
+      }
+    },
+    "downloads": {}
+  },
+  "mobileRobot": {
+    "title": "移动机器人",
+    "desc": "自主导航、多传感器融合，适用于工厂、仓储等多场景智能物流，实现高效自动化搬运。",
+    "features": [
+      "激光SLAM+视觉融合导航，路径自主规划",
+      "多传感器融合避障，安全可靠",
+      "支持多种货物托盘与货架对接",
+      "远程监控与智能调度平台",
+      "模块化设计，便于维护与扩展",
+      "5G网络支持，实时数据传输"
+    ],
+    "cases": {
+      "factoryLogistics": {
+        "title": "工厂智能物流搬运",
+        "desc": "在制造工厂实现原材料与成品的自动搬运，提升物流效率。"
+      },
+      "warehouseAutomation": {
+        "title": "仓储自动化",
+        "desc": "应用于大型仓库，实现货物自动分拣与配送。"
+      }
+    },
+    "scenes": ["制造工厂物流", "智能仓储", "医院物资配送"],
+    "params": {
+      "navigationMethod": {
+        "key": "导航方式",
+        "value": "激光SLAM+视觉融合"
+      },
+      "size": {
+        "key": "尺寸",
+        "value": "直径452mm，高240mm"
+      },
+      "selfWeight": {
+        "key": "自重",
+        "value": "20kg"
+      },
+      "ratedLoad": {
+        "key": "额定载重",
+        "value": "30kg"
+      },
+      "maxLoad": {
+        "key": "最大载重",
+        "value": "70kg"
+      },
+      "staticBatteryLife": {
+        "key": "静止续航时间",
+        "value": "8小时"
+      },
+      "noLoadBatteryLife": {
+        "key": "空载续航时间",
+        "value": "7小时"
+      },
+      "fullLoadBatteryLife": {
+        "key": "满载续航时间",
+        "value": "5小时"
+      },
+      "maxSpeed": {
+        "key": "最大速度",
+        "value": "1m/s"
+      },
+      "rangingAccuracy": {
+        "key": "测距精度",
+        "value": "±2mm"
+      },
+      "workingTemperature": {
+        "key": "工作温度",
+        "value": "0-40℃"
+      },
+      "workingHumidity": {
+        "key": "工作湿度",
+        "value": "5%-85%"
+      },
+      "communicationInterface": {
+        "key": "通信接口",
+        "value": "Ethernet、WIFI"
+      },
+      "protectionLevel": {
+        "key": "安全防护",
+        "value": "IP54"
+      },
+      "chargingMethod": {
+        "key": "充电方式",
+        "value": "自动充电桩对接"
+      },
+      "climbingAbility": {
+        "key": "爬坡能力",
+        "value": "<=3°"
+      },
+      "obstacleHeight": {
+        "key": "越障高度",
+        "value": "5mm"
+      },
+      "ditchDepth": {
+        "key": "越沟深度",
+        "value": "5mm"
+      }
+    },
+    "downloads": {}
+  }
+}

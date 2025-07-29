@@ -15,7 +15,7 @@ export interface Product {
  * @returns 跳转路由
  */
 export function getProductDetailLink(product: {
-  id: string;
+  slug: string;
   category: string;
 }): string {
   if (product.category === 'system') {

@@ -1,21 +1,21 @@
 <!-- 首页，聚合轮播、核心产品、视频案例、行业应用、合作伙伴等模块 -->
 <template>
+
   <div class="home-bg">
+
     <div class="home">
-      <HeroCarousel />
-      <div class="section">
-        <CoreProducts />
-      </div>
-      <div class="section">
-        <VideoCases />
-      </div>
-      <IndustryApplications />
-      <Partners />
+       <HeroCarousel />
+      <div class="section"> <CoreProducts /> </div>
+
+      <div class="section"> <VideoCases /> </div>
+       <IndustryApplications /> <Partners />
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 首页聚合各核心模块组件
 import HeroCarousel from '@/components/business/HeroCarousel.vue'; // 轮播图
 import CoreProducts from '@/components/business/CoreProducts.vue'; // 核心产品
@@ -109,3 +109,4 @@ import Partners from '@/components/business/Partners.vue'; // 合作伙伴
   }
 }
 </style>
+

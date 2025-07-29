@@ -1,102 +1,235 @@
 <!-- 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型 -->
 <template>
+
   <div class="video-detail-page">
+
     <div class="video-detail-main">
+
       <div class="video-detail-media">
-        <template v-if="getMediaType(videoInfo) === 'bilibili'">
-          <iframe
-            class="video-iframe"
-            :src="bilibiliEmbedUrl(videoInfo.url)"
-            frameborder="0"
-            allowfullscreen
-          ></iframe>
-        </template>
-        <template v-else-if="getMediaType(videoInfo) === 'video'">
-          <video controls :src="videoInfo.url" class="video-player"></video>
-        </template>
-        <template v-else-if="getMediaType(videoInfo) === 'image'">
-          <img :src="videoInfo.url" class="video-image" alt="图片展示" />
-        </template>
-        <div v-else class="video-placeholder">暂无视频/图片</div>
+         <template v-if="getMediaType(videoInfo) === 'bilibili'"
+          > <BilibiliPlayer
+            :url="videoInfo.url"
+            :title="videoInfo.title"
+          />
+          </template
+        >
+         <template v-else-if="getMediaType(videoInfo) === 'video'"
+          >
+          <video
+            class="video-player"
+            :src="videoInfo.url"
+            controls
+            preload="metadata"
+          >
+             {{ t('videos.videoDetail.browserNotSupport') }}
+          </video>
+          </template
+        >
+         <template v-else-if="getMediaType(videoInfo) === 'image'"
+          >
+          <img
+            class="video-image"
+            :src="videoInfo.url"
+            :alt="videoInfo.title"
+          />
+          </template
+        >
+         <template v-else
+          >
+          <div class="video-placeholder">{{ t('videos.videoDetail.noVideo') }}</div>
+          </template
+        >
+
       </div>
+
       <div class="video-detail-info">
-        <h1 class="video-title">{{ videoInfo.title }} - 介绍</h1>
+
+        <h1 class="video-title">{{ videoInfo.title }}</h1>
+
         <div
           v-for="(para, idx) in descParagraphs"
           :key="idx"
           class="video-desc"
         >
-          {{ para }}
+           {{ para }}
         </div>
-        <button class="more-btn" @click="showContact = true">了解更多</button>
-        <transition name="fade-dialog">
+         <button class="more-btn" @click="showContact = true">{{ t('videos.videoDetail.learnMore') }}</button>
+        <transition name="fade-dialog"
+          >
           <div
             v-if="showContact"
             class="contact-dialog-mask"
             @click.self="showContact = false"
           >
+
             <div class="contact-dialog">
-              <button class="contact-close-x" @click="showContact = false">
-                ×
-              </button>
-              <h3 class="contact-title">联系方式</h3>
+               <button class="contact-close-x" @click="showContact = false">
+                 × </button
+              >
+              <h3 class="contact-title">{{ t('videos.videoDetail.qrCodeTitle') }}</h3>
+
               <div class="contact-qrcode-placeholder">
-                <img
+                 <img
                   :src="wxworkQrcode"
                   alt="企业微信二维码"
                   style="width: 160px; height: 160px; object-fit: contain"
                 />
               </div>
+
               <div class="contact-qrcode-desc">
-                扫码添加企业微信，获取更多信息
+                 {{ t('videos.videoDetail.qrCodeDesc') }}
               </div>
+
             </div>
+
           </div>
-        </transition>
+           </transition
+        >
       </div>
+
     </div>
+
   </div>
+
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型
 import { useRoute } from 'vue-router';
-import { videoMap } from '@/data/videos';
-import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { videoMap, type VideoDetail } from '@/data/videos';
+import { ref, computed, onMounted, watch } from 'vue';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
+import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import { setSEO, setStructuredData } from '@/utils/seo';
 
 const route = useRoute();
+const { t, locale } = useI18n();
 
-const videoInfo = videoMap[String(route.params.slug)] || {
-  type: '',
+const rawVideoInfo = videoMap[String(route.params.slug)] || {
+  type: 'bilibili', // Provide a default type
+  slug: 'not-found',
   title: '未找到视频',
   url: '',
   desc: '暂无介绍',
 };
 
-const descParagraphs = videoInfo.desc
-  ? videoInfo.desc
-      .split(/[。.!！\n]/)
-      .filter(Boolean)
-      .map(p => (p.endsWith('。') ? p : p + '。'))
-  : [];
+// 国际化的视频信息
+const videoInfo = computed((): VideoDetail => ({
+  ...rawVideoInfo,
+  title: t(`videos.${rawVideoInfo.slug}.title`, rawVideoInfo.title),
+  desc: t(`videos.${rawVideoInfo.slug}.desc`, rawVideoInfo.desc)
+}));
 
-const showContact = ref(false);
+// 更新descParagraphs计算属性
+const descParagraphs = computed(() =>
+  videoInfo.value.desc
+    ? videoInfo.value.desc
+        .split(/[。.!！\n]/)
+        .filter(Boolean)
+        .map(p => (p.endsWith('。') ? p : p + '。'))
+    : []
+);
 
-function getMediaType(info) {
-  if (info.type === 'bilibili' && info.url) return 'bilibili';
-  if (info.type === 'video' && info.url) return 'video';
-  if (info.type === 'image' && info.url) return 'image';
+
+
+const showContact = ref<boolean>(false);
+
+type MediaType = 'bilibili' | 'video' | 'image' | 'none';
+
+function getMediaType(info: VideoDetail | { value: VideoDetail }): MediaType {
+  const videoData = 'value' in info ? info.value : info;
+  if (videoData.type === 'bilibili' && videoData.url) return 'bilibili';
+  if (videoData.type === 'video' && videoData.url) return 'video';
+  if (videoData.type === 'image' && videoData.url) return 'image';
   return 'none';
 }
 
-function bilibiliEmbedUrl(url) {
-  const match = url.match(/bilibili.com\/video\/(BV[\w]+)/);
-  if (match) {
-    return `https://player.bilibili.com/player.html?bvid=${match[1]}&autoplay=0`;
+// 动态SEO元数据
+const seoMetadata = computed(() => {
+  const videoTitle = videoInfo.value.title;
+  const videoDesc = videoInfo.value.desc;
+  const siteName = 'ZeroAnt Technology';
+  const currentUrl = `${window.location.origin}${route.fullPath}`;
+  
+  return {
+    title: `${videoTitle} - ${siteName}`,
+    description: videoDesc,
+    keywords: `${videoTitle}, 视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
+    ogTitle: videoTitle,
+    ogDescription: videoDesc,
+    ogType: 'video.other',
+    ogUrl: currentUrl,
+    ogVideo: getMediaType(videoInfo.value) === 'video' ? videoInfo.value.url : undefined,
+    ogImage: getMediaType(videoInfo.value) === 'image' ? videoInfo.value.url : `${window.location.origin}/logo.png`,
+    twitterCard: 'player',
+    twitterTitle: videoTitle,
+    twitterDescription: videoDesc,
+    canonical: currentUrl
+  };
+});
+
+// VideoObject结构化数据
+const videoStructuredData = computed(() => {
+  const videoTitle = videoInfo.value.title;
+  const videoDesc = videoInfo.value.desc;
+  const mediaType = getMediaType(videoInfo.value);
+  
+  if (mediaType === 'bilibili' || mediaType === 'video') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: videoTitle,
+      description: videoDesc,
+      thumbnailUrl: `${window.location.origin}/logo.png`,
+      uploadDate: new Date().toISOString().split('T')[0],
+      contentUrl: videoInfo.value.url,
+      embedUrl: mediaType === 'bilibili' ? videoInfo.value.url : undefined,
+      publisher: {
+        '@type': 'Organization',
+        name: 'ZeroAnt Technology',
+        url: window.location.origin
+      },
+      author: {
+        '@type': 'Organization',
+        name: 'ZeroAnt Technology'
+      }
+    };
+  } else if (mediaType === 'image') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ImageObject',
+      name: videoTitle,
+      description: videoDesc,
+      contentUrl: videoInfo.value.url,
+      author: {
+        '@type': 'Organization',
+        name: 'ZeroAnt Technology'
+      }
+    };
   }
-  return '';
-}
+  
+  return null;
+});
+
+// 设置SEO和结构化数据
+const updateSEO = () => {
+  if (seoMetadata.value) {
+    setSEO(seoMetadata.value);
+  }
+  if (videoStructuredData.value) {
+    setStructuredData(videoStructuredData.value);
+  }
+};
+
+// 监听数据变化并更新SEO
+watch([videoInfo, locale], updateSEO, { immediate: false });
+
+onMounted(() => {
+  updateSEO();
+});
+
+// 移除bilibiliEmbedUrl函数，现在使用BilibiliPlayer组件处理
 </script>
 
 <style scoped>
@@ -351,3 +484,4 @@ function bilibiliEmbedUrl(url) {
   }
 }
 </style>
+
