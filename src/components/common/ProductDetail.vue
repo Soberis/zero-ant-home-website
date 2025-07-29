@@ -517,7 +517,7 @@ const handleVideoClick = (index: number) => {
 
 .product-desc {
   font-size: 1.5rem;
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
   color: #666;
   margin-left: auto;
@@ -639,7 +639,7 @@ const handleVideoClick = (index: number) => {
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -672,6 +672,7 @@ const handleVideoClick = (index: number) => {
   font-size: 1.2rem;
   flex: 1;
   margin-right: 1rem;
+  text-align: left;
 }
 
 .param-value {
@@ -837,24 +838,6 @@ const handleVideoClick = (index: number) => {
   }
 }
 
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1400px;
-  }
-
-  .product-title {
-    font-size: 3rem;
-  }
-
-  .product-desc {
-    font-size: 1.6rem;
-  }
-
-  .section-title {
-    font-size: 2.8rem;
-  }
-}
-
 /* 返回按钮 */
 .back-section {
   background: #f8fafc;
@@ -888,7 +871,6 @@ const handleVideoClick = (index: number) => {
   content: "";
   position: absolute;
   top: 0;
-  left: -100%;
   width: 100%;
   height: 100%;
   background: linear-gradient(
