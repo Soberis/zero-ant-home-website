@@ -477,7 +477,7 @@ const handleVideoClick = (index: number) => {
     sans-serif;
   line-height: 1.6;
   width: 100%;
-  text-align: center;
+  text-align: center !important;
 }
 
 /* 产品头部 */
