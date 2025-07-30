@@ -290,7 +290,7 @@ onUnmounted(() => {
   letter-spacing: 0.08em;
   margin-bottom: 0.6em;
   opacity: 1;
-  font-size: 4.5rem;
+  font-size: 5rem;
   line-height: 1.1;
 }
 
@@ -348,7 +348,7 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   border-bottom: 2px solid transparent;
   position: relative;
-  font-size: 1.05em;
+  font-size: 1rem;
 }
 
 .about-nav li a {
@@ -395,6 +395,7 @@ onUnmounted(() => {
 
 .about-section h2 {
   color: #1a237e;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 32px;
   text-align: center;
@@ -526,7 +527,7 @@ onUnmounted(() => {
 }
 
 .timeline-year {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   color: #1a237e;
   font-weight: 700;
   margin-bottom: 12px;
@@ -540,7 +541,7 @@ onUnmounted(() => {
 }
 
 .timeline-content li {
-  font-size: 1.05em;
+  font-size: 1.1rem;
   color: #333;
   margin-bottom: 8px;
   word-break: break-word;
@@ -561,7 +562,7 @@ onUnmounted(() => {
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   padding: 20px 24px;
-  font-size: 1.05em;
+  font-size: 1.1rem;
   color: #1a3a8f;
   font-weight: 600;
   text-align: center;
@@ -589,7 +590,7 @@ onUnmounted(() => {
 }
 
 .contact-list li {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   color: #333;
   font-weight: 500;
   word-break: break-all;
@@ -837,7 +838,7 @@ onUnmounted(() => {
 
 .culture-content {
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1.1rem;
   margin: 48px 0 32px 0;
 }
 
@@ -845,15 +846,15 @@ onUnmounted(() => {
   text-align: center;
   margin: 0 auto;
   max-width: 900px;
-  font-size: 1.03em;
+  font-size: 1.1rem;
 }
 .culture-title {
-  font-size: 1.2em;
+  font-size: 2rem;
   font-weight: 600;
   margin-bottom: 16px;
 }
 .culture-subtitle {
-  font-size: 1.01em;
+  font-size: 1.1rem;
   color: #333;
   margin-bottom: 28px;
 }
@@ -863,18 +864,27 @@ onUnmounted(() => {
   margin: 0 auto;
   padding-left: 0;
   list-style: disc inside;
-  font-size: 1.09em;
-  line-height: 1.95;
-  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-weight: 400;
   color: #222;
 }
 .culture-list li {
-  margin-bottom: 9px;
+  margin-bottom: 12px;
   padding-left: 0;
 }
 
+.team-info h3,
+.financing-info h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1a237e;
+  text-align: center;
+}
+
 .financing-desc {
-  font-size: 1.1em;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.8;
   color: #333;
@@ -889,6 +899,9 @@ onUnmounted(() => {
 /* style部分新增/优化 */
 .core-values-title {
   text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 .core-values-content {
   text-align: center;
@@ -929,7 +942,7 @@ onUnmounted(() => {
     gap: 16px;
   }
   .core-value-card {
-    font-size: 1em;
+    font-size: 1rem;
     padding: 14px 10px;
     min-width: 100px;
     flex: 1 1 40%;
@@ -951,6 +964,7 @@ onUnmounted(() => {
   background: none;
 }
 .culture-desc {
+  font-size: 1.1rem;
   margin: 24px 0 18px 0;
   text-align: center;
 }
@@ -958,8 +972,8 @@ onUnmounted(() => {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 1.08em;
-  line-height: 2;
+  font-size: 1.1rem;
+  line-height: 1.8;
   text-align: left;
   display: inline-block;
 }

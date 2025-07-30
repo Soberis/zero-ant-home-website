@@ -1,49 +1,41 @@
-/* 全局样式重置 - 解决删除Bootstrap后的排版问题 */
-/* 自动应用统一字体规范 - 无需每个页面单独设置 */
+/* 全局样式重置 - 精简版 */
+/* 解决Bootstrap删除后的基础排版问题 */
 
 :root {
-  /* 字体大小变量 */
-  --font-size-display-large: 2.5rem;
-  --font-size-display-medium: 2.125rem;
-  --font-size-display-small: 1.75rem;
-  
-  --font-size-headline-large: 2rem;
-  --font-size-headline-medium: 1.75rem;
-  --font-size-headline-small: 1.5rem;
-  
-  --font-size-title-large: 1.375rem;
-  --font-size-title-medium: 1.125rem;
-  --font-size-title-small: 1rem;
-  
-  --font-size-body-large: 1.125rem;
-  --font-size-body-medium: 1rem;
-  --font-size-body-small: 0.875rem;
-  
-  --font-size-label-large: 0.875rem;
-  --font-size-label-medium: 0.75rem;
-  --font-size-label-small: 0.6875rem;
-  
-  /* 字体权重 */
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
+  /* 核心字体大小 - 6个层级足够使用 */
+  --font-size-display: 2.5rem;      /* 40px - 大标题 */
+  --font-size-headline: 1.75rem;    /* 28px - 中标题 */
+  --font-size-title: 1.25rem;       /* 20px - 小标题 */
+  --font-size-body: 1rem;           /* 16px - 正文 */
+  --font-size-small: 0.875rem;      /* 14px - 小字 */
+  --font-size-tiny: 0.75rem;        /* 12px - 超小字 */
+
+  /* 核心字重 - 4个层级覆盖需求 */
+  --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
-  /* 行高 */
-  --line-height-tight: 1.2;
-  --line-height-snug: 1.3;
+
+  /* 基础行高 */
+  --line-height-tight: 1.3;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.6;
-  
-  /* 颜色变量 */
-  --color-text-primary: #333;
-  --color-text-secondary: #666;
+
+  /* 基础间距 */
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 1rem;      /* 16px */
+  --spacing-md: 1.5rem;    /* 24px */
+  --spacing-lg: 2rem;      /* 32px */
+
+  /* 基础颜色 */
+  --color-text: #1a1a1a;
+  --color-text-light: #666;
   --color-text-muted: #999;
-  --color-text-inverse: #fff;
+  --color-border: #e5e5e5;
+  --color-bg: #ffffff;
 }
 
-/* 全局字体设置 - 自动应用到所有页面 */
+/* 全局重置 */
 * {
   box-sizing: border-box;
 }
@@ -51,158 +43,63 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 16px;
-  line-height: 1.6;
-  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
-/* HTML元素默认字体样式 - 自动应用 */
-h1, h2, h3, h4, h5, h6, p, span, div, li, dt, dd, th, td {
-  margin: 0;
-  padding: 0;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+/* 基础元素样式 */
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0 0 var(--spacing-sm) 0;
 }
 
-/* 标题样式 - 自动应用 */
-h1 {
-  font-size: var(--font-size-headline-large);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-snug);
-  margin: 0 0 1.5rem 0;
-}
+h1 { font-size: var(--font-size-display); font-weight: var(--font-weight-bold); }
+h2 { font-size: var(--font-size-headline); font-weight: var(--font-weight-semibold); }
+h3 { font-size: var(--font-size-title); font-weight: var(--font-weight-semibold); }
+h4, h5, h6 { font-size: var(--font-size-body); font-weight: var(--font-weight-semibold); }
 
-h2 {
-  font-size: var(--font-size-headline-medium);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-snug);
-  margin: 0 0 1.25rem 0;
-}
+p { font-size: var(--font-size-body); font-weight: var(--font-weight-normal); }
 
-h3 {
-  font-size: var(--font-size-headline-small);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-snug);
-  margin: 0 0 1rem 0;
-}
+small { font-size: var(--font-size-small); }
 
-h4 {
-  font-size: var(--font-size-title-large);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
-  margin: 0 0 0.875rem 0;
-}
-
-h5 {
-  font-size: var(--font-size-title-medium);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
-  margin: 0 0 0.75rem 0;
-}
-
-h6 {
-  font-size: var(--font-size-title-small);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
-  margin: 0 0 0.625rem 0;
-}
-
-/* 段落样式 - 自动应用 */
-p {
-  font-size: var(--font-size-body-medium);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-relaxed);
-  margin: 0 0 1rem 0;
-}
-
-/* 小字体样式 - 自动应用 */
-small {
-  font-size: var(--font-size-body-small);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-normal);
-}
-
-/* 列表样式 - 自动应用 */
 ul, ol {
-  font-size: var(--font-size-body-medium);
-  line-height: var(--line-height-relaxed);
-  margin: 0 0 1rem 0;
-  padding-left: 1.5rem;
+  margin: 0 0 var(--spacing-sm) 0;
+  padding-left: var(--spacing-sm);
 }
 
-li {
-  margin-bottom: 0.5rem;
-}
-
-/* 表格样式 - 自动应用 */
-table {
-  font-size: var(--font-size-body-medium);
-  line-height: var(--line-height-normal);
-}
-
-th {
-  font-weight: var(--font-weight-semibold);
-}
-
-/* 表单元素样式 - 自动应用 */
+/* 表单元素 */
 input, textarea, select, button {
   font-family: inherit;
-  font-size: var(--font-size-body-medium);
-  line-height: var(--line-height-normal);
+  font-size: var(--font-size-body);
 }
 
-/* 按钮样式 - 自动应用 */
-button, .btn {
-  font-size: var(--font-size-body-medium);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
+/* 响应式调整 */
+@media (max-width: 768px) {
+  html { font-size: 15px; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
 }
 
-/* 响应式字体调整 */
-@media screen and (max-width: 768px) {
-  html, body {
-    font-size: 15px;
-  }
-  
-  h1 { font-size: 1.75rem; margin-bottom: 1.25rem; }
-  h2 { font-size: 1.5rem; margin-bottom: 1rem; }
-  h3 { font-size: 1.375rem; margin-bottom: 0.875rem; }
-  h4 { font-size: 1.25rem; margin-bottom: 0.75rem; }
-  h5 { font-size: 1.125rem; margin-bottom: 0.625rem; }
-  h6 { font-size: 1rem; margin-bottom: 0.5rem; }
-  p { font-size: 0.9375rem; margin-bottom: 0.875rem; }
+@media (max-width: 480px) {
+  html { font-size: 14px; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.375rem; }
 }
 
-@media screen and (max-width: 480px) {
-  html, body {
-    font-size: 14px;
-  }
-  
-  h1 { font-size: 1.5rem; margin-bottom: 1rem; }
-  h2 { font-size: 1.375rem; margin-bottom: 0.875rem; }
-  h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
-  h4 { font-size: 1.125rem; margin-bottom: 0.625rem; }
-  h5 { font-size: 1rem; margin-bottom: 0.5rem; }
-  h6 { font-size: 0.9375rem; margin-bottom: 0.5rem; }
-  p { font-size: 0.875rem; margin-bottom: 0.75rem; }
-}
-
-/* 工具类 - 可选使用 */
+/* 极简工具类 - 只保留最常用的 */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
-.font-light { font-weight: var(--font-weight-light); }
-.font-regular { font-weight: var(--font-weight-regular); }
-.font-medium { font-weight: var(--font-weight-medium); }
-.font-semibold { font-weight: var(--font-weight-semibold); }
 .font-bold { font-weight: var(--font-weight-bold); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
 
 .text-muted { color: var(--color-text-muted); }
-.text-secondary { color: var(--color-text-secondary); }
+.text-light { color: var(--color-text-light); }
+
+.spacing-top { margin-top: var(--spacing-sm); }
+.spacing-bottom { margin-bottom: var(--spacing-sm); }
+.spacing-top-lg { margin-top: var(--spacing-lg); }
+.spacing-bottom-lg { margin-bottom: var(--spacing-lg); }
