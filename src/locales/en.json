@@ -229,6 +229,26 @@
         "Industrial Control"
       ]
     },
+    "plate-welding-demo": {
+      "title": "Medium Plate Welding Process Demo",
+      "desc": "Demonstrates ZeroAnt Technology's innovative application in medium plate welding processes, achieving high-quality welding operations through intelligent welding technology and precise motion control, showcasing breakthrough applications of robotics in industrial welding.",
+      "tags": [
+        "Medium Plate Welding",
+        "Welding Robot",
+        "Industrial Automation",
+        "Smart Manufacturing"
+      ]
+    },
+    "underground-garage-cleaning": {
+      "title": "Underground Garage Cleaning Robot",
+      "desc": "Showcases ZeroAnt Technology's autonomous cleaning robot application in underground garage environments, achieving intelligent cleaning operations through autonomous navigation and environmental perception technology, providing efficient automated cleaning solutions for parking facilities.",
+      "tags": [
+        "Cleaning Robot",
+        "Underground Garage",
+        "Autonomous Navigation",
+        "Smart Cleaning"
+      ]
+    },
     "personalized-prescription-pharmaceutical": {
       "title": "Personalized Prescription Pharmaceutical",
       "desc": "Showcases ZeroAnt Technology's innovation in personalized prescription pharmaceuticals, achieving personalized drug customization through intelligent automation technology.",

@@ -321,8 +321,8 @@ export const videoMap: VideoMapData = {
     slug: "robotstudio-remote-control",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1J68LzKEHd/${BILIBILI_BASE_PARAMS}`,
-    title: "上位机RobotStudioIDE远程控制及仿真",
-    desc: "演示零蚁科技基于上位机的RobotStudio IDE远程控制技术，实现工业机器人的无缝集成与远程操作，展示实时机器人控制与仿真能力。",
+    title: "videos.robotstudio-remote-control.title",
+    desc: "videos.robotstudio-remote-control.desc",
     tags: ["RobotStudio IDE", "远程控制", "仿真", "工业机器人", "上位机集成"],
     publishDate: "2024-12-20",
   },
@@ -330,8 +330,8 @@ export const videoMap: VideoMapData = {
     slug: "lab-tube-loading",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1n68LzKEwe/${BILIBILI_BASE_PARAMS}`,
-    title: "生物实验室试管上料",
-    desc: "展示零蚁科技在生物实验室自动化领域的创新应用，通过高精度机器人实现试管自动上料，提高实验室工作效率和准确性。",
+    title: "videos.lab-tube-loading.title",
+    desc: "videos.lab-tube-loading.desc",
     tags: ["生物实验室", "试管上料", "自动化", "医疗机器人", "实验室自动化"],
     publishDate: "2024-12-20",
   },
@@ -339,10 +339,28 @@ export const videoMap: VideoMapData = {
     slug: "outdoor-patrol-robot",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1n68LzKE5P/${BILIBILI_BASE_PARAMS}`,
-    title: "室外移动巡检机器人",
-    desc: "演示零蚁科技室外移动巡检机器人的智能导航与巡检能力，通过激光SLAM和360度环境感知技术，实现复杂环境下的自主巡检任务。",
+    title: "videos.outdoor-patrol-robot.title",
+    desc: "videos.outdoor-patrol-robot.desc",
     tags: ["移动巡检", "室外机器人", "激光SLAM", "自主导航", "环境感知"],
     publishDate: "2024-12-20",
+  },
+  "plate-welding-demo": {
+    slug: "plate-welding-demo",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1MJ8fzzEyb/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.plate-welding-demo.title",
+    desc: "videos.plate-welding-demo.desc",
+    tags: ["焊接工艺", "工业自动化", "智能制造", "机器人控制", "中厚板焊接"],
+    publishDate: "2024-12-25",
+  },
+  "underground-garage-cleaning": {
+    slug: "underground-garage-cleaning",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV13L8fzGEGQ/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.underground-garage-cleaning.title",
+    desc: "videos.underground-garage-cleaning.desc",
+    tags: ["无人清扫", "地下车库", "自主导航", "环境感知", "智能清洁"],
+    publishDate: "2024-12-25",
   },
 };
 
@@ -353,12 +371,22 @@ export const videoMap: VideoMapData = {
 export const videoCards: VideoCard[] = [
   // AI智能
   {
+    title: "中厚板焊接工艺演示",
+    img: robotPolishingDemoImg,
+    slug: "plate-welding-demo",
+  },
+  {
     title: "上位机RobotStudioIDE远程控制及仿真",
     img: robotStudioRemoteControlImg,
     slug: "robotstudio-remote-control",
   },
 
   // 复合系统
+  {
+    title: "无人清扫车地下车库",
+    img: outdoorPatrolRobotImg,
+    slug: "underground-garage-cleaning",
+  },
   {
     title: "医疗自动化",
     img: compositeRobotImg,
