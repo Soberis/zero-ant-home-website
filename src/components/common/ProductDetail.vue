@@ -187,6 +187,7 @@ import { videoCards } from "@/data/videos";
 import applications from "@/data/applications";
 import type { ProductDetail } from "@/data/productDetails";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 import { ref, computed } from "vue";
 import {
   getRelatedApplications,
@@ -265,6 +266,9 @@ const localizedProduct = computed(() => {
     downloads: getTranslatedData("downloads", props.product.downloads),
   };
 });
+
+// 创建路由实例
+const router = useRouter();
 
 // 组件属性定义
 const props = withDefaults(
@@ -460,7 +464,7 @@ const handleVideoLeave = () => {
 const handleVideoClick = (index: number) => {
   const video = relatedVideos.value[index];
   if (video) {
-    window.open(`/video/${video.slug}`, "_blank");
+    router.push(`/video/${video.slug}`);
   }
 };
 </script>
