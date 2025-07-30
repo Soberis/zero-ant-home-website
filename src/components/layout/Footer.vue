@@ -319,6 +319,7 @@ onUnmounted(() => {
 .footer-col ul li a.active,
 .footer-col ul li a:hover {
   color: #fff;
+  text-decoration: underline;
 }
 .contact-col .contact-info {
   font-size: 13px;
@@ -361,6 +362,7 @@ onUnmounted(() => {
 
 .icp-link:hover {
   color: #bbb !important;
+  text-decoration: underline;
 }
 .qrcode-col {
   margin-left: 550px;

@@ -351,6 +351,11 @@ onUnmounted(() => {
   font-size: 1.05em;
 }
 
+.about-nav li a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .about-nav li:hover {
   color: #1a3a8f;
   transform: translateY(-1px);

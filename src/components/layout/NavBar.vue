@@ -399,20 +399,54 @@ onUnmounted(() => {
   transform: scale(1.02);
 }
 
+.logo-text:hover {
+  color: #1a3a8f;
+  background-color: rgba(26, 58, 143, 0.05);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.logo-text.router-link-active {
+  color: #1a3a8f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.logo-text::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1a3a8f, #4a90e2);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.logo-text:hover::after {
+  width: 80%;
+}
+
 .logo img {
   flex-shrink: 0;
 }
 
 .logo-text {
-  font-weight: 700;
-  color: #1a3a8f;
-  margin-left: 12px;
-  letter-spacing: -0.5px;
-  transition: color 0.3s ease;
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 12px 8px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  letter-spacing: 0.2px;
+  font-size: 24px;
+  margin-left: 12px;
 }
 
 .nav-wrapper {
@@ -483,11 +517,13 @@ onUnmounted(() => {
   color: #1a3a8f;
   background-color: rgba(26, 58, 143, 0.05);
   transform: translateY(-1px);
+  text-decoration: none;
 }
 
 .nav-link.active {
   color: #1a3a8f;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .nav-link::after {
@@ -576,6 +612,11 @@ onUnmounted(() => {
   position: relative;
   overflow: hidden;
   height: auto;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  text-decoration: none;
 }
 
 .dropdown-item::before {
@@ -864,6 +905,7 @@ onUnmounted(() => {
   background: rgba(26, 58, 143, 0.05);
   color: #1a3a8f;
   padding-left: 32px;
+  text-decoration: none;
 }
 
 .mobile-nav-link.router-link-active {
@@ -905,9 +947,9 @@ onUnmounted(() => {
   }
 
   .logo-text {
-    font-size: 22px;
+    font-size: 26px;
     margin-left: 8px;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -938,9 +980,9 @@ onUnmounted(() => {
   }
 
   .logo-text {
-    font-size: 18px;
+    font-size: 22px;
     margin-left: 6px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .language-btn {
@@ -986,9 +1028,10 @@ onUnmounted(() => {
   }
 
   .logo-text {
-    font-size: 16px;
+    font-size: 20px;
     margin-left: 4px;
-    letter-spacing: -1px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
   }
 
   .language-btn {
@@ -1034,8 +1077,9 @@ onUnmounted(() => {
   }
 
   .logo-text {
-    font-size: 15px;
+    font-size: 17px;
     margin-left: 3px;
+    font-weight: 700;
     letter-spacing: -1.2px;
   }
 

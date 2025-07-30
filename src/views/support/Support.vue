@@ -394,12 +394,13 @@ function handleKeydown(
 }
 .card-content a {
   color: #1a3a8f;
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
 }
 .card-content a:hover {
   color: #0d1e4a;
+  text-decoration: none;
 }
 /* 展开收起动画 */
 .fade-slide-enter-active,
