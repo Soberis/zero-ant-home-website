@@ -260,7 +260,7 @@ const applyForPosition = (position: Position): void => {
 .careers-page {
   min-height: 70vh;
   background: #f8f9fa;
-  font-size: 1.8rem; // 再提升正文基础字体
+
   line-height: 1.7;
 }
 
@@ -282,18 +282,18 @@ const applyForPosition = (position: Position): void => {
 .careers-hero {
   background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
   color: white;
-  padding: 120px 0 80px;
+  padding: 120px 0 60px;
   text-align: center;
 
   .hero-title {
-    font-size: 4rem; // 原3.5rem，提升
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
+    font-size: 2.5rem;
   }
 
   .hero-subtitle {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     margin-bottom: 3rem;
     opacity: 0.9;
     max-width: 600px;
@@ -312,13 +312,13 @@ const applyForPosition = (position: Position): void => {
 
       .stat-number {
         display: block;
-        font-size: 2.5rem; // 原2.5rem，略提升
+        font-size: 2.2rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
       }
 
       .stat-label {
-        font-size: 1.6rem;
+        font-size: 1rem;
       }
     }
   }
@@ -326,7 +326,7 @@ const applyForPosition = (position: Position): void => {
 
 // 通用样式
 .section-title {
-  font-size: 2.5rem; // 原2.5rem，略提升
+  font-size: 2rem; // 优化为2rem
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
@@ -344,7 +344,7 @@ const applyForPosition = (position: Position): void => {
     padding: 0;
     list-style: none;
     text-align: left;
-    font-size: 1.15rem;
+
     color: #222;
     font-weight: 500;
   }
@@ -375,14 +375,14 @@ const applyForPosition = (position: Position): void => {
       }
 
       .benefit-title {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
         font-weight: 600;
         margin-bottom: 1rem;
         color: #222;
       }
 
       .benefit-description {
-        font-size: 1.5rem;
+        font-size: 1rem;
         color: #666;
         line-height: 1.7; // 略提升
       }
@@ -423,10 +423,10 @@ const applyForPosition = (position: Position): void => {
         gap: 1rem;
 
         .position-title {
-          font-size: 2.2rem;
           font-weight: 600;
           color: #222;
           margin: 0;
+          font-size: 1.3rem;
         }
 
         .position-type {
@@ -434,7 +434,7 @@ const applyForPosition = (position: Position): void => {
           color: #1976d2;
           padding: 0.25rem 0.75rem;
           border-radius: 20px;
-          font-size: 1.2rem; // 原0.875rem，提升
+          font-size: 0.9rem;
           font-weight: 500;
         }
       }
@@ -450,12 +450,12 @@ const applyForPosition = (position: Position): void => {
             font-weight: 500;
             color: #666;
             margin-right: 0.5rem;
-            font-size: 1.5rem;
+            font-size: 1rem;
           }
 
           .detail-value {
             color: #333;
-            font-size: 1.5rem;
+            font-size: 1rem;
           }
         }
       }
@@ -464,7 +464,7 @@ const applyForPosition = (position: Position): void => {
         margin-bottom: 2rem;
 
         .requirements-title {
-          font-size: 1.8rem;
+          font-size: 1.3rem;
           font-weight: 600;
           margin-bottom: 1rem;
           color: #333;
@@ -476,12 +476,12 @@ const applyForPosition = (position: Position): void => {
           margin: 0;
 
           li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
             position: relative;
             color: #666;
-            line-height: 1.7; // 略提升
-            font-size: 1.5rem;
+            line-height: 1.5;
+            font-size: 1rem;
 
             &:before {
               content: "•";
@@ -489,6 +489,8 @@ const applyForPosition = (position: Position): void => {
               font-weight: bold;
               position: absolute;
               left: 0;
+              top: 0.5rem;
+              font-size: 0.8rem;
             }
           }
         }
@@ -504,7 +506,7 @@ const applyForPosition = (position: Position): void => {
           padding: 0.85rem 2.2rem; // 略提升
           border-radius: 8px;
           font-weight: 500;
-          font-size: 1.13rem;
+          font-size: 0.7rem;
           cursor: pointer;
           transition: background-color 0.3s ease;
 
@@ -528,7 +530,7 @@ const applyForPosition = (position: Position): void => {
     margin: 0 auto;
 
     .contact-description {
-      font-size: 1.5rem;
+      font-size: 1.1rem;
       color: #666;
       margin-bottom: 2rem;
       line-height: 1.7;
@@ -545,13 +547,13 @@ const applyForPosition = (position: Position): void => {
           font-weight: 500;
           color: #666;
           margin-right: 0.5rem;
-          font-size: 1.5rem;
+          font-size: 1rem;
         }
 
         .contact-value {
           color: #1a3a8f;
           font-weight: 500;
-          font-size: 1.5rem;
+          font-size: 1rem;
         }
       }
     }
@@ -565,12 +567,12 @@ const applyForPosition = (position: Position): void => {
     padding: 15vh 0 0 0; // 移动端文字下移
 
     .hero-title {
-      font-size: 2rem; // 进一步减小标题字体
+      font-size: 2rem;
       margin-bottom: 0.8rem;
     }
 
     .hero-subtitle {
-      font-size: 1.4rem; // 减小副标题字体
+      font-size: 1.1rem;
       margin-bottom: 2rem;
       padding: 0 1rem; // 添加水平内边距
     }
@@ -580,19 +582,19 @@ const applyForPosition = (position: Position): void => {
 
       .stat-item {
         .stat-number {
-          font-size: 2rem; // 减小数字字体
+          font-size: 1.8rem; // 减小数字字体
           margin-bottom: 0.3rem;
         }
 
         .stat-label {
-          font-size: 1.3rem; // 减小标签字体
+          font-size: 0.9rem;
         }
       }
     }
   }
 
   .section-title {
-    font-size: 1.8rem; // 统一为1.8rem，更适合移动端
+    font-size: 1.6rem; // 统一为1.6rem，更适合移动端
   }
 
   .why-join,
@@ -614,12 +616,12 @@ const applyForPosition = (position: Position): void => {
         padding: 1.5rem; // 减小卡片内边距
 
         .benefit-title {
-          font-size: 1.6rem; // 减小标题字体
+          font-size: 1.2rem;
           margin-bottom: 0.8rem;
         }
 
         .benefit-description {
-          font-size: 1.3rem; // 减小描述字体
+          font-size: 0.9rem;
         }
       }
     }
@@ -628,49 +630,56 @@ const applyForPosition = (position: Position): void => {
   .job-positions {
     .positions-grid {
       padding: 0 20px;
-      gap: 20px; // 减小卡片间距
+      gap: 15px; // 进一步减小卡片间距
 
       .position-card {
-        padding: 1.5rem; // 减小卡片内边距
+        padding: 1.2rem; // 进一步减小卡片内边距
 
         .position-header {
           flex-direction: column;
           align-items: flex-start;
-          margin-bottom: 1rem;
+          margin-bottom: 0.8rem;
 
           .position-title {
-            font-size: 1.8rem; // 减小职位标题字体
+            font-size: 1.2rem;
           }
 
           .position-type {
-            font-size: 1.1rem; // 减小职位类型字体
+            font-size: 0.8rem;
           }
         }
 
         .position-details {
           grid-template-columns: 1fr;
-          gap: 0.5rem;
-          margin-bottom: 1rem;
+          gap: 0.4rem;
+          margin-bottom: 0.8rem;
 
           .detail-item {
             .detail-label,
             .detail-value {
-              font-size: 1.3rem; // 减小详情字体
+              font-size: 0.9rem;
             }
           }
         }
 
         .position-requirements {
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
 
           .requirements-title {
-            font-size: 1.5rem; // 减小要求标题字体
-            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
           }
 
           .requirements-list li {
-            font-size: 1.3rem; // 减小要求列表字体
-            padding: 0.3rem 0;
+            font-size: 0.9rem;
+            padding: 0.2rem 0;
+            padding-left: 1rem;
+            line-height: 1.4;
+
+            &:before {
+              top: 0.4rem;
+              font-size: 0.7rem;
+            }
           }
         }
 
@@ -678,7 +687,7 @@ const applyForPosition = (position: Position): void => {
           text-align: center;
 
           .apply-btn {
-            font-size: 1.1rem; // 减小按钮字体
+            font-size: 0.9rem;
             padding: 0.7rem 1.8rem; // 减小按钮内边距
           }
         }
@@ -693,7 +702,6 @@ const applyForPosition = (position: Position): void => {
     .contact-item {
       .contact-label,
       .contact-value {
-        font-size: 1.3rem; // 减小联系信息字体
       }
     }
   }
@@ -709,12 +717,12 @@ const applyForPosition = (position: Position): void => {
     }
 
     .hero-subtitle {
-      font-size: 1.3rem; // 进一步减小副标题字体
+      font-size: 1rem; // 进一步减小副标题字体
     }
   }
 
   .section-title {
-    font-size: 1.6rem; // 进一步减小章节标题字体
+    font-size: 1.5rem; // 进一步减小章节标题字体
   }
 
   .container {
@@ -731,6 +739,39 @@ const applyForPosition = (position: Position): void => {
   .job-positions {
     .positions-grid {
       padding: 0 16px;
+      gap: 12px;
+
+      .position-card {
+        padding: 1rem;
+
+        .position-header {
+          margin-bottom: 0.6rem;
+        }
+
+        .position-details {
+          margin-bottom: 0.6rem;
+          gap: 0.3rem;
+        }
+
+        .position-requirements {
+          margin-bottom: 0.8rem;
+
+          .requirements-title {
+            margin-bottom: 0.5rem;
+          }
+
+          .requirements-list li {
+            padding: 0.15rem 0;
+            padding-left: 0.8rem;
+            line-height: 1.3;
+
+            &:before {
+              top: 0.35rem;
+              font-size: 0.6rem;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -741,11 +782,11 @@ const applyForPosition = (position: Position): void => {
     padding: 11vh 0 0 0; // 最小屏幕文字下移
 
     .hero-title {
-      font-size: 1.6rem; // 最小标题字体
+      font-size: 1.6rem;
     }
 
     .hero-subtitle {
-      font-size: 1.2rem; // 最小副标题字体
+      font-size: 0.9rem;
     }
 
     .hero-stats {
@@ -754,11 +795,11 @@ const applyForPosition = (position: Position): void => {
 
       .stat-item {
         .stat-number {
-          font-size: 1.8rem;
+          font-size: 1.6rem;
         }
 
         .stat-label {
-          font-size: 1.2rem;
+          font-size: 0.9rem;
         }
       }
     }
@@ -777,6 +818,48 @@ const applyForPosition = (position: Position): void => {
   .job-positions {
     .positions-grid {
       padding: 0 12px;
+      gap: 10px;
+
+      .position-card {
+        padding: 0.8rem;
+
+        .position-header {
+          margin-bottom: 0.5rem;
+        }
+
+        .position-details {
+          margin-bottom: 0.5rem;
+          gap: 0.2rem;
+        }
+
+        .position-requirements {
+          margin-bottom: 0.6rem;
+
+          .requirements-title {
+            margin-bottom: 0.4rem;
+          }
+
+          .requirements-list li {
+            padding: 0.1rem 0;
+            padding-left: 0.7rem;
+            line-height: 1.2;
+
+            &:before {
+              top: 0.3rem;
+              font-size: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .requirements-list li {
+    padding-left: 0.7rem;
+
+    &:before {
+      top: 0.3rem;
+      font-size: 0.5rem;
     }
   }
 }

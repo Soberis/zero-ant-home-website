@@ -70,8 +70,8 @@ onUnmounted(() => {
   position: fixed;
   right: 2rem;
   bottom: 2rem;
-  width: 4rem;
-  height: 4rem;
+  width: 3.2rem;
+  height: 3.2rem;
   border: none;
   border-radius: 50%;
   background: var(--color-primary, #1a3a8f);
@@ -100,8 +100,8 @@ onUnmounted(() => {
   }
 
   &__icon {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 
@@ -110,12 +110,12 @@ onUnmounted(() => {
   .back-to-top {
     right: 1rem;
     bottom: 1rem;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2.8rem;
+    height: 2.8rem;
 
     &__icon {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.25rem;
+      height: 1.25rem;
     }
   }
 }

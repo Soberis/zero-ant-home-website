@@ -9,18 +9,53 @@ server {
 
     # 启用 gzip 压缩
     gzip on;
-    gzip_types text/css application/javascript application/font-woff application/font-woff2 font/woff font/woff2;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types
+        text/plain
+        text/css
+        text/xml
+        text/javascript
+        application/javascript
+        application/xml+rss
+        application/json
+        application/font-woff
+        application/font-woff2
+        font/woff
+        font/woff2
+        image/svg+xml;
 
-    # 字体文件MIME类型配置
-    location ~* \.(woff|woff2|ttf|eot|svg)$ {
+    # 静态资源缓存策略
+    location ~* \.(woff|woff2|ttf|eot|otf|svg)$ {
         add_header Access-Control-Allow-Origin *;
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
 
+    # 图片资源缓存
+    location ~* \.(jpg|jpeg|png|gif|ico|webp|avif)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # CSS和JS文件缓存
+    location ~* \.(css|js)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # HTML文件缓存（较短缓存时间）
+    location ~* \.html$ {
+        expires 1h;
+        add_header Cache-Control "public, no-cache";
+    }
+
     # 处理 SPA 路由：所有路由返回 index.html
     location / {
         try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+        add_header Pragma "no-cache";
+        add_header Expires "0";
     }
 
     # 生产环境开启 HTTP 跳转 HTTPS

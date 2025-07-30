@@ -22,18 +22,14 @@ Allow: /images/
 Allow: /assets/
 
 # Disallow crawling of development and build files
-Disallow: /src/
 Disallow: /node_modules/
 Disallow: /.git/
 Disallow: /dist/
 Disallow: /build/
 Disallow: /.vscode/
 Disallow: /coverage/
-Disallow: /test/
-Disallow: /tests/
 
 # Disallow crawling of configuration files
-Disallow: /*.json
 Disallow: /*.js.map
 Disallow: /*.css.map
 Disallow: /tsconfig*

@@ -1,36 +1,29 @@
 <template>
-
   <section class="video-cases">
-
-    <h2 class="section-title">{{ $t('nav.videoCases') }}</h2>
+    <h2 class="section-title">{{ $t("nav.videoCases") }}</h2>
 
     <div class="videos-list">
-
       <div
         v-for="video in videoCardsTyped"
         :key="video.slug"
         class="video-card"
       >
-
         <div class="video-img">
-           <img :src="video.img" :alt="video.title" loading="lazy" />
+          <img :src="video.img" :alt="video.title" loading="lazy" />
         </div>
 
         <div class="video-title">{{ $t(`videos.${video.slug}.title`) }}</div>
-         <router-link :to="`/video/${video.slug}`" class="more-btn"
-        >{{ $t(`home.videoCases.watchVideo`) }} +</router-link
+        <router-link :to="`/video/${video.slug}`" class="more-btn"
+          >{{ $t(`home.videoCases.watchVideo`) }} +</router-link
         >
       </div>
-
     </div>
-
   </section>
-
 </template>
 
 <script setup lang="ts">
 // 视频案例数据
-import { videoCards, type VideoCard } from '@/data/videos';
+import { videoCards, type VideoCard } from "@/data/videos";
 const videoCardsTyped: VideoCard[] = videoCards;
 </script>
 
@@ -45,7 +38,7 @@ const videoCardsTyped: VideoCard[] = videoCards;
 }
 .section-title {
   text-align: center;
-  font-size: 2.6rem;
+  font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 56px;
   letter-spacing: 2px;
@@ -82,7 +75,7 @@ const videoCardsTyped: VideoCard[] = videoCards;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 120px;
+  height: 160px;
 }
 .video-img img {
   max-width: 100%;
@@ -91,24 +84,22 @@ const videoCardsTyped: VideoCard[] = videoCards;
   border-radius: 12px;
 }
 .video-title {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #222 !important;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   text-align: center;
 }
 .more-btn {
   display: inline-block;
   border: 2px solid #1a3a8f;
   color: #1a3a8f;
-  border-radius: 24px;
-  padding: 10px 36px;
-  font-size: 1.1rem;
+  border-radius: 22px;
+  padding: 8px 28px;
+  font-size: 1rem;
   text-decoration: none;
   font-weight: 600;
-  transition:
-    background 0.2s,
-    color 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 .more-btn:hover {
   background: #1a3a8f;
@@ -125,7 +116,11 @@ const videoCardsTyped: VideoCard[] = videoCards;
 }
 @media (max-width: 600px) {
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .video-title {
+    font-size: 1rem;
   }
   .videos-list {
     display: flex;
@@ -135,4 +130,3 @@ const videoCardsTyped: VideoCard[] = videoCards;
   }
 }
 </style>
-

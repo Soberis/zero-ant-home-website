@@ -1,72 +1,61 @@
 <!-- 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换 -->
 
 <template>
-
   <div class="application-detail">
-
     <h1 class="title">{{ detail?.title }}</h1>
 
     <div class="desc" v-html="detail?.description"></div>
 
     <div class="video-wrap">
-       <template v-if="videoDetail && videoDetail.type === 'bilibili'"
-        >
+      <template v-if="videoDetail && videoDetail.type === 'bilibili'">
         <div class="video-container">
-           <BilibiliPlayer
-            :url="videoDetail.url"
-            :title="videoDetail.title"
-          />
+          <BilibiliPlayer :url="videoDetail.url" :title="videoDetail.title" />
         </div>
-         </template
-      > <template v-else-if="videoDetail && videoDetail.type === 'local'"
-        >
+      </template>
+      <template v-else-if="videoDetail && videoDetail.type === 'local'">
         <div class="video-container">
-           <video :src="videoDetail.url" controls class="video-player" />
+          <video :src="videoDetail.url" controls class="video-player" />
         </div>
-         </template
-      > <template v-else
-        >
-        <div class="video-placeholder">{{ t('applicationsPage.noVideo') }}</div>
-         </template
-      >
+      </template>
+      <template v-else>
+        <div class="video-placeholder">{{ t("applicationsPage.noVideo") }}</div>
+      </template>
       <div class="video-bottom-bar" :class="bottomBarClass">
-         <button
+        <button
           v-if="prevSlug"
           class="video-bottom-btn prev"
           @click="goTo(prevSlug)"
         >
-           ◀ {{ t('applicationsPage.prev') }} </button
-        > <button
+          ◀ {{ t("applicationsPage.prev") }}
+        </button>
+        <button
           v-if="nextSlug"
           class="video-bottom-btn next"
           @click="goTo(nextSlug)"
         >
-           {{ t('applicationsPage.next') }} ▶ </button
-        >
+          {{ t("applicationsPage.next") }} ▶
+        </button>
       </div>
-
     </div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
 // 行业应用详情页，根据slug展示应用内容，支持bilibili和video类型视频，上下切换
-import { useRoute, useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import applications, { type Application } from '@/data/applications';
-import { computed, type ComputedRef, onMounted, watch } from 'vue';
-import { videoMap, type VideoDetail } from '@/data/videos';
-import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
-import { setSEO, setStructuredData } from '@/utils/seo';
+import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import applications, { type Application } from "@/data/applications";
+import { computed, type ComputedRef, onMounted, watch } from "vue";
+import { videoMap, type VideoDetail } from "@/data/videos";
+import BilibiliPlayer from "@/components/BilibiliPlayer.vue";
+import { setSEO, setStructuredData } from "@/utils/seo";
 
 const route = useRoute();
 const router = useRouter();
 const { t, locale } = useI18n();
 const slug: ComputedRef<string> = computed(() => route.params.slug as string);
 const rawDetail: ComputedRef<Application | undefined> = computed(() =>
-  applications.find(item => item.slug === slug.value)
+  applications.find((item) => item.slug === slug.value)
 );
 
 // 国际化的应用详情
@@ -74,8 +63,14 @@ const detail: ComputedRef<Application | undefined> = computed(() => {
   if (!rawDetail.value) return undefined;
   return {
     ...rawDetail.value,
-    title: t(`applications.${rawDetail.value.slug}.title`, rawDetail.value.title),
-    description: t(`applications.${rawDetail.value.slug}.description`, rawDetail.value.description)
+    title: t(
+      `applications.${rawDetail.value.slug}.title`,
+      rawDetail.value.title
+    ),
+    description: t(
+      `applications.${rawDetail.value.slug}.description`,
+      rawDetail.value.description
+    ),
   };
 });
 
@@ -88,63 +83,63 @@ const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
 // 动态SEO元数据
 const seoMetadata = computed(() => {
   if (!detail.value) return null;
-  
+
   const appTitle = detail.value.title;
-  const appDesc = detail.value.description.replace(/<[^>]*>/g, ''); // 移除HTML标签
-  const siteName = 'ZeroAnt Technology';
+  const appDesc = detail.value.description.replace(/<[^>]*>/g, ""); // 移除HTML标签
+  const siteName = "ZeroAnt Technology";
   const currentUrl = `${window.location.origin}${route.fullPath}`;
-  
+
   return {
     title: `${appTitle} - ${siteName}`,
     description: appDesc,
     keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化, ZeroAnt, 零蚁科技`,
     ogTitle: appTitle,
     ogDescription: appDesc,
-    ogType: 'article',
+    ogType: "article",
     ogUrl: currentUrl,
     ogImage: `${window.location.origin}/logo.png`,
-    twitterCard: 'summary_large_image',
+    twitterCard: "summary_large_image",
     twitterTitle: appTitle,
     twitterDescription: appDesc,
-    canonical: currentUrl
+    canonical: currentUrl,
   };
 });
 
 // Article结构化数据
 const articleStructuredData = computed(() => {
   if (!detail.value) return null;
-  
+
   const appTitle = detail.value.title;
-  const appDesc = detail.value.description.replace(/<[^>]*>/g, ''); // 移除HTML标签
-  
+  const appDesc = detail.value.description.replace(/<[^>]*>/g, ""); // 移除HTML标签
+
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
+    "@context": "https://schema.org",
+    "@type": "Article",
     headline: appTitle,
     description: appDesc,
     author: {
-      '@type': 'Organization',
-      name: 'ZeroAnt Technology',
-      url: window.location.origin
+      "@type": "Organization",
+      name: "ZeroAnt Technology",
+      url: window.location.origin,
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'ZeroAnt Technology',
+      "@type": "Organization",
+      name: "ZeroAnt Technology",
       url: window.location.origin,
       logo: {
-        '@type': 'ImageObject',
-        url: `${window.location.origin}/logo.png`
-      }
+        "@type": "ImageObject",
+        url: `${window.location.origin}/logo.png`,
+      },
     },
-    datePublished: new Date().toISOString().split('T')[0],
-    dateModified: new Date().toISOString().split('T')[0],
+    datePublished: new Date().toISOString().split("T")[0],
+    dateModified: new Date().toISOString().split("T")[0],
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${window.location.origin}${route.fullPath}`
+      "@type": "WebPage",
+      "@id": `${window.location.origin}${route.fullPath}`,
     },
     image: `${window.location.origin}/logo.png`,
-    articleSection: '应用场景',
-    keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化`
+    articleSection: "应用场景",
+    keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化`,
   };
 });
 
@@ -168,7 +163,7 @@ onMounted(() => {
 // 移除bilibiliEmbedUrl函数，现在使用BilibiliPlayer组件处理
 
 const currentIndex: ComputedRef<number> = computed(() =>
-  applications.findIndex(item => item.slug === slug.value)
+  applications.findIndex((item) => item.slug === slug.value)
 );
 const prevSlug: ComputedRef<string | null> = computed(() =>
   currentIndex.value > 0 ? applications[currentIndex.value - 1].slug : null
@@ -180,10 +175,10 @@ const nextSlug: ComputedRef<string | null> = computed(() =>
 );
 // 新增：判断按钮类型
 const bottomBarClass: ComputedRef<string> = computed(() => {
-  if (prevSlug.value && nextSlug.value) return 'both';
-  if (prevSlug.value) return 'only-prev';
-  if (nextSlug.value) return 'only-next';
-  return '';
+  if (prevSlug.value && nextSlug.value) return "both";
+  if (prevSlug.value) return "only-prev";
+  if (nextSlug.value) return "only-next";
+  return "";
 });
 function goTo(targetSlug: string | null): void {
   if (targetSlug) {
@@ -205,18 +200,18 @@ function goTo(targetSlug: string | null): void {
   box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
 }
 .title {
-  font-size: 2.6rem;
-  font-weight: 800;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: #222;
-  margin-bottom: 32px;
-  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
   text-align: left;
 }
 .desc {
-  font-size: 1.15rem;
-  color: #333;
-  line-height: 1.9;
-  margin-bottom: 40px;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 2rem;
   white-space: normal;
   text-align: left;
 }
@@ -267,7 +262,7 @@ function goTo(targetSlug: string | null): void {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+
   border-radius: 12px;
   border: 1px dashed #e3e8f0;
 }
@@ -296,20 +291,17 @@ function goTo(targetSlug: string | null): void {
   background: #fff;
   border: 2px solid #1a3a8f;
   border-radius: 24px;
-  font-size: 1.08rem;
-  font-weight: 700;
-  padding: 10px 40px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.6rem 1.8rem;
   box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
   cursor: pointer;
-  letter-spacing: 1px;
-  transition:
-    background 0.18s,
-    color 0.18s,
-    box-shadow 0.18s,
+  letter-spacing: 0.5px;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s,
     border-color 0.18s;
   outline: none;
   opacity: 1;
-  min-width: 110px;
+  min-width: 100px;
   text-align: center;
   margin: 0;
 }
@@ -325,6 +317,15 @@ function goTo(targetSlug: string | null): void {
   border-color: #16306b;
 }
 @media (max-width: 600px) {
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
   .video-container {
     max-width: 100%;
   }
@@ -339,11 +340,10 @@ function goTo(targetSlug: string | null): void {
     margin-top: 10px;
   }
   .video-bottom-btn {
-    font-size: 0.98rem;
-    padding: 8px 0;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
     min-width: 80px;
     border-radius: 16px;
   }
 }
 </style>
-

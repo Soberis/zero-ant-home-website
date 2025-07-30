@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 import multiOsImg from "@/assets/images/products/多OS混合部署嵌入式虚拟机.png";
 import airosImg from "@/assets/images/products/AiROS机器人操作系统.png";
 import scara4axisImg from "@/assets/images/products/四轴机器人.png";
@@ -54,7 +54,7 @@ import dualArmImg from "@/assets/images/products/双臂人形机器人.png";
 
 // 获取国际化函数和路由
 const { t } = useI18n();
-const router = useRouter();
+// const router = useRouter();
 
 // 轮播图数据类型定义
 interface SlideItem {
@@ -144,9 +144,10 @@ function resetTimer(): void {
 /**
  * 跳转到产品详情页
  */
-function navigateToProduct(slide: SlideItem): void {
-  router.push(slide.routePath);
-}
+// 跳转到产品详情页
+// function navigateToProduct(slide: SlideItem): void {
+//   router.push(slide.routePath);
+// }
 
 onMounted(() => {
   resetTimer();
@@ -220,13 +221,12 @@ onMounted(() => {
   max-width: 600px;
 }
 .slide-title {
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 18px;
   letter-spacing: 1px;
 }
 .slide-desc {
-  font-size: 1.5rem;
   font-weight: 400;
   margin-bottom: 0;
 }
@@ -262,11 +262,9 @@ onMounted(() => {
     max-width: 90vw;
   }
   .slide-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
-  .slide-desc {
-    font-size: 1rem;
-  }
+
   .carousel-controls {
     right: 20px;
     bottom: 48px;
@@ -278,6 +276,11 @@ onMounted(() => {
   }
   .carousel-controls button.active {
     width: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .slide-title {
+    font-size: 1.8rem;
   }
 }
 </style>

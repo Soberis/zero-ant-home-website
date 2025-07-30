@@ -1,0 +1,178 @@
+// 字体排版规范系统
+// 基于 Material Design 3 字体规范
+
+// 显示字体 - 最大标题
+.text-display-large {
+  font-size: 2.5rem; // 40px
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.text-display-medium {
+  font-size: 2.125rem; // 34px
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.text-display-small {
+  font-size: 1.75rem; // 28px
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+// 标题字体
+.text-headline-large {
+  font-size: 2rem; // 32px
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.text-headline-medium {
+  font-size: 1.75rem; // 28px
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.text-headline-small {
+  font-size: 1.5rem; // 24px
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+// 标题
+.text-title-large {
+  font-size: 1.375rem; // 22px
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.text-title-medium {
+  font-size: 1.125rem; // 18px
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.text-title-small {
+  font-size: 1rem; // 16px
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+// 正文字体
+.text-body-large {
+  font-size: 1.125rem; // 18px
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-body-medium {
+  font-size: 1rem; // 16px
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-body-small {
+  font-size: 0.875rem; // 14px
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// 标签字体
+.text-label-large {
+  font-size: 0.875rem; // 14px
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.text-label-medium {
+  font-size: 0.75rem; // 12px
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.text-label-small {
+  font-size: 0.6875rem; // 11px
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+// 字体权重工具类
+.font-weight-light { font-weight: 300; }
+.font-weight-regular { font-weight: 400; }
+.font-weight-medium { font-weight: 500; }
+.font-weight-semibold { font-weight: 600; }
+.font-weight-bold { font-weight: 700; }
+
+// 文本对齐
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+// 文本装饰
+.text-underline { text-decoration: underline; }
+.text-no-underline { text-decoration: none; }
+
+// 文本转换
+.text-uppercase { text-transform: uppercase; }
+.text-lowercase { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+
+// 文本溢出
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-break {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+// 响应式字体大小
+@media (max-width: 768px) {
+  .text-display-large { font-size: 2rem; }
+  .text-display-medium { font-size: 1.75rem; }
+  .text-display-small { font-size: 1.5rem; }
+  .text-headline-large { font-size: 1.75rem; }
+  .text-headline-medium { font-size: 1.5rem; }
+  .text-headline-small { font-size: 1.375rem; }
+  .text-title-large { font-size: 1.25rem; }
+  .text-title-medium { font-size: 1.125rem; }
+  .text-title-small { font-size: 1rem; }
+  .text-body-large { font-size: 1.0625rem; }
+  .text-body-medium { font-size: 1rem; }
+  .text-body-small { font-size: 0.8125rem; }
+  .text-label-large { font-size: 0.8125rem; }
+  .text-label-medium { font-size: 0.75rem; }
+  .text-label-small { font-size: 0.6875rem; }
+}
+
+@media (max-width: 480px) {
+  .text-display-large { font-size: 1.75rem; }
+  .text-display-medium { font-size: 1.5rem; }
+  .text-display-small { font-size: 1.375rem; }
+  .text-headline-large { font-size: 1.5rem; }
+  .text-headline-medium { font-size: 1.375rem; }
+  .text-headline-small { font-size: 1.25rem; }
+  .text-title-large { font-size: 1.125rem; }
+  .text-title-medium { font-size: 1rem; }
+  .text-title-small { font-size: 0.9375rem; }
+  .text-body-large { font-size: 1rem; }
+  .text-body-medium { font-size: 0.9375rem; }
+  .text-body-small { font-size: 0.8125rem; }
+  .text-label-large { font-size: 0.8125rem; }
+  .text-label-medium { font-size: 0.75rem; }
+  .text-label-small { font-size: 0.6875rem; }
+}
+
+// 使用示例：
+// 页面主标题：<h1 class="text-display-large">ZeroAnt 智能系统</h1>
+// 产品标题：<h2 class="text-headline-medium">AI智能复合系统</h2>
+// 段落文本：<p class="text-body-medium">这是正文内容...</p>
+// 标签文本：<span class="text-label-medium">NEW</span>

@@ -1,13 +1,9 @@
 <template>
-
   <div class="product-card">
-
     <div class="product-header">
-
       <div v-if="product.image" class="product-image-wrapper">
-
         <div class="image-backdrop"></div>
-         <img
+        <img
           :src="product.image"
           :alt="t(product.name)"
           class="product-image"
@@ -16,16 +12,14 @@
       </div>
 
       <div v-else class="product-image-placeholder">
-
         <div class="placeholder-icon">
-           <svg
+          <svg
             width="80"
             height="80"
             viewBox="0 0 48 48"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-
             <rect
               x="8"
               y="12"
@@ -52,35 +46,29 @@
               stroke-width="2"
               opacity="0.4"
             />
-             </svg
-          >
+          </svg>
         </div>
-
       </div>
-
     </div>
 
     <div class="product-content">
-
       <div class="product-name">{{ t(product.name) }}</div>
 
       <div class="product-desc">{{ t(product.desc) }}</div>
-       <button class="more-btn" @click="emit('more', product.slug)">
-         <span class="btn-text">{{ t('hero.cta') }}</span> <span class="btn-arrow">→</span>
-        </button
-      >
+      <button class="more-btn" @click="emit('more', product.slug)">
+        <span class="btn-text">{{ t("hero.cta") }}</span>
+        <span class="btn-arrow">→</span>
+      </button>
     </div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-import type { ProductData } from '@/data/products';
-import { useI18n } from 'vue-i18n';
+import type { ProductData } from "@/data/products";
+import { useI18n } from "vue-i18n";
 
 const { product } = defineProps<{ product: ProductData }>();
-const emit = defineEmits<{ (e: 'more', slug: string): void }>();
+const emit = defineEmits<{ (e: "more", slug: string): void }>();
 const { t } = useI18n();
 </script>
 
@@ -98,6 +86,79 @@ const { t } = useI18n();
   padding: 40px 32px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 520px;
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    padding: 24px 20px;
+    min-height: 420px;
+  }
+
+  .product-image-wrapper {
+    width: 160px;
+    height: 160px;
+  }
+
+  .product-image,
+  .product-image-placeholder {
+    width: 140px;
+    height: 140px;
+  }
+
+  .product-name {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .product-desc {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .more-btn {
+    padding: 12px 30px;
+    font-size: 0.75rem;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    padding: 20px 16px;
+    min-height: 380px;
+  }
+
+  .product-image-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .product-image,
+  .product-image-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .product-name {
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+  }
+
+  .product-desc {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    min-height: 40px;
+    color: #555;
+    line-height: 1.55;
+  }
+
+  .more-btn {
+    padding: 10px 24px;
+    font-size: 0.7rem;
+    min-width: 120px;
+  }
 }
 
 .product-card:hover {
@@ -168,7 +229,7 @@ const { t } = useI18n();
 }
 
 .product-image-placeholder::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -213,8 +274,8 @@ const { t } = useI18n();
 }
 
 .product-name {
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #222;
   margin-bottom: 20px;
   letter-spacing: 1px;
@@ -228,12 +289,12 @@ const { t } = useI18n();
 }
 
 .product-desc {
-  color: #666;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  color: #555;
   margin-bottom: 32px;
   text-align: center;
   min-height: 50px;
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 400;
   flex: 1;
 }
@@ -244,23 +305,23 @@ const { t } = useI18n();
   background: linear-gradient(135deg, #1a3a8f 0%, #4a90e2 100%);
   color: #fff;
   border-radius: 50px;
-  padding: 16px 40px;
-  font-size: 1.1rem;
+  padding: 14px 36px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 600;
+  font-size: 0.8rem;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);
   display: flex;
   align-items: center;
   gap: 8px;
   overflow: hidden;
-  min-width: 160px;
+  min-width: 150px;
   justify-content: center;
 }
 
 .more-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -293,7 +354,6 @@ const { t } = useI18n();
 }
 
 .btn-arrow {
-  font-size: 1.2rem;
   transition: transform 0.3s ease;
   font-weight: normal;
 }
@@ -306,4 +366,3 @@ const { t } = useI18n();
   transform: translateX(-2px);
 }
 </style>
-

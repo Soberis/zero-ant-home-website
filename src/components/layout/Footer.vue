@@ -453,10 +453,6 @@ onUnmounted(() => {
     font-size: 10px;
   }
 
-  .contact-info {
-    font-size: 12px;
-  }
-
   .footer-col h4 {
     font-size: 15px;
   }

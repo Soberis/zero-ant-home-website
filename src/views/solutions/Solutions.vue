@@ -113,7 +113,7 @@ const Applications = computed(() => {
 .solutions-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f8 100%);
-  padding: 48px 0;
+  padding: 80px 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -145,19 +145,19 @@ const Applications = computed(() => {
 
 .page-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 80px;
+  padding-top: 32px;
 }
 
 .page-title {
-  font-size: 4.6rem;
   font-weight: 800;
   margin-bottom: 36px;
   letter-spacing: 2px;
   color: #222;
+  font-size: 3rem;
 }
 
 .page-subtitle {
-  font-size: 1.8rem;
   font-weight: 800;
   margin-bottom: 36px;
   letter-spacing: 1px;
@@ -167,15 +167,16 @@ const Applications = computed(() => {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.3;
+  font-size: 1.1rem;
 }
 
 .section-title {
   color: #222;
-  font-size: 2.6rem;
   font-weight: 700;
   text-align: center;
   margin: 48px 0 32px 0;
   letter-spacing: 1px;
+  font-size: 2rem;
   padding-left: 0;
   position: relative;
   transition: color 0.3s ease;
@@ -265,14 +266,12 @@ const Applications = computed(() => {
   justify-content: center;
 }
 .app-title {
-  font-size: 1.6rem;
   color: #222;
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
 .app-desc {
-  font-size: 1.15rem;
   color: #888;
   margin-bottom: 10px;
   line-height: 1.5;
@@ -300,18 +299,6 @@ const Applications = computed(() => {
     --section-spacing: 60px;
     --card-padding: 32px 24px;
   }
-
-  .page-title {
-    font-size: 4rem;
-  }
-
-  .page-subtitle {
-    font-size: 1.5rem;
-  }
-
-  .section-title {
-    font-size: 2.4rem;
-  }
 }
 
 @media (max-width: 900px) {
@@ -336,26 +323,22 @@ const Applications = computed(() => {
     padding: 32px 24px;
   }
 
-  .core-title {
-    font-size: 1.8rem;
-  }
-
   .solutions-page {
-    padding: 28px 0 32px 0;
+    padding: 60px 0 32px 0;
   }
 
   .page-title {
-    font-size: 3.2rem;
+    font-size: 2.4rem;
     margin-bottom: 18px;
   }
 
   .page-subtitle {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     margin-bottom: 20px;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin: 32px 0 18px 0;
   }
   .section-title::after {
@@ -392,11 +375,12 @@ const Applications = computed(() => {
   }
 
   .solutions-page {
-    padding: 12px 0 16px 0;
+    padding: 40px 0 16px 0;
   }
 
   .page-header {
-    margin-bottom: 32px;
+    margin-bottom: 36px;
+    padding-top: 12px;
   }
 
   .page-title {
@@ -405,12 +389,12 @@ const Applications = computed(() => {
   }
 
   .page-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     margin-bottom: 20px;
   }
 
   .section-title {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     margin: 32px 0 18px 0;
     padding-left: 0;
   }

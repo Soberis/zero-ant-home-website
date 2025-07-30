@@ -404,7 +404,6 @@ onUnmounted(() => {
 }
 
 .logo-text {
-  font-size: 26px;
   font-weight: 700;
   color: #1a3a8f;
   margin-left: 12px;
@@ -452,7 +451,6 @@ onUnmounted(() => {
 .nav-link {
   color: #2c3e50;
   text-decoration: none;
-  font-size: 16px;
   font-weight: 500;
   padding: 12px 8px;
   position: relative;
@@ -471,7 +469,6 @@ onUnmounted(() => {
 }
 
 .dropdown-icon {
-  font-size: 10px;
   color: #666;
   transition: all 0.3s ease;
   transform: rotate(0deg);
@@ -573,7 +570,6 @@ onUnmounted(() => {
   border: 2px solid transparent;
   min-width: 140px;
   flex: 0 0 auto;
-  font-size: 14px; /* 从15px调整为14px */
   color: #333;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

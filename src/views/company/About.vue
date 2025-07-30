@@ -1,226 +1,174 @@
 <!-- 关于我们页面，包含公司介绍、发展历程、荣誉、文化、招聘、联系方式等内容，支持国际化 -->
 
 <template>
-
   <div class="about-page">
-     <!-- 口号大屏 -->
+    <!-- 口号大屏 -->
     <section class="about-hero">
-
       <div class="hero-content">
+        <h1>{{ $t("slogan") }}</h1>
 
-        <h1>{{ $t('slogan') }}</h1>
-
-        <div class="hero-sub">{{ $t('slogan2') }}</div>
+        <div class="hero-sub">{{ $t("slogan2") }}</div>
 
         <div class="hero-line"></div>
-
       </div>
-
     </section>
-     <!-- 目录栏 -->
+    <!-- 目录栏 -->
     <nav class="about-nav">
-
       <ul>
-
         <li :class="{ active: activeTab === 'company-intro' }">
-           <a
+          <a
             href="#company-intro"
             @click.prevent="scrollToSection('company-intro')"
-            >{{ $t('nav.companyIntro') }}</a
+            >{{ $t("nav.companyIntro") }}</a
           >
         </li>
 
         <li :class="{ active: activeTab === 'history' }">
-           <a href="#history" @click.prevent="scrollToSection('history')">{{
-            $t('nav.history')
-          }}</a
-          >
+          <a href="#history" @click.prevent="scrollToSection('history')">{{
+            $t("nav.history")
+          }}</a>
         </li>
 
         <li :class="{ active: activeTab === 'honors' }">
-           <a href="#honors" @click.prevent="scrollToSection('honors')">{{
-            $t('nav.honor')
-          }}</a
-          >
+          <a href="#honors" @click.prevent="scrollToSection('honors')">{{
+            $t("nav.honor")
+          }}</a>
         </li>
 
         <li :class="{ active: activeTab === 'core-values' }">
-           <a
+          <a
             href="#core-values"
             @click.prevent="scrollToSection('core-values')"
-            >{{ $t('nav.coreValues') }}</a
+            >{{ $t("nav.coreValues") }}</a
           >
         </li>
 
         <li :class="{ active: activeTab === 'culture' }">
-           <a href="#culture" @click.prevent="scrollToSection('culture')">{{
-            $t('nav.culture')
-          }}</a
-          >
+          <a href="#culture" @click.prevent="scrollToSection('culture')">{{
+            $t("nav.culture")
+          }}</a>
         </li>
 
         <li :class="{ active: activeTab === 'contact' }">
-           <a href="#contact" @click.prevent="scrollToSection('contact')">{{
-            $t('nav.contact')
-          }}</a
-          >
+          <a href="#contact" @click.prevent="scrollToSection('contact')">{{
+            $t("nav.contact")
+          }}</a>
         </li>
-
       </ul>
-
     </nav>
 
     <section id="company-intro" class="about-section company-intro">
-
-      <h2>{{ $t('nav.companyIntro') }}</h2>
+      <h2>{{ $t("nav.companyIntro") }}</h2>
 
       <p v-html="$t('about.companyIntroDetailed.para1')"></p>
 
       <p v-html="$t('about.companyIntroDetailed.para2')"></p>
 
       <p v-html="$t('about.companyIntroDetailed.para3')"></p>
-       <!-- 团队信息 -->
+      <!-- 团队信息 -->
       <div class="info-section team-info">
-
-        <h3>{{ $t('about.teamOverview') }}</h3>
+        <h3>{{ $t("about.teamOverview") }}</h3>
 
         <div class="stats-grid">
-
           <div class="stat-card">
+            <div class="stat-number">{{ 20 }}+{{ $t("about.people") }}</div>
 
-            <div class="stat-number">{{ 20 }}+{{ $t('about.people') }}</div>
-
-            <div class="stat-label">{{ $t('about.teamSize') }}</div>
-
+            <div class="stat-label">{{ $t("about.teamSize") }}</div>
           </div>
 
           <div class="stat-card">
-
             <div class="stat-number">90%+</div>
 
-            <div class="stat-label">{{ $t('about.masterDegree') }}</div>
-
+            <div class="stat-label">{{ $t("about.masterDegree") }}</div>
           </div>
 
           <div class="stat-card">
+            <div class="stat-number">≤{{ 32 }}{{ $t("about.yearsOld") }}</div>
 
-            <div class="stat-number">≤{{ 32 }}{{ $t('about.yearsOld') }}</div>
-
-            <div class="stat-label">{{ $t('about.averageAge') }}</div>
-
+            <div class="stat-label">{{ $t("about.averageAge") }}</div>
           </div>
 
           <div class="stat-card">
-
             <div class="stat-number">≥90%</div>
 
-            <div class="stat-label">{{ $t('about.topUniversity') }}</div>
-
+            <div class="stat-label">{{ $t("about.topUniversity") }}</div>
           </div>
-
         </div>
-
       </div>
-       <!-- 融资信息 -->
+      <!-- 融资信息 -->
       <div class="info-section financing-info">
-
-        <h3>{{ $t('about.financingPlan') }}</h3>
+        <h3>{{ $t("about.financingPlan") }}</h3>
 
         <p class="financing-desc">
-           {{ $t('about.companyIntroDetailed.financingDesc') }}
+          {{ $t("about.companyIntroDetailed.financingDesc") }}
         </p>
 
         <p class="financing-desc">
-           {{ $t('about.companyIntroDetailed.emailTips')
+          {{ $t("about.companyIntroDetailed.emailTips")
           }}<a href="mailto:liqingfeng@zeroant.com"
             >&nbsp;liqingfeng@zeroant.com</a
           >
         </p>
-
       </div>
-
     </section>
 
     <section id="history" class="about-section history">
-
-      <h2>{{ $t('nav.history') }}</h2>
+      <h2>{{ $t("nav.history") }}</h2>
 
       <div class="timeline">
-
         <div
           v-for="item in timelineData"
           :key="item.year"
           class="timeline-item"
         >
-
           <div class="timeline-dot"></div>
 
           <div class="timeline-year">{{ item.year }}</div>
 
           <div class="timeline-content">
-
             <ul>
-
               <li v-for="event in item.events" :key="event">{{ event }}</li>
-
             </ul>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
 
     <section id="honors" class="about-section honors">
-
-      <h2>{{ $t('nav.honor') }}</h2>
+      <h2>{{ $t("nav.honor") }}</h2>
 
       <div class="honor-cards">
-
         <div v-for="(honor, idx) in honors" :key="idx" class="honor-card">
-           {{ honor }}
+          {{ honor }}
         </div>
-
       </div>
-
     </section>
 
     <section id="core-values" class="about-section core-values">
-
-      <h2 class="core-values-title">{{ $t('about.coreValues.title') }}</h2>
+      <h2 class="core-values-title">{{ $t("about.coreValues.title") }}</h2>
 
       <div class="core-values-content">
-
         <div class="core-values-row">
+          <div class="core-value-card">{{ $t("about.coreValues.value1") }}</div>
 
-          <div class="core-value-card">{{ $t('about.coreValues.value1') }}</div>
+          <div class="core-value-card">{{ $t("about.coreValues.value2") }}</div>
 
-          <div class="core-value-card">{{ $t('about.coreValues.value2') }}</div>
+          <div class="core-value-card">{{ $t("about.coreValues.value3") }}</div>
 
-          <div class="core-value-card">{{ $t('about.coreValues.value3') }}</div>
-
-          <div class="core-value-card">{{ $t('about.coreValues.value4') }}</div>
-
+          <div class="core-value-card">{{ $t("about.coreValues.value4") }}</div>
         </div>
-
       </div>
-
     </section>
 
     <section id="culture" class="about-section culture">
-
-      <h2 class="culture-title">{{ $t('nav.culture') }}</h2>
+      <h2 class="culture-title">{{ $t("nav.culture") }}</h2>
 
       <div class="culture-card no-bg">
-
         <div class="culture-desc financing-desc">
-           {{ $t('about.enterpriseCulture.description') }}
+          {{ $t("about.enterpriseCulture.description") }}
         </div>
 
         <ul class="culture-list">
-
           <li v-html="$t('about.enterpriseCulture.item1')"></li>
 
           <li v-html="$t('about.enterpriseCulture.item2')"></li>
@@ -228,52 +176,43 @@
           <li v-html="$t('about.enterpriseCulture.item3')"></li>
 
           <li v-html="$t('about.enterpriseCulture.item4')"></li>
-
         </ul>
-
       </div>
-
     </section>
 
     <section id="contact" class="about-section contact">
-
-      <h2>{{ $t('nav.contact') }}</h2>
+      <h2>{{ $t("nav.contact") }}</h2>
 
       <ul class="contact-list">
+        <li>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</li>
 
-        <li>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</li>
-
-        <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
-
+        <li>{{ $t("contacts.address") }}：{{ $t("footer.address") }}</li>
       </ul>
-
     </section>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, type ComputedRef } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { getTimelineData, getHonors, type TimelineEvent } from '@/data/about';
+import { computed, ref, onMounted, onUnmounted, type ComputedRef } from "vue";
+import { useI18n } from "vue-i18n";
+import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 const { t } = useI18n();
 
 const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
-  getTimelineData(t).map(item => ({ ...item }))
+  getTimelineData(t).map((item) => ({ ...item }))
 );
 const honors: ComputedRef<string[]> = computed(() =>
-  getHonors(t).map(honor => honor)
+  getHonors(t).map((honor) => honor)
 );
 
-const activeTab = ref<string>('company-intro');
+const activeTab = ref<string>("company-intro");
 const tabIds: string[] = [
-  'company-intro',
-  'history',
-  'honors',
-  'core-values',
-  'culture',
-  'contact',
+  "company-intro",
+  "history",
+  "honors",
+  "core-values",
+  "culture",
+  "contact",
 ];
 
 function updateActiveTab(): void {
@@ -296,16 +235,16 @@ function updateActiveTab(): void {
 function scrollToSection(id: string): void {
   const el = document.getElementById(id);
   if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', updateActiveTab, { passive: true });
+  window.addEventListener("scroll", updateActiveTab, { passive: true });
   updateActiveTab();
 });
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateActiveTab);
+  window.removeEventListener("scroll", updateActiveTab);
 });
 </script>
 
@@ -346,22 +285,23 @@ onUnmounted(() => {
 }
 
 .hero-content h1 {
-  font-size: 5vw;
   font-weight: 900;
   color: #222;
   letter-spacing: 0.08em;
   margin-bottom: 0.6em;
   opacity: 1;
+  font-size: 4.5rem;
+  line-height: 1.1;
 }
 
 .hero-sub {
-  font-size: 2vw;
   font-weight: 400;
   color: #222;
   opacity: 0.7;
   margin-bottom: 1.2em;
   letter-spacing: 0.04em;
   opacity: 1;
+  font-size: 2rem;
 }
 
 .hero-line {
@@ -374,7 +314,6 @@ onUnmounted(() => {
 }
 
 .hero-en {
-  font-size: 1.2vw;
   color: #222;
   font-weight: 300;
   letter-spacing: 0.18em;
@@ -402,19 +341,41 @@ onUnmounted(() => {
 }
 
 .about-nav li {
-  font-size: 1.2em;
   color: #222;
   font-weight: 600;
   cursor: pointer;
   padding: 18px 0;
-  transition: color 0.2s, border-bottom 0.2s;
+  transition: all 0.3s ease;
   border-bottom: 2px solid transparent;
+  position: relative;
+  font-size: 1.05em;
 }
 
-.about-nav li:hover,
+.about-nav li:hover {
+  color: #1a3a8f;
+  transform: translateY(-1px);
+}
+
 .about-nav li.active {
   color: #1a3a8f;
   border-bottom: 2px solid #1a3a8f;
+}
+
+.about-nav li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #1a3a8f, #4f8cff);
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.about-nav li:hover:not(.active)::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 .about-section {
@@ -428,7 +389,6 @@ onUnmounted(() => {
 }
 
 .about-section h2 {
-  font-size: 2em;
   color: #1a237e;
   font-weight: 700;
   margin-bottom: 32px;
@@ -442,14 +402,14 @@ onUnmounted(() => {
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
+  width: 40px;
+  height: 2px;
   background: linear-gradient(90deg, #1a3a8f 0%, #4f8cff 100%);
-  border-radius: 2px;
+  border-radius: 1px;
+  opacity: 0.7;
 }
 
 .about-section > p {
-  font-size: 1.15em;
   font-weight: 400;
   line-height: 1.8;
   color: #333;
@@ -470,7 +430,6 @@ onUnmounted(() => {
 }
 
 .info-section h3 {
-  font-size: 1.4em;
   color: #1a3a8f;
   font-weight: 600;
   margin-bottom: 20px;
@@ -478,7 +437,6 @@ onUnmounted(() => {
 }
 
 .info-section p {
-  font-size: 1.1em;
   line-height: 1.7;
   color: #555;
   margin-bottom: 24px;
@@ -520,15 +478,15 @@ onUnmounted(() => {
 }
 
 .stat-number {
-  font-size: 2.2em;
   font-weight: 700;
   color: #1a3a8f;
   margin-bottom: 8px;
   display: block;
+  font-size: 2rem;
+  line-height: 1.2;
 }
 
 .stat-label {
-  font-size: 1em;
   color: #666;
   font-weight: 500;
 }
@@ -667,20 +625,20 @@ onUnmounted(() => {
   }
 
   .hero-content h1 {
-    font-size: 2.5em;
+    font-size: 3.5rem;
   }
 
   .hero-sub {
-    font-size: 1.2em;
+    font-size: 1.5rem;
   }
 
   .hero-en {
-    font-size: 1em;
+    font-size: 1.1rem;
   }
 
   .hero-line {
-    width: 120px;
-    height: 2px;
+    width: 140px;
+    height: 3px;
   }
 
   .about-section {
@@ -719,7 +677,7 @@ onUnmounted(() => {
   }
 
   .stat-number {
-    font-size: 1.8em;
+    font-size: 1.8rem;
   }
 
   .honor-cards {
@@ -735,16 +693,16 @@ onUnmounted(() => {
 
 @media (max-width: 600px) {
   .about-hero {
-    min-height: 50vh;
-    height: 50vh;
+    min-height: 60vh;
+    height: 60vh;
   }
 
   .hero-content h1 {
-    font-size: 2em;
+    font-size: 2.8rem;
   }
 
   .hero-sub {
-    font-size: 1em;
+    font-size: 1.2rem;
   }
 
   .about-nav ul {
@@ -757,6 +715,10 @@ onUnmounted(() => {
 
   .stats-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
   }
 
   .contact-list li {
@@ -831,6 +793,16 @@ onUnmounted(() => {
 }
 
 @media (max-width: 900px) {
+  .about-nav ul {
+    gap: 32px;
+    padding: 0 20px;
+  }
+
+  .about-nav li {
+    font-size: 1em;
+    padding: 16px 0;
+  }
+
   .team-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -838,6 +810,23 @@ onUnmounted(() => {
 
   .team-member-card {
     padding: 24px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-nav {
+    margin-bottom: 24px;
+  }
+
+  .about-nav ul {
+    gap: 20px;
+    padding: 0 16px;
+    flex-wrap: wrap;
+  }
+
+  .about-nav li {
+    font-size: 0.95em;
+    padding: 14px 0;
   }
 }
 
@@ -970,4 +959,3 @@ onUnmounted(() => {
   display: inline-block;
 }
 </style>
-
