@@ -896,6 +896,36 @@ onUnmounted(() => {
   max-width: 100%;
 }
 
+/* 移除邮箱链接的下划线 */
+.financing-desc a {
+  text-decoration: none;
+  color: #1a3a8f;
+}
+
+.financing-desc a:hover {
+  text-decoration: underline;
+}
+
+/* 联系信息中的邮箱链接也移除下划线 */
+.contact-list a {
+  text-decoration: none;
+  color: #1a3a8f;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+/* 通用邮箱链接样式 */
+.about-page a[href^="mailto:"] {
+  text-decoration: none;
+  color: #1a3a8f;
+}
+
+.about-page a[href^="mailto:"]:hover {
+  text-decoration: underline;
+}
+
 /* style部分新增/优化 */
 .core-values-title {
   text-align: center;

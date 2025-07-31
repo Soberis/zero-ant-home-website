@@ -184,8 +184,8 @@ export const productRelations: ProductRelationsData = {
     applicationSlugs: ["smart-logistics", "intelligent-navigation"],
     videoSlugs: [
       "agv-product-introduction",
-      "radar-360-scanning",
       "outdoor-patrol-robot",
+      "mobile-robot-chassis",
     ],
     customFeatures: [
       "高精度激光SLAM导航，路径自主规划",

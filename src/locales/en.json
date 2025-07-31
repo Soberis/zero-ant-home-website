@@ -404,6 +404,28 @@
         "Trajectory Planning"
       ]
     },
+    "assembly-robot": {
+      "title": "Assembly Robot",
+      "desc": "Demonstrates ZeroAnt Technology's advanced robotic assembly capabilities, showcasing precise component handling and assembly processes. Features high-precision positioning and intelligent control algorithms, suitable for complex assembly tasks in industrial automation.",
+      "tags": [
+        "Assembly",
+        "Precision Control",
+        "Industrial Automation",
+        "Component Handling",
+        "Intelligent Assembly"
+      ]
+    },
+    "mobile-robot-chassis": {
+      "title": "Self-Developed Mobile Robot Chassis",
+      "desc": "Showcases ZeroAnt Technology's self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control, and intelligent navigation systems for autonomous mobile robot applications.",
+      "tags": [
+        "Mobile Robot",
+        "Autonomous Navigation",
+        "Chassis Platform",
+        "Motion Control",
+        "Intelligent Mobility"
+      ]
+    },
     "robotstudio-remote-control": {
       "title": "Upper Computer RobotStudio IDE Remote Control and Simulation",
       "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",

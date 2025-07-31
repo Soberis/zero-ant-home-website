@@ -28,6 +28,8 @@ import dualRobotBallCatchingImg from "@/assets/images/videos/双机协作抓球.
 import riceMolecularExperimentImg from "@/assets/images/videos/水稻分子重复实验.png";
 import sketchingRobotImg from "@/assets/images/videos/素描机器人.png";
 import gantry2d3dImg from "@/assets/images/videos/二三自由度龙门架.png";
+import assemblyRobotImg from "@/assets/images/videos/装配机器人.png";
+import mobileRobotChassisImg from "@/assets/images/videos/自研移动机器人底盘.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -362,6 +364,24 @@ export const videoMap: VideoMapData = {
     tags: ["无人清扫", "地下车库", "自主导航", "环境感知", "智能清洁"],
     publishDate: "2024-12-25",
   },
+  "assembly-robot": {
+    slug: "assembly-robot",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1Th86zJEe8/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.assembly-robot.title",
+    desc: "videos.assembly-robot.desc",
+    tags: ["装配机器人", "工业自动化", "智能制造", "精密装配"],
+    publishDate: "2024-12-25",
+  },
+  "mobile-robot-chassis": {
+    slug: "mobile-robot-chassis",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1Th86zJEjW/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.mobile-robot-chassis.title",
+    desc: "videos.mobile-robot-chassis.desc",
+    tags: ["移动机器人", "机器人底盘", "自主导航", "智能移动"],
+    publishDate: "2024-12-25",
+  },
 };
 
 /**
@@ -479,6 +499,11 @@ export const videoCards: VideoCard[] = [
     img: gantry2d3dImg,
     slug: "gantry-2d3d",
   },
+  {
+    title: "装配机器人",
+    img: assemblyRobotImg,
+    slug: "assembly-robot",
+  },
   // 基础技术
   {
     title: "抛球抓球演示",
@@ -514,6 +539,11 @@ export const videoCards: VideoCard[] = [
     title: "伺服电机台站",
     img: servoMotorStationImg,
     slug: "servo-motor-station",
+  },
+  {
+    title: "自研移动机器人底盘",
+    img: mobileRobotChassisImg,
+    slug: "mobile-robot-chassis",
   },
 ].filter((card) => {
   const video = getVideoById(card.slug);
