@@ -270,8 +270,17 @@ import logoUrl from "@/assets/zeroant_logo.png";
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
 
+// 防抖锁
+let toggleLock = false;
+
+// 元素位置缓存（性能优化）
+const cachedElements = new Map<string, number>();
+let cacheUpdateTimeout: number | null = null;
+
 // 切换移动端菜单
 function toggleMobileMenu() {
+  if (toggleLock) return;
+  toggleLock = true;
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
   // 防止背景滚动
   if (isMobileMenuOpen.value) {
@@ -279,12 +288,15 @@ function toggleMobileMenu() {
   } else {
     document.body.style.overflow = "";
   }
+  setTimeout(() => (toggleLock = false), 350);
 }
 
 // 关闭移动端菜单
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
   document.body.style.overflow = "";
+  // 移动端菜单关闭后延迟一点，让动画完成再跳转
+  return new Promise(resolve => setTimeout(resolve, 300));
 }
 
 // 点击背景关闭菜单
@@ -341,6 +353,36 @@ function switchLanguage() {
   }
 }
 
+// 缓存目标元素位置（性能优化）
+function cacheElementPositions() {
+  // 收集所有可能的hash目标
+  const allHashes = [
+    ...aboutNav.map(item => item.hash),
+    ...systemProductNav.map(item => item.hash),
+    ...robotProductNav.map(item => item.hash),
+    ...supportNav.map(item => item.hash),
+    '#video-section',
+    '#industry-applications'
+  ];
+
+  allHashes.forEach(hash => {
+    const element = document.querySelector(hash) as HTMLElement;
+    if (element) {
+      cachedElements.set(hash, element.offsetTop);
+    }
+  });
+}
+
+// 防抖更新缓存
+  function updateCacheWithDebounce() {
+    if (cacheUpdateTimeout) {
+      clearTimeout(cacheUpdateTimeout as number);
+    }
+    cacheUpdateTimeout = window.setTimeout(() => {
+      cacheElementPositions();
+    }, 100);
+  }
+
 onMounted(() => {
   const savedLanguage = localStorage.getItem("language");
   if (savedLanguage && (savedLanguage === "zh" || savedLanguage === "en")) {
@@ -349,11 +391,27 @@ onMounted(() => {
     locale.value = "zh";
     localStorage.setItem("language", "zh");
   }
+
+  // 初始化缓存（延迟执行确保DOM就绪）
+  setTimeout(() => {
+    cacheElementPositions();
+  }, 500);
+
+  // 监听窗口变化，防抖更新缓存
+  window.addEventListener('resize', updateCacheWithDebounce);
+  window.addEventListener('scroll', updateCacheWithDebounce);
 });
 
 onUnmounted(() => {
   // 清理body样式
   document.body.style.overflow = "";
+  
+  // 清理事件监听
+  window.removeEventListener('resize', updateCacheWithDebounce);
+  window.removeEventListener('scroll', updateCacheWithDebounce);
+  if (cacheUpdateTimeout) {
+    clearTimeout(cacheUpdateTimeout);
+  }
 });
 </script>
 

@@ -215,60 +215,94 @@ const tabIds: string[] = [
   "contact",
 ];
 
+let scrollTimeout: number | null = null;
+let cachedElements: Array<{id: string, top: number}> = [];
+
+// 预缓存元素位置，减少重复计算
+function cacheElementPositions(): void {
+  if (typeof document === "undefined") return;
+  
+  cachedElements = tabIds.map(id => {
+    const el = document.getElementById(id);
+    return {
+      id,
+      top: el ? el.offsetTop : 0
+    };
+  }).filter(item => item.top > 0);
+}
+
 function updateActiveTab(): void {
   // 确保DOM已加载完成
-  if (typeof document === "undefined" || !document.body) {
+  if (typeof document === "undefined" || !document.body || cachedElements.length === 0) {
     return;
   }
 
-  const scrollY = window.scrollY || window.pageYOffset;
-  let found = false;
-  for (let i = tabIds.length - 1; i >= 0; i--) {
-    try {
-      const el = document.getElementById(tabIds[i]);
-      if (el && el.getBoundingClientRect) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top + window.scrollY - 120 <= scrollY + 10) {
-          activeTab.value = tabIds[i];
-          found = true;
-          break;
-        }
-      }
-    } catch (error) {
-      // 忽略DOM解析错误，继续处理下一个元素
-      console.warn(`无法解析DOM节点: ${tabIds[i]}`, error);
-    }
+  // 防抖处理，避免频繁计算
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
   }
-  if (!found) activeTab.value = tabIds[0];
+
+  scrollTimeout = window.setTimeout(() => {
+    const scrollY = window.scrollY || window.pageYOffset;
+    let found = false;
+    
+    // 使用预缓存的位置数据，避免重复DOM查询
+    for (let i = cachedElements.length - 1; i >= 0; i--) {
+      if (cachedElements[i].top <= scrollY + 120) {
+        activeTab.value = cachedElements[i].id;
+        found = true;
+        break;
+      }
+    }
+    if (!found) activeTab.value = tabIds[0];
+    scrollTimeout = null;
+  }, 50); // 50ms防抖延迟，更灵敏
 }
 
 function scrollToSection(id: string): void {
-  // 延迟执行以确保DOM已加载
-  setTimeout(() => {
-    try {
+  // 使用预缓存的位置数据，立即跳转
+  try {
+    const cached = cachedElements.find(item => item.id === id);
+    if (cached) {
+      window.scrollTo({
+        top: cached.top - 100, // 预留导航栏空间
+        behavior: "smooth"
+      });
+    } else {
+      // 回退到实时查询
       const el = document.getElementById(id);
-      if (el && el.scrollIntoView) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (el) {
+        window.scrollTo({
+          top: el.offsetTop - 100,
+          behavior: "smooth"
+        });
       }
-    } catch (error) {
-      console.warn(`无法滚动到指定节点: ${id}`, error);
     }
-  }, 100);
+  } catch (error) {
+    // 静默处理错误
+  }
 }
 
 onMounted(() => {
-  // 延迟初始化，确保DOM完全加载
-  setTimeout(() => {
-    try {
-      window.addEventListener("scroll", updateActiveTab, { passive: true });
-      updateActiveTab();
-    } catch (error) {
-      console.warn("初始化滚动监听失败:", error);
-    }
-  }, 100);
+  // 初始化缓存并监听滚动
+  try {
+    cacheElementPositions();
+    window.addEventListener("scroll", updateActiveTab, { passive: true });
+    window.addEventListener("resize", cacheElementPositions);
+    // 延迟100ms确保DOM完全渲染
+    setTimeout(updateActiveTab, 100);
+  } catch (error) {
+    // 静默处理初始化错误
+  }
 });
+
 onUnmounted(() => {
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = null;
+  }
   window.removeEventListener("scroll", updateActiveTab);
+  window.removeEventListener("resize", cacheElementPositions);
 });
 </script>
 
