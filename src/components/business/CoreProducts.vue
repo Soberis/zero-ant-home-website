@@ -23,7 +23,7 @@
 <script setup lang="ts">
 // 核心产品数据
 import { products } from "@/data/products";
-import { getProductDetailLink } from "@/helpers/product";
+import { getProductDetailLink } from "@/utils/product";
 import { useI18n } from "vue-i18n";
 import { h, type Component } from "vue";
 

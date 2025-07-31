@@ -52,7 +52,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import applications from "@/data/applications";
-import { useAutoScroll } from "@/helpers/useAutoScroll";
+import { useAutoScroll } from "@/utils/useAutoScroll";
 
 const displayApps = applications;
 const scrollWrap = ref<HTMLElement | null>(null);

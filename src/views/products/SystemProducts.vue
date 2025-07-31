@@ -29,7 +29,7 @@ import { useI18n } from 'vue-i18n';
 import { products } from '@/data/products';
 import ProductsLayout from '@/components/layout/ProductsLayout.vue';
 import ProductCard from '@/components/common/ProductCard.vue';
-import { getProductDetailLink } from '@/helpers/product';
+import { getProductDetailLink } from '@/utils/product';
 const router = useRouter();
 const { t } = useI18n();
 
