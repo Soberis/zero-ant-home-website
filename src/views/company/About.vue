@@ -216,32 +216,56 @@ const tabIds: string[] = [
 ];
 
 function updateActiveTab(): void {
+  // 确保DOM已加载完成
+  if (typeof document === "undefined" || !document.body) {
+    return;
+  }
+
   const scrollY = window.scrollY || window.pageYOffset;
   let found = false;
   for (let i = tabIds.length - 1; i >= 0; i--) {
-    const el = document.getElementById(tabIds[i]);
-    if (el) {
-      const rect = el.getBoundingClientRect();
-      if (rect.top + window.scrollY - 120 <= scrollY + 10) {
-        activeTab.value = tabIds[i];
-        found = true;
-        break;
+    try {
+      const el = document.getElementById(tabIds[i]);
+      if (el && el.getBoundingClientRect) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top + window.scrollY - 120 <= scrollY + 10) {
+          activeTab.value = tabIds[i];
+          found = true;
+          break;
+        }
       }
+    } catch (error) {
+      // 忽略DOM解析错误，继续处理下一个元素
+      console.warn(`无法解析DOM节点: ${tabIds[i]}`, error);
     }
   }
   if (!found) activeTab.value = tabIds[0];
 }
 
 function scrollToSection(id: string): void {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  // 延迟执行以确保DOM已加载
+  setTimeout(() => {
+    try {
+      const el = document.getElementById(id);
+      if (el && el.scrollIntoView) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } catch (error) {
+      console.warn(`无法滚动到指定节点: ${id}`, error);
+    }
+  }, 100);
 }
 
 onMounted(() => {
-  window.addEventListener("scroll", updateActiveTab, { passive: true });
-  updateActiveTab();
+  // 延迟初始化，确保DOM完全加载
+  setTimeout(() => {
+    try {
+      window.addEventListener("scroll", updateActiveTab, { passive: true });
+      updateActiveTab();
+    } catch (error) {
+      console.warn("初始化滚动监听失败:", error);
+    }
+  }, 100);
 });
 onUnmounted(() => {
   window.removeEventListener("scroll", updateActiveTab);
