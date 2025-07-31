@@ -145,7 +145,6 @@ const originalUrl = computed(() => props.url);
 // iframe加载成功
 const handleIframeLoad = () => {
   isLoading.value = false;
-  console.log("B站视频iframe加载成功");
 };
 
 // iframe加载错误
@@ -157,7 +156,6 @@ const handleIframeError = () => {
 
 // 尝试直接播放
 const tryDirectPlay = async () => {
-  console.log("尝试直接播放模式");
   useDirectPlay.value = true;
   showFallback.value = false;
   isLoading.value = true;
@@ -218,17 +216,13 @@ onMounted(() => {
   // 移动端优化：更短的超时时间
   const timeout = isMobileDevice.value ? 8000 : 10000;
 
-  console.log(
-    `BilibiliPlayer组件已挂载，设备类型: ${
-      isMobileDevice.value ? "移动端" : "桌面端"
-    }`
-  );
-
   // 设置超时检查
   setTimeout(() => {
     if (isLoading.value && !showFallback.value) {
       console.warn(
-        `${isMobileDevice.value ? "移动端" : "桌面端"} iframe加载超时，显示备用方案`
+        `${
+          isMobileDevice.value ? "移动端" : "桌面端"
+        } iframe加载超时，显示备用方案`
       );
       handleIframeError();
     }
@@ -236,7 +230,6 @@ onMounted(() => {
 
   // 移动端特殊处理：如果检测到是移动端，优先尝试移动端播放方式
   if (isMobileDevice.value && !useDirectPlay.value) {
-    console.log("检测到移动端，使用移动端优化播放策略");
     // 可以在这里添加移动端特定的优化
   }
 });
