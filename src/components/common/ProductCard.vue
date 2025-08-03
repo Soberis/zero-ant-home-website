@@ -55,9 +55,13 @@
       <div class="product-name">{{ t(product.name) }}</div>
 
       <div class="product-desc">{{ t(product.desc) }}</div>
-      <button class="more-btn" @click="emit('more', product.slug)">
+      <button 
+        class="more-btn" 
+        @click="emit('more', product.slug)"
+        :aria-label="t('hero.cta') + ' ' + t(product.name)"
+      >
         <span class="btn-text">{{ t("hero.cta") }}</span>
-        <span class="btn-arrow">→</span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
       </button>
     </div>
   </div>
@@ -83,26 +87,73 @@ const { t } = useI18n();
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(26, 58, 143, 0.08);
   border: 1px solid rgba(26, 58, 143, 0.05);
-  padding: 40px 32px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 520px;
+  padding: 32px 24px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
+  min-height: 480px;
+  will-change: transform, box-shadow;
 }
 
-@media (max-width: 768px) {
+/* 1200px断点 - 大屏幕优化 */
+@media (max-width: 1200px) {
   .product-card {
-    padding: 24px 20px;
-    min-height: 420px;
+    padding: 28px 20px;
+    min-height: 460px;
   }
 
   .product-image-wrapper {
-    width: 160px;
-    height: 160px;
+    width: 420px;
+    height: 240px;
   }
 
   .product-image,
   .product-image-placeholder {
-    width: 140px;
-    height: 140px;
+    width: 400px;
+    height: 220px;
+  }
+
+  .product-name {
+    font-size: 1.35rem;
+  }
+}
+
+/* 1024px断点 - 平板横屏 */
+@media (max-width: 1024px) {
+  .product-card {
+    padding: 24px 18px;
+    min-height: 440px;
+  }
+
+  .product-image-wrapper {
+    width: 400px;
+    height: 230px;
+  }
+
+  .product-image,
+  .product-image-placeholder {
+    width: 380px;
+    height: 210px;
+  }
+
+  .product-name {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    padding: 20px 16px;
+    min-height: 400px;
+  }
+
+  .product-image-wrapper {
+    width: 380px;
+    height: 220px;
+  }
+
+  .product-image,
+  .product-image-placeholder {
+    width: 360px;
+    height: 200px;
   }
 
   .product-name {
@@ -126,19 +177,19 @@ const { t } = useI18n();
 
 @media (max-width: 480px) {
   .product-card {
-    padding: 20px 16px;
-    min-height: 380px;
+    padding: 16px 12px;
+    min-height: 360px;
   }
 
   .product-image-wrapper {
-    width: 120px;
-    height: 120px;
+    width: 340px;
+    height: 180px;
   }
 
   .product-image,
   .product-image-placeholder {
-    width: 100px;
-    height: 100px;
+    width: 320px;
+    height: 160px;
   }
 
   .product-name {
@@ -161,6 +212,43 @@ const { t } = useI18n();
   }
 }
 
+/* 375px断点 - 小屏手机优化 */
+@media (max-width: 375px) {
+  .product-card {
+    padding: 14px 10px;
+    min-height: 340px;
+  }
+
+  .product-image-wrapper {
+    width: 300px;
+    height: 170px;
+  }
+
+  .product-image,
+  .product-image-placeholder {
+    width: 280px;
+    height: 150px;
+  }
+
+  .product-name {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+  }
+
+  .product-desc {
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+    min-height: 38px;
+    line-height: 1.5;
+  }
+
+  .more-btn {
+    padding: 9px 20px;
+    font-size: 0.65rem;
+    min-width: 110px;
+  }
+}
+
 .product-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 16px 48px rgba(26, 58, 143, 0.15);
@@ -172,7 +260,7 @@ const { t } = useI18n();
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .product-image-wrapper {
@@ -180,6 +268,8 @@ const { t } = useI18n();
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 450px;
+  height: 260px;
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -212,12 +302,13 @@ const { t } = useI18n();
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 8px 16px rgba(26, 58, 143, 0.1));
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  will-change: transform, filter;
 }
 
 .product-image-placeholder {
-  width: 200px;
-  height: 200px;
+  width: 450px;
+  height: 260px;
   background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 50%, #e8f0ff 100%);
   border-radius: 20px;
   display: flex;
@@ -226,6 +317,7 @@ const { t } = useI18n();
   border: 2px solid rgba(26, 58, 143, 0.1);
   position: relative;
   overflow: hidden;
+  will-change: transform;
 }
 
 .product-image-placeholder::before {
@@ -257,12 +349,13 @@ const { t } = useI18n();
   position: relative;
   z-index: 2;
   opacity: 0.6;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: opacity, transform;
 }
 
 .product-image-placeholder:hover .placeholder-icon {
   opacity: 0.8;
-  transform: scale(1.1);
+  transform: scale3d(1.1, 1.1, 1);
 }
 
 .product-content {
@@ -274,27 +367,23 @@ const { t } = useI18n();
 }
 
 .product-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: #222;
-  margin-bottom: 20px;
+  color: #000;
+  margin-bottom: 16px;
   letter-spacing: 1px;
   text-align: center;
-  background: linear-gradient(135deg, #222 0%, #1a3a8f 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   position: relative;
   line-height: 1.3;
 }
 
 .product-desc {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 32px;
+  font-size: 0.95rem;
+  color: #000;
+  margin-bottom: 24px;
   text-align: center;
-  min-height: 50px;
-  line-height: 1.65;
+  min-height: 45px;
+  line-height: 1.6;
   font-weight: 400;
   flex: 1;
 }
@@ -307,7 +396,7 @@ const { t } = useI18n();
   border-radius: 50px;
   padding: 14px 36px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 600;
   font-size: 0.8rem;
   letter-spacing: 0.5px;
@@ -318,6 +407,13 @@ const { t } = useI18n();
   overflow: hidden;
   min-width: 150px;
   justify-content: center;
+  will-change: transform, box-shadow;
+  outline: none;
+}
+
+.more-btn:focus-visible {
+  transform: translateY(-2px) scale3d(1.05, 1.05, 1);
+  box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3), 0 0 0 3px rgba(26, 58, 143, 0.3);
 }
 
 .more-btn::before {
@@ -341,28 +437,32 @@ const { t } = useI18n();
 }
 
 .more-btn:hover {
-  transform: translateY(-2px) scale(1.05);
+  transform: translateY(-2px) scale3d(1.05, 1.05, 1);
   box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3);
 }
 
 .more-btn:active {
-  transform: translateY(0) scale(1.02);
+  transform: translateY(0) scale3d(1.02, 1.02, 1);
 }
 
 .btn-text {
   transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 .btn-arrow {
   transition: transform 0.3s ease;
   font-weight: normal;
+  will-change: transform;
 }
 
-.more-btn:hover .btn-arrow {
+.more-btn:hover .btn-arrow,
+.more-btn:focus-visible .btn-arrow {
   transform: translateX(4px);
 }
 
-.more-btn:hover .btn-text {
+.more-btn:hover .btn-text,
+.more-btn:focus-visible .btn-text {
   transform: translateX(-2px);
 }
 </style>

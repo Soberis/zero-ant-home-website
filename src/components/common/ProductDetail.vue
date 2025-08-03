@@ -494,16 +494,51 @@ const handleVideoClick = (index: number) => {
 
 .product-image {
   display: block;
-  max-width: 800px;
-  max-height: 500px;
+  max-width: 1000px;
+  max-height: 600px;
   width: 100%;
   height: auto;
   margin: 0 auto 4rem;
   border-radius: 1.5rem;
-  box-shadow: 0 12px 48px rgba(26, 58, 143, 0.2);
+  box-shadow: 0 16px 64px rgba(26, 58, 143, 0.25);
   object-fit: contain;
   background: white;
-  padding: 1.5rem;
+  padding: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .product-image {
+    max-width: 900px;
+    max-height: 550px;
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .product-image {
+    max-width: 800px;
+    max-height: 500px;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-image {
+    max-width: 90vw;
+    max-height: 400px;
+    padding: 1.25rem;
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-image {
+    max-width: 95vw;
+    max-height: 300px;
+    padding: 1rem;
+    margin-bottom: 2.5rem;
+    border-radius: 1rem;
+  }
 }
 
 .product-title {

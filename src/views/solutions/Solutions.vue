@@ -162,10 +162,7 @@ const Applications = computed(() => {
   margin-bottom: 36px;
   letter-spacing: 1px;
   text-align: center;
-  background: linear-gradient(135deg, #333 0%, #1a3a8f 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #222;
   line-height: 1.3;
   font-size: 1.1rem;
 }
