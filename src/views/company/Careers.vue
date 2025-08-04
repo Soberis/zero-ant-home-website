@@ -286,7 +286,7 @@ const applyForPosition = (position: Position): void => {
   text-align: center;
 
   .hero-title {
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 1rem;
     line-height: 1.2;
     font-size: 2.5rem;
@@ -313,7 +313,7 @@ const applyForPosition = (position: Position): void => {
       .stat-number {
         display: block;
         font-size: 2.2rem;
-        font-weight: 700;
+        font-weight: 600;
         margin-bottom: 0.5rem;
       }
 
@@ -327,10 +327,10 @@ const applyForPosition = (position: Position): void => {
 // 通用样式
 .section-title {
   font-size: 2rem; // 优化为2rem
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 3rem;
-  color: #222;
+  color: #2d3748;
 }
 
 // 为什么选择我们
@@ -345,7 +345,7 @@ const applyForPosition = (position: Position): void => {
     list-style: none;
     text-align: left;
 
-    color: #222;
+    color: #2d3748;
     font-weight: 500;
   }
   .why-extra-list li {
@@ -376,9 +376,9 @@ const applyForPosition = (position: Position): void => {
 
       .benefit-title {
         font-size: 1.3rem;
-        font-weight: 600;
+        font-weight: 500;
         margin-bottom: 1rem;
-        color: #222;
+        color: #2d3748;
       }
 
       .benefit-description {
@@ -423,8 +423,8 @@ const applyForPosition = (position: Position): void => {
         gap: 1rem;
 
         .position-title {
-          font-weight: 600;
-          color: #222;
+          font-weight: 500;
+          color: #2d3748;
           margin: 0;
           font-size: 1.3rem;
         }
@@ -454,7 +454,7 @@ const applyForPosition = (position: Position): void => {
           }
 
           .detail-value {
-            color: #333;
+            color: #2d3748;
             font-size: 1rem;
           }
         }
@@ -465,9 +465,9 @@ const applyForPosition = (position: Position): void => {
 
         .requirements-title {
           font-size: 1.3rem;
-          font-weight: 600;
+          font-weight: 500;
           margin-bottom: 1rem;
-          color: #333;
+          color: #2d3748;
         }
 
         .requirements-list {

@@ -368,8 +368,8 @@ const { t } = useI18n();
 
 .product-name {
   font-size: 1.4rem;
-  font-weight: 700;
-  color: #000;
+  font-weight: 600;
+  color: #2d3748;
   margin-bottom: 16px;
   letter-spacing: 1px;
   text-align: center;
@@ -379,7 +379,7 @@ const { t } = useI18n();
 
 .product-desc {
   font-size: 0.95rem;
-  color: #000;
+  color: #2d3748;
   margin-bottom: 24px;
   text-align: center;
   min-height: 45px;
@@ -397,7 +397,7 @@ const { t } = useI18n();
   padding: 14px 36px;
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.8rem;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);

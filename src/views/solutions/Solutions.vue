@@ -100,7 +100,7 @@ const Applications = computed(() => {
 :root {
   --primary-color: #1a3a8f;
   --primary-light: #4f8cff;
-  --text-color: #222;
+  --text-color: #2d3748;
   --border-color: #e3e8f0;
   --shadow-light: rgba(26, 58, 143, 0.08);
   --shadow-medium: rgba(26, 58, 143, 0.13);
@@ -132,7 +132,7 @@ const Applications = computed(() => {
 
 .feature-tag:hover {
   background: #f8f9fc;
-  color: #222;
+  color: #2d3748;
   border: 1px solid #1a3a8f;
   transform: scale(1.05);
 }
@@ -150,26 +150,26 @@ const Applications = computed(() => {
 }
 
 .page-title {
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 36px;
   letter-spacing: 2px;
-  color: #222;
+  color: #2d3748;
   font-size: 3rem;
 }
 
 .page-subtitle {
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 36px;
   letter-spacing: 1px;
   text-align: center;
-  color: #222;
+  color: #2d3748;
   line-height: 1.3;
   font-size: 1.1rem;
 }
 
 .section-title {
-  color: #222;
-  font-weight: 700;
+  color: #2d3748;
+  font-weight: 600;
   text-align: center;
   margin: 48px 0 32px 0;
   letter-spacing: 1px;
@@ -263,8 +263,8 @@ const Applications = computed(() => {
   justify-content: center;
 }
 .app-title {
-  color: #222;
-  font-weight: 600;
+  color: #2d3748;
+  font-weight: 500;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }

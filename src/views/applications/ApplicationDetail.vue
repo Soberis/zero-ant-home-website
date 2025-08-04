@@ -201,15 +201,15 @@ function goTo(targetSlug: string | null): void {
 }
 .title {
   font-size: 1.75rem;
-  font-weight: 700;
-  color: #222;
+  font-weight: 600;
+  color: #2d3748;
   margin-bottom: 1.5rem;
   letter-spacing: 0.5px;
   text-align: left;
 }
 .desc {
   font-size: 1rem;
-  color: #444;
+  color: #2d3748;
   line-height: 1.8;
   margin-bottom: 2rem;
   white-space: normal;
@@ -243,7 +243,7 @@ function goTo(targetSlug: string | null): void {
   max-width: 800px;
   aspect-ratio: 16/9;
   border-radius: 12px;
-  background: #000;
+  background: #2d3748;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   display: block;
   margin: 0 auto;
@@ -292,7 +292,7 @@ function goTo(targetSlug: string | null): void {
   border: 2px solid #1a3a8f;
   border-radius: 24px;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   padding: 0.6rem 1.8rem;
   box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
   cursor: pointer;

@@ -53,7 +53,7 @@ function goDetail(): void {
 .label {
   font-size: 1.1rem;
   color: #555;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }

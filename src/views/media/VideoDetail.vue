@@ -258,7 +258,7 @@ onMounted(() => {
   width: 100%;
   max-width: 640px;
   border-radius: 10px;
-  background: #000;
+  background: #2d3748;
   aspect-ratio: 16/9;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
@@ -296,10 +296,10 @@ onMounted(() => {
 }
 .video-title {
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 1rem;
   margin-top: 0;
-  color: #222;
+  color: #2d3748;
   letter-spacing: 0.3px;
   line-height: 1.3;
   text-align: left;
@@ -330,7 +330,7 @@ onMounted(() => {
   color: #1a3a8f;
   border-radius: 10px;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.5px;
   box-shadow: 0 2px 8px rgba(26, 58, 143, 0.06);
   cursor: pointer;

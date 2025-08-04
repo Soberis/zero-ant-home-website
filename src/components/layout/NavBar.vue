@@ -466,7 +466,7 @@ onUnmounted(() => {
 
 .logo-text.router-link-active {
   color: #1a3a8f;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -492,7 +492,7 @@ onUnmounted(() => {
 }
 
 .logo-text {
-  color: #2c3e50;
+  color: #2d3748;
   text-decoration: none;
   font-weight: 500;
   padding: 12px 8px;
@@ -541,7 +541,7 @@ onUnmounted(() => {
 }
 
 .nav-link {
-  color: #2c3e50;
+  color: #2d3748;
   text-decoration: none;
   font-weight: 500;
   padding: 12px 8px;
@@ -580,7 +580,7 @@ onUnmounted(() => {
 
 .nav-link.active {
   color: #1a3a8f;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -664,7 +664,7 @@ onUnmounted(() => {
   border: 2px solid transparent;
   min-width: 140px;
   flex: 0 0 auto;
-  color: #333;
+  color: #2d3748;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -950,7 +950,7 @@ onUnmounted(() => {
 .mobile-nav-link {
   display: block;
   padding: 16px 24px;
-  color: #2c3e50;
+  color: #2d3748;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
@@ -969,7 +969,7 @@ onUnmounted(() => {
 .mobile-nav-link.router-link-active {
   background: rgba(26, 58, 143, 0.08);
   color: #1a3a8f;
-  font-weight: 600;
+  font-weight: 500;
   border-left: 4px solid #1a3a8f;
 }
 
@@ -1007,7 +1007,7 @@ onUnmounted(() => {
   .logo-text {
     font-size: 26px;
     margin-left: 8px;
-    font-weight: 700;
+    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1040,7 +1040,7 @@ onUnmounted(() => {
   .logo-text {
     font-size: 22px;
     margin-left: 6px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .language-btn {
@@ -1088,7 +1088,7 @@ onUnmounted(() => {
   .logo-text {
     font-size: 20px;
     margin-left: 4px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.8px;
   }
 
@@ -1137,7 +1137,7 @@ onUnmounted(() => {
   .logo-text {
     font-size: 17px;
     margin-left: 3px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -1.2px;
   }
 
@@ -1149,7 +1149,7 @@ onUnmounted(() => {
   }
 
   .lang-text {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .hamburger-menu {

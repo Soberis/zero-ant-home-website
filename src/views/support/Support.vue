@@ -119,7 +119,7 @@
             role="region"
             :aria-hidden="!downloadStates[idx]"
           >
-            <span style="color: #666; font-style: italic">{{
+            <span style="font-style: italic">{{
               t("supportPage.preparingMessage")
             }}</span>
           </div>
@@ -260,15 +260,15 @@ function handleKeydown(
   align-items: center;
 }
 .hero-title {
-  color: #222;
-  font-weight: 800;
+  color: #2d3748;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 28px;
   letter-spacing: 2px;
   font-size: 3rem;
 }
 .hero-desc {
-  color: #222;
+  color: #2d3748;
   text-align: center;
   margin-bottom: 48px;
   font-weight: 400;
@@ -305,9 +305,9 @@ function handleKeydown(
   justify-content: center;
 }
 .card-desc {
-  color: #222;
+  color: #2d3748;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   text-align: center;
 }
 .support-page {
@@ -320,8 +320,8 @@ function handleKeydown(
   min-height: 100vh;
 }
 .section-title {
-  color: #222;
-  font-weight: 700;
+  color: #2d3748;
+  font-weight: 600;
   text-align: center;
   margin: 48px 0 32px 0;
   letter-spacing: 1px;
@@ -365,7 +365,7 @@ function handleKeydown(
   background: #f0f3fa;
 }
 .card-title {
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.01em;
   font-size: 1.1rem;
 }
@@ -373,12 +373,12 @@ function handleKeydown(
   color: #1a3a8f;
 }
 .faq-title {
-  color: #222;
+  color: #2d3748;
 }
 .card-icon {
   font-size: 1.5rem;
   color: #bbb;
-  font-weight: 700;
+  font-weight: 600;
   transition: color 0.2s;
 }
 .card-header:hover .card-icon {
@@ -386,7 +386,7 @@ function handleKeydown(
 }
 .card-content {
   padding: 0 40px 24px 40px;
-  color: #222;
+  color: #2d3748;
   line-height: 1.8;
   background: #f7f8fa;
   transition: all 0.2s;

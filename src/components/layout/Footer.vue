@@ -285,7 +285,7 @@ onUnmounted(() => {
   color: #fff;
   font-size: 16px;
   margin-bottom: 12px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .footer-subtitle {
   color: #fff;
@@ -338,7 +338,7 @@ onUnmounted(() => {
 .qrcode-img {
   width: 64px;
   height: 64px;
-  background: #444;
+  background: #2d3748748;
   border-radius: 8px;
   margin-bottom: 4px;
 }

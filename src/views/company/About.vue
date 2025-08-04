@@ -71,7 +71,7 @@
 
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-number">{{ 20 }}+{{ $t("about.people") }}</div>
+            <div class="stat-number">{{ 20 }}+</div>
 
             <div class="stat-label">{{ $t("about.teamSize") }}</div>
           </div>
@@ -83,7 +83,7 @@
           </div>
 
           <div class="stat-card">
-            <div class="stat-number">≤{{ 32 }}{{ $t("about.yearsOld") }}</div>
+            <div class="stat-number">≤{{ 32 }}</div>
 
             <div class="stat-label">{{ $t("about.averageAge") }}</div>
           </div>
@@ -309,7 +309,7 @@ onUnmounted(() => {
 <style scoped>
 .about-page {
   background: #f7f8fa;
-  color: #222;
+  color: #2d3748;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Microsoft YaHei", Arial, sans-serif;
   min-height: 100vh;
@@ -343,8 +343,8 @@ onUnmounted(() => {
 }
 
 .hero-content h1 {
-  font-weight: 900;
-  color: #222;
+  font-weight: 800;
+  color: #2d3748;
   letter-spacing: 0.08em;
   margin-bottom: 0.6em;
   opacity: 1;
@@ -354,7 +354,7 @@ onUnmounted(() => {
 
 .hero-sub {
   font-weight: 400;
-  color: #222;
+  color: #2d3748;
   opacity: 0.7;
   margin-bottom: 1.2em;
   letter-spacing: 0.04em;
@@ -372,7 +372,7 @@ onUnmounted(() => {
 }
 
 .hero-en {
-  color: #222;
+  color: #2d3748;
   font-weight: 300;
   letter-spacing: 0.18em;
   opacity: 0.7;
@@ -399,8 +399,8 @@ onUnmounted(() => {
 }
 
 .about-nav li {
-  color: #222;
-  font-weight: 600;
+  color: #2d3748;
+  font-weight: 500;
   cursor: pointer;
   padding: 18px 0;
   transition: all 0.3s ease;
@@ -454,7 +454,7 @@ onUnmounted(() => {
 .about-section h2 {
   color: #1a237e;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 32px;
   text-align: center;
   position: relative;
@@ -495,7 +495,7 @@ onUnmounted(() => {
 
 .info-section h3 {
   color: #1a3a8f;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -542,7 +542,7 @@ onUnmounted(() => {
 }
 
 .stat-number {
-  font-weight: 700;
+  font-weight: 600;
   color: #1a3a8f;
   margin-bottom: 8px;
   display: block;
@@ -552,7 +552,7 @@ onUnmounted(() => {
 
 .stat-label {
   color: #666;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* 时间线样式 */
@@ -587,7 +587,7 @@ onUnmounted(() => {
 .timeline-year {
   font-size: 1.2rem;
   color: #1a237e;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 
@@ -622,7 +622,7 @@ onUnmounted(() => {
   padding: 20px 24px;
   font-size: 1.1rem;
   color: #1a3a8f;
-  font-weight: 600;
+  font-weight: 500;
   text-align: center;
   word-break: break-word;
   white-space: pre-line;
@@ -650,7 +650,7 @@ onUnmounted(() => {
 .contact-list li {
   font-size: 1.1rem;
   color: #333;
-  font-weight: 500;
+  font-weight: 400;
   word-break: break-all;
   white-space: pre-line;
   padding: 12px 24px;
@@ -793,7 +793,7 @@ onUnmounted(() => {
 
 .about-page,
 .about-page * {
-  color: #222 !important;
+  color: #2d3748 !important;
 }
 
 .about-section:last-child {
@@ -832,14 +832,14 @@ onUnmounted(() => {
 
 .member-name {
   font-size: 1.4em;
-  font-weight: 700;
+  font-weight: 600;
   color: #1a3a8f;
   margin-bottom: 8px;
 }
 
 .member-position {
   font-size: 1.1em;
-  font-weight: 600;
+  font-weight: 500;
   color: #666;
   margin-bottom: 16px;
   padding: 6px 16px;
@@ -908,7 +908,7 @@ onUnmounted(() => {
 }
 .culture-title {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 16px;
 }
 .culture-subtitle {
@@ -925,7 +925,7 @@ onUnmounted(() => {
   font-size: 1.1rem;
   line-height: 1.8;
   font-weight: 400;
-  color: #222;
+  color: #2d3748;
 }
 .culture-list li {
   margin-bottom: 12px;
@@ -935,7 +935,7 @@ onUnmounted(() => {
 .team-info h3,
 .financing-info h3 {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 16px;
   color: #1a237e;
   text-align: center;
@@ -988,7 +988,7 @@ onUnmounted(() => {
 .core-values-title {
   text-align: center;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 16px;
 }
 .core-values-content {
@@ -1010,7 +1010,7 @@ onUnmounted(() => {
   border-radius: 20px;
   box-shadow: 0 2px 8px 0 rgba(26, 58, 143, 0.05);
   font-size: 1.2em;
-  font-weight: 600;
+  font-weight: 500;
   color: #1a3a8f;
   text-align: center;
   letter-spacing: 0.18em;

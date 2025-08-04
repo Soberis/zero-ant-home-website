@@ -89,14 +89,14 @@ const scrollRight = (): void => {
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 18px;
-  color: #222;
+  color: #2d3748;
   letter-spacing: 2px;
 }
 .section-desc {
   text-align: center;
-  color: #222;
+  color: #2d3748;
   font-size: 1.3rem;
   margin-bottom: 38px;
 }
@@ -191,9 +191,9 @@ const scrollRight = (): void => {
 }
 .app-title {
   font-size: 1rem;
-  color: #222;
+  color: #2d3748;
   text-align: center;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 18px;
   margin-bottom: 8px;
 }

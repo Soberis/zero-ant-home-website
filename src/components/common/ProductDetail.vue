@@ -474,7 +474,7 @@ const handleVideoClick = (index: number) => {
 .product-detail {
   min-height: 100vh;
   background: #f7f8fa;
-  color: #222;
+  color: #2d3748;
   scroll-behavior: smooth;
   font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
   line-height: 1.6;
@@ -485,7 +485,7 @@ const handleVideoClick = (index: number) => {
 /* 产品头部 */
 .product-header {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  color: #222;
+  color: #2d3748;
   padding: 8rem 0 6rem;
   position: relative;
   overflow: hidden;
@@ -543,20 +543,20 @@ const handleVideoClick = (index: number) => {
 
 .product-title {
   font-size: 2.6rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 2rem;
   text-align: center;
   letter-spacing: -0.02em;
   position: relative;
   z-index: 1;
-  color: #222;
+  color: #2d3748;
 }
 
 .product-desc {
     font-size: 0.9rem;
     text-align: left;
     margin-bottom: 3rem;
-    color: #444;
+    color: #2d3748;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.75;
@@ -578,9 +578,9 @@ const handleVideoClick = (index: number) => {
 }
 
 .section-title {
-    color: #222;
+    color: #2d3748;
     font-size: 1.9rem;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
     margin: 0 0 3rem 0;
     letter-spacing: 1px;
@@ -638,8 +638,8 @@ const handleVideoClick = (index: number) => {
 
 .feature-title {
     font-size: 0.9rem;
-    font-weight: 600;
-    color: #222;
+    font-weight: 500;
+    color: #2d3748;
     margin-bottom: 1rem;
     line-height: 1.5;
   }
@@ -704,8 +704,8 @@ const handleVideoClick = (index: number) => {
 }
 
 .param-key {
-    font-weight: 600;
-    color: #222;
+    font-weight: 500;
+    color: #2d3748;
     font-size: 0.85rem;
     flex: 1;
     margin-right: 1rem;
@@ -713,8 +713,8 @@ const handleVideoClick = (index: number) => {
   }
 
   .param-value {
-    color: #222;
-    font-weight: 600;
+    color: #2d3748;
+    font-weight: 500;
     font-size: 0.85rem;
     text-align: right;
     flex-shrink: 0;
@@ -765,7 +765,7 @@ const handleVideoClick = (index: number) => {
 }
 
 .download-name {
-    font-weight: 700;
+    font-weight: 600;
     color: #1a3a8f;
     text-align: center;
     font-size: 0.9rem;
@@ -784,7 +784,7 @@ const handleVideoClick = (index: number) => {
     padding: 0.6rem 1.2rem;
     border-radius: 50px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 1rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
@@ -1027,7 +1027,7 @@ const handleVideoClick = (index: number) => {
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);
   display: flex;

@@ -216,7 +216,7 @@ onMounted(() => {
   left: 80px;
   bottom: 120px;
   z-index: 2;
-  color: #222;
+  color: #2d3748;
   text-align: left;
   max-width: 600px;
 }

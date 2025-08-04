@@ -39,10 +39,10 @@ const videoCardsTyped: VideoCard[] = videoCards;
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 56px;
   letter-spacing: 2px;
-  color: #222;
+  color: #2d3748;
 }
 .videos-list {
   display: grid;
@@ -85,8 +85,8 @@ const videoCardsTyped: VideoCard[] = videoCards;
 }
 .video-title {
   font-size: 1.1rem;
-  font-weight: 700;
-  color: #222 !important;
+  font-weight: 600;
+  color: #2d3748;
   margin-bottom: 12px;
   text-align: center;
 }
@@ -98,7 +98,7 @@ const videoCardsTyped: VideoCard[] = videoCards;
   padding: 8px 28px;
   font-size: 1rem;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: background 0.2s, color 0.2s;
 }
 .more-btn:hover {

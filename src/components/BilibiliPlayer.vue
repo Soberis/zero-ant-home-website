@@ -243,7 +243,7 @@ onMounted(() => {
   min-height: 360px;
   border-radius: 10px;
   overflow: hidden;
-  background: #000;
+  background: #2d3748;
   aspect-ratio: 16/9;
 }
 
@@ -324,8 +324,8 @@ onMounted(() => {
 
 .fallback-title {
   font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-weight: 500;
+  color: #2d3748;
   margin: 0 0 8px 0;
 }
 
@@ -403,7 +403,7 @@ onMounted(() => {
 
 .fallback-tips p {
   margin: 0 0 8px 0;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .fallback-tips ul {

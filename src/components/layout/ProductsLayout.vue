@@ -26,8 +26,8 @@
 
 :deep(.series-title) {
   font-size: 2.6rem;
-  font-weight: 700;
-  color: #222;
+  font-weight: 600;
+  color: #2d3748;
   margin-bottom: 24px;
   letter-spacing: 1.5px;
   line-height: 1.25;
@@ -89,14 +89,14 @@
 
 :deep(.product-name) {
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 20px;
-  color: #222;
+  color: #2d3748;
   letter-spacing: 1px;
 }
 
 :deep(.product-desc) {
-  color: #444;
+  color: #2d3748748;
   font-size: 1.1rem;
   margin-bottom: 48px;
   text-align: center;
@@ -114,7 +114,7 @@
   font-size: 1.15rem;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1px;
   box-shadow: 0 2px 8px rgba(26, 58, 143, 0.04);
 }

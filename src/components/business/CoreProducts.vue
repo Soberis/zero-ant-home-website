@@ -1451,10 +1451,10 @@ const getProductIcon = (slug: string): Component => {
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 56px;
   letter-spacing: 2px;
-  color: #222;
+  color: #2d3748;
 }
 .products-list {
   display: grid;
@@ -1523,14 +1523,14 @@ const getProductIcon = (slug: string): Component => {
 }
 .product-title {
   font-size: 1.3rem;
-  font-weight: 700;
-  color: #222 !important;
+  font-weight: 600;
+  color: #2d3748;
   margin-bottom: 18px;
   text-align: center;
 }
 .product-desc {
   font-size: 0.9rem;
-  color: #222 !important;
+  color: #2d3748;
   text-align: center;
   margin-bottom: 36px;
   min-height: 56px;
@@ -1543,7 +1543,7 @@ const getProductIcon = (slug: string): Component => {
   padding: 8px 28px;
   font-size: 1rem;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: background 0.2s, color 0.2s;
 }
 .more-btn:hover {

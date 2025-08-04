@@ -35,9 +35,9 @@ const partnersTyped: Partner[] = partners;
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 12px;
-  color: #222;
+  color: #2d3748;
   letter-spacing: 2px;
 }
 .section-underline {
