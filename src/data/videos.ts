@@ -30,6 +30,7 @@ import sketchingRobotImg from "@/assets/images/videos/素描机器人.png";
 import gantry2d3dImg from "@/assets/images/videos/二三自由度龙门架.png";
 import assemblyRobotImg from "@/assets/images/videos/装配机器人.png";
 import mobileRobotChassisImg from "@/assets/images/videos/自研移动机器人底盘.png";
+import fixedRailTransferRobot from "@/assets/images/videos/固定滑轨式传送机器人.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -109,7 +110,7 @@ export const videoMap: VideoMapData = {
     tags: ["医疗自动化", "智能调度", "医院物流"],
     publishDate: "2024-04-01",
   },
-  "semiconductor": {
+  semiconductor: {
     slug: "semiconductor",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1NKuXzaEff/${BILIBILI_BASE_PARAMS}`,
@@ -382,6 +383,15 @@ export const videoMap: VideoMapData = {
     tags: ["移动机器人", "机器人底盘", "自主导航", "智能移动"],
     publishDate: "2024-12-25",
   },
+  "fixed-rail-transfer-robot": {
+    slug: "fixed-rail-transfer-robot",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1JLtFznE67/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.fixed-rail-transfer-robot.title",
+    desc: "videos.fixed-rail-transfer-robot.desc",
+    tags: ["固定滑轨", "传送机器人", "工业自动化", "精准定位", "物流传输"],
+    publishDate: "2025-01-15",
+  },
 };
 
 /**
@@ -462,6 +472,11 @@ export const videoCards: VideoCard[] = [
     title: "移动传送机器人",
     img: mobileTransferRobotImg,
     slug: "mobile-transfer-robot",
+  },
+  {
+    title: "固定滑轨式传送机器人",
+    img: fixedRailTransferRobot,
+    slug: "fixed-rail-transfer-robot",
   },
   {
     title: "室外移动巡检机器人",

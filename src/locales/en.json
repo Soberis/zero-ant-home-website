@@ -426,6 +426,17 @@
         "Intelligent Mobility"
       ]
     },
+    "fixed-rail-transfer-robot": {
+      "title": "Fixed Rail Transfer Robot",
+      "desc": "Demonstrates ZeroAnt Technology's fixed rail transfer robot with precise positioning capabilities. Features high-precision positioning systems and intelligent control algorithms for efficient and stable material transfer on fixed tracks, suitable for precise logistics transport needs in industrial production lines.",
+      "tags": [
+        "Fixed Rail",
+        "Transfer Robot",
+        "Industrial Automation",
+        "Precise Positioning",
+        "Logistics Transport"
+      ]
+    },
     "robotstudio-remote-control": {
       "title": "Upper Computer RobotStudio IDE Remote Control and Simulation",
       "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",
