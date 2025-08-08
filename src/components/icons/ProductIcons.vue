@@ -4,16 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type Component } from "vue";
-import MultiOsVmIcon from "./icons/MultiOsVmIcon.vue";
-import IndustrialRtosIcon from "./icons/IndustrialRtosIcon.vue";
-import AirosIcon from "./icons/AirosIcon.vue";
-import RobotSchedulerIcon from "./icons/RobotSchedulerIcon.vue";
-import Gantry2dIcon from "./icons/Gantry2dIcon.vue";
-import Scara4axisIcon from "./icons/Scara4axisIcon.vue";
-import Arm6axisIcon from "./icons/Arm6axisIcon.vue";
-import DualArmHumanoidIcon from "./icons/DualArmHumanoidIcon.vue";
-import MobileRobotIcon from "./icons/MobileRobotIcon.vue";
+import { computed, type Component, defineAsyncComponent } from "vue";
 
 interface Props {
   name: string;
@@ -24,20 +15,23 @@ const props = withDefaults(defineProps<Props>(), {
   size: 80
 });
 
-// 图标映射表
-const iconMap: Record<string, Component> = {
-  "multi-os-vm": MultiOsVmIcon,
-  "industrial-rtos": IndustrialRtosIcon,
-  "airos": AirosIcon,
-  "robot-scheduler": RobotSchedulerIcon,
-  "gantry-2d": Gantry2dIcon,
-  "scara-4axis": Scara4axisIcon,
-  "arm-6axis": Arm6axisIcon,
-  "dual-arm-humanoid": DualArmHumanoidIcon,
-  "mobile-robot": MobileRobotIcon,
+// 使用动态导入避免循环引用
+const iconMap: Record<string, () => Promise<Component>> = {
+  "multi-os-vm": () => import("./icons/MultiOsVmIcon.vue"),
+  "industrial-rtos": () => import("./icons/IndustrialRtosIcon.vue"),
+  "airos": () => import("./icons/AirosIcon.vue"),
+  "robot-scheduler": () => import("./icons/RobotSchedulerIcon.vue"),
+  "gantry-2d": () => import("./icons/Gantry2dIcon.vue"),
+  "scara-4axis": () => import("./icons/Scara4axisIcon.vue"),
+  "arm-6axis": () => import("./icons/Arm6axisIcon.vue"),
+  "dual-arm-humanoid": () => import("./icons/DualArmHumanoidIcon.vue"),
+  "mobile-robot": () => import("./icons/MobileRobotIcon.vue"),
 };
 
-const iconComponent = computed(() => iconMap[props.name]);
+const iconComponent = computed(() => {
+  const loader = iconMap[props.name];
+  return loader ? defineAsyncComponent(loader) : null;
+});
 </script>
 
 <style scoped>
