@@ -448,7 +448,9 @@ const productFeatures = computed((): FeatureItem[] => {
     // 最后使用原始数据
     return props.product.features || [];
   } catch (error) {
-    console.warn("获取产品特性时出错:", error);
+    if (import.meta.env.DEV) {
+      console.warn("获取产品特性时出错:", error);
+    }
     return props.product.features || [];
   }
 });

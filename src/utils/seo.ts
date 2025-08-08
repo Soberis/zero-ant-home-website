@@ -28,7 +28,9 @@ export interface SEOMetaData {
 export function setSEO(meta: SEOMetaData) {
   // 确保在浏览器环境中运行
   if (typeof document === "undefined" || !document.head) {
-    console.warn("SEO设置失败：DOM尚未加载完成");
+    if (import.meta.env.DEV) {
+      console.warn("SEO设置失败：DOM尚未加载完成");
+    }
     return;
   }
 
@@ -62,7 +64,9 @@ export function setSEO(meta: SEOMetaData) {
 
         element.setAttribute("content", content);
       } catch (error) {
-        console.warn(`更新meta标签失败: ${name}`, error);
+        if (import.meta.env.DEV) {
+          console.warn(`更新meta标签失败: ${name}`, error);
+        }
       }
     };
 
@@ -132,7 +136,9 @@ export function setSEO(meta: SEOMetaData) {
       canonicalElement.setAttribute("href", meta.canonical);
     }
   } catch (error) {
-    console.warn("设置SEO元数据失败:", error);
+    if (import.meta.env.DEV) {
+      console.warn("设置SEO元数据失败:", error);
+    }
   }
 }
 
@@ -145,22 +151,15 @@ export function setStructuredData(
 ) {
   // 确保在浏览器环境中运行
   if (typeof document === "undefined" || !document.head) {
-    console.warn("结构化数据设置失败：DOM尚未加载完成");
+    if (import.meta.env.DEV) {
+      console.warn("结构化数据设置失败：DOM尚未加载完成");
+    }
     return;
   }
 
   try {
     // 移除现有的结构化数据
-    const existingScripts = document.querySelectorAll(
-      'script[type="application/ld+json"]'
-    );
-    existingScripts.forEach((script) => {
-      try {
-        script.remove();
-      } catch (error) {
-        console.warn("移除旧结构化数据失败:", error);
-      }
-    });
+    removeStructuredData();
 
     // 处理单个对象或对象数组
     const dataArray = Array.isArray(data) ? data : [data];
@@ -173,11 +172,39 @@ export function setStructuredData(
         script.textContent = JSON.stringify(item);
         document.head.appendChild(script);
       } catch (error) {
-        console.warn("创建结构化数据脚本失败:", error);
+        if (import.meta.env.DEV) {
+          console.warn("创建结构化数据脚本失败:", error);
+        }
       }
     });
   } catch (error) {
-    console.warn("设置结构化数据失败:", error);
+    if (import.meta.env.DEV) {
+      console.warn("设置结构化数据失败:", error);
+    }
+  }
+}
+
+/**
+ * 移除结构化数据
+ */
+function removeStructuredData(): void {
+  try {
+    const existingScripts = document.querySelectorAll(
+      'script[type="application/ld+json"]'
+    );
+    existingScripts.forEach((script) => {
+      try {
+        script.remove();
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.warn("移除旧结构化数据失败:", error);
+        }
+      }
+    });
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn("移除旧结构化数据失败:", error);
+    }
   }
 }
 

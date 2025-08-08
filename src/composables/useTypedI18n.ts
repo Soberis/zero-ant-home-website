@@ -68,7 +68,9 @@ export function useTypedI18n() {
     try {
       return t(key);
     } catch (error) {
-      console.warn(`Translation key not found: ${key}`);
+      if (import.meta.env.DEV) {
+        console.warn(`Translation key not found: ${key}`);
+      }
       return key;
     }
   };
@@ -79,7 +81,9 @@ export function useTypedI18n() {
       locale.value = newLocale;
       return true;
     }
-    console.warn(`Locale ${newLocale} is not available`);
+    if (import.meta.env.DEV) {
+      console.warn(`Locale ${newLocale} is not available`);
+    }
     return false;
   };
 
@@ -115,6 +119,25 @@ export function useTypedI18n() {
     return defaultValue;
   };
 
+  // 获取翻译文本，如果不存在则返回默认值
+  const getTranslation = (key: string, defaultValue: string = ''): string => {
+    try {
+      const translation = t(key);
+      if (translation === key) {
+        if (import.meta.env.DEV) {
+          console.warn(`Translation key not found: ${key}`);
+        }
+        return defaultValue;
+      }
+      return translation;
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn(`Translation failed for key: ${key}`, error);
+      }
+      return defaultValue;
+    }
+  };
+
   return {
     t: typedT,
     locale,
@@ -123,6 +146,7 @@ export function useTypedI18n() {
     hasTranslation,
     getTranslationObject,
     tWithDefault,
+    getTranslation,
     ...rest
   };
 }

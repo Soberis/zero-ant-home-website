@@ -18,6 +18,9 @@ export class PerformanceMonitor {
     memoryUsage: 0
   };
 
+  private observers: PerformanceObserver[] = [];
+  private isInitialized = false;
+
   constructor() {
     this.init();
   }
@@ -26,104 +29,163 @@ export class PerformanceMonitor {
    * 初始化性能监控
    */
   private init() {
-    if (typeof window === 'undefined') return;
-
-    // this.startTime = performance.now(); // 暂时未使用，保留接口
+    if (this.isInitialized) return;
     
-    // 监听页面加载完成
-    if (document.readyState === 'complete') {
-      this.measureLoadTime();
-    } else {
-      window.addEventListener('load', () => this.measureLoadTime());
-    }
-
-    // 监听首次内容绘制
-    this.observePaintMetrics();
-    
-    // 监听资源加载
-    this.observeResourceMetrics();
-    
-    // 监听内存使用情况
-    this.observeMemoryMetrics();
-  }
-
-  /**
-   * 测量页面加载时间
-   */
-  private measureLoadTime() {
-    const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-    if (navigation && navigation.loadEventEnd && navigation.domContentLoadedEventEnd) {
-      // 使用 startTime 而不是已废弃的 navigationStart
-      this.metrics.loadTime = navigation.loadEventEnd - navigation.startTime;
-      this.metrics.renderTime = navigation.domContentLoadedEventEnd - navigation.startTime;
-    }
-  }
-
-  /**
-   * 观察绘制指标
-   */
-  private observePaintMetrics() {
-    if ('PerformanceObserver' in window) {
-      const observer = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          if (entry.name === 'first-contentful-paint') {
-            console.log(`首次内容绘制: ${entry.startTime.toFixed(2)}ms`);
-          }
-        });
-      });
+    try {
+      this.monitorPaintTiming();
+      this.monitorResourceTiming();
+      this.monitorMemoryUsage();
+      this.monitorLongTasks();
+      this.monitorLayoutShifts();
+      this.monitorFirstInputDelay();
       
-      try {
-        observer.observe({ entryTypes: ['paint'] });
-      } catch (e) {
-        console.warn('Paint metrics not supported');
+      this.isInitialized = true;
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn('性能监控初始化失败:', error);
       }
     }
   }
 
   /**
-   * 观察资源加载指标
+   * 监控绘制性能
    */
-  private observeResourceMetrics() {
-    if ('PerformanceObserver' in window) {
-      const observer = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        this.metrics.resourceCount = performance.getEntriesByType('resource').length;
-        
-        // 分析慢资源
-        entries.forEach((entry) => {
-          const resource = entry as PerformanceResourceTiming;
-          if (resource.duration > 1000) { // 超过1秒的资源
-            console.warn(`慢资源警告: ${resource.name} - ${resource.duration.toFixed(2)}ms`);
-          }
-        });
+  private monitorPaintTiming() {
+    if ('getEntriesByType' in performance) {
+      const paintEntries = performance.getEntriesByType('paint');
+      paintEntries.forEach((entry) => {
+        if (entry.name === 'first-contentful-paint' && import.meta.env.DEV) {
+          console.log(`首次内容绘制: ${entry.startTime.toFixed(2)}ms`);
+        }
       });
-      
-      try {
-        observer.observe({ entryTypes: ['resource'] });
-      } catch (e) {
-        console.warn('Resource metrics not supported');
-      }
+    } else if (import.meta.env.DEV) {
+      console.warn('Paint metrics not supported');
     }
   }
 
   /**
-   * 观察内存使用情况
+   * 监控资源加载性能
    */
-  private observeMemoryMetrics() {
+  private monitorResourceTiming() {
+    if ('getEntriesByType' in performance) {
+      const resources = performance.getEntriesByType('resource');
+      const slowResources = resources.filter(
+        (resource) => resource.duration > 3000
+      );
+      
+      if (slowResources.length > 0 && import.meta.env.DEV) {
+        slowResources.forEach((resource) => {
+          console.warn(`慢资源警告: ${resource.name} - ${resource.duration.toFixed(2)}ms`);
+        });
+      }
+    } else if (import.meta.env.DEV) {
+      console.warn('Resource metrics not supported');
+    }
+  }
+
+  /**
+   * 监控内存使用情况
+   */
+  private monitorMemoryUsage() {
     if ('memory' in performance) {
       const memory = (performance as any).memory;
-      this.metrics.memoryUsage = memory.usedJSHeapSize;
+      const currentMemory = memory.usedJSHeapSize;
+      const maxMemory = memory.jsHeapSizeLimit;
       
-      // 定期检查内存使用
-      setInterval(() => {
-        const currentMemory = memory.usedJSHeapSize;
-        if (this.metrics && this.metrics.memoryUsage && currentMemory > this.metrics.memoryUsage * 1.5) {
-          console.warn(`内存使用增长警告: ${(currentMemory / 1024 / 1024).toFixed(2)}MB`);
-        }
-        this.metrics.memoryUsage = currentMemory;
-      }, 30000); // 每30秒检查一次
+      if (currentMemory / maxMemory > 0.8 && import.meta.env.DEV) {
+        console.warn(`内存使用增长警告: ${(currentMemory / 1024 / 1024).toFixed(2)}MB`);
+      }
     }
+  }
+
+  /**
+   * 监控长任务
+   */
+  private monitorLongTasks() {
+    if ('PerformanceObserver' in window) {
+      try {
+        const observer = new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry) => {
+            if (entry.duration > 50 && import.meta.env.DEV) {
+              console.warn(`长任务警告: ${entry.duration.toFixed(2)}ms`);
+            }
+          });
+        });
+        
+        observer.observe({ entryTypes: ['longtask'] });
+        this.observers.push(observer);
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.warn('长任务监控不支持');
+        }
+      }
+    }
+  }
+
+  /**
+   * 监控布局偏移
+   */
+  private monitorLayoutShifts() {
+    if ('PerformanceObserver' in window) {
+      try {
+        const observer = new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry: any) => {
+            if (entry.value > 0.1 && import.meta.env.DEV) {
+              console.warn(`布局偏移警告: ${entry.value.toFixed(3)}`);
+            }
+          });
+        });
+        
+        observer.observe({ entryTypes: ['layout-shift'] });
+        this.observers.push(observer);
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.warn('布局偏移监控不支持');
+        }
+      }
+    }
+  }
+
+  /**
+   * 监控首次输入延迟
+   */
+  private monitorFirstInputDelay() {
+    if ('PerformanceObserver' in window) {
+      try {
+        const observer = new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry: any) => {
+            if (entry.processingStart && entry.startTime && import.meta.env.DEV) {
+              const delay = entry.processingStart - entry.startTime;
+              if (delay > 100) {
+                console.warn(`首次输入延迟警告: ${delay.toFixed(2)}ms`);
+              }
+            }
+          });
+        });
+        
+        observer.observe({ entryTypes: ['first-input'] });
+        this.observers.push(observer);
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.warn('首次输入延迟监控不支持');
+        }
+      }
+    }
+  }
+
+  /**
+   * 清理监控器
+   */
+  public destroy() {
+    this.observers.forEach(observer => {
+      try {
+        observer.disconnect();
+      } catch (error) {
+        // 静默处理清理错误
+      }
+    });
+    this.observers = [];
+    this.isInitialized = false;
   }
 
   /**
@@ -135,7 +197,7 @@ export class PerformanceMonitor {
     const end = performance.now();
     const duration = end - start;
     
-    if (name) {
+    if (name && import.meta.env.DEV) {
       console.log(`${name} 执行时间: ${duration.toFixed(2)}ms`);
     }
     
@@ -143,15 +205,18 @@ export class PerformanceMonitor {
   }
 
   /**
-   * 测量异步函数执行时间
+   * 异步测量函数执行时间
    */
-  public async measureAsyncFunction<T>(fn: () => Promise<T>, name?: string): Promise<T> {
+  public async measureAsyncFunction<T>(
+    fn: () => Promise<T>,
+    name?: string
+  ): Promise<T> {
     const start = performance.now();
     const result = await fn();
     const end = performance.now();
     const duration = end - start;
     
-    if (name) {
+    if (name && import.meta.env.DEV) {
       console.log(`${name} 异步执行时间: ${duration.toFixed(2)}ms`);
     }
     
@@ -159,7 +224,34 @@ export class PerformanceMonitor {
   }
 
   /**
-   * 获取当前性能指标
+   * 动态导入优化
+   */
+  public async dynamicImport<T>(
+    importFn: () => Promise<T>,
+    retries = 3,
+    delay = 1000
+  ): Promise<T> {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        return await importFn();
+      } catch (error) {
+        if (attempt === retries) {
+          throw error;
+        }
+        
+        if (import.meta.env.DEV) {
+          console.warn(`Import failed, retrying... (${attempt}/${retries})`);
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, delay * attempt));
+      }
+    }
+    
+    throw new Error('Dynamic import failed after all retries');
+  }
+
+  /**
+   * 获取性能指标
    */
   public getMetrics(): PerformanceMetrics {
     return { ...this.metrics };

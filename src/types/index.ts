@@ -37,11 +37,48 @@ export type ProductSlug =
   | 'dual-arm-humanoid'
   | 'mobile-robot';
 
-// 应用场景slug类型
-export type ApplicationSlug = string; // TODO: 可以进一步细化
+// 应用场景相关类型
+export type ApplicationSlug = 
+  | 'industrial-automation'
+  | 'medical-robotics'
+  | 'logistics-automation'
+  | 'research-development'
+  | 'education-training';
 
-// 视频slug类型
-export type VideoSlug = string; // TODO: 可以进一步细化
+// 视频相关类型
+export type VideoSlug = 
+  | '360-radar-scan'
+  | 'agv-introduction'
+  | 'ultrasound-robot'
+  | 'rtos-ethercat-control'
+  | 'ur-robot-grasping'
+  | 'robotstudio-remote-control'
+  | 'personalized-medicine'
+  | 'thick-plate-welding'
+  | 'gantry-robot'
+  | 'servo-motor-station'
+  | 'dual-robot-cooperation'
+  | 'dual-robot-ball-catching'
+  | 'scara-refrigerator'
+  | 'fixed-track-conveyor'
+  | 'composite-robot-transfer'
+  | 'composite-robot-application'
+  | 'outdoor-inspection-robot'
+  | 'grinding-robot'
+  | 'ball-throwing-catching'
+  | 'unmanned-sweeper'
+  | 'wafer-transfer-control'
+  | 'robot-grinding-process'
+  | 'high-speed-precision'
+  | 'rice-molecular-experiment'
+  | 'biological-tube-feeding'
+  | 'palletizing-robot'
+  | 'offline-programming'
+  | 'offline-logo-drawing'
+  | 'mobile-conveyor-robot'
+  | 'sketch-robot'
+  | 'mobile-robot-chassis'
+  | 'assembly-robot';
 
 /**
  * 产品基础接口
