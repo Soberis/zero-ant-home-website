@@ -62,6 +62,12 @@ export default defineConfig({
       },
       mangle: {
         safari10: true, // 解决Safari 10的兼容性问题
+        // 保留关键变量名，避免变量名冲突
+        reserved: ['iconComponent', 'iconMap', 'loader'],
+        // 避免过度混淆导致的变量名冲突
+        properties: {
+          reserved: ['size', 'height', 'width', 'name']
+        }
       },
     },
     rollupOptions: {
