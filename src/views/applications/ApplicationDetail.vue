@@ -287,34 +287,55 @@ function goTo(targetSlug: string | null): void {
   justify-content: flex-end;
 }
 .video-bottom-btn {
-  color: #1a3a8f;
-  background: #fff;
-  border: 2px solid #1a3a8f;
-  border-radius: 24px;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  color: white;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
   font-size: 0.9rem;
-  font-weight: 500;
-  padding: 0.6rem 1.8rem;
-  box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
-  cursor: pointer;
+  transition: all 0.3s ease;
   letter-spacing: 0.5px;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s,
-    border-color 0.18s;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
   outline: none;
-  opacity: 1;
   min-width: 100px;
   text-align: center;
   margin: 0;
 }
+
 .video-bottom-btn:hover {
-  background: #1a3a8f;
-  color: #fff;
-  border-color: #1a3a8f;
-  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.1);
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
 }
+
+.video-bottom-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.video-bottom-btn:hover::before {
+  left: 100%;
+}
+
 .video-bottom-btn:active {
-  background: #16306b;
-  color: #fff;
-  border-color: #16306b;
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(0);
+  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.2);
 }
 @media (max-width: 600px) {
   .title {
@@ -341,9 +362,8 @@ function goTo(targetSlug: string | null): void {
   }
   .video-bottom-btn {
     font-size: 0.85rem;
-    padding: 0.5rem 1.2rem;
+    padding: 12px 24px;
     min-width: 80px;
-    border-radius: 16px;
   }
 }
 </style>

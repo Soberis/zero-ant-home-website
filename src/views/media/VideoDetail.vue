@@ -322,34 +322,56 @@ onMounted(() => {
   margin-bottom: 0;
 }
 .more-btn {
-  margin-top: 1.5rem;
-  padding: 0.6rem 1.8rem;
-  min-width: 110px;
-  border: 2px solid #1a3a8f;
-  background: #fff;
-  color: #1a3a8f;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  color: white;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
   font-size: 0.9rem;
-  font-weight: 500;
+  transition: all 0.3s ease;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.06);
+  position: relative;
+  overflow: hidden;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s;
-  outline: none;
   display: inline-block;
+  outline: none;
   user-select: none;
+  margin-top: 1.5rem;
+  min-width: 110px;
 }
+
 .more-btn:hover {
-  background: #1a3a8f;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.13);
-  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
 }
+
+.more-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.more-btn:hover::before {
+  left: 100%;
+}
+
 .more-btn:active {
-  background: #274fc5;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.1);
-  transform: scale(0.98);
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(0);
+  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.2);
 }
 .contact-dialog-mask {
   position: fixed;
@@ -471,7 +493,7 @@ onMounted(() => {
   }
   .more-btn {
     margin-top: 1rem;
-    padding: 0.5rem 1.5rem;
+    padding: 12px 24px;
     font-size: 0.85rem;
   }
 }

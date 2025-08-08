@@ -65,10 +65,11 @@
       </button>
     </div>
   </div>
+  
 </template>
 
 <script setup lang="ts">
-import type { ProductData } from "@/data/products";
+import type { ProductData } from "@/types";
 import { useI18n } from "vue-i18n";
 
 const { product } = defineProps<{ product: ProductData }>();
@@ -389,31 +390,31 @@ const { t } = useI18n();
 }
 
 .more-btn {
-  position: relative;
-  border: none;
-  background: linear-gradient(135deg, #1a3a8f 0%, #4a90e2 100%);
-  color: #fff;
-  border-radius: 50px;
-  padding: 14px 36px;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 500;
-  font-size: 0.8rem;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  color: white;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  overflow: hidden;
   min-width: 150px;
   justify-content: center;
-  will-change: transform, box-shadow;
   outline: none;
 }
 
-.more-btn:focus-visible {
-  transform: translateY(-2px) scale3d(1.05, 1.05, 1);
-  box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3), 0 0 0 3px rgba(26, 58, 143, 0.3);
+.more-btn:hover {
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
 }
 
 .more-btn::before {
@@ -436,9 +437,10 @@ const { t } = useI18n();
   left: 100%;
 }
 
-.more-btn:hover {
-  transform: translateY(-2px) scale3d(1.05, 1.05, 1);
-  box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3);
+.more-btn:focus-visible {
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
 }
 
 .more-btn:active {

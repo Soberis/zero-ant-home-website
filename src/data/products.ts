@@ -1,16 +1,5 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
-import type { Product } from "@/utils/product";
-
-/**
- * 扩展产品接口，添加产品特有字段
- */
-export interface ProductData extends Product {
-  name: string;
-  image: string;
-  desc: string;
-  seriesTitle: string;
-  seriesSubtitle: string;
-}
+import type { ProductData } from "@/types";
 
 // 1. 先定义所有图片变量
 const multiOsVmImg = new URL(

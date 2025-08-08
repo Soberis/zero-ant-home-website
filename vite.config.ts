@@ -23,13 +23,14 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
       dts: true, // 生成类型声明文件
     }),
-    // Bundle 分析工具（仅在构建时生成）
-    visualizer({
+    // Bundle 分析工具（仅在分析模式下生成）
+    ...(process.env.ANALYZE ? [visualizer({
       filename: "dist/stats.html",
       open: true,
       gzipSize: true,
       brotliSize: true,
-    }),
+      template: 'treemap' // 更直观的可视化
+    })] : []),
     // 图片优化插件
     ViteImageOptimizer({}),
   ],
@@ -81,23 +82,48 @@ export default defineConfig({
             if (id.includes("element-plus")) {
               return "ui-vendor";
             }
-            // 工具库 - 根据实际使用情况动态添加
-            if (id.includes("axios")) {
-              return "utils-vendor";
+            // 大型第三方库单独分包
+            if (id.includes("lodash")) {
+              return "lodash-vendor";
+            }
+            if (id.includes("dayjs") || id.includes("moment")) {
+              return "date-vendor";
+            }
+            // 图片处理相关
+            if (id.includes("sharp") || id.includes("imagemin")) {
+              return "image-vendor";
             }
             // 其他第三方库
             return "vendor";
           }
 
           // 项目内部模块分组
-          if (id.includes("/data/")) {
+          if (id.includes("/data/") && !id.includes("/data/videos")) {
             return "data";
           }
-          if (id.includes("/components/")) {
-            return "components";
+          // 视频数据单独分包（较大）
+          if (id.includes("/data/videos")) {
+            return "video-data";
           }
-          if (id.includes("/utils/")) {
+          // 图标组件单独分包
+          if (id.includes("/components/icons/")) {
+            return "icons";
+          }
+          // 业务组件分包
+          if (id.includes("/components/business/")) {
+            return "business-components";
+          }
+          // 通用组件分包
+          if (id.includes("/components/common/")) {
+            return "common-components";
+          }
+          // 工具函数分包
+          if (id.includes("/utils/") || id.includes("/composables/")) {
             return "utils";
+          }
+          // 路由和配置分包
+          if (id.includes("/router/") || id.includes("/config/")) {
+            return "config";
           }
         },
         // 优化文件命名
@@ -126,7 +152,7 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 800, // 降低警告阈值
+    chunkSizeWarningLimit: 1000, // 合理的警告阈值
     // 启用 CSS 代码分割
     cssCodeSplit: true,
     // 启用资源内联阈值

@@ -18,11 +18,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:analyze": "vite build --mode analyze",
+    "build:analyze": "ANALYZE=true vite build",
+    "build:prod": "NODE_ENV=production vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
     "validate": "yarn type-check && yarn build && echo 'All checks passed successfully!'",
-    "audit": "yarn audit --level moderate"
+    "audit": "yarn audit --level moderate",
+    "perf": "yarn build:analyze && yarn preview"
   },
   "dependencies": {
     "@intlify/core-base": "^11.1.10",

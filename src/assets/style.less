@@ -56,6 +56,11 @@ body {
   /* Firefox兼容性处理 */
   scrollbar-width: thin;
   scrollbar-color: #c1c1c1 #f1f1f1;
+  
+  /* Chrome 121以前版本回退 */
+  @supports not (scrollbar-width: thin) {
+    scrollbar-width: auto;
+  }
 }
 
 /* WebKit浏览器滚动条 - 简化样式 */
@@ -113,6 +118,11 @@ a:visited {
 .hide-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  
+  /* Chrome 121以前版本回退 */
+  @supports not (scrollbar-width: none) {
+    -webkit-scrollbar: none;
+  }
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -832,9 +842,10 @@ pre {
     scroll-behavior: auto !important;
   }
 
-  // 优化滚动性能
+  // 优化滚动性能 - 现代浏览器默认开启硬件加速
   .scroll-container {
-    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   // 自定义滚动条样式（兼容WebKit浏览器）
@@ -862,18 +873,18 @@ pre {
     will-change: auto;
     transform: none;
     filter: none;
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 
 // 高DPI屏幕优化
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .high-dpi-image {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast; /* Edge 79+ */
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: crisp-edges; /* Standard */
+    image-rendering: pixelated; /* Fallback */
   }
 }
 

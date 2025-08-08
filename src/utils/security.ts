@@ -202,15 +202,16 @@ export function checkSecurityFeatures() {
  * @param event 安全事件
  * @param details 事件详情
  */
-export function logSecurityEvent(event: string, details?: any) {
-  const logData = {
-    timestamp: new Date().toISOString(),
-    event,
-    details,
-    userAgent: navigator.userAgent,
-    url: window.location.href,
-    referrer: document.referrer,
-  };
+export function logSecurityEvent(_event: string, _details?: any) {
+  // 暂时注释掉未使用的 logData
+  // const logData = {
+  //   timestamp: new Date().toISOString(),
+  //   event,
+  //   details,
+  //   userAgent: navigator.userAgent,
+  //   url: window.location.href,
+  //   referrer: document.referrer,
+  // };
 
   // 开发环境输出到控制台
   if (import.meta.env.DEV) {

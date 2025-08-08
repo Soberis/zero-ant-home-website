@@ -358,7 +358,7 @@ function handleLazyLoadSuccess(event: CustomEvent) {
 
 // 懒加载错误事件处理
 function handleLazyLoadError(event: CustomEvent) {
-  const { src, errorType, retryCount, maxRetries } = event.detail;
+  const { src, errorType, retryCount } = event.detail;
 
   // 错误上报
   if (typeof window !== "undefined" && (window as any).gtag) {

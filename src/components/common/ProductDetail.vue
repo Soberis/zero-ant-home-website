@@ -895,14 +895,9 @@ const handleVideoClick = (index: number) => {
     padding: 0.55rem 1.1rem;
   }
 
-  .download-action {
-    font-size: 0.7rem;
-    padding: 0.5rem 1rem;
-  }
-
   .back-btn {
     font-size: 0.8rem;
-    padding: 12px 28px;
+    padding: 12px 24px;
   }
 }
 
@@ -953,14 +948,13 @@ const handleVideoClick = (index: number) => {
     font-size: 0.8rem;
   }
 
-  .download-action {
-    font-size: 0.7rem;
+  .download-action {    font-size: 0.7rem;
     padding: 0.5rem 1rem;
   }
 
   .back-btn {
     font-size: 0.8rem;
-    padding: 12px 28px;
+    padding: 12px 24px;
   }
 }
 
@@ -1018,31 +1012,38 @@ const handleVideoClick = (index: number) => {
 }
 
 .back-btn {
-  position: relative;
-  border: none;
-  background: linear-gradient(135deg, #1a3a8f 0%, #4a90e2 100%);
-  color: #fff;
-  border-radius: 50px;
-  padding: 14px 36px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 500;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  color: white;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  overflow: hidden;
   min-width: 150px;
   justify-content: center;
   margin: 0 auto;
+}
+
+.back-btn:hover {
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
 }
 
 .back-btn::before {
   content: "";
   position: absolute;
   top: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
   background: linear-gradient(
@@ -1058,10 +1059,7 @@ const handleVideoClick = (index: number) => {
   left: 100%;
 }
 
-.back-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3);
-}
+
 
 .back-btn:active {
   transform: translateY(0) scale(1.02);

@@ -360,13 +360,36 @@ onMounted(() => {
 }
 
 .fallback-btn.primary {
-  background: #1a3a8f;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
   color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .fallback-btn.primary:hover {
-  background: #274fc5;
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
+}
+
+.fallback-btn.primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.fallback-btn.primary:hover::before {
+  left: 100%;
 }
 
 .fallback-btn.secondary {
