@@ -12,6 +12,8 @@ export interface SEOMetaData {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  ogImageWidth?: string | number;
+  ogImageHeight?: string | number;
   ogUrl?: string;
   twitterTitle?: string;
   twitterDescription?: string;
@@ -19,6 +21,7 @@ export interface SEOMetaData {
   twitterCard?: string;
   canonical?: string;
   siteName?: string;
+  localeAlternate?: Array<{ hrefLang: string; href: string }>;
 }
 
 /**
@@ -99,6 +102,12 @@ export function setSEO(meta: SEOMetaData) {
     if (meta.ogImage) {
       updateMetaTag("og:image", meta.ogImage, true);
     }
+    if (meta.ogImageWidth) {
+      updateMetaTag("og:image:width", String(meta.ogImageWidth), true);
+    }
+    if (meta.ogImageHeight) {
+      updateMetaTag("og:image:height", String(meta.ogImageHeight), true);
+    }
 
     if (meta.ogUrl) {
       updateMetaTag("og:url", meta.ogUrl, true);
@@ -134,6 +143,22 @@ export function setSEO(meta: SEOMetaData) {
       }
 
       canonicalElement.setAttribute("href", meta.canonical);
+    }
+
+    // 更新 hreflang（多语言可发现性）
+    if (meta.localeAlternate && meta.localeAlternate.length) {
+      // 清理旧的 hreflang
+      document
+        .querySelectorAll('link[rel="alternate"][hreflang]')
+        .forEach((n) => n.parentNode?.removeChild(n));
+      // 注入新的
+      meta.localeAlternate.forEach((alt) => {
+        const link = document.createElement('link');
+        link.setAttribute('rel', 'alternate');
+        link.setAttribute('hreflang', alt.hrefLang);
+        link.setAttribute('href', alt.href);
+        document.head.appendChild(link);
+      });
     }
   } catch (error) {
     if (import.meta.env.DEV) {

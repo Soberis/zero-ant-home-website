@@ -163,6 +163,8 @@
           class="hamburger-menu"
           :class="{ active: isMobileMenuOpen }"
           aria-label="Toggle navigation menu"
+          :aria-expanded="isMobileMenuOpen ? 'true' : 'false'"
+          aria-controls="mobile-nav-panel"
           @click="toggleMobileMenu"
         >
           <span class="hamburger-line"></span>
@@ -176,6 +178,9 @@
       class="mobile-nav"
       :class="{ open: isMobileMenuOpen }"
       @click="handleBackgroundClick"
+      id="mobile-nav-panel"
+      role="dialog"
+      aria-modal="true"
     >
       <div class="mobile-nav-content">
         <ul class="mobile-nav-links">
@@ -383,6 +388,15 @@ function cacheElementPositions() {
     }, 100);
   }
 
+// 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）
+const onKeydownCapture = (e: KeyboardEvent) => {
+  if (e.key === 'Escape' && isMobileMenuOpen.value) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    closeMobileMenu();
+  }
+};
+
 onMounted(() => {
   const savedLanguage = localStorage.getItem("language");
   if (savedLanguage && (savedLanguage === "zh" || savedLanguage === "en")) {
@@ -400,6 +414,9 @@ onMounted(() => {
   // 监听窗口变化，防抖更新缓存
   window.addEventListener('resize', updateCacheWithDebounce);
   window.addEventListener('scroll', updateCacheWithDebounce);
+
+  // 捕获阶段监听 Esc，优先关闭移动菜单，避免触发全局返回
+  document.addEventListener('keydown', onKeydownCapture, true);
 });
 
 onUnmounted(() => {
@@ -412,6 +429,7 @@ onUnmounted(() => {
   if (cacheUpdateTimeout) {
     clearTimeout(cacheUpdateTimeout);
   }
+  document.removeEventListener('keydown', onKeydownCapture, true);
 });
 </script>
 
@@ -732,7 +750,7 @@ onUnmounted(() => {
   font-size: 13px;
   font-weight: 500;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(26, 58, 143, 0.1);
@@ -1047,7 +1065,7 @@ onUnmounted(() => {
     padding: 6px 10px;
     font-size: 11px;
     min-width: 35px;
-    border-radius: 16px;
+    border-radius: 12px;
   }
 
   .nav-actions {
@@ -1096,7 +1114,7 @@ onUnmounted(() => {
     padding: 5px 8px;
     font-size: 10px;
     min-width: 30px;
-    border-radius: 14px;
+    border-radius: 10px;
   }
 
   .hamburger-menu {
