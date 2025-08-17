@@ -160,15 +160,6 @@
       "desc": "Demonstrates automated handling and intelligent scheduling in chip manufacturing and testing.",
       "tags": ["Semiconductor Processing", "Automation", "Smart Manufacturing"]
     },
-    "dual-robot-collaboration": {
-      "title": "Dual Robot Collaboration",
-      "desc": "Showcases multi-robot collaborative operations for efficient automated handling and task allocation.",
-      "tags": [
-        "Robot Collaboration",
-        "Multi-robot Scheduling",
-        "Smart Manufacturing"
-      ]
-    },
     "polishing-robot": {
       "title": "Polishing Robot",
       "desc": "Demonstrates intelligent polishing robot for efficient surface treatment in industrial automation.",
@@ -193,11 +184,6 @@
       "title": "Composite Robot Transfer",
       "desc": "Advanced composite robot systems for complex material handling tasks with integrated mobile and manipulator capabilities.",
       "tags": ["Composite Robot", "Transfer System", "Mobile Manipulation"]
-    },
-    "ultrasound-medical-robot": {
-      "title": "Ultrasound Medical Robot",
-      "desc": "Showcases ZeroAnt Technology's innovation in medical automation with ultrasound robots enabling automated ultrasound examinations, improving medical efficiency and examination accuracy.",
-      "tags": ["Medical Robot", "Ultrasound Examination", "Medical Automation"]
     },
     "ur-robot-llm-motion-capture": {
       "title": "UR Robot LLM Motion Capture",
@@ -269,16 +255,6 @@
         "Smart Logistics"
       ]
     },
-    "high-speed-precision-robot-arm": {
-      "title": "High-Speed Precision Robot Arm Demo",
-      "desc": "Demonstrates ZeroAnt Technology's robot arm high-speed precision operation capabilities through advanced motion control algorithms and precision mechanical design.",
-      "tags": [
-        "Robot Arm",
-        "High-Speed Precision",
-        "Motion Control",
-        "Industrial Automation"
-      ]
-    },
     "offline-programming": {
       "title": "Offline Programming",
       "desc": "Showcases ZeroAnt Technology's advanced offline programming technology, achieving efficient robot program development and optimization through digital simulation and virtual debugging.",
@@ -307,16 +283,6 @@
         "Logistics Automation",
         "Smart Manufacturing",
         "Industrial Robot"
-      ]
-    },
-    "ball-catching-demo": {
-      "title": "Ball Catching Demo",
-      "desc": "Demonstrates ZeroAnt Technology's advanced robot technology in visual recognition and motion control through real-time visual tracking and precise grasping control.",
-      "tags": [
-        "Robot Control",
-        "Visual Recognition",
-        "Motion Control",
-        "Intelligent Grasping"
       ]
     },
     "dual-robot-ball-catching": {

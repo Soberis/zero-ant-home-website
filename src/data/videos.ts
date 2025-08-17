@@ -3,10 +3,8 @@
 // 图片资源导入
 import radar360Img from "@/assets/images/videos/360度雷达扫描.png";
 import agvImg from "@/assets/images/videos/agv产品介绍.png";
-import ultrasoundImg from "@/assets/images/videos/b超机器人.png";
 import compositeRobotImg from "@/assets/images/videos/复合机器人传板.png";
 import waferTransferImg from "@/assets/images/videos/晶圆传送机器人运动控制.png";
-import dualRobotCollabImg from "@/assets/images/videos/双机协作.png";
 import polishingRobotImg from "@/assets/images/videos/打磨机器人.png";
 import compositeRobotAppImg from "@/assets/images/videos/复合机器人应用.png";
 import urRobotLLMImg from "@/assets/images/videos/UR机器人大语言模型动作抓取.png";
@@ -14,13 +12,11 @@ import fourAxisRobotFridgeImg from "@/assets/images/videos/四轴机器人开冰
 import servoMotorStationImg from "@/assets/images/videos/伺服电机台站.png";
 import personalizedPrescriptionImg from "@/assets/images/videos/个性化处方制药.png";
 import mobileTransferRobotImg from "@/assets/images/videos/移动传送机器人.png";
-import highSpeedPrecisionRobotArmImg from "@/assets/images/videos/机械臂高速高精度演示.png";
 import offlineProgrammingImg from "@/assets/images/videos/离线编程.png";
 import offlineProgrammingLogoDrawingImg from "@/assets/images/videos/离线编程绘制logo.png";
 import rtosEthercatImg from "@/assets/images/videos/RTOS-EtherCAT电机控制验证.png";
 import robotPolishingDemoImg from "@/assets/images/videos/机器人打磨工艺演示.png";
 import palletizingRobotImg from "@/assets/images/videos/码垛机器人.png";
-import ballCatchingDemoImg from "@/assets/images/videos/抛球抓球演示.png";
 import robotStudioRemoteControlImg from "@/assets/images/videos/上位机RobotStudioIDE远程控制及仿真.png";
 import labTubeLoadingImg from "@/assets/images/videos/生物实验室试管上料.png";
 import outdoorPatrolRobotImg from "@/assets/images/videos/室外移动巡检机器人.png";
@@ -119,15 +115,6 @@ export const videoMap: VideoMapData = {
     tags: ["半导体加工", "自动化", "智能制造"],
     publishDate: "2024-04-01",
   },
-  "dual-robot-collaboration": {
-    slug: "dual-robot-collaboration",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1CvgqznEpw/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.dual-robot-collaboration.title",
-    desc: "videos.dual-robot-collaboration.desc",
-    tags: ["机器人协作", "多机调度", "智能制造"],
-    publishDate: "2024-04-15",
-  },
   "dual-robot-ball-catching": {
     slug: "dual-robot-ball-catching",
     type: "bilibili",
@@ -174,16 +161,6 @@ export const videoMap: VideoMapData = {
     duration: "5:12",
     tags: ["AGV产品", "自动导引", "智能制造"],
     publishDate: "2024-02-20",
-  },
-  "ultrasound-medical-robot": {
-    slug: "ultrasound-medical-robot",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1czgNztEv9/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.ultrasound-medical-robot.title",
-    desc: "videos.ultrasound-medical-robot.desc",
-    duration: "4:38",
-    tags: ["医疗机器人", "B超检查", "医疗自动化"],
-    publishDate: "2024-03-10",
   },
   "ur-robot-llm-motion-capture": {
     slug: "ur-robot-llm-motion-capture",
@@ -257,15 +234,6 @@ export const videoMap: VideoMapData = {
     tags: ["移动机器人", "自动传送", "智能导航", "物流自动化"],
     publishDate: "2024-05-15",
   },
-  "high-speed-precision-robot-arm": {
-    slug: "high-speed-precision-robot-arm",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1t2bdz8Ef4/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.high-speed-precision-robot-arm.title",
-    desc: "videos.high-speed-precision-robot-arm.desc",
-    tags: ["机械臂", "高速高精度", "运动控制", "工业自动化"],
-    publishDate: "2024-05-20",
-  },
   "offline-programming": {
     slug: "offline-programming",
     type: "bilibili",
@@ -309,15 +277,6 @@ export const videoMap: VideoMapData = {
     title: "videos.palletizing-robot.title",
     desc: "videos.palletizing-robot.desc",
     tags: ["码垛机器人", "物流自动化", "智能制造", "工业机器人"],
-    publishDate: "2024-06-15",
-  },
-  "ball-catching-demo": {
-    slug: "ball-catching-demo",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1R6bUznEkM/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.ball-catching-demo.title",
-    desc: "videos.ball-catching-demo.desc",
-    tags: ["机器人控制", "视觉识别", "运动控制", "智能抓取"],
     publishDate: "2024-06-15",
   },
   "robotstudio-remote-control": {
@@ -428,11 +387,6 @@ export const videoCards: VideoCard[] = [
     slug: "semiconductor",
   },
   {
-    title: "双机协作",
-    img: dualRobotCollabImg,
-    slug: "dual-robot-collaboration",
-  },
-  {
     title: "双机协作抓球",
     img: dualRobotBallCatchingImg,
     slug: "dual-robot-ball-catching",
@@ -462,11 +416,6 @@ export const videoCards: VideoCard[] = [
     title: "个性化处方制药",
     img: personalizedPrescriptionImg,
     slug: "personalized-prescription-pharmaceutical",
-  },
-  {
-    title: "B超机器人",
-    img: ultrasoundImg,
-    slug: "ultrasound-medical-robot",
   },
   {
     title: "移动传送机器人",
@@ -500,11 +449,6 @@ export const videoCards: VideoCard[] = [
     slug: "sketching-robot",
   },
   {
-    title: "机械臂高速高精度演示",
-    img: highSpeedPrecisionRobotArmImg,
-    slug: "high-speed-precision-robot-arm",
-  },
-  {
     title: "码垛机器人",
     img: palletizingRobotImg,
     slug: "palletizing-robot",
@@ -520,11 +464,6 @@ export const videoCards: VideoCard[] = [
     slug: "assembly-robot",
   },
   // 基础技术
-  {
-    title: "抛球抓球演示",
-    img: ballCatchingDemoImg,
-    slug: "ball-catching-demo",
-  },
   {
     title: "离线编程",
     img: offlineProgrammingImg,

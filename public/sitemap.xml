@@ -124,13 +124,7 @@
 		<priority>0.5</priority>
 	</url>
 	
-	<!-- B超机器人视频 -->
-	<url>
-		<loc>https://zeroant.com/video/ultrasound-robot</loc>
-		<lastmod>2025-07-20</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
+
 	
 	<!-- 复合机器人传板视频 -->
 	<url>
