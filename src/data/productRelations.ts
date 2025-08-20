@@ -169,7 +169,7 @@ export const productRelations: ProductRelationsData = {
 
   "dual-arm-humanoid": {
     applicationSlugs: ["intelligent-manufacturing"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "dual-robot-ball-catching"],
+    videoSlugs: ["ur-robot-llm-motion-capture", "dual-robot-ball-catching", "vr-remote-franka-dual-arm"],
     customFeatures: [
       "双臂高柔性协作，模拟人类操作",
       "多模态感知与智能决策",

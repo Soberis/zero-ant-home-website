@@ -403,6 +403,17 @@
         "Logistics Transport"
       ]
     },
+    "vr-remote-franka-dual-arm": {
+      "title": "VR Remote Franka Dual-Arm Robot",
+      "desc": "Showcases ZeroAnt Technology's VR-based remote operation system for Franka dual-arm robots, achieving precise remote control through immersive interaction interfaces. Demonstrates innovative applications of human-robot collaboration in complex operational scenarios, featuring intuitive VR control and real-time robot response for advanced teleoperation tasks.",
+      "tags": [
+        "VR Remote Operation",
+        "Franka Robot",
+        "Dual-Arm Collaboration",
+        "Remote Control",
+        "Human-Robot Interaction"
+      ]
+    },
     "robotstudio-remote-control": {
       "title": "Upper Computer RobotStudio IDE Remote Control and Simulation",
       "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",

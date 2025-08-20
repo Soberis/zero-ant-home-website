@@ -26,7 +26,8 @@ import sketchingRobotImg from "@/assets/images/videos/素描机器人.png";
 import gantry2d3dImg from "@/assets/images/videos/二三自由度龙门架.png";
 import assemblyRobotImg from "@/assets/images/videos/装配机器人.png";
 import mobileRobotChassisImg from "@/assets/images/videos/自研移动机器人底盘.png";
-import fixedRailTransferRobot from "@/assets/images/videos/固定滑轨式传送机器人.png";
+import fixedRailTransferRobotImg from "@/assets/images/videos/固定滑轨式传送机器人.png";
+import vrRemoteFrankaDualArmImg from "@/assets/images/videos/vr 遥操作 franka 双臂.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -351,6 +352,15 @@ export const videoMap: VideoMapData = {
     tags: ["固定滑轨", "传送机器人", "工业自动化", "精准定位", "物流传输"],
     publishDate: "2025-01-15",
   },
+  "vr-remote-franka-dual-arm": {
+    slug: "vr-remote-franka-dual-arm",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1q1eMzWE16/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.vr-remote-franka-dual-arm.title",
+    desc: "videos.vr-remote-franka-dual-arm.desc",
+    tags: ["VR遥操作", "Franka机器人", "双臂协作", "远程控制", "人机交互"],
+    publishDate: "2025-01-20",
+  },
 };
 
 /**
@@ -368,6 +378,11 @@ export const videoCards: VideoCard[] = [
     title: "上位机RobotStudioIDE远程控制及仿真",
     img: robotStudioRemoteControlImg,
     slug: "robotstudio-remote-control",
+  },
+  {
+    title: "VR遥操作Franka双臂机器人",
+    img: vrRemoteFrankaDualArmImg,
+    slug: "vr-remote-franka-dual-arm",
   },
 
   // 复合系统
@@ -424,7 +439,7 @@ export const videoCards: VideoCard[] = [
   },
   {
     title: "固定滑轨式传送机器人",
-    img: fixedRailTransferRobot,
+    img: fixedRailTransferRobotImg,
     slug: "fixed-rail-transfer-robot",
   },
   {
