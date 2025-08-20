@@ -145,6 +145,7 @@ const originalUrl = computed(() => props.url);
 // iframe加载成功
 const handleIframeLoad = () => {
   isLoading.value = false;
+  console.log("B站视频iframe加载成功");
 };
 
 // iframe加载错误
@@ -156,6 +157,7 @@ const handleIframeError = () => {
 
 // 尝试直接播放
 const tryDirectPlay = async () => {
+  console.log("尝试直接播放模式");
   useDirectPlay.value = true;
   showFallback.value = false;
   isLoading.value = true;
@@ -216,13 +218,17 @@ onMounted(() => {
   // 移动端优化：更短的超时时间
   const timeout = isMobileDevice.value ? 8000 : 10000;
 
+  console.log(
+    `BilibiliPlayer组件已挂载，设备类型: ${
+      isMobileDevice.value ? "移动端" : "桌面端"
+    }`
+  );
+
   // 设置超时检查
   setTimeout(() => {
     if (isLoading.value && !showFallback.value) {
       console.warn(
-        `${
-          isMobileDevice.value ? "移动端" : "桌面端"
-        } iframe加载超时，显示备用方案`
+        `${isMobileDevice.value ? "移动端" : "桌面端"} iframe加载超时，显示备用方案`
       );
       handleIframeError();
     }
@@ -230,6 +236,7 @@ onMounted(() => {
 
   // 移动端特殊处理：如果检测到是移动端，优先尝试移动端播放方式
   if (isMobileDevice.value && !useDirectPlay.value) {
+    console.log("检测到移动端，使用移动端优化播放策略");
     // 可以在这里添加移动端特定的优化
   }
 });
@@ -243,7 +250,7 @@ onMounted(() => {
   min-height: 360px;
   border-radius: 10px;
   overflow: hidden;
-  background: #2d3748;
+  background: #000;
   aspect-ratio: 16/9;
 }
 
@@ -324,8 +331,8 @@ onMounted(() => {
 
 .fallback-title {
   font-size: 20px;
-  font-weight: 500;
-  color: #2d3748;
+  font-weight: 600;
+  color: #333;
   margin: 0 0 8px 0;
 }
 
@@ -360,36 +367,13 @@ onMounted(() => {
 }
 
 .fallback-btn.primary {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  background: #1a3a8f;
   color: white;
-  position: relative;
-  overflow: hidden;
 }
 
 .fallback-btn.primary:hover {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
-}
-
-.fallback-btn.primary::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
-}
-
-.fallback-btn.primary:hover::before {
-  left: 100%;
+  background: #274fc5;
+  transform: translateY(-1px);
 }
 
 .fallback-btn.secondary {
@@ -426,7 +410,7 @@ onMounted(() => {
 
 .fallback-tips p {
   margin: 0 0 8px 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .fallback-tips ul {

@@ -3,8 +3,10 @@
 // 图片资源导入
 import radar360Img from "@/assets/images/videos/360度雷达扫描.png";
 import agvImg from "@/assets/images/videos/agv产品介绍.png";
+import ultrasoundImg from "@/assets/images/videos/b超机器人.png";
 import compositeRobotImg from "@/assets/images/videos/复合机器人传板.png";
 import waferTransferImg from "@/assets/images/videos/晶圆传送机器人运动控制.png";
+import dualRobotCollabImg from "@/assets/images/videos/双机协作.png";
 import polishingRobotImg from "@/assets/images/videos/打磨机器人.png";
 import compositeRobotAppImg from "@/assets/images/videos/复合机器人应用.png";
 import urRobotLLMImg from "@/assets/images/videos/UR机器人大语言模型动作抓取.png";
@@ -12,11 +14,13 @@ import fourAxisRobotFridgeImg from "@/assets/images/videos/四轴机器人开冰
 import servoMotorStationImg from "@/assets/images/videos/伺服电机台站.png";
 import personalizedPrescriptionImg from "@/assets/images/videos/个性化处方制药.png";
 import mobileTransferRobotImg from "@/assets/images/videos/移动传送机器人.png";
+import highSpeedPrecisionRobotArmImg from "@/assets/images/videos/机械臂高速高精度演示.png";
 import offlineProgrammingImg from "@/assets/images/videos/离线编程.png";
 import offlineProgrammingLogoDrawingImg from "@/assets/images/videos/离线编程绘制logo.png";
 import rtosEthercatImg from "@/assets/images/videos/RTOS-EtherCAT电机控制验证.png";
 import robotPolishingDemoImg from "@/assets/images/videos/机器人打磨工艺演示.png";
 import palletizingRobotImg from "@/assets/images/videos/码垛机器人.png";
+import ballCatchingDemoImg from "@/assets/images/videos/抛球抓球演示.png";
 import robotStudioRemoteControlImg from "@/assets/images/videos/上位机RobotStudioIDE远程控制及仿真.png";
 import labTubeLoadingImg from "@/assets/images/videos/生物实验室试管上料.png";
 import outdoorPatrolRobotImg from "@/assets/images/videos/室外移动巡检机器人.png";
@@ -24,10 +28,6 @@ import dualRobotBallCatchingImg from "@/assets/images/videos/双机协作抓球.
 import riceMolecularExperimentImg from "@/assets/images/videos/水稻分子重复实验.png";
 import sketchingRobotImg from "@/assets/images/videos/素描机器人.png";
 import gantry2d3dImg from "@/assets/images/videos/二三自由度龙门架.png";
-import assemblyRobotImg from "@/assets/images/videos/装配机器人.png";
-import mobileRobotChassisImg from "@/assets/images/videos/自研移动机器人底盘.png";
-import fixedRailTransferRobotImg from "@/assets/images/videos/固定滑轨式传送机器人.png";
-import vrRemoteFrankaDualArmImg from "@/assets/images/videos/vr 遥操作 franka 双臂.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -107,7 +107,7 @@ export const videoMap: VideoMapData = {
     tags: ["医疗自动化", "智能调度", "医院物流"],
     publishDate: "2024-04-01",
   },
-  semiconductor: {
+  "semiconductor": {
     slug: "semiconductor",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1NKuXzaEff/${BILIBILI_BASE_PARAMS}`,
@@ -115,6 +115,15 @@ export const videoMap: VideoMapData = {
     desc: "videos.semiconductor.desc",
     tags: ["半导体加工", "自动化", "智能制造"],
     publishDate: "2024-04-01",
+  },
+  "dual-robot-collaboration": {
+    slug: "dual-robot-collaboration",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1CvgqznEpw/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.dual-robot-collaboration.title",
+    desc: "videos.dual-robot-collaboration.desc",
+    tags: ["机器人协作", "多机调度", "智能制造"],
+    publishDate: "2024-04-15",
   },
   "dual-robot-ball-catching": {
     slug: "dual-robot-ball-catching",
@@ -162,6 +171,16 @@ export const videoMap: VideoMapData = {
     duration: "5:12",
     tags: ["AGV产品", "自动导引", "智能制造"],
     publishDate: "2024-02-20",
+  },
+  "ultrasound-medical-robot": {
+    slug: "ultrasound-medical-robot",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1czgNztEv9/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.ultrasound-medical-robot.title",
+    desc: "videos.ultrasound-medical-robot.desc",
+    duration: "4:38",
+    tags: ["医疗机器人", "B超检查", "医疗自动化"],
+    publishDate: "2024-03-10",
   },
   "ur-robot-llm-motion-capture": {
     slug: "ur-robot-llm-motion-capture",
@@ -235,6 +254,15 @@ export const videoMap: VideoMapData = {
     tags: ["移动机器人", "自动传送", "智能导航", "物流自动化"],
     publishDate: "2024-05-15",
   },
+  "high-speed-precision-robot-arm": {
+    slug: "high-speed-precision-robot-arm",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1t2bdz8Ef4/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.high-speed-precision-robot-arm.title",
+    desc: "videos.high-speed-precision-robot-arm.desc",
+    tags: ["机械臂", "高速高精度", "运动控制", "工业自动化"],
+    publishDate: "2024-05-20",
+  },
   "offline-programming": {
     slug: "offline-programming",
     type: "bilibili",
@@ -280,12 +308,21 @@ export const videoMap: VideoMapData = {
     tags: ["码垛机器人", "物流自动化", "智能制造", "工业机器人"],
     publishDate: "2024-06-15",
   },
+  "ball-catching-demo": {
+    slug: "ball-catching-demo",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1R6bUznEkM/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.ball-catching-demo.title",
+    desc: "videos.ball-catching-demo.desc",
+    tags: ["机器人控制", "视觉识别", "运动控制", "智能抓取"],
+    publishDate: "2024-06-15",
+  },
   "robotstudio-remote-control": {
     slug: "robotstudio-remote-control",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1J68LzKEHd/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.robotstudio-remote-control.title",
-    desc: "videos.robotstudio-remote-control.desc",
+    title: "上位机RobotStudioIDE远程控制及仿真",
+    desc: "演示零蚁科技基于上位机的RobotStudio IDE远程控制技术，实现工业机器人的无缝集成与远程操作，展示实时机器人控制与仿真能力。",
     tags: ["RobotStudio IDE", "远程控制", "仿真", "工业机器人", "上位机集成"],
     publishDate: "2024-12-20",
   },
@@ -293,8 +330,8 @@ export const videoMap: VideoMapData = {
     slug: "lab-tube-loading",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1n68LzKEwe/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.lab-tube-loading.title",
-    desc: "videos.lab-tube-loading.desc",
+    title: "生物实验室试管上料",
+    desc: "展示零蚁科技在生物实验室自动化领域的创新应用，通过高精度机器人实现试管自动上料，提高实验室工作效率和准确性。",
     tags: ["生物实验室", "试管上料", "自动化", "医疗机器人", "实验室自动化"],
     publishDate: "2024-12-20",
   },
@@ -302,64 +339,10 @@ export const videoMap: VideoMapData = {
     slug: "outdoor-patrol-robot",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1n68LzKE5P/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.outdoor-patrol-robot.title",
-    desc: "videos.outdoor-patrol-robot.desc",
+    title: "室外移动巡检机器人",
+    desc: "演示零蚁科技室外移动巡检机器人的智能导航与巡检能力，通过激光SLAM和360度环境感知技术，实现复杂环境下的自主巡检任务。",
     tags: ["移动巡检", "室外机器人", "激光SLAM", "自主导航", "环境感知"],
     publishDate: "2024-12-20",
-  },
-  "plate-welding-demo": {
-    slug: "plate-welding-demo",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1MJ8fzzEyb/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.plate-welding-demo.title",
-    desc: "videos.plate-welding-demo.desc",
-    tags: ["焊接工艺", "工业自动化", "智能制造", "机器人控制", "中厚板焊接"],
-    publishDate: "2024-12-25",
-  },
-  "underground-garage-cleaning": {
-    slug: "underground-garage-cleaning",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV13L8fzGEGQ/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.underground-garage-cleaning.title",
-    desc: "videos.underground-garage-cleaning.desc",
-    tags: ["无人清扫", "地下车库", "自主导航", "环境感知", "智能清洁"],
-    publishDate: "2024-12-25",
-  },
-  "assembly-robot": {
-    slug: "assembly-robot",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1Th86zJEe8/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.assembly-robot.title",
-    desc: "videos.assembly-robot.desc",
-    tags: ["装配机器人", "工业自动化", "智能制造", "精密装配"],
-    publishDate: "2024-12-25",
-  },
-  "mobile-robot-chassis": {
-    slug: "mobile-robot-chassis",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1Th86zJEjW/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.mobile-robot-chassis.title",
-    desc: "videos.mobile-robot-chassis.desc",
-    tags: ["移动机器人", "机器人底盘", "自主导航", "智能移动"],
-    publishDate: "2024-12-25",
-  },
-  "fixed-rail-transfer-robot": {
-    slug: "fixed-rail-transfer-robot",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1JLtFznE67/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.fixed-rail-transfer-robot.title",
-    desc: "videos.fixed-rail-transfer-robot.desc",
-    tags: ["固定滑轨", "传送机器人", "工业自动化", "精准定位", "物流传输"],
-    publishDate: "2025-01-15",
-  },
-  "vr-remote-franka-dual-arm": {
-    slug: "vr-remote-franka-dual-arm",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1q1eMzWE16/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.vr-remote-franka-dual-arm.title",
-    desc: "videos.vr-remote-franka-dual-arm.desc",
-    tags: ["VR遥操作", "Franka机器人", "双臂协作", "远程控制", "人机交互"],
-    publishDate: "2025-01-20",
   },
 };
 
@@ -370,27 +353,12 @@ export const videoMap: VideoMapData = {
 export const videoCards: VideoCard[] = [
   // AI智能
   {
-    title: "中厚板焊接工艺演示",
-    img: robotPolishingDemoImg,
-    slug: "plate-welding-demo",
-  },
-  {
     title: "上位机RobotStudioIDE远程控制及仿真",
     img: robotStudioRemoteControlImg,
     slug: "robotstudio-remote-control",
   },
-  {
-    title: "VR遥操作Franka双臂机器人",
-    img: vrRemoteFrankaDualArmImg,
-    slug: "vr-remote-franka-dual-arm",
-  },
 
   // 复合系统
-  {
-    title: "无人清扫车地下车库",
-    img: outdoorPatrolRobotImg,
-    slug: "underground-garage-cleaning",
-  },
   {
     title: "医疗自动化",
     img: compositeRobotImg,
@@ -400,6 +368,11 @@ export const videoCards: VideoCard[] = [
     title: "半导体加工",
     img: waferTransferImg,
     slug: "semiconductor",
+  },
+  {
+    title: "双机协作",
+    img: dualRobotCollabImg,
+    slug: "dual-robot-collaboration",
   },
   {
     title: "双机协作抓球",
@@ -433,14 +406,14 @@ export const videoCards: VideoCard[] = [
     slug: "personalized-prescription-pharmaceutical",
   },
   {
+    title: "B超机器人",
+    img: ultrasoundImg,
+    slug: "ultrasound-medical-robot",
+  },
+  {
     title: "移动传送机器人",
     img: mobileTransferRobotImg,
     slug: "mobile-transfer-robot",
-  },
-  {
-    title: "固定滑轨式传送机器人",
-    img: fixedRailTransferRobotImg,
-    slug: "fixed-rail-transfer-robot",
   },
   {
     title: "室外移动巡检机器人",
@@ -464,6 +437,11 @@ export const videoCards: VideoCard[] = [
     slug: "sketching-robot",
   },
   {
+    title: "机械臂高速高精度演示",
+    img: highSpeedPrecisionRobotArmImg,
+    slug: "high-speed-precision-robot-arm",
+  },
+  {
     title: "码垛机器人",
     img: palletizingRobotImg,
     slug: "palletizing-robot",
@@ -473,12 +451,12 @@ export const videoCards: VideoCard[] = [
     img: gantry2d3dImg,
     slug: "gantry-2d3d",
   },
-  {
-    title: "装配机器人",
-    img: assemblyRobotImg,
-    slug: "assembly-robot",
-  },
   // 基础技术
+  {
+    title: "抛球抓球演示",
+    img: ballCatchingDemoImg,
+    slug: "ball-catching-demo",
+  },
   {
     title: "离线编程",
     img: offlineProgrammingImg,
@@ -508,11 +486,6 @@ export const videoCards: VideoCard[] = [
     title: "伺服电机台站",
     img: servoMotorStationImg,
     slug: "servo-motor-station",
-  },
-  {
-    title: "自研移动机器人底盘",
-    img: mobileRobotChassisImg,
-    slug: "mobile-robot-chassis",
   },
 ].filter((card) => {
   const video = getVideoById(card.slug);

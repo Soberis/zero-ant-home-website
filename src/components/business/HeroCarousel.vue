@@ -44,17 +44,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useI18n } from "vue-i18n";
-// import { useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import multiOsImg from "@/assets/images/products/多OS混合部署嵌入式虚拟机.png";
 import airosImg from "@/assets/images/products/AiROS机器人操作系统.png";
 import scara4axisImg from "@/assets/images/products/四轴机器人.png";
 import dualArmImg from "@/assets/images/products/双臂人形机器人.png";
 
-// 获取国际化函数
+// 获取国际化函数和路由
 const { t } = useI18n();
-// const router = useRouter();
+const router = useRouter();
 
 // 轮播图数据类型定义
 interface SlideItem {
@@ -69,7 +69,7 @@ interface SlideItem {
   routePath: string;
 }
 
-// 使用computed缓存轮播图数据，避免重复计算
+// 轮播图数据（使用翻译函数）
 const slides = computed<SlideItem[]>(() => [
   {
     img: multiOsImg,
@@ -99,9 +99,9 @@ const slides = computed<SlideItem[]>(() => [
     desc: t("products.scara4axis.desc"),
     bgSize: "contain",
     bgPosition: "center center",
-    customWidth: "80%",
+    customWidth: "",
     customHeight: "auto",
-    showArc: false,
+    showArc: true,
     routePath: "/robot-products/scara-4axis",
   },
   {
@@ -110,94 +110,67 @@ const slides = computed<SlideItem[]>(() => [
     desc: t("products.dualArmHumanoid.desc"),
     bgSize: "contain",
     bgPosition: "center center",
-    customWidth: "70%",
+    customWidth: "",
     customHeight: "auto",
-    showArc: false,
+    showArc: true,
     routePath: "/robot-products/dual-arm-humanoid",
   },
 ]);
+const current = ref<number>(0);
+// 自动轮播定时器
+let timer: NodeJS.Timeout | null = null;
 
-// 当前轮播索引
-const current = ref(0);
-// 自动播放定时器
-let autoPlayTimer: NodeJS.Timeout | null = null;
-// 是否暂停自动播放
-const isPaused = ref(false);
-
-// 切换到指定轮播
-const goTo = (index: number) => {
-  if (index >= 0 && index < slides.value.length) {
-    current.value = index;
-    resetAutoPlay();
-  }
-};
-
-// 下一张轮播
-const next = () => {
+/**
+ * 切换到下一张
+ */
+function next(): void {
   current.value = (current.value + 1) % slides.value.length;
-  resetAutoPlay();
-};
-
-// 重置自动播放
-const resetAutoPlay = () => {
-  if (autoPlayTimer) {
-    clearTimeout(autoPlayTimer);
-  }
-  if (!isPaused.value) {
-    autoPlayTimer = setTimeout(next, 5000);
-  }
-};
-
-// 暂停自动播放
-const pauseAutoPlay = () => {
-  isPaused.value = true;
-  if (autoPlayTimer) {
-    clearTimeout(autoPlayTimer);
-    autoPlayTimer = null;
-  }
-};
-
-// 恢复自动播放
-const resumeAutoPlay = () => {
-  isPaused.value = false;
-  resetAutoPlay();
-};
-
-// 监听轮播数据变化，重新开始自动播放
-watch(slides, () => {
-  nextTick(() => {
-    resetAutoPlay();
-  });
-});
-
-onMounted(() => {
-  // 启动自动播放
-  resetAutoPlay();
-  
-  // 监听页面可见性变化
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      pauseAutoPlay();
-    } else {
-      resumeAutoPlay();
-    }
-  });
-});
-
-onUnmounted(() => {
-  // 清理定时器
-  if (autoPlayTimer) {
-    clearTimeout(autoPlayTimer);
-  }
-});
+}
+/**
+ * 跳转到指定索引
+ */
+function goTo(idx: number): void {
+  current.value = idx;
+  resetTimer();
+}
+/**
+ * 重置自动轮播定时器
+ */
+function resetTimer(): void {
+  if (timer) clearInterval(timer);
+  timer = setInterval(next, 4000);
+}
 
 /**
  * 跳转到产品详情页
  */
-// 跳转到产品详情页
-// function navigateToProduct(slide: SlideItem): void {
-//   router.push(slide.routePath);
-// }
+function navigateToProduct(slide: SlideItem): void {
+  router.push(slide.routePath);
+}
+
+onMounted(() => {
+  resetTimer();
+
+  // 预加载下一张图片
+  const preloadNextImage = () => {
+    const nextIndex = (current.value + 1) % slides.value.length;
+    const img = new Image();
+    img.src = slides.value[nextIndex].img;
+  };
+
+  // 初始预加载
+  preloadNextImage();
+
+  // 监听轮播变化预加载下一张
+  const stopWatch = watch(current, () => {
+    preloadNextImage();
+  });
+
+  onUnmounted(() => {
+    stopWatch();
+    if (timer) clearInterval(timer);
+  });
+});
 </script>
 
 <style scoped>
@@ -242,17 +215,18 @@ onUnmounted(() => {
   left: 80px;
   bottom: 120px;
   z-index: 2;
-  color: #2d3748;
+  color: #222;
   text-align: left;
   max-width: 600px;
 }
 .slide-title {
-  font-size: 2.8rem;
+  font-size: 3.2rem;
   font-weight: 700;
   margin-bottom: 18px;
   letter-spacing: 1px;
 }
 .slide-desc {
+  font-size: 1.5rem;
   font-weight: 400;
   margin-bottom: 0;
 }
@@ -288,9 +262,11 @@ onUnmounted(() => {
     max-width: 90vw;
   }
   .slide-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
-
+  .slide-desc {
+    font-size: 1rem;
+  }
   .carousel-controls {
     right: 20px;
     bottom: 48px;
@@ -302,11 +278,6 @@ onUnmounted(() => {
   }
   .carousel-controls button.active {
     width: 32px;
-  }
-}
-@media (max-width: 600px) {
-  .slide-title {
-    font-size: 1.8rem;
   }
 }
 </style>

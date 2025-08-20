@@ -87,61 +87,33 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
+    // 如果浏览器返回/前进且有保存的位置，恢复该位置
     if (savedPosition) {
       return savedPosition;
     }
-
+    
     // 处理hash导航
     if (to.hash) {
-      // 优化hash导航：防抖、重试、错误处理
-      return new Promise((resolve) => {
-        const maxAttempts = 5;
-        let attempts = 0;
-
-        const tryScroll = () => {
-          const element = document.querySelector(to.hash) as HTMLElement;
-          if (element) {
-            // 移动端导航栏高度更小
-            const isMobile = window.innerWidth <= 768;
-            const offset = isMobile ? 60 : 120;
-            const top = Math.max(0, element.offsetTop - offset);
-            resolve({
-              top,
-              behavior: 'smooth',
-            });
-          } else if (attempts < maxAttempts) {
-            attempts += 1;
-            setTimeout(tryScroll, 50 * attempts); // 指数退避
-          } else {
-            resolve({ top: 0, behavior: 'smooth' });
-          }
-        };
-
-        // 立即尝试滚动
-        tryScroll();
-      });
+      return {
+        el: to.hash,
+        top: 120,
+        behavior: "smooth",
+      };
     }
-
-    // 保存当前滚动位置到历史状态（防抖）
+    
+    // 保存当前滚动位置到历史状态
     if (from && from.name) {
-      // 使用any类型绕过TypeScript检查
-      const win = window as any;
-      if (win.__scrollSaveTimeout) {
-        clearTimeout(win.__scrollSaveTimeout);
-      }
-      win.__scrollSaveTimeout = setTimeout(() => {
-        window.history.replaceState(
-          {
-            ...window.history.state,
-            scrollTop: window.scrollY || document.documentElement.scrollTop,
-          },
-          ''
-        );
-      }, 100);
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          scrollTop: window.scrollY || document.documentElement.scrollTop
+        },
+        ''
+      );
     }
-
+    
     // 默认滚动到顶部
-    return { top: 0, behavior: 'smooth' };
+    return { top: 0 };
   },
 });
 

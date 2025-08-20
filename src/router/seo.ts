@@ -57,7 +57,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
 
   if (seoConfig) {
     // 基础 SEO 配置
-    const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+    const baseUrl = "https://zeroant.com";
     const currentUrl = `${baseUrl}${to.path}`;
 
     setSEO({
@@ -68,17 +68,11 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       ogDescription: seoConfig.description,
       ogUrl: currentUrl,
       ogImage: `${baseUrl}/logo.png`,
-      ogImageWidth: 1200,
-      ogImageHeight: 630,
       twitterTitle: seoConfig.title,
       twitterDescription: seoConfig.description,
       twitterImage: `${baseUrl}/logo.png`,
       canonical: currentUrl,
       siteName: safeTranslate("seo.siteName"),
-      localeAlternate: [
-        { hrefLang: 'zh', href: currentUrl },
-        { hrefLang: 'en', href: currentUrl }
-      ],
     });
 
     // 设置结构化数据
@@ -198,7 +192,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupSolutionsSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const baseUrl = "https://zeroant.com";
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置解决方案页面 SEO
@@ -210,17 +204,11 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     ogDescription: safeTranslate("seo.solutions.description"),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.png`,
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.solutions.title"),
     twitterDescription: safeTranslate("seo.solutions.description"),
     twitterImage: `${baseUrl}/logo.png`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 解决方案页面结构化数据
@@ -289,7 +277,7 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupAboutSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const baseUrl = "https://zeroant.com";
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置关于我们页面 SEO
@@ -301,17 +289,11 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
     ogDescription: safeTranslate("seo.about.description"),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.png`,
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.about.title"),
     twitterDescription: safeTranslate("seo.about.description"),
     twitterImage: `${baseUrl}/logo.png`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 关于我们页面结构化数据
@@ -345,7 +327,7 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupCareersSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const baseUrl = "https://zeroant.com";
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置招聘页面 SEO
@@ -357,17 +339,11 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     ogDescription: safeTranslate("seo.careers.description"),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.png`,
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.careers.title"),
     twitterDescription: safeTranslate("seo.careers.description"),
     twitterImage: `${baseUrl}/logo.png`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 招聘页面结构化数据 - 使用CollectionPage包含多个JobPosting
@@ -499,7 +475,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupSupportSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const baseUrl = "https://zeroant.com";
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置支持页面 SEO
@@ -511,17 +487,11 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
     ogDescription: safeTranslate("seo.support.description"),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.png`,
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.support.title"),
     twitterDescription: safeTranslate("seo.support.description"),
     twitterImage: `${baseUrl}/logo.png`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 支持页面结构化数据
@@ -595,7 +565,7 @@ export function setupProductSEO(
   productDescription: string,
   to: RouteLocationNormalized
 ) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const baseUrl = "https://zeroant.com";
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置产品页面 SEO
@@ -606,17 +576,11 @@ export function setupProductSEO(
     ogDescription: productDescription,
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
     twitterTitle: productName,
     twitterDescription: productDescription,
     twitterImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 产品结构化数据

@@ -285,7 +285,7 @@ onUnmounted(() => {
   color: #fff;
   font-size: 16px;
   margin-bottom: 12px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .footer-subtitle {
   color: #fff;
@@ -319,7 +319,6 @@ onUnmounted(() => {
 .footer-col ul li a.active,
 .footer-col ul li a:hover {
   color: #fff;
-  text-decoration: underline;
 }
 .contact-col .contact-info {
   font-size: 13px;
@@ -338,7 +337,7 @@ onUnmounted(() => {
 .qrcode-img {
   width: 64px;
   height: 64px;
-  background: #2d3748748;
+  background: #444;
   border-radius: 8px;
   margin-bottom: 4px;
 }
@@ -362,7 +361,6 @@ onUnmounted(() => {
 
 .icp-link:hover {
   color: #bbb !important;
-  text-decoration: underline;
 }
 .qrcode-col {
   margin-left: 550px;
@@ -453,6 +451,10 @@ onUnmounted(() => {
 
   .qrcode-label {
     font-size: 10px;
+  }
+
+  .contact-info {
+    font-size: 12px;
   }
 
   .footer-col h4 {
