@@ -1,12 +1,38 @@
-// 全局基础样式
+// 引入字体排版规范
+@import "./typography.less";
+
+/* CSS变量定义 - 统一管理颜色 */
+:root {
+  --color-primary: #1a3a8f;
+  --color-text: #2d3748;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-background: #fafbfc;
+}
+
+/* 全局基础样式 - 2025年8月优化版 */
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: "Microsoft YaHei", "Segoe UI", sans-serif !important;
+  /* 优化字体栈，去掉!important，让浏览器自己决定 */
+  font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text); /* 使用CSS变量统一颜色 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* 添加微妙的背景纹理 */
+  background-color: var(--color-background);
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(26, 58, 143, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(45, 55, 72, 0.01) 0%, transparent 50%);
 }
 
 // 全局防止横向滚动
@@ -25,37 +51,78 @@ body {
   display: none !important;
 }
 
-// 滚动条样式优化
+/* 滚动条优化 - 更自然的样式 */
 * {
-  // Firefox滚动条样式
+  /* Firefox兼容性处理 */
   scrollbar-width: thin;
   scrollbar-color: #c1c1c1 #f1f1f1;
+  
+  /* Chrome 121以前版本回退 */
+  @supports not (scrollbar-width: thin) {
+    scrollbar-width: auto;
+  }
 }
 
-// WebKit浏览器滚动条样式
+/* WebKit浏览器滚动条 - 简化样式 */
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px; /* 稍微细一点 */
+  height: 6px;
 }
 
 *::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+  background: transparent; /* 透明轨道更干净 */
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
+  background: #d1d5db;
+  border-radius: 3px;
+  /* 老版本Safari兼容性 */
+  background-clip: padding-box;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #9ca3af;
+}
+
+/* IE11滚动条hack */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  * {
+    scrollbar-face-color: #d1d5db;
+    scrollbar-track-color: #f3f4f6;
+  }
+}
+
+// 全局链接样式
+a {
+  text-decoration: none;
+  color: var(--color-primary, #1a3a8f);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--color-primary, #1a3a8f);
+}
+
+a:active {
+  text-decoration: none;
+  color: var(--color-primary, #1a3a8f);
+}
+
+a:visited {
+  color: var(--color-primary, #1a3a8f);
 }
 
 // 隐藏滚动条（可选）
 .hide-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  
+  /* Chrome 121以前版本回退 */
+  @supports not (scrollbar-width: none) {
+    -webkit-scrollbar: none;
+  }
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -103,15 +170,323 @@ pre {
   flex-direction: column;
 }
 
-// 确保页脚始终在底部
+/* 页脚始终在底部 - 简化实现 */
 .page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
 
-  .main-content {
-    flex: 1;
+.page .main-content {
+  flex: 1 0 auto; /* 简化的flex写法 */
+}
+
+/* 老版本浏览器后备方案 */
+@supports not (display: flex) {
+  .page {
+    display: table;
+    width: 100%;
+    height: 100vh;
   }
+  
+  .page .main-content {
+    display: table-row;
+    height: 100%;
+  }
+}
+
+/* 文本颜色工具类 - 减少颜色硬编码 */
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+/* 字体层次优化 - 更自然的排版 */
+.text-display-large {
+  font-size: clamp(2rem, 5vw, 2.5rem); /* 响应式字体 */
+  font-weight: 500; /* 稍微轻一点，更优雅 */
+  line-height: 1.15;
+  letter-spacing: -0.015em; /* 减少字距压缩 */
+  /* 添加微妙的文本阴影增加层次感 */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.text-display-medium {
+  font-size: clamp(1.75rem, 4vw, 2.125rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.text-display-small {
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  font-weight: 500; /* 更轻的权重 */
+  line-height: 1.25;
+}
+
+/* 自然感动效 - 打破AI完美主义 */
+/* 微妙入场动画 - 每个元素有轻微差异 */
+@keyframes gentle-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gentle-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 随机延迟的入场动画 */
+.fade-in-item {
+  animation: gentle-fade-in 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-in-item:nth-child(1) { animation-delay: 0.1s; }
+.fade-in-item:nth-child(2) { animation-delay: 0.2s; }
+.fade-in-item:nth-child(3) { animation-delay: 0.35s; }
+.fade-in-item:nth-child(4) { animation-delay: 0.15s; }
+.fade-in-item:nth-child(5) { animation-delay: 0.3s; }
+
+/* 悬停动效 - 更自然的曲线 */
+.natural-hover {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 自定义贝塞尔曲线 */
+}
+
+.natural-hover:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* 滚动视差效果 - 微妙而不夸张 */
+.parallax-element {
+  transition: transform 0.1s ease-out;
+}
+
+/* 文本打字机动效 - 模拟人工输入 */
+@keyframes typewriter {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+.typewriter-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 2s steps(20, end);
+}
+
+/* 微妙的脉动效果 - 呼吸感 */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.breathing-effect {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+/* 按钮点击动效 - 有弹性的反馈 */
+@keyframes button-press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.button-press:active {
+  animation: button-press 0.15s ease-out;
+}
+
+/* 加载动画 - 不完美但自然 */
+@keyframes organic-loader {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.05); }
+  50% { transform: rotate(180deg) scale(0.95); }
+  75% { transform: rotate(270deg) scale(1.02); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.organic-spinner {
+  animation: organic-loader 2s ease-in-out infinite;
+}
+
+/* 卡片翻转动效 - 自然的3D效果 */
+.card-flip {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-flip:hover {
+  transform: rotateY(5deg) rotateX(2deg);
+}
+
+/* 背景微动效 - 模拟真实环境 */
+@keyframes background-drift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.drift-background {
+  background-size: 200% 200%;
+  animation: background-drift 20s ease-in-out infinite;
+}
+
+/* 文字抖动动效 - 微小的不完美 */
+@keyframes text-tremble {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-0.5px); }
+  75% { transform: translateX(0.5px); }
+}
+
+.text-tremble:hover {
+  animation: text-tremble 0.3s ease-in-out;
+}
+
+/* 响应式动效 - 移动设备上减少动效 */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-item,
+  .natural-hover,
+  .parallax-element,
+  .breathing-effect,
+  .organic-spinner,
+  .drift-background {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .fade-in-item {
+    animation-duration: 0.5s;
+  }
+  
+  .natural-hover:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// 标题层级
+.text-headline-large {
+  font-size: 2rem; // 32px
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.text-headline-medium {
+  font-size: 1.75rem; // 28px
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.text-headline-small {
+  font-size: 1.5rem; // 24px
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+// 标题
+.text-title-large {
+  font-size: 1.375rem; // 22px
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.text-title-medium {
+  font-size: 1.125rem; // 18px
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.text-title-small {
+  font-size: 1rem; // 16px
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+// 正文文本
+.text-body-large {
+  font-size: 1.125rem; // 18px
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-body-medium {
+  font-size: 1rem; // 16px
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-body-small {
+  font-size: 0.875rem; // 14px
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// 标签文本
+.text-label-large {
+  font-size: 0.875rem; // 14px
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.text-label-medium {
+  font-size: 0.75rem; // 12px
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.text-label-small {
+  font-size: 0.6875rem; // 11px
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+// 响应式字体大小
+@media (max-width: 768px) {
+  .text-display-large { font-size: 2rem; } // 32px
+  .text-display-medium { font-size: 1.75rem; } // 28px
+  .text-display-small { font-size: 1.5rem; } // 24px
+  .text-headline-large { font-size: 1.75rem; } // 28px
+  .text-headline-medium { font-size: 1.5rem; } // 24px
+  .text-headline-small { font-size: 1.375rem; } // 22px
+  .text-title-large { font-size: 1.25rem; } // 20px
+  .text-title-medium { font-size: 1.125rem; } // 18px
+  .text-title-small { font-size: 1rem; } // 16px
+}
+
+@media (max-width: 480px) {
+  .text-display-large { font-size: 1.75rem; } // 28px
+  .text-display-medium { font-size: 1.5rem; } // 24px
+  .text-display-small { font-size: 1.375rem; } // 22px
+  .text-headline-large { font-size: 1.5rem; } // 24px
+  .text-headline-medium { font-size: 1.375rem; } // 22px
+  .text-headline-small { font-size: 1.25rem; } // 20px
+  .text-title-large { font-size: 1.125rem; } // 18px
+  .text-title-medium { font-size: 1rem; } // 16px
+  .text-title-small { font-size: 0.9375rem; } // 15px
 }
 
 // 响应式布局
@@ -180,6 +555,63 @@ embed,
 object {
   max-width: 100%;
   height: auto;
+}
+
+// HTML元素默认字体大小规范
+h1 {
+  font-size: 2rem; // 32px
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0 0 1.5rem 0;
+}
+
+h2 {
+  font-size: 1.75rem; // 28px
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0 0 1.25rem 0;
+}
+
+h3 {
+  font-size: 1.5rem; // 24px
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 1rem 0;
+}
+
+h4 {
+  font-size: 1.375rem; // 22px
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 0.875rem 0;
+}
+
+h5 {
+  font-size: 1.125rem; // 18px
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0 0 0.75rem 0;
+}
+
+h6 {
+  font-size: 1rem; // 16px
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 0 0.625rem 0;
+}
+
+p {
+  font-size: 1rem; // 16px
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+// 小字体文本
+small {
+  font-size: 0.875rem; // 14px
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 // 防止长文本导致横向滚动
@@ -302,26 +734,7 @@ pre {
     padding: 12px 16px;
   }
 
-  // 优化字体大小
-  body {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  h1 {
-    font-size: 28px;
-    line-height: 1.3;
-  }
-
-  h2 {
-    font-size: 24px;
-    line-height: 1.4;
-  }
-
-  h3 {
-    font-size: 20px;
-    line-height: 1.4;
-  }
+  // 移动端字体大小优化已在字体规范系统中定义
 
   // 移动端导航优化
   .nav-container {
@@ -364,15 +777,42 @@ pre {
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 1.75rem; // 28px
+    margin-bottom: 1.25rem;
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 1.5rem; // 24px
+    margin-bottom: 1rem;
   }
 
   h3 {
-    font-size: 18px;
+    font-size: 1.375rem; // 22px
+    margin-bottom: 0.875rem;
+  }
+
+  h4 {
+    font-size: 1.25rem; // 20px
+    margin-bottom: 0.75rem;
+  }
+
+  h5 {
+    font-size: 1.125rem; // 18px
+    margin-bottom: 0.625rem;
+  }
+
+  h6 {
+    font-size: 1rem; // 16px
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.9375rem; // 15px
+    margin-bottom: 0.875rem;
+  }
+
+  small {
+    font-size: 0.8125rem; // 13px
   }
 
   .container {
@@ -402,9 +842,10 @@ pre {
     scroll-behavior: auto !important;
   }
 
-  // 优化滚动性能
+  // 优化滚动性能 - 现代浏览器默认开启硬件加速
   .scroll-container {
-    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   // 自定义滚动条样式（兼容WebKit浏览器）
@@ -432,18 +873,18 @@ pre {
     will-change: auto;
     transform: none;
     filter: none;
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 
 // 高DPI屏幕优化
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .high-dpi-image {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast; /* Edge 79+ */
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: crisp-edges; /* Standard */
+    image-rendering: pixelated; /* Fallback */
   }
 }
 

@@ -12,17 +12,19 @@
     "zeroant"
   ],
   "engines": {
-    "node": ">=20.17.0",
+    "node": ">=20.16.0",
     "yarn": ">=1.22.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:analyze": "vite build --mode analyze",
+    "build:analyze": "ANALYZE=true vite build",
+    "build:prod": "NODE_ENV=production vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
     "validate": "yarn type-check && yarn build && echo 'All checks passed successfully!'",
-    "audit": "yarn audit --level moderate"
+    "audit": "yarn audit --level moderate",
+    "perf": "yarn build:analyze && yarn preview"
   },
   "dependencies": {
     "@intlify/core-base": "^11.1.10",
@@ -51,6 +53,8 @@
   "resolutions": {
     "esbuild": ">=0.25.0",
     "semver": ">=5.7.2",
-    "brace-expansion": ">=2.0.2"
+    "brace-expansion": ">=2.0.2",
+    "minimatch": ">=9.0.0",
+    "vue-tsc": "^2.0.29"
   }
 }

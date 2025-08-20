@@ -1,34 +1,28 @@
 <template>
-
   <section class="global-partners">
-
-    <h2 class="section-title">{{ $t('home.partners.title') }}</h2>
+    <h2 class="section-title">{{ $t("home.partners.title") }}</h2>
 
     <div class="section-underline"></div>
 
     <div class="partners-list">
-
       <div
         v-for="(partner, idx) in partnersTyped"
         :key="partner.alt + idx"
         class="partner-logo"
       >
-         <img
+        <img
           :src="partner.src"
           :alt="partner.alt"
           :class="partner.class"
           loading="lazy"
         />
       </div>
-
     </div>
-
   </section>
-
 </template>
 
 <script setup lang="ts">
-import { partners, type Partner } from '@/data/partners';
+import { partners, type Partner } from "@/data/partners";
 const partnersTyped: Partner[] = partners;
 </script>
 
@@ -40,10 +34,10 @@ const partnersTyped: Partner[] = partners;
 }
 .section-title {
   text-align: center;
-  font-size: 2.6rem;
-  font-weight: 800;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 12px;
-  color: #222;
+  color: #2d3748;
   letter-spacing: 2px;
 }
 .section-underline {
@@ -70,9 +64,7 @@ const partnersTyped: Partner[] = partners;
   align-items: center;
   justify-content: center;
   border: 1px solid #e5e6eb;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 8px 0 rgba(30, 42, 80, 0.06);
   overflow: hidden; /* 防止图片溢出 */
 }
@@ -128,7 +120,7 @@ const partnersTyped: Partner[] = partners;
     height: 60px;
   }
   .section-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   .section-underline {
     height: 2px;
@@ -139,8 +131,7 @@ const partnersTyped: Partner[] = partners;
 
 @media (max-width: 600px) {
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 }
 </style>
-

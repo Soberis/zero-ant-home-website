@@ -1,226 +1,174 @@
 <!-- 关于我们页面，包含公司介绍、发展历程、荣誉、文化、招聘、联系方式等内容，支持国际化 -->
 
 <template>
-
   <div class="about-page">
-     <!-- 口号大屏 -->
+    <!-- 口号大屏 -->
     <section class="about-hero">
-
       <div class="hero-content">
+        <h1>{{ $t("slogan") }}</h1>
 
-        <h1>{{ $t('slogan') }}</h1>
-
-        <div class="hero-sub">{{ $t('slogan2') }}</div>
+        <div class="hero-sub">{{ $t("slogan2") }}</div>
 
         <div class="hero-line"></div>
-
       </div>
-
     </section>
-     <!-- 目录栏 -->
+    <!-- 目录栏 -->
     <nav class="about-nav">
-
       <ul>
-
         <li :class="{ active: activeTab === 'company-intro' }">
-           <a
+          <a
             href="#company-intro"
             @click.prevent="scrollToSection('company-intro')"
-            >{{ $t('nav.companyIntro') }}</a
+            >{{ $t("nav.companyIntro") }}</a
           >
         </li>
 
         <li :class="{ active: activeTab === 'history' }">
-           <a href="#history" @click.prevent="scrollToSection('history')">{{
-            $t('nav.history')
-          }}</a
-          >
+          <a href="#history" @click.prevent="scrollToSection('history')">{{
+            $t("nav.history")
+          }}</a>
         </li>
 
         <li :class="{ active: activeTab === 'honors' }">
-           <a href="#honors" @click.prevent="scrollToSection('honors')">{{
-            $t('nav.honor')
-          }}</a
-          >
+          <a href="#honors" @click.prevent="scrollToSection('honors')">{{
+            $t("nav.honor")
+          }}</a>
         </li>
 
         <li :class="{ active: activeTab === 'core-values' }">
-           <a
+          <a
             href="#core-values"
             @click.prevent="scrollToSection('core-values')"
-            >{{ $t('nav.coreValues') }}</a
+            >{{ $t("nav.coreValues") }}</a
           >
         </li>
 
         <li :class="{ active: activeTab === 'culture' }">
-           <a href="#culture" @click.prevent="scrollToSection('culture')">{{
-            $t('nav.culture')
-          }}</a
-          >
+          <a href="#culture" @click.prevent="scrollToSection('culture')">{{
+            $t("nav.culture")
+          }}</a>
         </li>
 
         <li :class="{ active: activeTab === 'contact' }">
-           <a href="#contact" @click.prevent="scrollToSection('contact')">{{
-            $t('nav.contact')
-          }}</a
-          >
+          <a href="#contact" @click.prevent="scrollToSection('contact')">{{
+            $t("nav.contact")
+          }}</a>
         </li>
-
       </ul>
-
     </nav>
 
     <section id="company-intro" class="about-section company-intro">
-
-      <h2>{{ $t('nav.companyIntro') }}</h2>
+      <h2>{{ $t("nav.companyIntro") }}</h2>
 
       <p v-html="$t('about.companyIntroDetailed.para1')"></p>
 
       <p v-html="$t('about.companyIntroDetailed.para2')"></p>
 
       <p v-html="$t('about.companyIntroDetailed.para3')"></p>
-       <!-- 团队信息 -->
+      <!-- 团队信息 -->
       <div class="info-section team-info">
-
-        <h3>{{ $t('about.teamOverview') }}</h3>
+        <h3>{{ $t("about.teamOverview") }}</h3>
 
         <div class="stats-grid">
-
           <div class="stat-card">
+            <div class="stat-number">{{ 20 }}+</div>
 
-            <div class="stat-number">{{ 20 }}+{{ $t('about.people') }}</div>
-
-            <div class="stat-label">{{ $t('about.teamSize') }}</div>
-
+            <div class="stat-label">{{ $t("about.teamSize") }}</div>
           </div>
 
           <div class="stat-card">
-
             <div class="stat-number">90%+</div>
 
-            <div class="stat-label">{{ $t('about.masterDegree') }}</div>
-
+            <div class="stat-label">{{ $t("about.masterDegree") }}</div>
           </div>
 
           <div class="stat-card">
+            <div class="stat-number">≤{{ 32 }}</div>
 
-            <div class="stat-number">≤{{ 32 }}{{ $t('about.yearsOld') }}</div>
-
-            <div class="stat-label">{{ $t('about.averageAge') }}</div>
-
+            <div class="stat-label">{{ $t("about.averageAge") }}</div>
           </div>
 
           <div class="stat-card">
-
             <div class="stat-number">≥90%</div>
 
-            <div class="stat-label">{{ $t('about.topUniversity') }}</div>
-
+            <div class="stat-label">{{ $t("about.topUniversity") }}</div>
           </div>
-
         </div>
-
       </div>
-       <!-- 融资信息 -->
+      <!-- 融资信息 -->
       <div class="info-section financing-info">
-
-        <h3>{{ $t('about.financingPlan') }}</h3>
+        <h3>{{ $t("about.financingPlan") }}</h3>
 
         <p class="financing-desc">
-           {{ $t('about.companyIntroDetailed.financingDesc') }}
+          {{ $t("about.companyIntroDetailed.financingDesc") }}
         </p>
 
         <p class="financing-desc">
-           {{ $t('about.companyIntroDetailed.emailTips')
+          {{ $t("about.companyIntroDetailed.emailTips")
           }}<a href="mailto:liqingfeng@zeroant.com"
             >&nbsp;liqingfeng@zeroant.com</a
           >
         </p>
-
       </div>
-
     </section>
 
     <section id="history" class="about-section history">
-
-      <h2>{{ $t('nav.history') }}</h2>
+      <h2>{{ $t("nav.history") }}</h2>
 
       <div class="timeline">
-
         <div
           v-for="item in timelineData"
           :key="item.year"
           class="timeline-item"
         >
-
           <div class="timeline-dot"></div>
 
           <div class="timeline-year">{{ item.year }}</div>
 
           <div class="timeline-content">
-
             <ul>
-
               <li v-for="event in item.events" :key="event">{{ event }}</li>
-
             </ul>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
 
     <section id="honors" class="about-section honors">
-
-      <h2>{{ $t('nav.honor') }}</h2>
+      <h2>{{ $t("nav.honor") }}</h2>
 
       <div class="honor-cards">
-
         <div v-for="(honor, idx) in honors" :key="idx" class="honor-card">
-           {{ honor }}
+          {{ honor }}
         </div>
-
       </div>
-
     </section>
 
     <section id="core-values" class="about-section core-values">
-
-      <h2 class="core-values-title">{{ $t('about.coreValues.title') }}</h2>
+      <h2 class="core-values-title">{{ $t("about.coreValues.title") }}</h2>
 
       <div class="core-values-content">
-
         <div class="core-values-row">
+          <div class="core-value-card">{{ $t("about.coreValues.value1") }}</div>
 
-          <div class="core-value-card">{{ $t('about.coreValues.value1') }}</div>
+          <div class="core-value-card">{{ $t("about.coreValues.value2") }}</div>
 
-          <div class="core-value-card">{{ $t('about.coreValues.value2') }}</div>
+          <div class="core-value-card">{{ $t("about.coreValues.value3") }}</div>
 
-          <div class="core-value-card">{{ $t('about.coreValues.value3') }}</div>
-
-          <div class="core-value-card">{{ $t('about.coreValues.value4') }}</div>
-
+          <div class="core-value-card">{{ $t("about.coreValues.value4") }}</div>
         </div>
-
       </div>
-
     </section>
 
     <section id="culture" class="about-section culture">
-
-      <h2 class="culture-title">{{ $t('nav.culture') }}</h2>
+      <h2 class="culture-title">{{ $t("nav.culture") }}</h2>
 
       <div class="culture-card no-bg">
-
         <div class="culture-desc financing-desc">
-           {{ $t('about.enterpriseCulture.description') }}
+          {{ $t("about.enterpriseCulture.description") }}
         </div>
 
         <ul class="culture-list">
-
           <li v-html="$t('about.enterpriseCulture.item1')"></li>
 
           <li v-html="$t('about.enterpriseCulture.item2')"></li>
@@ -228,91 +176,140 @@
           <li v-html="$t('about.enterpriseCulture.item3')"></li>
 
           <li v-html="$t('about.enterpriseCulture.item4')"></li>
-
         </ul>
-
       </div>
-
     </section>
 
     <section id="contact" class="about-section contact">
-
-      <h2>{{ $t('nav.contact') }}</h2>
+      <h2>{{ $t("nav.contact") }}</h2>
 
       <ul class="contact-list">
+        <li>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</li>
 
-        <li>{{ $t('contacts.email') }}：liqingfeng@zeroant.com</li>
-
-        <li>{{ $t('contacts.address') }}：{{ $t('footer.address') }}</li>
-
+        <li>{{ $t("contacts.address") }}：{{ $t("footer.address") }}</li>
       </ul>
-
     </section>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, type ComputedRef } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { getTimelineData, getHonors, type TimelineEvent } from '@/data/about';
+import { computed, ref, onMounted, onUnmounted, type ComputedRef } from "vue";
+import { useI18n } from "vue-i18n";
+import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 const { t } = useI18n();
 
 const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
-  getTimelineData(t).map(item => ({ ...item }))
+  getTimelineData(t).map((item) => ({ ...item }))
 );
 const honors: ComputedRef<string[]> = computed(() =>
-  getHonors(t).map(honor => honor)
+  getHonors(t).map((honor) => honor)
 );
 
-const activeTab = ref<string>('company-intro');
+const activeTab = ref<string>("company-intro");
 const tabIds: string[] = [
-  'company-intro',
-  'history',
-  'honors',
-  'core-values',
-  'culture',
-  'contact',
+  "company-intro",
+  "history",
+  "honors",
+  "core-values",
+  "culture",
+  "contact",
 ];
 
+let scrollTimeout: number | null = null;
+let cachedElements: Array<{id: string, top: number}> = [];
+
+// 预缓存元素位置，减少重复计算
+function cacheElementPositions(): void {
+  if (typeof document === "undefined") return;
+  
+  cachedElements = tabIds.map(id => {
+    const el = document.getElementById(id);
+    return {
+      id,
+      top: el ? el.offsetTop : 0
+    };
+  }).filter(item => item.top > 0);
+}
+
 function updateActiveTab(): void {
-  const scrollY = window.scrollY || window.pageYOffset;
-  let found = false;
-  for (let i = tabIds.length - 1; i >= 0; i--) {
-    const el = document.getElementById(tabIds[i]);
-    if (el) {
-      const rect = el.getBoundingClientRect();
-      if (rect.top + window.scrollY - 120 <= scrollY + 10) {
-        activeTab.value = tabIds[i];
+  // 确保DOM已加载完成
+  if (typeof document === "undefined" || !document.body || cachedElements.length === 0) {
+    return;
+  }
+
+  // 防抖处理，避免频繁计算
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+  }
+
+  scrollTimeout = window.setTimeout(() => {
+    const scrollY = window.scrollY || window.pageYOffset;
+    let found = false;
+    
+    // 使用预缓存的位置数据，避免重复DOM查询
+    for (let i = cachedElements.length - 1; i >= 0; i--) {
+      if (cachedElements[i].top <= scrollY + 120) {
+        activeTab.value = cachedElements[i].id;
         found = true;
         break;
       }
     }
-  }
-  if (!found) activeTab.value = tabIds[0];
+    if (!found) activeTab.value = tabIds[0];
+    scrollTimeout = null;
+  }, 50); // 50ms防抖延迟，更灵敏
 }
 
 function scrollToSection(id: string): void {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // 使用预缓存的位置数据，立即跳转
+  try {
+    const cached = cachedElements.find(item => item.id === id);
+    if (cached) {
+      window.scrollTo({
+        top: cached.top - 100, // 预留导航栏空间
+        behavior: "smooth"
+      });
+    } else {
+      // 回退到实时查询
+      const el = document.getElementById(id);
+      if (el) {
+        window.scrollTo({
+          top: el.offsetTop - 100,
+          behavior: "smooth"
+        });
+      }
+    }
+  } catch (error) {
+    // 静默处理错误
   }
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', updateActiveTab, { passive: true });
-  updateActiveTab();
+  // 初始化缓存并监听滚动
+  try {
+    cacheElementPositions();
+    window.addEventListener("scroll", updateActiveTab, { passive: true });
+    window.addEventListener("resize", cacheElementPositions);
+    // 延迟100ms确保DOM完全渲染
+    setTimeout(updateActiveTab, 100);
+  } catch (error) {
+    // 静默处理初始化错误
+  }
 });
+
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateActiveTab);
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = null;
+  }
+  window.removeEventListener("scroll", updateActiveTab);
+  window.removeEventListener("resize", cacheElementPositions);
 });
 </script>
 
 <style scoped>
 .about-page {
   background: #f7f8fa;
-  color: #222;
+  color: #2d3748;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Microsoft YaHei", Arial, sans-serif;
   min-height: 100vh;
@@ -346,22 +343,23 @@ onUnmounted(() => {
 }
 
 .hero-content h1 {
-  font-size: 5vw;
-  font-weight: 900;
-  color: #222;
+  font-weight: 800;
+  color: #2d3748;
   letter-spacing: 0.08em;
   margin-bottom: 0.6em;
   opacity: 1;
+  font-size: 5rem;
+  line-height: 1.1;
 }
 
 .hero-sub {
-  font-size: 2vw;
   font-weight: 400;
-  color: #222;
+  color: #2d3748;
   opacity: 0.7;
   margin-bottom: 1.2em;
   letter-spacing: 0.04em;
   opacity: 1;
+  font-size: 2rem;
 }
 
 .hero-line {
@@ -374,8 +372,7 @@ onUnmounted(() => {
 }
 
 .hero-en {
-  font-size: 1.2vw;
-  color: #222;
+  color: #2d3748;
   font-weight: 300;
   letter-spacing: 0.18em;
   opacity: 0.7;
@@ -402,19 +399,46 @@ onUnmounted(() => {
 }
 
 .about-nav li {
-  font-size: 1.2em;
-  color: #222;
-  font-weight: 600;
+  color: #2d3748;
+  font-weight: 500;
   cursor: pointer;
   padding: 18px 0;
-  transition: color 0.2s, border-bottom 0.2s;
+  transition: all 0.3s ease;
   border-bottom: 2px solid transparent;
+  position: relative;
+  font-size: 1rem;
 }
 
-.about-nav li:hover,
+.about-nav li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.about-nav li:hover {
+  color: #1a3a8f;
+  transform: translateY(-1px);
+}
+
 .about-nav li.active {
   color: #1a3a8f;
   border-bottom: 2px solid #1a3a8f;
+}
+
+.about-nav li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #1a3a8f, #4f8cff);
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.about-nav li:hover:not(.active)::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 .about-section {
@@ -428,9 +452,9 @@ onUnmounted(() => {
 }
 
 .about-section h2 {
-  font-size: 2em;
   color: #1a237e;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   margin-bottom: 32px;
   text-align: center;
   position: relative;
@@ -442,14 +466,14 @@ onUnmounted(() => {
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
+  width: 40px;
+  height: 2px;
   background: linear-gradient(90deg, #1a3a8f 0%, #4f8cff 100%);
-  border-radius: 2px;
+  border-radius: 1px;
+  opacity: 0.7;
 }
 
 .about-section > p {
-  font-size: 1.15em;
   font-weight: 400;
   line-height: 1.8;
   color: #333;
@@ -470,15 +494,13 @@ onUnmounted(() => {
 }
 
 .info-section h3 {
-  font-size: 1.4em;
   color: #1a3a8f;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 20px;
   text-align: center;
 }
 
 .info-section p {
-  font-size: 1.1em;
   line-height: 1.7;
   color: #555;
   margin-bottom: 24px;
@@ -520,17 +542,17 @@ onUnmounted(() => {
 }
 
 .stat-number {
-  font-size: 2.2em;
-  font-weight: 700;
+  font-weight: 600;
   color: #1a3a8f;
   margin-bottom: 8px;
   display: block;
+  font-size: 2rem;
+  line-height: 1.2;
 }
 
 .stat-label {
-  font-size: 1em;
   color: #666;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* 时间线样式 */
@@ -563,9 +585,9 @@ onUnmounted(() => {
 }
 
 .timeline-year {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   color: #1a237e;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 
@@ -577,7 +599,7 @@ onUnmounted(() => {
 }
 
 .timeline-content li {
-  font-size: 1.05em;
+  font-size: 1.1rem;
   color: #333;
   margin-bottom: 8px;
   word-break: break-word;
@@ -598,9 +620,9 @@ onUnmounted(() => {
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   padding: 20px 24px;
-  font-size: 1.05em;
+  font-size: 1.1rem;
   color: #1a3a8f;
-  font-weight: 600;
+  font-weight: 500;
   text-align: center;
   word-break: break-word;
   white-space: pre-line;
@@ -626,9 +648,9 @@ onUnmounted(() => {
 }
 
 .contact-list li {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   color: #333;
-  font-weight: 500;
+  font-weight: 400;
   word-break: break-all;
   white-space: pre-line;
   padding: 12px 24px;
@@ -667,20 +689,20 @@ onUnmounted(() => {
   }
 
   .hero-content h1 {
-    font-size: 2.5em;
+    font-size: 3.5rem;
   }
 
   .hero-sub {
-    font-size: 1.2em;
+    font-size: 1.5rem;
   }
 
   .hero-en {
-    font-size: 1em;
+    font-size: 1.1rem;
   }
 
   .hero-line {
-    width: 120px;
-    height: 2px;
+    width: 140px;
+    height: 3px;
   }
 
   .about-section {
@@ -719,7 +741,7 @@ onUnmounted(() => {
   }
 
   .stat-number {
-    font-size: 1.8em;
+    font-size: 1.8rem;
   }
 
   .honor-cards {
@@ -735,16 +757,16 @@ onUnmounted(() => {
 
 @media (max-width: 600px) {
   .about-hero {
-    min-height: 50vh;
-    height: 50vh;
+    min-height: 60vh;
+    height: 60vh;
   }
 
   .hero-content h1 {
-    font-size: 2em;
+    font-size: 2.8rem;
   }
 
   .hero-sub {
-    font-size: 1em;
+    font-size: 1.2rem;
   }
 
   .about-nav ul {
@@ -759,6 +781,10 @@ onUnmounted(() => {
     grid-template-columns: 1fr 1fr;
   }
 
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
   .contact-list li {
     min-width: auto;
     width: 100%;
@@ -767,7 +793,7 @@ onUnmounted(() => {
 
 .about-page,
 .about-page * {
-  color: #222 !important;
+  color: #2d3748 !important;
 }
 
 .about-section:last-child {
@@ -806,14 +832,14 @@ onUnmounted(() => {
 
 .member-name {
   font-size: 1.4em;
-  font-weight: 700;
+  font-weight: 600;
   color: #1a3a8f;
   margin-bottom: 8px;
 }
 
 .member-position {
   font-size: 1.1em;
-  font-weight: 600;
+  font-weight: 500;
   color: #666;
   margin-bottom: 16px;
   padding: 6px 16px;
@@ -831,6 +857,16 @@ onUnmounted(() => {
 }
 
 @media (max-width: 900px) {
+  .about-nav ul {
+    gap: 32px;
+    padding: 0 20px;
+  }
+
+  .about-nav li {
+    font-size: 1em;
+    padding: 16px 0;
+  }
+
   .team-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -841,9 +877,26 @@ onUnmounted(() => {
   }
 }
 
+@media (max-width: 600px) {
+  .about-nav {
+    margin-bottom: 24px;
+  }
+
+  .about-nav ul {
+    gap: 20px;
+    padding: 0 16px;
+    flex-wrap: wrap;
+  }
+
+  .about-nav li {
+    font-size: 0.95em;
+    padding: 14px 0;
+  }
+}
+
 .culture-content {
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1.1rem;
   margin: 48px 0 32px 0;
 }
 
@@ -851,15 +904,15 @@ onUnmounted(() => {
   text-align: center;
   margin: 0 auto;
   max-width: 900px;
-  font-size: 1.03em;
+  font-size: 1.1rem;
 }
 .culture-title {
-  font-size: 1.2em;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 500;
   margin-bottom: 16px;
 }
 .culture-subtitle {
-  font-size: 1.01em;
+  font-size: 1.1rem;
   color: #333;
   margin-bottom: 28px;
 }
@@ -869,18 +922,27 @@ onUnmounted(() => {
   margin: 0 auto;
   padding-left: 0;
   list-style: disc inside;
-  font-size: 1.09em;
-  line-height: 1.95;
-  font-weight: 500;
-  color: #222;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-weight: 400;
+  color: #2d3748;
 }
 .culture-list li {
-  margin-bottom: 9px;
+  margin-bottom: 12px;
   padding-left: 0;
 }
 
+.team-info h3,
+.financing-info h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: #1a237e;
+  text-align: center;
+}
+
 .financing-desc {
-  font-size: 1.1em;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.8;
   color: #333;
@@ -892,9 +954,42 @@ onUnmounted(() => {
   max-width: 100%;
 }
 
+/* 移除邮箱链接的下划线 */
+.financing-desc a {
+  text-decoration: none;
+  color: #1a3a8f;
+}
+
+.financing-desc a:hover {
+  text-decoration: underline;
+}
+
+/* 联系信息中的邮箱链接也移除下划线 */
+.contact-list a {
+  text-decoration: none;
+  color: #1a3a8f;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+/* 通用邮箱链接样式 */
+.about-page a[href^="mailto:"] {
+  text-decoration: none;
+  color: #1a3a8f;
+}
+
+.about-page a[href^="mailto:"]:hover {
+  text-decoration: underline;
+}
+
 /* style部分新增/优化 */
 .core-values-title {
   text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 16px;
 }
 .core-values-content {
   text-align: center;
@@ -915,7 +1010,7 @@ onUnmounted(() => {
   border-radius: 20px;
   box-shadow: 0 2px 8px 0 rgba(26, 58, 143, 0.05);
   font-size: 1.2em;
-  font-weight: 600;
+  font-weight: 500;
   color: #1a3a8f;
   text-align: center;
   letter-spacing: 0.18em;
@@ -935,7 +1030,7 @@ onUnmounted(() => {
     gap: 16px;
   }
   .core-value-card {
-    font-size: 1em;
+    font-size: 1rem;
     padding: 14px 10px;
     min-width: 100px;
     flex: 1 1 40%;
@@ -957,6 +1052,7 @@ onUnmounted(() => {
   background: none;
 }
 .culture-desc {
+  font-size: 1.1rem;
   margin: 24px 0 18px 0;
   text-align: center;
 }
@@ -964,10 +1060,9 @@ onUnmounted(() => {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 1.08em;
-  line-height: 2;
+  font-size: 1.1rem;
+  line-height: 1.8;
   text-align: left;
   display: inline-block;
 }
 </style>
-

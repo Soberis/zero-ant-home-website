@@ -3,13 +3,13 @@
 
   <div class="home-bg">
 
-    <div class="home">
+     <div class="home">
        <HeroCarousel />
-      <div class="section"> <CoreProducts /> </div>
-
-      <div class="section"> <VideoCases /> </div>
-       <IndustryApplications /> <Partners />
-    </div>
+       <div class="section"><CoreProducts /></div>
+       <div class="section"><VideoCases /></div>
+       <div class="section"><IndustryApplications /></div>
+       <div class="section"><Partners /></div>
+     </div>
 
   </div>
 

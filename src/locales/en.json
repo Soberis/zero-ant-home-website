@@ -160,15 +160,6 @@
       "desc": "Demonstrates automated handling and intelligent scheduling in chip manufacturing and testing.",
       "tags": ["Semiconductor Processing", "Automation", "Smart Manufacturing"]
     },
-    "dual-robot-collaboration": {
-      "title": "Dual Robot Collaboration",
-      "desc": "Showcases multi-robot collaborative operations for efficient automated handling and task allocation.",
-      "tags": [
-        "Robot Collaboration",
-        "Multi-robot Scheduling",
-        "Smart Manufacturing"
-      ]
-    },
     "polishing-robot": {
       "title": "Polishing Robot",
       "desc": "Demonstrates intelligent polishing robot for efficient surface treatment in industrial automation.",
@@ -193,11 +184,6 @@
       "title": "Composite Robot Transfer",
       "desc": "Advanced composite robot systems for complex material handling tasks with integrated mobile and manipulator capabilities.",
       "tags": ["Composite Robot", "Transfer System", "Mobile Manipulation"]
-    },
-    "ultrasound-medical-robot": {
-      "title": "Ultrasound Medical Robot",
-      "desc": "Showcases ZeroAnt Technology's innovation in medical automation with ultrasound robots enabling automated ultrasound examinations, improving medical efficiency and examination accuracy.",
-      "tags": ["Medical Robot", "Ultrasound Examination", "Medical Automation"]
     },
     "ur-robot-llm-motion-capture": {
       "title": "UR Robot LLM Motion Capture",
@@ -229,6 +215,26 @@
         "Industrial Control"
       ]
     },
+    "plate-welding-demo": {
+      "title": "Medium Plate Welding Process Demo",
+      "desc": "Demonstrates ZeroAnt Technology's innovative application in medium plate welding processes, achieving high-quality welding operations through intelligent welding technology and precise motion control, showcasing breakthrough applications of robotics in industrial welding.",
+      "tags": [
+        "Medium Plate Welding",
+        "Welding Robot",
+        "Industrial Automation",
+        "Smart Manufacturing"
+      ]
+    },
+    "underground-garage-cleaning": {
+      "title": "Underground Garage Cleaning Robot",
+      "desc": "Showcases ZeroAnt Technology's autonomous cleaning robot application in underground garage environments, achieving intelligent cleaning operations through autonomous navigation and environmental perception technology, providing efficient automated cleaning solutions for parking facilities.",
+      "tags": [
+        "Cleaning Robot",
+        "Underground Garage",
+        "Autonomous Navigation",
+        "Smart Cleaning"
+      ]
+    },
     "personalized-prescription-pharmaceutical": {
       "title": "Personalized Prescription Pharmaceutical",
       "desc": "Showcases ZeroAnt Technology's innovation in personalized prescription pharmaceuticals, achieving personalized drug customization through intelligent automation technology.",
@@ -247,16 +253,6 @@
         "Transfer Operations",
         "Flexible Production",
         "Smart Logistics"
-      ]
-    },
-    "high-speed-precision-robot-arm": {
-      "title": "High-Speed Precision Robot Arm Demo",
-      "desc": "Demonstrates ZeroAnt Technology's robot arm high-speed precision operation capabilities through advanced motion control algorithms and precision mechanical design.",
-      "tags": [
-        "Robot Arm",
-        "High-Speed Precision",
-        "Motion Control",
-        "Industrial Automation"
       ]
     },
     "offline-programming": {
@@ -287,16 +283,6 @@
         "Logistics Automation",
         "Smart Manufacturing",
         "Industrial Robot"
-      ]
-    },
-    "ball-catching-demo": {
-      "title": "Ball Catching Demo",
-      "desc": "Demonstrates ZeroAnt Technology's advanced robot technology in visual recognition and motion control through real-time visual tracking and precise grasping control.",
-      "tags": [
-        "Robot Control",
-        "Visual Recognition",
-        "Motion Control",
-        "Intelligent Grasping"
       ]
     },
     "dual-robot-ball-catching": {
@@ -382,6 +368,50 @@
         "Precision Positioning",
         "Industrial Automation",
         "Trajectory Planning"
+      ]
+    },
+    "assembly-robot": {
+      "title": "Assembly Robot",
+      "desc": "Demonstrates ZeroAnt Technology's advanced robotic assembly capabilities, showcasing precise component handling and assembly processes. Features high-precision positioning and intelligent control algorithms, suitable for complex assembly tasks in industrial automation.",
+      "tags": [
+        "Assembly",
+        "Precision Control",
+        "Industrial Automation",
+        "Component Handling",
+        "Intelligent Assembly"
+      ]
+    },
+    "mobile-robot-chassis": {
+      "title": "Self-Developed Mobile Robot Chassis",
+      "desc": "Showcases ZeroAnt Technology's self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control, and intelligent navigation systems for autonomous mobile robot applications.",
+      "tags": [
+        "Mobile Robot",
+        "Autonomous Navigation",
+        "Chassis Platform",
+        "Motion Control",
+        "Intelligent Mobility"
+      ]
+    },
+    "fixed-rail-transfer-robot": {
+      "title": "Fixed Rail Transfer Robot",
+      "desc": "Demonstrates ZeroAnt Technology's fixed rail transfer robot with precise positioning capabilities. Features high-precision positioning systems and intelligent control algorithms for efficient and stable material transfer on fixed tracks, suitable for precise logistics transport needs in industrial production lines.",
+      "tags": [
+        "Fixed Rail",
+        "Transfer Robot",
+        "Industrial Automation",
+        "Precise Positioning",
+        "Logistics Transport"
+      ]
+    },
+    "vr-remote-franka-dual-arm": {
+      "title": "VR Remote Franka Dual-Arm Robot",
+      "desc": "Showcases ZeroAnt Technology's VR-based remote operation system for Franka dual-arm robots, achieving precise remote control through immersive interaction interfaces. Demonstrates innovative applications of human-robot collaboration in complex operational scenarios, featuring intuitive VR control and real-time robot response for advanced teleoperation tasks.",
+      "tags": [
+        "VR Remote Operation",
+        "Franka Robot",
+        "Dual-Arm Collaboration",
+        "Remote Control",
+        "Human-Robot Interaction"
       ]
     },
     "robotstudio-remote-control": {

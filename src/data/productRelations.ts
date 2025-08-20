@@ -134,7 +134,7 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [
       "mobile-transfer-robot",
       "four-axis-robot-open-fridge",
-      "high-speed-precision-robot-arm",
+      "ur-robot-llm-motion-capture",
     ],
     customFeatures: [
       "高速运动，循环节拍短",
@@ -169,7 +169,7 @@ export const productRelations: ProductRelationsData = {
 
   "dual-arm-humanoid": {
     applicationSlugs: ["intelligent-manufacturing"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "dual-robot-collaboration"],
+    videoSlugs: ["ur-robot-llm-motion-capture", "dual-robot-ball-catching", "vr-remote-franka-dual-arm"],
     customFeatures: [
       "双臂高柔性协作，模拟人类操作",
       "多模态感知与智能决策",
@@ -184,8 +184,8 @@ export const productRelations: ProductRelationsData = {
     applicationSlugs: ["smart-logistics", "intelligent-navigation"],
     videoSlugs: [
       "agv-product-introduction",
-      "radar-360-scanning",
       "outdoor-patrol-robot",
+      "mobile-robot-chassis",
     ],
     customFeatures: [
       "高精度激光SLAM导航，路径自主规划",

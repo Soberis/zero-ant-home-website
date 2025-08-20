@@ -202,19 +202,19 @@ export function checkSecurityFeatures() {
  * @param event 安全事件
  * @param details 事件详情
  */
-export function logSecurityEvent(event: string, details?: any) {
-  const logData = {
-    timestamp: new Date().toISOString(),
-    event,
-    details,
-    userAgent: navigator.userAgent,
-    url: window.location.href,
-    referrer: document.referrer,
-  };
+export function logSecurityEvent(_event: string, _details?: any) {
+  // 暂时注释掉未使用的 logData
+  // const logData = {
+  //   timestamp: new Date().toISOString(),
+  //   event,
+  //   details,
+  //   userAgent: navigator.userAgent,
+  //   url: window.location.href,
+  //   referrer: document.referrer,
+  // };
 
   // 开发环境输出到控制台
   if (import.meta.env.DEV) {
-    console.warn("🔒 安全事件:", logData);
   }
 
   // 生产环境可以发送到安全监控服务
@@ -247,42 +247,11 @@ export function initSecurity() {
   const features = checkSecurityFeatures();
 
   if (import.meta.env.DEV) {
-    console.group("🔒 安全特性检查");
-    console.table(features);
-
-    // 安全建议
-    const suggestions: string[] = [];
-
-    if (!features.https) {
-      suggestions.push("⚠️ 建议使用 HTTPS 协议");
-    }
-
-    if (!features.crypto) {
-      suggestions.push("⚠️ 浏览器不支持 Web Crypto API");
-    }
-
-    if (!features.csp) {
-      suggestions.push("💡 建议添加 Content Security Policy");
-    }
-
-    if (!features.referrerPolicy) {
-      suggestions.push("💡 建议设置 Referrer Policy");
-    }
-
-    if (suggestions.length > 0) {
-      console.group("📋 安全建议");
-      suggestions.forEach(tip => console.log(tip));
-      console.groupEnd();
-    } else {
-      console.log("✅ 安全配置良好！");
-    }
-
-    console.groupEnd();
   }
 
   // 设置全局错误处理
   setupGlobalErrorHandling();
-  
+
   // 初始化安全策略
   setupSecurityPolicies();
 
@@ -297,7 +266,7 @@ export function initSecurity() {
  * 设置全局错误处理
  */
 function setupGlobalErrorHandling() {
-  window.addEventListener('error', (event) => {
+  window.addEventListener("error", (event) => {
     const errorInfo = {
       message: event.message,
       filename: event.filename,
@@ -306,31 +275,27 @@ function setupGlobalErrorHandling() {
       error: event.error?.stack,
       timestamp: new Date().toISOString(),
       userAgent: navigator.userAgent,
-      url: window.location.href
+      url: window.location.href,
     };
-    
-    console.error('全局错误:', errorInfo);
-    
+
     // 生产环境错误上报
     if (import.meta.env.PROD) {
-      reportError('javascript_error', errorInfo);
+      reportError("javascript_error", errorInfo);
     }
   });
-  
-  window.addEventListener('unhandledrejection', (event) => {
+
+  window.addEventListener("unhandledrejection", (event) => {
     const errorInfo = {
       reason: event.reason,
       promise: event.promise,
       timestamp: new Date().toISOString(),
       userAgent: navigator.userAgent,
-      url: window.location.href
+      url: window.location.href,
     };
-    
-    console.error('未处理的 Promise 拒绝:', errorInfo);
-    
+
     // 生产环境错误上报
     if (import.meta.env.PROD) {
-      reportError('promise_rejection', errorInfo);
+      reportError("promise_rejection", errorInfo);
     }
   });
 }
@@ -343,10 +308,10 @@ function setupSecurityPolicies() {
   if (import.meta.env.PROD) {
     disableConsole();
   }
-  
+
   // 防止右键菜单（可选）
   // document.addEventListener('contextmenu', (e) => e.preventDefault())
-  
+
   // 防止选择文本（可选）
   // document.addEventListener('selectstart', (e) => e.preventDefault())
 }
@@ -356,9 +321,9 @@ function setupSecurityPolicies() {
  */
 function disableConsole() {
   const noop = () => {};
-  const methods = ['log', 'warn', 'error', 'info', 'debug', 'trace'];
-  
-  methods.forEach(method => {
+  const methods = ["log", "warn", "error", "info", "debug", "trace"];
+
+  methods.forEach((method) => {
     (console as any)[method] = noop;
   });
 }
@@ -369,18 +334,18 @@ function disableConsole() {
 function reportError(type: string, errorInfo: any) {
   // 这里可以集成第三方错误监控服务
   // 例如：Sentry, LogRocket, Bugsnag 等
-  
+
   try {
-    fetch('/api/errors', {
-      method: 'POST',
+    fetch("/api/errors", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         type,
         error: errorInfo,
-        timestamp: Date.now()
-      })
+        timestamp: Date.now(),
+      }),
     }).catch(() => {
       // 静默处理上报失败
     });
@@ -426,7 +391,10 @@ export class SecureStorage {
 
       localStorage.setItem(key, finalValue);
     } catch (error) {
-      logSecurityEvent("STORAGE_ERROR", { key, error: error instanceof Error ? error.message : String(error) });
+      logSecurityEvent("STORAGE_ERROR", {
+        key,
+        error: error instanceof Error ? error.message : String(error),
+      });
     }
   }
 
@@ -439,7 +407,10 @@ export class SecureStorage {
 
       return JSON.parse(finalValue);
     } catch (error) {
-      logSecurityEvent("STORAGE_ERROR", { key, error: error instanceof Error ? error.message : String(error) });
+      logSecurityEvent("STORAGE_ERROR", {
+        key,
+        error: error instanceof Error ? error.message : String(error),
+      });
       return null;
     }
   }
@@ -448,7 +419,10 @@ export class SecureStorage {
     try {
       localStorage.removeItem(key);
     } catch (error) {
-      logSecurityEvent("STORAGE_ERROR", { key, error: error instanceof Error ? error.message : String(error) });
+      logSecurityEvent("STORAGE_ERROR", {
+        key,
+        error: error instanceof Error ? error.message : String(error),
+      });
     }
   }
 }

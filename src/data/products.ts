@@ -1,16 +1,5 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
-import type { Product } from "@/helpers/product";
-
-/**
- * 扩展产品接口，添加产品特有字段
- */
-export interface ProductData extends Product {
-  name: string;
-  image: string;
-  desc: string;
-  seriesTitle: string;
-  seriesSubtitle: string;
-}
+import type { ProductData } from "@/types";
 
 // 1. 先定义所有图片变量
 const multiOsVmImg = new URL(
@@ -139,13 +128,20 @@ export function getProducts(): ProductData[] {
   ];
 }
 
-// 3. 最后调用函数并导出
+// 3. 分步导出，避免循环引用问题
 export const products: ProductData[] = getProducts();
 
 /**
- * 产品slug到路由的映射表，便于页面跳转
- * @example productRouteMap["mobile-robot"] => "/products/mobile-robot"
+ * 获取产品slug到路由的映射表，便于页面跳转
+ * @example getProductRouteMap()["mobile-robot"] => "/products/mobile-robot"
  */
-export const productRouteMap: Record<string, string> = Object.fromEntries(
-  products.map((p) => [p.slug, `/products/${p.slug}`])
-);
+export function getProductRouteMap(): Record<string, string> {
+  return Object.fromEntries(
+    products.map((p) => [p.slug, `/products/${p.slug}`])
+  );
+}
+
+/**
+ * 产品slug到路由的映射表（懒加载）
+ */
+export const productRouteMap: Record<string, string> = getProductRouteMap();

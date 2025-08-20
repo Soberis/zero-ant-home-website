@@ -23,13 +23,17 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
       dts: true, // 生成类型声明文件
     }),
-    // Bundle 分析工具（仅在构建时生成）
-    visualizer({
-      filename: "dist/stats.html",
-      open: true,
-      gzipSize: true,
-      brotliSize: true,
-    }),
+    // Bundle 分析工具（Windows 下也兼容：当脚本为 build:analyze 时启用）
+    ...((process.env.ANALYZE || process.env.npm_lifecycle_event === 'build:analyze')
+      ? [
+          visualizer({
+            filename: "dist/stats.html",
+            open: true,
+            gzipSize: true,
+            brotliSize: true,
+          }),
+        ]
+      : []),
     // 图片优化插件
     ViteImageOptimizer({}),
   ],

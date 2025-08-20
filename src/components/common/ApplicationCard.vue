@@ -1,16 +1,13 @@
 <template>
-
   <div class="app-card" @click="goDetail">
-     <span class="icon" v-html="svg"></span>
+    <span class="icon" v-html="svg"></span>
     <div class="label">{{ t(`applications.${slug}.title`, title) }}</div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const { title, svg, slug } = defineProps<{
   title: string;
@@ -38,9 +35,7 @@ function goDetail(): void {
   flex-direction: column;
   align-items: center;
   padding: 36px 0 26px 0;
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
   border: 1px solid #e3e8f0;
 }
@@ -56,11 +51,10 @@ function goDetail(): void {
   justify-content: center;
 }
 .label {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #555;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
 </style>
-
