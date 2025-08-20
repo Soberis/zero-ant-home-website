@@ -187,7 +187,6 @@ import { videoCards } from "@/data/videos";
 import applications from "@/data/applications";
 import type { ProductDetail } from "@/data/productDetails";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
 import { ref, computed } from "vue";
 import {
   getRelatedApplications,
@@ -266,9 +265,6 @@ const localizedProduct = computed(() => {
     downloads: getTranslatedData("downloads", props.product.downloads),
   };
 });
-
-// 创建路由实例
-const router = useRouter();
 
 // 组件属性定义
 const props = withDefaults(
@@ -448,9 +444,7 @@ const productFeatures = computed((): FeatureItem[] => {
     // 最后使用原始数据
     return props.product.features || [];
   } catch (error) {
-    if (import.meta.env.DEV) {
-      console.warn("获取产品特性时出错:", error);
-    }
+    console.warn("获取产品特性时出错:", error);
     return props.product.features || [];
   }
 });
@@ -466,7 +460,7 @@ const handleVideoLeave = () => {
 const handleVideoClick = (index: number) => {
   const video = relatedVideos.value[index];
   if (video) {
-    router.push(`/video/${video.slug}`);
+    window.open(`/video/${video.slug}`, "_blank");
   }
 };
 </script>
@@ -476,9 +470,11 @@ const handleVideoClick = (index: number) => {
 .product-detail {
   min-height: 100vh;
   background: #f7f8fa;
-  color: #2d3748;
+  color: #222;
   scroll-behavior: smooth;
-  font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
   line-height: 1.6;
   width: 100%;
   text-align: center !important;
@@ -487,7 +483,7 @@ const handleVideoClick = (index: number) => {
 /* 产品头部 */
 .product-header {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  color: #2d3748;
+  color: #222;
   padding: 8rem 0 6rem;
   position: relative;
   overflow: hidden;
@@ -496,79 +492,44 @@ const handleVideoClick = (index: number) => {
 
 .product-image {
   display: block;
-  max-width: 1000px;
-  max-height: 600px;
+  max-width: 800px;
+  max-height: 500px;
   width: 100%;
   height: auto;
   margin: 0 auto 4rem;
   border-radius: 1.5rem;
-  box-shadow: 0 16px 64px rgba(26, 58, 143, 0.25);
+  box-shadow: 0 12px 48px rgba(26, 58, 143, 0.2);
   object-fit: contain;
   background: white;
-  padding: 2rem;
-}
-
-@media (max-width: 1200px) {
-  .product-image {
-    max-width: 900px;
-    max-height: 550px;
-    padding: 1.75rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .product-image {
-    max-width: 800px;
-    max-height: 500px;
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .product-image {
-    max-width: 90vw;
-    max-height: 400px;
-    padding: 1.25rem;
-    margin-bottom: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .product-image {
-    max-width: 95vw;
-    max-height: 300px;
-    padding: 1rem;
-    margin-bottom: 2.5rem;
-    border-radius: 1rem;
-  }
+  padding: 1.5rem;
 }
 
 .product-title {
-  font-size: 2.6rem;
-  font-weight: 600;
+  font-size: 2.8rem;
+  font-weight: 700;
   margin-bottom: 2rem;
   text-align: center;
   letter-spacing: -0.02em;
   position: relative;
   z-index: 1;
-  color: #2d3748;
+  color: #222;
 }
 
 .product-desc {
-    font-size: 0.9rem;
-    text-align: left;
-    margin-bottom: 3rem;
-    color: #2d3748;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.75;
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    white-space: normal;
-    padding: 0 2rem;
-    display: block;
-  }
+  font-size: 1.5rem;
+  text-align: left;
+  margin-bottom: 3rem;
+  color: #666;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  white-space: normal;
+  padding: 0 2rem;
+  display: block;
+}
 
 /* 主要内容区域 */
 .main-content {
@@ -580,22 +541,22 @@ const handleVideoClick = (index: number) => {
 }
 
 .section-title {
-    color: #2d3748;
-    font-size: 1.9rem;
-    font-weight: 600;
-    text-align: center;
-    margin: 0 0 3rem 0;
-    letter-spacing: 1px;
-    position: relative;
-    transition: color 0.3s ease;
-    padding: 0 2rem;
-  }
+  color: #222;
+  font-size: 2.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 3rem 0;
+  letter-spacing: 1px;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 0 2rem;
+}
 
 /* 优势特点 */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -639,19 +600,19 @@ const handleVideoClick = (index: number) => {
 }
 
 .feature-title {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #2d3748;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
 
-  .feature-desc {
-    color: #555;
-    line-height: 1.65;
-    font-size: 0.75rem;
-    margin: 0;
-  }
+.feature-desc {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  margin: 0;
+}
 
 /* 应用场景 - 应用网格 */
 .application-grid {
@@ -659,7 +620,8 @@ const handleVideoClick = (index: number) => {
   grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   gap: 32px;
   max-width: 1200px;
-  margin: 2rem auto 0;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
 
 /* 相关案例 - 视频网格 */
@@ -667,8 +629,7 @@ const handleVideoClick = (index: number) => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
-  margin: 2rem auto 0;
+  margin-top: 2rem;
 }
 
 /* 产品参数 */
@@ -706,31 +667,29 @@ const handleVideoClick = (index: number) => {
 }
 
 .param-key {
-    font-weight: 500;
-    color: #2d3748;
-    font-size: 0.85rem;
-    flex: 1;
-    margin-right: 1rem;
-    text-align: left;
-  }
+  font-weight: 600;
+  color: #222;
+  font-size: 1.2rem;
+  flex: 1;
+  margin-right: 1rem;
+  text-align: left;
+}
 
-  .param-value {
-    color: #2d3748;
-    font-weight: 500;
-    font-size: 0.85rem;
-    text-align: right;
-    flex-shrink: 0;
-    max-width: 60%;
-    word-break: break-word;
-  }
+.param-value {
+  color: #222;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: right;
+  flex-shrink: 0;
+  max-width: 60%;
+  word-break: break-word;
+}
 
 /* 相关下载 */
 .downloads-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
 }
 
 .download-card {
@@ -767,32 +726,32 @@ const handleVideoClick = (index: number) => {
 }
 
 .download-name {
-    font-weight: 600;
-    color: #1a3a8f;
-    text-align: center;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
-  }
+  font-weight: 700;
+  color: #1a3a8f;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
 
 .download-card:hover .download-name {
   color: #1976d2;
 }
 
 .download-action {
-    display: inline-block;
-    background: linear-gradient(135deg, #1976d2 0%, #1a3a8f 100%);
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    margin-top: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
-    position: relative;
-    overflow: hidden;
-  }
+  display: inline-block;
+  background: linear-gradient(135deg, #1976d2 0%, #1a3a8f 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+  position: relative;
+  overflow: hidden;
+}
 
 .download-action::before {
   content: "";
@@ -828,9 +787,6 @@ const handleVideoClick = (index: number) => {
   border-radius: 1rem;
   box-shadow: 0 4px 24px rgba(26, 58, 143, 0.08);
   border: 1px solid #e3f2fd;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
 }
 
 .placeholder-icon {
@@ -840,169 +796,45 @@ const handleVideoClick = (index: number) => {
 }
 
 .placeholder-text {
-    color: #555;
-    font-size: 0.85rem;
-    text-align: center;
-    margin: 0;
-  }
-
-/* 平板响应式调整 */
-@media (max-width: 768px) {
-  .product-header {
-    padding: 4rem 0 3rem;
-  }
-
-  .product-title {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .product-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-  }
-
-  .section-title {
-    font-size: 1.6rem;
-    margin: 0 0 2rem 0;
-  }
-
-  .feature-card {
-    padding: 2rem;
-  }
-
-  .feature-title {
-    font-size: 0.9rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .feature-desc {
-    font-size: 0.75rem;
-    line-height: 1.6;
-  }
-
-  .param-key,
-  .param-value {
-    font-size: 0.8rem;
-  }
-
-  .download-name {
-    font-size: 0.85rem;
-  }
-  
-  .download-action {
-    font-size: 0.8rem;
-    padding: 0.55rem 1.1rem;
-  }
-
-  .back-btn {
-    font-size: 0.8rem;
-    padding: 12px 24px;
-  }
-}
-
-/* 移动端响应式调整 */
-@media (max-width: 480px) {
-  .product-header {
-    padding: 3rem 0 2rem;
-  }
-
-  .product-title {
-    font-size: 1.8rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .product-desc {
-    font-size: 0.9rem;
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
-    padding: 0 0.5rem;
-  }
-
-  .section-title {
-    font-size: 1.4rem;
-    margin: 0 0 1.5rem 0;
-  }
-
-  .feature-card {
-    padding: 1.5rem;
-  }
-
-  .feature-title {
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .feature-desc {
-    font-size: 0.7rem;
-    line-height: 1.55;
-  }
-
-  .param-key,
-  .param-value {
-    font-size: 0.75rem;
-    padding: 1rem;
-  }
-
-  .download-name {
-    font-size: 0.8rem;
-  }
-
-  .download-action {    font-size: 0.7rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .back-btn {
-    font-size: 0.8rem;
-    padding: 12px 24px;
-  }
+  color: #666;
+  font-size: 1.1rem;
+  text-align: center;
+  margin: 0;
 }
 
 /* 大屏幕响应式调整 */
 @media (min-width: 1440px) {
   .product-title {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
 
   .product-desc {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   .section-title {
-    font-size: 1.8rem;
+    font-size: 2.6rem;
   }
 
   .feature-title {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   .feature-desc {
-    font-size: 0.8rem;
+    font-size: 1.3rem;
   }
 
   .param-key,
   .param-value {
-    font-size: 0.95rem;
+    font-size: 1.3rem;
   }
 
   .download-name {
-    font-size: 0.85rem;
+    font-size: 1.3rem;
   }
 
   .placeholder-text {
-    font-size: 0.85rem;
-  }
-  
-  .videos-grid {
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2.5rem;
-  }
-  
-  .downloads-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    font-size: 1.3rem;
   }
 }
 
@@ -1014,38 +846,31 @@ const handleVideoClick = (index: number) => {
 }
 
 .back-btn {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-  color: white;
-  text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
   position: relative;
-  overflow: hidden;
   border: none;
+  background: linear-gradient(135deg, #1a3a8f 0%, #4a90e2 100%);
+  color: #fff;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 150px;
+  overflow: hidden;
+  min-width: 160px;
   justify-content: center;
   margin: 0 auto;
-}
-
-.back-btn:hover {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
 }
 
 .back-btn::before {
   content: "";
   position: absolute;
   top: 0;
-  left: -100%;
   width: 100%;
   height: 100%;
   background: linear-gradient(
@@ -1061,7 +886,10 @@ const handleVideoClick = (index: number) => {
   left: 100%;
 }
 
-
+.back-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3);
+}
 
 .back-btn:active {
   transform: translateY(0) scale(1.02);

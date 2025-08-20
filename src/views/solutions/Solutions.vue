@@ -100,7 +100,7 @@ const Applications = computed(() => {
 :root {
   --primary-color: #1a3a8f;
   --primary-light: #4f8cff;
-  --text-color: #2d3748;
+  --text-color: #222;
   --border-color: #e3e8f0;
   --shadow-light: rgba(26, 58, 143, 0.08);
   --shadow-medium: rgba(26, 58, 143, 0.13);
@@ -113,7 +113,7 @@ const Applications = computed(() => {
 .solutions-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f8 100%);
-  padding: 80px 0;
+  padding: 48px 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -132,7 +132,7 @@ const Applications = computed(() => {
 
 .feature-tag:hover {
   background: #f8f9fc;
-  color: #2d3748;
+  color: #222;
   border: 1px solid #1a3a8f;
   transform: scale(1.05);
 }
@@ -145,35 +145,37 @@ const Applications = computed(() => {
 
 .page-header {
   text-align: center;
-  margin-bottom: 80px;
-  padding-top: 32px;
+  margin-bottom: 64px;
 }
 
 .page-title {
-  font-weight: 700;
+  font-size: 4.6rem;
+  font-weight: 800;
   margin-bottom: 36px;
   letter-spacing: 2px;
-  color: #2d3748;
-  font-size: 3rem;
+  color: #222;
 }
 
 .page-subtitle {
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: 800;
   margin-bottom: 36px;
   letter-spacing: 1px;
   text-align: center;
-  color: #2d3748;
+  background: linear-gradient(135deg, #333 0%, #1a3a8f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1.3;
-  font-size: 1.1rem;
 }
 
 .section-title {
-  color: #2d3748;
-  font-weight: 600;
+  color: #222;
+  font-size: 2.6rem;
+  font-weight: 700;
   text-align: center;
   margin: 48px 0 32px 0;
   letter-spacing: 1px;
-  font-size: 2rem;
   padding-left: 0;
   position: relative;
   transition: color 0.3s ease;
@@ -263,12 +265,14 @@ const Applications = computed(() => {
   justify-content: center;
 }
 .app-title {
-  color: #2d3748;
-  font-weight: 500;
+  font-size: 1.6rem;
+  color: #222;
+  font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
 .app-desc {
+  font-size: 1.15rem;
   color: #888;
   margin-bottom: 10px;
   line-height: 1.5;
@@ -296,6 +300,18 @@ const Applications = computed(() => {
     --section-spacing: 60px;
     --card-padding: 32px 24px;
   }
+
+  .page-title {
+    font-size: 4rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.4rem;
+  }
 }
 
 @media (max-width: 900px) {
@@ -320,22 +336,26 @@ const Applications = computed(() => {
     padding: 32px 24px;
   }
 
+  .core-title {
+    font-size: 1.8rem;
+  }
+
   .solutions-page {
-    padding: 60px 0 32px 0;
+    padding: 28px 0 32px 0;
   }
 
   .page-title {
-    font-size: 2.4rem;
+    font-size: 3.2rem;
     margin-bottom: 18px;
   }
 
   .page-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     margin-bottom: 20px;
   }
 
   .section-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin: 32px 0 18px 0;
   }
   .section-title::after {
@@ -372,12 +392,11 @@ const Applications = computed(() => {
   }
 
   .solutions-page {
-    padding: 40px 0 16px 0;
+    padding: 12px 0 16px 0;
   }
 
   .page-header {
-    margin-bottom: 36px;
-    padding-top: 12px;
+    margin-bottom: 32px;
   }
 
   .page-title {
@@ -386,12 +405,12 @@ const Applications = computed(() => {
   }
 
   .page-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     margin-bottom: 20px;
   }
 
   .section-title {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     margin: 32px 0 18px 0;
     padding-left: 0;
   }

@@ -1,27 +1,31 @@
 <template>
+
   <section class="industry-apps">
-    <h2 class="section-title">{{ $t("home.industryApplications.title") }}</h2>
+
+    <h2 class="section-title">{{ $t('home.industryApplications.title') }}</h2>
 
     <div class="section-desc">
-      {{ $t("home.industryApplications.description") }}
+       {{ $t('home.industryApplications.description') }}
     </div>
 
     <div class="apps-list-wrap">
-      <button
+       <button
         class="scroll-btn left"
         @mouseenter="pauseScroll"
         @mouseleave="resumeScroll"
         @click="scrollLeft"
       >
-        <span>&lt;</span>
-      </button>
+         <span>&lt;</span> </button
+      >
       <div
         ref="scrollWrap"
         class="apps-list"
         @mouseenter="pauseScroll"
         @mouseleave="resumeScroll"
       >
+
         <div class="apps-track">
+
           <div
             v-for="app in displayApps"
             :key="app.slug"
@@ -29,30 +33,33 @@
             style="cursor: pointer"
             @click="goDetail(app.slug)"
           >
-            <span class="icon" v-html="app.svg"></span>
-            <div class="app-title">
-              {{ $t(`applications.${app.slug}.title`) }}
-            </div>
+             <span class="icon" v-html="app.svg"></span>
+            <div class="app-title">{{ $t(`applications.${app.slug}.title`) }}</div>
+
           </div>
+
         </div>
+
       </div>
-      <button
+       <button
         class="scroll-btn right"
         @mouseenter="pauseScroll"
         @mouseleave="resumeScroll"
         @click="scrollRight"
       >
-        <span>&gt;</span>
-      </button>
+         <span>&gt;</span> </button
+      >
     </div>
+
   </section>
+
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import applications from "@/data/applications";
-import { useAutoScroll } from "@/utils/useAutoScroll";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import applications from '@/data/applications';
+import { useAutoScroll } from '@/helpers/useAutoScroll';
 
 const displayApps = applications;
 const scrollWrap = ref<HTMLElement | null>(null);
@@ -88,16 +95,16 @@ const scrollRight = (): void => {
 }
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2.6rem;
+  font-weight: 800;
   margin-bottom: 18px;
-  color: #2d3748;
+  color: #222;
   letter-spacing: 2px;
 }
 .section-desc {
   text-align: center;
-  color: #2d3748;
-  font-size: 1.3rem;
+  color: #222;
+  font-size: 1.8rem;
   margin-bottom: 38px;
 }
 .apps-list-wrap {
@@ -122,7 +129,11 @@ const scrollRight = (): void => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
+  transition:
+    background 0.18s,
+    color 0.18s,
+    box-shadow 0.18s,
+    transform 0.18s;
   box-shadow: 0 2px 8px 0 rgba(30, 40, 90, 0.08);
 }
 .scroll-btn.left {
@@ -163,8 +174,10 @@ const scrollRight = (): void => {
   align-items: center;
   padding: 24px 10px 18px 10px;
   box-shadow: 0 2px 8px 0 rgba(30, 40, 90, 0.04);
-  transition: box-shadow 0.22s cubic-bezier(0.4, 2, 0.6, 1),
-    transform 0.22s cubic-bezier(0.4, 2, 0.6, 1), border-color 0.18s;
+  transition:
+    box-shadow 0.22s cubic-bezier(0.4, 2, 0.6, 1),
+    transform 0.22s cubic-bezier(0.4, 2, 0.6, 1),
+    border-color 0.18s;
   flex: 0 0 auto;
 }
 .app-card:hover {
@@ -177,7 +190,7 @@ const scrollRight = (): void => {
 }
 .app-img {
   width: 100%;
-  height: 160px;
+  height: 140px;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -190,10 +203,10 @@ const scrollRight = (): void => {
   border-radius: 10px;
 }
 .app-title {
-  font-size: 1rem;
-  color: #2d3748;
+  font-size: 1.5rem;
+  color: #222;
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 18px;
   margin-bottom: 8px;
 }
@@ -202,41 +215,16 @@ const scrollRight = (): void => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 88px;
-  height: 88px;
+  width: 72px;
+  height: 72px;
 }
 .icon svg {
-  width: 88px;
-  height: 88px;
-}
-
-/* 视觉密度补偿 - 根据图标内容密度调整尺寸 */
-.app-card:nth-child(1) .icon svg,
-.app-card:nth-child(6) .icon svg,
-.app-card:nth-child(7) .icon svg {
-  /* 高密度图标：复合系统、智能物流、制药自动化 - 适当缩小 */
-  width: 82px;
-  height: 82px;
-}
-
-.app-card:nth-child(2) .icon svg,
-.app-card:nth-child(3) .icon svg,
-.app-card:nth-child(5) .icon svg {
-  /* 中密度图标：智能制造、智能巡检、农业科研 - 标准尺寸 */
-  width: 88px;
-  height: 88px;
-}
-
-.app-card:nth-child(4) .icon svg,
-.app-card:nth-child(8) .icon svg,
-.app-card:nth-child(9) .icon svg {
-  /* 低密度图标：智能导航、文创艺术、边缘计算 - 适当放大 */
-  width: 94px;
-  height: 94px;
+  width: 72px;
+  height: 72px;
 }
 @media (max-width: 900px) {
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
   }
   .section-desc {
     font-size: 1.1rem;
@@ -262,10 +250,11 @@ const scrollRight = (): void => {
 
 @media (max-width: 600px) {
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   .section-desc {
     font-size: 1rem;
   }
 }
 </style>
+

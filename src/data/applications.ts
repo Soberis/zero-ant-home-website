@@ -60,9 +60,9 @@ const applications: Application[] = [
     slug: "intelligent-manufacturing",
     title: "智能制造",
     description: `
-<p>基于多OS混合部署嵌入式虚拟机和国产工业实时操作系统，为制造业提供高精度、高效率的自动化解决方案。通过双机协作抓球、UR机器人大语言模型动作抓取等核心技术，实现复杂制造工艺的智能化升级。支持6000mm/s高速运动、亚毫米级精度控制，满足电子制造、汽车生产、3C制造等高端制造需求。</p>
+<p>基于多OS混合部署嵌入式虚拟机和国产工业实时操作系统，为制造业提供高精度、高效率的自动化解决方案。通过双机协作、高速高精度机械臂等核心技术，实现复杂制造工艺的智能化升级。支持6000mm/s高速运动、亚毫米级精度控制，满足电子制造、汽车生产、3C制造等高端制造需求。</p>
     `,
-    video: "dual-robot-ball-catching",
+    video: "dual-robot-collaboration",
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="16" width="32" height="20" rx="4" stroke="#1a3a8f" stroke-width="2"/><circle cx="18" cy="26" r="3" stroke="#1a3a8f" stroke-width="2"/><circle cx="30" cy="26" r="3" stroke="#1a3a8f" stroke-width="2"/><path d="M12 12v4" stroke="#1a3a8f" stroke-width="2"/><path d="M24 12v4" stroke="#1a3a8f" stroke-width="2"/><path d="M36 12v4" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   // 单一应用
@@ -72,7 +72,7 @@ const applications: Application[] = [
     description: `
 <p>基于四轴机械臂和六轴机械臂技术，提供0.02mm重复定位精度的高精度装配解决方案。通过先进的运动控制算法和视觉引导技术，支持6000mm/s高速运动，实现复杂产品的精密组装。广泛应用于3C电子、光学器件、精密仪器等高端制造领域，助力客户实现高质量、高效率的自动化生产。</p>
     `,
-    video: "ur-robot-llm-motion-capture",
+    video: "high-speed-precision-robot-arm",
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 36l12-12 12 12" stroke="#1a3a8f" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" stroke="#1a3a8f" stroke-width="2"/><path d="M18 18l12-6" stroke="#1a3a8f" stroke-width="2"/><path d="M30 18l-12-6" stroke="#1a3a8f" stroke-width="2"/></svg>`,
   },
   {

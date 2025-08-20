@@ -1,17 +1,23 @@
 <!-- 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互 -->
 <template>
+
   <div class="support-hero-bg">
+
     <div class="support-hero">
-      <h1 id="after-sales" class="hero-title">{{ t("supportPage.title") }}</h1>
+
+      <h1 id="after-sales" class="hero-title">{{ t('supportPage.title') }}</h1>
 
       <div class="hero-desc">
-        {{ t("supportPage.description") }}
+         {{ t('supportPage.description') }}
       </div>
 
       <div class="service-cards">
+
         <div class="service-card">
+
           <div class="icon-box">
-            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+             <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+
               <path
                 d="M28 6L46 12V26C46 38.5 36.5 47.5 28 50C19.5 47.5 10 38.5 10 26V12L28 6Z"
                 fill="#fff"
@@ -28,7 +34,7 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                12
+                 12
               </text>
 
               <text
@@ -40,17 +46,21 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                HOURS
+                 HOURS
               </text>
-            </svg>
+               </svg
+            >
           </div>
 
-          <div class="card-desc">{{ t("supportPage.fastResponse") }}</div>
+          <div class="card-desc">{{ t('supportPage.fastResponse') }}</div>
+
         </div>
 
         <div class="service-card">
+
           <div class="icon-box">
-            <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+             <svg width="66" height="66" viewBox="0 0 56 56" fill="none">
+
               <circle
                 cx="28"
                 cy="28"
@@ -74,31 +84,37 @@
                 font-weight="bold"
                 dominant-baseline="middle"
               >
-                24h
+                 24h
               </text>
-            </svg>
+               </svg
+            >
           </div>
 
-          <div class="card-desc">{{ t("supportPage.dedicatedService") }}</div>
+          <div class="card-desc">{{ t('supportPage.dedicatedService') }}</div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
 
   <div class="support-page">
-    <h2 id="download" class="section-title">
-      {{ t("supportPage.relatedDownloads") }}
-    </h2>
+
+    <h2 id="download" class="section-title">{{ t('supportPage.relatedDownloads') }}</h2>
 
     <div class="section-block">
+
       <div
         v-for="(item, idx) in downloads"
         :key="item.title"
         class="card-item download-card"
         :class="{ open: downloadStates[idx] }"
       >
-        <div
-          class="card-header"
+
+        <div 
+          class="card-header" 
           @click="toggleDownload(idx)"
           @keydown="handleKeydown($event, idx, 'download')"
           role="button"
@@ -106,38 +122,40 @@
           :aria-expanded="downloadStates[idx]"
           :aria-controls="`download-content-${idx}`"
         >
-          <span class="card-title download-title">{{ item.title }}</span>
-          <span class="card-icon" aria-hidden="true">{{
-            downloadStates[idx] ? "-" : "+"
-          }}</span>
+           <span class="card-title download-title">{{ item.title }}</span
+          > <span class="card-icon" aria-hidden="true">{{ downloadStates[idx] ? '-' : '+' }}</span
+          >
         </div>
-        <transition name="fade-slide">
-          <div
-            v-if="downloadStates[idx]"
+         <transition name="fade-slide"
+          >
+          <div 
+            v-if="downloadStates[idx]" 
             class="card-content"
             :id="`download-content-${idx}`"
             role="region"
             :aria-hidden="!downloadStates[idx]"
           >
-            <span style="font-style: italic">{{
-              t("supportPage.preparingMessage")
-            }}</span>
+             <span style="color: #666; font-style: italic;">{{ t('supportPage.preparingMessage') }}</span>
           </div>
-        </transition>
+           </transition
+        >
       </div>
+
     </div>
 
-    <h2 id="faq" class="section-title">{{ t("supportPage.faqTitle") }}</h2>
+    <h2 id="faq" class="section-title">{{ t('supportPage.faqTitle') }}</h2>
 
     <div class="section-block">
+
       <div
         v-for="(faq, idx) in faqs"
         :key="faq.q"
         class="card-item faq-card"
         :class="{ open: faqStates[idx] }"
       >
-        <div
-          class="card-header"
+
+        <div 
+          class="card-header" 
           @click="toggleFaq(idx)"
           @keydown="handleKeydown($event, idx, 'faq')"
           role="button"
@@ -145,31 +163,33 @@
           :aria-expanded="faqStates[idx]"
           :aria-controls="`faq-content-${idx}`"
         >
-          <span class="card-title faq-title">{{ faq.q }}</span>
-          <span class="card-icon" aria-hidden="true">{{
-            faqStates[idx] ? "-" : "+"
-          }}</span>
+           <span class="card-title faq-title">{{ faq.q }}</span
+          > <span class="card-icon" aria-hidden="true">{{ faqStates[idx] ? '-' : '+' }}</span
+          >
         </div>
-        <transition name="fade-slide">
-          <div
-            v-if="faqStates[idx]"
+         <transition name="fade-slide"
+          >
+          <div 
+            v-if="faqStates[idx]" 
             class="card-content"
             :id="`faq-content-${idx}`"
             role="region"
             :aria-hidden="!faqStates[idx]"
-          >
-            {{ faq.a }}
-          </div>
-        </transition>
+          > {{ faq.a }} </div>
+           </transition
+        >
       </div>
+
     </div>
+
   </div>
+
 </template>
 
 <script setup lang="ts">
 // 售后支持页面，包含服务介绍、资料下载、常见问题FAQ，支持展开收起交互
-import { computed, ref, watchEffect } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed, ref, watchEffect } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
@@ -185,27 +205,27 @@ interface FaqItem {
 
 const downloads = computed<DownloadItem[]>(() => [
   {
-    title: t("supportPage.downloads.productManual"),
-    desc: "PDF文档下载",
+    title: t('supportPage.downloads.productManual'),
+    desc: 'PDF文档下载',
   },
   {
-    title: t("supportPage.downloads.jointMaterials"),
-    desc: "ZIP资料包下载",
+    title: t('supportPage.downloads.jointMaterials'),
+    desc: 'ZIP资料包下载',
   },
 ]);
 
 const faqs = computed<FaqItem[]>(() => [
   {
-    q: t("supportPage.faqs.navigation.question"),
-    a: t("supportPage.faqs.navigation.answer"),
+    q: t('supportPage.faqs.navigation.question'),
+    a: t('supportPage.faqs.navigation.answer'),
   },
   {
-    q: t("supportPage.faqs.development.question"),
-    a: t("supportPage.faqs.development.answer"),
+    q: t('supportPage.faqs.development.question'),
+    a: t('supportPage.faqs.development.answer'),
   },
   {
-    q: t("supportPage.faqs.customization.question"),
-    a: t("supportPage.faqs.customization.answer"),
+    q: t('supportPage.faqs.customization.question'),
+    a: t('supportPage.faqs.customization.answer'),
   },
 ]);
 
@@ -227,14 +247,10 @@ function toggleFaq(idx: number): void {
 }
 
 // 键盘导航支持
-function handleKeydown(
-  event: KeyboardEvent,
-  idx: number,
-  type: "download" | "faq"
-): void {
-  if (event.key === "Enter" || event.key === " ") {
+function handleKeydown(event: KeyboardEvent, idx: number, type: 'download' | 'faq'): void {
+  if (event.key === 'Enter' || event.key === ' ') {
     event.preventDefault();
-    if (type === "download") {
+    if (type === 'download') {
       toggleDownload(idx);
     } else {
       toggleFaq(idx);
@@ -260,19 +276,19 @@ function handleKeydown(
   align-items: center;
 }
 .hero-title {
-  color: #2d3748;
-  font-weight: 700;
+  color: #222;
+  font-size: 4.2rem;
+  font-weight: 800;
   text-align: center;
   margin-bottom: 28px;
   letter-spacing: 2px;
-  font-size: 3rem;
 }
 .hero-desc {
-  color: #2d3748;
+  color: #222;
+  font-size: 1.65rem;
   text-align: center;
   margin-bottom: 48px;
   font-weight: 400;
-  font-size: 1.1rem;
 }
 .service-cards {
   display: flex;
@@ -292,7 +308,9 @@ function handleKeydown(
   align-items: center;
   justify-content: center;
   padding: 48px 24px 32px 24px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 .service-card:hover {
   box-shadow: 0 12px 40px rgba(26, 58, 143, 0.16);
@@ -305,9 +323,9 @@ function handleKeydown(
   justify-content: center;
 }
 .card-desc {
-  color: #2d3748;
-  font-size: 1.2rem;
-  font-weight: 500;
+  color: #222;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: center;
 }
 .support-page {
@@ -320,13 +338,13 @@ function handleKeydown(
   min-height: 100vh;
 }
 .section-title {
-  color: #2d3748;
-  font-weight: 600;
+  color: #222;
+  font-size: 2.6rem;
+  font-weight: 700;
   text-align: center;
   margin: 48px 0 32px 0;
   letter-spacing: 1px;
   padding-left: 0;
-  font-size: 2rem;
 }
 .section-block {
   width: 100%;
@@ -343,7 +361,9 @@ function handleKeydown(
   box-shadow: 0 2px 8px rgba(26, 58, 143, 0.04);
   width: 100%;
   margin-bottom: 24px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -365,20 +385,20 @@ function handleKeydown(
   background: #f0f3fa;
 }
 .card-title {
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: 700;
   letter-spacing: 0.01em;
-  font-size: 1.1rem;
 }
 .download-title {
   color: #1a3a8f;
 }
 .faq-title {
-  color: #2d3748;
+  color: #222;
 }
 .card-icon {
   font-size: 1.5rem;
   color: #bbb;
-  font-weight: 600;
+  font-weight: 700;
   transition: color 0.2s;
 }
 .card-header:hover .card-icon {
@@ -386,21 +406,20 @@ function handleKeydown(
 }
 .card-content {
   padding: 0 40px 24px 40px;
-  color: #2d3748;
+  color: #222;
+  font-size: 1.25rem;
   line-height: 1.8;
   background: #f7f8fa;
   transition: all 0.2s;
-  font-size: 1rem;
 }
 .card-content a {
   color: #1a3a8f;
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: 500;
   transition: color 0.2s;
 }
 .card-content a:hover {
   color: #0d1e4a;
-  text-decoration: none;
 }
 /* 展开收起动画 */
 .fade-slide-enter-active,
@@ -440,20 +459,20 @@ function handleKeydown(
   .icon-box {
     margin-bottom: 14px;
   }
+  .card-desc {
+    font-size: 1.2rem;
+  }
   .hero-title {
+    font-size: 2.4rem;
     margin-bottom: 12px;
-    font-size: 1.8rem;
   }
   .hero-desc {
+    font-size: 1.25rem;
     margin-bottom: 24px;
-    margin: 32px 0 18px 0;
-    font-size: 1rem;
-  }
-  .card-desc {
-    font-size: 1.1rem;
   }
   .section-title {
     font-size: 1.4rem;
+    margin: 32px 0 18px 0;
   }
   .card-header,
   .card-content {
@@ -469,11 +488,11 @@ function handleKeydown(
     padding: 16px 0 0 0;
   }
   .hero-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin-bottom: 8px;
   }
   .hero-desc {
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 14px;
   }
   .service-card {
@@ -482,14 +501,14 @@ function handleKeydown(
     min-height: 80px;
   }
   .card-desc {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
   .support-page {
     padding: 10px 0 16px 0;
     gap: 12px;
   }
   .section-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin: 18px 0 8px 0;
     padding-left: 0;
   }
@@ -498,10 +517,7 @@ function handleKeydown(
   }
   .card-content {
     padding: 0 16px 12px 16px;
-    font-size: 0.9rem;
-  }
-  .card-title {
-    font-size: 1rem;
   }
 }
 </style>
+

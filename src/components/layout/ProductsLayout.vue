@@ -1,5 +1,7 @@
 <template>
-  <div class="products"><slot /></div>
+
+  <div class="products"> <slot /> </div>
+
 </template>
 
 <script setup lang="ts">
@@ -11,7 +13,7 @@
 .products {
   background: transparent;
   min-height: 100vh;
-  padding: 100px 0 80px 0;
+  padding: 80px 0 60px 0;
   max-width: 1400px;
   margin: 0 auto;
   padding-left: 40px;
@@ -25,23 +27,22 @@
 }
 
 :deep(.series-title) {
-  font-size: 2.6rem;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 24px;
-  letter-spacing: 1.5px;
-  line-height: 1.25;
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #222;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  line-height: 1.1;
   text-align: center;
 }
 
 :deep(.series-subtitle) {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 72px;
-  font-weight: 500;
+  font-size: 1.4rem;
+  color: #666;
+  margin-bottom: 60px;
+  font-weight: 600;
   letter-spacing: 1px;
   text-align: center;
-  line-height: 1.6;
 }
 
 :deep(.product-card-wrapper) {
@@ -88,20 +89,20 @@
 }
 
 :deep(.product-name) {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #2d3748;
-  letter-spacing: 1px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 22px;
+  color: #222;
+  letter-spacing: 1.5px;
 }
 
 :deep(.product-desc) {
-  color: #2d3748748;
-  font-size: 1.1rem;
-  margin-bottom: 48px;
+  color: #222;
+  font-size: 1.18rem;
+  margin-bottom: 44px;
   text-align: center;
   min-height: 48px;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
 :deep(.more-btn) {
@@ -113,8 +114,11 @@
   padding: 12px 48px;
   font-size: 1.15rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  font-weight: 600;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  font-weight: 700;
   letter-spacing: 1px;
   box-shadow: 0 2px 8px rgba(26, 58, 143, 0.04);
 }
@@ -128,7 +132,6 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .products {
-    padding: 60px 24px 40px 24px;
     padding-left: 24px;
     padding-right: 24px;
   }
@@ -139,22 +142,15 @@
   }
 
   :deep(.series-title) {
-    font-size: 2.1rem;
-    margin-bottom: 20px;
+    font-size: 2.4rem;
   }
 
   :deep(.series-subtitle) {
-    font-size: 1.1rem;
-    margin-bottom: 48px;
-    line-height: 1.55;
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 900px) {
-  .products {
-    padding: 80px 30px 60px 30px;
-  }
-
   :deep(.product-card-wrapper) {
     max-width: 98vw;
     border-radius: 18px;
@@ -176,28 +172,17 @@
   }
 
   :deep(.series-title) {
-    font-size: 2.3rem;
-    margin-bottom: 22px;
-  }
-
-  :deep(.series-subtitle) {
-    font-size: 1.15rem;
-    margin-bottom: 56px;
-    line-height: 1.58;
+    font-size: 2.2rem;
   }
 
   :deep(.product-name) {
-    font-size: 1.5rem;
-  }
-
-  :deep(.product-desc) {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 600px) {
   .products {
-    padding: 40px 16px 30px 16px;
+    padding: 32px 16px 24px 16px;
   }
 
   :deep(.product-series) {
@@ -209,24 +194,12 @@
   }
 
   :deep(.series-title) {
-    font-size: 1.7rem;
-    margin-bottom: 16px;
+    font-size: 1.3rem;
   }
 
   :deep(.series-subtitle) {
     font-size: 1rem;
-    margin-bottom: 36px;
-    line-height: 1.5;
-  }
-
-  :deep(.product-name) {
-    font-size: 1.3rem;
-    margin-bottom: 16px;
-  }
-
-  :deep(.product-desc) {
-    font-size: 0.95rem;
-    margin-bottom: 36px;
   }
 }
 </style>
+

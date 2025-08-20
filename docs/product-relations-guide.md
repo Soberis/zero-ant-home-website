@@ -38,7 +38,7 @@ export const productRelations: ProductRelationsData = {
       'medical-automation-bilibili',
       'semiconductor-bilibili',
       'ur-robot-llm-motion-capture',
-      'dual-robot-ball-catching',
+      'dual-robot-collaboration',
       'composite-robot-application',
     ],
     customFeatures: [
@@ -83,7 +83,7 @@ export const productRelations: ProductRelationsData = {
 - `medical-automation-bilibili` - 医疗自动化视频案例
 - `semiconductor-bilibili` - 半导体行业视频案例
 - `ur-robot-llm-motion-capture` - UR机器人大模型动作捕捉
-- `dual-robot-ball-catching` - 双机协作抓球
+- `dual-robot-collaboration` - 双机器人协作
 - `composite-robot-application` - 复合机器人应用
 - `four-axis-robot-open-fridge` - 四轴机器人开冰箱
 - `polishing-robot` - 抛光机器人

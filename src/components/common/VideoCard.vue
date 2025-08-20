@@ -1,26 +1,31 @@
 <template>
+
   <div
     class="video-card"
     @mouseenter="emit('hover', index)"
     @mouseleave="emit('leave')"
     @click="emit('click', index)"
   >
-    <img
-      v-lazy="card.img"
-      :alt="card.title + '图片'"
-      class="video-card-img"
-      loading="lazy"
-    />
+     <img 
+       v-lazy="card.img" 
+       :alt="card.title + '图片'" 
+       class="video-card-img"
+       loading="lazy"
+     />
     <div class="video-card-title-bar" :class="{ active: active }">
+
       <div class="video-card-title" :class="{ active: active }">
-        {{ t(`videos.${card.slug}.title`, card.title) }}
+         {{ t(`videos.${card.slug}.title`, card.title) }}
       </div>
+
     </div>
+
   </div>
+
 </template>
 
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
@@ -41,14 +46,16 @@ defineProps({
  * @emits leave 鼠标离开
  * @emits click 点击卡片
  */
-const emit = defineEmits(["hover", "leave", "click"]);
+const emit = defineEmits(['hover', 'leave', 'click']);
 </script>
 
 <style scoped>
 .video-card {
   background: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
@@ -56,12 +63,11 @@ const emit = defineEmits(["hover", "leave", "click"]);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   min-height: 320px;
-  width: 100%;
   position: relative;
 }
 
 .video-card::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -75,7 +81,8 @@ const emit = defineEmits(["hover", "leave", "click"]);
 
 .video-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(26, 58, 143, 0.15),
+  box-shadow:
+    0 12px 40px rgba(26, 58, 143, 0.15),
     0 4px 12px rgba(0, 0, 0, 0.08);
   border-color: rgba(26, 58, 143, 0.2);
 }
@@ -113,9 +120,10 @@ const emit = defineEmits(["hover", "leave", "click"]);
 }
 
 .video-card-title {
-  color: #2d3748;
+  font-size: 18px;
+  color: #2c3e50;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   margin: 0;
   line-height: 1.4;
@@ -138,6 +146,7 @@ const emit = defineEmits(["hover", "leave", "click"]);
     padding: 20px 16px;
   }
   .video-card-title {
+    font-size: 16px;
   }
 }
 
@@ -152,7 +161,9 @@ const emit = defineEmits(["hover", "leave", "click"]);
     padding: 16px 12px;
   }
   .video-card-title {
+    font-size: 15px;
     letter-spacing: 0.3px;
   }
 }
 </style>
+
