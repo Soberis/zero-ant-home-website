@@ -1,5 +1,6 @@
 import { App } from 'vue'
 import { lazyLoad } from './lazyLoad'
+import scrollAnimateDirective from './scrollAnimate'
 
 /**
  * 注册全局指令
@@ -8,6 +9,9 @@ import { lazyLoad } from './lazyLoad'
 export function setupDirectives(app: App) {
   // 注册懒加载指令
   app.directive('lazy', lazyLoad)
+  
+  // 注册滚动动画指令
+  app.directive('scroll-animate', scrollAnimateDirective)
 }
 
-export { lazyLoad }
+export { lazyLoad, scrollAnimateDirective as scrollAnimate }

@@ -180,8 +180,62 @@ onMounted(() => {
   max-width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: #fff;
+  background: linear-gradient(135deg, #0a1628 0%, #1a3a8f 50%, #2d5cf6 100%);
 }
+
+/* 动态科技网格背景 */
+.hero-carousel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(45, 92, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 92, 246, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 动态粒子效果 */
+.hero-carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(45, 92, 246, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(26, 122, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(26, 58, 143, 0.1) 0%, transparent 50%);
+  animation: particleFloat 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
 .arc-bg {
   position: absolute;
   top: 0;
@@ -191,7 +245,9 @@ onMounted(() => {
   height: 300px;
   pointer-events: none;
   z-index: 3;
+  opacity: 0.4;
 }
+
 .carousel-slide {
   position: absolute;
   top: 0;
@@ -199,12 +255,15 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.8s;
+  transition: opacity 0.8s ease-in-out;
   z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
 }
+
 .carousel-slide.active {
   opacity: 1;
   z-index: 2;
@@ -215,21 +274,55 @@ onMounted(() => {
   left: 80px;
   bottom: 120px;
   z-index: 2;
-  color: #222;
+  color: #fff;
   text-align: left;
-  max-width: 600px;
+  max-width: 650px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
+
 .slide-title {
-  font-size: 3.2rem;
-  font-weight: 700;
+  font-size: 3.6rem;
+  font-weight: 800;
   margin-bottom: 18px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleFadeIn 1s ease-out;
 }
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .slide-desc {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 400;
   margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  animation: descFadeIn 1s ease-out 0.3s both;
 }
+
+@keyframes descFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .carousel-controls {
   position: absolute;
   right: 60px;
@@ -238,23 +331,71 @@ onMounted(() => {
   gap: 18px;
   z-index: 10;
 }
+
 .carousel-controls button {
   width: 28px;
   height: 8px;
   border-radius: 6px;
   border: none;
-  background: #b0b8c6;
-  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.3);
+  opacity: 0.6;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
+  backdrop-filter: blur(10px);
 }
+
+.carousel-controls button:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
 .carousel-controls button.active {
   width: 44px;
-  background: #1a7cff;
+  background: linear-gradient(135deg, #1a7cff 0%, #2d5cf6 100%);
   opacity: 1;
-  box-shadow: 0 2px 8px 0 rgba(26, 122, 255, 0.18);
+  box-shadow: 0 4px 16px rgba(26, 122, 255, 0.4),
+              0 0 20px rgba(26, 122, 255, 0.2);
+  animation: pulse 2s ease-in-out infinite;
 }
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 16px rgba(26, 122, 255, 0.4),
+                0 0 20px rgba(26, 122, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(26, 122, 255, 0.6),
+                0 0 30px rgba(26, 122, 255, 0.3);
+  }
+}
+
+/* 添加装饰性的科技线条 */
+.tech-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(45, 92, 246, 0.3), transparent);
+  height: 1px;
+  width: 100%;
+  animation: scanLine 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes scanLine {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .slide-content {
     left: 24px;
@@ -262,10 +403,11 @@ onMounted(() => {
     max-width: 90vw;
   }
   .slide-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
   }
   .slide-desc {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .carousel-controls {
     right: 20px;
@@ -278,6 +420,15 @@ onMounted(() => {
   }
   .carousel-controls button.active {
     width: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .slide-title {
+    font-size: 1.8rem;
+  }
+  .slide-desc {
+    font-size: 0.95rem;
   }
 }
 </style>
