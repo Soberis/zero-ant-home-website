@@ -1,5 +1,5 @@
 <template>
-  <header class="header" :class="{ scrolled: isScrolled }">
+  <header class="header">
     <nav class="nav-container">
       <div class="logo">
         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
@@ -270,14 +270,6 @@ import logoUrl from "@/assets/zeroant_logo.png";
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
 
-// 滚动状态
-const isScrolled = ref(false);
-
-// 监听滚动
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50;
-};
-
 // 切换移动端菜单
 function toggleMobileMenu() {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
@@ -357,17 +349,6 @@ onMounted(() => {
     locale.value = "zh";
     localStorage.setItem("language", "zh");
   }
-
-  // 添加滚动监听
-  window.addEventListener("scroll", handleScroll);
-});
-
-onUnmounted(() => {
-  // 清理body样式
-  document.body.style.overflow = "";
-
-  // 移除滚动监听
-  window.removeEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
@@ -378,22 +359,15 @@ onUnmounted(() => {
 
 <style scoped>
 .header {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #fff;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(26, 58, 143, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header.scrolled {
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 24px rgba(10, 22, 40, 0.12);
-  border-bottom: 1px solid rgba(45, 92, 246, 0.15);
 }
 
 .nav-container {
@@ -406,7 +380,7 @@ onUnmounted(() => {
   height: 80px;
   box-sizing: border-box;
   justify-content: space-between;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.95);
   position: relative;
   overflow-x: hidden;
 }
@@ -417,34 +391,29 @@ onUnmounted(() => {
   min-width: 0;
   margin-left: 48px;
   padding: 0 16px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s ease;
   flex-shrink: 0;
 }
 
 .logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .logo img {
   flex-shrink: 0;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
 }
 
 .logo-text {
   font-size: 26px;
   font-weight: 700;
-  color: #0a1628;
+  color: #1a3a8f;
   margin-left: 12px;
   letter-spacing: -0.5px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.3s ease;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #0a1628 0%, #1a3a8f 50%, #2d5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .nav-wrapper {
@@ -453,7 +422,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   height: 100%;
 }
 
@@ -504,18 +473,18 @@ onUnmounted(() => {
 .dropdown-icon {
   font-size: 10px;
   color: #666;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   transform: rotate(0deg);
 }
 
 .has-dropdown:hover .dropdown-icon {
   transform: rotate(180deg);
-  color: #2d5cf6;
+  color: #1a3a8f;
 }
 
 .nav-link:hover {
-  color: #2d5cf6;
-  background: rgba(45, 92, 246, 0.08);
+  color: #1a3a8f;
+  background-color: rgba(26, 58, 143, 0.05);
   transform: translateY(-1px);
 }
 
@@ -525,17 +494,16 @@ onUnmounted(() => {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #2d5cf6, #1a3a8f);
+  background: linear-gradient(90deg, #1a3a8f, #4a90e2);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(45, 92, 246, 0.3);
 }
 
 .nav-link:hover::after,
@@ -551,30 +519,30 @@ onUnmounted(() => {
   transform: translateY(-10px);
   background: rgba(255, 255, 255, 0.98);
   width: 100%;
-  box-shadow: 0 12px 40px rgba(10, 22, 40, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   border-radius: 0;
-  border-top: 2px solid #2d5cf6;
+  border-top: 2px solid #1a3a8f;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
   backdrop-filter: blur(20px);
-  height: 80px;
+  height: 80px; /* 与一级菜单栏高度一致 */
 }
 
 .dropdown-content {
-  padding: 0;
+  padding: 0; /* 移除上下内边距 */
   max-width: 1200px;
   margin: 0 auto;
-  height: 100%;
+  height: 100%; /* 占满dropdown高度 */
   display: flex;
-  align-items: center;
+  align-items: center; /* 垂直居中 */
 }
 
 .dropdown ul {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap; /* 不换行，保持一行排列 */
   justify-content: center;
   align-items: center;
   gap: 24px;
@@ -582,15 +550,15 @@ onUnmounted(() => {
   padding: 0 40px;
   list-style: none;
   width: 100%;
-  height: 100%;
+  height: 100%; /* 占满父容器高度 */
 }
 
 .dropdown li {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100%; /* 占满父容器高度 */
   display: flex;
-  align-items: center;
+  align-items: center; /* 垂直居中 */
 }
 
 .dropdown-item {
@@ -605,7 +573,7 @@ onUnmounted(() => {
   border: 2px solid transparent;
   min-width: 140px;
   flex: 0 0 auto;
-  font-size: 14px;
+  font-size: 14px; /* 从15px调整为14px */
   color: #333;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -615,7 +583,7 @@ onUnmounted(() => {
 }
 
 .dropdown-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -624,7 +592,7 @@ onUnmounted(() => {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(45, 92, 246, 0.1),
+    rgba(26, 58, 143, 0.1),
     transparent
   );
   transition: left 0.5s ease;
@@ -635,11 +603,11 @@ onUnmounted(() => {
 }
 
 .dropdown-item:hover {
-  background: linear-gradient(135deg, #f8faff 0%, #e8f2ff 100%);
-  color: #2d5cf6;
+  background: linear-gradient(135deg, #f8faff, #e8f2ff);
+  color: #1a3a8f;
   transform: translateY(-2px);
-  border-color: rgba(45, 92, 246, 0.2);
-  box-shadow: 0 8px 25px rgba(45, 92, 246, 0.15);
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 8px 25px rgba(26, 58, 143, 0.15);
 }
 
 .nav-item:hover .dropdown {
@@ -663,16 +631,16 @@ onUnmounted(() => {
 }
 
 .language-btn {
-  background: rgba(45, 92, 246, 0.08);
-  border: 1.5px solid rgba(45, 92, 246, 0.2);
-  color: #2d5cf6;
+  background: rgba(26, 58, 143, 0.08);
+  border: 1.5px solid rgba(26, 58, 143, 0.2);
+  color: #1a3a8f;
   font-size: 13px;
   font-weight: 500;
   padding: 8px 16px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(45, 92, 246, 0.1);
+  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.1);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
@@ -682,7 +650,7 @@ onUnmounted(() => {
 }
 
 .language-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -691,7 +659,7 @@ onUnmounted(() => {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(45, 92, 246, 0.1),
+    rgba(26, 58, 143, 0.1),
     transparent
   );
   transition: left 0.4s ease;
@@ -702,16 +670,16 @@ onUnmounted(() => {
 }
 
 .language-btn:hover {
-  background: rgba(45, 92, 246, 0.15);
-  border-color: rgba(45, 92, 246, 0.3);
+  background: rgba(26, 58, 143, 0.12);
+  border-color: rgba(26, 58, 143, 0.3);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(45, 92, 246, 0.2);
+  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.15);
   color: #1a3a8f;
 }
 
 .language-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(45, 92, 246, 0.2);
+  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.2);
 }
 
 .lang-text {
@@ -768,8 +736,8 @@ onUnmounted(() => {
 /* 新增中等屏幕优化 */
 @media (min-width: 951px) and (max-width: 1100px) {
   .nav-links {
-    gap: 14px;
-    padding: 0 8px;
+    gap: 14px; /* 进一步缩小 */
+    padding: 0 8px; /* 进一步缩小 */
   }
 
   .nav-link {
@@ -818,7 +786,7 @@ onUnmounted(() => {
 .hamburger-line {
   width: 24px;
   height: 2px;
-  background-color: #2d5cf6;
+  background-color: #1a3a8f;
   margin: 3px 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 1px;
@@ -843,12 +811,11 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(10, 22, 40, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px);
 }
 
 .mobile-nav.open {
@@ -862,8 +829,8 @@ onUnmounted(() => {
   right: 0;
   width: 280px;
   height: 100vh;
-  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
-  box-shadow: -4px 0 20px rgba(10, 22, 40, 0.15);
+  background: linear-gradient(135deg, #ffffff, #f8faff);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding-top: 80px;
@@ -892,22 +859,22 @@ onUnmounted(() => {
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  border-bottom: 1px solid rgba(45, 92, 246, 0.08);
+  border-bottom: 1px solid rgba(26, 58, 143, 0.1);
   transition: all 0.3s ease;
   position: relative;
 }
 
 .mobile-nav-link:hover {
-  background: rgba(45, 92, 246, 0.08);
-  color: #2d5cf6;
+  background: rgba(26, 58, 143, 0.05);
+  color: #1a3a8f;
   padding-left: 32px;
 }
 
 .mobile-nav-link.router-link-active {
-  background: rgba(45, 92, 246, 0.1);
+  background: rgba(26, 58, 143, 0.08);
   color: #1a3a8f;
   font-weight: 600;
-  border-left: 4px solid #2d5cf6;
+  border-left: 4px solid #1a3a8f;
 }
 
 /* 优化响应式设计 - 更早隐藏导航菜单 */
@@ -1143,7 +1110,7 @@ onUnmounted(() => {
 
   .nav-link:hover,
   .nav-link.active {
-    border-color: #2d5cf6;
+    border-color: #1a3a8f;
   }
 }
 </style>

@@ -259,232 +259,112 @@ onUnmounted(() => {
 
 <style scoped>
 .footer {
-  background: linear-gradient(135deg, #0a1628 0%, #1a3a8f 50%, #232323 100%);
+  background: #232323;
   color: #bdbdbd;
   font-size: 14px;
   padding: 40px 0 0 0;
-  margin-top: auto;
+  margin-top: auto; /* 确保页脚在底部 */
   width: 100%;
-  position: relative;
-  overflow: hidden;
 }
-
-/* 添加科技感装饰 */
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(45, 92, 246, 0.5),
-    rgba(26, 58, 143, 0.3),
-    rgba(45, 92, 246, 0.5),
-    transparent
-  );
-  animation: linePulse 3s ease-in-out infinite;
-}
-
-@keyframes linePulse {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* 添加网格背景效果 */
-.footer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    linear-gradient(rgba(45, 92, 246, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45, 92, 246, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
 .footer-main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px;
-  position: relative;
-  z-index: 1;
 }
-
 .footer-columns {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 32px;
 }
-
 .footer-col {
   min-width: 180px;
   flex: 1;
-  position: relative;
 }
-
 .footer-col h4 {
   color: #fff;
   font-size: 16px;
   margin-bottom: 12px;
   font-weight: 600;
-  position: relative;
-  display: inline-block;
 }
-
-.footer-col h4::after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #2d5cf6, #1a3a8f);
-  margin-top: 8px;
-  transition: width 0.3s ease;
-}
-
-.footer-col:hover h4::after {
-  width: 100%;
-}
-
 .footer-subtitle {
   color: #fff;
   font-size: 15px;
   margin: 18px 0 8px 0;
   font-weight: 500;
 }
-
 .footer-link-title {
   color: #fff;
   text-decoration: none;
 }
-
 .footer-link-title:hover {
-  color: #2d5cf6;
+  color: #1e6bc9;
 }
-
 .footer-col ul {
   list-style: none;
   padding: 0;
   margin: 0 0 8px 0;
 }
-
 .footer-col ul li {
   margin-bottom: 8px;
   color: #bdbdbd;
   line-height: 1.7;
-  transition: all 0.3s ease;
+  transition: color 0.2s;
 }
-
 .footer-col ul li a {
   color: #bdbdbd;
   text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
+  transition: color 0.2s;
 }
-
-.footer-col ul li a::before {
-  content: '›';
-  position: absolute;
-  left: -15px;
-  opacity: 0;
-  color: #2d5cf6;
-  transition: all 0.3s ease;
-}
-
-.footer-col ul li a:hover::before {
-  left: -12px;
-  opacity: 1;
-}
-
 .footer-col ul li a.active,
 .footer-col ul li a:hover {
-  color: #2d5cf6;
-  padding-left: 4px;
+  color: #fff;
 }
-
 .contact-col .contact-info {
   font-size: 13px;
   margin-bottom: 16px;
-  line-height: 1.8;
 }
-
 .footer-qrcodes {
   display: flex;
   gap: 16px;
   margin-top: 12px;
 }
-
 .qrcode-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease;
 }
-
-.qrcode-item:hover {
-  transform: translateY(-4px);
-}
-
 .qrcode-img {
   width: 64px;
   height: 64px;
   background: #444;
   border-radius: 8px;
   margin-bottom: 4px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
-.qrcode-item:hover .qrcode-img {
-  box-shadow: 0 4px 16px rgba(45, 92, 246, 0.3);
-}
-
 .qrcode-label {
   font-size: 12px;
   color: #bdbdbd;
-  transition: color 0.3s ease;
 }
-
-.qrcode-item:hover .qrcode-label {
-  color: #2d5cf6;
-}
-
 .footer-bottom {
   margin-top: 32px;
   padding: 16px 0 8px 0;
   text-align: center;
   color: #888;
   font-size: 13px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  z-index: 1;
 }
 
 .icp-link {
   color: #888 !important;
   text-decoration: none;
   margin-left: 8px;
-  transition: color 0.3s ease;
 }
 
 .icp-link:hover {
-  color: #2d5cf6 !important;
+  color: #bbb !important;
 }
-
 .qrcode-col {
   margin-left: 550px;
 }
-
 .bilibili-qrcode-img {
   padding: 2px;
   background: #fff;
@@ -514,7 +394,7 @@ onUnmounted(() => {
   .qrcode-col {
     margin-left: 0;
     flex: 1 1 100%;
-    order: 999;
+    order: 999; /* 将二维码移到最后面 */
     display: flex;
     justify-content: center;
     margin-top: 20px;

@@ -1456,50 +1456,15 @@ const getProductIcon = (slug: string): Component => {
   position: relative;
   padding: 80px 0 64px 0;
   overflow-x: hidden;
-  background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
 }
-
-/* 添加科技感装饰背景 */
-.core-products::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(45, 92, 246, 0.03) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(26, 58, 143, 0.03) 0%, transparent 40%);
-  pointer-events: none;
-  z-index: 0;
-}
-
 .section-title {
   text-align: center;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 800;
-  margin-bottom: 60px;
-  letter-spacing: 3px;
-  color: #0a1628;
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(135deg, #0a1628 0%, #1a3a8f 50%, #2d5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 56px;
+  letter-spacing: 2px;
+  color: #222;
 }
-
-.section-title::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #2d5cf6, #1a3a8f);
-  margin: 20px auto 0;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(45, 92, 246, 0.3);
-}
-
 .products-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1509,213 +1474,78 @@ const getProductIcon = (slug: string): Component => {
   margin: 0 auto;
   padding: 0 40px;
   overflow-x: hidden;
-  position: relative;
-  z-index: 1;
 }
-
 .product-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  border-radius: 28px;
-  box-shadow:
-    0 8px 32px rgba(10, 22, 40, 0.08),
-    0 2px 8px rgba(10, 22, 40, 0.04);
-  min-height: 440px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px 0 rgba(30, 40, 90, 0.08);
+  min-height: 420px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 56px 32px 40px 32px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.2s;
+  /* 移除flex宽度限制 */
   min-width: 0;
   max-width: 100%;
   margin: 0 auto;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  position: relative;
-  overflow: hidden;
 }
-
-/* 卡片光效 */
-.product-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(45, 92, 246, 0.1),
-    transparent
-  );
-  transition: left 0.6s ease;
-  pointer-events: none;
-}
-
-.product-card:hover::before {
-  left: 100%;
-}
-
 .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 16px 48px rgba(45, 92, 246, 0.15),
-    0 8px 24px rgba(45, 92, 246, 0.1);
-  border-color: rgba(45, 92, 246, 0.2);
+  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.13);
 }
-
 .product-img {
   margin-bottom: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 130px;
-  transition: transform 0.4s ease;
-}
-
-.product-card:hover .product-img {
-  transform: scale(1.05);
-}
-
-.product-img svg {
-  width: 100px;
   height: 120px;
-  filter: drop-shadow(0 4px 8px rgba(26, 58, 143, 0.2));
-  transition: filter 0.4s ease;
 }
-
-.product-card:hover .product-img svg {
-  filter: drop-shadow(0 8px 16px rgba(45, 92, 246, 0.3));
+.product-img svg {
+  width: 90px;
+  height: 110px;
 }
-
 .product-title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #0a1628 !important;
+  color: #222 !important;
   margin-bottom: 18px;
   text-align: center;
-  transition: color 0.3s ease;
 }
-
-.product-card:hover .product-title {
-  color: #1a3a8f !important;
-}
-
 .product-desc {
-  font-size: 1.1rem;
-  color: #4a5568 !important;
+  font-size: 1.08rem;
+  color: #222 !important;
   text-align: center;
   margin-bottom: 36px;
   min-height: 56px;
-  line-height: 1.6;
-  transition: color 0.3s ease;
 }
-
-.product-card:hover .product-desc {
-  color: #2d3748 !important;
-}
-
 .more-btn {
   display: inline-block;
-  border: 2px solid #2d5cf6;
-  color: #2d5cf6;
-  border-radius: 28px;
-  padding: 12px 40px;
+  border: 2px solid #1a3a8f;
+  color: #1a3a8f;
+  border-radius: 24px;
+  padding: 10px 36px;
   font-size: 1.1rem;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  background: transparent;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
-
-.more-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #2d5cf6 0%, #1a3a8f 100%);
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.more-btn:hover::before {
-  left: 0;
-}
-
 .more-btn:hover {
+  background: #1a3a8f;
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(45, 92, 246, 0.3);
-}
-
-/* 添加卡片边框渐变效果 */
-.product-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 28px;
-  padding: 2px;
-  background: linear-gradient(135deg, rgba(45, 92, 246, 0), rgba(45, 92, 246, 0.3), rgba(45, 92, 246, 0));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.product-card:hover::after {
-  opacity: 1;
 }
 
 @media (max-width: 900px) {
   .section-title {
-    font-size: 2rem;
-    letter-spacing: 2px;
-  }
-  .products-list {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
+    font-size: 1.4rem;
   }
 }
 
 @media (max-width: 600px) {
   .section-title {
-    font-size: 1.8rem;
-    letter-spacing: 1.5px;
-    margin-bottom: 40px;
-  }
-  .products-list {
-    padding: 0 24px;
-    gap: 28px;
-  }
-  .product-card {
-    padding: 40px 24px 32px 24px;
-    min-height: 400px;
-  }
-  .product-img {
-    height: 110px;
-  }
-  .product-img svg {
-    width: 85px;
-    height: 100px;
-  }
-  .product-title {
-    font-size: 1.4rem;
-  }
-  .product-desc {
-    font-size: 1rem;
-  }
-  .more-btn {
-    padding: 10px 32px;
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 }
 </style>
