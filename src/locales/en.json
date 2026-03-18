@@ -598,7 +598,7 @@
       ]
     },
     "robotstudio-remote-control": {
-      "title": "Upper Computer RobotStudio Remote Control and Simulation",
+      "title": "Upper Computer RobotStudio IDE Remote Control and Simulation",
       "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",
       "tags": [
         "RobotStudio IDE",

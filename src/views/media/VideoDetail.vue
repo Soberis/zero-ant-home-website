@@ -1,8 +1,9 @@
 <!-- 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型 -->
 <template>
   <div class="video-detail-page">
-    <div class="video-detail-main">
-      <div class="video-detail-media">
+    
+    <div class="player-hero-container">
+      <div class="media-wrapper">
         <template v-if="getMediaType(videoInfo) === 'bilibili'">
           <BilibiliPlayer :url="videoInfo.url" :title="videoInfo.title" />
         </template>
@@ -29,50 +30,64 @@
           </div>
         </template>
       </div>
+    </div>
 
-      <div class="video-detail-info">
-        <h1 class="video-title">{{ videoInfo.title }}</h1>
-
-        <div
+    <div class="content-wrapper">
+      <h1 class="video-title">{{ videoInfo.title }}</h1>
+      
+      <div class="video-desc-block">
+        <p
           v-for="(para, idx) in descParagraphs"
           :key="idx"
           class="video-desc"
         >
           {{ para }}
-        </div>
-        <button class="more-btn" @click="showContact = true">
-          {{ t("videos.videoDetail.learnMore") }}
+        </p>
+      </div>
+      
+      <!-- Project Standard CTA -->
+      <div class="action-area">
+        <button class="project-cta-btn" @click="showContact = true" aria-label="Learn More">
+          <span>{{ t("videos.videoDetail.learnMore") }}</span>
+          <svg class="cta-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+          </svg>
         </button>
-        <transition name="fade-dialog">
-          <div
-            v-if="showContact"
-            class="contact-dialog-mask"
-            @click.self="showContact = false"
-          >
-            <div class="contact-dialog">
-              <button class="contact-close-x" @click="showContact = false">
-                ×
-              </button>
-              <h3 class="contact-title">
-                {{ t("videos.videoDetail.qrCodeTitle") }}
-              </h3>
-
-              <div class="contact-qrcode-placeholder">
-                <img
-                  :src="wxworkQrcode"
-                  alt="企业微信二维码"
-                  style="width: 160px; height: 160px; object-fit: contain"
-                />
-              </div>
-
-              <div class="contact-qrcode-desc">
-                {{ t("videos.videoDetail.qrCodeDesc") }}
-              </div>
-            </div>
-          </div>
-        </transition>
       </div>
     </div>
+
+    <!-- Glassmorphism QR Code Dialog -->
+    <transition name="fade-dialog">
+      <div
+        v-if="showContact"
+        class="contact-dialog-mask"
+        @click.self="showContact = false"
+      >
+        <div class="contact-dialog">
+          <button class="contact-close-x" @click="showContact = false">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+          
+          <h3 class="contact-title">
+            {{ t("videos.videoDetail.qrCodeTitle") }}
+          </h3>
+
+          <div class="contact-qrcode-placeholder">
+            <img
+              :src="wxworkQrcode"
+              alt="企业微信二维码"
+              class="qrcode-img"
+            />
+          </div>
+
+          <p class="contact-qrcode-desc">
+            {{ t("videos.videoDetail.qrCodeDesc") }}
+          </p>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -234,278 +249,272 @@ onMounted(() => {
 
 <style scoped>
 .video-detail-page {
-  padding: 32px 0 48px 0;
-  background: #f7f8fa;
+  background: #f7f9fc;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px 120px;
 }
-.video-detail-main {
-  display: flex;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
-  max-width: 1200px;
+
+/* Floating Player Box */
+.player-hero-container {
   width: 100%;
-  min-height: 420px;
-  margin: 0 24px;
-  padding: 0;
+  max-width: 1060px; /* Dominant but elegant */
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
   overflow: hidden;
+  background: #000;
+  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.1), 0 10px 30px rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  margin-bottom: 56px;
+  transform: translateY(0);
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
 }
-.video-detail-media {
-  width: 720px;
-  min-width: 320px;
-  background: #fff;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 24px 24px 32px 32px;
-  box-sizing: border-box;
+
+.player-hero-container:hover {
+  box-shadow: 0 50px 100px rgba(15, 23, 42, 0.15), 0 15px 40px rgba(15, 23, 42, 0.08);
+  transform: translateY(-4px);
 }
+
+.media-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
 .video-player,
 .video-iframe,
-.video-image {
-  width: 100%;
-  max-width: 640px;
-  border-radius: 10px;
-  background: #2d3748;
-  aspect-ratio: 16/9;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-.video-iframe {
-  height: 360px;
-  border: none;
-}
-.video-image {
-  object-fit: cover;
-  height: 360px;
-  background: #f0f0f0;
-}
+.video-image,
 .video-placeholder {
   width: 100%;
-  max-width: 640px;
-  height: 360px;
-  background: #f0f0f0;
-  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  display: block;
+}
+
+.video-placeholder {
+  background: #1e293b;
+  color: #64748b;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #aaa;
 }
-.video-detail-info {
-  flex: 1 1 0;
+
+/* Content Area */
+.content-wrapper {
+  width: 100%;
+  max-width: 780px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 24px 28px 32px 28px;
-  min-width: 260px;
-  max-width: 400px;
-  background: #fff;
-  box-sizing: border-box;
+  align-items: center; /* Center-aligned content */
+  text-align: center;
 }
+
 .video-title {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  margin-top: 0;
-  color: #2d3748;
-  letter-spacing: 0.3px;
-  line-height: 1.3;
-  text-align: left;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Arial",
-    sans-serif;
-}
-.video-desc {
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.7;
-  text-align: left;
-  letter-spacing: 0.1px;
-  margin-bottom: 0.75rem;
-  white-space: pre-line;
-  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Arial",
-    sans-serif;
-  font-weight: 400;
-}
-.video-desc:last-child {
-  margin-bottom: 0;
-}
-.more-btn {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-  color: white;
-  text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-  outline: none;
-  user-select: none;
-  margin-top: 1.5rem;
-  min-width: 110px;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  color: #0f172a;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
-.more-btn:hover {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
-}
-
-.more-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
+.video-desc-block {
   width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
+  margin-bottom: 40px;
 }
 
-.more-btn:hover::before {
-  left: 100%;
+.video-desc {
+  font-size: 1.15rem;
+  color: #475569;
+  line-height: 1.85;
+  margin-block-start: 0;
+  margin-block-end: 20px;
+  letter-spacing: 0.01em;
 }
 
-.more-btn:active {
+.video-desc:last-child {
+  margin-block-end: 0;
+}
+
+/* Project Standard Action CTA */
+.action-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.project-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  color: #fff;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cta-icon {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-left: 2px;
+}
+
+.project-cta-btn:hover {
   background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  transform: translateY(0);
+  box-shadow: 0 12px 32px rgba(26, 58, 143, 0.35);
+  transform: translateY(-2px);
+}
+
+.project-cta-btn:hover .cta-icon {
+  transform: translateX(4px);
+}
+
+.project-cta-btn:active {
+  transform: translateY(1px);
   box-shadow: 0 4px 16px rgba(26, 58, 143, 0.2);
 }
+
+/* Glassmorphism Dialog */
 .contact-dialog-mask {
   position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(30, 40, 90, 0.18);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
 }
+
 .contact-dialog {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 12px 40px rgba(26, 58, 143, 0.18);
-  padding: 38px 36px 28px 36px;
-  min-width: 320px;
-  max-width: 90vw;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  padding: 40px 48px;
+  min-width: 380px;
   text-align: center;
   position: relative;
-  animation: fadeIn 0.25s;
 }
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+
 .contact-close-x {
   position: absolute;
   right: 18px;
-  top: 16px;
-  font-size: 22px;
-  color: #b3b8d1;
-  background: none;
+  top: 18px;
+  color: #94a3b8;
+  background: rgba(241, 245, 249, 0.8);
   border: none;
-  cursor: pointer;
-  transition: color 0.18s;
-  z-index: 10;
-}
-.contact-close-x:hover {
-  color: #1a3a8f;
-}
-.contact-qrcode-placeholder {
-  width: 180px;
-  height: 180px;
-  background: #f3f4fa;
-  border: 1.5px dashed #b3b8d1;
-  border-radius: 12px;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #888;
-
-  margin: 0 auto 10px auto;
+  cursor: pointer;
+  transition: all 0.2s;
 }
+
+.contact-close-x:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+.contact-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 24px 0;
+}
+
+.contact-qrcode-placeholder {
+  width: 200px;
+  height: 200px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.qrcode-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .contact-qrcode-desc {
-  color: #888;
-
-  margin-bottom: 18px;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
 }
+
+/* Dialog Transition */
 .fade-dialog-enter-active,
 .fade-dialog-leave-active {
-  transition: opacity 0.22s;
+  transition: opacity 0.3s ease;
+}
+.fade-dialog-enter-active .contact-dialog,
+.fade-dialog-leave-active .contact-dialog {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(1);
 }
 .fade-dialog-enter-from,
 .fade-dialog-leave-to {
   opacity: 0;
 }
-@media (max-width: 600px) {
-  .contact-dialog {
-    min-width: 0;
-    width: 96vw;
-    padding: 24px 8vw 18px 8vw;
-  }
-  .contact-qrcode-placeholder {
-    width: 120px;
-    height: 120px;
-  }
+.fade-dialog-enter-from .contact-dialog,
+.fade-dialog-leave-to .contact-dialog {
+  transform: scale(0.9);
 }
-@media (max-width: 1100px) {
-  .video-detail-main {
-    flex-direction: column;
-    min-width: 0;
-    max-width: 98vw;
+
+/* Responsive */
+@media (max-width: 768px) {
+  .video-detail-page {
+    padding: 40px 16px 80px;
   }
-  .video-detail-media,
-  .video-detail-info {
-    max-width: 100%;
-    width: 100%;
-    padding: 16px 16px 20px 16px;
-  }
-  .video-detail-media {
-    border-right: none;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 0;
-  }
-  .video-player,
-  .video-placeholder,
-  .video-iframe,
-  .video-image {
-    max-width: 100%;
-    height: 220px;
+  .player-hero-container {
+    border-radius: 16px;
+    margin-bottom: 40px;
   }
   .video-title {
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 16px;
+    font-size: 1.75rem;
   }
   .video-desc {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-block-end: 16px;
   }
-  .more-btn {
-    margin-top: 1rem;
-    padding: 12px 24px;
-    font-size: 0.85rem;
+  .contact-dialog {
+    min-width: 0;
+    width: 100%;
+    padding: 32px 24px;
+  }
+  .project-cta-btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 20px;
   }
 }
 </style>

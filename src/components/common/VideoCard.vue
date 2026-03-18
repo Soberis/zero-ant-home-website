@@ -1,19 +1,31 @@
 <template>
   <div
-    class="video-card"
+    class="video-card cinematic-card"
+    :class="{ active: active }"
     @mouseenter="emit('hover', index)"
     @mouseleave="emit('leave')"
     @click="emit('click', index)"
   >
-    <img
-      v-lazy="card.img"
-      :alt="card.title + '图片'"
-      class="video-card-img"
-      loading="lazy"
-    />
-    <div class="video-card-title-bar" :class="{ active: active }">
-      <div class="video-card-title" :class="{ active: active }">
-        {{ t(`videos.${card.slug}.title`, card.title) }}
+    <div class="video-bg-layer">
+      <img
+        v-lazy="card.img"
+        :alt="card.title + '图片'"
+        loading="lazy"
+      />
+      <div class="video-gradient"></div>
+    </div>
+
+    <div class="video-content-layer">
+      <div class="play-icon">
+        <svg viewBox="0 0 24 24" width="28" height="28">
+          <path fill="currentColor" d="M8 5v14l11-7z" />
+        </svg>
+      </div>
+      
+      <div class="video-bottom">
+        <div class="video-card-title">
+          {{ t(`videos.${card.slug}.title`, card.title) }}
+        </div>
       </div>
     </div>
   </div>
@@ -46,113 +58,124 @@ const emit = defineEmits(["hover", "leave", "click"]);
 
 <style scoped>
 .video-card {
-  background: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #0f172a;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  min-height: 320px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.15);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
   width: 100%;
-  position: relative;
+  cursor: pointer;
 }
 
-.video-card::before {
-  content: "";
+.video-card:hover,
+.video-card.active {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.25);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.video-bg-layer {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #1a3a8f 0%, #2d5aa0 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  inset: 0;
   z-index: 1;
 }
 
-.video-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(26, 58, 143, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: rgba(26, 58, 143, 0.2);
-}
-
-.video-card:hover::before {
-  transform: scaleX(1);
-}
-
-.video-card-img {
+.video-bg-layer img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
-  background: linear-gradient(135deg, #f0f2f5 0%, #e8eaed 100%);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
-  transition: transform 0.3s ease;
 }
 
-.video-card:hover .video-card-img {
-  transform: scale(1.05);
+.video-card:hover .video-bg-layer img,
+.video-card.active .video-bg-layer img {
+  transform: scale(1.06);
 }
 
-.video-card-title-bar {
-  flex: 1;
-  background: transparent;
-  padding: 24px 20px;
+.video-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%);
+  transition: opacity 0.4s ease;
+}
+
+.video-card:hover .video-gradient,
+.video-card.active .video-gradient {
+  opacity: 0.85;
+}
+
+.video-content-layer {
+  position: relative;
+  z-index: 2;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px 28px;
 }
 
-.video-card-title-bar.active {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-  border-radius: 0 0 20px 20px;
+.play-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  align-self: flex-end;
+}
+
+.video-card:hover .play-icon,
+.video-card.active .play-icon {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a3a8f;
+  transform: scale(1.15);
+  border-color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.video-bottom {
+  margin-top: auto;
+  transform: translateY(12px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.video-card:hover .video-bottom,
+.video-card.active .video-bottom {
+  transform: translateY(0);
 }
 
 .video-card-title {
-  color: #2d3748;
-  text-align: center;
-  font-weight: 500;
-  letter-spacing: 0.5px;
   margin: 0;
-  line-height: 1.4;
-  transition: color 0.3s ease;
-}
-
-.video-card-title.active {
+  font-size: 1.35rem;
+  line-height: 1.35;
   color: #fff;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
+@media (max-width: 680px) {
   .video-card {
-    min-height: 280px;
+    min-height: 320px;
   }
-  .video-card-img {
-    height: 160px;
-  }
-  .video-card-title-bar {
-    padding: 20px 16px;
-  }
-  .video-card-title {
-  }
-}
-
-@media (max-width: 480px) {
-  .video-card {
-    min-height: 240px;
-  }
-  .video-card-img {
-    height: 140px;
-  }
-  .video-card-title-bar {
-    padding: 16px 12px;
-  }
-  .video-card-title {
-    letter-spacing: 0.3px;
+  .video-content-layer {
+    padding: 24px 20px;
   }
 }
 </style>
