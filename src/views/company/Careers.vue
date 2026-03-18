@@ -1,91 +1,96 @@
 <template>
   <div class="careers-page">
-    <!-- 页面头部 -->
     <section class="careers-hero">
-      <div class="container">
-        <div class="hero-content">
+      <div class="page-shell hero-grid">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">{{ $t("nav.careers") }}</p>
           <h1 class="hero-title">{{ $t("careers.heroTitle") }}</h1>
+          <p class="hero-subtitle">{{ $t("careers.heroSubtitle") }}</p>
 
-          <p class="hero-subtitle">
-            {{ $t("careers.heroSubtitle") }}
-          </p>
+          <div class="hero-actions">
+            <button
+              type="button"
+              class="hero-action hero-action-primary"
+              @click="scrollToSection('positions')"
+            >
+              {{ $t("careers.hotPositionsTitle") }}
+            </button>
+            <button
+              type="button"
+              class="hero-action"
+              @click="scrollToSection('contact')"
+            >
+              {{ $t("careers.contactUsTitle") }}
+            </button>
+          </div>
+        </div>
 
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-number">8+</span>
-              <span class="stat-label">{{
-                $t("careers.techAccumulation")
-              }}</span>
-            </div>
-
-            <div class="stat-item">
-              <span class="stat-number">20+ </span>
-              <span class="stat-label">{{ $t("careers.teamPartners") }}</span>
-            </div>
-
-            <div class="stat-item">
-              <span class="stat-number">50+</span>
-              <span class="stat-label">{{
-                $t("careers.successfulProjects")
-              }}</span>
+        <div class="hero-panel">
+          <div class="hero-panel-inner">
+            <div
+              v-for="stat in heroStats"
+              :key="stat.label"
+              class="stat-item"
+            >
+              <span class="stat-number">{{ stat.value }}</span>
+              <span class="stat-label">{{ stat.label }}</span>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- 为什么选择我们 -->
+
     <section class="why-join">
-      <div class="container">
-        <h2 class="section-title">{{ $t("careers.whyJoinTitle") }}</h2>
+      <div class="page-shell">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("nav.careers") }}</p>
+          <h2 class="section-title">{{ $t("careers.whyJoinTitle") }}</h2>
+        </div>
 
         <div class="benefits-grid">
-          <div
+          <article
             v-for="benefit in benefits"
             :key="benefit.id"
             class="benefit-card"
           >
-            <div class="benefit-content">
-              <h3 class="benefit-title">{{ benefit.title }}</h3>
-
-              <p class="benefit-description">{{ benefit.description }}</p>
-            </div>
-          </div>
+            <span class="benefit-index">{{ formatIndex(benefit.id) }}</span>
+            <h3 class="benefit-title">{{ benefit.title }}</h3>
+            <p class="benefit-description">{{ benefit.description }}</p>
+          </article>
         </div>
       </div>
     </section>
-    <!-- 职位列表 -->
-    <section class="job-positions">
-      <div class="container">
-        <h2 class="section-title">{{ $t("careers.hotPositionsTitle") }}</h2>
 
-        <div class="positions-grid">
-          <div
+    <section id="positions" class="job-positions">
+      <div class="page-shell">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("careers.hotPositionsTitle") }}</p>
+          <h2 class="section-title">{{ $t("careers.hotPositionsTitle") }}</h2>
+        </div>
+
+        <div class="positions-list">
+          <article
             v-for="position in positions"
             :key="position.id"
             class="position-card"
           >
             <div class="position-header">
-              <h3 class="position-title">{{ position.title }}</h3>
-              <span class="position-type">{{ position.type }}</span>
-            </div>
-
-            <div class="position-details">
-              <div class="detail-item">
-                <span class="detail-label"
-                  >{{ $t("careers.workLocation") }}:</span
-                >
-                <span class="detail-value">{{ position.location }}</span>
+              <div class="position-heading">
+                <h3 class="position-title">{{ position.title }}</h3>
+                <span class="position-type">{{ position.type }}</span>
               </div>
 
-              <div class="detail-item">
-                <span class="detail-label"
-                  >{{ $t("careers.workExperience") }}:</span
-                >
-                <span class="detail-value">{{ position.experience }}</span>
+              <div class="position-meta">
+                <span class="meta-chip">
+                  {{ $t("careers.workLocation") }} / {{ position.location }}
+                </span>
+                <span class="meta-chip">
+                  {{ $t("careers.workExperience") }} / {{ position.experience }}
+                </span>
               </div>
             </div>
 
-            <div class="position-requirements">
+            <div class="position-body">
               <h4 class="requirements-title">
                 {{ $t("careers.positionRequirements") }}
               </h4>
@@ -98,28 +103,37 @@
             </div>
 
             <div class="position-actions">
-              <button class="apply-btn" @click="applyForPosition(position)">
+              <button class="apply-btn" type="button" @click="applyForPosition(position)">
                 {{ $t("careers.applyNow") }}
               </button>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
-    <!-- 联系我们 -->
-    <section class="contact-section">
-      <div class="container">
-        <div class="contact-content">
-          <h2 class="section-title">{{ $t("careers.contactUsTitle") }}</h2>
 
-          <p class="contact-description">
-            {{ $t("careers.contactDescription") }}
-          </p>
+    <section id="contact" class="contact-section">
+      <div class="page-shell">
+        <div class="contact-panel">
+          <div class="contact-copy">
+            <p class="section-eyebrow">{{ $t("careers.contactUsTitle") }}</p>
+            <h2 class="section-title">{{ $t("careers.contactUsTitle") }}</h2>
+            <p class="contact-description">
+              {{ $t("careers.contactDescription") }}
+            </p>
+            <button class="apply-btn contact-btn" type="button" @click="openMailto()">
+              {{ $t("careers.applyNow") }}
+            </button>
+          </div>
 
-          <div class="contact-info">
-            <div class="contact-item">
-              <span class="contact-label">{{ $t("careers.email") }}:</span>
-              <span class="contact-value">hr@zeroant.com</span>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <span class="contact-label">{{ $t("careers.email") }}</span>
+              <a class="contact-value" href="mailto:hr@zeroant.com">hr@zeroant.com</a>
+            </div>
+            <div class="contact-card">
+              <span class="contact-label">{{ $t("careers.workLocation") }}</span>
+              <span class="contact-value">{{ $t("careers.hangzhou") }}</span>
             </div>
           </div>
         </div>
@@ -134,7 +148,6 @@ import { useI18n } from "vue-i18n";
 
 const { t, tm } = useI18n();
 
-// 定义接口
 interface Benefit {
   id: number;
   title: string;
@@ -150,7 +163,12 @@ interface Position {
   requirements: string[];
 }
 
-// 公司优势
+const heroStats = computed(() => [
+  { value: "8+", label: t("careers.techAccumulation") },
+  { value: "20+", label: t("careers.teamPartners") },
+  { value: "50+", label: t("careers.successfulProjects") },
+]);
+
 const benefits = computed<Benefit[]>(() => [
   {
     id: 1,
@@ -184,7 +202,6 @@ const benefits = computed<Benefit[]>(() => [
   },
 ]);
 
-// 职位列表
 const positions = computed<Position[]>(() => [
   {
     id: 1,
@@ -246,647 +263,472 @@ const positions = computed<Position[]>(() => [
   },
 ]);
 
-// 申请职位
-const applyForPosition = (position: Position): void => {
-  window.open(
-    `mailto:hr@zeroant.com?subject=${t("careers.applySubject")}${
-      position.title
-    }`
-  );
-};
+function formatIndex(value: number): string {
+  return value.toString().padStart(2, "0");
+}
+
+function scrollToSection(id: string): void {
+  const element = document.getElementById(id);
+  if (!element) {
+    return;
+  }
+  element.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function openMailto(subject?: string): void {
+  const mailSubject = subject ? encodeURIComponent(subject) : "";
+  const query = mailSubject ? `?subject=${mailSubject}` : "";
+  window.open(`mailto:hr@zeroant.com${query}`);
+}
+
+function applyForPosition(position: Position): void {
+  openMailto(`${t("careers.applySubject")}${position.title}`);
+}
 </script>
 
 <style scoped lang="less">
 .careers-page {
-  min-height: 70vh;
-  background: #f8f9fa;
-
-  line-height: 1.7;
+  --career-primary: #1a3a8f;
+  --career-primary-deep: #0f172a;
+  --career-text: #1f2937;
+  --career-muted: #64748b;
+  --career-border: #d9e2ec;
+  --career-surface: #ffffff;
+  --career-surface-soft: #f4f7fb;
+  color: var(--career-text);
+  background:
+    radial-gradient(circle at top right, rgba(26, 58, 143, 0.08), transparent 28%),
+    linear-gradient(180deg, #f3f6fb 0%, #f7f9fc 24%, #ffffff 100%);
 }
 
-.container {
-  max-width: 1350px;
+.page-shell {
+  width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 0 32px;
 }
 
-// 覆盖全局样式，确保在大屏幕上也使用较小的max-width
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1350px !important;
-    padding: 0 32px;
+.careers-hero {
+  padding: 112px 0 72px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.hero-copy {
+  padding: 32px 0;
+}
+
+.hero-eyebrow,
+.section-eyebrow {
+  margin: 0 0 12px;
+  color: var(--career-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  max-width: 9em;
+  margin: 0 0 18px;
+  color: var(--career-text);
+  font-size: clamp(2.8rem, 5vw, 4.3rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.hero-subtitle {
+  max-width: 620px;
+  margin: 0 0 32px;
+  color: var(--career-muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-action,
+.apply-btn {
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.hero-action {
+  border: 1px solid var(--career-border);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--career-text);
+}
+
+.hero-action-primary,
+.apply-btn {
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #1a3a8f 0%, #16306b 100%);
+  color: #ffffff;
+  box-shadow: 0 16px 34px rgba(26, 58, 143, 0.18);
+}
+
+.hero-action:hover,
+.apply-btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero-panel {
+  border: 1px solid rgba(26, 58, 143, 0.12);
+  border-radius: 28px;
+  background:
+    linear-gradient(160deg, rgba(15, 23, 42, 0.98) 0%, rgba(26, 58, 143, 0.96) 100%);
+  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+
+.hero-panel-inner {
+  height: 100%;
+  padding: 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.stat-item {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 22px 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stat-number {
+  color: #ffffff;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.stat-label {
+  max-width: 8em;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.why-join,
+.job-positions,
+.contact-section {
+  padding: 28px 0 72px;
+}
+
+.why-join {
+  padding-top: 8px;
+}
+
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  margin: 0;
+  color: var(--career-text);
+  font-size: clamp(1.85rem, 3vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.benefit-card {
+  border: 1px solid var(--career-border);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+  padding: 24px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.benefit-card:hover,
+.position-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(26, 58, 143, 0.24);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+}
+
+.benefit-index {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: rgba(26, 58, 143, 0.48);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.benefit-title {
+  margin: 0 0 12px;
+  color: var(--career-text);
+  font-size: 1.16rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.benefit-description,
+.contact-description {
+  margin: 0;
+  color: var(--career-muted);
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+.positions-list {
+  display: grid;
+  gap: 18px;
+}
+
+.position-card {
+  border: 1px solid var(--career-border);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+  padding: 28px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.position-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(217, 226, 236, 0.9);
+}
+
+.position-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.position-title {
+  margin: 0;
+  color: var(--career-text);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.position-type,
+.meta-chip {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.position-type {
+  background: rgba(26, 58, 143, 0.08);
+  color: var(--career-primary);
+}
+
+.position-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.meta-chip {
+  border: 1px solid rgba(217, 226, 236, 0.88);
+  color: rgba(15, 23, 42, 0.68);
+  background: #f8fbff;
+}
+
+.position-body {
+  padding: 22px 0 24px;
+}
+
+.requirements-title {
+  margin: 0 0 14px;
+  color: var(--career-text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.requirements-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.requirements-list li {
+  position: relative;
+  padding-left: 16px;
+  color: var(--career-muted);
+  line-height: 1.75;
+}
+
+.requirements-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--career-primary);
+}
+
+.position-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.contact-panel {
+  border: 1px solid rgba(26, 58, 143, 0.12);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 247, 251, 0.98) 100%);
+  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.08);
+  padding: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
+  gap: 24px;
+}
+
+.contact-btn {
+  margin-top: 24px;
+}
+
+.contact-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-card {
+  border: 1px solid var(--career-border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 18px 20px;
+}
+
+.contact-label {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(15, 23, 42, 0.5);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.contact-value {
+  color: var(--career-primary-deep);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid,
+  .contact-panel,
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-label {
+    text-align: left;
   }
 }
 
-// 页面头部
-.careers-hero {
-  background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
-  color: white;
-  padding: 120px 0 60px;
-  text-align: center;
+@media (max-width: 768px) {
+  .page-shell {
+    width: min(1200px, calc(100% - 24px));
+  }
+
+  .careers-hero {
+    padding: 88px 0 56px;
+  }
+
+  .hero-copy {
+    padding: 0;
+  }
 
   .hero-title {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    max-width: none;
     font-size: 2.5rem;
   }
 
-  .hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 3rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-
-    .stat-item {
-      text-align: center;
-
-      .stat-number {
-        display: block;
-        font-size: 2.2rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-      }
-
-      .stat-label {
-        font-size: 1rem;
-      }
-    }
-  }
-}
-
-// 通用样式
-.section-title {
-  font-size: 2rem; // 优化为2rem
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #2d3748;
-}
-
-// 为什么选择我们
-.why-join {
-  padding: 80px 0;
-  background: white;
-
-  .why-extra-list {
-    max-width: 900px;
-    margin: 0 auto 2.5rem auto;
-    padding: 0;
-    list-style: none;
-    text-align: left;
-
-    color: #2d3748;
-    font-weight: 500;
-  }
-  .why-extra-list li {
-    margin-bottom: 0.7em;
-    line-height: 1.8;
-  }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 32px;
-
-    .benefit-card {
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid #f0f0f0;
-
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-      }
-
-      .benefit-title {
-        font-size: 1.3rem;
-        font-weight: 500;
-        margin-bottom: 1rem;
-        color: #2d3748;
-      }
-
-      .benefit-description {
-        font-size: 1rem;
-        color: #666;
-        line-height: 1.7; // 略提升
-      }
-    }
-  }
-}
-
-// 职位列表
-.job-positions {
-  padding: 80px 0;
-  background: #f8f9fa;
-
-  .positions-grid {
-    display: grid;
-    gap: 40px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 40px;
-
-    .position-card {
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-      &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-      }
-
-      .position-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-        flex-wrap: wrap;
-        gap: 1rem;
-
-        .position-title {
-          font-weight: 500;
-          color: #2d3748;
-          margin: 0;
-          font-size: 1.3rem;
-        }
-
-        .position-type {
-          background: #e3f2fd;
-          color: #1976d2;
-          padding: 0.25rem 0.75rem;
-          border-radius: 20px;
-          font-size: 0.9rem;
-          font-weight: 500;
-        }
-      }
-
-      .position-details {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-
-        .detail-item {
-          .detail-label {
-            font-weight: 500;
-            color: #666;
-            margin-right: 0.5rem;
-            font-size: 1rem;
-          }
-
-          .detail-value {
-            color: #2d3748;
-            font-size: 1rem;
-          }
-        }
-      }
-
-      .position-requirements {
-        margin-bottom: 2rem;
-
-        .requirements-title {
-          font-size: 1.3rem;
-          font-weight: 500;
-          margin-bottom: 1rem;
-          color: #2d3748;
-        }
-
-        .requirements-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-
-          li {
-            padding: 0.3rem 0;
-            padding-left: 1.2rem;
-            position: relative;
-            color: #666;
-            line-height: 1.5;
-            font-size: 1rem;
-
-            &:before {
-              content: "•";
-              color: #1a3a8f;
-              font-weight: bold;
-              position: absolute;
-              left: 0;
-              top: 0.5rem;
-              font-size: 0.8rem;
-            }
-          }
-        }
-      }
-
-      .position-actions {
-        text-align: right;
-
-        .apply-btn {
-          background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-          color: white;
-          text-decoration: none;
-          padding: 14px 28px;
-          border-radius: 12px;
-          font-weight: 600;
-          font-size: 0.9rem;
-          transition: all 0.3s ease;
-          letter-spacing: 0.5px;
-          position: relative;
-          overflow: hidden;
-          border: none;
-          cursor: pointer;
-
-          &:hover {
-            background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
-          }
-
-          &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-              90deg,
-              transparent,
-              rgba(255, 255, 255, 0.2),
-              transparent
-            );
-            transition: left 0.5s;
-          }
-
-          &:hover::before {
-            left: 100%;
-          }
-        }
-      }
-    }
-  }
-}
-
-// 联系我们
-.contact-section {
-  padding: 80px 0;
-  background: white;
-
-  .contact-content {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-
-    .contact-description {
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 2rem;
-      line-height: 1.7;
-    }
-
-    .contact-info {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-
-      .contact-item {
-        .contact-label {
-          font-weight: 500;
-          color: #666;
-          margin-right: 0.5rem;
-          font-size: 1rem;
-        }
-
-        .contact-value {
-          color: #1a3a8f;
-          font-weight: 500;
-          font-size: 1rem;
-        }
-      }
-    }
-  }
-}
-
-// 响应式设计
-@media (max-width: 768px) {
-  .careers-hero {
-    min-height: 70vh; // 手机端改为70vh，避免过高
-    padding: 15vh 0 0 0; // 移动端文字下移
-
-    .hero-title {
-      font-size: 2rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      padding: 0 1rem; // 添加水平内边距
-    }
-
-    .hero-stats {
-      gap: 1.5rem;
-
-      .stat-item {
-        .stat-number {
-          font-size: 1.8rem; // 减小数字字体
-          margin-bottom: 0.3rem;
-        }
-
-        .stat-label {
-          font-size: 0.9rem;
-        }
-      }
-    }
-  }
-
-  .section-title {
-    font-size: 1.6rem; // 统一为1.6rem，更适合移动端
-  }
-
-  .why-join,
-  .job-positions,
-  .contact-section {
-    padding: 40px 0;
-  }
-
-  .container {
-    padding: 0 20px; // 增加移动端内边距
-  }
-
-  .why-join {
-    .benefits-grid {
-      padding: 0 20px;
-      gap: 20px; // 减小卡片间距
-
-      .benefit-card {
-        padding: 1.5rem; // 减小卡片内边距
-
-        .benefit-title {
-          font-size: 1.2rem;
-          margin-bottom: 0.8rem;
-        }
-
-        .benefit-description {
-          font-size: 0.9rem;
-        }
-      }
-    }
-  }
-
-  .job-positions {
-    .positions-grid {
-      padding: 0 20px;
-      gap: 15px; // 进一步减小卡片间距
-
-      .position-card {
-        padding: 1.2rem; // 进一步减小卡片内边距
-
-        .position-header {
-          flex-direction: column;
-          align-items: flex-start;
-          margin-bottom: 0.8rem;
-
-          .position-title {
-            font-size: 1.2rem;
-          }
-
-          .position-type {
-            font-size: 0.8rem;
-          }
-        }
-
-        .position-details {
-          grid-template-columns: 1fr;
-          gap: 0.4rem;
-          margin-bottom: 0.8rem;
-
-          .detail-item {
-            .detail-label,
-            .detail-value {
-              font-size: 0.9rem;
-            }
-          }
-        }
-
-        .position-requirements {
-          margin-bottom: 1rem;
-
-          .requirements-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.6rem;
-          }
-
-          .requirements-list li {
-            font-size: 0.9rem;
-            padding: 0.2rem 0;
-            padding-left: 1rem;
-            line-height: 1.4;
-
-            &:before {
-              top: 0.4rem;
-              font-size: 0.7rem;
-            }
-          }
-        }
-
-        .position-actions {
-          text-align: center;
-
-          .apply-btn {
-            font-size: 0.85rem;
-            padding: 12px 24px;
-          }
-        }
-      }
-    }
-  }
-
-  .contact-info {
+  .hero-actions {
     flex-direction: column;
-    gap: 1rem;
+    align-items: stretch;
+  }
 
-    .contact-item {
-      .contact-label,
-      .contact-value {
-      }
-    }
+  .position-card,
+  .benefit-card,
+  .contact-panel,
+  .hero-panel-inner {
+    padding: 24px;
+  }
+
+  .position-header {
+    flex-direction: column;
+  }
+
+  .position-meta,
+  .position-actions {
+    justify-content: flex-start;
+  }
+
+  .apply-btn,
+  .hero-action {
+    width: 100%;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 560px) {
   .careers-hero {
-    min-height: 60vh; // 更小屏幕进一步减小高度
-    padding: 13vh 0 0 0; // 更小屏幕文字下移
-
-    .hero-title {
-      font-size: 1.8rem; // 进一步减小标题字体
-    }
-
-    .hero-subtitle {
-      font-size: 1rem; // 进一步减小副标题字体
-    }
+    padding-top: 72px;
   }
 
-  .section-title {
-    font-size: 1.5rem; // 进一步减小章节标题字体
+  .stat-item {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .container {
-    padding: 0 16px; // 减小内边距
-  }
-
-  .why-join {
-    .benefits-grid {
-      padding: 0 16px;
-      grid-template-columns: 1fr; // 单列布局
-    }
-  }
-
-  .job-positions {
-    .positions-grid {
-      padding: 0 16px;
-      gap: 12px;
-
-      .position-card {
-        padding: 1rem;
-
-        .position-header {
-          margin-bottom: 0.6rem;
-        }
-
-        .position-details {
-          margin-bottom: 0.6rem;
-          gap: 0.3rem;
-        }
-
-        .position-requirements {
-          margin-bottom: 0.8rem;
-
-          .requirements-title {
-            margin-bottom: 0.5rem;
-          }
-
-          .requirements-list li {
-            padding: 0.15rem 0;
-            padding-left: 0.8rem;
-            line-height: 1.3;
-
-            &:before {
-              top: 0.35rem;
-              font-size: 0.6rem;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .careers-hero {
-    min-height: 55vh; // 最小屏幕的高度
-    padding: 11vh 0 0 0; // 最小屏幕文字下移
-
-    .hero-title {
-      font-size: 1.6rem;
-    }
-
-    .hero-subtitle {
-      font-size: 0.9rem;
-    }
-
-    .hero-stats {
-      flex-direction: column; // 垂直排列统计数据
-      gap: 1rem;
-
-      .stat-item {
-        .stat-number {
-          font-size: 1.6rem;
-        }
-
-        .stat-label {
-          font-size: 0.9rem;
-        }
-      }
-    }
-  }
-
-  .container {
-    padding: 0 12px;
-  }
-
-  .why-join {
-    .benefits-grid {
-      padding: 0 12px;
-    }
-  }
-
-  .job-positions {
-    .positions-grid {
-      padding: 0 12px;
-      gap: 10px;
-
-      .position-card {
-        padding: 0.8rem;
-
-        .position-header {
-          margin-bottom: 0.5rem;
-        }
-
-        .position-details {
-          margin-bottom: 0.5rem;
-          gap: 0.2rem;
-        }
-
-        .position-requirements {
-          margin-bottom: 0.6rem;
-
-          .requirements-title {
-            margin-bottom: 0.4rem;
-          }
-
-          .requirements-list li {
-            padding: 0.1rem 0;
-            padding-left: 0.7rem;
-            line-height: 1.2;
-
-            &:before {
-              top: 0.3rem;
-              font-size: 0.5rem;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .requirements-list li {
-    padding-left: 0.7rem;
-
-    &:before {
-      top: 0.3rem;
-      font-size: 0.5rem;
-    }
+  .position-card {
+    padding: 20px;
   }
 }
 </style>

@@ -1,212 +1,240 @@
-<!-- 关于我们页面，包含公司介绍、发展历程、荣誉、文化、招聘、联系方式等内容，支持国际化 -->
-
+<!-- 关于我们页面，保留原有内容，仅优化信息层级、锚点导航和版式秩序 -->
 <template>
   <div class="about-page">
-    <!-- 口号大屏 -->
     <section class="about-hero">
-      <div class="hero-content">
-        <h1>{{ $t("slogan") }}</h1>
+      <div class="page-shell hero-shell">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">{{ $t("nav.about") }}</p>
+          <h1 class="hero-title">{{ $t("slogan") }}</h1>
+          <p class="hero-sub">{{ $t("slogan2") }}</p>
+        </div>
 
-        <div class="hero-sub">{{ $t("slogan2") }}</div>
-
-        <div class="hero-line"></div>
+        <div class="hero-panel">
+          <button
+            v-for="item in navItems"
+            :key="item.id"
+            type="button"
+            class="hero-link"
+            @click="scrollToSection(item.id)"
+          >
+            <span class="hero-link-index">{{ formatIndex(item.index) }}</span>
+            <span class="hero-link-label">{{ item.label }}</span>
+          </button>
+        </div>
       </div>
     </section>
-    <!-- 目录栏 -->
+
     <nav class="about-nav">
-      <ul>
-        <li :class="{ active: activeTab === 'company-intro' }">
-          <a
-            href="#company-intro"
-            @click.prevent="scrollToSection('company-intro')"
-            >{{ $t("nav.companyIntro") }}</a
-          >
-        </li>
-
-        <li :class="{ active: activeTab === 'history' }">
-          <a href="#history" @click.prevent="scrollToSection('history')">{{
-            $t("nav.history")
-          }}</a>
-        </li>
-
-        <li :class="{ active: activeTab === 'honors' }">
-          <a href="#honors" @click.prevent="scrollToSection('honors')">{{
-            $t("nav.honor")
-          }}</a>
-        </li>
-
-        <li :class="{ active: activeTab === 'core-values' }">
-          <a
-            href="#core-values"
-            @click.prevent="scrollToSection('core-values')"
-            >{{ $t("nav.coreValues") }}</a
-          >
-        </li>
-
-        <li :class="{ active: activeTab === 'culture' }">
-          <a href="#culture" @click.prevent="scrollToSection('culture')">{{
-            $t("nav.culture")
-          }}</a>
-        </li>
-
-        <li :class="{ active: activeTab === 'contact' }">
-          <a href="#contact" @click.prevent="scrollToSection('contact')">{{
-            $t("nav.contact")
-          }}</a>
-        </li>
-      </ul>
+      <div class="page-shell nav-scroll">
+        <button
+          v-for="item in navItems"
+          :key="item.id"
+          type="button"
+          class="nav-btn"
+          :class="{ active: activeTab === item.id }"
+          @click="scrollToSection(item.id)"
+        >
+          {{ item.label }}
+        </button>
+      </div>
     </nav>
 
-    <section id="company-intro" class="about-section company-intro">
-      <h2>{{ $t("nav.companyIntro") }}</h2>
+    <main class="page-shell page-content">
+      <section id="company-intro" class="about-section intro-section">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("nav.companyIntro") }}</p>
+          <h2 class="section-title">{{ $t("nav.companyIntro") }}</h2>
+        </div>
 
-      <p v-html="$t('about.companyIntroDetailed.para1')"></p>
-
-      <p v-html="$t('about.companyIntroDetailed.para2')"></p>
-
-      <p v-html="$t('about.companyIntroDetailed.para3')"></p>
-      <!-- 团队信息 -->
-      <div class="info-section team-info">
-        <h3>{{ $t("about.teamOverview") }}</h3>
-
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-number">{{ 20 }}+</div>
-
-            <div class="stat-label">{{ $t("about.teamSize") }}</div>
+        <div class="intro-layout">
+          <div class="intro-prose">
+            <p v-html="$t('about.companyIntroDetailed.para1')"></p>
+            <p v-html="$t('about.companyIntroDetailed.para2')"></p>
+            <p v-html="$t('about.companyIntroDetailed.para3')"></p>
           </div>
 
-          <div class="stat-card">
-            <div class="stat-number">90%+</div>
+          <div class="intro-side">
+            <article class="info-panel">
+              <h3 class="panel-title">{{ $t("about.teamOverview") }}</h3>
 
-            <div class="stat-label">{{ $t("about.masterDegree") }}</div>
-          </div>
+              <div class="stats-grid">
+                <div
+                  v-for="stat in teamStats"
+                  :key="stat.label"
+                  class="stat-card"
+                >
+                  <span class="stat-number">{{ stat.value }}</span>
+                  <span class="stat-label">{{ stat.label }}</span>
+                </div>
+              </div>
+            </article>
 
-          <div class="stat-card">
-            <div class="stat-number">≤{{ 32 }}</div>
-
-            <div class="stat-label">{{ $t("about.averageAge") }}</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-number">≥90%</div>
-
-            <div class="stat-label">{{ $t("about.topUniversity") }}</div>
+            <article class="info-panel">
+              <h3 class="panel-title">{{ $t("about.financingPlan") }}</h3>
+              <p class="info-text">
+                {{ $t("about.companyIntroDetailed.financingDesc") }}
+              </p>
+              <p class="info-text">
+                {{ $t("about.companyIntroDetailed.emailTips") }}
+                <a href="mailto:liqingfeng@zeroant.com">liqingfeng@zeroant.com</a>
+              </p>
+            </article>
           </div>
         </div>
-      </div>
-      <!-- 融资信息 -->
-      <div class="info-section financing-info">
-        <h3>{{ $t("about.financingPlan") }}</h3>
+      </section>
 
-        <p class="financing-desc">
-          {{ $t("about.companyIntroDetailed.financingDesc") }}
-        </p>
+      <section id="history" class="about-section">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("nav.history") }}</p>
+          <h2 class="section-title">{{ $t("nav.history") }}</h2>
+        </div>
 
-        <p class="financing-desc">
-          {{ $t("about.companyIntroDetailed.emailTips")
-          }}<a href="mailto:liqingfeng@zeroant.com"
-            >&nbsp;liqingfeng@zeroant.com</a
+        <div class="timeline">
+          <article
+            v-for="item in timelineData"
+            :key="item.year"
+            class="timeline-item"
           >
-        </p>
-      </div>
-    </section>
+            <div class="timeline-rail">
+              <span class="timeline-dot"></span>
+            </div>
 
-    <section id="history" class="about-section history">
-      <h2>{{ $t("nav.history") }}</h2>
+            <div class="timeline-card">
+              <div class="timeline-year">{{ item.year }}</div>
+              <ul class="timeline-events">
+                <li v-for="event in item.events" :key="event">{{ event }}</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
 
-      <div class="timeline">
-        <div
-          v-for="item in timelineData"
-          :key="item.year"
-          class="timeline-item"
-        >
-          <div class="timeline-dot"></div>
+      <section id="honors" class="about-section">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("nav.honor") }}</p>
+          <h2 class="section-title">{{ $t("nav.honor") }}</h2>
+        </div>
 
-          <div class="timeline-year">{{ item.year }}</div>
+        <div class="honor-grid">
+          <article
+            v-for="(honor, idx) in honors"
+            :key="honor"
+            class="honor-card"
+          >
+            <span class="card-index">{{ formatIndex(idx + 1) }}</span>
+            <p class="honor-text">{{ honor }}</p>
+          </article>
+        </div>
+      </section>
 
-          <div class="timeline-content">
-            <ul>
-              <li v-for="event in item.events" :key="event">{{ event }}</li>
-            </ul>
+      <section id="core-values" class="about-section">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("about.coreValues.title") }}</p>
+          <h2 class="section-title">{{ $t("about.coreValues.title") }}</h2>
+        </div>
+
+        <div class="values-grid">
+          <article
+            v-for="(value, idx) in coreValues"
+            :key="value"
+            class="value-card"
+          >
+            <span class="card-index">{{ formatIndex(idx + 1) }}</span>
+            <span class="value-text">{{ value }}</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="culture" class="about-section">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("nav.culture") }}</p>
+          <h2 class="section-title">{{ $t("nav.culture") }}</h2>
+        </div>
+
+        <div class="culture-card">
+          <p class="info-text">
+            {{ $t("about.enterpriseCulture.description") }}
+          </p>
+          <ul class="culture-list">
+            <li v-html="$t('about.enterpriseCulture.item1')"></li>
+            <li v-html="$t('about.enterpriseCulture.item2')"></li>
+            <li v-html="$t('about.enterpriseCulture.item3')"></li>
+            <li v-html="$t('about.enterpriseCulture.item4')"></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="contact" class="about-section contact-section">
+        <div class="section-heading">
+          <p class="section-eyebrow">{{ $t("nav.contact") }}</p>
+          <h2 class="section-title">{{ $t("nav.contact") }}</h2>
+        </div>
+
+        <div class="contact-panel">
+          <div class="contact-card">
+            <span class="contact-label">{{ $t("contacts.email") }}</span>
+            <a class="contact-value" href="mailto:liqingfeng@zeroant.com">
+              liqingfeng@zeroant.com
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-label">{{ $t("contacts.address") }}</span>
+            <span class="contact-value">{{ $t("footer.address") }}</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="honors" class="about-section honors">
-      <h2>{{ $t("nav.honor") }}</h2>
-
-      <div class="honor-cards">
-        <div v-for="(honor, idx) in honors" :key="idx" class="honor-card">
-          {{ honor }}
-        </div>
-      </div>
-    </section>
-
-    <section id="core-values" class="about-section core-values">
-      <h2 class="core-values-title">{{ $t("about.coreValues.title") }}</h2>
-
-      <div class="core-values-content">
-        <div class="core-values-row">
-          <div class="core-value-card">{{ $t("about.coreValues.value1") }}</div>
-
-          <div class="core-value-card">{{ $t("about.coreValues.value2") }}</div>
-
-          <div class="core-value-card">{{ $t("about.coreValues.value3") }}</div>
-
-          <div class="core-value-card">{{ $t("about.coreValues.value4") }}</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="culture" class="about-section culture">
-      <h2 class="culture-title">{{ $t("nav.culture") }}</h2>
-
-      <div class="culture-card no-bg">
-        <div class="culture-desc financing-desc">
-          {{ $t("about.enterpriseCulture.description") }}
-        </div>
-
-        <ul class="culture-list">
-          <li v-html="$t('about.enterpriseCulture.item1')"></li>
-
-          <li v-html="$t('about.enterpriseCulture.item2')"></li>
-
-          <li v-html="$t('about.enterpriseCulture.item3')"></li>
-
-          <li v-html="$t('about.enterpriseCulture.item4')"></li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="contact" class="about-section contact">
-      <h2>{{ $t("nav.contact") }}</h2>
-
-      <ul class="contact-list">
-        <li>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</li>
-
-        <li>{{ $t("contacts.address") }}：{{ $t("footer.address") }}</li>
-      </ul>
-    </section>
+      </section>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, type ComputedRef } from "vue";
+import {
+  computed,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  ref,
+  type ComputedRef,
+} from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
+
 const { t } = useI18n();
 
 const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
   getTimelineData(t).map((item) => ({ ...item }))
 );
+
 const honors: ComputedRef<string[]> = computed(() =>
-  getHonors(t).map((honor) => honor)
+  getHonors(t).map((item) => item)
 );
 
-const activeTab = ref<string>("company-intro");
-const tabIds: string[] = [
+const navItems = computed(() => [
+  { id: "company-intro", label: t("nav.companyIntro"), index: 1 },
+  { id: "history", label: t("nav.history"), index: 2 },
+  { id: "honors", label: t("nav.honor"), index: 3 },
+  { id: "core-values", label: t("nav.coreValues"), index: 4 },
+  { id: "culture", label: t("nav.culture"), index: 5 },
+  { id: "contact", label: t("nav.contact"), index: 6 },
+]);
+
+const teamStats = computed(() => [
+  { value: "20+", label: t("about.teamSize") },
+  { value: "90%+", label: t("about.masterDegree") },
+  { value: "≤32", label: t("about.averageAge") },
+  { value: "≥90%", label: t("about.topUniversity") },
+]);
+
+const coreValues = computed(() => [
+  t("about.coreValues.value1"),
+  t("about.coreValues.value2"),
+  t("about.coreValues.value3"),
+  t("about.coreValues.value4"),
+]);
+
+const activeTab = ref("company-intro");
+const tabIds = [
   "company-intro",
   "history",
   "honors",
@@ -215,854 +243,551 @@ const tabIds: string[] = [
   "contact",
 ];
 
-let scrollTimeout: number | null = null;
-let cachedElements: Array<{id: string, top: number}> = [];
+let rafId = 0;
+let cachedElements: Array<{ id: string; top: number }> = [];
 
-// 预缓存元素位置，减少重复计算
+function formatIndex(value: number): string {
+  return value.toString().padStart(2, "0");
+}
+
 function cacheElementPositions(): void {
-  if (typeof document === "undefined") return;
-  
-  cachedElements = tabIds.map(id => {
-    const el = document.getElementById(id);
-    return {
-      id,
-      top: el ? el.offsetTop : 0
-    };
-  }).filter(item => item.top > 0);
+  cachedElements = tabIds
+    .map((id) => {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return {
+        id,
+        top: el.getBoundingClientRect().top + window.scrollY,
+      };
+    })
+    .filter((item): item is { id: string; top: number } => Boolean(item));
 }
 
 function updateActiveTab(): void {
-  // 确保DOM已加载完成
-  if (typeof document === "undefined" || !document.body || cachedElements.length === 0) {
+  if (rafId) {
     return;
   }
 
-  // 防抖处理，避免频繁计算
-  if (scrollTimeout) {
-    clearTimeout(scrollTimeout);
-  }
+  rafId = window.requestAnimationFrame(() => {
+    const current = window.scrollY + 180;
+    const matched = [...cachedElements]
+      .reverse()
+      .find((item) => item.top <= current);
 
-  scrollTimeout = window.setTimeout(() => {
-    const scrollY = window.scrollY || window.pageYOffset;
-    let found = false;
-    
-    // 使用预缓存的位置数据，避免重复DOM查询
-    for (let i = cachedElements.length - 1; i >= 0; i--) {
-      if (cachedElements[i].top <= scrollY + 120) {
-        activeTab.value = cachedElements[i].id;
-        found = true;
-        break;
-      }
-    }
-    if (!found) activeTab.value = tabIds[0];
-    scrollTimeout = null;
-  }, 50); // 50ms防抖延迟，更灵敏
+    activeTab.value = matched?.id ?? tabIds[0];
+    rafId = 0;
+  });
 }
 
 function scrollToSection(id: string): void {
-  // 使用预缓存的位置数据，立即跳转
-  try {
-    const cached = cachedElements.find(item => item.id === id);
-    if (cached) {
-      window.scrollTo({
-        top: cached.top - 100, // 预留导航栏空间
-        behavior: "smooth"
-      });
-    } else {
-      // 回退到实时查询
-      const el = document.getElementById(id);
-      if (el) {
-        window.scrollTo({
-          top: el.offsetTop - 100,
-          behavior: "smooth"
-        });
-      }
-    }
-  } catch (error) {
-    // 静默处理错误
-  }
+  const target = cachedElements.find((item) => item.id === id);
+  const top = target?.top ?? document.getElementById(id)?.offsetTop ?? 0;
+
+  window.scrollTo({
+    top: Math.max(top - 120, 0),
+    behavior: "smooth",
+  });
 }
 
-onMounted(() => {
-  // 初始化缓存并监听滚动
-  try {
+onMounted(async () => {
+  await nextTick();
+  cacheElementPositions();
+  updateActiveTab();
+  window.addEventListener("scroll", updateActiveTab, { passive: true });
+  window.addEventListener("resize", cacheElementPositions);
+  window.setTimeout(() => {
     cacheElementPositions();
-    window.addEventListener("scroll", updateActiveTab, { passive: true });
-    window.addEventListener("resize", cacheElementPositions);
-    // 延迟100ms确保DOM完全渲染
-    setTimeout(updateActiveTab, 100);
-  } catch (error) {
-    // 静默处理初始化错误
-  }
+    updateActiveTab();
+  }, 120);
 });
 
 onUnmounted(() => {
-  if (scrollTimeout) {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = null;
+  if (rafId) {
+    window.cancelAnimationFrame(rafId);
   }
   window.removeEventListener("scroll", updateActiveTab);
   window.removeEventListener("resize", cacheElementPositions);
 });
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .about-page {
-  background: #f7f8fa;
-  color: #2d3748;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Microsoft YaHei", Arial, sans-serif;
-  min-height: 100vh;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+  --about-primary: #1a3a8f;
+  --about-primary-deep: #0f172a;
+  --about-text: #1f2937;
+  --about-muted: #64748b;
+  --about-border: #d9e2ec;
+  --about-surface: #ffffff;
+  --about-surface-soft: #f4f7fb;
+  color: var(--about-text);
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 30%),
+    linear-gradient(180deg, #f3f6fb 0%, #f7f9fc 24%, #ffffff 100%);
+}
+
+.page-shell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
 }
 
 .about-hero {
-  width: 100%;
-  max-width: 100%;
-  min-height: 100vh;
-  height: 100vh;
   position: relative;
-  overflow: hidden;
-  margin-bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(120deg, #f5f7fa 0%, #e3e8ee 100%);
+  padding: 112px 0 56px;
 }
 
-.hero-content {
+.about-hero::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 100%;
-  max-width: 100%;
-  z-index: 2;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 85%);
+  pointer-events: none;
 }
 
-.hero-content h1 {
-  font-weight: 800;
-  color: #2d3748;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.6em;
-  opacity: 1;
-  font-size: 5rem;
-  line-height: 1.1;
+.hero-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.hero-copy {
+  padding: 36px 0;
+}
+
+.hero-eyebrow,
+.section-eyebrow {
+  margin: 0 0 12px;
+  color: var(--about-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  max-width: 8em;
+  margin: 0 0 18px;
+  color: var(--about-text);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
 }
 
 .hero-sub {
-  font-weight: 400;
-  color: #2d3748;
-  opacity: 0.7;
-  margin-bottom: 1.2em;
-  letter-spacing: 0.04em;
-  opacity: 1;
-  font-size: 2rem;
+  max-width: 560px;
+  margin: 0;
+  color: var(--about-muted);
+  font-size: 1.08rem;
+  line-height: 1.85;
 }
 
-.hero-line {
-  width: 180px;
-  height: 3px;
-  margin: 0 auto 1.2em auto;
-  background: linear-gradient(90deg, #4f8cff 0%, #b3d1ff 100%);
-  border-radius: 2px;
-  opacity: 1;
+.hero-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-content: start;
+  padding: 20px;
+  border: 1px solid rgba(26, 58, 143, 0.14);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 247, 251, 0.98) 100%);
+  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.08);
 }
 
-.hero-en {
-  color: #2d3748;
-  font-weight: 300;
-  letter-spacing: 0.18em;
-  opacity: 0.7;
-  font-family: "Segoe UI", "Arial", "PingFang SC", "Microsoft YaHei", sans-serif;
-  opacity: 1;
+.hero-link {
+  border: 1px solid var(--about-border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 18px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.hero-link:hover,
+.nav-btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero-link:hover {
+  border-color: rgba(26, 58, 143, 0.26);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+}
+
+.hero-link-index,
+.card-index {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba(26, 58, 143, 0.48);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.hero-link-label {
+  color: var(--about-text);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .about-nav {
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 32px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(217, 226, 236, 0.9);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(16px);
 }
 
-.about-nav ul {
+.nav-scroll {
   display: flex;
-  justify-content: center;
-  gap: 48px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  gap: 12px;
+  padding: 14px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.about-nav li {
-  color: #2d3748;
-  font-weight: 500;
+.nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-btn {
+  flex: 0 0 auto;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(15, 23, 42, 0.72);
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
   cursor: pointer;
-  padding: 18px 0;
-  transition: all 0.3s ease;
-  border-bottom: 2px solid transparent;
-  position: relative;
-  font-size: 1rem;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.about-nav li a {
-  text-decoration: none;
-  color: inherit;
+.nav-btn.active {
+  border-color: rgba(26, 58, 143, 0.16);
+  background: rgba(26, 58, 143, 0.08);
+  color: var(--about-primary);
 }
 
-.about-nav li:hover {
-  color: #1a3a8f;
-  transform: translateY(-1px);
-}
-
-.about-nav li.active {
-  color: #1a3a8f;
-  border-bottom: 2px solid #1a3a8f;
-}
-
-.about-nav li::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #1a3a8f, #4f8cff);
-  transition: transform 0.3s ease;
-  transform-origin: center;
-}
-
-.about-nav li:hover:not(.active)::after {
-  transform: translateX(-50%) scaleX(1);
+.page-content {
+  padding: 32px 0 88px;
 }
 
 .about-section {
-  max-width: 1200px;
-  margin: 0 auto 48px auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px 0 rgba(80, 120, 200, 0.08);
-  padding: 48px 40px;
+  border: 1px solid rgba(217, 226, 236, 0.92);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+  padding: 32px;
+  margin-bottom: 20px;
   scroll-margin-top: 120px;
 }
 
-.about-section h2 {
-  color: #1a237e;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 32px;
-  text-align: center;
-  position: relative;
-}
-
-.about-section h2::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #1a3a8f 0%, #4f8cff 100%);
-  border-radius: 1px;
-  opacity: 0.7;
-}
-
-.about-section > p {
-  font-weight: 400;
-  line-height: 1.8;
-  color: #333;
-  letter-spacing: 0.5px;
-  margin-bottom: 32px;
-  text-align: left;
-  word-break: break-word;
-  white-space: pre-line;
-}
-
-/* 信息区块样式 */
-.info-section {
-  margin: 40px 0;
-  padding: 32px;
-  background: #f8f9fa;
-  border-radius: 12px;
-  /* border-left: 4px solid #1a3a8f; 删除蓝色竖线 */
-}
-
-.info-section h3 {
-  color: #1a3a8f;
-  font-weight: 500;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.info-section p {
-  line-height: 1.7;
-  color: #555;
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 24px;
-  text-align: left;
 }
 
-/* 统计数据网格 */
+.section-title {
+  margin: 0;
+  color: var(--about-text);
+  font-size: clamp(1.85rem, 3vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 24px;
+}
+
+.intro-prose {
+  display: grid;
+  gap: 18px;
+}
+
+.intro-prose p,
+.info-text,
+.timeline-events li,
+.honor-text,
+.culture-list li,
+.contact-value {
+  color: var(--about-muted);
+  line-height: 1.85;
+}
+
+.intro-prose p,
+.info-text,
+.honor-text {
+  margin: 0;
+}
+
+.intro-prose :deep(b),
+.culture-list :deep(b) {
+  color: var(--about-primary-deep);
+  font-weight: 700;
+}
+
+.intro-side {
+  display: grid;
+  gap: 16px;
+}
+
+.info-panel,
+.culture-card {
+  border: 1px solid var(--about-border);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  padding: 24px;
+}
+
+.panel-title {
+  margin: 0 0 18px;
+  color: var(--about-text);
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  margin-top: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .stat-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px 20px;
-  text-align: center;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #f0f0f0;
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-.stat-card.highlight {
-  background: linear-gradient(135deg, #e3e8ee 0%, #b3c6e6 100%);
-  color: #1a3a8f;
-  border: none;
-}
-
-.stat-card.highlight .stat-number,
-.stat-card.highlight .stat-label {
-  color: #1a3a8f;
+  border: 1px solid rgba(217, 226, 236, 0.9);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 18px 16px;
 }
 
 .stat-number {
-  font-weight: 600;
-  color: #1a3a8f;
-  margin-bottom: 8px;
   display: block;
-  font-size: 2rem;
-  line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--about-primary-deep);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.1;
 }
 
 .stat-label {
-  color: #666;
-  font-weight: 400;
+  color: var(--about-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
-/* 时间线样式 */
 .timeline {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 60px;
-  margin: 32px 0;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 16px;
 }
 
 .timeline-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.timeline-rail {
   position: relative;
-  min-width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-rail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -16px;
+  width: 1px;
+  background: rgba(217, 226, 236, 0.95);
+}
+
+.timeline-item:last-child .timeline-rail::before {
+  bottom: 50%;
 }
 
 .timeline-dot {
-  width: 20px;
-  height: 20px;
-  background: linear-gradient(90deg, #1a3a8f 0%, #4f8cff 100%);
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  margin-top: 18px;
   border-radius: 50%;
-  margin-bottom: 12px;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.2);
+  background: var(--about-primary);
+  box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1);
+}
+
+.timeline-card {
+  border: 1px solid var(--about-border);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  padding: 20px 22px;
 }
 
 .timeline-year {
-  font-size: 1.2rem;
-  color: #1a237e;
-  font-weight: 600;
   margin-bottom: 12px;
+  color: var(--about-primary-deep);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
-.timeline-content ul {
-  padding: 0;
+.timeline-events {
   margin: 0;
+  padding: 0;
   list-style: none;
-  text-align: center;
 }
 
-.timeline-content li {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 8px;
-  word-break: break-word;
-  white-space: pre-line;
-  line-height: 1.6;
+.timeline-events li {
+  margin: 0;
 }
 
-/* 荣誉卡片 */
-.honor-cards {
+.honor-grid,
+.values-grid,
+.contact-panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 24px;
-}
-
-.honor-card {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  padding: 20px 24px;
-  font-size: 1.1rem;
-  color: #1a3a8f;
-  font-weight: 500;
-  text-align: center;
-  word-break: break-word;
-  white-space: pre-line;
-  transition: transform 0.3s ease;
-  border: 1px solid #e9ecef;
-}
-
-.honor-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* 联系方式 */
-.contact-list {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 24px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
   gap: 16px;
-  align-items: center;
 }
 
-.contact-list li {
-  font-size: 1.1rem;
-  color: #333;
-  font-weight: 400;
-  word-break: break-all;
-  white-space: pre-line;
-  padding: 12px 24px;
-  border-radius: 8px;
-  min-width: 300px;
+.honor-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.honor-card,
+.value-card,
+.contact-card {
+  border: 1px solid var(--about-border);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  padding: 22px;
 }
 
-/* 响应式设计 */
-@media (max-width: 1200px) {
-  .about-section {
-    max-width: 95%;
-    padding: 32px 24px;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-  }
+.values-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-@media (max-width: 900px) {
-  .about-hero {
-    min-height: 70vh;
-    height: 70vh;
-  }
+.value-text {
+  color: var(--about-text);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
 
-  .hero-content h1 {
-    font-size: 3.5rem;
-  }
+.culture-list {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
 
-  .hero-sub {
-    font-size: 1.5rem;
-  }
+.contact-section {
+  margin-bottom: 0;
+}
 
-  .hero-en {
-    font-size: 1.1rem;
-  }
+.contact-panel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 
-  .hero-line {
-    width: 140px;
-    height: 3px;
-  }
+.contact-label {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(15, 23, 42, 0.5);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
 
-  .about-section {
-    padding: 24px 16px;
-    margin-bottom: 24px;
-  }
+.contact-value {
+  color: var(--about-primary-deep);
+  font-size: 1rem;
+  font-weight: 600;
+}
 
-  .about-nav ul {
-    gap: 24px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .about-nav li {
-    font-size: 1em;
-    padding: 12px 8px;
-  }
-
-  .timeline {
-    flex-direction: column;
-    gap: 24px;
-    align-items: center; /* 新增：让时间轴整体居中 */
-  }
-
-  .timeline-item {
-    align-items: center; /* 新增：让每个时间点内容居中 */
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 12px;
-  }
-
-  .stat-card {
-    padding: 16px 12px;
-  }
-
-  .stat-number {
-    font-size: 1.8rem;
-  }
-
-  .honor-cards {
+@media (max-width: 1024px) {
+  .hero-shell,
+  .intro-layout,
+  .honor-grid,
+  .values-grid,
+  .contact-panel {
     grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .info-section {
-    padding: 20px 16px;
-    margin: 24px 0;
   }
 }
 
-@media (max-width: 600px) {
-  .about-hero {
-    min-height: 60vh;
-    height: 60vh;
+@media (max-width: 768px) {
+  .page-shell {
+    width: min(1200px, calc(100% - 24px));
   }
 
-  .hero-content h1 {
+  .about-hero {
+    padding: 88px 0 40px;
+  }
+
+  .hero-copy {
+    padding: 0;
+  }
+
+  .hero-title {
+    max-width: none;
     font-size: 2.8rem;
   }
 
-  .hero-sub {
-    font-size: 1.2rem;
+  .hero-panel,
+  .about-section,
+  .info-panel,
+  .culture-card,
+  .contact-card {
+    padding: 20px;
   }
 
-  .about-nav ul {
-    gap: 16px;
-  }
-
-  .about-nav li {
-    font-size: 0.9em;
+  .hero-panel {
+    grid-template-columns: 1fr;
   }
 
   .stats-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-hero {
+    padding-top: 72px;
   }
 
-  .stat-number {
-    font-size: 1.6rem;
-  }
-
-  .contact-list li {
-    min-width: auto;
+  .nav-btn,
+  .hero-link {
     width: 100%;
   }
-}
 
-.about-page,
-.about-page * {
-  color: #2d3748 !important;
-}
-
-.about-section:last-child {
-  margin-bottom: 0 !important;
-  padding-bottom: 32px !important;
-}
-
-/* 核心团队样式 */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.team-member-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #f0f0f0;
-  text-align: center;
-}
-
-.team-member-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.member-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.member-name {
-  font-size: 1.4em;
-  font-weight: 600;
-  color: #1a3a8f;
-  margin-bottom: 8px;
-}
-
-.member-position {
-  font-size: 1.1em;
-  font-weight: 500;
-  color: #666;
-  margin-bottom: 16px;
-  padding: 6px 16px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 20px;
-  display: inline-block;
-}
-
-.member-background {
-  font-size: 1em;
-  line-height: 1.6;
-  color: #555;
-  text-align: left;
-  margin: 0;
-}
-
-@media (max-width: 900px) {
-  .about-nav ul {
-    gap: 32px;
-    padding: 0 20px;
+  .nav-scroll {
+    gap: 10px;
   }
 
-  .about-nav li {
-    font-size: 1em;
-    padding: 16px 0;
+  .timeline-item {
+    gap: 14px;
   }
-
-  .team-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .team-member-card {
-    padding: 24px 16px;
-  }
-}
-
-@media (max-width: 600px) {
-  .about-nav {
-    margin-bottom: 24px;
-  }
-
-  .about-nav ul {
-    gap: 20px;
-    padding: 0 16px;
-    flex-wrap: wrap;
-  }
-
-  .about-nav li {
-    font-size: 0.95em;
-    padding: 14px 0;
-  }
-}
-
-.culture-content {
-  text-align: center;
-  font-size: 1.1rem;
-  margin: 48px 0 32px 0;
-}
-
-.culture-block {
-  text-align: center;
-  margin: 0 auto;
-  max-width: 900px;
-  font-size: 1.1rem;
-}
-.culture-title {
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: 16px;
-}
-.culture-subtitle {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 28px;
-}
-.culture-list {
-  display: inline-block;
-  text-align: left;
-  margin: 0 auto;
-  padding-left: 0;
-  list-style: disc inside;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  font-weight: 400;
-  color: #2d3748;
-}
-.culture-list li {
-  margin-bottom: 12px;
-  padding-left: 0;
-}
-
-.team-info h3,
-.financing-info h3 {
-  font-size: 1.6rem;
-  font-weight: 500;
-  margin-bottom: 16px;
-  color: #1a237e;
-  text-align: center;
-}
-
-.financing-desc {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.8;
-  color: #333;
-  letter-spacing: 0.5px;
-  margin-bottom: 0;
-  text-align: left;
-  word-break: break-word;
-  white-space: pre-line;
-  max-width: 100%;
-}
-
-/* 移除邮箱链接的下划线 */
-.financing-desc a {
-  text-decoration: none;
-  color: #1a3a8f;
-}
-
-.financing-desc a:hover {
-  text-decoration: underline;
-}
-
-/* 联系信息中的邮箱链接也移除下划线 */
-.contact-list a {
-  text-decoration: none;
-  color: #1a3a8f;
-}
-
-.contact-list a:hover {
-  text-decoration: underline;
-}
-
-/* 通用邮箱链接样式 */
-.about-page a[href^="mailto:"] {
-  text-decoration: none;
-  color: #1a3a8f;
-}
-
-.about-page a[href^="mailto:"]:hover {
-  text-decoration: underline;
-}
-
-/* style部分新增/优化 */
-.core-values-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: 16px;
-}
-.core-values-content {
-  text-align: center;
-  margin: 24px 0 0 0;
-}
-.core-values-row {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-}
-.core-value-card {
-  min-width: 120px;
-  padding: 20px 28px;
-  background: linear-gradient(135deg, #f7faff 60%, #e9ecef 100%);
-  border-radius: 20px;
-  box-shadow: 0 2px 8px 0 rgba(26, 58, 143, 0.05);
-  font-size: 1.2em;
-  font-weight: 500;
-  color: #1a3a8f;
-  text-align: center;
-  letter-spacing: 0.18em;
-  transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
-}
-.core-value-card:hover {
-  box-shadow: 0 8px 24px 0 rgba(26, 58, 143, 0.13);
-  background: linear-gradient(135deg, #e3e8ee 60%, #f7faff 100%);
-  transform: translateY(-4px);
-}
-@media (max-width: 900px) {
-  .core-values-row {
-    gap: 16px;
-  }
-  .core-value-card {
-    font-size: 1rem;
-    padding: 14px 10px;
-    min-width: 100px;
-    flex: 1 1 40%;
-    margin-bottom: 8px;
-  }
-}
-
-.culture-title {
-  text-align: center;
-}
-.culture-card.no-bg {
-  padding: 0;
-  min-width: 320px;
-  max-width: 1200px;
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-  box-shadow: none;
-  background: none;
-}
-.culture-desc {
-  font-size: 1.1rem;
-  margin: 24px 0 18px 0;
-  text-align: center;
-}
-.culture-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  text-align: left;
-  display: inline-block;
 }
 </style>
