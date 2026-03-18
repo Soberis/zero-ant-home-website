@@ -9,17 +9,17 @@
     <div class="product-groups">
       <section v-for="group in productGroups" :key="group.key" class="product-group">
         <div class="group-header">
-          <div>
-            <span class="group-label">{{ group.label }}</span>
-            <h3 class="group-title">{{ group.title }}</h3>
-          </div>
+          <h3 class="group-title">{{ group.title }}</h3>
         </div>
 
         <div class="products-list">
-          <article v-for="product in group.items" :key="product.slug" class="product-card">
-            <!-- §7.4 层级：badge → visual → title → desc → button -->
-            <span class="product-badge">{{ group.label }}</span>
-
+          <router-link
+            v-for="product in group.items"
+            :key="product.slug"
+            :to="getProductDetailLink(product)"
+            class="product-card"
+          >
+            <!-- 层级：visual → title → desc → button -->
             <div class="product-visual" :class="`visual-${product.category}`">
               <img :src="product.image" :alt="t(product.name)" class="visual-img" />
             </div>
@@ -27,10 +27,10 @@
             <h4 class="product-title">{{ t(product.name) }}</h4>
             <p class="product-desc">{{ t(product.desc) }}</p>
 
-            <router-link :to="getProductDetailLink(product)" class="more-btn">
+            <span class="more-btn">
               {{ t('home.coreProducts.learnMore') }}
-            </router-link>
-          </article>
+            </span>
+          </router-link>
         </div>
       </section>
     </div>
@@ -126,16 +126,6 @@ const productGroups = computed(() => [
   margin-bottom: 24px;
 }
 
-.group-label {
-  display: inline-flex;
-  margin-bottom: 8px;
-  color: #64748b;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .group-title {
   margin: 0;
   font-size: 1.5rem;
@@ -160,6 +150,15 @@ const productGroups = computed(() => [
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 252, 0.92));
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.035);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card:link,
+.product-card:visited,
+.product-card:active {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* §7.5 hover 作用在卡片整体 */
@@ -167,27 +166,6 @@ const productGroups = computed(() => [
   transform: translateY(-4px);
   border-color: rgba(20, 54, 127, 0.14);
   box-shadow: 0 16px 32px rgba(15, 23, 42, 0.065);
-}
-
-/* §7.5 hover 时 visual 面板轻微提亮 + 边框加深 */
-.product-card:hover .product-visual {
-  border-color: rgba(20, 54, 127, 0.18);
-  background: rgba(255, 255, 255, 0.6);
-}
-
-/* §7.4 badge 退到辅助层：更小更淡 */
-.product-badge {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  padding: 5px 10px;
-  margin-bottom: 16px;
-  border-radius: 999px;
-  background: rgba(20, 54, 127, 0.06);
-  color: #5a7ab5;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
 }
 
 /* §7.1 容器规则：104x88 横向略宽面板，16px 圆角 */
@@ -281,7 +259,7 @@ const productGroups = computed(() => [
   color: #0f172a;
 }
 
-.more-btn:hover {
+.product-card:hover .more-btn {
   color: #0f172a;
   text-decoration: none;
   transform: translateY(-2px);
@@ -290,7 +268,7 @@ const productGroups = computed(() => [
   box-shadow: 0 14px 24px rgba(15, 23, 42, 0.08);
 }
 
-.more-btn:hover::after {
+.product-card:hover .more-btn::after {
   transform: translateX(2px);
   opacity: 1;
 }

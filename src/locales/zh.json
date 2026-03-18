@@ -460,7 +460,7 @@
       "tags": ["VR遥操作", "Franka机器人", "双臂协作", "远程控制", "人机交互"]
     },
     "robotstudio-remote-control": {
-      "title": "上位机RobotStudioIDE远程控制及仿真",
+      "title": "上位机RobotStudio远程控制及仿真",
       "desc": "展示零蚁科技基于RobotStudioIDE的上位机远程控制与仿真技术，实现机器人系统的可视化编程、远程监控与虚拟调试，大幅提升开发效率与系统可靠性。",
       "tags": [
         "上位机控制",
