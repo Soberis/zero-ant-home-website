@@ -39,20 +39,60 @@
     "backToTop": "Back to Top"
   },
   "home": {
+    "hero": {
+      "eyebrow": "ZeroAnt Robotics Platform",
+      "title": "Full-stack in-house development for reliable robotics solutions",
+      "description": "ZeroAnt delivers system products, robot products, and integrated solutions for medical automation, semiconductor processing, and advanced manufacturing scenarios.",
+      "primaryCta": "Explore Solutions",
+      "secondaryCta": "Contact Team",
+      "panelLabel": "Featured Product",
+      "panelCta": "View Details",
+      "tabs": {
+        "multiOsVm": "Multi-OS VM",
+        "airos": "AiROS",
+        "scara": "SCARA",
+        "humanoid": "Humanoid"
+      },
+        "highlights": {
+          "platform": {
+            "title": "In-house robot systems",
+            "desc": "AiROS and multi-OS capabilities connect control and execution."
+          },
+          "product": {
+            "title": "Systems and products together",
+            "desc": "Cover control platforms, mobile robots, and robotic arms."
+          },
+          "scenario": {
+            "title": "Built for reliable industries",
+            "desc": "Focused on medical, semiconductor, and precision manufacturing."
+          }
+        }
+    },
     "coreProducts": {
+      "eyebrow": "Product Matrix",
       "title": "Core Products",
-      "learnMore": "Learn More"
+      "description": "Build a complete portfolio around robotics software foundations, control platforms, and execution hardware.",
+      "learnMore": "Learn More",
+      "systemLabel": "System Products",
+      "robotLabel": "Robot Products"
     },
     "videoCases": {
+      "eyebrow": "Selected Cases",
       "title": "Video Cases",
+      "description": "A tighter set of representative demos to quickly understand ZeroAnt's real delivery capability.",
+      "featuredLabel": "Featured",
       "watchVideo": "Watch Video"
     },
     "industryApplications": {
+      "eyebrow": "Scenario Coverage",
       "title": "Industry Applications",
-      "description": "Focused on medical automation and semiconductor processing, while covering intelligent upgrade solutions for multiple industries"
+      "description": "From medical automation to semiconductor processing, ZeroAnt supports reliable delivery with system capability and execution platforms.",
+      "explore": "View Solution"
     },
     "partners": {
-      "title": "Partners"
+      "eyebrow": "Trusted By",
+      "title": "Partners",
+      "description": "Work with research institutes, industry customers, and ecosystem partners to prove real-world execution capability."
     }
   },
   "solutionsPage": {

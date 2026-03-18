@@ -433,8 +433,14 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .header {
+  --nav-text-color: #111111;
+  --nav-accent-color: #1a3a8f;
+  --nav-logo-text-color: #111111;
+  --nav-accent-surface: rgba(26, 58, 143, 0.05);
+  --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
+    saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
   background-color: #fff;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   position: fixed;
@@ -475,54 +481,37 @@ onUnmounted(() => {
   transform: scale(1.02);
 }
 
-.logo-text:hover {
-  color: #1a3a8f;
-  background-color: rgba(26, 58, 143, 0.05);
-  transform: translateY(-1px);
-  text-decoration: none;
-}
-
-.logo-text.router-link-active {
-  color: #1a3a8f;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.logo-text::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #1a3a8f, #4a90e2);
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 2px;
-}
-
-.logo-text:hover::after {
-  width: 80%;
-}
-
 .logo img {
   flex-shrink: 0;
+  filter: var(--nav-brand-filter);
+  transition: filter 0.3s ease;
 }
 
 .logo-text {
-  color: #2d3748;
+  color: var(--nav-logo-text-color);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   padding: 12px 8px;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
   display: flex;
   align-items: center;
-  border-radius: 8px;
-  letter-spacing: 0.2px;
+  letter-spacing: -0.02em;
   font-size: 24px;
   margin-left: 12px;
+}
+
+.logo-text:link,
+.logo-text:visited,
+.logo-text:active {
+  color: var(--nav-logo-text-color);
+}
+
+.logo-text:hover,
+.logo-text.router-link-active {
+  color: var(--nav-logo-text-color);
+  text-decoration: none;
 }
 
 .nav-wrapper {
@@ -559,7 +548,7 @@ onUnmounted(() => {
 }
 
 .nav-link {
-  color: #2d3748;
+  color: var(--nav-text-color);
   text-decoration: none;
   font-weight: 500;
   padding: 12px 8px;
@@ -573,31 +562,37 @@ onUnmounted(() => {
   letter-spacing: 0.2px;
 }
 
+.nav-link:link,
+.nav-link:visited,
+.nav-link:active {
+  color: var(--nav-text-color);
+}
+
 .nav-text {
   position: relative;
   z-index: 1;
 }
 
 .dropdown-icon {
-  color: #666;
+  color: var(--nav-text-color);
   transition: all 0.3s ease;
   transform: rotate(0deg);
 }
 
 .has-dropdown:hover .dropdown-icon {
   transform: rotate(180deg);
-  color: #1a3a8f;
+  color: var(--nav-accent-color);
 }
 
 .nav-link:hover {
-  color: #1a3a8f;
-  background-color: rgba(26, 58, 143, 0.05);
+  color: var(--nav-text-color);
+  background-color: var(--nav-accent-surface);
   transform: translateY(-1px);
   text-decoration: none;
 }
 
 .nav-link.active {
-  color: #1a3a8f;
+  color: var(--nav-text-color);
   font-weight: 500;
   text-decoration: none;
 }
@@ -610,7 +605,7 @@ onUnmounted(() => {
   transform: translateX(-50%);
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #1a3a8f, #4a90e2);
+  background: linear-gradient(90deg, var(--nav-accent-color), #4a90e2);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
 }
@@ -636,22 +631,22 @@ onUnmounted(() => {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
   backdrop-filter: blur(20px);
-  height: 80px; /* 与一级菜单栏高度一致 */
+  height: 80px;
 }
 
 .dropdown-content {
-  padding: 0; /* 移除上下内边距 */
+  padding: 0;
   max-width: 1200px;
   margin: 0 auto;
-  height: 100%; /* 占满dropdown高度 */
+  height: 100%;
   display: flex;
-  align-items: center; /* 垂直居中 */
+  align-items: center;
 }
 
 .dropdown ul {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap; /* 不换行，保持一行排列 */
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   gap: 24px;
@@ -659,15 +654,15 @@ onUnmounted(() => {
   padding: 0 40px;
   list-style: none;
   width: 100%;
-  height: 100%; /* 占满父容器高度 */
+  height: 100%;
 }
 
 .dropdown li {
   margin: 0;
   padding: 0;
-  height: 100%; /* 占满父容器高度 */
+  height: 100%;
   display: flex;
-  align-items: center; /* 垂直居中 */
+  align-items: center;
 }
 
 .dropdown-item {
@@ -682,13 +677,19 @@ onUnmounted(() => {
   border: 2px solid transparent;
   min-width: 140px;
   flex: 0 0 auto;
-  color: #2d3748;
+  color: var(--nav-text-color);
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   height: auto;
   text-decoration: none;
+}
+
+.dropdown-item:link,
+.dropdown-item:visited,
+.dropdown-item:active {
+  color: var(--nav-text-color);
 }
 
 .dropdown-item:hover {
@@ -717,7 +718,7 @@ onUnmounted(() => {
 
 .dropdown-item:hover {
   background: linear-gradient(135deg, #f8faff, #e8f2ff);
-  color: #1a3a8f;
+  color: var(--nav-text-color);
   transform: translateY(-2px);
   border-color: rgba(26, 58, 143, 0.2);
   box-shadow: 0 8px 25px rgba(26, 58, 143, 0.15);
@@ -744,63 +745,56 @@ onUnmounted(() => {
 }
 
 .language-btn {
-  background: rgba(26, 58, 143, 0.08);
-  border: 1.5px solid rgba(26, 58, 143, 0.2);
-  color: #1a3a8f;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  color: var(--nav-text-color);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  min-height: 44px;
+  border-radius: 999px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.1);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.03);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  letter-spacing: 0.5px;
-  min-width: 50px;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.06em;
+  min-width: 62px;
   text-align: center;
 }
 
 .language-btn::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(26, 58, 143, 0.1),
-    transparent
-  );
-  transition: left 0.4s ease;
-}
-
-.language-btn:hover::before {
-  left: 100%;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(249, 250, 251, 0.82));
+  z-index: 0;
 }
 
 .language-btn:hover {
-  background: rgba(26, 58, 143, 0.12);
-  border-color: rgba(26, 58, 143, 0.3);
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(15, 23, 42, 0.14);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.15);
-  color: #1a3a8f;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.05);
+  color: var(--nav-text-color);
 }
 
 .language-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.2);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
 }
 
 .lang-text {
   position: relative;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
 }
 
-/* 响应式优化 - 仅保留PC端优化 */
 @media (min-width: 1600px) {
   .nav-links {
     gap: 48px;
@@ -824,7 +818,6 @@ onUnmounted(() => {
   }
 }
 
-/* 在响应式部分也需要相应调整 */
 @media (min-width: 1101px) and (max-width: 1199px) {
   .nav-links {
     gap: 24px;
@@ -846,11 +839,10 @@ onUnmounted(() => {
   }
 }
 
-/* 新增中等屏幕优化 */
 @media (min-width: 951px) and (max-width: 1100px) {
   .nav-links {
-    gap: 14px; /* 进一步缩小 */
-    padding: 0 8px; /* 进一步缩小 */
+    gap: 14px;
+    padding: 0 8px;
   }
 
   .nav-link {
@@ -874,12 +866,12 @@ onUnmounted(() => {
   }
 
   .language-btn {
+    min-height: 40px;
     padding: 7px 12px;
     font-size: 12px;
   }
 }
 
-/* 汉堡菜单样式 */
 .hamburger-menu {
   display: none;
   flex-direction: column;
@@ -917,7 +909,6 @@ onUnmounted(() => {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* 移动端导航菜单 */
 .mobile-nav {
   position: fixed;
   top: 0;
@@ -968,7 +959,7 @@ onUnmounted(() => {
 .mobile-nav-link {
   display: block;
   padding: 16px 24px;
-  color: #2d3748;
+  color: var(--nav-text-color);
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
@@ -977,24 +968,27 @@ onUnmounted(() => {
   position: relative;
 }
 
+.mobile-nav-link:link,
+.mobile-nav-link:visited,
+.mobile-nav-link:active {
+  color: var(--nav-text-color);
+}
+
 .mobile-nav-link:hover {
   background: rgba(26, 58, 143, 0.05);
-  color: #1a3a8f;
+  color: var(--nav-text-color);
   padding-left: 32px;
   text-decoration: none;
 }
 
 .mobile-nav-link.router-link-active {
   background: rgba(26, 58, 143, 0.08);
-  color: #1a3a8f;
+  color: var(--nav-text-color);
   font-weight: 500;
   border-left: 4px solid #1a3a8f;
 }
 
-/* 优化响应式设计 - 更早隐藏导航菜单 */
-
 @media (max-width: 950px) {
-  /* 在950px以下隐藏桌面导航菜单，显示汉堡菜单 */
   .desktop-nav {
     display: none;
   }
@@ -1038,9 +1032,10 @@ onUnmounted(() => {
   }
 
   .language-btn {
-    padding: 8px 14px;
+    min-height: 40px;
+    min-width: 56px;
+    padding: 8px 12px;
     font-size: 13px;
-    min-width: 45px;
   }
 }
 
@@ -1062,10 +1057,10 @@ onUnmounted(() => {
   }
 
   .language-btn {
+    min-height: 36px;
+    min-width: 52px;
     padding: 6px 10px;
     font-size: 11px;
-    min-width: 35px;
-    border-radius: 12px;
   }
 
   .nav-actions {
@@ -1091,7 +1086,6 @@ onUnmounted(() => {
   }
 }
 
-/* 超窄屏幕：进一步优化 */
 @media (max-width: 480px) {
   .nav-container {
     height: 55px;
@@ -1111,10 +1105,10 @@ onUnmounted(() => {
   }
 
   .language-btn {
+    min-height: 34px;
+    min-width: 48px;
     padding: 5px 8px;
     font-size: 10px;
-    min-width: 30px;
-    border-radius: 10px;
   }
 
   .hamburger-menu {
@@ -1140,7 +1134,6 @@ onUnmounted(() => {
   }
 }
 
-/* 极限窄屏：最小化显示 */
 @media (max-width: 360px) {
   .nav-container {
     height: 50px;
@@ -1160,10 +1153,10 @@ onUnmounted(() => {
   }
 
   .language-btn {
+    min-height: 30px;
+    min-width: 42px;
     padding: 4px 6px;
     font-size: 9px;
-    min-width: 28px;
-    border-radius: 12px;
   }
 
   .lang-text {
@@ -1193,7 +1186,6 @@ onUnmounted(() => {
   }
 }
 
-/* 动画增强 */
 @keyframes slideInDown {
   from {
     opacity: 0;
@@ -1209,7 +1201,6 @@ onUnmounted(() => {
   animation: slideInDown 0.3s ease-out;
 }
 
-/* 无障碍优化 */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -1218,7 +1209,6 @@ onUnmounted(() => {
   }
 }
 
-/* 高对比度模式支持 */
 @media (prefers-contrast: high) {
   .nav-link {
     border: 1px solid transparent;

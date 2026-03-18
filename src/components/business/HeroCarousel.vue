@@ -1,312 +1,448 @@
 <template>
-  <div class="hero-carousel">
-    <div
-      v-for="(slide, idx) in slides"
-      :key="idx"
-      class="carousel-slide"
-      :class="{ active: idx === current }"
-    >
-      <div class="slide-content">
-        <h1 class="slide-title">{{ slide.title }}</h1>
-        <p class="slide-desc">{{ slide.desc }}</p>
+  <section class="hero-carousel" @mouseenter="pauseAutoPlay" @mouseleave="resumeAutoPlay">
+    <div class="hero-stage">
+      <div class="hero-stage-bg"></div>
+
+      <div class="hero-media">
+        <div class="hero-media-halo"></div>
+        <img :src="activeSlide.img" :alt="activeSlide.title" class="hero-image" />
+      </div>
+
+      <div class="hero-overlay">
+        <div class="hero-copy">
+          <span class="hero-category">{{ activeSlide.category }}</span>
+          <h1 class="hero-title">{{ activeSlide.title }}</h1>
+          <p class="hero-description">{{ activeSlide.desc }}</p>
+          <router-link :to="activeSlide.routePath" class="hero-link">
+            {{ t('home.hero.panelCta') }}
+          </router-link>
+        </div>
+
+        <div class="hero-controls">
+          <span class="hero-progress">{{ current + 1 }}/{{ slides.length }}</span>
+          <div class="hero-indicators">
+            <button
+              v-for="(slide, idx) in slides"
+              :key="slide.routePath"
+              class="hero-indicator"
+              :class="{ active: idx === current }"
+              type="button"
+              :aria-label="slide.shortTitle"
+              @click="goTo(idx)"
+            ></button>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="carousel-controls">
-      <button
-        v-for="(_, idx) in slides"
-        :key="idx"
-        :class="{ active: idx === current }"
-        @click="goTo(idx)"
-      ></button>
-    </div>
-    <!-- 顶部装饰弧线 -->
-    <svg
-      class="arc-bg"
-      viewBox="0 0 1920 300"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M0 300 Q960 0 1920 300"
-        stroke="#e5e7eb"
-        stroke-width="2"
-        fill="none"
-      />
-      <path
-        d="M0 250 Q960 50 1920 250"
-        stroke="#f3f4f6"
-        stroke-width="1"
-        fill="none"
-      />
-    </svg>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from "vue";
-import { useI18n } from "vue-i18n";
-// import { useRouter } from "vue-router";
-import multiOsImg from "@/assets/images/products/多OS混合部署嵌入式虚拟机.png";
-import airosImg from "@/assets/images/products/AiROS机器人操作系统.png";
-import scara4axisImg from "@/assets/images/products/四轴机器人.png";
-import dualArmImg from "@/assets/images/products/双臂人形机器人.png";
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import scara4axisImg from '@/assets/images/products/四轴机器人.png';
+import dualArmImg from '@/assets/images/products/双臂人形机器人.png';
 
-// 获取国际化函数
-const { t } = useI18n();
-// const router = useRouter();
-
-// 轮播图数据类型定义
 interface SlideItem {
   img: string;
   title: string;
+  shortTitle: string;
   desc: string;
-  bgSize?: "cover" | "contain" | "100% auto" | "auto 100%";
-  bgPosition?: string;
-  customWidth?: string;
-  customHeight?: string;
-  showArc?: boolean;
   routePath: string;
+  category: string;
 }
 
-// 使用computed缓存轮播图数据，避免重复计算
+const { t } = useI18n();
+
 const slides = computed<SlideItem[]>(() => [
   {
-    img: multiOsImg,
-    title: t("products.multiOsVm.name"),
-    desc: t("products.multiOsVm.desc"),
-    bgSize: "100% auto",
-    bgPosition: "center 20%",
-    customWidth: "85%",
-    customHeight: "auto",
-    showArc: false,
-    routePath: "/system-products/multi-os-vm",
-  },
-  {
-    img: airosImg,
-    title: t("products.airos.name"),
-    desc: t("products.airos.desc"),
-    bgSize: "contain",
-    bgPosition: "center center",
-    customWidth: "75%",
-    customHeight: "auto",
-    showArc: false,
-    routePath: "/system-products/airos",
-  },
-  {
     img: scara4axisImg,
-    title: t("products.scara4axis.name"),
-    desc: t("products.scara4axis.desc"),
-    bgSize: "contain",
-    bgPosition: "center center",
-    customWidth: "80%",
-    customHeight: "auto",
-    showArc: false,
-    routePath: "/robot-products/scara-4axis",
+    title: t('products.scara4axis.name'),
+    shortTitle: t('home.hero.tabs.scara'),
+    desc: t('products.scara4axis.desc'),
+    routePath: '/robot-products/scara-4axis',
+    category: t('home.coreProducts.robotLabel'),
   },
   {
     img: dualArmImg,
-    title: t("products.dualArmHumanoid.name"),
-    desc: t("products.dualArmHumanoid.desc"),
-    bgSize: "contain",
-    bgPosition: "center center",
-    customWidth: "70%",
-    customHeight: "auto",
-    showArc: false,
-    routePath: "/robot-products/dual-arm-humanoid",
+    title: t('products.dualArmHumanoid.name'),
+    shortTitle: t('home.hero.tabs.humanoid'),
+    desc: t('products.dualArmHumanoid.desc'),
+    routePath: '/robot-products/dual-arm-humanoid',
+    category: t('home.coreProducts.robotLabel'),
   },
 ]);
 
-// 当前轮播索引
 const current = ref(0);
-// 自动播放定时器
-let autoPlayTimer: NodeJS.Timeout | null = null;
-// 是否暂停自动播放
 const isPaused = ref(false);
+const activeSlide = computed(() => slides.value[current.value] ?? slides.value[0]);
+let autoPlayTimer: ReturnType<typeof setTimeout> | null = null;
 
-// 切换到指定轮播
-const goTo = (index: number) => {
-  if (index >= 0 && index < slides.value.length) {
-    current.value = index;
-    resetAutoPlay();
-  }
-};
-
-// 下一张轮播
-const next = () => {
-  current.value = (current.value + 1) % slides.value.length;
-  resetAutoPlay();
-};
-
-// 重置自动播放
-const resetAutoPlay = () => {
+const scheduleNext = (): void => {
   if (autoPlayTimer) {
     clearTimeout(autoPlayTimer);
   }
+
   if (!isPaused.value) {
-    autoPlayTimer = setTimeout(next, 5000);
+    autoPlayTimer = setTimeout(() => {
+      current.value = (current.value + 1) % slides.value.length;
+      scheduleNext();
+    }, 5200);
   }
 };
 
-// 暂停自动播放
-const pauseAutoPlay = () => {
+const goTo = (index: number): void => {
+  if (index < 0 || index >= slides.value.length) {
+    return;
+  }
+
+  current.value = index;
+  scheduleNext();
+};
+
+const pauseAutoPlay = (): void => {
   isPaused.value = true;
+
   if (autoPlayTimer) {
     clearTimeout(autoPlayTimer);
     autoPlayTimer = null;
   }
 };
 
-// 恢复自动播放
-const resumeAutoPlay = () => {
+const resumeAutoPlay = (): void => {
   isPaused.value = false;
-  resetAutoPlay();
+  scheduleNext();
 };
 
-// 监听轮播数据变化，重新开始自动播放
-watch(slides, () => {
-  nextTick(() => {
-    resetAutoPlay();
-  });
-});
+const handleVisibilityChange = (): void => {
+  if (document.hidden) {
+    pauseAutoPlay();
+    return;
+  }
+
+  resumeAutoPlay();
+};
 
 onMounted(() => {
-  // 启动自动播放
-  resetAutoPlay();
-  
-  // 监听页面可见性变化
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      pauseAutoPlay();
-    } else {
-      resumeAutoPlay();
-    }
-  });
+  scheduleNext();
+  document.addEventListener('visibilitychange', handleVisibilityChange);
 });
 
 onUnmounted(() => {
-  // 清理定时器
   if (autoPlayTimer) {
     clearTimeout(autoPlayTimer);
   }
-});
 
-/**
- * 跳转到产品详情页
- */
-// 跳转到产品详情页
-// function navigateToProduct(slide: SlideItem): void {
-//   router.push(slide.routePath);
-// }
+  document.removeEventListener('visibilitychange', handleVisibilityChange);
+});
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .hero-carousel {
   position: relative;
-  width: 100%;
-  max-width: 100%;
-  height: 100vh;
   overflow: hidden;
-  background: #fff;
+  min-height: calc(100svh - 80px);
 }
-.arc-bg {
+
+.hero-stage {
+  position: relative;
+  min-height: calc(100svh - 80px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(103, 152, 232, 0.16), rgba(103, 152, 232, 0) 34%),
+    linear-gradient(180deg, #fbfcfe 0%, #eef4fb 54%, #f7f9fc 100%);
+}
+
+.hero-stage::before,
+.hero-stage::after {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  max-width: 100%;
-  height: 300px;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%);
   pointer-events: none;
-  z-index: 3;
 }
-.carousel-slide {
+
+.hero-stage::before {
+  bottom: 43%;
+  width: 155%;
+  height: 78%;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.hero-stage::after {
+  bottom: 49%;
+  width: 175%;
+  height: 86%;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.hero-stage-bg {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 82%, rgba(64, 145, 255, 0.08), transparent 26%),
+    radial-gradient(circle at 80% 18%, rgba(26, 58, 143, 0.08), transparent 24%);
+  pointer-events: none;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 88px 11vw 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-media-halo {
+  position: absolute;
+  inset: 8% 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(90, 140, 230, 0.16), rgba(90, 140, 230, 0) 65%);
+  filter: blur(18px);
+}
+
+.hero-image {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 0.8s;
-  z-index: 1;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 70px rgba(15, 23, 42, 0.12));
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 5vw 44px;
+}
+
+.hero-copy {
+  max-width: min(760px, 62vw);
+}
+
+.hero-category {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+  color: #1f4fb1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.6rem, 4.4vw, 4.6rem);
+  line-height: 1.03;
+  letter-spacing: -0.05em;
+  color: #0f172a;
+  text-wrap: balance;
+}
+
+.hero-description {
+  margin: 18px 0 0;
+  max-width: 28em;
+  font-size: 1.02rem;
+  line-height: 1.78;
+  color: #4b5563;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 26px;
+  color: #0f172a;
+  font-size: 0.96rem;
+  font-weight: 600;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.hero-link::after {
+  content: '>';
+  font-size: 0.76rem;
+  opacity: 0.72;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.hero-link:link,
+.hero-link:visited,
+.hero-link:active {
+  color: #0f172a;
+}
+
+.hero-link:hover {
+  color: #0f172a;
+  text-decoration: none;
+  transform: translateX(2px);
+}
+
+.hero-link:hover::after {
+  transform: translateX(2px);
+  opacity: 1;
+}
+
+.hero-controls {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-}
-.carousel-slide.active {
-  opacity: 1;
-  z-index: 2;
+  align-items: flex-end;
+  gap: 14px;
+  min-width: 180px;
 }
 
-.slide-content {
-  position: absolute;
-  left: 80px;
-  bottom: 120px;
-  z-index: 2;
-  color: #2d3748;
-  text-align: left;
-  max-width: 600px;
+.hero-progress {
+  color: rgba(15, 23, 42, 0.56);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
-.slide-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 18px;
-  letter-spacing: 1px;
-}
-.slide-desc {
-  font-weight: 400;
-  margin-bottom: 0;
-}
-.carousel-controls {
-  position: absolute;
-  right: 60px;
-  bottom: 100px;
+
+.hero-indicators {
   display: flex;
-  gap: 18px;
-  z-index: 10;
+  align-items: center;
+  gap: 12px;
 }
-.carousel-controls button {
-  width: 28px;
-  height: 8px;
-  border-radius: 6px;
-  border: none;
-  background: #b0b8c6;
-  opacity: 0.7;
-  cursor: pointer;
-  transition: all 0.2s;
+
+.hero-indicator {
+  width: 42px;
+  height: 10px;
   padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.55);
+  cursor: pointer;
+  transition: width 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 }
-.carousel-controls button.active {
-  width: 44px;
-  background: #1a7cff;
-  opacity: 1;
-  box-shadow: 0 2px 8px 0 rgba(26, 122, 255, 0.18);
+
+.hero-indicator:hover {
+  transform: translateY(-1px);
 }
-@media (max-width: 900px) {
-  .slide-content {
-    left: 24px;
-    bottom: 60px;
-    max-width: 90vw;
-  }
-  .slide-title {
-    font-size: 2.2rem;
+
+.hero-indicator.active {
+  width: 64px;
+  background: #2a61cf;
+}
+
+@media (max-width: 1100px) {
+  .hero-carousel,
+  .hero-stage {
+    min-height: calc(100svh - 70px);
   }
 
-  .carousel-controls {
-    right: 20px;
-    bottom: 48px;
-    gap: 12px;
+  .hero-media {
+    inset: 86px 8vw 210px;
   }
-  .carousel-controls button {
-    width: 18px;
-    height: 6px;
+
+  .hero-overlay {
+    padding: 0 24px 34px;
   }
-  .carousel-controls button.active {
-    width: 32px;
+
+  .hero-copy {
+    max-width: min(680px, 68vw);
   }
 }
-@media (max-width: 600px) {
-  .slide-title {
-    font-size: 1.8rem;
+
+@media (max-width: 900px) {
+  .hero-carousel,
+  .hero-stage {
+    min-height: calc(100svh - 70px);
+  }
+
+  .hero-stage::before {
+    bottom: 48%;
+    width: 205%;
+    height: 74%;
+  }
+
+  .hero-stage::after {
+    bottom: 54%;
+    width: 230%;
+    height: 80%;
+  }
+
+  .hero-media {
+    inset: 80px 24px 260px;
+  }
+
+  .hero-overlay {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px 28px;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    max-width: 100%;
+  }
+
+  .hero-controls {
+    align-items: flex-start;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-carousel,
+  .hero-stage {
+    min-height: calc(100svh - 60px);
+  }
+
+  .hero-media {
+    inset: 72px 14px 250px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .hero-description {
+    font-size: 0.96rem;
+  }
+
+  .hero-overlay {
+    padding: 0 16px 24px;
+  }
+
+  .hero-indicator {
+    width: 28px;
+    height: 8px;
+  }
+
+  .hero-indicator.active {
+    width: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-carousel,
+  .hero-stage {
+    min-height: calc(100svh - 55px);
+  }
+
+  .hero-media {
+    inset: 68px 12px 238px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-carousel,
+  .hero-stage {
+    min-height: calc(100svh - 50px);
   }
 }
 </style>

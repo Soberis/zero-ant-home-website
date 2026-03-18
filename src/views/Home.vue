@@ -1,112 +1,99 @@
-<!-- 首页，聚合轮播、核心产品、视频案例、行业应用、合作伙伴等模块 -->
+<!-- 首页，聚合 Hero、核心产品、行业应用、视频案例与合作伙伴等模块 -->
 <template>
+  <div class="home-page">
+    <HeroCarousel />
 
-  <div class="home-bg">
+    <main class="home-main">
+      <section class="home-section home-section--products">
+        <CoreProducts />
+      </section>
 
-     <div class="home">
-       <HeroCarousel />
-       <div class="section"><CoreProducts /></div>
-       <div class="section"><VideoCases /></div>
-       <div class="section"><IndustryApplications /></div>
-       <div class="section"><Partners /></div>
-     </div>
+      <section class="home-section home-section--applications">
+        <IndustryApplications />
+      </section>
 
+      <section class="home-section home-section--videos">
+        <VideoCases />
+      </section>
+
+      <section class="home-section home-section--partners">
+        <Partners />
+      </section>
+    </main>
   </div>
-
 </template>
 
 <script setup lang="ts">
 // 首页聚合各核心模块组件
-import HeroCarousel from '@/components/business/HeroCarousel.vue'; // 轮播图
-import CoreProducts from '@/components/business/CoreProducts.vue'; // 核心产品
-import VideoCases from '@/components/business/VideoCases.vue'; // 视频案例
-import IndustryApplications from '@/components/business/IndustryApplications.vue'; // 行业应用
-import Partners from '@/components/business/Partners.vue'; // 合作伙伴
+import HeroCarousel from '@/components/business/HeroCarousel.vue';
+import CoreProducts from '@/components/business/CoreProducts.vue';
+import IndustryApplications from '@/components/business/IndustryApplications.vue';
+import VideoCases from '@/components/business/VideoCases.vue';
+import Partners from '@/components/business/Partners.vue';
 </script>
 
 <style lang="less" scoped>
-.btn {
-  width: 180px;
+.home-page {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(28, 74, 168, 0.12), transparent 26%),
+    radial-gradient(circle at right 15%, rgba(64, 145, 255, 0.08), transparent 24%),
+    linear-gradient(180deg, #f5f8fc 0%, #eef3f8 100%);
 }
-.home {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+
+.home-main {
+  position: relative;
 }
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+
+.home-section {
+  position: relative;
+  overflow: hidden;
 }
-.main-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 40px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto 0 auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.04);
-  padding: 32px 24px;
+
+.home-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
-.main-section > * {
-  flex: 1 1 0;
-  min-width: 0;
+
+.home-section--products::before {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 250, 255, 0.92)),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+  background-size: auto, 36px 36px;
 }
-.section-grey {
-  background: #f7f8fa;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 64px 0 48px 0;
-  overflow-x: hidden;
+
+.home-section--applications::before {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(31, 80, 182, 0.09), transparent 18%),
+    linear-gradient(180deg, rgba(238, 244, 252, 0.86), rgba(244, 248, 252, 0.96));
 }
-.section-white {
-  background: #fff;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 64px 0 48px 0;
-  overflow-x: hidden;
+
+.home-section--videos::before {
+  background:
+    radial-gradient(circle at 85% 15%, rgba(15, 23, 42, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(249, 251, 254, 0.92), rgba(238, 243, 248, 0.94));
 }
-.home-bg {
-  background: #f7f8fa;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+
+.home-section--partners::before {
+  background:
+    linear-gradient(180deg, rgba(245, 248, 251, 0.95), rgba(255, 255, 255, 0.98));
 }
-.section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 64px 0 48px 0;
-  background: transparent;
-}
+
 @media screen and (max-width: 991px) {
-  .container {
-    max-width: 100%;
-    padding: 0 8px;
-    overflow-x: hidden;
+  .home-page {
+    background:
+      radial-gradient(circle at top left, rgba(28, 74, 168, 0.1), transparent 28%),
+      linear-gradient(180deg, #f5f8fc 0%, #eef3f8 100%);
   }
-  .main-section {
-    flex-direction: column;
-    gap: 24px;
-    padding: 16px 4px;
-    box-shadow: none;
-    border-radius: 0;
-  }
-  .section-grey,
-  .section-white {
-    padding: 32px 0 24px 0;
-  }
-  .buttom-info {
-    margin-top: 10px;
-  }
-  .section {
-    padding: 32px 0 24px 0;
+
+  .home-section--products::before,
+  .home-section--applications::before,
+  .home-section--videos::before,
+  .home-section--partners::before {
+    background-size: auto, 24px 24px;
   }
 }
 </style>
-

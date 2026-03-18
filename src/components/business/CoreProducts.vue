@@ -1,249 +1,297 @@
 <template>
   <section class="core-products">
-    <h2 class="section-title">{{ t("home.coreProducts.title") }}</h2>
+    <div class="section-heading">
+      <span class="section-eyebrow">{{ t('home.coreProducts.eyebrow') }}</span>
+      <h2 class="section-title">{{ t('home.coreProducts.title') }}</h2>
+      <p class="section-description">{{ t('home.coreProducts.description') }}</p>
+    </div>
 
-    <div class="products-list">
-      <div v-for="product in products" :key="product.slug" class="product-card">
-        <div class="product-img">
-          <!-- 使用新的图标组件系统 -->
-          <ProductIcons :name="product.slug" :size="80" />
+    <div class="product-groups">
+      <section v-for="group in productGroups" :key="group.key" class="product-group">
+        <div class="group-header">
+          <div>
+            <span class="group-label">{{ group.label }}</span>
+            <h3 class="group-title">{{ group.title }}</h3>
+          </div>
         </div>
 
-        <div class="product-title">{{ t(product.name) }}</div>
+        <div class="products-list">
+          <article v-for="product in group.items" :key="product.slug" class="product-card">
+            <div class="product-top">
+              <span class="product-badge">{{ group.label }}</span>
+              <div class="product-icon">
+                <ProductIcons :name="product.slug" :size="68" />
+              </div>
+            </div>
 
-        <div class="product-desc">{{ t(product.desc) }}</div>
-        <router-link :to="getProductDetailLink(product)" class="more-btn"
-          >{{ t("home.coreProducts.learnMore") }} +</router-link
-        >
-      </div>
+            <h4 class="product-title">{{ t(product.name) }}</h4>
+            <p class="product-desc">{{ t(product.desc) }}</p>
+
+            <router-link :to="getProductDetailLink(product)" class="more-btn">
+              {{ t('home.coreProducts.learnMore') }}
+            </router-link>
+          </article>
+        </div>
+      </section>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-// 核心产品数据
-import { products } from "@/data/products";
-import { getProductDetailLink } from "@/utils/product";
-import { useI18n } from "vue-i18n";
-import ProductIcons from "@/components/icons/ProductIcons.vue";
+import { computed } from 'vue';
+import { products } from '@/data/products';
+import { getProductDetailLink } from '@/utils/product';
+import { useI18n } from 'vue-i18n';
+import ProductIcons from '@/components/icons/ProductIcons.vue';
 
 const { t } = useI18n();
+
+const productGroups = computed(() => [
+  {
+    key: 'system',
+    label: t('home.coreProducts.systemLabel'),
+    title: t('nav.systemProducts'),
+    items: products.filter((product) => product.category === 'system'),
+  },
+  {
+    key: 'robot',
+    label: t('home.coreProducts.robotLabel'),
+    title: t('nav.robotProducts'),
+    items: products.filter((product) => product.category === 'robot'),
+  },
+]);
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .core-products {
-  width: 100%;
-  max-width: 100%;
   position: relative;
-  padding: 80px 0 64px 0;
-  overflow-x: hidden;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 110px 24px 96px;
 }
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 48px;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 54, 127, 0.12);
+  background: rgba(255, 255, 255, 0.78);
+  color: #1f4fb1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .section-title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 56px;
-  letter-spacing: 2px;
-  color: #2d3748;
+  margin: 20px 0 12px;
+  font-size: clamp(2.1rem, 4vw, 3.15rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #0f172a;
 }
+
+.section-description {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #5b6475;
+}
+
+.product-groups {
+  display: grid;
+  gap: 32px;
+}
+
+.product-group {
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.055);
+  backdrop-filter: blur(12px);
+}
+
+.group-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.group-label {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.group-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
 .products-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 40px;
-  overflow-x: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
 }
+
 .product-card {
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  border: 2px solid transparent;
-  position: relative;
-  padding: 40px 32px;
-  height: 460px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  min-height: 320px;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 252, 0.9));
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 48px rgba(26, 58, 143, 0.15);
-  border-color: rgba(26, 58, 143, 0.1);
+  transform: translateY(-4px);
+  border-color: rgba(20, 54, 127, 0.16);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.07);
 }
 
-.product-img {
+.product-top {
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-badge {
+  display: inline-flex;
   align-items: center;
-  width: 100px;
-  height: 120px;
-  margin-bottom: 24px;
-  position: relative;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(20, 54, 127, 0.08);
+  color: #14367f;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.product-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(225, 235, 250, 0.8), rgba(247, 250, 253, 0.96));
 }
 
 .product-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #2d3748;
-  text-align: center;
-  margin-bottom: 16px;
+  margin: 28px 0 12px;
+  font-size: 1.2rem;
   line-height: 1.4;
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: #0f172a;
 }
 
 .product-desc {
-  font-size: 0.95rem;
-  color: #718096;
-  text-align: center;
-  line-height: 1.6;
-  margin-bottom: 32px;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  text-align: center;
+  margin: 0;
+  flex: 1;
+  font-size: 0.94rem;
+  line-height: 1.8;
+  color: #5b6475;
 }
 
 .more-btn {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-  color: white;
-  text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: 24px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  color: #0f172a;
+  font-size: 0.92rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
+    background-color 0.25s ease, color 0.25s ease;
+}
+
+.more-btn::after {
+  content: '>';
+  font-size: 0.82rem;
+  opacity: 0.72;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.more-btn:link,
+.more-btn:visited,
+.more-btn:active {
+  color: #0f172a;
 }
 
 .more-btn:hover {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  color: #0f172a;
+  text-decoration: none;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.18);
+  box-shadow: 0 14px 24px rgba(15, 23, 42, 0.08);
 }
 
-.more-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
+.more-btn:hover::after {
+  transform: translateX(2px);
+  opacity: 1;
 }
 
-.more-btn:hover::before {
-  left: 100%;
-}
-
-/* 响应式设计 */
-@media (max-width: 1200px) {
-  .products-list {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
-    padding: 0 32px;
-  }
-
-  .product-card {
-    padding: 32px 24px;
-    height: 420px;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .core-products {
-    padding: 60px 0 48px 0;
+    padding: 84px 16px 72px;
   }
 
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 40px;
+  .product-group {
+    padding: 22px;
+    border-radius: 22px;
   }
 
   .products-list {
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 0 20px;
-  }
-
-  .product-card {
-    height: auto;
-    min-height: 380px;
-    padding: 28px 20px;
-  }
-
-  .product-title {
-    font-size: 1.25rem;
-    min-height: 48px;
-  }
-
-  .product-desc {
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-  }
-
-  .more-btn {
-    padding: 12px 24px;
-    font-size: 0.85rem;
   }
 }
 
-@media (max-width: 480px) {
-  .core-products {
-    padding: 48px 0 40px 0;
-  }
-
+@media (max-width: 640px) {
   .section-title {
-    font-size: 1.75rem;
-    margin-bottom: 32px;
-  }
-
-  .products-list {
-    padding: 0 16px;
+    margin-top: 16px;
   }
 
   .product-card {
-    padding: 24px 16px;
+    min-height: auto;
+    padding: 20px;
     border-radius: 16px;
   }
 
-  .product-img {
-    width: 80px;
-    height: 100px;
-    margin-bottom: 20px;
-  }
-
   .product-title {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+    margin-top: 22px;
   }
 
-  .product-desc {
-    font-size: 0.85rem;
-    margin-bottom: 20px;
+  .product-icon {
+    width: 72px;
+    height: 72px;
   }
 
   .more-btn {
-    padding: 10px 20px;
-    font-size: 0.8rem;
-    border-radius: 8px;
+    width: 100%;
   }
 }
 </style>
