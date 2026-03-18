@@ -95,6 +95,149 @@
       "description": "与科研院所、行业客户和生态伙伴持续共建，验证技术落地能力。"
     }
   },
+  "productPages": {
+    "common": {
+      "viewProducts": "查看产品矩阵",
+      "viewSolutions": "查看解决方案",
+      "contactTeam": "联系团队",
+      "viewDetails": "查看详情",
+      "overviewEyebrow": "页面概览",
+      "guideEyebrow": "选型建议"
+    },
+    "metrics": {
+      "focus": "核心方向",
+      "output": "输出形态",
+      "configuration": "配置形态"
+    },
+    "metricValues": {
+      "multiOsVmFocus": "混合系统",
+      "multiOsVmOutput": "边缘平台",
+      "industrialRtosFocus": "实时内核",
+      "industrialRtosOutput": "运动控制",
+      "airosFocus": "机器人 OS",
+      "airosOutput": "控制栈",
+      "robotSchedulerFocus": "多机调度",
+      "robotSchedulerOutput": "跨设备协同",
+      "gantryConfig": "2 / 3 自由度",
+      "gantryOutput": "直线搬运",
+      "scaraConfig": "4 轴",
+      "scaraOutput": "高速装配",
+      "arm6Config": "6 轴",
+      "arm6Output": "复杂轨迹",
+      "dualArmConfig": "双臂",
+      "dualArmOutput": "高柔性任务",
+      "mobileConfig": "AMR 平台",
+      "mobileOutput": "智能物流"
+    },
+    "system": {
+      "hero": {
+        "eyebrow": "System Product Matrix",
+        "title": "机器人系统底座与平台能力",
+        "description": "围绕机器人操作系统、实时控制、混合部署与多机调度，构建可落地的系统产品矩阵。"
+      },
+      "metrics": {
+        "countValue": "04",
+        "countLabel": "系统产品",
+        "capabilityValue": "OS / RTOS / 调度",
+        "capabilityLabel": "核心能力",
+        "deliveryValue": "平台 + 集成",
+        "deliveryLabel": "交付方式"
+      },
+      "overview": {
+        "title": "从系统底座到协同调度",
+        "description": "系统产品页重点不是罗列软件名词，而是让用户快速理解 ZeroAnt 如何支撑控制、运行、部署和协同。",
+        "cards": {
+          "control": {
+            "title": "控制底座",
+            "description": "以操作系统与控制平台为中心，统一承载机器人运行基础。"
+          },
+          "runtime": {
+            "title": "实时运行",
+            "description": "兼顾高可靠、低抖动和工业现场需要的确定性执行。"
+          },
+          "integration": {
+            "title": "开放集成",
+            "description": "面向不同机器人、控制器与业务系统提供可扩展接口能力。"
+          },
+          "delivery": {
+            "title": "工程交付",
+            "description": "既能作为平台能力输出，也能支撑定制化集成与项目落地。"
+          }
+        }
+      },
+      "guide": {
+        "title": "系统产品选型建议",
+        "items": {
+          "foundation": {
+            "title": "先看控制底座",
+            "description": "如果目标是统一机器人运行环境，优先了解 AiROS 与工业实时操作系统。"
+          },
+          "runtime": {
+            "title": "再看部署能力",
+            "description": "如果现场存在多系统并存与资源隔离需求，优先看多 OS 混合部署能力。"
+          },
+          "orchestration": {
+            "title": "最后看协同调度",
+            "description": "如果面向多机器人协作与工厂级联动，重点看调度系统与接口能力。"
+          }
+        }
+      }
+    },
+    "robot": {
+      "hero": {
+        "eyebrow": "Robot Product Matrix",
+        "title": "面向真实场景的机器人产品矩阵",
+        "description": "覆盖机械臂、双臂协作、移动执行与龙门平台，以统一控制能力服务装配、搬运与物流场景。"
+      },
+      "metrics": {
+        "countValue": "05",
+        "countLabel": "机器人产品",
+        "coverageValue": "机械臂 / 移动平台",
+        "coverageLabel": "覆盖形态",
+        "scenarioValue": "装配 / 搬运 / 物流",
+        "scenarioLabel": "典型场景"
+      },
+      "overview": {
+        "title": "从执行机构到复合能力",
+        "description": "机器人产品页优先讲清不同形态的执行能力，让用户先建立选型判断，再深入到具体型号。",
+        "cards": {
+          "precision": {
+            "title": "精密执行",
+            "description": "围绕装配、定位、抓取与轨迹控制，覆盖常见工业执行需求。"
+          },
+          "flexibility": {
+            "title": "柔性协作",
+            "description": "通过多自由度与双臂协同，支持更复杂的工位动作和交互任务。"
+          },
+          "logistics": {
+            "title": "移动搬运",
+            "description": "将自主导航与任务执行结合，支撑工厂与仓储场景的物流流转。"
+          },
+          "integration": {
+            "title": "系统协同",
+            "description": "与 ZeroAnt 控制、调度和应用软件能力联动，形成完整交付方案。"
+          }
+        }
+      },
+      "guide": {
+        "title": "机器人产品选型建议",
+        "items": {
+          "assembly": {
+            "title": "精密装配",
+            "description": "需要高速取放、分拣和装配任务时，优先关注四轴机械臂和龙门平台。"
+          },
+          "complex": {
+            "title": "复杂轨迹",
+            "description": "需要多姿态运动、焊接喷涂或复杂路径控制时，优先看六轴与双臂。"
+          },
+          "mobile": {
+            "title": "移动执行",
+            "description": "需要跨工位搬运、厂内配送或复合任务时，优先看移动机器人方向。"
+          }
+        }
+      }
+    }
+  },
   "solutionsPage": {
     "title": "行业解决方案",
     "subtitle": "探索前沿技术应用，见证创新驱动未来",
@@ -574,63 +717,130 @@
       "name": "多OS混合部署嵌入式虚拟机",
       "desc": "支持多操作系统并行运行，提升工业设备灵活性与资源利用率。",
       "seriesTitle": "多OS混合部署嵌入式虚拟机",
-      "seriesSubtitle": "异构系统一体化解决方案"
+      "seriesSubtitle": "异构系统一体化解决方案",
+      "supportText": "适用于控制器、工业网关与边缘计算设备的异构系统一体化部署。",
+      "highlights": [
+        "混合部署",
+        "资源隔离",
+        "统一管理"
+      ]
     },
     "industrialRtos": {
       "name": "国产工业实时操作系统",
       "desc": "自主可控的工业级实时操作系统，保障关键任务高可靠运行。",
       "seriesTitle": "国产工业实时操作系统",
-      "seriesSubtitle": "高可靠性与自主可控"
+      "seriesSubtitle": "高可靠性与自主可控",
+      "supportText": "适用于高可靠运动控制、现场设备与关键任务执行场景。",
+      "highlights": [
+        "自主可控",
+        "确定性执行",
+        "工业现场适配"
+      ]
     },
     "airos": {
       "name": "AiROS机器人操作系统",
       "desc": "国产『开箱即用』机器人智能操作系统，打造机器人界的Android系统，让机器人走进千行百业。",
       "seriesTitle": "AiROS机器人操作系统",
-      "seriesSubtitle": "具身智能时代的操作系统"
+      "seriesSubtitle": "具身智能时代的操作系统",
+      "supportText": "适用于机器人本体、控制平台与上层应用的一体化软件底座。",
+      "highlights": [
+        "开箱即用",
+        "控制栈整合",
+        "机器人应用扩展"
+      ]
     },
     "robotScheduler": {
       "name": "移动机器人调度系统",
       "desc": "支持多品牌、多类型移动机器人统一调度与协同作业，提升工厂自动化水平。",
       "seriesTitle": "移动机器人调度系统",
-      "seriesSubtitle": "多机协同与智能调度"
+      "seriesSubtitle": "多机协同与智能调度",
+      "supportText": "适用于多机器人协作、跨设备联动与工厂级调度场景。",
+      "highlights": [
+        "多机协同",
+        "跨品牌接入",
+        "任务编排"
+      ]
     },
     "gantry2d": {
       "name": "二/三自由度龙门架",
       "desc": "高精度、高刚性的二/三自由度龙门架，适用于多场景自动化搬运与定位。",
       "seriesTitle": "二/三自由度龙门架",
-      "seriesSubtitle": "高效自动化搬运平台"
+      "seriesSubtitle": "高效自动化搬运平台",
+      "supportText": "适用于直线搬运、上下料和大工作范围内的精密定位任务。",
+      "highlights": [
+        "高刚性结构",
+        "直线执行",
+        "定制空间范围"
+      ]
     },
     "scara4axis": {
       "name": "四轴机械臂",
       "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用。",
       "seriesTitle": "四轴机械臂",
-      "seriesSubtitle": "灵活高效的工业助手"
+      "seriesSubtitle": "灵活高效的工业助手",
+      "supportText": "适用于高速装配、分拣取放和节拍明确的工业工位。",
+      "highlights": [
+        "高速取放",
+        "紧凑工位",
+        "稳定节拍"
+      ]
     },
     "arm6axis": {
       "name": "六轴机械臂",
       "desc": "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景。",
       "seriesTitle": "六轴机械臂",
-      "seriesSubtitle": "多场景智能作业"
+      "seriesSubtitle": "多场景智能作业",
+      "supportText": "适用于焊接、打磨、喷涂和复杂路径控制等多姿态任务。",
+      "highlights": [
+        "多姿态运动",
+        "复杂轨迹",
+        "多场景部署"
+      ]
     },
     "dualArmHumanoid": {
       "name": "双臂人型机器人",
       "desc": "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求。",
       "seriesTitle": "双臂人型机器人",
-      "seriesSubtitle": "高柔性协作平台"
+      "seriesSubtitle": "高柔性协作平台",
+      "supportText": "适用于双臂协同、灵巧操作和高柔性复合工序。",
+      "highlights": [
+        "双臂协作",
+        "灵巧执行",
+        "高柔性工位"
+      ]
     },
     "mobileRobot": {
       "name": "移动机器人",
       "desc": "自主导航、多传感器融合，适用于工厂、仓储等多场景智能物流。",
       "seriesTitle": "移动机器人",
-      "seriesSubtitle": "智能物流与搬运"
+      "seriesSubtitle": "智能物流与搬运",
+      "supportText": "适用于工厂物流、跨工位搬运与复合任务调度。",
+      "highlights": [
+        "自主导航",
+        "多传感融合",
+        "物流搬运"
+      ]
     }
   },
   "productDetail": {
+    "eyebrow": "产品详情",
+    "heroLabel": "关键参数",
     "features": "产品特点",
     "applications": "应用场景",
     "videoCases": "视频案例",
     "parameters": "产品参数",
     "downloads": "相关下载",
+    "relatedProducts": "相关产品",
+    "sameSeriesProducts": "同系列产品",
+    "solutionCta": "查看解决方案",
+    "downloadLabel": "下载资料",
+    "anchorOverview": "产品详情",
+    "anchorFeatures": "核心优势",
+    "anchorApplications": "应用场景",
+    "anchorCases": "视频案例",
+    "anchorParameters": "产品参数",
+    "anchorDownloads": "相关下载",
+    "relatedProductsEyebrow": "产品推荐",
     "backToList": "返回产品列表",
     "preparingMessage": "工程师正在精心准备中，敬请期待",
     "notFound": "未找到该产品"

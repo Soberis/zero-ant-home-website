@@ -111,7 +111,7 @@ const productGroups = computed(() => [
 
 .product-group {
   padding: 24px;
-  border-radius: 24px;
+  border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: rgba(255, 255, 255, 0.76);
   box-shadow: 0 18px 38px rgba(15, 23, 42, 0.055);
@@ -154,7 +154,7 @@ const productGroups = computed(() => [
   flex-direction: column;
   min-height: 320px;
   padding: 24px;
-  border-radius: 18px;
+  border-radius: 14px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 252, 0.9));
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
@@ -191,7 +191,7 @@ const productGroups = computed(() => [
   justify-content: center;
   width: 80px;
   height: 80px;
-  border-radius: 18px;
+  border-radius: 12px;
   background: linear-gradient(180deg, rgba(225, 235, 250, 0.8), rgba(247, 250, 253, 0.96));
 }
 
@@ -218,7 +218,7 @@ const productGroups = computed(() => [
   align-self: flex-start;
   margin-top: 24px;
   padding: 11px 18px;
-  border-radius: 999px;
+  border-radius: 12px;
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: rgba(255, 255, 255, 0.9);
   color: #0f172a;
@@ -262,7 +262,7 @@ const productGroups = computed(() => [
 
   .product-group {
     padding: 22px;
-    border-radius: 22px;
+    border-radius: 14px;
   }
 
   .products-list {
@@ -278,7 +278,7 @@ const productGroups = computed(() => [
   .product-card {
     min-height: auto;
     padding: 20px;
-    border-radius: 16px;
+    border-radius: 12px;
   }
 
   .product-title {

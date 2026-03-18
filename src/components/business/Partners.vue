@@ -83,7 +83,7 @@ const partnersTyped: Partner[] = partners;
   justify-content: center;
   min-height: 96px;
   padding: 18px;
-  border-radius: 24px;
+  border-radius: 14px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: rgba(255, 255, 255, 0.74);
   box-shadow: 0 20px 36px rgba(15, 23, 42, 0.05);
@@ -157,7 +157,7 @@ const partnersTyped: Partner[] = partners;
 
   .partner-logo {
     min-height: 88px;
-    border-radius: 20px;
+    border-radius: 12px;
   }
 }
 </style>

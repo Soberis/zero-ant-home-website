@@ -1,470 +1,363 @@
 <template>
-  <div class="product-card">
-    <div class="product-header">
-      <div v-if="product.image" class="product-image-wrapper">
-        <div class="image-backdrop"></div>
-        <img
-          :src="product.image"
-          :alt="t(product.name)"
-          class="product-image"
-          loading="lazy"
-        />
-      </div>
-
-      <div v-else class="product-image-placeholder">
-        <div class="placeholder-icon">
-          <svg
-            width="80"
-            height="80"
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="8"
-              y="12"
-              width="32"
-              height="24"
-              rx="4"
-              stroke="#1a3a8f"
-              stroke-width="2"
-              opacity="0.3"
-            />
-
-            <circle
-              cx="24"
-              cy="24"
-              r="6"
-              stroke="#1a3a8f"
-              stroke-width="2"
-              opacity="0.5"
-            />
-
-            <path
-              d="M24 18v12M18 24h12"
-              stroke="#1a3a8f"
-              stroke-width="2"
-              opacity="0.4"
-            />
-          </svg>
-        </div>
-      </div>
+  <article
+    :id="product.slug"
+    class="product-card"
+    :class="[
+      `product-card--${product.category}`,
+      { 'product-card--reverse': isReverse },
+    ]"
+  >
+    <div class="product-card__media">
+      <div class="product-card__media-backdrop"></div>
+      <img :src="product.image" :alt="t(product.name)" class="product-card__image" loading="lazy" />
     </div>
 
-    <div class="product-content">
-      <div class="product-name">{{ t(product.name) }}</div>
+    <div class="product-card__content">
+      <div class="product-card__head">
+        <span class="product-card__category">{{ categoryLabel }}</span>
+        <span class="product-card__series">{{ t(product.seriesTitle) }}</span>
+      </div>
 
-      <div class="product-desc">{{ t(product.desc) }}</div>
-      <button 
-        class="more-btn" 
-        @click="emit('more', product.slug)"
-        :aria-label="t('hero.cta') + ' ' + t(product.name)"
-      >
-        <span class="btn-text">{{ t("hero.cta") }}</span>
-        <span class="btn-arrow" aria-hidden="true">→</span>
+      <h2 class="product-card__title">{{ t(product.name) }}</h2>
+      <p class="product-card__subtitle">{{ t(product.seriesSubtitle) }}</p>
+      <p class="product-card__description">{{ t(product.desc) }}</p>
+
+      <div v-if="product.metrics?.length" class="product-card__metrics">
+        <article
+          v-for="metric in product.metrics"
+          :key="`${metric.label}-${metric.value}`"
+          class="product-card__metric"
+        >
+          <div class="product-card__metric-value">{{ t(metric.value) }}</div>
+          <div class="product-card__metric-label">{{ t(metric.label) }}</div>
+        </article>
+      </div>
+
+      <div v-if="product.highlights?.length" class="product-card__highlights">
+        <span
+          v-for="highlight in product.highlights"
+          :key="highlight"
+          class="product-card__highlight"
+        >
+          {{ t(highlight) }}
+        </span>
+      </div>
+
+      <p v-if="product.supportText" class="product-card__support">
+        {{ t(product.supportText) }}
+      </p>
+
+      <button class="product-card__action" type="button" @click="emit('more', product.slug)">
+        <span>{{ t("productPages.common.viewDetails") }}</span>
+        <span aria-hidden="true">></span>
       </button>
     </div>
-  </div>
-  
+  </article>
 </template>
 
 <script setup lang="ts">
-import type { ProductData } from "@/types";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import type { ProductData } from "@/types";
 
-const { product } = defineProps<{ product: ProductData }>();
+const props = withDefaults(
+  defineProps<{
+    product: ProductData;
+    index?: number;
+  }>(),
+  {
+    index: 0,
+  }
+);
+
 const emit = defineEmits<{ (e: "more", slug: string): void }>();
 const { t } = useI18n();
+
+const isReverse = computed(() => props.index % 2 === 1);
+const categoryLabel = computed(() =>
+  props.product.category === "system"
+    ? t("home.coreProducts.systemLabel")
+    : t("home.coreProducts.robotLabel")
+);
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .product-card {
+  display: grid;
+  grid-template-columns: minmax(340px, 0.92fr) minmax(0, 1.08fr);
+  gap: 26px;
+  align-items: stretch;
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.78)),
+    linear-gradient(135deg, rgba(22, 58, 135, 0.04), rgba(22, 58, 135, 0));
+  box-shadow: 0 26px 70px rgba(15, 23, 42, 0.08);
+  scroll-margin-top: 140px;
+}
+
+.product-card--reverse {
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+}
+
+.product-card--reverse .product-card__media {
+  order: 2;
+}
+
+.product-card--reverse .product-card__content {
+  order: 1;
+}
+
+.product-card__media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  padding: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.product-card--system .product-card__media {
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.22), transparent 30%),
+    linear-gradient(135deg, #0f172a 0%, #13203a 100%);
+}
+
+.product-card--robot .product-card__media {
+  background:
+    radial-gradient(circle at top right, rgba(148, 163, 184, 0.28), transparent 26%),
+    linear-gradient(180deg, #f8fbff 0%, #e8eef7 100%);
+}
+
+.product-card__media-backdrop {
+  position: absolute;
+  inset: 18px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.product-card--system .product-card__media-backdrop {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.product-card--robot .product-card__media-backdrop {
+  border: 1px solid rgba(22, 58, 135, 0.08);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(22, 58, 135, 0.06), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.16));
+}
+
+.product-card__image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  max-height: 360px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 34px rgba(15, 23, 42, 0.14));
+}
+
+.product-card__content {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #fff 0%, #fafbff 100%);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(26, 58, 143, 0.08);
-  border: 1px solid rgba(26, 58, 143, 0.05);
-  padding: 32px 24px;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
-  min-height: 480px;
-  will-change: transform, box-shadow;
+  justify-content: center;
+  min-width: 0;
+  padding: 10px 4px;
 }
 
-/* 1200px断点 - 大屏幕优化 */
-@media (max-width: 1200px) {
-  .product-card {
-    padding: 28px 20px;
-    min-height: 460px;
-  }
-
-  .product-image-wrapper {
-    width: 420px;
-    height: 240px;
-  }
-
-  .product-image,
-  .product-image-placeholder {
-    width: 400px;
-    height: 220px;
-  }
-
-  .product-name {
-    font-size: 1.35rem;
-  }
+.product-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
-/* 1024px断点 - 平板横屏 */
-@media (max-width: 1024px) {
-  .product-card {
-    padding: 24px 18px;
-    min-height: 440px;
+.product-card__category,
+.product-card__highlight {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.product-card__category {
+  padding: 7px 12px;
+  background: rgba(22, 58, 135, 0.08);
+  color: #163a87;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.product-card__series {
+  color: #5b6475;
+  font-size: 0.86rem;
+}
+
+.product-card__title {
+  margin: 16px 0 12px;
+  font-size: clamp(1.9rem, 2.8vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: #0f172a;
+}
+
+.product-card__subtitle {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: #163a87;
+}
+
+.product-card__description {
+  margin: 18px 0 0;
+  font-size: 1rem;
+  line-height: 1.82;
+  color: #5b6475;
+}
+
+.product-card__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.product-card__metric {
+  padding: 16px 16px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(248, 250, 252, 0.9);
+}
+
+.product-card__metric-value {
+  font-size: 1.16rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.product-card__metric-label {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #667085;
+}
+
+.product-card__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.product-card__highlight {
+  padding: 9px 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  color: #344054;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.product-card__support {
+  margin: 18px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.76;
+  color: #475467;
+}
+
+.product-card__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  min-width: 156px;
+  margin-top: 24px;
+  padding: 11px 18px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
+    background-color 0.25s ease, color 0.25s ease;
+}
+
+.product-card__action:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.18);
+  box-shadow: 0 14px 24px rgba(15, 23, 42, 0.08);
+}
+
+@media (max-width: 1100px) {
+  .product-card,
+  .product-card--reverse {
+    grid-template-columns: 1fr;
   }
 
-  .product-image-wrapper {
-    width: 400px;
-    height: 230px;
-  }
-
-  .product-image,
-  .product-image-placeholder {
-    width: 380px;
-    height: 210px;
-  }
-
-  .product-name {
-    font-size: 1.3rem;
+  .product-card--reverse .product-card__media,
+  .product-card--reverse .product-card__content {
+    order: initial;
   }
 }
 
 @media (max-width: 768px) {
   .product-card {
-    padding: 20px 16px;
-    min-height: 400px;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 14px;
   }
 
-  .product-image-wrapper {
-    width: 380px;
-    height: 220px;
+  .product-card__media {
+    min-height: 280px;
+    padding: 20px;
+    border-radius: 12px;
   }
 
-  .product-image,
-  .product-image-placeholder {
-    width: 360px;
-    height: 200px;
+  .product-card__metrics {
+    grid-template-columns: 1fr;
   }
 
-  .product-name {
-    font-size: 1.3rem;
-    margin-bottom: 16px;
+  .product-card__title {
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
   }
 
-  .product-desc {
-    font-size: 0.95rem;
-    margin-bottom: 24px;
-    color: #555;
-    line-height: 1.6;
-  }
-
-  .more-btn {
-    padding: 12px 30px;
-    font-size: 0.75rem;
-    min-width: 140px;
+  .product-card__action {
+    width: 100%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
   .product-card {
-    padding: 16px 12px;
-    min-height: 360px;
+    padding: 16px;
+    border-radius: 12px;
   }
 
-  .product-image-wrapper {
-    width: 340px;
-    height: 180px;
+  .product-card__media {
+    min-height: 230px;
+    padding: 16px;
+    border-radius: 10px;
   }
 
-  .product-image,
-  .product-image-placeholder {
-    width: 320px;
-    height: 160px;
+  .product-card__subtitle,
+  .product-card__description,
+  .product-card__support {
+    font-size: 0.94rem;
   }
-
-  .product-name {
-    font-size: 1.2rem;
-    margin-bottom: 14px;
-  }
-
-  .product-desc {
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-    min-height: 40px;
-    color: #555;
-    line-height: 1.55;
-  }
-
-  .more-btn {
-    padding: 10px 24px;
-    font-size: 0.7rem;
-    min-width: 120px;
-  }
-}
-
-/* 375px断点 - 小屏手机优化 */
-@media (max-width: 375px) {
-  .product-card {
-    padding: 14px 10px;
-    min-height: 340px;
-  }
-
-  .product-image-wrapper {
-    width: 300px;
-    height: 170px;
-  }
-
-  .product-image,
-  .product-image-placeholder {
-    width: 280px;
-    height: 150px;
-  }
-
-  .product-name {
-    font-size: 1.15rem;
-    margin-bottom: 12px;
-  }
-
-  .product-desc {
-    font-size: 0.85rem;
-    margin-bottom: 18px;
-    min-height: 38px;
-    line-height: 1.5;
-  }
-
-  .more-btn {
-    padding: 9px 20px;
-    font-size: 0.65rem;
-    min-width: 110px;
-  }
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(26, 58, 143, 0.15);
-  border-color: rgba(26, 58, 143, 0.1);
-}
-
-.product-header {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.product-image-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 450px;
-  height: 260px;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.product-image-wrapper:hover {
-  transform: scale(1.05);
-}
-
-.image-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 58, 143, 0.05) 0%,
-    rgba(74, 144, 226, 0.08) 50%,
-    rgba(26, 58, 143, 0.03) 100%
-  );
-  border-radius: 20px;
-  z-index: 1;
-}
-
-.product-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 8px 16px rgba(26, 58, 143, 0.1));
-  transition: transform 0.3s ease, filter 0.3s ease;
-  will-change: transform, filter;
-}
-
-.product-image-placeholder {
-  width: 450px;
-  height: 260px;
-  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 50%, #e8f0ff 100%);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgba(26, 58, 143, 0.1);
-  position: relative;
-  overflow: hidden;
-  will-change: transform;
-}
-
-.product-image-placeholder::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(26, 58, 143, 0.05) 50%,
-    transparent 70%
-  );
-  animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
-  }
-}
-
-.placeholder-icon {
-  position: relative;
-  z-index: 2;
-  opacity: 0.6;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  will-change: opacity, transform;
-}
-
-.product-image-placeholder:hover .placeholder-icon {
-  opacity: 0.8;
-  transform: scale3d(1.1, 1.1, 1);
-}
-
-.product-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.product-name {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
-  text-align: center;
-  position: relative;
-  line-height: 1.3;
-}
-
-.product-desc {
-  font-size: 0.95rem;
-  color: #2d3748;
-  margin-bottom: 24px;
-  text-align: center;
-  min-height: 45px;
-  line-height: 1.6;
-  font-weight: 400;
-  flex: 1;
-}
-
-.more-btn {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-  color: white;
-  text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 150px;
-  justify-content: center;
-  outline: none;
-}
-
-.more-btn:hover {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
-}
-
-.more-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
-}
-
-.more-btn:hover::before {
-  left: 100%;
-}
-
-.more-btn:focus-visible {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
-}
-
-.more-btn:active {
-  transform: translateY(0) scale3d(1.02, 1.02, 1);
-}
-
-.btn-text {
-  transition: transform 0.3s ease;
-  will-change: transform;
-}
-
-.btn-arrow {
-  transition: transform 0.3s ease;
-  font-weight: normal;
-  will-change: transform;
-}
-
-.more-btn:hover .btn-arrow,
-.more-btn:focus-visible .btn-arrow {
-  transform: translateX(4px);
-}
-
-.more-btn:hover .btn-text,
-.more-btn:focus-visible .btn-text {
-  transform: translateX(-2px);
 }
 </style>

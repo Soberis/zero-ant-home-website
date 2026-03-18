@@ -111,7 +111,7 @@ const featuredApps = computed(() =>
   flex-direction: column;
   min-height: 280px;
   padding: 26px;
-  border-radius: 18px;
+  border-radius: 14px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(243, 247, 251, 0.96));
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
@@ -132,7 +132,7 @@ const featuredApps = computed(() =>
   width: 76px;
   height: 76px;
   margin-bottom: 20px;
-  border-radius: 18px;
+  border-radius: 12px;
   background: rgba(20, 54, 127, 0.08);
 }
 
@@ -167,7 +167,7 @@ const featuredApps = computed(() =>
   align-self: flex-start;
   margin-top: 24px;
   padding: 11px 18px;
-  border-radius: 999px;
+  border-radius: 12px;
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: rgba(255, 255, 255, 0.9);
   color: #0f172a;
@@ -229,7 +229,7 @@ const featuredApps = computed(() =>
   .app-card {
     min-height: auto;
     padding: 22px;
-    border-radius: 16px;
+    border-radius: 12px;
   }
 }
 </style>

@@ -264,10 +264,15 @@ onUnmounted(() => {
   align-items: center;
   gap: 8px;
   margin-top: 26px;
+  padding: 11px 18px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
   color: #0f172a;
-  font-size: 0.96rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: color 0.25s ease, transform 0.25s ease, border-color 0.25s ease,
+    background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .hero-link::after {
@@ -286,7 +291,10 @@ onUnmounted(() => {
 .hero-link:hover {
   color: #0f172a;
   text-decoration: none;
-  transform: translateX(2px);
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.18);
+  box-shadow: 0 14px 24px rgba(15, 23, 42, 0.08);
 }
 
 .hero-link:hover::after {

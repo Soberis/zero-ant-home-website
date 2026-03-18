@@ -27,7 +27,7 @@ const { t, messages, locale } = useI18n();
 
 const route = useRoute();
 const router = useRouter();
-const slug = String(route.params.slug);
+const slug = computed(() => String(route.params.slug || ''));
 
 // 将URL slug转换为国际化键名的映射函数
 function slugToI18nKey(slug: string): string {
@@ -49,12 +49,12 @@ function slugToI18nKey(slug: string): string {
 const detail = computed(() => {
   // 检查slug是否在支持的产品列表中
   const supportedKeys = getProductDetailKeys();
-  if (!supportedKeys.includes(slug)) {
+  if (!supportedKeys.includes(slug.value)) {
     return null;
   }
   
   // 将slug转换为国际化键名
-  const i18nKey = slugToI18nKey(slug);
+  const i18nKey = slugToI18nKey(slug.value);
   
   // 尝试从国际化系统获取产品数据
   try {
@@ -95,7 +95,7 @@ const detail = computed(() => {
 
 // 获取当前产品基础信息
 const currentProduct = computed(() => {
-  return products.find(p => p.slug === slug);
+  return products.find(p => p.slug === slug.value);
 });
 
 // 动态SEO元数据
@@ -187,7 +187,7 @@ onMounted(() => {
 });
 
 function goBack() {
-  const product = products.find(p => p.slug === slug);
+  const product = products.find(p => p.slug === slug.value);
   if (product) {
     // 返回到对应产品列表页
     if (product.category === 'robot') {

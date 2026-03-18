@@ -116,7 +116,7 @@ const featuredVideos = computed(() =>
 
 .video-card {
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 14px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: rgba(255, 255, 255, 0.82);
   box-shadow: 0 12px 26px rgba(15, 23, 42, 0.045);
@@ -197,7 +197,7 @@ const featuredVideos = computed(() =>
   align-self: flex-start;
   margin-top: 24px;
   padding: 11px 18px;
-  border-radius: 999px;
+  border-radius: 12px;
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: rgba(255, 255, 255, 0.9);
   color: #0f172a;
@@ -252,7 +252,7 @@ const featuredVideos = computed(() =>
   }
 
   .video-card {
-    border-radius: 16px;
+    border-radius: 12px;
   }
 
   .video-body {
