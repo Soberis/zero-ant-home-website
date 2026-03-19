@@ -6,7 +6,11 @@
       <div class="media-wrapper">
       <template v-if="videoDetail && videoDetail.type === 'bilibili'">
         <div class="video-container">
-          <BilibiliPlayer :url="videoDetail.url" :title="videoDetail.title" />
+          <BilibiliPlayer
+            :key="videoDetail.url"
+            :url="videoDetail.url"
+            :title="videoDetail.title"
+          />
         </div>
       </template>
       <template v-else-if="videoDetail && videoDetail.type === 'local'">
@@ -91,18 +95,18 @@ const seoMetadata = computed(() => {
 
   const appTitle = detail.value.title;
   const appDesc = detail.value.description.replace(/<[^>]*>/g, ""); // 移除HTML标签
-  const siteName = "ZeroAnt Technology";
-  const currentUrl = `${window.location.origin}${route.fullPath}`;
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const currentUrl = `${baseUrl}${route.fullPath}`;
 
   return {
-    title: `${appTitle} - ${siteName}`,
+    title: appTitle,
     description: appDesc,
     keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化, ZeroAnt, 零蚁科技`,
     ogTitle: appTitle,
     ogDescription: appDesc,
     ogType: "article",
     ogUrl: currentUrl,
-    ogImage: `${window.location.origin}/logo.png`,
+    ogImage: `${baseUrl}/logo.png`,
     twitterCard: "summary_large_image",
     twitterTitle: appTitle,
     twitterDescription: appDesc,
@@ -136,8 +140,6 @@ const articleStructuredData = computed(() => {
         url: `${window.location.origin}/logo.png`,
       },
     },
-    datePublished: new Date().toISOString().split("T")[0],
-    dateModified: new Date().toISOString().split("T")[0],
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${window.location.origin}${route.fullPath}`,
@@ -150,11 +152,44 @@ const articleStructuredData = computed(() => {
 
 // 设置SEO和结构化数据
 const updateSEO = () => {
-  if (seoMetadata.value) {
-    setSEO(seoMetadata.value);
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const currentUrl = `${baseUrl}${route.fullPath}`;
+
+  if (!seoMetadata.value) {
+    setSEO({
+      title: t("seo.solutions.title"),
+      description: t("seo.solutions.description"),
+      keywords: t("seo.solutions.keywords"),
+      ogTitle: t("seo.solutions.title"),
+      ogDescription: t("seo.solutions.description"),
+      ogUrl: currentUrl,
+      ogImage: `${baseUrl}/logo.png`,
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      canonical: currentUrl,
+      localeAlternate: [
+        { hrefLang: "zh", href: currentUrl },
+        { hrefLang: "en", href: currentUrl },
+      ],
+    });
+    setStructuredData([]);
+    return;
   }
+
+  setSEO({
+    ...seoMetadata.value,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    localeAlternate: [
+      { hrefLang: "zh", href: currentUrl },
+      { hrefLang: "en", href: currentUrl },
+    ],
+  });
+
   if (articleStructuredData.value) {
     setStructuredData(articleStructuredData.value);
+  } else {
+    setStructuredData([]);
   }
 };
 

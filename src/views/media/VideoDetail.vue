@@ -5,10 +5,15 @@
     <div class="player-hero-container">
       <div class="media-wrapper">
         <template v-if="getMediaType(videoInfo) === 'bilibili'">
-          <BilibiliPlayer :url="videoInfo.url" :title="videoInfo.title" />
+          <BilibiliPlayer
+            :key="videoInfo.slug"
+            :url="videoInfo.url"
+            :title="videoInfo.title"
+          />
         </template>
         <template v-else-if="getMediaType(videoInfo) === 'video'">
           <video
+            :key="videoInfo.slug"
             class="video-player"
             :src="videoInfo.url"
             controls
@@ -19,6 +24,7 @@
         </template>
         <template v-else-if="getMediaType(videoInfo) === 'image'">
           <img
+            :key="videoInfo.slug"
             class="video-image"
             :src="videoInfo.url"
             :alt="videoInfo.title"
@@ -61,6 +67,9 @@
       <div
         v-if="showContact"
         class="contact-dialog-mask"
+        role="dialog"
+        aria-modal="true"
+        :aria-label="t('videos.videoDetail.qrCodeTitle')"
         @click.self="showContact = false"
       >
         <div class="contact-dialog">
@@ -96,28 +105,33 @@
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { videoMap, type VideoDetail } from "@/data/videos";
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import wxworkQrcode from "@/assets/images/qrcodes/wxwork.png";
 import BilibiliPlayer from "@/components/BilibiliPlayer.vue";
 import { setSEO, setStructuredData } from "@/utils/seo";
 
 const route = useRoute();
 const { t, locale } = useI18n();
+const currentSlug = computed(() => String(route.params.slug || ""));
 
-const rawVideoInfo = videoMap[String(route.params.slug)] || {
-  type: "bilibili", // Provide a default type
+const defaultVideoInfo: VideoDetail = {
+  type: "bilibili",
   slug: "not-found",
   title: "未找到视频",
   url: "",
   desc: "暂无介绍",
 };
 
+const rawVideoInfo = computed<VideoDetail>(
+  () => videoMap[currentSlug.value] || defaultVideoInfo
+);
+
 // 国际化的视频信息
 const videoInfo = computed(
   (): VideoDetail => ({
-    ...rawVideoInfo,
-    title: t(`videos.${rawVideoInfo.slug}.title`, rawVideoInfo.title),
-    desc: t(`videos.${rawVideoInfo.slug}.desc`, rawVideoInfo.desc),
+    ...rawVideoInfo.value,
+    title: t(`videos.${rawVideoInfo.value.slug}.title`, rawVideoInfo.value.title),
+    desc: t(`videos.${rawVideoInfo.value.slug}.desc`, rawVideoInfo.value.desc),
   })
 );
 
@@ -133,6 +147,16 @@ const descParagraphs = computed(() =>
 
 const showContact = ref<boolean>(false);
 
+function handleDialogEscape(event: KeyboardEvent): void {
+  if (event.key !== "Escape" || !showContact.value) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  showContact.value = false;
+}
+
 type MediaType = "bilibili" | "video" | "image" | "none";
 
 function getMediaType(info: VideoDetail | { value: VideoDetail }): MediaType {
@@ -147,12 +171,11 @@ function getMediaType(info: VideoDetail | { value: VideoDetail }): MediaType {
 const seoMetadata = computed(() => {
   const videoTitle = videoInfo.value.title;
   const videoDesc = videoInfo.value.desc;
-  const siteName = "ZeroAnt Technology";
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${route.fullPath}`;
 
   return {
-    title: `${videoTitle} - ${siteName}`,
+    title: videoTitle,
     description: videoDesc,
     keywords: `${videoTitle}, 视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
     ogTitle: videoTitle,
@@ -187,7 +210,6 @@ const videoStructuredData = computed(() => {
       name: videoTitle,
       description: videoDesc,
       thumbnailUrl: `${window.location.origin}/logo.png`,
-      uploadDate: new Date().toISOString().split("T")[0],
       contentUrl: videoInfo.value.url,
       embedUrl: mediaType === "bilibili" ? videoInfo.value.url : undefined,
       publisher: {
@@ -234,17 +256,25 @@ const updateSEO = () => {
   }
   if (videoStructuredData.value) {
     setStructuredData(videoStructuredData.value);
+  } else {
+    setStructuredData([]);
   }
 };
 
 // 监听数据变化并更新SEO
 watch([videoInfo, locale], updateSEO, { immediate: false });
+watch(currentSlug, () => {
+  showContact.value = false;
+});
 
 onMounted(() => {
   updateSEO();
+  document.addEventListener("keydown", handleDialogEscape, true);
 });
 
-// 移除bilibiliEmbedUrl函数，现在使用BilibiliPlayer组件处理
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleDialogEscape, true);
+});
 </script>
 
 <style scoped>

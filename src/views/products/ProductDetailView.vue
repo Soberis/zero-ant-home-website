@@ -104,12 +104,11 @@ const seoMetadata = computed(() => {
   
   const productName = t(currentProduct.value.name);
   const productDesc = t(currentProduct.value.desc);
-  const siteName = 'ZeroAnt Technology';
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${route.fullPath}`;
   
   return {
-    title: `${productName} - ${siteName}`,
+    title: productName,
     description: productDesc,
     keywords: `${productName}, ${currentProduct.value.category === 'robot' ? '机器人, 自动化' : '操作系统, 软件'}, ZeroAnt, 零蚁科技`,
     ogTitle: productName,
@@ -161,21 +160,44 @@ const productStructuredData = computed(() => {
 
 // 设置SEO和结构化数据
 const updateSEO = () => {
-  if (seoMetadata.value) {
-    const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-    const currentUrl = `${baseUrl}${route.fullPath}`;
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const currentUrl = `${baseUrl}${route.fullPath}`;
+
+  if (!seoMetadata.value) {
     setSEO({
-      ...seoMetadata.value,
+      title: t("productDetail.notFound"),
+      description: t("seo.products.description"),
+      keywords: t("seo.products.keywords"),
+      ogTitle: t("productDetail.notFound"),
+      ogDescription: t("seo.products.description"),
+      ogUrl: currentUrl,
+      ogImage: `${baseUrl}/logo.png`,
       ogImageWidth: 1200,
       ogImageHeight: 630,
+      canonical: currentUrl,
       localeAlternate: [
         { hrefLang: 'zh', href: currentUrl },
         { hrefLang: 'en', href: currentUrl }
       ],
     });
+    setStructuredData([]);
+    return;
   }
+
+  setSEO({
+    ...seoMetadata.value,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    localeAlternate: [
+      { hrefLang: 'zh', href: currentUrl },
+      { hrefLang: 'en', href: currentUrl }
+    ],
+  });
+
   if (productStructuredData.value) {
     setStructuredData(productStructuredData.value);
+  } else {
+    setStructuredData([]);
   }
 };
 
