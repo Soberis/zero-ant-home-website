@@ -11,10 +11,12 @@ export interface SEOMetaData {
   robots?: string;
   ogTitle?: string;
   ogDescription?: string;
+  ogType?: string | undefined;
   ogImage?: string;
   ogImageWidth?: string | number;
   ogImageHeight?: string | number;
   ogUrl?: string;
+  ogVideo?: string | undefined;
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
@@ -44,16 +46,28 @@ export function setSEO(meta: SEOMetaData) {
 
     // 设置页面标题
     if (meta.title) {
-      document.title = `${meta.title} - ${siteName}`;
+      const normalizedTitle = meta.title.trim();
+      document.title = normalizedTitle.includes(siteName)
+        ? normalizedTitle
+        : `${normalizedTitle} - ${siteName}`;
     }
 
     // 更新或创建 meta 标签的通用函数
-    const updateMetaTag = (name: string, content: string, property = false) => {
+    const updateMetaTag = (
+      name: string,
+      content?: string | number,
+      property = false
+    ) => {
       try {
         const selector = property
           ? `meta[property="${name}"]`
           : `meta[name="${name}"]`;
         let element = document.querySelector(selector) as HTMLMetaElement;
+
+        if (content === undefined || content === null || content === "") {
+          element?.remove();
+          return;
+        }
 
         if (!element) {
           element = document.createElement("meta");
@@ -65,7 +79,7 @@ export function setSEO(meta: SEOMetaData) {
           document.head.appendChild(element);
         }
 
-        element.setAttribute("content", content);
+        element.setAttribute("content", String(content));
       } catch (error) {
         if (import.meta.env.DEV) {
           console.warn(`更新meta标签失败: ${name}`, error);
@@ -74,68 +88,35 @@ export function setSEO(meta: SEOMetaData) {
     };
 
     // 更新基础 meta 标签
-    if (meta.description) {
-      updateMetaTag("description", meta.description);
-    }
-
-    if (meta.keywords) {
-      updateMetaTag("keywords", meta.keywords);
-    }
-
-    if (meta.author) {
-      updateMetaTag("author", meta.author);
-    }
-
-    if (meta.robots) {
-      updateMetaTag("robots", meta.robots);
-    }
+    updateMetaTag("description", meta.description);
+    updateMetaTag("keywords", meta.keywords);
+    updateMetaTag("author", meta.author);
+    updateMetaTag("robots", meta.robots);
 
     // 更新 Open Graph 标签
-    if (meta.ogTitle) {
-      updateMetaTag("og:title", meta.ogTitle, true);
-    }
-
-    if (meta.ogDescription) {
-      updateMetaTag("og:description", meta.ogDescription, true);
-    }
-
-    if (meta.ogImage) {
-      updateMetaTag("og:image", meta.ogImage, true);
-    }
-    if (meta.ogImageWidth) {
-      updateMetaTag("og:image:width", String(meta.ogImageWidth), true);
-    }
-    if (meta.ogImageHeight) {
-      updateMetaTag("og:image:height", String(meta.ogImageHeight), true);
-    }
-
-    if (meta.ogUrl) {
-      updateMetaTag("og:url", meta.ogUrl, true);
-    }
+    updateMetaTag("og:title", meta.ogTitle, true);
+    updateMetaTag("og:description", meta.ogDescription, true);
+    updateMetaTag("og:type", meta.ogType, true);
+    updateMetaTag("og:image", meta.ogImage, true);
+    updateMetaTag("og:image:width", meta.ogImageWidth, true);
+    updateMetaTag("og:image:height", meta.ogImageHeight, true);
+    updateMetaTag("og:url", meta.ogUrl, true);
+    updateMetaTag("og:video", meta.ogVideo, true);
 
     // 更新 Twitter Card 标签
-    if (meta.twitterTitle) {
-      updateMetaTag("twitter:title", meta.twitterTitle);
-    }
-
-    if (meta.twitterDescription) {
-      updateMetaTag("twitter:description", meta.twitterDescription);
-    }
-
-    if (meta.twitterImage) {
-      updateMetaTag("twitter:image", meta.twitterImage);
-    }
-
-    if (meta.twitterCard) {
-      updateMetaTag("twitter:card", meta.twitterCard);
-    }
+    updateMetaTag("twitter:title", meta.twitterTitle);
+    updateMetaTag("twitter:description", meta.twitterDescription);
+    updateMetaTag("twitter:image", meta.twitterImage);
+    updateMetaTag("twitter:card", meta.twitterCard);
 
     // 更新 canonical 链接
-    if (meta.canonical) {
-      let canonicalElement = document.querySelector(
-        'link[rel="canonical"]'
-      ) as HTMLLinkElement;
+    let canonicalElement = document.querySelector(
+      'link[rel="canonical"]'
+    ) as HTMLLinkElement | null;
 
+    if (!meta.canonical) {
+      canonicalElement?.remove();
+    } else {
       if (!canonicalElement) {
         canonicalElement = document.createElement("link");
         canonicalElement.setAttribute("rel", "canonical");

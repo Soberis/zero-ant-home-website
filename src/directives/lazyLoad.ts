@@ -205,6 +205,7 @@ let observer: IntersectionObserver;
  * 懒加载指令配置接口
  */
 interface LazyLoadOptions {
+  src?: string;
   placeholder?: string;
   fallback?: string;
   threshold?: number;
@@ -235,7 +236,7 @@ export const lazyLoad = {
     // 解析配置选项
     const options: LazyLoadOptions =
       typeof binding.value === "string"
-        ? { placeholder: binding.value }
+        ? { src: binding.value }
         : binding.value || {};
 
     // 设置默认占位图
@@ -243,9 +244,10 @@ export const lazyLoad = {
       options.placeholder ||
       "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvYWRpbmcuLi48L3RleHQ+PC9zdmc+";
 
-    // 保存原始 src 到 data-src
-    if (el.src && !el.dataset.src) {
-      el.dataset.src = el.src;
+    // 保存真实图片地址到 data-src
+    const actualSrc = options.src || el.getAttribute("src") || "";
+    if (actualSrc) {
+      el.dataset.src = actualSrc;
     }
 
     // 保存配置到元素
@@ -262,7 +264,7 @@ export const lazyLoad = {
       el.dataset.maxRetries = String(options.maxRetries);
     }
 
-    // 设置占位图
+    // 设置占位图，避免提前请求真实图片
     el.src = placeholder;
 
     // 添加懒加载样式类
@@ -315,14 +317,18 @@ export const lazyLoad = {
     // 解析新的配置选项
     const options: LazyLoadOptions =
       typeof binding.value === "string"
-        ? { placeholder: binding.value }
+        ? { src: binding.value }
         : binding.value || {};
 
-    // 如果 src 发生变化，重新设置懒加载
-    const newSrc =
-      typeof binding.value === "string" ? binding.value : options.placeholder;
-    if (newSrc && newSrc !== el.dataset.src) {
-      el.dataset.src = newSrc;
+    const nextSrc = options.src || el.getAttribute("src") || "";
+    const placeholder =
+      options.placeholder ||
+      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvYWRpbmcuLi48L3RleHQ+PC9zdmc+";
+
+    // 如果真实图片地址发生变化，重新设置懒加载
+    if (nextSrc && nextSrc !== el.dataset.src) {
+      el.dataset.src = nextSrc;
+      el.src = placeholder;
       el.classList.remove("lazy-loaded", "lazy-error");
       el.classList.add("lazy-image");
 
@@ -335,16 +341,7 @@ export const lazyLoad = {
 
 // 懒加载成功事件处理
 function handleLazyLoadSuccess(event: CustomEvent) {
-  const { src, loadTime, retryCount } = event.detail;
-
-  if (import.meta.env.DEV) {
-    console.log("🖼️ 图片懒加载成功:", {
-      src,
-      loadTime: `${loadTime.toFixed(2)}ms`,
-      retryCount,
-      stats: getPerformanceStats(),
-    });
-  }
+  const { src, loadTime } = event.detail;
 
   // 性能监控上报
   if (typeof window !== "undefined" && (window as any).gtag) {

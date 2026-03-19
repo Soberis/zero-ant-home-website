@@ -86,7 +86,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
     }
@@ -121,25 +121,6 @@ const router = createRouter({
         tryScroll();
       });
     }
-
-    // 保存当前滚动位置到历史状态（防抖）
-    if (from && from.name) {
-      // 使用any类型绕过TypeScript检查
-      const win = window as any;
-      if (win.__scrollSaveTimeout) {
-        clearTimeout(win.__scrollSaveTimeout);
-      }
-      win.__scrollSaveTimeout = setTimeout(() => {
-        window.history.replaceState(
-          {
-            ...window.history.state,
-            scrollTop: window.scrollY || document.documentElement.scrollTop,
-          },
-          ''
-        );
-      }, 100);
-    }
-
     // 默认滚动到顶部
     return { top: 0, behavior: 'smooth' };
   },

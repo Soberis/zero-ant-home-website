@@ -1,10 +1,10 @@
-import { createApp } from "vue";
+import { createApp, watch } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
 import i18n from "@/config/i18n";
 import { setupDirectives } from "@/directives";
 import { initSecurity } from "@/utils/security";
-import { setSEO } from "@/utils/seo";
+import type { RouteLocationNormalizedLoaded } from "vue-router";
 
 // 创建应用实例
 const app = createApp(App);
@@ -26,30 +26,12 @@ if (typeof window !== "undefined") {
   router.isReady().then(async () => {
     // 动态导入SEO函数，避免循环依赖
     const { setupPageSEO, setupSupportSEO, setupAboutSEO, setupCareersSEO, setupSolutionsSEO } = await import("@/router/seo");
-    
-    // 设置默认SEO
-    const siteUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-    setSEO({
-      title: i18n.global.t('seo.defaultTitle'),
-      description: i18n.global.t('seo.defaultDescription'),
-      keywords: i18n.global.t('seo.defaultKeywords'),
-      siteName: i18n.global.t('seo.siteName'),
-      canonical: siteUrl + router.currentRoute.value.fullPath,
-      localeAlternate: [
-        { hrefLang: 'zh', href: siteUrl + router.currentRoute.value.fullPath },
-        { hrefLang: 'en', href: siteUrl + router.currentRoute.value.fullPath }
-      ]
-    });
-    
-    // 设置路由守卫：自动设置 SEO 信息
-    router.afterEach((to) => {
-      // 使用 nextTick 确保 DOM 已更新
+    const applyRouteSEO = (to: RouteLocationNormalizedLoaded) => {
       setTimeout(() => {
-        // 同步 <html lang>
-        if (typeof document !== 'undefined') {
-          document.documentElement.setAttribute('lang', String(i18n.global.locale.value));
+        if (typeof document !== "undefined") {
+          document.documentElement.setAttribute("lang", String(i18n.global.locale.value));
         }
-        // 根据路由名称设置特定页面的 SEO
+
         switch (to.name) {
           case "Support":
             setupSupportSEO(to);
@@ -67,6 +49,20 @@ if (typeof window !== "undefined") {
             setupPageSEO(to);
         }
       }, 0);
+    };
+    
+    applyRouteSEO(router.currentRoute.value);
+    
+    // 设置路由守卫：自动设置 SEO 信息
+    router.afterEach((to) => {
+      applyRouteSEO(to);
     });
+
+    watch(
+      () => i18n.global.locale.value,
+      () => {
+        applyRouteSEO(router.currentRoute.value);
+      }
+    );
   });
 }

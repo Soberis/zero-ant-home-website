@@ -399,7 +399,6 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
           title: "Robotics Engineer",
           description:
             "Develop and optimize industrial robot systems, work on robot control algorithms and mechanical design.",
-          datePosted: new Date().toISOString().split("T")[0],
           employmentType: "FULL_TIME",
           jobLocation: {
             "@type": "Place",
@@ -428,7 +427,6 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
           title: "Algorithm Engineer",
           description:
             "Develop AI algorithms for robot perception, planning, and control systems.",
-          datePosted: new Date().toISOString().split("T")[0],
           employmentType: "FULL_TIME",
           jobLocation: {
             "@type": "Place",
@@ -457,7 +455,6 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
           title: "Software Development Engineer",
           description:
             "Develop software systems for robot control, user interfaces, and system integration.",
-          datePosted: new Date().toISOString().split("T")[0],
           employmentType: "FULL_TIME",
           jobLocation: {
             "@type": "Place",
@@ -584,53 +581,3 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
   setStructuredData(structuredData);
 }
 
-/**
- * 设置产品详情页 SEO
- * @param productName 产品名称
- * @param productDescription 产品描述
- * @param to 目标路由
- */
-export function setupProductSEO(
-  productName: string,
-  productDescription: string,
-  to: RouteLocationNormalized
-) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${to.path}`;
-
-  // 设置产品页面 SEO
-  setSEO({
-    title: productName,
-    description: productDescription,
-    ogTitle: productName,
-    ogDescription: productDescription,
-    ogUrl: currentUrl,
-    ogImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
-    twitterTitle: productName,
-    twitterDescription: productDescription,
-    twitterImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
-    canonical: currentUrl,
-    siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
-  });
-
-  // 产品结构化数据
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: productName,
-    description: productDescription,
-    url: currentUrl,
-    manufacturer: {
-      "@type": "Organization",
-      name: safeTranslate("seo.siteName"),
-      url: baseUrl,
-    },
-  };
-  setStructuredData(structuredData);
-}
