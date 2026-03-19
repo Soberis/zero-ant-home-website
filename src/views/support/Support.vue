@@ -155,7 +155,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -245,10 +245,23 @@ const contactItems = computed(() => [
 const downloadStates = ref<boolean[]>([]);
 const faqStates = ref<boolean[]>([]);
 
-watchEffect(() => {
-  downloadStates.value = downloads.value.map(() => false);
-  faqStates.value = faqs.value.map(() => false);
-});
+watch(
+  [() => downloads.value.length, () => faqs.value.length],
+  ([downloadLength, faqLength]) => {
+    if (downloadStates.value.length !== downloadLength) {
+      downloadStates.value = Array.from({ length: downloadLength }, (_, index) =>
+        downloadStates.value[index] ?? false
+      );
+    }
+
+    if (faqStates.value.length !== faqLength) {
+      faqStates.value = Array.from({ length: faqLength }, (_, index) =>
+        faqStates.value[index] ?? false
+      );
+    }
+  },
+  { immediate: true }
+);
 
 function toggleDownload(idx: number): void {
   downloadStates.value[idx] = !downloadStates.value[idx];

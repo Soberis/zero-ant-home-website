@@ -18,9 +18,11 @@
 
         <div class="intro-layout">
           <div class="intro-prose">
-            <p v-html="$t('about.companyIntroDetailed.para1')"></p>
-            <p v-html="$t('about.companyIntroDetailed.para2')"></p>
-            <p v-html="$t('about.companyIntroDetailed.para3')"></p>
+            <p
+              v-for="(paragraph, index) in companyIntroParagraphs"
+              :key="`intro-${index}`"
+              v-html="paragraph"
+            ></p>
           </div>
 
           <div class="intro-side">
@@ -122,10 +124,11 @@
             {{ $t("about.enterpriseCulture.description") }}
           </p>
           <ul class="culture-list">
-            <li v-html="$t('about.enterpriseCulture.item1')"></li>
-            <li v-html="$t('about.enterpriseCulture.item2')"></li>
-            <li v-html="$t('about.enterpriseCulture.item3')"></li>
-            <li v-html="$t('about.enterpriseCulture.item4')"></li>
+            <li
+              v-for="(item, index) in cultureItems"
+              :key="`culture-${index}`"
+              v-html="item"
+            ></li>
           </ul>
         </div>
       </section>
@@ -158,7 +161,7 @@ import { computed, type ComputedRef } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 
-const { t } = useI18n();
+const { t, tm } = useI18n();
 
 const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
   getTimelineData(t).map((item) => ({ ...item }))
@@ -181,6 +184,18 @@ const coreValues = computed(() => [
   t("about.coreValues.value3"),
   t("about.coreValues.value4"),
 ]);
+
+const companyIntroParagraphs = computed(() =>
+  ["para1", "para2", "para3"].map((key) =>
+    String(tm(`about.companyIntroDetailed.${key}`) ?? "")
+  )
+);
+
+const cultureItems = computed(() =>
+  ["item1", "item2", "item3", "item4"].map((key) =>
+    String(tm(`about.enterpriseCulture.${key}`) ?? "")
+  )
+);
 
 function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");

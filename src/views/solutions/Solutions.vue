@@ -306,13 +306,22 @@ import {
 } from "@/data/solutionIndustries";
 
 const router = useRouter();
-const { t, tm } = useI18n();
+const { t, te, tm } = useI18n();
 const activeMoreTab = ref<"videos" | "applications">("videos");
 const hoverVideoIdx = ref(-1);
 
 function translateOrFallback(key: string, fallback: string): string {
   const translated = t(key);
   return translated === key ? fallback : translated;
+}
+
+function getMessageString(key: string, fallback: string): string {
+  if (!te(key)) {
+    return fallback;
+  }
+
+  const message = tm(key);
+  return typeof message === "string" ? message : fallback;
 }
 
 function stripHtml(value: string): string {
@@ -372,7 +381,7 @@ const applicationMap = computed(() =>
   Object.fromEntries(
     applications.map((app) => {
       const title = translateOrFallback(`applications.${app.slug}.title`, app.title);
-      const description = translateOrFallback(
+      const description = getMessageString(
         `applications.${app.slug}.description`,
         app.description
       );
