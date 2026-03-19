@@ -32,5 +32,7 @@ dist-ssr
 
 # Trae AI 辅助配置目录（避免提交AI相关配置文件）
 .promptx/
+.playwright-cli/
 
 docs/
+output/
