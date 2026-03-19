@@ -4,7 +4,6 @@
     <section class="support-hero">
       <div class="support-shell hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow">{{ t("nav.support") }}</p>
           <h1 id="after-sales" class="hero-title">{{ t("supportPage.title") }}</h1>
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
 
@@ -41,7 +40,6 @@
       <div class="support-shell">
         <section id="download" class="content-section">
           <div class="section-heading">
-            <p class="section-eyebrow">{{ t("nav.download") }}</p>
             <h2 class="section-title">{{ t("supportPage.relatedDownloads") }}</h2>
           </div>
 
@@ -85,7 +83,6 @@
 
         <section id="faq" class="content-section faq-section">
           <div class="section-heading">
-            <p class="section-eyebrow">{{ t("nav.faq") }}</p>
             <h2 class="section-title">{{ t("supportPage.faqTitle") }}</h2>
           </div>
 
@@ -129,7 +126,6 @@
         <section id="contact" class="contact-section">
           <div class="contact-panel">
             <div class="contact-copy">
-              <p class="section-eyebrow">{{ t("nav.contact") }}</p>
               <h2 class="section-title">{{ t("nav.contact") }}</h2>
               <p class="contact-desc">{{ t("supportPage.description") }}</p>
             </div>
@@ -315,16 +311,6 @@ function scrollToSection(id: string): void {
   padding: 40px 0 24px;
 }
 
-.hero-eyebrow,
-.section-eyebrow {
-  margin: 0 0 12px;
-  color: var(--support-primary);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .hero-title {
   max-width: 10em;
   margin: 0 0 20px;
@@ -431,7 +417,7 @@ function scrollToSection(id: string): void {
 .section-heading {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
   margin-bottom: 24px;
 }
 
@@ -581,7 +567,6 @@ function scrollToSection(id: string): void {
   box-shadow: 0 28px 56px rgba(15, 23, 42, 0.16);
 }
 
-.contact-panel .section-eyebrow,
 .contact-panel .section-title {
   color: #ffffff;
 }

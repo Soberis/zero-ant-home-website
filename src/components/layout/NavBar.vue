@@ -75,24 +75,12 @@
             <div class="dropdown">
               <div class="dropdown-content">
                 <ul>
-                  <li>
+                  <li v-for="item in solutionsNav" :key="item.hash">
                     <router-link
-                      :to="{ path: '/solutions', hash: '#video-section' }"
+                      :to="{ path: '/solutions', hash: item.hash }"
                       class="dropdown-item"
                     >
-                      {{ $t("nav.videoCases") }}
-                    </router-link>
-                  </li>
-
-                  <li>
-                    <router-link
-                      :to="{
-                        path: '/solutions',
-                        hash: '#industry-applications',
-                      }"
-                      class="dropdown-item"
-                    >
-                      {{ $t("nav.industryApplications") }}
+                      {{ $t(item.label) }}
                     </router-link>
                   </li>
                 </ul>
@@ -319,6 +307,12 @@ const supportNav = [
   { hash: "#faq", label: "nav.faq" },
 ];
 
+const solutionsNav = [
+  { hash: "#industries", label: "solutionsPage.nav.industries" },
+  { hash: "#proof", label: "solutionsPage.nav.proof" },
+  { hash: "#delivery", label: "solutionsPage.nav.delivery" },
+];
+
 // 导航配置已整合到具体的产品导航中
 
 // 关于我们导航子项
@@ -366,8 +360,7 @@ function cacheElementPositions() {
     ...systemProductNav.map(item => item.hash),
     ...robotProductNav.map(item => item.hash),
     ...supportNav.map(item => item.hash),
-    '#video-section',
-    '#industry-applications'
+    ...solutionsNav.map(item => item.hash),
   ];
 
   allHashes.forEach(hash => {

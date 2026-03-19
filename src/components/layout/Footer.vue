@@ -78,17 +78,25 @@
             <ul>
               <li>
                 <router-link
-                  :to="{ path: '/solutions', hash: '#video-section' }"
+                  :to="{ path: '/solutions', hash: '#industries' }"
                 >
-                  {{ $t("nav.videoCases") }}
+                  {{ $t("solutionsPage.nav.industries") }}
                 </router-link>
               </li>
 
               <li>
                 <router-link
-                  :to="{ path: '/solutions', hash: '#industry-applications' }"
+                  :to="{ path: '/solutions', hash: '#proof' }"
                 >
-                  {{ $t("nav.industryApplications") }}
+                  {{ $t("solutionsPage.nav.proof") }}
+                </router-link>
+              </li>
+
+              <li>
+                <router-link
+                  :to="{ path: '/solutions', hash: '#delivery' }"
+                >
+                  {{ $t("solutionsPage.nav.delivery") }}
                 </router-link>
               </li>
             </ul>

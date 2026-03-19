@@ -4,45 +4,15 @@
     <section class="about-hero">
       <div class="page-shell hero-shell">
         <div class="hero-copy">
-          <p class="hero-eyebrow">{{ $t("nav.about") }}</p>
           <h1 class="hero-title">{{ $t("slogan") }}</h1>
           <p class="hero-sub">{{ $t("slogan2") }}</p>
-        </div>
-
-        <div class="hero-panel">
-          <button
-            v-for="item in navItems"
-            :key="item.id"
-            type="button"
-            class="hero-link"
-            @click="scrollToSection(item.id)"
-          >
-            <span class="hero-link-index">{{ formatIndex(item.index) }}</span>
-            <span class="hero-link-label">{{ item.label }}</span>
-          </button>
         </div>
       </div>
     </section>
 
-    <nav class="about-nav">
-      <div class="page-shell nav-scroll">
-        <button
-          v-for="item in navItems"
-          :key="item.id"
-          type="button"
-          class="nav-btn"
-          :class="{ active: activeTab === item.id }"
-          @click="scrollToSection(item.id)"
-        >
-          {{ item.label }}
-        </button>
-      </div>
-    </nav>
-
     <main class="page-shell page-content">
       <section id="company-intro" class="about-section intro-section">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("nav.companyIntro") }}</p>
           <h2 class="section-title">{{ $t("nav.companyIntro") }}</h2>
         </div>
 
@@ -85,7 +55,6 @@
 
       <section id="history" class="about-section">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("nav.history") }}</p>
           <h2 class="section-title">{{ $t("nav.history") }}</h2>
         </div>
 
@@ -111,7 +80,6 @@
 
       <section id="honors" class="about-section">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("nav.honor") }}</p>
           <h2 class="section-title">{{ $t("nav.honor") }}</h2>
         </div>
 
@@ -129,7 +97,6 @@
 
       <section id="core-values" class="about-section">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("about.coreValues.title") }}</p>
           <h2 class="section-title">{{ $t("about.coreValues.title") }}</h2>
         </div>
 
@@ -147,7 +114,6 @@
 
       <section id="culture" class="about-section">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("nav.culture") }}</p>
           <h2 class="section-title">{{ $t("nav.culture") }}</h2>
         </div>
 
@@ -166,7 +132,6 @@
 
       <section id="contact" class="about-section contact-section">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("nav.contact") }}</p>
           <h2 class="section-title">{{ $t("nav.contact") }}</h2>
         </div>
 
@@ -189,14 +154,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  onMounted,
-  onUnmounted,
-  ref,
-  type ComputedRef,
-} from "vue";
+import { computed, type ComputedRef } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 
@@ -209,15 +167,6 @@ const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
 const honors: ComputedRef<string[]> = computed(() =>
   getHonors(t).map((item) => item)
 );
-
-const navItems = computed(() => [
-  { id: "company-intro", label: t("nav.companyIntro"), index: 1 },
-  { id: "history", label: t("nav.history"), index: 2 },
-  { id: "honors", label: t("nav.honor"), index: 3 },
-  { id: "core-values", label: t("nav.coreValues"), index: 4 },
-  { id: "culture", label: t("nav.culture"), index: 5 },
-  { id: "contact", label: t("nav.contact"), index: 6 },
-]);
 
 const teamStats = computed(() => [
   { value: "20+", label: t("about.teamSize") },
@@ -233,83 +182,10 @@ const coreValues = computed(() => [
   t("about.coreValues.value4"),
 ]);
 
-const activeTab = ref("company-intro");
-const tabIds = [
-  "company-intro",
-  "history",
-  "honors",
-  "core-values",
-  "culture",
-  "contact",
-];
-
-let rafId = 0;
-let cachedElements: Array<{ id: string; top: number }> = [];
-
 function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");
 }
 
-function cacheElementPositions(): void {
-  cachedElements = tabIds
-    .map((id) => {
-      const el = document.getElementById(id);
-      if (!el) {
-        return null;
-      }
-      return {
-        id,
-        top: el.getBoundingClientRect().top + window.scrollY,
-      };
-    })
-    .filter((item): item is { id: string; top: number } => Boolean(item));
-}
-
-function updateActiveTab(): void {
-  if (rafId) {
-    return;
-  }
-
-  rafId = window.requestAnimationFrame(() => {
-    const current = window.scrollY + 180;
-    const matched = [...cachedElements]
-      .reverse()
-      .find((item) => item.top <= current);
-
-    activeTab.value = matched?.id ?? tabIds[0];
-    rafId = 0;
-  });
-}
-
-function scrollToSection(id: string): void {
-  const target = cachedElements.find((item) => item.id === id);
-  const top = target?.top ?? document.getElementById(id)?.offsetTop ?? 0;
-
-  window.scrollTo({
-    top: Math.max(top - 120, 0),
-    behavior: "smooth",
-  });
-}
-
-onMounted(async () => {
-  await nextTick();
-  cacheElementPositions();
-  updateActiveTab();
-  window.addEventListener("scroll", updateActiveTab, { passive: true });
-  window.addEventListener("resize", cacheElementPositions);
-  window.setTimeout(() => {
-    cacheElementPositions();
-    updateActiveTab();
-  }, 120);
-});
-
-onUnmounted(() => {
-  if (rafId) {
-    window.cancelAnimationFrame(rafId);
-  }
-  window.removeEventListener("scroll", updateActiveTab);
-  window.removeEventListener("resize", cacheElementPositions);
-});
 </script>
 
 <style scoped lang="less">
@@ -334,7 +210,8 @@ onUnmounted(() => {
 
 .about-hero {
   position: relative;
-  padding: 112px 0 56px;
+  min-height: 100svh;
+  padding-top: 80px;
 }
 
 .about-hero::before {
@@ -352,19 +229,25 @@ onUnmounted(() => {
 .hero-shell {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  gap: 28px;
-  align-items: stretch;
+  width: 100%;
+  min-height: calc(100svh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-copy {
-  padding: 36px 0;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  transform: translateY(-6vh);
 }
 
-.hero-eyebrow,
-.section-eyebrow {
-  margin: 0 0 12px;
+.hero-eyebrow {
+  margin: 0 0 18px;
   color: var(--about-primary);
   font-size: 0.78rem;
   font-weight: 700;
@@ -373,42 +256,32 @@ onUnmounted(() => {
 }
 
 .hero-title {
-  max-width: 8em;
-  margin: 0 0 18px;
+  max-width: 10em;
+  margin: 0 0 24px;
   color: var(--about-text);
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(3.6rem, 7vw, 6rem);
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.02;
   letter-spacing: -0.045em;
 }
 
 .hero-sub {
-  max-width: 560px;
+  max-width: 720px;
   margin: 0;
   color: var(--about-muted);
-  font-size: 1.08rem;
-  line-height: 1.85;
+  font-size: 1.12rem;
+  line-height: 1.95;
 }
 
-.hero-panel {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  align-content: start;
-  padding: 20px;
+.hero-anchor {
+  margin-top: 36px;
   border: 1px solid rgba(26, 58, 143, 0.14);
-  border-radius: 28px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 247, 251, 0.98) 100%);
-  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.08);
-}
-
-.hero-link {
-  border: 1px solid var(--about-border);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.86);
-  padding: 18px;
-  text-align: left;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--about-text);
+  padding: 12px 22px;
+  font-size: 0.94rem;
+  font-weight: 600;
   cursor: pointer;
   transition:
     transform 0.2s ease,
@@ -416,17 +289,12 @@ onUnmounted(() => {
     border-color 0.2s ease;
 }
 
-.hero-link:hover,
-.nav-btn:hover {
+.hero-anchor:hover {
   transform: translateY(-2px);
-}
-
-.hero-link:hover {
   border-color: rgba(26, 58, 143, 0.26);
   box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
 }
 
-.hero-link-index,
 .card-index {
   display: block;
   margin-bottom: 10px;
@@ -436,60 +304,8 @@ onUnmounted(() => {
   letter-spacing: 0.16em;
 }
 
-.hero-link-label {
-  color: var(--about-text);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-.about-nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(217, 226, 236, 0.9);
-  background: rgba(255, 255, 255, 0.86);
-  backdrop-filter: blur(16px);
-}
-
-.nav-scroll {
-  display: flex;
-  gap: 12px;
-  padding: 14px 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.nav-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.nav-btn {
-  flex: 0 0 auto;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: transparent;
-  color: rgba(15, 23, 42, 0.72);
-  padding: 10px 16px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    color 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.nav-btn.active {
-  border-color: rgba(26, 58, 143, 0.16);
-  background: rgba(26, 58, 143, 0.08);
-  color: var(--about-primary);
-}
-
 .page-content {
-  padding: 32px 0 88px;
+  padding: 24px 0 88px;
 }
 
 .about-section {
@@ -505,7 +321,7 @@ onUnmounted(() => {
 .section-heading {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
   margin-bottom: 24px;
 }
 
@@ -743,11 +559,12 @@ onUnmounted(() => {
   }
 
   .about-hero {
-    padding: 88px 0 40px;
+    min-height: auto;
+    padding-top: 80px;
   }
 
-  .hero-copy {
-    padding: 0;
+  .hero-shell {
+    min-height: calc(100svh - 80px);
   }
 
   .hero-title {
@@ -755,16 +572,11 @@ onUnmounted(() => {
     font-size: 2.8rem;
   }
 
-  .hero-panel,
   .about-section,
   .info-panel,
   .culture-card,
   .contact-card {
     padding: 20px;
-  }
-
-  .hero-panel {
-    grid-template-columns: 1fr;
   }
 
   .stats-grid {
@@ -777,13 +589,12 @@ onUnmounted(() => {
     padding-top: 72px;
   }
 
-  .nav-btn,
-  .hero-link {
-    width: 100%;
+  .hero-shell {
+    min-height: calc(100svh - 72px);
   }
 
-  .nav-scroll {
-    gap: 10px;
+  .hero-anchor {
+    width: 100%;
   }
 
   .timeline-item {

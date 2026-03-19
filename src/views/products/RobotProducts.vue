@@ -37,7 +37,7 @@ const pageContent = computed(() => ({
     },
     {
       label: t("productPages.common.contactTeam"),
-      to: "/solutions",
+      to: "/about#contact",
       variant: "secondary" as const,
     },
   ],

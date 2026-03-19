@@ -240,9 +240,152 @@
   },
   "solutionsPage": {
     "title": "Industry Solutions",
-    "subtitle": "Explore cutting-edge technology applications and witness innovation driving the future",
+    "subtitle": "Built for high-reliability industries with a robotics system backbone and scenario delivery capability.",
     "videoCases": "Video Cases",
-    "industryApplications": "Industry Applications"
+    "industryApplications": "Industry Applications",
+    "hero": {
+      "eyebrow": "Industry Solutions",
+      "title": "Robotics and intelligent system solutions for high-reliability industries",
+      "description": "Powered by AiROS, real-time control, scheduling collaboration and flexible deployment, ZeroAnt delivers practical solutions for medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
+      "primaryCta": "Explore Industries",
+      "secondaryCta": "View Delivery",
+      "stats": {
+        "industry": {
+          "value": "05",
+          "label": "Core industries"
+        },
+        "backbone": {
+          "value": "04",
+          "label": "Capability layers"
+        },
+        "delivery": {
+          "value": "01",
+          "label": "Delivery loop"
+        }
+      }
+    },
+    "nav": {
+      "backbone": "Backbone",
+      "industries": "Industries",
+      "proof": "Proof",
+      "delivery": "Delivery"
+    },
+    "backbone": {
+      "eyebrow": "Capability Backbone",
+      "title": "A capability stack from execution to deployment",
+      "description": "Industry solutions are not built from isolated devices. They are supported by execution platforms, real-time control, scheduling and deployment validation together.",
+      "execution": {
+        "title": "Execution Layer",
+        "description": "Covers SCARA, 6-axis, dual-arm, mobile robots and gantry structures for transport, assembly, polishing and inspection tasks."
+      },
+      "control": {
+        "title": "Control & Real-time Layer",
+        "description": "Built on AiROS and the industrial RTOS to support precise control, complex trajectories and stable operation."
+      },
+      "scheduling": {
+        "title": "Scheduling & Collaboration Layer",
+        "description": "Connects mobile platforms, robotic arms and production tasks into one complete workflow through multi-robot scheduling."
+      },
+      "deployment": {
+        "title": "Simulation & Deployment Layer",
+        "description": "Uses mixed deployment, offline programming and pre-validation to reduce on-site retrofit cost and shorten delivery cycles."
+      }
+    },
+    "industries": {
+      "eyebrow": "Industry Matrix",
+      "title": "Focused on five industry directions",
+      "description": "Existing scattered applications are regrouped into clearer industry entries so users can find their scenarios faster.",
+      "viewApplication": "View related application",
+      "medical": {
+        "title": "Medical & Life Science",
+        "summary": "Built for sample handling, tube loading and pharmaceutical automation where precision, safety and traceability matter.",
+        "scenarios": [
+          "Medical automation",
+          "Pharmaceutical automation",
+          "Laboratory workflow automation"
+        ]
+      },
+      "precision": {
+        "title": "Semiconductor & Precision Manufacturing",
+        "summary": "Designed for wafer transfer, precision assembly and surface treatment with stable takt time and high-precision control.",
+        "scenarios": [
+          "Semiconductor processing",
+          "Precision assembly",
+          "Surface treatment"
+        ]
+      },
+      "manufacturing": {
+        "title": "Smart Manufacturing & Flexible Lines",
+        "summary": "For multi-process and multi-device manufacturing environments that need flexible switching, collaboration and platformized control.",
+        "scenarios": [
+          "Smart manufacturing",
+          "Composite systems",
+          "AI robotics"
+        ]
+      },
+      "logistics": {
+        "title": "Logistics & Inspection Operations",
+        "summary": "Covers in-factory logistics, mobile navigation and all-weather inspection with strong scheduling efficiency and stable delivery.",
+        "scenarios": [
+          "Smart logistics",
+          "Intelligent navigation",
+          "Intelligent patrol and security"
+        ]
+      },
+      "research": {
+        "title": "Research & Innovation Lab",
+        "summary": "Supports agricultural research, innovation experiments and edge validation scenarios with openness, rapid verification and continuous iteration.",
+        "scenarios": [
+          "Agricultural research automation",
+          "Cultural and creative intelligent manufacturing",
+          "Industrial gateway and edge computing"
+        ]
+      }
+    },
+    "proof": {
+      "eyebrow": "Featured Proof",
+      "title": "A few cases are enough to prove delivery capability",
+      "description": "Selected cases with stronger representativeness show how ZeroAnt delivers across industries in practice.",
+      "watchCase": "View case details"
+    },
+    "more": {
+      "eyebrow": "More",
+      "title": "More videos and application entries",
+      "description": "The main page keeps only curated content. More videos and application entries are grouped here so users can continue browsing without disrupting the page rhythm.",
+      "videos": "More video cases",
+      "applications": "More applications"
+    },
+    "delivery": {
+      "eyebrow": "Delivery",
+      "title": "A delivery loop from discovery to phased rollout",
+      "description": "The page should not only show directions. It should also clarify how ZeroAnt delivers: understand the scenario, design the solution, validate in advance and then deploy.",
+      "contactTitle": "Let the team match the right solution faster",
+      "contactDescription": "If your scenario is already clear, contact the team directly. We can quickly provide suggestions based on industry characteristics, equipment conditions and delivery rhythm.",
+      "primaryCta": "Contact Team",
+      "steps": {
+        "discovery": {
+          "title": "Scenario Discovery",
+          "description": "Clarify business goals, workstation constraints, takt time and key risks."
+        },
+        "design": {
+          "title": "Solution Design",
+          "description": "Combine robot platforms, system products and integration approaches according to the industry."
+        },
+        "verify": {
+          "title": "Pre-validation",
+          "description": "Use simulation, offline programming and testing to reduce on-site commissioning pressure."
+        },
+        "deploy": {
+          "title": "Phased Rollout",
+          "description": "Go live, integrate and scale further while keeping the operation stable."
+        }
+      }
+    },
+    "tags": {
+      "typicalScenes": "Typical scenarios",
+      "relatedProducts": "Related products",
+      "featuredCase": "Featured case"
+    }
   },
   "supportPage": {
     "title": "After-sales Service",

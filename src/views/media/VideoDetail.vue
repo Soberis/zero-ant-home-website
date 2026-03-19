@@ -260,7 +260,7 @@ onMounted(() => {
 /* Floating Player Box */
 .player-hero-container {
   width: 100%;
-  max-width: 1060px; /* Dominant but elegant */
+  max-width: 860px; /* Reduced to fit better on laptop screens */
   aspect-ratio: 16 / 9;
   border-radius: 20px;
   overflow: hidden;

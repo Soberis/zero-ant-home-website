@@ -3,7 +3,6 @@
     <section class="careers-hero">
       <div class="page-shell hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow">{{ $t("nav.careers") }}</p>
           <h1 class="hero-title">{{ $t("careers.heroTitle") }}</h1>
           <p class="hero-subtitle">{{ $t("careers.heroSubtitle") }}</p>
 
@@ -43,7 +42,6 @@
     <section class="why-join">
       <div class="page-shell">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("nav.careers") }}</p>
           <h2 class="section-title">{{ $t("careers.whyJoinTitle") }}</h2>
         </div>
 
@@ -64,7 +62,6 @@
     <section id="positions" class="job-positions">
       <div class="page-shell">
         <div class="section-heading">
-          <p class="section-eyebrow">{{ $t("careers.hotPositionsTitle") }}</p>
           <h2 class="section-title">{{ $t("careers.hotPositionsTitle") }}</h2>
         </div>
 
@@ -116,7 +113,6 @@
       <div class="page-shell">
         <div class="contact-panel">
           <div class="contact-copy">
-            <p class="section-eyebrow">{{ $t("careers.contactUsTitle") }}</p>
             <h2 class="section-title">{{ $t("careers.contactUsTitle") }}</h2>
             <p class="contact-description">
               {{ $t("careers.contactDescription") }}

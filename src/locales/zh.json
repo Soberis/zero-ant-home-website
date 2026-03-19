@@ -240,9 +240,152 @@
   },
   "solutionsPage": {
     "title": "行业解决方案",
-    "subtitle": "探索前沿技术应用，见证创新驱动未来",
+    "subtitle": "聚焦高可靠行业，以机器人系统底座和场景交付能力支撑不同业务场景。",
     "videoCases": "视频案例",
-    "industryApplications": "行业应用"
+    "industryApplications": "行业应用",
+    "hero": {
+      "eyebrow": "Industry Solutions",
+      "title": "面向高可靠行业的机器人与智能系统解决方案",
+      "description": "零蚁科技以 AiROS、实时控制、调度协同与柔性部署能力为底座，面向医疗、半导体、智能制造、物流巡检与科研实验场景提供可落地的行业方案。",
+      "primaryCta": "查看行业方案",
+      "secondaryCta": "查看交付方式",
+      "stats": {
+        "industry": {
+          "value": "05",
+          "label": "核心行业方向"
+        },
+        "backbone": {
+          "value": "04",
+          "label": "系统能力底座"
+        },
+        "delivery": {
+          "value": "01",
+          "label": "统一交付闭环"
+        }
+      }
+    },
+    "nav": {
+      "backbone": "能力底座",
+      "industries": "行业矩阵",
+      "proof": "精选案例",
+      "delivery": "交付方式"
+    },
+    "backbone": {
+      "eyebrow": "Capability Backbone",
+      "title": "从机器人执行到系统部署的能力底座",
+      "description": "行业方案不靠单点设备拼接，而是由执行平台、实时控制、调度协同和部署验证共同支撑。",
+      "execution": {
+        "title": "机器人执行层",
+        "description": "覆盖四轴、六轴、双臂、移动机器人与龙门结构，适配搬运、装配、打磨、巡检等任务。"
+      },
+      "control": {
+        "title": "控制与实时层",
+        "description": "以 AiROS 和国产工业实时操作系统为核心，支撑高精度控制、复杂轨迹和稳定运行。"
+      },
+      "scheduling": {
+        "title": "调度与协同层",
+        "description": "通过多机调度与跨设备协同能力，把移动平台、机械臂和产线任务连接成完整流程。"
+      },
+      "deployment": {
+        "title": "仿真与部署层",
+        "description": "通过多 OS 混合部署、离线编程和前置验证降低现场改造成本，缩短交付周期。"
+      }
+    },
+    "industries": {
+      "eyebrow": "Industry Matrix",
+      "title": "聚焦五大行业方向",
+      "description": "把现有零散应用收敛成清晰的行业入口，让用户更快匹配到自己的业务场景。",
+      "viewApplication": "查看相关应用",
+      "medical": {
+        "title": "医疗与生命科学",
+        "summary": "围绕样本流转、试管上料、制药自动化等高要求场景，强调精度、安全与可追溯。",
+        "scenarios": [
+          "医疗自动化",
+          "制药自动化",
+          "实验室流程自动化"
+        ]
+      },
+      "precision": {
+        "title": "半导体与精密制造",
+        "summary": "面向晶圆搬运、精密装配与表面处理等工艺场景，强调稳定节拍与高精度控制。",
+        "scenarios": [
+          "半导体加工",
+          "精密装配",
+          "表面处理"
+        ]
+      },
+      "manufacturing": {
+        "title": "智能制造与柔性产线",
+        "summary": "面向多工序、多设备协同的制造场景，强调柔性切换、协同作业与平台化控制。",
+        "scenarios": [
+          "智能制造",
+          "复合系统",
+          "AI 机器人"
+        ]
+      },
+      "logistics": {
+        "title": "智能物流与巡检作业",
+        "summary": "覆盖厂内物流、移动导航、全天候巡检等场景，强调调度效率、路径规划与稳定交付。",
+        "scenarios": [
+          "智能物流",
+          "智能导航",
+          "智能巡检安防"
+        ]
+      },
+      "research": {
+        "title": "科研与创新实验",
+        "summary": "服务农业科研、创新实验与边缘验证场景，强调开放能力、快速验证与持续迭代。",
+        "scenarios": [
+          "农业科研自动化",
+          "文创艺术智能制造",
+          "工业网关与边缘计算"
+        ]
+      }
+    },
+    "proof": {
+      "eyebrow": "Featured Proof",
+      "title": "用少量案例证明落地能力",
+      "description": "精选更具代表性的案例，展示 ZeroAnt 在不同行业中的真实交付能力。",
+      "watchCase": "查看案例详情"
+    },
+    "more": {
+      "eyebrow": "More",
+      "title": "更多视频与行业应用",
+      "description": "主页面只保留精选内容，更多案例和应用入口集中放在这里，方便继续浏览而不打乱整页节奏。",
+      "videos": "更多视频案例",
+      "applications": "更多行业应用"
+    },
+    "delivery": {
+      "eyebrow": "Delivery",
+      "title": "从场景梳理到分阶段部署的交付闭环",
+      "description": "页面不只是展示方向，也要明确 ZeroAnt 的交付方式：先理解场景，再设计方案，前置验证，最终落地。",
+      "contactTitle": "让团队快速匹配行业方案",
+      "contactDescription": "如果你已经明确场景，欢迎直接联系团队沟通需求，我们会基于行业特点、设备条件和交付节奏快速给出建议。",
+      "primaryCta": "联系团队",
+      "steps": {
+        "discovery": {
+          "title": "场景梳理",
+          "description": "明确业务目标、工位约束、节拍要求与关键风险。"
+        },
+        "design": {
+          "title": "方案设计",
+          "description": "根据行业特点组合机器人本体、系统产品与集成方式。"
+        },
+        "verify": {
+          "title": "前置验证",
+          "description": "通过仿真、离线编程和测试验证减少现场调试压力。"
+        },
+        "deploy": {
+          "title": "分阶段部署",
+          "description": "在确保稳定运行的前提下完成上线、联调与后续扩展。"
+        }
+      }
+    },
+    "tags": {
+      "typicalScenes": "典型场景",
+      "relatedProducts": "相关产品",
+      "featuredCase": "精选案例"
+    }
   },
   "supportPage": {
     "title": "售后服务",
