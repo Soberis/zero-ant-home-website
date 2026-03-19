@@ -10,7 +10,6 @@
       <img
         v-lazy="card.img"
         :alt="card.title + '图片'"
-        loading="lazy"
       />
       <div class="video-gradient"></div>
     </div>

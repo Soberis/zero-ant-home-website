@@ -228,7 +228,7 @@ const emits = defineEmits<{
   back: [];
 }>();
 
-const { t } = useI18n();
+const { t, te, tm } = useI18n();
 const router = useRouter();
 
 function slugToI18nKey(slug: string): string {
@@ -253,23 +253,21 @@ const localizedProduct = computed(() => {
   const detailKey = `productDetails.${i18nKey}`;
   const productKey = `products.${i18nKey}`;
 
-  const getTranslatedData = (key: string, fallback: unknown) => {
-    try {
-      const translated = t(`${detailKey}.${key}`);
-      if (typeof translated === "string" && translated === `${detailKey}.${key}`) {
-        return fallback;
-      }
-      return translated;
-    } catch {
+  const getTranslatedData = <T,>(key: string, fallback: T): T => {
+    const fullKey = `${detailKey}.${key}`;
+    if (!te(fullKey)) {
       return fallback;
     }
+
+    const translated = tm(fullKey);
+    return (translated as T) ?? fallback;
   };
 
   return {
-    title: t(`${detailKey}.title`) !== `${detailKey}.title`
+    title: te(`${detailKey}.title`)
       ? t(`${detailKey}.title`)
       : t(`${productKey}.name`, props.product.title),
-    desc: t(`${detailKey}.desc`) !== `${detailKey}.desc`
+    desc: te(`${detailKey}.desc`)
       ? t(`${detailKey}.desc`)
       : t(`${productKey}.desc`, props.product.desc),
     image: getTranslatedData("image", props.product.image) as string,
@@ -635,6 +633,7 @@ const handleVideoClick = (index: number) => {
 .detail-section {
   padding: 28px;
   border-radius: 16px;
+  scroll-margin-top: 156px;
 }
 
 .detail-section__header {
@@ -816,6 +815,29 @@ const handleVideoClick = (index: number) => {
 
   .detail-nav {
     top: 68px;
+    padding-bottom: 8px;
+  }
+
+  .detail-nav__inner {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 12px 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .detail-nav__inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detail-nav__link {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .detail-section {
+    scroll-margin-top: 140px;
   }
 }
 
@@ -832,13 +854,24 @@ const handleVideoClick = (index: number) => {
     width: 100%;
   }
 
+  .detail-nav {
+    position: static;
+    top: auto;
+  }
+
   .detail-nav__inner {
-    padding: 12px;
+    padding: 10px 14px;
+    border-radius: 14px;
   }
 
   .detail-nav__link {
-    width: 100%;
+    width: auto;
     justify-content: center;
+    padding: 10px 16px;
+  }
+
+  .detail-section {
+    scroll-margin-top: 96px;
   }
 }
 </style>

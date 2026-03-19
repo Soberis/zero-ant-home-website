@@ -120,16 +120,11 @@ const categoryLabel = computed(() =>
   overflow: hidden;
 }
 
-.product-card--system .product-card__media {
-  background:
-    radial-gradient(circle at top right, rgba(96, 165, 250, 0.22), transparent 30%),
-    linear-gradient(135deg, #0f172a 0%, #13203a 100%);
-}
-
+.product-card--system .product-card__media,
 .product-card--robot .product-card__media {
   background:
-    radial-gradient(circle at top right, rgba(148, 163, 184, 0.28), transparent 26%),
-    linear-gradient(180deg, #f8fbff 0%, #e8eef7 100%);
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.2), transparent 28%),
+    linear-gradient(180deg, #f4f8fe 0%, #e9f0f8 100%);
 }
 
 .product-card__media-backdrop {
@@ -139,19 +134,14 @@ const categoryLabel = computed(() =>
   pointer-events: none;
 }
 
-.product-card--system .product-card__media-backdrop {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 26px 26px;
-}
-
+.product-card--system .product-card__media-backdrop,
 .product-card--robot .product-card__media-backdrop {
   border: 1px solid rgba(22, 58, 135, 0.08);
   background:
-    radial-gradient(circle at 30% 25%, rgba(22, 58, 135, 0.06), transparent 26%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.16));
+    linear-gradient(90deg, rgba(22, 58, 135, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(22, 58, 135, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 30% 25%, rgba(22, 58, 135, 0.05), transparent 28%);
+  background-size: 26px 26px, 26px 26px, auto;
 }
 
 .product-card__image {
@@ -188,11 +178,12 @@ const categoryLabel = computed(() =>
 }
 
 .product-card__category {
-  padding: 7px 12px;
+  padding: 8px 12px;
+  border: 1px solid rgba(26, 58, 143, 0.14);
   background: rgba(22, 58, 135, 0.08);
   color: #163a87;
   font-size: 0.8rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 

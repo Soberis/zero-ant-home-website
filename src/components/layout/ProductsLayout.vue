@@ -103,6 +103,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 interface ProductsLayoutAction {
   label: string;
   to: string;
@@ -153,9 +155,9 @@ const props = withDefaults(
   }
 );
 
-const resolvedActions = props.actions ?? [];
-const resolvedOverviewCards = props.overviewCards ?? [];
-const resolvedGuideItems = props.guideItems ?? [];
+const resolvedActions = computed(() => props.actions ?? []);
+const resolvedOverviewCards = computed(() => props.overviewCards ?? []);
+const resolvedGuideItems = computed(() => props.guideItems ?? []);
 
 const isHashLink = (to: string): boolean => to.startsWith("#");
 </script>
@@ -163,27 +165,27 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 <style scoped lang="less">
 .products-shell {
   --products-bg: #f4f7fb;
-  --products-surface: rgba(255, 255, 255, 0.8);
+  --products-surface: rgba(255, 255, 255, 0.9);
   --products-surface-strong: #ffffff;
-  --products-border: rgba(15, 23, 42, 0.08);
+  --products-border: rgba(15, 23, 42, 0.09);
   --products-title: #0f172a;
-  --products-text: #5b6475;
+  --products-text: #56657d;
   --products-accent: #163a87;
-  --products-accent-soft: rgba(22, 58, 135, 0.08);
+  --products-accent-soft: rgba(26, 58, 143, 0.08);
   --products-dark: #0e172a;
   min-height: 100vh;
   padding: 104px 0 96px;
   background:
-    radial-gradient(circle at top left, rgba(22, 58, 135, 0.12), transparent 24%),
-    radial-gradient(circle at right 16%, rgba(59, 130, 246, 0.08), transparent 20%),
-    linear-gradient(180deg, #f6f9fc 0%, #eef4f9 100%);
+    radial-gradient(circle at 10% 6%, rgba(22, 58, 135, 0.18), transparent 24%),
+    radial-gradient(circle at 84% 12%, rgba(59, 130, 246, 0.14), transparent 18%),
+    linear-gradient(180deg, #eaf1f9 0%, #f2f7fb 24%, #ffffff 100%);
 }
 
 .products-shell--robot {
   background:
-    radial-gradient(circle at top left, rgba(15, 23, 42, 0.08), transparent 20%),
-    radial-gradient(circle at right 20%, rgba(22, 58, 135, 0.1), transparent 22%),
-    linear-gradient(180deg, #f7fafc 0%, #edf3f8 100%);
+    radial-gradient(circle at 12% 6%, rgba(15, 23, 42, 0.12), transparent 20%),
+    radial-gradient(circle at right 18%, rgba(22, 58, 135, 0.14), transparent 20%),
+    linear-gradient(180deg, #ebf2f9 0%, #f3f7fb 24%, #ffffff 100%);
 }
 
 .products-container {
@@ -193,16 +195,17 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 
 .products-hero {
   position: relative;
+  padding: 8px 0 6px;
 }
 
 .products-hero__inner {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
-  gap: 28px;
+  gap: 36px;
   align-items: stretch;
 }
 
-.products-hero__copy,
 .products-hero__panel,
 .products-overview__header,
 .products-guide__item {
@@ -214,9 +217,9 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 
 .products-hero__copy {
   position: relative;
-  padding: 40px 42px 42px;
-  border-radius: 16px;
-  overflow: hidden;
+  padding: 36px 0 28px;
+  max-width: 700px;
+  overflow: visible;
 }
 
 .products-hero__copy::before,
@@ -228,17 +231,38 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-hero__copy::before {
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 55%),
-    linear-gradient(180deg, rgba(22, 58, 135, 0.04), rgba(22, 58, 135, 0));
+  inset: -6px auto auto -52px;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(26, 58, 143, 0.14), transparent 72%);
+  filter: blur(14px);
+  opacity: 0.9;
+}
+
+.products-hero__copy::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 136px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(22, 58, 135, 0.82), rgba(22, 58, 135, 0));
+  pointer-events: none;
+}
+
+.products-hero__copy > * {
+  position: relative;
+  z-index: 1;
 }
 
 .products-hero__panel {
   position: relative;
   padding: 28px;
   border-radius: 16px;
+  border-color: rgba(96, 165, 250, 0.12);
   background: linear-gradient(180deg, rgba(14, 23, 42, 0.96), rgba(14, 23, 42, 0.88));
   color: #fff;
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.14);
   overflow: hidden;
 }
 
@@ -255,8 +279,9 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   align-items: center;
   padding: 8px 14px;
   border-radius: 999px;
+  border: 1px solid rgba(26, 58, 143, 0.14);
   background: var(--products-accent-soft);
-  color: var(--products-accent);
+  color: #163a87;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -279,6 +304,11 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   font-size: 1rem;
   line-height: 1.82;
   color: var(--products-text);
+}
+
+.products-hero__description {
+  max-width: 620px;
+  font-size: 1.04rem;
 }
 
 .products-hero__actions {
@@ -322,8 +352,8 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 
 .products-hero__action--secondary {
   color: var(--products-title);
-  border-color: rgba(15, 23, 42, 0.14);
-  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(15, 23, 42, 0.16);
+  background: rgba(250, 252, 255, 0.88);
 }
 
 .products-hero__action--secondary:link,
@@ -465,8 +495,8 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   }
 
   .products-hero__copy {
-    padding: 30px 24px 28px;
-    border-radius: 14px;
+    padding: 12px 0 8px;
+    max-width: none;
   }
 
   .products-hero__panel {
