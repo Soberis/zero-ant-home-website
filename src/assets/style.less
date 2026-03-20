@@ -1,14 +1,49 @@
 // 引入字体排版规范
 @import "./typography.less";
 
-/* CSS变量定义 - 统一管理颜色 */
+/* CSS变量定义 - 设计系统 */
 :root {
+  /* ── 颜色 ── */
   --color-primary: #1a3a8f;
-  --color-text: #2d3748;
-  --color-text-secondary: #64748b;
-  --color-text-muted: #94a3b8;
-  --color-border: #e2e8f0;
+  --color-primary-dark: #0f2560;
+  --color-primary-light: #e8edf7;
+  --color-text: #1a1a2e;
+  --color-text-secondary: #5a6178;
+  --color-text-muted: #9ca3af;
+  --color-border: #e5e7eb;
   --color-background: #fafbfc;
+  --color-background-white: #ffffff;
+  --color-background-dark: #0f172a;
+
+  /* ── 圆角 ── */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* ── 间距（8px 网格） ── */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 100px;
+  --space-3xl: 140px;
+
+  /* ── Section / 容器 ── */
+  --section-padding-y: 100px;
+  --container-max-width: 1200px;
+  --container-padding-x: 48px;
+  --nav-height: 64px;
+
+  /* ── 过渡 ── */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ── 阴影 ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* 全局基础样式 - 2025年8月优化版 */
