@@ -1,42 +1,33 @@
 <template>
-  <section class="video-cases">
+  <section class="spotlight-section">
     <div class="section-heading">
-      <span class="section-eyebrow">{{ t('home.videoCases.eyebrow') }}</span>
-      <h2 class="section-title">{{ t('home.videoCases.title') }}</h2>
-      <p class="section-description">{{ t('home.videoCases.description') }}</p>
+      <span class="home-section-eyebrow">{{ t("home.videoCases.eyebrow") }}</span>
+      <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
+      <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
     </div>
 
-    <div class="videos-grid">
+    <div class="spotlight-grid">
       <router-link
-        v-for="(video, index) in featuredVideos"
-        :key="video.slug"
-        :to="`/video/${video.slug}`"
-        class="video-card cinematic-card"
-        :class="{ 'video-hero': index === 0 }"
+        v-for="item in spotlightItems"
+        :key="item.slug"
+        :to="`/video/${item.slug}`"
+        class="spotlight-card"
       >
-        <div class="video-bg-layer">
-          <img :src="video.img" :alt="video.title" loading="lazy" />
-          <div class="video-gradient"></div>
-        </div>
-
-        <div class="play-button-center">
-          <div class="play-icon">
-            <svg viewBox="0 0 24 24" width="32" height="32">
-              <path fill="currentColor" d="M8 5v14l11-7z" />
+        <div class="spotlight-card__media">
+          <img :src="item.img" :alt="item.title" loading="lazy" />
+          <span class="spotlight-card__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path
+                fill="currentColor"
+                d="M8 5.5v13l11-6.5-11-6.5z"
+              />
             </svg>
-          </div>
+          </span>
         </div>
 
-        <div class="video-content-layer">
-          <div class="video-top">
-            <span class="video-label" v-if="index === 0">{{ t('home.videoCases.featuredLabel') }}</span>
-          </div>
-          
-          <div class="video-bottom">
-            <h3 class="video-title">{{ video.title }}</h3>
-            <!-- Description strictly for Hero card -->
-            <p class="video-desc" v-if="index === 0">{{ video.preview }}</p>
-          </div>
+        <div class="spotlight-card__body">
+          <h3 class="text-title-medium spotlight-card__title">{{ item.title }}</h3>
+          <p class="text-body-small spotlight-card__desc">{{ item.description }}</p>
         </div>
       </router-link>
     </div>
@@ -44,342 +35,213 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { videoCards, videoMap } from '@/data/videos';
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+import { videoCards, videoMap } from "@/data/videos";
 
-const FEATURED_SLUGS = [
-  'robotstudio-remote-control',
-  'medical-automation',
-  'semiconductor',
-  'ur-robot-llm-motion-capture',
-  'lab-tube-loading',
-  'rtos-ethercat-validation',
+interface SpotlightItem {
+  slug: string;
+  img: string;
+  title: string;
+  description: string;
+}
+
+const SPOTLIGHT_SLUGS = [
+  "robotstudio-remote-control",
+  "medical-automation",
+  "semiconductor",
 ];
 
 const { t } = useI18n();
 
-const createPreview = (content: string): string => {
-  const plainText = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-  return plainText.length > 120 ? `${plainText.slice(0, 120)}...` : plainText;
+const makeVideoItem = (slug: string): SpotlightItem | null => {
+  const videoCard = videoCards.find((item) => item.slug === slug);
+  const videoDetail = videoMap[slug];
+
+  if (!videoCard || !videoDetail) {
+    return null;
+  }
+
+  return {
+    slug,
+    img: videoCard.img,
+    title: t(videoDetail.title),
+    description: t(videoDetail.desc),
+  };
 };
 
-const featuredVideos = computed(() =>
-  FEATURED_SLUGS.map((slug) => {
-    const videoCard = videoCards.find((item) => item.slug === slug);
-    const videoDetail = videoMap[slug];
-
-    if (!videoCard || !videoDetail) {
-      return null;
-    }
-
-    return {
-      slug,
-      img: videoCard.img,
-      title: t(videoDetail.title),
-      preview: createPreview(t(videoDetail.desc)),
-    };
-  }).filter((video): video is NonNullable<typeof video> => Boolean(video))
+const spotlightItems = computed(() =>
+  SPOTLIGHT_SLUGS.map((slug) => makeVideoItem(slug)).filter(
+    (item): item is SpotlightItem => Boolean(item)
+  )
 );
 </script>
 
 <style scoped lang="less">
-.video-cases {
+.spotlight-section {
   position: relative;
   z-index: 1;
-  max-width: 1280px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 108px 24px 96px;
+  padding: var(--section-padding-y) var(--container-padding-x);
 }
 
 .section-heading {
-  max-width: 760px;
-  margin-bottom: 42px;
+  max-width: 700px;
+  margin-bottom: var(--space-lg);
 }
 
-.section-eyebrow {
-  display: inline-flex;
-  padding: 7px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(20, 54, 127, 0.12);
-  background: rgba(255, 255, 255, 0.78);
-  color: #1f4fb1;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.section-title {
-  margin: 20px 0 12px;
-  font-size: clamp(2.1rem, 4vw, 3.15rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  color: #0f172a;
-}
-
-.section-description {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.9;
-  color: #5b6475;
-}
-
-.videos-grid {
+.spotlight-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
 }
 
-.video-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #0f172a;
+.spotlight-card {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(26, 58, 143, 0.08);
+  border-radius: var(--radius-md);
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.15);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-  aspect-ratio: 16 / 9; /* Perfect Video Thumbnail Ratio */
+  color: inherit;
+  background: var(--color-background-white);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
-/* Base Bento Box Hero logic */
-.video-hero {
-  grid-column: span 2;
-  grid-row: span 2;
-  aspect-ratio: auto; /* Let the span dictation create perfect flush alignment with the 2x 16:9 rows */
+.spotlight-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #f4f6fb;
 }
 
-.video-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.25);
-  border-color: rgba(255, 255, 255, 0.25);
-  z-index: 10;
-}
-
-.video-bg-layer {
+.spotlight-card__media::after {
+  content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
-}
-
-.video-bg-layer img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.video-card:hover .video-bg-layer img {
-  transform: scale(1.06);
-}
-
-.video-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.1) 40%, rgba(15, 23, 42, 0.95) 100%);
-  transition: opacity 0.4s ease;
-}
-
-.video-card:hover .video-gradient {
-  opacity: 0.85; 
-}
-
-.play-button-center {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  background: linear-gradient(180deg, rgba(10, 18, 34, 0.04), rgba(10, 18, 34, 0.1));
+  opacity: 0.65;
+  transition: opacity var(--transition-normal);
   pointer-events: none;
 }
 
-.play-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* optical adjustment for centered play arrow */
-.play-icon svg {
-  margin-left: 2px;
-}
-
-.video-hero .play-icon {
-  width: 76px;
-  height: 76px;
-  background: rgba(255, 255, 255, 0.15);
-  border-width: 2px;
-}
-
-.video-hero .play-icon svg {
-  width: 40px;
-  height: 40px;
-  margin-left: 4px;
-}
-
-.video-card:hover .play-icon {
-  background: rgba(255, 255, 255, 0.95);
-  color: #1a3a8f;
-  transform: scale(1.15);
-  border-color: #fff;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-}
-
-.video-content-layer {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
+.spotlight-card__media img {
+  width: 100%;
   height: 100%;
-  padding: 20px; /* Snug padding for small cards */
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-normal);
 }
 
-.video-hero .video-content-layer {
-  padding: 32px 36px; /* Grand padding for hero card */
-}
-
-.video-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex: 1; /* Pushes bottom down */
-}
-
-.video-label {
-  display: inline-flex;
-  padding: 6px 14px;
+.spotlight-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #fff;
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(10, 18, 34, 0.72);
+  color: var(--color-background-white);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 24px rgba(10, 18, 34, 0.18);
+  transition:
+    transform var(--transition-normal),
+    background var(--transition-normal),
+    box-shadow var(--transition-normal),
+    border-color var(--transition-normal);
+  pointer-events: none;
 }
 
-.video-bottom {
-  margin-top: auto;
-  transform: translateY(8px); /* less distance for small cards */
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.spotlight-card__play svg {
+  position: relative;
+  z-index: 1;
 }
 
-.video-hero .video-bottom {
-  transform: translateY(16px);
+.spotlight-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-sm) var(--space-sm) var(--space-md);
 }
 
-.video-card:hover .video-bottom {
-  transform: translateY(0);
-}
-
-.video-title {
+.spotlight-card__title {
   margin: 0;
-  font-size: 1.15rem;
-  line-height: 1.4;
-  color: #fff;
-  font-weight: 600;
+  color: var(--color-text);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
-.video-hero .video-title {
-  font-size: 1.65rem;
-  margin-bottom: 12px;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-}
-
-.video-desc {
+.spotlight-card__desc {
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-secondary);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-  transition: color 0.4s ease;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  min-height: 1.5em;
 }
 
-.video-card:hover .video-desc {
-  color: #fff;
+.spotlight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.spotlight-card:hover .spotlight-card__media::after {
+  opacity: 0.9;
+}
+
+.spotlight-card:hover .spotlight-card__media img {
+  transform: scale(1.02);
+}
+
+.spotlight-card:hover .spotlight-card__play {
+  background: rgba(28, 32, 40, 0.86);
+  border-color: rgba(255, 255, 255, 0.34);
+  box-shadow:
+    0 11px 24px rgba(10, 18, 34, 0.16),
+    0 0 0 3px rgba(255, 255, 255, 0.06);
+  transform: translate(-50%, -50%) scale(1.01);
 }
 
 @media (max-width: 1100px) {
-  .videos-grid {
+  .spotlight-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .video-hero {
-    grid-column: span 2;
-    grid-row: span 1; /* Alone on its row, don't span 2 */
-    aspect-ratio: 16 / 7; /* Wide cinematic banner for tablet */
   }
 }
 
 @media (max-width: 900px) {
-  .video-cases {
-    padding: 84px 16px 72px;
+  .spotlight-section {
+    padding: var(--space-xl) var(--space-md);
   }
 }
 
 @media (max-width: 680px) {
-  .videos-grid {
+  .spotlight-section {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+
+  .spotlight-card {
+    border-radius: var(--radius-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .spotlight-grid {
     grid-template-columns: 1fr;
   }
-  
-  .video-hero {
-    grid-column: span 1;
-    grid-row: span 1;
-    aspect-ratio: 16 / 9; /* Restore pure fixed aspect ratio since it no longer span 2x2 rows dynamically */
-  }
 
-  .video-card {
-    border-radius: 12px;
-  }
-
-  .video-content-layer,
-  .video-hero .video-content-layer {
-    padding: 20px;
-  }
-  
-  .video-hero .play-icon {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .video-hero .play-icon svg {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .video-hero .video-title {
-    font-size: 1.25rem;
-    margin-bottom: 8px;
-  }
-  
-  .video-desc {
-    font-size: 0.95rem;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+  .spotlight-card__body {
+    padding: var(--space-sm);
   }
 }
 </style>

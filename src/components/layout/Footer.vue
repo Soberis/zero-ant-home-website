@@ -270,16 +270,15 @@ onUnmounted(() => {
   width: 100%;
   margin-top: auto;
   padding: 56px 0 0;
-  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
-  border-top: 1px solid rgba(148, 163, 184, 0.12);
-  color: #94a3b8;
+  background: var(--color-background-dark);
+  color: #a1a1aa;
   font-size: 14px;
 }
 
 .footer-main {
-  max-width: 1280px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--container-padding-x);
 }
 
 .footer-columns {
@@ -295,7 +294,7 @@ onUnmounted(() => {
 
 .footer-col h4 {
   margin: 0 0 14px;
-  color: #f8fafc;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 600;
 }
@@ -313,7 +312,7 @@ onUnmounted(() => {
 
 .footer-col ul li a,
 .footer-link {
-  color: #94a3b8;
+  color: #a1a1aa;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -330,7 +329,7 @@ onUnmounted(() => {
 }
 
 .contact-info {
-  color: #cbd5e1;
+  color: #d4d4d8;
   font-size: 13px;
   line-height: 1.85;
 }
@@ -358,7 +357,7 @@ onUnmounted(() => {
   padding: 4px;
   border-radius: 16px;
   background: #ffffff;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.28);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   object-fit: cover;
 }
 
@@ -367,22 +366,21 @@ onUnmounted(() => {
 }
 
 .qrcode-label {
-  color: #cbd5e1;
+  color: #d4d4d8;
   font-size: 12px;
 }
 
 .footer-bottom {
-  margin-top: 40px;
-  padding: 18px 24px 20px;
-  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  margin-top: 48px;
+  padding: 24px 24px 32px;
   text-align: center;
-  color: #94a3b8;
+  color: #a1a1aa;
   font-size: 12px;
 }
 
 .icp-link {
   margin-left: 8px;
-  color: #cbd5e1 !important;
+  color: #d4d4d8 !important;
   text-decoration: none;
 }
 
@@ -396,7 +394,7 @@ onUnmounted(() => {
   }
 
   .footer-main {
-    padding: 0 16px;
+    padding: 0 24px;
   }
 
   .footer-columns {

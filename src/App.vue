@@ -108,30 +108,6 @@ body {
 
 .main-content {
   flex: 1;
-  padding-top: 80px;
-}
-
-@media (max-width: 950px) {
-  .main-content {
-    padding-top: 70px;
-  }
-}
-
-@media (max-width: 640px) {
-  .main-content {
-    padding-top: 60px;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-content {
-    padding-top: 55px;
-  }
-}
-
-@media (max-width: 360px) {
-  .main-content {
-    padding-top: 50px;
-  }
+  padding-top: var(--nav-height);
 }
 </style>

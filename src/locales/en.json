@@ -104,8 +104,8 @@
   "home": {
     "hero": {
       "eyebrow": "ZeroAnt Robotics Platform",
-      "title": "Full-stack in-house development for reliable robotics solutions",
-      "description": "ZeroAnt delivers system products, robot products, and integrated solutions for medical automation, semiconductor processing, and advanced manufacturing scenarios.",
+      "title": "In-house robotics platform",
+      "description": "Start with product capabilities, application scenarios, and support materials before deciding the next step.",
       "panelLabel": "Featured Product",
       "tabs": {
         "multiOsVm": "Multi-OS VM",
@@ -131,27 +131,26 @@
     "coreProducts": {
       "eyebrow": "Product Matrix",
       "title": "Core Products",
-      "description": "Build a complete portfolio around robotics software foundations, control platforms, and execution hardware.",
+      "description": "Start with the runtime base, control platform, and execution hardware.",
       "systemLabel": "@:common.terms.systemProducts",
       "robotLabel": "@:common.terms.robotProducts"
     },
     "videoCases": {
-      "eyebrow": "Selected Cases",
+      "eyebrow": "Case Library",
       "title": "@:common.section.videoCases",
-      "description": "A tighter set of representative demos to quickly understand ZeroAnt's real delivery capability.",
-      "featuredLabel": "Featured",
+      "description": "Representative cases that help confirm delivery capability quickly.",
       "watchVideo": "Watch Video"
     },
     "industryApplications": {
       "eyebrow": "Scenario Coverage",
       "title": "@:common.section.industryApplications",
-      "description": "From medical automation to semiconductor processing, ZeroAnt supports reliable delivery with system capability and execution platforms.",
+      "description": "Quickly find the right path for medical, semiconductor, manufacturing, and logistics scenarios.",
       "explore": "View Solution"
     },
     "partners": {
       "eyebrow": "Trusted By",
       "title": "Partners",
-      "description": "Work with research institutes, industry customers, and ecosystem partners to prove real-world execution capability."
+      "description": "Built with research institutions and industry partners to validate delivery."
     }
   },
   "productPages": {

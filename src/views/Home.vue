@@ -36,10 +36,7 @@ import Partners from '@/components/business/Partners.vue';
 .home-page {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top left, rgba(28, 74, 168, 0.12), transparent 26%),
-    radial-gradient(circle at right 15%, rgba(64, 145, 255, 0.08), transparent 24%),
-    linear-gradient(180deg, #f5f8fc 0%, #eef3f8 100%);
+  background: var(--color-background-white);
 }
 
 .home-main {
@@ -51,49 +48,25 @@ import Partners from '@/components/business/Partners.vue';
   overflow: hidden;
 }
 
-.home-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+.home-section--products {
+  background: var(--color-background);
 }
 
-.home-section--products::before {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 250, 255, 0.92)),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
-  background-size: auto, 36px 36px;
+.home-section--applications {
+  background: #f4f6fb;
 }
 
-.home-section--applications::before {
-  background:
-    radial-gradient(circle at 10% 20%, rgba(31, 80, 182, 0.09), transparent 18%),
-    linear-gradient(180deg, rgba(238, 244, 252, 0.86), rgba(244, 248, 252, 0.96));
+.home-section--videos {
+  background: #f7f8fc;
 }
 
-.home-section--videos::before {
-  background:
-    radial-gradient(circle at 85% 15%, rgba(15, 23, 42, 0.08), transparent 22%),
-    linear-gradient(180deg, rgba(249, 251, 254, 0.92), rgba(238, 243, 248, 0.94));
-}
-
-.home-section--partners::before {
-  background:
-    linear-gradient(180deg, rgba(245, 248, 251, 0.95), rgba(255, 255, 255, 0.98));
+.home-section--partners {
+  background: var(--color-background-dark);
 }
 
 @media screen and (max-width: 991px) {
   .home-page {
-    background:
-      radial-gradient(circle at top left, rgba(28, 74, 168, 0.1), transparent 28%),
-      linear-gradient(180deg, #f5f8fc 0%, #eef3f8 100%);
-  }
-
-  .home-section--products::before,
-  .home-section--applications::before,
-  .home-section--videos::before,
-  .home-section--partners::before {
-    background-size: auto, 24px 24px;
+    background: var(--color-background-white);
   }
 }
 </style>

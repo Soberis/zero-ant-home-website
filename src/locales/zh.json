@@ -104,8 +104,8 @@
   "home": {
     "hero": {
       "eyebrow": "ZeroAnt Robotics Platform",
-      "title": "全栈自研，打造高可靠机器人解决方案",
-      "description": "零蚁科技面向医疗自动化、半导体加工与高端制造场景，提供系统产品、机器人产品与一体化解决方案。",
+      "title": "高可靠机器人平台",
+      "description": "先看产品能力、应用场景和支持资料，再决定下一步。",
       "panelLabel": "重点产品",
       "tabs": {
         "multiOsVm": "Multi-OS VM",
@@ -131,27 +131,26 @@
     "coreProducts": {
       "eyebrow": "Product Matrix",
       "title": "核心产品",
-      "description": "围绕机器人系统底座、控制平台与执行终端，形成系统产品与机器人产品的完整矩阵。",
+      "description": "先看系统底座、控制平台与执行终端。",
       "systemLabel": "@:common.terms.systemProducts",
       "robotLabel": "@:common.terms.robotProducts"
     },
     "videoCases": {
       "eyebrow": "Selected Cases",
       "title": "@:common.section.videoCases",
-      "description": "精选具代表性的场景演示，快速了解 ZeroAnt 的真实落地能力。",
-      "featuredLabel": "@:common.terms.featuredCase",
+      "description": "精选案例，帮助快速确认落地能力。",
       "watchVideo": "观看视频"
     },
     "industryApplications": {
       "eyebrow": "Scenario Coverage",
       "title": "@:common.section.industryApplications",
-      "description": "从医疗自动化到半导体加工，以系统能力和执行平台支撑不同场景的高可靠交付。",
+      "description": "按医疗、半导体、智能制造与物流场景快速定位。",
       "explore": "查看方案"
     },
     "partners": {
       "eyebrow": "Trusted By",
       "title": "合作伙伴",
-      "description": "与科研院所、行业客户和生态伙伴持续共建，验证技术落地能力。"
+      "description": "与科研院所和行业伙伴共建验证与交付。"
     }
   },
   "productPages": {

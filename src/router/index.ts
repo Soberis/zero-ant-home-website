@@ -15,6 +15,54 @@ const SystemProducts = () => import("@/views/products/SystemProducts.vue");
 const RobotProducts = () => import("@/views/products/RobotProducts.vue");
 const Careers = () => import("@/views/company/Careers.vue");
 
+const scrollPageTo = (top: number, behavior: ScrollBehavior = "auto") => {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const targets = [document.body, document.documentElement].filter(
+    Boolean
+  ) as HTMLElement[];
+
+  targets.forEach((target) => {
+    try {
+      target.scrollTo({ left: 0, top, behavior });
+    } catch {
+      target.scrollTop = top;
+      target.scrollLeft = 0;
+    }
+  });
+};
+
+const scrollToHash = (
+  hash: string,
+  behavior: ScrollBehavior = "smooth"
+): number | false => {
+  if (typeof document === "undefined") {
+    return false;
+  }
+
+  const element = document.querySelector(hash) as HTMLElement | null;
+  if (!element) {
+    return false;
+  }
+
+  const isMobile = window.innerWidth <= 768;
+  const offset = isMobile ? 60 : 120;
+  const currentScrollY =
+    window.pageYOffset ??
+    document.documentElement.scrollTop ??
+    document.body.scrollTop ??
+    0;
+  const top = Math.max(
+    0,
+    element.getBoundingClientRect().top + currentScrollY - offset
+  );
+
+  scrollPageTo(top, behavior);
+  return top;
+};
+
 const routes = [
   // 首页
   {
@@ -88,6 +136,7 @@ const router = createRouter({
   routes,
   scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
+      scrollPageTo(savedPosition.top ?? 0, "auto");
       return savedPosition;
     }
 
@@ -99,21 +148,19 @@ const router = createRouter({
         let attempts = 0;
 
         const tryScroll = () => {
-          const element = document.querySelector(to.hash) as HTMLElement;
-          if (element) {
-            // 移动端导航栏高度更小
-            const isMobile = window.innerWidth <= 768;
-            const offset = isMobile ? 60 : 120;
-            const top = Math.max(0, element.offsetTop - offset);
+          const top = scrollToHash(to.hash, "smooth");
+          if (typeof top === "number") {
             resolve({
+              left: 0,
               top,
-              behavior: 'smooth',
+              behavior: "auto",
             });
           } else if (attempts < maxAttempts) {
             attempts += 1;
             setTimeout(tryScroll, 50 * attempts); // 指数退避
           } else {
-            resolve({ top: 0, behavior: 'smooth' });
+            scrollPageTo(0, "smooth");
+            resolve({ left: 0, top: 0, behavior: "auto" });
           }
         };
 
@@ -122,7 +169,8 @@ const router = createRouter({
       });
     }
     // 默认滚动到顶部
-    return { top: 0, behavior: 'smooth' };
+    scrollPageTo(0, "smooth");
+    return { left: 0, top: 0, behavior: "auto" };
   },
 });
 

@@ -5,6 +5,7 @@ import i18n from "@/config/i18n";
 import { setupDirectives } from "@/directives";
 import { initSecurity } from "@/utils/security";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
+import "@/assets/style.less";
 
 // 创建应用实例
 const app = createApp(App);
@@ -19,6 +20,10 @@ app.mount("#app");
 
 // 初始化安全监控和SEO（仅在浏览器环境）
 if (typeof window !== "undefined") {
+  if ("scrollRestoration" in window.history) {
+    window.history.scrollRestoration = "manual";
+  }
+
   // 初始化安全监控
   initSecurity();
   
