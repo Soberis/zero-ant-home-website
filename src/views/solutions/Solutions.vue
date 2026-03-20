@@ -282,7 +282,7 @@
           </div>
 
           <button type="button" class="primary-btn contact-btn" @click="contactTeam">
-            {{ t("solutionsPage.delivery.primaryCta") }}
+            {{ t("common.cta.contactTeam") }}
           </button>
         </aside>
       </div>
@@ -306,23 +306,9 @@ import {
 } from "@/data/solutionIndustries";
 
 const router = useRouter();
-const { t, te, tm } = useI18n();
+const { t, tm } = useI18n();
 const activeMoreTab = ref<"videos" | "applications">("videos");
 const hoverVideoIdx = ref(-1);
-
-function translateOrFallback(key: string, fallback: string): string {
-  const translated = t(key);
-  return translated === key ? fallback : translated;
-}
-
-function getMessageString(key: string, fallback: string): string {
-  if (!te(key)) {
-    return fallback;
-  }
-
-  const message = tm(key);
-  return typeof message === "string" ? message : fallback;
-}
 
 function stripHtml(value: string): string {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
@@ -369,7 +355,7 @@ const productMap = computed(() =>
         product.slug,
         {
           slug: product.slug,
-          title: translateOrFallback(product.name, product.slug),
+          title: t(product.name),
           route: `${baseRoute}/${product.slug}`,
         },
       ];
@@ -380,18 +366,12 @@ const productMap = computed(() =>
 const applicationMap = computed(() =>
   Object.fromEntries(
     applications.map((app) => {
-      const title = translateOrFallback(`applications.${app.slug}.title`, app.title);
-      const description = getMessageString(
-        `applications.${app.slug}.description`,
-        app.description
-      );
-
       return [
         app.slug,
         {
           slug: app.slug,
-          title,
-          description: truncate(stripHtml(description), 88),
+          title: t(app.title),
+          description: truncate(stripHtml(t(app.description)), 88),
         },
       ];
     })
@@ -402,19 +382,13 @@ const videoCardMap = computed(() =>
   Object.fromEntries(
     videoCards.map((card) => {
       const detail = videoMap[card.slug];
-      const title = detail
-        ? translateOrFallback(detail.title, card.title)
-        : card.title;
-      const description = detail
-        ? truncate(stripHtml(translateOrFallback(detail.desc, "")), 96)
-        : "";
 
       return [
         card.slug,
         {
           slug: card.slug,
-          title,
-          description,
+          title: detail ? t(detail.title) : t(card.title),
+          description: detail ? truncate(stripHtml(t(detail.desc)), 96) : "",
           image: card.img,
         },
       ];
@@ -488,12 +462,7 @@ const featuredCases = computed(() =>
 
 const allVideoCards = computed(() => videoCards);
 
-const allApplications = computed(() =>
-  applications.map((app) => ({
-    ...app,
-    title: translateOrFallback(`applications.${app.slug}.title`, app.title),
-  }))
-);
+const allApplications = computed(() => applications);
 
 const deliverySteps = computed(() => [
   {

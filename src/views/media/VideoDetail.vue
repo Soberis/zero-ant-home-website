@@ -32,7 +32,7 @@
         </template>
         <template v-else>
           <div class="video-placeholder">
-            {{ t("videos.videoDetail.noVideo") }}
+            {{ t("common.status.noVideo") }}
           </div>
         </template>
       </div>
@@ -53,8 +53,8 @@
       
       <!-- Project Standard CTA -->
       <div class="action-area">
-        <button class="project-cta-btn" @click="showContact = true" aria-label="Learn More">
-          <span>{{ t("videos.videoDetail.learnMore") }}</span>
+        <button class="project-cta-btn" @click="showContact = true" :aria-label="t('common.cta.learnMore')">
+          <span>{{ t("common.cta.learnMore") }}</span>
           <svg class="cta-icon" viewBox="0 0 24 24" width="20" height="20">
             <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
           </svg>
@@ -86,7 +86,7 @@
           <div class="contact-qrcode-placeholder">
             <img
               :src="wxworkQrcode"
-              alt="企业微信二维码"
+              :alt="t('videos.videoDetail.qrCodeDesc')"
               class="qrcode-img"
             />
           </div>
@@ -117,9 +117,9 @@ const currentSlug = computed(() => String(route.params.slug || ""));
 const defaultVideoInfo: VideoDetail = {
   type: "bilibili",
   slug: "not-found",
-  title: "未找到视频",
+  title: "videos.videoDetail.notFoundTitle",
   url: "",
-  desc: "暂无介绍",
+  desc: "videos.videoDetail.notFoundDesc",
 };
 
 const rawVideoInfo = computed<VideoDetail>(
@@ -130,20 +130,20 @@ const rawVideoInfo = computed<VideoDetail>(
 const videoInfo = computed(
   (): VideoDetail => ({
     ...rawVideoInfo.value,
-    title: t(`videos.${rawVideoInfo.value.slug}.title`, rawVideoInfo.value.title),
-    desc: t(`videos.${rawVideoInfo.value.slug}.desc`, rawVideoInfo.value.desc),
+    title: t(rawVideoInfo.value.title),
+    desc: t(rawVideoInfo.value.desc),
   })
 );
 
 // 更新descParagraphs计算属性
-const descParagraphs = computed(() =>
-  videoInfo.value.desc
-    ? videoInfo.value.desc
-        .split(/[。.!！\n]/)
-        .filter(Boolean)
-        .map((p) => (p.endsWith("。") ? p : p + "。"))
-    : []
-);
+const descParagraphs = computed(() => {
+  const text = videoInfo.value.desc.trim();
+  if (!text) {
+    return [];
+  }
+
+  return text.split(/\n+/).map((block) => block.trim()).filter(Boolean);
+});
 
 const showContact = ref<boolean>(false);
 

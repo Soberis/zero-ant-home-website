@@ -48,7 +48,7 @@
       </p>
 
       <button class="product-card__action" type="button" @click="emit('more', product.slug)">
-        <span>{{ t("productPages.common.viewDetails") }}</span>
+        <span>{{ t("common.cta.viewDetails") }}</span>
         <span aria-hidden="true">></span>
       </button>
     </div>

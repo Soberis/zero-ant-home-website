@@ -31,12 +31,12 @@ const pageContent = computed(() => ({
   description: t("productPages.robot.hero.description"),
   actions: [
     {
-      label: t("productPages.common.viewProducts"),
+      label: t("common.cta.viewProducts"),
       to: "#product-catalog",
       variant: "primary" as const,
     },
     {
-      label: t("productPages.common.contactTeam"),
+      label: t("common.cta.contactTeam"),
       to: "/about#contact",
       variant: "secondary" as const,
     },

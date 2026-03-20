@@ -14,7 +14,7 @@
           <h1 class="hero-title">{{ activeSlide.title }}</h1>
           <p class="hero-description">{{ activeSlide.desc }}</p>
           <router-link :to="activeSlide.routePath" class="hero-link">
-            {{ t('home.hero.panelCta') }}
+            {{ t('common.cta.viewDetails') }}
           </router-link>
         </div>
 

@@ -19,7 +19,7 @@
         </div>
       </template>
       <template v-else>
-        <div class="video-placeholder">{{ t("applicationsPage.noVideo") }}</div>
+        <div class="video-placeholder">{{ t("common.status.noVideo") }}</div>
       </template>
       </div>
     </div>
@@ -72,14 +72,8 @@ const detail: ComputedRef<Application | undefined> = computed(() => {
   if (!rawDetail.value) return undefined;
   return {
     ...rawDetail.value,
-    title: t(
-      `applications.${rawDetail.value.slug}.title`,
-      rawDetail.value.title
-    ),
-    description: t(
-      `applications.${rawDetail.value.slug}.description`,
-      rawDetail.value.description
-    ),
+    title: t(rawDetail.value.title),
+    description: t(rawDetail.value.description),
   };
 });
 

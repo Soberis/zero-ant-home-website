@@ -13,6 +13,29 @@ import type {
 export type { ProductDetail, ProductCase, ProductParam, ProductDownload };
 
 /**
+ * 产品详情页 slug 到 i18n key 的映射
+ * 统一管理，避免在多个组件中重复维护同一份映射表
+ */
+export const PRODUCT_I18N_KEY_MAP: Record<ProductSlug, string> = {
+  "multi-os-vm": "multiOsVm",
+  "industrial-rtos": "industrialRtos",
+  "airos": "airos",
+  "robot-scheduler": "robotScheduler",
+  "gantry-2d": "gantry2d",
+  "scara-4axis": "scara4axis",
+  "arm-6axis": "arm6axis",
+  "dual-arm-humanoid": "dualArmHumanoid",
+  "mobile-robot": "mobileRobot",
+};
+
+/**
+ * 将产品 slug 转换为 i18n key
+ */
+export function slugToI18nKey(slug: string): string {
+  return PRODUCT_I18N_KEY_MAP[slug as ProductSlug] || slug;
+}
+
+/**
  * 产品详情数据类型
  */
 export type ProductDetailsData = Record<ProductSlug, ProductDetail>;
@@ -22,17 +45,7 @@ export type ProductDetailsData = Record<ProductSlug, ProductDetail>;
  * 现在通过国际化系统获取数据，而不是硬编码
  */
 export function getProductDetailKeys(): string[] {
-  return [
-    'multi-os-vm',
-    'industrial-rtos', 
-    'airos',
-    'robot-scheduler',
-    'gantry-2d',
-    'scara-4axis',
-    'arm-6axis',
-    'dual-arm-humanoid',
-    'mobile-robot'
-  ];
+  return Object.keys(PRODUCT_I18N_KEY_MAP);
 }
 
 /**

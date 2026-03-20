@@ -74,7 +74,7 @@
                   class="card-content"
                 >
                   <p class="card-caption">{{ item.desc }}</p>
-                  <p class="card-body">{{ t("supportPage.preparingMessage") }}</p>
+                  <p class="card-body">{{ t("common.status.preparingMessage") }}</p>
                 </div>
               </transition>
             </article>

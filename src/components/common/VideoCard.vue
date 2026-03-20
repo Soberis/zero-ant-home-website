@@ -9,7 +9,7 @@
     <div class="video-bg-layer">
       <img
         v-lazy="card.img"
-        :alt="card.title + '图片'"
+        :alt="t(card.title)"
       />
       <div class="video-gradient"></div>
     </div>
@@ -23,7 +23,7 @@
       
       <div class="video-bottom">
         <div class="video-card-title">
-          {{ t(`videos.${card.slug}.title`, card.title) }}
+          {{ t(card.title) }}
         </div>
       </div>
     </div>

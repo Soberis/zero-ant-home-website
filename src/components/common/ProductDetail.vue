@@ -21,7 +21,7 @@
               to="/solutions"
               class="product-hero__action product-hero__action--secondary"
             >
-              {{ t("productDetail.solutionCta") }}
+              {{ t("common.cta.viewSolutions") }}
             </router-link>
           </div>
         </div>
@@ -46,7 +46,7 @@
           </div>
 
           <div class="product-hero__media">
-            <img :src="localizedProduct.image" :alt="localizedProduct.title" class="product-hero__image" />
+            <img :src="heroImageSrc" :alt="localizedProduct.title" class="product-hero__image" />
           </div>
         </div>
       </div>
@@ -177,12 +177,12 @@
             >
               <span class="download-card__type">{{ t("productDetail.downloadLabel") }}</span>
               <div class="download-card__name">{{ download.name }}</div>
-              <div class="download-card__action">{{ t("supportPage.downloads.downloadNow") }}</div>
+              <div class="download-card__action">{{ t("common.cta.downloadNow") }}</div>
             </a>
           </div>
 
           <div v-else class="downloads-placeholder">
-            <p class="downloads-placeholder__text">{{ t("productDetail.preparingMessage") }}</p>
+            <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
           </div>
         </section>
 
@@ -192,21 +192,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { computed } from "vue";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
-import applications from "@/data/applications";
-import { products } from "@/data/products";
-import { videoCards } from "@/data/videos";
-import type { ProductDetail, ProductDownload, ProductParam } from "@/data/productDetails";
-import {
-  getCustomFeatures,
-  getRelatedApplications,
-  getRelatedVideos,
-  hasProductRelations,
-} from "@/data/productRelations";
+import { useProductDetailData } from "@/composables/useProductDetailData";
+import type { ProductDetail } from "@/data/productDetails";
 
 type FeatureItem = string | { title?: string; desc?: string };
 
@@ -228,155 +219,32 @@ const emits = defineEmits<{
   back: [];
 }>();
 
-const { t, te, tm } = useI18n();
-const router = useRouter();
+const { t } = useI18n();
 
-function slugToI18nKey(slug: string): string {
-  const slugToKeyMap: Record<string, string> = {
-    "multi-os-vm": "multiOsVm",
-    "industrial-rtos": "industrialRtos",
-    airos: "airos",
-    "robot-scheduler": "robotScheduler",
-    "gantry-2d": "gantry2d",
-    "scara-4axis": "scara4axis",
-    "arm-6axis": "arm6axis",
-    "dual-arm-humanoid": "dualArmHumanoid",
-    "mobile-robot": "mobileRobot",
-  };
-  return slugToKeyMap[slug] || slug;
-}
-
-const currentProduct = computed(() => products.find((item) => item.slug === props.productSlug));
-
-const localizedProduct = computed(() => {
-  const i18nKey = slugToI18nKey(props.productSlug);
-  const detailKey = `productDetails.${i18nKey}`;
-  const productKey = `products.${i18nKey}`;
-
-  const getTranslatedData = <T,>(key: string, fallback: T): T => {
-    const fullKey = `${detailKey}.${key}`;
-    if (!te(fullKey)) {
-      return fallback;
-    }
-
-    const translated = tm(fullKey);
-    return (translated as T) ?? fallback;
-  };
-
-  return {
-    title: te(`${detailKey}.title`)
-      ? t(`${detailKey}.title`)
-      : t(`${productKey}.name`, props.product.title),
-    desc: te(`${detailKey}.desc`)
-      ? t(`${detailKey}.desc`)
-      : t(`${productKey}.desc`, props.product.desc),
-    image: getTranslatedData("image", props.product.image) as string,
-    features: getTranslatedData("features", props.product.features) as FeatureItem[],
-    params: getTranslatedData("params", props.product.params) as Array<ProductParam | string>,
-    downloads: getTranslatedData("downloads", props.product.downloads) as Array<ProductDownload | string>,
-  };
+const {
+  currentProduct,
+  localizedProduct: resolvedLocalizedProduct,
+  categoryLabel,
+  normalizedParams,
+  normalizedDownloads,
+  heroMetrics,
+  sectionLinks,
+  relatedApplications,
+  relatedVideos,
+  productFeatures: resolvedProductFeatures,
+  activeVideoIndex,
+  handleVideoHover,
+  handleVideoLeave,
+  handleVideoClick,
+} = useProductDetailData(() => props.productSlug, {
+  baseDetail: () => props.product,
+  showApplications: () => props.showApplications,
+  showVideos: () => props.showVideos,
 });
 
-const categoryLabel = computed(() =>
-  currentProduct.value?.category === "robot"
-    ? t("home.coreProducts.robotLabel")
-    : t("home.coreProducts.systemLabel")
-);
-
-const normalizedParams = computed(() =>
-  (localizedProduct.value.params || [])
-    .map((param) => (typeof param === "string" ? null : param))
-    .filter((param): param is ProductParam => Boolean(param))
-);
-
-const normalizedDownloads = computed(() =>
-  (localizedProduct.value.downloads || [])
-    .map((item) => {
-      if (typeof item === "string") {
-        return item ? { name: item, url: item } : null;
-      }
-      return item?.url ? item : null;
-    })
-    .filter((item): item is ProductDownload => Boolean(item))
-);
-
-const heroMetrics = computed(() => {
-  if (normalizedParams.value.length > 0) {
-    return normalizedParams.value.slice(0, 4).map((param) => ({
-      label: param.key,
-      value: param.value,
-    }));
-  }
-
-  return (currentProduct.value?.metrics || []).slice(0, 4).map((metric) => ({
-    label: t(metric.label),
-    value: t(metric.value),
-  }));
-});
-
-const sectionLinks = computed(() => {
-  const links = [
-    { id: "product-overview", label: t("productDetail.anchorOverview") },
-  ];
-
-  if (productFeatures.value.length) {
-    links.push({ id: "features-section", label: t("productDetail.anchorFeatures") });
-  }
-  if (props.showApplications && relatedApplications.value.length) {
-    links.push({ id: "applications-section", label: t("productDetail.anchorApplications") });
-  }
-  if (props.showVideos && relatedVideos.value.length) {
-    links.push({ id: "cases-section", label: t("productDetail.anchorCases") });
-  }
-  if (normalizedParams.value.length) {
-    links.push({ id: "parameters-section", label: t("productDetail.anchorParameters") });
-  }
-  links.push({ id: "downloads-section", label: t("productDetail.anchorDownloads") });
-
-  return links;
-});
-
-const relatedApplications = computed(() => {
-  if (hasProductRelations(props.productSlug)) {
-    return getRelatedApplications(props.productSlug);
-  }
-  return applications.slice(0, 6);
-});
-
-const relatedVideos = computed(() => {
-  if (hasProductRelations(props.productSlug)) {
-    return getRelatedVideos(props.productSlug);
-  }
-  return videoCards.slice(0, 6);
-});
-
-const productFeatures = computed((): FeatureItem[] => {
-  const translatedFeatures = localizedProduct.value.features;
-  if (Array.isArray(translatedFeatures) && translatedFeatures.length > 0) {
-    return translatedFeatures;
-  }
-
-  const customFeatures = getCustomFeatures(props.productSlug);
-  if (customFeatures?.length) {
-    return customFeatures;
-  }
-
-  return props.product.features || [];
-});
-
-const activeVideoIndex = ref(-1);
-const handleVideoHover = (index: number) => {
-  activeVideoIndex.value = index;
-};
-const handleVideoLeave = () => {
-  activeVideoIndex.value = -1;
-};
-const handleVideoClick = (index: number) => {
-  const video = relatedVideos.value[index];
-  if (video) {
-    router.push(`/video/${video.slug}`);
-  }
-};
+const localizedProduct = computed(() => resolvedLocalizedProduct.value ?? props.product);
+const heroImageSrc = computed(() => localizedProduct.value.image || props.image || "");
+const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.value);
 </script>
 
 <style scoped lang="less">

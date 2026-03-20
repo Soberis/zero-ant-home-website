@@ -16,87 +16,18 @@
 import { computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { getProductDetailKeys } from '@/data/productDetails';
-import type { ProductDetail } from '@/data/productDetails';
-import { products } from '@/data/products';
+import { useProductDetailData } from '@/composables/useProductDetailData';
 import ProductDetailComponent from '@/components/common/ProductDetail.vue';
 import { setSEO, setStructuredData } from '@/utils/seo';
 
 // 国际化
-const { t, messages, locale } = useI18n();
+const { t, locale } = useI18n();
 
 const route = useRoute();
 const router = useRouter();
 const slug = computed(() => String(route.params.slug || ''));
 
-// 将URL slug转换为国际化键名的映射函数
-function slugToI18nKey(slug: string): string {
-  const slugToKeyMap: Record<string, string> = {
-    'multi-os-vm': 'multiOsVm',
-    'industrial-rtos': 'industrialRtos',
-    'airos': 'airos',
-    'robot-scheduler': 'robotScheduler',
-    'gantry-2d': 'gantry2d',
-    'scara-4axis': 'scara4axis',
-    'arm-6axis': 'arm6axis',
-    'dual-arm-humanoid': 'dualArmHumanoid',
-    'mobile-robot': 'mobileRobot'
-  };
-  return slugToKeyMap[slug] || slug;
-}
-
-// 通过国际化系统获取产品详情数据
-const detail = computed(() => {
-  // 检查slug是否在支持的产品列表中
-  const supportedKeys = getProductDetailKeys();
-  if (!supportedKeys.includes(slug.value)) {
-    return null;
-  }
-  
-  // 将slug转换为国际化键名
-  const i18nKey = slugToI18nKey(slug.value);
-  
-  // 尝试从国际化系统获取产品数据
-  try {
-    // 直接从国际化消息对象中获取数据，而不是使用t()函数
-    // 使用响应式的locale来确保语言切换时重新计算
-    const currentLocale = locale.value;
-    const productData = (messages.value as any)[currentLocale]?.productDetails?.[i18nKey];
-    
-    if (!productData) {
-      return null;
-    }
-    
-    // 转换params对象为数组格式
-    const paramsArray = productData.params ? Object.values(productData.params) : [];
-    
-    // 转换downloads对象为数组格式
-    const downloadsArray = productData.downloads ? Object.values(productData.downloads) : [];
-    
-    // 转换cases对象为数组格式
-    const casesArray = productData.cases ? Object.values(productData.cases) : [];
-    
-    return {
-      title: productData.title || '',
-      desc: productData.desc || '',
-      image: currentProduct.value?.image || '',
-      features: productData.features || [],
-      cases: casesArray,
-      scenes: productData.scenes || [],
-      params: paramsArray,
-      downloads: downloadsArray
-    } as ProductDetail;
-  } catch (error) {
-    console.warn(`Failed to load product details for ${slug}:`, error);
-  }
-  
-  return null;
-});
-
-// 获取当前产品基础信息
-const currentProduct = computed(() => {
-  return products.find(p => p.slug === slug.value);
-});
+const { currentProduct, detail } = useProductDetailData(slug);
 
 // 动态SEO元数据
 const seoMetadata = computed(() => {
@@ -209,7 +140,7 @@ onMounted(() => {
 });
 
 function goBack() {
-  const product = products.find(p => p.slug === slug.value);
+  const product = currentProduct.value;
   if (product) {
     // 返回到对应产品列表页
     if (product.category === 'robot') {

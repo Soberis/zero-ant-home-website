@@ -9,7 +9,7 @@
     </div>
 
     <h3 class="app-card__title">
-      {{ t(`applications.${props.slug}.title`, props.title) }}
+      {{ t(props.title) }}
     </h3>
 
     <div class="app-card__footer">
@@ -23,6 +23,7 @@
 import { useI18n } from "vue-i18n";
 
 const props = defineProps<{
+  /** 应用标题 i18n key */
   title: string;
   svg: string;
   slug: string;

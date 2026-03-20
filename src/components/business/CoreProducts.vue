@@ -28,7 +28,7 @@
             <p class="product-desc">{{ t(product.desc) }}</p>
 
             <span class="more-btn">
-              {{ t('home.coreProducts.learnMore') }}
+              {{ t('common.cta.learnMore') }}
             </span>
           </router-link>
         </div>
