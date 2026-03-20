@@ -31,11 +31,6 @@ const pageContent = computed(() => ({
   description: t("productPages.robot.hero.description"),
   actions: [
     {
-      label: t("common.cta.viewProducts"),
-      to: "#product-catalog",
-      variant: "primary" as const,
-    },
-    {
       label: t("common.cta.contactTeam"),
       to: "/about#contact",
       variant: "secondary" as const,
@@ -58,24 +53,6 @@ const pageContent = computed(() => ({
   overviewEyebrow: t("productPages.common.overviewEyebrow"),
   overviewTitle: t("productPages.robot.overview.title"),
   overviewDescription: t("productPages.robot.overview.description"),
-  overviewCards: [
-    {
-      title: t("productPages.robot.overview.cards.precision.title"),
-      description: t("productPages.robot.overview.cards.precision.description"),
-    },
-    {
-      title: t("productPages.robot.overview.cards.flexibility.title"),
-      description: t("productPages.robot.overview.cards.flexibility.description"),
-    },
-    {
-      title: t("productPages.robot.overview.cards.logistics.title"),
-      description: t("productPages.robot.overview.cards.logistics.description"),
-    },
-    {
-      title: t("productPages.robot.overview.cards.integration.title"),
-      description: t("productPages.robot.overview.cards.integration.description"),
-    },
-  ],
   guideEyebrow: t("productPages.common.guideEyebrow"),
   guideTitle: t("productPages.robot.guide.title"),
   guideItems: [

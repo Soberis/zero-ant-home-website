@@ -186,53 +186,35 @@
     "system": {
       "hero": {
         "eyebrow": "System Product Matrix",
-        "title": "Robotics software foundations and platform capabilities",
-        "description": "Build a practical system portfolio around robot operating systems, real-time control, hybrid deployment, and multi-robot orchestration."
+        "title": "From Control Base to Orchestration",
+        "description": "Built around operating systems, real-time control, hybrid deployment, and multi-robot scheduling for a clear system portfolio."
       },
       "metrics": {
         "countValue": "04",
-        "countLabel": "@:common.terms.systemProducts",
-        "capabilityValue": "OS / RTOS / Scheduler",
+        "countLabel": "System Products",
+        "capabilityValue": "OS / RTOS",
         "capabilityLabel": "Core Capabilities",
-        "deliveryValue": "Platform + Integration",
+        "deliveryValue": "Platform Integration",
         "deliveryLabel": "Delivery Mode"
       },
       "overview": {
-        "title": "From runtime foundation to orchestration",
-        "description": "The system page should not read like a software list. It should quickly explain how ZeroAnt supports control, runtime, deployment, and coordination.",
-        "cards": {
-          "control": {
-            "title": "Control Foundation",
-            "description": "Center the product line around robot operating systems and runtime foundations."
-          },
-          "runtime": {
-            "title": "Deterministic Runtime",
-            "description": "Support reliable execution, low jitter behavior, and industrial-grade runtime needs."
-          },
-          "integration": {
-            "title": "Open Integration",
-            "description": "Extend toward different robots, controllers, and business systems with scalable interfaces."
-          },
-          "delivery": {
-            "title": "Engineering Delivery",
-            "description": "Work as a reusable platform layer while also supporting integration-heavy project delivery."
-          }
-        }
+        "title": "Start with the base, then check coordination boundaries",
+        "description": "The system page keeps only the key capability path so users can quickly judge whether control, runtime, deployment, and orchestration needs match."
       },
       "guide": {
-        "title": "How to navigate system products",
+        "title": "System Selection Path",
         "items": {
           "foundation": {
-            "title": "Start with the runtime base",
-            "description": "If you need a unified robot runtime foundation, begin with AiROS and the real-time operating system."
+            "title": "Start with the control base",
+            "description": "If you need a unified robot runtime, start with AiROS and the industrial real-time OS."
           },
           "runtime": {
-            "title": "Then check deployment needs",
-            "description": "If your site requires mixed operating systems and resource isolation, start with the multi-OS deployment direction."
+            "title": "Then check deployment",
+            "description": "For mixed operating systems and resource isolation, start with the multi-OS deployment route."
           },
           "orchestration": {
             "title": "Finish with orchestration",
-            "description": "If your goal is multi-robot collaboration and factory-level linkage, focus on scheduling and interface capabilities."
+            "description": "For multi-robot linkage and factory-level collaboration, focus on scheduling and interface capabilities."
           }
         }
       }
@@ -240,53 +222,35 @@
     "robot": {
       "hero": {
         "eyebrow": "Robot Product Matrix",
-        "title": "Robots built for real industrial tasks",
-        "description": "Cover arms, dual-arm collaboration, mobile execution, and gantry platforms with a unified control foundation for assembly, handling, and logistics."
+        "title": "From Execution Form to Application Fit",
+        "description": "Covers arms, dual-arm collaboration, mobile execution, and gantry platforms in one robot capability matrix."
       },
       "metrics": {
         "countValue": "05",
-        "countLabel": "@:common.terms.robotProducts",
-        "coverageValue": "Arm / Mobile Platform",
+        "countLabel": "Robot Products",
+        "coverageValue": "Arms / AMR",
         "coverageLabel": "Form Factors",
-        "scenarioValue": "Assembly / Handling / Logistics",
+        "scenarioValue": "Assembly / Handling",
         "scenarioLabel": "Key Scenarios"
       },
       "overview": {
-        "title": "From execution units to compound capability",
-        "description": "The robot page should explain the execution profile of each form factor first, then guide users into the right product choice.",
-        "cards": {
-          "precision": {
-            "title": "Precision Execution",
-            "description": "Cover common industrial execution needs across assembly, positioning, pick-and-place, and path control."
-          },
-          "flexibility": {
-            "title": "Flexible Collaboration",
-            "description": "Use multi-DOF and dual-arm coordination to support richer workstation tasks and interactions."
-          },
-          "logistics": {
-            "title": "Mobile Handling",
-            "description": "Combine navigation with task execution for factory and warehouse material movement."
-          },
-          "integration": {
-            "title": "System Coordination",
-            "description": "Link with ZeroAnt control, scheduling, and application software to form complete delivery solutions."
-          }
-        }
+        "title": "Start with execution form, then check scenario fit",
+        "description": "First judge what the robot can do, then move into specific models and typical scenarios to reduce selection friction."
       },
       "guide": {
-        "title": "How to navigate robot products",
+        "title": "Robot Selection Path",
         "items": {
           "assembly": {
             "title": "Precision assembly",
-            "description": "For fast pick-and-place, sorting, and assembly tasks, start with the SCARA arm and gantry platform."
+            "description": "For fast pick-and-place, sorting, and assembly, start with the 4-axis arm and gantry platform."
           },
           "complex": {
-            "title": "Complex motion",
-            "description": "For richer postures, welding, spraying, or complex path control, focus on 6-axis and dual-arm options."
+            "title": "Complex work",
+            "description": "For multi-pose motion, welding, spraying, or complex path control, focus on the 6-axis arm and dual-arm options."
           },
           "mobile": {
             "title": "Mobile execution",
-            "description": "For cross-station transport, in-factory delivery, or compound tasks, start with the mobile robot direction."
+            "description": "For cross-station transport, in-factory delivery, or compound tasks, start with the mobile robot."
           }
         }
       }
@@ -949,7 +913,7 @@
   "products": {
     "multiOsVm": {
       "name": "@:common.terms.multiOsHybridHypervisor",
-      "desc": "Supports parallel operation of multiple operating systems, enhancing industrial equipment flexibility and resource utilization.",
+      "desc": "Supports parallel operation of multiple operating systems for heterogeneous deployment across controllers and edge devices, balancing control isolation, resource utilization, and system coordination on the same hardware base with room for future expansion and unified management.",
       "seriesTitle": "@:common.terms.multiOsHybridHypervisor",
       "seriesSubtitle": "Heterogeneous System Integration Solution",
       "supportText": "Fit for heterogeneous deployment across controllers, industrial gateways, and edge computing devices.",
@@ -961,7 +925,7 @@
     },
     "airos": {
       "name": "@:common.terms.airosRobotOperatingSystem",
-      "desc": "Domestic 'out-of-the-box' intelligent robot operating system, creating the Android of robotics to bring robots into every industry.",
+      "desc": "An integrated operating system for robot bodies and control platforms, connecting low-level control, upper-layer applications, and future expansion to make deployment faster and evolution easier.",
       "seriesTitle": "@:common.terms.airosRobotOperatingSystem",
       "seriesSubtitle": "Operating System for Embodied Intelligence Era",
       "supportText": "Fit for a unified software foundation across robot bodies, control platforms, and upper-layer applications.",
@@ -973,7 +937,7 @@
     },
     "industrialRtos": {
       "name": "@:common.terms.industrialRealTimeOS",
-      "desc": "Domestic industrial-grade real-time operating system ensuring high-reliability operation of critical tasks.",
+      "desc": "A real-time operating system for industrial control that keeps critical tasks running stably while meeting the determinism and reliability requirements of field equipment, suitable for long-term online operation and dependable delivery.",
       "seriesTitle": "@:common.terms.industrialRealTimeOS",
       "seriesSubtitle": "High Reliability and Autonomous Control",
       "supportText": "Fit for high-reliability motion control, field equipment, and critical runtime scenarios.",
@@ -985,7 +949,7 @@
     },
     "robotScheduler": {
       "name": "@:common.terms.robotSchedulerSystem",
-      "desc": "Supports unified scheduling and collaborative operation of multi-brand, multi-type mobile robots, enhancing factory automation levels.",
+      "desc": "A unified scheduling system for multi-brand mobile robots, enabling cross-device collaboration for factory logistics and multi-robot coordination while improving task allocation and on-site dispatch efficiency.",
       "seriesTitle": "@:common.terms.robotSchedulerSystem",
       "seriesSubtitle": "Multi-Robot Coordination and Intelligent Scheduling",
       "supportText": "Fit for multi-robot collaboration, cross-device linkage, and factory-level orchestration scenarios.",
@@ -997,7 +961,7 @@
     },
     "gantry2d": {
       "name": "@:common.terms.gantry23Dof",
-      "desc": "High-precision, high-rigidity 2/3-DOF gantry suitable for multi-scenario automated handling and positioning.",
+      "desc": "A gantry platform for linear transfer and large-area positioning, suited to industrial tasks such as loading, unloading, handling, and precision positioning with clear takt demands, emphasizing stability and repeatability.",
       "seriesTitle": "@:common.terms.gantry23Dof",
       "seriesSubtitle": "Efficient Automated Handling Platform",
       "supportText": "Fit for linear transfer, loading and unloading, and precision positioning over larger working ranges.",
@@ -1009,7 +973,7 @@
     },
     "scara4axis": {
       "name": "@:common.terms.fourAxisScaraRobot",
-      "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications.",
+      "desc": "A compact 4-axis robotic arm for high-speed assembly and sorting, ideal for space-constrained stations with demanding cycle times while balancing fast pick-and-place with stable operation.",
       "seriesTitle": "@:common.terms.fourAxisScaraRobot",
       "seriesSubtitle": "Flexible and Efficient Industrial Assistant",
       "supportText": "Fit for fast assembly, sorting, pick-and-place, and takt-driven industrial workstations.",
@@ -1021,7 +985,7 @@
     },
     "arm6axis": {
       "name": "@:common.terms.sixAxisArm",
-      "desc": "Capable of complex trajectory control, suitable for welding, spraying, assembly and other industrial scenarios.",
+      "desc": "Supports complex trajectory control for welding, spraying, and assembly, covering more flexible multi-pose work and scenarios that require continuous paths and frequent process changes.",
       "seriesTitle": "@:common.terms.sixAxisArm",
       "seriesSubtitle": "Multi-Scenario Intelligent Operations",
       "supportText": "Fit for welding, grinding, spraying, and richer multi-posture trajectory tasks.",
@@ -1033,7 +997,7 @@
     },
     "dualArmHumanoid": {
       "name": "@:common.terms.dualArmHumanoidRobot",
-      "desc": "Dual-arm collaboration capability, suitable for complex assembly, service and high-flexibility operation requirements.",
+      "desc": "An execution platform for dual-arm collaboration and highly flexible tasks, suited to dexterous manipulation, compound processes, and multimodal interaction with support for more complex human-robot cooperation.",
       "seriesTitle": "@:common.terms.dualArmHumanoidRobot",
       "seriesSubtitle": "High-Flexibility Collaboration Platform",
       "supportText": "Fit for dual-arm collaboration, dexterous manipulation, and highly flexible compound processes.",
@@ -1045,7 +1009,7 @@
     },
     "mobileRobot": {
       "name": "@:common.terms.mobileRobot",
-      "desc": "Autonomous navigation, multi-sensor fusion, suitable for factory, warehouse and other multi-scenario intelligent logistics.",
+      "desc": "A mobile robot that combines navigation, scheduling, and handling capabilities, ideal for in-factory logistics, cross-station transfer, and compound tasks with multi-robot collaboration and on-site dispatch.",
       "seriesTitle": "@:common.terms.mobileRobot",
       "seriesSubtitle": "Intelligent Logistics and Handling",
       "supportText": "Fit for factory logistics, cross-station transport, and compound task scheduling.",
