@@ -53,7 +53,7 @@ export function useProductDetailData(
 
   const i18nKey = computed(() => slugToI18nKey(slugValue.value));
   const detailKey = computed(() => `productDetails.${i18nKey.value}`);
-  const hasDetailTranslation = computed(() => te(detailKey.value));
+  const hasDetailTranslation = computed(() => te(`${detailKey.value}.title`));
 
   const localizedProduct = computed<ProductDetail | null>(() => {
     if (!hasDetailTranslation.value && !baseDetail.value) {
