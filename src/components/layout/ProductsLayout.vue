@@ -254,7 +254,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   justify-content: center;
   min-width: 154px;
   padding: 12px 18px;
-  border-radius: 10px;
+  border-radius: 999px;
   border: 1px solid rgba(15, 23, 42, 0.12);
   font-weight: 600;
   font-size: 0.92rem;
