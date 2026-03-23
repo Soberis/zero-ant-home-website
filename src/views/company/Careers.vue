@@ -3,6 +3,7 @@
     <section class="careers-hero">
       <div class="page-shell hero-grid">
         <div class="hero-copy">
+          <p class="hero-eyebrow">JOIN US</p>
           <h1 class="hero-title">{{ $t("careers.heroTitle") }}</h1>
           <p class="hero-subtitle">{{ $t("careers.heroSubtitle") }}</p>
 
@@ -25,24 +26,25 @@
         </div>
 
         <div class="hero-panel">
-          <div class="hero-panel-inner">
-            <div
-              v-for="stat in heroStats"
-              :key="stat.label"
-              class="stat-item"
-            >
-              <span class="stat-number">{{ stat.value }}</span>
-              <span class="stat-label">{{ stat.label }}</span>
-            </div>
+          <div
+            v-for="stat in heroStats"
+            :key="stat.label"
+            class="hero-stat"
+          >
+            <span class="hero-stat-value">{{ stat.value }}</span>
+            <span class="hero-stat-label">{{ stat.label }}</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="why-join">
+    <section class="page-section why-join">
       <div class="page-shell">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("careers.whyJoinTitle") }}</h2>
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ $t("careers.whyJoinTitle") }}</span>
+            <span class="title-en">WHY CHOOSE US</span>
+          </h2>
         </div>
 
         <div class="benefits-grid">
@@ -59,10 +61,13 @@
       </div>
     </section>
 
-    <section id="positions" class="job-positions">
+    <section id="positions" class="page-section job-positions">
       <div class="page-shell">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("careers.hotPositionsTitle") }}</h2>
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ $t("careers.hotPositionsTitle") }}</span>
+            <span class="title-en">OPEN POSITIONS</span>
+          </h2>
         </div>
 
         <div class="positions-list">
@@ -109,17 +114,19 @@
       </div>
     </section>
 
-    <section id="contact" class="contact-section">
+    <section id="contact" class="page-section contact-section">
       <div class="page-shell">
         <div class="contact-panel">
           <div class="contact-copy">
-            <h2 class="section-title">{{ $t("careers.contactUsTitle") }}</h2>
+            <div class="detail-section__header" style="margin-bottom: 24px;">
+              <h2 class="detail-section__title">
+                <span class="title-main">{{ $t("careers.contactUsTitle") }}</span>
+                <span class="title-en">CONTACT US</span>
+              </h2>
+            </div>
             <p class="contact-description">
               {{ $t("careers.contactDescription") }}
             </p>
-            <button class="apply-btn contact-btn" type="button" @click="openMailto()">
-              {{ $t("careers.applyNow") }}
-            </button>
           </div>
 
           <div class="contact-grid">
@@ -161,7 +168,6 @@ interface Position {
 
 const heroStats = computed(() => [
   { value: "8+", label: t("careers.techAccumulation") },
-  { value: "20+", label: t("careers.teamPartners") },
   { value: "50+", label: t("careers.successfulProjects") },
 ]);
 
@@ -288,53 +294,57 @@ function applyForPosition(position: Position): void {
   --career-primary-deep: #0f172a;
   --career-text: #1f2937;
   --career-muted: #64748b;
-  --career-border: #d9e2ec;
+  --career-border: rgba(15, 23, 42, 0.08);
   --career-surface: #ffffff;
-  --career-surface-soft: #f4f7fb;
+  --career-surface-soft: #fbfcfe;
   color: var(--career-text);
-  background:
-    radial-gradient(circle at top right, rgba(26, 58, 143, 0.08), transparent 28%),
-    linear-gradient(180deg, #f3f6fb 0%, #f7f9fc 24%, #ffffff 100%);
+  background: #ffffff;
+}
+
+.careers-page > .page-section:nth-of-type(even) {
+  background-color: var(--career-surface-soft);
 }
 
 .page-shell {
-  width: min(1200px, calc(100% - 32px));
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 48px;
   margin: 0 auto;
 }
 
 .careers-hero {
-  padding: 112px 0 72px;
+  padding: 80px 0 80px;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
   gap: 28px;
   align-items: stretch;
 }
 
 .hero-copy {
-  padding: 32px 0;
+  padding: 20px 0 24px;
 }
 
 .hero-eyebrow,
 .section-eyebrow {
-  margin: 0 0 12px;
-  color: var(--career-primary);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  display: block;
+  margin: 0 0 16px;
+  color: var(--career-muted);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .hero-title {
-  max-width: 9em;
-  margin: 0 0 18px;
+  margin: 0 0 24px;
   color: var(--career-text);
-  font-size: clamp(2.8rem, 5vw, 4.3rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
@@ -354,103 +364,111 @@ function applyForPosition(position: Position): void {
 .hero-action,
 .apply-btn {
   border-radius: 999px;
-  padding: 12px 22px;
-  font-size: 0.94rem;
-  font-weight: 600;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
   cursor: pointer;
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .hero-action {
-  border: 1px solid var(--career-border);
-  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  background: #ffffff;
   color: var(--career-text);
 }
 
 .hero-action-primary,
 .apply-btn {
   border: 1px solid transparent;
-  background: linear-gradient(135deg, #1a3a8f 0%, #16306b 100%);
+  background: var(--career-primary);
   color: #ffffff;
-  box-shadow: 0 16px 34px rgba(26, 58, 143, 0.18);
+  box-shadow: none;
 }
 
-.hero-action:hover,
-.apply-btn:hover {
+.hero-action:hover {
+  background: var(--career-surface-soft);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.apply-btn:hover,
+.hero-action-primary:hover {
+  transform: translateY(-2px);
+  background: var(--career-primary-deep);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.12);
 }
 
 .hero-panel {
-  border: 1px solid rgba(26, 58, 143, 0.12);
-  border-radius: 28px;
-  background:
-    linear-gradient(160deg, rgba(15, 23, 42, 0.98) 0%, rgba(26, 58, 143, 0.96) 100%);
-  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.18);
-  overflow: hidden;
-}
-
-.hero-panel-inner {
-  height: 100%;
-  padding: 24px;
-  display: grid;
-  gap: 14px;
-}
-
-.stat-item {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 22px 24px;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding-left: 64px;
 }
 
-.stat-number {
-  color: #ffffff;
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 24px;
+  border-left: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.hero-stat-value {
+  color: var(--career-text);
+  font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
-.stat-label {
-  max-width: 8em;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  text-align: right;
+.hero-stat-label {
+  color: var(--career-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  text-align: left;
 }
 
 .why-join,
-.job-positions,
-.contact-section {
-  padding: 28px 0 72px;
+.job-positions {
+  padding: 120px 0 0;
 }
 
-.why-join {
-  padding-top: 8px;
+.page-section {
+  padding: 100px 0;
 }
 
-.section-heading {
+.detail-section__header {
+  max-width: 860px;
+  margin-bottom: 48px;
+}
+
+.detail-section__title {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 24px;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 16px 0;
 }
 
-.section-title {
-  margin: 0;
+.title-main {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 500;
   color: var(--career-text);
-  font-size: clamp(1.85rem, 3vw, 2.6rem);
-  font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+.title-en {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--career-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .benefits-grid {
@@ -460,21 +478,19 @@ function applyForPosition(position: Position): void {
 }
 
 .benefit-card {
-  border: 1px solid var(--career-border);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
-  padding: 24px;
+  border: none;
+  border-radius: 24px;
+  background: var(--career-surface-soft);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.04);
+  padding: 40px;
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s ease;
 }
 
 .benefit-card:hover,
 .position-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(26, 58, 143, 0.24);
+  transform: translateY(-6px);
   box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
 }
 
@@ -500,6 +516,7 @@ function applyForPosition(position: Position): void {
   margin: 0;
   color: var(--career-muted);
   font-size: 0.98rem;
+  font-weight: 600;
   line-height: 1.8;
 }
 
@@ -509,15 +526,14 @@ function applyForPosition(position: Position): void {
 }
 
 .position-card {
-  border: 1px solid var(--career-border);
+  border: none;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
-  padding: 28px;
+  background: var(--career-surface-soft);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.04);
+  padding: 40px;
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s ease;
 }
 
 .position-header {
@@ -614,46 +630,79 @@ function applyForPosition(position: Position): void {
 }
 
 .contact-panel {
-  border: 1px solid rgba(26, 58, 143, 0.12);
+  border: none;
   border-radius: 28px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 247, 251, 0.98) 100%);
-  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.08);
-  padding: 32px;
+  background: linear-gradient(135deg, #0f172a 0%, #1a3a8f 100%);
+  color: #ffffff;
+  box-shadow: 0 32px 64px rgba(15, 23, 42, 0.15);
+  padding: 64px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
-  gap: 24px;
+  gap: 32px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.contact-panel:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.2);
+}
+
+.contact-panel .title-main { color: #ffffff; }
+.contact-panel .title-en { color: rgba(255, 255, 255, 0.6); }
+
+.contact-description {
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.05rem;
 }
 
 .contact-btn {
-  margin-top: 24px;
+  margin-top: 32px;
+  border: 1px solid transparent;
+  background: #ffffff;
+  color: var(--career-text);
+  box-shadow: none;
+}
+.contact-btn:hover {
+  background: var(--career-surface-soft);
+  color: var(--career-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
 .contact-grid {
   display: grid;
-  gap: 14px;
+  gap: 20px;
 }
 
 .contact-card {
-  border: 1px solid var(--career-border);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 18px 20px;
+  border: none;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 24px 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .contact-label {
   display: block;
-  margin-bottom: 8px;
-  color: rgba(15, 23, 42, 0.5);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .contact-value {
-  color: var(--career-primary-deep);
-  font-size: 1rem;
-  font-weight: 600;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.contact-value[href]:hover {
+  color: #a3bfff;
+  text-decoration: none;
 }
 
 @media (max-width: 1024px) {
@@ -666,6 +715,10 @@ function applyForPosition(position: Position): void {
   .stat-label {
     text-align: left;
   }
+
+  .hero-copy {
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -674,11 +727,11 @@ function applyForPosition(position: Position): void {
   }
 
   .careers-hero {
-    padding: 88px 0 56px;
+    padding: 104px 0 52px;
   }
 
   .hero-copy {
-    padding: 0;
+    padding: 0 0 24px;
   }
 
   .hero-title {
@@ -715,7 +768,7 @@ function applyForPosition(position: Position): void {
 
 @media (max-width: 560px) {
   .careers-hero {
-    padding-top: 72px;
+    padding-top: 86px;
   }
 
   .stat-item {

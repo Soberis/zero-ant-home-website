@@ -107,12 +107,6 @@
 
             <ul>
               <li>
-                <router-link to="/support">
-                  {{ $t("nav.afterSales") }}
-                </router-link>
-              </li>
-
-              <li>
                 <router-link :to="{ path: '/support', hash: '#download' }">
                   {{ $t("nav.download") }}
                 </router-link>
@@ -123,14 +117,25 @@
                   {{ $t("nav.faq") }}
                 </router-link>
               </li>
+
+              <li>
+                <router-link :to="{ path: '/support', hash: '#contact' }">
+                  {{ $t("nav.contact") }}
+                </router-link>
+              </li>
             </ul>
 
             <h4>{{ $t("nav.careers") }}</h4>
 
             <ul>
               <li>
-                <router-link to="/careers">
-                  {{ $t("nav.careers") }}
+                <router-link :to="{ path: '/careers', hash: '#positions' }">
+                  {{ $t("careers.hotPositionsTitle") }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ path: '/careers', hash: '#contact' }">
+                  {{ $t("nav.contact") }}
                 </router-link>
               </li>
             </ul>

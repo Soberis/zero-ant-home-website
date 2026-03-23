@@ -164,7 +164,9 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-container {
-  width: min(1180px, calc(100% - 64px));
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 48px;
   margin: 0 auto;
 }
 
@@ -235,7 +237,6 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-hero__description {
-  max-width: 620px;
   font-size: 0.98rem;
 }
 

@@ -4,153 +4,155 @@
     <section class="support-hero">
       <div class="support-shell hero-grid">
         <div class="hero-copy">
+          <p class="hero-eyebrow">SUPPORT CENTER</p>
           <h1 id="after-sales" class="hero-title">{{ t("supportPage.title") }}</h1>
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
-
-          <div class="hero-actions">
-            <button
-              v-for="action in quickActions"
-              :key="action.id"
-              type="button"
-              class="hero-action"
-              @click="scrollToSection(action.id)"
-            >
-              {{ action.label }}
-            </button>
-          </div>
         </div>
 
-        <div class="hero-promises">
+        <div class="hero-panel">
           <article
             v-for="promise in servicePromises"
             :key="promise.metric + promise.description"
-            class="promise-card"
+            class="hero-stat"
           >
-            <div class="promise-head">
-              <span class="promise-metric">{{ promise.metric }}</span>
-              <span class="promise-unit">{{ promise.unit }}</span>
+            <div class="hero-stat-head">
+              <span class="hero-stat-value">{{ promise.metric }}</span>
+              <span class="hero-stat-unit">{{ promise.unit }}</span>
             </div>
-            <p class="promise-desc">{{ promise.description }}</p>
+            <p class="hero-stat-label">{{ promise.description }}</p>
           </article>
         </div>
       </div>
     </section>
 
-    <main class="support-main">
+    <section id="download" class="page-section">
       <div class="support-shell">
-        <section id="download" class="content-section">
-          <div class="section-heading">
-            <h2 class="section-title">{{ t("supportPage.relatedDownloads") }}</h2>
-          </div>
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ t("supportPage.relatedDownloads") }}</span>
+            <span class="title-en">DOWNLOADS</span>
+          </h2>
+        </div>
 
-          <div class="card-list">
-            <article
-              v-for="(item, idx) in downloads"
-              :key="item.title"
-              class="content-card download-card"
-              :class="{ open: downloadStates[idx] }"
+        <div class="card-list">
+          <article
+            v-for="(item, idx) in downloads"
+            :key="item.title"
+            class="content-card download-card"
+            :class="{ open: downloadStates[idx] }"
+          >
+            <button
+              type="button"
+              class="card-header"
+              :aria-expanded="downloadStates[idx]"
+              :aria-controls="`download-content-${idx}`"
+              @click="toggleDownload(idx)"
             >
-              <button
-                type="button"
-                class="card-header"
-                :aria-expanded="downloadStates[idx]"
-                :aria-controls="`download-content-${idx}`"
-                @click="toggleDownload(idx)"
-              >
-                <div class="card-header-main">
-                  <span class="card-index">{{ formatIndex(idx + 1) }}</span>
-                  <div class="card-title-wrap">
-                    <span class="card-tag">{{ item.tag }}</span>
-                    <span class="card-title">{{ item.title }}</span>
-                  </div>
+              <div class="card-header-main">
+                <span class="card-index">{{ formatIndex(idx + 1) }}</span>
+                <div class="card-title-wrap">
+                  <span class="card-tag">{{ item.tag }}</span>
+                  <span class="card-title">{{ item.title }}</span>
                 </div>
-                <span class="card-toggle" aria-hidden="true"></span>
-              </button>
-
-              <transition name="fade-slide">
-                <div
-                  v-if="downloadStates[idx]"
-                  :id="`download-content-${idx}`"
-                  class="card-content"
-                >
-                  <p class="card-caption">{{ item.desc }}</p>
-                  <p class="card-body">{{ t("common.status.preparingMessage") }}</p>
-                </div>
-              </transition>
-            </article>
-          </div>
-        </section>
-
-        <section id="faq" class="content-section faq-section">
-          <div class="section-heading">
-            <h2 class="section-title">{{ t("supportPage.faqTitle") }}</h2>
-          </div>
-
-          <div class="card-list">
-            <article
-              v-for="(faq, idx) in faqs"
-              :key="faq.q"
-              class="content-card faq-card"
-              :class="{ open: faqStates[idx] }"
-            >
-              <button
-                type="button"
-                class="card-header"
-                :aria-expanded="faqStates[idx]"
-                :aria-controls="`faq-content-${idx}`"
-                @click="toggleFaq(idx)"
-              >
-                <div class="card-header-main">
-                  <span class="card-index">{{ formatIndex(idx + 1) }}</span>
-                  <div class="card-title-wrap">
-                    <span class="card-tag card-tag-muted">FAQ</span>
-                    <span class="card-title">{{ faq.q }}</span>
-                  </div>
-                </div>
-                <span class="card-toggle" aria-hidden="true"></span>
-              </button>
-
-              <transition name="fade-slide">
-                <div
-                  v-if="faqStates[idx]"
-                  :id="`faq-content-${idx}`"
-                  class="card-content"
-                >
-                  <p class="card-body">{{ faq.a }}</p>
-                </div>
-              </transition>
-            </article>
-          </div>
-        </section>
-
-        <section id="contact" class="contact-section">
-          <div class="contact-panel">
-            <div class="contact-copy">
-              <h2 class="section-title">{{ t("nav.contact") }}</h2>
-              <p class="contact-desc">{{ t("supportPage.description") }}</p>
-            </div>
-
-            <div class="contact-grid">
-              <div
-                v-for="item in contactItems"
-                :key="item.label"
-                class="contact-card"
-              >
-                <span class="contact-label">{{ item.label }}</span>
-                <a
-                  v-if="item.href"
-                  class="contact-value"
-                  :href="item.href"
-                >
-                  {{ item.value }}
-                </a>
-                <span v-else class="contact-value">{{ item.value }}</span>
               </div>
+              <span class="card-toggle" aria-hidden="true"></span>
+            </button>
+
+            <transition name="fade-slide">
+              <div
+                v-if="downloadStates[idx]"
+                :id="`download-content-${idx}`"
+                class="card-content"
+              >
+                <p class="card-caption">{{ item.desc }}</p>
+                <p class="card-body">{{ t("common.status.preparingMessage") }}</p>
+              </div>
+            </transition>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="page-section">
+      <div class="support-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ t("supportPage.faqTitle") }}</span>
+            <span class="title-en">FAQ</span>
+          </h2>
+        </div>
+
+        <div class="card-list">
+          <article
+            v-for="(faq, idx) in faqs"
+            :key="faq.q"
+            class="content-card faq-card"
+            :class="{ open: faqStates[idx] }"
+          >
+            <button
+              type="button"
+              class="card-header"
+              :aria-expanded="faqStates[idx]"
+              :aria-controls="`faq-content-${idx}`"
+              @click="toggleFaq(idx)"
+            >
+              <div class="card-header-main">
+                <span class="card-index">{{ formatIndex(idx + 1) }}</span>
+                <div class="card-title-wrap">
+                  <span class="card-tag card-tag-muted">FAQ</span>
+                  <span class="card-title">{{ faq.q }}</span>
+                </div>
+              </div>
+              <span class="card-toggle" aria-hidden="true"></span>
+            </button>
+
+            <transition name="fade-slide">
+              <div
+                v-if="faqStates[idx]"
+                :id="`faq-content-${idx}`"
+                class="card-content"
+              >
+                <p class="card-body">{{ faq.a }}</p>
+              </div>
+            </transition>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="page-section contact-section">
+      <div class="support-shell">
+        <div class="contact-panel">
+          <div class="contact-copy">
+            <div class="detail-section__header" style="margin-bottom: 24px;">
+              <h2 class="detail-section__title">
+                <span class="title-main">{{ t("nav.contact") }}</span>
+                <span class="title-en">CONTACT US</span>
+              </h2>
+            </div>
+            <p class="contact-desc">{{ t("supportPage.description") }}</p>
+          </div>
+
+          <div class="contact-grid">
+            <div
+              v-for="item in contactItems"
+              :key="item.label"
+              class="contact-card"
+            >
+              <span class="contact-label">{{ item.label }}</span>
+              <a
+                v-if="item.href"
+                class="contact-value"
+                :href="item.href"
+              >
+                {{ item.value }}
+              </a>
+              <span v-else class="contact-value">{{ item.value }}</span>
             </div>
           </div>
-        </section>
+        </div>
       </div>
-    </main>
+    </section>
   </div>
 </template>
 
@@ -176,12 +178,6 @@ interface PromiseItem {
   unit: string;
   description: string;
 }
-
-const quickActions = computed(() => [
-  { id: "after-sales", label: t("nav.afterSales") },
-  { id: "download", label: t("nav.download") },
-  { id: "faq", label: t("nav.faq") },
-]);
 
 const servicePromises = computed<PromiseItem[]>(() => [
   {
@@ -232,8 +228,8 @@ const contactItems = computed(() => [
   },
   {
     label: t("contacts.email"),
-    value: "hr@zeroant.com",
-    href: "mailto:hr@zeroant.com",
+    value: "liqingfeng@zeroant.com",
+    href: "mailto:liqingfeng@zeroant.com",
   },
   {
     label: t("contacts.address"),
@@ -274,14 +270,6 @@ function toggleFaq(idx: number): void {
 function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");
 }
-
-function scrollToSection(id: string): void {
-  const element = document.getElementById(id);
-  if (!element) {
-    return;
-  }
-  element.scrollIntoView({ behavior: "smooth", block: "start" });
-}
 </script>
 
 <style scoped lang="less">
@@ -290,22 +278,26 @@ function scrollToSection(id: string): void {
   --support-primary-deep: #0f172a;
   --support-text: #1f2937;
   --support-muted: #64748b;
-  --support-border: #d9e2ec;
+  --support-border: rgba(15, 23, 42, 0.08);
   --support-surface: #ffffff;
-  --support-surface-soft: #f4f7fb;
-  background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 32%),
-    linear-gradient(180deg, #f3f6fb 0%, #f7f9fc 24%, #ffffff 100%);
+  --support-surface-soft: #fbfcfe;
+  background: #ffffff;
   color: var(--support-text);
 }
 
+.support-page > .page-section:nth-of-type(even) {
+  background-color: var(--support-surface-soft);
+}
+
 .support-shell {
-  width: min(1200px, calc(100% - 32px));
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 48px;
   margin: 0 auto;
 }
 
 .support-hero {
-  padding: 112px 0 72px;
+  padding: 80px 0 80px;
 }
 
 .hero-grid {
@@ -315,132 +307,129 @@ function scrollToSection(id: string): void {
   align-items: stretch;
 }
 
-.hero-copy,
-.hero-promises {
+.hero-copy {
   position: relative;
+  padding: 20px 0 24px;
 }
 
-.hero-copy {
-  padding: 40px 0 24px;
+.hero-eyebrow {
+  display: block;
+  margin: 0 0 16px;
+  color: var(--support-muted);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .hero-title {
-  max-width: 10em;
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   color: var(--support-text);
-  font-size: clamp(2.6rem, 5vw, 4.2rem);
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .hero-desc {
   max-width: 640px;
-  margin: 0 0 32px;
+  margin: 0;
   color: var(--support-muted);
   font-size: 1.05rem;
   line-height: 1.85;
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.hero-action {
-  border: 1px solid var(--support-border);
+.btn-large {
+  padding: 14px 36px;
+  font-size: 1.05rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  color: var(--support-text);
-  padding: 11px 18px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  letter-spacing: 0.05em;
+  box-shadow: 0 12px 24px rgba(26, 58, 143, 0.16);
 }
-
-.hero-action:hover {
+.btn-large:hover {
   transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.35);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 32px rgba(26, 58, 143, 0.24);
 }
 
-.hero-promises {
-  display: grid;
-  gap: 16px;
-}
-
-.promise-card {
-  min-height: 190px;
-  padding: 28px;
-  border: 1px solid rgba(26, 58, 143, 0.14);
-  border-radius: 24px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 247, 251, 0.96) 100%);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+.hero-panel {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.promise-head {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-}
-
-.promise-metric {
-  color: var(--support-primary-deep);
-  font-size: clamp(2.8rem, 5vw, 4rem);
-  font-weight: 600;
-  line-height: 0.95;
-  letter-spacing: -0.05em;
-}
-
-.promise-unit {
-  color: rgba(15, 23, 42, 0.55);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-}
-
-.promise-desc {
-  margin: 0;
-  color: var(--support-text);
-  font-size: 1rem;
-  line-height: 1.8;
-}
-
-.support-main {
-  padding: 0 0 88px;
-}
-
-.content-section {
-  padding: 40px 0 0;
-}
-
-.faq-section {
+  justify-content: center;
+  gap: 32px;
+  padding-left: 64px;
   margin-top: 12px;
 }
 
-.section-heading {
+.hero-stat {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  margin-bottom: 24px;
+  gap: 8px;
+  padding-left: 24px;
+  border-left: 1px solid rgba(15, 23, 42, 0.12);
 }
 
-.section-title {
-  margin: 0;
+.hero-stat-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.hero-stat-value {
   color: var(--support-text);
-  font-size: clamp(1.85rem, 3vw, 2.6rem);
+  font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.hero-stat-unit {
+  color: var(--support-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding-bottom: 2px;
+}
+
+.hero-stat-label {
+  margin: 0;
+  color: var(--support-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.page-section {
+  padding: 100px 0;
+}
+
+.detail-section__header {
+  max-width: 860px;
+  margin-bottom: 48px;
+}
+
+.detail-section__title {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;
+}
+
+.title-main {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 500;
+  color: var(--support-text);
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+.title-en {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--support-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .card-list {
@@ -449,25 +438,26 @@ function scrollToSection(id: string): void {
 }
 
 .content-card {
-  border: 1px solid var(--support-border);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
-  overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  padding: 32px;
+  border: none;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.04);
+  text-decoration: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.content-card.open {
-  transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.28);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+.content-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.08);
 }
 
 .faq-card {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  background: #ffffff;
 }
 
 .card-header {
@@ -564,24 +554,33 @@ function scrollToSection(id: string): void {
 }
 
 .contact-section {
-  padding-top: 32px;
+  padding-top: 120px;
 }
 
 .contact-panel {
-  border: 1px solid rgba(26, 58, 143, 0.12);
+  border: none;
   border-radius: 28px;
-  background:
-    linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(26, 58, 143, 0.96) 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1a3a8f 100%);
   color: #ffffff;
-  padding: 32px;
+  padding: 64px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
-  gap: 24px;
-  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.16);
+  gap: 32px;
+  box-shadow: 0 32px 64px rgba(15, 23, 42, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.contact-panel .section-title {
+.contact-panel:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.2);
+}
+
+.contact-panel .title-main {
   color: #ffffff;
+}
+
+.contact-panel .title-en {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .contact-desc {
@@ -589,34 +588,43 @@ function scrollToSection(id: string): void {
   max-width: 520px;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.85;
+  font-size: 1.05rem;
 }
 
 .contact-grid {
   display: grid;
-  gap: 14px;
+  gap: 20px;
 }
 
 .contact-card {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  border: none;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.08);
-  padding: 18px 20px;
+  padding: 24px 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .contact-label {
   display: block;
-  margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .contact-value {
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   line-height: 1.7;
+  text-decoration: none;
+}
+
+.contact-value[href]:hover {
+  color: #a3bfff;
+  text-decoration: none;
 }
 
 .fade-slide-enter-active,
@@ -632,7 +640,7 @@ function scrollToSection(id: string): void {
 
 @media (max-width: 1024px) {
   .support-hero {
-    padding-top: 96px;
+    padding-top: 110px;
   }
 
   .hero-grid,
@@ -651,7 +659,7 @@ function scrollToSection(id: string): void {
   }
 
   .support-hero {
-    padding: 88px 0 52px;
+    padding: 104px 0 52px;
   }
 
   .hero-title {
@@ -690,7 +698,7 @@ function scrollToSection(id: string): void {
 
 @media (max-width: 560px) {
   .support-hero {
-    padding-top: 72px;
+    padding-top: 86px;
   }
 
   .hero-actions {

@@ -112,10 +112,24 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item has-dropdown">
             <router-link to="/careers" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.careers") }}</span>
             </router-link>
+            <div class="dropdown">
+              <div class="dropdown-content">
+                <ul>
+                  <li v-for="item in careersNav" :key="item.hash">
+                    <router-link
+                      :to="{ path: '/careers', hash: item.hash }"
+                      class="dropdown-item"
+                    >
+                      {{ $t(item.label) }}
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </li>
 
           <li class="nav-item has-dropdown">
@@ -302,15 +316,20 @@ function handleBackgroundClick(event: Event): void {
 
 // 技术支持导航子项
 const supportNav = [
-  { hash: "#after-sales", label: "nav.afterSales" },
   { hash: "#download", label: "nav.download" },
   { hash: "#faq", label: "nav.faq" },
+  { hash: "#contact", label: "nav.contact" },
 ];
 
 const solutionsNav = [
   { hash: "#industries", label: "solutionsPage.nav.industries" },
   { hash: "#backbone", label: "solutionsPage.nav.backbone" },
   { hash: "#delivery", label: "solutionsPage.nav.delivery" },
+];
+
+const careersNav = [
+  { hash: "#positions", label: "careers.hotPositionsTitle" },
+  { hash: "#contact", label: "nav.contact" },
 ];
 
 // 导航配置已整合到具体的产品导航中
@@ -361,6 +380,7 @@ function cacheElementPositions() {
     ...robotProductNav.map(item => item.hash),
     ...supportNav.map(item => item.hash),
     ...solutionsNav.map(item => item.hash),
+    ...careersNav.map(item => item.hash),
   ];
 
   allHashes.forEach(hash => {

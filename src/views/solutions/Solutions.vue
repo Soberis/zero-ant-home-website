@@ -432,7 +432,7 @@ function goToProduct(route: string): void {
 }
 
 .solutions-hero {
-  padding: 48px 0 48px;
+  padding: 58px 0 48px;
 }
 
 .hero-grid {

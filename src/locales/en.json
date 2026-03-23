@@ -155,8 +155,8 @@
   },
   "productPages": {
     "common": {
-      "overviewEyebrow": "@:common.section.overview",
-      "guideEyebrow": "@:common.section.guide"
+      "overviewEyebrow": "PRODUCT OVERVIEW",
+      "guideEyebrow": "SELECTION GUIDE"
     },
     "metrics": {
       "focus": "Core Focus",
