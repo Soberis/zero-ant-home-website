@@ -29,7 +29,7 @@
               </router-link>
 
               <router-link
-                :to="{ path: '/support', hash: '#contact' }"
+                :to="{ path: '/about', hash: '#contact' }"
                 class="hero-link hero-link--secondary"
                 @click.stop
               >
