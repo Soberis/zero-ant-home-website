@@ -14,12 +14,12 @@
           ></p>
 
           <div class="product-hero__actions">
-            <button class="product-hero__action product-hero__action--primary" @click="emits('back')">
+            <button class="btn btn-primary" @click="emits('back')">
               {{ t("productDetail.backToList") }}
             </button>
             <router-link
               to="/solutions"
-              class="product-hero__action product-hero__action--secondary"
+              class="btn btn-secondary"
             >
               {{ t("common.cta.viewSolutions") }}
             </router-link>
@@ -245,10 +245,6 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .product-detail {
   min-height: 100vh;
   padding-bottom: 80px;
-  background: #fbfcfe;
-}
-
-.product-detail--robot {
   background: #ffffff;
 }
 
@@ -307,8 +303,8 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 
 .product-hero__title {
   margin: 24px 0 16px;
-  font-size: clamp(2.5rem, 4vw, 3.25rem);
-  font-weight: 700;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 300;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: #0f172a;
@@ -330,49 +326,7 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
   margin-top: 36px;
 }
 
-.product-hero__action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 158px;
-  padding: 11px 18px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
-    background-color 0.25s ease;
-}
-
-.product-hero__action:hover {
-  text-decoration: none;
-  transform: translateY(-2px);
-}
-
-.product-hero__action--primary {
-  color: #fff;
-  background: linear-gradient(135deg, #163a87 0%, #2454af 100%);
-  border-color: transparent;
-  box-shadow: 0 12px 24px rgba(20, 54, 127, 0.18);
-}
-
-.product-hero__action--primary:active,
-.product-hero__action--primary:visited,
-.product-hero__action--primary:hover {
-  color: #fff;
-}
-
-.product-hero__action--secondary {
-  color: #0f172a;
-  border-color: rgba(15, 23, 42, 0.14);
-  background: rgba(255, 255, 255, 0.8);
-}
-
-.product-hero__action--secondary:visited,
-.product-hero__action--secondary:active,
-.product-hero__action--secondary:hover {
-  color: #0f172a;
-}
+/* Cleaned up action buttons, now using global btn class */
 
 .product-hero__media-wrapper {
   position: relative;
@@ -417,7 +371,7 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .product-hero__metric-value {
   font-size: 1.6rem;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 600;
   color: #163a87;
   letter-spacing: -0.01em;
 }
@@ -445,11 +399,8 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
   padding: 100px 0 80px;
   border-radius: 0;
   scroll-margin-top: 100px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-.detail-section:nth-of-type(even) {
-  background: #fbfcfe;
+  background: transparent;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .detail-section__header {
@@ -467,10 +418,10 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 }
 
 .title-main {
-  font-size: clamp(1.8rem, 3vw, 2.2rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
 }
 
 .title-en {
@@ -499,9 +450,10 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .feature-card {
   max-width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 24px 0 0 0;
   background: transparent;
   border: none;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: none;
 }
 
@@ -515,8 +467,8 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .feature-card__index {
   display: block;
   font-size: 1.15rem;
-  font-weight: 500;
-  color: #cbd5e1;
+  font-weight: 600;
+  color: #163a87;
   margin-bottom: 12px;
   letter-spacing: 0.05em;
 }
@@ -524,7 +476,7 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .feature-card__title {
   margin: 0 0 12px;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.3;
   color: #0f172a;
   letter-spacing: -0.01em;
