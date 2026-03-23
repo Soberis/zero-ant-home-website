@@ -309,7 +309,7 @@ const supportNav = [
 
 const solutionsNav = [
   { hash: "#industries", label: "solutionsPage.nav.industries" },
-  { hash: "#proof", label: "solutionsPage.nav.proof" },
+  { hash: "#backbone", label: "solutionsPage.nav.backbone" },
   { hash: "#delivery", label: "solutionsPage.nav.delivery" },
 ];
 

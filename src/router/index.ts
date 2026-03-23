@@ -20,16 +20,21 @@ const scrollPageTo = (top: number, behavior: ScrollBehavior = "auto") => {
     return;
   }
 
-  const targets = [document.body, document.documentElement].filter(
-    Boolean
-  ) as HTMLElement[];
+  const targets = [
+    window,
+    document.documentElement,
+    document.body,
+    document.getElementById("app"),
+    document.querySelector(".page")
+  ].filter(Boolean) as any[];
 
   targets.forEach((target) => {
     try {
       target.scrollTo({ left: 0, top, behavior });
     } catch {
-      target.scrollTop = top;
-      target.scrollLeft = 0;
+      if (target.scrollTop !== undefined) {
+        target.scrollTop = top;
+      }
     }
   });
 };
@@ -49,11 +54,15 @@ const scrollToHash = (
 
   const isMobile = window.innerWidth <= 768;
   const offset = isMobile ? 60 : 120;
-  const currentScrollY =
-    window.pageYOffset ??
-    document.documentElement.scrollTop ??
-    document.body.scrollTop ??
-    0;
+  
+  const currentScrollY = Math.max(
+    window.pageYOffset || 0,
+    document.documentElement?.scrollTop || 0,
+    document.body?.scrollTop || 0,
+    document.getElementById("app")?.scrollTop || 0,
+    document.querySelector(".page")?.scrollTop || 0
+  );
+
   const top = Math.max(
     0,
     element.getBoundingClientRect().top + currentScrollY - offset

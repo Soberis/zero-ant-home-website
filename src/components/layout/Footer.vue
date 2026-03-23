@@ -86,9 +86,9 @@
 
               <li>
                 <router-link
-                  :to="{ path: '/solutions', hash: '#proof' }"
+                  :to="{ path: '/solutions', hash: '#backbone' }"
                 >
-                  {{ $t("solutionsPage.nav.proof") }}
+                  {{ $t("solutionsPage.nav.backbone") }}
                 </router-link>
               </li>
 

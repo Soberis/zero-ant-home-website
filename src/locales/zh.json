@@ -369,14 +369,14 @@
     "more": {
       "eyebrow": "More",
       "title": "更多视频与行业应用",
-      "description": "主页面只保留精选内容，更多案例和应用入口集中放在这里，方便继续浏览而不打乱整页节奏。",
+      "description": "探索更多 ZeroAnt 机器人在不同行业与复杂场景下的成功验证与应用视频。",
       "videos": "更多视频案例",
       "applications": "更多行业应用"
     },
     "delivery": {
       "eyebrow": "Delivery",
       "title": "从场景梳理到分阶段部署的交付闭环",
-      "description": "页面不只是展示方向，也要明确 ZeroAnt 的交付方式：先理解场景，再设计方案，前置验证，最终落地。",
+      "description": "明确场景需求，定制系统方案，通过前置仿真验证，确保最终现场高效、稳定地分阶段部署落地。",
       "contactTitle": "让团队快速匹配行业方案",
       "contactDescription": "如果你已经明确场景，欢迎直接联系团队沟通需求，我们会基于行业特点、设备条件和交付节奏快速给出建议。",
       "steps": {

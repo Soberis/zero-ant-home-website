@@ -12,17 +12,18 @@
               <a
                 v-if="isHashLink(action.to)"
                 :href="action.to"
-                class="products-hero__action"
-                :class="`products-hero__action--${action.variant ?? 'primary'}`"
+                class="btn"
+                :class="`btn-${action.variant ?? 'primary'}`"
               >
-                {{ action.label }}
+                <span>{{ action.label }}</span>
+                <svg v-if="action.variant === 'primary' || !action.variant" class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
 
               <router-link
                 v-else
                 :to="action.to"
-                class="products-hero__action"
-                :class="`products-hero__action--${action.variant ?? 'primary'}`"
+                class="btn"
+                :class="`btn-${action.variant ?? 'primary'}`"
               >
                 {{ action.label }}
               </router-link>
@@ -206,15 +207,12 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 .products-hero__eyebrow,
 .products-overview__eyebrow,
 .products-guide__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  padding: 0 0 0 12px;
-  border-left: 3px solid rgba(26, 58, 143, 0.45);
-  background: transparent;
-  color: var(--products-accent);
-  font-size: 0.76rem;
+  display: block;
+  margin: 0 0 16px;
+  color: var(--products-text);
+  font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -471,7 +469,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
     flex-direction: column;
   }
 
-  .products-hero__action {
+  .btn {
     width: 100%;
   }
 

@@ -12,14 +12,15 @@
           <div class="hero-actions">
             <button
               type="button"
-              class="primary-btn"
+              class="btn btn-primary"
               @click="scrollToSection('industries')"
             >
-              {{ t("solutionsPage.hero.primaryCta") }}
+              <span>{{ t("solutionsPage.hero.primaryCta") }}</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
             <button
               type="button"
-              class="secondary-btn"
+              class="btn btn-secondary"
               @click="scrollToSection('delivery')"
             >
               {{ t("solutionsPage.hero.secondaryCta") }}
@@ -40,25 +41,58 @@
       </div>
     </section>
 
-    <div class="section-nav">
-      <div class="page-shell nav-scroll">
-        <button
-          v-for="item in sectionNav"
-          :key="item.id"
-          type="button"
-          class="nav-pill"
-          @click="scrollToSection(item.id)"
-        >
-          {{ item.label }}
-        </button>
+    <section id="industries" class="page-section">
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ t("solutionsPage.industries.title") }}</span>
+            <span class="title-en">INDUSTRIES</span>
+          </h2>
+          <p class="section-description">
+            {{ t("solutionsPage.industries.description") }}
+          </p>
+        </div>
+
+        <!-- Revamped Dense Industry Grid -->
+        <div class="industry-grid">
+          <article
+            v-for="industry in industries"
+            :key="industry.key"
+            class="industry-block"
+            @click="industry.primaryApplication && goToApplication(industry.primaryApplication.slug)"
+          >
+            <div class="industry-block__header">
+              <span class="card-index">{{ formatIndex(industry.index) }}</span>
+              <h3 class="card-title">{{ industry.title }}</h3>
+            </div>
+            
+            <p class="card-description">{{ industry.summary }}</p>
+
+            <div class="industry-tags">
+              <span class="tag" v-for="scenario in industry.scenarios" :key="scenario">
+                {{ scenario }}
+              </span>
+            </div>
+
+            <div class="industry-footer-jump">
+              <span class="link-text">{{ t("solutionsPage.industries.viewApplication") }}</span>
+              <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
 
     <section id="backbone" class="page-section">
       <div class="page-shell">
-        <div class="section-heading">
-          <p class="section-eyebrow">{{ t("solutionsPage.backbone.eyebrow") }}</p>
-          <h2 class="section-title">{{ t("solutionsPage.backbone.title") }}</h2>
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ t("solutionsPage.backbone.title") }}</span>
+            <span class="title-en">TECH BACKBONE</span>
+          </h2>
           <p class="section-description">
             {{ t("solutionsPage.backbone.description") }}
           </p>
@@ -90,201 +124,113 @@
       </div>
     </section>
 
-    <section id="industries" class="page-section">
+    <!-- 暂不展示“精选案例”，后期集中提供视频沉浸体验时再开启 -->
+    <section id="proof" class="page-section" v-if="false">
       <div class="page-shell">
-        <div class="section-heading">
-          <p class="section-eyebrow">{{ t("solutionsPage.industries.eyebrow") }}</p>
-          <h2 class="section-title">{{ t("solutionsPage.industries.title") }}</h2>
-          <p class="section-description">
-            {{ t("solutionsPage.industries.description") }}
-          </p>
-        </div>
-
-        <div class="industry-grid">
-          <article
-            v-for="industry in industries"
-            :key="industry.key"
-            class="industry-card"
-          >
-            <span class="card-index">{{ formatIndex(industry.index) }}</span>
-            <h3 class="card-title">{{ industry.title }}</h3>
-            <p class="card-description">{{ industry.summary }}</p>
-
-            <div class="info-group">
-              <span class="info-label">{{ t("solutionsPage.tags.typicalScenes") }}</span>
-              <ul class="scenario-list">
-                <li v-for="scenario in industry.scenarios" :key="scenario">
-                  {{ scenario }}
-                </li>
-              </ul>
-            </div>
-
-            <div class="info-group">
-              <span class="info-label">{{ t("solutionsPage.tags.relatedProducts") }}</span>
-              <p class="meta-text">{{ industry.productSummary }}</p>
-            </div>
-
-            <div v-if="industry.primaryApplication" class="industry-footer">
-              <span class="application-hint">
-                {{ industry.primaryApplication.title }}
-              </span>
-              <button
-                type="button"
-                class="text-link"
-                @click="goToApplication(industry.primaryApplication.slug)"
-              >
-                {{ t("solutionsPage.industries.viewApplication") }}
-              </button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="proof" class="page-section">
-      <div class="page-shell">
-        <div class="section-heading">
-          <p class="section-eyebrow">{{ t("solutionsPage.proof.eyebrow") }}</p>
-          <h2 class="section-title">{{ t("solutionsPage.proof.title") }}</h2>
-          <p class="section-description">
-            {{ t("solutionsPage.proof.description") }}
-          </p>
-        </div>
-
-        <div class="proof-grid">
-          <button
-            v-for="proof in featuredCases"
-            :key="proof.slug"
-            type="button"
-            class="proof-card"
-            @click="goToVideo(proof.slug)"
-          >
-            <img class="proof-card-image" :src="proof.image" :alt="proof.title" />
-            <div class="proof-card-copy">
-              <span class="proof-card-tag">{{ proof.industryTitle }}</span>
-              <h3 class="proof-card-title">{{ proof.title }}</h3>
-              <p class="proof-card-description">{{ proof.description }}</p>
-              <span class="text-link">
-                {{ t("solutionsPage.proof.watchCase") }}
-              </span>
-            </div>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section more-section">
-      <div class="page-shell">
-        <div class="section-heading">
-          <p class="section-eyebrow">{{ t("solutionsPage.more.eyebrow") }}</p>
-          <h2 class="section-title">{{ t("solutionsPage.more.title") }}</h2>
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ t("solutionsPage.more.title") }}</span>
+            <span class="title-en">USE CASES</span>
+          </h2>
           <p class="section-description">
             {{ t("solutionsPage.more.description") }}
           </p>
         </div>
 
-        <div class="more-panel">
-          <div class="more-tabs">
-            <button
-              type="button"
-              class="more-tab"
-              :class="{ active: activeMoreTab === 'videos' }"
-              @click="activeMoreTab = 'videos'"
-            >
-              {{ t("solutionsPage.more.videos") }}
-            </button>
-            <button
-              type="button"
-              class="more-tab"
-              :class="{ active: activeMoreTab === 'applications' }"
-              @click="activeMoreTab = 'applications'"
-            >
-              {{ t("solutionsPage.more.applications") }}
-            </button>
-          </div>
+        <div class="more-tabs">
+          <button
+            type="button"
+            class="more-tab"
+            :class="{ active: activeMoreTab === 'videos' }"
+            @click="activeMoreTab = 'videos'"
+          >
+            {{ t("solutionsPage.more.videos") }}
+          </button>
+          <button
+            type="button"
+            class="more-tab"
+            :class="{ active: activeMoreTab === 'applications' }"
+            @click="activeMoreTab = 'applications'"
+          >
+            {{ t("solutionsPage.more.applications") }}
+          </button>
+        </div>
 
-          <div v-if="activeMoreTab === 'videos'" class="more-video-grid">
-            <VideoCard
-              v-for="(card, idx) in allVideoCards"
-              :key="card.slug"
-              :card="card"
-              :index="idx"
-              :active="hoverVideoIdx === idx"
-              @hover="setVideoHover"
-              @leave="clearVideoHover"
-              @click="goToVideoByIndex"
-            />
-          </div>
+        <div v-show="activeMoreTab === 'videos'" class="more-video-grid">
+          <VideoCard
+            v-for="(card, idx) in (showAllVideos ? allVideoCards : allVideoCards.slice(0, VIDEO_FOLD))"
+            :key="card.slug"
+            :card="card"
+            :index="idx"
+            :active="hoverMoreVideoIdx === idx"
+            @hover="setMoreVideoHover"
+            @leave="clearMoreVideoHover"
+            @click="goToVideo(card.slug)"
+          />
+        </div>
+        <div v-if="activeMoreTab === 'videos' && allVideoCards.length > VIDEO_FOLD" class="grid-show-more">
+          <button type="button" class="show-more-btn" @click="showAllVideos = !showAllVideos">
+            {{ showAllVideos ? '收起' : `查看更多 (${allVideoCards.length - VIDEO_FOLD}+)` }}
+          </button>
+        </div>
 
-          <div v-else class="more-application-grid">
-            <ApplicationCard
-              v-for="item in allApplications"
-              :key="item.slug"
-              :title="item.title"
-              :svg="item.svg"
-              :slug="item.slug"
-            />
-          </div>
+        <div v-show="activeMoreTab === 'applications'" class="more-application-grid">
+          <ApplicationCard
+            v-for="item in (showAllApps ? allApplications : allApplications.slice(0, APP_FOLD))"
+            :key="item.slug"
+            :title="item.title"
+            :svg="item.svg"
+            :slug="item.slug"
+          />
+        </div>
+        <div v-if="activeMoreTab === 'applications' && allApplications.length > APP_FOLD" class="grid-show-more">
+          <button type="button" class="show-more-btn" @click="showAllApps = !showAllApps">
+            {{ showAllApps ? '收起' : `查看更多 (${allApplications.length - APP_FOLD}+)` }}
+          </button>
         </div>
       </div>
     </section>
 
     <section id="delivery" class="page-section delivery-section">
-      <div class="page-shell delivery-layout">
-        <div class="delivery-main">
-          <div class="section-heading">
-            <p class="section-eyebrow">{{ t("solutionsPage.delivery.eyebrow") }}</p>
-            <h2 class="section-title">{{ t("solutionsPage.delivery.title") }}</h2>
-            <p class="section-description">
-              {{ t("solutionsPage.delivery.description") }}
-            </p>
-          </div>
-
-          <div class="delivery-steps">
-            <article
-              v-for="(step, idx) in deliverySteps"
-              :key="step.title"
-              class="delivery-step"
-            >
-              <span class="step-index">{{ formatIndex(idx + 1) }}</span>
-              <div class="step-copy">
-                <h3 class="step-title">{{ step.title }}</h3>
-                <p class="step-description">{{ step.description }}</p>
-              </div>
-            </article>
-          </div>
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ t("solutionsPage.delivery.title") }}</span>
+            <span class="title-en">DELIVERY NETWORK</span>
+          </h2>
+          <p class="section-description">
+            {{ t("solutionsPage.delivery.description") }}
+          </p>
         </div>
 
-        <aside class="contact-panel">
-          <p class="section-eyebrow">{{ t("solutionsPage.delivery.eyebrow") }}</p>
-          <h3 class="contact-title">{{ t("solutionsPage.delivery.contactTitle") }}</h3>
-          <p class="contact-description">
-            {{ t("solutionsPage.delivery.contactDescription") }}
-          </p>
+        <div class="delivery-steps">
+          <article
+            v-for="step in deliverySteps"
+            :key="step.title"
+            class="delivery-step"
+          >
+            <h3 class="step-title">{{ step.title }}</h3>
+            <p class="step-description">{{ step.description }}</p>
+          </article>
+        </div>
 
-          <div class="contact-list">
-            <div class="contact-item">
-              <span class="contact-label">{{ t("contacts.phone") }}</span>
-              <a class="contact-value" :href="`tel:${t('footer.telValue')}`">
-                {{ t("footer.telValue") }}
-              </a>
+        <div class="delivery-contact">
+          <div class="delivery-contact__copy">
+            <p class="section-eyebrow">{{ t("solutionsPage.delivery.eyebrow") }}</p>
+            <h3 class="delivery-contact__title">{{ t("solutionsPage.delivery.contactTitle") }}</h3>
+            <p class="delivery-contact__desc">{{ t("solutionsPage.delivery.contactDescription") }}</p>
+          </div>
+          <div class="delivery-contact__meta">
+            <div class="delivery-contact__row">
+              <span class="delivery-contact__label">{{ t("contacts.phone") }}</span>
+              <a class="delivery-contact__link" :href="`tel:${t('footer.telValue')}`">{{ t("footer.telValue") }}</a>
             </div>
-            <div class="contact-item">
-              <span class="contact-label">{{ t("contacts.email") }}</span>
-              <a class="contact-value" href="mailto:liqingfeng@zeroant.com">
-                liqingfeng@zeroant.com
-              </a>
-            </div>
-            <div class="contact-item">
-              <span class="contact-label">{{ t("contacts.address") }}</span>
-              <span class="contact-value">{{ t("footer.address") }}</span>
+            <div class="delivery-contact__row">
+              <span class="delivery-contact__label">{{ t("contacts.email") }}</span>
+              <a class="delivery-contact__link" href="mailto:liqingfeng@zeroant.com">liqingfeng@zeroant.com</a>
             </div>
           </div>
-
-          <button type="button" class="primary-btn contact-btn" @click="contactTeam">
-            {{ t("common.cta.contactTeam") }}
-          </button>
-        </aside>
+        </div>
       </div>
     </section>
   </div>
@@ -296,11 +242,10 @@ import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications from "@/data/applications";
 import { getProducts } from "@/data/products";
-import { videoCards, videoMap } from "@/data/videos";
+import { videoCards } from "@/data/videos";
 import VideoCard from "@/components/common/VideoCard.vue";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import {
-  featuredProofs,
   solutionCapabilityLayers,
   solutionIndustryGroups,
 } from "@/data/solutionIndustries";
@@ -308,7 +253,11 @@ import {
 const router = useRouter();
 const { t, tm } = useI18n();
 const activeMoreTab = ref<"videos" | "applications">("videos");
-const hoverVideoIdx = ref(-1);
+const hoverMoreVideoIdx = ref(-1);
+const showAllVideos = ref(false);
+const showAllApps = ref(false);
+const VIDEO_FOLD = 8;
+const APP_FOLD = 8;
 
 function stripHtml(value: string): string {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
@@ -338,12 +287,6 @@ const heroStats = computed(() => [
     value: t("solutionsPage.hero.stats.delivery.value"),
     label: t("solutionsPage.hero.stats.delivery.label"),
   },
-]);
-
-const sectionNav = computed(() => [
-  { id: "industries", label: t("solutionsPage.nav.industries") },
-  { id: "proof", label: t("solutionsPage.nav.proof") },
-  { id: "delivery", label: t("solutionsPage.nav.delivery") },
 ]);
 
 const productMap = computed(() =>
@@ -378,23 +321,6 @@ const applicationMap = computed(() =>
   )
 );
 
-const videoCardMap = computed(() =>
-  Object.fromEntries(
-    videoCards.map((card) => {
-      const detail = videoMap[card.slug];
-
-      return [
-        card.slug,
-        {
-          slug: card.slug,
-          title: detail ? t(detail.title) : t(card.title),
-          description: detail ? truncate(stripHtml(t(detail.desc)), 96) : "",
-          image: card.img,
-        },
-      ];
-    })
-  )
-);
 
 const capabilityLayers = computed(() =>
   solutionCapabilityLayers.map((layer) => ({
@@ -421,7 +347,9 @@ const industries = computed(() =>
       index: index + 1,
       title: t(`solutionsPage.industries.${group.key}.title`),
       summary: t(`solutionsPage.industries.${group.key}.summary`),
-      scenarios: (tm(`solutionsPage.industries.${group.key}.scenarios`) as string[]).slice(
+      scenarios: (tm(
+        `solutionsPage.industries.${group.key}.scenarios`
+      ) as string[]).map((str) => (str.startsWith("@:") ? t(str.slice(2)) : str)).slice(
         0,
         2
       ),
@@ -431,37 +359,8 @@ const industries = computed(() =>
   })
 );
 
-const featuredCases = computed(() =>
-  featuredProofs
-    .map((proof) => {
-      const media = videoCardMap.value[proof.videoSlug];
-      if (!media) {
-        return null;
-      }
-
-      return {
-        slug: proof.videoSlug,
-        image: media.image,
-        title: media.title,
-        description: media.description,
-        industryTitle: t(`solutionsPage.industries.${proof.industryKey}.title`),
-      };
-    })
-    .filter(
-      (
-        item
-      ): item is {
-        slug: string;
-        image: string;
-        title: string;
-        description: string;
-        industryTitle: string;
-      } => Boolean(item)
-    )
-);
 
 const allVideoCards = computed(() => videoCards);
-
 const allApplications = computed(() => applications);
 
 const deliverySteps = computed(() => [
@@ -499,30 +398,22 @@ function goToVideo(slug: string): void {
   router.push({ path: `/video/${slug}` });
 }
 
-function setVideoHover(idx: number): void {
-  hoverVideoIdx.value = idx;
+
+function setMoreVideoHover(idx: number): void {
+  hoverMoreVideoIdx.value = idx;
 }
 
-function clearVideoHover(): void {
-  hoverVideoIdx.value = -1;
+function clearMoreVideoHover(): void {
+  hoverMoreVideoIdx.value = -1;
 }
 
-function goToVideoByIndex(idx: number): void {
-  const target = allVideoCards.value[idx];
-  if (!target) {
-    return;
-  }
-  goToVideo(target.slug);
-}
+
 
 function goToProduct(route: string): void {
   router.push({ path: route });
 }
 
-function contactTeam(): void {
-  const subject = encodeURIComponent(t("solutionsPage.title"));
-  window.open(`mailto:liqingfeng@zeroant.com?subject=${subject}`);
-}
+
 </script>
 
 <style scoped lang="less">
@@ -533,20 +424,20 @@ function contactTeam(): void {
   --solution-muted: #64748b;
   --solution-border: #d9e2ec;
   --solution-surface: #ffffff;
-  --solution-surface-soft: #f4f7fb;
+  --solution-surface-soft: #fbfcfe;
   color: var(--solution-text);
-  background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 28%),
-    linear-gradient(180deg, #f3f6fb 0%, #f7f9fc 24%, #ffffff 100%);
+  background: #ffffff;
 }
 
 .page-shell {
-  width: min(1200px, calc(100% - 32px));
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 48px;
   margin: 0 auto;
 }
 
 .solutions-hero {
-  padding: 112px 0 48px;
+  padding: 48px 0 48px;
 }
 
 .hero-grid {
@@ -558,33 +449,29 @@ function contactTeam(): void {
 
 .hero-copy {
   padding: 28px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.hero-eyebrow,
-.section-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
+.hero-eyebrow {
+  display: block;
   margin: 0 0 16px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(26, 58, 143, 0.08); /* Soft primary tint */
-  border: 1px solid rgba(26, 58, 143, 0.12);
-  color: var(--solution-primary);
-  font-size: 0.8rem;
+  color: var(--solution-muted);
+  font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .hero-title {
-  max-width: 9em;
-  margin: 0 0 18px;
+  max-width: 14em;
+  margin: 0 0 24px;
   color: var(--solution-text);
-  font-size: clamp(2.8rem, 5vw, 4.4rem);
-  font-weight: 600;
-  line-height: 1.03;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .hero-description,
@@ -600,9 +487,9 @@ function contactTeam(): void {
 }
 
 .hero-description {
-  max-width: 640px;
+  max-width: 1200px;
   margin: 0 0 32px;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 
 .hero-actions,
@@ -616,8 +503,6 @@ function contactTeam(): void {
   gap: 12px;
 }
 
-.primary-btn,
-.secondary-btn,
 .nav-pill,
 .chip-btn,
 .text-link {
@@ -629,30 +514,6 @@ function contactTeam(): void {
     color 0.2s ease;
 }
 
-.primary-btn,
-.secondary-btn {
-  border-radius: 999px;
-  padding: 12px 22px;
-  font-size: 0.94rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.primary-btn {
-  border: 1px solid transparent;
-  background: linear-gradient(135deg, #1a3a8f 0%, #16306b 100%);
-  color: #ffffff;
-  box-shadow: 0 18px 36px rgba(26, 58, 143, 0.18);
-}
-
-.secondary-btn {
-  border: 1px solid var(--solution-border);
-  background: rgba(255, 255, 255, 0.84);
-  color: var(--solution-text);
-}
-
-.primary-btn:hover,
-.secondary-btn:hover,
 .nav-pill:hover,
 .chip-btn:hover,
 .text-link:hover {
@@ -660,29 +521,23 @@ function contactTeam(): void {
 }
 
 .hero-panel {
-  border: 1px solid rgba(26, 58, 143, 0.12);
-  border-radius: 28px;
-  background:
-    linear-gradient(160deg, rgba(15, 23, 42, 0.98) 0%, rgba(26, 58, 143, 0.96) 100%);
-  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.16);
-  padding: 24px;
-  display: grid;
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding-left: 64px;
 }
 
 .hero-stat {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 22px 24px;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 24px;
+  border-left: 1px solid rgba(15, 23, 42, 0.12);
 }
 
 .hero-stat-value {
-  color: #ffffff;
+  color: var(--solution-text);
   font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 600;
   line-height: 1;
@@ -690,11 +545,10 @@ function contactTeam(): void {
 }
 
 .hero-stat-label {
-  max-width: 8em;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 0.94rem;
+  color: var(--solution-muted);
+  font-size: 0.88rem;
   line-height: 1.55;
-  text-align: right;
+  text-align: left;
 }
 
 .section-nav {
@@ -717,7 +571,12 @@ function contactTeam(): void {
 }
 
 .page-section {
-  padding: 24px 0 64px;
+  padding: 100px 0;
+  scroll-margin-top: 80px; /* prevent navbar overlap */
+}
+
+.solutions-page > .page-section:nth-of-type(even) {
+  background-color: var(--solution-surface-soft);
 }
 
 .section-heading {
@@ -727,19 +586,42 @@ function contactTeam(): void {
   margin-bottom: 24px;
 }
 
-.section-title {
-  margin: 0;
+.detail-section__header {
+  max-width: 860px;
+  margin-bottom: 48px;
+}
+
+.detail-section__title {
+  display: flex;
+  flex-direction: column-reverse; /* Puts English label on Top Left */
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 16px 0;
+}
+
+.title-main {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 500;
   color: var(--solution-text);
-  font-size: clamp(1.85rem, 3vw, 2.6rem);
-  font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
 
+.title-en {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--solution-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
 .section-description {
-  max-width: 760px;
+  max-width: 1200px;
   margin: 0;
   font-size: 1rem;
+  line-height: 1.75;
+  color: var(--solution-muted);
 }
 
 .backbone-grid,
@@ -752,6 +634,7 @@ function contactTeam(): void {
 
 .backbone-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .industry-grid {
@@ -762,30 +645,188 @@ function contactTeam(): void {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.backbone-card,
-.industry-card,
-.proof-card,
-.delivery-step,
-.contact-panel {
-  border: 1px solid rgba(217, 226, 236, 0.92);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+.more-video-grid,
+.more-application-grid {
+  display: grid;
+  gap: 16px;
 }
 
-.backbone-card,
-.industry-card,
-.delivery-step {
-  padding: 24px;
+.more-video-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.more-application-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-subheading {
+  margin: 0 0 24px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--solution-text);
+  letter-spacing: 0.02em;
+}
+
+.grid-spacer {
+  height: 64px;
+}
+
+.backbone-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--solution-surface-soft);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.backbone-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.04);
+  border-color: rgba(26, 58, 143, 0.12);
+}
+.contact-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  background: #ffffff;
+  transition: transform var(--transition-normal, 0.3s ease), box-shadow var(--transition-normal, 0.3s ease);
+}
+
+
+.delivery-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+
+
+.card-footer-cta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  
+}
+.card-footer-cta .text-link {
+  pointer-events: none;
+}
+.cta-arrow {
+  width: 18px;
+  height: 18px;
+  color: var(--solution-primary);
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.backbone-card:hover .cta-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* --- Dense Industry Grid --- */
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+.industry-block {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.industry-block:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 58, 143, 0.16);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+}
+
+.industry-block__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.industry-block__header .card-index {
+  margin: 0;
+}
+.industry-block__header .card-title {
+  margin: 0;
+}
+
+.industry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(15, 23, 42, 0.04);
+  color: var(--solution-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.industry-footer-jump {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  color: var(--solution-text);
+  opacity: 0.65;
+  transition: all 0.3s ease;
+}
+
+.industry-block:hover .industry-footer-jump {
+  color: var(--solution-primary);
+  opacity: 1;
+}
+
+.industry-block:hover .action-icon {
+  transform: translateX(4px);
+}
+
+.link-text {
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+.action-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--solution-primary);
+  transition: transform 0.3s ease;
+}
+/* -------------------------------------- */
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .card-index {
   display: inline-block;
   margin-bottom: 14px;
-  color: rgba(26, 58, 143, 0.48);
-  font-size: 0.82rem;
+  color: rgba(15, 23, 42, 0.25);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
 }
 
 .card-title {
@@ -802,17 +843,32 @@ function contactTeam(): void {
 }
 
 .chip-list {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  margin-top: auto;
 }
 
 .chip,
 .chip-btn {
   width: fit-content;
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 0.82rem;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
   font-weight: 600;
   line-height: 1.4;
+  background: rgba(15, 23, 42, 0.05);
+  color: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-btn:hover {
+  background: rgba(26, 58, 143, 0.04);
+  border-color: rgba(26, 58, 143, 0.25);
+  color: var(--solution-primary);
+  transform: translateY(-2px);
 }
 
 .chip {
@@ -822,9 +878,9 @@ function contactTeam(): void {
 }
 
 .chip-btn {
-  border: 1px solid rgba(26, 58, 143, 0.12);
-  background: rgba(26, 58, 143, 0.08);
-  color: var(--solution-primary);
+  background: transparent;
+  color: var(--solution-text);
+  border: 1px solid rgba(15, 23, 42, 0.12);
   cursor: pointer;
 }
 
@@ -860,10 +916,10 @@ function contactTeam(): void {
   position: absolute;
   left: 0;
   top: 0.72em;
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: var(--solution-primary);
+  background: rgba(15, 23, 42, 0.3);
 }
 
 .info-label,
@@ -893,7 +949,8 @@ function contactTeam(): void {
 
 .proof-card-title {
   margin-bottom: 8px;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
+  color: var(--solution-title);
   font-weight: 600;
   line-height: 1.45;
 }
@@ -906,7 +963,7 @@ function contactTeam(): void {
 .industry-footer {
   margin-top: 22px;
   padding-top: 16px;
-  border-top: 1px solid rgba(217, 226, 236, 0.9);
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -961,6 +1018,15 @@ function contactTeam(): void {
   padding: 24px;
 }
 
+.industry-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px dashed rgba(15, 23, 42, 0.06);
+}
+
 .more-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -1001,45 +1067,60 @@ function contactTeam(): void {
 }
 
 .more-video-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .more-application-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.delivery-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-  gap: 24px;
-  align-items: stretch;
+.grid-show-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
 }
 
-.delivery-main {
-  display: flex;
-  flex-direction: column;
+.show-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border: 1.5px solid rgba(15, 23, 42, 0.15);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--solution-text);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.show-more-btn:hover {
+  border-color: var(--solution-primary);
+  color: var(--solution-primary);
+  transform: translateY(-1px);
+}
+
+.delivery-contact .section-eyebrow {
+  color: var(--solution-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .delivery-steps {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
-  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-bottom: 80px;
 }
 
 .delivery-step {
-  display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  gap: 18px;
+  padding: 24px 32px 24px 0;
+  
 }
 
-.step-index {
-  color: rgba(26, 58, 143, 0.48);
-  font-size: 0.96rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-}
 
 .step-title {
   margin: 0 0 8px;
@@ -1056,59 +1137,76 @@ function contactTeam(): void {
 .contact-panel {
   display: flex;
   flex-direction: column;
-  padding: 28px;
-  background:
-    linear-gradient(160deg, rgba(15, 23, 42, 0.98) 0%, rgba(26, 58, 143, 0.96) 100%);
-  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.16);
+  padding: 36px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.05);
 }
 
-.contact-panel .section-eyebrow,
-.contact-panel .contact-title,
-.contact-panel .contact-value {
-  color: #ffffff;
+.delivery-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 36px 0;
+  
 }
 
-.contact-title {
-  margin: 0 0 14px;
+.delivery-contact__copy {
+  flex: 1;
+}
+
+.delivery-contact__title {
+  margin: 4px 0 8px;
   font-size: 1.4rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.contact-description {
-  margin-bottom: 20px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.contact-item {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 16px;
-}
-
-.contact-label {
-  color: rgba(255, 255, 255, 0.62);
-}
-
-.contact-value {
-  display: block;
-  font-size: 1rem;
   font-weight: 500;
-  word-break: break-word;
+  color: var(--solution-text);
 }
 
-.contact-btn {
-  margin-top: auto;
-  width: 100%;
+.delivery-contact__desc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--solution-muted);
+}
+
+.delivery-contact__row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.delivery-contact__label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(15, 23, 42, 0.45);
+  text-transform: uppercase;
+}
+
+.delivery-contact__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 200px;
+}
+
+.delivery-contact__link {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--solution-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.delivery-contact__link:hover {
+  color: var(--solution-primary);
 }
 
 @media (max-width: 1024px) {
   .hero-grid,
-  .delivery-layout,
   .backbone-grid,
   .industry-grid,
-  .proof-grid,
+  .delivery-steps,
   .more-video-grid,
   .more-application-grid {
     grid-template-columns: 1fr;
@@ -1125,7 +1223,7 @@ function contactTeam(): void {
 
 @media (max-width: 768px) {
   .page-shell {
-    width: min(1200px, calc(100% - 24px));
+    padding: 0 20px;
   }
 
   .solutions-hero {
@@ -1141,12 +1239,10 @@ function contactTeam(): void {
     align-items: stretch;
   }
 
-  .primary-btn,
-  .secondary-btn {
-    width: 100%;
+  .hero-panel {
+    padding-left: 24px;
   }
 
-  .hero-panel,
   .backbone-card,
   .industry-card,
   .delivery-step,
@@ -1158,7 +1254,7 @@ function contactTeam(): void {
 
 @media (max-width: 560px) {
   .solutions-hero {
-    padding-top: 72px;
+    
   }
 
   .hero-stat {

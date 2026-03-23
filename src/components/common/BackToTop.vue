@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade-slide">
     <button
       v-show="isVisible"
       class="back-to-top"
@@ -12,7 +12,9 @@
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
         <path d="M12 19V5M5 12l7-7 7 7" />
       </svg>
@@ -26,108 +28,118 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const isVisible = ref(false);
-const scrollThreshold = 300; // 显示按钮的滚动阈值（像素）
+const scrollThreshold = 400;
 
-// 检查滚动位置
-const checkScroll = () => {
-  isVisible.value = window.scrollY > scrollThreshold;
+const getScrollTop = () => {
+  return Math.max(
+    window.scrollY || 0,
+    document.documentElement?.scrollTop || 0,
+    document.body?.scrollTop || 0,
+    document.getElementById('app')?.scrollTop || 0,
+    document.querySelector('.page')?.scrollTop || 0
+  );
 };
 
-// 平滑滚动到顶部
+const checkScroll = () => {
+  isVisible.value = getScrollTop() > scrollThreshold;
+};
+
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+  const targets = [
+    window,
+    document.documentElement,
+    document.body,
+    document.getElementById('app'),
+    document.querySelector('.page')
+  ];
+  
+  targets.forEach((target: any) => {
+    if (target) {
+      try {
+        target.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {
+        if (target.scrollTop !== undefined) {
+          target.scrollTop = 0;
+        }
+      }
+    }
   });
 };
 
-// 节流函数优化性能
-const throttle = (func: Function, delay: number) => {
-  let timeoutId: number | null = null;
-  return (...args: any[]) => {
-    if (timeoutId) return;
-    timeoutId = window.setTimeout(() => {
-      func(...args);
-      timeoutId = null;
-    }, delay);
-  };
-};
-
-const throttledCheckScroll = throttle(checkScroll, 100);
-
 onMounted(() => {
-  window.addEventListener("scroll", throttledCheckScroll);
-  checkScroll(); // 初始检查
+  window.addEventListener("scroll", checkScroll, { passive: true, capture: true });
+  checkScroll();
 });
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", throttledCheckScroll);
+  window.removeEventListener("scroll", checkScroll, { capture: true } as any);
 });
 </script>
 
 <style scoped lang="less">
 .back-to-top {
   position: fixed;
-  right: 2rem;
-  bottom: 2rem;
-  width: 3.2rem;
-  height: 3.2rem;
-  border: none;
+  right: 48px;
+  bottom: 48px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  background: var(--color-primary, #1a3a8f);
-  color: white;
+  background: rgba(15, 23, 42, 0.25); /* Premium dark transparent */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(26, 58, 143, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1000;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(26, 58, 143, 0.4);
+    transform: translateY(-4px);
+    background: rgba(15, 23, 42, 0.65);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(26, 58, 143, 0.3);
+    background: rgba(15, 23, 42, 0.85);
   }
 
   &:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+    outline: none;
   }
 
   &__icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 20px;
+    height: 20px;
   }
 }
 
-// 响应式设计
 @media (max-width: 768px) {
   .back-to-top {
-    right: 1rem;
-    bottom: 1rem;
-    width: 2.8rem;
-    height: 2.8rem;
+    right: 24px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
 
     &__icon {
-      width: 1.25rem;
-      height: 1.25rem;
+      width: 18px;
+      height: 18px;
     }
   }
 }
 
-// 过渡动画
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.fade-slide-enter-from,
+.fade-slide-leave-to {
   opacity: 0;
+  transform: translateY(16px);
 }
 </style>
