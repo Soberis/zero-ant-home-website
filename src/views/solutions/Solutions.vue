@@ -162,8 +162,9 @@
           />
         </div>
         <div v-if="activeMoreTab === 'videos' && allVideoCards.length > VIDEO_FOLD" class="grid-show-more">
-          <button type="button" class="show-more-btn" @click="showAllVideos = !showAllVideos">
-            {{ showAllVideos ? '收起' : `查看更多 (${allVideoCards.length - VIDEO_FOLD}+)` }}
+          <button type="button" class="show-more-btn" :class="{ active: showAllVideos }" @click="showAllVideos = !showAllVideos">
+            <span>{{ showAllVideos ? '收起' : `查看更多 (${allVideoCards.length - VIDEO_FOLD}+)` }}</span>
+            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
         </div>
 
@@ -177,8 +178,9 @@
           />
         </div>
         <div v-if="activeMoreTab === 'applications' && allApplications.length > APP_FOLD" class="grid-show-more">
-          <button type="button" class="show-more-btn" @click="showAllApps = !showAllApps">
-            {{ showAllApps ? '收起' : `查看更多 (${allApplications.length - APP_FOLD}+)` }}
+          <button type="button" class="show-more-btn" :class="{ active: showAllApps }" @click="showAllApps = !showAllApps">
+            <span>{{ showAllApps ? '收起' : `查看更多 (${allApplications.length - APP_FOLD}+)` }}</span>
+            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
         </div>
       </div>
@@ -1264,5 +1266,34 @@ function goToProduct(route: string): void {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+.show-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.show-more-arrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.show-more-btn.active .show-more-arrow {
+  transform: rotate(180deg);
+}
+
+/* 增强工业区块图标位移感 */
+.industry-block:hover .action-icon {
+  transform: translateX(6px);
+}
+
+/* 统一圆角到 24px (大卡片) 和 16px (内部小项) */
+.more-panel {
+  border-radius: 24px !important;
+}
+.industry-block, .backbone-card, .proof-card-image {
+  border-radius: 16px !important;
 }
 </style>
