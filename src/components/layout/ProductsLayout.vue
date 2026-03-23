@@ -307,6 +307,11 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   padding-right: 0;
 }
 
+.products-hero__metric + .products-hero__metric {
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  padding-left: 20px;
+}
+
 .products-hero__metric-value {
   font-size: clamp(1.15rem, 1.7vw, 1.45rem);
   font-weight: 600;
@@ -368,9 +373,9 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-guide__grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
 }
 
 .products-guide__item {
@@ -379,9 +384,11 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-guide__item + .products-guide__item {
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  padding-left: 32px;
 }
 
 .products-guide__item-title {
@@ -421,6 +428,25 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   .products-hero__metrics,
   .products-guide__grid {
     grid-template-columns: 1fr;
+  }
+  
+  .products-hero__metric + .products-hero__metric {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    padding-top: 12px;
+  }
+  
+  .products-guide__grid {
+    gap: 0;
+  }
+
+  .products-guide__item + .products-guide__item {
+    border-left: none;
+    padding-left: 0;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
   }
 }
 

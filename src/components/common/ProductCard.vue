@@ -173,7 +173,7 @@ const categoryLabel = computed(() =>
   margin-top: 22px;
   padding: 11px 18px;
   border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 10px;
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
   color: #0f172a;
   font-weight: 600;
