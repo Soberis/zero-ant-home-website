@@ -2,10 +2,10 @@
   <section class="ecosystem-section">
     <div class="ecosystem-panel">
       <div class="ecosystem-copy">
-        <p class="home-section-eyebrow home-section-eyebrow--inverse">
+        <p class="home-section-eyebrow">
           {{ $t("home.partners.eyebrow") }}
         </p>
-        <h2 class="home-section-title home-section-title--inverse">
+        <h2 class="home-section-title">
           {{ $t("home.partners.title") }}
         </h2>
       </div>
@@ -75,15 +75,14 @@ const partnersTyped: Partner[] = partners;
   min-height: 88px;
   padding: 14px 18px;
   border-radius: var(--radius-sm);
-  background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  border: 1px solid transparent;
   box-shadow: none;
-  transition: transform var(--transition-normal), border-color var(--transition-normal);
+  transition: transform var(--transition-normal);
 }
 
 .ecosystem-card:hover {
-  transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
 }
 
 .ecosystem-card img {
@@ -92,14 +91,14 @@ const partnersTyped: Partner[] = partners;
   max-width: 88%;
   object-fit: contain;
   display: block;
-  opacity: 1;
-  filter: none;
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: opacity var(--transition-normal), filter var(--transition-normal), transform var(--transition-normal);
 }
 
 .ecosystem-card:hover img {
   opacity: 1;
-  filter: none;
+  filter: grayscale(0%);
 }
 
 .ecosystem-card img.logo-huawei {

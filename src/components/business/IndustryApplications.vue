@@ -18,6 +18,14 @@
         <div class="app-body">
           <h3 class="text-headline-small app-title">{{ app.title }}</h3>
           <p class="text-body-small app-desc">{{ t(app.description) }}</p>
+          
+          <div class="card-action">
+            <span class="action-text">{{ t('common.cta.viewDetails') }}</span>
+            <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
       </router-link>
     </div>
@@ -131,6 +139,32 @@ const featuredApps = computed(() =>
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.card-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: var(--space-md);
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.action-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-normal);
+}
+
+.app-card:hover .card-action {
+  color: var(--color-primary);
+}
+
+.app-card:hover .action-icon {
+  transform: translateX(4px);
 }
 
 @media (max-width: 1100px) {

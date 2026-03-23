@@ -57,11 +57,11 @@ import Partners from '@/components/business/Partners.vue';
 }
 
 .home-section--videos {
-  background: #f7f8fc;
+  background: var(--color-background-white);
 }
 
 .home-section--partners {
-  background: var(--color-background-dark);
+  background: #f4f6fb;
 }
 
 @media screen and (max-width: 991px) {

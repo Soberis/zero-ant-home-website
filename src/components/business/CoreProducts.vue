@@ -26,6 +26,14 @@
             <div class="product-copy">
               <h4 class="text-title-large product-title">{{ t(product.name) }}</h4>
               <p class="text-body-small product-desc">{{ t(product.desc) }}</p>
+
+              <div class="card-action">
+                <span class="action-text">{{ t('common.cta.viewDetails') }}</span>
+                <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
             </div>
           </router-link>
         </div>
@@ -175,6 +183,7 @@ const productGroups = computed(() => [
 }
 
 .product-copy {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -189,6 +198,32 @@ const productGroups = computed(() => [
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.card-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: var(--space-md);
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.action-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-normal);
+}
+
+.product-card:hover .card-action {
+  color: var(--color-primary);
+}
+
+.product-card:hover .action-icon {
+  transform: translateX(4px);
 }
 
 @media (max-width: 1024px) {

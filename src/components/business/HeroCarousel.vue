@@ -19,13 +19,23 @@
           <h1 class="text-display-hero hero-title">{{ t('home.hero.title') }}</h1>
           <p class="text-body-large hero-description">{{ t('home.hero.description') }}</p>
           <div class="hero-actions">
-            <router-link
-              :to="{ path: '/support', hash: '#contact' }"
-              class="hero-link hero-link--secondary"
-              @click.stop
-            >
-              {{ t('common.cta.contactTeam') }}
-            </router-link>
+            <div class="hero-buttons">
+              <router-link
+                to="/solutions"
+                class="hero-link"
+                @click.stop
+              >
+                {{ t('common.cta.viewSolutions') }}
+              </router-link>
+
+              <router-link
+                :to="{ path: '/support', hash: '#contact' }"
+                class="hero-link hero-link--secondary"
+                @click.stop
+              >
+                {{ t('common.cta.contactTeam') }}
+              </router-link>
+            </div>
 
             <div class="hero-indicators">
               <button
@@ -285,8 +295,15 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 18px;
+  gap: 24px;
   margin-top: 24px;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
 .hero-indicators {
