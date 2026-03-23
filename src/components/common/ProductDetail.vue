@@ -5,7 +5,7 @@
   >
     <section id="product-overview" class="product-hero">
       <div class="container product-hero__inner">
-        <div class="product-hero__copy">
+        <div class="product-hero__header">
           <span class="product-hero__eyebrow">{{ categoryLabel }}</span>
           <h1 class="product-hero__title">{{ localizedProduct.title }}</h1>
           <p
@@ -26,14 +26,9 @@
           </div>
         </div>
 
-        <div class="product-hero__panel">
-          <div class="product-hero__panel-head">
-            <span class="product-hero__panel-label">{{ t("productDetail.heroLabel") }}</span>
-            <span class="product-hero__panel-series">
-              {{ currentProduct ? t(currentProduct.seriesTitle) : t("productDetail.eyebrow") }}
-            </span>
-          </div>
-
+        <div class="product-hero__media-wrapper">
+          <img :src="heroImageSrc" :alt="localizedProduct.title" class="product-hero__image" />
+          
           <div v-if="heroMetrics.length" class="product-hero__metrics">
             <article
               v-for="metric in heroMetrics"
@@ -44,26 +39,11 @@
               <div class="product-hero__metric-label">{{ metric.label }}</div>
             </article>
           </div>
-
-          <div class="product-hero__media">
-            <img :src="heroImageSrc" :alt="localizedProduct.title" class="product-hero__image" />
-          </div>
         </div>
       </div>
     </section>
 
-    <section v-if="sectionLinks.length" class="detail-nav">
-      <div class="container detail-nav__inner">
-        <a
-          v-for="link in sectionLinks"
-          :key="link.id"
-          :href="`#${link.id}`"
-          class="detail-nav__link"
-        >
-          {{ link.label }}
-        </a>
-      </div>
-    </section>
+
 
     <main class="product-main">
       <div class="container product-main__inner">
@@ -73,8 +53,10 @@
           class="detail-section"
         >
           <div class="detail-section__header">
-            <span class="detail-section__eyebrow">{{ t("productDetail.anchorFeatures") }}</span>
-            <h2 class="detail-section__title">{{ t("productDetail.features") }}</h2>
+            <h2 class="detail-section__title">
+              <span class="title-main">{{ t("productDetail.features") }}</span>
+              <span v-if="locale === 'zh-CN'" class="title-en">CORE FEATURES</span>
+            </h2>
           </div>
 
           <div class="features-grid">
@@ -83,13 +65,15 @@
               :key="idx"
               class="feature-card"
             >
-              <div class="feature-card__index">{{ String(idx + 1).padStart(2, "0") }}</div>
-              <h3 class="feature-card__title">
-                {{ typeof feature === "string" ? feature : feature.title || "" }}
-              </h3>
-              <p v-if="typeof feature === 'object' && feature.desc" class="feature-card__description">
-                {{ feature.desc }}
-              </p>
+              <div class="feature-card__content">
+                <span class="feature-card__index">{{ String(idx + 1).padStart(2, "0") }}</span>
+                <h3 class="feature-card__title">
+                  {{ typeof feature === "string" ? feature : feature.title || "" }}
+                </h3>
+                <p v-if="typeof feature === 'object' && feature.desc" class="feature-card__description">
+                  {{ feature.desc }}
+                </p>
+              </div>
             </article>
           </div>
         </section>
@@ -100,8 +84,10 @@
           class="detail-section"
         >
           <div class="detail-section__header">
-            <span class="detail-section__eyebrow">{{ t("productDetail.anchorApplications") }}</span>
-            <h2 class="detail-section__title">{{ t("productDetail.applications") }}</h2>
+            <h2 class="detail-section__title">
+              <span class="title-main">{{ t("productDetail.applications") }}</span>
+              <span v-if="locale === 'zh-CN'" class="title-en">APPLICATIONS</span>
+            </h2>
           </div>
 
           <div class="application-grid">
@@ -121,8 +107,10 @@
           class="detail-section"
         >
           <div class="detail-section__header">
-            <span class="detail-section__eyebrow">{{ t("productDetail.anchorCases") }}</span>
-            <h2 class="detail-section__title">{{ t("productDetail.videoCases") }}</h2>
+            <h2 class="detail-section__title">
+              <span class="title-main">{{ t("productDetail.videoCases") }}</span>
+              <span v-if="locale === 'zh-CN'" class="title-en">VIDEO CASES</span>
+            </h2>
           </div>
 
           <div class="videos-grid">
@@ -145,8 +133,10 @@
           class="detail-section"
         >
           <div class="detail-section__header">
-            <span class="detail-section__eyebrow">{{ t("productDetail.anchorParameters") }}</span>
-            <h2 class="detail-section__title">{{ t("productDetail.parameters") }}</h2>
+            <h2 class="detail-section__title">
+              <span class="title-main">{{ t("productDetail.techParams") }}</span>
+              <span v-if="locale === 'zh-CN'" class="title-en">TECH SPECS</span>
+            </h2>
           </div>
 
           <div class="params-grid">
@@ -163,8 +153,10 @@
 
         <section id="downloads-section" class="detail-section">
           <div class="detail-section__header">
-            <span class="detail-section__eyebrow">{{ t("productDetail.anchorDownloads") }}</span>
-            <h2 class="detail-section__title">{{ t("productDetail.downloads") }}</h2>
+            <h2 class="detail-section__title">
+              <span class="title-main">{{ t("productDetail.downloads") }}</span>
+              <span v-if="locale === 'zh-CN'" class="title-en">DOWNLOADS</span>
+            </h2>
           </div>
 
           <div v-if="normalizedDownloads.length" class="downloads-grid">
@@ -177,7 +169,10 @@
             >
               <span class="download-card__type">{{ t("productDetail.downloadLabel") }}</span>
               <div class="download-card__name">{{ download.name }}</div>
-              <div class="download-card__action">{{ t("common.cta.downloadNow") }}</div>
+              <div class="download-card__action">
+                <span>{{ t("common.cta.downloadNow") }}</span>
+                <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
             </a>
           </div>
 
@@ -219,7 +214,7 @@ const emits = defineEmits<{
   back: [];
 }>();
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const {
   currentProduct,
@@ -228,7 +223,6 @@ const {
   normalizedParams,
   normalizedDownloads,
   heroMetrics,
-  sectionLinks,
   relatedApplications,
   relatedVideos,
   productFeatures: resolvedProductFeatures,
@@ -251,51 +245,59 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .product-detail {
   min-height: 100vh;
   padding-bottom: 80px;
-  background:
-    radial-gradient(circle at top left, rgba(22, 58, 135, 0.12), transparent 22%),
-    linear-gradient(180deg, #f6f9fc 0%, #eef4f9 100%);
+  background: #fbfcfe;
 }
 
 .product-detail--robot {
-  background:
-    radial-gradient(circle at top left, rgba(15, 23, 42, 0.08), transparent 20%),
-    linear-gradient(180deg, #f7fafc 0%, #edf3f8 100%);
+  background: #ffffff;
 }
 
 .product-hero {
-  padding: 104px 0 24px;
+  padding: 72px 0 88px;
 }
 
 .product-hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 1.1fr);
   align-items: stretch;
+  gap: 60px;
 }
 
-.product-hero__copy,
-.product-hero__panel,
-.detail-nav__inner,
+.product-hero__header {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 12px 0 0 0;
+  border-radius: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.product-hero__media-wrapper,
 .detail-section {
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
-  backdrop-filter: blur(10px);
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
 }
 
-.product-hero__copy {
-  padding: 40px 42px 42px;
-  border-radius: 16px;
+.detail-nav__inner {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 14px 0;
 }
 
 .product-hero__eyebrow,
-.detail-section__eyebrow,
 .product-hero__panel-label {
   display: inline-flex;
   align-items: center;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(22, 58, 135, 0.08);
+  padding: 0 0 0 12px;
+  border-radius: 0;
+  background: transparent;
+  border-left: 3px solid rgba(26, 58, 143, 0.45);
   color: #163a87;
   font-size: 0.8rem;
   font-weight: 600;
@@ -305,24 +307,27 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 
 .product-hero__title {
   margin: 24px 0 16px;
-  font-size: clamp(2.4rem, 4vw, 3.6rem);
-  line-height: 1.04;
-  letter-spacing: -0.045em;
+  font-size: clamp(2.5rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: #0f172a;
 }
 
 .product-hero__description {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.82;
-  color: #5b6475;
+  max-width: 560px;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #4a4a4a;
 }
 
 .product-hero__actions {
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 28px;
+  gap: 16px;
+  margin-top: 36px;
 }
 
 .product-hero__action {
@@ -332,7 +337,7 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
   min-width: 158px;
   padding: 11px 18px;
   border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 12px;
+  border-radius: 999px;
   font-size: 0.92rem;
   font-weight: 600;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
@@ -369,124 +374,62 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
   color: #0f172a;
 }
 
-.product-hero__panel {
+.product-hero__media-wrapper {
   position: relative;
-  padding: 28px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(14, 23, 42, 0.96), rgba(14, 23, 42, 0.88));
-  color: #fff;
-  overflow: hidden;
-}
-
-.product-hero__panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top right, rgba(96, 165, 250, 0.22), transparent 34%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 60%);
-  pointer-events: none;
-}
-
-.product-hero__panel-head,
-.product-hero__metrics,
-.product-hero__media {
-  position: relative;
-  z-index: 1;
-}
-
-.product-hero__panel-head {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: center;
-}
-
-.product-hero__panel-series {
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(226, 232, 240, 0.74);
-}
-
-.product-hero__metrics {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 18px;
-}
-
-.product-hero__metric {
-  padding: 18px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.product-hero__metric-value {
-  font-size: 1.18rem;
-  line-height: 1.25;
-  font-weight: 700;
-  color: #fff;
-}
-
-.product-hero__metric-label {
-  margin-top: 8px;
-  font-size: 0.78rem;
-  line-height: 1.55;
-  color: rgba(226, 232, 240, 0.74);
-}
-
-.product-hero__media {
-  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 320px;
-  padding: 22px;
-  margin-top: 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(148, 163, 184, 0.08));
 }
 
 .product-hero__image {
   width: 100%;
-  max-height: 360px;
+  max-height: 500px;
   object-fit: contain;
 }
 
-.detail-nav {
-  position: sticky;
-  top: 80px;
-  z-index: 10;
-  padding-bottom: 12px;
+.product-hero__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+  width: 100%;
 }
 
-.detail-nav__inner {
+.product-hero__metric {
+  padding: 0;
+  border: none;
+  background: transparent;
   display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 14px 18px;
-  border-radius: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.detail-nav__link {
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 14px;
-  border-radius: 10px;
-  color: #475467;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background: rgba(248, 250, 252, 0.9);
+.product-hero__metric + .product-hero__metric {
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  padding-left: 20px;
 }
 
-.detail-nav__link:hover {
+.product-hero__metric-value {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  font-weight: 700;
   color: #163a87;
-  text-decoration: none;
-  background: rgba(22, 58, 135, 0.08);
+  letter-spacing: -0.01em;
 }
+
+.product-hero__metric-label {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #0f172a;
+  font-weight: 500;
+}
+
 
 .product-main {
   padding-top: 12px;
@@ -499,23 +442,46 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 }
 
 .detail-section {
-  padding: 28px;
-  border-radius: 16px;
-  scroll-margin-top: 156px;
+  padding: 100px 0 80px;
+  border-radius: 0;
+  scroll-margin-top: 100px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.detail-section:nth-of-type(even) {
+  background: #fbfcfe;
 }
 
 .detail-section__header {
-  margin-bottom: 18px;
+  margin-bottom: 40px;
+  text-align: left;
 }
 
 .detail-section__title {
-  margin: 16px 0 0;
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  line-height: 1.16;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px;
   color: #0f172a;
 }
 
-.features-grid,
+.title-main {
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.title-en {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #667085;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.features-list,
 .application-grid,
 .videos-grid,
 .downloads-grid {
@@ -524,40 +490,51 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 }
 
 .features-grid {
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  padding: 20px 0;
 }
 
 .feature-card {
-  padding: 22px;
-  border-radius: 14px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.88));
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.feature-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .feature-card__index {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(22, 58, 135, 0.08);
-  color: #163a87;
-  font-size: 1rem;
-  font-weight: 700;
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
 }
 
 .feature-card__title {
-  margin: 18px 0 10px;
-  font-size: 1rem;
-  line-height: 1.5;
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
   color: #0f172a;
+  letter-spacing: -0.01em;
 }
 
 .feature-card__description {
   margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.72;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
   color: #5b6475;
 }
 
@@ -576,10 +553,11 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 }
 
 .param-card {
-  padding: 18px 18px 20px;
-  border-radius: 14px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(248, 250, 252, 0.9);
+  padding: 16px 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: transparent;
 }
 
 .param-card__label {
@@ -603,15 +581,22 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 }
 
 .download-card {
-  padding: 22px;
-  border-radius: 14px;
-}
-
-.download-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 220px;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.download-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
 }
 
 .download-card__type {
@@ -631,9 +616,25 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 }
 
 .download-card__action {
-  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(217, 226, 236, 0.9);
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.download-card:hover .download-card__action,
+.download-card:hover .action-icon {
   color: #163a87;
-  font-weight: 600;
+}
+
+.download-card:hover .action-icon {
+  transform: translateX(4px);
 }
 
 .downloads-placeholder {
@@ -641,7 +642,7 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
   align-items: center;
   justify-content: center;
   min-height: 180px;
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px dashed rgba(15, 23, 42, 0.16);
   background: rgba(248, 250, 252, 0.88);
 }
@@ -654,9 +655,36 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 @media (max-width: 1100px) {
   .product-hero__inner {
     grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .product-hero__header {
+    text-align: center;
+    align-items: center;
+    padding-top: 0;
+  }
+  
+  .product-hero__description {
+    margin: 0 auto;
+  }
+  
+  .product-hero__actions {
+    justify-content: center;
   }
 
-  .features-grid,
+  .product-hero__metric {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .product-hero__metric + .product-hero__metric {
+    padding-left: 0;
+    border-left: none;
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
   .downloads-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -667,45 +695,23 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
     padding-top: 84px;
   }
 
-  .product-hero__copy,
-  .product-hero__panel,
   .detail-section {
-    padding: 22px;
-    border-radius: 14px;
+    padding: 80px 0 40px;
+    scroll-margin-top: 100px;
   }
 
-  .product-hero__metrics,
   .params-grid,
-  .features-grid,
   .downloads-grid {
     grid-template-columns: 1fr;
   }
 
-  .detail-nav {
-    top: 68px;
-    padding-bottom: 8px;
+  .product-hero__metrics {
+    grid-template-columns: 1fr;
   }
 
-  .detail-nav__inner {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 12px 16px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .detail-nav__inner::-webkit-scrollbar {
-    display: none;
-  }
-
-  .detail-nav__link {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-
-  .detail-section {
-    scroll-margin-top: 140px;
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 }
 
@@ -722,24 +728,9 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
     width: 100%;
   }
 
-  .detail-nav {
-    position: static;
-    top: auto;
-  }
-
-  .detail-nav__inner {
-    padding: 10px 14px;
-    border-radius: 14px;
-  }
-
-  .detail-nav__link {
-    width: auto;
-    justify-content: center;
-    padding: 10px 16px;
-  }
 
   .detail-section {
-    scroll-margin-top: 96px;
+    scroll-margin-top: 80px;
   }
 }
 </style>

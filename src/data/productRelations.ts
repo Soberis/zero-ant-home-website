@@ -58,7 +58,6 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [
       "servo-motor-station",
       "polishing-robot",
-      "robot-polishing-demo",
       "rtos-ethercat-validation",
     ],
     customFeatures: [
@@ -81,7 +80,6 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [
       "ur-robot-llm-motion-capture",
       "composite-robot-application",
-      "semiconductor",
       "medical-automation",
     ],
     customFeatures: [

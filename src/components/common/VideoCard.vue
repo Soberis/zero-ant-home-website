@@ -59,7 +59,7 @@ const emit = defineEmits(["hover", "leave", "click"]);
 .video-card {
   position: relative;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 12px;
   background: #0f172a;
   min-height: 380px;
   display: flex;

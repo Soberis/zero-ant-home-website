@@ -14,7 +14,15 @@
 
     <div class="app-card__footer">
       <span class="app-card__action">{{ t("solutionsPage.industries.viewApplication") }}</span>
-      <span class="app-card__arrow" aria-hidden="true">></span>
+      <svg
+        class="action-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
     </div>
   </router-link>
 </template>
@@ -38,25 +46,19 @@ const { t } = useI18n();
   flex-direction: column;
   gap: 18px;
   min-height: 220px;
-  padding: 22px;
-  border-radius: 18px;
+  padding: 24px;
+  border-radius: 12px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.9)),
-    radial-gradient(circle at top right, rgba(26, 58, 143, 0.08), transparent 42%);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+  background: #ffffff;
+  box-shadow: none;
   text-decoration: none;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease,
-    background-color 0.25s ease;
+  transition: all 0.3s ease;
 }
 
 .app-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(26, 58, 143, 0.16);
-  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.08);
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
   text-decoration: none;
 }
 
@@ -88,12 +90,10 @@ const { t } = useI18n();
   width: 60px;
   height: 60px;
   flex-shrink: 0;
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(241, 245, 249, 0.9)),
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.1), transparent 50%);
-  border: 1px solid rgba(26, 58, 143, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: none;
 }
 
 .app-card__title {
@@ -114,19 +114,27 @@ const { t } = useI18n();
   border-top: 1px solid rgba(217, 226, 236, 0.9);
 }
 
-.app-card__action,
-.app-card__arrow {
-  color: #163a87;
+.app-card__action {
+  color: #64748b;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.app-card__arrow {
-  transition: transform 0.25s ease;
+.action-icon {
+  width: 16px;
+  height: 16px;
+  color: #64748b;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.app-card:hover .app-card__arrow {
-  transform: translateX(3px);
+.app-card:hover .app-card__action,
+.app-card:hover .action-icon {
+  color: #163a87;
+}
+
+.app-card:hover .action-icon {
+  transform: translateX(4px);
 }
 
 @media (max-width: 560px) {

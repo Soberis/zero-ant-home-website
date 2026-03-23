@@ -153,7 +153,7 @@ export function useProductDetailData(
       return getRelatedApplications(slugValue.value);
     }
 
-    return applications.slice(0, 6);
+    return applications.slice(0, 4);
   });
 
   const relatedVideos = computed(() => {
@@ -165,7 +165,7 @@ export function useProductDetailData(
       return getRelatedVideos(slugValue.value);
     }
 
-    return videoCards.slice(0, 6);
+    return videoCards.slice(0, 3);
   });
 
   const productFeatures = computed((): string[] => {
