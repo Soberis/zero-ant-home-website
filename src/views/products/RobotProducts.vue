@@ -33,7 +33,7 @@ const pageContent = computed(() => ({
     {
       label: t("common.cta.contactTeam"),
       to: "/about#contact",
-      variant: "secondary" as const,
+      variant: "primary" as const,
     },
   ],
   metrics: [

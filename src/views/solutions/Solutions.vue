@@ -13,17 +13,10 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="scrollToSection('industries')"
-            >
-              <span>{{ t("solutionsPage.hero.primaryCta") }}</span>
-              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
               @click="scrollToSection('delivery')"
             >
-              {{ t("solutionsPage.hero.secondaryCta") }}
+              <span>{{ t("solutionsPage.hero.secondaryCta") }}</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
           </div>
         </div>
@@ -125,7 +118,7 @@
     </section>
 
     <!-- 暂不展示“精选案例”，后期集中提供视频沉浸体验时再开启 -->
-    <section id="proof" class="page-section" v-if="false">
+    <section id="proof" class="page-section">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">

@@ -33,7 +33,7 @@ const pageContent = computed(() => ({
     {
       label: t("common.cta.viewSolutions"),
       to: "/solutions",
-      variant: "secondary" as const,
+      variant: "primary" as const,
     },
   ],
   metrics: [
