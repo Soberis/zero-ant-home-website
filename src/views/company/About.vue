@@ -10,10 +10,14 @@
       </div>
     </section>
 
-    <main class="page-shell page-content">
-      <section id="company-intro" class="about-section intro-section">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("nav.companyIntro") }}</h2>
+    <main class="about-main">
+      <section id="company-intro" class="page-section intro-section">
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ $t("nav.companyIntro") }}</span>
+            <span class="title-en">COMPANY PROFILE</span>
+          </h2>
         </div>
 
         <div class="intro-layout">
@@ -48,16 +52,21 @@
               </p>
               <p class="info-text">
                 {{ $t("about.companyIntroDetailed.emailTips") }}
-                <a href="mailto:liqingfeng@zeroant.com">liqingfeng@zeroant.com</a>
+                <a class="contact-value" href="mailto:liqingfeng@zeroant.com">liqingfeng@zeroant.com</a>
               </p>
             </article>
           </div>
         </div>
-      </section>
+      </div>
+</section>
 
-      <section id="history" class="about-section">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("nav.history") }}</h2>
+      <section id="history" class="page-section">
+      <div class="page-shell">
+<div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ $t("nav.history") }}</span>
+            <span class="title-en">MILESTONES</span>
+          </h2>
         </div>
 
         <div class="timeline">
@@ -78,11 +87,16 @@
             </div>
           </article>
         </div>
-      </section>
+      </div>
+</section>
 
-      <section id="honors" class="about-section">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("nav.honor") }}</h2>
+      <section id="honors" class="page-section">
+      <div class="page-shell">
+<div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ $t("nav.honor") }}</span>
+            <span class="title-en">HONORS</span>
+          </h2>
         </div>
 
         <div class="honor-grid">
@@ -95,11 +109,16 @@
             <p class="honor-text">{{ honor }}</p>
           </article>
         </div>
-      </section>
+      </div>
+</section>
 
-      <section id="core-values" class="about-section">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("about.coreValues.title") }}</h2>
+      <section id="core-values" class="page-section">
+      <div class="page-shell">
+<div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ $t("about.coreValues.title") }}</span>
+            <span class="title-en">CORE VALUES</span>
+          </h2>
         </div>
 
         <div class="values-grid">
@@ -112,11 +131,16 @@
             <span class="value-text">{{ value }}</span>
           </article>
         </div>
-      </section>
+      </div>
+</section>
 
-      <section id="culture" class="about-section">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("nav.culture") }}</h2>
+      <section id="culture" class="page-section">
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main">{{ $t("nav.culture") }}</span>
+            <span class="title-en">CULTURE</span>
+          </h2>
         </div>
 
         <div class="culture-card">
@@ -131,27 +155,42 @@
             ></li>
           </ul>
         </div>
-      </section>
+      </div>
+</section>
 
-      <section id="contact" class="about-section contact-section">
-        <div class="section-heading">
-          <h2 class="section-title">{{ $t("nav.contact") }}</h2>
-        </div>
-
+      <section id="contact" class="page-section contact-section">
+      <div class="page-shell">
         <div class="contact-panel">
-          <div class="contact-card">
-            <span class="contact-label">{{ $t("contacts.email") }}</span>
-            <a class="contact-value" href="mailto:liqingfeng@zeroant.com">
-              liqingfeng@zeroant.com
-            </a>
+          <div class="contact-copy">
+            <div class="detail-section__header" style="margin-bottom: 24px;">
+              <h2 class="detail-section__title">
+                <span class="title-main">{{ $t("nav.contact") }}</span>
+                <span class="title-en">CONTACT US</span>
+              </h2>
+            </div>
           </div>
 
-          <div class="contact-card">
-            <span class="contact-label">{{ $t("contacts.address") }}</span>
-            <span class="contact-value">{{ $t("footer.address") }}</span>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <span class="contact-label">{{ $t("contacts.phone") }}</span>
+              <a class="contact-value" :href="`tel:${$t('footer.telValue')}`">
+                {{ $t("footer.telValue") }}
+              </a>
+            </div>
+            <div class="contact-card">
+              <span class="contact-label">{{ $t("contacts.email") }}</span>
+              <a class="contact-value" href="mailto:liqingfeng@zeroant.com">
+                liqingfeng@zeroant.com
+              </a>
+            </div>
+            <div class="contact-card">
+              <span class="contact-label">{{ $t("contacts.address") }}</span>
+              <span class="contact-value">{{ $t("footer.address") }}</span>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+</section>
     </main>
   </div>
 </template>
@@ -213,13 +252,17 @@ function formatIndex(value: number): string {
   --about-surface: #ffffff;
   --about-surface-soft: #f4f7fb;
   color: var(--about-text);
-  background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 30%),
-    linear-gradient(180deg, #f3f6fb 0%, #f7f9fc 24%, #ffffff 100%);
+  background: #ffffff;
+}
+
+.about-page > .about-main > .page-section:nth-of-type(even) {
+  background-color: var(--about-surface-soft);
 }
 
 .page-shell {
-  width: min(1200px, calc(100% - 32px));
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 48px;
   margin: 0 auto;
 }
 
@@ -290,7 +333,7 @@ function formatIndex(value: number): string {
 
 .hero-anchor {
   margin-top: 36px;
-  border: 1px solid rgba(26, 58, 143, 0.14);
+  border: none;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.78);
   color: var(--about-text);
@@ -319,34 +362,38 @@ function formatIndex(value: number): string {
   letter-spacing: 0.16em;
 }
 
-.page-content {
-  padding: 24px 0 88px;
+.page-section {
+  padding: 100px 0;
+  scroll-margin-top: 80px;
 }
 
-.about-section {
-  border: 1px solid rgba(217, 226, 236, 0.92);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
-  padding: 32px;
-  margin-bottom: 20px;
-  scroll-margin-top: 120px;
+.detail-section__header {
+  max-width: 860px;
+  margin-bottom: 48px;
 }
 
-.section-heading {
+.detail-section__title {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-bottom: 24px;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 16px 0;
 }
 
-.section-title {
-  margin: 0;
+.title-main {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 500;
   color: var(--about-text);
-  font-size: clamp(1.85rem, 3vw, 2.6rem);
-  font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+.title-en {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--about-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .intro-layout {
@@ -366,20 +413,11 @@ function formatIndex(value: number): string {
 .honor-text,
 .culture-list li,
 .contact-value {
-  color: var(--about-muted);
-  line-height: 1.85;
-}
-
-.intro-prose p,
-.info-text,
-.honor-text {
-  margin: 0;
-}
-
-.intro-prose :deep(b),
-.culture-list :deep(b) {
-  color: var(--about-primary-deep);
-  font-weight: 700;
+  color: var(--about-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.7;
+  text-decoration: none;
 }
 
 .intro-side {
@@ -388,11 +426,36 @@ function formatIndex(value: number): string {
 }
 
 .info-panel,
-.culture-card {
-  border: 1px solid var(--about-border);
-  border-radius: 22px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+.culture-card,
+.honor-card {
+  background: var(--about-surface-soft);
+}
+
+.timeline-card,
+.value-card {
+  background: #ffffff;
+}
+
+.info-panel,
+.culture-card,
+.timeline-card,
+.honor-card,
+.value-card {
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: none;
+  border-radius: 16px;
   padding: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.info-panel:hover,
+.culture-card:hover,
+.timeline-card:hover,
+.honor-card:hover,
+.value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+  border-color: rgba(26, 58, 143, 0.12);
 }
 
 .panel-title {
@@ -409,9 +472,9 @@ function formatIndex(value: number): string {
 }
 
 .stat-card {
-  border: 1px solid rgba(217, 226, 236, 0.9);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--about-surface-soft);
   padding: 18px 16px;
 }
 
@@ -471,13 +534,6 @@ function formatIndex(value: number): string {
   box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1);
 }
 
-.timeline-card {
-  border: 1px solid var(--about-border);
-  border-radius: 22px;
-  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
-  padding: 20px 22px;
-}
-
 .timeline-year {
   margin-bottom: 12px;
   color: var(--about-primary-deep);
@@ -507,15 +563,6 @@ function formatIndex(value: number): string {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.honor-card,
-.value-card,
-.contact-card {
-  border: 1px solid var(--about-border);
-  border-radius: 22px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-  padding: 22px;
-}
-
 .values-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -540,22 +587,48 @@ function formatIndex(value: number): string {
 }
 
 .contact-panel {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+  gap: 48px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.contact-description {
+  margin: 16px 0 0;
+  color: rgba(15, 23, 42, 0.6);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+.contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .contact-label {
   display: block;
-  margin-bottom: 8px;
   color: rgba(15, 23, 42, 0.5);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .contact-value {
-  color: var(--about-primary-deep);
-  font-size: 1rem;
+  color: var(--about-text);
+  font-size: 1.15rem;
   font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
 }
 
 @media (max-width: 1024px) {
@@ -587,7 +660,6 @@ function formatIndex(value: number): string {
     font-size: 2.8rem;
   }
 
-  .about-section,
   .info-panel,
   .culture-card,
   .contact-card {

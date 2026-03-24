@@ -227,11 +227,6 @@ const contactItems = computed(() => [
     href: `tel:${t("footer.telValue")}`,
   },
   {
-    label: t("contacts.email"),
-    value: "liqingfeng@zeroant.com",
-    href: "mailto:liqingfeng@zeroant.com",
-  },
-  {
     label: t("contacts.address"),
     value: t("footer.address"),
     href: "",
@@ -443,21 +438,22 @@ function formatIndex(value: number): string {
   align-items: flex-start;
   gap: 0;
   padding: 32px;
-  border: none;
-  border-radius: 20px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
   background: #ffffff;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.04);
+  box-shadow: none;
   text-decoration: none;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .content-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+  border-color: rgba(26, 58, 143, 0.12);
 }
 
 .faq-card {
-  background: #ffffff;
+  background: var(--support-surface-soft);
 }
 
 .card-header {
@@ -497,18 +493,19 @@ function formatIndex(value: number): string {
 
 .card-tag {
   width: fit-content;
-  border-radius: 999px;
+  border-radius: 4px;
+  border: 0;
   background: rgba(26, 58, 143, 0.08);
   color: var(--support-primary);
-  padding: 4px 10px;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .card-tag-muted {
-  background: rgba(15, 23, 42, 0.06);
-  color: rgba(15, 23, 42, 0.72);
+  background: rgba(26, 58, 143, 0.06);
+  color: var(--support-primary);
 }
 
 .card-title {
@@ -558,74 +555,53 @@ function formatIndex(value: number): string {
 }
 
 .contact-panel {
-  border: none;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #0f172a 0%, #1a3a8f 100%);
-  color: #ffffff;
-  padding: 64px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
-  gap: 32px;
-  box-shadow: 0 32px 64px rgba(15, 23, 42, 0.15);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.contact-panel:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.2);
-}
-
-.contact-panel .title-main {
-  color: #ffffff;
-}
-
-.contact-panel .title-en {
-  color: rgba(255, 255, 255, 0.6);
+  gap: 48px;
+  align-items: start;
+  margin-top: 32px;
 }
 
 .contact-desc {
   margin: 16px 0 0;
   max-width: 520px;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.85;
+  color: var(--support-muted);
   font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.85;
 }
 
 .contact-grid {
-  display: grid;
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px 64px;
 }
 
 .contact-card {
-  border: none;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 24px 32px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 0 0 auto;
 }
 
 .contact-label {
-  display: block;
-  margin-bottom: 10px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  color: var(--support-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .contact-value {
-  color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 500;
-  line-height: 1.7;
+  color: var(--support-text);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.5;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.contact-value[href]:hover {
-  color: #a3bfff;
-  text-decoration: none;
-}
+.contact-value[href]:hover { color: var(--support-primary); }
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {

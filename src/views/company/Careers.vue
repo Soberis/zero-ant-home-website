@@ -131,12 +131,12 @@
 
           <div class="contact-grid">
             <div class="contact-card">
-              <span class="contact-label">{{ $t("careers.email") }}</span>
-              <a class="contact-value" href="mailto:hr@zeroant.com">hr@zeroant.com</a>
-            </div>
-            <div class="contact-card">
               <span class="contact-label">{{ $t("careers.workLocation") }}</span>
               <span class="contact-value">{{ $t("careers.hangzhou") }}</span>
+            </div>
+            <div class="contact-card">
+              <span class="contact-label">{{ $t("careers.email") }}</span>
+              <a class="contact-value" href="mailto:hr@zeroant.com">hr@zeroant.com</a>
             </div>
           </div>
         </div>
@@ -478,20 +478,19 @@ function applyForPosition(position: Position): void {
 }
 
 .benefit-card {
-  border: none;
-  border-radius: 24px;
-  background: var(--career-surface-soft);
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: none;
   padding: 40px;
-  transition:
-    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.4s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .benefit-card:hover,
 .position-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+  border-color: rgba(26, 58, 143, 0.12);
 }
 
 .benefit-index {
@@ -511,8 +510,7 @@ function applyForPosition(position: Position): void {
   line-height: 1.45;
 }
 
-.benefit-description,
-.contact-description {
+.benefit-description {
   margin: 0;
   color: var(--career-muted);
   font-size: 0.98rem;
@@ -526,14 +524,12 @@ function applyForPosition(position: Position): void {
 }
 
 .position-card {
-  border: none;
-  border-radius: 24px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
   background: var(--career-surface-soft);
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.04);
+  box-shadow: none;
   padding: 40px;
-  transition:
-    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.4s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .position-header {
@@ -630,78 +626,71 @@ function applyForPosition(position: Position): void {
 }
 
 .contact-panel {
-  border: none;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #0f172a 0%, #1a3a8f 100%);
-  color: #ffffff;
-  box-shadow: 0 32px 64px rgba(15, 23, 42, 0.15);
-  padding: 64px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
-  gap: 32px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+  gap: 48px;
+  align-items: start;
+  margin-top: 32px;
 }
-
-.contact-panel:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.2);
-}
-
-.contact-panel .title-main { color: #ffffff; }
-.contact-panel .title-en { color: rgba(255, 255, 255, 0.6); }
 
 .contact-description {
   margin: 16px 0 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--career-muted);
   font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.85;
 }
 
 .contact-btn {
   margin-top: 32px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  padding: 12px 32px;
   background: #ffffff;
   color: var(--career-text);
-  box-shadow: none;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .contact-btn:hover {
-  background: var(--career-surface-soft);
-  color: var(--career-primary);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  border-color: rgba(26, 58, 143, 0.16);
+  box-shadow: 0 12px 24px rgba(26, 58, 143, 0.06);
+  color: var(--career-primary);
 }
 
 .contact-grid {
-  display: grid;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .contact-card {
-  border: none;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 24px 32px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .contact-label {
-  display: block;
-  margin-bottom: 10px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  color: var(--career-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .contact-value {
-  color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 500;
+  color: var(--career-text);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.5;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .contact-value[href]:hover {
-  color: #a3bfff;
+  color: var(--career-primary);
   text-decoration: none;
 }
 
