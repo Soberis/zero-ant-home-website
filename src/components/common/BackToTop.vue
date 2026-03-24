@@ -85,7 +85,7 @@ onUnmounted(() => {
   height: 48px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  background: #000000; /* Premium dark transparent */
+  background: #0f172a;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #ffffff;
@@ -99,13 +99,13 @@ onUnmounted(() => {
 
   &:hover {
     transform: translateY(-4px);
-    background: #0f172a;
+    background: #1e2d45;
     box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
   }
 
   &:active {
     transform: translateY(0);
-    background: #000000;
+    background: #0f172a;
   }
 
   &:focus {

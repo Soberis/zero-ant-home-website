@@ -74,7 +74,7 @@ const emit = defineEmits(["hover", "leave", "click"]);
 
 .video-card:hover,
 .video-card.active {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: 0 24px 48px rgba(15, 23, 42, 0.25);
   border-color: rgba(255, 255, 255, 0.25);
 }

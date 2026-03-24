@@ -110,13 +110,16 @@ const featuredApps = computed(() =>
   width: 56px;
   height: 56px;
   margin-bottom: var(--space-md);
-  border-radius: 50%;
+  border-radius: 16px;
   background: rgba(26, 58, 143, 0.06);
+  border: 1px solid rgba(26, 58, 143, 0.1);
+  transition: background var(--transition-normal), border-color var(--transition-normal);
 }
 
 .app-icon :deep(svg) {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
+  transition: color var(--transition-normal);
 }
 
 .app-body {
@@ -165,6 +168,29 @@ const featuredApps = computed(() =>
 
 .app-card:hover .action-icon {
   transform: translateX(4px);
+}
+
+.app-card:hover .app-icon {
+  background: #1a3a8f;
+  border-color: #1a3a8f;
+}
+
+.app-card:hover .app-icon :deep(svg) {
+  color: #ffffff;
+}
+
+.app-card:hover .app-icon :deep(svg path),
+.app-card:hover .app-icon :deep(svg circle),
+.app-card:hover .app-icon :deep(svg rect),
+.app-card:hover .app-icon :deep(svg line),
+.app-card:hover .app-icon :deep(svg polyline),
+.app-card:hover .app-icon :deep(svg polygon) {
+  stroke: #ffffff;
+  fill: none;
+}
+
+.app-card:hover .app-icon :deep(svg [fill]:not([fill="none"])) {
+  fill: #ffffff;
 }
 
 @media (max-width: 1100px) {

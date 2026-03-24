@@ -199,7 +199,7 @@ const spotlightItems = computed(() =>
 }
 
 .spotlight-card:hover .spotlight-card__media::after {
-  opacity: 0.9;
+  opacity: 0.75;
 }
 
 .spotlight-card:hover .spotlight-card__media img {

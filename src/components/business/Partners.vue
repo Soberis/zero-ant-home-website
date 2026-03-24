@@ -75,14 +75,16 @@ const partnersTyped: Partner[] = partners;
   min-height: 88px;
   padding: 14px 18px;
   border-radius: var(--radius-sm);
-  background: transparent;
-  border: 1px solid transparent;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
   box-shadow: none;
-  transition: transform var(--transition-normal);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
 
 .ecosystem-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  border-color: rgba(15, 23, 42, 0.12);
 }
 
 .ecosystem-card img {

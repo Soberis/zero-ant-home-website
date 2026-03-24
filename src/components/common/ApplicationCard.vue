@@ -92,8 +92,9 @@ const { t } = useI18n();
   flex-shrink: 0;
   border-radius: 16px;
   background: #f8fafc;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .app-card__title {
@@ -135,6 +136,29 @@ const { t } = useI18n();
 
 .app-card:hover .action-icon {
   transform: translateX(4px);
+}
+
+.app-card:hover .app-card__icon {
+  background: #1a3a8f;
+  border-color: #1a3a8f;
+}
+
+.app-card:hover .app-card__icon :deep(svg) {
+  color: #ffffff;
+}
+
+.app-card:hover .app-card__icon :deep(svg path),
+.app-card:hover .app-card__icon :deep(svg circle),
+.app-card:hover .app-card__icon :deep(svg rect),
+.app-card:hover .app-card__icon :deep(svg line),
+.app-card:hover .app-card__icon :deep(svg polyline),
+.app-card:hover .app-card__icon :deep(svg polygon) {
+  stroke: #ffffff;
+  fill: none;
+}
+
+.app-card:hover .app-card__icon :deep(svg [fill]:not([fill="none"])) {
+  fill: #ffffff;
 }
 
 @media (max-width: 560px) {

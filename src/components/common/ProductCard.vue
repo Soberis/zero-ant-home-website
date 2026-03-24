@@ -22,7 +22,7 @@
 
       <button class="product-card__action" type="button" @click="emit('more', product.slug)">
         <span>{{ t("common.cta.viewDetails") }}</span>
-        <span aria-hidden="true">></span>
+        <svg class="product-card__action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </button>
     </div>
   </article>
@@ -167,7 +167,7 @@ const categoryLabel = computed(() =>
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: fit-content;
   min-width: 156px;
   margin-top: 22px;
@@ -183,12 +183,23 @@ const categoryLabel = computed(() =>
     background-color 0.25s ease, color 0.25s ease;
 }
 
+.product-card__action-arrow {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
 .product-card__action:hover {
   transform: translateY(-2px);
   background: #ffffff;
-  color: #0f172a;
-  border-color: rgba(15, 23, 42, 0.18);
+  color: #1a3a8f;
+  border-color: rgba(26, 58, 143, 0.28);
   box-shadow: var(--shadow-sm);
+}
+
+.product-card__action:hover .product-card__action-arrow {
+  transform: translateX(4px);
 }
 
 @media (max-width: 1100px) {
