@@ -1,41 +1,41 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
 import type { ProductData } from "@/types";
 
-// 1. 先定义所有图片变量
+// 1. 先定义所有图片 variables
 const multiOsVmImg = new URL(
-  "@/assets/images/products/多OS混合部署嵌入式虚拟机.png",
+  "@/assets/images/products/embedded-vm.png",
   import.meta.url
 ).href;
 const industrialRtosImg = new URL(
-  "@/assets/images/products/国产工业实时操作系统.jpg",
+  "@/assets/images/products/industrial-rtos.jpg",
   import.meta.url
 ).href;
 const airosImg = new URL(
-  "@/assets/images/products/AiROS机器人操作系统.png",
+  "@/assets/images/products/airos-os.png",
   import.meta.url
 ).href;
 const robotSchedulerImg = new URL(
-  "@/assets/images/products/移动机器人调度系统.png",
+  "@/assets/images/products/robot-scheduling-system.png",
   import.meta.url
 ).href;
 const gantry2dImg = new URL(
-  "@/assets/images/products/二或三自由度龙门架.png",
+  "@/assets/images/products/gantry-2d3d.png",
   import.meta.url
 ).href;
 const scara4axisImg = new URL(
-  "@/assets/images/products/四轴机器人.png",
+  "@/assets/images/products/four-axis-robot.png",
   import.meta.url
 ).href;
 const arm6axisImg = new URL(
-  "@/assets/images/products/六轴机器人.png",
+  "@/assets/images/products/six-axis-robot.png",
   import.meta.url
 ).href;
 const dualArmHumanoidImg = new URL(
-  "@/assets/images/products/双臂人形机器人.png",
+  "@/assets/images/products/dual-arm-humanoid.png",
   import.meta.url
 ).href;
 const mobileRobotImg = new URL(
-  "@/assets/images/products/移动机器人.png",
+  "@/assets/images/products/mobile-robot.png",
   import.meta.url
 ).href;
 
