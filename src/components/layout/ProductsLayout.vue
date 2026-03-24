@@ -386,8 +386,8 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   margin-top: 0;
   padding-top: 0;
   border-top: none;
-  border-left: 1px solid rgba(15, 23, 42, 0.08);
-  padding-left: 32px;
+  border-left: 1px solid rgba(15, 23, 42, 0.06);
+  padding-left: 24px;
 }
 
 .products-guide__item-title {

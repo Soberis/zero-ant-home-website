@@ -200,12 +200,15 @@
 
         <div class="delivery-steps">
           <article
-            v-for="step in deliverySteps"
+            v-for="(step, idx) in deliverySteps"
             :key="step.title"
             class="delivery-step"
           >
-            <h3 class="step-title">{{ step.title }}</h3>
-            <p class="step-description">{{ step.description }}</p>
+            <span class="card-index step-index">{{ formatIndex(idx + 1) }}</span>
+            <div class="step-content">
+              <h3 class="step-title">{{ step.title }}</h3>
+              <p class="step-description">{{ step.description }}</p>
+            </div>
           </article>
         </div>
 
@@ -698,10 +701,10 @@ function goToProduct(route: string): void {
 
 
 .delivery-steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 64px;
 }
 
 
@@ -1111,15 +1114,27 @@ function goToProduct(route: string): void {
 }
 
 .delivery-steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 0;
-  margin-bottom: 80px;
+  margin-bottom: 64px;
 }
 
 .delivery-step {
-  padding: 24px 32px 24px 0;
-  
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.delivery-step:last-child {
+  border-bottom: none;
+}
+
+.delivery-step .card-index {
+  margin-bottom: 0;
+  color: rgba(15, 23, 42, 0.35);
 }
 
 
@@ -1207,7 +1222,6 @@ function goToProduct(route: string): void {
   .hero-grid,
   .backbone-grid,
   .industry-grid,
-  .delivery-steps,
   .more-video-grid,
   .more-application-grid {
     grid-template-columns: 1fr;
@@ -1259,10 +1273,15 @@ function goToProduct(route: string): void {
 
   .backbone-card,
   .industry-card,
-  .delivery-step,
   .contact-panel,
   .more-panel {
     padding: 20px;
+  }
+
+  .delivery-step {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 14px;
+    padding: 16px 0;
   }
 }
 

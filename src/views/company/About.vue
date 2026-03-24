@@ -626,7 +626,7 @@ function formatIndex(value: number): string {
   flex-direction: column;
   gap: 10px;
   padding: 24px 32px;
-  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  border-left: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .value-card:first-child {
@@ -721,7 +721,7 @@ function formatIndex(value: number): string {
   .value-card {
     flex: 0 0 calc(50% - 16px);
     border-left: none;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
     padding: 20px 0;
   }
 

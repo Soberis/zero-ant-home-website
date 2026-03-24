@@ -364,8 +364,8 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 }
 
 .product-hero__metric + .product-hero__metric {
-  border-left: 1px solid rgba(15, 23, 42, 0.08);
-  padding-left: 20px;
+  border-left: 1px solid rgba(15, 23, 42, 0.06);
+  padding-left: 16px;
 }
 
 .product-hero__metric-value {
@@ -634,7 +634,7 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
     border-left: none;
     padding-top: 24px;
     margin-top: 24px;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
   }
 
   .downloads-grid {
