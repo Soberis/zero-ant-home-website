@@ -1,33 +1,33 @@
 // 视频数据模块，包含视频详情映射和视频卡片列表
 
 // 图片资源导入
-import radar360Img from "@/assets/images/videos/360度雷达扫描.png";
-import agvImg from "@/assets/images/videos/agv产品介绍.png";
-import compositeRobotImg from "@/assets/images/videos/复合机器人传板.png";
-import waferTransferImg from "@/assets/images/videos/晶圆传送机器人运动控制.png";
-import polishingRobotImg from "@/assets/images/videos/打磨机器人.png";
-import compositeRobotAppImg from "@/assets/images/videos/复合机器人应用.png";
-import urRobotLLMImg from "@/assets/images/videos/UR机器人大语言模型动作抓取.png";
-import fourAxisRobotFridgeImg from "@/assets/images/videos/四轴机器人开冰箱.png";
-import servoMotorStationImg from "@/assets/images/videos/伺服电机台站.png";
-import personalizedPrescriptionImg from "@/assets/images/videos/个性化处方制药.png";
-import mobileTransferRobotImg from "@/assets/images/videos/移动传送机器人.png";
-import offlineProgrammingImg from "@/assets/images/videos/离线编程.png";
-import offlineProgrammingLogoDrawingImg from "@/assets/images/videos/离线编程绘制logo.png";
-import rtosEthercatImg from "@/assets/images/videos/RTOS-EtherCAT电机控制验证.png";
-import robotPolishingDemoImg from "@/assets/images/videos/机器人打磨工艺演示.png";
-import palletizingRobotImg from "@/assets/images/videos/码垛机器人.png";
-import robotStudioRemoteControlImg from "@/assets/images/videos/上位机RobotStudioIDE远程控制及仿真.png";
-import labTubeLoadingImg from "@/assets/images/videos/生物实验室试管上料.png";
-import outdoorPatrolRobotImg from "@/assets/images/videos/室外移动巡检机器人.png";
-import dualRobotBallCatchingImg from "@/assets/images/videos/双机协作抓球.png";
-import riceMolecularExperimentImg from "@/assets/images/videos/水稻分子重复实验.png";
-import sketchingRobotImg from "@/assets/images/videos/素描机器人.png";
-import gantry2d3dImg from "@/assets/images/videos/二三自由度龙门架.png";
-import assemblyRobotImg from "@/assets/images/videos/装配机器人.png";
-import mobileRobotChassisImg from "@/assets/images/videos/自研移动机器人底盘.png";
-import fixedRailTransferRobotImg from "@/assets/images/videos/固定滑轨式传送机器人.png";
-import vrRemoteFrankaDualArmImg from "@/assets/images/videos/vr 遥操作 franka 双臂.png";
+import radar360Img from "@/assets/images/videos/radar-360-scanning.png";
+import agvImg from "@/assets/images/videos/agv-intro.png";
+import compositeRobotImg from "@/assets/images/videos/composite-robot-transfer.png";
+import waferTransferImg from "@/assets/images/videos/wafer-transfer-control.png";
+import polishingRobotImg from "@/assets/images/videos/polishing-robot.png";
+import compositeRobotAppImg from "@/assets/images/videos/composite-robot-app.png";
+import urRobotLLMImg from "@/assets/images/videos/ur-llm-grab.png";
+import fourAxisRobotFridgeImg from "@/assets/images/videos/four-axis-fridge.png";
+import servoMotorStationImg from "@/assets/images/videos/servo-motor-station.png";
+import personalizedPrescriptionImg from "@/assets/images/videos/personalized-pharmaceutical.png";
+import mobileTransferRobotImg from "@/assets/images/videos/mobile-transfer-robot.png";
+import offlineProgrammingImg from "@/assets/images/videos/offline-programming.png";
+import offlineProgrammingLogoDrawingImg from "@/assets/images/videos/offline-programming-logo.png";
+import rtosEthercatImg from "@/assets/images/videos/rtos-ethercat-validation.png";
+import robotPolishingDemoImg from "@/assets/images/videos/robot-polishing-demo.png";
+import palletizingRobotImg from "@/assets/images/videos/palletizing-robot.png";
+import robotStudioRemoteControlImg from "@/assets/images/videos/robotstudio-remote.png";
+import labTubeLoadingImg from "@/assets/images/videos/lab-tube-loading.png";
+import outdoorPatrolRobotImg from "@/assets/images/videos/outdoor-patrol-robot.png";
+import dualRobotBallCatchingImg from "@/assets/images/videos/dual-robot-ball-catching.png";
+import riceMolecularExperimentImg from "@/assets/images/videos/rice-molecular-experiment.png";
+import sketchingRobotImg from "@/assets/images/videos/sketching-robot.png";
+import gantry2d3dImg from "@/assets/images/videos/gantry-2d3d.png";
+import assemblyRobotImg from "@/assets/images/videos/assembly-robot.png";
+import mobileRobotChassisImg from "@/assets/images/videos/mobile-robot-chassis.png";
+import fixedRailTransferRobotImg from "@/assets/images/videos/fixed-rail-transfer-robot.png";
+import vrRemoteFrankaDualArmImg from "@/assets/images/videos/vr-teleop-franka.png";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
