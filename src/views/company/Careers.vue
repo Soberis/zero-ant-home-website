@@ -298,13 +298,13 @@ function applyForPosition(position: Position): void {
 
 <style scoped lang="less">
 .careers-page {
-  --career-primary: #1a3a8f;
-  --career-primary-deep: #0f172a;
-  --career-text: #1f2937;
-  --career-muted: #64748b;
-  --career-border: rgba(15, 23, 42, 0.08);
-  --career-surface: #ffffff;
-  --career-surface-soft: #fbfcfe;
+  --career-primary: var(--color-primary);
+  --career-primary-deep: var(--color-primary-dark);
+  --career-text: var(--color-text);
+  --career-muted: var(--color-text-secondary);
+  --career-border: var(--color-border);
+  --career-surface: var(--color-background-white);
+  --career-surface-soft: var(--color-background);
   color: var(--career-text);
   background: #ffffff;
 }
@@ -492,49 +492,60 @@ function applyForPosition(position: Position): void {
 
 .benefits-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 64px;
+  row-gap: 0;
 }
 
 .benefit-card {
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 16px;
-  background: #ffffff;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  row-gap: 0;
+  align-items: start;
+  padding: 20px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
+  background: transparent;
+  border-radius: 0;
   box-shadow: none;
-  padding: 40px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: none;
 }
 
-.benefit-card:hover,
-.position-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
-  border-color: rgba(26, 58, 143, 0.12);
+.benefit-card:nth-child(-n+2) {
+  border-top: none;
+  padding-top: 0;
 }
 
 .benefit-index {
+  grid-column: 1;
+  grid-row: 1;
   display: inline-block;
-  margin-bottom: 18px;
-  color: rgba(26, 58, 143, 0.48);
-  font-size: 0.84rem;
+  padding-top: 3px;
+  color: rgba(26, 58, 143, 0.36);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
 }
 
 .benefit-title {
-  margin: 0 0 12px;
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 6px;
   color: var(--career-text);
-  font-size: 1.16rem;
+  font-size: 1.06rem;
   font-weight: 600;
   line-height: 1.45;
 }
 
 .benefit-description {
+  grid-column: 2;
+  grid-row: 2;
   margin: 0;
   color: var(--career-muted);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 .positions-list {

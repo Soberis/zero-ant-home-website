@@ -454,9 +454,7 @@ function formatIndex(value: number): string {
 
 .info-panel,
 .culture-card,
-.timeline-card,
-.honor-card,
-.value-card {
+.timeline-card {
   border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: none;
   border-radius: 16px;
@@ -466,12 +464,20 @@ function formatIndex(value: number): string {
 
 .info-panel:hover,
 .culture-card:hover,
-.timeline-card:hover,
-.honor-card:hover,
-.value-card:hover {
+.timeline-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
   border-color: rgba(26, 58, 143, 0.12);
+}
+
+/* honor and value items: divider-list style, no card */
+.honor-card,
+.value-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 .panel-title {
@@ -574,26 +580,71 @@ function formatIndex(value: number): string {
   margin: 0;
 }
 
-.honor-grid,
-.values-grid,
-.contact-panel {
-  display: grid;
-  gap: 16px;
-}
-
+/* honors: 两列分隔线列表 */
 .honor-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
 }
 
+.honor-card {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  padding: 20px 24px 20px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+}
+
+.honor-card:nth-child(odd) {
+  padding-right: 40px;
+}
+
+.honor-card:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.card-index {
+  color: rgba(26, 58, 143, 0.36);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding-top: 3px;
+}
+
+.honor-text {
+  margin: 0;
+  color: var(--about-text);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* values: 横向 4 列关键词，竖线分隔 */
 .values-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.value-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 32px;
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.value-card:first-child {
+  border-left: none;
+  padding-left: 0;
 }
 
 .value-text {
   color: var(--about-text);
-  font-size: 1.08rem;
+  font-size: 1.12rem;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .culture-list {
@@ -661,10 +712,28 @@ function formatIndex(value: number): string {
 @media (max-width: 1024px) {
   .hero-shell,
   .intro-layout,
-  .honor-grid,
-  .values-grid,
   .contact-panel {
     grid-template-columns: 1fr;
+  }
+
+  .honor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .values-grid {
+    flex-wrap: wrap;
+  }
+
+  .value-card {
+    flex: 0 0 calc(50% - 16px);
+    border-left: none;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 20px 0;
+  }
+
+  .value-card:first-child,
+  .value-card:nth-child(2) {
+    border-top: none;
   }
 }
 
