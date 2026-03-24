@@ -1232,7 +1232,20 @@ function goToProduct(route: string): void {
 
   .hero-actions {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 240px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    margin: 0 auto;
+  }
+
+  .hero-actions .btn-arrow {
+    width: 18px;
+    height: 18px;
   }
 
   .hero-panel {
@@ -1252,6 +1265,11 @@ function goToProduct(route: string): void {
   .hero-stat {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .hero-actions .btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
   }
 
   .delivery-step {

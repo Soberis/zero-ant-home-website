@@ -612,6 +612,12 @@ onUnmounted(() => {
   .player-hero-container { border-radius: 16px; margin-bottom: 40px; }
   .title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
   .video-title { font-size: 1.6rem; }
+  .contact-cta {
+    align-self: center;
+    width: 100%;
+    max-width: 240px;
+    justify-content: center;
+  }
   .video-desc { font-size: 1rem; line-height: 1.7; margin-block-end: 16px; }
   .contact-dialog { min-width: 0; width: 100%; padding: 32px 24px; }
   .video-bottom-bar { flex-direction: column; align-items: stretch; }

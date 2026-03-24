@@ -485,9 +485,22 @@ function goTo(targetSlug: string | null): void {
     margin-bottom: 36px;
   }
 
+  .title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
   .title {
     font-size: 1.75rem;
     margin-bottom: 16px;
+  }
+
+  .contact-cta {
+    align-self: center;
+    width: 100%;
+    max-width: 240px;
+    justify-content: center;
   }
 
   .desc {

@@ -945,13 +945,16 @@ onUnmounted(() => {
   top: 0;
   right: 0;
   width: 280px;
-  height: 100vh;
+  height: 100svh;
   background: linear-gradient(135deg, #ffffff, #f8faff);
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding-top: 80px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.open .mobile-nav-content {

@@ -337,6 +337,8 @@ onUnmounted(() => {
   color: #d4d4d8;
   font-size: 13px;
   line-height: 1.85;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .footer-qrcodes {
@@ -433,6 +435,11 @@ onUnmounted(() => {
   .footer-bottom {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .footer-bottom .icp-link {
+    display: block;
+    margin: 6px 0 0;
   }
 }
 </style>

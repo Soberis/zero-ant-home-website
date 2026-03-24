@@ -395,7 +395,7 @@ function formatIndex(value: number): string {
 }
 
 .page-section {
-  padding: 100px 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .detail-section__header {
@@ -553,7 +553,7 @@ function formatIndex(value: number): string {
 }
 
 .contact-section {
-  padding-top: 120px;
+  padding-top: var(--section-padding-y);
 }
 
 .contact-panel {
@@ -583,7 +583,9 @@ function formatIndex(value: number): string {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  flex: 0 0 auto;
+  flex: 1 1 240px;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .contact-label {
@@ -601,6 +603,8 @@ function formatIndex(value: number): string {
   line-height: 1.5;
   text-decoration: none;
   transition: color 0.3s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-value[href]:hover { color: var(--brand-primary); }
@@ -654,7 +658,7 @@ function formatIndex(value: number): string {
 
   .promise-card,
   .contact-panel {
-    padding: 24px;
+    padding: 20px;
   }
 
   .card-header {
@@ -671,6 +675,15 @@ function formatIndex(value: number): string {
 
   .card-title {
     font-size: 1rem;
+  }
+
+  .contact-grid {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-card {
+    width: 100%;
   }
 }
 
@@ -697,8 +710,12 @@ function formatIndex(value: number): string {
     min-width: 32px;
   }
 
+  .contact-panel {
+    margin-top: 16px;
+  }
+
   .contact-card {
-    padding: 16px;
+    padding: 10px 12px;
   }
 }
 </style>
