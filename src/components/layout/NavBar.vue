@@ -432,9 +432,11 @@ onUnmounted(() => {
     background-color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(25px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2); // 玻璃边缘亮点
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
     
     .nav-container {
-      height: 64px;
+      height: var(--space-xl);
     }
     
     .logo {
@@ -443,8 +445,8 @@ onUnmounted(() => {
     }
 
     .dropdown {
-      top: 64px;
-      height: 64px;
+      top: var(--space-xl);
+      height: var(--space-xl);
     }
     
     .logo-text {
@@ -460,7 +462,7 @@ onUnmounted(() => {
   max-width: 100vw;
   margin: 0 auto;
   padding: 0;
-  height: 80px;
+  height: var(--nav-height);
   box-sizing: border-box;
   justify-content: space-between;
   background: transparent;
@@ -492,14 +494,15 @@ onUnmounted(() => {
 .logo-text {
   color: var(--nav-logo-text-color);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700; // 更具建筑感的细体/黑体切换
   padding: 12px 8px;
   position: relative;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
   display: flex;
   align-items: center;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em; // 建筑化字间距
+  text-rendering: optimizeLegibility;
   font-size: 24px;
   margin-left: 12px;
 }
@@ -619,21 +622,21 @@ onUnmounted(() => {
 
 .dropdown {
   position: fixed;
-  top: 80px;
+  top: var(--nav-height);
   left: 0;
   right: 0;
   transform: translateY(-8px) scaleY(0.98);
   background: rgba(255, 255, 255, 0.85);
   width: 100%;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-  border-radius: 0;
+  border-radius: 0 0 24px 24px; // 大圆角
   border-top: 1px solid rgba(26, 58, 143, 0.1);
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 999;
   backdrop-filter: blur(30px);
-  height: 80px;
+  height: var(--nav-height);
   transform-origin: top;
 }
 

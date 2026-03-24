@@ -274,8 +274,8 @@ onUnmounted(() => {
 .footer {
   width: 100%;
   margin-top: auto;
-  padding: 56px 0 0;
-  background: var(--color-background-dark);
+  padding: var(--section-padding-y) 0 0; // 大气间距
+  background: #0a0f1d; // 深邃高级底色
   color: #a1a1aa;
   font-size: 14px;
 }
@@ -288,8 +288,8 @@ onUnmounted(() => {
 
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 28px 20px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 48px 40px; // 更开阔的间距
   align-items: start;
 }
 
@@ -298,10 +298,12 @@ onUnmounted(() => {
 }
 
 .footer-col h4 {
-  margin: 0 0 14px;
+  margin: 0 0 20px;
   color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase; // 建筑化排版
 }
 
 .footer-col ul {
@@ -311,22 +313,22 @@ onUnmounted(() => {
 }
 
 .footer-col ul li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   line-height: 1.6;
 }
 
 .footer-col ul li a,
 .footer-link {
-  color: #a1a1aa;
+  color: #8a8a91;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-block;
 }
 
-.footer-col ul li a.active,
 .footer-col ul li a:hover,
 .footer-link:hover {
   color: #ffffff;
-  text-decoration: none;
+  transform: translateX(4px); // 轻微平移交互
 }
 
 .contact-col {
@@ -336,7 +338,7 @@ onUnmounted(() => {
 .contact-info {
   color: #d4d4d8;
   font-size: 13px;
-  line-height: 1.85;
+  line-height: 2;
   overflow-wrap: anywhere;
   word-break: break-word;
 }
@@ -344,7 +346,7 @@ onUnmounted(() => {
 .footer-qrcodes {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 24px;
 }
 
 .qrcode-col {
@@ -355,49 +357,63 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .qrcode-img {
-  width: 76px;
-  height: 76px;
-  padding: 4px;
-  border-radius: 16px;
+  width: 88px;
+  height: 88px;
+  padding: 6px;
+  border-radius: 12px;
   background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.qrcode-item:hover .qrcode-img {
+  transform: translateY(-4px) scale(1.05);
 }
 
 .bilibili-qrcode-img {
-  padding: 6px;
+  padding: 8px;
 }
 
 .qrcode-label {
   color: #d4d4d8;
   font-size: 12px;
+  font-weight: 500;
 }
 
 .footer-bottom {
-  margin-top: 48px;
-  padding: 24px 24px 32px;
+  margin-top: 80px;
+  padding: 32px 24px 40px;
   text-align: center;
-  color: #a1a1aa;
+  color: rgba(161, 161, 170, 0.6);
   font-size: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .icp-link {
-  margin-left: 8px;
-  color: #d4d4d8 !important;
+  margin-left: 12px;
+  color: rgba(212, 212, 216, 0.6) !important;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .icp-link:hover {
   color: #ffffff !important;
 }
 
+@media (max-width: 1024px) {
+  .footer-columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .footer {
-    padding-top: 44px;
+    padding-top: 64px;
   }
 
   .footer-main {
@@ -405,7 +421,8 @@ onUnmounted(() => {
   }
 
   .footer-columns {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
   }
 
   .contact-col,
@@ -415,12 +432,14 @@ onUnmounted(() => {
 
   .qrcode-col {
     justify-self: start;
+    margin-top: 12px;
   }
 }
 
 @media (max-width: 560px) {
   .footer-columns {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .contact-col,
@@ -433,13 +452,14 @@ onUnmounted(() => {
   }
 
   .footer-bottom {
+    margin-top: 48px;
     padding-left: 16px;
     padding-right: 16px;
   }
 
   .footer-bottom .icp-link {
     display: block;
-    margin: 6px 0 0;
+    margin: 8px 0 0;
   }
 }
 </style>
