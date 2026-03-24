@@ -276,19 +276,12 @@ function formatIndex(value: number): string {
 
 <style scoped lang="less">
 .support-page {
-  --support-primary: var(--color-primary);
-  --support-primary-deep: var(--color-primary-dark);
-  --support-text: var(--color-text);
-  --support-muted: var(--color-text-secondary);
-  --support-border: var(--color-border);
-  --support-surface: var(--color-background-white);
-  --support-surface-soft: var(--color-background);
-  color: var(--support-text);
-  background: var(--support-surface);
+  color: var(--brand-text);
+  background: var(--brand-surface);
 }
 
 .support-page > .page-section:nth-of-type(even) {
-  background-color: var(--support-surface-soft);
+  background-color: var(--brand-surface-soft);
 }
 
 .support-shell {
@@ -317,7 +310,7 @@ function formatIndex(value: number): string {
 .hero-eyebrow {
   display: block;
   margin: 0 0 16px;
-  color: var(--support-muted);
+  color: var(--brand-muted);
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -326,7 +319,7 @@ function formatIndex(value: number): string {
 
 .hero-title {
   margin: 0 0 24px;
-  color: var(--support-text);
+  color: var(--brand-text);
   font-size: clamp(2.2rem, 3.8vw, 3.6rem);
   font-weight: 500;
   line-height: 1.15;
@@ -336,7 +329,7 @@ function formatIndex(value: number): string {
 .hero-desc {
   max-width: 640px;
   margin: 0;
-  color: var(--support-muted);
+  color: var(--brand-muted);
   font-size: 1.05rem;
   line-height: 1.85;
 }
@@ -378,7 +371,7 @@ function formatIndex(value: number): string {
 }
 
 .hero-stat-value {
-  color: var(--support-text);
+  color: var(--brand-text);
   font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 600;
   line-height: 1;
@@ -386,7 +379,7 @@ function formatIndex(value: number): string {
 }
 
 .hero-stat-unit {
-  color: var(--support-muted);
+  color: var(--brand-muted);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -395,7 +388,7 @@ function formatIndex(value: number): string {
 
 .hero-stat-label {
   margin: 0;
-  color: var(--support-muted);
+  color: var(--brand-muted);
   font-size: 0.88rem;
   line-height: 1.55;
   text-align: left;
@@ -421,7 +414,7 @@ function formatIndex(value: number): string {
 .title-main {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 500;
-  color: var(--support-text);
+  color: var(--brand-text);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -429,7 +422,7 @@ function formatIndex(value: number): string {
 .title-en {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--support-muted);
+  color: var(--brand-muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -463,7 +456,7 @@ function formatIndex(value: number): string {
 }
 
 .faq-card {
-  background: var(--support-surface-soft);
+  background: var(--brand-surface-soft);
 }
 
 .card-header {
@@ -506,7 +499,7 @@ function formatIndex(value: number): string {
   border-radius: 4px;
   border: 0;
   background: rgba(26, 58, 143, 0.08);
-  color: var(--support-primary);
+  color: var(--brand-primary);
   padding: 4px 12px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -515,11 +508,11 @@ function formatIndex(value: number): string {
 
 .card-tag-muted {
   background: rgba(26, 58, 143, 0.06);
-  color: var(--support-primary);
+  color: var(--brand-primary);
 }
 
 .card-title {
-  color: var(--support-text);
+  color: var(--brand-text);
   font-size: 1.05rem;
   font-weight: 600;
   line-height: 1.7;
@@ -535,12 +528,12 @@ function formatIndex(value: number): string {
 
 .content-card.open .card-toggle {
   transform: rotate(180deg);
-  color: var(--support-primary);
+  color: var(--brand-primary);
 }
 
 .card-content {
   padding: 0 24px 24px 74px;
-  color: var(--support-muted);
+  color: var(--brand-muted);
 }
 
 .card-caption {
@@ -554,7 +547,7 @@ function formatIndex(value: number): string {
 
 .card-body {
   margin: 0;
-  color: var(--support-muted);
+  color: var(--brand-muted);
   font-size: 0.98rem;
   line-height: 1.85;
 }
@@ -574,7 +567,7 @@ function formatIndex(value: number): string {
 .contact-desc {
   margin: 16px 0 0;
   max-width: 520px;
-  color: var(--support-muted);
+  color: var(--brand-muted);
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.85;
@@ -594,7 +587,7 @@ function formatIndex(value: number): string {
 }
 
 .contact-label {
-  color: var(--support-muted);
+  color: var(--brand-muted);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -602,7 +595,7 @@ function formatIndex(value: number): string {
 }
 
 .contact-value {
-  color: var(--support-text);
+  color: var(--brand-text);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -610,7 +603,7 @@ function formatIndex(value: number): string {
   transition: color 0.3s ease;
 }
 
-.contact-value[href]:hover { color: var(--support-primary); }
+.contact-value[href]:hover { color: var(--brand-primary); }
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
@@ -709,3 +702,4 @@ function formatIndex(value: number): string {
   }
 }
 </style>
+

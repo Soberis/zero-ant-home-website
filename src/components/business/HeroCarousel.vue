@@ -148,9 +148,9 @@ onMounted(() => {
   scheduleNext();
   document.addEventListener('visibilitychange', handleVisibilityChange);
   // 延迟触发入场动画，确保首帧渲染完成
-  requestAnimationFrame(() => {
+  window.setTimeout(() => {
     entered.value = true;
-  });
+  }, 100);
 });
 
 onUnmounted(() => {
@@ -336,6 +336,14 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 12px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.hero-copy.hero-entered .hero-indicators {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-indicator {

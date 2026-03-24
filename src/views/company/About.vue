@@ -254,19 +254,12 @@ function formatIndex(value: number): string {
 
 <style scoped lang="less">
 .about-page {
-  --about-primary: var(--color-primary);
-  --about-primary-deep: var(--color-primary-dark);
-  --about-text: var(--color-text);
-  --about-muted: var(--color-text-secondary);
-  --about-border: var(--color-border);
-  --about-surface: var(--color-background-white);
-  --about-surface-soft: var(--color-background);
-  color: var(--about-text);
-  background: #ffffff;
+  color: var(--brand-text);
+  background: var(--brand-surface);
 }
 
 .about-page > .about-main > .page-section:nth-of-type(even) {
-  background-color: var(--about-surface-soft);
+  background-color: var(--brand-surface-soft);
 }
 
 .page-shell {
@@ -316,7 +309,7 @@ function formatIndex(value: number): string {
 
 .hero-eyebrow {
   margin: 0 0 18px;
-  color: var(--about-primary);
+  color: var(--brand-primary);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -326,7 +319,7 @@ function formatIndex(value: number): string {
 .hero-title {
   max-width: 10em;
   margin: 0 0 24px;
-  color: var(--about-text);
+  color: var(--brand-text);
   font-size: clamp(3.6rem, 7vw, 6rem);
   font-weight: 600;
   line-height: 1.02;
@@ -336,7 +329,7 @@ function formatIndex(value: number): string {
 .hero-sub {
   max-width: 720px;
   margin: 0;
-  color: var(--about-muted);
+  color: var(--brand-muted);
   font-size: 1.12rem;
   line-height: 1.95;
 }
@@ -346,7 +339,7 @@ function formatIndex(value: number): string {
   border: none;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.78);
-  color: var(--about-text);
+  color: var(--brand-text);
   padding: 12px 22px;
   font-size: 0.94rem;
   font-weight: 600;
@@ -393,7 +386,7 @@ function formatIndex(value: number): string {
 .title-main {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 500;
-  color: var(--about-text);
+  color: var(--brand-text);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -401,7 +394,7 @@ function formatIndex(value: number): string {
 .title-en {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--about-muted);
+  color: var(--brand-muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -422,14 +415,14 @@ function formatIndex(value: number): string {
 .timeline-events li,
 .honor-text,
 .culture-list li {
-  color: var(--about-text);
+  color: var(--brand-text);
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.8;
 }
 
 .contact-value {
-  color: var(--about-text);
+  color: var(--brand-text);
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.8;
@@ -444,7 +437,7 @@ function formatIndex(value: number): string {
 .info-panel,
 .culture-card,
 .honor-card {
-  background: var(--about-surface-soft);
+  background: var(--brand-surface-soft);
 }
 
 .timeline-card,
@@ -482,7 +475,7 @@ function formatIndex(value: number): string {
 
 .panel-title {
   margin: 0 0 18px;
-  color: var(--about-text);
+  color: var(--brand-text);
   font-size: 1.08rem;
   font-weight: 600;
 }
@@ -496,21 +489,21 @@ function formatIndex(value: number): string {
 .stat-card {
   border: none;
   border-radius: var(--radius-sm);
-  background: var(--about-surface-soft);
+  background: var(--brand-surface-soft);
   padding: 18px 16px;
 }
 
 .stat-number {
   display: block;
   margin-bottom: 8px;
-  color: var(--about-primary-deep);
+  color: var(--brand-primary-deep);
   font-size: 1.6rem;
   font-weight: 600;
   line-height: 1.1;
 }
 
 .stat-label {
-  color: var(--about-muted);
+  color: var(--brand-muted);
   font-size: 0.92rem;
   line-height: 1.6;
 }
@@ -552,7 +545,7 @@ function formatIndex(value: number): string {
   height: 14px;
   margin-top: 4px;
   border-radius: 50%;
-  background: var(--about-primary);
+  background: var(--brand-primary);
   box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1);
   animation: pulse-dot 2.4s ease-in-out infinite;
 }
@@ -564,7 +557,7 @@ function formatIndex(value: number): string {
 
 .timeline-year {
   margin-bottom: 12px;
-  color: var(--about-primary-deep);
+  color: var(--brand-primary-deep);
   font-size: 1.18rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -615,7 +608,7 @@ function formatIndex(value: number): string {
 
 .honor-text {
   margin: 0;
-  color: var(--about-text);
+  color: var(--brand-text);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -642,7 +635,7 @@ function formatIndex(value: number): string {
 }
 
 .value-text {
-  color: var(--about-text);
+  color: var(--brand-text);
   font-size: 1.12rem;
   font-weight: 600;
   line-height: 1.4;
@@ -698,7 +691,7 @@ function formatIndex(value: number): string {
 }
 
 .contact-value {
-  color: var(--about-text);
+  color: var(--brand-text);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -707,7 +700,7 @@ function formatIndex(value: number): string {
 }
 
 .contact-value[href]:hover {
-  color: var(--about-primary);
+  color: var(--brand-primary);
 }
 
 @media (max-width: 1024px) {
@@ -786,3 +779,4 @@ function formatIndex(value: number): string {
   }
 }
 </style>
+

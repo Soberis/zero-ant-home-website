@@ -421,15 +421,8 @@ function goToProduct(route: string): void {
 
 <style scoped lang="less">
 .solutions-page {
-  --solution-primary: var(--color-primary);
-  --solution-primary-deep: var(--color-primary-dark);
-  --solution-text: var(--color-text);
-  --solution-muted: var(--color-text-secondary);
-  --solution-border: var(--color-border);
-  --solution-surface: var(--color-background-white);
-  --solution-surface-soft: var(--color-background);
-  color: var(--solution-text);
-  background: #ffffff;
+  color: var(--brand-text);
+  background: var(--brand-surface);
 }
 
 .page-shell {
@@ -460,7 +453,7 @@ function goToProduct(route: string): void {
 .hero-eyebrow {
   display: block;
   margin: 0 0 16px;
-  color: var(--solution-muted);
+  color: var(--brand-muted);
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -470,7 +463,7 @@ function goToProduct(route: string): void {
 .hero-title {
   max-width: 14em;
   margin: 0 0 24px;
-  color: var(--solution-text);
+  color: var(--brand-text);
   font-size: clamp(2.2rem, 3.8vw, 3.6rem);
   font-weight: 500;
   line-height: 1.15;
@@ -485,7 +478,7 @@ function goToProduct(route: string): void {
 .step-description,
 .contact-description,
 .contact-value {
-  color: var(--solution-muted);
+  color: var(--brand-muted);
   line-height: 1.85;
 }
 
@@ -540,7 +533,7 @@ function goToProduct(route: string): void {
 }
 
 .hero-stat-value {
-  color: var(--solution-text);
+  color: var(--brand-text);
   font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 600;
   line-height: 1;
@@ -548,7 +541,7 @@ function goToProduct(route: string): void {
 }
 
 .hero-stat-label {
-  color: var(--solution-muted);
+  color: var(--brand-muted);
   font-size: 0.88rem;
   line-height: 1.55;
   text-align: left;
@@ -563,10 +556,10 @@ function goToProduct(route: string): void {
 }
 
 .nav-pill {
-  border: 1px solid var(--solution-border);
+  border: 1px solid var(--brand-border);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.88);
-  color: var(--solution-text);
+  color: var(--brand-text);
   padding: 10px 16px;
   font-size: 0.92rem;
   font-weight: 600;
@@ -579,7 +572,7 @@ function goToProduct(route: string): void {
 }
 
 .solutions-page > .page-section:nth-of-type(even) {
-  background-color: var(--solution-surface-soft);
+  background-color: var(--brand-surface-soft);
 }
 
 .section-heading {
@@ -605,7 +598,7 @@ function goToProduct(route: string): void {
 .title-main {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 500;
-  color: var(--solution-text);
+  color: var(--brand-text);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -613,7 +606,7 @@ function goToProduct(route: string): void {
 .title-en {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--solution-muted);
+  color: var(--brand-muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -624,7 +617,7 @@ function goToProduct(route: string): void {
   margin: 0;
   font-size: 1rem;
   line-height: 1.75;
-  color: var(--solution-muted);
+  color: var(--brand-muted);
 }
 
 .backbone-grid,
@@ -666,7 +659,7 @@ function goToProduct(route: string): void {
   margin: 0 0 24px 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--solution-text);
+  color: var(--brand-text);
   letter-spacing: 0.02em;
 }
 
@@ -679,7 +672,7 @@ function goToProduct(route: string): void {
   flex-direction: column;
   padding: 32px;
   border-radius: 16px;
-  background: var(--solution-surface-soft);
+  background: var(--brand-surface-soft);
   border: 1px solid rgba(15, 23, 42, 0.04);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
@@ -721,7 +714,7 @@ function goToProduct(route: string): void {
 .cta-arrow {
   width: 18px;
   height: 18px;
-  color: var(--solution-primary);
+  color: var(--brand-primary);
   opacity: 0.8;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -779,7 +772,7 @@ function goToProduct(route: string): void {
   padding: 4px 12px;
   border-radius: 4px;
   background: rgba(15, 23, 42, 0.04);
-  color: var(--solution-text);
+  color: var(--brand-text);
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -790,13 +783,13 @@ function goToProduct(route: string): void {
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
-  color: var(--solution-text);
+  color: var(--brand-text);
   opacity: 0.65;
   transition: all 0.3s ease;
 }
 
 .industry-block:hover .industry-footer-jump {
-  color: var(--solution-primary);
+  color: var(--brand-primary);
   opacity: 1;
 }
 
@@ -812,7 +805,7 @@ function goToProduct(route: string): void {
 .action-icon {
   width: 24px;
   height: 24px;
-  color: var(--solution-primary);
+  color: var(--brand-primary);
   transition: transform 0.3s ease;
 }
 /* -------------------------------------- */
@@ -834,7 +827,7 @@ function goToProduct(route: string): void {
 
 .card-title {
   margin: 0 0 12px;
-  color: var(--solution-text);
+  color: var(--brand-text);
   font-size: 1.16rem;
   font-weight: 600;
   line-height: 1.45;
@@ -870,7 +863,7 @@ function goToProduct(route: string): void {
 .chip-btn:hover {
   background: rgba(26, 58, 143, 0.04);
   border-color: rgba(26, 58, 143, 0.25);
-  color: var(--solution-primary);
+  color: var(--brand-primary);
   transform: translateY(-2px);
 }
 
@@ -882,7 +875,7 @@ function goToProduct(route: string): void {
 
 .chip-btn {
   background: transparent;
-  color: var(--solution-text);
+  color: var(--brand-text);
   border: 1px solid rgba(15, 23, 42, 0.12);
   cursor: pointer;
 }
@@ -893,7 +886,7 @@ function goToProduct(route: string): void {
 
 .meta-text {
   margin: 0;
-  color: var(--solution-text);
+  color: var(--brand-text);
   font-size: 0.94rem;
   line-height: 1.75;
 }
@@ -909,7 +902,7 @@ function goToProduct(route: string): void {
 .scenario-list li {
   position: relative;
   padding-left: 14px;
-  color: var(--solution-text);
+  color: var(--brand-text);
   font-size: 0.94rem;
   line-height: 1.7;
 }
@@ -947,13 +940,13 @@ function goToProduct(route: string): void {
 .proof-card-title,
 .contact-title,
 .step-title {
-  color: var(--solution-text);
+  color: var(--brand-text);
 }
 
 .proof-card-title {
   margin-bottom: 8px;
   font-size: 1.15rem;
-  color: var(--solution-title);
+  color: var(--brand-text);
   font-weight: 600;
   line-height: 1.45;
 }
@@ -982,7 +975,7 @@ function goToProduct(route: string): void {
 .text-link {
   border: 0;
   background: transparent;
-  color: var(--solution-primary);
+  color: var(--brand-primary);
   padding: 0;
   font-size: 0.94rem;
   font-weight: 600;
@@ -1038,7 +1031,7 @@ function goToProduct(route: string): void {
 }
 
 .more-tab {
-  border: 1px solid var(--solution-border);
+  border: 1px solid var(--brand-border);
   border-radius: 999px;
   background: #ffffff;
   color: rgba(15, 23, 42, 0.68);
@@ -1060,7 +1053,7 @@ function goToProduct(route: string): void {
 .more-tab.active {
   border-color: rgba(26, 58, 143, 0.16);
   background: rgba(26, 58, 143, 0.08);
-  color: var(--solution-primary);
+  color: var(--brand-primary);
 }
 
 .more-video-grid,
@@ -1091,7 +1084,7 @@ function goToProduct(route: string): void {
   border: 1.5px solid rgba(15, 23, 42, 0.15);
   border-radius: 999px;
   background: transparent;
-  color: var(--solution-text);
+  color: var(--brand-text);
   font-size: 0.92rem;
   font-weight: 500;
   cursor: pointer;
@@ -1099,13 +1092,13 @@ function goToProduct(route: string): void {
 }
 
 .show-more-btn:hover {
-  border-color: var(--solution-primary);
-  color: var(--solution-primary);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
   transform: translateY(-1px);
 }
 
 .delivery-contact .section-eyebrow {
-  color: var(--solution-muted);
+  color: var(--brand-muted);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1163,13 +1156,13 @@ function goToProduct(route: string): void {
   margin: 4px 0 8px;
   font-size: 1.4rem;
   font-weight: 500;
-  color: var(--solution-text);
+  color: var(--brand-text);
 }
 
 .delivery-contact__desc {
   margin: 0;
   font-size: 0.95rem;
-  color: var(--solution-muted);
+  color: var(--brand-muted);
 }
 
 .delivery-contact__row {
@@ -1196,13 +1189,13 @@ function goToProduct(route: string): void {
 .delivery-contact__link {
   font-size: 1.1rem;
   font-weight: 500;
-  color: var(--solution-text);
+  color: var(--brand-text);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .delivery-contact__link:hover {
-  color: var(--solution-primary);
+  color: var(--brand-primary);
 }
 
 @media (max-width: 1024px) {
@@ -1301,3 +1294,4 @@ function goToProduct(route: string): void {
   border-radius: 16px !important;
 }
 </style>
+

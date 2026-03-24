@@ -17,24 +17,21 @@
             v-for="product in group.items"
             :key="product.slug"
             :to="getProductDetailLink(product)"
-            class="card product-card hover-lift"
+            class="product-row"
           >
-            <div class="product-visual" :class="`visual-${product.category}`">
+            <div class="row-media" :class="`visual-${product.category}`">
               <img :src="product.image" :alt="t(product.name)" class="visual-img" />
             </div>
 
-            <div class="product-copy">
-              <h4 class="text-title-large product-title">{{ t(product.name) }}</h4>
-              <p class="text-body-small product-desc">{{ t(product.desc) }}</p>
-
-              <div class="card-action">
-                <span class="action-text">{{ t('common.cta.viewDetails') }}</span>
-                <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
+            <div class="row-copy">
+              <h4 class="text-title-medium row-title">{{ t(product.name) }}</h4>
+              <p class="text-body-small row-desc">{{ t(product.desc) }}</p>
             </div>
+
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </router-link>
         </div>
       </section>
@@ -49,22 +46,18 @@ import { getProductDetailLink } from '@/utils/product';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-const FEATURED_PRODUCTS_PER_GROUP = 3;
-
 const productGroups = computed(() => [
   {
     key: 'system',
     title: t('nav.systemProducts'),
     items: products
-      .filter((product) => product.category === 'system')
-      .slice(0, FEATURED_PRODUCTS_PER_GROUP),
+      .filter((product) => product.category === 'system'),
   },
   {
     key: 'robot',
     title: t('nav.robotProducts'),
     items: products
-      .filter((product) => product.category === 'robot')
-      .slice(0, FEATURED_PRODUCTS_PER_GROUP),
+      .filter((product) => product.category === 'robot'),
   },
 ]);
 </script>
@@ -86,7 +79,7 @@ const productGroups = computed(() => [
 /* ── 分组容器 ── */
 .product-groups {
   display: grid;
-  gap: 36px;
+  gap: 48px;
 }
 
 .product-group {
@@ -107,47 +100,42 @@ const productGroups = computed(() => [
 }
 
 .products-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-md);
-}
-
-.product-card {
   display: flex;
   flex-direction: column;
-  min-height: 0;
-  border: 0;
-  text-decoration: none;
-  color: inherit;
-  /* rely on .card global class for background, padding, boundary and shadow */
-  padding: var(--space-md);
-  border-radius: var(--radius-md);
-  background: var(--color-background-white);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  gap: 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.product-card:link,
-.product-card:visited,
-.product-card:active {
+.product-row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  transition: color var(--transition-normal), transform var(--transition-normal);
+}
+
+.product-row:link,
+.product-row:visited,
+.product-row:active {
   text-decoration: none;
   color: inherit;
 }
 
-/* §7.5 hover 作用在卡片整体 */
-.product-card:hover {
+.product-row:hover {
   transform: translateY(-2px);
-  background: #ffffff;
 }
 
-.product-visual {
+.row-media {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 172px;
+  height: 96px;
   border-radius: var(--radius-md);
-  margin-bottom: var(--space-sm);
   position: relative;
   overflow: hidden;
   transition: background-color var(--transition-normal);
@@ -177,58 +165,44 @@ const productGroups = computed(() => [
   filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.05));
 }
 
-.product-title {
-  margin: 0;
-  color: var(--color-text);
-}
-
-.product-copy {
-  flex: 1;
+.row-copy {
   display: flex;
   flex-direction: column;
   gap: 6px;
   min-width: 0;
 }
 
-.product-desc {
+.row-title {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.row-desc {
   margin: 0;
   color: var(--color-text-secondary);
-  min-height: calc(1.5em * 2);
+  max-width: 560px;
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
 
-.card-action {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: var(--space-md);
+.row-arrow {
+  width: 20px;
+  height: 20px;
   color: var(--color-text-secondary);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color var(--transition-normal);
+  transition: transform var(--transition-normal), color var(--transition-normal);
 }
 
-.action-icon {
-  width: 16px;
-  height: 16px;
-  transition: transform var(--transition-normal);
-}
-
-.product-card:hover .card-action {
+.product-row:hover .row-arrow {
   color: var(--color-primary);
-}
-
-.product-card:hover .action-icon {
   transform: translateX(4px);
 }
 
 @media (max-width: 1024px) {
-  .products-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .product-row {
+    grid-template-columns: 140px minmax(0, 1fr) auto;
+    gap: 16px;
   }
 }
 
@@ -239,21 +213,19 @@ const productGroups = computed(() => [
 }
 
 @media (max-width: 640px) {
-  .section-title {
-    margin-top: var(--space-sm);
-  }
-
-  .products-list {
+  .product-row {
     grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: start;
   }
 
-  .product-card {
-    min-height: auto;
-    padding: var(--space-sm);
-  }
-
-  .product-visual {
+  .row-media {
     height: 150px;
   }
+
+  .row-arrow {
+    justify-self: end;
+  }
 }
+
 </style>

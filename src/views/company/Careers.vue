@@ -298,19 +298,12 @@ function applyForPosition(position: Position): void {
 
 <style scoped lang="less">
 .careers-page {
-  --career-primary: var(--color-primary);
-  --career-primary-deep: var(--color-primary-dark);
-  --career-text: var(--color-text);
-  --career-muted: var(--color-text-secondary);
-  --career-border: var(--color-border);
-  --career-surface: var(--color-background-white);
-  --career-surface-soft: var(--color-background);
-  color: var(--career-text);
-  background: #ffffff;
+  color: var(--brand-text);
+  background: var(--brand-surface);
 }
 
 .careers-page > .page-section:nth-of-type(even) {
-  background-color: var(--career-surface-soft);
+  background-color: var(--brand-surface-soft);
 }
 
 .page-shell {
@@ -339,7 +332,7 @@ function applyForPosition(position: Position): void {
 .section-eyebrow {
   display: block;
   margin: 0 0 16px;
-  color: var(--career-muted);
+  color: var(--brand-muted);
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -348,7 +341,7 @@ function applyForPosition(position: Position): void {
 
 .hero-title {
   margin: 0 0 24px;
-  color: var(--career-text);
+  color: var(--brand-text);
   font-size: clamp(2.2rem, 3.8vw, 3.6rem);
   font-weight: 500;
   line-height: 1.15;
@@ -358,7 +351,7 @@ function applyForPosition(position: Position): void {
 .hero-subtitle {
   max-width: 620px;
   margin: 0 0 32px;
-  color: var(--career-muted);
+  color: var(--brand-muted);
   font-size: 1.05rem;
   line-height: 1.85;
 }
@@ -386,19 +379,19 @@ function applyForPosition(position: Position): void {
 .hero-action {
   border: 1px solid rgba(15, 23, 42, 0.16);
   background: #ffffff;
-  color: var(--career-text);
+  color: var(--brand-text);
 }
 
 .hero-action-primary,
 .apply-btn {
   border: 1px solid transparent;
-  background: var(--career-primary);
+  background: var(--brand-primary);
   color: #ffffff;
   box-shadow: none;
 }
 
 .hero-action:hover {
-  background: var(--career-surface-soft);
+  background: var(--brand-surface-soft);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
 }
@@ -406,7 +399,7 @@ function applyForPosition(position: Position): void {
 .apply-btn:hover,
 .hero-action-primary:hover {
   transform: translateY(-2px);
-  background: var(--career-primary-deep);
+  background: var(--brand-primary-deep);
   box-shadow: 0 8px 24px rgba(26, 58, 143, 0.12);
 }
 
@@ -438,7 +431,7 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-stat-value {
-  color: var(--career-text);
+  color: var(--brand-text);
   font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 600;
   line-height: 1;
@@ -446,7 +439,7 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-stat-label {
-  color: var(--career-muted);
+  color: var(--brand-muted);
   font-size: 0.88rem;
   line-height: 1.55;
   text-align: left;
@@ -477,7 +470,7 @@ function applyForPosition(position: Position): void {
 .title-main {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 500;
-  color: var(--career-text);
+  color: var(--brand-text);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -485,7 +478,7 @@ function applyForPosition(position: Position): void {
 .title-en {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--career-muted);
+  color: var(--brand-muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -532,7 +525,7 @@ function applyForPosition(position: Position): void {
   grid-column: 2;
   grid-row: 1;
   margin: 0 0 6px;
-  color: var(--career-text);
+  color: var(--brand-text);
   font-size: 1.06rem;
   font-weight: 600;
   line-height: 1.45;
@@ -542,7 +535,7 @@ function applyForPosition(position: Position): void {
   grid-column: 2;
   grid-row: 2;
   margin: 0;
-  color: var(--career-muted);
+  color: var(--brand-muted);
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.7;
@@ -556,7 +549,7 @@ function applyForPosition(position: Position): void {
 .position-card {
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
-  background: var(--career-surface-soft);
+  background: var(--brand-surface-soft);
   box-shadow: none;
   padding: 40px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -579,7 +572,7 @@ function applyForPosition(position: Position): void {
 
 .position-title {
   margin: 0;
-  color: var(--career-text);
+  color: var(--brand-text);
   font-size: 1.35rem;
   font-weight: 600;
   line-height: 1.35;
@@ -597,7 +590,7 @@ function applyForPosition(position: Position): void {
 
 .position-type {
   background: rgba(26, 58, 143, 0.08);
-  color: var(--career-primary);
+  color: var(--brand-primary);
 }
 
 .position-meta {
@@ -619,7 +612,7 @@ function applyForPosition(position: Position): void {
 
 .requirements-title {
   margin: 0 0 14px;
-  color: var(--career-text);
+  color: var(--brand-text);
   font-size: 1rem;
   font-weight: 600;
 }
@@ -635,7 +628,7 @@ function applyForPosition(position: Position): void {
 .requirements-list li {
   position: relative;
   padding-left: 16px;
-  color: var(--career-muted);
+  color: var(--brand-muted);
   line-height: 1.75;
 }
 
@@ -647,7 +640,7 @@ function applyForPosition(position: Position): void {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--career-primary);
+  background: var(--brand-primary);
 }
 
 .position-actions {
@@ -665,7 +658,7 @@ function applyForPosition(position: Position): void {
 
 .contact-description {
   margin: 16px 0 0;
-  color: var(--career-muted);
+  color: var(--brand-muted);
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.85;
@@ -677,7 +670,7 @@ function applyForPosition(position: Position): void {
   border-radius: 999px;
   padding: 12px 32px;
   background: #ffffff;
-  color: var(--career-text);
+  color: var(--brand-text);
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -687,7 +680,7 @@ function applyForPosition(position: Position): void {
   transform: translateY(-2px);
   border-color: rgba(26, 58, 143, 0.16);
   box-shadow: 0 12px 24px rgba(26, 58, 143, 0.06);
-  color: var(--career-primary);
+  color: var(--brand-primary);
 }
 
 .contact-grid {
@@ -703,7 +696,7 @@ function applyForPosition(position: Position): void {
 }
 
 .contact-label {
-  color: var(--career-muted);
+  color: var(--brand-muted);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -711,7 +704,7 @@ function applyForPosition(position: Position): void {
 }
 
 .contact-value {
-  color: var(--career-text);
+  color: var(--brand-text);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -720,7 +713,7 @@ function applyForPosition(position: Position): void {
 }
 
 .contact-value[href]:hover {
-  color: var(--career-primary);
+  color: var(--brand-primary);
   text-decoration: none;
 }
 
@@ -800,3 +793,4 @@ function applyForPosition(position: Position): void {
   }
 }
 </style>
+
