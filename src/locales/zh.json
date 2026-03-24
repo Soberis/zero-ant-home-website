@@ -34,7 +34,8 @@
     "applications": "应用领域",
     "medicalAuto": "医药自动化",
     "semiProcessing": "@:common.terms.semiconductorProcessing",
-    "toggleMenu": "切换导航菜单"
+    "toggleMenu": "切换导航菜单",
+    "logoAlt": "零蚁科技标志"
   },
   "common": {
     "backToTop": "返回顶部",
@@ -1159,6 +1160,7 @@
     "bilibili": "B站官方号",
     "copyright": "版权所有",
     "telValue": "13001001954",
+    "emailValue": "liqingfeng@zeroant.com",
     "icpNumber": "备案号：浙ICP备2022031941号-4"
   },
   "seo": {

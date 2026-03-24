@@ -10,7 +10,7 @@
             <div class="contact-info">
               <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
 
-              <div>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</div>
+              <div>{{ $t("contacts.email") }}：{{ $t("footer.emailValue") }}</div>
 
               <div style="margin-top: 8px">
                 {{ $t("contacts.address") }}：{{ $t("footer.address") }}
@@ -189,7 +189,7 @@
             <div class="contact-info">
               <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
 
-              <div>{{ $t("contacts.email") }}：liqingfeng@zeroant.com</div>
+              <div>{{ $t("contacts.email") }}：{{ $t("footer.emailValue") }}</div>
 
               <div style="margin-top: 8px">
                 {{ $t("contacts.address") }}：{{ $t("footer.address") }}
@@ -238,24 +238,16 @@
 </template>
 
 <script setup lang="ts">
-// 仅用于国际化，无复杂逻辑
+// 仅用于国际化与基础响应式逻辑
 import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.png";
 import wxQrcode from "@/assets/images/qrcodes/wx.jpg";
 import { ref, onMounted, onUnmounted } from "vue";
+import {
+  systemProductNav,
+  robotProductNav,
+} from "@/data/navigation";
 
-const systemProductNav = [
-  { hash: "#multi-os-vm", label: "nav.multiOSVM" },
-  { hash: "#industrial-rtos", label: "nav.industrialRTOS" },
-  { hash: "#airos", label: "nav.airos" },
-  { hash: "#robot-scheduler", label: "nav.robotScheduler" },
-];
-const robotProductNav = [
-  { hash: "#gantry-2d", label: "nav.gantry2D" },
-  { hash: "#scara-4axis", label: "nav.scara4Axis" },
-  { hash: "#arm-6axis", label: "nav.arm6Axis" },
-  { hash: "#dual-arm-humanoid", label: "nav.dualArmHumanoid" },
-  { hash: "#mobile-robot", label: "nav.mobileRobot" },
-];
+// 导航数据已从 @/data/navigation 导入
 
 const isMobile = ref(false);
 function checkMobile() {
