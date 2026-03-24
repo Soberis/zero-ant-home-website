@@ -7,7 +7,7 @@ import Home from "@/views/Home.vue";
 const Solutions = () => import("@/views/solutions/Solutions.vue");
 const About = () => import("@/views/company/About.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
-const ProductDetail = () => import("@/views/products/ProductDetailView.vue");
+const ProductDetail = () => import("@/views/products/ProductDetail.vue");
 const Support = () => import("@/views/support/Support.vue");
 const ApplicationDetail = () =>
   import("@/views/applications/ApplicationDetail.vue");
