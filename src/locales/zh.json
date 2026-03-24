@@ -147,7 +147,8 @@
       "eyebrow": "Scenario Coverage",
       "title": "@:common.section.industryApplications",
       "description": "按医疗、半导体、智能制造与物流场景快速定位。",
-      "explore": "查看方案"
+      "explore": "查看方案",
+      "exploreAll": "探索所有行业应用"
     },
     "partners": {
       "eyebrow": "Trusted By",
@@ -733,7 +734,7 @@
       ]
     },
     "robotstudio-remote-control": {
-      "title": "上位机RobotStudioIDE远程控制及仿真",
+      "title": "上位机IDE远程控制",
       "desc": "展示零蚁科技基于RobotStudioIDE的上位机远程控制与仿真技术，实现机器人系统的可视化编程、远程监控与虚拟调试，大幅提升开发效率与系统可靠性。",
       "tags": [
         "上位机控制",
@@ -1160,7 +1161,7 @@
     "bilibili": "B站官方号",
     "copyright": "版权所有",
     "telValue": "13001001954",
-    "emailValue": "liqingfeng@zeroant.com",
+    "emailValue": "liqingfeng{'@'}zeroant.com",
     "icpNumber": "备案号：浙ICP备2022031941号-4"
   },
   "seo": {

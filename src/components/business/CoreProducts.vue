@@ -151,6 +151,7 @@ const productGroups = computed(() => [
   height: 100%;
   object-fit: contain;
   object-position: center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .visual-robot {
@@ -163,6 +164,11 @@ const productGroups = computed(() => [
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.05));
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-row:hover .visual-img {
+  transform: scale(1.04);
 }
 
 .row-copy {

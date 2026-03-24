@@ -153,7 +153,7 @@ export function useProductDetailData(
       return getRelatedApplications(slugValue.value);
     }
 
-    return applications.slice(0, 4);
+    return applications.slice(0, 6);
   });
 
   const relatedVideos = computed(() => {

@@ -235,8 +235,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
+import { computed, ref, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications from "@/data/applications";
 import { getProducts } from "@/data/products";
@@ -257,8 +257,20 @@ const deliveryRef = ref<HTMLElement | null>(null);
 useScrollRevealList([industriesRef, backboneRef, proofRef, deliveryRef]);
 
 const router = useRouter();
+const route = useRoute();
 const { t, tm } = useI18n();
 const activeMoreTab = ref<"videos" | "applications">("videos");
+
+watch(
+  () => route.query.tab,
+  (newTab) => {
+    if (newTab === "applications" || newTab === "videos") {
+      activeMoreTab.value = newTab as "videos" | "applications";
+    }
+  },
+  { immediate: true }
+);
+
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
 const showAllApps = ref(false);
@@ -1064,18 +1076,17 @@ function goToProduct(route: string): void {
   color: var(--brand-primary);
 }
 
-.more-video-grid,
+.more-video-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .more-application-grid {
   display: grid;
-  gap: 16px;
-}
-
-.more-video-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.more-application-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 48px;
+  row-gap: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-show-more {

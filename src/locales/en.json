@@ -146,7 +146,8 @@
       "eyebrow": "Scenario Coverage",
       "title": "@:common.section.industryApplications",
       "description": "Quickly find the right path for medical, semiconductor, manufacturing, and logistics scenarios.",
-      "explore": "View Solution"
+      "explore": "View Solution",
+      "exploreAll": "Explore All Industry Applications"
     },
     "partners": {
       "eyebrow": "Trusted By",
@@ -778,7 +779,7 @@
       ]
     },
     "robotstudio-remote-control": {
-      "title": "Upper Computer RobotStudio IDE Remote Control and Simulation",
+      "title": "RobotStudio IDE Control",
       "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",
       "tags": [
         "RobotStudio IDE",
@@ -1168,7 +1169,7 @@
     "bilibili": "Bilibili",
     "copyright": "All Rights Reserved",
     "telValue": "13001001954",
-    "emailValue": "liqingfeng@zeroant.com",
+    "emailValue": "liqingfeng{'@'}zeroant.com",
     "icpNumber": "ICP Record No.: Zhe ICP Bei 2022031941-4"
   },
   "seo": {

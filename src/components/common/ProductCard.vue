@@ -111,6 +111,11 @@ const categoryLabel = computed(() =>
   max-height: 400px;
   object-fit: contain;
   filter: none;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.04);
 }
 
 .product-card__content {
