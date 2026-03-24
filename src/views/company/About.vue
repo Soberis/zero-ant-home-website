@@ -224,8 +224,8 @@ const honors: ComputedRef<string[]> = computed(() =>
 const teamStats = computed(() => [
   { value: "20+", label: t("about.teamSize") },
   { value: "90%+", label: t("about.masterDegree") },
-  { value: "�?2", label: t("about.averageAge") },
-  { value: "�?0%", label: t("about.topUniversity") },
+  { value: "≤32", label: t("about.averageAge") },
+  { value: "≥90%", label: t("about.topUniversity") },
 ]);
 
 const coreValues = computed(() => [
@@ -574,7 +574,7 @@ function formatIndex(value: number): string {
   margin: 0;
 }
 
-/* honors: 两列分隔线列�?*/
+/* honors: 两列分隔线列�?*/
 .honor-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -614,7 +614,7 @@ function formatIndex(value: number): string {
   line-height: 1.6;
 }
 
-/* values: 横向 4 列关键词，竖线分�?*/
+/* values: 横向 4 列关键词，竖线分�?*/
 .values-grid {
   display: flex;
   align-items: stretch;

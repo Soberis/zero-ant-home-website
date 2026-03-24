@@ -3,7 +3,7 @@
     class="app-card"
     :to="props.slug ? `/applications/${props.slug}` : '/solutions'"
   >
-    <span class="app-card__icon" v-html="props.svg"></span>
+    <span class="app-card__icon" v-html="sanitizedSvg"></span>
 
     <h3 class="app-card__title">
       {{ t(props.title) }}
@@ -25,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+import { sanitizeHtmlAllowList } from "@/utils/security";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps<{
@@ -35,6 +37,8 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
+
+const sanitizedSvg = computed(() => sanitizeHtmlAllowList(props.svg, ["svg", "path", "circle", "rect", "line", "polyline", "polygon", "g"]));
 </script>
 
 <style scoped lang="less">

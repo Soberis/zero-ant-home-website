@@ -15,10 +15,10 @@
 
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
-          <p class="text-label-large hero-eyebrow">{{ t('home.hero.eyebrow') }}</p>
-          <h1 class="text-display-hero hero-title">{{ t('home.hero.title') }}</h1>
-          <p class="text-body-large hero-description">{{ t('home.hero.description') }}</p>
-          <div class="hero-actions">
+          <p class="text-label-large hero-eyebrow" style="transition-delay: 0.1s">{{ t('home.hero.eyebrow') }}</p>
+          <h1 class="text-display-hero hero-title" style="transition-delay: 0.2s">{{ t('home.hero.title') }}</h1>
+          <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
+          <div class="hero-actions" style="transition-delay: 0.4s">
             <div class="hero-buttons">
               <router-link
                 to="/solutions"

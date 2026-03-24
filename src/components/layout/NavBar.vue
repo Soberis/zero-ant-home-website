@@ -63,11 +63,7 @@
               </div>
             </div>
           </li>
-          <!-- <li class="nav-item">
-            <router-link to="/video" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.videoCases") }}</span>
-            </router-link>
-          </li> -->
+
           <li class="nav-item has-dropdown">
             <router-link to="/solutions" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.solutions") }}</span>
@@ -87,11 +83,7 @@
               </div>
             </div>
           </li>
-          <!-- <li class="nav-item has-dropdown">
-            <router-link to="/applications" class="nav-link" active-class="active">
-              <span class="nav-text">{{ $t("nav.applications") }}</span>
-            </router-link>
-          </li> -->
+
           <li class="nav-item has-dropdown">
             <router-link to="/support" class="nav-link" active-class="active">
               <span class="nav-text">{{ $t("nav.support") }}</span>
@@ -215,11 +207,7 @@
               {{ $t("nav.robotProducts") }}
             </router-link>
           </li>
-          <!-- <li class="mobile-nav-item">
-            <router-link to="/video" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.videoCases") }}
-            </router-link>
-          </li> -->
+
           <li class="mobile-nav-item">
             <router-link
               to="/solutions"
@@ -229,11 +217,7 @@
               {{ $t("nav.solutions") }}
             </router-link>
           </li>
-          <!-- <li class="mobile-nav-item">
-            <router-link to="/applications" class="mobile-nav-link" @click="closeMobileMenu">
-              {{ $t("nav.applications") }}
-            </router-link>
-          </li> -->
+
           <li class="mobile-nav-item">
             <router-link
               to="/support"
