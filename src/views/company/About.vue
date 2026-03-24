@@ -411,12 +411,18 @@ function formatIndex(value: number): string {
 .info-text,
 .timeline-events li,
 .honor-text,
-.culture-list li,
+.culture-list li {
+  color: var(--about-text);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
 .contact-value {
   color: var(--about-text);
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.8;
   text-decoration: none;
 }
 
@@ -528,7 +534,7 @@ function formatIndex(value: number): string {
   z-index: 1;
   width: 14px;
   height: 14px;
-  margin-top: 18px;
+  margin-top: 4px;
   border-radius: 50%;
   background: var(--about-primary);
   box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1);
