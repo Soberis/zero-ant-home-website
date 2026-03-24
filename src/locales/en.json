@@ -33,7 +33,8 @@
     "contact": "@:common.terms.contactUs",
     "applications": "Applications",
     "medicalAuto": "@:common.terms.medicalAutomation",
-    "semiProcessing": "@:common.terms.semiconductorProcessing"
+    "semiProcessing": "@:common.terms.semiconductorProcessing",
+    "toggleMenu": "Toggle navigation menu"
   },
   "common": {
     "backToTop": "Back to Top",

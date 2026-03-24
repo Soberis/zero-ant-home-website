@@ -33,7 +33,8 @@
     "contact": "@:common.terms.contactUs",
     "applications": "应用领域",
     "medicalAuto": "医药自动化",
-    "semiProcessing": "@:common.terms.semiconductorProcessing"
+    "semiProcessing": "@:common.terms.semiconductorProcessing",
+    "toggleMenu": "切换导航菜单"
   },
   "common": {
     "backToTop": "返回顶部",
