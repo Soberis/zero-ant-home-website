@@ -11,7 +11,7 @@
     </section>
 
     <main class="about-main">
-      <section id="company-intro" class="page-section intro-section">
+      <section id="company-intro" ref="introRef" class="page-section intro-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -60,7 +60,7 @@
       </div>
 </section>
 
-      <section id="history" class="page-section">
+      <section id="history" ref="historyRef" class="page-section reveal-ready">
       <div class="page-shell">
 <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -90,7 +90,7 @@
       </div>
 </section>
 
-      <section id="honors" class="page-section">
+      <section id="honors" ref="honorsRef" class="page-section reveal-ready">
       <div class="page-shell">
 <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -112,7 +112,7 @@
       </div>
 </section>
 
-      <section id="core-values" class="page-section">
+      <section id="core-values" ref="valuesRef" class="page-section reveal-ready">
       <div class="page-shell">
 <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -134,7 +134,7 @@
       </div>
 </section>
 
-      <section id="culture" class="page-section">
+      <section id="culture" ref="cultureRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -158,7 +158,7 @@
       </div>
 </section>
 
-      <section id="contact" class="page-section contact-section">
+      <section id="contact" ref="aboutContactRef" class="page-section contact-section reveal-ready">
       <div class="page-shell">
         <div class="contact-panel">
           <div class="contact-copy">
@@ -196,11 +196,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type ComputedRef } from "vue";
+import { computed, ref, type ComputedRef } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
+import { useScrollRevealList } from '@/composables/useScrollReveal';
 
 const { t, tm } = useI18n();
+
+const introRef = ref<HTMLElement | null>(null);
+const historyRef = ref<HTMLElement | null>(null);
+const honorsRef = ref<HTMLElement | null>(null);
+const valuesRef = ref<HTMLElement | null>(null);
+const cultureRef = ref<HTMLElement | null>(null);
+const aboutContactRef = ref<HTMLElement | null>(null);
+
+useScrollRevealList([introRef, historyRef, honorsRef, valuesRef, cultureRef, aboutContactRef]);
 
 const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
   getTimelineData(t).map((item) => ({ ...item }))

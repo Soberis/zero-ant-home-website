@@ -38,7 +38,7 @@
       </div>
     </section>
 
-    <section class="page-section why-join">
+    <section ref="whyJoinRef" class="page-section why-join reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -61,7 +61,7 @@
       </div>
     </section>
 
-    <section id="positions" class="page-section job-positions">
+    <section id="positions" ref="positionsRef" class="page-section job-positions reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -115,7 +115,7 @@
       </div>
     </section>
 
-    <section id="contact" class="page-section contact-section">
+    <section id="contact" ref="careerContactRef" class="page-section contact-section reveal-ready">
       <div class="page-shell">
         <div class="contact-panel">
           <div class="contact-copy">
@@ -147,10 +147,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useScrollRevealList } from '@/composables/useScrollReveal';
 
 const { t, tm } = useI18n();
+
+const whyJoinRef = ref<HTMLElement | null>(null);
+const positionsRef = ref<HTMLElement | null>(null);
+const careerContactRef = ref<HTMLElement | null>(null);
+
+useScrollRevealList([whyJoinRef, positionsRef, careerContactRef]);
 
 interface Benefit {
   id: number;

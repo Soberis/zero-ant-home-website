@@ -25,7 +25,7 @@
       </div>
     </section>
 
-    <section id="download" class="page-section">
+    <section id="download" ref="downloadRef" class="page-section reveal-ready">
       <div class="support-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -73,7 +73,7 @@
       </div>
     </section>
 
-    <section id="faq" class="page-section">
+    <section id="faq" ref="faqRef" class="page-section reveal-ready">
       <div class="support-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -120,7 +120,7 @@
       </div>
     </section>
 
-    <section id="contact" class="page-section contact-section">
+    <section id="contact" ref="contactRef" class="page-section contact-section reveal-ready">
       <div class="support-shell">
         <div class="contact-panel">
           <div class="contact-copy">
@@ -159,8 +159,15 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import { useScrollRevealList } from '@/composables/useScrollReveal';
 
 const { t } = useI18n();
+
+const downloadRef = ref<HTMLElement | null>(null);
+const faqRef = ref<HTMLElement | null>(null);
+const contactRef = ref<HTMLElement | null>(null);
+
+useScrollRevealList([downloadRef, faqRef, contactRef]);
 
 interface DownloadItem {
   title: string;

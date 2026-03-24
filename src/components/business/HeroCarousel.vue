@@ -9,12 +9,12 @@
       @keydown.enter.prevent="handleStageClick"
       @keydown.space.prevent="handleStageClick"
     >
-      <div class="hero-media">
+      <div class="hero-media" :class="{ 'hero-entered': entered }">
         <img :src="activeSlide.img" :alt="activeSlide.title" class="hero-image" />
       </div>
 
       <div class="hero-overlay">
-        <div class="hero-copy">
+        <div class="hero-copy" :class="{ 'hero-entered': entered }">
           <p class="text-label-large hero-eyebrow">{{ t('home.hero.eyebrow') }}</p>
           <h1 class="text-display-hero hero-title">{{ t('home.hero.title') }}</h1>
           <p class="text-body-large hero-description">{{ t('home.hero.description') }}</p>
@@ -91,6 +91,7 @@ const slides = computed<SlideItem[]>(() => [
 
 const current = ref(0);
 const isPaused = ref(false);
+const entered = ref(false);
 const activeSlide = computed(() => slides.value[current.value] ?? slides.value[0]);
 let autoPlayTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -146,6 +147,10 @@ const handleVisibilityChange = (): void => {
 onMounted(() => {
   scheduleNext();
   document.addEventListener('visibilitychange', handleVisibilityChange);
+  // 延迟触发入场动画，确保首帧渲染完成
+  requestAnimationFrame(() => {
+    entered.value = true;
+  });
 });
 
 onUnmounted(() => {
@@ -184,6 +189,16 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  /* entrance: scale in */
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s,
+    transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s;
+}
+
+.hero-media.hero-entered {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .hero-image {
@@ -208,6 +223,16 @@ onUnmounted(() => {
   max-width: min(520px, 40vw);
   display: flex;
   flex-direction: column;
+  /* entrance: fade up */
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-copy.hero-entered {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-eyebrow {

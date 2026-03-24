@@ -34,7 +34,7 @@
       </div>
     </section>
 
-    <section id="industries" class="page-section">
+    <section id="industries" ref="industriesRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -79,7 +79,7 @@
       </div>
     </section>
 
-    <section id="backbone" class="page-section">
+    <section id="backbone" ref="backboneRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -118,7 +118,7 @@
     </section>
 
     <!-- 暂不展示“精选案例”，后期集中提供视频沉浸体验时再开启 -->
-    <section id="proof" class="page-section">
+    <section id="proof" ref="proofRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -186,7 +186,7 @@
       </div>
     </section>
 
-    <section id="delivery" class="page-section delivery-section">
+    <section id="delivery" ref="deliveryRef" class="page-section delivery-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -244,6 +244,14 @@ import {
   solutionCapabilityLayers,
   solutionIndustryGroups,
 } from "@/data/solutionIndustries";
+import { useScrollRevealList } from '@/composables/useScrollReveal';
+
+const industriesRef = ref<HTMLElement | null>(null);
+const backboneRef = ref<HTMLElement | null>(null);
+const proofRef = ref<HTMLElement | null>(null);
+const deliveryRef = ref<HTMLElement | null>(null);
+
+useScrollRevealList([industriesRef, backboneRef, proofRef, deliveryRef]);
 
 const router = useRouter();
 const { t, tm } = useI18n();

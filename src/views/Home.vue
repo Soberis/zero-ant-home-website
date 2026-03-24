@@ -4,19 +4,19 @@
     <HeroCarousel />
 
     <main class="home-main">
-      <section class="home-section home-section--products">
+      <section ref="productsRef" class="home-section home-section--products reveal-ready">
         <CoreProducts />
       </section>
 
-      <section class="home-section home-section--applications">
+      <section ref="appsRef" class="home-section home-section--applications reveal-ready">
         <IndustryApplications />
       </section>
 
-      <section class="home-section home-section--videos">
+      <section ref="videosRef" class="home-section home-section--videos reveal-ready">
         <VideoCases />
       </section>
 
-      <section class="home-section home-section--partners">
+      <section ref="partnersRef" class="home-section home-section--partners reveal-ready">
         <Partners />
       </section>
     </main>
@@ -24,12 +24,20 @@
 </template>
 
 <script setup lang="ts">
-// 首页聚合各核心模块组件
+import { ref } from 'vue';
 import HeroCarousel from '@/components/business/HeroCarousel.vue';
 import CoreProducts from '@/components/business/CoreProducts.vue';
 import IndustryApplications from '@/components/business/IndustryApplications.vue';
 import VideoCases from '@/components/business/VideoCases.vue';
 import Partners from '@/components/business/Partners.vue';
+import { useScrollRevealList } from '@/composables/useScrollReveal';
+
+const productsRef = ref<HTMLElement | null>(null);
+const appsRef = ref<HTMLElement | null>(null);
+const videosRef = ref<HTMLElement | null>(null);
+const partnersRef = ref<HTMLElement | null>(null);
+
+useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 </script>
 
 <style lang="less" scoped>
