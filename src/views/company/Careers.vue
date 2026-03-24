@@ -107,6 +107,7 @@
             <div class="position-actions">
               <button class="apply-btn" type="button" @click="applyForPosition(position)">
                 {{ $t("careers.applyNow") }}
+                <svg class="apply-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </button>
             </div>
           </article>
@@ -402,6 +403,17 @@ function applyForPosition(position: Position): void {
   box-shadow: 0 8px 24px rgba(26, 58, 143, 0.12);
 }
 
+.apply-btn-arrow {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.apply-btn:hover .apply-btn-arrow {
+  transform: translateX(4px);
+}
+
 .hero-panel {
   display: flex;
   flex-direction: column;
@@ -514,7 +526,7 @@ function applyForPosition(position: Position): void {
   margin: 0;
   color: var(--career-muted);
   font-size: 0.98rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.8;
 }
 

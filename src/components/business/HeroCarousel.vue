@@ -26,6 +26,7 @@
                 @click.stop
               >
                 {{ t('common.cta.viewSolutions') }}
+                <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </router-link>
 
               <router-link
@@ -34,6 +35,7 @@
                 @click.stop
               >
                 {{ t('common.cta.contactTeam') }}
+                <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </router-link>
             </div>
 
@@ -243,11 +245,11 @@ onUnmounted(() => {
     background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.hero-link::after {
-  content: '>';
-  font-size: 0.76rem;
-  opacity: 0.72;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+.hero-link-arrow {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
 }
 
 .hero-link:link,
@@ -265,9 +267,8 @@ onUnmounted(() => {
   box-shadow: 0 12px 24px rgba(26, 58, 143, 0.24);
 }
 
-.hero-link:hover::after {
-  transform: translateX(2px);
-  opacity: 1;
+.hero-link:hover .hero-link-arrow {
+  transform: translateX(4px);
 }
 
 .hero-link:focus-visible {

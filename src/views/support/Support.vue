@@ -55,7 +55,7 @@
                   <span class="card-title">{{ item.title }}</span>
                 </div>
               </div>
-              <span class="card-toggle" aria-hidden="true"></span>
+              <svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
 
             <transition name="fade-slide">
@@ -103,7 +103,7 @@
                   <span class="card-title">{{ faq.q }}</span>
                 </div>
               </div>
-              <span class="card-toggle" aria-hidden="true"></span>
+              <svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
 
             <transition name="fade-slide">
@@ -429,7 +429,9 @@ function formatIndex(value: number): string {
 
 .card-list {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 16px;
+  max-width: 1200px;
 }
 
 .content-card {
@@ -437,7 +439,8 @@ function formatIndex(value: number): string {
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
-  padding: 32px;
+  padding: 0;
+  min-height: 80px;
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
   background: #ffffff;
@@ -460,11 +463,11 @@ function formatIndex(value: number): string {
   width: 100%;
   border: 0;
   background: transparent;
-  padding: 24px 28px;
+  padding: 24px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   cursor: pointer;
   text-align: left;
 }
@@ -517,20 +520,19 @@ function formatIndex(value: number): string {
 
 .card-toggle {
   flex: 0 0 auto;
-  width: 14px;
-  height: 14px;
-  border-right: 2px solid rgba(15, 23, 42, 0.38);
-  border-bottom: 2px solid rgba(15, 23, 42, 0.38);
-  transform: rotate(45deg);
-  transition: transform 0.2s ease;
+  width: 20px;
+  height: 20px;
+  color: rgba(15, 23, 42, 0.5);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
 }
 
 .content-card.open .card-toggle {
-  transform: rotate(225deg);
+  transform: rotate(180deg);
+  color: var(--support-primary);
 }
 
 .card-content {
-  padding: 0 28px 24px 90px;
+  padding: 0 24px 24px 74px;
   color: var(--support-muted);
 }
 

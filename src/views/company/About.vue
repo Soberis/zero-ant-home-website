@@ -538,6 +538,12 @@ function formatIndex(value: number): string {
   border-radius: 50%;
   background: var(--about-primary);
   box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1); }
+  50% { box-shadow: 0 0 0 10px rgba(26, 58, 143, 0.05); }
 }
 
 .timeline-year {
@@ -635,6 +641,11 @@ function formatIndex(value: number): string {
   font-weight: 600;
   line-height: 1.5;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-value[href]:hover {
+  color: var(--about-primary);
 }
 
 @media (max-width: 1024px) {
