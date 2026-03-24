@@ -418,7 +418,7 @@ function applyForPosition(position: Position): void {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 32px;
+  gap: 0;
   padding-left: 64px;
 }
 
@@ -426,8 +426,12 @@ function applyForPosition(position: Position): void {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-left: 24px;
-  border-left: 1px solid rgba(15, 23, 42, 0.12);
+  padding: 14px 0;
+  border-left: none;
+}
+
+.hero-stat + .hero-stat {
+  border-top: 1px solid rgba(15, 23, 42, 0.12);
 }
 
 .hero-stat-value {
@@ -730,6 +734,10 @@ function applyForPosition(position: Position): void {
 
   .hero-copy {
     padding-top: 0;
+  }
+
+  .hero-panel {
+    padding-left: 0;
   }
 }
 

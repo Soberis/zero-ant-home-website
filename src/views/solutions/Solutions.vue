@@ -484,7 +484,7 @@ function goToProduct(route: string): void {
 
 .hero-description {
   max-width: 1200px;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
   font-size: 1.15rem;
 }
 
@@ -519,17 +519,22 @@ function goToProduct(route: string): void {
 .hero-panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 32px;
+  justify-content: flex-start;
+  gap: 0;
   padding-left: 64px;
+  padding-top: 24px;
 }
 
 .hero-stat {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-left: 24px;
-  border-left: 1px solid rgba(15, 23, 42, 0.12);
+  padding: 14px 0;
+  border-left: none;
+}
+
+.hero-stat + .hero-stat {
+  border-top: 1px solid rgba(15, 23, 42, 0.12);
 }
 
 .hero-stat-value {
