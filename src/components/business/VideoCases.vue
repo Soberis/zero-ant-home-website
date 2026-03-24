@@ -144,17 +144,20 @@ const spotlightItems = computed(() =>
   place-items: center;
   width: 3rem;
   height: 3rem;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 999px;
-  background: rgba(10, 18, 34, 0.72);
-  color: var(--color-background-white);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
   transform: translate(-50%, -50%);
-  box-shadow: 0 10px 24px rgba(10, 18, 34, 0.18);
+  box-shadow: 0 8px 20px rgba(10, 18, 34, 0.15);
   transition:
     transform var(--transition-normal),
     background var(--transition-normal),
     box-shadow var(--transition-normal),
-    border-color var(--transition-normal);
+    border-color var(--transition-normal),
+    color var(--transition-normal);
   pointer-events: none;
 }
 
@@ -204,12 +207,11 @@ const spotlightItems = computed(() =>
 }
 
 .spotlight-card:hover .spotlight-card__play {
-  background: rgba(28, 32, 40, 0.86);
-  border-color: rgba(255, 255, 255, 0.34);
-  box-shadow:
-    0 11px 24px rgba(10, 18, 34, 0.16),
-    0 0 0 3px rgba(255, 255, 255, 0.06);
-  transform: translate(-50%, -50%) scale(1.01);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #fff;
+  color: #1a3a8f;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translate(-50%, -50%) scale(1.15);
 }
 
 @media (max-width: 1100px) {
