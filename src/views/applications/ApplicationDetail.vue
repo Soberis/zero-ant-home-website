@@ -25,11 +25,19 @@
     </div>
 
     <div class="content-wrapper">
-      <h1 class="title">{{ detail?.title }}</h1>
+      <div class="title-row">
+        <h1 class="title">{{ detail?.title }}</h1>
+        <button class="contact-cta" @click="showContact = true">
+          {{ $t("common.cta.contactTeam") }}
+          <svg viewBox="0 0 24 24" width="15" height="15">
+            <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+          </svg>
+        </button>
+      </div>
 
       <div class="desc" v-html="detail?.description"></div>
 
-      <div class="video-bottom-bar" :class="bottomBarClass">
+      <div v-if="prevSlug || nextSlug" class="video-bottom-bar" :class="bottomBarClass">
         <button
           v-if="prevSlug"
           class="video-bottom-btn prev"
@@ -46,6 +54,30 @@
         </button>
       </div>
     </div>
+
+    <!-- QR Code Dialog -->
+    <transition name="fade-dialog">
+      <div
+        v-if="showContact"
+        class="contact-dialog-mask"
+        role="dialog"
+        aria-modal="true"
+        @click.self="showContact = false"
+      >
+        <div class="contact-dialog">
+          <button class="contact-close-x" @click="showContact = false">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+          <h3 class="contact-title">{{ t("videos.videoDetail.qrCodeTitle") }}</h3>
+          <div class="contact-qrcode-placeholder">
+            <img :src="wxworkQrcode" :alt="t('videos.videoDetail.qrCodeDesc')" class="qrcode-img" />
+          </div>
+          <p class="contact-qrcode-desc">{{ t("videos.videoDetail.qrCodeDesc") }}</p>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -54,14 +86,32 @@
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications, { type Application } from "@/data/applications";
-import { computed, type ComputedRef, onMounted, watch } from "vue";
+import { computed, ref, type ComputedRef, onMounted, onUnmounted, watch } from "vue";
 import { videoMap, type VideoDetail } from "@/data/videos";
 import BilibiliPlayer from "@/components/BilibiliPlayer.vue";
+import wxworkQrcode from "@/assets/images/qrcodes/wxwork.png";
 import { setSEO, setStructuredData } from "@/utils/seo";
 
 const route = useRoute();
 const router = useRouter();
 const { t, locale } = useI18n();
+const showContact = ref<boolean>(false);
+
+function handleDialogEscape(event: KeyboardEvent): void {
+  if (event.key !== "Escape" || !showContact.value) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  showContact.value = false;
+}
+
+onMounted(() => {
+  document.addEventListener("keydown", handleDialogEscape, true);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleDialogEscape, true);
+});
+
 const slug: ComputedRef<string> = computed(() => route.params.slug as string);
 const rawDetail: ComputedRef<Application | undefined> = computed(() =>
   applications.find((item) => item.slug === slug.value)
@@ -226,24 +276,25 @@ function goTo(targetSlug: string | null): void {
 
 <style scoped>
 .application-detail-page {
-  background: #f7f9fc;
+  background: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 24px 120px;
+  padding: 80px 48px 120px;
 }
 
 .player-hero-container {
   width: 100%;
   max-width: 860px;
   aspect-ratio: 16 / 9;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.1), 0 10px 30px rgba(15, 23, 42, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   margin-bottom: 48px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .media-wrapper {
@@ -253,17 +304,57 @@ function goTo(targetSlug: string | null): void {
 
 .content-wrapper {
   width: 100%;
-  max-width: 820px;
+  max-width: 860px;
+  text-align: left;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  margin-bottom: 28px;
 }
 
 .title {
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 500;
   color: #0f172a;
-  margin: 0 0 24px;
+  margin: 0;
   letter-spacing: -0.02em;
   text-align: left;
   line-height: 1.25;
+  flex: 1;
+}
+
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: #1a3a8f;
+  color: #ffffff;
+  border: none;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.2);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.contact-cta:hover {
+  background: #152f73;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
+  transform: translateY(-2px);
+  color: #ffffff;
 }
 
 .desc {
@@ -329,8 +420,8 @@ function goTo(targetSlug: string | null): void {
 }
 
 .video-bottom-btn {
-  padding: 13px 24px;
-  border-radius: 12px;
+  padding: 12px 24px;
+  border-radius: 999px;
   font-weight: 600;
   font-size: 0.92rem;
   transition:
@@ -355,9 +446,10 @@ function goTo(targetSlug: string | null): void {
 }
 
 .video-bottom-btn.next {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
+  background: #1a3a8f;
   color: white;
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.18);
+  border-color: transparent;
+  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.18);
 }
 
 .video-bottom-btn:hover {
@@ -366,32 +458,12 @@ function goTo(targetSlug: string | null): void {
 
 .video-bottom-btn.prev:hover {
   border-color: rgba(26, 58, 143, 0.24);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .video-bottom-btn.next:hover {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  box-shadow: 0 12px 30px rgba(26, 58, 143, 0.3);
-}
-
-.video-bottom-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
-}
-
-.video-bottom-btn:hover::before {
-  left: 100%;
+  background: #152f73;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
 }
 
 .video-bottom-btn:active {
@@ -399,8 +471,8 @@ function goTo(targetSlug: string | null): void {
 }
 
 .video-bottom-btn.next:active {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.2);
+  background: #0f2560;
+  box-shadow: 0 2px 8px rgba(26, 58, 143, 0.16);
 }
 
 @media (max-width: 600px) {
@@ -437,5 +509,101 @@ function goTo(targetSlug: string | null): void {
     min-width: 0;
     width: 100%;
   }
+}
+</style>
+
+<style scoped>
+/* QR Code Dialog */
+.contact-dialog-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.contact-dialog {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  padding: 40px 48px;
+  min-width: 380px;
+  text-align: center;
+  position: relative;
+}
+
+.contact-close-x {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  color: #94a3b8;
+  background: rgba(241, 245, 249, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.contact-close-x:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+.contact-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 24px 0;
+}
+
+.contact-qrcode-placeholder {
+  width: 200px;
+  height: 200px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.qrcode-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.contact-qrcode-desc {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.fade-dialog-enter-active,
+.fade-dialog-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-dialog-enter-from,
+.fade-dialog-leave-to {
+  opacity: 0;
+}
+.fade-dialog-enter-from .contact-dialog,
+.fade-dialog-leave-to .contact-dialog {
+  transform: scale(0.9);
 }
 </style>

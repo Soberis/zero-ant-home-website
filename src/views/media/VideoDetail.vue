@@ -39,8 +39,16 @@
     </div>
 
     <div class="content-wrapper">
-      <h1 class="video-title">{{ videoInfo.title }}</h1>
-      
+      <div class="title-row">
+        <h1 class="video-title">{{ videoInfo.title }}</h1>
+        <button class="contact-cta" @click="showContact = true">
+          {{ t("common.cta.contactTeam") }}
+          <svg viewBox="0 0 24 24" width="15" height="15">
+            <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+          </svg>
+        </button>
+      </div>
+
       <div class="video-desc-block">
         <p
           v-for="(para, idx) in descParagraphs"
@@ -50,14 +58,21 @@
           {{ para }}
         </p>
       </div>
-      
-      <!-- Project Standard CTA -->
-      <div class="action-area">
-        <button class="project-cta-btn" @click="showContact = true" :aria-label="t('common.cta.learnMore')">
-          <span>{{ t("common.cta.learnMore") }}</span>
-          <svg class="cta-icon" viewBox="0 0 24 24" width="20" height="20">
-            <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
-          </svg>
+
+      <div v-if="prevSlug || nextSlug" class="video-bottom-bar" :class="bottomBarClass">
+        <button
+          v-if="prevSlug"
+          class="video-nav-btn prev"
+          @click="goTo(prevSlug)"
+        >
+          ◀ {{ t("applicationsPage.prev") }}
+        </button>
+        <button
+          v-if="nextSlug"
+          class="video-nav-btn next"
+          @click="goTo(nextSlug)"
+        >
+          {{ t("applicationsPage.next") }} ▶
         </button>
       </div>
     </div>
@@ -102,17 +117,39 @@
 
 <script setup lang="ts">
 // 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { videoMap, type VideoDetail } from "@/data/videos";
+import { videoMap, videoCards, type VideoDetail } from "@/data/videos";
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import wxworkQrcode from "@/assets/images/qrcodes/wxwork.png";
 import BilibiliPlayer from "@/components/BilibiliPlayer.vue";
 import { setSEO, setStructuredData } from "@/utils/seo";
 
 const route = useRoute();
+const router = useRouter();
 const { t, locale } = useI18n();
 const currentSlug = computed(() => String(route.params.slug || ""));
+
+const currentIndex = computed(() =>
+  videoCards.findIndex((c) => c.slug === currentSlug.value)
+);
+const prevSlug = computed(() =>
+  currentIndex.value > 0 ? videoCards[currentIndex.value - 1].slug : null
+);
+const nextSlug = computed(() =>
+  currentIndex.value < videoCards.length - 1
+    ? videoCards[currentIndex.value + 1].slug
+    : null
+);
+const bottomBarClass = computed(() => {
+  if (prevSlug.value && nextSlug.value) return "both";
+  if (prevSlug.value) return "only-prev";
+  if (nextSlug.value) return "only-next";
+  return "";
+});
+function goTo(slug: string | null): void {
+  if (slug) router.push({ name: route.name || undefined, params: { slug } });
+}
 
 const defaultVideoInfo: VideoDetail = {
   type: "bilibili",
@@ -279,31 +316,30 @@ onUnmounted(() => {
 
 <style scoped>
 .video-detail-page {
-  background: #f7f9fc;
+  background: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 24px 120px;
+  padding: 80px 48px 120px;
 }
 
 /* Floating Player Box */
 .player-hero-container {
   width: 100%;
-  max-width: 860px; /* Reduced to fit better on laptop screens */
+  max-width: 860px;
   aspect-ratio: 16 / 9;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.1), 0 10px 30px rgba(15, 23, 42, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   margin-bottom: 56px;
-  transform: translateY(0);
-  transition: box-shadow 0.5s ease, transform 0.5s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .player-hero-container:hover {
-  box-shadow: 0 50px 100px rgba(15, 23, 42, 0.15), 0 15px 40px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
   transform: translateY(-4px);
 }
 
@@ -336,20 +372,33 @@ onUnmounted(() => {
 /* Content Area */
 .content-wrapper {
   width: 100%;
-  max-width: 780px;
+  max-width: 860px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center-aligned content */
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  margin-bottom: 28px;
 }
 
 .video-title {
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 700;
-  margin: 0 0 24px 0;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 500;
+  margin: 0;
   color: #0f172a;
   line-height: 1.25;
   letter-spacing: -0.02em;
+  flex: 1;
 }
 
 .video-desc-block {
@@ -358,62 +407,53 @@ onUnmounted(() => {
 }
 
 .video-desc {
-  font-size: 1.15rem;
-  color: #475569;
+  font-size: 1.05rem;
+  color: #64748b;
   line-height: 1.85;
+  font-weight: 400;
   margin-block-start: 0;
   margin-block-end: 20px;
-  letter-spacing: 0.01em;
 }
 
 .video-desc:last-child {
   margin-block-end: 0;
 }
 
-/* Project Standard Action CTA */
-.action-area {
+.video-tags {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.project-cta-btn {
+.contact-cta {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: #1a3a8f;
+  color: #ffffff;
   border: none;
-  padding: 14px 36px;
-  border-radius: 12px;
-  font-size: 1.05rem;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.25);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.2);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.cta-icon {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  margin-left: 2px;
-}
-
-.project-cta-btn:hover {
-  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
-  box-shadow: 0 12px 32px rgba(26, 58, 143, 0.35);
+.contact-cta:hover {
+  background: #152f73;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
-.project-cta-btn:hover .cta-icon {
-  transform: translateX(4px);
-}
-
-.project-cta-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 4px 16px rgba(26, 58, 143, 0.2);
+.contact-cta:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* Glassmorphism Dialog */
@@ -518,33 +558,63 @@ onUnmounted(() => {
   transform: scale(0.9);
 }
 
+/* Prev / Next Navigation */
+.video-bottom-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  gap: 16px;
+}
+
+.video-bottom-bar.both { justify-content: space-between; }
+.video-bottom-bar.only-prev { justify-content: flex-start; }
+.video-bottom-bar.only-next { justify-content: flex-end; }
+
+.video-nav-btn {
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.video-nav-btn.prev {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.video-nav-btn.next {
+  background: #1a3a8f;
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.2);
+}
+
+.video-nav-btn:hover { transform: translateY(-2px); }
+.video-nav-btn.prev:hover {
+  border-color: rgba(26, 58, 143, 0.24);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+.video-nav-btn.next:hover {
+  background: #152f73;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
+}
+.video-nav-btn:active { transform: translateY(0); }
+
 /* Responsive */
 @media (max-width: 768px) {
-  .video-detail-page {
-    padding: 40px 16px 80px;
-  }
-  .player-hero-container {
-    border-radius: 16px;
-    margin-bottom: 40px;
-  }
-  .video-title {
-    margin-bottom: 16px;
-    font-size: 1.75rem;
-  }
-  .video-desc {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-block-end: 16px;
-  }
-  .contact-dialog {
-    min-width: 0;
-    width: 100%;
-    padding: 32px 24px;
-  }
-  .project-cta-btn {
-    width: 100%;
-    max-width: 320px;
-    padding: 14px 20px;
-  }
+  .video-detail-page { padding: 40px 16px 80px; }
+  .player-hero-container { border-radius: 16px; margin-bottom: 40px; }
+  .title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .video-title { font-size: 1.6rem; }
+  .video-desc { font-size: 1rem; line-height: 1.7; margin-block-end: 16px; }
+  .contact-dialog { min-width: 0; width: 100%; padding: 32px 24px; }
+  .video-bottom-bar { flex-direction: column; align-items: stretch; }
+  .video-nav-btn { width: 100%; text-align: center; }
 }
 </style>
