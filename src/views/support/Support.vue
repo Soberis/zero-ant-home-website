@@ -276,15 +276,15 @@ function formatIndex(value: number): string {
 
 <style scoped lang="less">
 .support-page {
-  --support-primary: #1a3a8f;
-  --support-primary-deep: #0f172a;
-  --support-text: #1f2937;
-  --support-muted: #64748b;
-  --support-border: rgba(15, 23, 42, 0.08);
-  --support-surface: #ffffff;
-  --support-surface-soft: #fbfcfe;
-  background: #ffffff;
+  --support-primary: var(--color-primary);
+  --support-primary-deep: var(--color-primary-dark);
+  --support-text: var(--color-text);
+  --support-muted: var(--color-text-secondary);
+  --support-border: var(--color-border);
+  --support-surface: var(--color-background-white);
+  --support-surface-soft: var(--color-background);
   color: var(--support-text);
+  background: var(--support-surface);
 }
 
 .support-page > .page-section:nth-of-type(even) {

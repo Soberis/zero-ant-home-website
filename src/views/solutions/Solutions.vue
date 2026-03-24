@@ -421,13 +421,13 @@ function goToProduct(route: string): void {
 
 <style scoped lang="less">
 .solutions-page {
-  --solution-primary: #1a3a8f;
-  --solution-primary-deep: #0f172a;
-  --solution-text: #1f2937;
-  --solution-muted: #64748b;
-  --solution-border: #d9e2ec;
-  --solution-surface: #ffffff;
-  --solution-surface-soft: #fbfcfe;
+  --solution-primary: var(--color-primary);
+  --solution-primary-deep: var(--color-primary-dark);
+  --solution-text: var(--color-text);
+  --solution-muted: var(--color-text-secondary);
+  --solution-border: var(--color-border);
+  --solution-surface: var(--color-background-white);
+  --solution-surface-soft: var(--color-background);
   color: var(--solution-text);
   background: #ffffff;
 }
@@ -1256,10 +1256,6 @@ function goToProduct(route: string): void {
 }
 
 @media (max-width: 560px) {
-  .solutions-hero {
-    
-  }
-
   .hero-stat {
     flex-direction: column;
     align-items: flex-start;

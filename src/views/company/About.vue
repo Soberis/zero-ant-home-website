@@ -254,13 +254,13 @@ function formatIndex(value: number): string {
 
 <style scoped lang="less">
 .about-page {
-  --about-primary: #1a3a8f;
-  --about-primary-deep: #0f172a;
-  --about-text: #1f2937;
-  --about-muted: #64748b;
-  --about-border: #d9e2ec;
-  --about-surface: #ffffff;
-  --about-surface-soft: #f4f7fb;
+  --about-primary: var(--color-primary);
+  --about-primary-deep: var(--color-primary-dark);
+  --about-text: var(--color-text);
+  --about-muted: var(--color-text-secondary);
+  --about-border: var(--color-border);
+  --about-surface: var(--color-background-white);
+  --about-surface-soft: var(--color-background);
   color: var(--about-text);
   background: #ffffff;
 }
@@ -588,10 +588,9 @@ function formatIndex(value: number): string {
 }
 
 .honor-card {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
+  display: flex;
+  align-items: flex-start;
   gap: 16px;
-  align-items: start;
   padding: 20px 24px 20px 0;
   border-bottom: 1px solid rgba(15, 23, 42, 0.07);
 }
@@ -605,6 +604,8 @@ function formatIndex(value: number): string {
 }
 
 .card-index {
+  flex-shrink: 0;
+  width: 40px;
   color: rgba(26, 58, 143, 0.36);
   font-size: 0.78rem;
   font-weight: 700;
