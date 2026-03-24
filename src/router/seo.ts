@@ -59,6 +59,15 @@ export function setupPageSEO(to: RouteLocationNormalized) {
     // 基础 SEO 配置
     const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
     const currentUrl = `${baseUrl}${to.path}`;
+    const companyName =
+      safeTranslate("footer.companyFullName") || safeTranslate("seo.siteName");
+    const contactTel = safeTranslate("footer.telValue");
+    const addressText = safeTranslate("footer.address");
+    const postalAddress = {
+      "@type": "PostalAddress",
+      streetAddress: addressText,
+      addressCountry: "CN",
+    };
 
     setSEO({
       title: seoConfig.title,
@@ -95,7 +104,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       },
       publisher: {
         "@type": "Organization",
-        name: safeTranslate("seo.siteName"),
+        name: companyName,
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
@@ -110,7 +119,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       const organizationData = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: safeTranslate("seo.siteName"),
+        name: companyName,
         alternateName: "ZeroAnt Technology",
         url: baseUrl,
         logo: {
@@ -120,18 +129,11 @@ export function setupPageSEO(to: RouteLocationNormalized) {
           height: 200,
         },
         description: safeTranslate("seo.defaultDescription"),
-        foundingDate: "2020",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-          addressLocality: "Hangzhou",
-          addressRegion: "Zhejiang",
-          postalCode: "310000",
-          addressCountry: "CN",
-        },
+        foundingDate: "2025",
+        address: postalAddress,
         contactPoint: {
           "@type": "ContactPoint",
-          telephone: "+86-13001001954",
+          telephone: contactTel,
           contactType: "customer service",
           availableLanguage: ["Chinese", "English"],
         },
@@ -159,30 +161,12 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       const localBusinessData = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        name: safeTranslate("seo.siteName"),
+        name: companyName,
         image: `${baseUrl}/logo.png`,
         "@id": baseUrl,
         url: baseUrl,
-        telephone: "+86-13001001954",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-          addressLocality: "Hangzhou",
-          addressRegion: "Zhejiang",
-          postalCode: "310000",
-          addressCountry: "CN",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: 30.2741,
-          longitude: 120.1551,
-        },
-        openingHoursSpecification: {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "18:00",
-        },
+        telephone: contactTel,
+        address: postalAddress,
       };
 
       // 同时设置WebPage、Organization和LocalBusiness结构化数据

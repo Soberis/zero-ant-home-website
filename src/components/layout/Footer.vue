@@ -228,7 +228,7 @@
         <a
           href="https://beian.miit.gov.cn"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           class="icp-link"
           >{{ $t("footer.icpNumber") }}</a
         >

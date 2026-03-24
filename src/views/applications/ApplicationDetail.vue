@@ -35,7 +35,7 @@
         </button>
       </div>
 
-      <div class="desc" v-html="detail?.description"></div>
+      <div class="desc" v-html="sanitizedDescription"></div>
 
       <div v-if="prevSlug || nextSlug" class="video-bottom-bar" :class="bottomBarClass">
         <button
@@ -91,6 +91,7 @@ import { videoMap, type VideoDetail } from "@/data/videos";
 import BilibiliPlayer from "@/components/BilibiliPlayer.vue";
 import wxworkQrcode from "@/assets/images/qrcodes/wxwork.png";
 import { setSEO, setStructuredData } from "@/utils/seo";
+import { sanitizeHtmlAllowList } from "@/utils/security";
 
 const route = useRoute();
 const router = useRouter();
@@ -126,6 +127,10 @@ const detail: ComputedRef<Application | undefined> = computed(() => {
     description: t(rawDetail.value.description),
   };
 });
+
+const sanitizedDescription = computed(() =>
+  sanitizeHtmlAllowList(detail.value?.description || "")
+);
 
 // 新增：获取视频详情对象
 const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {

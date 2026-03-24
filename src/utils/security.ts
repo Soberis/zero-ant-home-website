@@ -14,12 +14,54 @@ export function sanitizeInput(input: string): string {
   }
 
   return input
+    .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#x27;")
-    .replace(/\//g, "&#x2F;")
-    .replace(/&/g, "&amp;");
+    .replace(/\//g, "&#x2F;");
+}
+
+/**
+ * 允许有限标签的 HTML 清洗（默认仅保留基础排版标签）
+ * @param input HTML 字符串
+ * @param allowedTags 允许的标签名列表（小写）
+ */
+export function sanitizeHtmlAllowList(
+  input: string,
+  allowedTags: string[] = ["p", "br", "b", "strong", "em", "i"]
+): string {
+  if (typeof input !== "string") {
+    return "";
+  }
+
+  if (typeof window === "undefined" || typeof DOMParser === "undefined") {
+    return sanitizeInput(input);
+  }
+
+  try {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(input, "text/html");
+    const nodes = Array.from(doc.body.querySelectorAll("*"));
+
+    nodes.forEach((node) => {
+      const tag = node.tagName.toLowerCase();
+      if (!allowedTags.includes(tag)) {
+        const textNode = doc.createTextNode(node.textContent || "");
+        node.replaceWith(textNode);
+        return;
+      }
+
+      // 清理所有属性，避免事件/样式注入
+      Array.from(node.attributes).forEach((attr) => {
+        node.removeAttribute(attr.name);
+      });
+    });
+
+    return doc.body.innerHTML;
+  } catch {
+    return sanitizeInput(input);
+  }
 }
 
 /**

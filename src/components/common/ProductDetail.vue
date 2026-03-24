@@ -8,10 +8,7 @@
         <div class="product-hero__header">
           <span class="product-hero__eyebrow">{{ categoryLabel }}</span>
           <h1 class="product-hero__title">{{ localizedProduct.title }}</h1>
-          <p
-            class="product-hero__description"
-            v-html="localizedProduct.desc.replace(/\n/g, '<br>')"
-          ></p>
+          <p class="product-hero__description" v-html="sanitizedDescription"></p>
 
           <div class="product-hero__actions">
             <button class="btn btn-primary" @click="emits('back')">
@@ -189,6 +186,7 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
+import { sanitizeHtmlAllowList } from "@/utils/security";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
 import { useProductDetailData } from "@/composables/useProductDetailData";
@@ -239,6 +237,11 @@ const {
 const localizedProduct = computed(() => resolvedLocalizedProduct.value ?? props.product);
 const heroImageSrc = computed(() => localizedProduct.value.image || props.image || "");
 const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.value);
+const sanitizedDescription = computed(() =>
+  sanitizeHtmlAllowList(
+    String(localizedProduct.value.desc || "").replace(/\n/g, "<br>")
+  )
+);
 </script>
 
 <style scoped lang="less">
@@ -290,10 +293,10 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .product-hero__panel-label {
   display: inline-flex;
   align-items: center;
-  padding: 0 0 0 12px;
+  padding: 0;
   border-radius: 0;
   background: transparent;
-  border-left: 3px solid rgba(26, 58, 143, 0.45);
+  border-left: none;
   color: #163a87;
   font-size: 0.8rem;
   font-weight: 600;
@@ -450,11 +453,16 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
 .feature-card {
   max-width: 100%;
   margin: 0;
-  padding: 24px 0 0 0;
+  padding: 0;
   background: transparent;
   border: none;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-top: none;
   box-shadow: none;
+}
+
+.feature-card:nth-child(n + 4) {
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  padding-top: 24px;
 }
 
 .feature-card__content {
@@ -664,6 +672,16 @@ const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.va
   .features-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .feature-card {
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    padding-top: 24px;
+  }
+
+  .feature-card:first-child {
+    border-top: none;
+    padding-top: 0;
   }
 }
 

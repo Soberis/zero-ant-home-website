@@ -200,8 +200,9 @@ import { computed, ref, type ComputedRef } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { sanitizeHtmlAllowList } from "@/utils/security";
 
-const { t, tm } = useI18n();
+const { t } = useI18n();
 
 const introRef = ref<HTMLElement | null>(null);
 const historyRef = ref<HTMLElement | null>(null);
@@ -223,8 +224,8 @@ const honors: ComputedRef<string[]> = computed(() =>
 const teamStats = computed(() => [
   { value: "20+", label: t("about.teamSize") },
   { value: "90%+", label: t("about.masterDegree") },
-  { value: "≤32", label: t("about.averageAge") },
-  { value: "≥90%", label: t("about.topUniversity") },
+  { value: "�?2", label: t("about.averageAge") },
+  { value: "�?0%", label: t("about.topUniversity") },
 ]);
 
 const coreValues = computed(() => [
@@ -236,13 +237,13 @@ const coreValues = computed(() => [
 
 const companyIntroParagraphs = computed(() =>
   ["para1", "para2", "para3"].map((key) =>
-    String(tm(`about.companyIntroDetailed.${key}`) ?? "")
+    sanitizeHtmlAllowList(t(`about.companyIntroDetailed.${key}`))
   )
 );
 
 const cultureItems = computed(() =>
   ["item1", "item2", "item3", "item4"].map((key) =>
-    String(tm(`about.enterpriseCulture.${key}`) ?? "")
+    sanitizeHtmlAllowList(t(`about.enterpriseCulture.${key}`))
   )
 );
 
@@ -573,7 +574,7 @@ function formatIndex(value: number): string {
   margin: 0;
 }
 
-/* honors: 两列分隔线列表 */
+/* honors: 两列分隔线列�?*/
 .honor-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -613,7 +614,7 @@ function formatIndex(value: number): string {
   line-height: 1.6;
 }
 
-/* values: 横向 4 列关键词，竖线分隔 */
+/* values: 横向 4 列关键词，竖线分�?*/
 .values-grid {
   display: flex;
   align-items: stretch;

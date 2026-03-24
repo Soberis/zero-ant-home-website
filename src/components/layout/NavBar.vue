@@ -280,9 +280,6 @@ const isMobileMenuOpen = ref(false);
 // 防抖锁
 let toggleLock = false;
 
-// 元素位置缓存（性能优化）
-const cachedElements = new Map<string, number>();
-let cacheUpdateTimeout: number | null = null;
 
 // 切换移动端菜单
 function toggleMobileMenu() {
@@ -302,8 +299,6 @@ function toggleMobileMenu() {
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
   document.body.style.overflow = "";
-  // 移动端菜单关闭后延迟一点，让动画完成再跳转
-  return new Promise(resolve => setTimeout(resolve, 300));
 }
 
 // 点击背景关闭菜单
@@ -371,36 +366,6 @@ function switchLanguage() {
   }
 }
 
-// 缓存目标元素位置（性能优化）
-function cacheElementPositions() {
-  // 收集所有可能的hash目标
-  const allHashes = [
-    ...aboutNav.map(item => item.hash),
-    ...systemProductNav.map(item => item.hash),
-    ...robotProductNav.map(item => item.hash),
-    ...supportNav.map(item => item.hash),
-    ...solutionsNav.map(item => item.hash),
-    ...careersNav.map(item => item.hash),
-  ];
-
-  allHashes.forEach(hash => {
-    const element = document.querySelector(hash) as HTMLElement;
-    if (element) {
-      cachedElements.set(hash, element.offsetTop);
-    }
-  });
-}
-
-// 防抖更新缓存
-  function updateCacheWithDebounce() {
-    if (cacheUpdateTimeout) {
-      clearTimeout(cacheUpdateTimeout as number);
-    }
-    cacheUpdateTimeout = window.setTimeout(() => {
-      cacheElementPositions();
-    }, 100);
-  }
-
 // 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）
 const onKeydownCapture = (e: KeyboardEvent) => {
   if (e.key === 'Escape' && isMobileMenuOpen.value) {
@@ -419,15 +384,6 @@ onMounted(() => {
     localStorage.setItem("language", "zh");
   }
 
-  // 初始化缓存（延迟执行确保DOM就绪）
-  setTimeout(() => {
-    cacheElementPositions();
-  }, 500);
-
-  // 监听窗口变化，防抖更新缓存
-  window.addEventListener('resize', updateCacheWithDebounce);
-  window.addEventListener('scroll', updateCacheWithDebounce);
-
   // 捕获阶段监听 Esc，优先关闭移动菜单，避免触发全局返回
   document.addEventListener('keydown', onKeydownCapture, true);
 });
@@ -437,11 +393,6 @@ onUnmounted(() => {
   document.body.style.overflow = "";
   
   // 清理事件监听
-  window.removeEventListener('resize', updateCacheWithDebounce);
-  window.removeEventListener('scroll', updateCacheWithDebounce);
-  if (cacheUpdateTimeout) {
-    clearTimeout(cacheUpdateTimeout);
-  }
   document.removeEventListener('keydown', onKeydownCapture, true);
 });
 </script>

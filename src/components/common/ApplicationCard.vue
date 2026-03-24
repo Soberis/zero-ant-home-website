@@ -3,10 +3,7 @@
     class="app-card"
     :to="props.slug ? `/applications/${props.slug}` : '/solutions'"
   >
-    <div class="app-card__head">
-      <span class="app-card__eyebrow">{{ t("nav.applications") }}</span>
-      <span class="app-card__icon" v-html="props.svg"></span>
-    </div>
+    <span class="app-card__icon" v-html="props.svg"></span>
 
     <h3 class="app-card__title">
       {{ t(props.title) }}
@@ -44,44 +41,25 @@ const { t } = useI18n();
 .app-card {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  min-height: 220px;
+  gap: 16px;
+  min-height: 200px;
   padding: 24px;
   border-radius: 16px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #ffffff;
-  box-shadow: none;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  background: var(--brand-surface-soft);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .app-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(26, 58, 143, 0.2);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+  border-color: rgba(26, 58, 143, 0.16);
+  background: #ffffff;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
   text-decoration: none;
 }
 
-.app-card__head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.app-card__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(26, 58, 143, 0.14);
-  background: rgba(26, 58, 143, 0.08);
-  color: #163a87;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
 
 .app-card__icon {
   display: inline-flex;
@@ -91,8 +69,8 @@ const { t } = useI18n();
   height: 60px;
   flex-shrink: 0;
   border-radius: 16px;
-  background: #f8fafc;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.05);
   box-shadow: none;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
@@ -112,7 +90,7 @@ const { t } = useI18n();
   gap: 12px;
   margin-top: auto;
   padding-top: 14px;
-  border-top: 1px solid rgba(217, 226, 236, 0.9);
+  border-top: 1px solid rgba(217, 226, 236, 0.75);
 }
 
 .app-card__action {
@@ -166,10 +144,6 @@ const { t } = useI18n();
     min-height: 0;
     padding: 18px;
     border-radius: 16px;
-  }
-
-  .app-card__head {
-    gap: 12px;
   }
 
   .app-card__icon {

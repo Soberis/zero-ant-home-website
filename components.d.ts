@@ -32,6 +32,8 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Scara4axisIcon: typeof import('./src/components/icons/icons/Scara4axisIcon.vue')['default']
+    SpotlightCard: typeof import('./src/components/common/SpotlightCard.vue')['default']
+    StatCard: typeof import('./src/components/common/StatCard.vue')['default']
     VideoCard: typeof import('./src/components/common/VideoCard.vue')['default']
     VideoCases: typeof import('./src/components/business/VideoCases.vue')['default']
   }

@@ -1,9 +1,17 @@
 <template>
   <section class="spotlight-section">
-    <div class="section-heading">
-      <span class="home-section-eyebrow">{{ t("home.videoCases.eyebrow") }}</span>
-      <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
-      <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
+    <div class="section-heading-row">
+      <div class="section-heading">
+        <span class="home-section-eyebrow">{{ t("home.videoCases.eyebrow") }}</span>
+        <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
+        <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
+      </div>
+      <router-link to="/solutions#proof" class="section-cta">
+        <span>{{ t("solutionsPage.more.videos") }}</span>
+        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </router-link>
     </div>
 
     <div class="spotlight-grid">
@@ -86,9 +94,44 @@ const spotlightItems = computed(() =>
   padding: var(--section-padding-y) var(--container-padding-x);
 }
 
+.section-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
 .section-heading {
   max-width: 700px;
-  margin-bottom: var(--space-lg);
+  margin-bottom: 0;
+}
+
+.section-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.section-cta .cta-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+.section-cta:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.section-cta:hover .cta-arrow {
+  transform: translateX(4px);
 }
 
 .spotlight-grid {
@@ -223,6 +266,11 @@ const spotlightItems = computed(() =>
 @media (max-width: 900px) {
   .spotlight-section {
     padding: var(--space-xl) var(--space-md);
+  }
+
+  .section-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
