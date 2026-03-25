@@ -186,10 +186,14 @@ onUnmounted(() => {
 
 .hero-media {
   position: absolute;
-  inset: 40px 10vw 40px 40vw; /* Brought left (from 45vw) and giving 10vw padding on the right */
+  inset: 40px 0;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center; /* Stop forcing it to the right edge */
+  justify-content: flex-end; /* Push to the right edge of container */
+  padding-right: var(--container-padding-x);
   pointer-events: none;
   /* entrance: scale in */
   opacity: 0;
@@ -206,12 +210,12 @@ onUnmounted(() => {
 .hero-image {
   position: relative;
   z-index: 1;
-  width: 100%;
+  width: 55%; /* Take up right 55% of the 1440px container */
   max-width: none;
   height: 96%; /* Massive scale */
   object-fit: contain;
-  object-position: center; /* Let it sit evenly in its container */
-  transform: scale(1.08); /* A bit softer scale, no rightward translation */
+  object-position: center; /* Shifted from 'center right' to 'center' to bring it slightly left */
+  transform: scale(1.08); /* A bit softer scale */
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.08)); /* Softer, pragmatic shadow */
   will-change: transform, opacity;
 }
@@ -222,7 +226,10 @@ onUnmounted(() => {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  padding: 24vh 10vw 44px; /* Lower vertical start (24vh), shift left edge right (10vw) */
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 24vh var(--container-padding-x) 44px; /* Perfectly aligns left edge with nav/content */
   pointer-events: none; /* Let clicks pass through empty space */
 }
 
@@ -231,7 +238,7 @@ onUnmounted(() => {
 }
 
 .hero-copy {
-  max-width: min(580px, 45vw);
+  max-width: min(580px, 45%);
   display: flex;
   flex-direction: column;
   /* entrance: fade up */
@@ -361,7 +368,7 @@ onUnmounted(() => {
 
 .hero-indicators {
   position: absolute;
-  right: 10vw; /* Match the 10vw inner padding of text block for symmetry */
+  right: var(--container-padding-x); /* Match container padding on right side */
   bottom: 44px;
   display: flex;
   align-items: center;
@@ -403,20 +410,23 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 40px 0 80px 10vw; /* Still huge, just a bit more boxed */
+    inset: 40px 0 80px;
+    padding-right: var(--container-padding-x);
+    justify-content: flex-end; /* Keep image on the right on tablets to avoid text overlap */
   }
 
   .hero-overlay {
-    padding: 18vh 6vw 40px;
+    padding: 16vh var(--container-padding-x) 40px;
   }
 
   .hero-copy {
-    max-width: min(580px, 56vw);
+    max-width: min(500px, 55%);
   }
 
   .hero-image {
-    width: 100%;
-    transform: translateX(2%) scale(1.1);
+    width: 55%;
+    object-position: center right; /* Push back to right slightly for narrow screens */
+    transform: translateX(0) scale(1.05);
   }
 }
 
@@ -427,12 +437,13 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 40px -10px 180px; /* Bleeds horizontally, leaves bottom for text */
+    inset: 40px 0 180px; 
+    padding-right: 0;
     justify-content: center;
   }
 
   .hero-overlay {
-    padding: 10vh 24px 32px;
+    padding: 10vh var(--container-padding-x) 32px;
     justify-content: flex-end; /* Mobile keeps text at bottom generally */
   }
 
@@ -449,14 +460,14 @@ onUnmounted(() => {
   }
 
   .hero-indicators {
-    right: 24px;
+    right: var(--container-padding-x);
     bottom: 32px;
   }
 
   .hero-image {
-    width: 115%; /* Scale big on mobile too */
+    width: 100%; /* Take full width on mobile */
     object-position: center bottom;
-    transform: scale(1.05);
+    transform: scale(1.02); /* Gentle scale on mobile */
   }
 }
 
