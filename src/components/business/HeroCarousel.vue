@@ -432,10 +432,7 @@ onUnmounted(() => {
     inset: 72px 14px 238px;
   }
 
-  .hero-title {
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
-  }
-
+  
   .hero-description {
     font-size: 0.96rem;
   }

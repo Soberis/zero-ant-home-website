@@ -7,7 +7,7 @@
       <div class="container product-hero__inner">
         <div class="product-hero__header">
           <span class="product-hero__eyebrow">{{ categoryLabel }}</span>
-          <h1 class="product-hero__title">{{ localizedProduct.title }}</h1>
+          <h1 class="product-hero__title text-display-hero">{{ localizedProduct.title }}</h1>
           <p class="product-hero__description" v-html="sanitizedDescription"></p>
 
           <div class="product-hero__actions">
@@ -51,7 +51,7 @@
         >
           <div class="detail-section__header">
             <h2 class="detail-section__title">
-              <span class="title-main">{{ t("productDetail.features") }}</span>
+              <span class="title-main text-display-large">{{ t("productDetail.features") }}</span>
               <span v-if="locale === 'zh-CN'" class="title-en">CORE FEATURES</span>
             </h2>
           </div>
@@ -82,7 +82,7 @@
         >
           <div class="detail-section__header">
             <h2 class="detail-section__title">
-              <span class="title-main">{{ t("productDetail.applications") }}</span>
+              <span class="title-main text-display-large">{{ t("productDetail.applications") }}</span>
               <span v-if="locale === 'zh-CN'" class="title-en">APPLICATIONS</span>
             </h2>
           </div>
@@ -105,7 +105,7 @@
         >
           <div class="detail-section__header">
             <h2 class="detail-section__title">
-              <span class="title-main">{{ t("productDetail.videoCases") }}</span>
+              <span class="title-main text-display-large">{{ t("productDetail.videoCases") }}</span>
               <span v-if="locale === 'zh-CN'" class="title-en">VIDEO CASES</span>
             </h2>
           </div>
@@ -131,7 +131,7 @@
         >
           <div class="detail-section__header">
             <h2 class="detail-section__title">
-              <span class="title-main">{{ t("productDetail.techParams") }}</span>
+              <span class="title-main text-display-large">{{ t("productDetail.techParams") }}</span>
               <span v-if="locale === 'zh-CN'" class="title-en">TECH SPECS</span>
             </h2>
           </div>
@@ -151,7 +151,7 @@
         <section id="downloads-section" class="detail-section">
           <div class="detail-section__header">
             <h2 class="detail-section__title">
-              <span class="title-main">{{ t("productDetail.downloads") }}</span>
+              <span class="title-main text-display-large">{{ t("productDetail.downloads") }}</span>
               <span v-if="locale === 'zh-CN'" class="title-en">DOWNLOADS</span>
             </h2>
           </div>
@@ -306,10 +306,6 @@ const sanitizedDescription = computed(() =>
 
 .product-hero__title {
   margin: 24px 0 16px;
-  font-size: clamp(3rem, 6vw, 4.5rem);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
   color: #0f172a;
 }
 
@@ -420,12 +416,6 @@ const sanitizedDescription = computed(() =>
   color: #0f172a;
 }
 
-.title-main {
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-}
 
 .title-en {
   font-size: 1rem;
@@ -474,8 +464,25 @@ const sanitizedDescription = computed(() =>
 
 .feature-card__index {
   display: block;
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 600;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.feature-card__title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #0f172a;
+  margin: 0;
+}
+
+.feature-card__description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 8px 0 0;
 }
 
 .param-card__value {
@@ -636,10 +643,7 @@ const sanitizedDescription = computed(() =>
 }
 
 @media (max-width: 560px) {
-  .product-hero__title {
-    font-size: clamp(2rem, 11vw, 3rem);
-  }
-
+  
   .product-hero__actions {
     flex-direction: column;
   }

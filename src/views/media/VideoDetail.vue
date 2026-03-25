@@ -40,7 +40,7 @@
 
     <div class="content-wrapper">
       <div class="title-row">
-        <h1 class="video-title">{{ videoInfo.title }}</h1>
+        <h2 class="video-title">{{ videoInfo.title }}</h2>
         <button class="contact-cta" @click="showContact = true">
           {{ t("common.cta.contactTeam") }}
           <svg viewBox="0 0 24 24" width="15" height="15">
@@ -392,12 +392,8 @@ onUnmounted(() => {
 }
 
 .video-title {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 500;
   margin: 0;
-  color: #0f172a;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  text-align: left;
   flex: 1;
 }
 
@@ -611,7 +607,6 @@ onUnmounted(() => {
   .video-detail-page { padding: 40px 16px 80px; }
   .player-hero-container { border-radius: 16px; margin-bottom: 40px; }
   .title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .video-title { font-size: 1.6rem; }
   .contact-cta {
     align-self: center;
     width: 100%;

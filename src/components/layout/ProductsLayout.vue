@@ -4,7 +4,7 @@
       <div class="products-container products-hero__inner">
         <div class="products-hero__copy">
           <span class="products-hero__eyebrow">{{ eyebrow }}</span>
-          <h1 class="products-hero__title">{{ title }}</h1>
+          <h1 class="products-hero__title text-display-hero">{{ title }}</h1>
           <p class="products-hero__description">{{ description }}</p>
 
           <div v-if="resolvedActions.length" class="products-hero__actions">
@@ -220,9 +220,6 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 
 .products-hero__title {
   margin: 18px 0 14px;
-  font-size: clamp(2.05rem, 3.35vw, 2.8rem);
-  line-height: 1.05;
-  letter-spacing: -0.05em;
   color: var(--products-title);
   text-wrap: balance;
 }
@@ -458,10 +455,6 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 
   .products-container {
     width: min(100%, calc(100% - 24px));
-  }
-
-  .products-hero__title {
-    font-size: clamp(1.95rem, 10vw, 2.65rem);
   }
 
   .products-hero__copy {

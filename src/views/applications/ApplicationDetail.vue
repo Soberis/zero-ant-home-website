@@ -26,7 +26,7 @@
 
     <div class="content-wrapper">
       <div class="title-row">
-        <h1 class="title">{{ detail?.title }}</h1>
+        <h2 class="title">{{ detail?.title }}</h2>
         <button class="contact-cta" @click="showContact = true">
           {{ $t("common.cta.contactTeam") }}
           <svg viewBox="0 0 24 24" width="15" height="15">
@@ -70,7 +70,7 @@
               <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
             </svg>
           </button>
-          <h3 class="contact-title">{{ t("videos.videoDetail.qrCodeTitle") }}</h3>
+          <h3 class="contact-title text-display-hero">{{ t("videos.videoDetail.qrCodeTitle") }}</h3>
           <div class="contact-qrcode-placeholder">
             <img :src="wxworkQrcode" :alt="t('videos.videoDetail.qrCodeDesc')" class="qrcode-img" />
           </div>
@@ -325,14 +325,9 @@ function goTo(targetSlug: string | null): void {
   margin-bottom: 28px;
 }
 
-.title {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 500;
-  color: #0f172a;
+.title {  
   margin: 0;
-  letter-spacing: -0.02em;
   text-align: left;
-  line-height: 1.25;
   flex: 1;
 }
 
@@ -496,8 +491,7 @@ function goTo(targetSlug: string | null): void {
     gap: 16px;
   }
 
-  .title {
-    font-size: 1.75rem;
+  .title {    
     margin-bottom: 16px;
   }
 

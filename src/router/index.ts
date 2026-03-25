@@ -145,8 +145,12 @@ const router = createRouter({
   routes,
   scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
-      scrollPageTo(savedPosition.top ?? 0, "auto");
-      return savedPosition;
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          scrollPageTo(savedPosition.top ?? 0, "auto");
+          resolve(savedPosition);
+        }, 100); // 延迟等待DOM加载，避免瞬间回滚失败
+      });
     }
 
     // 处理hash导航

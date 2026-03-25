@@ -266,7 +266,7 @@
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "Industry Solutions",
-      "title": "面向高可靠行业的机器人与智能系统解决方案",
+      "title": "高可靠行业的机器人与智能系统解决方案",
       "description": "零蚁科技以 AiROS、实时控制、调度协同与柔性部署能力为底座，面向医疗、半导体、智能制造、物流巡检与科研实验场景提供可落地的行业方案。",
       "primaryCta": "查看行业方案",
       "secondaryCta": "查看交付方式",

@@ -5,7 +5,7 @@
       <div class="support-shell hero-grid">
         <div class="hero-copy">
           <p class="hero-eyebrow">SUPPORT CENTER</p>
-          <h1 id="after-sales" class="hero-title">{{ t("supportPage.title") }}</h1>
+          <h1 id="after-sales" class="hero-title text-display-hero">{{ t("supportPage.title") }}</h1>
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
         </div>
 
@@ -29,7 +29,7 @@
       <div class="support-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ t("supportPage.relatedDownloads") }}</span>
+            <span class="title-main text-display-large">{{ t("supportPage.relatedDownloads") }}</span>
             <span class="title-en">DOWNLOADS</span>
           </h2>
         </div>
@@ -77,7 +77,7 @@
       <div class="support-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ t("supportPage.faqTitle") }}</span>
+            <span class="title-main text-display-large">{{ t("supportPage.faqTitle") }}</span>
             <span class="title-en">FAQ</span>
           </h2>
         </div>
@@ -126,7 +126,7 @@
           <div class="contact-copy">
             <div class="detail-section__header" style="margin-bottom: 24px;">
               <h2 class="detail-section__title">
-                <span class="title-main">{{ t("nav.contact") }}</span>
+                <span class="title-main text-display-large">{{ t("nav.contact") }}</span>
                 <span class="title-en">CONTACT US</span>
               </h2>
             </div>
@@ -320,10 +320,6 @@ function formatIndex(value: number): string {
 .hero-title {
   margin: 0 0 24px;
   color: var(--brand-text);
-  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
 }
 
 .hero-desc {
@@ -415,12 +411,7 @@ function formatIndex(value: number): string {
   margin: 0;
 }
 
-.title-main {
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 500;
-  color: var(--brand-text);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+.title-main {  color: var(--brand-text);
 }
 
 .title-en {
@@ -654,7 +645,6 @@ function formatIndex(value: number): string {
 
   .hero-title {
     max-width: none;
-    font-size: 2.5rem;
   }
 
   .hero-desc,

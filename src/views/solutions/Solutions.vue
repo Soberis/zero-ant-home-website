@@ -4,7 +4,7 @@
       <div class="page-shell hero-grid">
         <div class="hero-copy">
           <p class="hero-eyebrow">{{ t("solutionsPage.hero.eyebrow") }}</p>
-          <h1 class="hero-title">{{ t("solutionsPage.hero.title") }}</h1>
+          <h1 class="hero-title text-display-hero">{{ t("solutionsPage.hero.title") }}</h1>
           <p class="hero-description">
             {{ t("solutionsPage.hero.description") }}
           </p>
@@ -38,7 +38,7 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ t("solutionsPage.industries.title") }}</span>
+            <span class="title-main text-display-large">{{ t("solutionsPage.industries.title") }}</span>
             <span class="title-en">INDUSTRIES</span>
           </h2>
           <p class="section-description">
@@ -83,7 +83,7 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ t("solutionsPage.backbone.title") }}</span>
+            <span class="title-main text-display-large">{{ t("solutionsPage.backbone.title") }}</span>
             <span class="title-en">TECH BACKBONE</span>
           </h2>
           <p class="section-description">
@@ -122,7 +122,7 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ t("solutionsPage.more.title") }}</span>
+            <span class="title-main text-display-large">{{ t("solutionsPage.more.title") }}</span>
             <span class="title-en">USE CASES</span>
           </h2>
           <p class="section-description">
@@ -190,7 +190,7 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ t("solutionsPage.delivery.title") }}</span>
+            <span class="title-main text-display-large">{{ t("solutionsPage.delivery.title") }}</span>
             <span class="title-en">DELIVERY NETWORK</span>
           </h2>
           <p class="section-description">
@@ -274,7 +274,7 @@ watch(
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
 const showAllApps = ref(false);
-const VIDEO_FOLD = 8;
+const VIDEO_FOLD = 6;
 const APP_FOLD = 8;
 
 function stripHtml(value: string): string {
@@ -479,10 +479,6 @@ function goToProduct(route: string): void {
   max-width: 14em;
   margin: 0 0 24px;
   color: var(--brand-text);
-  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
 }
 
 .hero-description,
@@ -615,12 +611,7 @@ function goToProduct(route: string): void {
   margin: 0 0 16px 0;
 }
 
-.title-main {
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 500;
-  color: var(--brand-text);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+.title-main {  color: var(--brand-text);
 }
 
 .title-en {
@@ -668,11 +659,11 @@ function goToProduct(route: string): void {
 }
 
 .more-video-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .more-application-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-subheading {

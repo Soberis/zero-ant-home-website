@@ -265,7 +265,7 @@
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "@:common.terms.industrySolutions",
-      "title": "Robotics and intelligent system solutions for high-reliability industries",
+      "title": "High-reliability robotics and intelligent system solutions",
       "description": "Powered by AiROS, real-time control, scheduling collaboration and flexible deployment, ZeroAnt delivers practical solutions for medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
       "primaryCta": "Explore Industries",
       "secondaryCta": "View Delivery",

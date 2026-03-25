@@ -4,7 +4,7 @@
     <section class="about-hero">
       <div class="page-shell hero-shell">
         <div class="hero-copy">
-          <h1 class="hero-title">{{ $t("slogan") }}</h1>
+          <h1 class="hero-title text-display-super">{{ $t("slogan") }}</h1>
           <p class="hero-sub">{{ $t("slogan2") }}</p>
         </div>
       </div>
@@ -15,7 +15,7 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ $t("nav.companyIntro") }}</span>
+            <span class="title-main text-display-large">{{ $t("nav.companyIntro") }}</span>
             <span class="title-en">COMPANY PROFILE</span>
           </h2>
         </div>
@@ -64,7 +64,7 @@
       <div class="page-shell">
 <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ $t("nav.history") }}</span>
+            <span class="title-main text-display-large">{{ $t("nav.history") }}</span>
             <span class="title-en">MILESTONES</span>
           </h2>
         </div>
@@ -94,7 +94,7 @@
       <div class="page-shell">
 <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ $t("nav.honor") }}</span>
+            <span class="title-main text-display-large">{{ $t("nav.honor") }}</span>
             <span class="title-en">HONORS</span>
           </h2>
         </div>
@@ -116,7 +116,7 @@
       <div class="page-shell">
 <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ $t("about.coreValues.title") }}</span>
+            <span class="title-main text-display-large">{{ $t("about.coreValues.title") }}</span>
             <span class="title-en">CORE VALUES</span>
           </h2>
         </div>
@@ -138,7 +138,7 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main">{{ $t("nav.culture") }}</span>
+            <span class="title-main text-display-large">{{ $t("nav.culture") }}</span>
             <span class="title-en">CULTURE</span>
           </h2>
         </div>
@@ -164,7 +164,7 @@
           <div class="contact-copy">
             <div class="detail-section__header" style="margin-bottom: 24px;">
               <h2 class="detail-section__title">
-                <span class="title-main">{{ $t("nav.contact") }}</span>
+                <span class="title-main text-display-large">{{ $t("nav.contact") }}</span>
                 <span class="title-en">CONTACT US</span>
               </h2>
             </div>
@@ -321,10 +321,6 @@ function formatIndex(value: number): string {
   max-width: 10em;
   margin: 0 0 24px;
   color: var(--brand-text);
-  font-size: clamp(3.6rem, 7vw, 6rem);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -0.045em;
 }
 
 .hero-sub {
@@ -384,12 +380,7 @@ function formatIndex(value: number): string {
   margin: 0 0 16px 0;
 }
 
-.title-main {
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 500;
-  color: var(--brand-text);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+.title-main {  color: var(--brand-text);
 }
 
 .title-en {
@@ -748,7 +739,6 @@ function formatIndex(value: number): string {
 
   .hero-title {
     max-width: none;
-    font-size: 2.8rem;
   }
 
   .info-panel,
