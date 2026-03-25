@@ -17,6 +17,7 @@
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
           <p class="text-label-large hero-eyebrow" style="transition-delay: 0.1s">{{ t('home.hero.eyebrow') }}</p>
           <h1 class="text-display-hero hero-title" style="transition-delay: 0.2s">{{ t('home.hero.title') }}</h1>
+          <div class="hero-product-name" :key="activeSlide.shortTitle" style="transition-delay: 0.25s">—— {{ activeSlide.title }}</div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.4s">
             <div class="hero-buttons">
@@ -38,19 +39,20 @@
                 <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </router-link>
             </div>
-
-            <div class="hero-indicators">
-              <button
-                v-for="(slide, idx) in slides"
-                :key="slide.routePath"
-                class="hero-indicator"
-                :class="{ active: idx === current }"
-                type="button"
-                :aria-label="slide.shortTitle"
-                @click.stop="goTo(idx)"
-              ></button>
-            </div>
           </div>
+        </div>
+        
+        <!-- Moved indicators to bottom right -->
+        <div class="hero-indicators" :class="{ 'hero-entered': entered }">
+          <button
+            v-for="(slide, idx) in slides"
+            :key="slide.routePath"
+            class="hero-indicator"
+            :class="{ active: idx === current }"
+            type="button"
+            :aria-label="slide.shortTitle"
+            @click.stop="goTo(idx)"
+          ></button>
         </div>
       </div>
     </div>
@@ -173,54 +175,63 @@ onUnmounted(() => {
   position: relative;
   min-height: calc(100svh - var(--nav-height));
   overflow: hidden;
-  background: #111111;
+  background: #fbfbfd;
   cursor: pointer;
 }
 
 .hero-stage:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline: 2px solid rgba(0, 0, 0, 0.72);
   outline-offset: -2px;
 }
 
 .hero-media {
   position: absolute;
-  inset: 68px 5vw 132px;
+  inset: 40px 10vw 40px 40vw; /* Brought left (from 45vw) and giving 10vw padding on the right */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Stop forcing it to the right edge */
   pointer-events: none;
   /* entrance: scale in */
   opacity: 0;
-  transform: scale(1.06);
-  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s,
-    transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s;
+  transform: scale(1.04) translateX(2%);
+  transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s,
+    transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
 }
 
 .hero-media.hero-entered {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) translateX(0);
 }
 
 .hero-image {
   position: relative;
   z-index: 1;
-  width: 118%;
+  width: 100%;
   max-width: none;
-  height: 100%;
+  height: 96%; /* Massive scale */
   object-fit: contain;
-  transform: translateX(4%) scale(1.1);
-  filter: drop-shadow(0 18px 48px rgba(0, 0, 0, 0.18));
+  object-position: center; /* Let it sit evenly in its container */
+  transform: scale(1.08); /* A bit softer scale, no rightward translation */
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.08)); /* Softer, pragmatic shadow */
+  will-change: transform, opacity;
 }
 
 .hero-overlay {
   position: absolute;
-  inset: auto 0 0;
+  inset: 0;
   z-index: 2;
-  padding: 0 5vw 44px;
+  display: flex;
+  flex-direction: column;
+  padding: 24vh 10vw 44px; /* Lower vertical start (24vh), shift left edge right (10vw) */
+  pointer-events: none; /* Let clicks pass through empty space */
+}
+
+.hero-copy, .hero-indicators {
+  pointer-events: auto; /* Re-enable clicks on interactive elements */
 }
 
 .hero-copy {
-  max-width: min(520px, 40vw);
+  max-width: min(580px, 45vw);
   display: flex;
   flex-direction: column;
   /* entrance: fade up */
@@ -237,22 +248,30 @@ onUnmounted(() => {
 
 .hero-eyebrow {
   margin: 0 0 var(--space-sm);
-  color: rgba(255, 255, 255, 0.78);
+  color: #86868b;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .hero-title {
   margin: 0;
-  max-width: 8ch;
-  color: #ffffff;
-  text-wrap: balance;
+  color: #1d1d1f;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.hero-product-name {
+  margin: 16px 0 0;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #515154;
+  letter-spacing: 0.01em;
 }
 
 .hero-description {
-  margin: var(--space-md) 0 0;
+  margin: 28px 0 0;
   max-width: 20em;
-  color: rgba(255, 255, 255, 0.82);
+  color: #515154;
 }
 
 .hero-link {
@@ -297,19 +316,27 @@ onUnmounted(() => {
 }
 
 .hero-link:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline: 2px solid rgba(0, 0, 0, 0.72);
   outline-offset: 3px;
 }
 
 .hero-link--secondary {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: #1d1d1f;
+  border-color: #d2d2d7;
   box-shadow: none;
 }
 
+.hero-link--secondary:link,
+.hero-link--secondary:visited,
+.hero-link--secondary:active {
+  color: #1d1d1f;
+}
+
 .hero-link--secondary:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.04);
+  color: #1d1d1f;
+  border-color: #86868b;
   box-shadow: none;
 }
 
@@ -333,15 +360,18 @@ onUnmounted(() => {
 }
 
 .hero-indicators {
+  position: absolute;
+  right: 10vw; /* Match the 10vw inner padding of text block for symmetry */
+  bottom: 44px;
   display: flex;
   align-items: center;
   gap: 12px;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
 }
 
-.hero-copy.hero-entered .hero-indicators {
+.hero-indicators.hero-entered {
   opacity: 1;
   transform: translateY(0);
 }
@@ -352,7 +382,7 @@ onUnmounted(() => {
   padding: 0;
   border: 0;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.12);
   cursor: pointer;
   transition: width 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 }
@@ -363,7 +393,7 @@ onUnmounted(() => {
 
 .hero-indicator.active {
   width: 56px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 @media (max-width: 1100px) {
@@ -373,11 +403,11 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 80px 4vw 176px;
+    inset: 40px 0 80px 10vw; /* Still huge, just a bit more boxed */
   }
 
   .hero-overlay {
-    padding: 0 24px 34px;
+    padding: 18vh 6vw 40px;
   }
 
   .hero-copy {
@@ -385,8 +415,8 @@ onUnmounted(() => {
   }
 
   .hero-image {
-    width: 112%;
-    transform: translateX(2%) scale(1.06);
+    width: 100%;
+    transform: translateX(2%) scale(1.1);
   }
 }
 
@@ -397,11 +427,13 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 80px 22px 248px;
+    inset: 40px -10px 180px; /* Bleeds horizontally, leaves bottom for text */
+    justify-content: center;
   }
 
   .hero-overlay {
-    padding: 0 20px 28px;
+    padding: 10vh 24px 32px;
+    justify-content: flex-end; /* Mobile keeps text at bottom generally */
   }
 
   .hero-copy {
@@ -416,9 +448,15 @@ onUnmounted(() => {
     align-items: flex-start;
   }
 
+  .hero-indicators {
+    right: 24px;
+    bottom: 32px;
+  }
+
   .hero-image {
-    width: 100%;
-    transform: none;
+    width: 115%; /* Scale big on mobile too */
+    object-position: center bottom;
+    transform: scale(1.05);
   }
 }
 
@@ -429,7 +467,7 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 72px 14px 238px;
+    inset: 20px -20px 240px; /* Bleed past edges */
   }
 
   
@@ -458,7 +496,7 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 68px 12px 228px;
+    inset: 10px -20px 230px;
   }
 }
 
