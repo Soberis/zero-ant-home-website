@@ -20,7 +20,7 @@
             class="product-card-item"
           >
             <div class="card-visual">
-              <img :src="product.image" :alt="t(product.name)" class="visual-img" />
+              <img :src="product.image" :alt="t(product.name)" class="visual-img" loading="lazy" decoding="async" />
             </div>
 
             <div class="card-content">
@@ -61,6 +61,7 @@ const productGroups = computed(() => [
 .core-products {
   position: relative;
   z-index: 1;
+  contain: content;
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: var(--section-padding-y) var(--container-padding-x);

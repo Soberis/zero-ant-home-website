@@ -550,6 +550,7 @@ function goToProduct(route: string): void {
 
 .hero-stat-value {
   color: var(--brand-text);
+  font-family: "Outfit", sans-serif;
   font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 600;
   line-height: 1;
@@ -589,6 +590,31 @@ function goToProduct(route: string): void {
 
 .solutions-page > .page-section:nth-of-type(even) {
   background-color: var(--brand-surface-soft);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, #ffffff, transparent);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, #ffffff, transparent);
+    z-index: 1;
+    pointer-events: none;
+  }
 }
 
 .section-heading {
@@ -705,7 +731,7 @@ function goToProduct(route: string): void {
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 12px;
   background: #ffffff;
-  transition: transform var(--transition-normal, 0.3s ease), box-shadow var(--transition-normal, 0.3s ease);
+  transition: transform 0.3s ease;
 }
 
 
@@ -756,7 +782,7 @@ function goToProduct(route: string): void {
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.08);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .industry-block:hover {

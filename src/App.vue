@@ -1,5 +1,8 @@
 <template>
   <div id="app" class="page">
+    <div class="scroll-progress-container">
+      <div class="scroll-progress-bar" :style="{ width: scrollProgress + '%' }"></div>
+    </div>
     <!-- 导航栏 -->
     <NavBar />
     <!-- 主体内容 -->
@@ -14,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/layout/NavBar.vue";
 import Footer from "@/components/layout/Footer.vue";
@@ -67,14 +70,34 @@ const handleEscKey = (event: KeyboardEvent) => {
   }
 };
 
+const scrollProgress = ref(0);
+let ticking = false;
+
+const updateScrollProgress = () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  scrollProgress.value = scrolled;
+  ticking = false;
+};
+
+const handleScroll = () => {
+  if (!ticking) {
+    window.requestAnimationFrame(updateScrollProgress);
+    ticking = true;
+  }
+};
+
 onMounted(() => {
   // 添加全局键盘监听
   document.addEventListener("keydown", handleEscKey);
+  window.addEventListener("scroll", handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
   // 移除全局键盘监听
   document.removeEventListener("keydown", handleEscKey);
+  window.removeEventListener("scroll", handleScroll);
 });
 </script>
 
@@ -109,5 +132,24 @@ body {
 .main-content {
   flex: 1;
   padding-top: var(--nav-height);
+}
+
+/* Scroll Progress Bar */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: var(--color-primary, #1a3a8f);
+  width: 0%;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 8px rgba(26, 58, 143, 0.4);
 }
 </style>

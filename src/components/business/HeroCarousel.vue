@@ -10,7 +10,7 @@
       @keydown.space.prevent="handleStageClick"
     >
       <div class="hero-media" :class="{ 'hero-entered': entered }">
-        <img :src="activeSlide.img" :alt="activeSlide.title" class="hero-image" />
+        <img :src="activeSlide.img" :alt="activeSlide.title" class="hero-image" fetchpriority="high" decoding="async" />
       </div>
 
       <div class="hero-overlay">
