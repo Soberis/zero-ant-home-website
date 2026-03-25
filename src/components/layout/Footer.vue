@@ -23,8 +23,10 @@
               <div class="qrcode-item">
                 <img
                   :src="wxQrcode"
-                  alt="微信公众号二维码"
+                  :alt="$t('footer.wx')"
                   class="qrcode-img"
+                  loading="lazy"
+                  aria-label="WeChat Official Account QR Code"
                 />
                 <div class="qrcode-label">{{ $t("footer.wx") }}</div>
               </div>
@@ -32,8 +34,10 @@
               <div class="qrcode-item">
                 <img
                   :src="bilibiliQrcode"
-                  alt="B站二维码"
+                  :alt="$t('footer.bilibili')"
                   class="qrcode-img bilibili-qrcode-img"
+                  loading="lazy"
+                  aria-label="Bilibili Channel QR Code"
                 />
                 <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
               </div>
@@ -202,8 +206,10 @@
               <div class="qrcode-item">
                 <img
                   :src="wxQrcode"
-                  alt="微信公众号二维码"
+                  :alt="$t('footer.wx')"
                   class="qrcode-img"
+                  loading="lazy"
+                  aria-label="WeChat Official Account QR Code"
                 />
                 <div class="qrcode-label">{{ $t("footer.wx") }}</div>
               </div>
@@ -211,8 +217,10 @@
               <div class="qrcode-item">
                 <img
                   :src="bilibiliQrcode"
-                  alt="B站二维码"
+                  :alt="$t('footer.bilibili')"
                   class="qrcode-img bilibili-qrcode-img"
+                  loading="lazy"
+                  aria-label="Bilibili Channel QR Code"
                 />
                 <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
               </div>

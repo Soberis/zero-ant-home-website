@@ -488,15 +488,22 @@ small {
   animation: fade-in-up 0.6s ease-out both;
 }
 
-// 交互悬浮
-.hover-lift {
-  transition: transform var(--transition-normal),
-    box-shadow var(--transition-normal);
+// 骨架屏加载动画
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 0.5) 25%,
+    rgba(243, 244, 246, 0.8) 37%,
+    rgba(229, 231, 235, 0.5) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: var(--radius-sm);
 }
 
 /* ================================================================

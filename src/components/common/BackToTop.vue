@@ -1,145 +1,101 @@
 <template>
-  <transition name="fade-slide">
+  <transition name="fade">
     <button
-      v-show="isVisible"
+      v-show="visible"
       class="back-to-top"
+      :aria-label="t('common.cta.backToTop') || 'Back to top'"
       @click="scrollToTop"
-      :aria-label="t('common.backToTop')"
-      :title="t('common.backToTop')"
     >
-      <svg
-        class="back-to-top__icon"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M12 19V5M5 12l7-7 7 7" />
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
       </svg>
     </button>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-const isVisible = ref(false);
-const scrollThreshold = 400;
 
-const getScrollTop = () => {
-  return Math.max(
-    window.scrollY || 0,
-    document.documentElement?.scrollTop || 0,
-    document.body?.scrollTop || 0,
-    document.getElementById('app')?.scrollTop || 0,
-    document.querySelector('.page')?.scrollTop || 0
-  );
-};
-
-const checkScroll = () => {
-  isVisible.value = getScrollTop() > scrollThreshold;
-};
+defineProps<{
+  visible: boolean;
+}>();
 
 const scrollToTop = () => {
-  const targets = [
-    window,
-    document.documentElement,
-    document.body,
-    document.getElementById('app'),
-    document.querySelector('.page')
-  ];
+  const scrollConfig: ScrollToOptions = {
+    top: 0,
+    behavior: 'smooth',
+  };
+
+  // Scroll all common containers
+  window.scrollTo(scrollConfig);
+  document.documentElement.scrollTo(scrollConfig);
+  document.body.scrollTo(scrollConfig);
   
-  targets.forEach((target: any) => {
-    if (target) {
-      try {
-        target.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (e) {
-        if (target.scrollTop !== undefined) {
-          target.scrollTop = 0;
-        }
-      }
-    }
-  });
+  // Also try to find if there is a specific #app scroll
+  const appEl = document.getElementById('app');
+  if (appEl) appEl.scrollTo(scrollConfig);
 };
-
-onMounted(() => {
-  window.addEventListener("scroll", checkScroll, { passive: true, capture: true });
-  checkScroll();
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", checkScroll, { capture: true } as any);
-});
 </script>
 
 <style scoped lang="less">
 .back-to-top {
   position: fixed;
-  right: 48px;
-  bottom: calc(48px + env(safe-area-inset-bottom, 0px));
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  background: #0f172a;
+  right: 32px;
+  bottom: 32px;
+  width: 56px;
+  height: 56px;
+  background: rgba(26, 58, 143, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
   color: #ffffff;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1000;
+  cursor: pointer;
+  z-index: 2001;
+  box-shadow: 0 8px 32px rgba(26, 58, 143, 0.3), 
+              inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-  &:hover {
-    transform: translateY(-4px);
-    background: #1e2d45;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
-  }
+.back-to-top:hover {
+  transform: translateY(-8px) scale(1.1);
+  background: rgba(26, 58, 143, 1);
+  box-shadow: 0 16px 48px rgba(26, 58, 143, 0.5),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
 
-  &:active {
-    transform: translateY(0);
-    background: #0f172a;
-  }
+@keyframes pulse-once {
+  0% { transform: translateY(0) scale(1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+  50% { transform: translateY(-10px) scale(1.15); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+  100% { transform: translateY(0) scale(1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+}
 
-  &:focus {
-    outline: none;
-  }
+.fade-enter-active {
+  animation: pulse-once 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-  &__icon {
-    width: 20px;
-    height: 20px;
-  }
+.fade-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
 }
 
 @media (max-width: 768px) {
   .back-to-top {
-    right: 24px;
-    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-    width: 44px;
-    height: 44px;
-
-    &__icon {
-      width: 18px;
-      height: 18px;
-    }
+    right: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
   }
-}
-
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fade-slide-enter-from,
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(16px);
 }
 </style>

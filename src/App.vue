@@ -1,18 +1,19 @@
 <template>
   <div id="app" class="page">
-    <div class="scroll-progress-container">
-      <div class="scroll-progress-bar" :style="{ width: scrollProgress + '%' }"></div>
-    </div>
     <!-- 导航栏 -->
     <NavBar />
     <!-- 主体内容 -->
     <main class="main-content">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="page-fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </main>
     <!-- 页脚 -->
     <Footer />
     <!-- 返回顶部按钮 -->
-    <BackToTop />
+    <BackToTop :visible="isBackToTopVisible" />
   </div>
 </template>
 
@@ -70,20 +71,32 @@ const handleEscKey = (event: KeyboardEvent) => {
   }
 };
 
-const scrollProgress = ref(0);
+const isBackToTopVisible = ref(false);
 let ticking = false;
 
-const updateScrollProgress = () => {
-  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (winScroll / height) * 100;
-  scrollProgress.value = scrolled;
-  ticking = false;
-};
-
-const handleScroll = () => {
+const handleScroll = (event: Event) => {
   if (!ticking) {
-    window.requestAnimationFrame(updateScrollProgress);
+    window.requestAnimationFrame(() => {
+      const target = event.target as any;
+      let winScroll = 0;
+
+      // Detect scroll position from target or window
+      if (
+        !target ||
+        target === document ||
+        target === window ||
+        target.tagName === "HTML" ||
+        target.tagName === "BODY"
+      ) {
+        winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      } else if (target.scrollTop !== undefined) {
+        winScroll = target.scrollTop;
+      }
+
+      // Update back to top visibility
+      isBackToTopVisible.value = winScroll > 300;
+      ticking = false;
+    });
     ticking = true;
   }
 };
@@ -91,13 +104,13 @@ const handleScroll = () => {
 onMounted(() => {
   // 添加全局键盘监听
   document.addEventListener("keydown", handleEscKey);
-  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, true);
 });
 
 onUnmounted(() => {
   // 移除全局键盘监听
   document.removeEventListener("keydown", handleEscKey);
-  window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("scroll", handleScroll, true);
 });
 </script>
 
@@ -134,22 +147,19 @@ body {
   padding-top: var(--nav-height);
 }
 
-/* Scroll Progress Bar */
-.scroll-progress-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  z-index: 2000;
-  pointer-events: none;
+/* Page Transitions */
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.scroll-progress-bar {
-  height: 100%;
-  background: var(--color-primary, #1a3a8f);
-  width: 0%;
-  transition: width 0.1s ease-out;
-  box-shadow: 0 0 8px rgba(26, 58, 143, 0.4);
+.page-fade-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>

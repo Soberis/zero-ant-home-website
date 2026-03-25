@@ -3,7 +3,16 @@
     <div class="player-hero-container">
       <div class="media-wrapper">
         <template v-if="mediaInfo.type === 'bilibili'">
+          <div v-if="!videoStarted" class="video-facade" @click="videoStarted = true">
+            <img :src="thumbnailUrl" :alt="mediaInfo.title" class="facade-image" />
+            <div class="facade-play-btn" aria-label="Play Video">
+              <svg viewBox="0 0 24 24" width="48" height="48">
+                <path fill="currentColor" d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
           <BilibiliPlayer
+            v-else
             :key="mediaInfo.url"
             :url="mediaInfo.url"
             :title="mediaInfo.title"
@@ -146,6 +155,12 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 const showContact = ref<boolean>(false);
+const videoStarted = ref<boolean>(false);
+
+const thumbnailUrl = computed(() => {
+  // If we have a custom thumbnail, use it; otherwise, use a default fallback
+  return "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"; // A generic robotic background
+});
 
 const bottomBarClass = computed(() => {
   if (props.prevSlug && props.nextSlug) return "both";
@@ -218,12 +233,56 @@ onUnmounted(() => {
 .video-player,
 .video-iframe,
 .video-image,
-.video-placeholder {
+.video-placeholder,
+.facade-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border: none;
   display: block;
+}
+
+.video-facade {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: #000;
+  overflow: hidden;
+}
+
+.facade-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(26, 58, 143, 0.9);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+}
+
+.video-facade:hover .facade-play-btn {
+  background: #1a3a8f;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 12px 48px rgba(26, 58, 143, 0.4);
+}
+
+.facade-image {
+  opacity: 0.7;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+.video-facade:hover .facade-image {
+  transform: scale(1.05);
+  opacity: 0.8;
 }
 
 .video-placeholder {

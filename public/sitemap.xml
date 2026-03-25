@@ -3,7 +3,7 @@
 	<!-- 首页 - 最高优先级 -->
 	<url>
 		<loc>https://zeroant.com/</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>1.0</priority>
 	</url>
@@ -11,7 +11,7 @@
 	<!-- 关于我们 -->
 	<url>
 		<loc>https://zeroant.com/about</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
@@ -19,7 +19,7 @@
 	<!-- 人才招聘 -->
 	<url>
 		<loc>https://zeroant.com/careers</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
@@ -27,7 +27,7 @@
 	<!-- 联系我们 -->
 	<url>
 		<loc>https://zeroant.com/contact</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
 	</url>
@@ -35,7 +35,7 @@
 	<!-- 系统产品 -->
 	<url>
 		<loc>https://zeroant.com/system-products</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 	</url>
@@ -43,7 +43,7 @@
 	<!-- 机器人产品 -->
 	<url>
 		<loc>https://zeroant.com/robot-products</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 	</url>
@@ -51,7 +51,7 @@
 	<!-- 应用场景 -->
 	<url>
 		<loc>https://zeroant.com/applications</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
@@ -59,7 +59,7 @@
 	<!-- 视频案例 -->
 	<url>
 		<loc>https://zeroant.com/video</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
@@ -67,7 +67,7 @@
 	<!-- 服务支持 -->
 	<url>
 		<loc>https://zeroant.com/support</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
 	</url>
@@ -75,7 +75,7 @@
 	<!-- 系统产品详情页 -->
 	<url>
 		<loc>https://zeroant.com/products/system</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
@@ -83,7 +83,7 @@
 	<!-- 机器人产品详情页 -->
 	<url>
 		<loc>https://zeroant.com/products/robot</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
@@ -93,7 +93,7 @@
 	<!-- 医疗自动化应用 -->
 	<url>
 		<loc>https://zeroant.com/applications/medical-automation</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.6</priority>
 	</url>
@@ -101,7 +101,7 @@
 	<!-- 半导体加工应用 -->
 	<url>
 		<loc>https://zeroant.com/applications/semiconductor-processing</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.6</priority>
 	</url>
@@ -111,7 +111,7 @@
 	<!-- 360度雷达扫描视频 -->
 	<url>
 		<loc>https://zeroant.com/video/360-radar-scan</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
@@ -119,7 +119,7 @@
 	<!-- AGV产品介绍视频 -->
 	<url>
 		<loc>https://zeroant.com/video/agv-product-intro</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
@@ -129,7 +129,7 @@
 	<!-- 复合机器人传板视频 -->
 	<url>
 		<loc>https://zeroant.com/video/composite-robot-transfer</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
@@ -137,7 +137,7 @@
 	<!-- 晶圆传送机器人运动控制视频 -->
 	<url>
 		<loc>https://zeroant.com/video/wafer-transfer-robot</loc>
-		<lastmod>2025-07-20</lastmod>
+		<lastmod>2026-03-25</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>

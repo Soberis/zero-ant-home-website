@@ -11,7 +11,7 @@
       <div class="nav-wrapper desktop-nav">
         <ul class="nav-links">
           <li class="nav-item">
-            <router-link to="/" class="nav-link" active-class="active">
+            <router-link to="/" class="nav-link" active-class="active" aria-current-value="page">
               <span class="nav-text">{{ $t("nav.home") }}</span>
             </router-link>
           </li>
@@ -148,7 +148,11 @@
 
       <div class="nav-actions">
         <div class="language-switcher">
-          <button class="language-btn" @click="switchLanguage()">
+          <button 
+            class="language-btn" 
+            @click="switchLanguage()"
+            :aria-label="locale === 'zh' ? 'Switch to English' : '切换至中文'"
+          >
             <span class="lang-text">{{ locale === "zh" ? "EN" : "中文" }}</span>
           </button>
         </div>

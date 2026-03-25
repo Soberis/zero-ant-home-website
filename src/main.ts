@@ -26,6 +26,13 @@ if (typeof window !== "undefined") {
 
   // 初始化安全监控
   initSecurity();
+
+  // 注册 Service Worker (PWA)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    });
+  }
   
   // 初始化默认SEO和路由守卫
   router.isReady().then(async () => {
