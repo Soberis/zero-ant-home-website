@@ -13,6 +13,7 @@ declare module 'vue' {
     Arm6axisIcon: typeof import('./src/components/icons/icons/Arm6axisIcon.vue')['default']
     BackToTop: typeof import('./src/components/common/BackToTop.vue')['default']
     BilibiliPlayer: typeof import('./src/components/BilibiliPlayer.vue')['default']
+    CommonDetailLayout: typeof import('./src/components/common/CommonDetailLayout.vue')['default']
     CoreProducts: typeof import('./src/components/business/CoreProducts.vue')['default']
     DualArmHumanoidIcon: typeof import('./src/components/icons/icons/DualArmHumanoidIcon.vue')['default']
     Footer: typeof import('./src/components/layout/Footer.vue')['default']

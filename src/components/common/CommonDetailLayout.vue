@@ -1,0 +1,495 @@
+<template>
+  <div class="common-detail-page">
+    <div class="player-hero-container">
+      <div class="media-wrapper">
+        <template v-if="mediaInfo.type === 'bilibili'">
+          <BilibiliPlayer
+            :key="mediaInfo.url"
+            :url="mediaInfo.url"
+            :title="mediaInfo.title"
+          />
+        </template>
+        <template v-else-if="mediaInfo.type === 'video'">
+          <video
+            :key="mediaInfo.url"
+            class="video-player"
+            :src="mediaInfo.url"
+            controls
+            preload="metadata"
+          >
+            {{ t("videos.videoDetail.browserNotSupport") }}
+          </video>
+        </template>
+        <template v-else-if="mediaInfo.type === 'image'">
+          <img
+            :key="mediaInfo.url"
+            class="video-image"
+            :src="mediaInfo.url"
+            :alt="mediaInfo.title"
+          />
+        </template>
+        <template v-else>
+          <div class="video-placeholder">
+            {{ t("common.status.noVideo") }}
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="title-row">
+        <h2 class="detail-title">{{ title }}</h2>
+        <button class="contact-cta" @click="showContact = true">
+          {{ t("common.cta.contactTeam") }}
+          <svg viewBox="0 0 24 24" width="15" height="15">
+            <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="content-desc-block">
+        <!-- 富文本渲染 (Application) -->
+        <div v-if="contentHtml" class="content-html" v-html="contentHtml"></div>
+        
+        <!-- 分段文本渲染 (Video) -->
+        <template v-else-if="contentParagraphs && contentParagraphs.length">
+          <p
+            v-for="(para, idx) in contentParagraphs"
+            :key="idx"
+            class="content-para"
+          >
+            {{ para }}
+          </p>
+        </template>
+      </div>
+
+      <div v-if="prevSlug || nextSlug" class="detail-bottom-bar" :class="bottomBarClass">
+        <button
+          v-if="prevSlug"
+          class="detail-nav-btn prev"
+          @click="emitNavigate(prevSlug)"
+        >
+          ◀ {{ t("applicationsPage.prev") }}
+        </button>
+        <button
+          v-if="nextSlug"
+          class="detail-nav-btn next"
+          @click="emitNavigate(nextSlug)"
+        >
+          {{ t("applicationsPage.next") }} ▶
+        </button>
+      </div>
+    </div>
+
+    <!-- Glassmorphism QR Code Dialog -->
+    <transition name="fade-dialog">
+      <div
+        v-if="showContact"
+        class="contact-dialog-mask"
+        role="dialog"
+        aria-modal="true"
+        :aria-label="t('videos.videoDetail.qrCodeTitle')"
+        @click.self="showContact = false"
+      >
+        <div class="contact-dialog">
+          <button class="contact-close-x" @click="showContact = false">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+          
+          <h3 class="contact-title">
+            {{ t("videos.videoDetail.qrCodeTitle") }}
+          </h3>
+
+          <div class="contact-qrcode-placeholder">
+            <img
+              :src="wxworkQrcode"
+              :alt="t('videos.videoDetail.qrCodeDesc')"
+              class="qrcode-img"
+            />
+          </div>
+
+          <p class="contact-qrcode-desc">
+            {{ t("videos.videoDetail.qrCodeDesc") }}
+          </p>
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
+
+interface MediaInfo {
+  type: 'bilibili' | 'video' | 'image' | 'none';
+  url: string;
+  title: string;
+}
+
+const props = defineProps<{
+  title: string;
+  mediaInfo: MediaInfo;
+  contentHtml?: string;
+  contentParagraphs?: string[];
+  prevSlug?: string | null;
+  nextSlug?: string | null;
+}>();
+
+const emit = defineEmits<{
+  (e: 'navigate', slug: string): void;
+}>();
+
+const { t } = useI18n();
+const showContact = ref<boolean>(false);
+
+const bottomBarClass = computed(() => {
+  if (props.prevSlug && props.nextSlug) return "both";
+  if (props.prevSlug) return "only-prev";
+  if (props.nextSlug) return "only-next";
+  return "";
+});
+
+function emitNavigate(slug: string | null) {
+  if (slug) emit('navigate', slug);
+}
+
+function handleDialogEscape(event: KeyboardEvent): void {
+  if (event.key !== "Escape" || !showContact.value) {
+    return;
+  }
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  showContact.value = false;
+}
+
+// 当路由切换 (通过传参的标题或slug等变更判断) 需要关闭弹窗
+watch(() => props.title, () => {
+  showContact.value = false;
+});
+
+onMounted(() => {
+  document.addEventListener("keydown", handleDialogEscape, true);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleDialogEscape, true);
+});
+</script>
+
+<style scoped>
+.common-detail-page {
+  background: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 48px 120px;
+}
+
+/* Floating Player Box */
+.player-hero-container {
+  width: 100%;
+  max-width: 860px;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  margin-bottom: 56px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.player-hero-container:hover {
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
+  transform: translateY(-4px);
+}
+
+.media-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.video-player,
+.video-iframe,
+.video-image,
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  display: block;
+}
+
+.video-placeholder {
+  background: #1e293b;
+  color: #64748b;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Content Area */
+.content-wrapper {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  margin-bottom: 28px;
+}
+
+.detail-title {
+  margin: 0;
+  text-align: left;
+  flex: 1;
+}
+
+.content-desc-block {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+/* 兼容 HTML 富文本内容的样式 */
+.content-html {
+  font-size: 1.06rem;
+  color: #475569;
+  line-height: 1.85;
+  white-space: normal;
+}
+.content-html :deep(p) {
+  margin: 0 0 20px 0;
+}
+.content-html :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+/* 兼容分段文本的样式 */
+.content-para {
+  font-size: 1.05rem;
+  color: #64748b;
+  line-height: 1.85;
+  font-weight: 400;
+  margin-block-start: 0;
+  margin-block-end: 20px;
+}
+.content-para:last-child {
+  margin-block-end: 0;
+}
+
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: #1a3a8f;
+  color: #ffffff;
+  border: none;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.2);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.contact-cta:hover {
+  background: #152f73;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.contact-cta:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Glassmorphism Dialog */
+.contact-dialog-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.contact-dialog {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  padding: 40px 48px;
+  min-width: 380px;
+  text-align: center;
+  position: relative;
+}
+
+.contact-close-x {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  color: #94a3b8;
+  background: rgba(241, 245, 249, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.contact-close-x:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+.contact-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #0f172a;
+  margin: 0 0 24px 0;
+}
+
+.contact-qrcode-placeholder {
+  width: 200px;
+  height: 200px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.qrcode-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.contact-qrcode-desc {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Dialog Transition */
+.fade-dialog-enter-active,
+.fade-dialog-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-dialog-enter-active .contact-dialog,
+.fade-dialog-leave-active .contact-dialog {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(1);
+}
+.fade-dialog-enter-from,
+.fade-dialog-leave-to {
+  opacity: 0;
+}
+.fade-dialog-enter-from .contact-dialog,
+.fade-dialog-leave-to .contact-dialog {
+  transform: scale(0.9);
+}
+
+/* Prev / Next Navigation */
+.detail-bottom-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  gap: 16px;
+}
+
+.detail-bottom-bar.both { justify-content: space-between; }
+.detail-bottom-bar.only-prev { justify-content: flex-start; }
+.detail-bottom-bar.only-next { justify-content: flex-end; }
+
+.detail-nav-btn {
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.detail-nav-btn.prev {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.detail-nav-btn.next {
+  background: #1a3a8f;
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.2);
+}
+
+.detail-nav-btn:hover { transform: translateY(-2px); }
+.detail-nav-btn.prev:hover {
+  border-color: rgba(26, 58, 143, 0.24);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+.detail-nav-btn.next:hover {
+  background: #152f73;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
+}
+.detail-nav-btn:active { transform: translateY(0); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .common-detail-page { padding: 40px 16px 80px; }
+  .player-hero-container { border-radius: 16px; margin-bottom: 40px; }
+  .title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .contact-cta {
+    align-self: center;
+    width: 100%;
+    max-width: 240px;
+    justify-content: center;
+  }
+  .content-html, .content-para { font-size: 1rem; line-height: 1.7; }
+  .contact-dialog { min-width: 0; width: 100%; padding: 32px 24px; }
+  .detail-bottom-bar { flex-direction: column; align-items: stretch; }
+  .detail-nav-btn { width: 100%; text-align: center; }
+}
+</style>
