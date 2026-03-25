@@ -93,11 +93,12 @@ const { t } = useI18n();
 
 .app-title {
   margin: 0;
+  font-family: "Outfit", sans-serif;
   font-size: 1.35rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--color-text);
   line-height: 1.3;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;

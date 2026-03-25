@@ -459,6 +459,7 @@ onUnmounted(() => {
 .logo-text {
   color: var(--nav-logo-text-color);
   text-decoration: none;
+  font-family: "Outfit", sans-serif;
   font-weight: 700; // 更具建筑感的细体/黑体切换
   padding: 12px 8px;
   position: relative;
@@ -520,6 +521,7 @@ onUnmounted(() => {
 .nav-link {
   color: var(--nav-text-color);
   text-decoration: none;
+  font-family: "Outfit", sans-serif;
   font-weight: 500;
   padding: 12px 8px;
   position: relative;
@@ -529,7 +531,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 6px;
   border-radius: 8px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.02em;
 }
 
 .nav-link:link,

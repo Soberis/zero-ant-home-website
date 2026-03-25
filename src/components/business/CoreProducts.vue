@@ -90,6 +90,7 @@ const productGroups = computed(() => [
 
 .group-title {
   margin: 0;
+  font-family: "Outfit", sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--color-text);
@@ -155,10 +156,11 @@ const productGroups = computed(() => [
 
 .card-title {
   margin: 0;
+  font-family: "Outfit", sans-serif;
   font-size: 1.15rem;
   font-weight: 500;
   color: var(--color-text);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
   transition: color 0.3s ease;
 }
 

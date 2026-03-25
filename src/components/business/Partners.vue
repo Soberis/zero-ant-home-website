@@ -64,7 +64,7 @@ const partnersTyped: Partner[] = partners;
 .ecosystem-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
-  gap: var(--space-sm);
+  gap: var(--space-md);
   width: 100%;
 }
 
@@ -73,18 +73,16 @@ const partnersTyped: Partner[] = partners;
   align-items: center;
   justify-content: center;
   min-height: 88px;
-  padding: 14px 18px;
-  border-radius: var(--radius-sm);
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.07);
+  padding: 12px;
+  border-radius: 0;
+  background: transparent;
+  border: none;
   box-shadow: none;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  transition: transform var(--transition-normal);
 }
 
 .ecosystem-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-  border-color: rgba(15, 23, 42, 0.12);
 }
 
 .ecosystem-card img {
@@ -101,6 +99,7 @@ const partnersTyped: Partner[] = partners;
 .ecosystem-card:hover img {
   opacity: 1;
   filter: grayscale(0%);
+  transform: scale(1.08);
 }
 
 .ecosystem-card img.logo-huawei {

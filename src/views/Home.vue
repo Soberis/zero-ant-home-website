@@ -57,20 +57,19 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 }
 
 .home-section--products {
-  background: #fbfbfd;
-
+  background: #ffffff; /* White background for the first section */
 }
 
 .home-section--applications {
-  background: #fbfbfd;
+  background: #fbfbfd; /* Soft Gray for the second section */
 }
 
 .home-section--videos {
-  background: #fbfbfd;
+  background: #ffffff; /* White for the video section */
 }
 
 .home-section--partners {
-  background: #fbfbfd;
+  background: #fbfbfd; /* Soft Gray for the logo cloud */
 }
 
 @media screen and (max-width: 991px) {

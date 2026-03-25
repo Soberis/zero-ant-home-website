@@ -262,13 +262,15 @@ onUnmounted(() => {
 
 .hero-title {
   margin: 0;
+  font-family: "Outfit", sans-serif;
   color: #1d1d1f;
   white-space: nowrap;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
 }
 
 .hero-product-name {
   margin: 16px 0 0;
+  font-family: "Outfit", sans-serif;
   font-size: 1.6rem;
   font-weight: 500;
   color: #515154;
