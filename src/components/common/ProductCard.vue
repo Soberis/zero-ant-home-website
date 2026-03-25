@@ -89,18 +89,24 @@ const categoryLabel = computed(() =>
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  min-height: 360px;
-  padding: 0 16px 0 0;
-  border-radius: 0;
-  border: 0;
+  justify-content: center;
+  min-height: 320px;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(15, 23, 42, 0.05);
   overflow: hidden;
-  background: transparent;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+  transition: all 0.4s ease;
+}
+
+.product-card:hover .product-card__media {
+  border-color: rgba(26, 58, 143, 0.12);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
 }
 
 .product-card--reverse .product-card__media {
-  justify-content: flex-start;
-  padding: 0 0 0 16px;
+  order: 2;
 }
 
 .product-card__image {
@@ -166,6 +172,7 @@ const categoryLabel = computed(() =>
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .product-card__action {
@@ -226,8 +233,8 @@ const categoryLabel = computed(() =>
   }
 
   .product-card__media {
-    min-height: 300px;
-    padding: 0;
+    min-height: 240px;
+    padding: 16px;
     justify-content: center;
   }
 

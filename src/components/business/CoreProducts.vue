@@ -12,26 +12,20 @@
           <h3 class="group-title">{{ group.title }}</h3>
         </div>
 
-        <div class="products-list">
+        <div class="products-grid">
           <router-link
             v-for="product in group.items"
             :key="product.slug"
             :to="getProductDetailLink(product)"
-            class="product-row"
+            class="product-card-item"
           >
-            <div class="row-media" :class="`visual-${product.category}`">
+            <div class="card-visual">
               <img :src="product.image" :alt="t(product.name)" class="visual-img" />
             </div>
 
-            <div class="row-copy">
-              <h4 class="text-title-medium row-title">{{ t(product.name) }}</h4>
-              <p class="text-body-small row-desc">{{ t(product.desc) }}</p>
+            <div class="card-content">
+              <h4 class="card-title">{{ t(product.name) }}</h4>
             </div>
-
-            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
           </router-link>
         </div>
       </section>
@@ -46,6 +40,7 @@ import { getProductDetailLink } from '@/utils/product';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
+
 const productGroups = computed(() => [
   {
     key: 'system',
@@ -73,142 +68,106 @@ const productGroups = computed(() => [
 
 .section-heading {
   max-width: 760px;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
 /* ── 分组容器 ── */
 .product-groups {
   display: grid;
-  gap: 48px;
+  gap: 80px;
 }
 
 .product-group {
   display: grid;
-  gap: var(--space-sm);
+  gap: var(--space-lg);
   padding: 0;
 }
 
 .group-header {
   margin-bottom: 0;
+  padding-left: 4px;
 }
 
 .group-title {
   margin: 0;
-  font-size: clamp(1.25rem, 2vw, 1.65rem);
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 500;
   color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.products-list {
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.product-card-item {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-.product-row {
-  display: grid;
-  grid-template-columns: 160px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 20px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px 32px;
   text-decoration: none;
-  color: inherit;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  transition: color var(--transition-normal), transform var(--transition-normal);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
 }
 
-.product-row:link,
-.product-row:visited,
-.product-row:active {
-  text-decoration: none;
-  color: inherit;
+.product-card-item:hover {
+  transform: translateY(-8px);
+  border-color: rgba(26, 58, 143, 0.12);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
 }
 
-.product-row:hover {
-  transform: translateY(-2px);
-}
-
-.row-media {
+.card-visual {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 96px;
-  border-radius: var(--radius-md);
+  height: 240px;
+  margin-bottom: 32px;
   position: relative;
-  overflow: hidden;
-  transition: background-color var(--transition-normal);
 }
 
-.visual-system {
-  background: #f7f7f7;
-  padding: 0;
-}
-
-.visual-system .visual-img {
-  width: 100%;
-  height: 100%;
+.visual-img {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  object-position: center;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s ease;
 }
 
-.visual-robot {
-  background: #f7f7f7;
-  padding: 10px;
+.product-card-item:hover .visual-img {
+  transform: scale(1.06);
 }
 
-.visual-robot .visual-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.05));
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.card-content {
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(15, 23, 42, 0.04);
 }
 
-.product-row:hover .visual-img {
-  transform: scale(1.04);
-}
-
-.row-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-.row-title {
+.card-title {
   margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--color-text);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
-.row-desc {
-  margin: 0;
-  color: var(--color-text-secondary);
-  max-width: 560px;
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.row-arrow {
-  width: 20px;
-  height: 20px;
-  color: var(--color-text-secondary);
-  transition: transform var(--transition-normal), color var(--transition-normal);
-}
-
-.product-row:hover .row-arrow {
+.product-card-item:hover .card-title {
   color: var(--color-primary);
-  transform: translateX(4px);
 }
 
-@media (max-width: 1024px) {
-  .product-row {
-    grid-template-columns: 140px minmax(0, 1fr) auto;
-    gap: 16px;
+@media (max-width: 1100px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
@@ -216,22 +175,29 @@ const productGroups = computed(() => [
   .core-products {
     padding: var(--space-xl) var(--space-md);
   }
+  
+  .product-groups {
+    gap: 60px;
+  }
 }
 
 @media (max-width: 640px) {
-  .product-row {
+  .products-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
-    align-items: start;
+    gap: 16px;
+  }
+  
+  .product-card-item {
+    padding: 32px 24px;
+  }
+  
+  .card-visual {
+    height: 200px;
+    margin-bottom: 24px;
   }
 
-  .row-media {
-    height: 150px;
-  }
-
-  .row-arrow {
-    justify-self: end;
+  .group-title {
+    font-size: 1.25rem;
   }
 }
-
 </style>

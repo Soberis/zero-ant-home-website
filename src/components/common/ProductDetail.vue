@@ -340,8 +340,14 @@ const sanitizedDescription = computed(() =>
 
 .product-hero__image {
   width: 100%;
-  max-height: 500px;
+  max-height: 48vh;
+  min-height: 320px;
   object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-hero__image:hover {
+  transform: scale(1.02);
 }
 
 .product-hero__metrics {
