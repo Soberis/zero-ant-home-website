@@ -72,7 +72,10 @@ if (typeof window !== "undefined") {
 
     watch(
       () => i18n.global.locale.value,
-      () => {
+      (newLocale) => {
+        if (typeof document !== "undefined") {
+          document.documentElement.setAttribute('lang', String(newLocale));
+        }
         applyRouteSEO(router.currentRoute.value);
       }
     );

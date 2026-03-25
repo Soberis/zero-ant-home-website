@@ -33,9 +33,28 @@ const i18n = createI18n({
   messages,
 });
 
-// 同步 <html lang>
+// 初始化同步设置 <html lang> 属性，防止 FOUT
 if (typeof document !== 'undefined') {
   document.documentElement.setAttribute('lang', i18n.global.locale.value);
 }
+
+// 极致 I18n 增强：跨语言日期与数字格式化工具
+export const useLocaleFormat = () => {
+  const currentLocale = i18n.global.locale.value;
+  
+  return {
+    /** 格式化日期：随语言自动切换 (zh: 2025/03/25, en: Mar 25, 2025) */
+    formatDate: (date: Date | string | number) => {
+      const d = new Date(date);
+      return new Intl.DateTimeFormat(currentLocale === 'zh' ? 'zh-CN' : 'en-US', {
+        year: 'numeric', month: 'short', day: 'numeric'
+      }).format(d);
+    },
+    /** 格式化数字：自动添加千分位 */
+    formatNumber: (num: number) => {
+      return new Intl.NumberFormat(currentLocale === 'zh' ? 'zh-CN' : 'en-US').format(num);
+    }
+  };
+};
 
 export default i18n;

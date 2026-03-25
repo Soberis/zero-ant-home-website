@@ -5,7 +5,6 @@ import applications from "@/data/applications";
 import { products } from "@/data/products";
 import { videoCards } from "@/data/videos";
 import {
-  getCustomFeatures,
   getRelatedApplications,
   getRelatedVideos,
   hasProductRelations,
@@ -169,17 +168,7 @@ export function useProductDetailData(
   });
 
   const productFeatures = computed((): string[] => {
-    const translatedFeatures = localizedProduct.value?.features || [];
-    if (Array.isArray(translatedFeatures) && translatedFeatures.length > 0) {
-      return translatedFeatures;
-    }
-
-    const customFeatures = getCustomFeatures(slugValue.value);
-    if (customFeatures?.length) {
-      return customFeatures;
-    }
-
-    return baseDetail.value?.features || [];
+    return localizedProduct.value?.features || baseDetail.value?.features || [];
   });
 
   const sectionLinks = computed(() => {

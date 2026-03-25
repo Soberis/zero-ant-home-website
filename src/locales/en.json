@@ -1206,6 +1206,53 @@
       "title": "About ZeroAnt Technology - Industrial Robotics Technology Innovation Enterprise",
       "description": "ZeroAnt Technology was founded in Hangzhou as a high-tech enterprise focusing on industrial robotics technology innovation. The company owns independently developed AiROS robotic operating system and has core technological advantages in robot control, machine vision, artificial intelligence and other fields. We are committed to providing high-quality industrial robot products and smart manufacturing solutions for global manufacturing customers, driving industrial intelligent upgrading.",
       "keywords": "ZeroAnt Technology, about us, company introduction, industrial robotics company, Hangzhou robotics enterprise, high-tech company, AiROS system, robotics technology innovation, smart manufacturing enterprise, automation company, robot control technology, artificial intelligence, corporate culture, development history, technical strength, core team"
+    },
+    "structuredData": {
+      "solutions": {
+        "medical": {
+          "name": "Medical Automation Solutions",
+          "description": "Comprehensive automation solutions for medical device manufacturing and laboratory automation"
+        },
+        "semiconductor": {
+          "name": "Semiconductor Processing Solutions",
+          "description": "High-precision automation solutions for semiconductor manufacturing processes"
+        },
+        "smartManufacturing": {
+          "name": "Smart Manufacturing Solutions",
+          "description": "End-to-end smart manufacturing solutions with AI and robotics integration"
+        }
+      },
+      "careers": {
+        "roboticsEngineer": {
+          "title": "Robotics Engineer",
+          "description": "Develop and optimize industrial robot systems, work on robot control algorithms and mechanical design.",
+          "qualifications": "Bachelor's degree in Robotics, Mechanical Engineering, or related field. 3+ years experience in industrial robotics.",
+          "responsibilities": "Design and develop robotic systems, optimize control algorithms, collaborate with cross-functional teams."
+        },
+        "algorithmEngineer": {
+          "title": "Algorithm Engineer",
+          "description": "Develop AI algorithms for robot perception, planning, and control systems.",
+          "qualifications": "Master's degree in Computer Science, AI, or related field. Strong background in machine learning and robotics.",
+          "responsibilities": "Develop AI algorithms, implement machine learning models, optimize robot performance."
+        },
+        "softwareEngineer": {
+          "title": "Software Development Engineer",
+          "description": "Develop software systems for robot control, user interfaces, and system integration.",
+          "qualifications": "Bachelor's degree in Software Engineering or Computer Science. Proficiency in C++, Python, and embedded systems.",
+          "responsibilities": "Develop robot control software, create user interfaces, integrate hardware and software systems."
+        },
+        "location": "Room 1-501, Building 1, No. 998 Wenyi West Road, Hangzhou"
+      },
+      "support": {
+        "q1": "What technical support services does ZeroAnt Technology provide?",
+        "a1": "We provide 7x24 professional services including robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare parts supply and comprehensive technical support.",
+        "q2": "How can I get technical support for my industrial robot?",
+        "a2": "You can contact our technical support team through phone, email, or online support system. Our experienced engineers provide rapid response technical consultation and on-site services.",
+        "q3": "Do you provide training for robot operation and maintenance?",
+        "a3": "Yes, we offer comprehensive technical training programs covering robot operation, programming, maintenance, and troubleshooting to ensure optimal equipment performance.",
+        "q4": "What is the warranty period for ZeroAnt robots?",
+        "a4": "Our industrial robots come with comprehensive warranty coverage. Please contact our support team for specific warranty terms and conditions for your product model."
+      }
     }
   }
 }

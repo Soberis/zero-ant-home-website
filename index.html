@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 物理层 I18n 锁定：在 JS 加载前，强制同步 html.lang 属性，消除语义抖动 -->
+    <script>
+      (function() {
+        var saved = localStorage.getItem('language');
+        var lang = (saved === 'zh' || saved === 'en') ? saved : (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        document.documentElement.setAttribute('lang', lang);
+      })();
+    </script>
     <!-- 安全策略 -->
     <meta
       http-equiv="Content-Security-Policy"
