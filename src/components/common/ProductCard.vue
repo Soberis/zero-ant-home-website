@@ -91,18 +91,18 @@ const categoryLabel = computed(() =>
   align-items: center;
   justify-content: center;
   min-height: 320px;
-  padding: 32px;
-  border-radius: 20px;
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+  padding: 12px;
+  border-radius: 0;
+  border: none;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
   transition: all 0.4s ease;
 }
 
 .product-card:hover .product-card__media {
-  border-color: rgba(26, 58, 143, 0.12);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .product-card--reverse .product-card__media {
@@ -116,7 +116,7 @@ const categoryLabel = computed(() =>
   max-width: 560px;
   max-height: 400px;
   object-fit: contain;
-  filter: none;
+  filter: drop-shadow(0 8px 24px rgba(15, 23, 42, 0.04));
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

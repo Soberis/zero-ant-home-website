@@ -57,7 +57,8 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 }
 
 .home-section--products {
-  background: #ffffff;
+  background: #fbfbfd;
+
 }
 
 .home-section--applications {
@@ -65,7 +66,7 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 }
 
 .home-section--videos {
-  background: #ffffff;
+  background: #fbfbfd;
 }
 
 .home-section--partners {

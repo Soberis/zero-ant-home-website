@@ -107,21 +107,19 @@ const productGroups = computed(() => [
 .product-card-item {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 48px 32px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   text-decoration: none;
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible;
   position: relative;
 }
 
 .product-card-item:hover {
-  transform: translateY(-8px);
-  border-color: rgba(26, 58, 143, 0.12);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+  transform: translateY(-4px);
 }
 
 .card-visual {
@@ -129,32 +127,36 @@ const productGroups = computed(() => [
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 240px;
-  margin-bottom: 32px;
+  height: 280px; /* Increased height for integrated look */
+  margin-bottom: 20px;
   position: relative;
+  background: transparent;
 }
 
 .visual-img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90%;
+  max-height: 90%;
   object-fit: contain;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  /* Added a very subtle drop shadow to the image itself for depth without a card container */
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.04));
 }
 
 .product-card-item:hover .visual-img {
-  transform: scale(1.06);
+  transform: scale(1.04);
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
 }
 
 .card-content {
   text-align: center;
-  padding-top: 12px;
-  border-top: 1px solid rgba(15, 23, 42, 0.04);
+  padding-top: 0;
+  border-top: none;
 }
 
 .card-title {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 500;
   color: var(--color-text);
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
