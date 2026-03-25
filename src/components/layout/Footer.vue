@@ -291,6 +291,7 @@ onUnmounted(() => {
 
 .footer-col h4 {
   margin: 0 0 20px;
+  font-family: "Outfit", sans-serif;
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
@@ -328,6 +329,7 @@ onUnmounted(() => {
 }
 
 .contact-info {
+  font-family: "Inter", sans-serif;
   color: #d4d4d8;
   font-size: 13px;
   line-height: 2;

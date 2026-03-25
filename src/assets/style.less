@@ -504,9 +504,9 @@ small {
 /* 单元素 reveal：初始隐藏，进入视口后显现 */
 .reveal-ready {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(32px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-ready.revealed {
@@ -519,7 +519,7 @@ small {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .reveal-stagger.revealed > .reveal-item {
@@ -530,7 +530,7 @@ small {
 // 生成 stagger 延迟（最多 12 个子元素）
 each(range(12), {
   .reveal-stagger.revealed > .reveal-item:nth-child(@{value}) {
-    transition-delay: (@value - 1) * 0.07s;
+  transition-delay: (@value - 1) * 0.07s;
   }
 });
 
