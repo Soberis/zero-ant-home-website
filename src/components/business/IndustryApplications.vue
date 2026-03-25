@@ -101,6 +101,10 @@ const featuredApps = computed(() =>
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--space-xl, 64px);
   row-gap: 0;
+
+  :deep(.app-divider-item:nth-child(-n+2)) {
+    border-top: none;
+  }
 }
 
 @media (max-width: 900px) {

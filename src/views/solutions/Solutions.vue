@@ -663,7 +663,13 @@ function goToProduct(route: string): void {
 }
 
 .more-application-grid {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+
+  :deep(.app-divider-item:nth-child(-n+2)) {
+    border-top: none;
+  }
 }
 
 .grid-subheading {

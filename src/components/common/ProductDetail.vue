@@ -666,13 +666,23 @@ const sanitizedDescription = computed(() =>
 
 .application-grid,
 .videos-grid {
+  display: grid;
+  gap: 16px;
   grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  :deep(.app-divider-item:first-child) {
+    border-top: none;
+  }
 }
 
 @media (min-width: 640px) {
   .application-grid,
   .videos-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    :deep(.app-divider-item:nth-child(-n+2)) {
+      border-top: none;
+    }
   }
 }
 
@@ -681,6 +691,10 @@ const sanitizedDescription = computed(() =>
   .videos-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
+
+    :deep(.app-divider-item:nth-child(-n+3)) {
+      border-top: none;
+    }
   }
 }
 </style>

@@ -37,23 +37,21 @@ const { t } = useI18n();
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  padding: 24px;
+  padding: 32px 16px; /* Increas vertical padding for more air */
   margin: 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06); /* Lighter divider */
   text-decoration: none;
   background: transparent;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-divider-item:hover {
   text-decoration: none;
-  background-color: var(--brand-surface-soft, rgba(26, 58, 143, 0.03));
-  border-color: transparent;
+  background-color: rgba(15, 23, 42, 0.02); /* Very soft highlight */
 }
 
 .app-divider-item:hover .app-content {
-  transform: translateX(4px);
+  transform: translateX(6px);
 }
 
 .app-divider-item:hover .app-title,
