@@ -368,14 +368,26 @@
       "eyebrow": "Featured Proof",
       "title": "用少量案例证明落地能力",
       "description": "精选更具代表性的案例，展示 ZeroAnt 在不同行业中的真实交付能力。",
-      "watchCase": "查看案例详情"
+      "watchCase": "查看案例详情",
+      "guide": "先展示 3 个代表性视频案例，用来证明跨行业落地能力；完整视频与应用索引按需展开。",
+      "expandVideos": "查看全部视频案例 ({count})",
+      "collapseVideos": "收起视频案例",
+      "expandApplications": "查看行业应用索引 ({count})",
+      "collapseApplications": "收起行业应用索引",
+      "allVideos": "全部视频案例",
+      "applicationIndex": "行业应用索引"
     },
     "more": {
       "eyebrow": "More",
       "title": "更多视频与行业应用",
       "description": "探索更多 ZeroAnt 机器人在不同行业与复杂场景下的成功验证与应用视频。",
       "videos": "更多视频案例",
-      "applications": "更多行业应用"
+      "applications": "更多行业应用",
+      "videoGuide": "当前先展示 {visible} 个代表性视频，展开后可继续浏览全部 {total} 个案例。",
+      "applicationGuide": "当前先展示 {visible} 个高相关应用入口，展开后可继续浏览全部 {total} 个行业应用。",
+      "expandVideos": "展开全部视频案例 ({count}+)",
+      "expandApplications": "展开全部行业应用 ({count}+)",
+      "collapse": "收起列表"
     },
     "delivery": {
       "eyebrow": "Delivery",

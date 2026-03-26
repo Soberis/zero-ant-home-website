@@ -52,7 +52,12 @@
             v-for="industry in industries"
             :key="industry.key"
             class="industry-block"
+            :aria-disabled="industry.primaryApplication ? 'false' : 'true'"
+            :tabindex="industry.primaryApplication ? 0 : -1"
+            role="link"
             @click="openApplication(industry.primaryApplication)"
+            @keydown.enter.prevent="openApplication(industry.primaryApplication)"
+            @keydown.space.prevent="openApplication(industry.primaryApplication)"
           >
             <div class="industry-block__header">
               <span class="card-index">{{ formatIndex(industry.index) }}</span>
@@ -101,6 +106,7 @@
             <h3 class="card-title">{{ layer.title }}</h3>
             <p class="card-description">{{ layer.description }}</p>
 
+            <p class="backbone-related-label">{{ t("solutionsPage.tags.relatedProducts") }}</p>
             <div class="chip-list">
               <button
                 v-for="product in layer.products"
@@ -109,7 +115,11 @@
                 class="chip-btn"
                 @click="goToProduct(product.route)"
               >
-                {{ product.title }}
+                <span>{{ product.title }}</span>
+                <svg class="chip-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10H15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M10 5L15 10L10 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
               </button>
             </div>
           </article>
@@ -117,41 +127,26 @@
       </div>
     </section>
 
-    <!-- 暂不展示“精选案例”，后期集中提供视频沉浸体验时再开启 -->
+    <!-- 精选案例默认收缩展示，完整案例索引按需展开 -->
     <section id="proof" ref="proofRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("solutionsPage.more.title") }}</span>
+            <span class="title-main text-display-large">{{ t("solutionsPage.proof.title") }}</span>
             <span class="title-en">USE CASES</span>
           </h2>
           <p class="section-description">
-            {{ t("solutionsPage.more.description") }}
+            {{ t("solutionsPage.proof.description") }}
           </p>
         </div>
 
-        <div class="more-tabs">
-          <button
-            type="button"
-            class="more-tab"
-            :class="{ active: activeMoreTab === 'videos' }"
-            @click="activeMoreTab = 'videos'"
-          >
-            {{ t("solutionsPage.more.videos") }}
-          </button>
-          <button
-            type="button"
-            class="more-tab"
-            :class="{ active: activeMoreTab === 'applications' }"
-            @click="activeMoreTab = 'applications'"
-          >
-            {{ t("solutionsPage.more.applications") }}
-          </button>
-        </div>
+        <p class="proof-guide">
+          {{ t("solutionsPage.proof.guide") }}
+        </p>
 
-        <div v-show="activeMoreTab === 'videos'" class="more-video-grid">
+        <div class="proof-feature-grid">
           <VideoCard
-            v-for="(card, idx) in (showAllVideos ? allVideoCards : allVideoCards.slice(0, VIDEO_FOLD))"
+            v-for="(card, idx) in featuredVideoCards"
             :key="card.slug"
             :card="card"
             :index="idx"
@@ -161,27 +156,62 @@
             @click="goToVideo(card.slug)"
           />
         </div>
-        <div v-if="activeMoreTab === 'videos' && allVideoCards.length > VIDEO_FOLD" class="grid-show-more">
-          <button type="button" class="show-more-btn" :class="{ active: showAllVideos }" @click="showAllVideos = !showAllVideos">
-            <span>{{ showAllVideos ? '收起' : `查看更多 (${allVideoCards.length - VIDEO_FOLD}+)` }}</span>
+
+        <div class="proof-actions">
+          <button type="button" class="show-more-btn" :class="{ active: showAllVideos }" @click="toggleVideoArchive">
+            <span>
+              {{
+                showAllVideos
+                  ? t("solutionsPage.proof.collapseVideos")
+                  : t("solutionsPage.proof.expandVideos", {
+                      count: allVideoCards.length,
+                    })
+              }}
+            </span>
+            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+
+          <button type="button" class="show-more-btn" :class="{ active: showAllApps }" @click="toggleApplicationArchive">
+            <span>
+              {{
+                showAllApps
+                  ? t("solutionsPage.proof.collapseApplications")
+                  : t("solutionsPage.proof.expandApplications", {
+                      count: allApplications.length,
+                    })
+              }}
+            </span>
             <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
         </div>
 
-        <div v-show="activeMoreTab === 'applications'" class="more-application-grid">
+        <div v-if="showAllVideos" class="proof-archive">
+          <p class="proof-archive-title">{{ t("solutionsPage.proof.allVideos") }}</p>
+          <div class="more-video-grid">
+            <VideoCard
+              v-for="(card, idx) in allVideoCards"
+              :key="card.slug"
+              :card="card"
+              :index="idx + 100"
+              :active="hoverMoreVideoIdx === idx + 100"
+              @hover="setMoreVideoHover"
+              @leave="clearMoreVideoHover"
+              @click="goToVideo(card.slug)"
+            />
+          </div>
+        </div>
+
+        <div v-if="showAllApps" class="proof-archive">
+          <p class="proof-archive-title">{{ t("solutionsPage.proof.applicationIndex") }}</p>
+          <div class="more-application-grid">
           <ApplicationCard
-            v-for="item in (showAllApps ? allApplications : allApplications.slice(0, APP_FOLD))"
+            v-for="item in allApplications"
             :key="item.slug"
             :title="item.title"
             :svg="item.svg"
             :slug="item.slug"
           />
-        </div>
-        <div v-if="activeMoreTab === 'applications' && allApplications.length > APP_FOLD" class="grid-show-more">
-          <button type="button" class="show-more-btn" :class="{ active: showAllApps }" @click="showAllApps = !showAllApps">
-            <span>{{ showAllApps ? '收起' : `查看更多 (${allApplications.length - APP_FOLD}+)` }}</span>
-            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
+          </div>
         </div>
       </div>
     </section>
@@ -236,7 +266,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications from "@/data/applications";
 import { getProducts } from "@/data/products";
@@ -244,6 +274,7 @@ import { videoCards } from "@/data/videos";
 import VideoCard from "@/components/common/VideoCard.vue";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import {
+  featuredProofs,
   solutionCapabilityLayers,
   solutionIndustryGroups,
 } from "@/data/solutionIndustries";
@@ -284,26 +315,13 @@ const deliveryRef = ref<HTMLElement | null>(null);
 
 useScrollRevealList([industriesRef, backboneRef, proofRef, deliveryRef]);
 
-const router = useRouter();
 const route = useRoute();
+const router = useRouter();
 const { t, tm } = useI18n();
-const activeMoreTab = ref<"videos" | "applications">("videos");
-
-watch(
-  () => route.query.tab,
-  (newTab) => {
-    if (newTab === "applications" || newTab === "videos") {
-      activeMoreTab.value = newTab as "videos" | "applications";
-    }
-  },
-  { immediate: true }
-);
 
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
 const showAllApps = ref(false);
-const VIDEO_FOLD = 6;
-const APP_FOLD = 8;
 
 function isDefined<T>(value: T | null | undefined): value is T {
   return value != null;
@@ -311,6 +329,14 @@ function isDefined<T>(value: T | null | undefined): value is T {
 
 function stripHtml(value: string): string {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function getRawMessage(key: string): string {
+  const raw = tm(key) as unknown;
+  if (typeof raw === "string") {
+    return raw.startsWith("@:") ? t(raw.slice(2)) : raw;
+  }
+  return t(key);
 }
 
 function truncate(value: string, maxLength: number): string {
@@ -326,11 +352,11 @@ function formatIndex(value: number): string {
 
 const heroStats = computed(() => [
   {
-    value: t("solutionsPage.hero.stats.industry.value"),
+    value: formatIndex(solutionIndustryGroups.length),
     label: t("solutionsPage.hero.stats.industry.label"),
   },
   {
-    value: t("solutionsPage.hero.stats.backbone.value"),
+    value: formatIndex(solutionCapabilityLayers.length),
     label: t("solutionsPage.hero.stats.backbone.label"),
   },
   {
@@ -359,7 +385,7 @@ const applicationMap = computed<Record<string, SolutionApplicationRef>>(() =>
     map[app.slug] = {
       slug: app.slug,
       title: t(app.title),
-      description: truncate(stripHtml(t(app.description)), 88),
+      description: truncate(stripHtml(getRawMessage(app.description)), 88),
     };
 
     return map;
@@ -406,6 +432,28 @@ const industries = computed<SolutionIndustryCard[]>(() =>
 
 const allVideoCards = computed(() => videoCards);
 const allApplications = computed(() => applications);
+const videoCardMap = computed(() =>
+  allVideoCards.value.reduce<Record<string, (typeof videoCards)[number]>>((map, card) => {
+    map[card.slug] = card;
+    return map;
+  }, {})
+);
+const featuredVideoCards = computed(() => {
+  const selected = featuredProofs
+    .map((item) => videoCardMap.value[item.videoSlug])
+    .filter(isDefined);
+
+  return selected.length > 0 ? selected : allVideoCards.value.slice(0, 3);
+});
+
+watch(
+  () => route.query.tab,
+  (tab) => {
+    showAllVideos.value = tab === "videos";
+    showAllApps.value = tab === "applications";
+  },
+  { immediate: true }
+);
 
 const deliverySteps = computed(() => [
   {
@@ -461,6 +509,20 @@ function clearMoreVideoHover(): void {
 function goToProduct(route: string): void {
   router.push({ path: route });
 }
+
+function toggleVideoArchive(): void {
+  showAllVideos.value = !showAllVideos.value;
+  if (showAllVideos.value) {
+    showAllApps.value = false;
+  }
+}
+
+function toggleApplicationArchive(): void {
+  showAllApps.value = !showAllApps.value;
+  if (showAllApps.value) {
+    showAllVideos.value = false;
+  }
+}
 </script>
 
 <style scoped lang="less">
@@ -471,24 +533,26 @@ function goToProduct(route: string): void {
 
 .page-shell {
   width: 100%;
-  max-width: 1200px;
-  padding: 0 48px;
+  max-width: var(--container-max-width);
+  padding: 0 var(--container-padding-x);
   margin: 0 auto;
 }
 
 .solutions-hero {
-  padding: 58px 0 48px;
+  padding: 68px 0 40px;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  gap: 48px;
+  align-items: end;
+  max-width: 1220px;
 }
 
 .hero-copy {
-  padding: 28px 0;
+  max-width: 720px;
+  padding: 24px 0 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -498,9 +562,9 @@ function goToProduct(route: string): void {
   display: block;
   margin: 0 0 16px;
   color: var(--brand-muted);
-  font-size: 1.1rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -523,9 +587,9 @@ function goToProduct(route: string): void {
 }
 
 .hero-description {
-  max-width: 1200px;
+  max-width: 40rem;
   margin: 0 0 24px;
-  font-size: 1.15rem;
+  font-size: 1.02rem;
 }
 
 .hero-actions,
@@ -561,15 +625,19 @@ function goToProduct(route: string): void {
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
-  padding-left: 64px;
-  padding-top: 24px;
+  width: 100%;
+  max-width: 240px;
+  margin-left: 0;
+  padding-left: 28px;
+  padding-top: 12px;
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .hero-stat {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 14px 0;
+  gap: 6px;
+  padding: 18px 0;
   border-left: none;
 }
 
@@ -580,7 +648,7 @@ function goToProduct(route: string): void {
 .hero-stat-value {
   color: var(--brand-text);
   font-family: "Outfit", sans-serif;
-  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-size: clamp(2.1rem, 3.6vw, 3rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -588,7 +656,7 @@ function goToProduct(route: string): void {
 
 .hero-stat-label {
   color: var(--brand-muted);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   line-height: 1.55;
   text-align: left;
 }
@@ -613,37 +681,13 @@ function goToProduct(route: string): void {
 }
 
 .page-section {
-  padding: 100px 0;
+  padding: 88px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
   scroll-margin-top: 80px; /* prevent navbar overlap */
 }
 
 .solutions-page > .page-section:nth-of-type(even) {
-  background-color: var(--brand-surface-soft);
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to bottom, #ffffff, transparent);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to top, #ffffff, transparent);
-    z-index: 1;
-    pointer-events: none;
-  }
+  background-color: #f8f9fb;
 }
 
 .section-heading {
@@ -654,26 +698,26 @@ function goToProduct(route: string): void {
 }
 
 .detail-section__header {
-  max-width: 860px;
-  margin-bottom: 48px;
+  max-width: 760px;
+  margin-bottom: 40px;
 }
 
 .detail-section__title {
   display: flex;
-  flex-direction: column-reverse; /* Puts English label on Top Left */
+  flex-direction: column-reverse;
   align-items: flex-start;
-  gap: 12px;
-  margin: 0 0 16px 0;
+  gap: 10px;
+  margin: 0 0 12px 0;
 }
 
 .title-main {  color: var(--brand-text);
 }
 
 .title-en {
-  font-size: 1.1rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--brand-muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -742,16 +786,17 @@ function goToProduct(route: string): void {
 .backbone-card {
   display: flex;
   flex-direction: column;
-  padding: 32px;
-  border-radius: 16px;
-  background: var(--brand-surface-soft);
-  border: 1px solid rgba(15, 23, 42, 0.04);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  padding: 24px 0 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  transition: border-color 0.25s ease;
 }
 .backbone-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.04);
-  border-color: rgba(26, 58, 143, 0.12);
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(26, 58, 143, 0.2);
 }
 .contact-panel {
   display: flex;
@@ -799,32 +844,33 @@ function goToProduct(route: string): void {
 /* --- Dense Industry Grid --- */
 .industry-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
 }
 
 .industry-block {
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  border-radius: 16px;
-  background: #ffffff;
+  min-height: 100%;
+  padding: 28px 28px 24px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(15, 23, 42, 0.08);
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .industry-block:hover {
-  transform: translateY(-4px);
-  border-color: rgba(26, 58, 143, 0.16);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+  transform: translateY(-2px);
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
 
 .industry-block__header {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 .industry-block__header .card-index {
   margin: 0;
@@ -836,28 +882,40 @@ function goToProduct(route: string): void {
 .industry-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 32px;
+  gap: 10px 0;
+  margin-bottom: 22px;
 }
 
 .tag {
-  padding: 4px 12px;
-  border-radius: 4px;
-  background: rgba(15, 23, 42, 0.04);
-  color: var(--brand-text);
-  font-size: 0.85rem;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(15, 23, 42, 0.56);
+  font-size: 0.82rem;
   font-weight: 500;
+}
+
+.tag + .tag {
+  position: relative;
+  margin-left: 14px;
+}
+
+.tag + .tag::before {
+  content: "/";
+  position: absolute;
+  left: -10px;
+  color: rgba(15, 23, 42, 0.28);
 }
 
 .industry-footer-jump {
   margin-top: auto;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 6px;
   color: var(--brand-text);
-  opacity: 0.65;
-  transition: all 0.3s ease;
+  opacity: 0.72;
+  transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 .industry-block:hover .industry-footer-jump {
@@ -870,13 +928,13 @@ function goToProduct(route: string): void {
 }
 
 .link-text {
-  font-size: 0.94rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 500;
 }
 
 .action-icon {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   color: var(--brand-primary);
   transition: transform 0.3s ease;
 }
@@ -910,10 +968,19 @@ function goToProduct(route: string): void {
   font-size: 0.98rem;
 }
 
+.backbone-related-label {
+  margin: 4px 0 12px;
+  color: rgba(15, 23, 42, 0.46);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .chip-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px 18px;
   margin-top: auto;
 }
 
@@ -933,10 +1000,10 @@ function goToProduct(route: string): void {
 }
 
 .chip-btn:hover {
-  background: rgba(26, 58, 143, 0.04);
-  border-color: rgba(26, 58, 143, 0.25);
+  background: transparent;
+  border-color: transparent;
   color: var(--brand-primary);
-  transform: translateY(-2px);
+  transform: none;
 }
 
 .chip {
@@ -946,10 +1013,27 @@ function goToProduct(route: string): void {
 }
 
 .chip-btn {
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: transparent;
-  color: var(--brand-text);
-  border: 1px solid rgba(15, 23, 42, 0.12);
+  color: rgba(15, 23, 42, 0.68);
+  border: none;
   cursor: pointer;
+}
+
+.chip-arrow {
+  width: 14px;
+  height: 14px;
+  color: currentColor;
+  opacity: 0.72;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.chip-btn:hover .chip-arrow {
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 .info-group {
@@ -1095,37 +1179,42 @@ function goToProduct(route: string): void {
   border-top: 1px dashed rgba(15, 23, 42, 0.06);
 }
 
-.more-tabs {
+.proof-guide {
+  max-width: 44rem;
+  margin: -8px 0 28px;
+  color: rgba(15, 23, 42, 0.56);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.proof-feature-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.proof-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 24px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.more-tab {
-  border: 1px solid var(--brand-border);
-  border-radius: 999px;
-  background: #ffffff;
-  color: rgba(15, 23, 42, 0.68);
-  padding: 10px 16px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
+.proof-archive {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.more-tab:hover {
-  transform: translateY(-2px);
-}
-
-.more-tab.active {
-  border-color: rgba(26, 58, 143, 0.16);
-  background: rgba(26, 58, 143, 0.08);
-  color: var(--brand-primary);
+.proof-archive-title {
+  margin: 0 0 20px;
+  color: rgba(15, 23, 42, 0.48);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .more-video-grid {
@@ -1141,31 +1230,23 @@ function goToProduct(route: string): void {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-show-more {
-  display: flex;
-  justify-content: center;
-  margin-top: 32px;
-}
-
 .show-more-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 32px;
-  border: 1.5px solid rgba(15, 23, 42, 0.15);
-  border-radius: 999px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
   background: transparent;
   color: var(--brand-text);
   font-size: 0.92rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .show-more-btn:hover {
-  border-color: var(--brand-primary);
   color: var(--brand-primary);
-  transform: translateY(-1px);
 }
 
 .delivery-contact .section-eyebrow {
@@ -1226,9 +1307,12 @@ function goToProduct(route: string): void {
 .delivery-contact {
   display: flex;
   align-items: flex-start;
-  gap: 32px;
-  padding: 36px 0;
-  
+  gap: 48px;
+  padding: 28px 32px;
+  border-top: none;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .delivery-contact__copy {
@@ -1266,7 +1350,7 @@ function goToProduct(route: string): void {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .delivery-contact__link {
@@ -1285,9 +1369,19 @@ function goToProduct(route: string): void {
   .hero-grid,
   .backbone-grid,
   .industry-grid,
+  .proof-feature-grid,
   .more-video-grid,
   .more-application-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-panel {
+    max-width: none;
+    margin-left: 0;
+    padding-left: 0;
+    padding-top: 0;
+    border-left: none;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
   }
 
   .hero-title {
@@ -1305,7 +1399,7 @@ function goToProduct(route: string): void {
   }
 
   .solutions-hero {
-    padding: 88px 0 40px;
+    padding: 88px 0 36px;
   }
 
   .hero-copy {
@@ -1331,14 +1425,27 @@ function goToProduct(route: string): void {
   }
 
   .hero-panel {
-    padding-left: 24px;
+    padding-top: 20px;
   }
 
   .backbone-card,
   .industry-card,
   .contact-panel,
   .more-panel {
-    padding: 20px;
+    padding: 20px 0 0;
+  }
+
+  .industry-block {
+    padding: 22px 22px 20px;
+  }
+
+  .proof-actions {
+    gap: 16px;
+  }
+
+  .delivery-contact {
+    flex-direction: column;
+    gap: 24px;
   }
 
   .delivery-step {
@@ -1386,16 +1493,11 @@ function goToProduct(route: string): void {
   transform: rotate(180deg);
 }
 
-/* 增强工业区块图标位移感 */
-.industry-block:hover .action-icon {
-  transform: translateX(6px);
-}
-
 /* 统一圆角到 24px (大卡片) 和 16px (内部小项) */
 .more-panel {
   border-radius: 24px !important;
 }
-.industry-block, .backbone-card, .proof-card-image {
+.proof-card-image {
   border-radius: 16px !important;
 }
 </style>

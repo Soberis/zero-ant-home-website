@@ -367,14 +367,26 @@
       "eyebrow": "Featured Proof",
       "title": "A few cases are enough to prove delivery capability",
       "description": "Selected cases with stronger representativeness show how ZeroAnt delivers across industries in practice.",
-      "watchCase": "View case details"
+      "watchCase": "View case details",
+      "guide": "Start with 3 representative video cases to prove cross-industry delivery. Full videos and the application index can be expanded on demand.",
+      "expandVideos": "View all video cases ({count})",
+      "collapseVideos": "Collapse video cases",
+      "expandApplications": "View application index ({count})",
+      "collapseApplications": "Collapse application index",
+      "allVideos": "All video cases",
+      "applicationIndex": "Application index"
     },
     "more": {
       "eyebrow": "More",
       "title": "More videos and application entries",
       "description": "The main page keeps only curated content. More videos and application entries are grouped here so users can continue browsing without disrupting the page rhythm.",
       "videos": "More video cases",
-      "applications": "More applications"
+      "applications": "More applications",
+      "videoGuide": "Showing {visible} representative videos first. Expand to browse all {total} cases.",
+      "applicationGuide": "Showing {visible} high-relevance application entries first. Expand to browse all {total} applications.",
+      "expandVideos": "Expand all video cases ({count}+)",
+      "expandApplications": "Expand all applications ({count}+)",
+      "collapse": "Collapse list"
     },
     "delivery": {
       "eyebrow": "@:common.terms.delivery",
