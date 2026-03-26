@@ -17,6 +17,8 @@ app.mount("#app");
 
 // 初始化安全监控和SEO（仅在浏览器环境）
 if (typeof window !== "undefined") {
+  const DEV_CACHE_PREFIX = "zeroant-cache";
+
   if ("scrollRestoration" in window.history) {
     window.history.scrollRestoration = "manual";
   }
@@ -30,8 +32,27 @@ if (typeof window !== "undefined") {
       .catch(() => {});
   }, 0);
 
+  // dev 环境主动清理已注册的 SW 和缓存，避免旧包干扰本地调试
+  if (import.meta.env.DEV && "serviceWorker" in navigator) {
+    void navigator.serviceWorker.getRegistrations().then((registrations) => {
+      registrations.forEach((registration) => {
+        void registration.unregister();
+      });
+    });
+
+    if ("caches" in window) {
+      void caches.keys().then((cacheNames) => {
+        cacheNames
+          .filter((cacheName) => cacheName.startsWith(DEV_CACHE_PREFIX))
+          .forEach((cacheName) => {
+            void caches.delete(cacheName);
+          });
+      });
+    }
+  }
+
   // 注册 Service Worker (PWA)
-  if ("serviceWorker" in navigator) {
+  if (import.meta.env.PROD && "serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       navigator.serviceWorker.register("/sw.js").catch(() => {});
     });

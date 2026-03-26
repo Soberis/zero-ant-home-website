@@ -31,13 +31,13 @@ const pageContent = computed(() => ({
   description: t("productPages.robot.hero.description"),
   actions: [
     {
-      label: t("common.cta.contactTeam"),
-      to: "/about#contact",
+      label: t("common.cta.viewSolutions"),
+      to: "/solutions",
       variant: "primary" as const,
     },
     {
-      label: t("common.cta.viewSolutions"),
-      to: "/solutions",
+      label: t("common.cta.contactTeam"),
+      to: "/about#contact",
       variant: "secondary" as const,
     },
   ],

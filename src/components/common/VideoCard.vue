@@ -25,7 +25,7 @@
         {{ t(card.title) }}
       </h3>
       <p v-if="card.description || description" class="video-desc">
-        {{ card.description ? t(card.description) : description }}
+        {{ card.description || description }}
       </p>
     </div>
   </div>
@@ -98,22 +98,22 @@ const emit = defineEmits(["hover", "leave", "click"]);
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
 }
 
 .video-block:hover .play-icon,
 .video-block.active .play-icon {
-  background: rgba(255, 255, 255, 0.95);
-  color: #1a3a8f;
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
   transform: translate(-50%, -50%) scale(1.1);
-  border-color: #fff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
 }
 
 .video-content {

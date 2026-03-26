@@ -20,6 +20,45 @@ const productDetailRouteNames = new Set([
   "RobotProductDetail",
 ]);
 
+let isPopStateNavigation = false;
+
+function scrollToTopNow(): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const scrollConfig: ScrollToOptions = {
+    top: 0,
+    left: 0,
+    behavior: "auto",
+  };
+
+  const scrollingElement = document.scrollingElement || document.documentElement;
+
+  window.scrollTo(scrollConfig);
+  scrollingElement.scrollTo?.(scrollConfig);
+  document.body.scrollTo?.(scrollConfig);
+  scrollingElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
+function scheduleScrollToTop(): void {
+  scrollToTopNow();
+
+  window.requestAnimationFrame(() => {
+    scrollToTopNow();
+  });
+
+  window.setTimeout(() => {
+    scrollToTopNow();
+  }, 140);
+
+  // 对齐 App.vue 的 page transition 时长，避免离场动画结束后又回滚到旧位置
+  window.setTimeout(() => {
+    scrollToTopNow();
+  }, 460);
+}
+
 const routes = [
   // 首页
   {
@@ -132,6 +171,12 @@ const router = createRouter({
   },
 });
 
+if (typeof window !== "undefined") {
+  window.addEventListener("popstate", () => {
+    isPopStateNavigation = true;
+  });
+}
+
 router.beforeEach(async (to) => {
   if (!productDetailRouteNames.has(String(to.name))) {
     return true;
@@ -146,6 +191,20 @@ router.beforeEach(async (to) => {
     }
   }
   return true;
+});
+
+router.afterEach((to, _from, failure) => {
+  if (failure || to.hash) {
+    isPopStateNavigation = false;
+    return;
+  }
+
+  if (isPopStateNavigation) {
+    isPopStateNavigation = false;
+    return;
+  }
+
+  scheduleScrollToTop();
 });
 
 // 产品详情页的 locale 预热守卫，避免首次进入时详情文案缺失

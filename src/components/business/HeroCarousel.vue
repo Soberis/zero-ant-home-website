@@ -24,7 +24,7 @@
           <div class="hero-actions" style="transition-delay: 0.4s">
             <div class="hero-buttons">
               <router-link
-                to="/system-products"
+                to="/robot-products"
                 class="hero-link"
                 @click.stop
               >

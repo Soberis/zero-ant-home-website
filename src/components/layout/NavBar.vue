@@ -293,22 +293,22 @@ onUnmounted(() => {
   --nav-accent-surface: rgba(26, 58, 143, 0.05);
   --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
     saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
-  background-color: rgba(255, 255, 255, 0.88);
+  background-color: rgba(255, 255, 255, 0.94);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(26, 58, 143, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
   &.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.96);
+    background-color: rgba(255, 255, 255, 0.985);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(16px);
-    border-top: 1px solid rgba(255, 255, 255, 0.25); // 玻璃边缘亮点
+    backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
     
     .nav-container {
@@ -504,7 +504,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   transform: translateY(-8px) scaleY(0.98);
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.985);
   width: 100%;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   border-radius: 0 0 24px 24px; // 大圆角
@@ -513,7 +513,7 @@ onUnmounted(() => {
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 999;
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(10px);
   height: var(--nav-height);
   transform-origin: top;
 }
@@ -803,8 +803,8 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(15, 23, 42, 0.32);
-  backdrop-filter: blur(6px);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -823,8 +823,8 @@ onUnmounted(() => {
   right: 0;
   width: 300px;
   height: 100svh;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.995);
+  backdrop-filter: blur(4px);
   box-shadow: -12px 0 40px rgba(15, 23, 42, 0.08);
   transform: translateX(100%);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -915,6 +915,14 @@ onUnmounted(() => {
     padding: 0 16px;
   }
 
+  .header {
+    background-color: rgba(255, 255, 255, 0.965);
+  }
+
+  .header.is-scrolled {
+    background-color: rgba(255, 255, 255, 0.99);
+  }
+
   .logo {
     margin-left: 0;
     padding: 0;
@@ -996,6 +1004,8 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 260px;
     padding-top: 70px;
+    background: rgba(255, 255, 255, 0.998);
+    backdrop-filter: none;
   }
 }
 
@@ -1039,6 +1049,8 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 240px;
     padding-top: 65px;
+    background: rgba(255, 255, 255, 0.998);
+    backdrop-filter: none;
   }
 
   .mobile-nav-link {
@@ -1091,6 +1103,8 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 220px;
     padding-top: 60px;
+    background: rgba(255, 255, 255, 0.998);
+    backdrop-filter: none;
   }
 
   .mobile-nav-link {

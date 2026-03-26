@@ -48,7 +48,7 @@
     <div class="content-wrapper">
       <div class="title-row">
         <h2 class="detail-title">{{ title }}</h2>
-        <button class="contact-cta" @click="showContact = true">
+        <button type="button" class="btn btn-secondary contact-cta" @click="showContact = true">
           {{ t("common.cta.contactTeam") }}
           <svg viewBox="0 0 24 24" width="15" height="15">
             <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
@@ -75,14 +75,16 @@
       <div v-if="prevSlug || nextSlug" class="detail-bottom-bar" :class="bottomBarClass">
         <button
           v-if="prevSlug"
-          class="detail-nav-btn prev"
+          type="button"
+          class="btn btn-secondary detail-nav-btn prev"
           @click="emitNavigate(prevSlug)"
         >
           ◀ {{ t("applicationsPage.prev") }}
         </button>
         <button
           v-if="nextSlug"
-          class="detail-nav-btn next"
+          type="button"
+          class="btn btn-secondary detail-nav-btn next"
           @click="emitNavigate(nextSlug)"
         >
           {{ t("applicationsPage.next") }} ▶
@@ -158,6 +160,32 @@ const { t } = useI18n();
 const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
 
+function scrollToTop(): void {
+  const scrollConfig: ScrollToOptions = {
+    top: 0,
+    left: 0,
+    behavior: "auto",
+  };
+
+  const scrollingElement = document.scrollingElement || document.documentElement;
+
+  window.scrollTo(scrollConfig);
+  scrollingElement.scrollTo?.(scrollConfig);
+  document.body.scrollTo?.(scrollConfig);
+  scrollingElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
+function scheduleScrollToTop(): void {
+  scrollToTop();
+  window.requestAnimationFrame(() => {
+    scrollToTop();
+  });
+  window.setTimeout(() => {
+    scrollToTop();
+  }, 460);
+}
+
 const thumbnailUrl = computed(() => {
   return fallbackFacadeImg;
 });
@@ -185,9 +213,11 @@ function handleDialogEscape(event: KeyboardEvent): void {
 // 当路由切换 (通过传参的标题或slug等变更判断) 需要关闭弹窗
 watch(() => props.title, () => {
   showContact.value = false;
+  scheduleScrollToTop();
 });
 
 onMounted(() => {
+  scheduleScrollToTop();
   document.addEventListener("keydown", handleDialogEscape, true);
 });
 
@@ -258,21 +288,25 @@ onUnmounted(() => {
   transform: translate(-50%, -50%);
   width: 80px;
   height: 80px;
-  background: rgba(26, 58, 143, 0.9);
+  background: rgba(255, 255, 255, 0.18);
   color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 5;
 }
 
 .video-facade:hover .facade-play-btn {
-  background: #1a3a8f;
+  background: rgba(255, 255, 255, 0.28);
   transform: translate(-50%, -50%) scale(1.1);
-  box-shadow: 0 12px 48px rgba(26, 58, 143, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.22);
 }
 
 .facade-image {
@@ -356,33 +390,8 @@ onUnmounted(() => {
 }
 
 .contact-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
   flex-shrink: 0;
-  background: #1a3a8f;
-  color: #ffffff;
-  border: none;
-  padding: 11px 24px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.2);
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.contact-cta:hover {
-  background: #152f73;
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
-  transform: translateY(-2px);
-  color: #ffffff;
-}
-
-.contact-cta:active {
-  transform: translateY(0);
-  box-shadow: none;
+  white-space: nowrap;
 }
 
 /* Glassmorphism Dialog */
@@ -503,37 +512,9 @@ onUnmounted(() => {
 .detail-bottom-bar.only-next { justify-content: flex-end; }
 
 .detail-nav-btn {
-  padding: 11px 24px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  border: 1px solid transparent;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
-
-.detail-nav-btn.prev {
-  background: #ffffff;
-  color: #0f172a;
-  border-color: rgba(15, 23, 42, 0.1);
-}
-
-.detail-nav-btn.next {
-  background: #1a3a8f;
-  color: #ffffff;
-  box-shadow: 0 2px 12px rgba(26, 58, 143, 0.2);
-}
-
-.detail-nav-btn:hover { transform: translateY(-2px); }
-.detail-nav-btn.prev:hover {
-  border-color: rgba(26, 58, 143, 0.24);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
-}
-.detail-nav-btn.next:hover {
-  background: #152f73;
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.28);
-}
-.detail-nav-btn:active { transform: translateY(0); }
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -541,9 +522,8 @@ onUnmounted(() => {
   .player-hero-container { border-radius: 16px; margin-bottom: 40px; }
   .title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
   .contact-cta {
-    align-self: center;
+    align-self: stretch;
     width: 100%;
-    max-width: 240px;
     justify-content: center;
   }
   .content-html, .content-para { font-size: 1rem; line-height: 1.7; }
