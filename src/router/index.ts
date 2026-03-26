@@ -20,41 +20,6 @@ const productDetailRouteNames = new Set([
   "RobotProductDetail",
 ]);
 
-const scrollPageTo = (top: number, behavior: ScrollBehavior = "auto") => {
-  if (typeof document === "undefined") {
-    return;
-  }
-
-  window.scrollTo({ left: 0, top, behavior });
-};
-
-const scrollToHash = (
-  hash: string,
-  behavior: ScrollBehavior = "smooth"
-): number | false => {
-  if (typeof document === "undefined") {
-    return false;
-  }
-
-  const element = document.querySelector(hash) as HTMLElement | null;
-  if (!element) {
-    return false;
-  }
-
-  const isMobile = window.innerWidth <= 768;
-  const offset = isMobile ? 60 : 120;
-  
-  const currentScrollY = window.pageYOffset || document.documentElement?.scrollTop || document.body?.scrollTop || 0;
-
-  const top = Math.max(
-    0,
-    element.getBoundingClientRect().top + currentScrollY - offset
-  );
-
-  scrollPageTo(top, behavior);
-  return top;
-};
-
 const routes = [
   // 首页
   {
@@ -130,7 +95,6 @@ const router = createRouter({
     if (savedPosition) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          scrollPageTo(savedPosition.top ?? 0, "auto");
           resolve(savedPosition);
         }, 100); // 延迟等待DOM加载，避免瞬间回滚失败
       });
@@ -138,34 +102,32 @@ const router = createRouter({
 
     // 处理hash导航
     if (to.hash) {
-      // 优化hash导航：防抖、重试、错误处理
+      // 等待目标节点挂载后再滚动，依赖 CSS scroll-margin-top 做最终对齐
       return new Promise((resolve) => {
-        const maxAttempts = 5;
+        const maxAttempts = 20;
         let attempts = 0;
 
         const tryScroll = () => {
-          const top = scrollToHash(to.hash, "smooth");
-          if (typeof top === "number") {
-            resolve({
-              left: 0,
-              top,
-              behavior: "auto",
+          const element = document.querySelector(to.hash) as HTMLElement | null;
+          if (element) {
+            element.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "nearest",
             });
+            resolve(false);
           } else if (attempts < maxAttempts) {
             attempts += 1;
-            setTimeout(tryScroll, 50 * attempts); // 指数退避
+            setTimeout(tryScroll, 50);
           } else {
-            scrollPageTo(0, "smooth");
             resolve({ left: 0, top: 0, behavior: "auto" });
           }
         };
 
-        // 立即尝试滚动
         tryScroll();
       });
     }
     // 默认滚动到顶部
-    scrollPageTo(0, "smooth");
     return { left: 0, top: 0, behavior: "auto" };
   },
 });

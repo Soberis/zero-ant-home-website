@@ -2,231 +2,64 @@
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-columns">
-        <!-- 移动端只显示公司和二维码 -->
-        <template v-if="isMobile">
-          <div class="footer-col contact-col">
-            <h4>{{ $t("footer.companyFullName") }}</h4>
+        <div
+          v-for="section in footerNavSections"
+          :key="section.to"
+          class="footer-col footer-col--nav"
+        >
+          <h4>{{ $t(section.title) }}</h4>
 
-            <div class="contact-info">
-              <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
+          <ul>
+            <li v-for="item in section.items" :key="item.hash">
+              <router-link
+                :to="{ path: section.to, hash: item.hash }"
+                class="footer-link"
+              >
+                {{ $t(item.label) }}
+              </router-link>
+            </li>
+          </ul>
+        </div>
 
-              <div>{{ $t("contacts.email") }}：{{ $t("footer.emailValue") }}</div>
+        <div class="footer-col contact-col">
+          <h4>{{ $t("footer.companyFullName") }}</h4>
 
-              <div style="margin-top: 8px">
-                {{ $t("contacts.address") }}：{{ $t("footer.address") }}
-              </div>
+          <div class="contact-info">
+            <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
+
+            <div>{{ $t("contacts.email") }}：{{ $t("footer.emailValue") }}</div>
+
+            <div style="margin-top: 8px">
+              {{ $t("contacts.address") }}：{{ $t("footer.address") }}
             </div>
           </div>
+        </div>
 
-          <div class="footer-col qrcode-col">
-            <div class="footer-qrcodes">
-              <div class="qrcode-item">
-                <img
-                  :src="wxQrcode"
-                  :alt="$t('footer.wx')"
-                  class="qrcode-img"
-                  loading="lazy"
-                  aria-label="WeChat Official Account QR Code"
-                />
-                <div class="qrcode-label">{{ $t("footer.wx") }}</div>
-              </div>
+        <div class="footer-col qrcode-col">
+          <div class="footer-qrcodes">
+            <div class="qrcode-item">
+              <img
+                :src="wxQrcode"
+                :alt="$t('footer.wx')"
+                class="qrcode-img"
+                loading="lazy"
+                aria-label="WeChat Official Account QR Code"
+              />
+              <div class="qrcode-label">{{ $t("footer.wx") }}</div>
+            </div>
 
-              <div class="qrcode-item">
-                <img
-                  :src="bilibiliQrcode"
-                  :alt="$t('footer.bilibili')"
-                  class="qrcode-img bilibili-qrcode-img"
-                  loading="lazy"
-                  aria-label="Bilibili Channel QR Code"
-                />
-                <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
-              </div>
+            <div class="qrcode-item">
+              <img
+                :src="bilibiliQrcode"
+                :alt="$t('footer.bilibili')"
+                class="qrcode-img bilibili-qrcode-img"
+                loading="lazy"
+                aria-label="Bilibili Channel QR Code"
+              />
+              <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
             </div>
           </div>
-        </template>
-        <!-- 桌面端显示全部，包括公司和二维码 -->
-        <template v-else>
-          <div class="footer-col">
-            <h4>{{ $t("nav.systemProducts") }}</h4>
-
-            <ul>
-              <li v-for="item in systemProductNav" :key="item.hash">
-                <router-link
-                  :to="{ path: '/system-products', hash: item.hash }"
-                  class="footer-link"
-                >
-                  {{ $t(item.label) }}
-                </router-link>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>{{ $t("nav.robotProducts") }}</h4>
-
-            <ul>
-              <li v-for="item in robotProductNav" :key="item.hash">
-                <router-link
-                  :to="{ path: '/robot-products', hash: item.hash }"
-                  class="footer-link"
-                >
-                  {{ $t(item.label) }}
-                </router-link>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>{{ $t("nav.solutions") }}</h4>
-
-            <ul>
-              <li>
-                <router-link
-                  :to="{ path: '/solutions', hash: '#industries' }"
-                >
-                  {{ $t("solutionsPage.nav.industries") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link
-                  :to="{ path: '/solutions', hash: '#backbone' }"
-                >
-                  {{ $t("solutionsPage.nav.backbone") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link
-                  :to="{ path: '/solutions', hash: '#delivery' }"
-                >
-                  {{ $t("solutionsPage.nav.delivery") }}
-                </router-link>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>{{ $t("nav.support") }}</h4>
-
-            <ul>
-              <li>
-                <router-link :to="{ path: '/support', hash: '#download' }">
-                  {{ $t("nav.download") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link :to="{ path: '/support', hash: '#faq' }">
-                  {{ $t("nav.faq") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link :to="{ path: '/support', hash: '#contact' }">
-                  {{ $t("nav.contact") }}
-                </router-link>
-              </li>
-            </ul>
-
-            <h4>{{ $t("nav.careers") }}</h4>
-
-            <ul>
-              <li>
-                <router-link :to="{ path: '/careers', hash: '#positions' }">
-                  {{ $t("careers.hotPositionsTitle") }}
-                </router-link>
-              </li>
-              <li>
-                <router-link :to="{ path: '/careers', hash: '#contact' }">
-                  {{ $t("nav.contact") }}
-                </router-link>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>{{ $t("nav.about") }}</h4>
-
-            <ul>
-              <li>
-                <router-link :to="{ path: '/about', hash: '#company-intro' }">
-                  {{ $t("nav.companyIntro") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link :to="{ path: '/about', hash: '#history' }">
-                  {{ $t("nav.history") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link :to="{ path: '/about', hash: '#honors' }">
-                  {{ $t("nav.honor") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link :to="{ path: '/about', hash: '#core-values' }">
-                  {{ $t("nav.coreValues") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link :to="{ path: '/about', hash: '#culture' }">
-                  {{ $t("nav.culture") }}
-                </router-link>
-              </li>
-
-              <li>
-                <router-link :to="{ path: '/about', hash: '#contact' }">
-                  {{ $t("nav.contact") }}
-                </router-link>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer-col contact-col">
-            <h4>{{ $t("footer.companyFullName") }}</h4>
-
-            <div class="contact-info">
-              <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
-
-              <div>{{ $t("contacts.email") }}：{{ $t("footer.emailValue") }}</div>
-
-              <div style="margin-top: 8px">
-                {{ $t("contacts.address") }}：{{ $t("footer.address") }}
-              </div>
-            </div>
-          </div>
-
-          <div class="footer-col qrcode-col">
-            <div class="footer-qrcodes">
-              <div class="qrcode-item">
-                <img
-                  :src="wxQrcode"
-                  :alt="$t('footer.wx')"
-                  class="qrcode-img"
-                  loading="lazy"
-                  aria-label="WeChat Official Account QR Code"
-                />
-                <div class="qrcode-label">{{ $t("footer.wx") }}</div>
-              </div>
-
-              <div class="qrcode-item">
-                <img
-                  :src="bilibiliQrcode"
-                  :alt="$t('footer.bilibili')"
-                  class="qrcode-img bilibili-qrcode-img"
-                  loading="lazy"
-                  aria-label="Bilibili Channel QR Code"
-                />
-                <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
-              </div>
-            </div>
-          </div>
-        </template>
+        </div>
       </div>
     </div>
 
@@ -246,28 +79,9 @@
 </template>
 
 <script setup lang="ts">
-// 仅用于国际化与基础响应式逻辑
 import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
 import wxQrcode from "@/assets/images/qrcodes/wx.webp";
-import { ref, onMounted, onUnmounted } from "vue";
-import {
-  systemProductNav,
-  robotProductNav,
-} from "@/data/navigation";
-
-// 导航数据已从 @/data/navigation 导入
-
-const isMobile = ref(false);
-function checkMobile() {
-  isMobile.value = window.innerWidth <= 768;
-}
-onMounted(() => {
-  checkMobile();
-  window.addEventListener("resize", checkMobile);
-});
-onUnmounted(() => {
-  window.removeEventListener("resize", checkMobile);
-});
+import { footerNavSections } from "@/data/navigation";
 </script>
 
 <style scoped lang="less">
@@ -288,8 +102,8 @@ onUnmounted(() => {
 
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 48px 40px; // 更开阔的间距
+  grid-template-columns: repeat(6, 1fr); // 统一 6 列导航
+  gap: 48px 40px; // 适量增大间距
   align-items: start;
 }
 
@@ -297,8 +111,12 @@ onUnmounted(() => {
   min-width: 0;
 }
 
+.footer-col--nav {
+  display: block;
+}
+
 .footer-col h4 {
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   font-family: "Outfit", sans-serif;
   color: #ffffff;
   font-size: 14px;
@@ -314,7 +132,7 @@ onUnmounted(() => {
 }
 
 .footer-col ul li {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   line-height: 1.6;
 }
 
@@ -324,6 +142,7 @@ onUnmounted(() => {
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   display: inline-block;
+  white-space: nowrap; // 防止长文字换行
 }
 
 .footer-col ul li a:hover,
@@ -333,7 +152,7 @@ onUnmounted(() => {
 }
 
 .contact-col {
-  grid-column: span 2;
+  grid-column: span 3;
 }
 
 .contact-info {
@@ -352,7 +171,8 @@ onUnmounted(() => {
 }
 
 .qrcode-col {
-  grid-column: span 2;
+  grid-column: 5 / span 2; // 跳过第 4 列，从第 5 列开始，避免太靠右
+  justify-self: start;
 }
 
 .qrcode-item {
@@ -411,6 +231,14 @@ onUnmounted(() => {
   .footer-columns {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .contact-col {
+    grid-column: span 2;
+  }
+  .qrcode-col {
+    grid-column: span 1;
+    justify-self: end;
+  }
 }
 
 @media (max-width: 900px) {
@@ -438,17 +266,23 @@ onUnmounted(() => {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .footer-columns {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .footer-col--nav {
+    display: none;
   }
 
   .contact-col,
   .qrcode-col {
     grid-column: span 1;
   }
+}
 
+@media (max-width: 560px) {
   .footer-qrcodes {
     justify-content: flex-start;
   }

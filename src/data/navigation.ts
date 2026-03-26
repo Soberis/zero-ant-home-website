@@ -43,3 +43,34 @@ export const aboutNav = [
   { hash: "#culture", label: "nav.culture" },
   { hash: "#contact", label: "nav.contact" },
 ];
+
+export interface NavigationItem {
+  to: string;
+  label: string;
+  children?: readonly { hash: string; label: string }[];
+}
+
+export const topNavItems: readonly NavigationItem[] = [
+  { to: "/", label: "nav.home" },
+  { to: "/system-products", label: "nav.systemProducts", children: systemProductNav },
+  { to: "/robot-products", label: "nav.robotProducts", children: robotProductNav },
+  { to: "/solutions", label: "nav.solutions", children: solutionsNav },
+  { to: "/support", label: "nav.support", children: supportNav },
+  { to: "/careers", label: "nav.careers", children: careersNav },
+  { to: "/about", label: "nav.about", children: aboutNav },
+];
+
+export interface FooterNavSection {
+  title: string;
+  to: string;
+  items: readonly { hash: string; label: string }[];
+}
+
+export const footerNavSections: readonly FooterNavSection[] = [
+  { title: "nav.systemProducts", to: "/system-products", items: systemProductNav },
+  { title: "nav.robotProducts", to: "/robot-products", items: robotProductNav },
+  { title: "nav.solutions", to: "/solutions", items: solutionsNav },
+  { title: "nav.support", to: "/support", items: supportNav },
+  { title: "nav.careers", to: "/careers", items: careersNav },
+  { title: "nav.about", to: "/about", items: aboutNav },
+];
