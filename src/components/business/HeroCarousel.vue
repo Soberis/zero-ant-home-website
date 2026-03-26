@@ -177,7 +177,7 @@ onUnmounted(() => {
   position: relative;
   min-height: calc(100svh - var(--nav-height));
   overflow: hidden;
-  background: #fbfbfd;
+  background: #ffffff;
   cursor: pointer;
 }
 
@@ -188,37 +188,36 @@ onUnmounted(() => {
 
 .hero-media {
   position: absolute;
-  inset: 40px 0;
+  inset: 0;
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Push to the right edge of container */
+  justify-content: flex-end;
   padding-right: var(--container-padding-x);
   pointer-events: none;
-  /* entrance: scale in */
   opacity: 0;
-  transform: scale(1.04) translateX(2%);
-  transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s,
-    transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+  transform: translateX(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
 }
 
 .hero-media.hero-entered {
   opacity: 1;
-  transform: scale(1) translateX(0);
+  transform: translateX(0);
 }
 
 .hero-image {
   position: relative;
   z-index: 1;
-  width: 55%; /* Take up right 55% of the 1440px container */
+  width: 56%;
   max-width: none;
-  height: 96%; /* Massive scale */
+  height: 88%;
   object-fit: contain;
-  object-position: center; /* Shifted from 'center right' to 'center' to bring it slightly left */
-  transform: scale(1.08); /* A bit softer scale */
-  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.08)); /* Softer, pragmatic shadow */
+  object-position: center right;
+  transform: none;
+  filter: drop-shadow(0 20px 36px rgba(15, 23, 42, 0.08));
 }
 
 .hero-overlay {
@@ -230,8 +229,8 @@ onUnmounted(() => {
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 24vh var(--container-padding-x) 44px; /* Perfectly aligns left edge with nav/content */
-  pointer-events: none; /* Let clicks pass through empty space */
+  padding: 19vh var(--container-padding-x) 40px;
+  pointer-events: none;
 }
 
 .hero-copy, .hero-indicators {
@@ -239,14 +238,13 @@ onUnmounted(() => {
 }
 
 .hero-copy {
-  max-width: min(580px, 45%);
+  max-width: min(500px, 42%);
   display: flex;
   flex-direction: column;
-  /* entrance: fade up */
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-copy.hero-entered {
@@ -256,8 +254,8 @@ onUnmounted(() => {
 
 .hero-eyebrow {
   margin: 0 0 var(--space-sm);
-  color: #86868b;
-  letter-spacing: 0.12em;
+  color: #6b7280;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -265,37 +263,38 @@ onUnmounted(() => {
   margin: 0;
   font-family: "Outfit", sans-serif;
   color: #1d1d1f;
-  white-space: nowrap;
-  letter-spacing: -0.012em;
+  white-space: normal;
+  letter-spacing: -0.03em;
 }
 
 .hero-product-name {
-  margin: 16px 0 0;
+  margin: 14px 0 0;
   font-family: "Outfit", sans-serif;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #6b7280;
-  letter-spacing: 0.14em;
+  color: #1a3a8f;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .hero-description {
-  margin: 28px 0 0;
-  max-width: 20em;
-  color: #515154;
+  margin: 24px 0 0;
+  max-width: 22em;
+  color: #4b5565;
+  line-height: 1.75;
 }
 
 .hero-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 22px;
+  padding: 14px 24px;
   border: 1px solid transparent;
   border-radius: 999px;
   background: var(--color-primary);
   color: #ffffff;
   font-size: 0.92rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.25s ease, transform 0.25s ease, border-color 0.25s ease,
     background-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -316,10 +315,10 @@ onUnmounted(() => {
 .hero-link:hover {
   color: #ffffff;
   text-decoration: none;
-  transform: translateY(-2px);
+  transform: none;
   background: var(--color-primary-dark);
   border-color: transparent;
-  box-shadow: 0 12px 24px rgba(26, 58, 143, 0.24);
+  box-shadow: none;
 }
 
 .hero-link:hover .hero-link-arrow {
@@ -334,7 +333,7 @@ onUnmounted(() => {
 .hero-link--secondary {
   background: transparent;
   color: #1d1d1f;
-  border-color: #d2d2d7;
+  border-color: rgba(15, 23, 42, 0.14);
   box-shadow: none;
 }
 
@@ -347,7 +346,7 @@ onUnmounted(() => {
 .hero-link--secondary:hover {
   background: rgba(0, 0, 0, 0.04);
   color: #1d1d1f;
-  border-color: #86868b;
+  border-color: rgba(15, 23, 42, 0.24);
   box-shadow: none;
 }
 
@@ -359,8 +358,8 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
-  margin-top: 24px;
+  gap: 0;
+  margin-top: 28px;
 }
 
 .hero-buttons {
@@ -372,11 +371,11 @@ onUnmounted(() => {
 
 .hero-indicators {
   position: absolute;
-  right: var(--container-padding-x); /* Match container padding on right side */
-  bottom: 44px;
+  right: var(--container-padding-x);
+  bottom: 36px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
@@ -388,8 +387,8 @@ onUnmounted(() => {
 }
 
 .hero-indicator {
-  width: 36px;
-  height: 8px;
+  width: 28px;
+  height: 6px;
   padding: 0;
   border: 0;
   border-radius: 999px;
@@ -403,8 +402,8 @@ onUnmounted(() => {
 }
 
 .hero-indicator.active {
-  width: 56px;
-  background: rgba(0, 0, 0, 0.8);
+  width: 46px;
+  background: rgba(0, 0, 0, 0.72);
 }
 
 @media (max-width: 1100px) {
@@ -414,23 +413,23 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 40px 0 80px;
+    inset: 0;
     padding-right: var(--container-padding-x);
-    justify-content: flex-end; /* Keep image on the right on tablets to avoid text overlap */
+    justify-content: flex-end;
   }
 
   .hero-overlay {
-    padding: 16vh var(--container-padding-x) 40px;
+    padding: 17vh var(--container-padding-x) 40px;
   }
 
   .hero-copy {
-    max-width: min(500px, 55%);
+    max-width: min(460px, 48%);
   }
 
   .hero-image {
-    width: 55%;
-    object-position: center right; /* Push back to right slightly for narrow screens */
-    transform: translateX(0) scale(1.05);
+    width: 54%;
+    object-position: center right;
+    transform: none;
   }
 }
 
@@ -441,14 +440,14 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 40px 0 180px; 
+    inset: 0 0 180px;
     padding-right: 0;
     justify-content: center;
   }
 
   .hero-overlay {
     padding: 10vh var(--container-padding-x) 32px;
-    justify-content: flex-end; /* Mobile keeps text at bottom generally */
+    justify-content: flex-end;
   }
 
   .hero-copy {
@@ -469,9 +468,9 @@ onUnmounted(() => {
   }
 
   .hero-image {
-    width: 100%; /* Take full width on mobile */
+    width: 100%;
     object-position: center bottom;
-    transform: scale(1.02); /* Gentle scale on mobile */
+    transform: none;
   }
 }
 
@@ -482,7 +481,7 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 20px -20px 240px; /* Bleed past edges */
+    inset: 20px -10px 240px;
   }
 
   

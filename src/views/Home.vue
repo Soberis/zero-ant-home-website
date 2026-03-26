@@ -56,62 +56,24 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 .home-section {
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .home-section--products {
-  background: #ffffff; /* White background for the first section */
+  border-top: none;
+  background: #ffffff;
 }
 
 .home-section--applications {
-  background: #fbfbfd; /* Soft Gray for the second section */
-  position: relative;
-  
-  // Soft top edge blend
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to bottom, #ffffff, transparent);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  // Soft bottom edge blend
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to top, #ffffff, transparent);
-    z-index: 1;
-    pointer-events: none;
-  }
+  background: #f8f9fb;
 }
 
 .home-section--videos {
-  background: #ffffff; /* White for the video section */
+  background: #ffffff;
 }
 
 .home-section--partners {
-  background: #fbfbfd; /* Soft Gray for the logo cloud */
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to bottom, #ffffff, transparent);
-    z-index: 1;
-    pointer-events: none;
-  }
+  background: #f8f9fb;
 }
 
 @media screen and (max-width: 991px) {

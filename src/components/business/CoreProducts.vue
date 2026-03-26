@@ -91,19 +91,19 @@ function getProductSummary(product: (typeof products)[number]): string {
 }
 
 .section-heading {
-  max-width: 760px;
+  max-width: 720px;
   margin-bottom: 0;
 }
 
 /* ── 分组容器 ── */
 .product-groups {
   display: grid;
-  gap: 80px;
+  gap: 72px;
 }
 
 .product-group {
   display: grid;
-  gap: var(--space-lg);
+  gap: 24px;
   padding: 0;
 }
 
@@ -113,18 +113,16 @@ function getProductSummary(product: (typeof products)[number]): string {
   justify-content: space-between;
   gap: var(--space-md);
   margin-bottom: 0;
-  padding-left: 4px;
+  padding-left: 0;
 }
 
 .group-title {
   margin: 0;
   font-family: "Outfit", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   font-weight: 500;
   color: var(--color-text);
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  letter-spacing: -0.02em;
 }
 
 .group-link {
@@ -132,22 +130,21 @@ function getProductSummary(product: (typeof products)[number]): string {
   align-items: center;
   gap: 8px;
   color: var(--color-text-secondary);
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 500;
   text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition: color var(--transition-fast);
   white-space: nowrap;
 }
 
 .group-link .group-link-arrow {
-  width: 18px;
-  height: 18px;
-  transition: transform var(--transition-fast);
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
 .group-link:hover {
   color: var(--color-primary);
-  transform: translateY(-1px);
 }
 
 .group-link:hover .group-link-arrow {
@@ -156,26 +153,34 @@ function getProductSummary(product: (typeof products)[number]): string {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 28px;
+  border-top: none;
 }
 
 .product-card-item {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
   background: transparent;
   border-radius: 0;
   padding: 0;
   text-decoration: none;
   border: none;
   box-shadow: none;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s ease;
   overflow: visible;
   position: relative;
 }
 
+.product-card-item:focus-visible {
+  outline: 2px solid rgba(26, 58, 143, 0.2);
+  outline-offset: 10px;
+}
+
 .product-card-item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 .card-visual {
@@ -183,48 +188,53 @@ function getProductSummary(product: (typeof products)[number]): string {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 280px; /* Increased height for integrated look */
-  margin-bottom: 20px;
+  height: 220px;
+  margin-bottom: 0;
   position: relative;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0;
   background: transparent;
 }
 
 .visual-img {
-  max-width: 90%;
-  max-height: 90%;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
   object-fit: contain;
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  /* Added a very subtle drop shadow to the image itself for depth without a card container */
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.04));
+  object-position: center;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  filter: none;
 }
 
 .product-card-item:hover .visual-img {
-  transform: scale(1.04);
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
+  opacity: 0.98;
+  transform: translateY(-2px);
 }
 
 .card-content {
-  text-align: center;
-  padding-top: 0;
-  border-top: none;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  text-align: left;
 }
 
 .card-title {
   margin: 0;
   font-family: "Outfit", sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--color-text);
-  letter-spacing: -0.012em;
+  letter-spacing: -0.02em;
   transition: color 0.3s ease;
 }
 
 .card-description {
-  margin: 10px auto 0;
-  max-width: 20em;
+  margin: 0;
+  max-width: 22rem;
   color: var(--color-text-secondary);
   font-size: 0.94rem;
-  line-height: 1.7;
+  line-height: 1.75;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -238,8 +248,8 @@ function getProductSummary(product: (typeof products)[number]): string {
 
 @media (max-width: 1100px) {
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 24px;
   }
 }
 
@@ -254,23 +264,31 @@ function getProductSummary(product: (typeof products)[number]): string {
   }
 
   .product-groups {
-    gap: 60px;
+    gap: 56px;
+  }
+
+  .products-grid {
+    gap: 32px 20px;
+  }
+
+  .card-visual {
+    height: 180px;
   }
 }
 
 @media (max-width: 640px) {
   .products-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 28px;
   }
-  
+
   .product-card-item {
-    padding: 32px 24px;
+    gap: 14px;
   }
-  
+
   .card-visual {
     height: 200px;
-    margin-bottom: 24px;
+    padding: 0;
   }
 
   .group-header {
@@ -284,6 +302,14 @@ function getProductSummary(product: (typeof products)[number]): string {
 
   .group-link {
     font-size: 0.88rem;
+  }
+
+  .card-title {
+    font-size: 1.125rem;
+  }
+
+  .card-description {
+    max-width: none;
   }
 }
 </style>
