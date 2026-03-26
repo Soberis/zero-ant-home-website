@@ -161,6 +161,12 @@ body {
   }
 }
 
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  body::before {
+    display: none;
+  }
+}
+
 .page {
   display: flex;
   flex-direction: column;

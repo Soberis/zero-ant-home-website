@@ -25,17 +25,11 @@ defineProps<{
 const scrollToTop = () => {
   const scrollConfig: ScrollToOptions = {
     top: 0,
+    left: 0,
     behavior: 'smooth',
   };
 
-  // Scroll all common containers
   window.scrollTo(scrollConfig);
-  document.documentElement.scrollTo(scrollConfig);
-  document.body.scrollTo(scrollConfig);
-  
-  // Also try to find if there is a specific #app scroll
-  const appEl = document.getElementById('app');
-  if (appEl) appEl.scrollTo(scrollConfig);
 };
 </script>
 

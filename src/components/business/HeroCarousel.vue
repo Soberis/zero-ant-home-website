@@ -217,7 +217,6 @@ onUnmounted(() => {
   object-position: center; /* Shifted from 'center right' to 'center' to bring it slightly left */
   transform: scale(1.08); /* A bit softer scale */
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.08)); /* Softer, pragmatic shadow */
-  will-change: transform, opacity;
 }
 
 .hero-overlay {

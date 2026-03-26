@@ -75,27 +75,15 @@ const handleEscKey = (event: KeyboardEvent) => {
 const isBackToTopVisible = ref(false);
 let ticking = false;
 
-const handleScroll = (event: Event) => {
+const updateBackToTopVisibility = () => {
+  isBackToTopVisible.value =
+    (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > 300;
+};
+
+const handleScroll = () => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
-      const target = event.target as any;
-      let winScroll = 0;
-
-      // Detect scroll position from target or window
-      if (
-        !target ||
-        target === document ||
-        target === window ||
-        target.tagName === "HTML" ||
-        target.tagName === "BODY"
-      ) {
-        winScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      } else if (target.scrollTop !== undefined) {
-        winScroll = target.scrollTop;
-      }
-
-      // Update back to top visibility
-      isBackToTopVisible.value = winScroll > 300;
+      updateBackToTopVisibility();
       ticking = false;
     });
     ticking = true;
@@ -106,6 +94,7 @@ onMounted(() => {
   // 添加全局键盘监听
   document.addEventListener("keydown", handleEscKey);
   window.addEventListener("scroll", handleScroll, true);
+  updateBackToTopVisibility();
 });
 
 onUnmounted(() => {
