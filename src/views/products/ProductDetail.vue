@@ -106,10 +106,6 @@ const updateSEO = () => {
       ogImageWidth: 1200,
       ogImageHeight: 630,
       canonical: currentUrl,
-      localeAlternate: [
-        { hrefLang: 'zh', href: currentUrl },
-        { hrefLang: 'en', href: currentUrl }
-      ],
     });
     setStructuredData([]);
     return;
@@ -119,10 +115,6 @@ const updateSEO = () => {
     ...seoMetadata.value,
     ogImageWidth: 1200,
     ogImageHeight: 630,
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   if (productStructuredData.value) {

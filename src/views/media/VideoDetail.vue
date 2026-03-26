@@ -162,16 +162,10 @@ const videoStructuredData = computed(() => {
 // 设置SEO和结构化数据
 const updateSEO = () => {
   if (seoMetadata.value) {
-    const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-    const currentUrl = `${baseUrl}${route.fullPath}`;
     setSEO({
       ...seoMetadata.value,
       ogImageWidth: 1200,
       ogImageHeight: 630,
-      localeAlternate: [
-        { hrefLang: 'zh', href: currentUrl },
-        { hrefLang: 'en', href: currentUrl }
-      ],
     });
   }
   if (videoStructuredData.value) {

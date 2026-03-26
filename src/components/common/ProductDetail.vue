@@ -24,7 +24,13 @@
         </div>
 
         <div class="product-hero__media-wrapper">
-          <img :src="heroImageSrc" :alt="localizedProduct.title" class="product-hero__image" />
+          <img
+            :src="heroImageSrc"
+            :alt="localizedProduct.title"
+            class="product-hero__image"
+            :width="heroImageSize?.width"
+            :height="heroImageSize?.height"
+          />
           
           <div v-if="heroMetrics.length" class="product-hero__metrics">
             <article
@@ -242,6 +248,37 @@ const sanitizedDescription = computed(() =>
     String(localizedProduct.value.desc || "").replace(/\n/g, "<br>")
   )
 );
+
+type HeroImageSize = {
+  width: number;
+  height: number;
+};
+
+const HERO_IMAGE_SIZE_RULES: Array<{ test: RegExp; width: number; height: number }> = [
+  { test: /embedded-vm/i, width: 1200, height: 521 },
+  { test: /industrial-rtos/i, width: 1200, height: 675 },
+  { test: /airos-os/i, width: 1200, height: 721 },
+  { test: /robot-scheduling-system/i, width: 1200, height: 594 },
+  { test: /gantry-2d3d/i, width: 1200, height: 675 },
+  { test: /four-axis-robot/i, width: 1200, height: 1600 },
+  { test: /six-axis-robot-1000w-q75/i, width: 1000, height: 678 },
+  { test: /dual-arm-humanoid/i, width: 1200, height: 2133 },
+  { test: /mobile-robot/i, width: 1200, height: 960 },
+];
+
+const heroImageSize = computed<HeroImageSize>(() => {
+  const src = heroImageSrc.value;
+  if (!src) {
+    return { width: 1200, height: 675 };
+  }
+
+  const match = HERO_IMAGE_SIZE_RULES.find(({ test }) => test.test(src));
+  if (!match) {
+    return { width: 1200, height: 675 };
+  }
+
+  return { width: match.width, height: match.height };
+});
 </script>
 
 <style scoped lang="less">

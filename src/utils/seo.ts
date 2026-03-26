@@ -21,7 +21,6 @@ export interface SEOMetaData {
   twitterCard?: string;
   canonical?: string;
   siteName?: string;
-  localeAlternate?: Array<{ hrefLang: string; href: string }>;
 }
 
 /**
@@ -123,21 +122,6 @@ export function setSEO(meta: SEOMetaData) {
       canonicalElement.setAttribute("href", meta.canonical);
     }
 
-    // 更新 hreflang（多语言可发现性）
-    if (meta.localeAlternate && meta.localeAlternate.length) {
-      // 清理旧的 hreflang
-      document
-        .querySelectorAll('link[rel="alternate"][hreflang]')
-        .forEach((n) => n.parentNode?.removeChild(n));
-      // 注入新的
-      meta.localeAlternate.forEach((alt) => {
-        const link = document.createElement('link');
-        link.setAttribute('rel', 'alternate');
-        link.setAttribute('hreflang', alt.hrefLang);
-        link.setAttribute('href', alt.href);
-        document.head.appendChild(link);
-      });
-    }
   } catch (error) {
     if (import.meta.env.DEV) {
       console.warn("设置SEO元数据失败:", error);

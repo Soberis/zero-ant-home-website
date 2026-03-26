@@ -80,15 +80,11 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       ogImageWidth: 1200,
       ogImageHeight: 630,
       twitterTitle: seoConfig.title,
-      twitterDescription: seoConfig.description,
-      twitterImage: `${baseUrl}/logo.webp`,
-      canonical: currentUrl,
-      siteName: safeTranslate("seo.siteName"),
-      localeAlternate: [
-        { hrefLang: 'zh', href: currentUrl },
-        { hrefLang: 'en', href: currentUrl }
-      ],
-    });
+    twitterDescription: seoConfig.description,
+    twitterImage: `${baseUrl}/logo.webp`,
+    canonical: currentUrl,
+    siteName: safeTranslate("seo.siteName"),
+  });
 
     // 设置结构化数据
     let structuredData: Record<string, any> = {
@@ -201,10 +197,6 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 解决方案页面结构化数据
@@ -292,10 +284,6 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 关于我们页面结构化数据
@@ -348,10 +336,6 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 招聘页面结构化数据 - 使用CollectionPage包含多个JobPosting
@@ -499,10 +483,6 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
-    localeAlternate: [
-      { hrefLang: 'zh', href: currentUrl },
-      { hrefLang: 'en', href: currentUrl }
-    ],
   });
 
   // 支持页面结构化数据
