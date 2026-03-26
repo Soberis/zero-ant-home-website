@@ -9,7 +9,7 @@ import {
   getRelatedVideos,
   hasProductRelations,
 } from "@/data/productRelations";
-import { slugToI18nKey } from "@/data/productDetails";
+import { createEmptyProductDetail, slugToI18nKey } from "@/data/productDetails";
 import type {
   ProductCase,
   ProductDetail,
@@ -54,9 +54,21 @@ export function useProductDetailData(
   const detailKey = computed(() => `productDetails.${i18nKey.value}`);
   const hasDetailTranslation = computed(() => te(`${detailKey.value}.title`));
 
+  const createFallbackDetail = (): ProductDetail | null => {
+    if (!currentProduct.value) {
+      return null;
+    }
+
+    const detail = createEmptyProductDetail();
+    detail.title = t(currentProduct.value.name);
+    detail.desc = t(currentProduct.value.desc);
+    detail.image = currentProduct.value.image;
+    return detail;
+  };
+
   const localizedProduct = computed<ProductDetail | null>(() => {
     if (!hasDetailTranslation.value && !baseDetail.value) {
-      return null;
+      return createFallbackDetail();
     }
 
     const fallbackTitle =

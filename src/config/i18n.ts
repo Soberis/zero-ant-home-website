@@ -1,17 +1,27 @@
 import { createI18n } from 'vue-i18n';
 import en from '@/locales/en.json';
 import zh from '@/locales/zh.json';
-import productDetailsEn from '@/locales/productDetails/en.json';
-import productDetailsZh from '@/locales/productDetails/zh.json';
+
+export type SupportedLocale = 'zh' | 'en';
+
+type ProductDetailLocaleMessages = Record<string, unknown>;
+
+const productDetailLocaleLoaders: Record<
+  SupportedLocale,
+  () => Promise<{ default: ProductDetailLocaleMessages }>
+> = {
+  en: () => import('@/locales/productDetails/en.json'),
+  zh: () => import('@/locales/productDetails/zh.json'),
+};
+
+const loadedProductDetailLocales = new Set<SupportedLocale>();
 
 const messages = {
   en: {
     ...en,
-    productDetails: productDetailsEn
   },
   zh: {
     ...zh,
-    productDetails: productDetailsZh
   },
 };
 
@@ -32,6 +42,20 @@ const i18n = createI18n({
   fallbackLocale: 'en',
   messages,
 });
+
+export async function ensureProductDetailLocale(
+  locale: SupportedLocale
+): Promise<void> {
+  if (loadedProductDetailLocales.has(locale)) {
+    return;
+  }
+
+  const { default: productDetails } = await productDetailLocaleLoaders[locale]();
+  i18n.global.mergeLocaleMessage(locale, {
+    productDetails,
+  });
+  loadedProductDetailLocales.add(locale);
+}
 
 // 初始化同步设置 <html lang> 属性，防止 FOUT
 if (typeof document !== 'undefined') {

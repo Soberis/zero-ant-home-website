@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import i18n, { ensureProductDetailLocale } from "@/config/i18n";
 
 // 核心页面直接导入（首屏关键路径）
 import Home from "@/views/Home.vue";
@@ -9,11 +10,15 @@ const About = () => import("@/views/company/About.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
 const ProductDetail = () => import("@/views/products/ProductDetail.vue");
 const Support = () => import("@/views/support/Support.vue");
-const ApplicationDetail = () =>
-  import("@/views/applications/ApplicationDetail.vue");
+const ApplicationDetail = () => import("@/views/applications/ApplicationDetail.vue");
 const SystemProducts = () => import("@/views/products/SystemProducts.vue");
 const RobotProducts = () => import("@/views/products/RobotProducts.vue");
 const Careers = () => import("@/views/company/Careers.vue");
+
+const productDetailRouteNames = new Set([
+  "SystemProductDetail",
+  "RobotProductDetail",
+]);
 
 const scrollPageTo = (top: number, behavior: ScrollBehavior = "auto") => {
   if (typeof document === "undefined") {
@@ -187,6 +192,22 @@ const router = createRouter({
   },
 });
 
-// 路由守卫将在main.ts中设置，避免循环依赖
+router.beforeEach(async (to) => {
+  if (!productDetailRouteNames.has(String(to.name))) {
+    return true;
+  }
+
+  const locale = i18n.global.locale.value === "en" ? "en" : "zh";
+  try {
+    await ensureProductDetailLocale(locale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn("预热产品详情文案失败:", error);
+    }
+  }
+  return true;
+});
+
+// 产品详情页的 locale 预热守卫，避免首次进入时详情文案缺失
 
 export default router;

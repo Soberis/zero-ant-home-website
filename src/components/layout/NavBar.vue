@@ -260,7 +260,9 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
+import { ensureProductDetailLocale } from "@/config/i18n";
 import {
   systemProductNav,
   robotProductNav,
@@ -293,6 +295,7 @@ const handleResize = () => {
 
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
+const route = useRoute();
 
 // 防抖锁
 let toggleLock = false;
@@ -330,14 +333,38 @@ function handleBackgroundClick(event: Event): void {
 
 const { locale } = useI18n();
 
-function switchLanguage() {
-  if (locale.value === "zh") {
-    locale.value = "en";
-    localStorage.setItem("language", "en");
-  } else {
-    locale.value = "zh";
-    localStorage.setItem("language", "zh");
+function isProductDetailRoute() {
+  return (
+    route.name === "SystemProductDetail" ||
+    route.name === "RobotProductDetail"
+  );
+}
+
+function persistLanguagePreference(language: "zh" | "en"): void {
+  try {
+    localStorage.setItem("language", language);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn("保存语言偏好失败:", error);
+    }
   }
+}
+
+async function switchLanguage() {
+  const targetLocale = locale.value === "zh" ? "en" : "zh";
+
+  if (isProductDetailRoute()) {
+    try {
+      await ensureProductDetailLocale(targetLocale);
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn("切换语言前预热产品详情文案失败:", error);
+      }
+    }
+  }
+
+  locale.value = targetLocale;
+  persistLanguagePreference(targetLocale);
 }
 
 // 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）
@@ -355,7 +382,7 @@ onMounted(() => {
     locale.value = savedLanguage;
   } else {
     locale.value = "zh";
-    localStorage.setItem("language", "zh");
+    persistLanguagePreference("zh");
   }
 
   // 监听滚动
