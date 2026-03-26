@@ -247,8 +247,8 @@
 
 <script setup lang="ts">
 // 仅用于国际化与基础响应式逻辑
-import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.png";
-import wxQrcode from "@/assets/images/qrcodes/wx.jpg";
+import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
+import wxQrcode from "@/assets/images/qrcodes/wx.webp";
 import { ref, onMounted, onUnmounted } from "vue";
 import {
   systemProductNav,

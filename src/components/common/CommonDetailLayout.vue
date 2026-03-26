@@ -132,7 +132,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
-import wxworkQrcode from '@/assets/images/qrcodes/wxwork.png';
+import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
 
 interface MediaInfo {
   type: 'bilibili' | 'video' | 'image' | 'none';
