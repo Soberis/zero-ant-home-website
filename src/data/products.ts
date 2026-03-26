@@ -27,7 +27,7 @@ const scara4axisImg = new URL(
   import.meta.url
 ).href;
 const arm6axisImg = new URL(
-  "@/assets/images/products/six-axis-robot.webp",
+  "@/assets/images/products/six-axis-robot-1000w-q75.webp",
   import.meta.url
 ).href;
 const dualArmHumanoidImg = new URL(

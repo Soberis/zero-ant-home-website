@@ -8,8 +8,10 @@
   >
     <div class="video-media">
       <img
-        v-lazy="card.img"
+        :src="card.img"
         :alt="t(card.title)"
+        loading="lazy"
+        decoding="async"
       />
       <div class="play-icon">
         <svg viewBox="0 0 24 24" width="28" height="28">

@@ -2,7 +2,6 @@ import { createApp, watch } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
 import i18n from "@/config/i18n";
-import { setupDirectives } from "@/directives";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 import "@/assets/style.less";
 
@@ -12,7 +11,6 @@ const app = createApp(App);
 // 注册插件和指令
 app.use(router);
 app.use(i18n);
-setupDirectives(app);
 
 // Element Plus 组件和样式通过按需导入自动处理
 app.mount("#app");
