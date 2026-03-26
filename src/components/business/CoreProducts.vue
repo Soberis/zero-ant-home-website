@@ -1,15 +1,23 @@
 <template>
   <section class="core-products">
-    <div class="section-heading">
-      <span class="home-section-eyebrow">{{ t('home.coreProducts.eyebrow') }}</span>
-      <h2 class="home-section-title">{{ t('home.coreProducts.title') }}</h2>
-      <p class="home-section-description">{{ t('home.coreProducts.description') }}</p>
+    <div class="section-heading-row">
+      <div class="section-heading">
+        <span class="home-section-eyebrow">{{ t('home.coreProducts.eyebrow') }}</span>
+        <h2 class="home-section-title">{{ t('home.coreProducts.title') }}</h2>
+        <p class="home-section-description">{{ t('home.coreProducts.description') }}</p>
+      </div>
     </div>
 
     <div class="product-groups">
       <section v-for="group in productGroups" :key="group.key" class="product-group">
         <div class="group-header">
           <h3 class="group-title">{{ group.title }}</h3>
+          <router-link :to="group.to" class="group-link">
+            <span>{{ t("common.cta.viewProducts") }}</span>
+            <svg class="group-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </router-link>
         </div>
 
         <div class="products-grid">
@@ -25,6 +33,7 @@
 
             <div class="card-content">
               <h4 class="card-title">{{ t(product.name) }}</h4>
+              <p class="card-description">{{ getProductSummary(product) }}</p>
             </div>
           </router-link>
         </div>
@@ -45,16 +54,22 @@ const productGroups = computed(() => [
   {
     key: 'system',
     title: t('nav.systemProducts'),
+    to: '/system-products',
     items: products
       .filter((product) => product.category === 'system'),
   },
   {
     key: 'robot',
     title: t('nav.robotProducts'),
+    to: '/robot-products',
     items: products
       .filter((product) => product.category === 'robot'),
   },
 ]);
+
+function getProductSummary(product: (typeof products)[number]): string {
+  return product.supportText ? t(product.supportText) : t(product.desc);
+}
 </script>
 
 <style scoped lang="less">
@@ -67,9 +82,17 @@ const productGroups = computed(() => [
   padding: var(--section-padding-y) var(--container-padding-x);
 }
 
+.section-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
 .section-heading {
   max-width: 760px;
-  margin-bottom: var(--space-xl);
+  margin-bottom: 0;
 }
 
 /* ── 分组容器 ── */
@@ -85,6 +108,10 @@ const productGroups = computed(() => [
 }
 
 .group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
   margin-bottom: 0;
   padding-left: 4px;
 }
@@ -98,6 +125,33 @@ const productGroups = computed(() => [
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.group-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.group-link .group-link-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+.group-link:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.group-link:hover .group-link-arrow {
+  transform: translateX(4px);
 }
 
 .products-grid {
@@ -165,6 +219,19 @@ const productGroups = computed(() => [
   transition: color 0.3s ease;
 }
 
+.card-description {
+  margin: 10px auto 0;
+  max-width: 20em;
+  color: var(--color-text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .product-card-item:hover .card-title {
   color: var(--color-primary);
 }
@@ -181,6 +248,11 @@ const productGroups = computed(() => [
     padding: var(--space-xl) var(--space-md);
   }
   
+  .section-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .product-groups {
     gap: 60px;
   }
@@ -201,8 +273,17 @@ const productGroups = computed(() => [
     margin-bottom: 24px;
   }
 
+  .group-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .group-title {
     font-size: 1.25rem;
+  }
+
+  .group-link {
+    font-size: 0.88rem;
   }
 }
 </style>
