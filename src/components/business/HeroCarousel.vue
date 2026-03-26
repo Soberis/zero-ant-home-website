@@ -63,8 +63,8 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import scara4axisImg from '@/assets/images/products/four-axis-robot.png';
-import dualArmImg from '@/assets/images/products/dual-arm-humanoid.png';
+import scara4axisImg from '@/assets/images/products/four-axis-robot.webp';
+import dualArmImg from '@/assets/images/products/dual-arm-humanoid.webp';
 
 interface SlideItem {
   img: string;

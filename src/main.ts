@@ -3,7 +3,6 @@ import App from "@/App.vue";
 import router from "@/router";
 import i18n from "@/config/i18n";
 import { setupDirectives } from "@/directives";
-import { initSecurity } from "@/utils/security";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 import "@/assets/style.less";
 
@@ -24,8 +23,14 @@ if (typeof window !== "undefined") {
     window.history.scrollRestoration = "manual";
   }
 
-  // 初始化安全监控
-  initSecurity();
+  // 延后初始化安全监控，避免阻塞首屏脚本解析
+  window.setTimeout(() => {
+    void import("@/utils/security")
+      .then(({ initSecurity }) => {
+        initSecurity();
+      })
+      .catch(() => {});
+  }, 0);
 
   // 注册 Service Worker (PWA)
   if ("serviceWorker" in navigator) {
@@ -81,3 +86,5 @@ if (typeof window !== "undefined") {
     );
   });
 }
+
+

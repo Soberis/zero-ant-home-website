@@ -3,39 +3,39 @@ import type { ProductData } from "@/types";
 
 // 1. 先定义所有图片 variables
 const multiOsVmImg = new URL(
-  "@/assets/images/products/embedded-vm.png",
+  "@/assets/images/products/embedded-vm.webp",
   import.meta.url
 ).href;
 const industrialRtosImg = new URL(
-  "@/assets/images/products/industrial-rtos.jpg",
+  "@/assets/images/products/industrial-rtos.webp",
   import.meta.url
 ).href;
 const airosImg = new URL(
-  "@/assets/images/products/airos-os.png",
+  "@/assets/images/products/airos-os.webp",
   import.meta.url
 ).href;
 const robotSchedulerImg = new URL(
-  "@/assets/images/products/robot-scheduling-system.png",
+  "@/assets/images/products/robot-scheduling-system.webp",
   import.meta.url
 ).href;
 const gantry2dImg = new URL(
-  "@/assets/images/products/gantry-2d3d.png",
+  "@/assets/images/products/gantry-2d3d.webp",
   import.meta.url
 ).href;
 const scara4axisImg = new URL(
-  "@/assets/images/products/four-axis-robot.png",
+  "@/assets/images/products/four-axis-robot.webp",
   import.meta.url
 ).href;
 const arm6axisImg = new URL(
-  "@/assets/images/products/six-axis-robot.png",
+  "@/assets/images/products/six-axis-robot.webp",
   import.meta.url
 ).href;
 const dualArmHumanoidImg = new URL(
-  "@/assets/images/products/dual-arm-humanoid.png",
+  "@/assets/images/products/dual-arm-humanoid.webp",
   import.meta.url
 ).href;
 const mobileRobotImg = new URL(
-  "@/assets/images/products/mobile-robot.png",
+  "@/assets/images/products/mobile-robot.webp",
   import.meta.url
 ).href;
 

@@ -109,7 +109,7 @@ const seoMetadata = computed(() => {
     ogImage:
       getMediaType(videoInfo.value) === "image"
         ? videoInfo.value.url
-        : `${window.location.origin}/logo.png`,
+        : `${window.location.origin}/logo.webp`,
     twitterCard: "player",
     twitterTitle: videoTitle,
     twitterDescription: videoDesc,
@@ -129,7 +129,7 @@ const videoStructuredData = computed(() => {
       "@type": "VideoObject",
       name: videoTitle,
       description: videoDesc,
-      thumbnailUrl: `${window.location.origin}/logo.png`,
+      thumbnailUrl: `${window.location.origin}/logo.webp`,
       contentUrl: videoInfo.value.url,
       embedUrl: mediaType === "bilibili" ? videoInfo.value.url : undefined,
       publisher: {

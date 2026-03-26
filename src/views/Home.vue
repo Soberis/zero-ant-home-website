@@ -24,13 +24,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { defineAsyncComponent, ref } from 'vue';
 import HeroCarousel from '@/components/business/HeroCarousel.vue';
-import CoreProducts from '@/components/business/CoreProducts.vue';
-import IndustryApplications from '@/components/business/IndustryApplications.vue';
-import VideoCases from '@/components/business/VideoCases.vue';
-import Partners from '@/components/business/Partners.vue';
 import { useScrollRevealList } from '@/composables/useScrollReveal';
+
+// 首页下半屏内容异步加载，先把首屏路径跑轻
+const CoreProducts = defineAsyncComponent(() => import('@/components/business/CoreProducts.vue'));
+const IndustryApplications = defineAsyncComponent(() => import('@/components/business/IndustryApplications.vue'));
+const VideoCases = defineAsyncComponent(() => import('@/components/business/VideoCases.vue'));
+const Partners = defineAsyncComponent(() => import('@/components/business/Partners.vue'));
 
 const productsRef = ref<HTMLElement | null>(null);
 const appsRef = ref<HTMLElement | null>(null);
@@ -118,3 +120,5 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
   }
 }
 </style>
+
+

@@ -52,7 +52,7 @@
             v-for="industry in industries"
             :key="industry.key"
             class="industry-block"
-            @click="industry.primaryApplication && goToApplication(industry.primaryApplication.slug)"
+            @click="openApplication(industry.primaryApplication)"
           >
             <div class="industry-block__header">
               <span class="card-index">{{ formatIndex(industry.index) }}</span>
@@ -247,7 +247,35 @@ import {
   solutionCapabilityLayers,
   solutionIndustryGroups,
 } from "@/data/solutionIndustries";
-import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { useScrollRevealList } from "@/composables/useScrollReveal";
+
+interface SolutionProductRef {
+  slug: string;
+  title: string;
+  route: string;
+}
+
+interface SolutionApplicationRef {
+  slug: string;
+  title: string;
+  description: string;
+}
+
+interface SolutionCapabilityCard {
+  key: string;
+  title: string;
+  description: string;
+  products: SolutionProductRef[];
+}
+
+interface SolutionIndustryCard {
+  key: string;
+  index: number;
+  title: string;
+  summary: string;
+  scenarios: string[];
+  primaryApplication: SolutionApplicationRef | null;
+}
 
 const industriesRef = ref<HTMLElement | null>(null);
 const backboneRef = ref<HTMLElement | null>(null);
@@ -276,6 +304,10 @@ const showAllVideos = ref(false);
 const showAllApps = ref(false);
 const VIDEO_FOLD = 6;
 const APP_FOLD = 8;
+
+function isDefined<T>(value: T | null | undefined): value is T {
+  return value != null;
+}
 
 function stripHtml(value: string): string {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
@@ -307,76 +339,70 @@ const heroStats = computed(() => [
   },
 ]);
 
-const productMap = computed(() =>
-  Object.fromEntries(
-    getProducts().map((product) => {
-      const baseRoute =
-        product.category === "system" ? "/system-products" : "/robot-products";
-      return [
-        product.slug,
-        {
-          slug: product.slug,
-          title: t(product.name),
-          route: `${baseRoute}/${product.slug}`,
-        },
-      ];
-    })
-  )
+const productMap = computed<Record<string, SolutionProductRef>>(() =>
+  getProducts().reduce<Record<string, SolutionProductRef>>((map, product) => {
+    const baseRoute =
+      product.category === "system" ? "/system-products" : "/robot-products";
+
+    map[product.slug] = {
+      slug: product.slug,
+      title: t(product.name),
+      route: `${baseRoute}/${product.slug}`,
+    };
+
+    return map;
+  }, {})
 );
 
-const applicationMap = computed(() =>
-  Object.fromEntries(
-    applications.map((app) => {
-      return [
-        app.slug,
-        {
-          slug: app.slug,
-          title: t(app.title),
-          description: truncate(stripHtml(t(app.description)), 88),
-        },
-      ];
-    })
-  )
+const applicationMap = computed<Record<string, SolutionApplicationRef>>(() =>
+  applications.reduce<Record<string, SolutionApplicationRef>>((map, app) => {
+    map[app.slug] = {
+      slug: app.slug,
+      title: t(app.title),
+      description: truncate(stripHtml(t(app.description)), 88),
+    };
+
+    return map;
+  }, {})
 );
 
-
-const capabilityLayers = computed(() =>
+const capabilityLayers = computed<SolutionCapabilityCard[]>(() =>
   solutionCapabilityLayers.map((layer) => ({
     key: layer.key,
     title: t(`solutionsPage.backbone.${layer.key}.title`),
     description: t(`solutionsPage.backbone.${layer.key}.description`),
     products: layer.productSlugs
       .map((slug) => productMap.value[slug])
-      .filter(Boolean),
+      .filter(isDefined),
   }))
 );
 
-const industries = computed(() =>
+const industries = computed<SolutionIndustryCard[]>(() =>
   solutionIndustryGroups.map((group, index) => {
-    const products = group.productSlugs
-      .map((slug) => productMap.value[slug])
-      .filter(Boolean);
     const applicationsForGroup = group.applicationSlugs
       .map((slug) => applicationMap.value[slug])
-      .filter(Boolean);
+      .filter(isDefined);
+
+    const rawScenarios = tm(`solutionsPage.industries.${group.key}.scenarios`);
+    const scenarios = Array.isArray(rawScenarios)
+      ? rawScenarios
+          .map((item) => {
+            const text = String(item);
+            return text.startsWith("@:") ? t(text.slice(2)) : text;
+          })
+          .slice(0, 2)
+      : [];
 
     return {
       key: group.key,
       index: index + 1,
       title: t(`solutionsPage.industries.${group.key}.title`),
       summary: t(`solutionsPage.industries.${group.key}.summary`),
-      scenarios: (tm(
-        `solutionsPage.industries.${group.key}.scenarios`
-      ) as string[]).map((str) => (str.startsWith("@:") ? t(str.slice(2)) : str)).slice(
-        0,
-        2
-      ),
-      productSummary: products.map((item) => item.title).join(" / "),
-      primaryApplication: applicationsForGroup[0],
+      scenarios,
+      primaryApplication: applicationsForGroup[0] ?? null,
     };
   })
 );
-
 
 const allVideoCards = computed(() => videoCards);
 const allApplications = computed(() => applications);
@@ -412,10 +438,17 @@ function goToApplication(slug: string): void {
   router.push({ path: `/applications/${slug}` });
 }
 
+function openApplication(application: SolutionApplicationRef | null): void {
+  if (!application) {
+    return;
+  }
+
+  goToApplication(application.slug);
+}
+
 function goToVideo(slug: string): void {
   router.push({ path: `/video/${slug}` });
 }
-
 
 function setMoreVideoHover(idx: number): void {
   hoverMoreVideoIdx.value = idx;
@@ -425,13 +458,9 @@ function clearMoreVideoHover(): void {
   hoverMoreVideoIdx.value = -1;
 }
 
-
-
 function goToProduct(route: string): void {
   router.push({ path: route });
 }
-
-
 </script>
 
 <style scoped lang="less">
@@ -1370,4 +1399,5 @@ function goToProduct(route: string): void {
   border-radius: 16px !important;
 }
 </style>
+
 

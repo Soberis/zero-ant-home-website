@@ -18,11 +18,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/layout/NavBar.vue";
-import Footer from "@/components/layout/Footer.vue";
-import BackToTop from "@/components/common/BackToTop.vue";
+// 非关键壳子组件异步加载，减少首屏同步体积
+const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue"));
+const BackToTop = defineAsyncComponent(() => import("@/components/common/BackToTop.vue"));
 
 const router = useRouter();
 
@@ -163,3 +164,5 @@ body {
   transform: translateY(-10px);
 }
 </style>
+
+

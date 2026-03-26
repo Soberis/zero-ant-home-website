@@ -260,7 +260,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import logoUrl from "@/assets/zeroant_logo.png";
+import logoUrl from "@/assets/zeroant_logo.webp";
 import {
   systemProductNav,
   robotProductNav,

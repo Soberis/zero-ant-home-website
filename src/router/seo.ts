@@ -76,12 +76,12 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       ogTitle: seoConfig.title,
       ogDescription: seoConfig.description,
       ogUrl: currentUrl,
-      ogImage: `${baseUrl}/logo.png`,
+      ogImage: `${baseUrl}/logo.webp`,
       ogImageWidth: 1200,
       ogImageHeight: 630,
       twitterTitle: seoConfig.title,
       twitterDescription: seoConfig.description,
-      twitterImage: `${baseUrl}/logo.png`,
+      twitterImage: `${baseUrl}/logo.webp`,
       canonical: currentUrl,
       siteName: safeTranslate("seo.siteName"),
       localeAlternate: [
@@ -108,7 +108,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}/logo.png`,
+          url: `${baseUrl}/logo.webp`,
         },
       },
     };
@@ -124,7 +124,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}/logo.png`,
+          url: `${baseUrl}/logo.webp`,
           width: 200,
           height: 200,
         },
@@ -162,7 +162,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         name: companyName,
-        image: `${baseUrl}/logo.png`,
+        image: `${baseUrl}/logo.webp`,
         "@id": baseUrl,
         url: baseUrl,
         telephone: contactTel,
@@ -193,12 +193,12 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.solutions.title"),
     ogDescription: safeTranslate("seo.solutions.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
     ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.solutions.title"),
     twitterDescription: safeTranslate("seo.solutions.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
     localeAlternate: [
@@ -225,7 +225,7 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
     mainEntity: {
@@ -284,12 +284,12 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.about.title"),
     ogDescription: safeTranslate("seo.about.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
     ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.about.title"),
     twitterDescription: safeTranslate("seo.about.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
     localeAlternate: [
@@ -316,7 +316,7 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
   };
@@ -340,12 +340,12 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.careers.title"),
     ogDescription: safeTranslate("seo.careers.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
     ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.careers.title"),
     twitterDescription: safeTranslate("seo.careers.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
     localeAlternate: [
@@ -372,7 +372,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
     mainEntity: {
@@ -399,7 +399,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
             "@type": "Organization",
             name: safeTranslate("seo.siteName"),
             sameAs: baseUrl,
-            logo: `${baseUrl}/logo.png`,
+            logo: `${baseUrl}/logo.webp`,
           },
           qualifications:
             "Bachelor's degree in Robotics, Mechanical Engineering, or related field. 3+ years experience in industrial robotics.",
@@ -427,7 +427,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
             "@type": "Organization",
             name: safeTranslate("seo.siteName"),
             sameAs: baseUrl,
-            logo: `${baseUrl}/logo.png`,
+            logo: `${baseUrl}/logo.webp`,
           },
           qualifications:
             "Master's degree in Computer Science, AI, or related field. Strong background in machine learning and robotics.",
@@ -455,7 +455,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
             "@type": "Organization",
             name: safeTranslate("seo.siteName"),
             sameAs: baseUrl,
-            logo: `${baseUrl}/logo.png`,
+            logo: `${baseUrl}/logo.webp`,
           },
           qualifications:
             "Bachelor's degree in Software Engineering or Computer Science. Proficiency in C++, Python, and embedded systems.",
@@ -491,12 +491,12 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.support.title"),
     ogDescription: safeTranslate("seo.support.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
     ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.support.title"),
     twitterDescription: safeTranslate("seo.support.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
     localeAlternate: [
@@ -523,7 +523,7 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
     mainEntity: [

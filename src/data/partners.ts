@@ -1,25 +1,25 @@
 // 合作伙伴数据模块，统一图片引入方式
-import shinaide from '@/assets/images/partners/shinaide.png';
-import huawei from '@/assets/images/partners/huawei.png';
+import shinaide from '@/assets/images/partners/shinaide.webp';
+import huawei from '@/assets/images/partners/huawei.webp';
 import meituan from '@/assets/images/partners/meituan.svg';
 import perkinelmer from '@/assets/images/partners/perkinelmer.svg';
-import nabote from '@/assets/images/partners/nabote.png';
-import qisheng from '@/assets/images/partners/qisheng.png';
-import xinsong from '@/assets/images/partners/xinsong.png';
+import nabote from '@/assets/images/partners/nabote.webp';
+import qisheng from '@/assets/images/partners/qisheng.webp';
+import xinsong from '@/assets/images/partners/xinsong.webp';
 import pudu from '@/assets/images/partners/pudu.svg';
-import qingzhi from '@/assets/images/partners/qingzhi.jpg';
-import dizhi from '@/assets/images/partners/dizhi.png';
-import dongnan from '@/assets/images/partners/dongnan.jpg';
-import fudan from '@/assets/images/partners/fudan.png';
-import zhongshan from '@/assets/images/partners/zhongshan.jpg';
-import hunan from '@/assets/images/partners/hunan.png';
+import qingzhi from '@/assets/images/partners/qingzhi.webp';
+import dizhi from '@/assets/images/partners/dizhi.webp';
+import dongnan from '@/assets/images/partners/dongnan.webp';
+import fudan from '@/assets/images/partners/fudan.webp';
+import zhongshan from '@/assets/images/partners/zhongshan.webp';
+import hunan from '@/assets/images/partners/hunan.webp';
 import qinghua from '@/assets/images/partners/qinghua.svg';
-import buaa from '@/assets/images/partners/buaa.png';
-import buaahyy from '@/assets/images/partners/buaahyy.jpg';
+import buaa from '@/assets/images/partners/buaa.webp';
+import buaahyy from '@/assets/images/partners/buaahyy.webp';
 import openEuler from '@/assets/images/partners/openEuler.svg';
-import hongxu from '@/assets/images/partners/hongxu.png';
+import hongxu from '@/assets/images/partners/hongxu.webp';
 import yihui from '@/assets/images/partners/yihui.svg';
-import huazhi from '@/assets/images/partners/changshahuazhi.png';
+import huazhi from '@/assets/images/partners/changshahuazhi.webp';
 
 /**
  * 合作伙伴接口

@@ -5,7 +5,7 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/favicon.ico',
   '/site.webmanifest',
-  '/logo.png'
+  '/logo.webp'
 ];
 
 // Install Event
