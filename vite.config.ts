@@ -70,7 +70,8 @@ export default defineConfig({
       output: {
         // 优化代码分割策略
         manualChunks: (id) => {
-          // 第三方库分组
+          // 仅对第三方依赖做稳定分组，避免把项目内部代码强行塞进公共 chunk，
+          // 反而拖大首页首屏与路由首包。
           if (id.includes("node_modules")) {
             // Vue 核心生态
             if (
@@ -90,17 +91,6 @@ export default defineConfig({
             }
             // 其他第三方库
             return "vendor";
-          }
-
-          // 项目内部模块分组
-          if (id.includes("/data/")) {
-            return "data";
-          }
-          if (id.includes("/components/")) {
-            return "components";
-          }
-          if (id.includes("/utils/")) {
-            return "utils";
           }
         },
         // 优化文件命名
