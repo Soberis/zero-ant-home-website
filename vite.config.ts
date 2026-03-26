@@ -46,7 +46,6 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         charset: "utf-8",
-        additionalData: `@import "@/assets/style.less";`,
       },
     },
   },

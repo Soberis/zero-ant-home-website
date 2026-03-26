@@ -1,5 +1,3 @@
-import i18n from "@/config/i18n"; // 导入i18n实例
-
 /**
  * SEO 元数据接口
  */
@@ -40,9 +38,8 @@ export function setSEO(meta: SEOMetaData) {
   }
 
   try {
-    // 在函数内部获取siteName，确保i18n已初始化
-    const siteName =
-      meta.siteName || i18n.global.t("seo.siteName") || "ZeroAnt Technology";
+    // 站点名不依赖 i18n，避免把整套文案资源拖进 SEO 工具包
+    const siteName = meta.siteName || "ZeroAnt Technology";
 
     // 设置页面标题
     if (meta.title) {
