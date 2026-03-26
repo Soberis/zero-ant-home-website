@@ -3,7 +3,7 @@
     <nav class="nav-container">
       <div class="logo">
         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
-        <router-link to="/" class="logo-text">
+        <router-link to="/" class="logo-text" @click="handleTopNavClick('/', $event)">
           {{ $t("logoText") }}
         </router-link>
       </div>
@@ -21,6 +21,7 @@
               class="nav-link"
               active-class="active"
               aria-current-value="page"
+              @click="handleTopNavClick(item.to, $event)"
             >
               <span class="nav-text">{{ $t(item.label) }}</span>
             </router-link>
@@ -80,7 +81,11 @@
       <div class="mobile-nav-content">
         <ul class="mobile-nav-links">
           <li v-for="item in topNavItems" :key="item.to" class="mobile-nav-item">
-            <router-link :to="item.to" class="mobile-nav-link" @click="closeMobileMenu">
+            <router-link
+              :to="item.to"
+              class="mobile-nav-link"
+              @click="handleTopNavClick(item.to, $event, true)"
+            >
               {{ $t(item.label) }}
             </router-link>
           </li>
@@ -91,9 +96,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { nextTick, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
@@ -123,6 +128,7 @@ const handleDesktopBreakpointChange = (event: MediaQueryListEvent) => {
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
 const route = useRoute();
+const router = useRouter();
 
 // 防抖锁
 let toggleLock = false;
@@ -146,6 +152,53 @@ function toggleMobileMenu() {
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
   document.body.style.overflow = "";
+}
+
+function scrollToTop(): void {
+  const scrollConfig: ScrollToOptions = {
+    top: 0,
+    left: 0,
+    behavior: "auto",
+  };
+
+  const scrollingElement = document.scrollingElement || document.documentElement;
+
+  window.scrollTo(scrollConfig);
+  scrollingElement.scrollTo?.(scrollConfig);
+  document.body.scrollTo?.(scrollConfig);
+  scrollingElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
+function scheduleScrollToTop(): void {
+  scrollToTop();
+  window.requestAnimationFrame(() => {
+    scrollToTop();
+  });
+}
+
+async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = false): Promise<void> {
+  if (closeMenu) {
+    closeMobileMenu();
+  }
+
+  if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
+    return;
+  }
+
+  event.preventDefault();
+
+  if (route.fullPath === to) {
+    scheduleScrollToTop();
+    return;
+  }
+
+  try {
+    await router.push(to);
+    await nextTick();
+  } finally {
+    scheduleScrollToTop();
+  }
 }
 
 // 点击背景关闭菜单
@@ -240,22 +293,22 @@ onUnmounted(() => {
   --nav-accent-surface: rgba(26, 58, 143, 0.05);
   --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
     saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.88);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(26, 58, 143, 0.05);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(26, 58, 143, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
   &.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.96);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(25px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2); // 玻璃边缘亮点
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.25); // 玻璃边缘亮点
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
     
     .nav-container {
@@ -451,7 +504,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   transform: translateY(-8px) scaleY(0.98);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   width: 100%;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   border-radius: 0 0 24px 24px; // 大圆角
@@ -460,7 +513,7 @@ onUnmounted(() => {
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 999;
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(14px);
   height: var(--nav-height);
   transform-origin: top;
 }
@@ -750,8 +803,8 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(15, 23, 42, 0.2);
-  backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.32);
+  backdrop-filter: blur(6px);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -770,9 +823,9 @@ onUnmounted(() => {
   right: 0;
   width: 300px;
   height: 100svh;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: -12px 0 40px rgba(15, 23, 42, 0.08);
   transform: translateX(100%);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   padding-top: 80px;
@@ -780,7 +833,7 @@ onUnmounted(() => {
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  border-left: 1px solid rgba(26, 58, 143, 0.05);
+  border-left: 1px solid rgba(26, 58, 143, 0.06);
 }
 
 .mobile-nav.open .mobile-nav-content {

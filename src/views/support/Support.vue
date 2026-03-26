@@ -9,10 +9,10 @@
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
 
           <div class="hero-actions">
-            <a href="#download" class="btn btn-primary btn-large hero-action">
+            <a href="#download" class="btn btn-primary">
               {{ t("supportPage.heroActions.downloads") }}
             </a>
-            <a href="#contact" class="btn btn-secondary btn-large hero-action">
+            <a href="#contact" class="btn btn-secondary">
               {{ t("supportPage.heroActions.contact") }}
             </a>
           </div>
@@ -344,22 +344,6 @@ function formatIndex(value: number): string {
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 28px;
-}
-
-.hero-action {
-  min-width: 168px;
-}
-
-.btn-large {
-  padding: 14px 36px;
-  font-size: 1.05rem;
-  border-radius: 999px;
-  letter-spacing: 0.05em;
-  box-shadow: 0 12px 24px rgba(26, 58, 143, 0.16);
-}
-.btn-large:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(26, 58, 143, 0.24);
 }
 
 .hero-panel {
@@ -715,9 +699,8 @@ function formatIndex(value: number): string {
     align-items: stretch;
   }
 
-  .hero-action {
+  .hero-actions .btn {
     width: 100%;
-    justify-content: center;
   }
 
   .promise-card {
