@@ -36,11 +36,20 @@ if (typeof window !== "undefined") {
       navigator.serviceWorker.register("/sw.js").catch(() => {});
     });
   }
-  
+
   // 初始化默认SEO和路由守卫
   router.isReady().then(async () => {
     // 动态导入SEO函数，避免循环依赖
-    const { setupPageSEO, setupSupportSEO, setupAboutSEO, setupCareersSEO, setupSolutionsSEO } = await import("@/router/seo");
+    const { 
+      setupPageSEO, 
+      setupSupportSEO, 
+      setupAboutSEO, 
+      setupCareersSEO, 
+      setupSolutionsSEO,
+      setupProductDetailSEO,
+      setupApplicationDetailSEO
+    } = await import("@/router/seo");
+    
     const applyRouteSEO = (to: RouteLocationNormalizedLoaded) => {
       setTimeout(() => {
         if (typeof document !== "undefined") {
@@ -59,6 +68,13 @@ if (typeof window !== "undefined") {
             break;
           case "Solutions":
             setupSolutionsSEO(to);
+            break;
+          case "SystemProductDetail":
+          case "RobotProductDetail":
+            setupProductDetailSEO(to);
+            break;
+          case "ApplicationDetail":
+            setupApplicationDetailSEO(to);
             break;
           default:
             setupPageSEO(to);
@@ -84,5 +100,3 @@ if (typeof window !== "undefined") {
     );
   });
 }
-
-

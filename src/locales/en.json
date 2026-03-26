@@ -106,7 +106,7 @@
     "hero": {
       "eyebrow": "ZeroAnt Robotics Platform",
       "title": "In-house robotics platform",
-      "description": "Start with product capabilities, application scenarios, and support materials before deciding the next step.",
+      "description": "Start with the product matrix, industry scenarios, and support materials before taking the next step.",
       "panelLabel": "Featured Product",
       "tabs": {
         "multiOsVm": "Multi-OS VM",

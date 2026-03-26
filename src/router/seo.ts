@@ -43,6 +43,8 @@ function getRouteSEOMap(): Record<string, any> {
     Support: translatedSeoConfigs.support,
     Careers: translatedSeoConfigs.careers,
     About: translatedSeoConfigs.about,
+    SystemProductDetail: translatedSeoConfigs.products,
+    RobotProductDetail: translatedSeoConfigs.products,
   };
 }
 
@@ -454,11 +456,79 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
 }
 
 /**
- * 设置产品详情页 SEO
- * @param productName 产品名称
- * @param productDescription 产品描述
- * @param to 目标路由
+ * 设置产品详情页 SEO 和结构化数据
  */
+export async function setupProductDetailSEO(to: RouteLocationNormalized) {
+  const { getProducts } = await import("@/data/products");
+  const slug = to.params.slug as string;
+  const product = getProducts().find((p) => p.slug === slug);
+
+  if (!product) return;
+
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const currentUrl = `${baseUrl}${to.path}`;
+  const productName = safeTranslate(product.name);
+  const productDesc = safeTranslate(product.desc);
+  const siteName = safeTranslate("seo.siteName");
+
+  setSEO({
+    title: productName,
+    description: productDesc,
+    keywords: `${productName}, ${safeTranslate("seo.home.keywords")}`,
+    ogTitle: productName,
+    ogDescription: productDesc,
+    ogUrl: currentUrl,
+    ogImage: product.image.startsWith("http")
+      ? product.image
+      : `${baseUrl}${product.image}`,
+    twitterTitle: productName,
+    twitterDescription: productDesc,
+    canonical: currentUrl,
+    siteName: siteName,
+  });
+
+  // 产品结构化数据 - Schema.org/Product
+  setStructuredData({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: productName,
+    description: productDesc,
+    image: product.image.startsWith("http")
+      ? product.image
+      : `${baseUrl}${product.image}`,
+    brand: {
+      "@type": "Brand",
+      name: siteName,
+    },
+    offers: {
+      "@type": "Offer",
+      url: currentUrl,
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: siteName,
+      },
+    },
+  });
+}
+
+/**
+ * 设置应用详情页 SEO 和结构化数据
+ */
+export async function setupApplicationDetailSEO(to: RouteLocationNormalized) {
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const currentUrl = `${baseUrl}${to.path}`;
+  const siteName = safeTranslate("seo.siteName");
+
+  setSEO({
+    title: `${safeTranslate("common.section.applications")} - ${siteName}`,
+    description: safeTranslate("seo.solutions.description"),
+    ogUrl: currentUrl,
+    canonical: currentUrl,
+    siteName: siteName,
+  });
+}
+
 /**
  * 设置支持页面 SEO 和结构化数据
  * @param to 目标路由
@@ -544,4 +614,3 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
 
   setStructuredData(structuredData);
 }
-

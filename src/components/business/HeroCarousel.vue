@@ -17,16 +17,18 @@
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
           <p class="text-label-large hero-eyebrow" style="transition-delay: 0.1s">{{ t('home.hero.eyebrow') }}</p>
           <h1 class="text-display-hero hero-title" style="transition-delay: 0.2s">{{ t('home.hero.title') }}</h1>
-          <div class="hero-product-name" :key="activeSlide.shortTitle" style="transition-delay: 0.25s">—— {{ activeSlide.title }}</div>
+          <div class="hero-product-name" :key="activeSlide.shortTitle" style="transition-delay: 0.25s">
+            {{ t('home.hero.panelLabel') }} · {{ activeSlide.shortTitle }}
+          </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.4s">
             <div class="hero-buttons">
               <router-link
-                to="/solutions"
+                to="/system-products"
                 class="hero-link"
                 @click.stop
               >
-                {{ t('common.cta.viewSolutions') }}
+                {{ t('common.cta.viewProducts') }}
                 <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </router-link>
 
@@ -270,10 +272,11 @@ onUnmounted(() => {
 .hero-product-name {
   margin: 16px 0 0;
   font-family: "Outfit", sans-serif;
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: #515154;
-  letter-spacing: 0.01em;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .hero-description {
