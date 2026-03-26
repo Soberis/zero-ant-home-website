@@ -132,6 +132,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import fallbackFacadeImg from '@/assets/images/videos/mobile-transfer-robot.webp';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
 
 interface MediaInfo {
@@ -158,8 +159,7 @@ const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
 
 const thumbnailUrl = computed(() => {
-  // If we have a custom thumbnail, use it; otherwise, use a default fallback
-  return "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"; // A generic robotic background
+  return fallbackFacadeImg;
 });
 
 const bottomBarClass = computed(() => {

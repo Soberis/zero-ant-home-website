@@ -15,10 +15,10 @@
               {{ t("productDetail.backToList") }}
             </button>
             <router-link
-              to="/solutions"
+              :to="{ path: '/about', hash: '#contact' }"
               class="btn btn-secondary"
             >
-              {{ t("common.cta.viewSolutions") }}
+              {{ t("common.cta.contactTeam") }}
             </router-link>
           </div>
         </div>

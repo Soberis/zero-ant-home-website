@@ -409,6 +409,10 @@
   "supportPage": {
     "title": "@:common.terms.afterSalesService",
     "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
+    "heroActions": {
+      "downloads": "View Downloads",
+      "contact": "Contact Support"
+    },
     "fastResponse": "Rapid problem resolution within 12 hours",
     "dedicatedService": "7×24 hours dedicated service group response",
     "relatedDownloads": "@:common.section.relatedDownloads",

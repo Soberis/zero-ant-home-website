@@ -7,6 +7,15 @@
           <p class="hero-eyebrow">SUPPORT CENTER</p>
           <h1 id="after-sales" class="hero-title text-display-hero">{{ t("supportPage.title") }}</h1>
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
+
+          <div class="hero-actions">
+            <a href="#download" class="btn btn-primary btn-large hero-action">
+              {{ t("supportPage.heroActions.downloads") }}
+            </a>
+            <a href="#contact" class="btn btn-secondary btn-large hero-action">
+              {{ t("supportPage.heroActions.contact") }}
+            </a>
+          </div>
         </div>
 
         <div class="hero-panel">
@@ -328,6 +337,17 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: 1.05rem;
   line-height: 1.85;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.hero-action {
+  min-width: 168px;
 }
 
 .btn-large {
