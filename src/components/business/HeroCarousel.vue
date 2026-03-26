@@ -10,7 +10,14 @@
       @keydown.space.prevent="handleStageClick"
     >
       <div class="hero-media" :class="{ 'hero-entered': entered }">
-        <img :src="activeSlide.img" :alt="activeSlide.title" class="hero-image" fetchpriority="high" decoding="async" />
+        <img
+          :src="activeSlide.img"
+          :alt="activeSlide.title"
+          class="hero-image"
+          :style="activeSlideImageStyle"
+          fetchpriority="high"
+          decoding="async"
+        />
       </div>
 
       <div class="hero-overlay">
@@ -64,6 +71,11 @@ interface SlideItem {
   title: string;
   shortTitle: string;
   routePath: string;
+  imageScale?: number;
+  imageShiftX?: string;
+  imageShiftY?: string;
+  imageShiftXMobile?: string;
+  imageShiftYMobile?: string;
 }
 
 const { t } = useI18n();
@@ -75,24 +87,37 @@ const slides = computed<SlideItem[]>(() => [
     title: t('products.scara4axis.name'),
     shortTitle: t('home.hero.tabs.scara'),
     routePath: '/robot-products/scara-4axis',
+    imageScale: 1.02,
+    imageShiftX: '8px',
+    imageShiftY: '6px',
   },
   {
     img: dualArmImg,
     title: t('products.dualArmHumanoid.name'),
     shortTitle: t('home.hero.tabs.humanoid'),
     routePath: '/robot-products/dual-arm-humanoid',
+    imageScale: 0.94,
+    imageShiftX: '18px',
+    imageShiftY: '4px',
+    imageShiftXMobile: '10px',
   },
   {
     img: arm6axisImg,
     title: t('products.arm6axis.name'),
     shortTitle: t('products.arm6axis.name'),
     routePath: '/robot-products/arm-6axis',
+    imageScale: 1.04,
+    imageShiftX: '16px',
   },
   {
     img: mobileRobotImg,
     title: t('products.mobileRobot.name'),
     shortTitle: t('products.mobileRobot.name'),
     routePath: '/robot-products/mobile-robot',
+    imageScale: 1.18,
+    imageShiftX: '10px',
+    imageShiftY: '-10px',
+    imageShiftYMobile: '-16px',
   },
 ]);
 
@@ -100,6 +125,13 @@ const current = ref(0);
 const isPaused = ref(false);
 const entered = ref(false);
 const activeSlide = computed(() => slides.value[current.value] ?? slides.value[0]);
+const activeSlideImageStyle = computed(() => ({
+  '--hero-image-scale': String(activeSlide.value.imageScale ?? 1),
+  '--hero-image-shift-x': activeSlide.value.imageShiftX ?? '0px',
+  '--hero-image-shift-y': activeSlide.value.imageShiftY ?? '0px',
+  '--hero-image-shift-x-mobile': activeSlide.value.imageShiftXMobile ?? activeSlide.value.imageShiftX ?? '0px',
+  '--hero-image-shift-y-mobile': activeSlide.value.imageShiftYMobile ?? activeSlide.value.imageShiftY ?? '0px',
+}));
 let autoPlayTimer: ReturnType<typeof setTimeout> | null = null;
 
 const scheduleNext = (): void => {
@@ -219,7 +251,9 @@ onUnmounted(() => {
   height: 88%;
   object-fit: contain;
   object-position: center right;
-  transform: none;
+  transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
+    scale(var(--hero-image-scale, 1));
+  transform-origin: center center;
   filter: drop-shadow(0 20px 36px rgba(15, 23, 42, 0.08));
 }
 
@@ -399,7 +433,8 @@ onUnmounted(() => {
   .hero-image {
     width: 54%;
     object-position: center right;
-    transform: none;
+    transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
+      scale(var(--hero-image-scale, 1));
   }
 }
 
@@ -440,7 +475,8 @@ onUnmounted(() => {
   .hero-image {
     width: 100%;
     object-position: center bottom;
-    transform: none;
+    transform: translate(var(--hero-image-shift-x-mobile, 0), var(--hero-image-shift-y-mobile, 0))
+      scale(var(--hero-image-scale, 1));
   }
 }
 
