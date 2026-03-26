@@ -27,11 +27,11 @@
     "perf": "yarn build:analyze && yarn preview"
   },
   "dependencies": {
-    "@intlify/core-base": "^11.1.10",
+    "@intlify/core-base": "^11.3.0",
     "element-plus": "^2.10.4",
     "esbuild": "^0.25.8",
     "vue": "^3.4.21",
-    "vue-i18n": "^11.1.10",
+    "vue-i18n": "^11.3.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
