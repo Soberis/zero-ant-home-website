@@ -371,6 +371,7 @@
       "guide": "Start with 3 representative video cases to prove cross-industry delivery. Full videos and the application index can be expanded on demand.",
       "expandVideos": "View all video cases ({count})",
       "collapseVideos": "Collapse video cases",
+      "browseApplications": "View application index",
       "expandApplications": "View application index ({count})",
       "collapseApplications": "Collapse application index",
       "allVideos": "All video cases",

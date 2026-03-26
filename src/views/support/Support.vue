@@ -12,9 +12,6 @@
             <a href="#download" class="btn btn-primary">
               {{ t("supportPage.heroActions.downloads") }}
             </a>
-            <a href="#contact" class="btn btn-secondary">
-              {{ t("supportPage.heroActions.contact") }}
-            </a>
           </div>
         </div>
 

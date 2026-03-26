@@ -113,7 +113,7 @@
       "tabs": {
         "multiOsVm": "Multi-OS VM",
         "airos": "AiROS",
-        "scara": "SCARA",
+        "scara": "四轴机械臂",
         "humanoid": "双臂人形"
       },
       "highlights": {
@@ -372,6 +372,7 @@
       "guide": "先展示 3 个代表性视频案例，用来证明跨行业落地能力；完整视频与应用索引按需展开。",
       "expandVideos": "查看全部视频案例 ({count})",
       "collapseVideos": "收起视频案例",
+      "browseApplications": "查看行业应用索引",
       "expandApplications": "查看行业应用索引 ({count})",
       "collapseApplications": "收起行业应用索引",
       "allVideos": "全部视频案例",

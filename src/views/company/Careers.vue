@@ -15,13 +15,6 @@
             >
               {{ $t("careers.hotPositionsTitle") }}
             </button>
-            <button
-              type="button"
-              class="hero-action"
-              @click="scrollToSection('contact')"
-            >
-              {{ $t("careers.contactUsTitle") }}
-            </button>
           </div>
         </div>
 

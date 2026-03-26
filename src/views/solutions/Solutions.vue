@@ -13,9 +13,9 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="scrollToSection('delivery')"
+              @click="scrollToSection('industries')"
             >
-              <span>{{ t("solutionsPage.hero.secondaryCta") }}</span>
+              <span>{{ t("solutionsPage.hero.primaryCta") }}</span>
               <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
           </div>
@@ -143,6 +143,18 @@
         <p class="proof-guide">
           {{ t("solutionsPage.proof.guide") }}
         </p>
+        <button
+          type="button"
+          class="text-link proof-inline-link"
+          :class="{ active: showAllApps }"
+          @click="toggleApplicationArchive"
+        >
+          {{
+            showAllApps
+              ? t("solutionsPage.proof.collapseApplications")
+              : t("solutionsPage.proof.browseApplications")
+          }}
+        </button>
 
         <div class="proof-feature-grid">
           <VideoCard
@@ -171,18 +183,6 @@
             <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
 
-          <button type="button" class="show-more-btn" :class="{ active: showAllApps }" @click="toggleApplicationArchive">
-            <span>
-              {{
-                showAllApps
-                  ? t("solutionsPage.proof.collapseApplications")
-                  : t("solutionsPage.proof.expandApplications", {
-                      count: allApplications.length,
-                    })
-              }}
-            </span>
-            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
         </div>
 
         <div v-if="showAllVideos" class="proof-archive">
@@ -601,6 +601,7 @@ function toggleApplicationArchive(): void {
 
 .hero-actions {
   gap: 12px;
+  align-items: center;
 }
 
 .nav-pill,
@@ -1185,6 +1186,17 @@ function toggleApplicationArchive(): void {
   color: rgba(15, 23, 42, 0.56);
   font-size: 0.92rem;
   line-height: 1.75;
+}
+
+.proof-inline-link {
+  margin: -18px 0 28px;
+  color: rgba(15, 23, 42, 0.62);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.proof-inline-link.active {
+  color: var(--brand-primary);
 }
 
 .proof-feature-grid {

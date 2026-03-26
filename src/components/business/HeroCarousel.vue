@@ -22,25 +22,14 @@
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.4s">
-            <div class="hero-buttons">
-              <router-link
-                to="/robot-products"
-                class="hero-link"
-                @click.stop
-              >
-                {{ t('common.cta.viewProducts') }}
-                <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </router-link>
-
-              <router-link
-                :to="{ path: '/about', hash: '#contact' }"
-                class="hero-link hero-link--secondary"
-                @click.stop
-              >
-                {{ t('common.cta.contactTeam') }}
-                <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </router-link>
-            </div>
+            <router-link
+              to="/robot-products"
+              class="hero-link"
+              @click.stop
+            >
+              {{ t('common.cta.viewProducts') }}
+              <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </router-link>
           </div>
         </div>
         
@@ -66,7 +55,9 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import scara4axisImg from '@/assets/images/products/four-axis-robot.webp';
+import arm6axisImg from '@/assets/images/products/six-axis-robot-1000w-q75.webp';
 import dualArmImg from '@/assets/images/products/dual-arm-humanoid.webp';
+import mobileRobotImg from '@/assets/images/products/mobile-robot.webp';
 
 interface SlideItem {
   img: string;
@@ -90,6 +81,18 @@ const slides = computed<SlideItem[]>(() => [
     title: t('products.dualArmHumanoid.name'),
     shortTitle: t('home.hero.tabs.humanoid'),
     routePath: '/robot-products/dual-arm-humanoid',
+  },
+  {
+    img: arm6axisImg,
+    title: t('products.arm6axis.name'),
+    shortTitle: t('products.arm6axis.name'),
+    routePath: '/robot-products/arm-6axis',
+  },
+  {
+    img: mobileRobotImg,
+    title: t('products.mobileRobot.name'),
+    shortTitle: t('products.mobileRobot.name'),
+    routePath: '/robot-products/mobile-robot',
   },
 ]);
 
@@ -330,43 +333,10 @@ onUnmounted(() => {
   outline-offset: 3px;
 }
 
-.hero-link--secondary {
-  background: transparent;
-  color: #1d1d1f;
-  border-color: rgba(15, 23, 42, 0.14);
-  box-shadow: none;
-}
-
-.hero-link--secondary:link,
-.hero-link--secondary:visited,
-.hero-link--secondary:active {
-  color: #1d1d1f;
-}
-
-.hero-link--secondary:hover {
-  background: rgba(0, 0, 0, 0.04);
-  color: #1d1d1f;
-  border-color: rgba(15, 23, 42, 0.24);
-  box-shadow: none;
-}
-
-.hero-link--secondary::after {
-  opacity: 0.82;
-}
-
 .hero-actions {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  gap: 0;
   margin-top: 28px;
-}
-
-.hero-buttons {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
 }
 
 .hero-indicators {
