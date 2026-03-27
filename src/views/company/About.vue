@@ -265,7 +265,7 @@ function formatIndex(value: number): string {
 
 .page-shell {
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--container-max-width);
   padding: 0 48px;
   margin: 0 auto;
 }

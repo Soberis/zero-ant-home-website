@@ -72,12 +72,15 @@
               </span>
             </div>
 
-            <div class="industry-footer-jump">
-              <span class="link-text">{{ t("solutionsPage.industries.viewApplication") }}</span>
-              <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+            <div v-if="industry.primaryApplication" class="industry-footer-jump">
+              <span class="industry-footer-label">{{ t("solutionsPage.industries.applicationEntry") }}</span>
+              <div class="industry-footer-link">
+                <span class="link-text">{{ industry.primaryApplication.title }}</span>
+                <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
             </div>
           </article>
         </div>
@@ -556,7 +559,7 @@ function toggleApplicationArchive(): void {
   grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
   gap: 48px;
   align-items: start;
-  max-width: 1220px;
+  max-width: var(--container-max-width);
 }
 
 .hero-copy {
@@ -593,6 +596,7 @@ function toggleApplicationArchive(): void {
 .contact-value {
   color: var(--brand-muted);
   line-height: 1.85;
+  font-weight: 500;
 }
 
 .hero-description {
@@ -638,9 +642,9 @@ function toggleApplicationArchive(): void {
   width: 100%;
   max-width: 260px;
   margin-left: 0;
-  padding-left: 28px;
+  padding-left: 0;
   padding-top: 24px;
-  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  border-left: none;
 }
 
 .hero-stat {
@@ -667,6 +671,7 @@ function toggleApplicationArchive(): void {
 .hero-stat-label {
   color: var(--brand-muted);
   font-size: 0.84rem;
+  font-weight: 500;
   line-height: 1.55;
   text-align: left;
 }
@@ -709,7 +714,7 @@ function toggleApplicationArchive(): void {
 
 .detail-section__header {
   max-width: 760px;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
 .detail-section__title {
@@ -749,8 +754,8 @@ function toggleApplicationArchive(): void {
 }
 
 .backbone-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
 }
 
 .industry-grid {
@@ -796,12 +801,15 @@ function toggleApplicationArchive(): void {
 .backbone-card {
   display: flex;
   flex-direction: column;
-  padding: 24px 0 0;
+  padding: 0 0 0;
   border-radius: 0;
   background: transparent;
   border: none;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
   transition: border-color 0.25s ease;
+}
+.backbone-card:nth-child(n + 3) {
+  padding-top: 28px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 .backbone-card:hover {
   transform: none;
@@ -854,33 +862,39 @@ function toggleApplicationArchive(): void {
 /* --- Dense Industry Grid --- */
 .industry-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px 28px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 28px 32px;
 }
 
 .industry-block {
   display: flex;
   flex-direction: column;
+  grid-column: span 4;
   min-height: 100%;
-  padding: 28px 28px 24px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 24px 0 22px;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
   cursor: pointer;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.industry-block:nth-child(4),
+.industry-block:nth-child(5) {
+  grid-column: span 6;
 }
 
 .industry-block:hover {
-  transform: translateY(-2px);
   border-color: rgba(26, 58, 143, 0.2);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
 
 .industry-block__header {
   display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 .industry-block__header .card-index {
   margin: 0;
@@ -892,15 +906,15 @@ function toggleApplicationArchive(): void {
 .industry-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 0;
-  margin-bottom: 22px;
+  gap: 8px 0;
+  margin-bottom: 18px;
 }
 
 .tag {
   padding: 0;
   border-radius: 0;
   background: transparent;
-  color: rgba(15, 23, 42, 0.56);
+  color: rgba(15, 23, 42, 0.6);
   font-size: 0.82rem;
   font-weight: 500;
 }
@@ -920,17 +934,32 @@ function toggleApplicationArchive(): void {
 .industry-footer-jump {
   margin-top: auto;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
+  padding-top: 14px;
   color: var(--brand-text);
-  opacity: 0.72;
   transition: color 0.25s ease, opacity 0.25s ease;
 }
 
-.industry-block:hover .industry-footer-jump {
+.industry-footer-label {
+  color: rgba(15, 23, 42, 0.42);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.industry-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(15, 23, 42, 0.74);
+  transition: color 0.25s ease;
+}
+
+.industry-block:hover .industry-footer-link {
   color: var(--brand-primary);
-  opacity: 1;
 }
 
 .industry-block:hover .action-icon {
@@ -938,8 +967,9 @@ function toggleApplicationArchive(): void {
 }
 
 .link-text {
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.55;
 }
 
 .action-icon {
@@ -979,18 +1009,18 @@ function toggleApplicationArchive(): void {
 }
 
 .backbone-related-label {
-  margin: 4px 0 12px;
-  color: rgba(15, 23, 42, 0.46);
-  font-size: 0.78rem;
+  margin: 8px 0 10px;
+  color: rgba(15, 23, 42, 0.42);
+  font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .chip-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 18px;
+  gap: 10px 16px;
   margin-top: auto;
 }
 
@@ -1026,18 +1056,21 @@ function toggleApplicationArchive(): void {
   padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: transparent;
-  color: rgba(15, 23, 42, 0.68);
+  color: rgba(15, 23, 42, 0.66);
   border: none;
   cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.55;
 }
 
 .chip-arrow {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   color: currentColor;
-  opacity: 0.72;
+  opacity: 0.62;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
@@ -1190,37 +1223,51 @@ function toggleApplicationArchive(): void {
 }
 
 .proof-guide {
-  max-width: 44rem;
-  margin: -8px 0 28px;
-  color: rgba(15, 23, 42, 0.56);
-  font-size: 0.92rem;
+  max-width: 38rem;
+  margin: -4px 0 18px;
+  color: rgba(15, 23, 42, 0.62);
+  font-size: 0.9rem;
+  font-weight: 500;
   line-height: 1.75;
 }
 
 .proof-feature-grid {
   display: grid;
-  gap: 32px;
+  gap: 28px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.proof-feature-grid :deep(.video-title),
+.more-video-grid :deep(.video-title) {
+  font-weight: 600;
+}
+
+.proof-feature-grid :deep(.video-desc),
+.more-video-grid :deep(.video-desc) {
+  color: rgba(15, 23, 42, 0.62);
+  font-weight: 500;
 }
 
 .proof-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-  margin: 0 0 28px;
+  gap: 16px;
+  margin: 0 0 18px;
   padding-top: 0;
   border-top: none;
 }
 
 .proof-archive {
-  margin-top: 36px;
-  padding-top: 28px;
+  margin-top: 28px;
+  padding-top: 24px;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .proof-archive-title {
-  margin: 0 0 20px;
-  color: rgba(15, 23, 42, 0.48);
+  margin: 0 0 16px;
+  color: rgba(15, 23, 42, 0.44);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1240,17 +1287,26 @@ function toggleApplicationArchive(): void {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.more-application-grid :deep(.app-title) {
+  font-weight: 600;
+}
+
+.more-application-grid :deep(.action-text) {
+  color: rgba(15, 23, 42, 0.62);
+  font-weight: 600;
+}
+
 .show-more-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   padding: 0;
   border: none;
   border-radius: 0;
   background: transparent;
-  color: var(--brand-text);
-  font-size: 0.92rem;
-  font-weight: 500;
+  color: rgba(15, 23, 42, 0.74);
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -1259,17 +1315,22 @@ function toggleApplicationArchive(): void {
   color: var(--brand-primary);
 }
 
+.show-more-btn.active {
+  color: rgba(15, 23, 42, 0.82);
+}
+
 .show-more-btn--secondary {
-  color: rgba(15, 23, 42, 0.62);
+  color: rgba(15, 23, 42, 0.58);
 }
 
 .show-more-btn--secondary.active {
-  color: var(--brand-primary);
+  color: rgba(15, 23, 42, 0.72);
 }
 
 .show-more-arrow {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
   transition: transform 0.3s ease;
 }
 
@@ -1368,9 +1429,9 @@ function toggleApplicationArchive(): void {
 
 .delivery-contact__label {
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: rgba(15, 23, 42, 0.45);
+  color: rgba(15, 23, 42, 0.52);
   text-transform: uppercase;
 }
 
@@ -1383,7 +1444,7 @@ function toggleApplicationArchive(): void {
 
 .delivery-contact__link {
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--brand-text);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -1396,11 +1457,20 @@ function toggleApplicationArchive(): void {
 @media (max-width: 1024px) {
   .hero-grid,
   .backbone-grid,
-  .industry-grid,
   .proof-feature-grid,
   .more-video-grid,
   .more-application-grid {
     grid-template-columns: 1fr;
+  }
+
+  .industry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .industry-block,
+  .industry-block:nth-child(4),
+  .industry-block:nth-child(5) {
+    grid-column: auto;
   }
 
   .hero-panel {
@@ -1424,6 +1494,10 @@ function toggleApplicationArchive(): void {
 @media (max-width: 768px) {
   .page-shell {
     padding: 0 20px;
+  }
+
+  .industry-grid {
+    grid-template-columns: 1fr;
   }
 
   .solutions-hero {

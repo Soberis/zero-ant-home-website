@@ -312,11 +312,12 @@
         "description": "通过多 OS 混合部署、离线编程和前置验证降低现场改造成本，缩短交付周期。"
       }
     },
-    "industries": {
-      "eyebrow": "Industry Matrix",
-      "title": "聚焦五大行业方向",
-      "description": "把现有零散应用收敛成清晰的行业入口，帮助用户更快定位场景、方案与案例。",
-      "viewApplication": "查看相关应用",
+      "industries": {
+        "eyebrow": "Industry Matrix",
+        "title": "聚焦五大行业方向",
+        "description": "把现有零散应用收敛成清晰的行业入口，帮助用户更快定位场景、方案与案例。",
+        "applicationEntry": "代表应用",
+        "viewApplication": "查看相关应用",
       "medical": {
         "title": "医疗与生命科学",
         "summary": "围绕样本流转、试管上料、制药自动化等高要求场景，强调精度、安全与可追溯。",

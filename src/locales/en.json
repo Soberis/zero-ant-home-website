@@ -260,27 +260,27 @@
   },
   "solutionsPage": {
     "title": "@:common.terms.industrySolutions",
-    "subtitle": "Built for high-reliability industries with a robotics system backbone and scenario delivery capability.",
+    "subtitle": "Built for high-reliability industries on a robotics backbone with scenario delivery capability.",
     "videoCases": "@:common.section.videoCases",
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "@:common.terms.industrySolutions",
-      "title": "Robotics and intelligent system solutions for high-reliability scenarios",
-      "description": "Powered by AiROS, real-time control, scheduling collaboration and flexible deployment as the backbone, ZeroAnt covers medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
-      "primaryCta": "Explore Industries",
+      "title": "Robotics and intelligent system solutions for high-reliability applications",
+      "description": "Built on AiROS, real-time control, orchestration and flexible deployment, ZeroAnt covers medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
+      "primaryCta": "Explore Industry Solutions",
       "secondaryCta": "View Delivery",
       "stats": {
         "industry": {
           "value": "05",
-          "label": "Core industries"
+          "label": "Core industry verticals"
         },
         "backbone": {
           "value": "04",
-          "label": "Capability layers"
+          "label": "System backbone"
         },
         "delivery": {
           "value": "01",
-          "label": "Delivery loop"
+          "label": "Unified delivery loop"
         }
       }
     },
@@ -292,30 +292,31 @@
     },
     "backbone": {
       "eyebrow": "Capability Backbone",
-      "title": "A capability stack from execution to deployment",
-      "description": "Industry solutions are not built from isolated devices. They are supported by execution platforms, real-time control, scheduling and deployment validation together.",
+      "title": "Capability backbone from robot execution to system deployment",
+      "description": "Industry solutions are not assembled from isolated devices. They are supported jointly by execution platforms, real-time control, scheduling coordination and deployment validation.",
       "execution": {
-        "title": "Execution Layer",
-        "description": "Covers SCARA, 6-axis, dual-arm, mobile robots and gantry structures for transport, assembly, polishing and inspection tasks."
+        "title": "Execution layer",
+        "description": "Covers 4-axis, 6-axis, dual-arm, mobile robots and gantry structures for transport, assembly, polishing and inspection tasks."
       },
       "control": {
-        "title": "Control & Real-time Layer",
-        "description": "Built on AiROS and the industrial RTOS to support precise control, complex trajectories and stable operation."
+        "title": "Control and real-time layer",
+        "description": "Built around AiROS and an industrial RTOS to support precise control, complex trajectories and stable operation."
       },
       "scheduling": {
-        "title": "Scheduling & Collaboration Layer",
-        "description": "Connects mobile platforms, robotic arms and production tasks into one complete workflow through multi-robot scheduling."
+        "title": "Scheduling and coordination layer",
+        "description": "Links mobile platforms, robotic arms and production tasks into one complete workflow through multi-robot scheduling and cross-device coordination."
       },
       "deployment": {
-        "title": "Simulation & Deployment Layer",
-        "description": "Uses mixed deployment, offline programming and pre-validation to reduce on-site retrofit cost and shorten delivery cycles."
+        "title": "Simulation and deployment layer",
+        "description": "Uses mixed-OS deployment, offline programming and pre-validation to reduce on-site retrofit costs and shorten delivery cycles."
       }
     },
     "industries": {
       "eyebrow": "Industry Matrix",
-      "title": "Focused on five industry directions",
-      "description": "Existing scattered applications are regrouped into clearer industry entries to help users locate scenarios, solutions and cases faster.",
-      "viewApplication": "View related application",
+      "title": "Five key industry directions",
+      "description": "Scattered applications are consolidated into clear industry entry points so users can locate scenarios, solutions and cases faster.",
+      "applicationEntry": "Featured application",
+      "viewApplication": "View related applications",
       "medical": {
         "title": "Medical & Life Science",
         "summary": "Built for sample handling, tube loading and pharmaceutical automation where precision, safety and traceability matter.",
@@ -365,9 +366,9 @@
     "proof": {
       "eyebrow": "Featured Proof",
       "title": "A few cases are enough to prove delivery capability",
-      "description": "Selected cases with stronger representativeness show how ZeroAnt delivers across industries in practice.",
+      "description": "Selected representative cases show how ZeroAnt delivers across industries in practice.",
       "watchCase": "View case details",
-      "guide": "Start with 3 representative video cases, then expand the full video set and industry application index on demand.",
+      "guide": "Start with 3 representative video cases, then expand the full video archive and industry application index as needed.",
       "expandVideos": "View all video cases ({count})",
       "collapseVideos": "Collapse all video cases",
       "browseApplications": "View all industry applications",
@@ -378,8 +379,8 @@
     },
     "more": {
       "eyebrow": "More",
-      "title": "More videos and application entries",
-      "description": "The main page keeps only curated content. More videos and application entries are grouped here so users can continue browsing without disrupting the page rhythm.",
+      "title": "More video cases and industry applications",
+      "description": "Explore more verified ZeroAnt deployments across industries and complex scenarios.",
       "videos": "View more video cases",
       "applications": "More industry applications",
       "videoGuide": "Showing {visible} representative videos first. Expand to browse all {total} cases.",
