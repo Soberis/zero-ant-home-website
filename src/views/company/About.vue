@@ -272,13 +272,9 @@ function formatIndex(value: number): string {
 
 .about-hero {
   position: relative;
-<<<<<<< HEAD
   min-height: calc(100svh - var(--nav-height));
   padding-top: 0;
-=======
-  min-height: 100svh;
-  padding-top: var(--nav-height);
->>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
+  box-sizing: border-box;
   overflow: hidden;
   background:
     radial-gradient(circle at 82% 24%, rgba(26, 58, 143, 0.08), transparent 28%),
@@ -314,12 +310,8 @@ function formatIndex(value: number): string {
   position: relative;
   z-index: 1;
   width: 100%;
-<<<<<<< HEAD
   min-height: inherit;
-=======
-  min-height: calc(100svh - var(--nav-height));
   box-sizing: border-box;
->>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
   display: flex;
   align-items: center;
   justify-content: center;
@@ -699,8 +691,7 @@ function formatIndex(value: number): string {
   }
 }
 
-<<<<<<< HEAD
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .page-shell {
     padding: 0 20px;
   }
@@ -715,9 +706,6 @@ function formatIndex(value: number): string {
     justify-content: center;
   }
 
-=======
-@media (max-width: 900px) {
->>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
   .hero-copy {
     padding: 0 0 12px;
   }
@@ -741,8 +729,7 @@ function formatIndex(value: number): string {
   }
 }
 
-<<<<<<< HEAD
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .about-hero {
     padding-top: 0;
     min-height: calc(100svh - var(--nav-height));
@@ -752,9 +739,6 @@ function formatIndex(value: number): string {
     min-height: inherit;
   }
 
-=======
-@media (max-width: 640px) {
->>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
   .timeline-item {
     gap: 14px;
   }
