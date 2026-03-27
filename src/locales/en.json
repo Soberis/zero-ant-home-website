@@ -1063,14 +1063,14 @@
   },
   "careers": {
     "heroTitle": "Join ZeroAnt Technology",
-    "heroSubtitle": "Build the future of robotics with us, bringing robots to every corner",
+    "heroSubtitle": "Join a cross-disciplinary hardware and software team working on real robotics platforms, control systems and full-system delivery.",
     "techAccumulation": "Technical Accumulation",
-    "teamPartners": "Team Partners",
     "successfulProjects": "Successful Projects",
+    "pathsLabel": "Application Flow",
     "whyJoinTitle": "Why Choose ZeroAnt Technology",
     "hotPositionsTitle": "Hot Positions",
     "contactUsTitle": "@:common.terms.contactUs",
-    "contactDescription": "If you are interested in our positions or want to learn more, please feel free to contact our HR team.",
+    "contactDescription": "If your target role is already clear, send your resume directly to the HR team and we will arrange the next conversation as soon as possible.",
     "email": "@:common.terms.email",
     "workLocation": "Work Location",
     "workExperience": "Work Experience",
@@ -1080,6 +1080,20 @@
     "unlimited": "Unlimited",
     "hangzhou": "Hangzhou",
     "applySubject": "Apply for position: ",
+    "paths": {
+      "whyJoin": {
+        "title": "Start with team and growth",
+        "description": "Quickly judge whether the R&D pace, work style and growth space fit you."
+      },
+      "positions": {
+        "title": "Then review open roles",
+        "description": "Prioritize the positions whose responsibilities and requirements fit your direction."
+      },
+      "contact": {
+        "title": "Finally start the conversation",
+        "description": "Once your target role is clear, contact the HR team directly to start the application."
+      }
+    },
     "benefits": {
       "techInnovation": {
         "title": "Technical Innovation",
@@ -1107,21 +1121,6 @@
       }
     },
     "positions": {
-      "robotEngineer": {
-        "title": "Robotics Engineer",
-        "requirements": [
-          "Bachelor's degree or above in Mechanical Engineering, Automation or related fields",
-          "3+ years of experience in robotics system development",
-          "Familiar with ROS, motion control, path planning technologies",
-          "Good teamwork and communication skills"
-        ],
-        "downloads": [
-          {
-            "name": "Technical Specifications.pdf",
-            "url": "/downloads/dual-arm-humanoid-specs.pdf"
-          }
-        ]
-      },
       "softwareEngineer": {
         "title": "Software Engineer",
         "requirements": [
@@ -1131,40 +1130,22 @@
           "Understanding of robot operating systems and control algorithms"
         ]
       },
-      "algorithmEngineer": {
-        "title": "Algorithm Engineer",
+      "electricalEngineer": {
+        "title": "Electrical Engineer",
         "requirements": [
-          "Master's degree or above in Computer Science, Mathematics, Automation or related fields",
-          "Experience in deep learning, computer vision or SLAM algorithms",
-          "Familiar with TensorFlow, PyTorch and other deep learning frameworks",
-          "Experience in robot perception and decision-making algorithm development preferred"
+          "Bachelor's degree or above in Electrical Engineering, Automation or related fields",
+          "Familiar with electrical schematics, control cabinet layout and on-site electrical commissioning",
+          "Experience with servos, motors, sensors and actuator integration is preferred",
+          "Able to work with mechanical and software teams to complete full-system commissioning and delivery"
         ]
       },
-      "hardwareEngineer": {
-        "title": "Hardware Engineer",
+      "robotSystemsEngineer": {
+        "title": "Robotics Systems Engineer",
         "requirements": [
-          "Bachelor's degree or above in Electronic Engineering, Automation or related fields",
-          "Familiar with circuit design, PCB layout and hardware debugging",
-          "Experience in embedded system hardware development",
-          "Understanding of sensor integration and signal processing technologies"
-        ]
-      },
-      "productManager": {
-        "title": "Product Manager",
-        "requirements": [
-          "Bachelor's degree or above, preferably in engineering or management",
-          "2+ years of product manager or related position experience preferred",
-          "Good requirements analysis, product planning and cross-department communication skills",
-          "Experience in robotics, industrial automation or software products preferred"
-        ]
-      },
-      "testEngineer": {
-        "title": "Test Engineer",
-        "requirements": [
-          "Bachelor's degree or above in Computer Science, Automation or related fields",
-          "Familiar with software/hardware testing processes, able to write test cases independently",
-          "Experience in automated testing and continuous integration preferred",
-          "Detail-oriented with good communication and teamwork skills"
+          "Bachelor's degree or above in Robotics, Automation, Mechatronics or related fields",
+          "Familiar with robotics system integration, full-system commissioning and delivery workflows for automation cells",
+          "Able to work with mechanical, electrical and software teams on on-site debugging, issue isolation and solution closure",
+          "Experience with mobile robots, robotic arms or production-line automation projects is preferred"
         ]
       }
     }
@@ -1238,8 +1219,8 @@
     },
     "careers": {
       "title": "Talent Recruitment - ZeroAnt Technology Seeking Excellence",
-      "description": "ZeroAnt Technology is recruiting excellent talents including robotics engineers, algorithm engineers, software development engineers, hardware engineers, sales engineers and more. We offer competitive compensation and benefits, broad career development opportunities and innovative work environment. Join us to drive industrial robotics technology innovation and create a bright future for smart manufacturing.",
-      "keywords": "talent recruitment, robotics engineer, algorithm engineer, software development, hardware engineer, sales engineer, R&D engineer, automation engineer, machine vision engineer, control system engineer, Hangzhou recruitment, robotics company jobs, technical positions, engineering careers, career development, innovation team"
+      "description": "ZeroAnt Technology is hiring Software Engineers, Robotics Systems Engineers and Electrical Engineers for robotics platforms, system integration and full-system delivery. We offer competitive compensation, clear growth paths and opportunities to work on real products and deployments.",
+      "keywords": "talent recruitment, software engineer, robotics systems engineer, electrical engineer, robotics platform, control systems, system integration, full-system delivery, Hangzhou recruitment, robotics company jobs, technical positions, engineering careers, career development, innovation team"
     },
     "about": {
       "title": "About ZeroAnt Technology - Industrial Robotics Technology Innovation Enterprise",

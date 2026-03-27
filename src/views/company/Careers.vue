@@ -10,28 +10,49 @@
           <div class="hero-actions">
             <button
               type="button"
-              class="hero-action hero-action-primary"
+              class="hero-action"
               @click="scrollToSection('positions')"
             >
               {{ $t("careers.hotPositionsTitle") }}
             </button>
           </div>
+
+          <div class="hero-promises">
+            <article
+              v-for="stat in heroStats"
+              :key="stat.label"
+              class="hero-promise"
+            >
+              <div class="hero-promise-head">
+                <span class="hero-promise-value">{{ stat.value }}</span>
+                <span class="hero-promise-unit">+</span>
+              </div>
+              <p class="hero-promise-label">{{ stat.label }}</p>
+            </article>
+          </div>
         </div>
 
         <div class="hero-panel">
-          <div
-            v-for="stat in heroStats"
-            :key="stat.label"
-            class="hero-stat"
+          <p class="hero-panel-label">{{ $t("careers.pathsLabel") }}</p>
+
+          <a
+            v-for="path in recruitmentPaths"
+            :key="path.id"
+            :href="path.href"
+            class="career-path"
           >
-            <span class="hero-stat-value">{{ stat.value }}</span>
-            <span class="hero-stat-label">{{ stat.label }}</span>
-          </div>
+            <span class="career-path-index">{{ formatIndex(path.id) }}</span>
+            <div class="career-path-copy">
+              <span class="career-path-title">{{ path.title }}</span>
+              <p class="career-path-desc">{{ path.description }}</p>
+            </div>
+            <svg class="career-path-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <section ref="whyJoinRef" class="page-section why-join reveal-ready">
+    <section id="why-join" ref="whyJoinRef" class="page-section why-join reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -112,7 +133,7 @@
       <div class="page-shell">
         <div class="contact-panel">
           <div class="contact-copy">
-            <div class="detail-section__header" style="margin-bottom: 24px;">
+            <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ $t("careers.contactUsTitle") }}</span>
                 <span class="title-en">CONTACT US</span>
@@ -167,9 +188,37 @@ interface Position {
   requirements: string[];
 }
 
+interface RecruitmentPath {
+  id: number;
+  href: string;
+  title: string;
+  description: string;
+}
+
 const heroStats = computed(() => [
   { value: "8+", label: t("careers.techAccumulation") },
   { value: "50+", label: t("careers.successfulProjects") },
+]);
+
+const recruitmentPaths = computed<RecruitmentPath[]>(() => [
+  {
+    id: 1,
+    href: "#why-join",
+    title: t("careers.paths.whyJoin.title"),
+    description: t("careers.paths.whyJoin.description"),
+  },
+  {
+    id: 2,
+    href: "#positions",
+    title: t("careers.paths.positions.title"),
+    description: t("careers.paths.positions.description"),
+  },
+  {
+    id: 3,
+    href: "#contact",
+    title: t("careers.paths.contact.title"),
+    description: t("careers.paths.contact.description"),
+  },
 ]);
 
 const benefits = computed<Benefit[]>(() => [
@@ -208,16 +257,6 @@ const benefits = computed<Benefit[]>(() => [
 const positions = computed<Position[]>(() => [
   {
     id: 1,
-    title: t("careers.positions.robotEngineer.title"),
-    type: t("careers.fullTime"),
-    location: t("careers.hangzhou"),
-    experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.robotEngineer.requirements"
-    ) as string[],
-  },
-  {
-    id: 2,
     title: t("careers.positions.softwareEngineer.title"),
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
@@ -227,42 +266,24 @@ const positions = computed<Position[]>(() => [
     ) as string[],
   },
   {
+    id: 2,
+    title: t("careers.positions.robotSystemsEngineer.title"),
+    type: t("careers.fullTime"),
+    location: t("careers.hangzhou"),
+    experience: t("careers.unlimited"),
+    requirements: tm(
+      "careers.positions.robotSystemsEngineer.requirements"
+    ) as string[],
+  },
+  {
     id: 3,
-    title: t("careers.positions.algorithmEngineer.title"),
+    title: t("careers.positions.electricalEngineer.title"),
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
     experience: t("careers.unlimited"),
     requirements: tm(
-      "careers.positions.algorithmEngineer.requirements"
+      "careers.positions.electricalEngineer.requirements"
     ) as string[],
-  },
-  {
-    id: 4,
-    title: t("careers.positions.hardwareEngineer.title"),
-    type: t("careers.fullTime"),
-    location: t("careers.hangzhou"),
-    experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.hardwareEngineer.requirements"
-    ) as string[],
-  },
-  {
-    id: 5,
-    title: t("careers.positions.productManager.title"),
-    type: t("careers.fullTime"),
-    location: t("careers.hangzhou"),
-    experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.productManager.requirements"
-    ) as string[],
-  },
-  {
-    id: 6,
-    title: t("careers.positions.testEngineer.title"),
-    type: t("careers.fullTime"),
-    location: t("careers.hangzhou"),
-    experience: t("careers.unlimited"),
-    requirements: tm("careers.positions.testEngineer.requirements") as string[],
   },
 ]);
 
@@ -307,18 +328,18 @@ function applyForPosition(position: Position): void {
 }
 
 .careers-hero {
-  padding: 80px 0 80px;
+  padding: 84px 0 88px;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-  gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  gap: 56px;
+  align-items: start;
 }
 
 .hero-copy {
-  padding: 20px 0 24px;
+  padding: 16px 0 12px;
 }
 
 .hero-eyebrow,
@@ -338,8 +359,8 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-subtitle {
-  max-width: 620px;
-  margin: 0 0 32px;
+  max-width: 32em;
+  margin: 0;
   color: var(--brand-muted);
   font-size: 1.05rem;
   line-height: 1.85;
@@ -348,7 +369,8 @@ function applyForPosition(position: Position): void {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
+  margin-top: 28px;
 }
 
 .hero-action,
@@ -366,13 +388,6 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-action {
-  border: 1px solid rgba(15, 23, 42, 0.16);
-  background: #ffffff;
-  color: var(--brand-text);
-}
-
-.hero-action-primary,
-.apply-btn {
   border: 1px solid transparent;
   background: var(--brand-primary);
   color: #ffffff;
@@ -380,16 +395,23 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-action:hover {
-  background: var(--brand-surface-soft);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-}
-
-.apply-btn:hover,
-.hero-action-primary:hover {
   transform: translateY(-2px);
   background: var(--brand-primary-deep);
   box-shadow: 0 8px 24px rgba(26, 58, 143, 0.12);
+}
+
+.apply-btn {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  color: var(--brand-text);
+  box-shadow: none;
+}
+
+.apply-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(15, 23, 42, 0.02);
+  border-color: rgba(15, 23, 42, 0.22);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
 }
 
 .apply-btn-arrow {
@@ -406,36 +428,115 @@ function applyForPosition(position: Position): void {
 .hero-panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0;
-  padding-left: 64px;
+  padding-top: 18px;
 }
 
-.hero-stat {
+.hero-promises {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+  margin-top: 44px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.hero-promise {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 14px 0;
-  border-left: none;
 }
 
-.hero-stat + .hero-stat {
-  border-top: 1px solid rgba(15, 23, 42, 0.12);
+.hero-promise-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
 }
 
-.hero-stat-value {
+.hero-promise-value {
   color: var(--brand-text);
-  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
-.hero-stat-label {
+.hero-promise-unit {
   color: var(--brand-muted);
-  font-size: 0.88rem;
-  line-height: 1.55;
-  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding-bottom: 2px;
+}
+
+.hero-promise-label {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.hero-panel-label {
+  margin: 0 0 12px;
+  color: var(--brand-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.career-path {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 22px 0;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.career-path + .career-path {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.career-path:hover {
+  color: var(--brand-primary);
+  text-decoration: none;
+  transform: translateX(4px);
+}
+
+.career-path-index {
+  min-width: 34px;
+  color: rgba(26, 58, 143, 0.42);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.career-path-copy {
+  min-width: 0;
+}
+
+.career-path-title {
+  display: block;
+  color: var(--brand-text);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.career-path-desc {
+  margin: 6px 0 0;
+  color: var(--brand-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.career-path-arrow {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .why-join,
@@ -448,8 +549,8 @@ function applyForPosition(position: Position): void {
 }
 
 .detail-section__header {
-  max-width: 860px;
-  margin-bottom: 48px;
+  max-width: 760px;
+  margin-bottom: 28px;
 }
 
 .detail-section__title {
@@ -531,16 +632,18 @@ function applyForPosition(position: Position): void {
 
 .positions-list {
   display: grid;
-  gap: 18px;
+  gap: 0;
 }
 
 .position-card {
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 16px;
-  background: var(--brand-surface-soft);
-  box-shadow: none;
-  padding: 40px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  background: transparent;
+  padding: 32px 0;
+}
+
+.position-card:first-child {
+  padding-top: 0;
+  border-top: none;
 }
 
 .position-header {
@@ -548,8 +651,8 @@ function applyForPosition(position: Position): void {
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(217, 226, 236, 0.9);
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .position-heading {
@@ -570,14 +673,14 @@ function applyForPosition(position: Position): void {
 .meta-chip {
   width: fit-content;
   border-radius: 999px;
-  padding: 6px 12px;
-  font-size: 0.82rem;
-  font-weight: 700;
+  padding: 5px 11px;
+  font-size: 0.78rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
 }
 
 .position-type {
-  background: rgba(26, 58, 143, 0.08);
+  background: rgba(26, 58, 143, 0.05);
   color: var(--brand-primary);
 }
 
@@ -589,13 +692,13 @@ function applyForPosition(position: Position): void {
 }
 
 .meta-chip {
-  border: 1px solid rgba(217, 226, 236, 0.88);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   color: rgba(15, 23, 42, 0.68);
-  background: #f8fbff;
+  background: transparent;
 }
 
 .position-body {
-  padding: 22px 0 24px;
+  padding: 20px 0 22px;
 }
 
 .requirements-title {
@@ -638,49 +741,34 @@ function applyForPosition(position: Position): void {
 
 .contact-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
   gap: 48px;
   align-items: start;
-  margin-top: 32px;
+}
+
+.contact-header {
+  margin-bottom: 24px;
 }
 
 .contact-description {
-  margin: 16px 0 0;
+  margin: 0;
   color: var(--brand-muted);
-  font-size: 1.05rem;
-  font-weight: 400;
+  font-size: 1rem;
   line-height: 1.85;
 }
 
-.contact-btn {
-  margin-top: 32px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 999px;
-  padding: 12px 32px;
-  background: #ffffff;
-  color: var(--brand-text);
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-btn:hover {
-  transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.16);
-  box-shadow: 0 12px 24px rgba(26, 58, 143, 0.06);
-  color: var(--brand-primary);
-}
-
 .contact-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 36px;
+  padding-top: 4px;
 }
 
 .contact-card {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .contact-label {
@@ -698,6 +786,8 @@ function applyForPosition(position: Position): void {
   line-height: 1.5;
   text-decoration: none;
   transition: color 0.3s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-value[href]:hover {
@@ -710,10 +800,6 @@ function applyForPosition(position: Position): void {
   .contact-panel,
   .benefits-grid {
     grid-template-columns: 1fr;
-  }
-
-  .stat-label {
-    text-align: left;
   }
 
   .hero-copy {
@@ -747,13 +833,6 @@ function applyForPosition(position: Position): void {
     align-items: stretch;
   }
 
-  .position-card,
-  .benefit-card,
-  .contact-panel,
-  .hero-panel-inner {
-    padding: 24px;
-  }
-
   .position-header {
     flex-direction: column;
   }
@@ -767,6 +846,11 @@ function applyForPosition(position: Position): void {
   .hero-action {
     width: 100%;
   }
+
+  .hero-promises,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {
@@ -774,13 +858,8 @@ function applyForPosition(position: Position): void {
     padding-top: 86px;
   }
 
-  .stat-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .position-card {
-    padding: 20px;
+    padding: 24px 0;
   }
 }
 </style>
