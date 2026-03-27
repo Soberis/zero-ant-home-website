@@ -108,7 +108,7 @@
     "hero": {
       "eyebrow": "ZeroAnt Robotics Platform",
       "title": "高可靠机器人平台",
-      "description": "先看产品矩阵、行业场景和支持资料，再决定下一步。",
+      "description": "从机器人产品、行业方案到支持交付，快速判断你的场景如何落地。",
       "panelLabel": "重点产品",
       "tabs": {
         "multiOsVm": "Multi-OS VM",
@@ -428,13 +428,34 @@
       "downloads": "查看资料",
       "contact": "联系支持"
     },
+    "supportMapLabel": "支持路径",
     "fastResponse": "12小时内快速解决问题",
     "dedicatedService": "7×24小时专属服务群响应",
     "relatedDownloads": "@:common.section.relatedDownloads",
+    "downloadIntro": "先获取手册和接口资料，帮助团队快速完成选型、安装与集成准备。",
     "faqTitle": "常见问题",
+    "faqIntro": "优先覆盖导航方式、二次开发与定制交付三类高频问题。",
+    "contactIntro": "如果资料和 FAQ 仍不足以回答现场问题，直接联系团队进入支持沟通。",
     "downloads": {
       "productManual": "产品手册",
-      "jointMaterials": "关节资料"
+      "productManualDesc": "适合安装、接线、基础操作与日常维护参考。",
+      "jointMaterials": "关节资料",
+      "jointMaterialsDesc": "适合参数确认、接口对接与结构集成准备。",
+      "updating": "资料更新中"
+    },
+    "paths": {
+      "downloads": {
+        "title": "先看资料",
+        "description": "快速获取手册与接口材料"
+      },
+      "faq": {
+        "title": "常见问题",
+        "description": "先确认导航、集成与定制边界"
+      },
+      "contact": {
+        "title": "联系支持",
+        "description": "现场问题直接进入服务沟通"
+      }
     },
     "faqs": {
       "navigation": {

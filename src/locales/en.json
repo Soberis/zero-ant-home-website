@@ -107,7 +107,7 @@
     "hero": {
       "eyebrow": "ZeroAnt Robotics Platform",
       "title": "In-house robotics platform",
-      "description": "Start with the product matrix, industry scenarios, and support materials before taking the next step.",
+      "description": "From robot products and industry solutions to delivery support, quickly see how your scenario can land.",
       "panelLabel": "Featured Product",
       "tabs": {
         "multiOsVm": "Multi-OS VM",
@@ -427,13 +427,34 @@
       "downloads": "View Downloads",
       "contact": "Contact Support"
     },
+    "supportMapLabel": "Support Path",
     "fastResponse": "Rapid problem resolution within 12 hours",
     "dedicatedService": "7×24 hours dedicated service group response",
     "relatedDownloads": "@:common.section.relatedDownloads",
+    "downloadIntro": "Start with manuals and interface materials so the team can prepare for selection, installation and integration faster.",
     "faqTitle": "Frequently Asked Questions",
+    "faqIntro": "This section focuses on the three highest-frequency topics: navigation, secondary development and custom delivery.",
+    "contactIntro": "If materials and FAQs still do not cover the on-site issue, contact the team directly to enter the support flow.",
     "downloads": {
       "productManual": "Product Manual",
-      "jointMaterials": "Joint Materials"
+      "productManualDesc": "For installation, wiring, basic operation and day-to-day maintenance reference.",
+      "jointMaterials": "Joint Materials",
+      "jointMaterialsDesc": "For parameter confirmation, interface integration and mechanical preparation.",
+      "updating": "Updating"
+    },
+    "paths": {
+      "downloads": {
+        "title": "Start With Materials",
+        "description": "Get manuals and interface references first"
+      },
+      "faq": {
+        "title": "Check FAQs",
+        "description": "Confirm navigation, integration and customization boundaries"
+      },
+      "contact": {
+        "title": "Contact Support",
+        "description": "Move straight into service communication for on-site issues"
+      }
     },
     "faqs": {
       "navigation": {

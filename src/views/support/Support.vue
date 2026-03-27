@@ -13,20 +13,38 @@
               {{ t("supportPage.heroActions.downloads") }}
             </a>
           </div>
+
+          <div class="hero-promises">
+            <article
+              v-for="promise in servicePromises"
+              :key="promise.metric + promise.description"
+              class="hero-promise"
+            >
+              <div class="hero-promise-head">
+                <span class="hero-promise-value">{{ promise.metric }}</span>
+                <span v-if="promise.unit" class="hero-promise-unit">{{ promise.unit }}</span>
+              </div>
+              <p class="hero-promise-label">{{ promise.description }}</p>
+            </article>
+          </div>
         </div>
 
         <div class="hero-panel">
-          <article
-            v-for="promise in servicePromises"
-            :key="promise.metric + promise.description"
-            class="hero-stat"
+          <p class="hero-panel-label">{{ t("supportPage.supportMapLabel") }}</p>
+
+          <a
+            v-for="path in supportPaths"
+            :key="path.id"
+            :href="path.href"
+            class="support-path"
           >
-            <div class="hero-stat-head">
-              <span class="hero-stat-value">{{ promise.metric }}</span>
-              <span class="hero-stat-unit">{{ promise.unit }}</span>
+            <span class="support-path-index">{{ formatIndex(path.id) }}</span>
+            <div class="support-path-copy">
+              <span class="support-path-title">{{ path.title }}</span>
+              <p class="support-path-desc">{{ path.description }}</p>
             </div>
-            <p class="hero-stat-label">{{ promise.description }}</p>
-          </article>
+            <svg class="support-path-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -38,42 +56,21 @@
             <span class="title-main text-display-large">{{ t("supportPage.relatedDownloads") }}</span>
             <span class="title-en">DOWNLOADS</span>
           </h2>
+          <p class="detail-section__desc">{{ t("supportPage.downloadIntro") }}</p>
         </div>
 
-        <div class="card-list">
+        <div class="download-grid">
           <article
-            v-for="(item, idx) in downloads"
+            v-for="item in downloads"
             :key="item.title"
-            class="content-card download-card"
-            :class="{ open: downloadStates[idx] }"
+            class="download-card"
           >
-            <button
-              type="button"
-              class="card-header"
-              :aria-expanded="downloadStates[idx]"
-              :aria-controls="`download-content-${idx}`"
-              @click="toggleDownload(idx)"
-            >
-              <div class="card-header-main">
-                <span class="card-index">{{ formatIndex(idx + 1) }}</span>
-                <div class="card-title-wrap">
-                  <span class="card-tag">{{ item.tag }}</span>
-                  <span class="card-title">{{ item.title }}</span>
-                </div>
-              </div>
-              <svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-
-            <transition name="fade-slide">
-              <div
-                v-if="downloadStates[idx]"
-                :id="`download-content-${idx}`"
-                class="card-content"
-              >
-                <p class="card-caption">{{ item.desc }}</p>
-                <p class="card-body">{{ t("common.status.preparingMessage") }}</p>
-              </div>
-            </transition>
+            <div class="download-card-head">
+              <span class="card-tag">{{ item.tag }}</span>
+              <span class="download-status">{{ item.status }}</span>
+            </div>
+            <h3 class="download-title">{{ item.title }}</h3>
+            <p class="download-desc">{{ item.desc }}</p>
           </article>
         </div>
       </div>
@@ -86,13 +83,14 @@
             <span class="title-main text-display-large">{{ t("supportPage.faqTitle") }}</span>
             <span class="title-en">FAQ</span>
           </h2>
+          <p class="detail-section__desc">{{ t("supportPage.faqIntro") }}</p>
         </div>
 
-        <div class="card-list">
+        <div class="faq-list">
           <article
             v-for="(faq, idx) in faqs"
             :key="faq.q"
-            class="content-card faq-card"
+            class="faq-item"
             :class="{ open: faqStates[idx] }"
           >
             <button
@@ -130,13 +128,13 @@
       <div class="support-shell">
         <div class="contact-panel">
           <div class="contact-copy">
-            <div class="detail-section__header" style="margin-bottom: 24px;">
+            <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("nav.contact") }}</span>
                 <span class="title-en">CONTACT US</span>
               </h2>
+              <p class="detail-section__desc">{{ t("supportPage.contactIntro") }}</p>
             </div>
-            <p class="contact-desc">{{ t("supportPage.description") }}</p>
           </div>
 
           <div class="contact-grid">
@@ -144,6 +142,7 @@
               v-for="item in contactItems"
               :key="item.label"
               class="contact-card"
+              :class="{ 'contact-card--full': item.fullWidth }"
             >
               <span class="contact-label">{{ item.label }}</span>
               <a
@@ -179,6 +178,7 @@ interface DownloadItem {
   title: string;
   desc: string;
   tag: string;
+  status: string;
 }
 
 interface FaqItem {
@@ -189,6 +189,13 @@ interface FaqItem {
 interface PromiseItem {
   metric: string;
   unit: string;
+  description: string;
+}
+
+interface SupportPath {
+  id: number;
+  href: string;
+  title: string;
   description: string;
 }
 
@@ -208,13 +215,15 @@ const servicePromises = computed<PromiseItem[]>(() => [
 const downloads = computed<DownloadItem[]>(() => [
   {
     title: t("supportPage.downloads.productManual"),
-    desc: "PDF",
+    desc: t("supportPage.downloads.productManualDesc"),
     tag: "PDF",
+    status: t("supportPage.downloads.updating"),
   },
   {
     title: t("supportPage.downloads.jointMaterials"),
-    desc: "ZIP",
+    desc: t("supportPage.downloads.jointMaterialsDesc"),
     tag: "ZIP",
+    status: t("supportPage.downloads.updating"),
   },
 ]);
 
@@ -233,6 +242,29 @@ const faqs = computed<FaqItem[]>(() => [
   },
 ]);
 
+const supportPaths = computed<SupportPath[]>(() => [
+  {
+    id: 1,
+    href: "#download",
+    title: t("supportPage.paths.downloads.title"),
+    description: t("supportPage.paths.downloads.description"),
+  },
+  {
+    id: 2,
+    href: "#faq",
+    title: t("supportPage.paths.faq.title"),
+    description: t("supportPage.paths.faq.description"),
+  },
+  {
+    id: 3,
+    href: "#contact",
+    title: t("supportPage.paths.contact.title"),
+    description: t("supportPage.paths.contact.description"),
+  },
+]);
+
+const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
+
 const contactItems = computed(() => [
   {
     label: t("contacts.phone"),
@@ -240,24 +272,23 @@ const contactItems = computed(() => [
     href: `tel:${t("footer.telValue")}`,
   },
   {
+    label: t("contacts.email"),
+    value: supportEmail.value,
+    href: `mailto:${supportEmail.value}`,
+  },
+  {
     label: t("contacts.address"),
     value: t("footer.address"),
     href: "",
+    fullWidth: true,
   },
 ]);
 
-const downloadStates = ref<boolean[]>([]);
 const faqStates = ref<boolean[]>([]);
 
 watch(
-  [() => downloads.value.length, () => faqs.value.length],
-  ([downloadLength, faqLength]) => {
-    if (downloadStates.value.length !== downloadLength) {
-      downloadStates.value = Array.from({ length: downloadLength }, (_, index) =>
-        downloadStates.value[index] ?? false
-      );
-    }
-
+  () => faqs.value.length,
+  (faqLength) => {
     if (faqStates.value.length !== faqLength) {
       faqStates.value = Array.from({ length: faqLength }, (_, index) =>
         faqStates.value[index] ?? false
@@ -266,10 +297,6 @@ watch(
   },
   { immediate: true }
 );
-
-function toggleDownload(idx: number): void {
-  downloadStates.value[idx] = !downloadStates.value[idx];
-}
 
 function toggleFaq(idx: number): void {
   faqStates.value[idx] = !faqStates.value[idx];
@@ -298,19 +325,19 @@ function formatIndex(value: number): string {
 }
 
 .support-hero {
-  padding: 80px 0 80px;
+  padding: 84px 0 88px;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-  gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  gap: 56px;
+  align-items: start;
 }
 
 .hero-copy {
   position: relative;
-  padding: 20px 0 24px;
+  padding: 16px 0 12px;
 }
 
 .hero-eyebrow {
@@ -329,7 +356,7 @@ function formatIndex(value: number): string {
 }
 
 .hero-desc {
-  max-width: 640px;
+  max-width: 32em;
   margin: 0;
   color: var(--brand-muted);
   font-size: 1.05rem;
@@ -343,43 +370,36 @@ function formatIndex(value: number): string {
   margin-top: 28px;
 }
 
-.hero-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0;
-  padding-left: 64px;
-  margin-top: 12px;
+.hero-promises {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+  margin-top: 44px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.hero-stat {
+.hero-promise {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 14px 0;
-  border-left: none;
 }
 
-.hero-stat + .hero-stat {
-  border-top: 1px solid rgba(15, 23, 42, 0.12);
-}
-
-.hero-stat-head {
+.hero-promise-head {
   display: flex;
   align-items: flex-end;
   gap: 6px;
-  margin-bottom: 4px;
 }
 
-.hero-stat-value {
+.hero-promise-value {
   color: var(--brand-text);
-  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
-.hero-stat-unit {
+.hero-promise-unit {
   color: var(--brand-muted);
   font-size: 0.85rem;
   font-weight: 600;
@@ -387,12 +407,81 @@ function formatIndex(value: number): string {
   padding-bottom: 2px;
 }
 
-.hero-stat-label {
+.hero-promise-label {
   margin: 0;
   color: var(--brand-muted);
-  font-size: 0.88rem;
-  line-height: 1.55;
-  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.hero-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 18px;
+}
+
+.hero-panel-label {
+  margin: 0 0 12px;
+  color: var(--brand-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.support-path {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 22px 0;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.support-path + .support-path {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.support-path:hover {
+  color: var(--brand-primary);
+  text-decoration: none;
+  transform: translateX(4px);
+}
+
+.support-path-index {
+  min-width: 34px;
+  color: rgba(26, 58, 143, 0.42);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.support-path-copy {
+  min-width: 0;
+}
+
+.support-path-title {
+  display: block;
+  color: var(--brand-text);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.support-path-desc {
+  margin: 6px 0 0;
+  color: var(--brand-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.support-path-arrow {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .page-section {
@@ -400,8 +489,8 @@ function formatIndex(value: number): string {
 }
 
 .detail-section__header {
-  max-width: 860px;
-  margin-bottom: 48px;
+  max-width: 760px;
+  margin-bottom: 28px;
 }
 
 .detail-section__title {
@@ -423,43 +512,93 @@ function formatIndex(value: number): string {
   text-transform: uppercase;
 }
 
-.card-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  max-width: 1200px;
+.detail-section__desc {
+  margin: 14px 0 0;
+  max-width: 34em;
+  color: var(--brand-muted);
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
-.content-card {
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.download-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-  padding: 0;
-  min-height: 80px;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 16px;
+  gap: 14px;
+  min-height: 220px;
+  padding: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
   background: #ffffff;
-  box-shadow: none;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
-.content-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
-  border-color: rgba(26, 58, 143, 0.12);
+.download-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(26, 58, 143, 0.18);
 }
 
-.faq-card {
-  background: var(--brand-surface-soft);
+.download-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.download-status {
+  color: var(--brand-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.download-title {
+  margin: 0;
+  color: var(--brand-text);
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.download-desc {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+.card-tag {
+  width: fit-content;
+  border-radius: 4px;
+  border: 0;
+  background: rgba(26, 58, 143, 0.08);
+  color: var(--brand-primary);
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.faq-list {
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: transparent;
 }
 
 .card-header {
   width: 100%;
   border: 0;
   background: transparent;
-  padding: 24px 24px;
+  padding: 26px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -476,7 +615,7 @@ function formatIndex(value: number): string {
 }
 
 .card-index {
-  min-width: 44px;
+  min-width: 40px;
   color: rgba(26, 58, 143, 0.45);
   font-size: 0.92rem;
   font-weight: 700;
@@ -487,19 +626,7 @@ function formatIndex(value: number): string {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.card-tag {
-  width: fit-content;
-  border-radius: 4px;
-  border: 0;
-  background: rgba(26, 58, 143, 0.08);
-  color: var(--brand-primary);
-  padding: 4px 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  gap: 6px;
 }
 
 .card-tag-muted {
@@ -522,23 +649,14 @@ function formatIndex(value: number): string {
   transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
 }
 
-.content-card.open .card-toggle {
+.faq-item.open .card-toggle {
   transform: rotate(180deg);
   color: var(--brand-primary);
 }
 
 .card-content {
-  padding: 0 24px 24px 74px;
+  padding: 0 0 24px 58px;
   color: var(--brand-muted);
-}
-
-.card-caption {
-  margin: 0 0 8px;
-  color: rgba(15, 23, 42, 0.48);
-  font-size: 0.86rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .card-body {
@@ -552,36 +670,37 @@ function formatIndex(value: number): string {
   padding-top: var(--section-padding-y);
 }
 
-.contact-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
-  gap: 48px;
-  align-items: start;
-  margin-top: 32px;
+.contact-header {
+  margin-bottom: 24px;
 }
 
-.contact-desc {
-  margin: 16px 0 0;
-  max-width: 520px;
-  color: var(--brand-muted);
-  font-size: 1.05rem;
-  font-weight: 400;
-  line-height: 1.85;
+.contact-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 48px;
+  align-items: start;
 }
 
 .contact-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 28px 64px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 36px;
+  padding-top: 4px;
 }
 
 .contact-card {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  flex: 1 1 240px;
-  max-width: 100%;
   min-width: 0;
+}
+
+.contact-card--full {
+  grid-column: 1 / -1;
+}
+
+.contact-card--full .contact-value {
+  white-space: nowrap;
 }
 
 .contact-label {
@@ -631,7 +750,7 @@ function formatIndex(value: number): string {
   }
 
   .hero-panel {
-    padding-left: 0;
+    padding-top: 8px;
   }
 }
 
@@ -644,24 +763,25 @@ function formatIndex(value: number): string {
     padding: 104px 0 52px;
   }
 
+  .hero-promises,
+  .download-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero-title {
     max-width: none;
   }
 
   .hero-desc,
-  .promise-desc,
   .card-body,
-  .contact-desc {
+  .download-desc,
+  .detail-section__desc {
     line-height: 1.75;
   }
 
-  .promise-card,
-  .contact-panel {
-    padding: 20px;
-  }
-
   .card-header {
-    padding: 20px;
+    padding: 22px 0;
   }
 
   .card-header-main {
@@ -669,20 +789,23 @@ function formatIndex(value: number): string {
   }
 
   .card-content {
-    padding: 0 20px 20px 20px;
+    padding: 0 0 22px 0;
   }
 
   .card-title {
     font-size: 1rem;
   }
 
-  .contact-grid {
-    flex-direction: column;
-    gap: 12px;
-  }
-
   .contact-card {
     width: 100%;
+  }
+
+  .contact-card--full {
+    grid-column: auto;
+  }
+
+  .contact-card--full .contact-value {
+    white-space: normal;
   }
 }
 
@@ -700,20 +823,21 @@ function formatIndex(value: number): string {
     width: 100%;
   }
 
-  .promise-card {
-    min-height: 0;
-  }
-
   .card-index {
     min-width: 32px;
   }
 
-  .contact-panel {
-    margin-top: 16px;
+  .download-card {
+    padding: 22px;
+    min-height: 0;
   }
 
-  .contact-card {
-    padding: 10px 12px;
+  .support-path {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .support-path-arrow {
+    display: none;
   }
 }
 </style>
