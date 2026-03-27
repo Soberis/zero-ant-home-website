@@ -549,6 +549,7 @@ function applyForPosition(position: Position): void {
 
 .page-section {
   padding: 100px 0;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 .detail-section__header {

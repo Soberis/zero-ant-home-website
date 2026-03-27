@@ -469,7 +469,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
 .detail-section {
   padding: 100px 0 80px;
   border-radius: 0;
-  scroll-margin-top: 100px;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
   background: transparent;
   border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
