@@ -84,6 +84,7 @@ const mediaInfo = computed(() => {
     type: getMediaType(videoInfo.value),
     url: videoInfo.value.url,
     title: videoInfo.value.title,
+    thumbnailUrl: videoCards.find((item) => item.slug === currentSlug.value)?.img || "",
   };
 });
 

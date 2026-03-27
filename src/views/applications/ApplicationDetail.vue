@@ -15,7 +15,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications, { type Application } from "@/data/applications";
 import { computed, type ComputedRef, onMounted, watch } from "vue";
-import { videoMap, type VideoDetail } from "@/data/videos";
+import { videoCards, videoMap, type VideoDetail } from "@/data/videos";
 import { setSEO, setStructuredData } from "@/utils/seo";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
@@ -49,6 +49,11 @@ const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
   return videoKey ? videoMap[videoKey] : undefined;
 });
 
+const videoThumbnail = computed(() => {
+  const videoKey = detail.value?.video;
+  return videoKey ? videoCards.find((item) => item.slug === videoKey)?.img || "" : "";
+});
+
 const mediaInfo = computed(() => {
   return {
     type: (videoDetail.value?.type === "bilibili" || videoDetail.value?.type === "video" || videoDetail.value?.type === "image")
@@ -56,6 +61,7 @@ const mediaInfo = computed(() => {
       : ((typeof videoDetail.value?.type === "string" && videoDetail.value.type === "local") ? "video" : "none") as "bilibili" | "video" | "image" | "none",
     url: videoDetail.value?.url || "",
     title: videoDetail.value?.title || detail.value?.title || "",
+    thumbnailUrl: videoThumbnail.value,
   };
 });
 

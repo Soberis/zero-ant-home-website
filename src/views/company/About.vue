@@ -4,7 +4,15 @@
     <section class="about-hero">
       <div class="page-shell hero-shell">
         <div class="hero-copy">
-          <h1 class="hero-title text-display-super">{{ $t("slogan") }}</h1>
+          <h1
+            :class="[
+              'hero-title',
+              'text-display-super',
+              { 'hero-title--single-line': locale === 'en' }
+            ]"
+          >
+            {{ $t("slogan") }}
+          </h1>
           <p class="hero-sub">{{ $t("slogan2") }}</p>
         </div>
       </div>
@@ -144,9 +152,7 @@
         </div>
 
         <div class="culture-card">
-          <p class="info-text">
-            {{ $t("about.enterpriseCulture.description") }}
-          </p>
+          <p class="info-text" v-html="cultureDescription"></p>
           <ul class="culture-list">
             <li
               v-for="(item, index) in cultureItems"
@@ -202,7 +208,7 @@ import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
 import { sanitizeHtmlAllowList } from "@/utils/security";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const introRef = ref<HTMLElement | null>(null);
 const historyRef = ref<HTMLElement | null>(null);
@@ -245,6 +251,10 @@ const cultureItems = computed(() =>
   ["item1", "item2", "item3", "item4"].map((key) =>
     sanitizeHtmlAllowList(t(`about.enterpriseCulture.${key}`))
   )
+);
+
+const cultureDescription = computed(() =>
+  sanitizeHtmlAllowList(t("about.enterpriseCulture.description"))
 );
 
 function formatIndex(value: number): string {
@@ -330,6 +340,12 @@ function formatIndex(value: number): string {
   max-width: 8.6em;
   margin: 0 0 18px;
   color: var(--brand-text);
+}
+
+.hero-title--single-line {
+  max-width: none;
+  white-space: nowrap;
+  font-size: clamp(3rem, 5.4vw, 5.3rem);
 }
 
 .hero-sub {
@@ -712,6 +728,11 @@ function formatIndex(value: number): string {
 
   .hero-title {
     max-width: none;
+  }
+
+  .hero-title--single-line {
+    white-space: normal;
+    font-size: clamp(2.8rem, 7vw, 4.2rem);
   }
 
   .stats-grid {

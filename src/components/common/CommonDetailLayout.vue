@@ -141,6 +141,7 @@ interface MediaInfo {
   type: 'bilibili' | 'video' | 'image' | 'none';
   url: string;
   title: string;
+  thumbnailUrl?: string;
 }
 
 const props = defineProps<{
@@ -186,9 +187,7 @@ function scheduleScrollToTop(): void {
   }, 460);
 }
 
-const thumbnailUrl = computed(() => {
-  return fallbackFacadeImg;
-});
+const thumbnailUrl = computed(() => props.mediaInfo.thumbnailUrl || fallbackFacadeImg);
 
 const bottomBarClass = computed(() => {
   if (props.prevSlug && props.nextSlug) return "both";

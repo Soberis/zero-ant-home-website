@@ -17,10 +17,7 @@
     "dualArmHumanoid": "@:common.terms.dualArmHumanoidRobot",
     "mobileRobot": "@:common.terms.mobileRobot",
     "solutions": "@:common.terms.industrySolutions",
-    "videoCases": "@:common.section.videoCases",
-    "industryApplications": "@:common.section.industryApplications",
     "support": "服务支持",
-    "afterSales": "@:common.terms.afterSalesService",
     "download": "@:common.section.relatedDownloads",
     "faq": "常见问题",
     "careers": "人才招聘",
@@ -31,16 +28,10 @@
     "coreValues": "@:common.terms.coreValues",
     "culture": "@:common.terms.corporateCulture",
     "contact": "@:common.terms.contactUs",
-    "applications": "应用领域",
-    "medicalAuto": "医药自动化",
-    "semiProcessing": "@:common.terms.semiconductorProcessing",
-    "toggleMenu": "切换导航菜单",
-    "logoAlt": "零蚁科技标志"
+    "toggleMenu": "切换导航菜单"
   },
   "common": {
-    "backToTop": "返回顶部",
     "cta": {
-      "learnMore": "了解更多",
       "viewDetails": "查看详情",
       "viewSolutions": "查看解决方案",
       "contactTeam": "联系团队",
@@ -55,13 +46,9 @@
       "videoCases": "视频案例",
       "relatedDownloads": "相关下载",
       "industryApplications": "行业应用",
-      "productDetails": "产品详情",
       "applications": "应用场景",
       "parameters": "产品参数",
-      "relatedProducts": "相关产品",
-      "sameSeriesProducts": "同系列产品",
-      "overview": "页面概览",
-      "guide": "选型建议"
+      "relatedProducts": "相关产品"
     },
     "terms": {
       "smartManufacturing": "智能制造",
@@ -110,24 +97,8 @@
       "description": "从机器人产品、行业方案到支持交付，快速判断你的场景如何落地。",
       "panelLabel": "重点产品",
       "tabs": {
-        "multiOsVm": "Multi-OS VM",
-        "airos": "AiROS",
         "scara": "四轴机械臂",
         "humanoid": "双臂人形"
-      },
-      "highlights": {
-        "platform": {
-          "title": "自研机器人系统",
-          "desc": "AiROS 与多 OS 能力打通控制与执行。"
-        },
-        "product": {
-          "title": "系统与产品协同",
-          "desc": "覆盖控制平台、移动机器人与机械臂。"
-        },
-        "scenario": {
-          "title": "服务高可靠行业",
-          "desc": "聚焦医药、半导体与精密制造。"
-        }
       }
     },
     "coreProducts": {
@@ -140,8 +111,7 @@
     "videoCases": {
       "eyebrow": "Selected Cases",
       "title": "@:common.section.videoCases",
-      "description": "精选案例，帮助快速确认落地能力。",
-      "watchVideo": "观看视频"
+      "description": "精选案例，帮助快速确认落地能力。"
     },
     "industryApplications": {
       "eyebrow": "Scenario Coverage",
@@ -152,8 +122,7 @@
     },
     "partners": {
       "eyebrow": "Trusted By",
-      "title": "合作伙伴",
-      "description": "与科研院所和行业伙伴共建验证与交付。"
+      "title": "合作伙伴"
     }
   },
   "productPages": {
@@ -312,12 +281,12 @@
         "description": "通过多 OS 混合部署、离线编程和前置验证降低现场改造成本，缩短交付周期。"
       }
     },
-      "industries": {
-        "eyebrow": "Industry Matrix",
-        "title": "聚焦五大行业方向",
-        "description": "把现有零散应用收敛成清晰的行业入口，帮助用户更快定位场景、方案与案例。",
-        "applicationEntry": "代表应用",
-        "viewApplication": "查看相关应用",
+    "industries": {
+      "eyebrow": "Industry Matrix",
+      "title": "聚焦五大行业方向",
+      "description": "把现有零散应用收敛成清晰的行业入口，帮助用户更快定位场景、方案与案例。",
+      "applicationEntry": "代表应用",
+      "viewApplication": "查看相关应用",
       "medical": {
         "title": "医疗与生命科学",
         "summary": "围绕样本流转、试管上料、制药自动化等高要求场景，强调精度、安全与可追溯。",
@@ -425,8 +394,7 @@
     "title": "@:common.terms.afterSalesService",
     "description": "售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应",
     "heroActions": {
-      "downloads": "查看资料",
-      "contact": "联系支持"
+      "downloads": "查看资料"
     },
     "supportMapLabel": "支持路径",
     "fastResponse": "12小时内快速解决问题",
@@ -480,8 +448,6 @@
       "financingDesc": "团队目前处于天使轮融资阶段，对团队感兴趣或有合作意向，请邮件联系。创业团队时间宝贵，非诚勿扰！",
       "emailTips": "联系邮箱："
     },
-    "culture": "经世致用、正直诚信、务实发展、敏捷迭代",
-    "coreTeam": "核心团队",
     "teamOverview": "团队概况",
     "teamSize": "团队规模",
     "masterDegree": "硕士以上学位占比",
@@ -491,8 +457,6 @@
       "background": "来自北京航空航天大学杭州创新研究院科研团队，专注机器人系统与核心技术研发。"
     },
     "financingPlan": "融资计划",
-    "people": "人",
-    "yearsOld": "岁",
     "timeline": {
       "2017": "启动工业操作系统内核研发",
       "2020": "启动机器人控制系统研发，获得浙江省重大专项支持",
@@ -515,7 +479,6 @@
       "value4": "敏捷迭代"
     },
     "enterpriseCulture": {
-      "title": "@:common.terms.corporateCulture",
       "description": "零蚁科技以<b>创新驱动智造</b>为核心理念，构建开放协作的工程师文化：",
       "item1": "<b>厚积薄发</b>：深耕基础技术，十年磨一剑，打造核心系统",
       "item2": "<b>场景革命</b>：聚焦工业痛点，以机器人技术重塑生产流程",
@@ -526,305 +489,119 @@
   "videos": {
     "medical-automation": {
       "title": "@:common.terms.medicalAutomation",
-      "desc": "本视频展示了零蚁科技在医疗自动化领域的应用案例，包括自动化物品传送、智能调度等创新技术，助力医院与实验室提升效率与安全。",
-      "tags": [
-        "@:common.terms.medicalAutomation",
-        "智能调度",
-        "医院物流"
-      ]
+      "desc": "本视频展示了零蚁科技在医疗自动化领域的应用案例，包括自动化物品传送、智能调度等创新技术，助力医院与实验室提升效率与安全。"
     },
     "semiconductor": {
       "title": "@:common.terms.semiconductorProcessing",
-      "desc": "本视频展示了零蚁科技在半导体加工领域的自动化搬运、智能调度等创新应用，助力芯片制造与封装测试提质增效。",
-      "tags": [
-        "@:common.terms.semiconductorProcessing",
-        "@:common.terms.automation",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "本视频展示了零蚁科技在半导体加工领域的自动化搬运、智能调度等创新应用，助力芯片制造与封装测试提质增效。"
     },
     "polishing-robot": {
       "title": "打磨机器人",
-      "desc": "本视频展示了零蚁科技自主研发的打磨机器人在工业自动化生产线中的应用，通过智能控制与高精度打磨技术，实现高效、稳定的表面处理作业，提升产品质量与生产效率。",
-      "tags": [
-        "打磨机器人",
-        "@:common.terms.industrialAutomation",
-        "@:common.terms.surfaceTreatment"
-      ]
+      "desc": "本视频展示了零蚁科技自主研发的打磨机器人在工业自动化生产线中的应用，通过智能控制与高精度打磨技术，实现高效、稳定的表面处理作业，提升产品质量与生产效率。"
     },
     "composite-robot-application": {
       "title": "复合机器人应用",
-      "desc": "本视频展示了零蚁科技复合机器人在智能制造与自动化物流中的创新应用，通过多功能集成与智能调度，实现复杂场景下的高效协作与柔性生产。",
-      "tags": [
-        "@:common.terms.compositeRobot",
-        "@:common.terms.smartManufacturing",
-        "自动化物流"
-      ]
+      "desc": "本视频展示了零蚁科技复合机器人在智能制造与自动化物流中的创新应用，通过多功能集成与智能调度，实现复杂场景下的高效协作与柔性生产。"
     },
     "radar-360-scanning": {
       "title": "360度雷达扫描",
-      "desc": "展示零蚁科技先进的360度雷达扫描技术，实现全方位环境感知和精准定位，为机器人导航提供可靠的技术支撑。",
-      "tags": [
-        "雷达技术",
-        "AGV导航",
-        "@:common.terms.environmentalPerception"
-      ]
+      "desc": "展示零蚁科技先进的360度雷达扫描技术，实现全方位环境感知和精准定位，为机器人导航提供可靠的技术支撑。"
     },
     "agv-product-introduction": {
       "title": "AGV产品介绍",
-      "desc": "详细介绍零蚁科技自主研发的AGV自动导引车产品，包括核心技术特点、应用场景和实际运行效果展示。",
-      "tags": [
-        "AGV产品",
-        "自动导引",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "详细介绍零蚁科技自主研发的AGV自动导引车产品，包括核心技术特点、应用场景和实际运行效果展示。"
     },
     "ur-robot-llm-motion-capture": {
       "title": "UR机器人大语言模型动作抓取",
-      "desc": "本视频展示了零蚁科技基于大语言模型的UR机器人动作抓取与智能控制，通过AI与机器人深度融合，实现复杂任务的自主学习与高效执行，推动智能制造与人机协作新发展。",
-      "tags": [
-        "UR机器人",
-        "大语言模型",
-        "动作抓取",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "本视频展示了零蚁科技基于大语言模型的UR机器人动作抓取与智能控制，通过AI与机器人深度融合，实现复杂任务的自主学习与高效执行，推动智能制造与人机协作新发展。"
     },
     "four-axis-robot-open-fridge": {
       "title": "四轴机器人开冰箱",
-      "desc": "本视频展示了零蚁科技四轴机器人在自动化场景下开冰箱的创新应用，通过高精度运动控制与智能感知，实现复杂动作的自主执行，体现了机器人柔性作业与智能制造的深度融合。",
-      "tags": [
-        "四轴机器人",
-        "@:common.terms.automation",
-        "@:common.terms.smartManufacturing",
-        "@:common.terms.motionControl"
-      ]
+      "desc": "本视频展示了零蚁科技四轴机器人在自动化场景下开冰箱的创新应用，通过高精度运动控制与智能感知，实现复杂动作的自主执行，体现了机器人柔性作业与智能制造的深度融合。"
     },
     "servo-motor-station": {
       "title": "伺服电机台站",
-      "desc": "本视频展示了零蚁科技伺服电机台站的自动化控制与应用，通过高性能伺服系统实现精准定位与高效作业，助力智能制造与工业自动化升级。",
-      "tags": [
-        "伺服电机",
-        "@:common.terms.automation",
-        "@:common.terms.smartManufacturing",
-        "@:common.terms.industrialControl"
-      ]
+      "desc": "本视频展示了零蚁科技伺服电机台站的自动化控制与应用，通过高性能伺服系统实现精准定位与高效作业，助力智能制造与工业自动化升级。"
     },
     "plate-welding-demo": {
       "title": "中厚板焊接工艺演示",
-      "desc": "本视频展示了零蚁科技在工业焊接领域的创新应用，通过先进的机器人焊接技术实现中厚板的高质量、高效率焊接作业，体现了智能制造在工业制造中的重要作用。",
-      "tags": [
-        "焊接机器人",
-        "中厚板焊接",
-        "@:common.terms.industrialAutomation",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "本视频展示了零蚁科技在工业焊接领域的创新应用，通过先进的机器人焊接技术实现中厚板的高质量、高效率焊接作业，体现了智能制造在工业制造中的重要作用。"
     },
     "underground-garage-cleaning": {
       "title": "无人清扫车地下车库",
-      "desc": "本视频展示了零蚁科技无人清扫车在地下车库的智能清扫应用，通过自主导航与智能路径规划，实现复杂环境下的高效清洁作业，推动智能清洁与无人化运维的发展。",
-      "tags": [
-        "无人清扫车",
-        "地下车库",
-        "智能清洁",
-        "@:common.terms.autonomousNavigation"
-      ]
+      "desc": "本视频展示了零蚁科技无人清扫车在地下车库的智能清扫应用，通过自主导航与智能路径规划，实现复杂环境下的高效清洁作业，推动智能清洁与无人化运维的发展。"
     },
     "personalized-prescription-pharmaceutical": {
       "title": "个性化处方制药",
-      "desc": "本视频展示了零蚁科技在个性化处方制药领域的创新应用，通过智能自动化技术实现个性化药物定制，提升医疗精准度和患者治疗效果。",
-      "tags": [
-        "个性化制药",
-        "@:common.terms.medicalAutomation",
-        "智能定制",
-        "精准医疗"
-      ]
-    },
-    "composite-robot-transfer": {
-      "title": "复合机器人传板",
-      "desc": "展示零蚁科技复合机器人在工业自动化中的传板应用，通过多功能集成与智能控制，实现复杂物料搬运任务的高效执行。",
-      "tags": [
-        "@:common.terms.compositeRobot",
-        "传板作业",
-        "物料搬运",
-        "@:common.terms.industrialAutomation"
-      ]
+      "desc": "本视频展示了零蚁科技在个性化处方制药领域的创新应用，通过智能自动化技术实现个性化药物定制，提升医疗精准度和患者治疗效果。"
     },
     "mobile-transfer-robot": {
       "title": "移动传送机器人",
-      "desc": "展示零蚁科技移动传送机器人的自动化作业流程，实现物料在不同工位间的高效、精准传送，提升生产线柔性化水平。",
-      "tags": [
-        "@:common.terms.mobileRobot",
-        "传送作业",
-        "柔性生产",
-        "@:common.terms.smartLogistics"
-      ]
+      "desc": "展示零蚁科技移动传送机器人的自动化作业流程，实现物料在不同工位间的高效、精准传送，提升生产线柔性化水平。"
     },
     "offline-programming": {
       "title": "@:common.terms.offlineProgramming",
-      "desc": "本视频展示了零蚁科技先进的离线编程技术，通过数字化仿真与虚拟调试，实现机器人程序的高效开发与优化，大幅提升编程效率与作业安全性。",
-      "tags": [
-        "@:common.terms.offlineProgramming",
-        "数字化仿真",
-        "虚拟调试",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "本视频展示了零蚁科技先进的离线编程技术，通过数字化仿真与虚拟调试，实现机器人程序的高效开发与优化，大幅提升编程效率与作业安全性。"
     },
     "offline-programming-logo-drawing": {
       "title": "离线编程绘制logo",
-      "desc": "本视频展示了零蚁科技离线编程技术在精确绘制logo图案中的应用，通过轨迹控制与路径规划，实现机器人精确绘制复杂logo图案，体现离线编程技术的高精度控制能力。",
-      "tags": [
-        "@:common.terms.offlineProgramming",
-        "轨迹控制",
-        "logo绘制",
-        "精密控制"
-      ]
+      "desc": "本视频展示了零蚁科技离线编程技术在精确绘制logo图案中的应用，通过轨迹控制与路径规划，实现机器人精确绘制复杂logo图案，体现离线编程技术的高精度控制能力。"
     },
     "palletizing-robot": {
       "title": "@:common.terms.palletizingRobot",
-      "desc": "本视频展示了零蚁科技码垛机器人在物流自动化中的高效应用，通过智能路径规划与精准抓取控制，实现货物的高效堆垛与搬运，大幅提升仓储物流效率与作业安全性。",
-      "tags": [
-        "@:common.terms.palletizingRobot",
-        "物流自动化",
-        "@:common.terms.smartManufacturing",
-        "@:common.terms.industrialRobot"
-      ]
+      "desc": "本视频展示了零蚁科技码垛机器人在物流自动化中的高效应用，通过智能路径规划与精准抓取控制，实现货物的高效堆垛与搬运，大幅提升仓储物流效率与作业安全性。"
     },
     "dual-robot-ball-catching": {
       "title": "双机协作抓球",
-      "desc": "本视频展示了零蚁科技双机协作系统在复杂抓取任务中的创新应用，通过双机器人智能协作与视觉识别技术，实现两台机器人对高速运动物体的协同捕获，体现多机器人系统的协调控制能力和智能决策水平。",
-      "tags": [
-        "双机协作",
-        "视觉识别",
-        "@:common.terms.motionControl",
-        "智能抓取"
-      ]
+      "desc": "本视频展示了零蚁科技双机协作系统在复杂抓取任务中的创新应用，通过双机器人智能协作与视觉识别技术，实现两台机器人对高速运动物体的协同捕获，体现多机器人系统的协调控制能力和智能决策水平。"
     },
     "rice-molecular-experiment": {
       "title": "水稻分子重复实验",
-      "desc": "本视频展示了零蚁科技在农业科研领域的创新应用，通过高精度机器人技术实现水稻分子实验的自动化操作，包括样本处理、数据采集和实验流程的标准化，大幅提升农业科研效率和实验准确性，助力现代农业科技发展。",
-      "tags": [
-        "生物实验",
-        "分子检测",
-        "农业自动化",
-        "科研应用"
-      ]
+      "desc": "本视频展示了零蚁科技在农业科研领域的创新应用，通过高精度机器人技术实现水稻分子实验的自动化操作，包括样本处理、数据采集和实验流程的标准化，大幅提升农业科研效率和实验准确性，助力现代农业科技发展。"
     },
     "sketching-robot": {
       "title": "素描机器人",
-      "desc": "本视频展示了零蚁科技素描机器人的创新应用，通过先进的视觉识别技术和精密运动控制，实现机器人自主完成素描绘画创作。结合AI算法和机械臂控制，展现机器人技术在艺术创作领域的突破性应用。",
-      "tags": [
-        "素描机器人",
-        "视觉识别",
-        "艺术创作",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "本视频展示了零蚁科技素描机器人的创新应用，通过先进的视觉识别技术和精密运动控制，实现机器人自主完成素描绘画创作。结合AI算法和机械臂控制，展现机器人技术在艺术创作领域的突破性应用。"
     },
     "gantry-2d3d": {
       "title": "@:common.terms.gantry23Dof",
-      "desc": "展示零蚁科技二/三自由度龙门架机器人在工业自动化中的精准运动控制与高效作业能力，通过先进的轨迹规划算法和伺服控制技术，实现大范围空间内的精密定位与重复作业，适用于物料搬运、精密装配、检测测量等多种工业应用场景。",
-      "tags": [
-        "龙门架机器人",
-        "二自由度",
-        "三自由度",
-        "精密定位",
-        "@:common.terms.industrialAutomation",
-        "轨迹规划"
-      ]
+      "desc": "展示零蚁科技二/三自由度龙门架机器人在工业自动化中的精准运动控制与高效作业能力，通过先进的轨迹规划算法和伺服控制技术，实现大范围空间内的精密定位与重复作业，适用于物料搬运、精密装配、检测测量等多种工业应用场景。"
     },
     "assembly-robot": {
       "title": "装配机器人",
-      "desc": "本视频展示了零蚁科技装配机器人在工业自动化生产线中的精密装配应用，通过高精度定位与智能控制技术，实现复杂产品的自动化装配作业，大幅提升装配精度与生产效率，助力制造业智能化升级。",
-      "tags": [
-        "装配机器人",
-        "@:common.terms.industrialAutomation",
-        "@:common.terms.smartManufacturing",
-        "@:common.terms.precisionAssembly"
-      ]
+      "desc": "本视频展示了零蚁科技装配机器人在工业自动化生产线中的精密装配应用，通过高精度定位与智能控制技术，实现复杂产品的自动化装配作业，大幅提升装配精度与生产效率，助力制造业智能化升级。"
     },
     "mobile-robot-chassis": {
       "title": "自研移动机器人底盘",
-      "desc": "本视频展示了零蚁科技自主研发的移动机器人底盘，通过先进的导航定位技术和运动控制算法，实现复杂环境下的自主移动与精准定位，为各类移动机器人应用提供可靠的基础平台。",
-      "tags": [
-        "@:common.terms.mobileRobot",
-        "机器人底盘",
-        "@:common.terms.autonomousNavigation",
-        "智能移动"
-      ]
+      "desc": "本视频展示了零蚁科技自主研发的移动机器人底盘，通过先进的导航定位技术和运动控制算法，实现复杂环境下的自主移动与精准定位，为各类移动机器人应用提供可靠的基础平台。"
     },
     "fixed-rail-transfer-robot": {
       "title": "固定滑轨式传送机器人",
-      "desc": "本视频展示了零蚁科技固定滑轨式传送机器人的精准传送能力，通过高精度定位系统和智能控制算法，实现物料在固定轨道上的高效、稳定传送，适用于工业生产线中的精准物流传输需求。",
-      "tags": [
-        "固定滑轨",
-        "传送机器人",
-        "@:common.terms.industrialAutomation",
-        "精准定位",
-        "物流传输"
-      ]
+      "desc": "本视频展示了零蚁科技固定滑轨式传送机器人的精准传送能力，通过高精度定位系统和智能控制算法，实现物料在固定轨道上的高效、稳定传送，适用于工业生产线中的精准物流传输需求。"
     },
     "vr-remote-franka-dual-arm": {
       "title": "VR遥操作Franka双臂机器人",
-      "desc": "本视频展示了零蚁科技基于VR技术的Franka双臂机器人遥操作系统，通过沉浸式交互界面实现远程精准控制，展现人机协作在复杂作业场景中的创新应用。",
-      "tags": [
-        "VR遥操作",
-        "Franka机器人",
-        "双臂协作",
-        "远程控制",
-        "人机交互"
-      ]
+      "desc": "本视频展示了零蚁科技基于VR技术的Franka双臂机器人遥操作系统，通过沉浸式交互界面实现远程精准控制，展现人机协作在复杂作业场景中的创新应用。"
     },
     "robotstudio-remote-control": {
       "title": "上位机IDE远程控制",
-      "desc": "展示零蚁科技基于RobotStudioIDE的上位机远程控制与仿真技术，实现机器人系统的可视化编程、远程监控与虚拟调试，大幅提升开发效率与系统可靠性。",
-      "tags": [
-        "上位机控制",
-        "RobotStudioIDE",
-        "远程控制",
-        "仿真技术",
-        "@:common.terms.industrialAutomation"
-      ]
+      "desc": "展示零蚁科技基于RobotStudioIDE的上位机远程控制与仿真技术，实现机器人系统的可视化编程、远程监控与虚拟调试，大幅提升开发效率与系统可靠性。"
     },
     "robot-polishing-demo": {
       "title": "机器人打磨工艺演示",
-      "desc": "本视频展示了零蚁科技机器人打磨工艺的完整流程，通过先进的路径规划算法和力控技术，实现高精度的表面处理作业，展现工业自动化中机器人打磨技术的卓越性能。",
-      "tags": [
-        "机器人打磨",
-        "@:common.terms.surfaceTreatment",
-        "力控技术",
-        "@:common.terms.industrialAutomation"
-      ]
+      "desc": "本视频展示了零蚁科技机器人打磨工艺的完整流程，通过先进的路径规划算法和力控技术，实现高精度的表面处理作业，展现工业自动化中机器人打磨技术的卓越性能。"
     },
     "rtos-ethercat-validation": {
       "title": "RTOS-EtherCAT电机控制验证",
-      "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线技术的电机控制验证系统，通过毫秒级实时响应和多轴同步控制，实现高精度的工业运动控制解决方案。",
-      "tags": [
-        "RTOS",
-        "EtherCAT",
-        "电机控制",
-        "实时系统",
-        "@:common.terms.industrialControl"
-      ]
+      "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线技术的电机控制验证系统，通过毫秒级实时响应和多轴同步控制，实现高精度的工业运动控制解决方案。"
     },
     "lab-tube-loading": {
       "title": "生物实验室试管上料",
-      "desc": "展示零蚁科技在生物实验室自动化领域的创新应用，通过高精度机器人实现试管自动上料，提高实验室工作效率和准确性。",
-      "tags": [
-        "生物实验室",
-        "试管上料",
-        "@:common.terms.automation",
-        "医疗机器人",
-        "实验室自动化"
-      ]
+      "desc": "展示零蚁科技在生物实验室自动化领域的创新应用，通过高精度机器人实现试管自动上料，提高实验室工作效率和准确性。"
     },
     "outdoor-patrol-robot": {
       "title": "室外移动巡检机器人",
-      "desc": "演示零蚁科技室外移动巡检机器人的智能导航与巡检能力，通过激光SLAM和360度环境感知技术，实现复杂环境下的自主巡检任务。",
-      "tags": [
-        "移动巡检",
-        "室外机器人",
-        "激光SLAM",
-        "@:common.terms.autonomousNavigation",
-        "@:common.terms.environmentalPerception"
-      ]
+      "desc": "演示零蚁科技室外移动巡检机器人的智能导航与巡检能力，通过激光SLAM和360度环境感知技术，实现复杂环境下的自主巡检任务。"
     },
     "videoDetail": {
       "qrCodeTitle": "联系方式",
@@ -1042,130 +819,55 @@
     "multiOsVm": {
       "name": "@:common.terms.multiOsHybridHypervisor",
       "desc": "支持多操作系统并行运行，适用于控制器和边缘设备的异构部署，可在同一硬件底座上兼顾控制隔离、资源利用与系统协同，并支持后续平台扩展与统一管理。",
-      "seriesTitle": "@:common.terms.multiOsHybridHypervisor",
-      "seriesSubtitle": "异构系统部署方案",
-      "supportText": "适用于控制器、工业网关与边缘计算设备。",
-      "highlights": [
-        "混合部署",
-        "资源隔离",
-        "统一管理"
-      ]
+      "supportText": "适用于控制器、工业网关与边缘计算设备。"
     },
     "industrialRtos": {
       "name": "@:common.terms.industrialRealTimeOS",
       "desc": "面向工业控制的实时操作系统，保障关键任务稳定运行，并兼顾现场设备对确定性和可靠性的要求，适合长期在线与稳定交付。",
-      "seriesTitle": "@:common.terms.industrialRealTimeOS",
-      "seriesSubtitle": "高可靠实时内核",
-      "supportText": "适用于运动控制、现场设备与关键任务。",
-      "highlights": [
-        "自主可控",
-        "确定性执行",
-        "工业适配"
-      ]
+      "supportText": "适用于运动控制、现场设备与关键任务。"
     },
     "airos": {
       "name": "@:common.terms.airosRobotOperatingSystem",
       "desc": "面向机器人本体与控制平台的一体化操作系统，连接底层控制、上层应用与后续扩展能力，便于快速落地和持续演进。",
-      "seriesTitle": "@:common.terms.airosRobotOperatingSystem",
-      "seriesSubtitle": "机器人控制底座",
-      "supportText": "适用于机器人本体、控制平台与应用扩展。",
-      "highlights": [
-        "开箱即用",
-        "控制栈整合",
-        "应用扩展"
-      ]
+      "supportText": "适用于机器人本体、控制平台与应用扩展。"
     },
     "robotScheduler": {
       "name": "@:common.terms.robotSchedulerSystem",
       "desc": "统一调度多品牌移动机器人，实现跨设备协同作业，适合工厂物流与多机联动场景，提升任务分配与现场调度效率。",
-      "seriesTitle": "@:common.terms.robotSchedulerSystem",
-      "seriesSubtitle": "多机协同调度",
-      "supportText": "适用于工厂物流、跨工位搬运与协同任务。",
-      "highlights": [
-        "多机协同",
-        "跨品牌接入",
-        "任务编排"
-      ]
+      "supportText": "适用于工厂物流、跨工位搬运与协同任务。"
     },
     "gantry2d": {
       "name": "@:common.terms.gantry23Dof",
       "desc": "适用于直线搬运和大范围定位的龙门平台，面向上下料、搬运和精密定位等节拍明确的工业任务，强调稳定性与高重复精度。",
-      "seriesTitle": "@:common.terms.gantry23Dof",
-      "seriesSubtitle": "高效搬运平台",
-      "supportText": "适用于上下料、搬运与精密定位。",
-      "highlights": [
-        "高刚性结构",
-        "直线执行",
-        "定制空间范围"
-      ]
+      "supportText": "适用于上下料、搬运与精密定位。"
     },
     "scara4axis": {
       "name": "@:common.terms.fourAxisScaraRobot",
       "desc": "面向高速装配与分拣的紧凑型四轴机械臂，适合空间受限但节拍要求高的工位，兼顾快速取放与稳定运行。",
-      "seriesTitle": "@:common.terms.fourAxisScaraRobot",
-      "seriesSubtitle": "高速工业执行",
-      "supportText": "适用于装配、取放与节拍作业。",
-      "highlights": [
-        "高速取放",
-        "紧凑工位",
-        "稳定节拍"
-      ]
+      "supportText": "适用于装配、取放与节拍作业。"
     },
     "arm6axis": {
       "name": "@:common.terms.sixAxisArm",
       "desc": "支持复杂轨迹控制，适配焊接、喷涂和装配任务，并能覆盖更灵活的多姿态作业，适合需要连续轨迹和多工艺切换的场景。",
-      "seriesTitle": "@:common.terms.sixAxisArm",
-      "seriesSubtitle": "多姿态作业平台",
-      "supportText": "适用于焊接、打磨和复杂路径任务。",
-      "highlights": [
-        "多姿态运动",
-        "@:common.terms.complexTrajectory",
-        "多场景部署"
-      ]
+      "supportText": "适用于焊接、打磨和复杂路径任务。"
     },
     "dualArmHumanoid": {
       "name": "@:common.terms.dualArmHumanoidRobot",
       "desc": "用于双臂协作和高柔性任务的执行平台，适合灵巧操作、复合工序与多模态交互，可支持更复杂的人机协同任务。",
-      "seriesTitle": "@:common.terms.dualArmHumanoidRobot",
-      "seriesSubtitle": "双臂协作平台",
-      "supportText": "适用于灵巧操作和复合工序。",
-      "highlights": [
-        "双臂协作",
-        "灵巧执行",
-        "高柔性工位"
-      ]
+      "supportText": "适用于灵巧操作和复合工序。"
     },
     "mobileRobot": {
       "name": "@:common.terms.mobileRobot",
       "desc": "融合导航、调度与搬运能力的移动机器人，适合厂内物流、跨工位搬运与复合任务，支持多机协同和现场调度。",
-      "seriesTitle": "@:common.terms.mobileRobot",
-      "seriesSubtitle": "智能物流执行",
-      "supportText": "适用于厂内物流、跨工位搬运与调度。",
-      "highlights": [
-        "@:common.terms.autonomousNavigation",
-        "多传感融合",
-        "物流搬运"
-      ]
+      "supportText": "适用于厂内物流、跨工位搬运与调度。"
     }
   },
   "productDetail": {
-    "eyebrow": "@:common.section.productDetails",
-    "heroLabel": "关键参数",
     "features": "产品特点",
     "applications": "@:common.section.applications",
     "videoCases": "@:common.section.videoCases",
     "parameters": "@:common.section.parameters",
     "downloads": "@:common.section.relatedDownloads",
-    "relatedProducts": "@:common.section.relatedProducts",
-    "sameSeriesProducts": "@:common.section.sameSeriesProducts",
-    "downloadLabel": "@:common.terms.downloads",
-    "anchorOverview": "@:common.section.productDetails",
-    "anchorFeatures": "核心优势",
-    "anchorApplications": "@:common.section.applications",
-    "anchorCases": "@:common.section.videoCases",
-    "anchorParameters": "@:common.section.parameters",
-    "anchorDownloads": "@:common.section.relatedDownloads",
-    "relatedProductsEyebrow": "产品推荐",
     "backToList": "返回产品列表",
     "notFound": "未找到该产品"
   },

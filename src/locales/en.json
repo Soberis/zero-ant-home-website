@@ -17,10 +17,7 @@
     "dualArmHumanoid": "@:common.terms.dualArmHumanoidRobot",
     "mobileRobot": "@:common.terms.mobileRobot",
     "solutions": "Solutions",
-    "videoCases": "@:common.section.videoCases",
-    "industryApplications": "@:common.section.industryApplications",
     "support": "Support",
-    "afterSales": "@:common.terms.afterSalesService",
     "download": "@:common.terms.downloads",
     "faq": "FAQ",
     "careers": "Careers",
@@ -31,15 +28,10 @@
     "coreValues": "@:common.terms.coreValues",
     "culture": "@:common.terms.corporateCulture",
     "contact": "@:common.terms.contactUs",
-    "applications": "Applications",
-    "medicalAuto": "@:common.terms.medicalAutomation",
-    "semiProcessing": "@:common.terms.semiconductorProcessing",
     "toggleMenu": "Toggle navigation menu"
   },
   "common": {
-    "backToTop": "Back to Top",
     "cta": {
-      "learnMore": "Learn More",
       "viewDetails": "View Details",
       "viewSolutions": "Explore Solutions",
       "contactTeam": "Contact Team",
@@ -54,13 +46,9 @@
       "videoCases": "Video Cases",
       "relatedDownloads": "Related Downloads",
       "industryApplications": "Industry Applications",
-      "productDetails": "Product Details",
       "applications": "Application Scenarios",
       "parameters": "Product Parameters",
-      "relatedProducts": "Related Products",
-      "sameSeriesProducts": "Same Series",
-      "overview": "Page Overview",
-      "guide": "Selection Guide"
+      "relatedProducts": "Related Products"
     },
     "terms": {
       "smartManufacturing": "Smart Manufacturing",
@@ -109,24 +97,8 @@
       "description": "From robot products and industry solutions to delivery support, quickly see how your scenario can land.",
       "panelLabel": "Featured Product",
       "tabs": {
-        "multiOsVm": "Multi-OS VM",
-        "airos": "AiROS",
         "scara": "SCARA",
         "humanoid": "Humanoid"
-      },
-      "highlights": {
-        "platform": {
-          "title": "In-house robot systems",
-          "desc": "AiROS and multi-OS capabilities connect control and execution."
-        },
-        "product": {
-          "title": "Systems and products together",
-          "desc": "Cover control platforms, mobile robots, and robotic arms."
-        },
-        "scenario": {
-          "title": "Built for reliable industries",
-          "desc": "Focused on medical, semiconductor, and precision manufacturing."
-        }
       }
     },
     "coreProducts": {
@@ -139,8 +111,7 @@
     "videoCases": {
       "eyebrow": "Case Library",
       "title": "@:common.section.videoCases",
-      "description": "Representative cases that help confirm delivery capability quickly.",
-      "watchVideo": "Watch Video"
+      "description": "Representative cases that help confirm delivery capability quickly."
     },
     "industryApplications": {
       "eyebrow": "Scenario Coverage",
@@ -151,8 +122,7 @@
     },
     "partners": {
       "eyebrow": "Trusted By",
-      "title": "Partners",
-      "description": "Built with research institutions and industry partners to validate delivery."
+      "title": "Partners"
     }
   },
   "productPages": {
@@ -424,8 +394,7 @@
     "title": "@:common.terms.afterSalesService",
     "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
     "heroActions": {
-      "downloads": "View Downloads",
-      "contact": "Contact Support"
+      "downloads": "View Downloads"
     },
     "supportMapLabel": "Support Path",
     "fastResponse": "Rapid problem resolution within 12 hours",
@@ -479,8 +448,6 @@
       "financingDesc": "The team is currently in the angel round financing stage. If you are interested in the team or have cooperation intentions, please contact us by email. Startup teams value time, no casual inquiries please!",
       "emailTips": "Contact email:"
     },
-    "culture": "Practical application, Integrity and honesty, Pragmatic development, Agile iteration",
-    "coreTeam": "Core Team",
     "teamOverview": "Team Overview",
     "teamSize": "Team Size",
     "masterDegree": "Master's Degree and Above",
@@ -490,8 +457,6 @@
       "background": "Research team from Beihang University Hangzhou Innovation Research Institute, focused on robot systems and core technology R&D."
     },
     "financingPlan": "Financing Plan",
-    "people": "people",
-    "yearsOld": "years old",
     "timeline": {
       "2017": "Started industrial operating system kernel R&D",
       "2020": "Launched robot control system R&D, received support from Zhejiang Province major project",
@@ -516,7 +481,6 @@
       "value4": "Agile Iteration"
     },
     "enterpriseCulture": {
-      "title": "@:common.terms.corporateCulture",
       "description": "ZeroAnt Technology builds an open and collaborative engineering culture with <b>Innovation Drives Smart Manufacturing</b> as its core concept:",
       "item1": "<b>Deep Accumulation</b>: Deeply cultivating fundamental technologies, ten years to forge a sword, creating core systems",
       "item2": "<b>Scenario Revolution</b>: Focusing on industrial pain points, reshaping production processes with robotics technology",
@@ -527,306 +491,119 @@
   "videos": {
     "medical-automation": {
       "title": "@:common.terms.medicalAutomation",
-      "desc": "Showcases automated item transfer and intelligent scheduling in hospitals and labs, improving efficiency and safety.",
-      "tags": [
-        "@:common.terms.medicalAutomation",
-        "Intelligent Scheduling",
-        "Hospital Logistics"
-      ]
+      "desc": "Showcases automated item transfer and intelligent scheduling in hospitals and labs, improving efficiency and safety."
     },
     "semiconductor": {
       "title": "@:common.terms.semiconductorProcessing",
-      "desc": "Demonstrates automated handling and intelligent scheduling in chip manufacturing and testing.",
-      "tags": [
-        "@:common.terms.semiconductorProcessing",
-        "@:common.terms.automation",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "Demonstrates automated handling and intelligent scheduling in chip manufacturing and testing."
     },
     "polishing-robot": {
       "title": "Polishing Robot",
-      "desc": "Demonstrates intelligent polishing robot for efficient surface treatment in industrial automation.",
-      "tags": [
-        "Polishing Robot",
-        "@:common.terms.industrialAutomation",
-        "@:common.terms.surfaceTreatment"
-      ]
+      "desc": "Demonstrates intelligent polishing robot for efficient surface treatment in industrial automation."
     },
     "composite-robot-application": {
       "title": "Composite Robot Application",
-      "desc": "Showcases composite robots in smart manufacturing with multi-functional integration and intelligent scheduling.",
-      "tags": [
-        "@:common.terms.compositeRobot",
-        "@:common.terms.smartManufacturing",
-        "Automated Logistics"
-      ]
+      "desc": "Showcases composite robots in smart manufacturing with multi-functional integration and intelligent scheduling."
     },
     "radar-360-scanning": {
       "title": "360-Degree Radar Scanning",
-      "desc": "Advanced radar scanning technology for omnidirectional environmental perception and precise robot navigation.",
-      "tags": [
-        "Radar Technology",
-        "AGV Navigation",
-        "@:common.terms.environmentalPerception"
-      ]
+      "desc": "Advanced radar scanning technology for omnidirectional environmental perception and precise robot navigation."
     },
     "agv-product-introduction": {
       "title": "AGV Product Introduction",
-      "desc": "Introduction to AGV automated guided vehicles with core features and application demonstrations.",
-      "tags": [
-        "AGV Product",
-        "Automated Guidance",
-        "@:common.terms.smartManufacturing"
-      ]
-    },
-    "composite-robot-transfer": {
-      "title": "Composite Robot Transfer",
-      "desc": "Advanced composite robot systems for complex material handling tasks with integrated mobile and manipulator capabilities.",
-      "tags": [
-        "@:common.terms.compositeRobot",
-        "Transfer System",
-        "Mobile Manipulation"
-      ]
+      "desc": "Introduction to AGV automated guided vehicles with core features and application demonstrations."
     },
     "ur-robot-llm-motion-capture": {
       "title": "UR Robot LLM Motion Capture",
-      "desc": "Demonstrates ZeroAnt Technology's UR robot motion capture and intelligent control based on large language models, achieving autonomous learning and efficient execution of complex tasks through deep integration of AI and robotics.",
-      "tags": [
-        "UR Robot",
-        "Large Language Model",
-        "Motion Capture",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's UR robot motion capture and intelligent control based on large language models, achieving autonomous learning and efficient execution of complex tasks through deep integration of AI and robotics."
     },
     "four-axis-robot-open-fridge": {
       "title": "Four-Axis Robot Opening Fridge",
-      "desc": "Showcases ZeroAnt Technology's four-axis robot opening a fridge in automation scenarios, demonstrating autonomous execution of complex actions through high-precision motion control and intelligent perception.",
-      "tags": [
-        "Four-Axis Robot",
-        "@:common.terms.automation",
-        "@:common.terms.smartManufacturing",
-        "@:common.terms.motionControl"
-      ]
+      "desc": "Showcases ZeroAnt Technology's four-axis robot opening a fridge in automation scenarios, demonstrating autonomous execution of complex actions through high-precision motion control and intelligent perception."
     },
     "servo-motor-station": {
       "title": "Servo Motor Station",
-      "desc": "Demonstrates ZeroAnt Technology's servo motor station automation control and applications, achieving precise positioning and efficient operations through high-performance servo systems.",
-      "tags": [
-        "Servo Motor",
-        "@:common.terms.automation",
-        "@:common.terms.smartManufacturing",
-        "@:common.terms.industrialControl"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's servo motor station automation control and applications, achieving precise positioning and efficient operations through high-performance servo systems."
     },
     "plate-welding-demo": {
       "title": "Medium Plate Welding Process Demo",
-      "desc": "Demonstrates ZeroAnt Technology's innovative application in medium plate welding processes, achieving high-quality welding operations through intelligent welding technology and precise motion control, showcasing breakthrough applications of robotics in industrial welding.",
-      "tags": [
-        "Medium Plate Welding",
-        "Welding Robot",
-        "@:common.terms.industrialAutomation",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's innovative application in medium plate welding processes, achieving high-quality welding operations through intelligent welding technology and precise motion control, showcasing breakthrough applications of robotics in industrial welding."
     },
     "underground-garage-cleaning": {
       "title": "Underground Garage Cleaning Robot",
-      "desc": "Showcases ZeroAnt Technology's autonomous cleaning robot application in underground garage environments, achieving intelligent cleaning operations through autonomous navigation and environmental perception technology, providing efficient automated cleaning solutions for parking facilities.",
-      "tags": [
-        "Cleaning Robot",
-        "Underground Garage",
-        "@:common.terms.autonomousNavigation",
-        "Smart Cleaning"
-      ]
+      "desc": "Showcases ZeroAnt Technology's autonomous cleaning robot application in underground garage environments, achieving intelligent cleaning operations through autonomous navigation and environmental perception technology, providing efficient automated cleaning solutions for parking facilities."
     },
     "personalized-prescription-pharmaceutical": {
       "title": "Personalized Prescription Pharmaceutical",
-      "desc": "Showcases ZeroAnt Technology's innovation in personalized prescription pharmaceuticals, achieving personalized drug customization through intelligent automation technology.",
-      "tags": [
-        "Personalized Pharmaceuticals",
-        "@:common.terms.medicalAutomation",
-        "Intelligent Customization",
-        "Precision Medicine"
-      ]
+      "desc": "Showcases ZeroAnt Technology's innovation in personalized prescription pharmaceuticals, achieving personalized drug customization through intelligent automation technology."
     },
     "mobile-transfer-robot": {
       "title": "Mobile Transfer Robot",
-      "desc": "Showcases ZeroAnt Technology's mobile transfer robot automation workflow, achieving efficient and precise material transfer between different workstations.",
-      "tags": [
-        "@:common.terms.mobileRobot",
-        "Transfer Operations",
-        "Flexible Production",
-        "@:common.terms.smartLogistics"
-      ]
+      "desc": "Showcases ZeroAnt Technology's mobile transfer robot automation workflow, achieving efficient and precise material transfer between different workstations."
     },
     "offline-programming": {
       "title": "@:common.terms.offlineProgramming",
-      "desc": "Showcases ZeroAnt Technology's advanced offline programming technology, achieving efficient robot program development and optimization through digital simulation and virtual debugging.",
-      "tags": [
-        "@:common.terms.offlineProgramming",
-        "Digital Simulation",
-        "Virtual Debugging",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "Showcases ZeroAnt Technology's advanced offline programming technology, achieving efficient robot program development and optimization through digital simulation and virtual debugging."
     },
     "offline-programming-logo-drawing": {
       "title": "Offline Programming Logo Drawing",
-      "desc": "Demonstrates ZeroAnt Technology's offline programming technology in precisely drawing logo patterns through trajectory control and path planning.",
-      "tags": [
-        "@:common.terms.offlineProgramming",
-        "Trajectory Control",
-        "Logo Drawing",
-        "Precision Control"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's offline programming technology in precisely drawing logo patterns through trajectory control and path planning."
     },
     "palletizing-robot": {
       "title": "@:common.terms.palletizingRobot",
-      "desc": "Showcases ZeroAnt Technology's palletizing robot efficient application in logistics automation through intelligent path planning and precise grasping control.",
-      "tags": [
-        "@:common.terms.palletizingRobot",
-        "Logistics Automation",
-        "@:common.terms.smartManufacturing",
-        "@:common.terms.industrialRobot"
-      ]
+      "desc": "Showcases ZeroAnt Technology's palletizing robot efficient application in logistics automation through intelligent path planning and precise grasping control."
     },
     "dual-robot-ball-catching": {
       "title": "Dual Robot Ball Catching",
-      "desc": "Demonstrates ZeroAnt Technology's innovative dual-robot collaboration system in complex grasping tasks, achieving coordinated capture of high-speed moving objects through intelligent collaboration and visual recognition technology, showcasing multi-robot system coordination and intelligent decision-making capabilities.",
-      "tags": [
-        "Dual Robot Collaboration",
-        "Visual Recognition",
-        "@:common.terms.motionControl",
-        "Intelligent Grasping"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's innovative dual-robot collaboration system in complex grasping tasks, achieving coordinated capture of high-speed moving objects through intelligent collaboration and visual recognition technology, showcasing multi-robot system coordination and intelligent decision-making capabilities."
     },
     "rice-molecular-experiment": {
       "title": "Rice Molecular Repetition Experiment",
-      "desc": "Showcases ZeroAnt Technology's innovative application in agricultural research, achieving automated rice molecular experiments through high-precision robotics technology, including sample processing, data collection, and standardization of experimental workflows, significantly enhancing agricultural research efficiency and experimental accuracy.",
-      "tags": [
-        "Biological Experiment",
-        "Molecular Detection",
-        "Agricultural Automation",
-        "Research Application"
-      ]
+      "desc": "Showcases ZeroAnt Technology's innovative application in agricultural research, achieving automated rice molecular experiments through high-precision robotics technology, including sample processing, data collection, and standardization of experimental workflows, significantly enhancing agricultural research efficiency and experimental accuracy."
     },
     "sketching-robot": {
       "title": "Sketching Robot",
-      "desc": "Demonstrates ZeroAnt Technology's innovative sketching robot application, achieving autonomous sketching creation through advanced visual recognition technology and precision motion control. Combined with AI algorithms and robotic arm control, showcasing breakthrough applications of robotics in artistic creation.",
-      "tags": [
-        "Sketching Robot",
-        "Visual Recognition",
-        "Artistic Creation",
-        "@:common.terms.smartManufacturing"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's innovative sketching robot application, achieving autonomous sketching creation through advanced visual recognition technology and precision motion control. Combined with AI algorithms and robotic arm control, showcasing breakthrough applications of robotics in artistic creation."
     },
     "robot-polishing-demo": {
       "title": "Robot Polishing Process Demo",
-      "desc": "Showcases ZeroAnt Technology's complete robot polishing process through advanced path planning algorithms and force control technology.",
-      "tags": [
-        "Robot Polishing",
-        "@:common.terms.surfaceTreatment",
-        "Force Control Technology",
-        "@:common.terms.industrialAutomation"
-      ]
+      "desc": "Showcases ZeroAnt Technology's complete robot polishing process through advanced path planning algorithms and force control technology."
     },
     "rtos-ethercat-validation": {
       "title": "RTOS-EtherCAT Motor Control Validation",
-      "desc": "Demonstrates ZeroAnt Technology's motor control validation system based on RTOS real-time operating system and EtherCAT bus technology.",
-      "tags": [
-        "RTOS",
-        "EtherCAT",
-        "Motor Control",
-        "Real-time System",
-        "@:common.terms.industrialControl"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's motor control validation system based on RTOS real-time operating system and EtherCAT bus technology."
     },
     "lab-tube-loading": {
       "title": "Biological Laboratory Tube Loading",
-      "desc": "Showcases ZeroAnt Technology's innovative application in biological laboratory automation, achieving automatic tube loading through high-precision robotics to improve laboratory efficiency and accuracy.",
-      "tags": [
-        "Biological Laboratory",
-        "Tube Loading",
-        "@:common.terms.automation",
-        "Medical Robot",
-        "Laboratory Automation"
-      ]
+      "desc": "Showcases ZeroAnt Technology's innovative application in biological laboratory automation, achieving automatic tube loading through high-precision robotics to improve laboratory efficiency and accuracy."
     },
     "outdoor-patrol-robot": {
       "title": "Outdoor Mobile Patrol Robot",
-      "desc": "Demonstrates the intelligent navigation and patrol capabilities of ZeroAnt Technology's outdoor mobile patrol robot, utilizing LiDAR SLAM and 360-degree environmental perception technology to achieve autonomous patrol tasks in complex environments.",
-      "tags": [
-        "Mobile Patrol",
-        "Outdoor Robot",
-        "LiDAR SLAM",
-        "@:common.terms.autonomousNavigation",
-        "@:common.terms.environmentalPerception"
-      ]
+      "desc": "Demonstrates the intelligent navigation and patrol capabilities of ZeroAnt Technology's outdoor mobile patrol robot, utilizing LiDAR SLAM and 360-degree environmental perception technology to achieve autonomous patrol tasks in complex environments."
     },
     "gantry-2d3d": {
       "title": "2/3-DOF Gantry Robot",
-      "desc": "Demonstrates ZeroAnt Technology's 2/3-DOF gantry robot's precise motion control and efficient operation capabilities in industrial automation. Through advanced trajectory planning algorithms and servo control technology, achieves precise positioning and repetitive operations over large workspace areas, suitable for material handling, precision assembly, inspection and measurement applications.",
-      "tags": [
-        "Gantry Robot",
-        "2-DOF",
-        "3-DOF",
-        "Precision Positioning",
-        "@:common.terms.industrialAutomation",
-        "Trajectory Planning"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's 2/3-DOF gantry robot's precise motion control and efficient operation capabilities in industrial automation. Through advanced trajectory planning algorithms and servo control technology, achieves precise positioning and repetitive operations over large workspace areas, suitable for material handling, precision assembly, inspection and measurement applications."
     },
     "assembly-robot": {
       "title": "Assembly Robot",
-      "desc": "Demonstrates ZeroAnt Technology's advanced robotic assembly capabilities, showcasing precise component handling and assembly processes. Features high-precision positioning and intelligent control algorithms, suitable for complex assembly tasks in industrial automation.",
-      "tags": [
-        "Assembly",
-        "Precision Control",
-        "@:common.terms.industrialAutomation",
-        "Component Handling",
-        "Intelligent Assembly"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's advanced robotic assembly capabilities, showcasing precise component handling and assembly processes. Features high-precision positioning and intelligent control algorithms, suitable for complex assembly tasks in industrial automation."
     },
     "mobile-robot-chassis": {
       "title": "Self-Developed Mobile Robot Chassis",
-      "desc": "Showcases ZeroAnt Technology's self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control, and intelligent navigation systems for autonomous mobile robot applications.",
-      "tags": [
-        "@:common.terms.mobileRobot",
-        "@:common.terms.autonomousNavigation",
-        "Chassis Platform",
-        "@:common.terms.motionControl",
-        "Intelligent Mobility"
-      ]
+      "desc": "Showcases ZeroAnt Technology's self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control, and intelligent navigation systems for autonomous mobile robot applications."
     },
     "fixed-rail-transfer-robot": {
       "title": "Fixed Rail Transfer Robot",
-      "desc": "Demonstrates ZeroAnt Technology's fixed rail transfer robot with precise positioning capabilities. Features high-precision positioning systems and intelligent control algorithms for efficient and stable material transfer on fixed tracks, suitable for precise logistics transport needs in industrial production lines.",
-      "tags": [
-        "Fixed Rail",
-        "Transfer Robot",
-        "@:common.terms.industrialAutomation",
-        "Precise Positioning",
-        "Logistics Transport"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's fixed rail transfer robot with precise positioning capabilities. Features high-precision positioning systems and intelligent control algorithms for efficient and stable material transfer on fixed tracks, suitable for precise logistics transport needs in industrial production lines."
     },
     "vr-remote-franka-dual-arm": {
       "title": "VR Remote Franka Dual-Arm Robot",
-      "desc": "Showcases ZeroAnt Technology's VR-based remote operation system for Franka dual-arm robots, achieving precise remote control through immersive interaction interfaces. Demonstrates innovative applications of human-robot collaboration in complex operational scenarios, featuring intuitive VR control and real-time robot response for advanced teleoperation tasks.",
-      "tags": [
-        "VR Remote Operation",
-        "Franka Robot",
-        "Dual-Arm Collaboration",
-        "Remote Control",
-        "Human-Robot Interaction"
-      ]
+      "desc": "Showcases ZeroAnt Technology's VR-based remote operation system for Franka dual-arm robots, achieving precise remote control through immersive interaction interfaces. Demonstrates innovative applications of human-robot collaboration in complex operational scenarios, featuring intuitive VR control and real-time robot response for advanced teleoperation tasks."
     },
     "robotstudio-remote-control": {
       "title": "RobotStudio IDE Control",
-      "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities.",
-      "tags": [
-        "RobotStudio IDE",
-        "Remote Control",
-        "Simulation",
-        "@:common.terms.industrialRobot",
-        "Upper Computer Integration"
-      ]
+      "desc": "Demonstrates ZeroAnt Technology's advanced upper computer remote control technology, achieving seamless integration and remote operation of industrial robots through RobotStudio IDE. Showcases real-time robot control and simulation capabilities."
     },
     "videoDetail": {
       "qrCodeTitle": "Contact Information",
@@ -955,110 +732,47 @@
     "multiOsVm": {
       "name": "@:common.terms.multiOsHybridHypervisor",
       "desc": "Supports parallel operation of multiple operating systems for heterogeneous deployment across controllers and edge devices, balancing control isolation, resource utilization, and system coordination on the same hardware base with room for future expansion and unified management.",
-      "seriesTitle": "@:common.terms.multiOsHybridHypervisor",
-      "seriesSubtitle": "Heterogeneous System Integration Solution",
-      "supportText": "Fit for heterogeneous deployment across controllers, industrial gateways, and edge computing devices.",
-      "highlights": [
-        "Mixed deployment",
-        "Resource isolation",
-        "Unified management"
-      ]
+      "supportText": "Fit for heterogeneous deployment across controllers, industrial gateways, and edge computing devices."
     },
     "airos": {
       "name": "@:common.terms.airosRobotOperatingSystem",
       "desc": "An integrated operating system for robot bodies and control platforms, connecting low-level control, upper-layer applications, and future expansion to make deployment faster and evolution easier.",
-      "seriesTitle": "@:common.terms.airosRobotOperatingSystem",
-      "seriesSubtitle": "Operating System for Embodied Intelligence Era",
-      "supportText": "Fit for a unified software foundation across robot bodies, control platforms, and upper-layer applications.",
-      "highlights": [
-        "Out-of-the-box",
-        "Integrated control stack",
-        "Robot application expansion"
-      ]
+      "supportText": "Fit for a unified software foundation across robot bodies, control platforms, and upper-layer applications."
     },
     "industrialRtos": {
       "name": "@:common.terms.industrialRealTimeOS",
       "desc": "A real-time operating system for industrial control that keeps critical tasks running stably while meeting the determinism and reliability requirements of field equipment, suitable for long-term online operation and dependable delivery.",
-      "seriesTitle": "@:common.terms.industrialRealTimeOS",
-      "seriesSubtitle": "High Reliability and Autonomous Control",
-      "supportText": "Fit for high-reliability motion control, field equipment, and critical runtime scenarios.",
-      "highlights": [
-        "Autonomous control",
-        "Deterministic execution",
-        "Industrial-ready runtime"
-      ]
+      "supportText": "Fit for high-reliability motion control, field equipment, and critical runtime scenarios."
     },
     "robotScheduler": {
       "name": "@:common.terms.robotSchedulerSystem",
       "desc": "A unified scheduling system for multi-brand mobile robots, enabling cross-device collaboration for factory logistics and multi-robot coordination while improving task allocation and on-site dispatch efficiency.",
-      "seriesTitle": "@:common.terms.robotSchedulerSystem",
-      "seriesSubtitle": "Multi-Robot Coordination and Intelligent Scheduling",
-      "supportText": "Fit for multi-robot collaboration, cross-device linkage, and factory-level orchestration scenarios.",
-      "highlights": [
-        "Fleet coordination",
-        "Cross-brand access",
-        "Task orchestration"
-      ]
+      "supportText": "Fit for multi-robot collaboration, cross-device linkage, and factory-level orchestration scenarios."
     },
     "gantry2d": {
       "name": "@:common.terms.gantry23Dof",
       "desc": "A gantry platform for linear transfer and large-area positioning, suited to industrial tasks such as loading, unloading, handling, and precision positioning with clear takt demands, emphasizing stability and repeatability.",
-      "seriesTitle": "@:common.terms.gantry23Dof",
-      "seriesSubtitle": "Efficient Automated Handling Platform",
-      "supportText": "Fit for linear transfer, loading and unloading, and precision positioning over larger working ranges.",
-      "highlights": [
-        "High-rigidity structure",
-        "Linear execution",
-        "Custom work envelope"
-      ]
+      "supportText": "Fit for linear transfer, loading and unloading, and precision positioning over larger working ranges."
     },
     "scara4axis": {
       "name": "@:common.terms.fourAxisScaraRobot",
       "desc": "A compact 4-axis robotic arm for high-speed assembly and sorting, ideal for space-constrained stations with demanding cycle times while balancing fast pick-and-place with stable operation.",
-      "seriesTitle": "@:common.terms.fourAxisScaraRobot",
-      "seriesSubtitle": "Flexible and Efficient Industrial Assistant",
-      "supportText": "Fit for fast assembly, sorting, pick-and-place, and takt-driven industrial workstations.",
-      "highlights": [
-        "Fast pick-and-place",
-        "Compact workstation",
-        "Stable takt time"
-      ]
+      "supportText": "Fit for fast assembly, sorting, pick-and-place, and takt-driven industrial workstations."
     },
     "arm6axis": {
       "name": "@:common.terms.sixAxisArm",
       "desc": "Supports complex trajectory control for welding, spraying, and assembly, covering more flexible multi-pose work and scenarios that require continuous paths and frequent process changes.",
-      "seriesTitle": "@:common.terms.sixAxisArm",
-      "seriesSubtitle": "Multi-Scenario Intelligent Operations",
-      "supportText": "Fit for welding, grinding, spraying, and richer multi-posture trajectory tasks.",
-      "highlights": [
-        "Multi-posture motion",
-        "Complex trajectories",
-        "Multi-scenario deployment"
-      ]
+      "supportText": "Fit for welding, grinding, spraying, and richer multi-posture trajectory tasks."
     },
     "dualArmHumanoid": {
       "name": "@:common.terms.dualArmHumanoidRobot",
       "desc": "An execution platform for dual-arm collaboration and highly flexible tasks, suited to dexterous manipulation, compound processes, and multimodal interaction with support for more complex human-robot cooperation.",
-      "seriesTitle": "@:common.terms.dualArmHumanoidRobot",
-      "seriesSubtitle": "High-Flexibility Collaboration Platform",
-      "supportText": "Fit for dual-arm collaboration, dexterous manipulation, and highly flexible compound processes.",
-      "highlights": [
-        "Dual-arm collaboration",
-        "Dexterous execution",
-        "High-flexibility cell"
-      ]
+      "supportText": "Fit for dual-arm collaboration, dexterous manipulation, and highly flexible compound processes."
     },
     "mobileRobot": {
       "name": "@:common.terms.mobileRobot",
       "desc": "A mobile robot that combines navigation, scheduling, and handling capabilities, ideal for in-factory logistics, cross-station transfer, and compound tasks with multi-robot collaboration and on-site dispatch.",
-      "seriesTitle": "@:common.terms.mobileRobot",
-      "seriesSubtitle": "Intelligent Logistics and Handling",
-      "supportText": "Fit for factory logistics, cross-station transport, and compound task scheduling.",
-      "highlights": [
-        "Autonomous navigation",
-        "Multi-sensor fusion",
-        "Logistics handling"
-      ]
+      "supportText": "Fit for factory logistics, cross-station transport, and compound task scheduling."
     }
   },
   "careers": {
@@ -1151,23 +865,11 @@
     }
   },
   "productDetail": {
-    "eyebrow": "@:common.section.productDetails",
-    "heroLabel": "Key Metrics",
     "features": "Product Features",
     "applications": "@:common.section.applications",
     "videoCases": "@:common.section.videoCases",
     "parameters": "@:common.section.parameters",
     "downloads": "@:common.section.relatedDownloads",
-    "relatedProducts": "@:common.section.relatedProducts",
-    "sameSeriesProducts": "@:common.section.sameSeriesProducts",
-    "downloadLabel": "@:common.terms.downloads",
-    "anchorOverview": "@:common.section.productDetails",
-    "anchorFeatures": "Strengths",
-    "anchorApplications": "@:common.section.applications",
-    "anchorCases": "@:common.section.videoCases",
-    "anchorParameters": "@:common.section.parameters",
-    "anchorDownloads": "@:common.section.relatedDownloads",
-    "relatedProductsEyebrow": "Recommended",
     "backToList": "Back to Product List",
     "notFound": "Product not found"
   },

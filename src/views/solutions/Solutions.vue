@@ -1339,6 +1339,7 @@ function toggleApplicationArchive(): void {
 }
 
 .delivery-contact .section-eyebrow {
+  margin: 0;
   color: var(--brand-muted);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
@@ -1394,57 +1395,68 @@ function toggleApplicationArchive(): void {
 }
 
 .delivery-contact {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
   align-items: flex-start;
-  gap: 48px;
-  padding: 28px 32px;
-  border-top: none;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.92);
+  gap: 40px 56px;
+  padding: 30px 0 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+  border-radius: 0;
+  background: transparent;
 }
 
 .delivery-contact__copy {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  max-width: 720px;
 }
 
 .delivery-contact__title {
-  margin: 4px 0 8px;
-  font-size: 1.4rem;
-  font-weight: 500;
+  margin: 6px 0 10px;
+  font-size: 1.28rem;
+  font-weight: 600;
   color: var(--brand-text);
+  line-height: 1.35;
 }
 
 .delivery-contact__desc {
   margin: 0;
   font-size: 0.95rem;
   color: var(--brand-muted);
+  line-height: 1.8;
 }
 
 .delivery-contact__row {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .delivery-contact__label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  color: rgba(15, 23, 42, 0.52);
+  letter-spacing: 0.08em;
+  color: rgba(15, 23, 42, 0.46);
   text-transform: uppercase;
 }
 
 .delivery-contact__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 220px;
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  padding-top: 2px;
+  align-content: start;
 }
 
 .delivery-contact__link {
-  font-size: 1.1rem;
+  width: fit-content;
+  font-size: 1.02rem;
   font-weight: 600;
+  line-height: 1.45;
   color: var(--brand-text);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -1538,8 +1550,9 @@ function toggleApplicationArchive(): void {
   }
 
   .delivery-contact {
-    flex-direction: column;
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 24px;
   }
 
   .delivery-step {
