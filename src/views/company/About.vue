@@ -266,14 +266,14 @@ function formatIndex(value: number): string {
 .page-shell {
   width: 100%;
   max-width: var(--container-max-width);
-  padding: 0 48px;
+  padding: 0 var(--container-padding-x);
   margin: 0 auto;
 }
 
 .about-hero {
   position: relative;
-  min-height: clamp(560px, 78svh, 820px);
-  padding-top: 80px;
+  min-height: 100svh;
+  padding-top: var(--nav-height);
   overflow: hidden;
   background:
     radial-gradient(circle at 82% 24%, rgba(26, 58, 143, 0.08), transparent 28%),
@@ -309,7 +309,8 @@ function formatIndex(value: number): string {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: calc(clamp(560px, 78svh, 820px) - 80px);
+  min-height: calc(100svh - var(--nav-height));
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -340,7 +341,7 @@ function formatIndex(value: number): string {
 
 .page-section {
   padding: 88px 0;
-  scroll-margin-top: 80px;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 .detail-section__header {
@@ -658,7 +659,7 @@ function formatIndex(value: number): string {
   color: var(--brand-primary);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .intro-layout,
   .contact-panel {
     grid-template-columns: 1fr;
@@ -689,20 +690,7 @@ function formatIndex(value: number): string {
   }
 }
 
-@media (max-width: 768px) {
-  .page-shell {
-    padding: 0 20px;
-  }
-
-  .about-hero {
-    padding-top: 80px;
-  }
-
-  .hero-shell {
-    min-height: calc(clamp(560px, 78svh, 820px) - 80px);
-    justify-content: center;
-  }
-
+@media (max-width: 900px) {
   .hero-copy {
     padding: 0 0 12px;
   }
@@ -726,15 +714,7 @@ function formatIndex(value: number): string {
   }
 }
 
-@media (max-width: 560px) {
-  .about-hero {
-    padding-top: 72px;
-  }
-
-  .hero-shell {
-    min-height: calc(clamp(520px, 74svh, 720px) - 72px);
-  }
-
+@media (max-width: 640px) {
   .timeline-item {
     gap: 14px;
   }

@@ -320,7 +320,7 @@ function formatIndex(value: number): string {
 .support-shell {
   width: 100%;
   max-width: var(--container-max-width);
-  padding: 0 48px;
+  padding: 0 var(--container-padding-x);
   margin: 0 auto;
 }
 
@@ -330,13 +330,14 @@ function formatIndex(value: number): string {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  gap: 48px;
   align-items: start;
 }
 
 .hero-copy {
   position: relative;
+  max-width: 720px;
   padding: 16px 0 12px;
 }
 
@@ -415,6 +416,8 @@ function formatIndex(value: number): string {
 }
 
 .hero-panel {
+  width: 100%;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -735,7 +738,7 @@ function formatIndex(value: number): string {
   transform: translateY(-8px);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .support-hero {
     padding-top: 110px;
   }
@@ -750,15 +753,12 @@ function formatIndex(value: number): string {
   }
 
   .hero-panel {
+    max-width: none;
     padding-top: 8px;
   }
 }
 
-@media (max-width: 768px) {
-  .support-shell {
-    width: min(1200px, calc(100% - 24px));
-  }
-
+@media (max-width: 900px) {
   .support-hero {
     padding: 104px 0 52px;
   }
@@ -809,7 +809,7 @@ function formatIndex(value: number): string {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .support-hero {
     padding-top: 86px;
   }

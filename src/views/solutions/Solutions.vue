@@ -698,7 +698,7 @@ function toggleApplicationArchive(): void {
 .page-section {
   padding: 88px 0;
   border-top: 1px solid rgba(15, 23, 42, 0.05);
-  scroll-margin-top: 80px; /* prevent navbar overlap */
+  scroll-margin-top: calc(var(--nav-height) + 16px); /* prevent navbar overlap */
 }
 
 .solutions-page > .page-section:nth-of-type(even) {
@@ -1454,7 +1454,7 @@ function toggleApplicationArchive(): void {
   color: var(--brand-primary);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .hero-grid,
   .backbone-grid,
   .proof-feature-grid,
@@ -1491,11 +1491,7 @@ function toggleApplicationArchive(): void {
   }
 }
 
-@media (max-width: 768px) {
-  .page-shell {
-    padding: 0 20px;
-  }
-
+@media (max-width: 900px) {
   .industry-grid {
     grid-template-columns: 1fr;
   }
@@ -1553,7 +1549,7 @@ function toggleApplicationArchive(): void {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .hero-stat {
     flex-direction: column;
     align-items: flex-start;
