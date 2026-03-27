@@ -171,7 +171,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-container {
   width: 100%;
   max-width: var(--container-max-width);
-  padding: 0 48px;
+  padding: 0 var(--container-padding-x);
   margin: 0 auto;
 }
 
@@ -447,10 +447,6 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 @media (max-width: 900px) {
-  .products-container {
-    width: min(100%, calc(100% - 32px));
-  }
-
   .products-hero__panel {
     padding: 16px 0 0;
     border-left: none;
@@ -489,10 +485,6 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 @media (max-width: 640px) {
   .products-shell {
     padding: 72px 0 64px;
-  }
-
-  .products-container {
-    width: min(100%, calc(100% - 24px));
   }
 
   .products-hero__copy {

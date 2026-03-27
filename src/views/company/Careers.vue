@@ -323,7 +323,7 @@ function applyForPosition(position: Position): void {
 .page-shell {
   width: 100%;
   max-width: var(--container-max-width);
-  padding: 0 48px;
+  padding: 0 var(--container-padding-x);
   margin: 0 auto;
 }
 
@@ -333,12 +333,13 @@ function applyForPosition(position: Position): void {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  gap: 48px;
   align-items: start;
 }
 
 .hero-copy {
+  max-width: 720px;
   padding: 16px 0 12px;
 }
 
@@ -426,6 +427,8 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-panel {
+  width: 100%;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -795,7 +798,7 @@ function applyForPosition(position: Position): void {
   text-decoration: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .hero-grid,
   .contact-panel,
   .benefits-grid {
@@ -807,15 +810,12 @@ function applyForPosition(position: Position): void {
   }
 
   .hero-panel {
+    max-width: none;
     padding-left: 0;
   }
 }
 
-@media (max-width: 768px) {
-  .page-shell {
-    width: min(1200px, calc(100% - 24px));
-  }
-
+@media (max-width: 900px) {
   .careers-hero {
     padding: 104px 0 52px;
   }
@@ -853,7 +853,7 @@ function applyForPosition(position: Position): void {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .careers-hero {
     padding-top: 86px;
   }

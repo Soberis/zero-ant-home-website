@@ -266,14 +266,19 @@ function formatIndex(value: number): string {
 .page-shell {
   width: 100%;
   max-width: var(--container-max-width);
-  padding: 0 48px;
+  padding: 0 var(--container-padding-x);
   margin: 0 auto;
 }
 
 .about-hero {
   position: relative;
+<<<<<<< HEAD
   min-height: calc(100svh - var(--nav-height));
   padding-top: 0;
+=======
+  min-height: 100svh;
+  padding-top: var(--nav-height);
+>>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
   overflow: hidden;
   background:
     radial-gradient(circle at 82% 24%, rgba(26, 58, 143, 0.08), transparent 28%),
@@ -309,7 +314,12 @@ function formatIndex(value: number): string {
   position: relative;
   z-index: 1;
   width: 100%;
+<<<<<<< HEAD
   min-height: inherit;
+=======
+  min-height: calc(100svh - var(--nav-height));
+  box-sizing: border-box;
+>>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
   display: flex;
   align-items: center;
   justify-content: center;
@@ -340,7 +350,7 @@ function formatIndex(value: number): string {
 
 .page-section {
   padding: 88px 0;
-  scroll-margin-top: 80px;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 .detail-section__header {
@@ -658,7 +668,7 @@ function formatIndex(value: number): string {
   color: var(--brand-primary);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .intro-layout,
   .contact-panel {
     grid-template-columns: 1fr;
@@ -689,6 +699,7 @@ function formatIndex(value: number): string {
   }
 }
 
+<<<<<<< HEAD
 @media (max-width: 768px) {
   .page-shell {
     padding: 0 20px;
@@ -704,6 +715,9 @@ function formatIndex(value: number): string {
     justify-content: center;
   }
 
+=======
+@media (max-width: 900px) {
+>>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
   .hero-copy {
     padding: 0 0 12px;
   }
@@ -727,6 +741,7 @@ function formatIndex(value: number): string {
   }
 }
 
+<<<<<<< HEAD
 @media (max-width: 560px) {
   .about-hero {
     padding-top: 0;
@@ -737,6 +752,9 @@ function formatIndex(value: number): string {
     min-height: inherit;
   }
 
+=======
+@media (max-width: 640px) {
+>>>>>>> 319c8790a09d9b909617dbdc03e45dad410c11db
   .timeline-item {
     gap: 14px;
   }
