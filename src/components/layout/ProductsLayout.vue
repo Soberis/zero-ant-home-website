@@ -37,6 +37,10 @@
               v-for="metric in metrics"
               :key="`${metric.label}-${metric.value}`"
               class="products-hero__metric"
+              :class="{
+                'products-hero__metric--numeric': isNumericMetricValue(metric.value),
+                'products-hero__metric--text': !isNumericMetricValue(metric.value),
+              }"
             >
               <div class="products-hero__metric-value">{{ metric.value }}</div>
               <div class="products-hero__metric-label">{{ metric.label }}</div>
@@ -142,6 +146,7 @@ const resolvedActions = computed(() => props.actions ?? []);
 const resolvedGuideItems = computed(() => props.guideItems ?? []);
 
 const isHashLink = (to: string): boolean => to.startsWith("#");
+const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim());
 </script>
 
 <style scoped lang="less">
@@ -178,22 +183,26 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 .products-hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.96fr) minmax(330px, 1.04fr);
-  gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  gap: 48px;
+  align-items: start;
 }
 
 .products-hero__copy {
   position: relative;
-  max-width: 680px;
-  padding: 16px 0 12px;
+  max-width: min(740px, 100%);
+  padding: 24px 0 0;
 }
 
 .products-hero__panel {
   position: relative;
   display: flex;
   align-items: flex-start;
-  padding: 12px 0 0 24px;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 260px;
+  margin-left: 0;
+  padding: 24px 0 0;
   border-left: none;
   border-radius: 0;
   background: transparent;
@@ -235,14 +244,17 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-hero__description {
-  font-size: 0.98rem;
+  max-width: 40rem;
+  margin: 0 0 24px;
+  font-size: 1.02rem;
+  line-height: 1.85;
 }
 
 .products-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 .products-hero__action {
@@ -300,9 +312,11 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-hero__metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   position: relative;
-  padding-right: 0;
-  padding: 16px 0;
+  padding: 18px 0;
 }
 
 .products-hero__metric + .products-hero__metric {
@@ -310,19 +324,35 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 }
 
 .products-hero__metric-value {
-  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
-  font-weight: 650;
-  line-height: 1.15;
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(1.45rem, 1.9vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   color: var(--products-title);
 }
 
+.products-hero__metric--numeric .products-hero__metric-value {
+  font-size: clamp(2.1rem, 3vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.products-hero__metric--text .products-hero__metric-value {
+  white-space: nowrap;
+}
+
 .products-hero__metric-label {
-  margin-top: 6px;
-  font-size: 0.7rem;
-  line-height: 1.5;
-  letter-spacing: 0.08em;
+  font-size: 0.84rem;
+  line-height: 1.55;
   color: var(--products-text);
   font-weight: 500;
+}
+
+@media (min-width: 1360px) {
+  .products-hero__description {
+    white-space: nowrap;
+  }
 }
 
 .products-overview {
@@ -408,6 +438,11 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 
   .products-hero__copy {
     max-width: none;
+  }
+
+  .products-hero__panel {
+    max-width: none;
+    margin-left: 0;
   }
 }
 
