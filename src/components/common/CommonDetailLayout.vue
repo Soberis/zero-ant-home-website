@@ -238,9 +238,9 @@ onUnmounted(() => {
 
 /* Floating Player Box */
 .player-hero-container {
-  width: min(100%, 1000px, calc((100svh - var(--nav-height) - 176px) * 16 / 9));
+  width: min(100%, 1080px, calc((100svh - var(--nav-height) - 140px) * 16 / 9));
   aspect-ratio: 16 / 9;
-  max-height: min(56svh, 560px);
+  max-height: min(60svh, 600px);
   border-radius: 18px;
   overflow: hidden;
   background: #000;
@@ -326,7 +326,7 @@ onUnmounted(() => {
 /* Content Area */
 .content-wrapper {
   width: 100%;
-  max-width: 920px;
+  max-width: 940px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -335,26 +335,28 @@ onUnmounted(() => {
 
 .title-row {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  padding: 0 0 20px;
+  padding: 0 0 18px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .detail-title {
   margin: 0;
   text-align: left;
   flex: 1;
+  font-size: clamp(1.9rem, 2.4vw, 2.8rem);
   font-weight: 600;
+  line-height: 1.08;
   letter-spacing: -0.02em;
 }
 
 .content-desc-block {
   width: 100%;
-  max-width: 740px;
+  max-width: 760px;
   margin-bottom: 36px;
 }
 
@@ -532,10 +534,10 @@ onUnmounted(() => {
 @media (max-width: 1200px) {
   .common-detail-page { padding: 44px 28px 84px; }
   .player-hero-container {
-    width: min(100%, 920px, calc((100svh - var(--nav-height) - 156px) * 16 / 9));
-    max-height: min(52svh, 500px);
+    width: min(100%, 980px, calc((100svh - var(--nav-height) - 148px) * 16 / 9));
+    max-height: min(56svh, 540px);
   }
-  .content-wrapper { max-width: 880px; }
+  .content-wrapper { max-width: 900px; }
 }
 
 @media (max-width: 960px) {
@@ -547,6 +549,7 @@ onUnmounted(() => {
     margin-bottom: 36px;
   }
   .content-wrapper { max-width: 100%; }
+  .detail-title { font-size: clamp(1.75rem, 4vw, 2.35rem); }
 }
 
 @media (max-width: 768px) {
@@ -565,6 +568,7 @@ onUnmounted(() => {
     gap: 14px;
     margin-bottom: 24px;
   }
+  .detail-title { font-size: clamp(1.65rem, 7vw, 2.1rem); }
   .contact-cta {
     align-self: stretch;
     width: 100%;
