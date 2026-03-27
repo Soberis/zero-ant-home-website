@@ -196,8 +196,8 @@ interface RecruitmentPath {
 }
 
 const heroStats = computed(() => [
-  { value: "8+", label: t("careers.techAccumulation") },
-  { value: "50+", label: t("careers.successfulProjects") },
+  { value: "8", label: t("careers.techAccumulation") },
+  { value: "50", label: t("careers.successfulProjects") },
 ]);
 
 const recruitmentPaths = computed<RecruitmentPath[]>(() => [

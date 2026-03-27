@@ -272,8 +272,8 @@ function formatIndex(value: number): string {
 
 .about-hero {
   position: relative;
-  min-height: clamp(560px, 78svh, 820px);
-  padding-top: 80px;
+  min-height: calc(100svh - var(--nav-height));
+  padding-top: 0;
   overflow: hidden;
   background:
     radial-gradient(circle at 82% 24%, rgba(26, 58, 143, 0.08), transparent 28%),
@@ -309,7 +309,7 @@ function formatIndex(value: number): string {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: calc(clamp(560px, 78svh, 820px) - 80px);
+  min-height: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -695,11 +695,12 @@ function formatIndex(value: number): string {
   }
 
   .about-hero {
-    padding-top: 80px;
+    padding-top: 0;
+    min-height: calc(100svh - var(--nav-height));
   }
 
   .hero-shell {
-    min-height: calc(clamp(560px, 78svh, 820px) - 80px);
+    min-height: inherit;
     justify-content: center;
   }
 
@@ -728,11 +729,12 @@ function formatIndex(value: number): string {
 
 @media (max-width: 560px) {
   .about-hero {
-    padding-top: 72px;
+    padding-top: 0;
+    min-height: calc(100svh - var(--nav-height));
   }
 
   .hero-shell {
-    min-height: calc(clamp(520px, 74svh, 720px) - 72px);
+    min-height: inherit;
   }
 
   .timeline-item {
