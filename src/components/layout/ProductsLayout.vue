@@ -231,6 +231,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   font-size: 1rem;
   line-height: 1.82;
   color: var(--products-text);
+  font-weight: 500;
 }
 
 .products-hero__description {
@@ -241,7 +242,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .products-hero__action {
@@ -310,7 +311,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 
 .products-hero__metric-value {
   font-size: clamp(1.15rem, 1.7vw, 1.45rem);
-  font-weight: 600;
+  font-weight: 650;
   line-height: 1.15;
   color: var(--products-title);
 }
@@ -321,6 +322,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   line-height: 1.5;
   letter-spacing: 0.08em;
   color: var(--products-text);
+  font-weight: 500;
 }
 
 .products-overview {
@@ -343,7 +345,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 .products-guide__title {
   margin: 12px 0 10px;
   font-size: clamp(1.35rem, 2vw, 1.75rem);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.18;
   color: var(--products-title);
 }
@@ -392,6 +394,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
   font-size: 0.98rem;
   line-height: 1.35;
   color: var(--products-title);
+  font-weight: 600;
 }
 
 @media (max-width: 1100px) {

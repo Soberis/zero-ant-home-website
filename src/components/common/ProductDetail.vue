@@ -11,12 +11,13 @@
           <p class="product-hero__description" v-html="sanitizedDescription"></p>
 
           <div class="product-hero__actions">
-            <button class="btn btn-primary" @click="emits('back')">
-              {{ t("productDetail.backToList") }}
+            <button class="product-hero__back-link" type="button" @click="emits('back')">
+              <svg class="product-hero__back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+              <span>{{ t("productDetail.backToList") }}</span>
             </button>
             <router-link
               :to="{ path: '/about', hash: '#contact' }"
-              class="btn btn-secondary"
+              class="btn btn-secondary product-hero__contact-btn"
             >
               {{ t("common.cta.contactTeam") }}
             </router-link>
@@ -351,18 +352,46 @@ const heroImageSize = computed<HeroImageSize>(() => {
   max-width: 560px;
   font-size: 1.125rem;
   line-height: 1.6;
-  color: #4a4a4a;
+  color: #556074;
+  font-weight: 500;
 }
 
 .product-hero__actions {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 36px;
+  gap: 20px;
+  margin-top: 30px;
 }
 
-/* Cleaned up action buttons, now using global btn class */
+.product-hero__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(15, 23, 42, 0.76);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.product-hero__back-link:hover {
+  color: #163a87;
+}
+
+.product-hero__back-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.product-hero__contact-btn {
+  min-width: 144px;
+}
 
 .product-hero__media-wrapper {
   position: relative;
@@ -442,11 +471,11 @@ const heroImageSize = computed<HeroImageSize>(() => {
   border-radius: 0;
   scroll-margin-top: 100px;
   background: transparent;
-  border-top: 1px solid rgba(15, 23, 42, 0.05);
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .detail-section__header {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   text-align: left;
 }
 
@@ -463,7 +492,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
 .title-en {
   font-size: 1rem;
   font-weight: 600;
-  color: #667085;
+  color: rgba(15, 23, 42, 0.5);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -479,8 +508,8 @@ const heroImageSize = computed<HeroImageSize>(() => {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-  padding: 20px 0;
+  gap: 32px;
+  padding: 8px 0 0;
 }
 
 .feature-card {
@@ -515,7 +544,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
 
 .feature-card__title {
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
   color: #0f172a;
   margin: 0;
@@ -524,8 +553,30 @@ const heroImageSize = computed<HeroImageSize>(() => {
 .feature-card__description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #475569;
+  color: #556074;
+  font-weight: 500;
   margin: 8px 0 0;
+}
+
+.params-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 28px;
+  padding-top: 8px;
+}
+
+.param-card {
+  padding-top: 18px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.param-card__label {
+  font-size: 0.76rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #667085;
+  font-weight: 600;
 }
 
 .param-card__value {
@@ -546,17 +597,17 @@ const heroImageSize = computed<HeroImageSize>(() => {
   justify-content: space-between;
   min-height: 220px;
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #ffffff;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .download-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   border-color: rgba(26, 58, 143, 0.2);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
 }
 
 .download-card__type {
@@ -584,7 +635,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
   border-top: 1px solid rgba(217, 226, 236, 0.9);
   color: #64748b;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.3s ease;
 }
 
@@ -671,7 +722,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
 
   .features-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
   }
 
   .feature-card {
@@ -689,9 +740,10 @@ const heroImageSize = computed<HeroImageSize>(() => {
   
   .product-hero__actions {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .product-hero__action {
+  .product-hero__contact-btn {
     width: 100%;
   }
 

@@ -121,7 +121,7 @@ const categoryLabel = computed(() =>
 }
 
 .product-card:hover .product-card__image {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .product-card__content {
@@ -158,7 +158,7 @@ const categoryLabel = computed(() =>
   font-size: clamp(1.4rem, 2vw, 1.8rem);
   line-height: 1.1;
   letter-spacing: -0.03em;
-  font-weight: 500;
+  font-weight: 600;
   color: #0f172a;
 }
 
@@ -167,6 +167,7 @@ const categoryLabel = computed(() =>
   font-size: 0.96rem;
   line-height: 1.7;
   color: #556074;
+  font-weight: 500;
   min-height: calc(1.7em * 3);
   display: -webkit-box;
   overflow: hidden;
@@ -178,40 +179,39 @@ const categoryLabel = computed(() =>
 .product-card__action {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 6px;
   width: fit-content;
-  min-width: 156px;
-  margin-top: 22px;
-  padding: 11px 18px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #0f172a;
+  min-width: 0;
+  margin-top: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(15, 23, 42, 0.76);
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
-    background-color 0.25s ease, color 0.25s ease;
+  transition: color 0.25s ease;
 }
 
 .product-card__action-arrow {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
-  transition: transform 0.25s ease;
+  opacity: 0.75;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .product-card__action:hover {
-  transform: translateY(-2px);
-  background: #ffffff;
   color: #1a3a8f;
-  border-color: rgba(26, 58, 143, 0.28);
-  box-shadow: var(--shadow-sm);
 }
 
 .product-card__action:hover .product-card__action-arrow {
-  transform: translateX(4px);
+  transform: translateX(3px);
+  opacity: 1;
 }
 
 @media (max-width: 1100px) {
@@ -243,7 +243,7 @@ const categoryLabel = computed(() =>
   }
 
   .product-card__action {
-    width: 100%;
+    width: auto;
   }
 }
 
