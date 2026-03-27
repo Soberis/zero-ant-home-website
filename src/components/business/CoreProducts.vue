@@ -12,12 +12,6 @@
       <section v-for="group in productGroups" :key="group.key" class="product-group">
         <div class="group-header">
           <h3 class="group-title">{{ group.title }}</h3>
-          <router-link :to="group.to" class="group-link">
-            <span>{{ t("common.cta.viewProducts") }}</span>
-            <svg class="group-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </router-link>
         </div>
 
         <div class="products-grid">
@@ -54,14 +48,12 @@ const productGroups = computed(() => [
   {
     key: 'system',
     title: t('nav.systemProducts'),
-    to: '/system-products',
     items: products
       .filter((product) => product.category === 'system'),
   },
   {
     key: 'robot',
     title: t('nav.robotProducts'),
-    to: '/robot-products',
     items: products
       .filter((product) => product.category === 'robot'),
   },
@@ -110,7 +102,6 @@ function getProductSummary(product: (typeof products)[number]): string {
 .group-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-md);
   margin-bottom: 0;
   padding-left: 0;
@@ -121,34 +112,8 @@ function getProductSummary(product: (typeof products)[number]): string {
   font-family: "Outfit", sans-serif;
   font-size: 1.375rem;
   font-weight: 500;
-  color: var(--color-text);
+  color: currentColor;
   letter-spacing: -0.02em;
-}
-
-.group-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-text-secondary);
-  font-size: 0.88rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color var(--transition-fast);
-  white-space: nowrap;
-}
-
-.group-link .group-link-arrow {
-  width: 16px;
-  height: 16px;
-  transition: transform var(--transition-fast), color var(--transition-fast);
-}
-
-.group-link:hover {
-  color: var(--color-primary);
-}
-
-.group-link:hover .group-link-arrow {
-  transform: translateX(4px);
 }
 
 .products-grid {
@@ -298,10 +263,6 @@ function getProductSummary(product: (typeof products)[number]): string {
 
   .group-title {
     font-size: 1.25rem;
-  }
-
-  .group-link {
-    font-size: 0.88rem;
   }
 
   .card-title {

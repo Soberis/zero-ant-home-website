@@ -42,7 +42,6 @@
     "cta": {
       "learnMore": "了解更多",
       "viewDetails": "查看详情",
-      "viewProducts": "查看产品矩阵",
       "viewSolutions": "查看解决方案",
       "contactTeam": "联系团队",
       "downloadNow": "立即下载",
@@ -267,8 +266,8 @@
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "Industry Solutions",
-      "title": "高可靠行业的机器人与智能系统解决方案",
-      "description": "零蚁科技以 AiROS、实时控制、调度协同与柔性部署能力为底座，面向医疗、半导体、智能制造、物流巡检与科研实验场景提供可落地的行业方案。",
+      "title": "面向高可靠场景的机器人与智能系统方案",
+      "description": "零蚁科技以 AiROS、实时控制、调度协同与柔性部署能力为底座，覆盖医疗、半导体、智能制造、物流巡检与科研实验场景。",
       "primaryCta": "查看行业方案",
       "secondaryCta": "查看交付方式",
       "stats": {
@@ -316,7 +315,7 @@
     "industries": {
       "eyebrow": "Industry Matrix",
       "title": "聚焦五大行业方向",
-      "description": "把现有零散应用收敛成清晰的行业入口，让用户更快匹配到自己的业务场景。",
+      "description": "把现有零散应用收敛成清晰的行业入口，帮助用户更快定位场景、方案与案例。",
       "viewApplication": "查看相关应用",
       "medical": {
         "title": "医疗与生命科学",
@@ -369,20 +368,20 @@
       "title": "用少量案例证明落地能力",
       "description": "精选更具代表性的案例，展示 ZeroAnt 在不同行业中的真实交付能力。",
       "watchCase": "查看案例详情",
-      "guide": "先展示 3 个代表性视频案例，用来证明跨行业落地能力；完整视频与应用索引按需展开。",
+      "guide": "先看 3 个代表性视频案例，再按需展开完整视频与行业应用索引。",
       "expandVideos": "查看全部视频案例 ({count})",
-      "collapseVideos": "收起视频案例",
-      "browseApplications": "查看行业应用索引",
-      "expandApplications": "查看行业应用索引 ({count})",
-      "collapseApplications": "收起行业应用索引",
+      "collapseVideos": "收起全部视频案例",
+      "browseApplications": "查看所有行业应用",
+      "expandApplications": "查看所有行业应用 ({count})",
+      "collapseApplications": "收起所有行业应用",
       "allVideos": "全部视频案例",
-      "applicationIndex": "行业应用索引"
+      "applicationIndex": "所有行业应用"
     },
     "more": {
       "eyebrow": "More",
       "title": "更多视频与行业应用",
       "description": "探索更多 ZeroAnt 机器人在不同行业与复杂场景下的成功验证与应用视频。",
-      "videos": "更多视频案例",
+      "videos": "查看更多视频案例",
       "applications": "更多行业应用",
       "videoGuide": "当前先展示 {visible} 个代表性视频，展开后可继续浏览全部 {total} 个案例。",
       "applicationGuide": "当前先展示 {visible} 个高相关应用入口，展开后可继续浏览全部 {total} 个行业应用。",

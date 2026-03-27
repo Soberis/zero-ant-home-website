@@ -143,18 +143,43 @@
         <p class="proof-guide">
           {{ t("solutionsPage.proof.guide") }}
         </p>
-        <button
-          type="button"
-          class="text-link proof-inline-link"
-          :class="{ active: showAllApps }"
-          @click="toggleApplicationArchive"
-        >
-          {{
-            showAllApps
-              ? t("solutionsPage.proof.collapseApplications")
-              : t("solutionsPage.proof.browseApplications")
-          }}
-        </button>
+
+        <div class="proof-actions">
+          <button
+            type="button"
+            class="show-more-btn"
+            :class="{ active: showAllVideos }"
+            @click="toggleVideoArchive"
+          >
+            <span>
+              {{
+                showAllVideos
+                  ? t("solutionsPage.proof.collapseVideos")
+                  : t("solutionsPage.proof.expandVideos", {
+                      count: allVideoCards.length,
+                    })
+              }}
+            </span>
+            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <button
+            type="button"
+            class="show-more-btn show-more-btn--secondary"
+            :class="{ active: showAllApps }"
+            @click="toggleApplicationArchive"
+          >
+            <span>
+              {{
+                showAllApps
+                  ? t("solutionsPage.proof.collapseApplications")
+                  : t("solutionsPage.proof.expandApplications", {
+                      count: allApplications.length,
+                    })
+              }}
+            </span>
+            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </div>
 
         <div class="proof-feature-grid">
           <VideoCard
@@ -167,22 +192,6 @@
             @leave="clearMoreVideoHover"
             @click="goToVideo(card.slug)"
           />
-        </div>
-
-        <div class="proof-actions">
-          <button type="button" class="show-more-btn" :class="{ active: showAllVideos }" @click="toggleVideoArchive">
-            <span>
-              {{
-                showAllVideos
-                  ? t("solutionsPage.proof.collapseVideos")
-                  : t("solutionsPage.proof.expandVideos", {
-                      count: allVideoCards.length,
-                    })
-              }}
-            </span>
-            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-
         </div>
 
         <div v-if="showAllVideos" class="proof-archive">
@@ -546,7 +555,7 @@ function toggleApplicationArchive(): void {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
   gap: 48px;
-  align-items: end;
+  align-items: start;
   max-width: 1220px;
 }
 
@@ -627,10 +636,10 @@ function toggleApplicationArchive(): void {
   justify-content: flex-start;
   gap: 0;
   width: 100%;
-  max-width: 240px;
+  max-width: 260px;
   margin-left: 0;
   padding-left: 28px;
-  padding-top: 12px;
+  padding-top: 24px;
   border-left: 1px solid rgba(15, 23, 42, 0.08);
 }
 
@@ -1188,17 +1197,6 @@ function toggleApplicationArchive(): void {
   line-height: 1.75;
 }
 
-.proof-inline-link {
-  margin: -18px 0 28px;
-  color: rgba(15, 23, 42, 0.62);
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.proof-inline-link.active {
-  color: var(--brand-primary);
-}
-
 .proof-feature-grid {
   display: grid;
   gap: 32px;
@@ -1209,9 +1207,9 @@ function toggleApplicationArchive(): void {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-  margin-top: 28px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin: 0 0 28px;
+  padding-top: 0;
+  border-top: none;
 }
 
 .proof-archive {
@@ -1259,6 +1257,24 @@ function toggleApplicationArchive(): void {
 
 .show-more-btn:hover {
   color: var(--brand-primary);
+}
+
+.show-more-btn--secondary {
+  color: rgba(15, 23, 42, 0.62);
+}
+
+.show-more-btn--secondary.active {
+  color: var(--brand-primary);
+}
+
+.show-more-arrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.show-more-btn.active .show-more-arrow {
+  transform: rotate(180deg);
 }
 
 .delivery-contact .section-eyebrow {
@@ -1451,10 +1467,6 @@ function toggleApplicationArchive(): void {
     padding: 22px 22px 20px;
   }
 
-  .proof-actions {
-    gap: 16px;
-  }
-
   .delivery-contact {
     flex-direction: column;
     gap: 24px;
@@ -1487,22 +1499,6 @@ function toggleApplicationArchive(): void {
     flex-direction: column;
     align-items: flex-start;
   }
-}
-
-.show-more-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.show-more-arrow {
-  width: 14px;
-  height: 14px;
-  transition: transform 0.3s ease;
-}
-
-.show-more-btn.active .show-more-arrow {
-  transform: rotate(180deg);
 }
 
 /* 统一圆角到 24px (大卡片) 和 16px (内部小项) */

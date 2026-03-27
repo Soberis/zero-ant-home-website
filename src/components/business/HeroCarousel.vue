@@ -28,16 +28,6 @@
             {{ t('home.hero.panelLabel') }} · {{ activeSlide.shortTitle }}
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
-          <div class="hero-actions" style="transition-delay: 0.4s">
-            <router-link
-              to="/robot-products"
-              class="hero-link"
-              @click.stop
-            >
-              {{ t('common.cta.viewProducts') }}
-              <svg class="hero-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </router-link>
-          </div>
         </div>
         
         <!-- Moved indicators to bottom right -->
@@ -321,58 +311,6 @@ onUnmounted(() => {
   line-height: 1.75;
 }
 
-.hero-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 24px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: var(--color-primary);
-  color: #ffffff;
-  font-size: 0.92rem;
-  font-weight: 600;
-  transition: color 0.25s ease, transform 0.25s ease, border-color 0.25s ease,
-    background-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.hero-link-arrow {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  transition: transform 0.25s ease;
-}
-
-.hero-link:link,
-.hero-link:visited,
-.hero-link:active {
-  color: #ffffff;
-}
-
-.hero-link:hover {
-  color: #ffffff;
-  text-decoration: none;
-  transform: none;
-  background: var(--color-primary-dark);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-.hero-link:hover .hero-link-arrow {
-  transform: translateX(4px);
-}
-
-.hero-link:focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.72);
-  outline-offset: 3px;
-}
-
-.hero-actions {
-  display: flex;
-  align-items: flex-start;
-  margin-top: 28px;
-}
-
 .hero-indicators {
   position: absolute;
   right: var(--container-padding-x);
@@ -461,10 +399,6 @@ onUnmounted(() => {
 
   .hero-title {
     max-width: 100%;
-  }
-
-  .hero-actions {
-    align-items: flex-start;
   }
 
   .hero-indicators {

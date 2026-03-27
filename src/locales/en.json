@@ -41,7 +41,6 @@
     "cta": {
       "learnMore": "Learn More",
       "viewDetails": "View Details",
-      "viewProducts": "Browse Products",
       "viewSolutions": "Explore Solutions",
       "contactTeam": "Contact Team",
       "downloadNow": "Download Now",
@@ -266,8 +265,8 @@
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "@:common.terms.industrySolutions",
-      "title": "High-reliability robotics and intelligent system solutions",
-      "description": "Powered by AiROS, real-time control, scheduling collaboration and flexible deployment, ZeroAnt delivers practical solutions for medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
+      "title": "Robotics and intelligent system solutions for high-reliability scenarios",
+      "description": "Powered by AiROS, real-time control, scheduling collaboration and flexible deployment as the backbone, ZeroAnt covers medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
       "primaryCta": "Explore Industries",
       "secondaryCta": "View Delivery",
       "stats": {
@@ -315,7 +314,7 @@
     "industries": {
       "eyebrow": "Industry Matrix",
       "title": "Focused on five industry directions",
-      "description": "Existing scattered applications are regrouped into clearer industry entries so users can find their scenarios faster.",
+      "description": "Existing scattered applications are regrouped into clearer industry entries to help users locate scenarios, solutions and cases faster.",
       "viewApplication": "View related application",
       "medical": {
         "title": "Medical & Life Science",
@@ -368,25 +367,25 @@
       "title": "A few cases are enough to prove delivery capability",
       "description": "Selected cases with stronger representativeness show how ZeroAnt delivers across industries in practice.",
       "watchCase": "View case details",
-      "guide": "Start with 3 representative video cases to prove cross-industry delivery. Full videos and the application index can be expanded on demand.",
+      "guide": "Start with 3 representative video cases, then expand the full video set and industry application index on demand.",
       "expandVideos": "View all video cases ({count})",
-      "collapseVideos": "Collapse video cases",
-      "browseApplications": "View application index",
-      "expandApplications": "View application index ({count})",
-      "collapseApplications": "Collapse application index",
+      "collapseVideos": "Collapse all video cases",
+      "browseApplications": "View all industry applications",
+      "expandApplications": "View all industry applications ({count})",
+      "collapseApplications": "Collapse all industry applications",
       "allVideos": "All video cases",
-      "applicationIndex": "Application index"
+      "applicationIndex": "All industry applications"
     },
     "more": {
       "eyebrow": "More",
       "title": "More videos and application entries",
       "description": "The main page keeps only curated content. More videos and application entries are grouped here so users can continue browsing without disrupting the page rhythm.",
-      "videos": "More video cases",
-      "applications": "More applications",
+      "videos": "View more video cases",
+      "applications": "More industry applications",
       "videoGuide": "Showing {visible} representative videos first. Expand to browse all {total} cases.",
-      "applicationGuide": "Showing {visible} high-relevance application entries first. Expand to browse all {total} applications.",
+      "applicationGuide": "Showing {visible} high-relevance application entries first. Expand to browse all {total} industry applications.",
       "expandVideos": "Expand all video cases ({count}+)",
-      "expandApplications": "Expand all applications ({count}+)",
+      "expandApplications": "Expand all industry applications ({count}+)",
       "collapse": "Collapse list"
     },
     "delivery": {
