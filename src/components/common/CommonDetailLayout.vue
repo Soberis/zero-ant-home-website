@@ -233,26 +233,20 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 48px 120px;
+  padding: 52px 40px 96px;
 }
 
 /* Floating Player Box */
 .player-hero-container {
-  width: 100%;
-  max-width: 860px;
+  width: min(100%, 1000px, calc((100svh - var(--nav-height) - 176px) * 16 / 9));
   aspect-ratio: 16 / 9;
-  border-radius: 16px;
+  max-height: min(56svh, 560px);
+  border-radius: 18px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  margin-bottom: 56px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.player-hero-container:hover {
-  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
-  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  margin-bottom: 36px;
 }
 
 .media-wrapper {
@@ -286,8 +280,8 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
   border-radius: 50%;
@@ -304,7 +298,7 @@ onUnmounted(() => {
 
 .video-facade:hover .facade-play-btn {
   background: rgba(255, 255, 255, 0.28);
-  transform: translate(-50%, -50%) scale(1.1);
+  transform: translate(-50%, -50%) scale(1.06);
   border-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 12px 40px rgba(15, 23, 42, 0.22);
 }
@@ -332,7 +326,7 @@ onUnmounted(() => {
 /* Content Area */
 .content-wrapper {
   width: 100%;
-  max-width: 860px;
+  max-width: 920px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -341,32 +335,35 @@ onUnmounted(() => {
 
 .title-row {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  padding: 20px 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.07);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
-  margin-bottom: 28px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  margin-bottom: 32px;
 }
 
 .detail-title {
   margin: 0;
   text-align: left;
   flex: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .content-desc-block {
   width: 100%;
-  margin-bottom: 40px;
+  max-width: 740px;
+  margin-bottom: 36px;
 }
 
 /* 兼容 HTML 富文本内容的样式 */
 .content-html {
   font-size: 1.06rem;
-  color: #475569;
+  color: #556074;
   line-height: 1.85;
+  font-weight: 500;
   white-space: normal;
 }
 .content-html :deep(p) {
@@ -379,9 +376,9 @@ onUnmounted(() => {
 /* 兼容分段文本的样式 */
 .content-para {
   font-size: 1.05rem;
-  color: #64748b;
+  color: #556074;
   line-height: 1.85;
-  font-weight: 400;
+  font-weight: 500;
   margin-block-start: 0;
   margin-block-end: 20px;
 }
@@ -392,6 +389,21 @@ onUnmounted(() => {
 .contact-cta {
   flex-shrink: 0;
   white-space: nowrap;
+  min-height: 44px;
+  padding: 0 20px;
+  gap: 8px;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #0f172a;
+}
+
+.contact-cta:hover {
+  background: rgba(15, 23, 42, 0.02);
+  border-color: rgba(15, 23, 42, 0.22);
+  color: #163a87;
+}
+
+.contact-cta svg {
+  opacity: 0.72;
 }
 
 /* Glassmorphism Dialog */
@@ -501,8 +513,8 @@ onUnmounted(() => {
   width: 100%;
   display: flex;
   align-items: center;
-  margin-top: 36px;
-  padding-top: 24px;
+  margin-top: 32px;
+  padding-top: 20px;
   border-top: 1px solid rgba(15, 23, 42, 0.06);
   gap: 16px;
 }
@@ -517,18 +529,60 @@ onUnmounted(() => {
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .common-detail-page { padding: 44px 28px 84px; }
+  .player-hero-container {
+    width: min(100%, 920px, calc((100svh - var(--nav-height) - 156px) * 16 / 9));
+    max-height: min(52svh, 500px);
+  }
+  .content-wrapper { max-width: 880px; }
+}
+
+@media (max-width: 960px) {
+  .common-detail-page { padding: 36px 24px 76px; }
+  .player-hero-container {
+    width: 100%;
+    max-height: none;
+    border-radius: 16px;
+    margin-bottom: 36px;
+  }
+  .content-wrapper { max-width: 100%; }
+}
+
 @media (max-width: 768px) {
-  .common-detail-page { padding: 40px 16px 80px; }
-  .player-hero-container { border-radius: 16px; margin-bottom: 40px; }
-  .title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .common-detail-page { padding: 24px 14px 64px; }
+  .player-hero-container {
+    border-radius: 14px;
+    margin-bottom: 28px;
+  }
+  .facade-play-btn {
+    width: 60px;
+    height: 60px;
+  }
+  .title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
   .contact-cta {
     align-self: stretch;
     width: 100%;
     justify-content: center;
   }
+  .content-desc-block { margin-bottom: 32px; }
   .content-html, .content-para { font-size: 1rem; line-height: 1.7; }
   .contact-dialog { min-width: 0; width: 100%; padding: 32px 24px; }
   .detail-bottom-bar { flex-direction: column; align-items: stretch; }
   .detail-nav-btn { width: 100%; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .common-detail-page { padding: 20px 12px 52px; }
+  .player-hero-container { border-radius: 12px; }
+  .facade-play-btn {
+    width: 56px;
+    height: 56px;
+  }
 }
 </style>
