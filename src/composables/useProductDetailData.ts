@@ -97,11 +97,9 @@ export function useProductDetailData(
       fallback: T[]
     ): T[] => {
       const fullKey = `${detailKey.value}.${field}`;
-      if (!te(fullKey)) {
-        return fallback;
-      }
-
-      return normalizeCollection<T>(tm(fullKey), fallback);
+      const translated = tm(fullKey);
+      const normalized = normalizeCollection<T>(translated, fallback);
+      return normalized.length > 0 ? normalized : fallback;
     };
 
     return {
@@ -142,6 +140,13 @@ export function useProductDetailData(
   );
 
   const heroMetrics = computed(() => {
+    if ((currentProduct.value?.metrics || []).length > 0) {
+      return (currentProduct.value?.metrics || []).slice(0, 4).map((metric) => ({
+        label: t(metric.label),
+        value: t(metric.value),
+      }));
+    }
+
     if (normalizedParams.value.length > 0) {
       return normalizedParams.value.slice(0, 4).map((param) => ({
         label: param.key,
@@ -149,10 +154,7 @@ export function useProductDetailData(
       }));
     }
 
-    return (currentProduct.value?.metrics || []).slice(0, 4).map((metric) => ({
-      label: t(metric.label),
-      value: t(metric.value),
-    }));
+    return [];
   });
 
   const relatedApplications = computed(() => {
@@ -183,28 +185,6 @@ export function useProductDetailData(
     return localizedProduct.value?.features || baseDetail.value?.features || [];
   });
 
-  const sectionLinks = computed(() => {
-    const links = [
-      { id: "product-overview", label: t("productDetail.anchorOverview") },
-    ];
-
-    if (productFeatures.value.length) {
-      links.push({ id: "features-section", label: t("productDetail.anchorFeatures") });
-    }
-    if (showApplications.value && relatedApplications.value.length) {
-      links.push({ id: "applications-section", label: t("productDetail.anchorApplications") });
-    }
-    if (showVideos.value && relatedVideos.value.length) {
-      links.push({ id: "cases-section", label: t("productDetail.anchorCases") });
-    }
-    if (normalizedParams.value.length) {
-      links.push({ id: "parameters-section", label: t("productDetail.anchorParameters") });
-    }
-    links.push({ id: "downloads-section", label: t("productDetail.anchorDownloads") });
-
-    return links;
-  });
-
   const activeVideoIndex = ref(-1);
 
   const handleVideoHover = (index: number) => {
@@ -231,7 +211,6 @@ export function useProductDetailData(
     normalizedParams,
     normalizedDownloads,
     heroMetrics,
-    sectionLinks,
     relatedApplications,
     relatedVideos,
     productFeatures,

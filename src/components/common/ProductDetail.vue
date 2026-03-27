@@ -12,7 +12,19 @@
 
           <div class="product-hero__actions">
             <button class="product-hero__back-link" type="button" @click="emits('back')">
-              <svg class="product-hero__back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+              <svg
+                class="product-hero__back-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 12H5" />
+                <path d="m12 19-7-7 7-7" />
+              </svg>
               <span>{{ t("productDetail.backToList") }}</span>
             </button>
             <router-link
@@ -29,10 +41,10 @@
             :src="heroImageSrc"
             :alt="localizedProduct.title"
             class="product-hero__image"
-            :width="heroImageSize?.width"
-            :height="heroImageSize?.height"
+            :width="heroImageSize.width"
+            :height="heroImageSize.height"
           />
-          
+
           <div v-if="heroMetrics.length" class="product-hero__metrics">
             <article
               v-for="metric in heroMetrics"
@@ -47,8 +59,6 @@
       </div>
     </section>
 
-
-
     <main class="product-main">
       <div class="container product-main__inner">
         <section
@@ -59,7 +69,7 @@
           <div class="detail-section__header">
             <h2 class="detail-section__title">
               <span class="title-main text-display-large">{{ t("productDetail.features") }}</span>
-              <span v-if="locale === 'zh-CN'" class="title-en">CORE FEATURES</span>
+              <span v-if="locale === 'zh'" class="title-en">CORE FEATURES</span>
             </h2>
           </div>
 
@@ -74,7 +84,10 @@
                 <h3 class="feature-card__title">
                   {{ typeof feature === "string" ? feature : feature.title || "" }}
                 </h3>
-                <p v-if="typeof feature === 'object' && feature.desc" class="feature-card__description">
+                <p
+                  v-if="typeof feature === 'object' && feature.desc"
+                  class="feature-card__description"
+                >
                   {{ feature.desc }}
                 </p>
               </div>
@@ -90,7 +103,7 @@
           <div class="detail-section__header">
             <h2 class="detail-section__title">
               <span class="title-main text-display-large">{{ t("productDetail.applications") }}</span>
-              <span v-if="locale === 'zh-CN'" class="title-en">APPLICATIONS</span>
+              <span v-if="locale === 'zh'" class="title-en">APPLICATIONS</span>
             </h2>
           </div>
 
@@ -113,7 +126,7 @@
           <div class="detail-section__header">
             <h2 class="detail-section__title">
               <span class="title-main text-display-large">{{ t("productDetail.videoCases") }}</span>
-              <span v-if="locale === 'zh-CN'" class="title-en">VIDEO CASES</span>
+              <span v-if="locale === 'zh'" class="title-en">VIDEO CASES</span>
             </h2>
           </div>
 
@@ -138,20 +151,26 @@
         >
           <div class="detail-section__header">
             <h2 class="detail-section__title">
-              <span class="title-main text-display-large">{{ t("productDetail.techParams") }}</span>
-              <span v-if="locale === 'zh-CN'" class="title-en">TECH SPECS</span>
+              <span class="title-main text-display-large">{{ t("productDetail.parameters") }}</span>
+              <span v-if="locale === 'zh'" class="title-en">TECH SPECS</span>
             </h2>
           </div>
 
           <div class="params-grid">
-            <article
-              v-for="param in normalizedParams"
-              :key="`${param.key}-${param.value}`"
-              class="param-card"
+            <div
+              v-for="(column, columnIndex) in parameterColumns"
+              :key="`params-column-${columnIndex}`"
+              class="params-column"
             >
-              <div class="param-card__label">{{ param.key }}</div>
-              <div class="param-card__value">{{ param.value }}</div>
-            </article>
+              <article
+                v-for="param in column"
+                :key="`${param.key}-${param.value}`"
+                class="param-card"
+              >
+                <div class="param-card__label">{{ param.key }}</div>
+                <div class="param-card__value">{{ param.value }}</div>
+              </article>
+            </div>
           </div>
         </section>
 
@@ -159,11 +178,14 @@
           <div class="detail-section__header">
             <h2 class="detail-section__title">
               <span class="title-main text-display-large">{{ t("productDetail.downloads") }}</span>
-              <span v-if="locale === 'zh-CN'" class="title-en">DOWNLOADS</span>
+              <span v-if="locale === 'zh'" class="title-en">DOWNLOADS</span>
             </h2>
           </div>
 
-          <div v-if="normalizedDownloads.length" class="downloads-grid">
+          <div
+            v-if="normalizedDownloads.length"
+            class="downloads-grid"
+          >
             <a
               v-for="download in normalizedDownloads"
               :key="`${download.name}-${download.url}`"
@@ -171,12 +193,12 @@
               :href="download.url"
               :download="download.name"
             >
-              <span class="download-card__type">{{ t("productDetail.downloadLabel") }}</span>
-              <div class="download-card__name">{{ download.name }}</div>
-              <div class="download-card__action">
-                <span>{{ t("common.cta.downloadNow") }}</span>
-                <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="download-card-head">
+                <span class="card-tag">{{ getDownloadFormat(download.name, download.url) }}</span>
+                <span class="download-status">{{ t("common.cta.downloadNow") }}</span>
               </div>
+              <h3 class="download-title">{{ getDownloadDisplayName(download.name) }}</h3>
+              <p class="download-desc">{{ download.name }}</p>
             </a>
           </div>
 
@@ -184,15 +206,14 @@
             <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
           </div>
         </section>
-
       </div>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
@@ -244,11 +265,23 @@ const {
 const localizedProduct = computed(() => resolvedLocalizedProduct.value ?? props.product);
 const heroImageSrc = computed(() => localizedProduct.value.image || props.image || "");
 const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.value);
+const parameterColumns = computed(() => {
+  const params = normalizedParams.value;
+  const midpoint = Math.ceil(params.length / 2);
+  return [params.slice(0, midpoint), params.slice(midpoint)];
+});
 const sanitizedDescription = computed(() =>
-  sanitizeHtmlAllowList(
-    String(localizedProduct.value.desc || "").replace(/\n/g, "<br>")
-  )
+  sanitizeHtmlAllowList(String(localizedProduct.value.desc || "").replace(/\n/g, "<br>"))
 );
+
+const getDownloadFormat = (name: string, url: string) => {
+  const source = name || url;
+  const match = source.match(/\.([a-z0-9]+)(?:$|[?#])/i);
+  return match ? match[1].toUpperCase() : "FILE";
+};
+
+const getDownloadDisplayName = (name: string) =>
+  name.replace(/\.[a-z0-9]+$/i, "");
 
 type HeroImageSize = {
   width: number;
@@ -455,7 +488,6 @@ const heroImageSize = computed<HeroImageSize>(() => {
   font-weight: 500;
 }
 
-
 .product-main {
   padding-top: 12px;
 }
@@ -482,12 +514,11 @@ const heroImageSize = computed<HeroImageSize>(() => {
 .detail-section__title {
   margin: 0;
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 16px;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 10px;
   color: #0f172a;
 }
-
 
 .title-en {
   font-size: 1rem;
@@ -499,8 +530,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
 
 .features-list,
 .application-grid,
-.videos-grid,
-.downloads-grid {
+.videos-grid {
   display: grid;
   gap: 16px;
 }
@@ -560,92 +590,136 @@ const heroImageSize = computed<HeroImageSize>(() => {
 
 .params-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px 28px;
-  padding-top: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 52px;
+}
+
+#parameters-section .detail-section__header {
+  margin-bottom: 20px;
+}
+
+#parameters-section .detail-section__title {
+  gap: 8px;
+}
+
+.params-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .param-card {
-  padding-top: 18px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  display: grid;
+  grid-template-columns: minmax(120px, 10.5rem) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.params-column > .param-card:first-child {
+  padding-top: 12px;
+}
+
+.param-card + .param-card {
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .param-card__label {
-  font-size: 0.76rem;
-  line-height: 1.5;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  padding-top: 2px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  letter-spacing: 0;
+  text-transform: none;
   color: #667085;
   font-weight: 600;
 }
 
 .param-card__value {
-  margin-top: 10px;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  margin-top: 0;
+  justify-self: stretch;
+  max-width: none;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  text-align: left;
   color: #0f172a;
   font-weight: 600;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .downloads-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
 .download-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 14px;
   min-height: 220px;
-  padding: 24px;
-  border-radius: 10px;
+  padding: 28px;
   border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
   background: #ffffff;
   text-decoration: none;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .download-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.2);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+  border-color: rgba(26, 58, 143, 0.18);
 }
 
-.download-card__type {
-  font-size: 0.78rem;
-  line-height: 1.5;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #667085;
+.download-card:focus-visible {
+  outline: none;
+  border-color: rgba(26, 58, 143, 0.22);
+  box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.12);
 }
 
-.download-card__name {
-  margin-top: 18px;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.download-card__action {
+.download-card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(217, 226, 236, 0.9);
-  color: #64748b;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: color 0.3s ease;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.download-card:hover .download-card__action,
-.download-card:hover .action-icon {
+.card-tag {
+  width: fit-content;
+  border-radius: 4px;
+  border: 0;
+  background: rgba(26, 58, 143, 0.08);
   color: #163a87;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
-.download-card:hover .action-icon {
-  transform: translateX(4px);
+.download-status {
+  color: #667085;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.download-title {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.55;
+  transition: color 0.25s ease;
+}
+
+.download-desc {
+  margin: 0;
+  color: #667085;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .downloads-placeholder {
@@ -668,17 +742,17 @@ const heroImageSize = computed<HeroImageSize>(() => {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .product-hero__header {
     text-align: center;
     align-items: center;
     padding-top: 0;
   }
-  
+
   .product-hero__description {
     margin: 0 auto;
   }
-  
+
   .product-hero__actions {
     justify-content: center;
   }
@@ -687,7 +761,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
     align-items: center;
     text-align: center;
   }
-  
+
   .product-hero__metric + .product-hero__metric {
     padding-left: 0;
     border-left: none;
@@ -696,9 +770,6 @@ const heroImageSize = computed<HeroImageSize>(() => {
     border-top: 1px solid rgba(15, 23, 42, 0.06);
   }
 
-  .downloads-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 @media (max-width: 768px) {
@@ -711,9 +782,27 @@ const heroImageSize = computed<HeroImageSize>(() => {
     scroll-margin-top: 100px;
   }
 
-  .params-grid,
+  .params-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .param-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .param-card__value {
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
+
   .downloads-grid {
     grid-template-columns: 1fr;
+  }
+
+  .download-card {
+    min-height: auto;
   }
 
   .product-hero__metrics {
@@ -737,7 +826,6 @@ const heroImageSize = computed<HeroImageSize>(() => {
 }
 
 @media (max-width: 560px) {
-  
   .product-hero__actions {
     flex-direction: column;
     align-items: stretch;
@@ -747,9 +835,16 @@ const heroImageSize = computed<HeroImageSize>(() => {
     width: 100%;
   }
 
-
   .detail-section {
     scroll-margin-top: 80px;
+  }
+
+  .download-card {
+    padding: 24px;
+  }
+
+  .download-title {
+    font-size: 1.05rem;
   }
 }
 
@@ -769,7 +864,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
   .videos-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    :deep(.app-divider-item:nth-child(-n+2)) {
+    :deep(.app-divider-item:nth-child(-n + 2)) {
       border-top: none;
     }
   }
@@ -781,7 +876,7 @@ const heroImageSize = computed<HeroImageSize>(() => {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
 
-    :deep(.app-divider-item:nth-child(-n+3)) {
+    :deep(.app-divider-item:nth-child(-n + 3)) {
       border-top: none;
     }
   }

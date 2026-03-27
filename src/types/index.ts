@@ -94,14 +94,10 @@ export interface BaseProduct {
  * 扩展产品接口
  */
 export interface ProductData extends BaseProduct {
-  seriesKey: string;
   name: string;
   image: string;
   desc: string;
-  seriesTitle: string;
-  seriesSubtitle: string;
   supportText?: string;
-  highlights?: string[];
   metrics?: ProductMetric[];
 }
 
