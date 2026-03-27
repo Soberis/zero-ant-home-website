@@ -162,7 +162,7 @@
       <div class="page-shell">
         <div class="contact-panel">
           <div class="contact-copy">
-            <div class="detail-section__header" style="margin-bottom: 24px;">
+            <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ $t("nav.contact") }}</span>
                 <span class="title-en">CONTACT US</span>
@@ -183,7 +183,7 @@
                 liqingfeng@zeroant.com
               </a>
             </div>
-            <div class="contact-card">
+            <div class="contact-card contact-card--wide">
               <span class="contact-label">{{ $t("contacts.address") }}</span>
               <span class="contact-value">{{ $t("footer.address") }}</span>
             </div>
@@ -272,8 +272,12 @@ function formatIndex(value: number): string {
 
 .about-hero {
   position: relative;
-  min-height: 100svh;
+  min-height: clamp(560px, 78svh, 820px);
   padding-top: 80px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 24%, rgba(26, 58, 143, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(247, 249, 252, 0.72) 0%, rgba(255, 255, 255, 0.96) 100%);
 }
 
 .about-hero::before {
@@ -281,10 +285,23 @@ function formatIndex(value: number): string {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(15, 23, 42, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.028) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 85%);
+  pointer-events: none;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% 14% auto;
+  width: 34vw;
+  min-width: 320px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26, 58, 143, 0.09), transparent 68%);
+  filter: blur(8px);
   pointer-events: none;
 }
 
@@ -292,92 +309,51 @@ function formatIndex(value: number): string {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: calc(100svh - 80px);
+  min-height: calc(clamp(560px, 78svh, 820px) - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .hero-copy {
-  max-width: 960px;
+  max-width: 840px;
   margin: 0 auto;
-  padding: 0;
+  padding: 24px 0 48px;
   display: grid;
   justify-items: center;
   text-align: center;
-  transform: translateY(-6vh);
-}
-
-.hero-eyebrow {
-  margin: 0 0 18px;
-  color: var(--brand-primary);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
 }
 
 .hero-title {
-  max-width: 10em;
-  margin: 0 0 24px;
+  max-width: 8.6em;
+  margin: 0 0 18px;
   color: var(--brand-text);
 }
 
 .hero-sub {
-  max-width: 720px;
+  max-width: 32em;
   margin: 0;
   color: var(--brand-muted);
-  font-size: 1.12rem;
-  line-height: 1.95;
-}
-
-.hero-anchor {
-  margin-top: 36px;
-  border: none;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
-  color: var(--brand-text);
-  padding: 12px 22px;
-  font-size: 0.94rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.hero-anchor:hover {
-  transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.26);
-  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
-}
-
-.card-index {
-  display: block;
-  margin-bottom: 10px;
-  color: rgba(26, 58, 143, 0.48);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-size: 1.08rem;
+  line-height: 1.85;
 }
 
 .page-section {
-  padding: 100px 0;
+  padding: 88px 0;
   scroll-margin-top: 80px;
 }
 
 .detail-section__header {
-  max-width: 860px;
-  margin-bottom: 48px;
+  max-width: 780px;
+  margin-bottom: 40px;
 }
 
 .detail-section__title {
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
-  gap: 12px;
-  margin: 0 0 16px 0;
+  gap: 10px;
+  margin: 0 0 12px 0;
 }
 
 .title-main {  color: var(--brand-text);
@@ -394,7 +370,7 @@ function formatIndex(value: number): string {
 .intro-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-  gap: 24px;
+  gap: 40px;
 }
 
 .intro-prose {
@@ -416,46 +392,33 @@ function formatIndex(value: number): string {
 .contact-value {
   color: var(--brand-text);
   font-size: 1.05rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.8;
   text-decoration: none;
 }
 
 .intro-side {
   display: grid;
-  gap: 16px;
-}
-
-.info-panel,
-.culture-card,
-.honor-card {
-  background: var(--brand-surface-soft);
-}
-
-.timeline-card,
-.value-card {
-  background: #ffffff;
+  gap: 28px;
+  align-content: start;
+  padding-top: 6px;
 }
 
 .info-panel,
 .culture-card,
 .timeline-card {
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: transparent;
+  border: none;
   box-shadow: none;
-  border-radius: 16px;
-  padding: 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border-radius: 0;
+  padding: 0;
+  transition: none;
 }
 
-.info-panel:hover,
-.culture-card:hover,
-.timeline-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
-  border-color: rgba(26, 58, 143, 0.12);
+.intro-side .info-panel + .info-panel {
+  padding-top: 8px;
 }
 
-/* honor and value items: divider-list style, no card */
 .honor-card,
 .value-card {
   background: transparent;
@@ -466,23 +429,22 @@ function formatIndex(value: number): string {
 }
 
 .panel-title {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   color: var(--brand-text);
-  font-size: 1.08rem;
+  font-size: 1.02rem;
   font-weight: 600;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 14px 24px;
 }
 
 .stat-card {
-  border: none;
-  border-radius: var(--radius-sm);
-  background: var(--brand-surface-soft);
-  padding: 18px 16px;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
 }
 
 .stat-number {
@@ -502,13 +464,13 @@ function formatIndex(value: number): string {
 
 .timeline {
   display: grid;
-  gap: 16px;
+  gap: 26px;
 }
 
 .timeline-item {
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 20px;
 }
 
 .timeline-rail {
@@ -538,19 +500,13 @@ function formatIndex(value: number): string {
   margin-top: 4px;
   border-radius: 50%;
   background: var(--brand-primary);
-  box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1);
-  animation: pulse-dot 2.4s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 6px rgba(26, 58, 143, 0.1); }
-  50% { box-shadow: 0 0 0 10px rgba(26, 58, 143, 0.05); }
+  box-shadow: 0 0 0 5px rgba(26, 58, 143, 0.08);
 }
 
 .timeline-year {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--brand-primary-deep);
-  font-size: 1.18rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -565,23 +521,22 @@ function formatIndex(value: number): string {
   margin: 0;
 }
 
-/* honors: 两列分隔线列�?*/
 .honor-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
+  column-gap: 52px;
 }
 
 .honor-card {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 20px 24px 20px 0;
+  padding: 22px 0;
   border-bottom: 1px solid rgba(15, 23, 42, 0.07);
 }
 
 .honor-card:nth-child(odd) {
-  padding-right: 40px;
+  padding-right: 0;
 }
 
 .honor-card:nth-last-child(-n+2) {
@@ -605,32 +560,35 @@ function formatIndex(value: number): string {
   line-height: 1.6;
 }
 
-/* values: 横向 4 列关键词，竖线分�?*/
 .values-grid {
   display: flex;
-  align-items: stretch;
-  gap: 0;
+  align-items: flex-start;
+  gap: 32px;
 }
 
 .value-card {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 24px 32px;
-  border-left: 1px solid rgba(15, 23, 42, 0.06);
+  gap: 12px;
+  padding: 18px 0 0;
 }
 
 .value-card:first-child {
-  border-left: none;
   padding-left: 0;
+}
+
+#core-values .card-index {
+  width: auto;
+  padding-top: 0;
+  color: rgba(26, 58, 143, 0.28);
 }
 
 .value-text {
   color: var(--brand-text);
-  font-size: 1.12rem;
-  font-weight: 600;
-  line-height: 1.4;
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.45;
 }
 
 .culture-list {
@@ -641,36 +599,41 @@ function formatIndex(value: number): string {
   gap: 12px;
 }
 
+.culture-card {
+  padding: 28px 0;
+}
+
 .contact-section {
   margin-bottom: 0;
 }
 
 .contact-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 0.74fr) minmax(420px, 1fr);
+  gap: 64px;
   align-items: start;
-  margin-top: 32px;
+  padding-top: 20px;
 }
 
-.contact-description {
-  margin: 16px 0 0;
-  color: rgba(15, 23, 42, 0.6);
-  font-size: 1.05rem;
-  font-weight: 400;
-  line-height: 1.85;
+.contact-header {
+  margin-bottom: 24px;
 }
 
 .contact-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 36px;
 }
 
 .contact-card {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
+  padding-top: 0;
+}
+
+.contact-card--wide {
+  grid-column: 1 / -1;
 }
 
 .contact-label {
@@ -696,7 +659,6 @@ function formatIndex(value: number): string {
 }
 
 @media (max-width: 1024px) {
-  .hero-shell,
   .intro-layout,
   .contact-panel {
     grid-template-columns: 1fr;
@@ -721,34 +683,46 @@ function formatIndex(value: number): string {
   .value-card:nth-child(2) {
     border-top: none;
   }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 768px) {
   .page-shell {
-    width: min(1200px, calc(100% - 24px));
+    padding: 0 20px;
   }
 
   .about-hero {
-    min-height: auto;
     padding-top: 80px;
   }
 
   .hero-shell {
-    min-height: calc(100svh - 80px);
+    min-height: calc(clamp(560px, 78svh, 820px) - 80px);
+    justify-content: center;
+  }
+
+  .hero-copy {
+    padding: 0 0 12px;
   }
 
   .hero-title {
     max-width: none;
   }
 
-  .info-panel,
-  .culture-card,
-  .contact-card {
-    padding: 20px;
-  }
-
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .honor-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .contact-card--wide {
+    grid-column: auto;
   }
 }
 
@@ -758,11 +732,7 @@ function formatIndex(value: number): string {
   }
 
   .hero-shell {
-    min-height: calc(100svh - 72px);
-  }
-
-  .hero-anchor {
-    width: 100%;
+    min-height: calc(clamp(520px, 74svh, 720px) - 72px);
   }
 
   .timeline-item {

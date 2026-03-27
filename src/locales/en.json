@@ -474,8 +474,8 @@
   "about": {
     "companyIntroDetailed": {
       "para1": "Hangzhou ZeroAnt Technology Co., Ltd. is a high-tech enterprise founded by the research team from <b>Beihang University Hangzhou Innovation Research Institute</b>, focusing on the R&D of intelligent robot complete solutions. Currently, it provides highly reliable robot intelligent system solutions for biopharmaceutical, semiconductor and other industries.",
-      "para2": "The company relies on the <b>Zhejiang Provincial Key Laboratory of Industrial Big Data and Robot Intelligent Systems</b>, independently developing the <b>\"Intelligent Robot Operating System\" (AiROS)</b>, conquering core technologies such as mobile robot autonomous navigation, high-speed and high-precision control of robotic arms, 3D spatial semantic perception, and multi-robot collaborative scheduling, creating a full-stack software ecosystem and modular hardware platform.",
-      "para3": "The team has established normalized cooperation mechanisms with multiple top domestic institutions, forming a <b>closed-loop innovation system of \"industry-university-research-application\"</b>. As a pioneer of industrial intelligent infrastructure, ZeroAnt Technology is promoting industry intelligent upgrades with <b>fully autonomous and controllable technology</b>, continuously empowering high-quality development of the manufacturing industry.",
+      "para2": "The company relies on the <b>Zhejiang Provincial Key Laboratory of Industrial Big Data and Robot Intelligent Systems</b>, independently developing <b>AiROS</b> (Intelligent Robot Operating System), conquering core technologies such as mobile robot autonomous navigation, high-speed and high-precision control of robotic arms, 3D spatial semantic perception, and multi-robot collaborative scheduling, creating a full-stack software ecosystem and modular hardware platform.",
+      "para3": "The team has established normalized cooperation mechanisms with multiple top domestic institutions, forming a <b>closed-loop innovation system of industry-university-research-application</b>. As a pioneer of industrial intelligent infrastructure, ZeroAnt Technology is promoting industry intelligent upgrades with <b>fully autonomous and controllable technology</b>, continuously empowering high-quality development of the manufacturing industry.",
       "financingDesc": "The team is currently in the angel round financing stage. If you are interested in the team or have cooperation intentions, please contact us by email. Startup teams value time, no casual inquiries please!",
       "emailTips": "Contact email:"
     },
@@ -517,10 +517,10 @@
     },
     "enterpriseCulture": {
       "title": "@:common.terms.corporateCulture",
-      "description": "ZeroAnt Technology builds an open and collaborative engineering culture with \"Innovation Drives Smart Manufacturing\" as its core concept:",
+      "description": "ZeroAnt Technology builds an open and collaborative engineering culture with <b>Innovation Drives Smart Manufacturing</b> as its core concept:",
       "item1": "<b>Deep Accumulation</b>: Deeply cultivating fundamental technologies, ten years to forge a sword, creating core systems",
       "item2": "<b>Scenario Revolution</b>: Focusing on industrial pain points, reshaping production processes with robotics technology",
-      "item3": "<b>Ecosystem Co-construction</b>: Partnering with universities and research institutes to create a closed-loop innovation system of \"industry-university-research-application\"",
+      "item3": "<b>Ecosystem Co-construction</b>: Partnering with universities and research institutes to create a closed-loop innovation system of industry-university-research-application",
       "item4": "<b>Extreme Evolution</b>: Making a little progress every day, continuously iterating knowledge systems"
     }
   },
