@@ -393,9 +393,6 @@
   "supportPage": {
     "title": "@:common.terms.afterSalesService",
     "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
-    "heroActions": {
-      "downloads": "View Downloads"
-    },
     "supportMapLabel": "Support Path",
     "fastResponse": "Rapid problem resolution within 12 hours",
     "dedicatedService": "7×24 hours dedicated service group response",
@@ -778,6 +775,7 @@
   "careers": {
     "heroTitle": "Join ZeroAnt Technology",
     "heroSubtitle": "Join a cross-disciplinary hardware and software team working on real robotics platforms, control systems and full-system delivery.",
+    "heroAction": "View Open Positions",
     "techAccumulation": "Technical Accumulation",
     "successfulProjects": "Successful Projects",
     "pathsLabel": "Application Flow",

@@ -9,8 +9,8 @@
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
 
           <div class="hero-actions">
-            <a href="#download" class="btn btn-primary">
-              {{ t("supportPage.heroActions.downloads") }}
+            <a href="#contact" class="btn btn-primary">
+              {{ t("supportPage.paths.contact.title") }}
             </a>
           </div>
 

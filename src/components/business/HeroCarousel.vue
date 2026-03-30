@@ -1,13 +1,9 @@
 <template>
   <section class="hero-carousel" @mouseenter="pauseAutoPlay" @mouseleave="resumeAutoPlay">
-    <div
+    <router-link
       class="hero-stage"
-      role="link"
-      tabindex="0"
+      :to="activeSlide.routePath"
       :aria-label="`${activeSlide.title} ${t('common.cta.viewDetails')}`"
-      @click="handleStageClick"
-      @keydown.enter.prevent="handleStageClick"
-      @keydown.space.prevent="handleStageClick"
     >
       <div class="hero-media" :class="{ 'hero-entered': entered }">
         <img
@@ -29,20 +25,19 @@
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
         </div>
-        
-        <!-- Moved indicators to bottom right -->
-        <div class="hero-indicators" :class="{ 'hero-entered': entered }">
-          <button
-            v-for="(slide, idx) in slides"
-            :key="slide.routePath"
-            class="hero-indicator"
-            :class="{ active: idx === current }"
-            type="button"
-            :aria-label="slide.shortTitle"
-            @click.stop="goTo(idx)"
-          ></button>
-        </div>
       </div>
+    </router-link>
+
+    <div class="hero-indicators" :class="{ 'hero-entered': entered }">
+      <button
+        v-for="(slide, idx) in slides"
+        :key="slide.routePath"
+        class="hero-indicator"
+        :class="{ active: idx === current }"
+        type="button"
+        :aria-label="slide.shortTitle"
+        @click="goTo(idx)"
+      ></button>
     </div>
   </section>
 </template>
@@ -50,7 +45,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
 import scara4axisImg from '@/assets/images/products/four-axis-robot.webp';
 import arm6axisImg from '@/assets/images/products/six-axis-robot-1000w-q75.webp';
 import dualArmImg from '@/assets/images/products/dual-arm-humanoid.webp';
@@ -69,7 +63,6 @@ interface SlideItem {
 }
 
 const { t } = useI18n();
-const router = useRouter();
 
 const slides = computed<SlideItem[]>(() => [
   {
@@ -147,10 +140,6 @@ const goTo = (index: number): void => {
   scheduleNext();
 };
 
-const handleStageClick = (): void => {
-  void router.push(activeSlide.value.routePath);
-};
-
 const pauseAutoPlay = (): void => {
   isPaused.value = true;
 
@@ -204,6 +193,7 @@ onUnmounted(() => {
 }
 
 .hero-stage {
+  display: block;
   position: relative;
   min-height: calc(100svh - var(--nav-height));
   overflow: hidden;
@@ -217,6 +207,8 @@ onUnmounted(() => {
       rgba(248, 250, 252, 0.88) 100%
     );
   cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 }
 
 .hero-stage:focus-visible {
@@ -273,10 +265,6 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
-.hero-copy, .hero-indicators {
-  pointer-events: auto; /* Re-enable clicks on interactive elements */
-}
-
 .hero-copy {
   max-width: min(520px, 42%);
   display: flex;
@@ -328,19 +316,25 @@ onUnmounted(() => {
 
 .hero-indicators {
   position: absolute;
-  right: var(--container-padding-x);
+  left: 50%;
+  width: 100%;
+  max-width: var(--container-max-width);
+  padding: 0 var(--container-padding-x);
+  box-sizing: border-box;
+  justify-content: flex-end;
   bottom: 36px;
   display: flex;
   align-items: center;
   gap: 10px;
+  pointer-events: auto;
   opacity: 0;
-  transform: translateY(6px);
+  transform: translate(-50%, 6px);
   transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
 }
 
 .hero-indicators.hero-entered {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .hero-indicator {
@@ -418,7 +412,6 @@ onUnmounted(() => {
   }
 
   .hero-indicators {
-    right: var(--container-padding-x);
     bottom: 32px;
   }
 

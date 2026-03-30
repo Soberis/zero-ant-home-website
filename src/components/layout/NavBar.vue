@@ -276,7 +276,11 @@ onUnmounted(() => {
   z-index: 1000;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
   &.is-scrolled {
     background-color: rgba(255, 255, 255, 0.985);
@@ -325,7 +329,10 @@ onUnmounted(() => {
   min-width: 0;
   margin-left: 0;
   padding: 0;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    margin 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 
@@ -374,7 +381,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
   height: 100%;
 }
 
@@ -408,7 +415,10 @@ onUnmounted(() => {
   font-weight: 500;
   padding: 10px 4px;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -430,7 +440,7 @@ onUnmounted(() => {
 
 .dropdown-icon {
   color: var(--nav-text-color);
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
   transform: rotate(0deg);
 }
 
@@ -483,7 +493,9 @@ onUnmounted(() => {
   border-top: 1px solid rgba(15, 23, 42, 0.06);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 999;
   backdrop-filter: blur(10px);
   height: auto;
@@ -533,7 +545,12 @@ onUnmounted(() => {
   flex: 0 0 auto;
   color: var(--nav-text-color);
   font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
   height: auto;
@@ -594,7 +611,12 @@ onUnmounted(() => {
   min-height: 38px;
   border-radius: 100px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: none;
   position: relative;
   overflow: hidden;
@@ -721,7 +743,10 @@ onUnmounted(() => {
   margin-left: 16px;
   position: relative;
   z-index: 1001;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hamburger-menu:hover {
@@ -734,7 +759,9 @@ onUnmounted(() => {
   height: 1.5px;
   background-color: var(--nav-accent-color);
   margin: 2.5px 0;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 1px;
 }
 
@@ -762,7 +789,7 @@ onUnmounted(() => {
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-nav.open {
@@ -805,7 +832,9 @@ onUnmounted(() => {
   padding: 0;
   opacity: 0;
   transform: translateX(20px);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-nav.open .mobile-nav-item {
@@ -829,7 +858,10 @@ onUnmounted(() => {
   font-size: 17px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    padding-left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 

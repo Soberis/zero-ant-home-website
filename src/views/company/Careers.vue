@@ -13,7 +13,7 @@
               class="hero-action"
               @click="scrollToSection('positions')"
             >
-              {{ $t("careers.hotPositionsTitle") }}
+              {{ $t("careers.heroAction") }}
             </button>
           </div>
 

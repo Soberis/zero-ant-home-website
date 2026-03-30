@@ -393,9 +393,6 @@
   "supportPage": {
     "title": "@:common.terms.afterSalesService",
     "description": "售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应",
-    "heroActions": {
-      "downloads": "查看资料"
-    },
     "supportMapLabel": "支持路径",
     "fastResponse": "12小时内快速解决问题",
     "dedicatedService": "7×24小时专属服务群响应",
@@ -729,6 +726,7 @@
   "careers": {
     "heroTitle": "加入零蚁科技",
     "heroSubtitle": "加入软硬件协同团队，参与机器人平台、控制系统与整机交付的真实研发。",
+    "heroAction": "查看热招岗位",
     "techAccumulation": "技术积累",
     "successfulProjects": "成功项目",
     "pathsLabel": "招聘路径",
