@@ -609,7 +609,7 @@
       "qrCodeTitle": "Contact Information",
       "qrCodeDesc": "Scan QR code to add WeCom for more information",
       "notFoundTitle": "Video Not Found",
-      "notFoundDesc": "No description available",
+      "notFoundDesc": "This video case link is unavailable or no longer exists. Return to the solutions page to continue exploring other video cases.",
       "browserNotSupport": "Your browser does not support video playback."
     }
   },
@@ -878,7 +878,14 @@
     "next": "Next",
     "coreAdvantages": "Core Advantages",
     "typicalApplications": "Typical Applications",
-    "notFound": "Application not found"
+    "notFound": "Application not found",
+    "notFoundDescription": "This application link is unavailable or no longer exists. Return to the solutions page to continue exploring other scenarios.",
+    "backToSolutions": "Back to Solutions"
+  },
+  "notFoundPage": {
+    "title": "Page Not Found",
+    "description": "This address is unavailable or no longer exists. Return to the homepage to continue exploring ZeroAnt products, solutions, and case studies.",
+    "backHome": "Back to Home"
   },
   "contacts": {
     "phone": "Phone",

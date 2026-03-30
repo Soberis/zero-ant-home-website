@@ -160,11 +160,14 @@ export const products: ProductData[] = getProducts();
 
 /**
  * 获取产品slug到路由的映射表，便于页面跳转
- * @example getProductRouteMap()["mobile-robot"] => "/products/mobile-robot"
+ * @example getProductRouteMap()["mobile-robot"] => "/robot-products/mobile-robot"
  */
 export function getProductRouteMap(): Record<string, string> {
   return Object.fromEntries(
-    products.map((p) => [p.slug, `/products/${p.slug}`])
+    products.map((product) => [
+      product.slug,
+      `/${product.category === "system" ? "system-products" : "robot-products"}/${product.slug}`,
+    ])
   );
 }
 

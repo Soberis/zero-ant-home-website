@@ -30,6 +30,7 @@ declare module 'vue' {
     ProductIcons: typeof import('./src/components/icons/ProductIcons.vue')['default']
     ProductsLayout: typeof import('./src/components/layout/ProductsLayout.vue')['default']
     RobotSchedulerIcon: typeof import('./src/components/icons/icons/RobotSchedulerIcon.vue')['default']
+    RouteNotFoundState: typeof import('./src/components/common/RouteNotFoundState.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Scara4axisIcon: typeof import('./src/components/icons/icons/Scara4axisIcon.vue')['default']

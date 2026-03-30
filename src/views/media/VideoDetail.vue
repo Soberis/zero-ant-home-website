@@ -1,5 +1,13 @@
 <template>
+  <RouteNotFoundState
+    v-if="isNotFound"
+    :title="t('videos.videoDetail.notFoundTitle')"
+    :description="t('videos.videoDetail.notFoundDesc')"
+    :action-label="t('applicationsPage.backToSolutions')"
+    to="/solutions"
+  />
   <CommonDetailLayout
+    v-else
     :title="videoInfo.title"
     :media-info="mediaInfo"
     :content-paragraphs="descParagraphs"
@@ -17,11 +25,13 @@ import { videoMap, videoCards, type VideoDetail } from "@/data/videos";
 import { computed, onMounted, watch } from "vue";
 import { setSEO, setStructuredData } from "@/utils/seo";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
+import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
 
 const route = useRoute();
 const router = useRouter();
 const { t, locale } = useI18n();
 const currentSlug = computed(() => String(route.params.slug || ""));
+const isNotFound = computed(() => !videoMap[currentSlug.value]);
 
 const currentIndex = computed(() =>
   videoCards.findIndex((c) => c.slug === currentSlug.value)
@@ -94,6 +104,23 @@ const seoMetadata = computed(() => {
   const videoDesc = videoInfo.value.desc;
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${route.fullPath}`;
+
+  if (isNotFound.value) {
+    return {
+      title: videoTitle,
+      description: videoDesc,
+      keywords: `视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
+      ogTitle: videoTitle,
+      ogDescription: videoDesc,
+      ogType: "website",
+      ogUrl: currentUrl,
+      ogImage: `${baseUrl}/logo.webp`,
+      twitterCard: "summary_large_image",
+      twitterTitle: videoTitle,
+      twitterDescription: videoDesc,
+      canonical: currentUrl,
+    };
+  }
 
   return {
     title: videoTitle,

@@ -607,7 +607,7 @@
       "qrCodeTitle": "联系方式",
       "qrCodeDesc": "扫码添加企业微信，获取更多信息",
       "notFoundTitle": "未找到视频",
-      "notFoundDesc": "暂无介绍",
+      "notFoundDesc": "当前链接对应的视频案例不存在或已下线，你可以返回行业方案页继续浏览其他视频案例。",
       "browserNotSupport": "您的浏览器不支持视频播放。"
     }
   },
@@ -876,7 +876,14 @@
     "next": "下一个",
     "coreAdvantages": "核心优势",
     "typicalApplications": "典型应用",
-    "notFound": "未找到该应用"
+    "notFound": "未找到该应用",
+    "notFoundDescription": "当前链接对应的行业应用不存在或已下线，你可以返回行业方案页继续浏览其他场景。",
+    "backToSolutions": "返回行业方案"
+  },
+  "notFoundPage": {
+    "title": "页面不存在",
+    "description": "当前地址不存在或已下线，请返回首页继续浏览零蚁科技的产品、方案与案例。",
+    "backHome": "返回首页"
   },
   "contacts": {
     "phone": "电话",

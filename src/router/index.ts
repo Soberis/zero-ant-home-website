@@ -14,6 +14,7 @@ const ApplicationDetail = () => import("@/views/applications/ApplicationDetail.v
 const SystemProducts = () => import("@/views/products/SystemProducts.vue");
 const RobotProducts = () => import("@/views/products/RobotProducts.vue");
 const Careers = () => import("@/views/company/Careers.vue");
+const NotFound = () => import("@/views/NotFound.vue");
 
 const productDetailRouteNames = new Set([
   "SystemProductDetail",
@@ -124,6 +125,11 @@ const routes = [
     path: "/robot-products/:slug",
     name: "RobotProductDetail",
     component: ProductDetail,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 

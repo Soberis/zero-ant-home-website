@@ -8,7 +8,13 @@
     :next-slug="nextSlug"
     @navigate="goTo"
   />
-  <div v-else class="not-found">{{ t("applicationsPage.notFound") }}</div>
+  <RouteNotFoundState
+    v-else
+    :title="t('applicationsPage.notFound')"
+    :description="t('applicationsPage.notFoundDescription')"
+    :action-label="t('applicationsPage.backToSolutions')"
+    to="/solutions"
+  />
 </template>
 
 <script setup lang="ts">
@@ -21,6 +27,7 @@ import { videoCards, videoMap, type VideoDetail } from "@/data/videos";
 import { setSEO, setStructuredData } from "@/utils/seo";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
+import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -190,13 +197,5 @@ function goTo(targetSlug: string | null): void {
     });
   }
 }
-</script>
 
-<style scoped>
-.not-found {
-  text-align: center;
-  color: #b0b3bb;
-  font-size: 1.5rem;
-  margin-top: 120px;
-}
-</style>
+</script>
