@@ -875,7 +875,8 @@
     "prev": "上一个",
     "next": "下一个",
     "coreAdvantages": "核心优势",
-    "typicalApplications": "典型应用"
+    "typicalApplications": "典型应用",
+    "notFound": "未找到该应用"
   },
   "contacts": {
     "phone": "电话",

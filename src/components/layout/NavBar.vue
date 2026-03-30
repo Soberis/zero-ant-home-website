@@ -261,8 +261,8 @@ onMounted(() => {
   if (savedLanguage && (savedLanguage === "zh" || savedLanguage === "en")) {
     locale.value = savedLanguage;
   } else {
-    locale.value = "zh";
-    persistLanguagePreference("zh");
+    const initialLocale = locale.value === "en" ? "en" : "zh";
+    persistLanguagePreference(initialLocale);
   }
 
   // 监听滚动

@@ -1,12 +1,14 @@
 <template>
   <CommonDetailLayout
-    :title="detail?.title || ''"
+    v-if="detail"
+    :title="detail.title"
     :media-info="mediaInfo"
     :content-html="sanitizedDescription"
     :prev-slug="prevSlug"
     :next-slug="nextSlug"
     @navigate="goTo"
   />
+  <div v-else class="not-found">{{ t("applicationsPage.notFound") }}</div>
 </template>
 
 <script setup lang="ts">
@@ -133,10 +135,10 @@ const updateSEO = () => {
 
   if (!seoMetadata.value) {
     setSEO({
-      title: t("seo.solutions.title"),
+      title: t("applicationsPage.notFound"),
       description: t("seo.solutions.description"),
       keywords: t("seo.solutions.keywords"),
-      ogTitle: t("seo.solutions.title"),
+      ogTitle: t("applicationsPage.notFound"),
       ogDescription: t("seo.solutions.description"),
       ogUrl: currentUrl,
       ogImage: `${baseUrl}/logo.webp`,
@@ -169,13 +171,13 @@ onMounted(() => {
 });
 
 const currentIndex: ComputedRef<number> = computed(() =>
-  applications.findIndex((item) => item.slug === slug.value)
+  rawDetail.value ? applications.findIndex((item) => item.slug === slug.value) : -1
 );
 const prevSlug: ComputedRef<string | null> = computed(() =>
   currentIndex.value > 0 ? applications[currentIndex.value - 1].slug : null
 );
 const nextSlug: ComputedRef<string | null> = computed(() =>
-  currentIndex.value < applications.length - 1
+  currentIndex.value >= 0 && currentIndex.value < applications.length - 1
     ? applications[currentIndex.value + 1].slug
     : null
 );
@@ -189,3 +191,12 @@ function goTo(targetSlug: string | null): void {
   }
 }
 </script>
+
+<style scoped>
+.not-found {
+  text-align: center;
+  color: #b0b3bb;
+  font-size: 1.5rem;
+  margin-top: 120px;
+}
+</style>

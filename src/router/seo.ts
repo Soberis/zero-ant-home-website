@@ -513,23 +513,6 @@ export async function setupProductDetailSEO(to: RouteLocationNormalized) {
 }
 
 /**
- * 设置应用详情页 SEO 和结构化数据
- */
-export async function setupApplicationDetailSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${to.path}`;
-  const siteName = safeTranslate("seo.siteName");
-
-  setSEO({
-    title: `${safeTranslate("common.section.applications")} - ${siteName}`,
-    description: safeTranslate("seo.solutions.description"),
-    ogUrl: currentUrl,
-    canonical: currentUrl,
-    siteName: siteName,
-  });
-}
-
-/**
  * 设置支持页面 SEO 和结构化数据
  * @param to 目标路由
  */

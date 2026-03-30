@@ -877,7 +877,8 @@
     "prev": "Previous",
     "next": "Next",
     "coreAdvantages": "Core Advantages",
-    "typicalApplications": "Typical Applications"
+    "typicalApplications": "Typical Applications",
+    "notFound": "Application not found"
   },
   "contacts": {
     "phone": "Phone",

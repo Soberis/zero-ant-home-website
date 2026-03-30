@@ -30,7 +30,7 @@ const prevSlug = computed(() =>
   currentIndex.value > 0 ? videoCards[currentIndex.value - 1].slug : null
 );
 const nextSlug = computed(() =>
-  currentIndex.value < videoCards.length - 1
+  currentIndex.value >= 0 && currentIndex.value < videoCards.length - 1
     ? videoCards[currentIndex.value + 1].slug
     : null
 );

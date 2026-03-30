@@ -67,8 +67,7 @@ if (typeof window !== "undefined") {
       setupAboutSEO, 
       setupCareersSEO, 
       setupSolutionsSEO,
-      setupProductDetailSEO,
-      setupApplicationDetailSEO
+      setupProductDetailSEO
     } = await import("@/router/seo");
     
     const applyRouteSEO = (to: RouteLocationNormalizedLoaded) => {
@@ -93,9 +92,6 @@ if (typeof window !== "undefined") {
           case "SystemProductDetail":
           case "RobotProductDetail":
             setupProductDetailSEO(to);
-            break;
-          case "ApplicationDetail":
-            setupApplicationDetailSEO(to);
             break;
           default:
             setupPageSEO(to);
