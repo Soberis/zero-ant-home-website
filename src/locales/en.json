@@ -894,7 +894,7 @@
   },
   "footer": {
     "companyFullName": "Hangzhou ZeroAnt Technology Co., Ltd.",
-    "address": "Room 1-501, Building 1, No. 998 Wenyi West Road, Yuhang District, Hangzhou, Zhejiang Province",
+    "address": "Room 310, Building 1, Building 4, No. 99 Juhang Alley, Changhe Street, Binjiang District, Hangzhou, Zhejiang Province",
     "wx": "WeChat",
     "bilibili": "Bilibili",
     "copyright": "All Rights Reserved",
@@ -970,8 +970,7 @@
           "description": "Develop software systems for robot control, user interfaces, and system integration.",
           "qualifications": "Bachelor's degree in Software Engineering or Computer Science. Proficiency in C++, Python, and embedded systems.",
           "responsibilities": "Develop robot control software, create user interfaces, integrate hardware and software systems."
-        },
-        "location": "Room 1-501, Building 1, No. 998 Wenyi West Road, Hangzhou"
+        }
       },
       "support": {
         "q1": "What technical support services does ZeroAnt Technology provide?",

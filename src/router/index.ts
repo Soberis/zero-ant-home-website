@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import i18n, { ensureProductDetailLocale } from "@/config/i18n";
+import { scheduleScrollToTop } from "@/utils/scroll";
 
 // 核心页面直接导入（首屏关键路径）
 import Home from "@/views/Home.vue";
@@ -22,43 +23,6 @@ const productDetailRouteNames = new Set([
 ]);
 
 let isPopStateNavigation = false;
-
-function scrollToTopNow(): void {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  const scrollConfig: ScrollToOptions = {
-    top: 0,
-    left: 0,
-    behavior: "auto",
-  };
-
-  const scrollingElement = document.scrollingElement || document.documentElement;
-
-  window.scrollTo(scrollConfig);
-  scrollingElement.scrollTo?.(scrollConfig);
-  document.body.scrollTo?.(scrollConfig);
-  scrollingElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-}
-
-function scheduleScrollToTop(): void {
-  scrollToTopNow();
-
-  window.requestAnimationFrame(() => {
-    scrollToTopNow();
-  });
-
-  window.setTimeout(() => {
-    scrollToTopNow();
-  }, 140);
-
-  // 对齐 App.vue 的 page transition 时长，避免离场动画结束后又回滚到旧位置
-  window.setTimeout(() => {
-    scrollToTopNow();
-  }, 460);
-}
 
 const routes = [
   // 首页
@@ -210,7 +174,7 @@ router.afterEach((to, _from, failure) => {
     return;
   }
 
-  scheduleScrollToTop();
+  scheduleScrollToTop({ afterTransition: true });
 });
 
 // 产品详情页的 locale 预热守卫，避免首次进入时详情文案缺失

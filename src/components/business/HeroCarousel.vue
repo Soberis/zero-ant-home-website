@@ -122,15 +122,16 @@ const activeSlideImageStyle = computed(() => ({
   '--hero-image-shift-x-mobile': activeSlide.value.imageShiftXMobile ?? activeSlide.value.imageShiftX ?? '0px',
   '--hero-image-shift-y-mobile': activeSlide.value.imageShiftYMobile ?? activeSlide.value.imageShiftY ?? '0px',
 }));
-let autoPlayTimer: ReturnType<typeof setTimeout> | null = null;
+let autoPlayTimer: number | null = null;
+let enterTimer: number | null = null;
 
 const scheduleNext = (): void => {
   if (autoPlayTimer) {
     clearTimeout(autoPlayTimer);
   }
 
-  if (!isPaused.value) {
-    autoPlayTimer = setTimeout(() => {
+  if (!isPaused.value && slides.value.length > 1) {
+    autoPlayTimer = window.setTimeout(() => {
       current.value = (current.value + 1) % slides.value.length;
       scheduleNext();
     }, 5200);
@@ -147,7 +148,7 @@ const goTo = (index: number): void => {
 };
 
 const handleStageClick = (): void => {
-  router.push(activeSlide.value.routePath);
+  void router.push(activeSlide.value.routePath);
 };
 
 const pauseAutoPlay = (): void => {
@@ -177,7 +178,7 @@ onMounted(() => {
   scheduleNext();
   document.addEventListener('visibilitychange', handleVisibilityChange);
   // 延迟触发入场动画，确保首帧渲染完成
-  window.setTimeout(() => {
+  enterTimer = window.setTimeout(() => {
     entered.value = true;
   }, 100);
 });
@@ -185,6 +186,10 @@ onMounted(() => {
 onUnmounted(() => {
   if (autoPlayTimer) {
     clearTimeout(autoPlayTimer);
+  }
+
+  if (enterTimer) {
+    clearTimeout(enterTimer);
   }
 
   document.removeEventListener('visibilitychange', handleVisibilityChange);
@@ -202,7 +207,15 @@ onUnmounted(() => {
   position: relative;
   min-height: calc(100svh - var(--nav-height));
   overflow: hidden;
-  background: #ffffff;
+  background:
+    radial-gradient(circle at 76% 22%, rgba(26, 58, 143, 0.11), transparent 24%),
+    radial-gradient(circle at 18% 14%, rgba(15, 23, 42, 0.045), transparent 28%),
+    linear-gradient(
+      180deg,
+      rgba(247, 249, 252, 0.82) 0%,
+      rgba(255, 255, 255, 0.98) 40%,
+      rgba(248, 250, 252, 0.88) 100%
+    );
   cursor: pointer;
 }
 
@@ -236,15 +249,15 @@ onUnmounted(() => {
 .hero-image {
   position: relative;
   z-index: 1;
-  width: 56%;
+  width: 58%;
   max-width: none;
-  height: 88%;
+  height: 84%;
   object-fit: contain;
   object-position: center right;
   transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
     scale(var(--hero-image-scale, 1));
   transform-origin: center center;
-  filter: drop-shadow(0 20px 36px rgba(15, 23, 42, 0.08));
+  filter: drop-shadow(0 28px 44px rgba(15, 23, 42, 0.12));
 }
 
 .hero-overlay {
@@ -256,7 +269,7 @@ onUnmounted(() => {
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 19vh var(--container-padding-x) 40px;
+  padding: clamp(104px, 15vh, 156px) var(--container-padding-x) 40px;
   pointer-events: none;
 }
 
@@ -265,9 +278,10 @@ onUnmounted(() => {
 }
 
 .hero-copy {
-  max-width: min(500px, 42%);
+  max-width: min(520px, 42%);
   display: flex;
   flex-direction: column;
+  padding: 0 0 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
@@ -295,9 +309,10 @@ onUnmounted(() => {
 }
 
 .hero-product-name {
-  margin: 14px 0 0;
+  align-self: flex-start;
+  margin: 18px 0 0;
   font-family: "Outfit", sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: #1a3a8f;
   letter-spacing: 0.1em;
@@ -305,9 +320,9 @@ onUnmounted(() => {
 }
 
 .hero-description {
-  margin: 24px 0 0;
-  max-width: 22em;
-  color: #4b5565;
+  margin: 20px 0 0;
+  max-width: 24em;
+  color: #445066;
   line-height: 1.75;
 }
 
@@ -361,11 +376,11 @@ onUnmounted(() => {
   }
 
   .hero-overlay {
-    padding: 17vh var(--container-padding-x) 40px;
+    padding: clamp(96px, 13vh, 144px) var(--container-padding-x) 40px;
   }
 
   .hero-copy {
-    max-width: min(460px, 48%);
+    max-width: min(500px, 46%);
   }
 
   .hero-image {
@@ -383,18 +398,19 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 0 0 180px;
+    inset: 12px 0 164px;
     padding-right: 0;
     justify-content: center;
   }
 
   .hero-overlay {
-    padding: 10vh var(--container-padding-x) 32px;
+    padding: 84px var(--container-padding-x) 28px;
     justify-content: flex-end;
   }
 
   .hero-copy {
     max-width: 100%;
+    padding: 0 0 20px;
   }
 
   .hero-title {
@@ -421,7 +437,7 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 20px -10px 240px;
+    inset: 22px -8px 206px;
   }
 
   
@@ -430,7 +446,10 @@ onUnmounted(() => {
   }
 
   .hero-overlay {
-    padding: 0 16px 24px;
+    padding: 72px 16px 22px;
+  }
+
+  .hero-copy {
   }
 
   .hero-indicator {
@@ -450,7 +469,14 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 10px -20px 230px;
+    inset: 12px -18px 188px;
+  }
+
+  .hero-overlay {
+    padding-top: 68px;
+  }
+
+  .hero-copy {
   }
 }
 

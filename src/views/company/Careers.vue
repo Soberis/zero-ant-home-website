@@ -302,7 +302,7 @@ function scrollToSection(id: string): void {
 function openMailto(subject?: string): void {
   const mailSubject = subject ? encodeURIComponent(subject) : "";
   const query = mailSubject ? `?subject=${mailSubject}` : "";
-  window.open(`mailto:hr@zeroant.com${query}`);
+  window.location.href = `mailto:hr@zeroant.com${query}`;
 }
 
 function applyForPosition(position: Position): void {

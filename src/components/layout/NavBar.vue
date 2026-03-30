@@ -102,6 +102,7 @@ import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
+import { scheduleScrollToTop } from "@/utils/scroll";
 
 // 滚动状态
 const isScrolled = ref(false);
@@ -145,36 +146,13 @@ function toggleMobileMenu() {
   } else {
     document.body.style.overflow = "";
   }
-  setTimeout(() => (toggleLock = false), 350);
+  window.setTimeout(() => (toggleLock = false), 350);
 }
 
 // 关闭移动端菜单
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
   document.body.style.overflow = "";
-}
-
-function scrollToTop(): void {
-  const scrollConfig: ScrollToOptions = {
-    top: 0,
-    left: 0,
-    behavior: "auto",
-  };
-
-  const scrollingElement = document.scrollingElement || document.documentElement;
-
-  window.scrollTo(scrollConfig);
-  scrollingElement.scrollTo?.(scrollConfig);
-  document.body.scrollTo?.(scrollConfig);
-  scrollingElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-}
-
-function scheduleScrollToTop(): void {
-  scrollToTop();
-  window.requestAnimationFrame(() => {
-    scrollToTop();
-  });
 }
 
 async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = false): Promise<void> {
@@ -193,12 +171,8 @@ async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = fals
     return;
   }
 
-  try {
-    await router.push(to);
-    await nextTick();
-  } finally {
-    scheduleScrollToTop();
-  }
+  await router.push(to);
+  await nextTick();
 }
 
 // 点击背景关闭菜单

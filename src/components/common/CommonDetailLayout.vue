@@ -3,14 +3,20 @@
     <div class="player-hero-container">
       <div class="media-wrapper">
         <template v-if="mediaInfo.type === 'bilibili'">
-          <div v-if="!videoStarted" class="video-facade" @click="videoStarted = true">
+          <button
+            v-if="!videoStarted"
+            type="button"
+            class="video-facade"
+            :aria-label="`${t('common.cta.viewDetails')} ${mediaInfo.title}`"
+            @click="videoStarted = true"
+          >
             <img :src="thumbnailUrl" :alt="mediaInfo.title" class="facade-image" />
-            <div class="facade-play-btn" aria-label="Play Video">
+            <span class="facade-play-btn" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="48" height="48">
                 <path fill="currentColor" d="M8 5v14l11-7z" />
               </svg>
-            </div>
-          </div>
+            </span>
+          </button>
           <BilibiliPlayer
             v-else
             :key="mediaInfo.url"
@@ -103,7 +109,7 @@
         @click.self="showContact = false"
       >
         <div class="contact-dialog">
-          <button class="contact-close-x" @click="showContact = false">
+          <button type="button" class="contact-close-x" @click="showContact = false">
             <svg viewBox="0 0 24 24" width="24" height="24">
               <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
             </svg>
@@ -161,32 +167,6 @@ const { t } = useI18n();
 const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
 
-function scrollToTop(): void {
-  const scrollConfig: ScrollToOptions = {
-    top: 0,
-    left: 0,
-    behavior: "auto",
-  };
-
-  const scrollingElement = document.scrollingElement || document.documentElement;
-
-  window.scrollTo(scrollConfig);
-  scrollingElement.scrollTo?.(scrollConfig);
-  document.body.scrollTo?.(scrollConfig);
-  scrollingElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-}
-
-function scheduleScrollToTop(): void {
-  scrollToTop();
-  window.requestAnimationFrame(() => {
-    scrollToTop();
-  });
-  window.setTimeout(() => {
-    scrollToTop();
-  }, 460);
-}
-
 const thumbnailUrl = computed(() => props.mediaInfo.thumbnailUrl || fallbackFacadeImg);
 
 const bottomBarClass = computed(() => {
@@ -212,11 +192,10 @@ function handleDialogEscape(event: KeyboardEvent): void {
 // 当路由切换 (通过传参的标题或slug等变更判断) 需要关闭弹窗
 watch(() => props.title, () => {
   showContact.value = false;
-  scheduleScrollToTop();
+  videoStarted.value = false;
 });
 
 onMounted(() => {
-  scheduleScrollToTop();
   document.addEventListener("keydown", handleDialogEscape, true);
 });
 
@@ -270,6 +249,9 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   cursor: pointer;
+  border: none;
+  padding: 0;
+  text-align: inherit;
   background: #000;
   overflow: hidden;
 }

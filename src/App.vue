@@ -21,11 +21,17 @@
 import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/layout/NavBar.vue";
+import { scheduleScrollToTop } from "@/utils/scroll";
 // 非关键壳子组件异步加载，减少首屏同步体积
 const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue"));
 const BackToTop = defineAsyncComponent(() => import("@/components/common/BackToTop.vue"));
 
 const router = useRouter();
+
+function hasInAppHistory(): boolean {
+  const historyState = window.history.state as { back?: string | null } | null;
+  return typeof historyState?.back === "string" && historyState.back.length > 0;
+}
 
 // 全局ESC键返回功能
 const handleEscKey = (event: KeyboardEvent) => {
@@ -64,11 +70,13 @@ const handleEscKey = (event: KeyboardEvent) => {
   // 安全触发返回
   event.preventDefault();
 
-  // 如果有历史记录则返回，否则回到首页
-  if (window.history.length > 1) {
+  // 只在存在站内上一跳时返回，避免首次访问时直接退到站外/空白页
+  if (hasInAppHistory()) {
     router.go(-1);
   } else {
-    router.push("/");
+    void router.push("/").then(() => {
+      scheduleScrollToTop();
+    });
   }
 };
 

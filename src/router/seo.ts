@@ -19,6 +19,83 @@ function safeTranslate(key: string): string {
   }
 }
 
+function safeTranslateArray(key: string): string[] {
+  try {
+    const message = i18n.global.tm(key);
+    if (!Array.isArray(message)) {
+      return [];
+    }
+
+    return message.filter((item): item is string => typeof item === "string");
+  } catch {
+    return [];
+  }
+}
+
+function getCompanyName(): string {
+  return safeTranslate("footer.companyFullName") || safeTranslate("seo.siteName");
+}
+
+function getCompanyAddress(): string {
+  return safeTranslate("footer.address");
+}
+
+function getPostalAddress() {
+  return {
+    "@type": "PostalAddress",
+    streetAddress: getCompanyAddress(),
+    addressLocality: safeTranslate("careers.hangzhou"),
+    addressRegion: "Zhejiang",
+    addressCountry: "CN",
+  };
+}
+
+function getPublisher(baseUrl: string) {
+  return {
+    "@type": "Organization",
+    name: getCompanyName(),
+    url: baseUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${baseUrl}/logo.webp`,
+    },
+  };
+}
+
+function getCareerStructuredJobs(baseUrl: string): Record<string, any>[] {
+  const jobKeys = [
+    "softwareEngineer",
+    "robotSystemsEngineer",
+    "electricalEngineer",
+  ] as const;
+
+  return jobKeys.map((jobKey) => {
+    const title = safeTranslate(`careers.positions.${jobKey}.title`);
+    const requirements = safeTranslateArray(
+      `careers.positions.${jobKey}.requirements`
+    );
+    const qualifications = requirements.join("；");
+
+    return {
+      "@type": "JobPosting",
+      title,
+      description: `${title} - ${safeTranslate("careers.heroSubtitle")}`,
+      employmentType: "FULL_TIME",
+      jobLocation: {
+        "@type": "Place",
+        address: getPostalAddress(),
+      },
+      hiringOrganization: {
+        "@type": "Organization",
+        name: getCompanyName(),
+        sameAs: baseUrl,
+        logo: `${baseUrl}/logo.webp`,
+      },
+      ...(qualifications ? { qualifications } : {}),
+    };
+  });
+}
+
 /**
  * 获取路由 SEO 配置映射
  */
@@ -61,15 +138,9 @@ export function setupPageSEO(to: RouteLocationNormalized) {
     // 基础 SEO 配置
     const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
     const currentUrl = `${baseUrl}${to.path}`;
-    const companyName =
-      safeTranslate("footer.companyFullName") || safeTranslate("seo.siteName");
+    const companyName = getCompanyName();
     const contactTel = safeTranslate("footer.telValue");
-    const addressText = safeTranslate("footer.address");
-    const postalAddress = {
-      "@type": "PostalAddress",
-      streetAddress: addressText,
-      addressCountry: "CN",
-    };
+    const postalAddress = getPostalAddress();
 
     setSEO({
       title: seoConfig.title,
@@ -82,11 +153,11 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       ogImageWidth: 1200,
       ogImageHeight: 630,
       twitterTitle: seoConfig.title,
-    twitterDescription: seoConfig.description,
-    twitterImage: `${baseUrl}/logo.webp`,
-    canonical: currentUrl,
-    siteName: safeTranslate("seo.siteName"),
-  });
+      twitterDescription: seoConfig.description,
+      twitterImage: `${baseUrl}/logo.webp`,
+      canonical: currentUrl,
+      siteName: safeTranslate("seo.siteName"),
+    });
 
     // 设置结构化数据
     let structuredData: Record<string, any> = {
@@ -100,15 +171,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
         name: safeTranslate("seo.siteName"),
         url: baseUrl,
       },
-      publisher: {
-        "@type": "Organization",
-        name: companyName,
-        url: baseUrl,
-        logo: {
-          "@type": "ImageObject",
-          url: `${baseUrl}/logo.webp`,
-        },
-      },
+      publisher: getPublisher(baseUrl),
     };
 
     // 为首页添加额外的结构化数据
@@ -138,8 +201,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
         industry: "Industrial Automation",
         numberOfEmployees: {
           "@type": "QuantitativeValue",
-          minValue: 50,
-          maxValue: 200,
+          minValue: 20,
         },
         knowsAbout: [
           "Industrial Robots",
@@ -214,7 +276,7 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
@@ -227,32 +289,37 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
       itemListElement: [
         {
           "@type": "Service",
-          name: "Medical Automation Solutions",
-          description:
-            "Comprehensive automation solutions for medical device manufacturing and laboratory automation",
+          name: safeTranslate("seo.structuredData.solutions.medical.name"),
+          description: safeTranslate(
+            "seo.structuredData.solutions.medical.description"
+          ),
           provider: {
             "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
+            name: getCompanyName(),
           },
         },
         {
           "@type": "Service",
-          name: "Semiconductor Processing Solutions",
-          description:
-            "High-precision automation solutions for semiconductor manufacturing processes",
+          name: safeTranslate("seo.structuredData.solutions.semiconductor.name"),
+          description: safeTranslate(
+            "seo.structuredData.solutions.semiconductor.description"
+          ),
           provider: {
             "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
+            name: getCompanyName(),
           },
         },
         {
           "@type": "Service",
-          name: "Smart Manufacturing Solutions",
-          description:
-            "End-to-end smart manufacturing solutions with AI and robotics integration",
+          name: safeTranslate(
+            "seo.structuredData.solutions.smartManufacturing.name"
+          ),
+          description: safeTranslate(
+            "seo.structuredData.solutions.smartManufacturing.description"
+          ),
           provider: {
             "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
+            name: getCompanyName(),
           },
         },
       ],
@@ -301,7 +368,7 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
@@ -353,7 +420,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
@@ -363,92 +430,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     },
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: [
-        {
-          "@type": "JobPosting",
-          title: "Robotics Engineer",
-          description:
-            "Develop and optimize industrial robot systems, work on robot control algorithms and mechanical design.",
-          employmentType: "FULL_TIME",
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Hangzhou",
-              addressRegion: "Zhejiang",
-              postalCode: "310000",
-              streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-              addressCountry: "CN",
-            },
-          },
-          hiringOrganization: {
-            "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
-            sameAs: baseUrl,
-            logo: `${baseUrl}/logo.webp`,
-          },
-          qualifications:
-            "Bachelor's degree in Robotics, Mechanical Engineering, or related field. 3+ years experience in industrial robotics.",
-          responsibilities:
-            "Design and develop robotic systems, optimize control algorithms, collaborate with cross-functional teams.",
-        },
-        {
-          "@type": "JobPosting",
-          title: "Algorithm Engineer",
-          description:
-            "Develop AI algorithms for robot perception, planning, and control systems.",
-          employmentType: "FULL_TIME",
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Hangzhou",
-              addressRegion: "Zhejiang",
-              postalCode: "310000",
-              streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-              addressCountry: "CN",
-            },
-          },
-          hiringOrganization: {
-            "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
-            sameAs: baseUrl,
-            logo: `${baseUrl}/logo.webp`,
-          },
-          qualifications:
-            "Master's degree in Computer Science, AI, or related field. Strong background in machine learning and robotics.",
-          responsibilities:
-            "Develop AI algorithms, implement machine learning models, optimize robot performance.",
-        },
-        {
-          "@type": "JobPosting",
-          title: "Software Development Engineer",
-          description:
-            "Develop software systems for robot control, user interfaces, and system integration.",
-          employmentType: "FULL_TIME",
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Hangzhou",
-              addressRegion: "Zhejiang",
-              postalCode: "310000",
-              streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-              addressCountry: "CN",
-            },
-          },
-          hiringOrganization: {
-            "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
-            sameAs: baseUrl,
-            logo: `${baseUrl}/logo.webp`,
-          },
-          qualifications:
-            "Bachelor's degree in Software Engineering or Computer Science. Proficiency in C++, Python, and embedded systems.",
-          responsibilities:
-            "Develop robot control software, create user interfaces, integrate hardware and software systems.",
-        },
-      ],
+      itemListElement: getCareerStructuredJobs(baseUrl),
     },
   };
 
@@ -551,7 +533,7 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
@@ -562,34 +544,34 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What technical support services does ZeroAnt Technology provide?",
+        name: safeTranslate("seo.structuredData.support.q1"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "We provide 7x24 professional services including robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare parts supply and comprehensive technical support.",
+          text: safeTranslate("seo.structuredData.support.a1"),
         },
       },
       {
         "@type": "Question",
-        name: "How can I get technical support for my industrial robot?",
+        name: safeTranslate("seo.structuredData.support.q2"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "You can contact our technical support team through phone, email, or online support system. Our experienced engineers provide rapid response technical consultation and on-site services.",
+          text: safeTranslate("seo.structuredData.support.a2"),
         },
       },
       {
         "@type": "Question",
-        name: "Do you provide training for robot operation and maintenance?",
+        name: safeTranslate("seo.structuredData.support.q3"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes, we offer comprehensive technical training programs covering robot operation, programming, maintenance, and troubleshooting to ensure optimal equipment performance.",
+          text: safeTranslate("seo.structuredData.support.a3"),
         },
       },
       {
         "@type": "Question",
-        name: "What is the warranty period for ZeroAnt robots?",
+        name: safeTranslate("seo.structuredData.support.q4"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Our industrial robots come with comprehensive warranty coverage. Please contact our support team for specific warranty terms and conditions for your product model.",
+          text: safeTranslate("seo.structuredData.support.a4"),
         },
       },
     ],
