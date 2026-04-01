@@ -6,62 +6,106 @@
         <h2 class="home-section-title">{{ t('home.coreProducts.title') }}</h2>
         <p class="home-section-description">{{ t('home.coreProducts.description') }}</p>
       </div>
+
+      <router-link to="/products" class="section-action">
+        {{ t('home.coreProducts.enter') }}
+      </router-link>
     </div>
 
-    <div class="product-groups">
-      <section v-for="group in productGroups" :key="group.key" class="product-group">
-        <div class="group-header">
-          <h3 class="group-title">{{ group.title }}</h3>
+    <div class="family-grid">
+      <router-link
+        v-for="family in productFamilies"
+        :key="family.key"
+        :to="{ path: '/products', hash: `#${family.key}` }"
+        class="family-card"
+      >
+        <div class="family-card__visual">
+          <img
+            :src="family.image"
+            :alt="t(family.titleKey)"
+            class="family-card__image"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
-        <div class="products-grid">
-          <router-link
-            v-for="product in group.items"
-            :key="product.slug"
-            :to="getProductDetailLink(product)"
-            class="product-card-item"
-          >
-            <div class="card-visual">
-              <img :src="product.image" :alt="t(product.name)" class="visual-img" loading="lazy" decoding="async" />
-            </div>
+        <div class="family-card__content">
+          <span class="family-card__eyebrow">{{ family.eyebrow }}</span>
+          <h3 class="family-card__title">{{ t(family.titleKey) }}</h3>
+          <p class="family-card__description">{{ t(family.descriptionKey) }}</p>
 
-            <div class="card-content">
-              <h4 class="card-title">{{ t(product.name) }}</h4>
-              <p class="card-description">{{ getProductSummary(product) }}</p>
-            </div>
-          </router-link>
+          <p class="family-card__models">
+            {{ family.models.join(' / ') }}
+          </p>
+
+          <span class="family-card__action">{{ t('home.coreProducts.cardAction') }}</span>
         </div>
-      </section>
+      </router-link>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { products } from '@/data/products';
-import { getProductDetailLink } from '@/utils/product';
+import zaR3XImg from '@/assets/images/product/ZA-R3-X.png';
+import zaM135Img from '@/assets/images/product/ZA-M135.png';
+import zaMR3TImg from '@/assets/images/product/ZA-MR3T.png';
+import zaRMVRImg from '@/assets/images/product/ZA-RMVR 具身智能双臂VR遥操作开发平台.jpg';
+import zaZG100Img from '@/assets/images/product/ZA-ZG100.png';
+import rotatingPlatformImg from '@/assets/images/product/旋转平台.png';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-const productGroups = computed(() => [
+const productFamilies = [
   {
-    key: 'system',
-    title: t('nav.systemProducts'),
-    items: products
-      .filter((product) => product.category === 'system'),
+    key: 'r-series',
+    eyebrow: 'R SERIES',
+    titleKey: 'home.coreProducts.families.rSeries.title',
+    descriptionKey: 'home.coreProducts.families.rSeries.description',
+    image: zaR3XImg,
+    models: ['ZA-R3', 'ZA-R3X', 'ZA-R3L', 'ZA-R3M', 'ZA-R3H', 'ZA-R3D6', 'ZA-R3T'],
   },
   {
-    key: 'robot',
-    title: t('nav.robotProducts'),
-    items: products
-      .filter((product) => product.category === 'robot'),
+    key: 'm-series',
+    eyebrow: 'M SERIES',
+    titleKey: 'home.coreProducts.families.mSeries.title',
+    descriptionKey: 'home.coreProducts.families.mSeries.description',
+    image: zaM135Img,
+    models: ['ZA-M75', 'ZA-M135'],
   },
-]);
-
-function getProductSummary(product: (typeof products)[number]): string {
-  return product.supportText ? t(product.supportText) : t(product.desc);
-}
+  {
+    key: 'mr-series',
+    eyebrow: 'MR SERIES',
+    titleKey: 'home.coreProducts.families.mrSeries.title',
+    descriptionKey: 'home.coreProducts.families.mrSeries.description',
+    image: zaMR3TImg,
+    models: ['ZA-MR3M', 'ZA-MR3T'],
+  },
+  {
+    key: 'embodied-platforms',
+    eyebrow: 'EMBODIED AI',
+    titleKey: 'home.coreProducts.families.embodied.title',
+    descriptionKey: 'home.coreProducts.families.embodied.description',
+    image: zaRMVRImg,
+    models: ['ZA-RMVR', 'ZA-RMPS', 'ZA-RDP'],
+  },
+  {
+    key: 'controller',
+    eyebrow: 'CONTROLLER',
+    titleKey: 'home.coreProducts.families.controller.title',
+    descriptionKey: 'home.coreProducts.families.controller.description',
+    image: zaZG100Img,
+    models: ['ZA-ZG100'],
+  },
+  {
+    key: 'accessories',
+    eyebrow: 'ACCESSORIES',
+    titleKey: 'home.coreProducts.families.accessories.title',
+    descriptionKey: 'home.coreProducts.families.accessories.description',
+    image: rotatingPlatformImg,
+    models: ['地轨', '旋转平台', 'ZA-R3M(L)', 'ZA-R3M(R)'],
+  },
+] as const;
 </script>
 
 <style scoped lang="less">
@@ -78,143 +122,147 @@ function getProductSummary(product: (typeof products)[number]): string {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-xl);
+  gap: 32px;
+  margin-bottom: 40px;
 }
 
 .section-heading {
-  max-width: 720px;
-  margin-bottom: 0;
+  max-width: 760px;
 }
 
-/* ── 分组容器 ── */
-.product-groups {
-  display: grid;
-  gap: 72px;
-}
-
-.product-group {
-  display: grid;
-  gap: 24px;
-  padding: 0;
-}
-
-.group-header {
-  display: flex;
+.section-action {
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-md);
-  margin-bottom: 0;
-  padding-left: 0;
-}
-
-.group-title {
-  margin: 0;
-  font-family: "Outfit", sans-serif;
-  font-size: 1.375rem;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid rgba(26, 58, 143, 0.14);
+  border-radius: 999px;
+  background: rgba(26, 58, 143, 0.04);
+  color: var(--color-primary);
+  font-size: 0.95rem;
   font-weight: 500;
-  color: currentColor;
-  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
 
-.products-grid {
+.section-action:hover {
+  background: rgba(26, 58, 143, 0.08);
+  border-color: rgba(26, 58, 143, 0.2);
+  transform: translateY(-1px);
+}
+
+.family-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px 28px;
-  border-top: none;
+  gap: 28px;
 }
 
-.product-card-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
+.family-card {
+  display: grid;
+  gap: 22px;
+  min-height: 100%;
+  padding: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(255, 255, 255, 1) 100%);
   text-decoration: none;
-  border: none;
-  box-shadow: none;
-  transition: transform 0.25s ease;
-  overflow: visible;
-  position: relative;
+  color: inherit;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.product-card-item:focus-visible {
-  outline: 2px solid rgba(26, 58, 143, 0.2);
-  outline-offset: 10px;
+.family-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(26, 58, 143, 0.16);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
 }
 
-.product-card-item:hover {
-  transform: translateY(-2px);
+.family-card:focus-visible {
+  outline: 2px solid rgba(26, 58, 143, 0.24);
+  outline-offset: 6px;
 }
 
-.card-visual {
+.family-card__visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 220px;
-  margin-bottom: 0;
-  position: relative;
-  padding: 0 12px;
-  border: none;
-  border-radius: 0;
-  background: transparent;
+  min-height: 200px;
+  padding: 12px 8px;
+  background:
+    radial-gradient(circle at top, rgba(26, 58, 143, 0.05) 0%, rgba(26, 58, 143, 0) 72%);
 }
 
-.visual-img {
+.family-card__image {
   width: auto;
   max-width: 100%;
-  height: 100%;
+  height: 180px;
   object-fit: contain;
   object-position: center;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  filter: none;
+  transition: transform 0.25s ease;
 }
 
-.product-card-item:hover .visual-img {
-  opacity: 0.98;
+.family-card:hover .family-card__image {
   transform: translateY(-2px);
 }
 
-.card-content {
+.family-card__content {
   display: grid;
   gap: 10px;
-  min-width: 0;
-  text-align: left;
 }
 
-.card-title {
+.family-card__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-text-tertiary, #7c8798);
+}
+
+.family-card__title {
   margin: 0;
   font-family: "Outfit", sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 500;
+  line-height: 1.2;
   color: var(--color-text);
   letter-spacing: -0.02em;
-  transition: color 0.3s ease;
 }
 
-.card-description {
+.family-card__description {
   margin: 0;
-  max-width: 22rem;
   color: var(--color-text-secondary);
-  font-size: 0.94rem;
+  font-size: 0.95rem;
   line-height: 1.75;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
-.product-card-item:hover .card-title {
+.family-card__models {
+  margin: 4px 0 0;
+  color: #344054;
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+.family-card__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
   color: var(--color-primary);
+  font-size: 0.92rem;
+  font-weight: 500;
 }
 
-@media (max-width: 1100px) {
-  .products-grid {
+.family-card__action::after {
+  content: "→";
+  transition: transform 0.25s ease;
+}
+
+.family-card:hover .family-card__action::after {
+  transform: translateX(3px);
+}
+
+@media (max-width: 1180px) {
+  .family-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 36px 24px;
   }
 }
 
@@ -222,55 +270,36 @@ function getProductSummary(product: (typeof products)[number]): string {
   .core-products {
     padding: var(--space-xl) var(--space-md);
   }
-  
+
   .section-heading-row {
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 32px;
   }
 
-  .product-groups {
-    gap: 56px;
-  }
-
-  .products-grid {
-    gap: 32px 20px;
-  }
-
-  .card-visual {
-    height: 180px;
+  .family-card {
+    padding: 24px;
   }
 }
 
 @media (max-width: 640px) {
-  .products-grid {
+  .family-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 20px;
   }
 
-  .product-card-item {
-    gap: 14px;
+  .family-card {
+    gap: 18px;
+    padding: 20px;
   }
 
-  .card-visual {
-    height: 200px;
-    padding: 0;
+  .family-card__visual {
+    min-height: 168px;
+    padding: 8px 0;
   }
 
-  .group-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .group-title {
-    font-size: 1.25rem;
-  }
-
-  .card-title {
-    font-size: 1.125rem;
-  }
-
-  .card-description {
-    max-width: none;
+  .family-card__image {
+    height: 152px;
   }
 }
 </style>

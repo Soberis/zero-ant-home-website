@@ -1,43 +1,18 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
 import type { ProductData } from "@/types";
+import coverImg from "@/assets/images/product/封面.png";
+import gantryImg from "@/assets/images/product/地轨.png";
+import scara4axisImg from "@/assets/images/product/ZA-R3-X.png";
+import arm6axisImg from "@/assets/images/product/ZA-R3D6.png";
+import dualArmHumanoidImg from "@/assets/images/product/ZA-MR3T.png";
+import mobileRobotImg from "@/assets/images/product/ZA-M135.png";
 
-// 1. 先定义所有图片 variables
-const multiOsVmImg = new URL(
-  "@/assets/images/products/embedded-vm.webp",
-  import.meta.url
-).href;
-const industrialRtosImg = new URL(
-  "@/assets/images/products/industrial-rtos.webp",
-  import.meta.url
-).href;
-const airosImg = new URL(
-  "@/assets/images/products/airos-os.webp",
-  import.meta.url
-).href;
-const robotSchedulerImg = new URL(
-  "@/assets/images/products/robot-scheduling-system.webp",
-  import.meta.url
-).href;
-const gantry2dImg = new URL(
-  "@/assets/images/products/gantry-2d3d.webp",
-  import.meta.url
-).href;
-const scara4axisImg = new URL(
-  "@/assets/images/products/four-axis-robot.webp",
-  import.meta.url
-).href;
-const arm6axisImg = new URL(
-  "@/assets/images/products/six-axis-robot-1000w-q75.webp",
-  import.meta.url
-).href;
-const dualArmHumanoidImg = new URL(
-  "@/assets/images/products/dual-arm-humanoid.webp",
-  import.meta.url
-).href;
-const mobileRobotImg = new URL(
-  "@/assets/images/products/mobile-robot.webp",
-  import.meta.url
-).href;
+// 先用现有 image/product 资源兜底旧产品页，避免首页与旧路由因缺图直接报错。
+const multiOsVmImg = coverImg;
+const industrialRtosImg = coverImg;
+const airosImg = coverImg;
+const robotSchedulerImg = coverImg;
+const gantry2dImg = gantryImg;
 
 // 2. 然后定义 getProducts 函数
 export function getProducts(): ProductData[] {
@@ -160,13 +135,21 @@ export const products: ProductData[] = getProducts();
 
 /**
  * 获取产品slug到路由的映射表，便于页面跳转
- * @example getProductRouteMap()["mobile-robot"] => "/robot-products/mobile-robot"
+ * @example getProductRouteMap()["mobile-robot"] => "/products#za-m135"
  */
 export function getProductRouteMap(): Record<string, string> {
+  const productCenterRoutes: Partial<Record<ProductData["slug"], string>> = {
+    "gantry-2d": "/products#rail",
+    "scara-4axis": "/products#za-r3-x",
+    "arm-6axis": "/products#za-r3d6",
+    "dual-arm-humanoid": "/products#za-mr3t",
+    "mobile-robot": "/products#za-m135",
+  };
+
   return Object.fromEntries(
     products.map((product) => [
       product.slug,
-      `/${product.category === "system" ? "system-products" : "robot-products"}/${product.slug}`,
+      productCenterRoutes[product.slug] ?? "/products",
     ])
   );
 }

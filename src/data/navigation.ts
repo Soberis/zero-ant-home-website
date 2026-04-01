@@ -3,19 +3,13 @@
  * 用于 NavBar.vue 和 Footer.vue，确保产品列表在全站同步
  */
 
-export const systemProductNav = [
-  { hash: "#multi-os-vm", label: "nav.multiOSVM" },
-  { hash: "#industrial-rtos", label: "nav.industrialRTOS" },
-  { hash: "#airos", label: "nav.airos" },
-  { hash: "#robot-scheduler", label: "nav.robotScheduler" },
-];
-
-export const robotProductNav = [
-  { hash: "#gantry-2d", label: "nav.gantry2D" },
-  { hash: "#scara-4axis", label: "nav.scara4Axis" },
-  { hash: "#arm-6axis", label: "nav.arm6Axis" },
-  { hash: "#dual-arm-humanoid", label: "nav.dualArmHumanoid" },
-  { hash: "#mobile-robot", label: "nav.mobileRobot" },
+export const productCenterNav = [
+  { hash: "#r-series", label: "nav.rSeries" },
+  { hash: "#m-series", label: "nav.mSeries" },
+  { hash: "#mr-series", label: "nav.mrSeries" },
+  { hash: "#embodied-platforms", label: "nav.embodiedPlatforms" },
+  { hash: "#controller", label: "nav.controller" },
+  { hash: "#accessories", label: "nav.accessories" },
 ];
 
 export const supportNav = [
@@ -52,8 +46,7 @@ export interface NavigationItem {
 
 export const topNavItems: readonly NavigationItem[] = [
   { to: "/", label: "nav.home" },
-  { to: "/system-products", label: "nav.systemProducts", children: systemProductNav },
-  { to: "/robot-products", label: "nav.robotProducts", children: robotProductNav },
+  { to: "/products", label: "nav.products", children: productCenterNav },
   { to: "/solutions", label: "nav.solutions", children: solutionsNav },
   { to: "/support", label: "nav.support", children: supportNav },
   { to: "/careers", label: "nav.careers", children: careersNav },
@@ -67,8 +60,7 @@ export interface FooterNavSection {
 }
 
 export const footerNavSections: readonly FooterNavSection[] = [
-  { title: "nav.systemProducts", to: "/system-products", items: systemProductNav },
-  { title: "nav.robotProducts", to: "/robot-products", items: robotProductNav },
+  { title: "nav.products", to: "/products", items: productCenterNav },
   { title: "nav.solutions", to: "/solutions", items: solutionsNav },
   { title: "nav.support", to: "/support", items: supportNav },
   { title: "nav.careers", to: "/careers", items: careersNav },

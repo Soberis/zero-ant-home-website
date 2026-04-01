@@ -379,13 +379,18 @@ const heroStats = computed(() => [
 
 const productMap = computed<Record<string, SolutionProductRef>>(() =>
   getProducts().reduce<Record<string, SolutionProductRef>>((map, product) => {
-    const baseRoute =
-      product.category === "system" ? "/system-products" : "/robot-products";
+    const productCenterRoutes: Partial<Record<string, string>> = {
+      "gantry-2d": "/products#rail",
+      "scara-4axis": "/products#za-r3-x",
+      "arm-6axis": "/products#za-r3d6",
+      "dual-arm-humanoid": "/products#za-mr3t",
+      "mobile-robot": "/products#za-m135",
+    };
 
     map[product.slug] = {
       slug: product.slug,
       title: t(product.name),
-      route: `${baseRoute}/${product.slug}`,
+      route: productCenterRoutes[product.slug] ?? "/products",
     };
 
     return map;

@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import i18n, { ensureProductDetailLocale } from "@/config/i18n";
 import { scheduleScrollToTop } from "@/utils/scroll";
 
 // 核心页面直接导入（首屏关键路径）
@@ -9,18 +8,11 @@ import Home from "@/views/Home.vue";
 const Solutions = () => import("@/views/solutions/Solutions.vue");
 const About = () => import("@/views/company/About.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
-const ProductDetail = () => import("@/views/products/ProductDetail.vue");
+const ProductsCenter = () => import("@/views/products/ProductsCenter.vue");
 const Support = () => import("@/views/support/Support.vue");
 const ApplicationDetail = () => import("@/views/applications/ApplicationDetail.vue");
-const SystemProducts = () => import("@/views/products/SystemProducts.vue");
-const RobotProducts = () => import("@/views/products/RobotProducts.vue");
 const Careers = () => import("@/views/company/Careers.vue");
 const NotFound = () => import("@/views/NotFound.vue");
-
-const productDetailRouteNames = new Set([
-  "SystemProductDetail",
-  "RobotProductDetail",
-]);
 
 let isPopStateNavigation = false;
 
@@ -49,6 +41,11 @@ const routes = [
     name: "Support",
     component: Support,
   },
+  {
+    path: "/products",
+    name: "Products",
+    component: ProductsCenter,
+  },
   // 人才招聘
   {
     path: "/careers",
@@ -68,27 +65,14 @@ const routes = [
     name: "VideoDetail",
     component: VideoDetail,
   },
-  // 系统产品
+  // 旧产品路由统一收口到产品中心
   {
-    path: "/system-products",
-    name: "SystemProducts",
-    component: SystemProducts,
+    path: "/system-products/:pathMatch(.*)*",
+    redirect: "/products",
   },
   {
-    path: "/system-products/:slug",
-    name: "SystemProductDetail",
-    component: ProductDetail,
-  },
-  // 机器人产品
-  {
-    path: "/robot-products",
-    name: "RobotProducts",
-    component: RobotProducts,
-  },
-  {
-    path: "/robot-products/:slug",
-    name: "RobotProductDetail",
-    component: ProductDetail,
+    path: "/robot-products/:pathMatch(.*)*",
+    redirect: "/products",
   },
   {
     path: "/:pathMatch(.*)*",
@@ -147,22 +131,6 @@ if (typeof window !== "undefined") {
   });
 }
 
-router.beforeEach(async (to) => {
-  if (!productDetailRouteNames.has(String(to.name))) {
-    return true;
-  }
-
-  const locale = i18n.global.locale.value === "en" ? "en" : "zh";
-  try {
-    await ensureProductDetailLocale(locale);
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      console.warn("预热产品详情文案失败:", error);
-    }
-  }
-  return true;
-});
-
 router.afterEach((to, _from, failure) => {
   if (failure || to.hash) {
     isPopStateNavigation = false;
@@ -176,7 +144,5 @@ router.afterEach((to, _from, failure) => {
 
   scheduleScrollToTop({ afterTransition: true });
 });
-
-// 产品详情页的 locale 预热守卫，避免首次进入时详情文案缺失
 
 export default router;

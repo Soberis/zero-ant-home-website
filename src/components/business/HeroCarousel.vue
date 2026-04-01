@@ -45,10 +45,10 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import scara4axisImg from '@/assets/images/products/four-axis-robot.webp';
-import arm6axisImg from '@/assets/images/products/six-axis-robot-1000w-q75.webp';
-import dualArmImg from '@/assets/images/products/dual-arm-humanoid.webp';
-import mobileRobotImg from '@/assets/images/products/mobile-robot.webp';
+import scara4axisImg from '@/assets/images/product/ZA-R3-X.png';
+import arm6axisImg from '@/assets/images/product/ZA-R3D6.png';
+import dualArmImg from '@/assets/images/product/ZA-MR3T.png';
+import mobileRobotImg from '@/assets/images/product/ZA-M135.png';
 
 interface SlideItem {
   img: string;
@@ -69,7 +69,7 @@ const slides = computed<SlideItem[]>(() => [
     img: scara4axisImg,
     title: t('products.scara4axis.name'),
     shortTitle: t('home.hero.tabs.scara'),
-    routePath: '/robot-products/scara-4axis',
+    routePath: '/products#za-r3-x',
     imageScale: 1.02,
     imageShiftX: '8px',
     imageShiftY: '6px',
@@ -78,7 +78,7 @@ const slides = computed<SlideItem[]>(() => [
     img: dualArmImg,
     title: t('products.dualArmHumanoid.name'),
     shortTitle: t('home.hero.tabs.humanoid'),
-    routePath: '/robot-products/dual-arm-humanoid',
+    routePath: '/products#za-mr3t',
     imageScale: 0.94,
     imageShiftX: '18px',
     imageShiftY: '4px',
@@ -88,7 +88,7 @@ const slides = computed<SlideItem[]>(() => [
     img: arm6axisImg,
     title: t('products.arm6axis.name'),
     shortTitle: t('products.arm6axis.name'),
-    routePath: '/robot-products/arm-6axis',
+    routePath: '/products#za-r3d6',
     imageScale: 1.04,
     imageShiftX: '16px',
   },
@@ -96,7 +96,7 @@ const slides = computed<SlideItem[]>(() => [
     img: mobileRobotImg,
     title: t('products.mobileRobot.name'),
     shortTitle: t('products.mobileRobot.name'),
-    routePath: '/robot-products/mobile-robot',
+    routePath: '/products#za-m135',
     imageScale: 1.18,
     imageShiftX: '10px',
     imageShiftY: '-10px',

@@ -7,10 +7,13 @@ import type { BaseProduct } from '@/types';
  * @returns 跳转路由
  */
 export function getProductDetailLink(product: BaseProduct): string {
-  if (product.category === 'system') {
-    return `/system-products/${product.slug}`;
-  } else if (product.category === 'robot') {
-    return `/robot-products/${product.slug}`;
-  }
-  return '/';
+  const productCenterAnchors: Partial<Record<BaseProduct["slug"], string>> = {
+    "gantry-2d": "#rail",
+    "scara-4axis": "#za-r3-x",
+    "arm-6axis": "#za-r3d6",
+    "dual-arm-humanoid": "#za-mr3t",
+    "mobile-robot": "#za-m135",
+  };
+
+  return `/products${productCenterAnchors[product.slug] ?? ""}`;
 }

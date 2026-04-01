@@ -34,8 +34,9 @@ dist-ssr
 .promptx/
 .playwright-cli/
 
-docs/
 output/
 
 skills-lock.json
 .agents/
+
+/参数

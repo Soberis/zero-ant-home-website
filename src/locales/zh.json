@@ -5,12 +5,19 @@
   "slogan2": "Let robots be everywhere",
   "nav": {
     "home": "首页",
+    "products": "产品中心",
     "systemProducts": "@:common.terms.systemProducts",
     "multiOSVM": "@:common.terms.multiOsHybridHypervisor",
     "industrialRTOS": "@:common.terms.industrialRealTimeOS",
     "airos": "@:common.terms.airosRobotOperatingSystem",
     "robotScheduler": "@:common.terms.robotSchedulerSystem",
     "robotProducts": "@:common.terms.robotProducts",
+    "rSeries": "R 系列",
+    "mSeries": "M 系列",
+    "mrSeries": "MR 系列",
+    "embodiedPlatforms": "具身与开发平台",
+    "controller": "控制器",
+    "accessories": "扩展机构",
     "gantry2D": "@:common.terms.gantry23Dof",
     "scara4Axis": "@:common.terms.fourAxisScaraRobot",
     "arm6Axis": "@:common.terms.sixAxisArm",
@@ -94,7 +101,7 @@
     "hero": {
       "eyebrow": "ZeroAnt Robotics Platform",
       "title": "高可靠机器人平台",
-      "description": "从机器人产品、行业方案到支持交付，快速判断你的场景如何落地。",
+      "description": "从产品中心、行业方案到支持交付，快速判断你的场景如何落地。",
       "panelLabel": "重点产品",
       "tabs": {
         "scara": "四轴机械臂",
@@ -103,10 +110,36 @@
     },
     "coreProducts": {
       "eyebrow": "Product Matrix",
-      "title": "核心产品",
-      "description": "先看系统底座、控制平台与执行终端。",
-      "systemLabel": "@:common.terms.systemProducts",
-      "robotLabel": "@:common.terms.robotProducts"
+      "title": "产品中心",
+      "description": "围绕已确认产品，先按系列与平台快速浏览，再进入产品中心继续选型。",
+      "enter": "进入产品中心",
+      "cardAction": "查看该系列",
+      "families": {
+        "rSeries": {
+          "title": "R 系列",
+          "description": "精密机械臂平台，覆盖臂长、立柱和六轴形态。"
+        },
+        "mSeries": {
+          "title": "M 系列",
+          "description": "自主导航移动底盘，覆盖不同负载和工位节拍。"
+        },
+        "mrSeries": {
+          "title": "MR 系列",
+          "description": "移动底盘与机械臂一体化，面向跨区域协同作业。"
+        },
+        "embodied": {
+          "title": "具身与开发平台",
+          "description": "覆盖 VR、主从遥操作与绘画平台，服务具身智能开发。"
+        },
+        "controller": {
+          "title": "控制器",
+          "description": "算控一体控制单元，承接接口、通讯与实时控制能力。"
+        },
+        "accessories": {
+          "title": "扩展机构",
+          "description": "地轨、旋转平台与安装形态扩展，用于补足行程与部署方式。"
+        }
+      }
     },
     "videoCases": {
       "eyebrow": "Selected Cases",
@@ -372,7 +405,7 @@
         },
         "design": {
           "title": "方案设计",
-          "description": "根据行业特点组合机器人本体、系统产品与集成方式。"
+          "description": "根据行业特点组合产品本体、扩展机构与集成方式。"
         },
         "verify": {
           "title": "前置验证",
@@ -911,8 +944,8 @@
     },
     "products": {
       "title": "产品中心 - 零蚁科技专业制造商",
-      "description": "零蚁科技工业机器人产品中心，提供SCARA四轴机器人、六轴关节机器人、双臂协作机器人、AGV移动机器人等全系列产品。具备高精度定位、快速响应、智能控制等特点，广泛应用于电子制造、汽车生产、医疗器械、半导体等行业的自动化生产线。",
-      "keywords": "工业机器人, 机器人产品, SCARA机器人, 四轴机器人, 六轴机器人, 关节机器人, 双臂机器人, 协作机器人, AGV机器人, 移动机器人, 机械臂, 自动化设备, 机器人制造商, 工业自动化产品, 精密定位, 智能控制, 电子制造, 汽车生产, 医疗器械自动化"
+      "description": "零蚁科技产品中心覆盖 R 系列机械臂、M 系列移动底盘、MR 系列复合机器人、具身开发平台、控制器与扩展机构，页面参数摘要与已确认产品图片保持一致，便于完成第一轮选型。",
+      "keywords": "零蚁科技, 产品中心, R系列机械臂, M系列移动底盘, MR系列复合机器人, 具身开发平台, 控制器, 扩展机构, SCARA机器人, 六轴机械臂, 双臂机器人, AGV底盘, 自动化设备"
     },
     "solutions": {
       "title": "解决方案 - 零蚁科技行业专家",

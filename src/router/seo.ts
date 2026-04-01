@@ -114,6 +114,7 @@ function getRouteSEOMap(): Record<string, any> {
 
   return {
     Home: translatedSeoConfigs.home,
+    Products: translatedSeoConfigs.products,
     SystemProducts: translatedSeoConfigs.products,
     RobotProducts: translatedSeoConfigs.products,
     Solutions: translatedSeoConfigs.solutions,

@@ -132,19 +132,7 @@ onMounted(() => {
 });
 
 function goBack() {
-  const product = currentProduct.value;
-  if (product) {
-    // 返回到对应产品列表页
-    if (product.category === 'robot') {
-      router.push('/robot-products');
-    } else if (product.category === 'system') {
-      router.push('/system-products');
-    } else {
-      router.push('/');
-    }
-  } else {
-    router.push('/system-products');
-  }
+  router.push('/products');
 }
 </script>
 
