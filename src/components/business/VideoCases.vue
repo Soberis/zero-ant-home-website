@@ -1,138 +1,173 @@
 <template>
-
-  <section class="video-cases">
-
-    <h2 class="section-title">{{ $t('nav.videoCases') }}</h2>
-
-    <div class="videos-list">
-
-      <div
-        v-for="video in videoCardsTyped"
-        :key="video.slug"
-        class="video-card"
-      >
-
-        <div class="video-img">
-           <img :src="video.img" :alt="video.title" loading="lazy" />
-        </div>
-
-        <div class="video-title">{{ $t(`videos.${video.slug}.title`) }}</div>
-         <router-link :to="`/video/${video.slug}`" class="more-btn"
-        >{{ $t(`home.videoCases.watchVideo`) }} +</router-link
-        >
+  <section class="spotlight-section">
+    <div class="section-heading-row">
+      <div class="section-heading">
+        <span class="home-section-eyebrow">{{ t("home.videoCases.eyebrow") }}</span>
+        <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
+        <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
       </div>
-
+      <router-link :to="{ path: '/solutions', query: { tab: 'videos' }, hash: '#proof' }" class="section-cta">
+        <span>{{ t("solutionsPage.more.videos") }}</span>
+        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </router-link>
     </div>
 
+    <div class="spotlight-grid">
+      <VideoCard
+        v-for="(item, idx) in spotlightItems"
+        :key="item.slug"
+        :card="item"
+        :description="item.description"
+        :index="idx"
+        :active="hoverIdx === idx"
+        @hover="onHover"
+        @leave="onLeave"
+        @click="goToVideo(item.slug)"
+      />
+    </div>
   </section>
-
 </template>
 
 <script setup lang="ts">
-// 视频案例数据
-import { videoCards, type VideoCard } from '@/data/videos';
-const videoCardsTyped: VideoCard[] = videoCards;
+import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import { videoCards, videoMap } from "@/data/videos";
+import VideoCard from "@/components/common/VideoCard.vue";
+
+const { t } = useI18n();
+const router = useRouter();
+
+const SPOTLIGHT_SLUGS = [
+  "robotstudio-remote-control",
+  "medical-automation",
+  "semiconductor",
+];
+
+const hoverIdx = ref(-1);
+
+const makeVideoItem = (slug: string) => {
+  const videoCard = videoCards.find((item) => item.slug === slug);
+  const videoDetail = videoMap[slug];
+
+  if (!videoCard || !videoDetail) {
+    return null;
+  }
+
+  return {
+    ...videoCard,
+    description: t(videoDetail.desc),
+  };
+};
+
+const spotlightItems = computed(() =>
+  SPOTLIGHT_SLUGS.map((slug) => makeVideoItem(slug)).filter(Boolean) as Array<{
+    title: string;
+    img: string;
+    slug: string;
+    description: string;
+  }>
+);
+
+const onHover = (idx: number) => {
+  hoverIdx.value = idx;
+};
+
+const onLeave = () => {
+  hoverIdx.value = -1;
+};
+
+const goToVideo = (slug: string) => {
+  router.push(`/video/${slug}`);
+};
 </script>
 
-<style scoped>
-.video-cases {
-  width: 100%;
-  max-width: 100%;
+<style scoped lang="less">
+.spotlight-section {
   position: relative;
-  padding: 80px 0 64px 0;
-  background: none;
-  overflow-x: hidden;
-}
-.section-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 800;
-  margin-bottom: 56px;
-  letter-spacing: 2px;
-  color: #222;
-}
-.videos-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  width: 100%;
-  max-width: 1600px;
+  z-index: 1;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 40px;
-  overflow-x: hidden;
+  padding: var(--section-padding-y) var(--container-padding-x);
 }
-.video-card {
-  width: 100%;
-  max-width: 100%;
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 4px 24px 0 rgba(30, 40, 90, 0.08);
-  min-height: 420px;
+
+.section-heading-row {
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.section-heading {
+  max-width: 700px;
+  margin-bottom: 0;
+}
+
+.section-cta {
+  display: inline-flex;
   align-items: center;
-  padding: 56px 32px 40px 32px;
-  transition: box-shadow 0.2s;
-}
-.video-card:hover {
-  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.13);
-}
-.video-img {
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-}
-.video-img img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 12px;
-}
-.video-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #222 !important;
-  margin-bottom: 18px;
-  text-align: center;
-}
-.more-btn {
-  display: inline-block;
-  border: 2px solid #1a3a8f;
-  color: #1a3a8f;
-  border-radius: 24px;
-  padding: 10px 36px;
-  font-size: 1.1rem;
-  text-decoration: none;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
   font-weight: 600;
-  transition:
-    background 0.2s,
-    color 0.2s;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
 }
-.more-btn:hover {
-  background: #1a3a8f;
-  color: #fff;
+
+.section-cta .cta-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
 }
+
+.section-cta:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.section-cta:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 1100px) {
+  .spotlight-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
-  .video-cases {
-    padding-left: 10px;
-    padding-right: 10px;
+  .spotlight-section {
+    padding: var(--space-xl) var(--space-md);
   }
-  .videos-list {
-    padding: 0 30px;
+
+  .section-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
-@media (max-width: 600px) {
-  .section-title {
-    font-size: 1.5rem;
+
+@media (max-width: 680px) {
+  .spotlight-section {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
   }
-  .videos-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 20px;
+}
+
+@media (max-width: 640px) {
+  .spotlight-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 }
 </style>
-

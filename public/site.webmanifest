@@ -1,0 +1,23 @@
+{
+  "name": "零蚁科技",
+  "short_name": "零蚁科技",
+  "description": "让机器人遍布角落，做最酷的机器人。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a3a8f",
+  "icons": [
+    {
+      "src": "favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "lang": "zh-CN",
+  "orientation": "portrait-primary"
+}

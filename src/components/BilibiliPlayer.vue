@@ -4,12 +4,12 @@
     <!-- 主要播放方式：iframe嵌入 -->
     <div v-if="!showFallback" class="iframe-container">
       <iframe
+        :key="frameUrl"
         ref="iframeRef"
         class="video-iframe"
-        :src="embedUrl"
+        :src="frameUrl"
         frameborder="0"
-        allowfullscreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen; autoplay; encrypted-media"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
         referrerpolicy="strict-origin-when-cross-origin"
         sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation-by-user-activation allow-presentation allow-popups-to-escape-sandbox"
         loading="lazy"
@@ -107,7 +107,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from "vue";
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
 interface Props {
@@ -124,84 +124,153 @@ const showFallback = ref(false);
 const isLoading = ref(true);
 const retryCount = ref(0);
 const maxRetries = 2;
+const autoRetryCount = ref(0);
+const maxAutoRetries = 1;
 const useDirectPlay = ref(false);
 const isMobileDevice = ref(false);
+const reloadToken = ref(0);
+let loadTimeoutId: number | null = null;
+
+interface ParsedVideoInfo {
+  bvid: string;
+  page: string;
+}
+
+function parseVideoInfo(url: string): ParsedVideoInfo | null {
+  const match = url.match(/bilibili\.com\/video\/(BV[\w]+)/i);
+  if (!match?.[1]) {
+    return null;
+  }
+
+  let page = "1";
+
+  try {
+    const parsedUrl = new URL(url);
+    page = parsedUrl.searchParams.get("p") || parsedUrl.searchParams.get("page") || "1";
+  } catch {
+    const pageMatch = url.match(/[?&](?:p|page)=(\d+)/i);
+    page = pageMatch?.[1] || "1";
+  }
+
+  return {
+    bvid: match[1],
+    page,
+  };
+}
+
+const parsedVideoInfo = computed(() => parseVideoInfo(props.url));
 
 // 生成嵌入URL
 const embedUrl = computed(() => {
-  const match = props.url.match(/bilibili.com\/video\/(BV[\w]+)/);
-  if (match && match[1]) {
-    const bvid = match[1];
-
-    // 统一使用player.bilibili.com的嵌入播放器，确保CSP兼容性
-    return `https://player.bilibili.com/player.html?bvid=${bvid}&page=1&autoplay=0&high_quality=1&as_wide=1&allowfullscreen=true&from=outer`;
+  const videoInfo = parsedVideoInfo.value;
+  if (!videoInfo) {
+    return "";
   }
-  return "";
+
+  return `https://player.bilibili.com/player.html?bvid=${videoInfo.bvid}&page=${videoInfo.page}&autoplay=0&high_quality=1&as_wide=1&allowfullscreen=true&from=outer`;
 });
 
 // 原始URL
 const originalUrl = computed(() => props.url);
 
+const directPlayUrl = computed(() => {
+  if (isMobileDevice.value) {
+    return props.url.replace("https://www.bilibili.com", "https://m.bilibili.com");
+  }
+  return props.url;
+});
+
+const frameUrl = computed(() => {
+  const baseUrl = useDirectPlay.value ? directPlayUrl.value : embedUrl.value;
+  if (!baseUrl) {
+    return "";
+  }
+
+  try {
+    const url = new URL(baseUrl);
+    if (reloadToken.value) {
+      url.searchParams.set("_ts", String(reloadToken.value));
+    }
+    return url.toString();
+  } catch {
+    return baseUrl;
+  }
+});
+
+function clearLoadTimeout(): void {
+  if (loadTimeoutId) {
+    window.clearTimeout(loadTimeoutId);
+    loadTimeoutId = null;
+  }
+}
+
+function scheduleLoadTimeout(duration: number): void {
+  clearLoadTimeout();
+
+  loadTimeoutId = window.setTimeout(() => {
+    if (isLoading.value && !showFallback.value) {
+      if (!useDirectPlay.value && autoRetryCount.value < maxAutoRetries) {
+        autoRetryCount.value += 1;
+        reloadToken.value = Date.now();
+        nextTick(() => {
+          scheduleLoadTimeout(duration);
+        });
+        return;
+      }
+
+      handleIframeError();
+    }
+  }, duration);
+}
+
+function resetPlayerState(): void {
+  clearLoadTimeout();
+  showFallback.value = false;
+  isLoading.value = true;
+  retryCount.value = 0;
+  autoRetryCount.value = 0;
+}
+
 // iframe加载成功
 const handleIframeLoad = () => {
+  clearLoadTimeout();
   isLoading.value = false;
-  console.log("B站视频iframe加载成功");
 };
 
 // iframe加载错误
 const handleIframeError = () => {
-  console.warn("B站视频iframe加载失败，切换到备用方案");
+  clearLoadTimeout();
   isLoading.value = false;
   showFallback.value = true;
 };
 
 // 尝试直接播放
 const tryDirectPlay = async () => {
-  console.log("尝试直接播放模式");
   useDirectPlay.value = true;
   showFallback.value = false;
   isLoading.value = true;
-  retryCount.value = 0;
 
   await nextTick();
 
-  // 统一播放超时处理
-  const timeout = 8000;
-
-  setTimeout(() => {
-    if (isLoading.value) {
-      console.warn("播放器加载失败，显示备用方案");
-      handleIframeError();
-    }
-  }, timeout);
+  scheduleLoadTimeout(8000);
 };
 
 // 重试iframe播放
 const retryIframe = async () => {
   if (retryCount.value >= maxRetries) {
-    console.warn("已达到最大重试次数");
     return;
   }
 
   retryCount.value++;
+  autoRetryCount.value = 0;
   useDirectPlay.value = false;
   showFallback.value = false;
   isLoading.value = true;
+  reloadToken.value = Date.now();
 
   await nextTick();
 
-  // 强制刷新iframe，添加时间戳避免缓存
-  if (iframeRef.value) {
-    iframeRef.value.src = embedUrl.value + "&t=" + Date.now();
-  }
-
-  // 延迟检查iframe是否加载成功
-  setTimeout(() => {
-    if (isLoading.value) {
-      console.warn("iframe重试超时，显示备用方案");
-      handleIframeError();
-    }
-  }, 5000);
+  scheduleLoadTimeout(5000);
 };
 
 // 移除了checkIframeContent函数，避免跨域安全错误
@@ -215,30 +284,45 @@ onMounted(() => {
       navigator.userAgent
     );
 
-  // 移动端优化：更短的超时时间
-  const timeout = isMobileDevice.value ? 8000 : 10000;
-
-  console.log(
-    `BilibiliPlayer组件已挂载，设备类型: ${
-      isMobileDevice.value ? "移动端" : "桌面端"
-    }`
-  );
-
-  // 设置超时检查
-  setTimeout(() => {
-    if (isLoading.value && !showFallback.value) {
-      console.warn(
-        `${isMobileDevice.value ? "移动端" : "桌面端"} iframe加载超时，显示备用方案`
-      );
-      handleIframeError();
-    }
-  }, timeout);
+  // 首屏进入时开启超时检测
+  scheduleLoadTimeout(isMobileDevice.value ? 8000 : 10000);
 
   // 移动端特殊处理：如果检测到是移动端，优先尝试移动端播放方式
   if (isMobileDevice.value && !useDirectPlay.value) {
-    console.log("检测到移动端，使用移动端优化播放策略");
     // 可以在这里添加移动端特定的优化
   }
+});
+
+watch(
+  () => props.url,
+  () => {
+    useDirectPlay.value = false;
+    reloadToken.value = 0;
+    resetPlayerState();
+    nextTick(() => {
+      scheduleLoadTimeout(isMobileDevice.value ? 8000 : 10000);
+    });
+  }
+);
+
+watch(
+  () => useDirectPlay.value,
+  (isDirectPlay, wasDirectPlay) => {
+    if (isDirectPlay === wasDirectPlay) {
+      return;
+    }
+
+    reloadToken.value = 0;
+    showFallback.value = false;
+    isLoading.value = true;
+    nextTick(() => {
+      scheduleLoadTimeout(isMobileDevice.value ? 8000 : 10000);
+    });
+  }
+);
+
+onUnmounted(() => {
+  clearLoadTimeout();
 });
 </script>
 
@@ -250,7 +334,7 @@ onMounted(() => {
   min-height: 360px;
   border-radius: 10px;
   overflow: hidden;
-  background: #000;
+  background: #2d3748;
   aspect-ratio: 16/9;
 }
 
@@ -331,8 +415,8 @@ onMounted(() => {
 
 .fallback-title {
   font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-weight: 500;
+  color: #2d3748;
   margin: 0 0 8px 0;
 }
 
@@ -367,13 +451,36 @@ onMounted(() => {
 }
 
 .fallback-btn.primary {
-  background: #1a3a8f;
+  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
   color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .fallback-btn.primary:hover {
-  background: #274fc5;
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #16306b 0%, #1e4085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.3);
+}
+
+.fallback-btn.primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.fallback-btn.primary:hover::before {
+  left: 100%;
 }
 
 .fallback-btn.secondary {
@@ -410,7 +517,7 @@ onMounted(() => {
 
 .fallback-tips p {
   margin: 0 0 8px 0;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .fallback-tips ul {

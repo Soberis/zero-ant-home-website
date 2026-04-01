@@ -1,66 +1,149 @@
 <template>
-
-  <div class="app-card" @click="goDetail">
-     <span class="icon" v-html="svg"></span>
-    <div class="label">{{ t(`applications.${slug}.title`, title) }}</div>
-
-  </div>
-
+  <router-link
+    class="app-divider-item"
+    :to="props.slug ? `/applications/${props.slug}` : '/solutions'"
+  >
+    <span class="app-icon" v-html="props.svg"></span>
+    
+    <div class="app-content">
+      <h3 class="app-title">
+        {{ t(props.title) }}
+      </h3>
+      <div class="app-action">
+        <span class="action-text">{{ t("solutionsPage.industries.viewApplication") }}</span>
+        <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+  </router-link>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
-const { title, svg, slug } = defineProps<{
+const props = defineProps<{
+  /** 应用标题 i18n key */
   title: string;
   svg: string;
   slug: string;
 }>();
 
 const { t } = useI18n();
-
-const router = useRouter();
-
-function goDetail(): void {
-  if (slug) {
-    router.push(`/applications/${slug}`);
-  }
-}
 </script>
 
-<style scoped>
-.app-card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px 0 rgba(26, 58, 143, 0.06);
+<style scoped lang="less">
+.app-divider-item {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 36px 0 26px 0;
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
-  cursor: pointer;
-  border: 1px solid #e3e8f0;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 32px 16px; /* Increas vertical padding for more air */
+  margin: 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.06); /* Lighter divider */
+  text-decoration: none;
+  background: transparent;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.app-card:hover {
-  box-shadow: 0 6px 24px 0 rgba(26, 58, 143, 0.13);
-  transform: translateY(-4px) scale(1.03);
-  border-color: #1a3a8f33;
+
+.app-divider-item:hover {
+  text-decoration: none;
+  background-color: rgba(15, 23, 42, 0.02); /* Very soft highlight */
 }
-.icon {
-  margin-bottom: 16px;
-  display: flex;
+
+.app-divider-item:hover .app-content {
+  transform: translateX(6px);
+}
+
+.app-divider-item:hover .app-title,
+.app-divider-item:hover .action-text,
+.app-divider-item:hover .action-arrow {
+  color: var(--brand-primary);
+}
+
+.app-divider-item:hover .action-arrow {
+  transform: translateX(4px);
+}
+
+.app-divider-item:hover .app-icon {
+  transform: scale(1.05);
+}
+
+.app-icon {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.label {
-  font-size: 1.3rem;
-  color: #555;
+
+.app-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 2px;
+  transition: transform 0.3s ease;
+}
+
+.app-title {
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s ease;
+}
+
+.app-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.action-text {
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+
+.action-arrow {
+  width: 16px;
+  height: 16px;
+  color: #64748b;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+@media (max-width: 560px) {
+  .app-divider-item {
+    gap: 16px;
+    padding: 24px 0;
+  }
+  
+  .app-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .app-title {
+    font-size: 1.2rem;
+  }
 }
 </style>
-

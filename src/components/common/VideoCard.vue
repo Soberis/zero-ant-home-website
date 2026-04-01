@@ -1,169 +1,172 @@
 <template>
-
   <div
-    class="video-card"
+    class="video-block"
+    :class="{ active: active }"
     @mouseenter="emit('hover', index)"
     @mouseleave="emit('leave')"
     @click="emit('click', index)"
   >
-     <img 
-       v-lazy="card.img" 
-       :alt="card.title + '图片'" 
-       class="video-card-img"
-       loading="lazy"
-     />
-    <div class="video-card-title-bar" :class="{ active: active }">
-
-      <div class="video-card-title" :class="{ active: active }">
-         {{ t(`videos.${card.slug}.title`, card.title) }}
+    <div class="video-media">
+      <img
+        :src="card.img"
+        :alt="t(card.title)"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="play-icon">
+        <svg viewBox="0 0 24 24" width="28" height="28">
+          <path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5z" />
+        </svg>
       </div>
-
     </div>
 
+    <div class="video-content">
+      <h3 class="video-title">
+        {{ t(card.title) }}
+      </h3>
+      <p v-if="card.description || description" class="video-desc">
+        {{ card.description || description }}
+      </p>
+    </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
-// 组件属性定义
 /**
  * @prop {Object} card 视频卡片数据
+ * @prop {String} description 可选的描述文本，如果不通过card.description传递，则通过prop传递
  * @prop {Number} index 当前卡片索引
  * @prop {Boolean} active 是否高亮
  */
 defineProps({
   card: { type: Object, required: true },
+  description: { type: String, default: "" },
   index: { type: Number, required: true },
   active: { type: Boolean, default: false },
 });
-// 事件定义
-/**
- * @emits hover 鼠标悬停
- * @emits leave 鼠标离开
- * @emits click 点击卡片
- */
-const emit = defineEmits(['hover', 'leave', 'click']);
+
+const emit = defineEmits(["hover", "leave", "click"]);
 </script>
 
 <style scoped>
-.video-card {
-  background: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
-  border-radius: 20px;
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.08),
-    0 1px 4px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+.video-block {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  min-height: 320px;
-  position: relative;
-}
-
-.video-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #1a3a8f 0%, #2d5aa0 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-  z-index: 1;
-}
-
-.video-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 12px 40px rgba(26, 58, 143, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: rgba(26, 58, 143, 0.2);
-}
-
-.video-card:hover::before {
-  transform: scaleX(1);
-}
-
-.video-card-img {
+  text-decoration: none;
   width: 100%;
-  height: 200px;
+}
+
+.video-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--brand-surface-soft, #f8fafc);
+  /* subtle edge definition without strong shadow */
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); 
+}
+
+.video-media img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  background: linear-gradient(135deg, #f0f2f5 0%, #e8eaed 100%);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
-  transition: transform 0.3s ease;
 }
 
-.video-card:hover .video-card-img {
-  transform: scale(1.05);
+.video-block:hover .video-media img,
+.video-block.active .video-media img {
+  transform: scale(1.04);
 }
 
-.video-card-title-bar {
-  flex: 1;
-  background: transparent;
-  padding: 24px 20px;
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: all 0.3s ease;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
 }
 
-.video-card-title-bar.active {
-  background: linear-gradient(135deg, #1a3a8f 0%, #2d5aa0 100%);
-  border-radius: 0 0 20px 20px;
+.video-block:hover .play-icon,
+.video-block.active .play-icon {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  transform: translate(-50%, -50%) scale(1.1);
+  border-color: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
 }
 
-.video-card-title {
-  font-size: 18px;
-  color: #2c3e50;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+.video-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.video-title {
   margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #0f172a;
   line-height: 1.4;
+  min-height: 3.5rem;
+
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   transition: color 0.3s ease;
 }
 
-.video-card-title.active {
-  color: #fff;
+.video-block:hover .video-title,
+.video-block.active .video-title {
+  color: var(--brand-primary);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .video-card {
-    min-height: 280px;
-  }
-  .video-card-img {
-    height: 160px;
-  }
-  .video-card-title-bar {
-    padding: 20px 16px;
-  }
-  .video-card-title {
-    font-size: 16px;
-  }
+.video-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #64748b;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-@media (max-width: 480px) {
-  .video-card {
-    min-height: 240px;
+@media (max-width: 560px) {
+  .video-title {
+    font-size: 1.15rem;
   }
-  .video-card-img {
-    height: 140px;
+  
+  .play-icon {
+    width: 48px;
+    height: 48px;
   }
-  .video-card-title-bar {
-    padding: 16px 12px;
-  }
-  .video-card-title {
-    font-size: 15px;
-    letter-spacing: 0.3px;
+  
+  .video-media {
+    border-radius: 16px;
   }
 }
 </style>
-

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import i18n, { ensureProductDetailLocale } from "@/config/i18n";
+import { scheduleScrollToTop } from "@/utils/scroll";
 
 // 核心页面直接导入（首屏关键路径）
 import Home from "@/views/Home.vue";
@@ -7,13 +9,20 @@ import Home from "@/views/Home.vue";
 const Solutions = () => import("@/views/solutions/Solutions.vue");
 const About = () => import("@/views/company/About.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
-const ProductDetail = () => import("@/views/products/ProductDetailView.vue");
+const ProductDetail = () => import("@/views/products/ProductDetail.vue");
 const Support = () => import("@/views/support/Support.vue");
-const ApplicationDetail = () =>
-  import("@/views/applications/ApplicationDetail.vue");
+const ApplicationDetail = () => import("@/views/applications/ApplicationDetail.vue");
 const SystemProducts = () => import("@/views/products/SystemProducts.vue");
 const RobotProducts = () => import("@/views/products/RobotProducts.vue");
 const Careers = () => import("@/views/company/Careers.vue");
+const NotFound = () => import("@/views/NotFound.vue");
+
+const productDetailRouteNames = new Set([
+  "SystemProductDetail",
+  "RobotProductDetail",
+]);
+
+let isPopStateNavigation = false;
 
 const routes = [
   // 首页
@@ -81,42 +90,93 @@ const routes = [
     name: "RobotProductDetail",
     component: ProductDetail,
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    // 如果浏览器返回/前进且有保存的位置，恢复该位置
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
-      return savedPosition;
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(savedPosition);
+        }, 100); // 延迟等待DOM加载，避免瞬间回滚失败
+      });
     }
-    
+
     // 处理hash导航
     if (to.hash) {
-      return {
-        el: to.hash,
-        top: 120,
-        behavior: "smooth",
-      };
+      // 等待目标节点挂载后再滚动，依赖 CSS scroll-margin-top 做最终对齐
+      return new Promise((resolve) => {
+        const maxAttempts = 20;
+        let attempts = 0;
+
+        const tryScroll = () => {
+          const element = document.querySelector(to.hash) as HTMLElement | null;
+          if (element) {
+            element.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "nearest",
+            });
+            resolve(false);
+          } else if (attempts < maxAttempts) {
+            attempts += 1;
+            setTimeout(tryScroll, 50);
+          } else {
+            resolve({ left: 0, top: 0, behavior: "auto" });
+          }
+        };
+
+        tryScroll();
+      });
     }
-    
-    // 保存当前滚动位置到历史状态
-    if (from && from.name) {
-      window.history.replaceState(
-        {
-          ...window.history.state,
-          scrollTop: window.scrollY || document.documentElement.scrollTop
-        },
-        ''
-      );
-    }
-    
     // 默认滚动到顶部
-    return { top: 0 };
+    return { left: 0, top: 0, behavior: "auto" };
   },
 });
 
-// 路由守卫将在main.ts中设置，避免循环依赖
+if (typeof window !== "undefined") {
+  window.addEventListener("popstate", () => {
+    isPopStateNavigation = true;
+  });
+}
+
+router.beforeEach(async (to) => {
+  if (!productDetailRouteNames.has(String(to.name))) {
+    return true;
+  }
+
+  const locale = i18n.global.locale.value === "en" ? "en" : "zh";
+  try {
+    await ensureProductDetailLocale(locale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn("预热产品详情文案失败:", error);
+    }
+  }
+  return true;
+});
+
+router.afterEach((to, _from, failure) => {
+  if (failure || to.hash) {
+    isPopStateNavigation = false;
+    return;
+  }
+
+  if (isPopStateNavigation) {
+    isPopStateNavigation = false;
+    return;
+  }
+
+  scheduleScrollToTop({ afterTransition: true });
+});
+
+// 产品详情页的 locale 预热守卫，避免首次进入时详情文案缺失
 
 export default router;

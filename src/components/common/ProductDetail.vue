@@ -1,62 +1,111 @@
 <template>
-  <div class="product-detail">
-    <!-- 产品头部信息 -->
-    <div class="product-header">
-      <div class="container">
-        <img
-          :src="localizedProduct.image"
-          alt="产品图片"
-          class="product-image"
-        />
-        <h2 class="product-title">{{ localizedProduct.title }}</h2>
+  <div
+    class="product-detail"
+    :class="[`product-detail--${currentProduct?.category ?? 'system'}`]"
+  >
+    <section id="product-overview" class="product-hero">
+      <div class="container product-hero__inner">
+        <div class="product-hero__header">
+          <span class="product-hero__eyebrow">{{ categoryLabel }}</span>
+          <h1 class="product-hero__title text-display-hero">{{ localizedProduct.title }}</h1>
+          <p class="product-hero__description" v-html="sanitizedDescription"></p>
 
-        <p
-          class="product-desc"
-          v-html="localizedProduct.desc.replace(/\n/g, '<br>')"
-        ></p>
+          <div class="product-hero__actions">
+            <button class="product-hero__back-link" type="button" @click="emits('back')">
+              <svg
+                class="product-hero__back-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 12H5" />
+                <path d="m12 19-7-7 7-7" />
+              </svg>
+              <span>{{ t("productDetail.backToList") }}</span>
+            </button>
+            <router-link
+              :to="{ path: '/about', hash: '#contact' }"
+              class="btn btn-secondary product-hero__contact-btn"
+            >
+              {{ t("common.cta.contactTeam") }}
+            </router-link>
+          </div>
+        </div>
+
+        <div class="product-hero__media-wrapper">
+          <img
+            :src="heroImageSrc"
+            :alt="localizedProduct.title"
+            class="product-hero__image"
+            :width="heroImageSize.width"
+            :height="heroImageSize.height"
+          />
+
+          <div v-if="heroMetrics.length" class="product-hero__metrics">
+            <article
+              v-for="metric in heroMetrics"
+              :key="`${metric.label}-${metric.value}`"
+              class="product-hero__metric"
+            >
+              <div class="product-hero__metric-value">{{ metric.value }}</div>
+              <div class="product-hero__metric-label">{{ metric.label }}</div>
+            </article>
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- 主要内容区域 -->
-    <div class="main-content">
-      <div class="container">
-        <!-- 优势特点 -->
+    </section>
+
+    <main class="product-main">
+      <div class="container product-main__inner">
         <section
-          v-if="productFeatures && productFeatures.length"
-          class="section features-section"
+          v-if="productFeatures.length"
+          id="features-section"
+          class="detail-section"
         >
-          <h2 class="section-title">{{ t("productDetail.features") }}</h2>
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ t("productDetail.features") }}</span>
+              <span v-if="locale === 'zh'" class="title-en">CORE FEATURES</span>
+            </h2>
+          </div>
 
           <div class="features-grid">
-            <div
+            <article
               v-for="(feature, idx) in productFeatures"
               :key="idx"
               class="feature-card"
             >
-              <div class="feature-icon">{{ getFeatureIcon(idx) }}</div>
-
-              <div class="feature-content">
-                <h3 class="feature-title">
-                  {{
-                    typeof feature === "string" ? feature : feature.title || ""
-                  }}
+              <div class="feature-card__content">
+                <span class="feature-card__index">{{ String(idx + 1).padStart(2, "0") }}</span>
+                <h3 class="feature-card__title">
+                  {{ typeof feature === "string" ? feature : feature.title || "" }}
                 </h3>
-
                 <p
                   v-if="typeof feature === 'object' && feature.desc"
-                  class="feature-desc"
+                  class="feature-card__description"
                 >
                   {{ feature.desc }}
                 </p>
               </div>
-            </div>
+            </article>
           </div>
         </section>
-        <!-- 应用场景 -->
+
         <section
           v-if="props.showApplications && relatedApplications.length > 0"
-          class="section scenes-section"
+          id="applications-section"
+          class="detail-section"
         >
-          <h1 class="section-title">{{ t("productDetail.applications") }}</h1>
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ t("productDetail.applications") }}</span>
+              <span v-if="locale === 'zh'" class="title-en">APPLICATIONS</span>
+            </h2>
+          </div>
 
           <div class="application-grid">
             <ApplicationCard
@@ -68,12 +117,18 @@
             />
           </div>
         </section>
-        <!-- 视频案例 -->
+
         <section
           v-if="props.showVideos && relatedVideos.length > 0"
-          class="section cases-section"
+          id="cases-section"
+          class="detail-section"
         >
-          <h2 class="section-title">{{ t("productDetail.videoCases") }}</h2>
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ t("productDetail.videoCases") }}</span>
+              <span v-if="locale === 'zh'" class="title-en">VIDEO CASES</span>
+            </h2>
+          </div>
 
           <div class="videos-grid">
             <VideoCard
@@ -88,185 +143,85 @@
             />
           </div>
         </section>
-        <!-- 产品参数 -->
+
         <section
-          v-if="localizedProduct.params && localizedProduct.params.length"
-          class="section"
+          v-if="normalizedParams.length"
+          id="parameters-section"
+          class="detail-section"
         >
-          <h2 class="section-title">{{ t("productDetail.parameters") }}</h2>
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ t("productDetail.parameters") }}</span>
+              <span v-if="locale === 'zh'" class="title-en">TECH SPECS</span>
+            </h2>
+          </div>
 
-          <div class="params-container">
-            <div class="params-grid">
-              <div
-                v-for="(param, idx) in localizedProduct.params"
-                :key="idx"
-                class="param-item"
+          <div class="params-grid">
+            <div
+              v-for="(column, columnIndex) in parameterColumns"
+              :key="`params-column-${columnIndex}`"
+              class="params-column"
+            >
+              <article
+                v-for="param in column"
+                :key="`${param.key}-${param.value}`"
+                class="param-card"
               >
-                <div class="param-key">
-                  {{ typeof param === "string" ? param : param.key }}
-                </div>
-
-                <div class="param-value">
-                  {{ typeof param === "string" ? "" : param.value }}
-                </div>
-              </div>
+                <div class="param-card__label">{{ param.key }}</div>
+                <div class="param-card__value">{{ param.value }}</div>
+              </article>
             </div>
           </div>
         </section>
-        <!-- 相关下载 -->
-        <section class="section downloads-section">
-          <h2 class="section-title">{{ t("productDetail.downloads") }}</h2>
+
+        <section id="downloads-section" class="detail-section">
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ t("productDetail.downloads") }}</span>
+              <span v-if="locale === 'zh'" class="title-en">DOWNLOADS</span>
+            </h2>
+          </div>
 
           <div
-            v-if="
-              localizedProduct.downloads &&
-              Object.keys(localizedProduct.downloads).length > 0
-            "
+            v-if="normalizedDownloads.length"
             class="downloads-grid"
           >
             <a
-              v-for="(item, key) in localizedProduct.downloads"
-              :key="key"
+              v-for="download in normalizedDownloads"
+              :key="`${download.name}-${download.url}`"
               class="download-card"
-              :href="
-                (typeof item === 'string' && item) || (item && item.url)
-                  ? typeof item === 'string'
-                    ? item
-                    : item.url
-                  : undefined
-              "
-              :download="
-                (typeof item === 'string' && item) || (item && item.url)
-                  ? typeof item === 'string'
-                    ? ''
-                    : item.name
-                  : undefined
-              "
+              :href="download.url"
+              :download="download.name"
             >
-              <div class="download-icon">📄</div>
-              <div class="download-name">
-                {{
-                  typeof item === "string" && item
-                    ? item
-                    : item && item.name
-                    ? item.name
-                    : "文档"
-                }}
+              <div class="download-card-head">
+                <span class="card-tag">{{ getDownloadFormat(download.name, download.url) }}</span>
+                <span class="download-status">{{ t("common.cta.downloadNow") }}</span>
               </div>
-              <div class="download-action">
-                {{ t("supportPage.downloads.downloadNow") }}
-              </div>
+              <h3 class="download-title">{{ getDownloadDisplayName(download.name) }}</h3>
+              <p class="download-desc">{{ download.name }}</p>
             </a>
           </div>
 
-          <div v-else class="no-downloads-placeholder">
-            <div class="placeholder-icon">📋</div>
-            <p class="placeholder-text">
-              {{ t("productDetail.preparingMessage") }}
-            </p>
+          <div v-else class="downloads-placeholder">
+            <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
           </div>
         </section>
       </div>
-    </div>
-    <!-- 返回按钮 -->
-    <div class="back-section">
-      <div class="container">
-        <button class="back-btn" @click="emits('back')">
-          <span class="back-icon">←</span>
-          <span class="back-text">{{ t("productDetail.backToList") }}</span>
-        </button>
-      </div>
-    </div>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import VideoCard from "@/components/common/VideoCard.vue";
-import ApplicationCard from "@/components/common/ApplicationCard.vue";
-import { videoCards } from "@/data/videos";
-import applications from "@/data/applications";
-import type { ProductDetail } from "@/data/productDetails";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-import { ref, computed } from "vue";
-import {
-  getRelatedApplications,
-  getRelatedVideos,
-  getCustomFeatures,
-  hasProductRelations,
-} from "@/data/productRelations";
+import { sanitizeHtmlAllowList } from "@/utils/security";
+import ApplicationCard from "@/components/common/ApplicationCard.vue";
+import VideoCard from "@/components/common/VideoCard.vue";
+import { useProductDetailData } from "@/composables/useProductDetailData";
+import type { ProductDetail } from "@/data/productDetails";
 
-// 特性项类型定义
 type FeatureItem = string | { title?: string; desc?: string };
 
-// 国际化
-const { t } = useI18n();
-
-// 将URL slug转换为国际化键名的映射函数
-function slugToI18nKey(slug: string): string {
-  const slugToKeyMap: Record<string, string> = {
-    "multi-os-vm": "multiOsVm",
-    "industrial-rtos": "industrialRtos",
-    airos: "airos",
-    "robot-scheduler": "robotScheduler",
-    "gantry-2d": "gantry2d",
-    "scara-4axis": "scara4axis",
-    "arm-6axis": "arm6axis",
-    "dual-arm-humanoid": "dualArmHumanoid",
-    "mobile-robot": "mobileRobot",
-  };
-  return slugToKeyMap[slug] || slug;
-}
-
-// 计算属性：根据productSlug获取国际化的产品数据
-const localizedProduct = computed(() => {
-  const i18nKey = slugToI18nKey(props.productSlug);
-  const detailKey = `productDetails.${i18nKey}`;
-  const productKey = `products.${i18nKey}`;
-
-  // 尝试从productDetail.productDetails获取详细信息，如果没有则使用原始数据
-  // 检查是否存在详细翻译
-  let hasDetailTranslation = false;
-  try {
-    const translatedTitle = t(`${detailKey}.title`);
-    hasDetailTranslation = translatedTitle !== `${detailKey}.title`;
-  } catch {
-    hasDetailTranslation = false;
-  }
-
-  // 获取翻译数据的辅助函数
-  const getTranslatedData = (key: string, fallback: any) => {
-    if (!hasDetailTranslation) return fallback;
-    try {
-      const translated = t(`${detailKey}.${key}`);
-      // 如果翻译结果是字符串且等于键名，说明没有找到翻译，使用fallback
-      if (
-        typeof translated === "string" &&
-        translated === `${detailKey}.${key}`
-      ) {
-        return fallback;
-      }
-      return translated;
-    } catch {
-      return fallback;
-    }
-  };
-
-  return {
-    title: hasDetailTranslation
-      ? t(`${detailKey}.title`)
-      : t(`${productKey}.name`, props.product.title),
-    desc: hasDetailTranslation
-      ? t(`${detailKey}.desc`)
-      : t(`${productKey}.desc`, props.product.desc),
-    image: getTranslatedData("image", props.product.image),
-    features: getTranslatedData("features", props.product.features),
-    cases: getTranslatedData("cases", props.product.cases),
-    params: getTranslatedData("params", props.product.params),
-    downloads: getTranslatedData("downloads", props.product.downloads),
-  };
-});
-
-// 组件属性定义
 const props = withDefaults(
   defineProps<{
     product: ProductDetail;
@@ -281,635 +236,649 @@ const props = withDefaults(
   }
 );
 
-// 组件事件定义
 const emits = defineEmits<{
   back: [];
 }>();
 
-// 特性图标映射表（优化性能，避免重复计算）
-const FEATURE_ICON_MAP = new Map([
-  // 实时性、高速相关
-  [["实时", "响应", "速度", "高速"], "⚡"],
-  // 安全性相关
-  [["安全", "可控", "防护", "认证"], "🔒"],
-  // 精准控制相关
-  [["精度", "定位", "控制", "轴"], "🎯"],
-  // 智能化相关
-  [["智能", "AI", "视觉", "语言", "学习"], "🧠"],
-  // 云端/网络相关
-  [["云", "远程", "网络", "5G", "连接"], "☁️"],
-  // 效率提升相关
-  [["成本", "效率", "周期", "优化"], "📈"],
-  // 技术集成相关
-  [["集成", "部署", "模块", "平台", "系统"], "🔧"],
-  // 协作相关
-  [["协作", "协同", "多", "统一", "调度"], "🤝"],
-  // 数据监控相关
-  [["监控", "数据", "分析", "诊断"], "📊"],
-  // 灵活性相关
-  [["灵活", "扩展", "自由度", "适应"], "🔄"],
-  // 稳定性相关
-  [["稳定", "可靠", "持续", "耐用"], "🛡️"],
-  // 创新技术相关
-  [["创新", "前沿", "突破", "先进"], "🚀"],
-  // 用户体验相关
-  [["简单", "易用", "友好", "便捷"], "✨"],
-  // 环保节能相关
-  [["节能", "环保", "绿色", "低耗"], "🌱"],
-  // 兼容性相关
-  [["兼容", "通用", "标准", "接口"], "🔗"],
-]);
+const { t, locale } = useI18n();
 
-// 扩展的默认图标序列（避免重复）
-const DEFAULT_ICONS = [
-  "⚡",
-  "🔒",
-  "🎯",
-  "🧠",
-  "☁️",
-  "📈",
-  "🔧",
-  "🤝",
-  "📊",
-  "🔄",
-  "🛡️",
-  "🚀",
-  "✨",
-  "🌱",
-  "🔗",
-  "🎨",
-  "⭐",
-  "🔥",
-  "💡",
+const {
+  currentProduct,
+  localizedProduct: resolvedLocalizedProduct,
+  categoryLabel,
+  normalizedParams,
+  normalizedDownloads,
+  heroMetrics,
+  relatedApplications,
+  relatedVideos,
+  productFeatures: resolvedProductFeatures,
+  activeVideoIndex,
+  handleVideoHover,
+  handleVideoLeave,
+  handleVideoClick,
+} = useProductDetailData(() => props.productSlug, {
+  baseDetail: () => props.product,
+  showApplications: () => props.showApplications,
+  showVideos: () => props.showVideos,
+});
+
+const localizedProduct = computed(() => resolvedLocalizedProduct.value ?? props.product);
+const heroImageSrc = computed(() => localizedProduct.value.image || props.image || "");
+const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.value);
+const parameterColumns = computed(() => {
+  const params = normalizedParams.value;
+  const midpoint = Math.ceil(params.length / 2);
+  return [params.slice(0, midpoint), params.slice(midpoint)];
+});
+const sanitizedDescription = computed(() =>
+  sanitizeHtmlAllowList(String(localizedProduct.value.desc || "").replace(/\n/g, "<br>"))
+);
+
+const getDownloadFormat = (name: string, url: string) => {
+  const source = name || url;
+  const match = source.match(/\.([a-z0-9]+)(?:$|[?#])/i);
+  return match ? match[1].toUpperCase() : "FILE";
+};
+
+const getDownloadDisplayName = (name: string) =>
+  name.replace(/\.[a-z0-9]+$/i, "");
+
+type HeroImageSize = {
+  width: number;
+  height: number;
+};
+
+const HERO_IMAGE_SIZE_RULES: Array<{ test: RegExp; width: number; height: number }> = [
+  { test: /embedded-vm/i, width: 1200, height: 521 },
+  { test: /industrial-rtos/i, width: 1200, height: 675 },
+  { test: /airos-os/i, width: 1200, height: 721 },
+  { test: /robot-scheduling-system/i, width: 1200, height: 594 },
+  { test: /gantry-2d3d/i, width: 1200, height: 675 },
+  { test: /four-axis-robot/i, width: 1200, height: 1600 },
+  { test: /six-axis-robot-1000w-q75/i, width: 1000, height: 678 },
+  { test: /dual-arm-humanoid/i, width: 1200, height: 2133 },
+  { test: /mobile-robot/i, width: 1200, height: 960 },
 ];
 
-// 预计算特性图标映射，避免在渲染时重复计算
-const featureIcons = computed(() => {
-  const icons: string[] = [];
-  const globalUsedIcons = new Set<string>();
-
-  productFeatures.value.forEach((feature, index) => {
-    const featureText =
-      typeof feature === "string"
-        ? feature
-        : feature.title || feature.desc || "";
-
-    // 首先尝试根据关键词匹配，但要确保图标未被使用
-    let matchedIcon = "";
-    for (const [keywords, icon] of FEATURE_ICON_MAP) {
-      if (
-        keywords.some((keyword) => featureText.includes(keyword)) &&
-        !globalUsedIcons.has(icon)
-      ) {
-        matchedIcon = icon;
-        break;
-      }
-    }
-
-    if (matchedIcon) {
-      icons.push(matchedIcon);
-      globalUsedIcons.add(matchedIcon);
-    } else {
-      // 如果没有匹配到或匹配的图标已被使用，从默认图标中选择一个未使用的
-      let selectedIcon = "";
-      for (const icon of DEFAULT_ICONS) {
-        if (!globalUsedIcons.has(icon)) {
-          selectedIcon = icon;
-          globalUsedIcons.add(icon);
-          break;
-        }
-      }
-
-      // 如果所有图标都已使用，使用循环索引但跳过已使用的
-      if (!selectedIcon) {
-        let fallbackIndex = index;
-        do {
-          selectedIcon = DEFAULT_ICONS[fallbackIndex % DEFAULT_ICONS.length];
-          fallbackIndex++;
-        } while (
-          globalUsedIcons.has(selectedIcon) &&
-          fallbackIndex < DEFAULT_ICONS.length + index
-        );
-
-        globalUsedIcons.add(selectedIcon);
-      }
-
-      icons.push(selectedIcon);
-    }
-  });
-
-  return icons;
-});
-
-// 获取特性图标的函数（现在只是简单的索引访问）
-const getFeatureIcon = (index: number): string => {
-  return featureIcons.value[index] || "⭐";
-};
-
-// 获取相关应用场景（用于应用场景展示）
-const relatedApplications = computed(() => {
-  // 如果产品有关联配置，使用关联数据
-  if (hasProductRelations(props.productSlug)) {
-    return getRelatedApplications(props.productSlug);
+const heroImageSize = computed<HeroImageSize>(() => {
+  const src = heroImageSrc.value;
+  if (!src) {
+    return { width: 1200, height: 675 };
   }
-  // 否则使用默认数据
-  return applications.slice(0, 6);
-});
 
-// 获取相关视频（用于案例展示）
-const relatedVideos = computed(() => {
-  // 如果产品有关联配置，使用关联数据
-  if (hasProductRelations(props.productSlug)) {
-    return getRelatedVideos(props.productSlug);
+  const match = HERO_IMAGE_SIZE_RULES.find(({ test }) => test.test(src));
+  if (!match) {
+    return { width: 1200, height: 675 };
   }
-  // 否则使用默认数据
-  return videoCards.slice(0, 6);
+
+  return { width: match.width, height: match.height };
 });
-
-// 获取产品的优势特点（优先使用国际化特点）
-const productFeatures = computed((): FeatureItem[] => {
-  try {
-    // 优先使用国际化特点
-    const features = localizedProduct.value.features;
-    if (Array.isArray(features) && features.length > 0) {
-      return features as FeatureItem[];
-    }
-
-    // 其次使用自定义特点
-    const customFeatures = getCustomFeatures(props.productSlug);
-    if (customFeatures && customFeatures.length > 0) {
-      return customFeatures;
-    }
-
-    // 最后使用原始数据
-    return props.product.features || [];
-  } catch (error) {
-    console.warn("获取产品特性时出错:", error);
-    return props.product.features || [];
-  }
-});
-
-// 视频卡片交互
-const activeVideoIndex = ref(-1);
-const handleVideoHover = (index: number) => {
-  activeVideoIndex.value = index;
-};
-const handleVideoLeave = () => {
-  activeVideoIndex.value = -1;
-};
-const handleVideoClick = (index: number) => {
-  const video = relatedVideos.value[index];
-  if (video) {
-    window.open(`/video/${video.slug}`, "_blank");
-  }
-};
 </script>
 
-<style scoped>
-/* 全局样式 */
+<style scoped lang="less">
 .product-detail {
   min-height: 100vh;
-  background: #f7f8fa;
-  color: #222;
-  scroll-behavior: smooth;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  line-height: 1.6;
-  width: 100%;
-  text-align: center !important;
+  padding-bottom: 80px;
+  background: #ffffff;
 }
 
-/* 产品头部 */
-.product-header {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  color: #222;
-  padding: 8rem 0 6rem;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid #e3f2fd;
+.product-hero {
+  padding: 72px 0 88px;
 }
 
-.product-image {
-  display: block;
-  max-width: 800px;
-  max-height: 500px;
-  width: 100%;
-  height: auto;
-  margin: 0 auto 4rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 12px 48px rgba(26, 58, 143, 0.2);
-  object-fit: contain;
-  background: white;
-  padding: 1.5rem;
+.product-hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 1.1fr);
+  align-items: stretch;
+  gap: 60px;
 }
 
-.product-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  text-align: center;
-  letter-spacing: -0.02em;
-  position: relative;
-  z-index: 1;
-  color: #222;
-}
-
-.product-desc {
-  font-size: 1.5rem;
+.product-hero__header {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 12px 0 0 0;
+  border-radius: 0;
   text-align: left;
-  margin-bottom: 3rem;
-  color: #666;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.product-hero__media-wrapper,
+.detail-section {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.detail-nav__inner {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 14px 0;
+}
+
+.product-hero__eyebrow,
+.product-hero__panel-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border-left: none;
+  color: #163a87;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-hero__title {
+  margin: 24px 0 16px;
+  color: #0f172a;
+}
+
+.product-hero__description {
+  margin: 0;
+  max-width: 560px;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #556074;
+  font-weight: 500;
+}
+
+.product-hero__actions {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.product-hero__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(15, 23, 42, 0.76);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.product-hero__back-link:hover {
+  color: #163a87;
+}
+
+.product-hero__back-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.product-hero__contact-btn {
+  min-width: 144px;
+}
+
+.product-hero__media-wrapper {
   position: relative;
-  z-index: 1;
+  width: 100%;
   max-width: 900px;
-  white-space: normal;
-  padding: 0 2rem;
-  display: block;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 主要内容区域 */
-.main-content {
-  padding: 6rem 0;
+.product-hero__image {
+  width: 100%;
+  max-height: 48vh;
+  min-height: 320px;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.section {
-  margin-bottom: 6rem;
+.product-hero__image:hover {
+  transform: scale(1.02);
 }
 
-.section-title {
-  color: #222;
-  font-size: 2.6rem;
-  font-weight: 700;
-  text-align: center;
-  margin: 0 0 3rem 0;
-  letter-spacing: 1px;
-  position: relative;
-  transition: color 0.3s ease;
-  padding: 0 2rem;
+.product-hero__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+  width: 100%;
 }
 
-/* 优势特点 */
+.product-hero__metric {
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.product-hero__metric + .product-hero__metric {
+  border-left: 1px solid rgba(15, 23, 42, 0.06);
+  padding-left: 16px;
+}
+
+.product-hero__metric-value {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #163a87;
+  letter-spacing: -0.01em;
+}
+
+.product-hero__metric-label {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.product-main {
+  padding-top: 12px;
+}
+
+.product-main__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-section {
+  padding: 100px 0 80px;
+  border-radius: 0;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
+  background: transparent;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.detail-section__header {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.detail-section__title {
+  margin: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 10px;
+  color: #0f172a;
+}
+
+.title-en {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.5);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.features-list,
+.application-grid,
+.videos-grid {
+  display: grid;
+  gap: 16px;
+}
+
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  padding: 8px 0 0;
 }
 
 .feature-card {
-  background: white;
-  border-radius: 1.25rem;
-  padding: 2.5rem;
-  box-shadow: 0 4px 24px rgba(26, 58, 143, 0.08);
-  border: 1px solid #e3f2fd;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.5rem;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 32px rgba(26, 58, 143, 0.15);
-  border-color: #1976d2;
-}
-
-.feature-icon {
-  font-size: 2.5rem;
-  width: 4rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #1976d2, #1565c0);
-  color: white;
-  border-radius: 1rem;
-  flex-shrink: 0;
-  margin-bottom: 0.5rem;
-}
-
-.feature-content {
-  flex: 1;
-}
-
-.feature-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 1rem;
-  line-height: 1.5;
-}
-
-.feature-desc {
-  color: #666;
-  line-height: 1.7;
-  font-size: 1.05rem;
+  max-width: 100%;
   margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-top: none;
+  box-shadow: none;
 }
 
-/* 应用场景 - 应用网格 */
-.application-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-  margin-top: 2rem;
+.feature-card:nth-child(n + 4) {
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  padding-top: 24px;
 }
 
-/* 相关案例 - 视频网格 */
-.videos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-/* 产品参数 */
-.params-container {
-  background: white;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.params-grid {
+.feature-card__content {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-.param-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 1.5rem;
-  background: #fafbfc;
-  border: 1px solid #e8eef5;
-  border-radius: 0.75rem;
-  transition: all 0.2s ease;
-  min-height: 60px;
-}
-
-.param-item:hover {
-  background: #f0f7ff;
-  border-color: #1976d2;
-}
-
-.param-key {
-  font-weight: 600;
-  color: #222;
-  font-size: 1.2rem;
-  flex: 1;
-  margin-right: 1rem;
+  align-items: flex-start;
   text-align: left;
 }
 
-.param-value {
-  color: #222;
+.feature-card__index {
+  display: block;
+  font-size: 1rem;
   font-weight: 600;
-  font-size: 1.2rem;
-  text-align: right;
-  flex-shrink: 0;
-  max-width: 60%;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.feature-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #0f172a;
+  margin: 0;
+}
+
+.feature-card__description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #556074;
+  font-weight: 500;
+  margin: 8px 0 0;
+}
+
+.params-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 52px;
+}
+
+#parameters-section .detail-section__header {
+  margin-bottom: 20px;
+}
+
+#parameters-section .detail-section__title {
+  gap: 8px;
+}
+
+.params-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.param-card {
+  display: grid;
+  grid-template-columns: minmax(120px, 10.5rem) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.params-column > .param-card:first-child {
+  padding-top: 12px;
+}
+
+.param-card + .param-card {
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.param-card__label {
+  padding-top: 2px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #667085;
+  font-weight: 600;
+}
+
+.param-card__value {
+  margin-top: 0;
+  justify-self: stretch;
+  max-width: none;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  text-align: left;
+  color: #0f172a;
+  font-weight: 600;
+  overflow-wrap: anywhere;
   word-break: break-word;
 }
 
-/* 相关下载 */
 .downloads-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
 .download-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 2.5rem 2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-radius: 1.25rem;
-  box-shadow: 0 6px 30px rgba(26, 58, 143, 0.12);
-  border: 1px solid #e3f2fd;
+  gap: 14px;
+  min-height: 220px;
+  padding: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  background: #ffffff;
   text-decoration: none;
-  transition: all 0.3s ease;
-  color: inherit;
-  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .download-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(26, 58, 143, 0.2);
-  border-color: #1976d2;
-}
-
-.download-icon {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(26, 58, 143, 0.1));
-}
-
-.download-card:hover .download-icon {
-  transform: scale(1.1);
-  filter: drop-shadow(0 4px 8px rgba(26, 58, 143, 0.2));
-}
-
-.download-name {
-  font-weight: 700;
-  color: #1a3a8f;
-  text-align: center;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  transition: color 0.3s ease;
-}
-
-.download-card:hover .download-name {
-  color: #1976d2;
-}
-
-.download-action {
-  display: inline-block;
-  background: linear-gradient(135deg, #1976d2 0%, #1a3a8f 100%);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.download-action::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.download-card:hover .download-action {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+  border-color: rgba(26, 58, 143, 0.18);
 }
 
-.download-card:hover .download-action::before {
-  width: 300px;
-  height: 300px;
+.download-card:focus-visible {
+  outline: none;
+  border-color: rgba(26, 58, 143, 0.22);
+  box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.12);
 }
 
-/* 无下载占位符 */
-.no-downloads-placeholder {
+.download-card-head {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 3rem;
-  background: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 24px rgba(26, 58, 143, 0.08);
-  border: 1px solid #e3f2fd;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.placeholder-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0.7;
-}
-
-.placeholder-text {
-  color: #666;
-  font-size: 1.1rem;
-  text-align: center;
-  margin: 0;
-}
-
-/* 大屏幕响应式调整 */
-@media (min-width: 1440px) {
-  .product-title {
-    font-size: 2.8rem;
-  }
-
-  .product-desc {
-    font-size: 1.5rem;
-  }
-
-  .section-title {
-    font-size: 2.6rem;
-  }
-
-  .feature-title {
-    font-size: 1.5rem;
-  }
-
-  .feature-desc {
-    font-size: 1.3rem;
-  }
-
-  .param-key,
-  .param-value {
-    font-size: 1.3rem;
-  }
-
-  .download-name {
-    font-size: 1.3rem;
-  }
-
-  .placeholder-text {
-    font-size: 1.3rem;
-  }
-}
-
-/* 返回按钮 */
-.back-section {
-  background: #f8fafc;
-  padding: 3rem 0;
-  border-top: 1px solid #e2e8f0;
-}
-
-.back-btn {
-  position: relative;
-  border: none;
-  background: linear-gradient(135deg, #1a3a8f 0%, #4a90e2 100%);
-  color: #fff;
-  border-radius: 50px;
-  padding: 16px 40px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.card-tag {
+  width: fit-content;
+  border-radius: 4px;
+  border: 0;
+  background: rgba(26, 58, 143, 0.08);
+  color: #163a87;
+  padding: 4px 12px;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 20px rgba(26, 58, 143, 0.2);
+  letter-spacing: 0.04em;
+}
+
+.download-status {
+  color: #667085;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.download-title {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.55;
+  transition: color 0.25s ease;
+}
+
+.download-desc {
+  margin: 0;
+  color: #667085;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.downloads-placeholder {
   display: flex;
   align-items: center;
-  gap: 8px;
-  overflow: hidden;
-  min-width: 160px;
   justify-content: center;
-  margin: 0 auto;
+  min-height: 180px;
+  border-radius: 12px;
+  border: 1px dashed rgba(15, 23, 42, 0.16);
+  background: rgba(248, 250, 252, 0.88);
 }
 
-.back-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
+.downloads-placeholder__text {
+  margin: 0;
+  color: #667085;
 }
 
-.back-btn:hover::before {
-  left: 100%;
+@media (max-width: 1100px) {
+  .product-hero__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .product-hero__header {
+    text-align: center;
+    align-items: center;
+    padding-top: 0;
+  }
+
+  .product-hero__description {
+    margin: 0 auto;
+  }
+
+  .product-hero__actions {
+    justify-content: center;
+  }
+
+  .product-hero__metric {
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-hero__metric + .product-hero__metric {
+    padding-left: 0;
+    border-left: none;
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
 }
 
-.back-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(26, 58, 143, 0.3);
+@media (max-width: 768px) {
+  .product-hero {
+    padding-top: 84px;
+  }
+
+  .detail-section {
+    padding: 80px 0 40px;
+    scroll-margin-top: 100px;
+  }
+
+  .params-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .param-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .param-card__value {
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
+
+  .downloads-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .download-card {
+    min-height: auto;
+  }
+
+  .product-hero__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .feature-card {
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    padding-top: 24px;
+  }
+
+  .feature-card:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
 }
 
-.back-btn:active {
-  transform: translateY(0) scale(1.02);
+@media (max-width: 560px) {
+  .product-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-hero__contact-btn {
+    width: 100%;
+  }
+
+  .detail-section {
+    scroll-margin-top: 80px;
+  }
+
+  .download-card {
+    padding: 24px;
+  }
+
+  .download-title {
+    font-size: 1.05rem;
+  }
 }
 
-.back-text {
-  transition: transform 0.3s ease;
+.application-grid,
+.videos-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  :deep(.app-divider-item:first-child) {
+    border-top: none;
+  }
 }
 
-.back-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-  font-weight: normal;
+@media (min-width: 640px) {
+  .application-grid,
+  .videos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    :deep(.app-divider-item:nth-child(-n + 2)) {
+      border-top: none;
+    }
+  }
 }
 
-.back-btn:hover .back-icon {
-  transform: translateX(-4px);
-}
+@media (min-width: 1024px) {
+  .application-grid,
+  .videos-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
 
-.back-btn:hover .back-text {
-  transform: translateX(2px);
+    :deep(.app-divider-item:nth-child(-n + 3)) {
+      border-top: none;
+    }
+  }
 }
 </style>

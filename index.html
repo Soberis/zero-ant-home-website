@@ -1,55 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 物理层 I18n 锁定：在 JS 加载前，强制同步 html.lang 属性，消除语义抖动 -->
+    <script>
+      (function() {
+        var saved = localStorage.getItem('language');
+        var lang = (saved === 'zh' || saved === 'en') ? saved : (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        document.documentElement.setAttribute('lang', lang);
+      })();
+    </script>
     <!-- 安全策略 -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://rsms.me; font-src 'self' https://fonts.gstatic.com https://rsms.me; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://www.google-analytics.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://player.bilibili.com https://m.bilibili.com https://www.bilibili.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://rsms.me; font-src 'self' https://fonts.gstatic.com https://rsms.me; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://www.google-analytics.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://player.bilibili.com https://m.bilibili.com https://www.bilibili.com; object-src 'none'; base-uri 'self'; form-action 'self';"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
+    <link rel="dns-prefetch" href="https://player.bilibili.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <!-- SEO 基础信息 -->
-    <meta name="description" content="让机器人遍布角落，做最酷的机器人。" />
+    <meta name="description" content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。" />
     <meta
       name="keywords"
-      content="零蚁科技，机器人，具身智能，机器人操作系统，智能系统，微物流，智能输送"
+      content="零蚁科技, 工业机器人, 智能制造, 机器人技术, 自动化设备, 四轴机器人, 六轴机械臂, 双臂人形机器人, 移动机器人, AiROS, 机器人操作系统, 医疗自动化, 半导体加工, 精密制造, 工业自动化解决方案, 机器人控制系统, 杭州机器人公司"
     />
-    <meta name="author" content="零蚁科技" />
+    <meta name="author" content="杭州零蚁科技有限公司" />
     <meta name="robots" content="index, follow" />
-    <link rel="icon" href="favicon.ico" />
+    <!-- Favicon配置 - 多尺寸多格式支持 -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#1a3a8f" />
     <link rel="canonical" href="https://zeroant.com" />
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="零蚁科技" />
+    <meta property="og:title" content="零蚁科技 - 让机器人无处不在" />
     <meta
       property="og:description"
-      content="让机器人遍布角落，做最酷的机器人。"
+      content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
     />
     <meta property="og:url" content="https://zeroant.com" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="零蚁科技" />
+    <meta property="og:image" content="https://zeroant.com/logo.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="零蚁科技" />
+    <meta name="twitter:title" content="零蚁科技 - 让机器人无处不在" />
     <meta
       name="twitter:description"
-      content="让机器人遍布角落，做最酷的机器人。"
+      content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
     />
     <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "零蚁科技",
+        "name": "杭州零蚁科技有限公司",
+        "alternateName": "ZeroAnt Technology",
         "url": "https://zeroant.com",
-        "logo": "https://zeroant.com/logo.png",
-        "description": "让机器人遍布角落，做最酷的机器人。"
+        "logo": "https://zeroant.com/logo.webp",
+        "foundingDate": "2025",
+        "industry": "Industrial Automation",
+        "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 20 },
+        "address": { "@type": "PostalAddress", "streetAddress": "浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室", "addressCountry": "CN" },
+        "description": "零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
       }
     </script>
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <!-- Theme style - 注释掉以避免字体冲突问题 -->
-    <!-- <link rel="stylesheet" href="css/style.css" /> -->
-    <title>零蚁科技</title>
+    <!-- Google Fonts - Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 基础样式重置 -->
+    <link rel="stylesheet" href="/css/reset.css" />
+    <title>零蚁科技 - 让机器人无处不在</title>
   </head>
 
   <body>

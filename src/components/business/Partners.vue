@@ -1,146 +1,196 @@
 <template>
-
-  <section class="global-partners">
-
-    <h2 class="section-title">{{ $t('home.partners.title') }}</h2>
-
-    <div class="section-underline"></div>
-
-    <div class="partners-list">
-
-      <div
-        v-for="(partner, idx) in partnersTyped"
-        :key="partner.alt + idx"
-        class="partner-logo"
-      >
-         <img
-          :src="partner.src"
-          :alt="partner.alt"
-          :class="partner.class"
-          loading="lazy"
-        />
+  <section class="ecosystem-section">
+    <div class="ecosystem-panel">
+      <div class="ecosystem-copy">
+        <p class="home-section-eyebrow">
+          {{ $t("home.partners.eyebrow") }}
+        </p>
+        <h2 class="home-section-title">
+          {{ $t("home.partners.title") }}
+        </h2>
       </div>
 
+      <div class="ecosystem-grid">
+        <div
+          v-for="(partner, idx) in partnersTyped"
+          :key="partner.alt + idx"
+          class="ecosystem-card"
+        >
+          <img
+            :src="partner.src"
+            :alt="partner.alt"
+            :class="partner.class"
+            loading="lazy"
+          />
+        </div>
+      </div>
     </div>
-
   </section>
-
 </template>
 
 <script setup lang="ts">
-import { partners, type Partner } from '@/data/partners';
+import { partners, type Partner } from "@/data/partners";
+
 const partnersTyped: Partner[] = partners;
 </script>
 
-<style scoped>
-.global-partners {
-  padding: 64px 0 48px 0;
-  background: #f7f8fa;
+<style scoped lang="less">
+.ecosystem-section {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--section-padding-y) var(--container-padding-x);
+}
+
+/* Remove dark container to rely on global background, reducing double dark nesting */
+.ecosystem-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.ecosystem-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xs);
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
+  gap: var(--space-md);
   width: 100%;
 }
-.section-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  color: #222;
-  letter-spacing: 2px;
-}
-.section-underline {
-  width: 56px;
-  height: 3px;
-  background: #1a3a8f;
-  margin: 0 auto 38px auto;
-  border-radius: 2px;
-}
-.partners-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.partner-logo {
-  width: 200px;
-  height: 100px; /* 增加高度 */
-  background: #fff;
-  border-radius: 0;
+
+.ecosystem-card {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #e5e6eb;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(30, 42, 80, 0.06);
-  overflow: hidden; /* 防止图片溢出 */
+  min-height: 88px;
+  padding: 12px;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: transform var(--transition-normal);
 }
-.partner-logo:hover {
-  border-color: #1a3a8f;
-  box-shadow: 0 4px 16px 0 rgba(26, 58, 143, 0.12);
+
+.ecosystem-card:hover {
+  transform: translateY(-2px);
 }
-.partner-logo img {
-  max-width: 80%;
-  max-height: 80%;
+
+.ecosystem-card img {
+  width: auto;
+  height: 46px;
+  max-width: 88%;
   object-fit: contain;
   display: block;
-  margin: 0 auto;
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: opacity var(--transition-normal), filter var(--transition-normal), transform var(--transition-normal);
 }
-/* 移除特殊logo的单独宽高设置 */
-.partner-logo .logo-schneider {
-  max-width: 100%;
-  max-height: 100%;
+
+.ecosystem-card:hover img {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.08);
 }
-.partner-logo .logo-huawei {
-  max-width: 72%;
-  max-height: 100%;
-}
-.partner-logo .logo-meituan {
-  max-width: 58%;
-  margin-top: -10px;
-}
-.partner-logo .logo-nabote {
-  max-width: 50%;
-}
-.partner-logo .logo-huazhi {
-  max-width: 62%;
-}
-.partner-logo .logo-qingzhi {
-  max-width: 38%;
-  margin-top: -6px;
-}
-.partner-logo .logo-qisheng {
-  max-width: 65%;
-}
-.partner-logo .logo-buaa,
-.partner-logo .logo-buaahyy {
+
+.ecosystem-card img.logo-huawei {
   max-width: 80%;
-  max-height: 100%;
 }
+
+.ecosystem-card img.logo-schneider {
+  max-width: 96%;
+}
+
+.ecosystem-card img.logo-meituan {
+  max-width: 72%;
+}
+
+.ecosystem-card img.logo-perkinelmer {
+  max-width: 88%;
+  max-height: 48px;
+}
+
+.ecosystem-card img.logo-pudu {
+  max-width: 70%;
+}
+
+.ecosystem-card img.logo-yihui {
+  max-width: 78%;
+}
+
+.ecosystem-card img.logo-nabote {
+  max-width: 68%;
+}
+
+.ecosystem-card img.logo-qisheng {
+  max-width: 76%;
+}
+
+.ecosystem-card img.logo-xinsong {
+  max-width: 74%;
+}
+
+.ecosystem-card img.logo-huazhi {
+  max-width: 76%;
+}
+
+.ecosystem-card img.logo-qingzhi {
+  max-width: 68%;
+}
+
+.ecosystem-card img.logo-hongxu {
+  max-width: 80%;
+}
+
+.ecosystem-card img.logo-open {
+  max-width: 78%;
+}
+
+.ecosystem-card img.logo-dizhi {
+  max-width: 90%;
+}
+
+.ecosystem-card img.logo-dongnan,
+.ecosystem-card img.logo-fudan,
+.ecosystem-card img.logo-zhongshan,
+.ecosystem-card img.logo-hunan,
+.ecosystem-card img.logo-qinghua {
+  max-width: 94%;
+}
+
+.ecosystem-card img.logo-buaa,
+.ecosystem-card img.logo-buaahyy {
+  max-width: 94%;
+  max-height: 58px;
+}
+
 @media (max-width: 900px) {
-  .partners-list {
-    gap: 16px 8px;
-  }
-  .partner-logo {
-    width: 60vw;
-    min-width: 80px;
-    height: 60px;
-  }
-  .section-title {
-    font-size: 1.4rem;
-  }
-  .section-underline {
-    height: 2px;
-    width: 32px;
-    margin-bottom: 18px;
+  .ecosystem-section {
+    padding: var(--space-xl) var(--space-md);
   }
 }
 
-@media (max-width: 600px) {
-  .section-title {
-    font-size: 1.5rem;
+@media (max-width: 680px) {
+  .ecosystem-section {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+
+  .ecosystem-panel {
+    gap: var(--space-md);
+  }
+
+  .ecosystem-card {
+    min-height: 88px;
   }
 }
 </style>
-

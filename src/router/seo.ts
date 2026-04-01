@@ -19,6 +19,83 @@ function safeTranslate(key: string): string {
   }
 }
 
+function safeTranslateArray(key: string): string[] {
+  try {
+    const message = i18n.global.tm(key);
+    if (!Array.isArray(message)) {
+      return [];
+    }
+
+    return message.filter((item): item is string => typeof item === "string");
+  } catch {
+    return [];
+  }
+}
+
+function getCompanyName(): string {
+  return safeTranslate("footer.companyFullName") || safeTranslate("seo.siteName");
+}
+
+function getCompanyAddress(): string {
+  return safeTranslate("footer.address");
+}
+
+function getPostalAddress() {
+  return {
+    "@type": "PostalAddress",
+    streetAddress: getCompanyAddress(),
+    addressLocality: safeTranslate("careers.hangzhou"),
+    addressRegion: "Zhejiang",
+    addressCountry: "CN",
+  };
+}
+
+function getPublisher(baseUrl: string) {
+  return {
+    "@type": "Organization",
+    name: getCompanyName(),
+    url: baseUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${baseUrl}/logo.webp`,
+    },
+  };
+}
+
+function getCareerStructuredJobs(baseUrl: string): Record<string, any>[] {
+  const jobKeys = [
+    "softwareEngineer",
+    "robotSystemsEngineer",
+    "electricalEngineer",
+  ] as const;
+
+  return jobKeys.map((jobKey) => {
+    const title = safeTranslate(`careers.positions.${jobKey}.title`);
+    const requirements = safeTranslateArray(
+      `careers.positions.${jobKey}.requirements`
+    );
+    const qualifications = requirements.join("；");
+
+    return {
+      "@type": "JobPosting",
+      title,
+      description: `${title} - ${safeTranslate("careers.heroSubtitle")}`,
+      employmentType: "FULL_TIME",
+      jobLocation: {
+        "@type": "Place",
+        address: getPostalAddress(),
+      },
+      hiringOrganization: {
+        "@type": "Organization",
+        name: getCompanyName(),
+        sameAs: baseUrl,
+        logo: `${baseUrl}/logo.webp`,
+      },
+      ...(qualifications ? { qualifications } : {}),
+    };
+  });
+}
+
 /**
  * 获取路由 SEO 配置映射
  */
@@ -43,6 +120,8 @@ function getRouteSEOMap(): Record<string, any> {
     Support: translatedSeoConfigs.support,
     Careers: translatedSeoConfigs.careers,
     About: translatedSeoConfigs.about,
+    SystemProductDetail: translatedSeoConfigs.products,
+    RobotProductDetail: translatedSeoConfigs.products,
   };
 }
 
@@ -57,8 +136,11 @@ export function setupPageSEO(to: RouteLocationNormalized) {
 
   if (seoConfig) {
     // 基础 SEO 配置
-    const baseUrl = "https://zeroant.com";
+    const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
     const currentUrl = `${baseUrl}${to.path}`;
+    const companyName = getCompanyName();
+    const contactTel = safeTranslate("footer.telValue");
+    const postalAddress = getPostalAddress();
 
     setSEO({
       title: seoConfig.title,
@@ -67,10 +149,12 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       ogTitle: seoConfig.title,
       ogDescription: seoConfig.description,
       ogUrl: currentUrl,
-      ogImage: `${baseUrl}/logo.png`,
+      ogImage: `${baseUrl}/logo.webp`,
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
       twitterTitle: seoConfig.title,
       twitterDescription: seoConfig.description,
-      twitterImage: `${baseUrl}/logo.png`,
+      twitterImage: `${baseUrl}/logo.webp`,
       canonical: currentUrl,
       siteName: safeTranslate("seo.siteName"),
     });
@@ -87,15 +171,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
         name: safeTranslate("seo.siteName"),
         url: baseUrl,
       },
-      publisher: {
-        "@type": "Organization",
-        name: safeTranslate("seo.siteName"),
-        url: baseUrl,
-        logo: {
-          "@type": "ImageObject",
-          url: `${baseUrl}/logo.png`,
-        },
-      },
+      publisher: getPublisher(baseUrl),
     };
 
     // 为首页添加额外的结构化数据
@@ -104,36 +180,28 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       const organizationData = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: safeTranslate("seo.siteName"),
+        name: companyName,
         alternateName: "ZeroAnt Technology",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}/logo.png`,
+          url: `${baseUrl}/logo.webp`,
           width: 200,
           height: 200,
         },
         description: safeTranslate("seo.defaultDescription"),
-        foundingDate: "2020",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-          addressLocality: "Hangzhou",
-          addressRegion: "Zhejiang",
-          postalCode: "310000",
-          addressCountry: "CN",
-        },
+        foundingDate: "2025",
+        address: postalAddress,
         contactPoint: {
           "@type": "ContactPoint",
-          telephone: "+86-13001001954",
+          telephone: contactTel,
           contactType: "customer service",
           availableLanguage: ["Chinese", "English"],
         },
         industry: "Industrial Automation",
         numberOfEmployees: {
           "@type": "QuantitativeValue",
-          minValue: 50,
-          maxValue: 200,
+          minValue: 20,
         },
         knowsAbout: [
           "Industrial Robots",
@@ -153,30 +221,12 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       const localBusinessData = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        name: safeTranslate("seo.siteName"),
-        image: `${baseUrl}/logo.png`,
+        name: companyName,
+        image: `${baseUrl}/logo.webp`,
         "@id": baseUrl,
         url: baseUrl,
-        telephone: "+86-13001001954",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-          addressLocality: "Hangzhou",
-          addressRegion: "Zhejiang",
-          postalCode: "310000",
-          addressCountry: "CN",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: 30.2741,
-          longitude: 120.1551,
-        },
-        openingHoursSpecification: {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "18:00",
-        },
+        telephone: contactTel,
+        address: postalAddress,
       };
 
       // 同时设置WebPage、Organization和LocalBusiness结构化数据
@@ -192,7 +242,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupSolutionsSEO(to: RouteLocationNormalized) {
-  const baseUrl = "https://zeroant.com";
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置解决方案页面 SEO
@@ -203,10 +253,12 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.solutions.title"),
     ogDescription: safeTranslate("seo.solutions.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.solutions.title"),
     twitterDescription: safeTranslate("seo.solutions.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
   });
@@ -224,12 +276,12 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
     mainEntity: {
@@ -237,32 +289,37 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
       itemListElement: [
         {
           "@type": "Service",
-          name: "Medical Automation Solutions",
-          description:
-            "Comprehensive automation solutions for medical device manufacturing and laboratory automation",
+          name: safeTranslate("seo.structuredData.solutions.medical.name"),
+          description: safeTranslate(
+            "seo.structuredData.solutions.medical.description"
+          ),
           provider: {
             "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
+            name: getCompanyName(),
           },
         },
         {
           "@type": "Service",
-          name: "Semiconductor Processing Solutions",
-          description:
-            "High-precision automation solutions for semiconductor manufacturing processes",
+          name: safeTranslate("seo.structuredData.solutions.semiconductor.name"),
+          description: safeTranslate(
+            "seo.structuredData.solutions.semiconductor.description"
+          ),
           provider: {
             "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
+            name: getCompanyName(),
           },
         },
         {
           "@type": "Service",
-          name: "Smart Manufacturing Solutions",
-          description:
-            "End-to-end smart manufacturing solutions with AI and robotics integration",
+          name: safeTranslate(
+            "seo.structuredData.solutions.smartManufacturing.name"
+          ),
+          description: safeTranslate(
+            "seo.structuredData.solutions.smartManufacturing.description"
+          ),
           provider: {
             "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
+            name: getCompanyName(),
           },
         },
       ],
@@ -277,7 +334,7 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupAboutSEO(to: RouteLocationNormalized) {
-  const baseUrl = "https://zeroant.com";
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置关于我们页面 SEO
@@ -288,10 +345,12 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.about.title"),
     ogDescription: safeTranslate("seo.about.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.about.title"),
     twitterDescription: safeTranslate("seo.about.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
   });
@@ -309,12 +368,12 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
   };
@@ -327,7 +386,7 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupCareersSEO(to: RouteLocationNormalized) {
-  const baseUrl = "https://zeroant.com";
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置招聘页面 SEO
@@ -338,10 +397,12 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.careers.title"),
     ogDescription: safeTranslate("seo.careers.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.careers.title"),
     twitterDescription: safeTranslate("seo.careers.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
   });
@@ -359,105 +420,17 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: [
-        {
-          "@type": "JobPosting",
-          title: "Robotics Engineer",
-          description:
-            "Develop and optimize industrial robot systems, work on robot control algorithms and mechanical design.",
-          datePosted: new Date().toISOString().split("T")[0],
-          employmentType: "FULL_TIME",
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Hangzhou",
-              addressRegion: "Zhejiang",
-              postalCode: "310000",
-              streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-              addressCountry: "CN",
-            },
-          },
-          hiringOrganization: {
-            "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
-            sameAs: baseUrl,
-            logo: `${baseUrl}/logo.png`,
-          },
-          qualifications:
-            "Bachelor's degree in Robotics, Mechanical Engineering, or related field. 3+ years experience in industrial robotics.",
-          responsibilities:
-            "Design and develop robotic systems, optimize control algorithms, collaborate with cross-functional teams.",
-        },
-        {
-          "@type": "JobPosting",
-          title: "Algorithm Engineer",
-          description:
-            "Develop AI algorithms for robot perception, planning, and control systems.",
-          datePosted: new Date().toISOString().split("T")[0],
-          employmentType: "FULL_TIME",
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Hangzhou",
-              addressRegion: "Zhejiang",
-              postalCode: "310000",
-              streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-              addressCountry: "CN",
-            },
-          },
-          hiringOrganization: {
-            "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
-            sameAs: baseUrl,
-            logo: `${baseUrl}/logo.png`,
-          },
-          qualifications:
-            "Master's degree in Computer Science, AI, or related field. Strong background in machine learning and robotics.",
-          responsibilities:
-            "Develop AI algorithms, implement machine learning models, optimize robot performance.",
-        },
-        {
-          "@type": "JobPosting",
-          title: "Software Development Engineer",
-          description:
-            "Develop software systems for robot control, user interfaces, and system integration.",
-          datePosted: new Date().toISOString().split("T")[0],
-          employmentType: "FULL_TIME",
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Hangzhou",
-              addressRegion: "Zhejiang",
-              postalCode: "310000",
-              streetAddress: "Room 1-501, Building 1, No. 998 Wenyi West Road",
-              addressCountry: "CN",
-            },
-          },
-          hiringOrganization: {
-            "@type": "Organization",
-            name: safeTranslate("seo.siteName"),
-            sameAs: baseUrl,
-            logo: `${baseUrl}/logo.png`,
-          },
-          qualifications:
-            "Bachelor's degree in Software Engineering or Computer Science. Proficiency in C++, Python, and embedded systems.",
-          responsibilities:
-            "Develop robot control software, create user interfaces, integrate hardware and software systems.",
-        },
-      ],
+      itemListElement: getCareerStructuredJobs(baseUrl),
     },
   };
 
@@ -465,17 +438,68 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
 }
 
 /**
- * 设置产品详情页 SEO
- * @param productName 产品名称
- * @param productDescription 产品描述
- * @param to 目标路由
+ * 设置产品详情页 SEO 和结构化数据
  */
+export async function setupProductDetailSEO(to: RouteLocationNormalized) {
+  const { getProducts } = await import("@/data/products");
+  const slug = to.params.slug as string;
+  const product = getProducts().find((p) => p.slug === slug);
+
+  if (!product) return;
+
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const currentUrl = `${baseUrl}${to.path}`;
+  const productName = safeTranslate(product.name);
+  const productDesc = safeTranslate(product.desc);
+  const siteName = safeTranslate("seo.siteName");
+
+  setSEO({
+    title: productName,
+    description: productDesc,
+    keywords: `${productName}, ${safeTranslate("seo.home.keywords")}`,
+    ogTitle: productName,
+    ogDescription: productDesc,
+    ogUrl: currentUrl,
+    ogImage: product.image.startsWith("http")
+      ? product.image
+      : `${baseUrl}${product.image}`,
+    twitterTitle: productName,
+    twitterDescription: productDesc,
+    canonical: currentUrl,
+    siteName: siteName,
+  });
+
+  // 产品结构化数据 - Schema.org/Product
+  setStructuredData({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: productName,
+    description: productDesc,
+    image: product.image.startsWith("http")
+      ? product.image
+      : `${baseUrl}${product.image}`,
+    brand: {
+      "@type": "Brand",
+      name: siteName,
+    },
+    offers: {
+      "@type": "Offer",
+      url: currentUrl,
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: siteName,
+      },
+    },
+  });
+}
+
 /**
  * 设置支持页面 SEO 和结构化数据
  * @param to 目标路由
  */
 export function setupSupportSEO(to: RouteLocationNormalized) {
-  const baseUrl = "https://zeroant.com";
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${to.path}`;
 
   // 设置支持页面 SEO
@@ -486,10 +510,12 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
     ogTitle: safeTranslate("seo.support.title"),
     ogDescription: safeTranslate("seo.support.description"),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.png`,
+    ogImage: `${baseUrl}/logo.webp`,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
     twitterTitle: safeTranslate("seo.support.title"),
     twitterDescription: safeTranslate("seo.support.description"),
-    twitterImage: `${baseUrl}/logo.png`,
+    twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
   });
@@ -507,94 +533,49 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
       url: baseUrl,
     },
     publisher: {
-      "@type": "Organization",
+      ...getPublisher(baseUrl),
       name: safeTranslate("seo.siteName"),
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/logo.webp`,
       },
     },
     mainEntity: [
       {
         "@type": "Question",
-        name: "What technical support services does ZeroAnt Technology provide?",
+        name: safeTranslate("seo.structuredData.support.q1"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "We provide 7x24 professional services including robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare parts supply and comprehensive technical support.",
+          text: safeTranslate("seo.structuredData.support.a1"),
         },
       },
       {
         "@type": "Question",
-        name: "How can I get technical support for my industrial robot?",
+        name: safeTranslate("seo.structuredData.support.q2"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "You can contact our technical support team through phone, email, or online support system. Our experienced engineers provide rapid response technical consultation and on-site services.",
+          text: safeTranslate("seo.structuredData.support.a2"),
         },
       },
       {
         "@type": "Question",
-        name: "Do you provide training for robot operation and maintenance?",
+        name: safeTranslate("seo.structuredData.support.q3"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes, we offer comprehensive technical training programs covering robot operation, programming, maintenance, and troubleshooting to ensure optimal equipment performance.",
+          text: safeTranslate("seo.structuredData.support.a3"),
         },
       },
       {
         "@type": "Question",
-        name: "What is the warranty period for ZeroAnt robots?",
+        name: safeTranslate("seo.structuredData.support.q4"),
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Our industrial robots come with comprehensive warranty coverage. Please contact our support team for specific warranty terms and conditions for your product model.",
+          text: safeTranslate("seo.structuredData.support.a4"),
         },
       },
     ],
   };
 
-  setStructuredData(structuredData);
-}
-
-/**
- * 设置产品详情页 SEO
- * @param productName 产品名称
- * @param productDescription 产品描述
- * @param to 目标路由
- */
-export function setupProductSEO(
-  productName: string,
-  productDescription: string,
-  to: RouteLocationNormalized
-) {
-  const baseUrl = "https://zeroant.com";
-  const currentUrl = `${baseUrl}${to.path}`;
-
-  // 设置产品页面 SEO
-  setSEO({
-    title: productName,
-    description: productDescription,
-    ogTitle: productName,
-    ogDescription: productDescription,
-    ogUrl: currentUrl,
-    ogImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
-    twitterTitle: productName,
-    twitterDescription: productDescription,
-    twitterImage: `${baseUrl}/product-image.png`, // 应该使用实际的产品图片
-    canonical: currentUrl,
-    siteName: safeTranslate("seo.siteName"),
-  });
-
-  // 产品结构化数据
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: productName,
-    description: productDescription,
-    url: currentUrl,
-    manufacturer: {
-      "@type": "Organization",
-      name: safeTranslate("seo.siteName"),
-      url: baseUrl,
-    },
-  };
   setStructuredData(structuredData);
 }

@@ -1,51 +1,80 @@
-<!-- 机器人产品页面，结构与Products.vue一致，仅数据不同 -->
 <template>
-   <ProductsLayout
-    >
-    <div
-      v-for="product in robotProducts"
-      :id="product.slug"
+  <ProductsLayout v-bind="pageContent">
+    <ProductCard
+      v-for="(product, index) in robotProducts"
       :key="product.slug"
-      class="product-series"
-    >
-
-      <div class="series-title">{{ t(product.seriesTitle) }}</div>
-
-      <div class="series-subtitle">{{ t(product.seriesSubtitle) }}</div>
-
-      <div class="product-card-wrapper">
-         <ProductCard :product="product" @more="goDetail" />
-      </div>
-
-    </div>
-     </ProductsLayout
-  >
+      :product="product"
+      :index="index"
+      @more="goDetail"
+    />
+  </ProductsLayout>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import { products } from '@/data/products';
-import ProductsLayout from '@/components/layout/ProductsLayout.vue';
-import ProductCard from '@/components/common/ProductCard.vue';
-import { getProductDetailLink } from '@/helpers/product';
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { products } from "@/data/products";
+import ProductsLayout from "@/components/layout/ProductsLayout.vue";
+import ProductCard from "@/components/common/ProductCard.vue";
+import { getProductDetailLink } from "@/utils/product";
+
 const router = useRouter();
 const { t } = useI18n();
 
-const robotProducts = computed(() =>
-  products.filter(p => p.category === 'robot')
-);
+const robotProducts = computed(() => products.filter((product) => product.category === "robot"));
+
+const pageContent = computed(() => ({
+  theme: "robot" as const,
+  eyebrow: t("productPages.robot.hero.eyebrow"),
+  title: t("productPages.robot.hero.title"),
+  description: t("productPages.robot.hero.description"),
+  actions: [
+    {
+      label: t("common.cta.viewSolutions"),
+      to: "/solutions",
+      variant: "primary" as const,
+    },
+  ],
+  metrics: [
+    {
+      value: t("productPages.robot.metrics.countValue"),
+      label: t("productPages.robot.metrics.countLabel"),
+    },
+    {
+      value: t("productPages.robot.metrics.coverageValue"),
+      label: t("productPages.robot.metrics.coverageLabel"),
+    },
+    {
+      value: t("productPages.robot.metrics.scenarioValue"),
+      label: t("productPages.robot.metrics.scenarioLabel"),
+    },
+  ],
+  overviewEyebrow: t("productPages.common.overviewEyebrow"),
+  overviewTitle: t("productPages.robot.overview.title"),
+  overviewDescription: t("productPages.robot.overview.description"),
+  guideEyebrow: t("productPages.common.guideEyebrow"),
+  guideTitle: t("productPages.robot.guide.title"),
+  guideItems: [
+    {
+      title: t("productPages.robot.guide.items.assembly.title"),
+      description: t("productPages.robot.guide.items.assembly.description"),
+    },
+    {
+      title: t("productPages.robot.guide.items.complex.title"),
+      description: t("productPages.robot.guide.items.complex.description"),
+    },
+    {
+      title: t("productPages.robot.guide.items.mobile.title"),
+      description: t("productPages.robot.guide.items.mobile.description"),
+    },
+  ],
+}));
 
 function goDetail(slug: string): void {
-  const product = products.find(p => p.slug === slug);
+  const product = products.find((item) => item.slug === slug);
   if (product) {
     router.push(getProductDetailLink(product));
   }
 }
 </script>
-
-<style scoped>
-/* 页面特定样式（如果需要的话可以在这里添加） */
-</style>
-

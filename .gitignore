@@ -25,9 +25,17 @@ dist-ssr
 
 # Cursor AI rules (避免提交AI规则文件)
 .cursor/rules/
-
+.agent/
+.tasks/
 # Trae AI 规则文件 (避免提交AI助手配置)
 .trae/
 
 # Trae AI 辅助配置目录（避免提交AI相关配置文件）
 .promptx/
+.playwright-cli/
+
+docs/
+output/
+
+skills-lock.json
+.agents/

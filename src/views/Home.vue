@@ -1,112 +1,86 @@
-<!-- 首页，聚合轮播、核心产品、视频案例、行业应用、合作伙伴等模块 -->
+<!-- 首页，聚合 Hero、核心产品、行业应用、视频案例与合作伙伴等模块 -->
 <template>
+  <div class="home-page">
+    <HeroCarousel />
 
-  <div class="home-bg">
+    <main class="home-main">
+      <section ref="productsRef" class="home-section home-section--products reveal-ready">
+        <CoreProducts />
+      </section>
 
-    <div class="home">
-       <HeroCarousel />
-      <div class="section"> <CoreProducts /> </div>
+      <section ref="appsRef" class="home-section home-section--applications reveal-ready">
+        <IndustryApplications />
+      </section>
 
-      <div class="section"> <VideoCases /> </div>
-       <IndustryApplications /> <Partners />
-    </div>
+      <section ref="videosRef" class="home-section home-section--videos reveal-ready">
+        <VideoCases />
+      </section>
 
+      <section ref="partnersRef" class="home-section home-section--partners reveal-ready">
+        <Partners />
+      </section>
+    </main>
   </div>
-
 </template>
 
 <script setup lang="ts">
-// 首页聚合各核心模块组件
-import HeroCarousel from '@/components/business/HeroCarousel.vue'; // 轮播图
-import CoreProducts from '@/components/business/CoreProducts.vue'; // 核心产品
-import VideoCases from '@/components/business/VideoCases.vue'; // 视频案例
-import IndustryApplications from '@/components/business/IndustryApplications.vue'; // 行业应用
-import Partners from '@/components/business/Partners.vue'; // 合作伙伴
+import { defineAsyncComponent, ref } from 'vue';
+import HeroCarousel from '@/components/business/HeroCarousel.vue';
+import { useScrollRevealList } from '@/composables/useScrollReveal';
+
+// 首页下半屏内容异步加载，先把首屏路径跑轻
+const CoreProducts = defineAsyncComponent(() => import('@/components/business/CoreProducts.vue'));
+const IndustryApplications = defineAsyncComponent(() => import('@/components/business/IndustryApplications.vue'));
+const VideoCases = defineAsyncComponent(() => import('@/components/business/VideoCases.vue'));
+const Partners = defineAsyncComponent(() => import('@/components/business/Partners.vue'));
+
+const productsRef = ref<HTMLElement | null>(null);
+const appsRef = ref<HTMLElement | null>(null);
+const videosRef = ref<HTMLElement | null>(null);
+const partnersRef = ref<HTMLElement | null>(null);
+
+useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 </script>
 
 <style lang="less" scoped>
-.btn {
-  width: 180px;
+.home-page {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-background-white);
 }
-.home {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+
+.home-main {
+  position: relative;
 }
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+
+.home-section {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
 }
-.main-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 40px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto 0 auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.04);
-  padding: 32px 24px;
+
+.home-section--products {
+  border-top: none;
+  background: #ffffff;
 }
-.main-section > * {
-  flex: 1 1 0;
-  min-width: 0;
+
+.home-section--applications {
+  background: #f8f9fb;
 }
-.section-grey {
-  background: #f7f8fa;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 64px 0 48px 0;
-  overflow-x: hidden;
+
+.home-section--videos {
+  background: #ffffff;
 }
-.section-white {
-  background: #fff;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 64px 0 48px 0;
-  overflow-x: hidden;
+
+.home-section--partners {
+  background: #f8f9fb;
 }
-.home-bg {
-  background: #f7f8fa;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-.section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 64px 0 48px 0;
-  background: transparent;
-}
+
 @media screen and (max-width: 991px) {
-  .container {
-    max-width: 100%;
-    padding: 0 8px;
-    overflow-x: hidden;
-  }
-  .main-section {
-    flex-direction: column;
-    gap: 24px;
-    padding: 16px 4px;
-    box-shadow: none;
-    border-radius: 0;
-  }
-  .section-grey,
-  .section-white {
-    padding: 32px 0 24px 0;
-  }
-  .buttom-info {
-    margin-top: 10px;
-  }
-  .section {
-    padding: 32px 0 24px 0;
+  .home-page {
+    background: var(--color-background-white);
   }
 }
 </style>
+
 

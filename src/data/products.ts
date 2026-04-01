@@ -1,52 +1,41 @@
 // 产品数据模块，包含所有核心产品信息及路由映射
-import type { Product } from "@/helpers/product";
+import type { ProductData } from "@/types";
 
-/**
- * 扩展产品接口，添加产品特有字段
- */
-export interface ProductData extends Product {
-  name: string;
-  image: string;
-  desc: string;
-  seriesTitle: string;
-  seriesSubtitle: string;
-}
-
-// 1. 先定义所有图片变量
+// 1. 先定义所有图片 variables
 const multiOsVmImg = new URL(
-  "@/assets/images/products/多OS混合部署嵌入式虚拟机.png",
+  "@/assets/images/products/embedded-vm.webp",
   import.meta.url
 ).href;
 const industrialRtosImg = new URL(
-  "@/assets/images/products/国产工业实时操作系统.jpg",
+  "@/assets/images/products/industrial-rtos.webp",
   import.meta.url
 ).href;
 const airosImg = new URL(
-  "@/assets/images/products/AiROS机器人操作系统.png",
+  "@/assets/images/products/airos-os.webp",
   import.meta.url
 ).href;
 const robotSchedulerImg = new URL(
-  "@/assets/images/products/移动机器人调度系统.png",
+  "@/assets/images/products/robot-scheduling-system.webp",
   import.meta.url
 ).href;
 const gantry2dImg = new URL(
-  "@/assets/images/products/二或三自由度龙门架.png",
+  "@/assets/images/products/gantry-2d3d.webp",
   import.meta.url
 ).href;
 const scara4axisImg = new URL(
-  "@/assets/images/products/四轴机器人.png",
+  "@/assets/images/products/four-axis-robot.webp",
   import.meta.url
 ).href;
 const arm6axisImg = new URL(
-  "@/assets/images/products/六轴机器人.png",
+  "@/assets/images/products/six-axis-robot-1000w-q75.webp",
   import.meta.url
 ).href;
 const dualArmHumanoidImg = new URL(
-  "@/assets/images/products/双臂人形机器人.png",
+  "@/assets/images/products/dual-arm-humanoid.webp",
   import.meta.url
 ).href;
 const mobileRobotImg = new URL(
-  "@/assets/images/products/移动机器人.png",
+  "@/assets/images/products/mobile-robot.webp",
   import.meta.url
 ).href;
 
@@ -59,8 +48,11 @@ export function getProducts(): ProductData[] {
       name: "products.multiOsVm.name",
       image: multiOsVmImg,
       desc: "products.multiOsVm.desc",
-      seriesTitle: "products.multiOsVm.seriesTitle",
-      seriesSubtitle: "products.multiOsVm.seriesSubtitle",
+      supportText: "products.multiOsVm.supportText",
+      metrics: [
+        { label: "productPages.metrics.focus", value: "productPages.metricValues.multiOsVmFocus" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.multiOsVmOutput" },
+      ],
       category: "system",
     },
     {
@@ -68,8 +60,11 @@ export function getProducts(): ProductData[] {
       name: "products.industrialRtos.name",
       image: industrialRtosImg,
       desc: "products.industrialRtos.desc",
-      seriesTitle: "products.industrialRtos.seriesTitle",
-      seriesSubtitle: "products.industrialRtos.seriesSubtitle",
+      supportText: "products.industrialRtos.supportText",
+      metrics: [
+        { label: "productPages.metrics.focus", value: "productPages.metricValues.industrialRtosFocus" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.industrialRtosOutput" },
+      ],
       category: "system",
     },
     {
@@ -77,8 +72,11 @@ export function getProducts(): ProductData[] {
       name: "products.airos.name",
       image: airosImg,
       desc: "products.airos.desc",
-      seriesTitle: "products.airos.seriesTitle",
-      seriesSubtitle: "products.airos.seriesSubtitle",
+      supportText: "products.airos.supportText",
+      metrics: [
+        { label: "productPages.metrics.focus", value: "productPages.metricValues.airosFocus" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.airosOutput" },
+      ],
       category: "system",
     },
     {
@@ -86,8 +84,11 @@ export function getProducts(): ProductData[] {
       name: "products.robotScheduler.name",
       image: robotSchedulerImg,
       desc: "products.robotScheduler.desc",
-      seriesTitle: "products.robotScheduler.seriesTitle",
-      seriesSubtitle: "products.robotScheduler.seriesSubtitle",
+      supportText: "products.robotScheduler.supportText",
+      metrics: [
+        { label: "productPages.metrics.focus", value: "productPages.metricValues.robotSchedulerFocus" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.robotSchedulerOutput" },
+      ],
       category: "system",
     },
     // robot产品
@@ -96,8 +97,11 @@ export function getProducts(): ProductData[] {
       name: "products.gantry2d.name",
       image: gantry2dImg,
       desc: "products.gantry2d.desc",
-      seriesTitle: "products.gantry2d.seriesTitle",
-      seriesSubtitle: "products.gantry2d.seriesSubtitle",
+      supportText: "products.gantry2d.supportText",
+      metrics: [
+        { label: "productPages.metrics.configuration", value: "productPages.metricValues.gantryConfig" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.gantryOutput" },
+      ],
       category: "robot",
     },
     {
@@ -105,8 +109,11 @@ export function getProducts(): ProductData[] {
       name: "products.scara4axis.name",
       image: scara4axisImg,
       desc: "products.scara4axis.desc",
-      seriesTitle: "products.scara4axis.seriesTitle",
-      seriesSubtitle: "products.scara4axis.seriesSubtitle",
+      supportText: "products.scara4axis.supportText",
+      metrics: [
+        { label: "productPages.metrics.configuration", value: "productPages.metricValues.scaraConfig" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.scaraOutput" },
+      ],
       category: "robot",
     },
     {
@@ -114,8 +121,11 @@ export function getProducts(): ProductData[] {
       name: "products.arm6axis.name",
       image: arm6axisImg,
       desc: "products.arm6axis.desc",
-      seriesTitle: "products.arm6axis.seriesTitle",
-      seriesSubtitle: "products.arm6axis.seriesSubtitle",
+      supportText: "products.arm6axis.supportText",
+      metrics: [
+        { label: "productPages.metrics.configuration", value: "productPages.metricValues.arm6Config" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.arm6Output" },
+      ],
       category: "robot",
     },
     {
@@ -123,8 +133,11 @@ export function getProducts(): ProductData[] {
       name: "products.dualArmHumanoid.name",
       image: dualArmHumanoidImg,
       desc: "products.dualArmHumanoid.desc",
-      seriesTitle: "products.dualArmHumanoid.seriesTitle",
-      seriesSubtitle: "products.dualArmHumanoid.seriesSubtitle",
+      supportText: "products.dualArmHumanoid.supportText",
+      metrics: [
+        { label: "productPages.metrics.configuration", value: "productPages.metricValues.dualArmConfig" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.dualArmOutput" },
+      ],
       category: "robot",
     },
     {
@@ -132,20 +145,33 @@ export function getProducts(): ProductData[] {
       name: "products.mobileRobot.name",
       image: mobileRobotImg,
       desc: "products.mobileRobot.desc",
-      seriesTitle: "products.mobileRobot.seriesTitle",
-      seriesSubtitle: "products.mobileRobot.seriesSubtitle",
+      supportText: "products.mobileRobot.supportText",
+      metrics: [
+        { label: "productPages.metrics.configuration", value: "productPages.metricValues.mobileConfig" },
+        { label: "productPages.metrics.output", value: "productPages.metricValues.mobileOutput" },
+      ],
       category: "robot",
     },
   ];
 }
 
-// 3. 最后调用函数并导出
+// 3. 分步导出，避免循环引用问题
 export const products: ProductData[] = getProducts();
 
 /**
- * 产品slug到路由的映射表，便于页面跳转
- * @example productRouteMap["mobile-robot"] => "/products/mobile-robot"
+ * 获取产品slug到路由的映射表，便于页面跳转
+ * @example getProductRouteMap()["mobile-robot"] => "/robot-products/mobile-robot"
  */
-export const productRouteMap: Record<string, string> = Object.fromEntries(
-  products.map((p) => [p.slug, `/products/${p.slug}`])
-);
+export function getProductRouteMap(): Record<string, string> {
+  return Object.fromEntries(
+    products.map((product) => [
+      product.slug,
+      `/${product.category === "system" ? "system-products" : "robot-products"}/${product.slug}`,
+    ])
+  );
+}
+
+/**
+ * 产品slug到路由的映射表（懒加载）
+ */
+export const productRouteMap: Record<string, string> = getProductRouteMap();

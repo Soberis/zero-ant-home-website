@@ -1,100 +1,142 @@
-// 全局基础样式
+// 引入字体排版规范
+@import "./typography.less";
+
+/* ================================================================
+   设计系统 - CSS 变量
+   ================================================================ */
+:root {
+  /* ── 颜色 ── */
+  --color-primary: #1a3a8f;
+  --color-primary-dark: #0f2560;
+  --color-primary-light: #e8edf7;
+  --color-text: #1a1a2e;
+  --color-text-secondary: #5a6178;
+  --color-text-muted: #9ca3af;
+  --color-border: #e5e7eb;
+  --color-background: #fafbfc;
+  --color-background-white: #ffffff;
+  --color-background-dark: #111111;
+
+  /* ── 品牌（统一变量） ── */
+  --brand-primary: var(--color-primary);
+  --brand-primary-deep: var(--color-primary-dark);
+  --brand-text: var(--color-text);
+  --brand-muted: var(--color-text-secondary);
+  --brand-border: var(--color-border);
+  --brand-surface: var(--color-background-white);
+  --brand-surface-soft: var(--color-background);
+
+  /* ── 圆角（3 档 + 胶囊） ── */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* ── 间距（8px 网格） ── */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 100px;
+  --space-3xl: 140px;
+
+  /* ── Section / 容器 ── */
+  --section-padding-y: 100px;
+  --container-max-width: 1440px; /* Increased from 1200px to fit large screens gracefully */
+  --container-padding-x: 48px;
+  --nav-height: 80px;
+
+  /* ── 过渡 ── */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ── 阴影 ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ================================================================
+   全局基础样式
+   ================================================================ */
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: "Microsoft YaHei", "Segoe UI", sans-serif !important;
+  font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
   overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
 }
 
-// 全局防止横向滚动
 * {
   box-sizing: border-box;
 }
 
-// 防止元素超出视口宽度
-*:not(html):not(body) {
-  max-width: 100% !important;
+/* 滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 transparent;
 }
 
-// 隐藏所有横向滚动条
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+// 隐藏横向滚动条
 ::-webkit-scrollbar:horizontal {
   height: 0 !important;
   display: none !important;
 }
 
-// 滚动条样式优化
-* {
-  // Firefox滚动条样式
-  scrollbar-width: thin;
-  scrollbar-color: #c1c1c1 #f1f1f1;
+/* ================================================================
+   链接
+   ================================================================ */
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    text-decoration: none;
+    color: var(--color-primary-dark);
+  }
 }
 
-// WebKit浏览器滚动条样式
-*::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-// 隐藏滚动条（可选）
-.hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
-}
-
+/* ================================================================
+   布局骨架
+   ================================================================ */
 body,
 html,
 #app {
   max-width: 100vw;
   overflow-x: hidden;
-}
-
-// 确保所有容器不会超出视口宽度
-.container,
-.nav-container,
-.page,
-.main-content {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-// 防止固定定位元素导致横向滚动
-.fixed,
-.absolute {
-  max-width: 100vw;
-}
-
-// 防止表格和预格式化文本导致横向滚动
-table {
-  table-layout: fixed;
-  width: 100%;
-  word-wrap: break-word;
-}
-
-pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #app {
@@ -103,128 +145,399 @@ pre {
   flex-direction: column;
 }
 
-// 确保页脚始终在底部
+body {
+  &::before {
+    display: none;
+  }
+}
+
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  body::before {
+    display: none;
+  }
+}
+
 .page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: var(--brand-surface);
+  position: relative;
+  z-index: 1;
+}
 
-  .main-content {
-    flex: 1;
+.page .main-content {
+  flex: 1 0 auto;
+}
+
+// 隐藏滚动条工具类
+.hide-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-// 响应式布局
-// 移动端优先设计
+/* ================================================================
+   容器
+   ================================================================ */
 .container {
   width: 100%;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 var(--container-padding-x);
 }
 
-// 平板设备
-@media (min-width: 768px) {
-  .container {
-    max-width: 750px;
-    padding: 0 24px;
-  }
-}
-
-// 桌面设备
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1000px;
-    padding: 0 32px;
-  }
-}
-
-// 大屏设备
-@media (min-width: 1280px) and (max-width: 1920px) {
-  .container {
-    max-width: 1200px;
-    padding: 0 32px;
-  }
-}
-
-// 超大屏设备
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1400px;
-    padding: 0 40px;
-  }
-}
-
-// 修复About页面的高度问题
-.about-page {
-  min-height: calc(100vh - 70px); // 减去导航栏高度
-
-  .about-hero {
-    height: auto; // 移除固定高度
-    min-height: 60vh;
-  }
-}
-
-// 防止横向滚动的全局规则
-.section,
-.container-fluid,
-.row {
+/* ================================================================
+   Section 通用
+   ================================================================ */
+.section {
+  padding: var(--section-padding-y) 0;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
-// 确保所有图片和媒体元素不会导致横向滚动
-img,
-video,
-iframe,
-embed,
-object {
-  max-width: 100%;
-  height: auto;
+/* ================================================================
+   首页 section header 统一样式
+   ================================================================ */
+.home-section-eyebrow {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-// 防止长文本导致横向滚动
-p,
-div,
-span,
-h1,
-h2,
-h3,
-h4,
-h5,
+.home-section-eyebrow--inverse {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.home-section-title {
+  margin: var(--space-md) 0 var(--space-sm);
+  color: var(--color-text);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.home-section-title--inverse {
+  color: #ffffff;
+}
+
+.home-section-description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.home-section-description--inverse {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --section-padding-y: 64px;
+    --container-padding-x: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --section-padding-y: 48px;
+    --container-padding-x: 16px;
+  }
+}
+
+@media (max-width: 950px) {
+  :root {
+    --nav-height: 70px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --nav-height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --nav-height: 55px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --nav-height: 50px;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --nav-height: 85px;
+  }
+}
+
+/* ================================================================
+   文本颜色工具类
+   ================================================================ */
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+/* ================================================================
+   HTML 元素默认字体规范
+   ================================================================ */
+h1 {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--space-md) 0;
+}
+
+h2 {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 var(--space-md) 0;
+}
+
+h3 {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 var(--space-xs) 0;
+}
+
 h6 {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  -hyphens: auto;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 0 var(--space-xs) 0;
 }
 
-// 防止代码块导致横向滚动
-code,
-pre {
-  max-width: 100%;
-  overflow-x: auto;
-  white-space: pre-wrap;
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
 }
 
-// 确保flex容器不会导致横向滚动
-.flex,
-.d-flex,
-[style*="display: flex"] {
-  flex-wrap: wrap;
-  max-width: 100%;
+small {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-// 防止绝对定位元素导致横向滚动
-[style*="position: absolute"],
-[style*="position: fixed"] {
-  max-width: 100vw;
+/* ================================================================
+   按钮系统
+   ================================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+  font-family: inherit;
 }
 
-// 解决锚点跳转被固定头部遮挡问题
-[id] {
-  scroll-margin-top: 120px;
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+
+  &:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(26, 58, 143, 0.25);
+    color: #ffffff;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
-// 懒加载图片样式
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid rgba(15, 23, 42, 0.16);
+
+  &:hover {
+    background: rgba(15, 23, 42, 0.04);
+    border-color: rgba(15, 23, 42, 0.4);
+    transform: translateY(-2px);
+    color: var(--color-text);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  padding: 8px 0;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--color-primary);
+  }
+}
+
+/* ================================================================
+   卡片系统
+   ================================================================ */
+.card {
+  background: var(--color-background-white);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal),
+    transform var(--transition-normal);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+.card-featured {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  overflow: hidden;
+
+  img {
+    border-radius: var(--radius-md);
+  }
+}
+
+/* ================================================================
+   动画（只保留 2 种核心动效）
+   ================================================================ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+// 骨架屏加载动画
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 0.5) 25%,
+    rgba(243, 244, 246, 0.8) 37%,
+    rgba(229, 231, 235, 0.5) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ================================================================
+   Scroll Reveal 动效系统
+   配合 useScrollReveal composable 使用
+   ================================================================ */
+
+/* 单元素 reveal：初始隐藏，进入视口后显现 */
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-ready.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger 容器：子元素按序延迟显现 */
+.reveal-stagger > .reveal-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-stagger.revealed > .reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// 生成 stagger 延迟（最多 12 个子元素）
+each(range(12), {
+  .reveal-stagger.revealed > .reveal-item:nth-child(@{value}) {
+  transition-delay: (@value - 1) * 0.07s;
+  }
+});
+
+/* ================================================================
+   图片占位符
+   ================================================================ */
+.image-placeholder {
+  background: #f3f4f6;
+}
+
+/* ================================================================
+   懒加载图片
+   ================================================================ */
 .lazy-image {
   transition: opacity 0.3s ease-in-out;
 
@@ -253,13 +566,9 @@ pre {
   }
 }
 
-// 性能优化：减少重绘和回流
-.performance-optimized {
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-// 响应式图片容器
+/* ================================================================
+   响应式图片
+   ================================================================ */
 .responsive-image {
   position: relative;
   overflow: hidden;
@@ -271,195 +580,111 @@ pre {
   }
 }
 
-// 图片占位符动画
-@keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
+img {
+  max-width: 100%;
+  height: auto;
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: saturate(0.92) contrast(1.02);
 }
 
-.image-placeholder {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200px 100%;
-  animation: shimmer 1.5s infinite;
+a:hover img,
+.video-block:hover img,
+.product-card:hover img {
+  filter: saturate(1) contrast(1);
 }
 
-// 移动端优化
-// 触摸优化
+/* ================================================================
+   表格
+   ================================================================ */
+table {
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ================================================================
+   文本溢出防护
+   ================================================================ */
+p,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+code,
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+/* ================================================================
+   锚点偏移修复
+   ================================================================ */
+[id] {
+  scroll-margin-top: calc(var(--nav-height) + 16px);
+}
+
+/* ================================================================
+   性能优化
+   ================================================================ */
+/* ================================================================
+   移动端优化
+   ================================================================ */
 @media (max-width: 768px) {
-  // 增加触摸目标大小
-  button,
   .btn,
-  a,
+  button:not(.hero-indicator):not(.hamburger-menu):not(.language-btn),
   input,
   select,
   textarea {
     min-height: 44px;
-    min-width: 44px;
-    padding: 12px 16px;
   }
 
-  // 优化字体大小
-  body {
-    font-size: 16px;
-    line-height: 1.6;
+  .card,
+  .product-card {
+    margin-bottom: var(--space-sm);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
   }
 
-  h1 {
-    font-size: 28px;
-    line-height: 1.3;
-  }
-
-  h2 {
-    font-size: 24px;
-    line-height: 1.4;
-  }
-
-  h3 {
-    font-size: 20px;
-    line-height: 1.4;
-  }
-
-  // 移动端导航优化
-  .nav-container {
-    padding: 0 16px;
-  }
-
-  // 移动端间距优化
-  .section {
-    padding: 40px 0;
-  }
-
-  .container {
-    padding: 0 16px;
-  }
-
-  // 移动端表格优化
   table {
     font-size: 14px;
-    
+
     th,
     td {
       padding: 8px 4px;
       word-break: break-word;
     }
   }
-
-  // 移动端卡片优化
-  .card,
-  .product-card {
-    margin-bottom: 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
 }
 
-// 小屏移动设备优化
 @media (max-width: 480px) {
   body {
     font-size: 14px;
   }
 
-  h1 {
-    font-size: 24px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  h3 {
-    font-size: 18px;
-  }
-
-  .container {
-    padding: 0 12px;
-  }
-
-  .section {
-    padding: 32px 0;
-  }
-
-  // 小屏设备按钮优化
   .btn {
     width: 100%;
     margin-bottom: 12px;
   }
 }
 
-// 移动端性能优化
-@media (max-width: 768px) {
-  // 减少动画和过渡效果
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  // 优化滚动性能
-  .scroll-container {
-    -webkit-overflow-scrolling: touch;
-  }
-
-  // 自定义滚动条样式（兼容WebKit浏览器）
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-  }
-
-  // 禁用不必要的视觉效果
-  .performance-critical {
-    will-change: auto;
-    transform: none;
-    filter: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
-
-// 高DPI屏幕优化
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .high-dpi-image {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: pixelated;
-  }
-}
-
-// 深色模式支持
-@media (prefers-color-scheme: dark) {
-  .auto-dark {
-    background-color: #1a1a1a;
-    color: #ffffff;
-  }
-
-  .image-placeholder {
-    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-  }
-}
-
-// 减少动画偏好支持
+/* ================================================================
+   减少动画偏好
+   ================================================================ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -469,14 +694,21 @@ pre {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
 
-  .shimmer,
-  .image-placeholder {
-    animation: none;
+/* ================================================================
+   高 DPI 屏幕
+   ================================================================ */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 }
 
-// 打印样式优化
+/* ================================================================
+   打印
+   ================================================================ */
 @media print {
   *,
   *::before,

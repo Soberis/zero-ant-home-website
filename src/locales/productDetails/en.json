@@ -7,7 +7,8 @@
       "Support for real-time and general-purpose OS hybrid deployment",
       "Embedded virtualization technology with low overhead and high security",
       "Flexible system switching and hot-plug capabilities",
-      "Support for multiple mainstream industrial protocols and interfaces"
+      "Support for multiple mainstream industrial protocols and interfaces",
+      "Cloud-edge collaborative management, remote monitoring and maintenance"
     ],
     "cases": {
       "smartManufacturing": {
@@ -79,7 +80,8 @@
       "Autonomous and controllable, security auditable, compatible with domestic chips",
       "Rich industrial protocol and driver support",
       "High reliability and fault tolerance mechanisms ensuring system stable operation",
-      "Flexible task scheduling and resource management"
+      "Flexible task scheduling and resource management",
+      "Cloud remote monitoring and maintenance capability"
     ],
     "cases": {
       "highEndEquipment": {

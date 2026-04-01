@@ -1,1552 +1,276 @@
 <template>
-
   <section class="core-products">
-
-    <h2 class="section-title">{{ t('home.coreProducts.title') }}</h2>
-
-    <div class="products-list">
-
-      <div v-for="product in products" :key="product.slug" class="product-card">
-
-        <div class="product-img">
-           <!-- 根据产品类型显示对应的SVG图标 --> <component
-            :is="getProductIcon(product.slug)"
-          />
-        </div>
-
-        <div class="product-title">{{ t(product.name) }}</div>
-
-        <div class="product-desc">{{ t(product.desc) }}</div>
-         <router-link :to="getProductDetailLink(product)" class="more-btn"
-          >{{ t('home.coreProducts.learnMore') }} +</router-link
-        >
+    <div class="section-heading-row">
+      <div class="section-heading">
+        <span class="home-section-eyebrow">{{ t('home.coreProducts.eyebrow') }}</span>
+        <h2 class="home-section-title">{{ t('home.coreProducts.title') }}</h2>
+        <p class="home-section-description">{{ t('home.coreProducts.description') }}</p>
       </div>
-
     </div>
 
-  </section>
+    <div class="product-groups">
+      <section v-for="group in productGroups" :key="group.key" class="product-group">
+        <div class="group-header">
+          <h3 class="group-title">{{ group.title }}</h3>
+        </div>
 
+        <div class="products-grid">
+          <router-link
+            v-for="product in group.items"
+            :key="product.slug"
+            :to="getProductDetailLink(product)"
+            class="product-card-item"
+          >
+            <div class="card-visual">
+              <img :src="product.image" :alt="t(product.name)" class="visual-img" loading="lazy" decoding="async" />
+            </div>
+
+            <div class="card-content">
+              <h4 class="card-title">{{ t(product.name) }}</h4>
+              <p class="card-description">{{ getProductSummary(product) }}</p>
+            </div>
+          </router-link>
+        </div>
+      </section>
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-// 核心产品数据
+import { computed } from 'vue';
 import { products } from '@/data/products';
-import { getProductDetailLink } from '@/helpers/product';
+import { getProductDetailLink } from '@/utils/product';
 import { useI18n } from 'vue-i18n';
-import { h, type Component } from 'vue';
 
 const { t } = useI18n();
 
-// 多OS混合部署嵌入式虚拟机图标 - 专业工业设计
-const MultiOsVmIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 主服务器机架
-      h('rect', {
-        x: '20',
-        y: '20',
-        width: '40',
-        height: '50',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 虚拟化层分割线
-      h('line', {
-        x1: '25',
-        y1: '35',
-        x2: '55',
-        y2: '35',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('line', {
-        x1: '25',
-        y1: '50',
-        x2: '55',
-        y2: '50',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      // VM实例标识
-      h('rect', {
-        x: '25',
-        y: '25',
-        width: '12',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '43',
-        y: '25',
-        width: '12',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '25',
-        y: '40',
-        width: '12',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '43',
-        y: '40',
-        width: '12',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '34',
-        y: '55',
-        width: '12',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 网络连接端口
-      h('rect', {
-        x: '35',
-        y: '10',
-        width: '10',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('line', {
-        x1: '40',
-        y1: '15',
-        x2: '40',
-        y2: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      // 底座支架
-      h('rect', {
-        x: '15',
-        y: '75',
-        width: '50',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-    ]
-  );
+const productGroups = computed(() => [
+  {
+    key: 'system',
+    title: t('nav.systemProducts'),
+    items: products
+      .filter((product) => product.category === 'system'),
+  },
+  {
+    key: 'robot',
+    title: t('nav.robotProducts'),
+    items: products
+      .filter((product) => product.category === 'robot'),
+  },
+]);
 
-// 国产工业实时操作系统图标 - 专业工业设计
-const IndustrialRtosIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 主控制单元
-      h('rect', {
-        x: '20',
-        y: '25',
-        width: '40',
-        height: '35',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 处理器核心
-      h('rect', {
-        x: '25',
-        y: '35',
-        width: '30',
-        height: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 实时时钟模块
-      h('rect', {
-        x: '30',
-        y: '10',
-        width: '20',
-        height: '10',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('line', {
-        x1: '35',
-        y1: '15',
-        x2: '40',
-        y2: '10',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('line', {
-        x1: '40',
-        y1: '15',
-        x2: '45',
-        y2: '10',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      // 连接总线
-      h('line', {
-        x1: '40',
-        y1: '20',
-        x2: '40',
-        y2: '25',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      // 工业I/O接口
-      h('rect', {
-        x: '10',
-        y: '70',
-        width: '15',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '32.5',
-        y: '70',
-        width: '15',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '55',
-        y: '70',
-        width: '15',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 数据总线
-      h('line', {
-        x1: '17.5',
-        y1: '60',
-        x2: '17.5',
-        y2: '70',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      h('line', {
-        x1: '40',
-        y1: '60',
-        x2: '40',
-        y2: '70',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      h('line', {
-        x1: '62.5',
-        y1: '60',
-        x2: '62.5',
-        y2: '70',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-    ]
-  );
-
-// AiROS机器人操作系统图标 - 专业工业设计
-const AirosIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 主控制模块
-      h('rect', {
-        x: '25',
-        y: '15',
-        width: '30',
-        height: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 传感器阵列
-      h('rect', {
-        x: '30',
-        y: '20',
-        width: '8',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '42',
-        y: '20',
-        width: '8',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 处理单元
-      h('rect', {
-        x: '20',
-        y: '45',
-        width: '40',
-        height: '25',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // AI处理器
-      h('rect', {
-        x: '25',
-        y: '50',
-        width: '30',
-        height: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 数据流指示
-      h('line', {
-        x1: '30',
-        y1: '55',
-        x2: '50',
-        y2: '55',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('line', {
-        x1: '30',
-        y1: '60',
-        x2: '50',
-        y2: '60',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      // 执行器接口
-      h('rect', {
-        x: '10',
-        y: '48',
-        width: '8',
-        height: '12',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '62',
-        y: '48',
-        width: '8',
-        height: '12',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 连接总线
-      h('line', {
-        x1: '18',
-        y1: '54',
-        x2: '20',
-        y2: '54',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      h('line', {
-        x1: '60',
-        y1: '54',
-        x2: '62',
-        y2: '54',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      // 系统总线
-      h('line', {
-        x1: '40',
-        y1: '35',
-        x2: '40',
-        y2: '45',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      // 底座平台
-      h('rect', {
-        x: '15',
-        y: '75',
-        width: '50',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-    ]
-  );
-
-// 移动机器人调度系统图标 - 专业工业设计
-const RobotSchedulerIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 中央控制服务器
-      h('rect', {
-        x: '30',
-        y: '10',
-        width: '20',
-        height: '25',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 服务器内部模块
-      h('line', {
-        x1: '32',
-        y1: '18',
-        x2: '48',
-        y2: '18',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('line', {
-        x1: '32',
-        y1: '22',
-        x2: '48',
-        y2: '22',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('line', {
-        x1: '32',
-        y1: '26',
-        x2: '48',
-        y2: '26',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      // 机器人单元1
-      h('rect', {
-        x: '10',
-        y: '50',
-        width: '15',
-        height: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '12',
-        y: '75',
-        width: '11',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 机器人单元2
-      h('rect', {
-        x: '32.5',
-        y: '65',
-        width: '15',
-        height: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '34.5',
-        y: '88',
-        width: '11',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 机器人单元3
-      h('rect', {
-        x: '55',
-        y: '50',
-        width: '15',
-        height: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '57',
-        y: '75',
-        width: '11',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 通信网络连接
-      h('line', {
-        x1: '30',
-        y1: '35',
-        x2: '17.5',
-        y2: '50',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      h('line', {
-        x1: '40',
-        y1: '35',
-        x2: '40',
-        y2: '65',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      h('line', {
-        x1: '50',
-        y1: '35',
-        x2: '62.5',
-        y2: '50',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      // 网络节点
-      h('rect', {
-        x: '15',
-        y: '47',
-        width: '5',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '37.5',
-        y: '62',
-        width: '5',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '60',
-        y: '47',
-        width: '5',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-    ]
-  );
-
-// 二/三自由度龙门架图标 - 专业工业设计
-const Gantry2dIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 龙门架主体结构
-      h('line', {
-        x1: '15',
-        y1: '20',
-        x2: '15',
-        y2: '75',
-        stroke: '#1a3a8f',
-        'stroke-width': '4',
-      }),
-      h('line', {
-        x1: '65',
-        y1: '20',
-        x2: '65',
-        y2: '75',
-        stroke: '#1a3a8f',
-        'stroke-width': '4',
-      }),
-      h('line', {
-        x1: '15',
-        y1: '20',
-        x2: '65',
-        y2: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '4',
-      }),
-      // X轴导轨系统
-      h('rect', {
-        x: '18',
-        y: '23',
-        width: '44',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // X轴滑块
-      h('rect', {
-        x: '35',
-        y: '21',
-        width: '10',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // Z轴导轨
-      h('rect', {
-        x: '38',
-        y: '29',
-        width: '4',
-        height: '25',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // Z轴滑块
-      h('rect', {
-        x: '36',
-        y: '45',
-        width: '8',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 工具头
-      h('rect', {
-        x: '37',
-        y: '51',
-        width: '6',
-        height: '10',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 底座平台
-      h('rect', {
-        x: '10',
-        y: '75',
-        width: '60',
-        height: '10',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 支撑脚
-      h('rect', {
-        x: '12',
-        y: '72',
-        width: '6',
-        height: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '62',
-        y: '72',
-        width: '6',
-        height: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 运动轴标识
-      h('line', {
-        x1: '25',
-        y1: '15',
-        x2: '35',
-        y2: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('polygon', {
-        points: '35,13 35,17 38,15',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: '#1a3a8f',
-      }),
-      h('line', {
-        x1: '70',
-        y1: '35',
-        x2: '70',
-        y2: '45',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('polygon', {
-        points: '68,45 72,45 70,48',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: '#1a3a8f',
-      }),
-    ]
-  );
-
-// 四轴机械臂图标 - 移动平台SCARA设计
-const Scara4axisIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 移动平台底盘 - AGV样式
-      h('rect', {
-        x: '15',
-        y: '75',
-        width: '50',
-        height: '18',
-        rx: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '2.5',
-        fill: 'none',
-      }),
-      // 平台轮子
-      h('circle', {
-        cx: '22',
-        cy: '88',
-        r: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('circle', {
-        cx: '58',
-        cy: '88',
-        r: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 导航指示灯
-      h('rect', {
-        x: '37',
-        y: '77',
-        width: '6',
-        height: '3',
-        rx: '1.5',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: '#1a3a8f',
-      }),
-      // 升降立柱 - 伸缩部分，高于机械臂
-      h('rect', {
-        x: '37',
-        y: '25',
-        width: '6',
-        height: '50',
-        rx: '2',
-        stroke: '#1a3a8f',
-        'stroke-width': '2.5',
-        fill: 'none',
-      }),
-      // 升降导轨 - 延长到更高位置
-      h('line', {
-        x1: '35',
-        y1: '30',
-        x2: '35',
-        y2: '70',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '2,2',
-      }),
-      h('line', {
-        x1: '45',
-        y1: '30',
-        x2: '45',
-        y2: '70',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '2,2',
-      }),
-      // 升降平台 - 机械臂安装在中间位置
-      h('rect', {
-        x: '32',
-        y: '47',
-        width: '16',
-        height: '6',
-        rx: '2',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第一关节 - 旋转底座，位于中间位置
-      h('circle', {
-        cx: '40',
-        cy: '50',
-        r: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第一臂段 - 水平臂
-      h('rect', {
-        x: '40',
-        y: '47',
-        width: '18',
-        height: '6',
-        rx: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第二关节
-      h('circle', {
-        cx: '58',
-        cy: '50',
-        r: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第二臂段 - 垂直臂
-      h('rect', {
-        x: '56',
-        y: '32',
-        width: '4',
-        height: '18',
-        rx: '2',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第三关节 - Z轴旋转
-      h('circle', {
-        cx: '58',
-        cy: '30',
-        r: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 第四轴 - 末端旋转轴
-      h('rect', {
-        x: '56',
-        y: '22',
-        width: '4',
-        height: '8',
-        rx: '2',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 末端执行器 - 夹爪
-      h('rect', {
-        x: '54',
-        y: '18',
-        width: '3',
-        height: '6',
-        rx: '1',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '61',
-        y: '18',
-        width: '3',
-        height: '6',
-        rx: '1',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 工作范围指示
-      h('path', {
-        d: 'M 22 50 A 20 20 0 0 1 62 50',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '3,2',
-        fill: 'none',
-      }),
-      // 上下移动指示箭头 - 显示升降范围
-      h('polygon', {
-        points: '30,40 32,37 28,37',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: '#1a3a8f',
-      }),
-      h('polygon', {
-        points: '30,60 32,63 28,63',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: '#1a3a8f',
-      }),
-    ]
-  );
-
-
-// 六轴机械臂图标 - 专业工业设计
-const Arm6axisIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 底座平台
-      h('rect', {
-        x: '25',
-        y: '75',
-        width: '30',
-        height: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 第一轴（旋转底座）
-      h('rect', {
-        x: '32',
-        y: '65',
-        width: '16',
-        height: '10',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第一臂段（垂直支撑）
-      h('rect', {
-        x: '37',
-        y: '45',
-        width: '6',
-        height: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第二轴关节
-      h('rect', {
-        x: '35',
-        y: '43',
-        width: '10',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第二臂段（水平大臂）
-      h('rect', {
-        x: '45',
-        y: '43',
-        width: '18',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第三轴关节
-      h('rect', {
-        x: '61',
-        y: '41',
-        width: '4',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第三臂段（小臂）
-      h('rect', {
-        x: '61',
-        y: '30',
-        width: '4',
-        height: '11',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第四轴（手腕旋转）
-      h('rect', {
-        x: '59',
-        y: '28',
-        width: '8',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第五轴（手腕俯仰）
-      h('rect', {
-        x: '61',
-        y: '22',
-        width: '4',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 第六轴（手腕摆动）
-      h('rect', {
-        x: '59',
-        y: '20',
-        width: '8',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 末端法兰
-      h('rect', {
-        x: '60',
-        y: '15',
-        width: '6',
-        height: '5',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 工作空间指示
-      h('path', {
-        d: 'M 20 45 A 25 25 0 0 1 70 45',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '3,2',
-        fill: 'none',
-      }),
-      // 轴数标识
-      h('line', {
-        x1: '10',
-        y1: '30',
-        x2: '20',
-        y2: '30',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      h('polygon', {
-        points: '20,28 20,32 23,30',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        fill: '#1a3a8f',
-      }),
-    ]
-  );
-
-// 双臂人型机器人图标 - 专业工业设计
-const DualArmHumanoidIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 头部控制模块
-      h('rect', {
-        x: '30',
-        y: '10',
-        width: '20',
-        height: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 传感器阵列
-      h('rect', {
-        x: '33',
-        y: '15',
-        width: '5',
-        height: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '42',
-        y: '15',
-        width: '5',
-        height: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 主控制器躯干
-      h('rect', {
-        x: '30',
-        y: '30',
-        width: '20',
-        height: '30',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 内部处理单元
-      h('rect', {
-        x: '33',
-        y: '35',
-        width: '14',
-        height: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 左臂系统
-      h('rect', {
-        x: '15',
-        y: '32',
-        width: '12',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '8',
-        y: '38',
-        width: '4',
-        height: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '5',
-        y: '53',
-        width: '10',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 右臂系统
-      h('rect', {
-        x: '53',
-        y: '32',
-        width: '12',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '68',
-        y: '38',
-        width: '4',
-        height: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '65',
-        y: '53',
-        width: '10',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 连接关节
-      h('rect', {
-        x: '27',
-        y: '33',
-        width: '6',
-        height: '2',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '47',
-        y: '33',
-        width: '6',
-        height: '2',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '12',
-        y: '36',
-        width: '3',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '65',
-        y: '36',
-        width: '3',
-        height: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 移动底座
-      h('rect', {
-        x: '25',
-        y: '65',
-        width: '30',
-        height: '15',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 支撑腿
-      h('rect', {
-        x: '32',
-        y: '60',
-        width: '4',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '44',
-        y: '60',
-        width: '4',
-        height: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 移动轮组
-      h('rect', {
-        x: '20',
-        y: '78',
-        width: '8',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      h('rect', {
-        x: '52',
-        y: '78',
-        width: '8',
-        height: '6',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-        fill: 'none',
-      }),
-      // 协作工作空间
-      h('path', {
-        d: 'M 10 55 A 30 30 0 0 1 70 55',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '3,2',
-        fill: 'none',
-      }),
-    ]
-  );
-
-// 移动机器人图标 - 专业工业设计
-const MobileRobotIcon = () =>
-  h(
-    'svg',
-    {
-      width: '80',
-      height: '100',
-      viewBox: '0 0 80 100',
-      fill: 'none',
-    },
-    [
-      // 主体底盘 - 圆角矩形现代设计
-      h('rect', {
-        x: '18',
-        y: '40',
-        width: '44',
-        height: '28',
-        rx: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '3',
-        fill: 'none',
-      }),
-      // 激光雷达 - 圆形设计
-      h('circle', {
-        cx: '40',
-        cy: '30',
-        r: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2.5',
-        fill: 'none',
-      }),
-      // 雷达扫描指示
-      h('path', {
-        d: 'M 25 35 A 15 15 0 0 1 55 35',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        'stroke-dasharray': '3,2',
-        fill: 'none',
-      }),
-      // 扫描射线
-      h('line', {
-        x1: '40',
-        y1: '30',
-        x2: '28',
-        y2: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '2,1',
-      }),
-      h('line', {
-        x1: '40',
-        y1: '30',
-        x2: '52',
-        y2: '20',
-        stroke: '#1a3a8f',
-        'stroke-width': '1',
-        'stroke-dasharray': '2,1',
-      }),
-      // 前置传感器
-      h('rect', {
-        x: '35',
-        y: '42',
-        width: '10',
-        height: '3',
-        rx: '1.5',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 驱动轮 - 圆形设计
-      h('circle', {
-        cx: '26',
-        cy: '75',
-        r: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2.5',
-        fill: 'none',
-      }),
-      h('circle', {
-        cx: '54',
-        cy: '75',
-        r: '8',
-        stroke: '#1a3a8f',
-        'stroke-width': '2.5',
-        fill: 'none',
-      }),
-      // 轮毂中心
-      h('circle', {
-        cx: '26',
-        cy: '75',
-        r: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      h('circle', {
-        cx: '54',
-        cy: '75',
-        r: '3',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 万向轮
-      h('circle', {
-        cx: '40',
-        cy: '82',
-        r: '4',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        fill: 'none',
-      }),
-      // 底盘连接
-      h('line', {
-        x1: '26',
-        y1: '68',
-        x2: '26',
-        y2: '67',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      h('line', {
-        x1: '54',
-        y1: '68',
-        x2: '54',
-        y2: '67',
-        stroke: '#1a3a8f',
-        'stroke-width': '2',
-      }),
-      h('line', {
-        x1: '40',
-        y1: '78',
-        x2: '40',
-        y2: '68',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-      }),
-      // 导航路径
-      h('path', {
-        d: 'M 10 88 Q 25 85 40 88 Q 55 85 70 88',
-        stroke: '#1a3a8f',
-        'stroke-width': '1.5',
-        'stroke-dasharray': '4,3',
-        fill: 'none',
-      }),
-      // 路径节点
-      h('circle', {
-        cx: '25',
-        cy: '86',
-        r: '1.5',
-        fill: '#1a3a8f',
-      }),
-      h('circle', {
-        cx: '55',
-        cy: '86',
-        r: '1.5',
-        fill: '#1a3a8f',
-      }),
-    ]
-  );
-
-// 根据产品slug返回对应的图标组件
-const getProductIcon = (slug: string): Component => {
-  const iconMap: Record<string, Component> = {
-    'multi-os-vm': MultiOsVmIcon,
-    'industrial-rtos': IndustrialRtosIcon,
-    airos: AirosIcon,
-    'robot-scheduler': RobotSchedulerIcon,
-    'gantry-2d': Gantry2dIcon,
-    'scara-4axis': Scara4axisIcon,
-    'arm-6axis': Arm6axisIcon,
-    'dual-arm-humanoid': DualArmHumanoidIcon,
-    'mobile-robot': MobileRobotIcon,
-  };
-  return iconMap[slug] || MultiOsVmIcon; // 默认图标
-};
+function getProductSummary(product: (typeof products)[number]): string {
+  return product.supportText ? t(product.supportText) : t(product.desc);
+}
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .core-products {
-  width: 100%;
-  max-width: 100%;
   position: relative;
-  padding: 80px 0 64px 0;
-  overflow-x: hidden;
-}
-.section-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 800;
-  margin-bottom: 56px;
-  letter-spacing: 2px;
-  color: #222;
-}
-.products-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  width: 100%;
-  max-width: 1600px;
+  z-index: 1;
+  contain: content;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 40px;
-  overflow-x: hidden;
+  padding: var(--section-padding-y) var(--container-padding-x);
 }
-.product-card {
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 4px 24px 0 rgba(30, 40, 90, 0.08);
-  min-height: 420px;
-  width: 100%;
+
+.section-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.section-heading {
+  max-width: 720px;
+  margin-bottom: 0;
+}
+
+/* ── 分组容器 ── */
+.product-groups {
+  display: grid;
+  gap: 72px;
+}
+
+.product-group {
+  display: grid;
+  gap: 24px;
+  padding: 0;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.group-title {
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: currentColor;
+  letter-spacing: -0.02em;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 28px;
+  border-top: none;
+}
+
+.product-card-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 56px 32px 40px 32px;
-  transition: box-shadow 0.2s;
-  /* 移除flex宽度限制 */
-  min-width: 0;
-  max-width: 100%;
-  margin: 0 auto;
+  align-items: flex-start;
+  gap: 18px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  text-decoration: none;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.25s ease;
+  overflow: visible;
+  position: relative;
 }
-.product-card:hover {
-  box-shadow: 0 4px 24px 0 rgba(26, 58, 143, 0.13);
+
+.product-card-item:focus-visible {
+  outline: 2px solid rgba(26, 58, 143, 0.2);
+  outline-offset: 10px;
 }
-.product-img {
-  margin-bottom: 32px;
+
+.product-card-item:hover {
+  transform: translateY(-2px);
+}
+
+.card-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 120px;
+  width: 100%;
+  height: 220px;
+  margin-bottom: 0;
+  position: relative;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
 }
-.product-img svg {
-  width: 90px;
-  height: 110px;
+
+.visual-img {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  filter: none;
 }
-.product-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #222 !important;
-  margin-bottom: 18px;
-  text-align: center;
+
+.product-card-item:hover .visual-img {
+  opacity: 0.98;
+  transform: translateY(-2px);
 }
-.product-desc {
-  font-size: 1.08rem;
-  color: #222 !important;
-  text-align: center;
-  margin-bottom: 36px;
-  min-height: 56px;
+
+.card-content {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  text-align: left;
 }
-.more-btn {
-  display: inline-block;
-  border: 2px solid #1a3a8f;
-  color: #1a3a8f;
-  border-radius: 24px;
-  padding: 10px 36px;
-  font-size: 1.1rem;
-  text-decoration: none;
-  font-weight: 600;
-  transition:
-    background 0.2s,
-    color 0.2s;
+
+.card-title {
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
 }
-.more-btn:hover {
-  background: #1a3a8f;
-  color: #fff;
+
+.card-description {
+  margin: 0;
+  max-width: 22rem;
+  color: var(--color-text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.75;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-card-item:hover .card-title {
+  color: var(--color-primary);
+}
+
+@media (max-width: 1100px) {
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 24px;
+  }
 }
 
 @media (max-width: 900px) {
-  .section-title {
-    font-size: 1.4rem;
+  .core-products {
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .section-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-groups {
+    gap: 56px;
+  }
+
+  .products-grid {
+    gap: 32px 20px;
+  }
+
+  .card-visual {
+    height: 180px;
   }
 }
 
-@media (max-width: 600px) {
-  .section-title {
-    font-size: 1.5rem;
+@media (max-width: 640px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .product-card-item {
+    gap: 14px;
+  }
+
+  .card-visual {
+    height: 200px;
+    padding: 0;
+  }
+
+  .group-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .group-title {
+    font-size: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.125rem;
+  }
+
+  .card-description {
+    max-width: none;
   }
 }
 </style>
-
