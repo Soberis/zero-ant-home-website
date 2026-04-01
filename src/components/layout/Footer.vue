@@ -39,6 +39,17 @@
           <div class="footer-qrcodes">
             <div class="qrcode-item">
               <img
+                :src="taobaoQrcode"
+                :alt="$t('footer.taobao')"
+                class="qrcode-img"
+                loading="lazy"
+                aria-label="Taobao QR Code"
+              />
+              <div class="qrcode-label">{{ $t("footer.taobao") }}</div>
+            </div>
+
+            <div class="qrcode-item">
+              <img
                 :src="wxQrcode"
                 :alt="$t('footer.wx')"
                 class="qrcode-img"
@@ -80,6 +91,7 @@
 
 <script setup lang="ts">
 import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
+import taobaoQrcode from "@/assets/images/qrcodes/taobao.png";
 import wxQrcode from "@/assets/images/qrcodes/wx.webp";
 import { footerNavSections } from "@/data/navigation";
 </script>
@@ -189,7 +201,7 @@ import { footerNavSections } from "@/data/navigation";
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
