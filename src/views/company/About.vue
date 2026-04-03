@@ -460,15 +460,17 @@ function formatIndex(value: number): string {
 
 .stat-card {
   padding: 24px;
-  background: rgba(15, 23, 42, 0.03); /* 改为灰色底座 */
+  background: rgba(15, 23, 42, 0.03);
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 12px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: all var(--transition-smooth);
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
-  background: rgba(15, 23, 42, 0.05);
+  transform: translateY(-4px) scale(1.02);
+  background: #ffffff;
+  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .stat-number {
@@ -600,14 +602,14 @@ function formatIndex(value: number): string {
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
 }
 
 .value-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.03);
   border-color: rgba(26, 58, 143, 0.15);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-lg);
 }
 
 .value-text {
