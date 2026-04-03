@@ -135,7 +135,6 @@
             :key="value"
             class="value-card"
           >
-            <span class="card-index">{{ formatIndex(idx + 1) }}</span>
             <span class="value-text">{{ value }}</span>
           </article>
         </div>
@@ -456,27 +455,36 @@ function formatIndex(value: number): string {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px 24px;
+  gap: 16px;
 }
 
 .stat-card {
-  border-radius: 0;
-  background: transparent;
-  padding: 0;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.03); /* 改为灰色底座 */
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 12px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  background: rgba(15, 23, 42, 0.05);
 }
 
 .stat-number {
   display: block;
   margin-bottom: 8px;
   color: var(--brand-primary-deep);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .stat-label {
   color: var(--brand-muted);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
+  font-weight: 500;
   line-height: 1.6;
 }
 
@@ -579,33 +587,33 @@ function formatIndex(value: number): string {
 }
 
 .values-grid {
-  display: flex;
-  align-items: flex-start;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .value-card {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 0 0;
+  gap: 16px;
+  padding: 32px 24px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+  transition: all 0.3s ease;
 }
 
-.value-card:first-child {
-  padding-left: 0;
-}
-
-#core-values .card-index {
-  width: auto;
-  padding-top: 0;
-  color: rgba(26, 58, 143, 0.28);
+.value-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 58, 143, 0.15);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
 }
 
 .value-text {
   color: var(--brand-text);
-  font-size: 1.08rem;
-  font-weight: 650;
+  font-size: 1.15rem;
+  font-weight: 600;
   line-height: 1.45;
 }
 
