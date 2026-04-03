@@ -131,7 +131,7 @@
 
         <div class="values-grid">
           <article
-            v-for="(value, idx) in coreValues"
+            v-for="value in coreValues"
             :key="value"
             class="value-card"
           >

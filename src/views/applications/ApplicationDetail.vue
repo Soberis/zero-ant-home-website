@@ -23,7 +23,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications, { type Application } from "@/data/applications";
 import { computed, type ComputedRef, onMounted, watch } from "vue";
-import { videoCards, videoMap, type VideoDetail } from "@/data/videos";
+import { getVideoThumbnailById, videoMap, type VideoDetail } from "@/data/videos";
 import { setSEO, setStructuredData } from "@/utils/seo";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
@@ -60,7 +60,7 @@ const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
 
 const videoThumbnail = computed(() => {
   const videoKey = detail.value?.video;
-  return videoKey ? videoCards.find((item) => item.slug === videoKey)?.img || "" : "";
+  return videoKey ? getVideoThumbnailById(videoKey) || "" : "";
 });
 
 const mediaInfo = computed(() => {

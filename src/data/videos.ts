@@ -25,8 +25,10 @@ import riceMolecularExperimentImg from "@/assets/images/videos/rice-molecular-ex
 import sketchingRobotImg from "@/assets/images/videos/sketching-robot.webp";
 import gantry2d3dImg from "@/assets/images/videos/gantry-2d3d.webp";
 import assemblyRobotImg from "@/assets/images/videos/assembly-robot.webp";
+import garageCleaningRobotImg from "@/assets/images/videos/garage-cleaning-robot.webp";
 import mobileRobotChassisImg from "@/assets/images/videos/mobile-robot-chassis.webp";
 import fixedRailTransferRobotImg from "@/assets/images/videos/fixed-rail-transfer-robot.webp";
+import plateWeldingDemoImg from "@/assets/images/videos/plate-welding-demo.webp";
 import vrRemoteFrankaDualArmImg from "@/assets/images/videos/vr-teleop-franka.webp";
 
 // 常量定义
@@ -68,6 +70,41 @@ export interface VideoCard {
 export type VideoMapData = Record<string, VideoDetail>;
 
 /**
+ * 视频缩略图映射，供卡片和详情页共用，避免详情页再依赖卡片列表取封面。
+ */
+const videoThumbnailMap: Record<string, string> = {
+  "medical-automation": compositeRobotImg,
+  semiconductor: waferTransferImg,
+  "dual-robot-ball-catching": dualRobotBallCatchingImg,
+  "polishing-robot": polishingRobotImg,
+  "composite-robot-application": compositeRobotAppImg,
+  "radar-360-scanning": radar360Img,
+  "agv-product-introduction": agvImg,
+  "ur-robot-llm-motion-capture": urRobotLLMImg,
+  "rice-molecular-experiment": riceMolecularExperimentImg,
+  "four-axis-robot-open-fridge": fourAxisRobotFridgeImg,
+  "sketching-robot": sketchingRobotImg,
+  "gantry-2d3d": gantry2d3dImg,
+  "servo-motor-station": servoMotorStationImg,
+  "personalized-prescription-pharmaceutical": personalizedPrescriptionImg,
+  "mobile-transfer-robot": mobileTransferRobotImg,
+  "offline-programming": offlineProgrammingImg,
+  "offline-programming-logo-drawing": offlineProgrammingLogoDrawingImg,
+  "rtos-ethercat-validation": rtosEthercatImg,
+  "robot-polishing-demo": robotPolishingDemoImg,
+  "palletizing-robot": palletizingRobotImg,
+  "robotstudio-remote-control": robotStudioRemoteControlImg,
+  "lab-tube-loading": labTubeLoadingImg,
+  "outdoor-patrol-robot": outdoorPatrolRobotImg,
+  "plate-welding-demo": plateWeldingDemoImg,
+  "underground-garage-cleaning": garageCleaningRobotImg,
+  "assembly-robot": assemblyRobotImg,
+  "mobile-robot-chassis": mobileRobotChassisImg,
+  "fixed-rail-transfer-robot": fixedRailTransferRobotImg,
+  "vr-remote-franka-dual-arm": vrRemoteFrankaDualArmImg,
+};
+
+/**
  * 数据验证函数
  */
 export const validateVideoData = (video: VideoDetail): boolean => {
@@ -79,6 +116,13 @@ export const validateVideoData = (video: VideoDetail): boolean => {
  */
 export const getVideoById = (slug: string): VideoDetail | undefined => {
   return videoMap[slug];
+};
+
+/**
+ * 工具函数：根据 slug 获取视频缩略图
+ */
+export const getVideoThumbnailById = (slug: string): string | undefined => {
+  return videoThumbnailMap[slug];
 };
 
 /**
@@ -429,7 +473,7 @@ export const videoCards: VideoCard[] = [
   // AI智能
   {
     title: "videos.plate-welding-demo.title",
-    img: robotPolishingDemoImg,
+    img: plateWeldingDemoImg,
     slug: "plate-welding-demo",
   },
   {
@@ -446,7 +490,7 @@ export const videoCards: VideoCard[] = [
   // 复合系统
   {
     title: "videos.underground-garage-cleaning.title",
-    img: outdoorPatrolRobotImg,
+    img: garageCleaningRobotImg,
     slug: "underground-garage-cleaning",
   },
   {

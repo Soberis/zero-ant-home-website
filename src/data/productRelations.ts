@@ -23,12 +23,12 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["polishing-robot", "robot-polishing-demo", "assembly-robot"],
   },
   "za-r3l-m-h": {
-    applicationSlugs: ["precision-assembly", "agricultural-research", "cultural-creative"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "rice-molecular-experiment", "sketching-robot"],
+    applicationSlugs: ["pharmaceutical-automation", "precision-assembly", "semiconductor"],
+    videoSlugs: ["lab-tube-loading", "four-axis-robot-open-fridge", "semiconductor"],
   },
   "za-r3m-left": {
     applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
-    videoSlugs: ["fixed-rail-transfer-robot", "semiconductor", "mobile-transfer-robot"],
+    videoSlugs: ["fixed-rail-transfer-robot", "semiconductor", "gantry-2d3d"],
   },
   "za-r3m-right": {
     applicationSlugs: ["surface-treatment", "intelligent-manufacturing", "precision-assembly"],
@@ -55,16 +55,16 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["dual-robot-ball-catching", "vr-remote-franka-dual-arm", "composite-robot-application"],
   },
   "za-rmvr": {
-    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
-    videoSlugs: ["vr-remote-franka-dual-arm", "dual-robot-ball-catching", "rice-molecular-experiment"],
+    applicationSlugs: ["ai-robotics", "offline-programming", "industrial-gateway"],
+    videoSlugs: ["vr-remote-franka-dual-arm", "offline-programming", "robotstudio-remote-control"],
   },
   "za-rmps": {
-    applicationSlugs: ["ai-robotics", "precision-assembly", "agricultural-research"],
-    videoSlugs: ["vr-remote-franka-dual-arm", "dual-robot-ball-catching", "assembly-robot"],
+    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
+    videoSlugs: ["vr-remote-franka-dual-arm", "dual-robot-ball-catching", "robotstudio-remote-control"],
   },
   "za-rdp": {
-    applicationSlugs: ["cultural-creative", "ai-robotics", "agricultural-research"],
-    videoSlugs: ["sketching-robot", "offline-programming-logo-drawing", "rice-molecular-experiment"],
+    applicationSlugs: ["cultural-creative", "ai-robotics", "offline-programming"],
+    videoSlugs: ["sketching-robot", "offline-programming-logo-drawing", "offline-programming"],
   },
   "za-zg100": {
     applicationSlugs: ["industrial-control", "offline-programming", "industrial-gateway"],
@@ -72,7 +72,7 @@ export const productRelations: ProductRelationsData = {
   },
   rail: {
     applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
-    videoSlugs: ["fixed-rail-transfer-robot", "gantry-2d3d", "mobile-transfer-robot"],
+    videoSlugs: ["fixed-rail-transfer-robot", "gantry-2d3d", "semiconductor"],
   },
   "rotating-platform": {
     applicationSlugs: ["surface-treatment", "precision-assembly", "intelligent-manufacturing"],
@@ -84,14 +84,22 @@ export const getRelatedApplications = (productSlug: string): Application[] => {
   const relation = productRelations[productSlug];
   if (!relation) return [];
 
-  return applications.filter((app) => relation.applicationSlugs.includes(app.slug));
+  const applicationMap = new Map(applications.map((app) => [app.slug, app] as const));
+
+  return relation.applicationSlugs
+    .map((slug) => applicationMap.get(slug))
+    .filter((app): app is Application => Boolean(app));
 };
 
 export const getRelatedVideos = (productSlug: string): VideoCard[] => {
   const relation = productRelations[productSlug];
   if (!relation) return [];
 
-  return videoCards.filter((video) => relation.videoSlugs.includes(video.slug));
+  const videoCardMap = new Map(videoCards.map((video) => [video.slug, video] as const));
+
+  return relation.videoSlugs
+    .map((slug) => videoCardMap.get(slug))
+    .filter((video): video is VideoCard => Boolean(video));
 };
 
 export const hasProductRelations = (productSlug: string): boolean => {
