@@ -2,57 +2,67 @@
   <div v-if="detailLocaleReady">
     <div v-if="productData" class="product-detail">
       <section id="product-overview" class="product-hero">
-        <div class="container product-hero__inner">
-          <div class="product-hero__header">
-            <span class="product-hero__eyebrow">{{ categoryLabel }}</span>
-            <h1 class="product-hero__title text-display-hero">{{ productData.title }}</h1>
-            <p class="product-hero__description" v-html="sanitizedDescription"></p>
+        <div class="container product-hero__container">
+          <div class="product-hero__inner">
+            <div class="product-hero__header">
+              <span class="product-hero__eyebrow">{{ categoryLabel }}</span>
+              <h1 class="product-hero__title text-display-hero">{{ productData.title }}</h1>
+              <p class="product-hero__description" v-html="sanitizedDescription"></p>
 
-            <div class="product-hero__actions">
-              <button class="product-hero__back-link" type="button" @click="goBack">
-                <svg
-                  class="product-hero__back-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
+              <div class="product-hero__actions">
+                <button class="product-hero__back-link" type="button" @click="goBack">
+                  <svg
+                    class="product-hero__back-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M19 12H5" />
+                    <path d="m12 19-7-7 7-7" />
+                  </svg>
+                  <span>{{ t("productDetail.backToList") }}</span>
+                </button>
+                <router-link
+                  :to="{ path: '/about', hash: '#contact' }"
+                  class="btn btn-primary product-hero__contact-btn"
                 >
-                  <path d="M19 12H5" />
-                  <path d="m12 19-7-7 7-7" />
-                </svg>
-                <span>{{ t("productDetail.backToList") }}</span>
-              </button>
-              <router-link
-                :to="{ path: '/about', hash: '#contact' }"
-                class="btn btn-secondary product-hero__contact-btn"
-              >
-                {{ t("common.cta.contactTeam") }}
-              </router-link>
+                  {{ t("common.cta.contactTeam") }}
+                </router-link>
+              </div>
+            </div>
+
+            <div class="product-hero__media-wrapper">
+              <img
+                :src="heroImageSrc"
+                :alt="productData.title"
+                class="product-hero__image"
+                :width="heroImageSize.width"
+                :height="heroImageSize.height"
+              />
             </div>
           </div>
 
-          <div class="product-hero__media-wrapper">
-            <img
-              :src="heroImageSrc"
-              :alt="productData.title"
-              class="product-hero__image"
-              :width="heroImageSize.width"
-              :height="heroImageSize.height"
-            />
-
-            <div v-if="heroMetrics.length" class="product-hero__metrics">
-              <article
-                v-for="metric in heroMetrics"
-                :key="`${metric.label}-${metric.value}`"
-                class="product-hero__metric"
+          <div v-if="heroMetrics.length" class="product-hero__metrics">
+            <article
+              v-for="metric in heroMetrics"
+              :key="`${metric.label}-${metric.value}`"
+              class="product-hero__metric"
+            >
+              <div
+                class="product-hero__metric-value"
+                :class="{
+                  'product-hero__metric-value--emphasis': isMetricEmphasis(metric.value),
+                  'product-hero__metric-value--compact': !isMetricEmphasis(metric.value),
+                }"
               >
-                <div class="product-hero__metric-value">{{ metric.value }}</div>
-                <div class="product-hero__metric-label">{{ metric.label }}</div>
-              </article>
-            </div>
+                {{ metric.value }}
+              </div>
+              <div class="product-hero__metric-label">{{ metric.label }}</div>
+            </article>
           </div>
         </div>
       </section>
@@ -363,6 +373,18 @@ const getDownloadFormat = (name: string, url: string) => {
 const getDownloadDisplayName = (name: string) =>
   name.replace(/\.[a-z0-9]+$/i, "");
 
+const METRIC_EMPHASIS_PATTERN =
+  /(^[±+\-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
+
+const isMetricEmphasis = (value: string) => {
+  const normalized = value.trim();
+  if (!normalized) return false;
+  if (/[\u4e00-\u9fff]/.test(normalized)) {
+    return METRIC_EMPHASIS_PATTERN.test(normalized);
+  }
+  return METRIC_EMPHASIS_PATTERN.test(normalized);
+};
+
 const HERO_IMAGE_SIZE_MAP: Record<string, HeroImageSize> = {
   rail: { width: 1600, height: 1280 },
   "rotating-platform": { width: 1600, height: 1280 },
@@ -399,13 +421,19 @@ const goBack = () => {
 }
 
 .product-hero {
-  padding: 72px 0 88px;
+  padding: calc(var(--nav-height) + 36px) 0 72px;
+}
+
+.product-hero__container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .product-hero__inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 1.1fr);
-  align-items: stretch;
+  align-items: center;
   gap: 60px;
 }
 
@@ -430,12 +458,6 @@ const goBack = () => {
   border-radius: 0;
 }
 
-.detail-nav__inner {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.9);
-  padding: 14px 0;
-}
-
 .product-hero__eyebrow,
 .product-hero__panel-label {
   display: inline-flex;
@@ -444,7 +466,7 @@ const goBack = () => {
   border-radius: 0;
   background: transparent;
   border-left: none;
-  color: #163a87;
+  color: #667085;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -452,7 +474,7 @@ const goBack = () => {
 }
 
 .product-hero__title {
-  margin: 24px 0 16px;
+  margin: 18px 0 16px;
   color: #0f172a;
 }
 
@@ -470,7 +492,7 @@ const goBack = () => {
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 20px;
-  margin-top: 30px;
+  margin-top: 32px;
 }
 
 .product-hero__back-link {
@@ -505,7 +527,7 @@ const goBack = () => {
 .product-hero__media-wrapper {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 760px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -515,8 +537,8 @@ const goBack = () => {
 
 .product-hero__image {
   width: 100%;
-  max-height: 48vh;
-  min-height: 320px;
+  max-height: 42vh;
+  min-height: 260px;
   object-fit: contain;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -527,14 +549,17 @@ const goBack = () => {
 
 .product-hero__metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
   margin-top: 40px;
   width: 100%;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .product-hero__metric {
-  padding: 0;
+  min-width: 0;
+  padding: 28px 24px;
   border: none;
   background: transparent;
   display: flex;
@@ -544,28 +569,42 @@ const goBack = () => {
 }
 
 .product-hero__metric + .product-hero__metric {
-  border-left: 1px solid rgba(15, 23, 42, 0.06);
-  padding-left: 16px;
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .product-hero__metric-value {
-  font-size: 1.6rem;
-  line-height: 1.2;
+  font-size: 1.12rem;
+  line-height: 1.4;
   font-weight: 600;
-  color: #163a87;
-  letter-spacing: -0.01em;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.product-hero__metric-value--emphasis {
+  font-size: 1.5rem;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.product-hero__metric-value--compact {
+  font-size: 1.04rem;
+  line-height: 1.55;
+  color: #0f172a;
+  font-weight: 600;
 }
 
 .product-hero__metric-label {
-  margin-top: 8px;
-  font-size: 1rem;
+  margin-top: 10px;
+  font-size: 0.98rem;
   line-height: 1.5;
-  color: #0f172a;
+  color: #556074;
   font-weight: 500;
 }
 
 .product-main {
-  padding-top: 12px;
+  padding-top: 0;
 }
 
 .product-main__inner {
@@ -575,9 +614,9 @@ const goBack = () => {
 }
 
 .detail-section {
-  padding: 100px 0 80px;
+  padding: 80px 0;
   border-radius: 0;
-  scroll-margin-top: calc(var(--nav-height) + 16px);
+  scroll-margin-top: calc(var(--nav-height, 72px) + 54px);
   background: transparent;
   border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
@@ -619,18 +658,23 @@ const goBack = () => {
 }
 
 .feature-card {
+  display: flex;
+  flex-direction: column;
   max-width: 100%;
   margin: 0;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-top: none;
-  box-shadow: none;
+  padding: 28px 24px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-.feature-card:nth-child(n + 4) {
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
-  padding-top: 24px;
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025);
+  background: #ffffff;
+  border-color: rgba(22, 58, 135, 0.15);
 }
 
 .feature-card__content {
@@ -641,11 +685,17 @@ const goBack = () => {
 }
 
 .feature-card__index {
-  display: block;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #64748b;
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(22, 58, 135, 0.08);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #163a87;
+  margin-bottom: 16px;
 }
 
 .feature-card__title {
@@ -686,17 +736,20 @@ const goBack = () => {
 .param-card {
   display: grid;
   grid-template-columns: minmax(120px, 10.5rem) minmax(0, 1fr);
-  align-items: start;
+  align-items: center;
   gap: 24px;
-  padding: 20px 0;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  transition: background-color 0.2s ease;
 }
 
-.params-column > .param-card:first-child {
-  padding-top: 12px;
+.param-card:nth-child(even) {
+  background: #f8fafc;
 }
 
-.param-card + .param-card {
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+.param-card:hover {
+  background: rgba(22, 58, 135, 0.04);
 }
 
 .param-card__label {
@@ -840,28 +893,28 @@ const goBack = () => {
     justify-content: center;
   }
 
+  .product-hero__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .product-hero__metric {
     align-items: center;
     text-align: center;
   }
 
   .product-hero__metric + .product-hero__metric {
-    padding-left: 0;
-    border-left: none;
-    padding-top: 24px;
-    margin-top: 24px;
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    border-left: 1px solid rgba(15, 23, 42, 0.08);
   }
 }
 
 @media (max-width: 768px) {
   .product-hero {
-    padding-top: 84px;
+    padding-top: calc(var(--nav-height) + 28px);
   }
 
   .detail-section {
-    padding: 80px 0 40px;
-    scroll-margin-top: 100px;
+    padding: 60px 0 40px;
+    scroll-margin-top: 120px;
   }
 
   .params-grid {
@@ -893,17 +946,12 @@ const goBack = () => {
 
   .features-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 20px;
   }
 
-  .feature-card {
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
-    padding-top: 24px;
-  }
-
-  .feature-card:first-child {
-    border-top: none;
-    padding-top: 0;
+  .product-hero__metric + .product-hero__metric {
+    border-left: none;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
   }
 }
 

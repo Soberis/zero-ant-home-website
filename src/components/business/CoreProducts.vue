@@ -54,7 +54,7 @@ import zaM135Img from '@/assets/images/product/ZA-M135.png';
 import zaMR3TImg from '@/assets/images/product/ZA-MR3T.png';
 import zaRMVRImg from '@/assets/images/product/ZA-RMVR具身智能双臂VR遥操作开发平台.jpg';
 import zaZG100Img from '@/assets/images/product/ZA-ZG100.png';
-import railImg from '@/assets/images/product/地轨.png';
+import rotatingPlatformImg from '@/assets/images/product/旋转平台.png';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -105,7 +105,7 @@ const productFamilies = [
     eyebrow: 'ACCESSORIES',
     titleKey: 'home.coreProducts.families.accessories.title',
     descriptionKey: 'home.coreProducts.families.accessories.description',
-    image: railImg,
+    image: rotatingPlatformImg,
     models: ['地轨', '旋转平台'],
   },
 ] as const;

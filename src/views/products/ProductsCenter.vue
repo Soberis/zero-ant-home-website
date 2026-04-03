@@ -314,17 +314,21 @@ const pageContent = computed(() => {
 }
 
 .product-card__body {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-content: start;
   gap: 14px;
+  min-height: 100%;
 }
 
 .product-card__actions {
-  margin-top: 8px;
+  margin-top: auto;
+  padding-top: 18px;
 }
 
 .product-card__detail-link {
-  width: fit-content;
+  width: 168px;
+  justify-content: center;
 }
 
 .product-card__title {
@@ -343,7 +347,7 @@ const pageContent = computed(() => {
 
 .product-card__spec-block {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .product-card__spec-label {
@@ -360,7 +364,7 @@ const pageContent = computed(() => {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .product-card__specs li {
