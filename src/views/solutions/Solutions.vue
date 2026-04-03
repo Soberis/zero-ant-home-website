@@ -39,7 +39,7 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.industries.title") }}</span>
-            <span class="title-en">INDUSTRIES</span>
+            <span class="title-en">SOLUTION DIRECTIONS</span>
           </h2>
           <p class="section-description">
             {{ t("solutionsPage.industries.description") }}
@@ -92,7 +92,7 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.backbone.title") }}</span>
-            <span class="title-en">TECH BACKBONE</span>
+            <span class="title-en">SOLUTION STACK</span>
           </h2>
           <p class="section-description">
             {{ t("solutionsPage.backbone.description") }}
@@ -233,7 +233,7 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.delivery.title") }}</span>
-            <span class="title-en">DELIVERY NETWORK</span>
+            <span class="title-en">DELIVERY PATH</span>
           </h2>
           <p class="section-description">
             {{ t("solutionsPage.delivery.description") }}
@@ -281,7 +281,7 @@ import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications from "@/data/applications";
-import { getProducts } from "@/data/products";
+import { productCenterCards } from "@/data/product-center";
 import { videoCards } from "@/data/videos";
 import VideoCard from "@/components/common/VideoCard.vue";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
@@ -329,7 +329,7 @@ useScrollRevealList([industriesRef, backboneRef, proofRef, deliveryRef]);
 
 const route = useRoute();
 const router = useRouter();
-const { t, tm } = useI18n();
+const { t, tm, locale } = useI18n();
 
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
@@ -362,6 +362,10 @@ function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");
 }
 
+function resolveLocalizedText(value: { zh: string; en: string }): string {
+  return locale.value === "en" ? value.en : value.zh;
+}
+
 const heroStats = computed(() => [
   {
     value: formatIndex(solutionIndustryGroups.length),
@@ -378,19 +382,11 @@ const heroStats = computed(() => [
 ]);
 
 const productMap = computed<Record<string, SolutionProductRef>>(() =>
-  getProducts().reduce<Record<string, SolutionProductRef>>((map, product) => {
-    const productCenterRoutes: Partial<Record<string, string>> = {
-      "gantry-2d": "/products#rail",
-      "scara-4axis": "/products#za-r3-x",
-      "arm-6axis": "/products#za-r3d6",
-      "dual-arm-humanoid": "/products#za-mr3t",
-      "mobile-robot": "/products#za-m135",
-    };
-
-    map[product.slug] = {
-      slug: product.slug,
-      title: t(product.name),
-      route: productCenterRoutes[product.slug] ?? "/products",
+  productCenterCards.reduce<Record<string, SolutionProductRef>>((map, item) => {
+    map[item.card.id] = {
+      slug: item.card.id,
+      title: resolveLocalizedText(item.card.title),
+      route: `/products/detail/${item.card.id}`,
     };
 
     return map;
@@ -743,7 +739,7 @@ function toggleApplicationArchive(): void {
 
 
 .section-description {
-  max-width: 1200px;
+  max-width: 980px;
   margin: 0;
   font-size: 1rem;
   line-height: 1.75;
@@ -832,15 +828,6 @@ function toggleApplicationArchive(): void {
 }
 
 
-.delivery-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-bottom: 64px;
-}
-
-
-
 .card-footer-cta {
   margin-top: auto;
   display: flex;
@@ -867,27 +854,21 @@ function toggleApplicationArchive(): void {
 /* --- Dense Industry Grid --- */
 .industry-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px 32px;
 }
 
 .industry-block {
   display: flex;
   flex-direction: column;
-  grid-column: span 4;
   min-height: 100%;
-  padding: 24px 0 22px;
+  padding: 28px 0 24px;
   border-radius: 0;
   background: transparent;
   border: none;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
   cursor: pointer;
   transition: border-color 0.25s ease, color 0.25s ease;
-}
-
-.industry-block:nth-child(4),
-.industry-block:nth-child(5) {
-  grid-column: span 6;
 }
 
 .industry-block:hover {
@@ -1353,22 +1334,19 @@ function toggleApplicationArchive(): void {
 }
 
 .delivery-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 24px;
   margin-bottom: 64px;
 }
 
 .delivery-step {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 20px;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-.delivery-step:last-child {
-  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100%;
+  padding: 20px 0 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .delivery-step .card-index {
@@ -1484,12 +1462,6 @@ function toggleApplicationArchive(): void {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .industry-block,
-  .industry-block:nth-child(4),
-  .industry-block:nth-child(5) {
-    grid-column: auto;
-  }
-
   .hero-panel {
     max-width: none;
     margin-left: 0;
@@ -1505,6 +1477,11 @@ function toggleApplicationArchive(): void {
 
   .hero-stat-label {
     text-align: left;
+  }
+
+  .delivery-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 28px;
   }
 }
 
@@ -1561,9 +1538,8 @@ function toggleApplicationArchive(): void {
   }
 
   .delivery-step {
-    grid-template-columns: 56px minmax(0, 1fr);
     gap: 14px;
-    padding: 16px 0;
+    padding-top: 18px;
   }
 }
 
@@ -1579,13 +1555,17 @@ function toggleApplicationArchive(): void {
   }
 
   .delivery-step {
-    grid-template-columns: 1fr;
     gap: 10px;
   }
 
   .industry-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .delivery-steps {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 }
 

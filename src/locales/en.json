@@ -6,23 +6,12 @@
   "nav": {
     "home": "Home",
     "products": "Product Center",
-    "systemProducts": "System",
-    "multiOSVM": "Multi-OS Embedded VM",
-    "industrialRTOS": "@:common.terms.industrialRealTimeOS",
-    "airos": "AiROS Robot OS",
-    "robotScheduler": "@:common.terms.robotSchedulerSystem",
-    "robotProducts": "Robot",
     "rSeries": "R Series",
     "mSeries": "M Series",
     "mrSeries": "MR Series",
     "embodiedPlatforms": "Embodied & Dev Platforms",
     "controller": "Controller",
     "accessories": "Accessories",
-    "gantry2D": "@:common.terms.gantry23Dof",
-    "scara4Axis": "SCARA 4-Axis Arm",
-    "arm6Axis": "@:common.terms.sixAxisArm",
-    "dualArmHumanoid": "@:common.terms.dualArmHumanoidRobot",
-    "mobileRobot": "@:common.terms.mobileRobot",
     "solutions": "Solutions",
     "support": "Support",
     "download": "@:common.terms.downloads",
@@ -62,29 +51,19 @@
       "industrialAutomation": "Industrial Automation",
       "medicalAutomation": "Medical Automation",
       "semiconductorProcessing": "Semiconductor Processing",
-      "mobileRobot": "Mobile Robot",
       "smartLogistics": "Smart Logistics",
       "industrialControl": "Industrial Control",
       "motionControl": "Motion Control",
       "offlineProgramming": "Offline Programming",
       "autonomousNavigation": "Autonomous Navigation",
       "complexTrajectory": "Complex Paths",
-      "robotProducts": "Robot Products",
-      "systemProducts": "System Products",
       "featuredCase": "Featured case",
       "coreValues": "Core Values",
       "afterSalesService": "After-sales Service",
       "industrySolutions": "Industry Solutions",
       "corporateCulture": "Corporate Culture",
       "automation": "Automation",
-      "industrialRealTimeOS": "Industrial Real-Time OS",
-      "airosRobotOperatingSystem": "AiROS Robot Operating System",
-      "multiOsHybridHypervisor": "Multi-OS Hybrid Deployment Embedded Hypervisor",
-      "robotSchedulerSystem": "Robot Scheduler System",
       "gantry23Dof": "2/3-DOF Gantry",
-      "sixAxisArm": "6-Axis Arm",
-      "dualArmHumanoidRobot": "Dual-Arm Humanoid Robot",
-      "fourAxisScaraRobot": "4-Axis SCARA Robot",
       "surfaceTreatment": "Surface Treatment",
       "precisionAssembly": "Precision Assembly",
       "compositeRobot": "Composite Robot",
@@ -100,9 +79,9 @@
   "home": {
     "hero": {
       "eyebrow": "ZeroAnt Robotics Platform",
-      "title": "In-house robotics platform",
-      "description": "From the products center and industry solutions to delivery support, quickly see how your scenario can land.",
-      "panelLabel": "Featured Product",
+      "title": "Precision Transfer Robot Platform",
+      "description": "Built for precision transfer, compact-space operation, and lift-linked workflows so teams can judge form factor, extension combinations, and delivery paths faster.",
+      "panelLabel": "Product Center",
       "tabs": {
         "scara": "SCARA",
         "humanoid": "Humanoid"
@@ -111,45 +90,45 @@
     "coreProducts": {
       "eyebrow": "Product Matrix",
       "title": "Product Center",
-      "description": "Browse the confirmed product lineup by family and platform before entering the product center for deeper selection.",
+      "description": "Scan R / M / MR, embodied platforms, controller hardware, and accessories first, then go deeper on model-level selection in the product center.",
       "enter": "Enter Product Center",
       "cardAction": "View family",
       "families": {
         "rSeries": {
           "title": "R Series",
-          "description": "Precision arm platforms covering arm-length, lift-column, and 6-axis variants."
+          "description": "For precision transfer and compact-space operation, covering SCARA, 6-axis, lift, and linked configurations."
         },
         "mSeries": {
           "title": "M Series",
-          "description": "Autonomous mobile bases for different payloads and station rhythms."
+          "description": "Autonomous mobile bases covering different payload classes and deployment rhythms."
         },
         "mrSeries": {
           "title": "MR Series",
-          "description": "Integrated mobile-and-arm platforms for cross-area collaborative work."
+          "description": "Integrated mobile, lift, and manipulation platforms for cross-area collaborative work."
         },
         "embodied": {
           "title": "Embodied & Dev Platforms",
-          "description": "VR, master-slave teleoperation, and drawing platforms for embodied AI development."
+          "description": "VR teleoperation, master-slave teleop, and drawing platforms for embodied training, validation, and demos."
         },
         "controller": {
           "title": "Controller",
-          "description": "Integrated control hardware for interfaces, communication, and real-time motion."
+          "description": "Integrated control hardware for real-time motion, bus synchronization, and dense I/O integration."
         },
         "accessories": {
           "title": "Accessories",
-          "description": "Rail, turntable, and mounting variants to extend travel and deployment options."
+          "description": "Rail and rotary-platform modules for extending travel, transfer, and station flexibility."
         }
       }
     },
     "videoCases": {
       "eyebrow": "Case Library",
       "title": "@:common.section.videoCases",
-      "description": "Representative cases that help confirm delivery capability quickly."
+      "description": "Representative videos that make product fit and real-world deployment paths easier to judge."
     },
     "industryApplications": {
       "eyebrow": "Scenario Coverage",
       "title": "@:common.section.industryApplications",
-      "description": "Quickly find the right path for medical, semiconductor, manufacturing, and logistics scenarios.",
+      "description": "Quickly find representative application entry points across semiconductors, biopharma, composite operations, and embodied development.",
       "explore": "View Solution",
       "exploreAll": "Explore All Industry Applications"
     },
@@ -158,128 +137,25 @@
       "title": "Partners"
     }
   },
-  "productPages": {
-    "common": {
-      "overviewEyebrow": "PRODUCT OVERVIEW",
-      "guideEyebrow": "SELECTION GUIDE"
-    },
-    "metrics": {
-      "focus": "Core Focus",
-      "output": "Output Type",
-      "configuration": "Configuration"
-    },
-    "metricValues": {
-      "multiOsVmFocus": "Mixed OS",
-      "multiOsVmOutput": "Edge Platform",
-      "industrialRtosFocus": "Real-time Core",
-      "industrialRtosOutput": "@:common.terms.motionControl",
-      "airosFocus": "Robot OS",
-      "airosOutput": "Control Stack",
-      "robotSchedulerFocus": "Fleet Scheduling",
-      "robotSchedulerOutput": "Cross-device",
-      "gantryConfig": "2 / 3 DOF",
-      "gantryOutput": "Linear Handling",
-      "scaraConfig": "4 Axis",
-      "scaraOutput": "Fast Assembly",
-      "arm6Config": "6 Axis",
-      "arm6Output": "@:common.terms.complexTrajectory",
-      "dualArmConfig": "Dual Arm",
-      "dualArmOutput": "Flexible Tasks",
-      "mobileConfig": "AMR Platform",
-      "mobileOutput": "@:common.terms.smartLogistics"
-    },
-    "system": {
-      "hero": {
-        "eyebrow": "System Product Matrix",
-        "title": "From Control Base to Orchestration",
-        "description": "Built around operating systems, real-time control, hybrid deployment, and multi-robot scheduling for a clear system portfolio."
-      },
-      "metrics": {
-        "countValue": "04",
-        "countLabel": "System Products",
-        "capabilityValue": "OS / RTOS",
-        "capabilityLabel": "Core Capabilities",
-        "deliveryValue": "Platform Integration",
-        "deliveryLabel": "Delivery Mode"
-      },
-      "overview": {
-        "title": "Start with the base, then check coordination boundaries",
-        "description": "The system page keeps only the key capability path so users can quickly judge whether control, runtime, deployment, and orchestration needs match."
-      },
-      "guide": {
-        "title": "System Selection Path",
-        "items": {
-          "foundation": {
-            "title": "Start with the control base",
-            "description": "If you need a unified robot runtime, start with AiROS and the industrial real-time OS."
-          },
-          "runtime": {
-            "title": "Then check deployment",
-            "description": "For mixed operating systems and resource isolation, start with the multi-OS deployment route."
-          },
-          "orchestration": {
-            "title": "Finish with orchestration",
-            "description": "For multi-robot linkage and factory-level collaboration, focus on scheduling and interface capabilities."
-          }
-        }
-      }
-    },
-    "robot": {
-      "hero": {
-        "eyebrow": "Robot Product Matrix",
-        "title": "From Execution Form to Application Fit",
-        "description": "Covers arms, dual-arm collaboration, mobile execution, and gantry platforms in one robot capability matrix."
-      },
-      "metrics": {
-        "countValue": "05",
-        "countLabel": "Robot Products",
-        "coverageValue": "Arms / AMR",
-        "coverageLabel": "Form Factors",
-        "scenarioValue": "Assembly / Handling",
-        "scenarioLabel": "Key Scenarios"
-      },
-      "overview": {
-        "title": "Start with execution form, then check scenario fit",
-        "description": "First judge what the robot can do, then move into specific models and typical scenarios to reduce selection friction."
-      },
-      "guide": {
-        "title": "Robot Selection Path",
-        "items": {
-          "assembly": {
-            "title": "Precision assembly",
-            "description": "For fast pick-and-place, sorting, and assembly, start with the 4-axis arm and gantry platform."
-          },
-          "complex": {
-            "title": "Complex work",
-            "description": "For multi-pose motion, welding, spraying, or complex path control, focus on the 6-axis arm and dual-arm options."
-          },
-          "mobile": {
-            "title": "Mobile execution",
-            "description": "For cross-station transport, in-factory delivery, or compound tasks, start with the mobile robot."
-          }
-        }
-      }
-    }
-  },
   "solutionsPage": {
     "title": "@:common.terms.industrySolutions",
-    "subtitle": "Built for high-reliability industries on a robotics backbone with scenario delivery capability.",
+    "subtitle": "Built around confirmed robot bodies, controller hardware, and expansion modules, focused on precision workcells, mobile collaboration, and embodied development.",
     "videoCases": "@:common.section.videoCases",
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "@:common.terms.industrySolutions",
-      "title": "Robotics and intelligent system solutions for high-reliability applications",
-      "description": "Built on AiROS, real-time control, orchestration and flexible deployment, ZeroAnt covers medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
-      "primaryCta": "Explore Industry Solutions",
+      "title": "Three solution directions built from the current product lineup",
+      "description": "Using the R / M / MR families, embodied platforms, controller hardware, and accessories as building blocks, ZeroAnt now focuses on precision workcells, mobile collaboration, and embodied development validation.",
+      "primaryCta": "Explore Solution Directions",
       "secondaryCta": "View Delivery",
       "stats": {
         "industry": {
-          "value": "05",
-          "label": "Core industry verticals"
+          "value": "03",
+          "label": "Core solution directions"
         },
         "backbone": {
           "value": "04",
-          "label": "System backbone"
+          "label": "Product stack"
         },
         "delivery": {
           "value": "01",
@@ -288,88 +164,70 @@
       }
     },
     "nav": {
-      "backbone": "Backbone",
-      "industries": "Industries",
+      "backbone": "Stack",
+      "industries": "Directions",
       "proof": "Proof",
       "delivery": "@:common.terms.delivery"
     },
     "backbone": {
       "eyebrow": "Capability Backbone",
-      "title": "Capability backbone from robot execution to system deployment",
-      "description": "Industry solutions are not assembled from isolated devices. They are supported jointly by execution platforms, real-time control, scheduling coordination and deployment validation.",
-      "execution": {
-        "title": "Execution layer",
-        "description": "Covers 4-axis, 6-axis, dual-arm, mobile robots and gantry structures for transport, assembly, polishing and inspection tasks."
+      "title": "A solution stack organized around current products",
+      "description": "Start from the product combination that can actually ship, then explain the capability boundary. Arms, mobile bases, embodied platforms, controller hardware, and accessories form one clear solution stack.",
+      "precisionExecution": {
+        "title": "Precision execution",
+        "description": "Built on the R family and 6-axis forms for high-speed pick-and-place, precision assembly, loading, and surface-treatment cells."
       },
-      "control": {
-        "title": "Control and real-time layer",
-        "description": "Built around AiROS and an industrial RTOS to support precise control, complex trajectories and stable operation."
+      "mobileExecution": {
+        "title": "Mobile collaboration",
+        "description": "Built on the M / MR families for in-factory transport, cross-station linkage, and mobile manipulation instead of isolated workstations."
       },
-      "scheduling": {
-        "title": "Scheduling and coordination layer",
-        "description": "Links mobile platforms, robotic arms and production tasks into one complete workflow through multi-robot scheduling and cross-device coordination."
+      "embodiedDevelopment": {
+        "title": "Embodied development",
+        "description": "Built on MR3T, VR / master-slave teleoperation platforms, and the drawing platform for training, teleop validation, and demos."
       },
-      "deployment": {
-        "title": "Simulation and deployment layer",
-        "description": "Uses mixed-OS deployment, offline programming and pre-validation to reduce on-site retrofit costs and shorten delivery cycles."
+      "controlExpansion": {
+        "title": "Control and expansion",
+        "description": "Built on ZA-ZG100, rail, and rotating platform modules to extend real-time control, interface density, and deployment form."
       }
     },
     "industries": {
       "eyebrow": "Industry Matrix",
-      "title": "Five key industry directions",
-      "description": "Scattered applications are consolidated into clear industry entry points so users can locate scenarios, solutions and cases faster.",
+      "title": "Three focused solution directions",
+      "description": "Current products are consolidated into 3 clear entry points so users can choose the direction first, then move into representative applications and combinations.",
       "applicationEntry": "Featured application",
       "viewApplication": "View related applications",
-      "medical": {
-        "title": "Medical & Life Science",
-        "summary": "Built for sample handling, tube loading and pharmaceutical automation where precision, safety and traceability matter.",
-        "scenarios": [
-          "Medical automation",
-          "Pharmaceutical automation",
-          "Laboratory workflow automation"
-        ]
-      },
-      "precision": {
-        "title": "Semiconductor & Precision Manufacturing",
-        "summary": "Designed for wafer transfer, precision assembly and surface treatment with stable takt time and high-precision control.",
+      "precisionWorkcell": {
+        "title": "Precision Workcells",
+        "summary": "For semiconductor, precision assembly, and surface-treatment stations where takt stability, positioning accuracy, and workstation integration matter.",
         "scenarios": [
           "Semiconductor processing",
           "Precision assembly",
           "Surface treatment"
         ]
       },
-      "manufacturing": {
-        "title": "Smart Manufacturing & Flexible Lines",
-        "summary": "For multi-process and multi-device manufacturing environments that need flexible switching, collaboration and platformized control.",
+      "mobileCollaboration": {
+        "title": "Mobile Collaboration",
+        "summary": "For in-factory transport, cross-station transfer, and composite robotic work where navigation stability, task switching, and runtime reliability matter.",
         "scenarios": [
-          "Smart manufacturing",
           "Composite systems",
-          "AI robotics"
-        ]
-      },
-      "logistics": {
-        "title": "Logistics & Inspection Operations",
-        "summary": "Covers in-factory logistics, mobile navigation and all-weather inspection with strong scheduling efficiency and stable delivery.",
-        "scenarios": [
           "Smart logistics",
-          "Intelligent navigation",
-          "Intelligent patrol and security"
+          "Intelligent navigation"
         ]
       },
-      "research": {
-        "title": "Research & Innovation Lab",
-        "summary": "Supports agricultural research, innovation experiments and edge validation scenarios with openness, rapid verification and continuous iteration.",
+      "embodiedDevelopment": {
+        "title": "Embodied Development & Validation",
+        "summary": "For dual-arm operation, teleoperation training, and research validation with emphasis on openness, fast iteration, and closed-loop experimentation.",
         "scenarios": [
+          "AI robotics",
           "Agricultural research automation",
-          "Cultural and creative intelligent manufacturing",
-          "Industrial gateway and edge computing"
+          "Creative manufacturing"
         ]
       }
     },
     "proof": {
       "eyebrow": "Featured Proof",
       "title": "A few cases are enough to prove delivery capability",
-      "description": "Selected representative cases show how ZeroAnt delivers across industries in practice.",
+      "description": "Three representative cases are enough to explain how the current product lineup turns into real delivery.",
       "watchCase": "View case details",
       "guide": "Start with 3 representative video cases, then expand the full video archive and industry application index as needed.",
       "expandVideos": "View all video cases ({count})",
@@ -383,7 +241,7 @@
     "more": {
       "eyebrow": "More",
       "title": "More video cases and industry applications",
-      "description": "Explore more verified ZeroAnt deployments across industries and complex scenarios.",
+      "description": "Browse more verified ZeroAnt deployments across additional real-world scenarios.",
       "videos": "View more video cases",
       "applications": "More industry applications",
       "videoGuide": "Showing {visible} representative videos first. Expand to browse all {total} cases.",
@@ -395,17 +253,17 @@
     "delivery": {
       "eyebrow": "@:common.terms.delivery",
       "title": "A delivery loop from discovery to phased rollout",
-      "description": "The page should not only show directions. It should also clarify how ZeroAnt delivers: understand the scenario, design the solution, validate in advance and then deploy.",
-      "contactTitle": "Let the team match the right solution faster",
-      "contactDescription": "If your scenario is already clear, contact the team directly. We can quickly provide suggestions based on industry characteristics, equipment conditions and delivery rhythm.",
+      "description": "Clarify the work direction first, then combine the body, controller, and expansion modules, validate early, and roll out in phases with fewer on-site iterations.",
+      "contactTitle": "Let the team match the right combination faster",
+      "contactDescription": "If the direction is already clear, contact the team directly. We can quickly recommend a combination based on workstation type, takt demand, and deployment conditions.",
       "steps": {
         "discovery": {
           "title": "Scenario Discovery",
-          "description": "Clarify business goals, workstation constraints, takt time and key risks."
+          "description": "Clarify the task target, space constraints, payload range, and takt requirements."
         },
         "design": {
           "title": "Solution Design",
-          "description": "Combine product platforms, accessories, and integration approaches according to the industry."
+          "description": "Combine the body, controller, and expansion modules around the chosen direction, then confirm interface boundaries."
         },
         "verify": {
           "title": "Pre-validation",
@@ -758,53 +616,6 @@
       "typicalApplications": "Industrial gateway virtualization, edge computing devices, heterogeneous system unified management, smart grids, smart cities"
     }
   },
-  "products": {
-    "multiOsVm": {
-      "name": "@:common.terms.multiOsHybridHypervisor",
-      "desc": "Supports parallel operation of multiple operating systems for heterogeneous deployment across controllers and edge devices, balancing control isolation, resource utilization, and system coordination on the same hardware base with room for future expansion and unified management.",
-      "supportText": "Fit for heterogeneous deployment across controllers, industrial gateways, and edge computing devices."
-    },
-    "airos": {
-      "name": "@:common.terms.airosRobotOperatingSystem",
-      "desc": "An integrated operating system for robot bodies and control platforms, connecting low-level control, upper-layer applications, and future expansion to make deployment faster and evolution easier.",
-      "supportText": "Fit for a unified software foundation across robot bodies, control platforms, and upper-layer applications."
-    },
-    "industrialRtos": {
-      "name": "@:common.terms.industrialRealTimeOS",
-      "desc": "A real-time operating system for industrial control that keeps critical tasks running stably while meeting the determinism and reliability requirements of field equipment, suitable for long-term online operation and dependable delivery.",
-      "supportText": "Fit for high-reliability motion control, field equipment, and critical runtime scenarios."
-    },
-    "robotScheduler": {
-      "name": "@:common.terms.robotSchedulerSystem",
-      "desc": "A unified scheduling system for multi-brand mobile robots, enabling cross-device collaboration for factory logistics and multi-robot coordination while improving task allocation and on-site dispatch efficiency.",
-      "supportText": "Fit for multi-robot collaboration, cross-device linkage, and factory-level orchestration scenarios."
-    },
-    "gantry2d": {
-      "name": "@:common.terms.gantry23Dof",
-      "desc": "A gantry platform for linear transfer and large-area positioning, suited to industrial tasks such as loading, unloading, handling, and precision positioning with clear takt demands, emphasizing stability and repeatability.",
-      "supportText": "Fit for linear transfer, loading and unloading, and precision positioning over larger working ranges."
-    },
-    "scara4axis": {
-      "name": "@:common.terms.fourAxisScaraRobot",
-      "desc": "A compact 4-axis robotic arm for high-speed assembly and sorting, ideal for space-constrained stations with demanding cycle times while balancing fast pick-and-place with stable operation.",
-      "supportText": "Fit for fast assembly, sorting, pick-and-place, and takt-driven industrial workstations."
-    },
-    "arm6axis": {
-      "name": "@:common.terms.sixAxisArm",
-      "desc": "Supports complex trajectory control for welding, spraying, and assembly, covering more flexible multi-pose work and scenarios that require continuous paths and frequent process changes.",
-      "supportText": "Fit for welding, grinding, spraying, and richer multi-posture trajectory tasks."
-    },
-    "dualArmHumanoid": {
-      "name": "@:common.terms.dualArmHumanoidRobot",
-      "desc": "An execution platform for dual-arm collaboration and highly flexible tasks, suited to dexterous manipulation, compound processes, and multimodal interaction with support for more complex human-robot cooperation.",
-      "supportText": "Fit for dual-arm collaboration, dexterous manipulation, and highly flexible compound processes."
-    },
-    "mobileRobot": {
-      "name": "@:common.terms.mobileRobot",
-      "desc": "A mobile robot that combines navigation, scheduling, and handling capabilities, ideal for in-factory logistics, cross-station transfer, and compound tasks with multi-robot collaboration and on-site dispatch.",
-      "supportText": "Fit for factory logistics, cross-station transport, and compound task scheduling."
-    }
-  },
   "careers": {
     "heroTitle": "Join ZeroAnt Technology",
     "heroSubtitle": "Join a cross-disciplinary hardware and software team working on real robotics platforms, control systems and full-system delivery.",
@@ -950,9 +761,9 @@
       "keywords": "ZeroAnt Technology, products center, R-series arm, M-series mobile base, MR-series composite robot, embodied platform, controller, accessories, SCARA robot, 6-axis arm, dual-arm robot, AGV base, automation equipment"
     },
     "solutions": {
-      "title": "Solutions - ZeroAnt Technology Industry Expert",
-      "description": "ZeroAnt Technology provides smart manufacturing solutions for medical automation, semiconductor processing, precision manufacturing and other industries. Based on AiROS robotic operating system, integrating machine vision, force control technology, path planning and other core technologies, we offer one-stop automation services from production line design to system integration, helping enterprises achieve digital transformation and upgrading.",
-      "keywords": "smart manufacturing solutions, automation solutions, robot system integration, medical automation, semiconductor automation, precision manufacturing, production line automation, AiROS operating system, machine vision, force control technology, path planning, digital transformation, Industry 4.0, flexible manufacturing, unmanned factory, smart production line, automation system integrator"
+      "title": "Solutions - ZeroAnt Technology",
+      "description": "Built around the R / M / MR families, embodied platforms, ZA-ZG100 controller hardware, and accessories, ZeroAnt now offers three focused solution directions: precision workcells, mobile collaboration, and embodied development validation.",
+      "keywords": "ZeroAnt solutions, precision workcells, mobile collaboration, embodied development platform, R series robotic arm, M series mobile base, MR composite robot, ZA-ZG100 controller, teleoperation platform, automation integration"
     },
     "support": {
       "title": "Technical Support - ZeroAnt Technology Professional Team",
@@ -971,17 +782,17 @@
     },
     "structuredData": {
       "solutions": {
-        "medical": {
-          "name": "Medical Automation Solutions",
-          "description": "Comprehensive automation solutions for medical device manufacturing and laboratory automation"
+        "precisionWorkcell": {
+          "name": "Precision Workcell Solutions",
+          "description": "High-precision automation solutions for semiconductor, assembly, and surface-treatment stations"
         },
-        "semiconductor": {
-          "name": "Semiconductor Processing Solutions",
-          "description": "High-precision automation solutions for semiconductor manufacturing processes"
+        "mobileCollaboration": {
+          "name": "Mobile Collaboration Solutions",
+          "description": "Mobile collaboration solutions for in-factory transport, cross-station transfer, and composite robotic work"
         },
-        "smartManufacturing": {
-          "name": "Smart Manufacturing Solutions",
-          "description": "End-to-end smart manufacturing solutions with AI and robotics integration"
+        "embodiedDevelopment": {
+          "name": "Embodied Development Solutions",
+          "description": "Embodied platforms for dual-arm operation, teleoperation training, and research validation"
         }
       },
       "careers": {

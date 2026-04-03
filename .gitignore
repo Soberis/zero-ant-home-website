@@ -39,4 +39,5 @@ output/
 skills-lock.json
 .agents/
 
-/参数
+docs/
+参数/

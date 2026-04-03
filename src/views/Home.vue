@@ -56,7 +56,7 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 .home-section {
   position: relative;
   overflow: hidden;
-  border-top: 1px solid rgba(15, 23, 42, 0.05);
+  border-top: 1px solid rgba(15, 23, 42, 0.03);
 }
 
 .home-section--products {

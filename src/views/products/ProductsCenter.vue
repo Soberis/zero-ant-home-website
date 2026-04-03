@@ -21,10 +21,10 @@
     >
       <div class="product-family__header">
         <div>
-          <span class="product-family__eyebrow">{{ pageCopy.familyLabel }}</span>
+          <span v-if="pageCopy.familyLabel" class="product-family__eyebrow">{{ pageCopy.familyLabel }}</span>
           <h2 class="product-family__title">{{ family.title }}</h2>
+          <p class="product-family__intro">{{ family.intro }}</p>
         </div>
-        <p class="product-family__intro">{{ family.intro }}</p>
       </div>
 
       <div class="product-family__grid">
@@ -42,11 +42,27 @@
             <h3 class="product-card__title">{{ card.title }}</h3>
             <p class="product-card__summary">{{ card.summary }}</p>
 
-            <ul class="product-card__specs">
-              <li v-for="spec in card.specs" :key="spec">{{ spec }}</li>
-            </ul>
+            <div class="product-card__spec-block">
+              <span class="product-card__spec-label">{{ pageCopy.specLabel }}</span>
+              <ul class="product-card__specs">
+                <li v-for="spec in card.primarySpecs" :key="spec">{{ spec }}</li>
+              </ul>
+            </div>
 
-            <p v-if="card.note" class="product-card__note">{{ card.note }}</p>
+            <p v-if="card.secondarySpec" class="product-card__secondary-spec">
+              {{ card.secondarySpec }}
+            </p>
+
+            <p v-if="card.note" class="product-card__note">
+              <span class="product-card__note-label">{{ pageCopy.tipLabel }}</span>
+              {{ card.note }}
+            </p>
+
+            <div class="product-card__actions">
+              <router-link class="btn btn-secondary product-card__detail-link" :to="`/products/detail/${card.id}`">
+                {{ pageCopy.detailAction }}
+              </router-link>
+            </div>
           </div>
         </article>
       </div>
@@ -89,14 +105,17 @@ const pageCopy = computed(() => {
   const isEn = locale.value === "en";
 
   return {
-    familyLabel: isEn ? "Product Family" : "产品家族",
+    familyLabel: "",
+    specLabel: isEn ? "Key Specs" : "重点参数",
+    tipLabel: isEn ? "Selection Tip" : "选型提示",
     ctaEyebrow: isEn ? "Selection Support" : "选型支持",
-    ctaTitle: isEn ? "Need a confirmed configuration path?" : "需要确认具体组合方案？",
+    ctaTitle: isEn ? "Need a confirmed product combination?" : "需要确认具体组合路径？",
     ctaDescription: isEn
-      ? "Start with the product center, then move to support or solutions to confirm model, accessory, and deployment combinations."
-      : "先用产品中心完成第一轮筛选，再进入支持或解决方案确认型号、扩展机构和部署组合。",
+      ? "Finish the first pass in the product center, then confirm model, controller, and accessory combinations with the team."
+      : "先在产品中心完成第一轮筛选，再和团队确认型号、控制器与扩展机构的组合关系。",
     contactAction: isEn ? "Contact Team" : "联系团队",
     solutionAction: isEn ? "View Solutions" : "查看解决方案",
+    detailAction: isEn ? "View Details" : "查看详情",
   };
 });
 
@@ -110,7 +129,8 @@ const families = computed(() =>
       image: card.image,
       title: resolveText(card.title),
       summary: resolveText(card.summary),
-      specs: card.specs.map(resolveText),
+      primarySpecs: card.specs.slice(0, 3).map(resolveText),
+      secondarySpec: card.specs[3] ? resolveText(card.specs[3]) : "",
       note: card.note ? resolveText(card.note) : "",
     })),
   }))
@@ -121,13 +141,13 @@ const pageContent = computed(() => {
 
   return {
     theme: "robot" as const,
-    eyebrow: isEn ? "Product Center" : "产品中心",
+    eyebrow: "Product Center",
     title: isEn
-      ? "Browse confirmed products by family, form factor, and accessory logic."
-      : "按家族、形态和扩展逻辑浏览已确认产品。",
+      ? "Start with family. Confirm the combination next."
+      : "先看系列，再定组合，再进型号。",
     description: isEn
-      ? "This page only uses the confirmed products from image/product. Parameter summaries follow the PPT and parameter files already aligned in docs."
-      : "当前页面只使用 image/product 中已确认的产品，参数摘要按 docs 已对齐的 PPT 与参数文件整理，不补猜测数据。",
+      ? "Only confirmed products and the most important differences stay on the page, so the first round of selection is faster."
+      : "页面只保留已确认产品和最关键差异，帮助更快完成第一轮筛选。",
     actions: [
       {
         label: isEn ? "Contact Team" : "联系团队",
@@ -143,44 +163,44 @@ const pageContent = computed(() => {
     metrics: [
       {
         value: "06",
-        label: isEn ? "Product families" : "产品家族",
+        label: isEn ? "Sections" : "展示分区",
       },
       {
         value: "16",
         label: isEn ? "Confirmed items" : "已确认展示项",
       },
       {
-        value: "02",
-        label: isEn ? "Key grouped-model rules" : "关键组合差异规则",
+        value: "03",
+        label: isEn ? "Key selection differences" : "关键选型差异",
       },
     ],
-    overviewEyebrow: isEn ? "Source Alignment" : "资料口径",
+    overviewEyebrow: "",
     overviewTitle: isEn
-      ? "Selection starts with family, then grouped-model differences."
-      : "先看系列，再看组合型号差异，再判断扩展适配。",
+      ? "Filter by section first. Compare the differences next."
+      : "先分区，再看组合差异。",
     overviewDescription: isEn
-      ? "ZA-R3 / ZA-R3X is grouped by arm length, while ZA-R3L / ZA-R3M / ZA-R3H is grouped by column height and Z-axis travel. Accessories stay in a separate zone instead of mixing with robot bodies."
-      : "ZA-R3 / ZA-R3X 按臂长做组合对比，ZA-R3L / ZA-R3M / ZA-R3H 按立柱高度与 Z 轴行程做组合对比；扩展机构单独成区，不与本体混排。",
-    guideEyebrow: isEn ? "Selection Guide" : "筛选原则",
-    guideTitle: isEn ? "Use the product center as the first-pass filter." : "把产品中心当成第一轮筛选入口。",
+      ? "Start from R / M / MR, embodied and development platforms, controller, and accessories, then compare grouped-model differences. Accessories are reviewed separately through rail and rotating platform."
+      : "先看 R / M / MR、具身与开发平台、控制器与扩展机构，再比较组合型号差异；扩展机构单独看地轨和旋转平台。",
+    guideEyebrow: "",
+    guideTitle: isEn ? "Three checks before going deeper." : "先做三步判断。",
     guideItems: [
       {
-        title: isEn ? "Filter by family first" : "先按家族筛选",
+        title: isEn ? "Filter by section first" : "先按分区筛选",
         description: isEn
-          ? "Start from R, M, MR, embodied platforms, controller, and accessories before looking at model details."
-          : "先确定 R、M、MR、具身平台、控制器、扩展机构的归属，再进入具体型号。",
+          ? "Start from R, M, MR, embodied and development platforms, controller, and accessories before opening model detail."
+          : "先确定 R、M、MR、具身与开发平台、控制器、扩展机构的归属，再看具体型号。",
       },
       {
-        title: isEn ? "Compare grouped models by explicit difference" : "组合型号按明确差异比较",
+        title: isEn ? "Compare grouped models by explicit difference" : "组合型号按差异比较",
         description: isEn
-          ? "ZA-R3 / ZA-R3X compares arm length directly; ZA-R3L / ZA-R3M / ZA-R3H compares column height and Z travel directly."
-          : "ZA-R3 / ZA-R3X 直接比较臂长，ZA-R3L / ZA-R3M / ZA-R3H 直接比较立柱高度与 Z 轴行程。",
+          ? "ZA-R3 / ZA-R3X compares SCARA arm length directly, while ZA-R3L / ZA-R3M / ZA-R3H compares column height and Z travel."
+          : "ZA-R3 / ZA-R3X 直接比较 SCARA 臂长，ZA-R3L / ZA-R3M / ZA-R3H 直接比较立柱高度和 Z 轴行程。",
       },
       {
-        title: isEn ? "Keep accessories separate" : "扩展机构单独判断适配",
+        title: isEn ? "Match accessories after the body" : "扩展机构放在本体之后匹配",
         description: isEn
-          ? "Rail, rotating platform, and mounting variants extend deployment options and should be selected after the main body."
-          : "地轨、旋转平台与安装形态用于补足部署能力，应在本体筛选后单独判断适配关系。",
+          ? "Rail and rotating platform stay as standalone accessories and are matched after the robot body is confirmed."
+          : "地轨和旋转平台作为独立扩展机构单独判断，在本体确认后再匹配。",
       },
     ],
   };
@@ -192,53 +212,49 @@ const pageContent = computed(() => {
   position: sticky;
   top: calc(var(--nav-height) + 12px);
   z-index: 10;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .product-center-filter__inner {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
+  gap: 10px 18px;
+  padding: 12px 0;
+  background: transparent;
 }
 
 .product-center-filter__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 0 16px;
-  color: #344054;
-  font-size: 0.92rem;
-  font-weight: 500;
-  background: rgba(15, 23, 42, 0.03);
-  transition: background 0.25s ease, color 0.25s ease;
+  min-height: 36px;
+  padding: 0 4px;
+  color: #475467;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: border-color 0.25s ease, color 0.25s ease;
 }
 
 .product-center-filter__link:hover {
   color: var(--color-primary);
-  background: rgba(26, 58, 143, 0.08);
+  border-bottom-color: rgba(26, 58, 143, 0.35);
 }
 
 .product-family {
-  padding-top: 20px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding-top: 12px;
   scroll-margin-top: calc(var(--nav-height) + 96px);
 }
 
 .product-family + .product-family {
-  margin-top: 40px;
+  margin-top: 52px;
 }
 
 .product-family__header {
-  display: grid;
-  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
-  gap: 28px;
-  align-items: start;
-  margin-bottom: 24px;
+  display: block;
+  margin-bottom: 28px;
 }
 
 .product-family__eyebrow {
@@ -252,29 +268,32 @@ const pageContent = computed(() => {
 
 .product-family__title {
   margin: 12px 0 0;
-  font-size: clamp(1.5rem, 2vw, 1.9rem);
+  font-size: clamp(1.7rem, 2.3vw, 2.15rem);
+  letter-spacing: -0.03em;
 }
 
 .product-family__intro {
-  margin: 0;
-  max-width: 56rem;
+  margin: 12px 0 0;
+  max-width: 40rem;
   color: var(--color-text-secondary);
-  line-height: 1.8;
+  font-size: 0.98rem;
+  line-height: 1.75;
 }
 
 .product-family__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 28px 32px;
 }
 
 .product-card {
   display: grid;
-  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1fr);
-  gap: 24px;
-  padding: 24px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: linear-gradient(180deg, rgba(248, 250, 252, 0.88) 0%, #fff 100%);
+  grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1fr);
+  gap: 28px;
+  padding: 28px 0;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  border-width: 1px 0 0;
+  background: transparent;
   scroll-margin-top: calc(var(--nav-height) + 96px);
 }
 
@@ -282,34 +301,58 @@ const pageContent = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 220px;
-  padding: 8px 0;
+  min-height: 236px;
+  padding: 10px 0;
   background: radial-gradient(circle at top, rgba(26, 58, 143, 0.05), rgba(26, 58, 143, 0));
 }
 
 .product-card__image {
   width: auto;
   max-width: 100%;
-  height: 200px;
+  height: 214px;
   object-fit: contain;
 }
 
 .product-card__body {
   display: grid;
   align-content: start;
-  gap: 12px;
+  gap: 14px;
+}
+
+.product-card__actions {
+  margin-top: 8px;
+}
+
+.product-card__detail-link {
+  width: fit-content;
 }
 
 .product-card__title {
   margin: 0;
-  font-size: 1.4rem;
-  line-height: 1.2;
+  font-size: 1.46rem;
+  line-height: 1.16;
+  letter-spacing: -0.025em;
 }
 
 .product-card__summary {
   margin: 0;
   color: var(--color-text-secondary);
-  line-height: 1.8;
+  line-height: 1.7;
+  max-width: 24em;
+}
+
+.product-card__spec-block {
+  display: grid;
+  gap: 10px;
+}
+
+.product-card__spec-label {
+  display: inline-flex;
+  color: #667085;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .product-card__specs {
@@ -317,14 +360,16 @@ const pageContent = computed(() => {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 
 .product-card__specs li {
   position: relative;
   padding-left: 14px;
   color: #344054;
-  line-height: 1.7;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.65;
 }
 
 .product-card__specs li::before {
@@ -338,13 +383,23 @@ const pageContent = computed(() => {
   border-radius: 50%;
 }
 
+.product-card__secondary-spec {
+  margin: 0;
+  color: #667085;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
 .product-card__note {
-  margin: 4px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin: 0;
   color: var(--color-primary);
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.product-card__note-label {
+  margin-right: 8px;
+  font-weight: 600;
 }
 
 .product-center-cta {
@@ -352,9 +407,8 @@ const pageContent = computed(() => {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 24px 32px;
-  margin-top: 40px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 56px;
+  padding-top: 8px;
 }
 
 .product-center-cta__copy {
@@ -387,6 +441,13 @@ const pageContent = computed(() => {
   align-items: center;
 }
 
+@media (min-width: 1360px) {
+  .product-family__intro {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 1180px) {
   .product-family__grid {
     grid-template-columns: 1fr;
@@ -398,13 +459,9 @@ const pageContent = computed(() => {
     top: calc(var(--nav-height) + 8px);
   }
 
-  .product-family__header {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
   .product-card {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -415,12 +472,12 @@ const pageContent = computed(() => {
 
   .product-center-filter__inner {
     gap: 8px;
-    padding: 10px;
+    padding: 10px 0;
   }
 
   .product-center-filter__link {
     min-height: 36px;
-    padding: 0 12px;
+    padding: 0 8px;
     font-size: 0.86rem;
   }
 
@@ -429,16 +486,16 @@ const pageContent = computed(() => {
   }
 
   .product-card {
-    padding: 18px;
+    padding: 18px 0;
     gap: 18px;
   }
 
   .product-card__visual {
-    min-height: 176px;
+    min-height: 184px;
   }
 
   .product-card__image {
-    height: 156px;
+    height: 164px;
   }
 
   .product-center-cta__actions {

@@ -202,7 +202,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   width: 100%;
   max-width: 260px;
   margin-left: 0;
-  padding: 24px 0 0;
+  padding: 18px 0 0;
   border-left: none;
   border-radius: 0;
   background: transparent;
@@ -304,7 +304,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__metrics {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 20px;
   width: 100%;
   margin-top: 0;
   padding-bottom: 0;
@@ -316,11 +316,12 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   flex-direction: column;
   gap: 6px;
   position: relative;
-  padding: 18px 0;
+  padding: 0;
 }
 
 .products-hero__metric + .products-hero__metric {
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  padding-top: 20px;
 }
 
 .products-hero__metric-value {
@@ -336,6 +337,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   font-size: clamp(2.1rem, 3vw, 2.9rem);
   line-height: 1;
   letter-spacing: -0.04em;
+  color: var(--products-title); /* 改回深色，保持全站一致 */
 }
 
 .products-hero__metric--text .products-hero__metric-value {
@@ -353,12 +355,20 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   .products-hero__description {
     white-space: nowrap;
   }
+
+  .products-overview__header {
+    max-width: none;
+  }
+
+  .products-overview__description {
+    white-space: nowrap;
+  }
 }
 
 .products-overview {
-  margin-top: 28px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 32px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06); /* 增加顶部横线 */
 }
 
 .products-guide__item {
@@ -381,7 +391,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-main {
-  margin-top: 24px;
+  margin-top: 28px;
 }
 
 .products-main__inner {
@@ -391,32 +401,32 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-guide {
-  margin-top: 28px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 56px;
+  padding: 56px 0 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.06); /* 增加顶部横线 */
 }
 
 .products-guide__header {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .products-guide__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+  gap: 40px;
 }
 
 .products-guide__item {
+  position: relative;
   padding: 0;
   border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .products-guide__item + .products-guide__item {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
   border-left: 1px solid rgba(15, 23, 42, 0.06);
-  padding-left: 24px;
+  padding-left: 40px;
 }
 
 .products-guide__item-title {
@@ -444,41 +454,30 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
     max-width: none;
     margin-left: 0;
   }
-}
-
-@media (max-width: 900px) {
-  .products-hero__panel {
-    padding: 16px 0 0;
-    border-left: none;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-  }
-
-  .products-hero__metrics {
-    gap: 0;
-  }
-
-  .products-guide__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .products-hero__metric {
-    padding: 14px 0;
-  }
-
-  .products-hero__metric + .products-hero__metric {
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-  }
-  
-  .products-guide__grid {
-    gap: 0;
-  }
 
   .products-guide__item + .products-guide__item {
     border-left: none;
     padding-left: 0;
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+}
+
+@media (max-width: 900px) {
+  .products-hero__panel {
+    padding: 18px 0 0;
+  }
+
+  .products-guide__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .products-hero__metric {
+    padding: 0;
+  }
+
+  .products-guide__item + .products-guide__item {
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    padding-top: 24px;
   }
 }
 
@@ -500,8 +499,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   }
 
   .products-overview {
-    margin-top: 26px;
-    padding-top: 24px;
+    margin-top: 24px;
   }
 
   .products-guide__item {

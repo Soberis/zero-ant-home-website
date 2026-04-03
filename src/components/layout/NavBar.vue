@@ -188,10 +188,7 @@ function handleBackgroundClick(event: Event): void {
 const { locale } = useI18n();
 
 function isProductDetailRoute() {
-  return (
-    route.name === "SystemProductDetail" ||
-    route.name === "RobotProductDetail"
-  );
+  return route.name === "ProductDetail";
 }
 
 function persistLanguagePreference(language: "zh" | "en"): void {

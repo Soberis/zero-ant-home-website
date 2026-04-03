@@ -1,51 +1,49 @@
-// 产品详情数据模块，包含所有产品的详细信息，按slug索引
-// 注意：此文件现在主要用于类型定义，实际数据通过国际化文件提供
+// 产品详情数据模块，包含当前产品中心详情页使用的类型和工具方法
 
-import type { 
-  ProductDetail, 
-  ProductCase, 
-  ProductParam, 
-  ProductDownload,
-  ProductSlug 
-} from "@/types";
+export interface ProductCase {
+  title: string;
+  desc: string;
+}
 
-// 重新导出类型供其他模块使用
-export type { ProductDetail, ProductCase, ProductParam, ProductDownload };
+export interface ProductParam {
+  key: string;
+  value: string;
+}
 
-/**
- * 产品详情页 slug 到 i18n key 的映射
- * 统一管理，避免在多个组件中重复维护同一份映射表
- */
-export const PRODUCT_I18N_KEY_MAP: Record<ProductSlug, string> = {
-  "multi-os-vm": "multiOsVm",
-  "industrial-rtos": "industrialRtos",
-  "airos": "airos",
-  "robot-scheduler": "robotScheduler",
-  "gantry-2d": "gantry2d",
-  "scara-4axis": "scara4axis",
-  "arm-6axis": "arm6axis",
-  "dual-arm-humanoid": "dualArmHumanoid",
-  "mobile-robot": "mobileRobot",
-};
+export interface ProductDownload {
+  name: string;
+  url: string;
+}
+
+export interface ProductDetail {
+  title: string;
+  desc: string;
+  image?: string;
+  features: string[];
+  cases: ProductCase[];
+  scenes: string[];
+  params: ProductParam[];
+  downloads: ProductDownload[];
+}
 
 /**
  * 将产品 slug 转换为 i18n key
  */
 export function slugToI18nKey(slug: string): string {
-  return PRODUCT_I18N_KEY_MAP[slug as ProductSlug] || slug;
+  return slug;
 }
 
 /**
  * 产品详情数据类型
  */
-export type ProductDetailsData = Record<ProductSlug, ProductDetail>;
+export type ProductDetailsData = Record<string, ProductDetail>;
 
 /**
  * 获取产品详情的工具函数
  * 现在通过国际化系统获取数据，而不是硬编码
  */
 export function getProductDetailKeys(): string[] {
-  return Object.keys(PRODUCT_I18N_KEY_MAP);
+  return [];
 }
 
 /**
@@ -59,13 +57,13 @@ export const productDetails: Partial<ProductDetailsData> = {};
  */
 export function createEmptyProductDetail(): ProductDetail {
   return {
-    title: '',
-    desc: '',
-    image: '',
+    title: "",
+    desc: "",
+    image: "",
     features: [],
     cases: [],
     scenes: [],
     params: [],
-    downloads: []
+    downloads: [],
   };
 }

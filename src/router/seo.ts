@@ -115,14 +115,11 @@ function getRouteSEOMap(): Record<string, any> {
   return {
     Home: translatedSeoConfigs.home,
     Products: translatedSeoConfigs.products,
-    SystemProducts: translatedSeoConfigs.products,
-    RobotProducts: translatedSeoConfigs.products,
+    ProductDetail: translatedSeoConfigs.products,
     Solutions: translatedSeoConfigs.solutions,
     Support: translatedSeoConfigs.support,
     Careers: translatedSeoConfigs.careers,
     About: translatedSeoConfigs.about,
-    SystemProductDetail: translatedSeoConfigs.products,
-    RobotProductDetail: translatedSeoConfigs.products,
   };
 }
 
@@ -290,9 +287,9 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
       itemListElement: [
         {
           "@type": "Service",
-          name: safeTranslate("seo.structuredData.solutions.medical.name"),
+          name: safeTranslate("seo.structuredData.solutions.precisionWorkcell.name"),
           description: safeTranslate(
-            "seo.structuredData.solutions.medical.description"
+            "seo.structuredData.solutions.precisionWorkcell.description"
           ),
           provider: {
             "@type": "Organization",
@@ -301,9 +298,9 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
         },
         {
           "@type": "Service",
-          name: safeTranslate("seo.structuredData.solutions.semiconductor.name"),
+          name: safeTranslate("seo.structuredData.solutions.mobileCollaboration.name"),
           description: safeTranslate(
-            "seo.structuredData.solutions.semiconductor.description"
+            "seo.structuredData.solutions.mobileCollaboration.description"
           ),
           provider: {
             "@type": "Organization",
@@ -312,11 +309,9 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
         },
         {
           "@type": "Service",
-          name: safeTranslate(
-            "seo.structuredData.solutions.smartManufacturing.name"
-          ),
+          name: safeTranslate("seo.structuredData.solutions.embodiedDevelopment.name"),
           description: safeTranslate(
-            "seo.structuredData.solutions.smartManufacturing.description"
+            "seo.structuredData.solutions.embodiedDevelopment.description"
           ),
           provider: {
             "@type": "Organization",
@@ -442,17 +437,21 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
  * 设置产品详情页 SEO 和结构化数据
  */
 export async function setupProductDetailSEO(to: RouteLocationNormalized) {
-  const { getProducts } = await import("@/data/products");
-  const slug = to.params.slug as string;
-  const product = getProducts().find((p) => p.slug === slug);
+  const { getProductCenterCardById } = await import("@/data/product-center");
+  const productId = String(to.params.id || "");
+  const product = getProductCenterCardById(productId);
 
   if (!product) return;
 
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${to.path}`;
-  const productName = safeTranslate(product.name);
-  const productDesc = safeTranslate(product.desc);
+  const isEn = i18n.global.locale.value === "en";
+  const productName = isEn ? product.card.title.en : product.card.title.zh;
+  const productDesc = isEn ? product.card.summary.en : product.card.summary.zh;
   const siteName = safeTranslate("seo.siteName");
+  const productImage = product.card.image.startsWith("http")
+    ? product.card.image
+    : `${baseUrl}${product.card.image}`;
 
   setSEO({
     title: productName,
@@ -461,9 +460,7 @@ export async function setupProductDetailSEO(to: RouteLocationNormalized) {
     ogTitle: productName,
     ogDescription: productDesc,
     ogUrl: currentUrl,
-    ogImage: product.image.startsWith("http")
-      ? product.image
-      : `${baseUrl}${product.image}`,
+    ogImage: productImage,
     twitterTitle: productName,
     twitterDescription: productDesc,
     canonical: currentUrl,
@@ -476,9 +473,7 @@ export async function setupProductDetailSEO(to: RouteLocationNormalized) {
     "@type": "Product",
     name: productName,
     description: productDesc,
-    image: product.image.startsWith("http")
-      ? product.image
-      : `${baseUrl}${product.image}`,
+    image: productImage,
     brand: {
       "@type": "Brand",
       name: siteName,

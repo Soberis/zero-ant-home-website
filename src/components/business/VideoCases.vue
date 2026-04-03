@@ -41,9 +41,9 @@ const { t } = useI18n();
 const router = useRouter();
 
 const SPOTLIGHT_SLUGS = [
-  "robotstudio-remote-control",
-  "medical-automation",
   "semiconductor",
+  "composite-robot-application",
+  "sketching-robot",
 ];
 
 const hoverIdx = ref(-1);

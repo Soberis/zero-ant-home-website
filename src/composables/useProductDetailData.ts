@@ -2,7 +2,6 @@ import { computed, ref, toValue, type MaybeRefOrGetter } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications from "@/data/applications";
-import { products } from "@/data/products";
 import { videoCards } from "@/data/videos";
 import {
   getRelatedApplications,
@@ -10,6 +9,7 @@ import {
   hasProductRelations,
 } from "@/data/productRelations";
 import { createEmptyProductDetail, slugToI18nKey } from "@/data/productDetails";
+import { getProductCenterCardById } from "@/data/product-center";
 import type {
   ProductCase,
   ProductDetail,
@@ -39,13 +39,26 @@ export function useProductDetailData(
   slug: MaybeRefOrGetter<string>,
   options: UseProductDetailDataOptions = {}
 ) {
-  const { t, te, tm } = useI18n();
+  const { t, te, tm, locale } = useI18n();
   const router = useRouter();
 
   const slugValue = computed(() => String(toValue(slug) || ""));
-  const currentProduct = computed(() =>
-    products.find((item) => item.slug === slugValue.value)
-  );
+  const currentProduct = computed(() => {
+    const record = getProductCenterCardById(slugValue.value);
+    if (!record) {
+      return null;
+    }
+
+    return {
+      slug: record.card.id,
+      image: record.card.image,
+      familyId: record.familyId,
+      familyTitle: record.familyTitle,
+      title: record.card.title,
+      summary: record.card.summary,
+      metrics: [],
+    };
+  });
   const baseDetail = computed(() => toValue(options.baseDetail) ?? null);
   const showApplications = computed(() => toValue(options.showApplications) ?? true);
   const showVideos = computed(() => toValue(options.showVideos) ?? true);
@@ -60,8 +73,16 @@ export function useProductDetailData(
     }
 
     const detail = createEmptyProductDetail();
-    detail.title = t(currentProduct.value.name);
-    detail.desc = t(currentProduct.value.desc);
+    detail.title =
+      t(`productDetails.${slugValue.value}.title`) ||
+      (locale.value === "en"
+        ? currentProduct.value.title.en
+        : currentProduct.value.title.zh);
+    detail.desc =
+      t(`productDetails.${slugValue.value}.desc`) ||
+      (locale.value === "en"
+        ? currentProduct.value.summary.en
+        : currentProduct.value.summary.zh);
     detail.image = currentProduct.value.image;
     return detail;
   };
@@ -72,9 +93,23 @@ export function useProductDetailData(
     }
 
     const fallbackTitle =
-      baseDetail.value?.title || (currentProduct.value ? t(currentProduct.value.name) : "");
+      baseDetail.value?.title ||
+      (currentProduct.value
+        ? (te(`${detailKey.value}.title`)
+            ? String(tm(`${detailKey.value}.title`))
+            : locale.value === "en"
+              ? currentProduct.value.title.en
+              : currentProduct.value.title.zh)
+        : "");
     const fallbackDesc =
-      baseDetail.value?.desc || (currentProduct.value ? t(currentProduct.value.desc) : "");
+      baseDetail.value?.desc ||
+      (currentProduct.value
+        ? (te(`${detailKey.value}.desc`)
+            ? String(tm(`${detailKey.value}.desc`))
+            : locale.value === "en"
+              ? currentProduct.value.summary.en
+              : currentProduct.value.summary.zh)
+        : "");
     const fallbackImage = baseDetail.value?.image || currentProduct.value?.image || "";
     const fallbackFeatures = baseDetail.value?.features || [];
     const fallbackCases = baseDetail.value?.cases || [];
@@ -116,11 +151,15 @@ export function useProductDetailData(
 
   const detail = localizedProduct;
 
-  const categoryLabel = computed(() =>
-    currentProduct.value?.category === "robot"
-      ? t("home.coreProducts.robotLabel")
-      : t("home.coreProducts.systemLabel")
-  );
+  const categoryLabel = computed(() => {
+    if (!currentProduct.value) {
+      return "";
+    }
+
+    return locale.value === "en"
+      ? currentProduct.value.familyTitle.en
+      : currentProduct.value.familyTitle.zh;
+  });
 
   const normalizedParams = computed(() =>
     (localizedProduct.value?.params || [])
@@ -140,13 +179,6 @@ export function useProductDetailData(
   );
 
   const heroMetrics = computed(() => {
-    if ((currentProduct.value?.metrics || []).length > 0) {
-      return (currentProduct.value?.metrics || []).slice(0, 4).map((metric) => ({
-        label: t(metric.label),
-        value: t(metric.value),
-      }));
-    }
-
     if (normalizedParams.value.length > 0) {
       return normalizedParams.value.slice(0, 4).map((param) => ({
         label: param.key,

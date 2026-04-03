@@ -33,10 +33,9 @@ import applications from '@/data/applications';
 import ApplicationCard from '@/components/common/ApplicationCard.vue';
 
 const FEATURED_SLUGS = [
-  'medical-automation',
   'semiconductor',
-  'intelligent-manufacturing',
-  'smart-logistics',
+  'composite-systems',
+  'ai-robotics',
 ];
 
 const { t } = useI18n();
@@ -98,12 +97,26 @@ const featuredApps = computed(() =>
 
 .apps-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--space-xl, 64px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 40px;
   row-gap: 0;
 
-  :deep(.app-divider-item:nth-child(-n+2)) {
+  :deep(.app-divider-item:nth-child(-n+3)) {
     border-top: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .apps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    :deep(.app-divider-item) {
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    :deep(.app-divider-item:nth-child(-n+2)) {
+      border-top: none;
+    }
   }
 }
 
@@ -116,6 +129,14 @@ const featuredApps = computed(() =>
 @media (max-width: 560px) {
   .apps-grid {
     grid-template-columns: 1fr;
+
+    :deep(.app-divider-item) {
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    :deep(.app-divider-item:first-child) {
+      border-top: none;
+    }
   }
 }
 </style>

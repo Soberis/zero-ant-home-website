@@ -4,11 +4,14 @@
       <div class="section-heading">
         <span class="home-section-eyebrow">{{ t('home.coreProducts.eyebrow') }}</span>
         <h2 class="home-section-title">{{ t('home.coreProducts.title') }}</h2>
-        <p class="home-section-description">{{ t('home.coreProducts.description') }}</p>
+        <p class="home-section-description core-products__description">{{ t('home.coreProducts.description') }}</p>
       </div>
 
-      <router-link to="/products" class="section-action">
-        {{ t('home.coreProducts.enter') }}
+      <router-link to="/products" class="section-cta">
+        <span>{{ t('home.coreProducts.enter') }}</span>
+        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
       </router-link>
     </div>
 
@@ -49,9 +52,9 @@
 import zaR3XImg from '@/assets/images/product/ZA-R3-X.png';
 import zaM135Img from '@/assets/images/product/ZA-M135.png';
 import zaMR3TImg from '@/assets/images/product/ZA-MR3T.png';
-import zaRMVRImg from '@/assets/images/product/ZA-RMVR 具身智能双臂VR遥操作开发平台.jpg';
+import zaRMVRImg from '@/assets/images/product/ZA-RMVR具身智能双臂VR遥操作开发平台.jpg';
 import zaZG100Img from '@/assets/images/product/ZA-ZG100.png';
-import rotatingPlatformImg from '@/assets/images/product/旋转平台.png';
+import railImg from '@/assets/images/product/地轨.png';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -63,7 +66,7 @@ const productFamilies = [
     titleKey: 'home.coreProducts.families.rSeries.title',
     descriptionKey: 'home.coreProducts.families.rSeries.description',
     image: zaR3XImg,
-    models: ['ZA-R3', 'ZA-R3X', 'ZA-R3L', 'ZA-R3M', 'ZA-R3H', 'ZA-R3D6', 'ZA-R3T'],
+    models: ['ZA-R3', 'ZA-R3X', 'ZA-R3M(L)', 'ZA-R3M(R)'],
   },
   {
     key: 'm-series',
@@ -71,7 +74,7 @@ const productFamilies = [
     titleKey: 'home.coreProducts.families.mSeries.title',
     descriptionKey: 'home.coreProducts.families.mSeries.description',
     image: zaM135Img,
-    models: ['ZA-M75', 'ZA-M135'],
+    models: ['ZA-M135'],
   },
   {
     key: 'mr-series',
@@ -83,7 +86,7 @@ const productFamilies = [
   },
   {
     key: 'embodied-platforms',
-    eyebrow: 'EMBODIED AI',
+    eyebrow: 'EMBODIED',
     titleKey: 'home.coreProducts.families.embodied.title',
     descriptionKey: 'home.coreProducts.families.embodied.description',
     image: zaRMVRImg,
@@ -102,8 +105,8 @@ const productFamilies = [
     eyebrow: 'ACCESSORIES',
     titleKey: 'home.coreProducts.families.accessories.title',
     descriptionKey: 'home.coreProducts.families.accessories.description',
-    image: rotatingPlatformImg,
-    models: ['地轨', '旋转平台', 'ZA-R3M(L)', 'ZA-R3M(R)'],
+    image: railImg,
+    models: ['地轨', '旋转平台'],
   },
 ] as const;
 </script>
@@ -127,29 +130,39 @@ const productFamilies = [
 }
 
 .section-heading {
-  max-width: 760px;
+  flex: 1 1 auto;
+  max-width: 880px;
 }
 
-.section-action {
+.section-cta {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 20px;
-  border: 1px solid rgba(26, 58, 143, 0.14);
-  border-radius: 999px;
-  background: rgba(26, 58, 143, 0.04);
-  color: var(--color-primary);
+  gap: 8px;
+  color: var(--color-text-secondary);
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  transition: color 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
 }
 
-.section-action:hover {
-  background: rgba(26, 58, 143, 0.08);
-  border-color: rgba(26, 58, 143, 0.2);
+.cta-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
+}
+
+.section-cta:hover {
+  color: var(--color-primary);
   transform: translateY(-1px);
+}
+
+.section-cta:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.core-products__description {
+  max-width: none;
 }
 
 .family-grid {
@@ -162,24 +175,25 @@ const productFamilies = [
   display: grid;
   gap: 22px;
   min-height: 100%;
-  padding: 28px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background:
-    linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(255, 255, 255, 1) 100%);
+  padding: 32px;
+  border-radius: 12px;
+  background: #ffffff;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s ease;
 }
 
 .family-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(26, 58, 143, 0.16);
-  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
+  transform: translateY(-6px);
+  background-color: #ffffff;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
 }
 
 .family-card:focus-visible {
   outline: 2px solid rgba(26, 58, 143, 0.24);
-  outline-offset: 6px;
+  outline-offset: 4px;
 }
 
 .family-card__visual {
@@ -188,8 +202,13 @@ const productFamilies = [
   justify-content: center;
   min-height: 200px;
   padding: 12px 8px;
-  background:
-    radial-gradient(circle at top, rgba(26, 58, 143, 0.05) 0%, rgba(26, 58, 143, 0) 72%);
+  border-radius: 8px;
+  background: #f8fafc;
+  transition: background-color 0.4s ease;
+}
+
+.family-card:hover .family-card__visual {
+  background: #f1f5f9;
 }
 
 .family-card__image {
@@ -274,6 +293,7 @@ const productFamilies = [
   .section-heading-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 20px;
     margin-bottom: 32px;
   }
 
@@ -300,6 +320,12 @@ const productFamilies = [
 
   .family-card__image {
     height: 152px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .core-products__description {
+    white-space: nowrap;
   }
 }
 </style>

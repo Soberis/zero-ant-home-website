@@ -42,8 +42,8 @@ export const productCenterFamilies: ProductCenterFamily[] = [
     id: "r-series",
     title: { zh: "R 系列", en: "R Series" },
     intro: {
-      zh: "面向精密传送与狭小空间操作的机械臂平台，优先按臂长、立柱高度与自由度形态做第一轮筛选。",
-      en: "Precision arm platforms for transfer and confined-space operation, first filtered by arm length, lift height, and arm form factor.",
+      zh: "面向精密传送与狭小空间操作的机械臂平台，优先按臂长、立柱高度、本体形态与联动方式做第一轮筛选。",
+      en: "Precision arm platforms for transfer and confined-space operation, first filtered by arm length, lift height, body form, and linked configuration.",
     },
     cards: [
       {
@@ -51,38 +51,15 @@ export const productCenterFamilies: ProductCenterFamily[] = [
         image: zaR3XImg,
         title: { zh: "ZA-R3 / ZA-R3X", en: "ZA-R3 / ZA-R3X" },
         summary: {
-          zh: "SCARA 精密传送平台，适合高速取放与狭小空间工位。",
-          en: "A SCARA transfer platform for high-speed pick-and-place and compact workstations.",
+          zh: "SCARA 精密传送平台，ZA-R3 与 ZA-R3X 主要按 SCARA 臂长区分，适合高速取放与狭小空间工位。",
+          en: "A SCARA transfer platform where ZA-R3 and ZA-R3X are primarily selected by SCARA arm length, suited to high-speed pick-and-place and compact workstations.",
         },
         specs: [
+          { zh: "SCARA 臂长：ZA-R3 450mm / ZA-R3X 592mm 水平范围", en: "SCARA arm length: ZA-R3 450mm / ZA-R3X 592mm horizontal reach" },
           { zh: "最大额定负载 3kg", en: "Max rated payload 3kg" },
-          { zh: "最大水平 / 垂直速度 1500mm/s / 500mm/s", en: "Max horizontal / vertical speed 1500mm/s / 500mm/s" },
           { zh: "重复定位精度 ±0.05mm", en: "Repeatability ±0.05mm" },
-          { zh: "臂长差异：水平范围 450mm / 592mm", en: "Arm-length difference: 450mm / 592mm horizontal reach" },
+          { zh: "最大水平 / 垂直速度 1500mm/s / 500mm/s", en: "Max horizontal / vertical speed 1500mm/s / 500mm/s" },
         ],
-        note: {
-          zh: "组合型号 ZA-R3-X，页面需直接体现臂长差异。",
-          en: "Grouped as ZA-R3-X. The page should surface the arm-length difference directly.",
-        },
-      },
-      {
-        id: "za-r3l-m-h",
-        image: zaR3LMHImg,
-        title: { zh: "ZA-R3L / ZA-R3M / ZA-R3H", en: "ZA-R3L / ZA-R3M / ZA-R3H" },
-        summary: {
-          zh: "7 自由度升降平台，适合按立柱高度和 Z 轴行程分级选型的工位。",
-          en: "A 7-DOF lift platform for stations selected by column height and Z-axis travel.",
-        },
-        specs: [
-          { zh: "7 自由度 / 单臂额定负载 1kg", en: "7 DOF / single-arm payload 1kg" },
-          { zh: "工作半径 640mm / 重复定位精度 ±0.1mm", en: "640mm working radius / repeatability ±0.1mm" },
-          { zh: "Z 轴行程 400 / 750 / 1160mm", en: "Z-axis travel 400 / 750 / 1160mm" },
-          { zh: "升降轴速度 400mm/s", en: "Lift-axis speed 400mm/s" },
-        ],
-        note: {
-          zh: "组合型号 ZA-R3L-M-H，页面需直接体现立柱高度 / Z 轴行程差异。",
-          en: "Grouped as ZA-R3L-M-H. The page should surface column-height / Z-travel differences directly.",
-        },
       },
       {
         id: "za-r3d6",
@@ -100,17 +77,63 @@ export const productCenterFamilies: ProductCenterFamily[] = [
         ],
       },
       {
+        id: "za-r3l-m-h",
+        image: zaR3LMHImg,
+        title: { zh: "ZA-R3L / ZA-R3M / ZA-R3H", en: "ZA-R3L / ZA-R3M / ZA-R3H" },
+        summary: {
+          zh: "SCARA 升降平台，ZA-R3L / ZA-R3M / ZA-R3H 主要按立柱高度与 Z 轴行程区分。",
+          en: "A SCARA lift platform where ZA-R3L, ZA-R3M, and ZA-R3H are primarily selected by column height and Z-axis travel.",
+        },
+        specs: [
+          { zh: "立柱高度分级：ZA-R3L / ZA-R3M / ZA-R3H", en: "Column-height variants: ZA-R3L / ZA-R3M / ZA-R3H" },
+          { zh: "核心差异：立柱高度 / Z 轴行程", en: "Key difference: column height / Z-axis travel" },
+          { zh: "选型建议：先按工位高度与上下料行程确认 L / M / H", en: "Selection cue: choose L / M / H by station height and vertical travel first" },
+          { zh: "产品形态：SCARA 升降平台", en: "Product form: SCARA lift platform" },
+        ],
+      },
+      {
+        id: "za-r3m-left",
+        image: zaR3MLImg,
+        title: { zh: "ZA-R3M(L) 地轨联动型", en: "ZA-R3M(L) Rail-Integrated" },
+        summary: {
+          zh: "基于 ZA-R3M 的地轨联动组合形态，用于补足长行程直线作业范围。",
+          en: "A rail-integrated ZA-R3M configuration for extending long-travel linear operation range.",
+        },
+        specs: [
+          { zh: "组合含义：ZA-R3M + 地轨", en: "Combination: ZA-R3M + Rail" },
+          { zh: "归属：R 系列联动型号", en: "Category: R-series linked variant" },
+          { zh: "适用场景：跨工位直线取放与联动传送", en: "Scenario: Cross-station linear pick-and-place and linked transfer" },
+          { zh: "选型重点：地轨行程、节拍与整体占位", en: "Selection cue: Rail travel, takt requirements, and overall footprint" },
+        ],
+      },
+      {
+        id: "za-r3m-right",
+        image: zaR3MRImg,
+        title: { zh: "ZA-R3M(R) 旋转平台联动型", en: "ZA-R3M(R) Rotary-Platform Integrated" },
+        summary: {
+          zh: "基于 ZA-R3M 的旋转平台联动组合形态，用于补足转位与姿态调整能力。",
+          en: "A rotating-platform-integrated ZA-R3M configuration for transfer and orientation adjustment.",
+        },
+        specs: [
+          { zh: "组合含义：ZA-R3M + 旋转平台", en: "Combination: ZA-R3M + Rotating Platform" },
+          { zh: "归属：R 系列联动型号", en: "Category: R-series linked variant" },
+          { zh: "适用场景：多角度转位与姿态调整", en: "Scenario: Multi-angle station transfer and posture adjustment" },
+          { zh: "选型重点：旋转精度、节拍与工位布局", en: "Selection cue: Rotation precision, takt requirements, and station layout" },
+        ],
+      },
+      {
         id: "za-r3t",
         image: zaR3TImg,
         title: { zh: "ZA-R3T", en: "ZA-R3T" },
         summary: {
-          zh: "已确认纳入产品中心的 R 系列形态，当前阶段先保留型号入口与产品图。",
-          en: "A confirmed R-series entry. At this stage the product center keeps the model entry and product visual.",
+          zh: "具身智能双臂机器人，适合双臂协同操作、具身训练与演示验证场景。",
+          en: "An embodied dual-arm robot for bimanual operation, embodied training, and demonstration workflows.",
         },
         specs: [
-          { zh: "已纳入 R 系列产品中心", en: "Included in the R-series product center" },
-          { zh: "使用独立产品图展示", en: "Shown with a dedicated product visual" },
-          { zh: "详情参数在下一阶段补齐", en: "Detailed parameters will be completed in the next phase" },
+          { zh: "单臂 7 自由度 / 额定负载 1kg", en: "Single arm: 7 DOF / rated payload 1kg" },
+          { zh: "臂展 640mm / 重复定位精度 ±0.1mm", en: "Arm span 640mm / repeatability ±0.1mm" },
+          { zh: "升降轴行程 400 / 750 / 1160mm 可选", en: "Lift axis travel 400 / 750 / 1160mm optional" },
+          { zh: "EtherCAT + 10 入 10 出 I/O", en: "EtherCAT + 10 in / 10 out I/O" },
         ],
       },
     ],
@@ -168,8 +191,8 @@ export const productCenterFamilies: ProductCenterFamily[] = [
         image: zaMR3MImg,
         title: { zh: "ZA-MR3M", en: "ZA-MR3M" },
         summary: {
-          zh: "复合升降机器人，适合移动 + 升降 + 单臂协同的基础方案。",
-          en: "A composite lift robot for baseline mobile, lift, and single-arm collaboration.",
+          zh: "复合升降机器人，适合跨工位移动、升降取放与单臂协同作业。",
+          en: "A composite lift robot for cross-station mobility, lift-assisted pick-and-place, and single-arm collaboration.",
         },
         specs: [
           { zh: "整体尺寸 674 × 456 × 1408mm", en: "Overall size 674 × 456 × 1408mm" },
@@ -279,8 +302,8 @@ export const productCenterFamilies: ProductCenterFamily[] = [
     id: "accessories",
     title: { zh: "扩展机构", en: "Accessories" },
     intro: {
-      zh: "扩展机构独立成区，用于补足行程、旋转角度和安装形态，不与本体混排。",
-      en: "Accessories live in a separate zone to extend travel, rotation, and mounting form factors instead of mixing with robot bodies.",
+      zh: "扩展机构独立成区，用于补足行程与旋转能力，作为本体外设单独判断。",
+      en: "Accessories stay in a separate zone to extend travel and rotation, and are matched as external modules after the robot body is chosen.",
     },
     cards: [
       {
@@ -313,38 +336,29 @@ export const productCenterFamilies: ProductCenterFamily[] = [
           { zh: "重复定位精度 ≤10 arcsec", en: "Repeatability ≤10 arcsec" },
         ],
       },
-      {
-        id: "za-r3m-left",
-        image: zaR3MLImg,
-        title: { zh: "ZA-R3M(L)", en: "ZA-R3M(L)" },
-        summary: {
-          zh: "安装形态扩展入口，先按左置方案纳入扩展机构管理。",
-          en: "A left-mounted installation variant managed as an accessory entry.",
-        },
-        specs: [
-          { zh: "安装形态：左置", en: "Mounting form: left-side" },
-          { zh: "作为 ZA-R3M 的左置安装变体展示", en: "Shown as the left-mounted ZA-R3M variant" },
-          { zh: "按扩展机构而非一级系列处理", en: "Handled as an accessory, not a top-level family" },
-          { zh: "用于贴合工作站左右布局差异", en: "Used to match left/right workstation layout differences" },
-        ],
-      },
-      {
-        id: "za-r3m-right",
-        image: zaR3MRImg,
-        title: { zh: "ZA-R3M(R)", en: "ZA-R3M(R)" },
-        summary: {
-          zh: "安装形态扩展入口，先按右置方案纳入扩展机构管理。",
-          en: "A right-mounted installation variant managed as an accessory entry.",
-        },
-        specs: [
-          { zh: "安装形态：右置", en: "Mounting form: right-side" },
-          { zh: "作为 ZA-R3M 的右置安装变体展示", en: "Shown as the right-mounted ZA-R3M variant" },
-          { zh: "按扩展机构而非一级系列处理", en: "Handled as an accessory, not a top-level family" },
-          { zh: "用于贴合工作站左右布局差异", en: "Used to match left/right workstation layout differences" },
-        ],
-      },
     ],
   },
 ];
 
 export const productCenterCover = coverImg;
+
+export interface ProductCenterCardWithFamily {
+  familyId: string;
+  familyTitle: LocalizedText;
+  familyIntro: LocalizedText;
+  card: ProductCenterCard;
+}
+
+export const productCenterCards: ProductCenterCardWithFamily[] = productCenterFamilies.flatMap(
+  (family) =>
+    family.cards.map((card) => ({
+      familyId: family.id,
+      familyTitle: family.title,
+      familyIntro: family.intro,
+      card,
+    }))
+);
+
+export function getProductCenterCardById(id: string): ProductCenterCardWithFamily | undefined {
+  return productCenterCards.find((item) => item.card.id === id);
+}

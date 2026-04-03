@@ -9,6 +9,7 @@ const Solutions = () => import("@/views/solutions/Solutions.vue");
 const About = () => import("@/views/company/About.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
 const ProductsCenter = () => import("@/views/products/ProductsCenter.vue");
+const ProductCenterDetail = () => import("@/views/products/ProductCenterDetail.vue");
 const Support = () => import("@/views/support/Support.vue");
 const ApplicationDetail = () => import("@/views/applications/ApplicationDetail.vue");
 const Careers = () => import("@/views/company/Careers.vue");
@@ -45,6 +46,11 @@ const routes = [
     path: "/products",
     name: "Products",
     component: ProductsCenter,
+  },
+  {
+    path: "/products/detail/:id",
+    name: "ProductDetail",
+    component: ProductCenterDetail,
   },
   // 人才招聘
   {
