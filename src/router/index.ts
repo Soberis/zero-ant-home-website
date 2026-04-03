@@ -148,6 +148,11 @@ router.afterEach((to, _from, failure) => {
     return;
   }
 
+  // 百度统计埋点
+  if (typeof window !== "undefined" && (window as any)._hmt) {
+    (window as any)._hmt.push(['_trackPageview', to.fullPath]);
+  }
+
   scheduleScrollToTop({ afterTransition: true });
 });
 

@@ -32,7 +32,10 @@
       "viewSolutions": "查看解决方案",
       "contactTeam": "联系团队",
       "downloadNow": "立即下载",
-      "backToTop": "返回顶部"
+      "backToTop": "返回顶部",
+      "learnProducts": "了解产品",
+      "bookDemo": "预约演示",
+      "onlineConsult": "在线咨询"
     },
     "status": {
       "noVideo": "暂无视频",
@@ -82,6 +85,8 @@
       "title": "精密传送机器人平台",
       "description": "聚焦精密传送、狭小空间操作与升降联动场景，帮助团队更快判断本体形态、扩展组合与交付方式。",
       "panelLabel": "产品中心",
+      "primaryCta": "@:common.cta.learnProducts",
+      "secondaryCta": "@:common.cta.bookDemo",
       "tabs": {
         "scara": "四轴机械臂",
         "humanoid": "双臂人形"

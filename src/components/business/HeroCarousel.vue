@@ -24,6 +24,14 @@
             {{ t('home.hero.panelLabel') }}
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
+          <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
+            <span class="btn btn-primary" @click.prevent="$router.push('/products')">
+              {{ t('home.hero.primaryCta') }}
+            </span>
+            <span class="btn btn-secondary" @click.prevent="$router.push('/support#contact')">
+              {{ t('home.hero.secondaryCta') }}
+            </span>
+          </div>
         </div>
       </div>
     </router-link>
@@ -209,6 +217,21 @@ onUnmounted(() => {
   max-width: 24em;
   color: #445066;
   line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 36px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-actions.hero-entered {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 1100px) {

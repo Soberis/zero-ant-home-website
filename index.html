@@ -11,10 +11,20 @@
         document.documentElement.setAttribute('lang', lang);
       })();
     </script>
+    <!-- 百度统计埋点代码 -->
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; // 替换为真实的 Site ID
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
     <!-- 安全策略 -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://rsms.me; font-src 'self' https://fonts.gstatic.com https://rsms.me; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://www.google-analytics.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://player.bilibili.com https://m.bilibili.com https://www.bilibili.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://hm.baidu.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://rsms.me; font-src 'self' https://fonts.gstatic.com https://rsms.me; img-src 'self' data: https: https://hm.baidu.com; connect-src 'self' https://api.github.com https://www.google-analytics.com https://hm.baidu.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://player.bilibili.com https://m.bilibili.com https://www.bilibili.com; object-src 'none'; base-uri 'self'; form-action 'self';"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />

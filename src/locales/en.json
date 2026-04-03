@@ -32,7 +32,10 @@
       "viewSolutions": "Explore Solutions",
       "contactTeam": "Contact Team",
       "downloadNow": "Download Now",
-      "backToTop": "Back to Top"
+      "backToTop": "Back to Top",
+      "learnProducts": "Explore Products",
+      "bookDemo": "Book Demo",
+      "onlineConsult": "Chat Now"
     },
     "status": {
       "noVideo": "No video available",
@@ -82,6 +85,8 @@
       "title": "Precision Transfer Robot Platform",
       "description": "Built for precision transfer, compact-space operation, and lift-linked workflows so teams can judge form factor, extension combinations, and delivery paths faster.",
       "panelLabel": "Product Center",
+      "primaryCta": "@:common.cta.learnProducts",
+      "secondaryCta": "@:common.cta.bookDemo",
       "tabs": {
         "scara": "SCARA",
         "humanoid": "Humanoid"

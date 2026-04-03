@@ -14,6 +14,9 @@
     <Footer />
     <!-- 返回顶部按钮 -->
     <BackToTop :visible="isBackToTopVisible" />
+    
+    <!-- 全站浮动咨询按钮 -->
+    <FloatingCTA :visible="isFloatingCTALoaded" />
   </div>
 </template>
 
@@ -25,6 +28,7 @@ import { scheduleScrollToTop } from "@/utils/scroll";
 // 非关键壳子组件异步加载，减少首屏同步体积
 const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue"));
 const BackToTop = defineAsyncComponent(() => import("@/components/common/BackToTop.vue"));
+const FloatingCTA = defineAsyncComponent(() => import("@/components/common/FloatingCTA.vue"));
 
 const router = useRouter();
 
@@ -81,6 +85,7 @@ const handleEscKey = (event: KeyboardEvent) => {
 };
 
 const isBackToTopVisible = ref(false);
+const isFloatingCTALoaded = ref(false);
 let ticking = false;
 
 const updateBackToTopVisibility = () => {
@@ -99,6 +104,11 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  // 延迟渲染浮动按钮，不抢占首屏资源
+  window.setTimeout(() => {
+    isFloatingCTALoaded.value = true;
+  }, 1500);
+
   // 添加全局键盘监听
   document.addEventListener("keydown", handleEscKey);
   window.addEventListener("scroll", handleScroll, true);

@@ -13,6 +13,7 @@ declare module 'vue' {
     BilibiliPlayer: typeof import('./src/components/BilibiliPlayer.vue')['default']
     CommonDetailLayout: typeof import('./src/components/common/CommonDetailLayout.vue')['default']
     CoreProducts: typeof import('./src/components/business/CoreProducts.vue')['default']
+    FloatingCTA: typeof import('./src/components/common/FloatingCTA.vue')['default']
     Footer: typeof import('./src/components/layout/Footer.vue')['default']
     HeroCarousel: typeof import('./src/components/business/HeroCarousel.vue')['default']
     IndustryApplications: typeof import('./src/components/business/IndustryApplications.vue')['default']
