@@ -99,12 +99,18 @@ const scrollToTop = () => {
 <style scoped lang="less">
 .floating-sidebar {
   position: fixed;
-  right: 32px;
-  bottom: 110px; /* 位于返回顶部按钮上方 */
+  right: max(16px, calc(50vw - var(--container-max-width, 1440px) / 2 - 80px)); /* 保证至少 16px 安全边距，大屏贴近内容区 */
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2000;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 100px; /* 恢复全悬浮药丸形态 */
+  padding: 12px 0;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -113,22 +119,21 @@ const scrollToTop = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: #ffffff;
-  color: var(--color-primary);
+  width: 44px;
+  height: 44px;
+  margin: 4px 8px; /* 恢复对称边距 */
+  background: transparent;
+  color: #64748b; /* 默认使用低对比度的 Slate 灰色，避免喧宾夺主 */
   border-radius: 50%;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.1), inset 0 0 0 1px rgba(15, 23, 42, 0.05);
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   
   &:hover {
     background: var(--color-primary);
     color: #ffffff;
-    transform: translateX(-4px);
-    box-shadow: 0 8px 24px rgba(26, 58, 143, 0.25);
     
+    /* 移除之前的位移和外阴影，保持药丸内部的纯净感 */
     .sidebar-popup {
       opacity: 1;
       visibility: visible;
@@ -148,7 +153,8 @@ const scrollToTop = () => {
 
 .sidebar-popup {
   position: absolute;
-  right: calc(100% + 20px);
+  right: 100%;
+  margin-right: 12px; /* 弹窗距离边缘的距离 */
   top: 50%;
   transform: translateY(-50%) translateX(10px) scale(0.95);
   opacity: 0;
@@ -160,20 +166,21 @@ const scrollToTop = () => {
   &::after {
     content: '';
     position: absolute;
-    right: -6px;
+    right: -5px;
     top: 50%;
     transform: translateY(-50%);
-    border-width: 6px 0 6px 6px;
+    border-width: 5px 0 5px 5px;
     border-style: solid;
     border-color: transparent transparent transparent #ffffff;
   }
 }
 
 .popup-content {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
   padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.15), inset 0 0 0 1px rgba(15, 23, 42, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(15, 23, 42, 0.12), inset 0 0 0 1px rgba(15, 23, 42, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -228,33 +235,46 @@ const scrollToTop = () => {
 }
 
 .back-to-top {
-  margin-top: 8px; /* 与上方的常用动作隔开一点距离 */
-  background: var(--color-primary);
-  color: #fff;
+  margin-top: 10px;
   
-  &:hover {
-    background: #0f256e;
+  /* 添加一条极细的分割线 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    right: 10px;
+    height: 1px;
+    background: rgba(15, 23, 42, 0.06);
+  }
+  
+  &:hover::before {
+    display: none; /* 悬停时隐藏分割线避免杂乱 */
   }
 }
 
 @media (max-width: 768px) {
   .floating-sidebar {
-    right: 16px;
-    bottom: 80px; /* 适配移动端 */
-    gap: 10px;
+    right: 12px;
+    top: auto;
+    bottom: 60px;
+    transform: none;
+    border-radius: 100px;
+    padding: 8px 0;
   }
   
   .sidebar-item {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
+    margin: 4px 6px;
     
     &:hover {
-      transform: none; /* 移动端去掉 hover 动画 */
+      transform: none;
     }
   }
   
   .sidebar-popup {
-    display: none; /* 屏幕太小，隐藏悬浮弹窗 */
+    display: none;
   }
 }
 </style>
