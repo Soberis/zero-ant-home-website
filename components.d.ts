@@ -9,7 +9,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ApplicationCard: typeof import('./src/components/common/ApplicationCard.vue')['default']
-    BackToTop: typeof import('./src/components/common/BackToTop.vue')['default']
     BilibiliPlayer: typeof import('./src/components/BilibiliPlayer.vue')['default']
     CommonDetailLayout: typeof import('./src/components/common/CommonDetailLayout.vue')['default']
     CoreProducts: typeof import('./src/components/business/CoreProducts.vue')['default']

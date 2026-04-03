@@ -12,11 +12,9 @@
     </main>
     <!-- 页脚 -->
     <Footer />
-    <!-- 返回顶部按钮 -->
-    <BackToTop :visible="isBackToTopVisible" />
     
-    <!-- 全站浮动咨询按钮 -->
-    <FloatingCTA :visible="isFloatingCTALoaded" />
+    <!-- 全站右侧悬浮工具栏 (包含返回顶部) -->
+    <FloatingCTA :visible="isFloatingCTALoaded" :show-back-to-top="isBackToTopVisible" />
   </div>
 </template>
 
@@ -27,7 +25,6 @@ import NavBar from "@/components/layout/NavBar.vue";
 import { scheduleScrollToTop } from "@/utils/scroll";
 // 非关键壳子组件异步加载，减少首屏同步体积
 const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue"));
-const BackToTop = defineAsyncComponent(() => import("@/components/common/BackToTop.vue"));
 const FloatingCTA = defineAsyncComponent(() => import("@/components/common/FloatingCTA.vue"));
 
 const router = useRouter();

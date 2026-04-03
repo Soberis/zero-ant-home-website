@@ -25,11 +25,8 @@
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
-            <span class="btn btn-primary" @click.prevent="$router.push('/products')">
+            <span class="btn btn-primary" @click.stop.prevent="$router.push('/products')">
               {{ t('home.hero.primaryCta') }}
-            </span>
-            <span class="btn btn-secondary" @click.prevent="$router.push('/support#contact')">
-              {{ t('home.hero.secondaryCta') }}
             </span>
           </div>
         </div>
