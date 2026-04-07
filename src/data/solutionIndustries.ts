@@ -49,20 +49,20 @@ export const solutionCapabilityLayers: SolutionCapabilityLayerConfig[] = [
 export const solutionIndustryGroups: SolutionIndustryGroupConfig[] = [
   {
     key: "precisionWorkcell",
-    applicationSlugs: ["semiconductor", "precision-assembly", "surface-treatment"],
-    productSlugs: ["za-r3-x", "za-r3d6", "za-zg100", "rail"],
-    proofVideoSlug: "semiconductor",
+    applicationSlugs: ["precision-assembly", "surface-treatment", "medical-automation"],
+    productSlugs: ["za-r3-x", "za-r3l-m-h", "za-r3d6", "za-zg100"],
+    proofVideoSlug: "assembly-robot",
   },
   {
     key: "mobileCollaboration",
     applicationSlugs: ["composite-systems", "smart-logistics", "intelligent-navigation"],
-    productSlugs: ["za-m135", "za-mr3m", "za-mr3t", "za-zg100"],
+    productSlugs: ["za-m75", "za-m135", "za-mr3m", "za-mr3t"],
     proofVideoSlug: "composite-robot-application",
   },
   {
     key: "embodiedDevelopment",
     applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
-    productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp", "za-zg100"],
+    productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
     proofVideoSlug: "sketching-robot",
   },
 ];
@@ -71,7 +71,7 @@ export const featuredProofs: FeaturedProofConfig[] = [
   {
     key: "precision-proof",
     industryKey: "precisionWorkcell",
-    videoSlug: "semiconductor",
+    videoSlug: "assembly-robot",
   },
   {
     key: "mobile-proof",

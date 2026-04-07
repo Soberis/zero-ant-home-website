@@ -3,7 +3,6 @@
     <section class="solutions-hero">
       <div class="page-shell hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow">{{ t("solutionsPage.hero.eyebrow") }}</p>
           <h1 class="hero-title text-display-hero">{{ t("solutionsPage.hero.title") }}</h1>
           <p class="hero-description">
             {{ t("solutionsPage.hero.description") }}
@@ -39,14 +38,12 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.industries.title") }}</span>
-            <span class="title-en">SOLUTION DIRECTIONS</span>
           </h2>
           <p class="section-description">
             {{ t("solutionsPage.industries.description") }}
           </p>
         </div>
 
-        <!-- Revamped Dense Industry Grid -->
         <div class="industry-grid">
           <article
             v-for="industry in industries"
@@ -60,21 +57,17 @@
             @keydown.space.prevent="openApplication(industry.primaryApplication)"
           >
             <div class="industry-block__header">
-              <span class="card-index">{{ formatIndex(industry.index) }}</span>
               <h3 class="card-title">{{ industry.title }}</h3>
             </div>
-            
+
             <p class="card-description">{{ industry.summary }}</p>
 
-            <div class="industry-tags">
-              <span class="tag" v-for="scenario in industry.scenarios" :key="scenario">
-                {{ scenario }}
-              </span>
-            </div>
+            <div class="industry-footer">
+              <p v-if="industry.productLine" class="industry-products">
+                {{ industry.productLine }}
+              </p>
 
-            <div v-if="industry.primaryApplication" class="industry-footer-jump">
-              <span class="industry-footer-label">{{ t("solutionsPage.industries.applicationEntry") }}</span>
-              <div class="industry-footer-link">
+              <div v-if="industry.primaryApplication" class="industry-footer-link" aria-hidden="true">
                 <span class="link-text">{{ industry.primaryApplication.title }}</span>
                 <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -87,101 +80,16 @@
       </div>
     </section>
 
-    <section id="backbone" ref="backboneRef" class="page-section reveal-ready">
-      <div class="page-shell">
-        <div class="detail-section__header">
-          <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("solutionsPage.backbone.title") }}</span>
-            <span class="title-en">SOLUTION STACK</span>
-          </h2>
-          <p class="section-description">
-            {{ t("solutionsPage.backbone.description") }}
-          </p>
-        </div>
-
-        <div class="backbone-grid">
-          <article
-            v-for="(layer, idx) in capabilityLayers"
-            :key="layer.key"
-            class="backbone-card"
-          >
-            <span class="card-index">{{ formatIndex(idx + 1) }}</span>
-            <h3 class="card-title">{{ layer.title }}</h3>
-            <p class="card-description">{{ layer.description }}</p>
-
-            <p class="backbone-related-label">{{ t("solutionsPage.tags.relatedProducts") }}</p>
-            <div class="chip-list">
-              <button
-                v-for="product in layer.products"
-                :key="product.slug"
-                type="button"
-                class="chip-btn"
-                @click="goToProduct(product.route)"
-              >
-                <span>{{ product.title }}</span>
-                <svg class="chip-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M4 10H15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M10 5L15 10L10 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- 精选案例默认收缩展示，完整案例索引按需展开 -->
     <section id="proof" ref="proofRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.proof.title") }}</span>
-            <span class="title-en">USE CASES</span>
           </h2>
           <p class="section-description">
             {{ t("solutionsPage.proof.description") }}
           </p>
-        </div>
-
-        <p class="proof-guide">
-          {{ t("solutionsPage.proof.guide") }}
-        </p>
-
-        <div class="proof-actions">
-          <button
-            type="button"
-            class="show-more-btn"
-            :class="{ active: showAllVideos }"
-            @click="toggleVideoArchive"
-          >
-            <span>
-              {{
-                showAllVideos
-                  ? t("solutionsPage.proof.collapseVideos")
-                  : t("solutionsPage.proof.expandVideos", {
-                      count: allVideoCards.length,
-                    })
-              }}
-            </span>
-            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <button
-            type="button"
-            class="show-more-btn show-more-btn--secondary"
-            :class="{ active: showAllApps }"
-            @click="toggleApplicationArchive"
-          >
-            <span>
-              {{
-                showAllApps
-                  ? t("solutionsPage.proof.collapseApplications")
-                  : t("solutionsPage.proof.expandApplications", {
-                      count: allApplications.length,
-                    })
-              }}
-            </span>
-            <svg class="show-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
         </div>
 
         <div class="proof-feature-grid">
@@ -195,6 +103,37 @@
             @leave="clearMoreVideoHover"
             @click="goToVideo(card.slug)"
           />
+        </div>
+
+        <div class="proof-links">
+          <button
+            type="button"
+            class="proof-link"
+            :class="{ active: showAllVideos }"
+            @click="toggleVideoArchive"
+          >
+            {{
+              showAllVideos
+                ? t("solutionsPage.proof.collapseVideos")
+                : t("solutionsPage.proof.expandVideos", {
+                    count: allVideoCards.length,
+                  })
+            }}
+          </button>
+          <button
+            type="button"
+            class="proof-link"
+            :class="{ active: showAllApps }"
+            @click="toggleApplicationArchive"
+          >
+            {{
+              showAllApps
+                ? t("solutionsPage.proof.collapseApplications")
+                : t("solutionsPage.proof.expandApplications", {
+                    count: allApplications.length,
+                  })
+            }}
+          </button>
         </div>
 
         <div v-if="showAllVideos" class="proof-archive">
@@ -216,13 +155,13 @@
         <div v-if="showAllApps" class="proof-archive">
           <p class="proof-archive-title">{{ t("solutionsPage.proof.applicationIndex") }}</p>
           <div class="more-application-grid">
-          <ApplicationCard
-            v-for="item in allApplications"
-            :key="item.slug"
-            :title="item.title"
-            :svg="item.svg"
-            :slug="item.slug"
-          />
+            <ApplicationCard
+              v-for="item in allApplications"
+              :key="item.slug"
+              :title="item.title"
+              :svg="item.svg"
+              :slug="item.slug"
+            />
           </div>
         </div>
       </div>
@@ -233,7 +172,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.delivery.title") }}</span>
-            <span class="title-en">DELIVERY PATH</span>
           </h2>
           <p class="section-description">
             {{ t("solutionsPage.delivery.description") }}
@@ -256,9 +194,13 @@
 
         <div class="delivery-contact">
           <div class="delivery-contact__copy">
-            <p class="section-eyebrow">{{ t("solutionsPage.delivery.eyebrow") }}</p>
             <h3 class="delivery-contact__title">{{ t("solutionsPage.delivery.contactTitle") }}</h3>
             <p class="delivery-contact__desc">{{ t("solutionsPage.delivery.contactDescription") }}</p>
+            <div class="delivery-contact__actions">
+              <router-link class="btn btn-primary" to="/support#contact">
+                {{ t("common.cta.contactTeam") }}
+              </router-link>
+            </div>
           </div>
           <div class="delivery-contact__meta">
             <div class="delivery-contact__row">
@@ -287,16 +229,9 @@ import VideoCard from "@/components/common/VideoCard.vue";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import {
   featuredProofs,
-  solutionCapabilityLayers,
   solutionIndustryGroups,
 } from "@/data/solutionIndustries";
 import { useScrollRevealList } from "@/composables/useScrollReveal";
-
-interface SolutionProductRef {
-  slug: string;
-  title: string;
-  route: string;
-}
 
 interface SolutionApplicationRef {
   slug: string;
@@ -304,28 +239,19 @@ interface SolutionApplicationRef {
   description: string;
 }
 
-interface SolutionCapabilityCard {
-  key: string;
-  title: string;
-  description: string;
-  products: SolutionProductRef[];
-}
-
 interface SolutionIndustryCard {
   key: string;
-  index: number;
   title: string;
   summary: string;
-  scenarios: string[];
+  productLine: string;
   primaryApplication: SolutionApplicationRef | null;
 }
 
 const industriesRef = ref<HTMLElement | null>(null);
-const backboneRef = ref<HTMLElement | null>(null);
 const proofRef = ref<HTMLElement | null>(null);
 const deliveryRef = ref<HTMLElement | null>(null);
 
-useScrollRevealList([industriesRef, backboneRef, proofRef, deliveryRef]);
+useScrollRevealList([industriesRef, proofRef, deliveryRef]);
 
 const route = useRoute();
 const router = useRouter();
@@ -334,6 +260,8 @@ const { t, tm, locale } = useI18n();
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
 const showAllApps = ref(false);
+const hiddenSolutionApplicationSlugs = new Set(["semiconductor"]);
+const hiddenSolutionVideoSlugs = new Set(["semiconductor"]);
 
 function isDefined<T>(value: T | null | undefined): value is T {
   return value != null;
@@ -366,28 +294,42 @@ function resolveLocalizedText(value: { zh: string; en: string }): string {
   return locale.value === "en" ? value.en : value.zh;
 }
 
-const heroStats = computed(() => [
-  {
-    value: formatIndex(solutionIndustryGroups.length),
-    label: t("solutionsPage.hero.stats.industry.label"),
-  },
-  {
-    value: formatIndex(solutionCapabilityLayers.length),
-    label: t("solutionsPage.hero.stats.backbone.label"),
-  },
-  {
-    value: t("solutionsPage.hero.stats.delivery.value"),
-    label: t("solutionsPage.hero.stats.delivery.label"),
-  },
-]);
+function formatProductLine(products: string[]): string {
+  const visibleProducts = products.slice(0, 3).join(" / ");
 
-const productMap = computed<Record<string, SolutionProductRef>>(() =>
-  productCenterCards.reduce<Record<string, SolutionProductRef>>((map, item) => {
-    map[item.card.id] = {
-      slug: item.card.id,
-      title: resolveLocalizedText(item.card.title),
-      route: `/products/detail/${item.card.id}`,
-    };
+  if (products.length <= 3) {
+    return visibleProducts;
+  }
+
+  return locale.value === "en" ? `${visibleProducts} / etc.` : `${visibleProducts} 等`;
+}
+
+const relatedProductCount = computed(() =>
+  new Set(solutionIndustryGroups.flatMap((group) => group.productSlugs)).size
+);
+
+const heroStats = computed(() => {
+  const isEn = locale.value === "en";
+
+  return [
+    {
+      value: formatIndex(solutionIndustryGroups.length),
+      label: isEn ? "Solution directions" : "方案方向",
+    },
+    {
+      value: formatIndex(relatedProductCount.value),
+      label: isEn ? "Related products" : "关联产品",
+    },
+    {
+      value: formatIndex(featuredProofs.length),
+      label: isEn ? "Featured cases" : "代表案例",
+    },
+  ];
+});
+
+const productTitleMap = computed<Record<string, string>>(() =>
+  productCenterCards.reduce<Record<string, string>>((map, item) => {
+    map[item.card.id] = resolveLocalizedText(item.card.title);
 
     return map;
   }, {})
@@ -405,46 +347,32 @@ const applicationMap = computed<Record<string, SolutionApplicationRef>>(() =>
   }, {})
 );
 
-const capabilityLayers = computed<SolutionCapabilityCard[]>(() =>
-  solutionCapabilityLayers.map((layer) => ({
-    key: layer.key,
-    title: t(`solutionsPage.backbone.${layer.key}.title`),
-    description: t(`solutionsPage.backbone.${layer.key}.description`),
-    products: layer.productSlugs
-      .map((slug) => productMap.value[slug])
-      .filter(isDefined),
-  }))
-);
-
 const industries = computed<SolutionIndustryCard[]>(() =>
-  solutionIndustryGroups.map((group, index) => {
+  solutionIndustryGroups.map((group) => {
     const applicationsForGroup = group.applicationSlugs
       .map((slug) => applicationMap.value[slug])
       .filter(isDefined);
 
-    const rawScenarios = tm(`solutionsPage.industries.${group.key}.scenarios`);
-    const scenarios = Array.isArray(rawScenarios)
-      ? rawScenarios
-          .map((item) => {
-            const text = String(item);
-            return text.startsWith("@:") ? t(text.slice(2)) : text;
-          })
-          .slice(0, 2)
-      : [];
-
     return {
       key: group.key,
-      index: index + 1,
       title: t(`solutionsPage.industries.${group.key}.title`),
       summary: t(`solutionsPage.industries.${group.key}.summary`),
-      scenarios,
+      productLine: formatProductLine(
+        group.productSlugs
+          .map((slug) => productTitleMap.value[slug])
+          .filter(isDefined)
+      ),
       primaryApplication: applicationsForGroup[0] ?? null,
     };
   })
 );
 
-const allVideoCards = computed(() => videoCards);
-const allApplications = computed(() => applications);
+const allVideoCards = computed(() =>
+  videoCards.filter((card) => !hiddenSolutionVideoSlugs.has(card.slug))
+);
+const allApplications = computed(() =>
+  applications.filter((item) => !hiddenSolutionApplicationSlugs.has(item.slug))
+);
 const videoCardMap = computed(() =>
   allVideoCards.value.reduce<Record<string, (typeof videoCards)[number]>>((map, card) => {
     map[card.slug] = card;
@@ -478,12 +406,8 @@ const deliverySteps = computed(() => [
     description: t("solutionsPage.delivery.steps.design.description"),
   },
   {
-    title: t("solutionsPage.delivery.steps.verify.title"),
-    description: t("solutionsPage.delivery.steps.verify.description"),
-  },
-  {
-    title: t("solutionsPage.delivery.steps.deploy.title"),
-    description: t("solutionsPage.delivery.steps.deploy.description"),
+    title: t("solutionsPage.delivery.steps.deliver.title"),
+    description: t("solutionsPage.delivery.steps.deliver.description"),
   },
 ]);
 
@@ -517,10 +441,6 @@ function setMoreVideoHover(idx: number): void {
 
 function clearMoreVideoHover(): void {
   hoverMoreVideoIdx.value = -1;
-}
-
-function goToProduct(route: string): void {
-  router.push({ path: route });
 }
 
 function toggleVideoArchive(): void {
@@ -571,16 +491,6 @@ function toggleApplicationArchive(): void {
   justify-content: flex-start;
 }
 
-.hero-eyebrow {
-  display: block;
-  margin: 0 0 16px;
-  color: var(--brand-muted);
-  font-size: 0.92rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .hero-title {
   max-width: 14em;
   margin: 0 0 24px;
@@ -616,23 +526,6 @@ function toggleApplicationArchive(): void {
 .hero-actions {
   gap: 12px;
   align-items: center;
-}
-
-.nav-pill,
-.chip-btn,
-.text-link {
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.nav-pill:hover,
-.chip-btn:hover,
-.text-link:hover {
-  transform: translateY(-2px);
 }
 
 .hero-panel {
@@ -677,100 +570,37 @@ function toggleApplicationArchive(): void {
   text-align: left;
 }
 
-.section-nav {
-  padding-bottom: 20px;
-}
-
-.nav-scroll {
-  gap: 12px;
-}
-
-.nav-pill {
-  border: 1px solid var(--brand-border);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  color: var(--brand-text);
-  padding: 10px 16px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 .page-section {
-  padding: 88px 0;
+  padding: 76px 0;
   border-top: 1px solid rgba(15, 23, 42, 0.05);
-  scroll-margin-top: calc(var(--nav-height) + 16px); /* prevent navbar overlap */
-}
-
-.solutions-page > .page-section:nth-of-type(even) {
-  background-color: #f8f9fb;
-}
-
-.section-heading {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 24px;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 .detail-section__header {
   max-width: 760px;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
 }
 
 .detail-section__title {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-start;
-  gap: 10px;
   margin: 0 0 12px 0;
 }
 
-.title-main {  color: var(--brand-text);
+.title-main {
+  color: var(--brand-text);
 }
-
-.title-en {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--brand-muted);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 
 .section-description {
-  max-width: 980px;
+  max-width: 42rem;
   margin: 0;
   font-size: 1rem;
   line-height: 1.75;
   color: var(--brand-muted);
 }
 
-.backbone-grid,
-.industry-grid,
-.proof-grid,
-.contact-list {
-  display: grid;
-  gap: 16px;
-}
-
-.backbone-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-}
-
-.industry-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.proof-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .more-video-grid,
 .more-application-grid {
   display: grid;
-  gap: 16px;
+  gap: 24px;
 }
 
 .more-video-grid {
@@ -783,71 +613,6 @@ function toggleApplicationArchive(): void {
   gap: 24px;
 }
 
-.grid-subheading {
-  margin: 0 0 24px 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--brand-text);
-  letter-spacing: 0.02em;
-}
-
-.grid-spacer {
-  height: 64px;
-}
-
-.backbone-card {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 0;
-  border-radius: 0;
-  background: transparent;
-  border: none;
-  transition: border-color 0.25s ease;
-}
-.backbone-card:nth-child(n + 3) {
-  padding-top: 28px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-}
-.backbone-card:hover {
-  transform: none;
-  box-shadow: none;
-  border-color: rgba(26, 58, 143, 0.2);
-}
-.contact-panel {
-  display: flex;
-  flex-direction: column;
-  padding: 40px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 12px;
-  background: #ffffff;
-  transition: transform 0.3s ease;
-}
-
-
-.card-footer-cta {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  
-}
-.card-footer-cta .text-link {
-  pointer-events: none;
-}
-.cta-arrow {
-  width: 18px;
-  height: 18px;
-  color: var(--brand-primary);
-  opacity: 0.8;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.backbone-card:hover .cta-arrow {
-  opacity: 1;
-  transform: translateX(4px);
-}
-
-/* --- Dense Industry Grid --- */
 .industry-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -858,11 +623,9 @@ function toggleApplicationArchive(): void {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding: 28px 0 24px;
-  border-radius: 0;
-  background: transparent;
+  padding: 24px 0 22px;
   border: none;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
   cursor: pointer;
   transition: border-color 0.25s ease, color 0.25s ease;
 }
@@ -875,68 +638,36 @@ function toggleApplicationArchive(): void {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-.industry-block__header .card-index {
-  margin: 0;
+  margin-bottom: 14px;
 }
 .industry-block__header .card-title {
   margin: 0;
 }
 
-.industry-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 0;
-  margin-bottom: 18px;
-}
-
-.tag {
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  color: rgba(15, 23, 42, 0.6);
-  font-size: 0.82rem;
-  font-weight: 500;
-}
-
-.tag + .tag {
-  position: relative;
-  margin-left: 14px;
-}
-
-.tag + .tag::before {
-  content: "/";
-  position: absolute;
-  left: -10px;
-  color: rgba(15, 23, 42, 0.28);
-}
-
-.industry-footer-jump {
+.industry-footer {
   margin-top: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
-  padding-top: 14px;
+  gap: 10px;
+  padding-top: 16px;
   color: var(--brand-text);
   transition: color 0.25s ease, opacity 0.25s ease;
 }
 
-.industry-footer-label {
-  color: rgba(15, 23, 42, 0.42);
-  font-size: 0.74rem;
+.industry-products {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.5);
+  font-size: 0.84rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  line-height: 1.7;
 }
 
 .industry-footer-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: rgba(15, 23, 42, 0.74);
+  gap: 5px;
+  color: rgba(15, 23, 42, 0.62);
   transition: color 0.25s ease;
 }
 
@@ -949,23 +680,16 @@ function toggleApplicationArchive(): void {
 }
 
 .link-text {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.86rem;
+  font-weight: 500;
   line-height: 1.55;
 }
 
 .action-icon {
-  width: 18px;
-  height: 18px;
-  color: var(--brand-primary);
+  width: 16px;
+  height: 16px;
+  color: currentColor;
   transition: transform 0.3s ease;
-}
-/* -------------------------------------- */
-
-.videos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
 }
 
 .card-index {
@@ -989,137 +713,7 @@ function toggleApplicationArchive(): void {
   margin: 0 0 18px;
   font-size: 0.98rem;
 }
-
-.backbone-related-label {
-  margin: 8px 0 10px;
-  color: rgba(15, 23, 42, 0.42);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.chip-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  margin-top: auto;
-}
-
-.chip,
-.chip-btn {
-  width: fit-content;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1.4;
-  background: rgba(15, 23, 42, 0.05);
-  color: rgba(15, 23, 42, 0.72);
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.chip-btn:hover {
-  background: transparent;
-  border-color: transparent;
-  color: var(--brand-primary);
-  transform: none;
-}
-
-.chip {
-  background: #f4f7fb;
-  color: rgba(15, 23, 42, 0.72);
-  border: 1px solid rgba(217, 226, 236, 0.9);
-}
-
-.chip-btn {
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: transparent;
-  color: rgba(15, 23, 42, 0.66);
-  border: none;
-  cursor: pointer;
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1.55;
-}
-
-.chip-arrow {
-  width: 12px;
-  height: 12px;
-  color: currentColor;
-  opacity: 0.62;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.chip-btn:hover .chip-arrow {
-  opacity: 1;
-  transform: translateX(2px);
-}
-
-.info-group {
-  margin-top: 18px;
-}
-
-.meta-text {
-  margin: 0;
-  color: var(--brand-text);
-  font-size: 0.94rem;
-  line-height: 1.75;
-}
-
-.scenario-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 8px;
-}
-
-.scenario-list li {
-  position: relative;
-  padding-left: 14px;
-  color: var(--brand-text);
-  font-size: 0.94rem;
-  line-height: 1.7;
-}
-
-.scenario-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.72em;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.3);
-}
-
-.info-label,
-.contact-label,
-.proof-card-tag {
-  display: inline-block;
-  margin-bottom: 10px;
-  color: rgba(15, 23, 42, 0.48);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.proof-card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-}
-
 .proof-card-title,
-.contact-title,
 .step-title {
   color: var(--brand-text);
 }
@@ -1137,88 +731,15 @@ function toggleApplicationArchive(): void {
   font-size: 0.92rem;
 }
 
-.industry-footer {
-  margin-top: 22px;
-  padding-top: 16px;
-  
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.application-hint {
-  color: rgba(15, 23, 42, 0.56);
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.text-link {
-  border: 0;
-  background: transparent;
-  color: var(--brand-primary);
-  padding: 0;
-  font-size: 0.94rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: fit-content;
-}
-
-.proof-card {
-  padding: 0;
-  overflow: hidden;
-  cursor: pointer;
-  text-align: left;
-}
-
-.proof-card-image {
-  height: 230px;
-}
-
-.proof-card-copy {
-  padding: 20px;
-}
-
 .delivery-section {
   padding-bottom: 88px;
-}
-
-.more-section {
-  padding-top: 4px;
-}
-
-.more-panel {
-  border: 1px solid rgba(217, 226, 236, 0.92);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
-  padding: 24px;
-}
-
-.industry-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px dashed rgba(15, 23, 42, 0.06);
-}
-
-.proof-guide {
-  max-width: 38rem;
-  margin: -4px 0 18px;
-  color: rgba(15, 23, 42, 0.62);
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.75;
 }
 
 .proof-feature-grid {
   display: grid;
   gap: 28px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-top: 24px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 8px;
 }
 
 .proof-feature-grid :deep(.video-title),
@@ -1232,18 +753,16 @@ function toggleApplicationArchive(): void {
   font-weight: 500;
 }
 
-.proof-actions {
+.proof-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin: 0 0 18px;
-  padding-top: 0;
-  border-top: none;
+  gap: 22px;
+  margin-top: 20px;
 }
 
 .proof-archive {
-  margin-top: 48px;
-  padding-top: 32px;
+  margin-top: 36px;
+  padding-top: 28px;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
@@ -1277,62 +796,32 @@ function toggleApplicationArchive(): void {
   font-weight: 600;
 }
 
-.show-more-btn {
+.proof-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   padding: 0;
   border: none;
-  border-radius: 0;
   background: transparent;
-  color: rgba(15, 23, 42, 0.74);
+  color: rgba(15, 23, 42, 0.68);
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
-.show-more-btn:hover {
+.proof-link:hover {
   color: var(--brand-primary);
 }
 
-.show-more-btn.active {
-  color: rgba(15, 23, 42, 0.82);
-}
-
-.show-more-btn--secondary {
-  color: rgba(15, 23, 42, 0.58);
-}
-
-.show-more-btn--secondary.active {
+.proof-link.active {
   color: rgba(15, 23, 42, 0.72);
-}
-
-.show-more-arrow {
-  width: 12px;
-  height: 12px;
-  opacity: 0.8;
-  transition: transform 0.3s ease;
-}
-
-.show-more-btn.active .show-more-arrow {
-  transform: rotate(180deg);
-}
-
-.delivery-contact .section-eyebrow {
-  margin: 0;
-  color: var(--brand-muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 600;
 }
 
 .delivery-steps {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0 24px;
-  margin-bottom: 64px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-bottom: 48px;
 }
 
 .delivery-step {
@@ -1360,16 +849,6 @@ function toggleApplicationArchive(): void {
 .contact-description {
   margin: 0;
   font-size: 0.96rem;
-}
-
-.contact-panel {
-  display: flex;
-  flex-direction: column;
-  padding: 36px;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.05);
 }
 
 .delivery-contact {
@@ -1406,6 +885,10 @@ function toggleApplicationArchive(): void {
   font-size: 0.95rem;
   color: var(--brand-muted);
   line-height: 1.8;
+}
+
+.delivery-contact__actions {
+  margin-top: 18px;
 }
 
 .delivery-contact__row {
@@ -1446,7 +929,6 @@ function toggleApplicationArchive(): void {
 
 @media (max-width: 1100px) {
   .hero-grid,
-  .backbone-grid,
   .proof-feature-grid,
   .more-video-grid,
   .more-application-grid {
@@ -1475,8 +957,8 @@ function toggleApplicationArchive(): void {
   }
 
   .delivery-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 28px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -1515,15 +997,8 @@ function toggleApplicationArchive(): void {
     padding-top: 20px;
   }
 
-  .backbone-card,
-  .industry-card,
-  .contact-panel,
-  .more-panel {
-    padding: 20px 0 0;
-  }
-
   .industry-block {
-    padding: 22px 22px 20px;
+    padding: 22px 0 20px;
   }
 
   .delivery-contact {
@@ -1554,22 +1029,13 @@ function toggleApplicationArchive(): void {
   }
 
   .industry-footer {
-    flex-direction: column;
-    align-items: flex-start;
+    gap: 10px;
   }
 
   .delivery-steps {
     grid-template-columns: 1fr;
     gap: 18px;
   }
-}
-
-/* 统一圆角到 24px (大卡片) 和 16px (内部小项) */
-.more-panel {
-  border-radius: 24px !important;
-}
-.proof-card-image {
-  border-radius: 16px !important;
 }
 </style>
 

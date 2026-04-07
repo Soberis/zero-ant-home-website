@@ -150,7 +150,7 @@
     "hero": {
       "eyebrow": "Industry Solutions",
       "title": "围绕现有产品组合的三类核心方案方向",
-      "description": "以 R / M / MR 系列、具身开发平台、控制器和扩展机构为抓手，覆盖精密作业单元、移动作业协同与具身开发验证三类方案。",
+      "description": "先判断是精密作业、移动协作还是具身开发，再看对应产品与代表案例。",
       "primaryCta": "查看方案方向",
       "secondaryCta": "查看交付方式",
       "stats": {
@@ -198,21 +198,21 @@
     "industries": {
       "eyebrow": "Industry Matrix",
       "title": "聚焦三类方案方向",
-      "description": "按现有产品能力把解决方案收敛成 3 个清晰入口，先判断方向，再进入代表应用和组合路径。",
+      "description": "解决方案先收敛成 3 个清晰入口，每个方向直接对应代表应用和关联产品。",
       "applicationEntry": "代表应用",
       "viewApplication": "查看相关应用",
       "precisionWorkcell": {
-        "title": "精密作业单元",
-        "summary": "面向半导体、精密装配与表面处理工位，强调节拍稳定、定位精度和工站集成能力。",
+        "title": "精密传送与装配",
+        "summary": "围绕 R 系列机械臂、升降平台与控制器，覆盖精密传送、装配与表面处理工位。",
         "scenarios": [
-          "@:common.terms.semiconductorProcessing",
           "@:common.terms.precisionAssembly",
-          "@:common.terms.surfaceTreatment"
+          "@:common.terms.surfaceTreatment",
+          "@:common.terms.medicalAutomation"
         ]
       },
       "mobileCollaboration": {
-        "title": "移动作业与跨区协同",
-        "summary": "面向厂内物流、跨工位搬运和复合机器人联动作业，强调导航稳定、多任务切换与连续运行。",
+        "title": "移动搬运与复合作业",
+        "summary": "围绕 M / MR 系列移动底盘与复合机器人，覆盖厂内物流、跨工位搬运与联动作业。",
         "scenarios": [
           "复合系统",
           "@:common.terms.smartLogistics",
@@ -220,8 +220,8 @@
         ]
       },
       "embodiedDevelopment": {
-        "title": "具身开发与验证",
-        "summary": "面向双臂操作、遥操作训练和科研验证，强调平台开放性、快速迭代和算法闭环。",
+        "title": "具身开发与遥操作验证",
+        "summary": "围绕 MR3T、VR / 主从遥操作与绘画平台，覆盖双臂操作、训练与科研验证。",
         "scenarios": [
           "AI 机器人",
           "农业科研自动化",
@@ -231,17 +231,17 @@
     },
     "proof": {
       "eyebrow": "Featured Proof",
-      "title": "用少量案例证明落地能力",
-      "description": "精选 3 个更能代表当前产品方向的案例，快速说明 ZeroAnt 如何把方案落到现场。",
+      "title": "先看 3 个代表案例",
+      "description": "先用 3 个代表案例判断方向，更多视频和应用按需展开。",
       "watchCase": "查看案例详情",
       "guide": "先看 3 个代表性视频案例，再按需展开完整视频与行业应用索引。",
-      "expandVideos": "查看全部视频案例 ({count})",
-      "collapseVideos": "收起全部视频案例",
+      "expandVideos": "更多视频案例 ({count})",
+      "collapseVideos": "收起视频案例",
       "browseApplications": "查看所有行业应用",
-      "expandApplications": "查看所有行业应用 ({count})",
-      "collapseApplications": "收起所有行业应用",
-      "allVideos": "全部视频案例",
-      "applicationIndex": "所有行业应用"
+      "expandApplications": "更多行业应用 ({count})",
+      "collapseApplications": "收起行业应用",
+      "allVideos": "更多视频案例",
+      "applicationIndex": "更多行业应用"
     },
     "more": {
       "eyebrow": "More",
@@ -257,10 +257,10 @@
     },
     "delivery": {
       "eyebrow": "Delivery",
-      "title": "从场景梳理到分阶段部署的交付闭环",
-      "description": "先明确作业方向，再组合本体、控制器与扩展机构，通过前置验证后分阶段部署，减少现场反复调整。",
-      "contactTitle": "让团队更快匹配正确组合",
-      "contactDescription": "如果方向已经明确，欢迎直接联系团队，我们会按工位类型、节拍要求和部署条件快速给出组合建议。",
+      "title": "明确方向后，进入组合与交付",
+      "description": "方向确认后，按组合设计、验证和部署推进落地。",
+      "contactTitle": "方向明确后，直接联系团队",
+      "contactDescription": "我们会根据工位类型、节拍要求和部署条件，快速给出产品组合建议。",
       "steps": {
         "discovery": {
           "title": "场景梳理",
@@ -270,13 +270,9 @@
           "title": "方案设计",
           "description": "根据方向组合本体型号、控制器与扩展机构，并确认接口边界。"
         },
-        "verify": {
-          "title": "前置验证",
-          "description": "通过仿真、离线编程和测试验证减少现场调试压力。"
-        },
-        "deploy": {
-          "title": "分阶段部署",
-          "description": "在确保稳定运行的前提下完成上线、联调与后续扩展。"
+        "deliver": {
+          "title": "验证与交付",
+          "description": "通过前置验证后进入联调上线和后续扩展，减少现场反复调整。"
         }
       }
     },
@@ -786,16 +782,16 @@
     "structuredData": {
       "solutions": {
         "precisionWorkcell": {
-          "name": "精密作业单元方案",
-          "description": "面向半导体、精密装配与表面处理工位的高精度自动化方案"
+          "name": "精密传送与装配方案",
+          "description": "围绕 R 系列机械臂、升降平台与控制器的高精度传送、装配与表面处理方案"
         },
         "mobileCollaboration": {
-          "name": "移动作业与跨区协同方案",
-          "description": "面向厂内物流、跨工位搬运与复合机器人联动的移动协作方案"
+          "name": "移动搬运与复合作业方案",
+          "description": "围绕 M / MR 系列移动底盘与复合机器人的搬运、转运与联动作业方案"
         },
         "embodiedDevelopment": {
-          "name": "具身开发与验证方案",
-          "description": "面向双臂操作、遥操作训练与科研验证的具身平台方案"
+          "name": "具身开发与遥操作验证方案",
+          "description": "围绕 MR3T、VR / 主从遥操作与绘画平台的具身开发与验证方案"
         }
       },
       "careers": {

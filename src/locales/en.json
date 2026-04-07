@@ -150,7 +150,7 @@
     "hero": {
       "eyebrow": "@:common.terms.industrySolutions",
       "title": "Three solution directions built from the current product lineup",
-      "description": "Using the R / M / MR families, embodied platforms, controller hardware, and accessories as building blocks, ZeroAnt now focuses on precision workcells, mobile collaboration, and embodied development validation.",
+      "description": "Start by deciding between precision workcells, mobile collaboration, and embodied development, then move into the matching products and proof cases.",
       "primaryCta": "Explore Solution Directions",
       "secondaryCta": "View Delivery",
       "stats": {
@@ -198,21 +198,21 @@
     "industries": {
       "eyebrow": "Industry Matrix",
       "title": "Three focused solution directions",
-      "description": "Current products are consolidated into 3 clear entry points so users can choose the direction first, then move into representative applications and combinations.",
+      "description": "The page is reduced to 3 clear entry points, each tied directly to representative applications and related products.",
       "applicationEntry": "Featured application",
       "viewApplication": "View related applications",
       "precisionWorkcell": {
-        "title": "Precision Workcells",
-        "summary": "For semiconductor, precision assembly, and surface-treatment stations where takt stability, positioning accuracy, and workstation integration matter.",
+        "title": "Precision Transfer & Assembly",
+        "summary": "Built around the R-series arms, lift platforms, and controller hardware for precision transfer, assembly, and surface-treatment stations.",
         "scenarios": [
-          "Semiconductor processing",
           "Precision assembly",
-          "Surface treatment"
+          "Surface treatment",
+          "Medical automation"
         ]
       },
       "mobileCollaboration": {
-        "title": "Mobile Collaboration",
-        "summary": "For in-factory transport, cross-station transfer, and composite robotic work where navigation stability, task switching, and runtime reliability matter.",
+        "title": "Mobile Transfer & Composite Work",
+        "summary": "Built around the M / MR families for in-factory logistics, cross-station transfer, and linked robotic work.",
         "scenarios": [
           "Composite systems",
           "Smart logistics",
@@ -220,8 +220,8 @@
         ]
       },
       "embodiedDevelopment": {
-        "title": "Embodied Development & Validation",
-        "summary": "For dual-arm operation, teleoperation training, and research validation with emphasis on openness, fast iteration, and closed-loop experimentation.",
+        "title": "Embodied Development & Teleoperation Validation",
+        "summary": "Built around MR3T, VR / master-slave teleoperation, and the drawing platform for dual-arm operation, training, and research validation.",
         "scenarios": [
           "AI robotics",
           "Agricultural research automation",
@@ -231,17 +231,17 @@
     },
     "proof": {
       "eyebrow": "Featured Proof",
-      "title": "A few cases are enough to prove delivery capability",
-      "description": "Three representative cases are enough to explain how the current product lineup turns into real delivery.",
+      "title": "Start with 3 representative cases",
+      "description": "Use 3 representative cases to judge the direction first, then expand more videos and applications if needed.",
       "watchCase": "View case details",
       "guide": "Start with 3 representative video cases, then expand the full video archive and industry application index as needed.",
-      "expandVideos": "View all video cases ({count})",
-      "collapseVideos": "Collapse all video cases",
+      "expandVideos": "More video cases ({count})",
+      "collapseVideos": "Collapse video cases",
       "browseApplications": "View all industry applications",
-      "expandApplications": "View all industry applications ({count})",
-      "collapseApplications": "Collapse all industry applications",
-      "allVideos": "All video cases",
-      "applicationIndex": "All industry applications"
+      "expandApplications": "More industry applications ({count})",
+      "collapseApplications": "Collapse industry applications",
+      "allVideos": "More video cases",
+      "applicationIndex": "More industry applications"
     },
     "more": {
       "eyebrow": "More",
@@ -257,10 +257,10 @@
     },
     "delivery": {
       "eyebrow": "@:common.terms.delivery",
-      "title": "A delivery loop from discovery to phased rollout",
-      "description": "Clarify the work direction first, then combine the body, controller, and expansion modules, validate early, and roll out in phases with fewer on-site iterations.",
-      "contactTitle": "Let the team match the right combination faster",
-      "contactDescription": "If the direction is already clear, contact the team directly. We can quickly recommend a combination based on workstation type, takt demand, and deployment conditions.",
+      "title": "After the direction is clear, move into combination and delivery",
+      "description": "Once the direction is confirmed, move through combination design, validation, and rollout.",
+      "contactTitle": "Once the direction is clear, contact the team directly",
+      "contactDescription": "We can quickly recommend a product combination based on workstation type, takt target, and deployment conditions.",
       "steps": {
         "discovery": {
           "title": "Scenario Discovery",
@@ -270,13 +270,9 @@
           "title": "Solution Design",
           "description": "Combine the body, controller, and expansion modules around the chosen direction, then confirm interface boundaries."
         },
-        "verify": {
-          "title": "Pre-validation",
-          "description": "Use simulation, offline programming and testing to reduce on-site commissioning pressure."
-        },
-        "deploy": {
-          "title": "Phased Rollout",
-          "description": "Go live, integrate and scale further while keeping the operation stable."
+        "deliver": {
+          "title": "Validation & Rollout",
+          "description": "Complete pre-validation first, then move into launch, integration, and further expansion with fewer on-site iterations."
         }
       }
     },
@@ -788,16 +784,16 @@
     "structuredData": {
       "solutions": {
         "precisionWorkcell": {
-          "name": "Precision Workcell Solutions",
-          "description": "High-precision automation solutions for semiconductor, assembly, and surface-treatment stations"
+          "name": "Precision Transfer & Assembly Solutions",
+          "description": "High-precision transfer, assembly, and surface-treatment solutions built around R-series arms, lift platforms, and controller hardware"
         },
         "mobileCollaboration": {
-          "name": "Mobile Collaboration Solutions",
-          "description": "Mobile collaboration solutions for in-factory transport, cross-station transfer, and composite robotic work"
+          "name": "Mobile Transfer & Composite Work Solutions",
+          "description": "Transfer and linked-work solutions built around M / MR mobile bases and composite robots"
         },
         "embodiedDevelopment": {
-          "name": "Embodied Development Solutions",
-          "description": "Embodied platforms for dual-arm operation, teleoperation training, and research validation"
+          "name": "Embodied Development & Teleoperation Validation Solutions",
+          "description": "Embodied development platforms built around MR3T, VR teleoperation, master-slave teleoperation, and drawing workflows"
         }
       },
       "careers": {

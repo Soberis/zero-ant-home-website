@@ -20,7 +20,7 @@ export const supportNav = [
 
 export const solutionsNav = [
   { hash: "#industries", label: "solutionsPage.nav.industries" },
-  { hash: "#backbone", label: "solutionsPage.nav.backbone" },
+  { hash: "#proof", label: "solutionsPage.nav.proof" },
   { hash: "#delivery", label: "solutionsPage.nav.delivery" },
 ];
 
