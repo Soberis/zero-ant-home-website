@@ -110,7 +110,7 @@ const scrollToTop = () => {
   -webkit-backdrop-filter: blur(24px);
   border-radius: 100px; /* 恢复全悬浮药丸形态 */
   padding: 12px 0;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

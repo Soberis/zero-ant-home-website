@@ -231,6 +231,12 @@ onUnmounted(() => {
   transform: translateY(0);
 }
 
+@media (max-width: 1500px) and (min-width: 901px) {
+  .hero-media {
+    padding-right: calc(var(--container-padding-x) + 88px);
+  }
+}
+
 @media (max-width: 1100px) {
   .hero-carousel,
   .hero-stage {
