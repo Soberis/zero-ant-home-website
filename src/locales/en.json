@@ -121,7 +121,7 @@
         },
         "accessories": {
           "title": "Accessories",
-          "description": "Rail and rotary-platform modules for extending travel, transfer, and station flexibility."
+          "description": "Rail-platform and rotary-platform modules for extending travel, transfer, and station flexibility."
         }
       }
     },
@@ -192,7 +192,7 @@
       },
       "controlExpansion": {
         "title": "Control and expansion",
-        "description": "Built on ZA-ZG100, rail, and rotating platform modules to extend real-time control, interface density, and deployment form."
+        "description": "Built on ZA-ZG100, rail platform, and rotating platform modules to extend real-time control, interface density, and deployment form."
       }
     },
     "industries": {

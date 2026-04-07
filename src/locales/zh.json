@@ -121,7 +121,7 @@
         },
         "accessories": {
           "title": "扩展机构",
-          "description": "地轨与旋转平台，用于补足行程、转位与工位扩展。"
+          "description": "地轨平台与旋转平台，用于补足行程、转位与工位扩展。"
         }
       }
     },
@@ -192,7 +192,7 @@
       },
       "controlExpansion": {
         "title": "控制与扩展层",
-        "description": "以 ZA-ZG100、地轨和旋转平台补足实时控制、接口集成与部署形态扩展。"
+        "description": "以 ZA-ZG100、地轨平台和旋转平台补足实时控制、接口集成与部署形态扩展。"
       }
     },
     "industries": {

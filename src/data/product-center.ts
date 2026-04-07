@@ -1,5 +1,5 @@
-import railImg from "@/assets/images/product/地轨.png";
 import coverImg from "@/assets/images/product/封面.png";
+import railImg from "@/assets/images/product/地轨平台.png";
 import rotatingPlatformImg from "@/assets/images/product/旋转平台.png";
 import zaM135Img from "@/assets/images/product/ZA-M135.png";
 import zaM75Img from "@/assets/images/product/ZA-M75.png";
@@ -100,7 +100,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
           en: "A rail-integrated ZA-R3M configuration for extending long-travel linear operation range.",
         },
         specs: [
-          { zh: "组合含义：ZA-R3M + 地轨", en: "Combination: ZA-R3M + Rail" },
+          { zh: "组合含义：ZA-R3M + 地轨平台", en: "Combination: ZA-R3M + Rail Platform" },
           { zh: "归属：R 系列联动型号", en: "Category: R-series linked variant" },
           { zh: "适用场景：跨工位直线取放与联动传送", en: "Scenario: Cross-station linear pick-and-place and linked transfer" },
           { zh: "选型重点：地轨行程、节拍与整体占位", en: "Selection cue: Rail travel, takt requirements, and overall footprint" },
@@ -309,7 +309,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "rail",
         image: railImg,
-        title: { zh: "地轨", en: "Rail" },
+        title: { zh: "地轨平台", en: "Rail Platform" },
         summary: {
           zh: "用于补足长行程直线移动，适合工位联动和跨工位取放。",
           en: "Extends long-range linear travel for linked stations and cross-station transfer.",

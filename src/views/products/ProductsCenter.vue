@@ -179,8 +179,8 @@ const pageContent = computed(() => {
       ? "Filter by section first. Compare the differences next."
       : "先分区，再看组合差异。",
     overviewDescription: isEn
-      ? "Start from R / M / MR, embodied and development platforms, controller, and accessories, then compare grouped-model differences. Accessories are reviewed separately through rail and rotating platform."
-      : "先看 R / M / MR、具身与开发平台、控制器与扩展机构，再比较组合型号差异；扩展机构单独看地轨和旋转平台。",
+      ? "Start from R / M / MR, embodied and development platforms, controller, and accessories, then compare grouped-model differences. Accessories are reviewed separately through rail platform and rotating platform."
+      : "先看 R / M / MR、具身与开发平台、控制器与扩展机构，再比较组合型号差异；扩展机构单独看地轨平台和旋转平台。",
     guideEyebrow: "",
     guideTitle: isEn ? "Three checks before going deeper." : "先做三步判断。",
     guideItems: [
@@ -199,8 +199,8 @@ const pageContent = computed(() => {
       {
         title: isEn ? "Match accessories after the body" : "扩展机构放在本体之后匹配",
         description: isEn
-          ? "Rail and rotating platform stay as standalone accessories and are matched after the robot body is confirmed."
-          : "地轨和旋转平台作为独立扩展机构单独判断，在本体确认后再匹配。",
+          ? "Rail platform and rotating platform stay as standalone accessories and are matched after the robot body is confirmed."
+          : "地轨平台和旋转平台作为独立扩展机构单独判断，在本体确认后再匹配。",
       },
     ],
   };

@@ -70,7 +70,7 @@ export const productRelations: ProductRelationsData = {
     applicationSlugs: ["industrial-control", "offline-programming", "industrial-gateway"],
     videoSlugs: ["rtos-ethercat-validation", "robotstudio-remote-control", "offline-programming"],
   },
-  rail: {
+  "rail": {
     applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
     videoSlugs: ["fixed-rail-transfer-robot", "gantry-2d3d", "semiconductor"],
   },

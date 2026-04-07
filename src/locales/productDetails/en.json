@@ -237,8 +237,8 @@
       { "key": "Other Interfaces", "value": "RS232×1, RS485×1, CAN×1" }
     ]
   },
-  "rail": {
-    "title": "Rail",
+  "rail-platform": {
+    "title": "Rail Platform",
     "desc": "Used to extend long-travel linear motion.",
     "params": [
       { "key": "Overall Dimensions", "value": "2229(L)×280(W)×146(H)mm" },
@@ -266,14 +266,14 @@
     ]
   },
   "za-r3m-left": {
-    "title": "ZA-R3M(L) Rail-Integrated",
-    "desc": "R-series ZA-R3M configuration integrated with a rail for extended long-travel linear operation.",
+    "title": "ZA-R3M(L) Rail Platform-Integrated",
+    "desc": "R-series ZA-R3M configuration integrated with a rail platform for extended long-travel linear operation.",
     "params": [
-      { "key": "Base Combination", "value": "ZA-R3M + Rail" },
+      { "key": "Base Combination", "value": "ZA-R3M + Rail Platform" },
       { "key": "Category", "value": "R-series linked variant" },
-      { "key": "Linked Module", "value": "Rail" },
+      { "key": "Linked Module", "value": "Rail Platform" },
       { "key": "Typical Scenario", "value": "Cross-station linear pick-and-place and linked transfer" },
-      { "key": "Selection Focus", "value": "Rail travel, takt time, and overall footprint" }
+      { "key": "Selection Focus", "value": "Rail Platform travel, takt time, and overall footprint" }
     ]
   },
   "za-r3m-right": {

@@ -106,7 +106,7 @@ const productFamilies = [
     titleKey: 'home.coreProducts.families.accessories.title',
     descriptionKey: 'home.coreProducts.families.accessories.description',
     image: rotatingPlatformImg,
-    models: ['地轨', '旋转平台'],
+    models: ['地轨平台', '旋转平台'],
   },
 ] as const;
 </script>
