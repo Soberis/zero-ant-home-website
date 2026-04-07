@@ -213,14 +213,20 @@ const pageContent = computed(() => {
   top: calc(var(--nav-height) + 12px);
   z-index: 10;
   margin-bottom: 28px;
+  display: flex;
 }
 
 .product-center-filter__inner {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
-  gap: 10px 18px;
-  padding: 12px 0;
-  background: transparent;
+  gap: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 99px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
 }
 
 .product-center-filter__link {
@@ -228,20 +234,22 @@ const pageContent = computed(() => {
   align-items: center;
   justify-content: center;
   min-height: 36px;
-  padding: 0 4px;
+  padding: 0 16px;
   color: #475467;
   font-size: 0.88rem;
   font-weight: 600;
-  border-bottom: 2px solid transparent;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition: border-color 0.25s ease, color 0.25s ease;
+  border-radius: 99px;
+  background-color: transparent;
+  transition: all 0.25s ease;
+  text-decoration: none;
 }
 
 .product-center-filter__link:hover {
   color: var(--color-primary);
-  border-bottom-color: rgba(26, 58, 143, 0.35);
+  background-color: rgba(26, 58, 143, 0.06);
 }
+
+/* active link state could be handled with JS, but for anchor links a soft hover is good enough for now. */
 
 .product-family {
   padding-top: 12px;

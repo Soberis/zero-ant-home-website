@@ -52,6 +52,7 @@
               :key="`${metric.label}-${metric.value}`"
               class="product-hero__metric"
             >
+              <div class="product-hero__metric-label">{{ metric.label }}</div>
               <div
                 class="product-hero__metric-value"
                 :class="{
@@ -61,7 +62,6 @@
               >
                 {{ metric.value }}
               </div>
-              <div class="product-hero__metric-label">{{ metric.label }}</div>
             </article>
           </div>
         </div>
@@ -393,6 +393,8 @@ const METRIC_EMPHASIS_PATTERN =
 const isMetricEmphasis = (value: string) => {
   const normalized = value.trim();
   if (!normalized) return false;
+  // Prevent long sentences from being rendered with massive emphasis font
+  if (normalized.length > 26) return false;
   if (/[\u4e00-\u9fff]/.test(normalized)) {
     return METRIC_EMPHASIS_PATTERN.test(normalized);
   }
@@ -512,20 +514,23 @@ const goBack = () => {
 .product-hero__back-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
   color: rgba(15, 23, 42, 0.76);
   font-size: 0.92rem;
   font-weight: 600;
   line-height: 1.5;
   cursor: pointer;
-  transition: color 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .product-hero__back-link:hover {
-  color: #163a87;
+  color: #1a3a8f;
+  border-color: rgba(26, 58, 143, 0.2);
+  background: rgba(26, 58, 143, 0.03);
 }
 
 .product-hero__back-icon {
@@ -564,57 +569,68 @@ const goBack = () => {
 .product-hero__metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 40px;
+  gap: 20px;
+  margin-top: 48px;
   width: 100%;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  border: none;
 }
 
 .product-hero__metric {
   min-width: 0;
-  padding: 28px 24px;
-  border: none;
-  background: transparent;
+  padding: 24px;
+  border-radius: 12px;
+  background: #f8fafc;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-hero__metric:hover {
+  background: #ffffff;
+  border-color: rgba(22, 58, 135, 0.15);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.03);
+  transform: translateY(-2px);
 }
 
 .product-hero__metric + .product-hero__metric {
-  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  border-left: none;
 }
 
 .product-hero__metric-value {
   font-size: 1.12rem;
-  line-height: 1.4;
-  font-weight: 600;
-  color: #0f172a;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--color-primary, #1a3a8f);
   word-break: break-word;
 }
 
 .product-hero__metric-value--emphasis {
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   letter-spacing: -0.015em;
   line-height: 1.2;
-  color: #0f172a;
-  font-weight: 700;
+  color: var(--color-primary, #1a3a8f);
+  font-weight: 800;
 }
 
 .product-hero__metric-value--compact {
   font-size: 1.04rem;
   line-height: 1.55;
-  color: #0f172a;
+  color: var(--color-primary, #1a3a8f);
   font-weight: 600;
 }
 
 .product-hero__metric-label {
-  margin-top: 10px;
-  font-size: 0.98rem;
+  margin-bottom: 12px;
+  margin-top: 0;
+  font-size: 0.9rem;
   line-height: 1.5;
-  color: #556074;
-  font-weight: 500;
+  color: rgba(15, 23, 42, 0.45);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .product-main {

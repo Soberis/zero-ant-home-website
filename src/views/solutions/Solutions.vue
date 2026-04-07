@@ -779,12 +779,8 @@ function toggleApplicationArchive(): void {
 
 .more-application-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-
-  :deep(.app-divider-item:nth-child(-n+2)) {
-    border-top: none;
-  }
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .grid-subheading {
@@ -1246,8 +1242,8 @@ function toggleApplicationArchive(): void {
 }
 
 .proof-archive {
-  margin-top: 28px;
-  padding-top: 24px;
+  margin-top: 48px;
+  padding-top: 32px;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
@@ -1268,9 +1264,8 @@ function toggleApplicationArchive(): void {
 
 .more-application-grid {
   display: grid;
-  column-gap: 48px;
-  row-gap: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .more-application-grid :deep(.app-title) {
