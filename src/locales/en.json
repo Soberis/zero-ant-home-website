@@ -95,7 +95,7 @@
     "coreProducts": {
       "eyebrow": "Product Matrix",
       "title": "Product Center",
-      "description": "Scan R / M / MR, embodied platforms, controller hardware, and accessories first, then go deeper on model-level selection in the product center.",
+      "description": "Browse R / M / MR, embodied platforms, controller hardware, and accessories first, then enter the product center for model-level products and specs.",
       "enter": "Enter Product Center",
       "cardAction": "View family",
       "families": {
@@ -761,8 +761,8 @@
       "keywords": "ZeroAnt Technology, industrial robots, smart manufacturing, robotics technology, automation equipment, 4-axis robot, 6-axis robotic arm, dual-arm humanoid robot, mobile robot, AiROS, robotic operating system, medical automation, semiconductor processing, precision manufacturing, industrial automation solutions, robot control system, Hangzhou robotics company"
     },
     "products": {
-      "title": "Products Center - ZeroAnt Technology Professional Manufacturer",
-      "description": "ZeroAnt Technology's products center covers R-series arms, M-series mobile bases, MR-series composite robots, embodied development platforms, controllers, and accessories, with parameter summaries aligned to the confirmed product visuals.",
+      "title": "Product Center - ZeroAnt Technology",
+      "description": "ZeroAnt Technology's product center covers R-series arms, M-series mobile bases, MR-series composite robots, embodied development platforms, controllers, and accessories, organized by family with current products and key specs for faster model comparison.",
       "keywords": "ZeroAnt Technology, products center, R-series arm, M-series mobile base, MR-series composite robot, embodied platform, controller, accessories, SCARA robot, 6-axis arm, dual-arm robot, AGV base, automation equipment"
     },
     "solutions": {

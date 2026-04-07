@@ -109,10 +109,10 @@ const pageCopy = computed(() => {
     specLabel: isEn ? "Key Specs" : "重点参数",
     tipLabel: isEn ? "Selection Tip" : "选型提示",
     ctaEyebrow: isEn ? "Selection Support" : "选型支持",
-    ctaTitle: isEn ? "Need a confirmed product combination?" : "需要确认具体组合路径？",
+    ctaTitle: isEn ? "Need help choosing?" : "不确定怎么选？",
     ctaDescription: isEn
-      ? "Finish the first pass in the product center, then confirm model, controller, and accessory combinations with the team."
-      : "先在产品中心完成第一轮筛选，再和团队确认型号、控制器与扩展机构的组合关系。",
+      ? "Tell us the workstation type, takt target, and space constraints. The team can help confirm the right model, controller, and accessory combination."
+      : "告诉我们工位类型、节拍要求和空间约束，团队会协助确认合适的型号、控制器与扩展机构组合。",
     contactAction: isEn ? "Contact Team" : "联系团队",
     solutionAction: isEn ? "View Solutions" : "查看解决方案",
     detailAction: isEn ? "View Details" : "查看详情",
@@ -143,11 +143,11 @@ const pageContent = computed(() => {
     theme: "robot" as const,
     eyebrow: "Product Center",
     title: isEn
-      ? "Start with family. Confirm the combination next."
-      : "先看系列，再定组合，再进型号。",
+      ? "Start with families, then models, then extensions."
+      : "先看系列，再进型号，再配扩展机构。",
     description: isEn
-      ? "Only confirmed products and the most important differences stay on the page, so the first round of selection is faster."
-      : "页面只保留已确认产品和最关键差异，帮助更快完成第一轮筛选。",
+      ? "Browse current products and key specs by family first, then move into the right model details faster."
+      : "按系列集中浏览当前产品与关键参数，先快速判断方向，再进入具体型号详情。",
     actions: [
       {
         label: isEn ? "Contact Team" : "联系团队",
@@ -163,44 +163,44 @@ const pageContent = computed(() => {
     metrics: [
       {
         value: "06",
-        label: isEn ? "Sections" : "展示分区",
+        label: isEn ? "Product groups" : "产品分组",
       },
       {
         value: "16",
-        label: isEn ? "Confirmed items" : "已确认展示项",
+        label: isEn ? "Current products" : "当前展示产品",
       },
       {
         value: "03",
-        label: isEn ? "Key selection differences" : "关键选型差异",
+        label: isEn ? "Selection cues" : "选型要点",
       },
     ],
     overviewEyebrow: "",
     overviewTitle: isEn
-      ? "Filter by section first. Compare the differences next."
-      : "先分区，再看组合差异。",
+      ? "Browse by family first. Compare model differences next."
+      : "先按系列浏览，再比较型号差异。",
     overviewDescription: isEn
-      ? "Start from R / M / MR, embodied and development platforms, controller, and accessories, then compare grouped-model differences. Accessories are reviewed separately through rail platform and rotating platform."
-      : "先看 R / M / MR、具身与开发平台、控制器与扩展机构，再比较组合型号差异；扩展机构单独看地轨平台和旋转平台。",
+      ? "Start from R / M / MR, embodied and development platforms, controller, and accessories, then move into specific models under each family. Accessories stay in their own section."
+      : "先看 R / M / MR、具身与开发平台、控制器和扩展机构的分类，再进入各系列下的具体型号；扩展机构单独成区查看。",
     guideEyebrow: "",
-    guideTitle: isEn ? "Three checks before going deeper." : "先做三步判断。",
+    guideTitle: isEn ? "Three quick checks." : "先看三件事。",
     guideItems: [
       {
-        title: isEn ? "Filter by section first" : "先按分区筛选",
+        title: isEn ? "Start by family" : "先按系列进入",
         description: isEn
-          ? "Start from R, M, MR, embodied and development platforms, controller, and accessories before opening model detail."
-          : "先确定 R、M、MR、具身与开发平台、控制器、扩展机构的归属，再看具体型号。",
+          ? "Confirm whether the need belongs to R, M, MR, embodied and development platforms, controller, or accessories before opening a specific model."
+          : "先确定属于 R、M、MR、具身与开发平台、控制器还是扩展机构，再进入具体型号。",
       },
       {
-        title: isEn ? "Compare grouped models by explicit difference" : "组合型号按差异比较",
+        title: isEn ? "Check the key difference inside a family" : "同系列先看关键差异",
         description: isEn
-          ? "ZA-R3 / ZA-R3X compares SCARA arm length directly, while ZA-R3L / ZA-R3M / ZA-R3H compares column height and Z travel."
-          : "ZA-R3 / ZA-R3X 直接比较 SCARA 臂长，ZA-R3L / ZA-R3M / ZA-R3H 直接比较立柱高度和 Z 轴行程。",
+          ? "For example, ZA-R3 / ZA-R3X is mainly separated by SCARA arm length, while ZA-R3L / ZA-R3M / ZA-R3H is mainly separated by column height and Z-axis travel."
+          : "例如 ZA-R3 / ZA-R3X 主要看 SCARA 臂长，ZA-R3L / ZA-R3M / ZA-R3H 主要看立柱高度和 Z 轴行程。",
       },
       {
-        title: isEn ? "Match accessories after the body" : "扩展机构放在本体之后匹配",
+        title: isEn ? "Match accessories after the robot body" : "本体明确后再配扩展机构",
         description: isEn
-          ? "Rail platform and rotating platform stay as standalone accessories and are matched after the robot body is confirmed."
-          : "地轨平台和旋转平台作为独立扩展机构单独判断，在本体确认后再匹配。",
+          ? "Rail platform and rotating platform are shown in a separate section and are usually matched after the robot body is clear."
+          : "地轨平台和旋转平台独立成区展示，通常在本体方向明确后再判断是否需要搭配。",
       },
     ],
   };

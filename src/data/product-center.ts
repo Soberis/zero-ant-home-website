@@ -42,8 +42,8 @@ export const productCenterFamilies: ProductCenterFamily[] = [
     id: "r-series",
     title: { zh: "R 系列", en: "R Series" },
     intro: {
-      zh: "面向精密传送与狭小空间操作的机械臂平台，优先按臂长、立柱高度、本体形态与联动方式做第一轮筛选。",
-      en: "Precision arm platforms for transfer and confined-space operation, first filtered by arm length, lift height, body form, and linked configuration.",
+      zh: "面向精密传送与狭小空间操作的机械臂平台，可按臂长、立柱高度、本体形态与联动方式快速定位型号。",
+      en: "Precision arm platforms for transfer and confined-space operation. Use arm length, column height, body form, and linked configuration to narrow the right model.",
     },
     cards: [
       {
@@ -302,8 +302,8 @@ export const productCenterFamilies: ProductCenterFamily[] = [
     id: "accessories",
     title: { zh: "扩展机构", en: "Accessories" },
     intro: {
-      zh: "扩展机构独立成区，用于补足行程与旋转能力，作为本体外设单独判断。",
-      en: "Accessories stay in a separate zone to extend travel and rotation, and are matched as external modules after the robot body is chosen.",
+      zh: "扩展机构独立成区展示，用于补足行程与旋转能力，可在确认本体后再匹配。",
+      en: "Accessories are shown in a separate section to extend travel and rotation, and can be matched after the robot body is confirmed.",
     },
     cards: [
       {
