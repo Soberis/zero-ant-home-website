@@ -99,7 +99,7 @@ const scrollToTop = () => {
 <style scoped lang="less">
 .floating-sidebar {
   position: fixed;
-  right: max(16px, calc(50vw - var(--container-max-width, 1440px) / 2 - 80px)); /* 保证至少 16px 安全边距，大屏贴近内容区 */
+  right: calc(16px + env(safe-area-inset-right, 0px));
   top: 50%;
   transform: translateY(-50%);
   z-index: 2000;
