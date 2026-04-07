@@ -223,12 +223,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, nextTick, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
+import { scheduleScrollToTop } from "@/utils/scroll";
 import { useProductDetailData } from "@/composables/useProductDetailData";
 import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
@@ -280,6 +281,19 @@ const loadProductDetailLocale = async () => {
 watch(locale, () => {
   void loadProductDetailLocale();
 }, { immediate: true });
+
+watch(
+  [cardId, detailLocaleReady],
+  async ([, ready]) => {
+    if (!ready) {
+      return;
+    }
+
+    await nextTick();
+    scheduleScrollToTop({ afterTransition: true });
+  },
+  { immediate: true }
+);
 
 const detail = computed<ProductDetail | null>(() => {
   if (!detailLocaleReady.value) {
