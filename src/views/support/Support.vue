@@ -4,7 +4,6 @@
     <section class="support-hero">
       <div class="support-shell hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow">SUPPORT CENTER</p>
           <h1 id="after-sales" class="hero-title text-display-hero">{{ t("supportPage.title") }}</h1>
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
 
@@ -54,7 +53,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("supportPage.relatedDownloads") }}</span>
-            <span class="title-en">DOWNLOADS</span>
           </h2>
           <p class="detail-section__desc">{{ t("supportPage.downloadIntro") }}</p>
         </div>
@@ -81,7 +79,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("supportPage.faqTitle") }}</span>
-            <span class="title-en">FAQ</span>
           </h2>
           <p class="detail-section__desc">{{ t("supportPage.faqIntro") }}</p>
         </div>
@@ -131,7 +128,6 @@
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("nav.contact") }}</span>
-                <span class="title-en">CONTACT US</span>
               </h2>
               <p class="detail-section__desc">{{ t("supportPage.contactIntro") }}</p>
             </div>
@@ -339,16 +335,6 @@ function formatIndex(value: number): string {
   position: relative;
   max-width: 720px;
   padding: 16px 0 12px;
-}
-
-.hero-eyebrow {
-  display: block;
-  margin: 0 0 16px;
-  color: var(--brand-muted);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .hero-title {

@@ -2,12 +2,11 @@
   <section class="core-products">
     <div class="section-heading-row">
       <div class="section-heading">
-        <span class="home-section-eyebrow">{{ t('home.coreProducts.eyebrow') }}</span>
         <h2 class="home-section-title">{{ t('home.coreProducts.title') }}</h2>
         <p class="home-section-description core-products__description">{{ t('home.coreProducts.description') }}</p>
       </div>
 
-      <router-link to="/products" class="section-cta">
+      <router-link :to="{ path: '/products', hash: '#products-page-top' }" class="section-cta">
         <span>{{ t('home.coreProducts.enter') }}</span>
         <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -33,7 +32,6 @@
         </div>
 
         <div class="family-card__content">
-          <span class="family-card__eyebrow">{{ family.eyebrow }}</span>
           <h3 class="family-card__title">{{ t(family.titleKey) }}</h3>
           <p class="family-card__description">{{ t(family.descriptionKey) }}</p>
 
@@ -62,7 +60,6 @@ const { t } = useI18n();
 const productFamilies = [
   {
     key: 'r-series',
-    eyebrow: 'R SERIES',
     titleKey: 'home.coreProducts.families.rSeries.title',
     descriptionKey: 'home.coreProducts.families.rSeries.description',
     image: zaR3XImg,
@@ -70,7 +67,6 @@ const productFamilies = [
   },
   {
     key: 'm-series',
-    eyebrow: 'M SERIES',
     titleKey: 'home.coreProducts.families.mSeries.title',
     descriptionKey: 'home.coreProducts.families.mSeries.description',
     image: zaM135Img,
@@ -78,7 +74,6 @@ const productFamilies = [
   },
   {
     key: 'mr-series',
-    eyebrow: 'MR SERIES',
     titleKey: 'home.coreProducts.families.mrSeries.title',
     descriptionKey: 'home.coreProducts.families.mrSeries.description',
     image: zaMR3TImg,
@@ -86,7 +81,6 @@ const productFamilies = [
   },
   {
     key: 'embodied-platforms',
-    eyebrow: 'EMBODIED',
     titleKey: 'home.coreProducts.families.embodied.title',
     descriptionKey: 'home.coreProducts.families.embodied.description',
     image: zaRMVRImg,
@@ -94,7 +88,6 @@ const productFamilies = [
   },
   {
     key: 'controller',
-    eyebrow: 'CONTROLLER',
     titleKey: 'home.coreProducts.families.controller.title',
     descriptionKey: 'home.coreProducts.families.controller.description',
     image: zaZG100Img,
@@ -102,7 +95,6 @@ const productFamilies = [
   },
   {
     key: 'accessories',
-    eyebrow: 'ACCESSORIES',
     titleKey: 'home.coreProducts.families.accessories.title',
     descriptionKey: 'home.coreProducts.families.accessories.description',
     image: rotatingPlatformImg,
@@ -227,13 +219,6 @@ const productFamilies = [
 .family-card__content {
   display: grid;
   gap: 10px;
-}
-
-.family-card__eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--color-text-tertiary, #7c8798);
 }
 
 .family-card__title {

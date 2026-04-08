@@ -77,7 +77,6 @@
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.features") }}</span>
-                <span v-if="locale === 'zh'" class="title-en">CORE FEATURES</span>
               </h2>
             </div>
 
@@ -111,7 +110,6 @@
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.applications") }}</span>
-                <span v-if="locale === 'zh'" class="title-en">APPLICATIONS</span>
               </h2>
             </div>
 
@@ -134,7 +132,6 @@
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.videoCases") }}</span>
-                <span v-if="locale === 'zh'" class="title-en">VIDEO CASES</span>
               </h2>
             </div>
 
@@ -160,7 +157,6 @@
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.parameters") }}</span>
-                <span v-if="locale === 'zh'" class="title-en">TECH SPECS</span>
               </h2>
             </div>
 
@@ -186,7 +182,6 @@
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.downloads") }}</span>
-                <span v-if="locale === 'zh'" class="title-en">DOWNLOADS</span>
               </h2>
             </div>
 
@@ -218,7 +213,7 @@
       </main>
     </div>
 
-    <div v-else class="not-found">{{ isEn ? "Product not found" : "未找到对应产品" }}</div>
+    <div v-else class="not-found">{{ t("productDetail.notFound") }}</div>
   </div>
 </template>
 
@@ -233,14 +228,14 @@ import { scheduleScrollToTop } from "@/utils/scroll";
 import { useProductDetailData } from "@/composables/useProductDetailData";
 import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
-import type { ProductDetail } from "@/data/productDetails";
+import type { ProductDetail, ProductFeature } from "@/data/productDetails";
 
-type FeatureItem = string | { title?: string; desc?: string };
+type FeatureItem = string | ProductFeature;
 type LocalizedParam = { key: string; value: string };
 type LocaleProductDetail = {
   title?: string;
   desc?: string;
-  features?: string[];
+  features?: FeatureItem[];
   params?: LocalizedParam[] | Record<string, LocalizedParam>;
   downloads?: Array<{ name: string; url: string }> | Record<string, { name: string; url: string }>;
 };
@@ -368,7 +363,9 @@ const productData = computed<ProductDetail | null>(() =>
   resolvedLocalizedProduct.value ?? detail.value
 );
 const heroImageSrc = computed(() => productData.value?.image || "");
-const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.value);
+const productFeatures = computed<FeatureItem[]>(() =>
+  resolvedProductFeatures.value.slice(0, 4)
+);
 const parameterColumns = computed(() => {
   const params = normalizedParams.value;
   const midpoint = Math.ceil(params.length / 2);
@@ -437,19 +434,19 @@ const goBack = () => {
 }
 
 .product-hero {
-  padding: calc(var(--nav-height) + 36px) 0 72px;
+  padding: calc(var(--nav-height) + 18px) 0 64px;
 }
 
 .product-hero__container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 32px;
 }
 
 .product-hero__inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 1.1fr);
-  align-items: center;
+  align-items: start;
   gap: 60px;
 }
 
@@ -457,7 +454,7 @@ const goBack = () => {
   border: none;
   background: transparent;
   box-shadow: none;
-  padding: 12px 0 0 0;
+  padding: 0;
   border-radius: 0;
   text-align: left;
   display: flex;
@@ -551,13 +548,14 @@ const goBack = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 8px;
 }
 
 .product-hero__image {
   width: 100%;
-  max-height: 42vh;
-  min-height: 260px;
+  max-height: clamp(320px, 38vw, 520px);
+  min-height: 220px;
   object-fit: contain;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -570,7 +568,7 @@ const goBack = () => {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
-  margin-top: 48px;
+  margin-top: 36px;
   width: 100%;
   border: none;
 }
@@ -682,8 +680,8 @@ const goBack = () => {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
   padding: 8px 0 0;
 }
 
@@ -729,9 +727,9 @@ const goBack = () => {
 }
 
 .feature-card__title {
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.45;
   color: #0f172a;
   margin: 0;
 }
@@ -907,6 +905,7 @@ const goBack = () => {
   .product-hero__inner {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 32px;
   }
 
   .product-hero__header {
@@ -939,7 +938,7 @@ const goBack = () => {
 
 @media (max-width: 768px) {
   .product-hero {
-    padding-top: calc(var(--nav-height) + 28px);
+    padding-top: calc(var(--nav-height) + 20px);
   }
 
   .detail-section {

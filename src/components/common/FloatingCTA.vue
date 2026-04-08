@@ -10,7 +10,7 @@
         </div>
         <div class="sidebar-popup">
           <div class="popup-content">
-            <div class="popup-title">服务热线</div>
+            <div class="popup-title">{{ t("common.cta.serviceHotline") }}</div>
             <div class="popup-desc tel-value">{{ t('footer.telValue') }}</div>
           </div>
         </div>
@@ -26,8 +26,8 @@
         <div class="sidebar-popup qrcode-popup">
           <div class="popup-content">
             <img :src="wxworkQrcode" alt="WeChat QR Code" class="qrcode-image" />
-            <div class="popup-title">扫码添加企业微信</div>
-            <div class="popup-desc">获取更多信息</div>
+            <div class="popup-title">{{ t("common.cta.wecomTitle") }}</div>
+            <div class="popup-desc">{{ t("common.cta.wecomDesc") }}</div>
           </div>
         </div>
       </div>
@@ -42,8 +42,8 @@
         <div class="sidebar-popup qrcode-popup">
           <div class="popup-content">
             <img :src="taobaoQrcode" alt="Taobao QR Code" class="qrcode-image" />
-            <div class="popup-title">官方淘宝店</div>
-            <div class="popup-desc">点击或扫码即刻采购</div>
+            <div class="popup-title">{{ t("common.cta.taobaoTitle") }}</div>
+            <div class="popup-desc">{{ t("common.cta.taobaoDesc") }}</div>
           </div>
         </div>
       </a>

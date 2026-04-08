@@ -24,7 +24,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.companyIntro") }}</span>
-            <span class="title-en">COMPANY PROFILE</span>
           </h2>
         </div>
 
@@ -73,7 +72,6 @@
 <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.history") }}</span>
-            <span class="title-en">MILESTONES</span>
           </h2>
         </div>
 
@@ -103,7 +101,6 @@
 <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.honor") }}</span>
-            <span class="title-en">HONORS</span>
           </h2>
         </div>
 
@@ -125,7 +122,6 @@
 <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("about.coreValues.title") }}</span>
-            <span class="title-en">CORE VALUES</span>
           </h2>
         </div>
 
@@ -146,7 +142,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.culture") }}</span>
-            <span class="title-en">CULTURE</span>
           </h2>
         </div>
 
@@ -170,7 +165,6 @@
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ $t("nav.contact") }}</span>
-                <span class="title-en">CONTACT US</span>
               </h2>
             </div>
           </div>

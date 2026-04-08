@@ -19,7 +19,7 @@
             <router-link
               :to="item.to"
               class="nav-link"
-              active-class="active"
+              :class="{ active: isTopNavActive(item.to) }"
               aria-current-value="page"
               @click="handleTopNavClick(item.to, $event)"
             >
@@ -84,6 +84,7 @@
             <router-link
               :to="item.to"
               class="mobile-nav-link"
+              :class="{ active: isTopNavActive(item.to) }"
               @click="handleTopNavClick(item.to, $event, true)"
             >
               {{ $t(item.label) }}
@@ -174,6 +175,15 @@ async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = fals
   await router.push(to);
   await nextTick();
 }
+
+function isTopNavActive(to: string): boolean {
+  if (to === "/") {
+    return route.path === "/";
+  }
+
+  return route.path === to || route.path.startsWith(`${to}/`);
+}
+
 
 // 点击背景关闭菜单
 function handleBackgroundClick(event: Event): void {
@@ -872,7 +882,7 @@ onUnmounted(() => {
   color: var(--nav-accent-color);
 }
 
-.mobile-nav-link.router-link-active {
+.mobile-nav-link.active {
   color: var(--nav-accent-color);
   background: rgba(26, 58, 143, 0.05);
   font-weight: 600;

@@ -2,9 +2,6 @@
   <section class="ecosystem-section">
     <div class="ecosystem-panel">
       <div class="ecosystem-copy">
-        <p class="home-section-eyebrow">
-          {{ $t("home.partners.eyebrow") }}
-        </p>
         <h2 class="home-section-title">
           {{ $t("home.partners.title") }}
         </h2>

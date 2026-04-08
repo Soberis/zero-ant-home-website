@@ -18,14 +18,13 @@
 
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
-          <p class="text-label-large hero-eyebrow" style="transition-delay: 0.1s">{{ t('home.hero.eyebrow') }}</p>
           <h1 class="text-display-hero hero-title" style="transition-delay: 0.2s">{{ t('home.hero.title') }}</h1>
           <div class="hero-product-name" style="transition-delay: 0.25s">
             {{ t('home.hero.panelLabel') }}
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
-            <span class="btn btn-primary" @click.stop.prevent="$router.push('/products')">
+            <span class="btn btn-primary" @click.stop.prevent="$router.push({ path: '/products', hash: '#products-page-top' })">
               {{ t('home.hero.primaryCta') }}
             </span>
           </div>
@@ -56,7 +55,7 @@ const { t } = useI18n();
 const activeSlide = computed<SlideItem>(() => ({
   img: coverImg,
   title: t('home.hero.title'),
-  routePath: '/products',
+  routePath: '/products#products-page-top',
   imageScale: 1.0,
   imageShiftX: '0px',
   imageShiftY: '0px',
@@ -181,13 +180,6 @@ onUnmounted(() => {
 .hero-copy.hero-entered {
   opacity: 1;
   transform: translateY(0);
-}
-
-.hero-eyebrow {
-  margin: 0 0 var(--space-sm);
-  color: #6b7280;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
 }
 
 .hero-title {

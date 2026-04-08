@@ -3,7 +3,6 @@
     <section class="careers-hero">
       <div class="page-shell hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow">JOIN US</p>
           <h1 class="hero-title text-display-hero">{{ $t("careers.heroTitle") }}</h1>
           <p class="hero-subtitle">{{ $t("careers.heroSubtitle") }}</p>
 
@@ -57,7 +56,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("careers.whyJoinTitle") }}</span>
-            <span class="title-en">WHY CHOOSE US</span>
           </h2>
         </div>
 
@@ -80,7 +78,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("careers.hotPositionsTitle") }}</span>
-            <span class="title-en">OPEN POSITIONS</span>
           </h2>
         </div>
 
@@ -136,7 +133,6 @@
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ $t("careers.contactUsTitle") }}</span>
-                <span class="title-en">CONTACT US</span>
               </h2>
             </div>
             <p class="contact-description">
@@ -341,17 +337,6 @@ function applyForPosition(position: Position): void {
 .hero-copy {
   max-width: 720px;
   padding: 16px 0 12px;
-}
-
-.hero-eyebrow,
-.section-eyebrow {
-  display: block;
-  margin: 0 0 16px;
-  color: var(--brand-muted);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .hero-title {

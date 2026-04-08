@@ -1,9 +1,8 @@
 <template>
-  <div class="products-shell" :class="[`products-shell--${theme}`]">
+  <div id="products-page-top" class="products-shell" :class="[`products-shell--${theme}`]">
     <section class="products-hero">
       <div class="products-container products-hero__inner">
         <div class="products-hero__copy">
-          <span class="products-hero__eyebrow">{{ eyebrow }}</span>
           <h1 class="products-hero__title text-display-hero">{{ title }}</h1>
           <p class="products-hero__description">{{ description }}</p>
 
@@ -57,9 +56,6 @@
     >
       <div class="products-container">
         <div class="products-overview__header">
-          <span v-if="overviewEyebrow" class="products-overview__eyebrow">
-            {{ overviewEyebrow }}
-          </span>
           <h2 v-if="overviewTitle" class="products-overview__title">{{ overviewTitle }}</h2>
           <p v-if="overviewDescription" class="products-overview__description">
             {{ overviewDescription }}
@@ -77,7 +73,6 @@
     <section v-if="resolvedGuideItems.length" class="products-guide">
       <div class="products-container">
         <div class="products-guide__header">
-          <span v-if="guideEyebrow" class="products-guide__eyebrow">{{ guideEyebrow }}</span>
           <h2 class="products-guide__title">{{ guideTitle }}</h2>
         </div>
 
@@ -118,25 +113,20 @@ interface ProductsLayoutGuideItem {
 const props = withDefaults(
   defineProps<{
     theme: "system" | "robot";
-    eyebrow: string;
     title: string;
     description: string;
     actions?: ProductsLayoutAction[];
     metrics?: ProductsLayoutMetric[];
-    overviewEyebrow?: string;
     overviewTitle?: string;
     overviewDescription?: string;
-    guideEyebrow?: string;
     guideTitle?: string;
     guideItems?: ProductsLayoutGuideItem[];
   }>(),
   {
     actions: () => [],
     metrics: () => [],
-    overviewEyebrow: "",
     overviewTitle: "",
     overviewDescription: "",
-    guideEyebrow: "",
     guideTitle: "",
     guideItems: () => [],
   }
@@ -213,18 +203,6 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__panel > * {
   position: relative;
   z-index: 1;
-}
-
-.products-hero__eyebrow,
-.products-overview__eyebrow,
-.products-guide__eyebrow {
-  display: block;
-  margin: 0 0 16px;
-  color: var(--products-text);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .products-hero__title {

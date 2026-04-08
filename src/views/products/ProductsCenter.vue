@@ -21,7 +21,6 @@
     >
       <div class="product-family__header">
         <div>
-          <span v-if="pageCopy.familyLabel" class="product-family__eyebrow">{{ pageCopy.familyLabel }}</span>
           <h2 class="product-family__title">{{ family.title }}</h2>
           <p class="product-family__intro">{{ family.intro }}</p>
         </div>
@@ -70,7 +69,6 @@
 
     <section class="product-center-cta">
       <div class="product-center-cta__copy">
-        <span class="product-center-cta__eyebrow">{{ pageCopy.ctaEyebrow }}</span>
         <h2 class="product-center-cta__title">{{ pageCopy.ctaTitle }}</h2>
         <p class="product-center-cta__description">{{ pageCopy.ctaDescription }}</p>
       </div>
@@ -96,28 +94,20 @@ import {
   productCenterFamilies,
 } from "@/data/product-center";
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 const resolveText = (value: LocalizedText): string =>
   locale.value === "en" ? value.en : value.zh;
 
-const pageCopy = computed(() => {
-  const isEn = locale.value === "en";
-
-  return {
-    familyLabel: "",
-    specLabel: isEn ? "Key Specs" : "重点参数",
-    tipLabel: isEn ? "Selection Tip" : "选型提示",
-    ctaEyebrow: isEn ? "Selection Support" : "选型支持",
-    ctaTitle: isEn ? "Need help choosing?" : "不确定怎么选？",
-    ctaDescription: isEn
-      ? "Tell us the workstation type, takt target, and space constraints. The team can help confirm the right model, controller, and accessory combination."
-      : "告诉我们工位类型、节拍要求和空间约束，团队会协助确认合适的型号、控制器与扩展机构组合。",
-    contactAction: isEn ? "Contact Team" : "联系团队",
-    solutionAction: isEn ? "View Solutions" : "查看解决方案",
-    detailAction: isEn ? "View Details" : "查看详情",
-  };
-});
+const pageCopy = computed(() => ({
+  specLabel: t("productsPage.common.specLabel"),
+  tipLabel: t("productsPage.common.tipLabel"),
+  ctaTitle: t("productsPage.common.ctaTitle"),
+  ctaDescription: t("productsPage.common.ctaDescription"),
+  contactAction: t("productsPage.common.contactAction"),
+  solutionAction: t("productsPage.common.solutionAction"),
+  detailAction: t("productsPage.common.detailAction"),
+}));
 
 const families = computed(() =>
   productCenterFamilies.map((family) => ({
@@ -136,75 +126,62 @@ const families = computed(() =>
   }))
 );
 
-const pageContent = computed(() => {
-  const isEn = locale.value === "en";
+const guideItems = computed(() => [
+  {
+    title: t("productsPage.guide.items.family.title"),
+    description: t("productsPage.guide.items.family.description"),
+  },
+  {
+    title: t("productsPage.guide.items.difference.title"),
+    description: t("productsPage.guide.items.difference.description"),
+  },
+  {
+    title: t("productsPage.guide.items.accessories.title"),
+    description: t("productsPage.guide.items.accessories.description"),
+  },
+]);
 
-  return {
-    theme: "robot" as const,
-    eyebrow: "Product Center",
-    title: isEn
-      ? "Start with families, then models, then extensions."
-      : "先看系列，再进型号，再配扩展机构。",
-    description: isEn
-      ? "Browse current products and key specs by family first, then move into the right model details faster."
-      : "按系列集中浏览当前产品与关键参数，先快速判断方向，再进入具体型号详情。",
-    actions: [
-      {
-        label: isEn ? "Contact Team" : "联系团队",
-        to: "/support#contact",
-        variant: "primary" as const,
-      },
-      {
-        label: isEn ? "View Solutions" : "查看解决方案",
-        to: "/solutions",
-        variant: "secondary" as const,
-      },
-    ],
-    metrics: [
-      {
-        value: "06",
-        label: isEn ? "Product groups" : "产品分组",
-      },
-      {
-        value: "16",
-        label: isEn ? "Current products" : "当前展示产品",
-      },
-      {
-        value: "03",
-        label: isEn ? "Selection cues" : "选型要点",
-      },
-    ],
-    overviewEyebrow: "",
-    overviewTitle: isEn
-      ? "Browse by family first. Compare model differences next."
-      : "先按系列浏览，再比较型号差异。",
-    overviewDescription: isEn
-      ? "Start from R / M / MR, embodied and development platforms, controller, and accessories, then move into specific models under each family. Accessories stay in their own section."
-      : "先看 R / M / MR、具身与开发平台、控制器和扩展机构的分类，再进入各系列下的具体型号；扩展机构单独成区查看。",
-    guideEyebrow: "",
-    guideTitle: isEn ? "Three quick checks." : "先看三件事。",
-    guideItems: [
-      {
-        title: isEn ? "Start by family" : "先按系列进入",
-        description: isEn
-          ? "Confirm whether the need belongs to R, M, MR, embodied and development platforms, controller, or accessories before opening a specific model."
-          : "先确定属于 R、M、MR、具身与开发平台、控制器还是扩展机构，再进入具体型号。",
-      },
-      {
-        title: isEn ? "Check the key difference inside a family" : "同系列先看关键差异",
-        description: isEn
-          ? "For example, ZA-R3 / ZA-R3X is mainly separated by SCARA arm length, while ZA-R3L / ZA-R3M / ZA-R3H is mainly separated by column height and Z-axis travel."
-          : "例如 ZA-R3 / ZA-R3X 主要看 SCARA 臂长，ZA-R3L / ZA-R3M / ZA-R3H 主要看立柱高度和 Z 轴行程。",
-      },
-      {
-        title: isEn ? "Match accessories after the robot body" : "本体明确后再配扩展机构",
-        description: isEn
-          ? "Rail platform and rotating platform are shown in a separate section and are usually matched after the robot body is clear."
-          : "地轨平台和旋转平台独立成区展示，通常在本体方向明确后再判断是否需要搭配。",
-      },
-    ],
-  };
-});
+const formatMetricCount = (count: number): string => String(count).padStart(2, "0");
+
+const pageMetrics = computed(() => [
+  {
+    value: formatMetricCount(families.value.length),
+    label: t("productsPage.hero.metrics.groups"),
+  },
+  {
+    value: formatMetricCount(
+      families.value.reduce((sum, family) => sum + family.cards.length, 0)
+    ),
+    label: t("productsPage.hero.metrics.products"),
+  },
+  {
+    value: formatMetricCount(guideItems.value.length),
+    label: t("productsPage.hero.metrics.cues"),
+  },
+]);
+
+const pageContent = computed(() => ({
+  theme: "robot" as const,
+  title: t("productsPage.hero.title"),
+  description: t("productsPage.hero.description"),
+  actions: [
+    {
+      label: t("productsPage.common.contactAction"),
+      to: "/support#contact",
+      variant: "primary" as const,
+    },
+    {
+      label: t("productsPage.common.solutionAction"),
+      to: "/solutions",
+      variant: "secondary" as const,
+    },
+  ],
+  metrics: pageMetrics.value,
+  overviewTitle: t("productsPage.overview.title"),
+  overviewDescription: t("productsPage.overview.description"),
+  guideTitle: t("productsPage.guide.title"),
+  guideItems: guideItems.value,
+}));
 </script>
 
 <style scoped lang="less">
@@ -265,17 +242,8 @@ const pageContent = computed(() => {
   margin-bottom: 28px;
 }
 
-.product-family__eyebrow {
-  display: inline-flex;
-  color: var(--color-text-secondary);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .product-family__title {
-  margin: 12px 0 0;
+  margin: 0;
   font-size: clamp(1.7rem, 2.3vw, 2.15rem);
   letter-spacing: -0.03em;
 }
@@ -427,17 +395,8 @@ const pageContent = computed(() => {
   max-width: 720px;
 }
 
-.product-center-cta__eyebrow {
-  display: inline-flex;
-  color: var(--color-text-secondary);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .product-center-cta__title {
-  margin: 12px 0 10px;
+  margin: 0 0 10px;
 }
 
 .product-center-cta__description {

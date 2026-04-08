@@ -186,14 +186,14 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       en: "Composite robotic platforms that combine mobility, lift, and manipulation into one cross-area unit.",
     },
     cards: [
-      {
-        id: "za-mr3m",
-        image: zaMR3MImg,
-        title: { zh: "ZA-MR3M", en: "ZA-MR3M" },
-        summary: {
-          zh: "复合升降机器人，适合跨工位移动、升降取放与单臂协同作业。",
-          en: "A composite lift robot for cross-station mobility, lift-assisted pick-and-place, and single-arm collaboration.",
-        },
+        {
+          id: "za-mr3m",
+          image: zaMR3MImg,
+          title: { zh: "ZA-MR3M", en: "ZA-MR3M" },
+          summary: {
+            zh: "高性能自主移动底盘与定制化四轴机械臂深度融合的复合机器人平台，面向跨区域、多高度作业场景。",
+            en: "A composite robot platform that integrates a high-performance autonomous mobile base with a customized four-axis robotic arm for cross-area, multi-height workflows.",
+          },
         specs: [
           { zh: "整体尺寸 674 × 456 × 1408mm", en: "Overall size 674 × 456 × 1408mm" },
           { zh: "整机重量 100kg / 行走速度 0.1~1.2m/s", en: "Weight 100kg / travel speed 0.1~1.2m/s" },
@@ -201,14 +201,14 @@ export const productCenterFamilies: ProductCenterFamily[] = [
           { zh: "导航方式：激光 SLAM", en: "Navigation: laser SLAM" },
         ],
       },
-      {
-        id: "za-mr3t",
-        image: zaMR3TImg,
-        title: { zh: "ZA-MR3T", en: "ZA-MR3T" },
-        summary: {
-          zh: "具身智能复合双臂机器人，面向仿人化操作与跨区域协同作业。",
-          en: "An embodied dual-arm composite robot for human-like manipulation and cross-area collaboration.",
-        },
+        {
+          id: "za-mr3t",
+          image: zaMR3TImg,
+          title: { zh: "ZA-MR3T", en: "ZA-MR3T" },
+          summary: {
+            zh: "高度集成的仿人形操作平台，融合移动底盘、升降轴、机械臂及视觉相机，面向类人化高精度作业。",
+            en: "A highly integrated humanoid-style manipulation platform that combines a mobile base, lift axis, robotic arms, and vision cameras for human-like high-precision operation.",
+          },
         specs: [
           { zh: "移动底盘 + 升降轴 + 双臂 + 视觉相机一体化", en: "Integrated mobile base, lift axis, dual arms, and vision cameras" },
           { zh: "整机重量 120kg / 行走速度 0.1~1.2m/s", en: "Weight 120kg / travel speed 0.1~1.2m/s" },
@@ -226,14 +226,14 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       en: "Platforms for VR, master-slave teleoperation, and embodied AI development workflows.",
     },
     cards: [
-      {
-        id: "za-rmvr",
-        image: zaRMVRImg,
-        title: { zh: "ZA-RMVR", en: "ZA-RMVR" },
-        summary: {
-          zh: "具身智能双臂 VR 遥操作开发平台，用于遥操作和具身训练闭环。",
-          en: "A dual-arm VR teleoperation platform for embodied training and teleop workflows.",
-        },
+        {
+          id: "za-rmvr",
+          image: zaRMVRImg,
+          title: { zh: "ZA-RMVR", en: "ZA-RMVR" },
+          summary: {
+            zh: "集成升降轴、双臂机械臂、灵巧末端执行器、核心控制器及 VR 设备的教学科研平台。",
+            en: "A teaching and research platform integrating a lift axis, dual robotic arms, dexterous end effectors, a core controller, and VR devices.",
+          },
         specs: [
           { zh: "平台尺寸 674 × 575 × 1408mm", en: "Platform size 674 × 575 × 1408mm" },
           { zh: "单臂 1kg / 双臂 2kg", en: "Single-arm 1kg / dual-arm 2kg" },

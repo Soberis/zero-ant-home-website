@@ -2,7 +2,6 @@
   <section class="spotlight-section">
     <div class="section-heading-row">
       <div class="section-heading">
-        <span class="home-section-eyebrow">{{ t("home.videoCases.eyebrow") }}</span>
         <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
         <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
       </div>

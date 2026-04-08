@@ -14,6 +14,7 @@ import type {
   ProductCase,
   ProductDetail,
   ProductDownload,
+  ProductFeature,
   ProductParam,
 } from "@/data/productDetails";
 
@@ -73,16 +74,16 @@ export function useProductDetailData(
     }
 
     const detail = createEmptyProductDetail();
-    detail.title =
-      t(`productDetails.${slugValue.value}.title`) ||
-      (locale.value === "en"
+    detail.title = te(`${detailKey.value}.title`)
+      ? t(`${detailKey.value}.title`)
+      : locale.value === "en"
         ? currentProduct.value.title.en
-        : currentProduct.value.title.zh);
-    detail.desc =
-      t(`productDetails.${slugValue.value}.desc`) ||
-      (locale.value === "en"
+        : currentProduct.value.title.zh;
+    detail.desc = te(`${detailKey.value}.desc`)
+      ? t(`${detailKey.value}.desc`)
+      : locale.value === "en"
         ? currentProduct.value.summary.en
-        : currentProduct.value.summary.zh);
+        : currentProduct.value.summary.zh;
     detail.image = currentProduct.value.image;
     return detail;
   };
@@ -141,7 +142,7 @@ export function useProductDetailData(
       title: resolveScalar("title", fallbackTitle),
       desc: resolveScalar("desc", fallbackDesc),
       image: resolveScalar("image", fallbackImage),
-      features: resolveCollection<string>("features", fallbackFeatures),
+      features: resolveCollection<string | ProductFeature>("features", fallbackFeatures),
       cases: resolveCollection<ProductCase>("cases", fallbackCases),
       scenes: resolveCollection<string>("scenes", fallbackScenes),
       params: resolveCollection<ProductParam>("params", fallbackParams),
@@ -213,7 +214,7 @@ export function useProductDetailData(
     return videoCards.slice(0, 3);
   });
 
-  const productFeatures = computed((): string[] => {
+  const productFeatures = computed((): Array<string | ProductFeature> => {
     return localizedProduct.value?.features || baseDetail.value?.features || [];
   });
 

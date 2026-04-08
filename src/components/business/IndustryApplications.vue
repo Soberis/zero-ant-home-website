@@ -2,7 +2,6 @@
   <section id="industry-applications" class="industry-apps">
     <div class="section-heading-row">
       <div class="section-heading">
-        <span class="home-section-eyebrow">{{ t('home.industryApplications.eyebrow') }}</span>
         <h2 class="home-section-title">{{ t('home.industryApplications.title') }}</h2>
         <p class="home-section-description">{{ t('home.industryApplications.description') }}</p>
       </div>

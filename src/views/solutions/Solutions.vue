@@ -301,7 +301,7 @@ function formatProductLine(products: string[]): string {
     return visibleProducts;
   }
 
-  return locale.value === "en" ? `${visibleProducts} / etc.` : `${visibleProducts} 等`;
+  return `${visibleProducts}${t("common.terms.andOthers")}`;
 }
 
 const relatedProductCount = computed(() =>
@@ -309,20 +309,18 @@ const relatedProductCount = computed(() =>
 );
 
 const heroStats = computed(() => {
-  const isEn = locale.value === "en";
-
   return [
     {
       value: formatIndex(solutionIndustryGroups.length),
-      label: isEn ? "Solution directions" : "方案方向",
+      label: t("common.terms.solutionDirections"),
     },
     {
       value: formatIndex(relatedProductCount.value),
-      label: isEn ? "Related products" : "关联产品",
+      label: t("common.terms.relatedProducts"),
     },
     {
       value: formatIndex(featuredProofs.length),
-      label: isEn ? "Featured cases" : "代表案例",
+      label: t("common.terms.featuredCases"),
     },
   ];
 });

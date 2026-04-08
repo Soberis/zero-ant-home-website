@@ -5,6 +5,11 @@ export interface ProductCase {
   desc: string;
 }
 
+export interface ProductFeature {
+  title: string;
+  desc?: string;
+}
+
 export interface ProductParam {
   key: string;
   value: string;
@@ -19,7 +24,7 @@ export interface ProductDetail {
   title: string;
   desc: string;
   image?: string;
-  features: string[];
+  features: Array<string | ProductFeature>;
   cases: ProductCase[];
   scenes: string[];
   params: ProductParam[];

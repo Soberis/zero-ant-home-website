@@ -2,6 +2,24 @@
   "za-r3-x": {
     "title": "ZA-R3 / ZA-R3X",
     "desc": "A SCARA transfer platform where ZA-R3 and ZA-R3X are primarily selected by SCARA arm length, suited to high-speed pick-and-place and compact workstations.",
+    "features": [
+      {
+        "title": "Two reach options",
+        "desc": "ZA-R3 offers 450mm reach and ZA-R3X offers 592mm horizontal reach, making it easier to match station coverage."
+      },
+      {
+        "title": "Built for fast pick-and-place",
+        "desc": "Maximum horizontal and vertical speeds of 1500mm/s and 500mm/s fit higher-frequency transfer cycles."
+      },
+      {
+        "title": "Stable repeatability",
+        "desc": "Repeatability is rated at ±0.05mm, suitable for stations that need consistent placement."
+      },
+      {
+        "title": "Complete control interfaces",
+        "desc": "Supports EtherCAT, Gigabit Ethernet, USB and 10 in / 10 out digital I/O for system integration."
+      }
+    ],
     "params": [
       { "key": "SCARA Arm Length", "value": "ZA-R3: 450mm; ZA-R3X: 592mm horizontal reach (plus 160mm gripper)" },
       { "key": "Max Rated Payload", "value": "3kg" },
@@ -22,19 +40,49 @@
   },
   "za-r3l-m-h": {
     "title": "ZA-R3L / ZA-R3M / ZA-R3H",
-    "desc": "7-DOF lift platform grouped by column height and Z-axis travel.",
+    "desc": "A SCARA lift platform where ZA-R3L, ZA-R3M, and ZA-R3H are primarily selected by column height and Z-axis travel.",
+    "features": [
+      {
+        "title": "L / M / H variants",
+        "desc": "The family is grouped by column height and Z-axis travel so different station heights can be matched more quickly."
+      },
+      {
+        "title": "Fits vertical loading gaps",
+        "desc": "Suitable for transfer tasks that need extra vertical compensation between pick and place positions."
+      },
+      {
+        "title": "Compact SCARA-based form",
+        "desc": "Keeps the compact character of a SCARA platform while extending vertical operating ability."
+      }
+    ],
     "params": [
-      { "key": "DOF", "value": "7" },
-      { "key": "Rated Payload", "value": "1kg" },
-      { "key": "Repeatability", "value": "±0.1mm" },
-      { "key": "Arm Span", "value": "640mm (excluding hand or gripper)" },
-      { "key": "Lift Axis Travel", "value": "400 / 750 / 1160mm (optional)" },
-      { "key": "Lift Axis Speed", "value": "400mm/s" }
+      { "key": "Product Form", "value": "SCARA lift platform" },
+      { "key": "Model Tiers", "value": "ZA-R3L / ZA-R3M / ZA-R3H" },
+      { "key": "Key Difference", "value": "Column height / Z-axis travel" },
+      { "key": "Selection Cue", "value": "Choose by station height and vertical loading travel first" }
     ]
   },
   "za-r3d6": {
     "title": "ZA-R3D6",
     "desc": "6-axis robotic arm for complex orientation and path control.",
+    "features": [
+      {
+        "title": "Flexible 6-axis posture control",
+        "desc": "Suitable for tasks that need more orientation freedom and more complex path planning."
+      },
+      {
+        "title": "540.5mm working radius",
+        "desc": "Provides practical workspace coverage in a relatively compact robot body."
+      },
+      {
+        "title": "±0.03mm repeatability",
+        "desc": "Fits validation and operation scenarios that need stable repeated positioning."
+      },
+      {
+        "title": "Flexible mounting",
+        "desc": "Supports any-angle installation and IP54 protection for different equipment layouts."
+      }
+    ],
     "params": [
       { "key": "DOF", "value": "6" },
       { "key": "Rated Payload", "value": "3kg (excluding hand or gripper)" },
@@ -58,6 +106,24 @@
   "za-r3t": {
     "title": "ZA-R3T",
     "desc": "Embodied dual-arm robot platform.",
+    "features": [
+      {
+        "title": "Dual-arm collaboration",
+        "desc": "Each arm has 7 DOF, supporting grasping, transfer and dual-arm validation tasks."
+      },
+      {
+        "title": "Balanced reach and precision",
+        "desc": "A 640mm arm span and ±0.1mm repeatability fit common tabletop and workstation-scale operations."
+      },
+      {
+        "title": "Selectable lift travel",
+        "desc": "Lift travel options of 400 / 750 / 1160mm help match different bench and station heights."
+      },
+      {
+        "title": "Ready for integration",
+        "desc": "EtherCAT, Gigabit Ethernet, USB and digital I/O make system integration and development easier."
+      }
+    ],
     "params": [
       { "key": "Single-Arm DOF", "value": "7" },
       { "key": "Single-Arm Rated Payload", "value": "1kg" },
@@ -81,6 +147,24 @@
   "za-m75": {
     "title": "ZA-M75",
     "desc": "Light-duty mobile base for flexible deployment and medium-light transport.",
+    "features": [
+      {
+        "title": "Light-duty mobile base",
+        "desc": "With a 75kg rated payload, it fits medium-light material transfer and platform-style deployment."
+      },
+      {
+        "title": "Zero-turn steering",
+        "desc": "Supports 360-degree zero-turn movement for narrower aisles and tighter routing."
+      },
+      {
+        "title": "Basic navigation and obstacle avoidance",
+        "desc": "Combines map building and LiDAR-based obstacle avoidance for common indoor routes."
+      },
+      {
+        "title": "Complete charging options",
+        "desc": "Runtime is about 10 hours and both manual charging and optional charging-dock setups are supported."
+      }
+    ],
     "params": [
       { "key": "Dimensions", "value": "Ø564×294(H)mm" },
       { "key": "Max Rated Payload", "value": "75kg" },
@@ -107,6 +191,24 @@
   "za-m135": {
     "title": "ZA-M135",
     "desc": "Mid-load mobile base for cross-station delivery and handling.",
+    "features": [
+      {
+        "title": "Mid-load transport capacity",
+        "desc": "A rated payload of 135kg fits heavier cross-station delivery and material handling tasks."
+      },
+      {
+        "title": "Compact deployment footprint",
+        "desc": "Dimensions of 674×456×327mm help it fit station-side deployment in tighter spaces."
+      },
+      {
+        "title": "Zero-turn and route adaptability",
+        "desc": "Supports 360-degree zero-turn steering along with basic mapping, positioning and obstacle avoidance."
+      },
+      {
+        "title": "Built for sustained work",
+        "desc": "Runtime is about 10 hours, with manual charging and optional automatic charging support."
+      }
+    ],
     "params": [
       { "key": "Dimensions", "value": "674(L)×456(W)×327(H)mm" },
       { "key": "Max Rated Payload", "value": "135kg" },
@@ -132,7 +234,17 @@
   },
   "za-mr3m": {
     "title": "ZA-MR3M",
-    "desc": "Composite lift robot platform.",
+    "desc": "ZA-MR3M is an innovative composite robot platform that deeply integrates a high-performance autonomous mobile base with a customized four-axis robotic arm. By introducing a long-travel lift axis, it addresses the classic reach-up and reach-down limitations of ordinary mobile robots for cross-area and multi-height workflows.",
+    "features": [
+      {
+        "title": "Mobile Base for Full-Area Reach",
+        "desc": "The high-precision mobile base acts as the robot arm’s legs, bringing autonomous navigation and obstacle avoidance so the operating range can extend across the workshop or laboratory."
+      },
+      {
+        "title": "Simplified Architecture, Better Value",
+        "desc": "The lift-plus-three-rotation configuration is optimized for logistics handling and planar operations, reducing system complexity and hardware cost while improving reliability."
+      }
+    ],
     "params": [
       { "key": "Product Name", "value": "Composite Lift Robot" },
       { "key": "Model", "value": "ZA-MR3M" },
@@ -150,7 +262,21 @@
   },
   "za-mr3t": {
     "title": "ZA-MR3T",
-    "desc": "Embodied dual-arm composite robot.",
+    "desc": "ZA-MR3T is a highly integrated humanoid-style manipulation platform that combines a mobile base, lift axis, robotic arms, and vision cameras. With embodied intelligence, it targets human-like, high-precision, all-scenario intelligent operation.",
+    "features": [
+      {
+        "title": "Humanoid-Style Operation",
+        "desc": "Inspired by human arm motion logic, it supports flexible multi-posture and multi-angle operation for complex bending, obstacle avoidance, precision assembly, and dexterous grasping tasks."
+      },
+      {
+        "title": "High Integration",
+        "desc": "By integrating the mobile base, lift axis, robotic arms, and vision cameras into one compact system, it breaks spatial limits and supports cross-area workflows from factory lines to labs and service scenarios."
+      },
+      {
+        "title": "Embodied Intelligence",
+        "desc": "With environmental perception from vision cameras and embodied-intelligence algorithms, it closes the loop from perception to decision to action for target recognition, path planning, grasping, transport, and assembly."
+      }
+    ],
     "params": [
       { "key": "Product Name", "value": "Embodied Dual-Arm Robot" },
       { "key": "Model", "value": "ZA-MR3T" },
@@ -168,7 +294,21 @@
   },
   "za-rmvr": {
     "title": "ZA-RMVR",
-    "desc": "Embodied dual-arm VR teleoperation development platform.",
+    "desc": "The embodied VR teleoperation development platform integrates a lift axis, dual robotic arms, dexterous end effectors, a core controller, and immersive VR devices into one teaching and research platform built around human-robot collaboration and data-driven workflows.",
+    "features": [
+      {
+        "title": "Immersive Intuitive Teleoperation",
+        "desc": "Based on VR vision and pose capture, operators can use natural intuitive movements to achieve high-precision, low-latency coordinated control of both arms."
+      },
+      {
+        "title": "High-Quality Embodied Data Capture",
+        "desc": "It records multimodal operational data such as vision, pose, and torque to support embodied foundation models and imitation learning with high-quality expert datasets."
+      },
+      {
+        "title": "Flexible Operation Across Large Spaces",
+        "desc": "The lift axis dynamically adjusts working height, extending operation from desktops to multi-layer shelving and other multi-dimensional task spaces."
+      }
+    ],
     "params": [
       { "key": "Product Name", "value": "Embodied Dual-Arm VR Teleoperation Development Platform" },
       { "key": "Model", "value": "ZA-RMVR" },
@@ -186,6 +326,20 @@
   "za-rmps": {
     "title": "ZA-RMPS",
     "desc": "Embodied dual-arm master-slave teleoperation development platform.",
+    "features": [
+      {
+        "title": "Real force feedback",
+        "desc": "The master-slave architecture feeds contact torque back in real time so operators can sense resistance and stiffness during precise contact tasks."
+      },
+      {
+        "title": "High-fidelity mapping",
+        "desc": "Matching master and slave arm structures support joint-level one-to-one mapping with low drift."
+      },
+      {
+        "title": "Fatigue-aware design",
+        "desc": "The physical master arm provides support and gravity compensation for longer data-collection and operation sessions."
+      }
+    ],
     "params": [
       { "key": "Product Name", "value": "Embodied Dual-Arm Master-Slave Teleoperation Development Platform" },
       { "key": "Model", "value": "ZA-RMPS" },
@@ -202,6 +356,20 @@
   "za-rdp": {
     "title": "ZA-RDP",
     "desc": "Drawing robot platform.",
+    "features": [
+      {
+        "title": "Teaching and research platform",
+        "desc": "Suitable for trajectory teaching, drawing demos, algorithm validation and motion-planning experiments."
+      },
+      {
+        "title": "Built on a 6-axis arm",
+        "desc": "Uses a 6-DOF robotic arm to balance motion flexibility with path control."
+      },
+      {
+        "title": "Clear platform composition",
+        "desc": "The arm, pen module, drawing board and optical platform make experiment setup and demos easier to organize."
+      }
+    ],
     "params": [
       { "key": "Product Name", "value": "Drawing Robot" },
       { "key": "Model", "value": "ZA-RDP" },
@@ -225,6 +393,24 @@
   "za-zg100": {
     "title": "ZA-ZG100",
     "desc": "High-performance controller.",
+    "features": [
+      {
+        "title": "RK3588 integrated control",
+        "desc": "Built on an 8-core 64-bit RK3588 processor with an onboard NPU for AI vision workloads and motion control in one controller."
+      },
+      {
+        "title": "EtherCAT real-time coordination",
+        "desc": "Uses EtherCAT and a 1ms control cycle to support synchronized multi-axis servo control."
+      },
+      {
+        "title": "Low-jitter control",
+        "desc": "Control jitter can be compressed to 5 microseconds for scenarios that require smoother trajectories and tighter timing."
+      },
+      {
+        "title": "Compact integrated architecture",
+        "desc": "The integrated control architecture helps reduce dependence on external IPC hardware and lowers integration complexity."
+      }
+    ],
     "params": [
       { "key": "CPU", "value": "8-core 64-bit A76+A55, 2.4GHz" },
       { "key": "GPU", "value": "ARM Mali-G610 MP4, 4-core GPU" },
@@ -233,13 +419,28 @@
       { "key": "Storage", "value": "128GB" },
       { "key": "Network Ports", "value": "EtherCAT×1, Ethernet×1" },
       { "key": "USB", "value": "USB3.0×2" },
+      { "key": "Power / Expansion", "value": "12V, Type-C" },
       { "key": "Display Interface", "value": "HDMI×1" },
       { "key": "Other Interfaces", "value": "RS232×1, RS485×1, CAN×1" }
     ]
   },
-  "rail-platform": {
+  "rail": {
     "title": "Rail Platform",
     "desc": "Used to extend long-travel linear motion.",
+    "features": [
+      {
+        "title": "Adds long linear travel",
+        "desc": "A travel length of 1750mm helps extend the robot's working range along a straight path."
+      },
+      {
+        "title": "Balances speed and positioning",
+        "desc": "A maximum speed of 500mm/s and positioning accuracy of 0.21mm/300mm fit linked transfer workflows."
+      },
+      {
+        "title": "Modular integration",
+        "desc": "Gigabit Ethernet and USB interfaces make it easier to use as an add-on module in an existing system."
+      }
+    ],
     "params": [
       { "key": "Overall Dimensions", "value": "2229(L)×280(W)×146(H)mm" },
       { "key": "Travel", "value": "1750mm" },
@@ -253,6 +454,20 @@
   "rotating-platform": {
     "title": "Rotating Platform",
     "desc": "Used to add rotational freedom to the workstation.",
+    "features": [
+      {
+        "title": "Adds transfer rotation",
+        "desc": "Supports ±360-degree rotation for stations that need angular switching and transfer alignment."
+      },
+      {
+        "title": "Stable rotation accuracy",
+        "desc": "Positioning accuracy of ≤1 arcmin and repeatability of ≤10 arcsec fit posture-adjustment tasks."
+      },
+      {
+        "title": "Compact expansion module",
+        "desc": "Useful as an accessory after the main robot body is chosen, helping extend station adaptability."
+      }
+    ],
     "params": [
       { "key": "Overall Dimensions", "value": "433(L)×280(W)×238(H)mm" },
       { "key": "Max Speed", "value": "30rpm" },
@@ -268,6 +483,20 @@
   "za-r3m-left": {
     "title": "ZA-R3M(L) Rail Platform-Integrated",
     "desc": "R-series ZA-R3M configuration integrated with a rail platform for extended long-travel linear operation.",
+    "features": [
+      {
+        "title": "Extends linear coverage",
+        "desc": "Combines ZA-R3M with a rail platform to expand straight-line operating range."
+      },
+      {
+        "title": "Fits cross-station linkage",
+        "desc": "Suitable for cross-station pick-and-place, transfer and continuous linear workflows."
+      },
+      {
+        "title": "Clear combination path",
+        "desc": "A practical option when the robot body is suitable but the straight-line travel range is not enough."
+      }
+    ],
     "params": [
       { "key": "Base Combination", "value": "ZA-R3M + Rail Platform" },
       { "key": "Category", "value": "R-series linked variant" },
@@ -279,6 +508,20 @@
   "za-r3m-right": {
     "title": "ZA-R3M(R) Rotary-Platform Integrated",
     "desc": "R-series ZA-R3M configuration integrated with a rotating platform for transfer and orientation adjustment.",
+    "features": [
+      {
+        "title": "Adds posture adjustment",
+        "desc": "Combines ZA-R3M with a rotating platform for tasks that need angle switching during transfer."
+      },
+      {
+        "title": "Fits rotation-based stations",
+        "desc": "Suitable for multi-angle transfer, posture switching and station-direction adjustment."
+      },
+      {
+        "title": "Selection tied to takt and layout",
+        "desc": "Useful when rotation precision, takt requirements and station layout drive the combination choice."
+      }
+    ],
     "params": [
       { "key": "Base Combination", "value": "ZA-R3M + Rotating Platform" },
       { "key": "Category", "value": "R-series linked variant" },
