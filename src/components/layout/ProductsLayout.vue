@@ -150,7 +150,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   --products-accent-soft: rgba(26, 58, 143, 0.06);
   --products-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
   min-height: 100vh;
-  padding: 80px 0 96px;
+  padding: 0 0 96px;
   background: #ffffff;
 }
 
@@ -167,7 +167,10 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 .products-hero {
   position: relative;
-  padding: 0;
+  padding: calc(var(--nav-height) + 28px) 0 56px;
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
+    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
 }
 
 .products-hero__inner {
@@ -346,7 +349,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-overview {
   margin-top: 32px;
   padding-top: 40px;
-  border-top: 1px solid rgba(15, 23, 42, 0.06); /* 增加顶部横线 */
+  padding-top: 40px;
 }
 
 .products-guide__item {
@@ -381,7 +384,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-guide {
   margin-top: 56px;
   padding: 56px 0 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.06); /* 增加顶部横线 */
+  padding: 56px 0 0;
 }
 
 .products-guide__header {
@@ -417,7 +420,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 @media (max-width: 1100px) {
   .products-shell {
-    padding-top: 72px;
+    padding-top: 0;
   }
 
   .products-hero__inner {
@@ -461,7 +464,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 @media (max-width: 640px) {
   .products-shell {
-    padding: 72px 0 64px;
+    padding: 0 0 64px;
   }
 
   .products-hero__copy {

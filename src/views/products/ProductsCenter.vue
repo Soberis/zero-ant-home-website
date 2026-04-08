@@ -229,12 +229,31 @@ const pageContent = computed(() => ({
 /* active link state could be handled with JS, but for anchor links a soft hover is good enough for now. */
 
 .product-family {
-  padding-top: 12px;
+  position: relative;
+  padding: 64px 0;
   scroll-margin-top: calc(var(--nav-height) + 96px);
+}
+.product-family::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  padding-left: 100vw;
+  padding-right: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.product-family:nth-of-type(odd)::before {
+  background-color: #f8f9fb;
+}
+.product-family:nth-of-type(even)::before {
+  background-color: #ffffff;
 }
 
 .product-family + .product-family {
-  margin-top: 52px;
+  margin-top: 0;
 }
 
 .product-family__header {
@@ -266,11 +285,25 @@ const pageContent = computed(() => ({
   display: grid;
   grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1fr);
   gap: 28px;
-  padding: 28px 0;
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  border-width: 1px 0 0;
-  background: transparent;
+  padding: 32px;
+  border-radius: 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   scroll-margin-top: calc(var(--nav-height) + 96px);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
+}
+
+.product-family:nth-of-type(odd) .product-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.product-family:nth-of-type(even) .product-card {
+  background: #f8f9fb;
+  border: none;
 }
 
 .product-card__visual {

@@ -309,7 +309,7 @@ function formatIndex(value: number): string {
   background: var(--brand-surface);
 }
 
-.support-page > .page-section:nth-of-type(even) {
+.support-page > .page-section:nth-of-type(odd) {
   background-color: var(--brand-surface-soft);
 }
 
@@ -322,6 +322,9 @@ function formatIndex(value: number): string {
 
 .support-hero {
   padding: 84px 0 88px;
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
+    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
 }
 
 .hero-grid {
@@ -521,9 +524,9 @@ function formatIndex(value: number): string {
   gap: 14px;
   min-height: 220px;
   padding: 28px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: none;
   border-radius: 18px;
-  background: #ffffff;
+  background: var(--brand-surface-soft);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
@@ -579,8 +582,11 @@ function formatIndex(value: number): string {
 }
 
 .faq-item {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  background: transparent;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  padding: 0 24px;
+  background: #ffffff;
 }
 
 .card-header {
@@ -682,6 +688,9 @@ function formatIndex(value: number): string {
   flex-direction: column;
   gap: 6px;
   min-width: 0;
+  background: var(--brand-surface-soft);
+  padding: 24px;
+  border-radius: 16px;
 }
 
 .contact-card--full {

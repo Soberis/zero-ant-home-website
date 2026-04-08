@@ -312,7 +312,7 @@ function applyForPosition(position: Position): void {
   background: var(--brand-surface);
 }
 
-.careers-page > .page-section:nth-of-type(even) {
+.careers-page > .page-section:nth-of-type(odd) {
   background-color: var(--brand-surface-soft);
 }
 
@@ -325,6 +325,9 @@ function applyForPosition(position: Position): void {
 
 .careers-hero {
   padding: 84px 0 88px;
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
+    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
 }
 
 .hero-grid {
@@ -575,17 +578,13 @@ function applyForPosition(position: Position): void {
   column-gap: 16px;
   row-gap: 0;
   align-items: start;
-  padding: 20px 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.07);
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  transition: none;
+  padding: 24px;
+  background: var(--brand-surface-soft);
+  border-radius: 16px;
 }
 
 .benefit-card:nth-child(-n+2) {
-  border-top: none;
-  padding-top: 0;
+  /* removed */
 }
 
 .benefit-index {
@@ -621,18 +620,26 @@ function applyForPosition(position: Position): void {
 
 .positions-list {
   display: grid;
-  gap: 0;
+  gap: 24px;
 }
 
 .position-card {
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  background: transparent;
-  padding: 32px 0;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 32px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.position-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(26, 58, 143, 0.12);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
 }
 
 .position-card:first-child {
-  padding-top: 0;
-  border-top: none;
+  /* padding-top: 0; */
+  /* border-top: none; */
 }
 
 .position-header {

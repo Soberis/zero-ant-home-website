@@ -33,7 +33,7 @@
       </div>
     </section>
 
-    <section id="industries" ref="industriesRef" class="page-section reveal-ready">
+    <section id="industries" ref="industriesRef" class="page-section page-section--plain reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -81,7 +81,7 @@
     </section>
 
     <!-- 精选案例默认收缩展示，完整案例索引按需展开 -->
-    <section id="proof" ref="proofRef" class="page-section reveal-ready">
+    <section id="proof" ref="proofRef" class="page-section page-section--muted reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -167,7 +167,7 @@
       </div>
     </section>
 
-    <section id="delivery" ref="deliveryRef" class="page-section delivery-section reveal-ready">
+    <section id="delivery" ref="deliveryRef" class="page-section page-section--plain delivery-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -458,8 +458,9 @@ function toggleApplicationArchive(): void {
 
 <style scoped lang="less">
 .solutions-page {
+  position: relative;
   color: var(--brand-text);
-  background: var(--brand-surface);
+  background: #ffffff;
 }
 
 .page-shell {
@@ -470,7 +471,11 @@ function toggleApplicationArchive(): void {
 }
 
 .solutions-hero {
-  padding: 68px 0 40px;
+  position: relative;
+  padding: calc(var(--nav-height) + 28px) 0 56px;
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
+    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
 }
 
 .hero-grid {
@@ -544,7 +549,6 @@ function toggleApplicationArchive(): void {
   flex-direction: column;
   gap: 6px;
   padding: 18px 0;
-  border-left: none;
 }
 
 .hero-stat + .hero-stat {
@@ -569,9 +573,16 @@ function toggleApplicationArchive(): void {
 }
 
 .page-section {
-  padding: 76px 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.05);
+  padding: 88px 0;
   scroll-margin-top: calc(var(--nav-height) + 16px);
+}
+
+.page-section--plain {
+  background: #ffffff;
+}
+
+.page-section--muted {
+  background: #f8f9fb;
 }
 
 .detail-section__header {
@@ -614,22 +625,29 @@ function toggleApplicationArchive(): void {
 .industry-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px 32px;
+  gap: 24px;
 }
 
 .industry-block {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding: 24px 0 22px;
-  border: none;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 20px;
+  background: rgba(248, 250, 253, 0.72);
   cursor: pointer;
-  transition: border-color 0.25s ease, color 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    background 0.25s ease;
 }
 
 .industry-block:hover {
-  border-color: rgba(26, 58, 143, 0.2);
+  transform: translateY(-2px);
+  border-color: rgba(26, 58, 143, 0.14);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .industry-block__header {
@@ -638,6 +656,7 @@ function toggleApplicationArchive(): void {
   align-items: flex-start;
   margin-bottom: 14px;
 }
+
 .industry-block__header .card-title {
   margin: 0;
 }
@@ -655,8 +674,8 @@ function toggleApplicationArchive(): void {
 
 .industry-products {
   margin: 0;
-  color: rgba(15, 23, 42, 0.5);
-  font-size: 0.84rem;
+  color: rgba(15, 23, 42, 0.58);
+  font-size: 0.92rem;
   font-weight: 600;
   line-height: 1.7;
 }
@@ -702,13 +721,13 @@ function toggleApplicationArchive(): void {
 .card-title {
   margin: 0 0 12px;
   color: var(--brand-text);
-  font-size: 1.16rem;
+  font-size: 1.28rem;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.35;
 }
 
 .card-description {
-  margin: 0 0 18px;
+  margin: 0;
   font-size: 0.98rem;
 }
 .proof-card-title,
@@ -829,6 +848,9 @@ function toggleApplicationArchive(): void {
   min-height: 100%;
   padding: 20px 0 0;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .delivery-step .card-index {
@@ -996,7 +1018,7 @@ function toggleApplicationArchive(): void {
   }
 
   .industry-block {
-    padding: 22px 0 20px;
+    padding: 24px;
   }
 
   .delivery-contact {
