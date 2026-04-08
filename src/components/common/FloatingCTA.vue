@@ -123,7 +123,7 @@ const scrollToTop = () => {
   height: 44px;
   margin: 4px 8px; /* 恢复对称边距 */
   background: transparent;
-  color: #64748b; /* 默认使用低对比度的 Slate 灰色，避免喧宾夺主 */
+  color: var(--color-primary); /* Use tech blue by default instead of slate gray */
   border-radius: 50%;
   cursor: pointer;
   text-decoration: none;

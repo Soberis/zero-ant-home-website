@@ -214,22 +214,22 @@ export const productCenterFamilies: ProductCenterFamily[] = [
     introKey: "productsCenter.families.accessories.intro",
     cards: [
       {
-        id: "rail",
-        image: railImg,
-        titleKey: "productsCenter.families.accessories.cards.rail.title",
-        summaryKey: "productsCenter.families.accessories.cards.rail.summary",
-        specKeys: [
-          "productsCenter.families.accessories.cards.rail.specs.0", "productsCenter.families.accessories.cards.rail.specs.1", "productsCenter.families.accessories.cards.rail.specs.2", "productsCenter.families.accessories.cards.rail.specs.3"
-        ]
-        
-      },
-      {
         id: "rotating-platform",
         image: rotatingPlatformImg,
         titleKey: "productsCenter.families.accessories.cards.rotatingplatform.title",
         summaryKey: "productsCenter.families.accessories.cards.rotatingplatform.summary",
         specKeys: [
           "productsCenter.families.accessories.cards.rotatingplatform.specs.0", "productsCenter.families.accessories.cards.rotatingplatform.specs.1", "productsCenter.families.accessories.cards.rotatingplatform.specs.2", "productsCenter.families.accessories.cards.rotatingplatform.specs.3"
+        ]
+        
+      },
+      {
+        id: "rail",
+        image: railImg,
+        titleKey: "productsCenter.families.accessories.cards.rail.title",
+        summaryKey: "productsCenter.families.accessories.cards.rail.summary",
+        specKeys: [
+          "productsCenter.families.accessories.cards.rail.specs.0", "productsCenter.families.accessories.cards.rail.specs.1", "productsCenter.families.accessories.cards.rail.specs.2", "productsCenter.families.accessories.cards.rail.specs.3"
         ]
         
       },

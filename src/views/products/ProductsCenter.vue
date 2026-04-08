@@ -9,7 +9,7 @@
           class="product-center-filter__link"
           :class="{ 'is-active': activeFamilyId === family.id }"
         >
-          {{ family.title }}
+          <span>{{ family.title }}</span>
         </a>
       </div>
     </section>
@@ -28,11 +28,12 @@
       </div>
 
       <div class="product-family__grid">
-        <article
+        <router-link
           v-for="card in family.cards"
           :key="card.id"
           :id="card.id"
           class="product-card"
+          :to="`/products/detail/${card.id}`"
         >
           <div class="product-card__visual">
             <img :src="card.image" :alt="card.title" class="product-card__image" loading="lazy" />
@@ -40,18 +41,19 @@
 
           <div class="product-card__body">
             <h3 class="product-card__title">{{ card.title }}</h3>
-            <p class="product-card__summary">{{ card.summary }}</p>
+            <!-- <p class="product-card__summary">{{ card.summary }}</p> -->
 
             <div class="product-card__spec-block">
-              <span class="product-card__spec-label">{{ pageCopy.specLabel }}</span>
               <ul class="product-card__specs">
-                <li v-for="spec in card.primarySpecs" :key="spec">{{ spec }}</li>
+                <li v-for="spec in card.primarySpecs" :key="spec">
+                  {{ spec }}
+                </li>
               </ul>
             </div>
 
-            <p v-if="card.secondarySpec" class="product-card__secondary-spec">
+            <!-- <p v-if="card.secondarySpec" class="product-card__secondary-spec">
               {{ card.secondarySpec }}
-            </p>
+            </p> -->
 
             <p v-if="card.note" class="product-card__note">
               <span class="product-card__note-label">{{ pageCopy.tipLabel }}</span>
@@ -59,12 +61,15 @@
             </p>
 
             <div class="product-card__actions">
-              <router-link class="btn btn-secondary product-card__detail-link" :to="`/products/detail/${card.id}`">
-                {{ pageCopy.detailAction }}
-              </router-link>
+              <div class="app-action product-card__detail-link">
+                <span class="action-text">{{ pageCopy.detailAction }}</span>
+                <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
             </div>
           </div>
-        </article>
+        </router-link>
       </div>
     </section>
 
@@ -137,6 +142,7 @@ const families = computed(() =>
     id: family.id,
     title: t(family.titleKey),
     intro: t(family.introKey),
+    thumbnail: family.cards[0]?.image || "",
     cards: family.cards.map((card) => ({
       id: card.id,
       image: card.image,
@@ -224,20 +230,23 @@ const pageContent = computed(() => ({
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.05);
   border-radius: 99px;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  max-width: 100%;
 }
 
 .product-center-filter__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  min-width: 80px;
   min-height: 36px;
   padding: 0 16px;
   color: #475467;
-  font-size: 0.88rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 500;
   border-radius: 99px;
   background-color: transparent;
   transition: all 0.25s ease;
@@ -246,8 +255,8 @@ const pageContent = computed(() => ({
 
 .product-center-filter__link:hover,
 .product-center-filter__link.is-active {
-  color: var(--color-primary);
-  background-color: rgba(26, 58, 143, 0.06);
+  color: var(--brand-primary, var(--color-primary));
+  background-color: var(--brand-surface-soft, rgba(26, 58, 143, 0.06));
 }
 
 /* active link state could be handled with JS, but for anchor links a soft hover is good enough for now. */
@@ -268,12 +277,7 @@ const pageContent = computed(() => ({
   height: 100%;
   transform: translateX(-50%);
   z-index: -1;
-}
-.product-family:nth-of-type(odd)::before {
   background-color: #f8f9fb;
-}
-.product-family:nth-of-type(even)::before {
-  background-color: #ffffff;
 }
 
 .product-family + .product-family {
@@ -301,33 +305,32 @@ const pageContent = computed(() => ({
 
 .product-family__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .product-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 32px;
+  gap: 0;
+  padding: 0;
   border-radius: 16px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
   scroll-margin-top: calc(var(--nav-height) + 96px);
+  overflow: hidden;
+  z-index: 1;
+  text-decoration: none;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
 }
 
 .product-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
-}
-
-.product-family:nth-of-type(odd) .product-card {
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-}
-
-.product-family:nth-of-type(even) .product-card {
-  background: #f8f9fb;
-  border: none;
+  transform: translateY(-6px);
+  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
 }
 
 .product-card__visual {
@@ -335,10 +338,10 @@ const pageContent = computed(() => ({
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 240px;
-  padding: 16px;
-  background: radial-gradient(circle at center, rgba(26, 58, 143, 0.05), rgba(26, 58, 143, 0));
-  border-radius: 12px;
+  height: 250px;
+  padding: 20px;
+  background: radial-gradient(circle at center, #ffffff 0%, #f1f3f8 100%);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.03);
 }
 
 .product-card__image {
@@ -356,71 +359,95 @@ const pageContent = computed(() => ({
 .product-card__body {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   flex: 1;
+  padding: 28px 24px;
 }
 
 .product-card__actions {
+  display: flex;
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 0;
   width: 100%;
 }
 
 .product-card__detail-link {
-  width: 168px;
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-primary, var(--color-primary));
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.25s ease;
+  text-decoration: none;
+}
+
+.product-card__detail-link:hover {
+  color: var(--brand-primary-deep, #142a66);
+}
+
+.product-card__detail-link .action-arrow {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.product-card:hover .product-card__detail-link .action-arrow {
+  transform: translateX(4px);
 }
 
 .product-card__title {
   margin: 0;
-  font-size: 1.46rem;
-  line-height: 1.16;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-text, #1a1a1a);
   letter-spacing: -0.025em;
 }
 
 .product-card__summary {
   margin: 0;
   color: var(--color-text-secondary);
-  line-height: 1.7;
-  max-width: 24em;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-card__spec-block {
-  display: grid;
-  gap: 8px;
-}
-
-.product-card__spec-label {
-  display: inline-flex;
-  color: var(--color-primary);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  margin-top: 8px;
 }
 
 .product-card__specs {
   margin: 0;
   padding: 0;
   list-style: none;
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .product-card__specs li {
   position: relative;
-  padding-left: 14px;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 12px;
   color: #344054;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
 .product-card__specs li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.72em;
+  top: 0.55em;
   width: 5px;
   height: 5px;
   background: var(--color-primary);
@@ -489,11 +516,15 @@ const pageContent = computed(() => ({
 
 @media (max-width: 1180px) {
   .product-family__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 900px) {
+  .product-family__grid {
+    grid-template-columns: 1fr;
+  }
+
   .product-center-filter {
     top: calc(var(--nav-height) + 8px);
   }
