@@ -710,7 +710,13 @@
     "parameters": "@:common.section.parameters",
     "downloads": "@:common.section.relatedDownloads",
     "backToList": "返回产品列表",
-    "notFound": "未找到该产品"
+    "notFound": "未找到该产品",
+    "cta": {
+      "title": "需要深入评估您的应用场景？",
+      "description": "探索我们的一站式行业解决方案，或直接获取零蚁工程师的一对一选型与部署支持。",
+      "exploreSolutions": "探索解决方案",
+      "contactSales": "联系我们"
+    }
   },
   "applicationsPage": {
     "prev": "上一个",

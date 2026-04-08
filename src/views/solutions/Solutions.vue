@@ -468,7 +468,11 @@ function toggleApplicationArchive(): void {
 
 .solutions-hero {
   position: relative;
-  padding: calc(var(--nav-height) + 28px) 0 56px;
+  min-height: calc(100vh - var(--nav-height));
+  padding: 40px 0 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background:
     radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
     linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);

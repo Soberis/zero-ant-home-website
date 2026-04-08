@@ -710,7 +710,13 @@
     "parameters": "@:common.section.parameters",
     "downloads": "@:common.section.relatedDownloads",
     "backToList": "Back to Product List",
-    "notFound": "Product not found"
+    "notFound": "Product not found",
+    "cta": {
+      "title": "Looking for comprehensive automation solutions?",
+      "description": "Explore our industry solutions or contact engineers for dedicated support.",
+      "exploreSolutions": "Explore Solutions",
+      "contactSales": "Contact Sales"
+    }
   },
   "applicationsPage": {
     "prev": "Previous",

@@ -209,6 +209,25 @@
               <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
             </div>
           </section>
+
+          <section class="detail-section product-footer-cta">
+            <div class="product-footer-cta__inner">
+              <h2 class="product-footer-cta__title">
+                {{ t("productDetail.cta.title") }}
+              </h2>
+              <p class="product-footer-cta__desc">
+                {{ t("productDetail.cta.description") }}
+              </p>
+              <div class="product-footer-cta__actions">
+                <router-link to="/solutions" class="btn btn-primary">
+                  {{ t("productDetail.cta.exploreSolutions") }}
+                </router-link>
+                <router-link :to="{ path: '/about', hash: '#contact' }" class="btn product-footer-cta__ghost-btn">
+                  {{ t("productDetail.cta.contactSales") }}
+                </router-link>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
     </div>
@@ -901,6 +920,65 @@ const goBack = () => {
   margin-top: 120px;
 }
 
+.product-footer-cta {
+  border-top: none;
+  padding-top: 20px;
+}
+
+.product-footer-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--brand-surface-soft, #f8f9fb);
+  border-radius: 16px;
+  padding: 56px 32px;
+}
+
+.product-footer-cta__title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.product-footer-cta__desc {
+  margin: 16px 0 32px;
+  max-width: 500px;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.product-footer-cta__actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.product-footer-cta__ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  height: 48px;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: transparent;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.product-footer-cta__ghost-btn:hover {
+  background: #ffffff;
+  border-color: rgba(26, 58, 143, 0.2);
+  color: var(--brand-primary);
+}
+
 @media (max-width: 1100px) {
   .product-hero__inner {
     grid-template-columns: 1fr;
@@ -952,13 +1030,21 @@ const goBack = () => {
 
   .param-card {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 6px;
+    padding: 14px 16px;
+  }
+
+  .param-card__label {
+    font-size: 0.9rem;
+    padding-top: 0;
   }
 
   .param-card__value {
     justify-self: start;
     max-width: none;
     text-align: left;
+    font-size: 1.05rem;
+    line-height: 1.5;
   }
 
   .downloads-grid {
@@ -1004,6 +1090,19 @@ const goBack = () => {
 
   .download-title {
     font-size: 1.05rem;
+  }
+
+  .product-footer-cta__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .product-footer-cta__inner {
+    padding: 40px 24px;
+  }
+
+  .product-footer-cta__title {
+    font-size: 1.4rem;
   }
 }
 
