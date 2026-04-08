@@ -70,7 +70,7 @@ const productFamilies = [
     titleKey: 'home.coreProducts.families.mSeries.title',
     descriptionKey: 'home.coreProducts.families.mSeries.description',
     image: zaM135Img,
-    models: ['ZA-M135'],
+    models: ['ZA-M75', 'ZA-M135'],
   },
   {
     key: 'mr-series',
@@ -168,8 +168,8 @@ const productFamilies = [
   gap: 22px;
   min-height: 100%;
   padding: 32px;
-  border-radius: 12px;
-  background: #ffffff;
+  border-radius: 16px;
+  background: var(--brand-surface-soft, #f8f9fb);
   text-decoration: none;
   color: inherit;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -179,8 +179,8 @@ const productFamilies = [
 
 .family-card:hover {
   transform: translateY(-6px);
-  background-color: #ffffff;
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+  background-color: var(--brand-surface-soft, #f8f9fb);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
 }
 
 .family-card:focus-visible {
@@ -194,13 +194,14 @@ const productFamilies = [
   justify-content: center;
   min-height: 200px;
   padding: 12px 8px;
-  border-radius: 8px;
-  background: #f8fafc;
-  transition: background-color 0.4s ease;
+  border-radius: 12px;
+  background: #ffffff;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .family-card:hover .family-card__visual {
-  background: #f1f5f9;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
 }
 
 .family-card__image {

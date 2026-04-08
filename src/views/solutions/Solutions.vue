@@ -255,7 +255,7 @@ useScrollRevealList([industriesRef, proofRef, deliveryRef]);
 
 const route = useRoute();
 const router = useRouter();
-const { t, tm, locale } = useI18n();
+const { t, tm } = useI18n();
 
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
@@ -288,10 +288,6 @@ function truncate(value: string, maxLength: number): string {
 
 function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");
-}
-
-function resolveLocalizedText(value: { zh: string; en: string }): string {
-  return locale.value === "en" ? value.en : value.zh;
 }
 
 function formatProductLine(products: string[]): string {
@@ -327,7 +323,7 @@ const heroStats = computed(() => {
 
 const productTitleMap = computed<Record<string, string>>(() =>
   productCenterCards.reduce<Record<string, string>>((map, item) => {
-    map[item.card.id] = resolveLocalizedText(item.card.title);
+    map[item.card.id] = t(item.card.titleKey);
 
     return map;
   }, {})
@@ -684,12 +680,12 @@ function toggleApplicationArchive(): void {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: rgba(15, 23, 42, 0.62);
+  color: var(--brand-primary);
   transition: color 0.25s ease;
 }
 
 .industry-block:hover .industry-footer-link {
-  color: var(--brand-primary);
+  color: var(--brand-primary-deep);
 }
 
 .industry-block:hover .action-icon {
@@ -697,7 +693,7 @@ function toggleApplicationArchive(): void {
 }
 
 .link-text {
-  font-size: 0.86rem;
+  font-size: 0.92rem;
   font-weight: 500;
   line-height: 1.55;
 }
@@ -846,11 +842,9 @@ function toggleApplicationArchive(): void {
   flex-direction: column;
   gap: 18px;
   min-height: 100%;
-  padding: 20px 0 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--brand-surface-soft);
 }
 
 .delivery-step .card-index {
@@ -876,13 +870,9 @@ function toggleApplicationArchive(): void {
   grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
   align-items: flex-start;
   gap: 40px 56px;
-  padding: 30px 0 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
-  border-radius: 0;
-  background: transparent;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--brand-surface-soft);
 }
 
 .delivery-contact__copy {

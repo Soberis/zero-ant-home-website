@@ -445,9 +445,8 @@ export async function setupProductDetailSEO(to: RouteLocationNormalized) {
 
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${to.path}`;
-  const isEn = i18n.global.locale.value === "en";
-  const productName = isEn ? product.card.title.en : product.card.title.zh;
-  const productDesc = isEn ? product.card.summary.en : product.card.summary.zh;
+  const productName = safeTranslate(product.card.titleKey);
+  const productDesc = safeTranslate(product.card.summaryKey);
   const siteName = safeTranslate("seo.siteName");
   const productImage = product.card.image.startsWith("http")
     ? product.card.image

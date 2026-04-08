@@ -40,7 +40,7 @@ export function useProductDetailData(
   slug: MaybeRefOrGetter<string>,
   options: UseProductDetailDataOptions = {}
 ) {
-  const { t, te, tm, locale } = useI18n();
+  const { t, te, tm } = useI18n();
   const router = useRouter();
 
   const slugValue = computed(() => String(toValue(slug) || ""));
@@ -54,9 +54,9 @@ export function useProductDetailData(
       slug: record.card.id,
       image: record.card.image,
       familyId: record.familyId,
-      familyTitle: record.familyTitle,
-      title: record.card.title,
-      summary: record.card.summary,
+      familyTitleKey: record.familyTitleKey,
+      titleKey: record.card.titleKey,
+      summaryKey: record.card.summaryKey,
       metrics: [],
     };
   });
@@ -76,14 +76,10 @@ export function useProductDetailData(
     const detail = createEmptyProductDetail();
     detail.title = te(`${detailKey.value}.title`)
       ? t(`${detailKey.value}.title`)
-      : locale.value === "en"
-        ? currentProduct.value.title.en
-        : currentProduct.value.title.zh;
+      : t(currentProduct.value.titleKey);
     detail.desc = te(`${detailKey.value}.desc`)
       ? t(`${detailKey.value}.desc`)
-      : locale.value === "en"
-        ? currentProduct.value.summary.en
-        : currentProduct.value.summary.zh;
+      : t(currentProduct.value.summaryKey);
     detail.image = currentProduct.value.image;
     return detail;
   };
@@ -98,18 +94,14 @@ export function useProductDetailData(
       (currentProduct.value
         ? (te(`${detailKey.value}.title`)
             ? String(tm(`${detailKey.value}.title`))
-            : locale.value === "en"
-              ? currentProduct.value.title.en
-              : currentProduct.value.title.zh)
+            : t(currentProduct.value.titleKey))
         : "");
     const fallbackDesc =
       baseDetail.value?.desc ||
       (currentProduct.value
         ? (te(`${detailKey.value}.desc`)
             ? String(tm(`${detailKey.value}.desc`))
-            : locale.value === "en"
-              ? currentProduct.value.summary.en
-              : currentProduct.value.summary.zh)
+            : t(currentProduct.value.summaryKey))
         : "");
     const fallbackImage = baseDetail.value?.image || currentProduct.value?.image || "";
     const fallbackFeatures = baseDetail.value?.features || [];
@@ -157,9 +149,7 @@ export function useProductDetailData(
       return "";
     }
 
-    return locale.value === "en"
-      ? currentProduct.value.familyTitle.en
-      : currentProduct.value.familyTitle.zh;
+    return t(currentProduct.value.familyTitleKey);
   });
 
   const normalizedParams = computed(() =>

@@ -416,27 +416,42 @@ function formatIndex(value: number): string {
 }
 
 .info-panel,
-.culture-card,
 .timeline-card {
   background: transparent;
   border: none;
   box-shadow: none;
   border-radius: 0;
   padding: 0;
-  transition: none;
+  transition: transform 0.25s ease;
 }
 
 .intro-side .info-panel + .info-panel {
   padding-top: 8px;
 }
 
-.honor-card,
-.value-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0;
+.culture-card {
+  background: #f8f9fb;
+  border-radius: 16px;
+  padding: 32px 40px;
   box-shadow: none;
+}
+
+.honor-card {
+  background: var(--brand-surface-soft);
+  border: none;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: none;
+}
+
+.value-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .panel-title {
@@ -454,8 +469,8 @@ function formatIndex(value: number): string {
 
 .stat-card {
   padding: 24px;
-  background: rgba(15, 23, 42, 0.03);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--brand-surface-soft);
+  border: none;
   border-radius: 12px;
   transition: all var(--transition-smooth);
 }
@@ -470,11 +485,11 @@ function formatIndex(value: number): string {
 .stat-number {
   display: block;
   margin-bottom: 8px;
-  color: var(--brand-primary-deep);
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  color: var(--brand-primary-deep);
 }
 
 .stat-label {
@@ -493,6 +508,14 @@ function formatIndex(value: number): string {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr);
   gap: 20px;
+}
+
+.timeline-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .timeline-rail {
@@ -553,12 +576,12 @@ function formatIndex(value: number): string {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 22px 0;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  padding: 24px;
+  border-bottom: none;
 }
 
 .honor-card:nth-child(odd) {
-  padding-right: 0;
+  padding-right: 24px;
 }
 
 .honor-card:nth-last-child(-n+2) {
@@ -592,18 +615,13 @@ function formatIndex(value: number): string {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 32px 24px;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
+  /* background/border is set in top block */
   transition: all var(--transition-smooth);
 }
 
 .value-card:hover {
-  transform: translateY(-8px) scale(1.03);
-  border-color: rgba(26, 58, 143, 0.15);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.04);
 }
 
 .value-text {
@@ -614,15 +632,30 @@ function formatIndex(value: number): string {
 }
 
 .culture-list {
-  margin: 18px 0 0;
+  margin: 20px 0 0;
   padding: 0;
   list-style: none;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
-.culture-card {
-  padding: 28px 0;
+.culture-list li {
+  position: relative;
+  padding-left: 24px;
+  color: var(--brand-text);
+  line-height: 1.7;
+}
+
+.culture-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background-color: var(--brand-primary);
+  border-radius: 50%;
 }
 
 .contact-section {
@@ -651,7 +684,11 @@ function formatIndex(value: number): string {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-top: 0;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .contact-card--wide {

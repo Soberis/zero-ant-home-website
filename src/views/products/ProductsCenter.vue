@@ -7,6 +7,7 @@
           :key="family.id"
           :href="`#${family.id}`"
           class="product-center-filter__link"
+          :class="{ 'is-active': activeFamilyId === family.id }"
         >
           {{ family.title }}
         </a>
@@ -86,18 +87,40 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
 import {
-  type LocalizedText,
   productCenterFamilies,
 } from "@/data/product-center";
 
-const { locale, t } = useI18n();
+const { t } = useI18n();
 
-const resolveText = (value: LocalizedText): string =>
-  locale.value === "en" ? value.en : value.zh;
+// resolveText removed as we now use standard i18n keys
+
+const activeFamilyId = ref("");
+
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        activeFamilyId.value = entry.target.id;
+      }
+    });
+  }, {
+    rootMargin: "-20% 0px -60% 0px",
+    threshold: 0
+  });
+
+  families.value.forEach((family) => {
+    const el = document.getElementById(family.id);
+    if (el) observer.observe(el);
+  });
+
+  onUnmounted(() => {
+    observer.disconnect();
+  });
+});
 
 const pageCopy = computed(() => ({
   specLabel: t("productsPage.common.specLabel"),
@@ -112,16 +135,16 @@ const pageCopy = computed(() => ({
 const families = computed(() =>
   productCenterFamilies.map((family) => ({
     id: family.id,
-    title: resolveText(family.title),
-    intro: resolveText(family.intro),
+    title: t(family.titleKey),
+    intro: t(family.introKey),
     cards: family.cards.map((card) => ({
       id: card.id,
       image: card.image,
-      title: resolveText(card.title),
-      summary: resolveText(card.summary),
-      primarySpecs: card.specs.slice(0, 3).map(resolveText),
-      secondarySpec: card.specs[3] ? resolveText(card.specs[3]) : "",
-      note: card.note ? resolveText(card.note) : "",
+      title: t(card.titleKey),
+      summary: t(card.summaryKey),
+      primarySpecs: card.specKeys.slice(0, 3).map((key) => t(key)),
+      secondarySpec: card.specKeys[3] ? t(card.specKeys[3]) : "",
+      note: card.noteKey ? t(card.noteKey) : "",
     })),
   }))
 );
@@ -221,7 +244,8 @@ const pageContent = computed(() => ({
   text-decoration: none;
 }
 
-.product-center-filter__link:hover {
+.product-center-filter__link:hover,
+.product-center-filter__link.is-active {
   color: var(--color-primary);
   background-color: rgba(26, 58, 143, 0.06);
 }
@@ -282,9 +306,9 @@ const pageContent = computed(() => ({
 }
 
 .product-card {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1fr);
-  gap: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   padding: 32px;
   border-radius: 16px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -310,29 +334,36 @@ const pageContent = computed(() => ({
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 236px;
-  padding: 10px 0;
-  background: radial-gradient(circle at top, rgba(26, 58, 143, 0.05), rgba(26, 58, 143, 0));
+  width: 100%;
+  height: 240px;
+  padding: 16px;
+  background: radial-gradient(circle at center, rgba(26, 58, 143, 0.05), rgba(26, 58, 143, 0));
+  border-radius: 12px;
 }
 
 .product-card__image {
   width: auto;
   max-width: 100%;
-  height: 214px;
+  height: 100%;
   object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.05);
 }
 
 .product-card__body {
   display: flex;
   flex-direction: column;
-  align-content: start;
   gap: 14px;
-  min-height: 100%;
+  flex: 1;
 }
 
 .product-card__actions {
   margin-top: auto;
   padding-top: 18px;
+  width: 100%;
 }
 
 .product-card__detail-link {
@@ -361,7 +392,7 @@ const pageContent = computed(() => ({
 
 .product-card__spec-label {
   display: inline-flex;
-  color: #667085;
+  color: var(--color-primary);
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -421,7 +452,11 @@ const pageContent = computed(() => ({
   justify-content: space-between;
   gap: 24px 32px;
   margin-top: 56px;
-  padding-top: 8px;
+  padding: 48px;
+  background: linear-gradient(135deg, #ffffff 0%, #f4f7fb 100%);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  border-radius: 24px;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.03);
 }
 
 .product-center-cta__copy {
@@ -464,8 +499,7 @@ const pageContent = computed(() => ({
   }
 
   .product-card {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    padding: 24px;
   }
 }
 
@@ -495,12 +529,10 @@ const pageContent = computed(() => ({
   }
 
   .product-card__visual {
-    min-height: 184px;
+    height: 200px;
   }
 
-  .product-card__image {
-    height: 164px;
-  }
+
 
   .product-center-cta__actions {
     width: 100%;

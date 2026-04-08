@@ -300,10 +300,10 @@ const detail = computed<ProductDetail | null>(() => {
     return null;
   }
 
-  const title = isEn.value ? record.card.title.en : record.card.title.zh;
-  const desc = isEn.value ? record.card.summary.en : record.card.summary.zh;
-  const specs = record.card.specs.map((item) => (isEn.value ? item.en : item.zh));
-  const note = record.card.note ? (isEn.value ? record.card.note.en : record.card.note.zh) : "";
+  const title = t(record.card.titleKey);
+  const desc = t(record.card.summaryKey);
+  const specs = record.card.specKeys.map((key) => t(key));
+  const note = record.card.noteKey ? t(record.card.noteKey) : "";
   const localized = tm(`productDetails.${record.card.id}`) as LocaleProductDetail;
   const localizedParams = normalizeParams(localized?.params);
 
@@ -399,7 +399,7 @@ const isMetricEmphasis = (value: string) => {
 };
 
 const HERO_IMAGE_SIZE_MAP: Record<string, HeroImageSize> = {
-  rail: { width: 1600, height: 1280 },
+  "rail": { width: 1600, height: 1280 },
   "rotating-platform": { width: 1600, height: 1280 },
   "za-m135": { width: 1600, height: 1200 },
   "za-m75": { width: 1600, height: 1280 },
@@ -434,13 +434,13 @@ const goBack = () => {
 }
 
 .product-hero {
-  padding: calc(var(--nav-height) + 18px) 0 64px;
+  padding: calc(var(--nav-height) + 16px) 0 32px;
 }
 
 .product-hero__container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 20px;
 }
 
 .product-hero__inner {
@@ -554,8 +554,8 @@ const goBack = () => {
 
 .product-hero__image {
   width: 100%;
-  max-height: clamp(320px, 38vw, 520px);
-  min-height: 220px;
+  max-height: clamp(260px, 42svh, 480px);
+  min-height: 200px;
   object-fit: contain;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -568,7 +568,7 @@ const goBack = () => {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
-  margin-top: 36px;
+  margin-top: 16px;
   width: 100%;
   border: none;
 }
