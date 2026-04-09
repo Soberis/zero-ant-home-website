@@ -1,10 +1,10 @@
 <template>
   <RouteNotFoundState
     v-if="isNotFound"
-    :title="t('videos.videoDetail.notFoundTitle')"
-    :description="t('videos.videoDetail.notFoundDesc')"
-    :action-label="t('applicationsPage.backToSolutions')"
-    to="/solutions"
+    :title="t('notFoundPage.title')"
+    :description="t('notFoundPage.description')"
+    :action-label="t('notFoundPage.backHome')"
+    to="/"
   />
   <CommonDetailLayout
     v-else
@@ -26,10 +26,18 @@ import { computed, onMounted, watch } from "vue";
 import { setSEO, setStructuredData } from "@/utils/seo";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
 import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  getAlternateLanguageLinks,
+  getLocaleFromPath,
+  getOgLocale,
+  stripLocalePrefix,
+} from "@/utils/localeRoute";
 
 const route = useRoute();
 const router = useRouter();
 const { t, locale } = useI18n();
+const { localizePath } = useLocalizedPath();
 const currentSlug = computed(() => String(route.params.slug || ""));
 const isNotFound = computed(() => !videoMap[currentSlug.value]);
 
@@ -46,15 +54,15 @@ const nextSlug = computed(() =>
 );
 
 function goTo(slug: string | null): void {
-  if (slug) router.push({ name: route.name || undefined, params: { slug } });
+  if (slug) router.push(localizePath(`/video/${slug}`));
 }
 
 const defaultVideoInfo: VideoDetail = {
   type: "bilibili",
   slug: "not-found",
-  title: "videos.videoDetail.notFoundTitle",
+  title: "notFoundPage.title",
   url: "",
-  desc: "videos.videoDetail.notFoundDesc",
+  desc: "notFoundPage.description",
 };
 
 const rawVideoInfo = computed<VideoDetail>(
@@ -103,45 +111,54 @@ const seoMetadata = computed(() => {
   const videoTitle = videoInfo.value.title;
   const videoDesc = videoInfo.value.desc;
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${route.fullPath}`;
+  const localeCode = getLocaleFromPath(route.path);
+  const currentUrl = `${baseUrl}${route.path}`;
+  const ogLocale = getOgLocale(localeCode);
+  const currentThumbnail =
+    videoCards.find((item) => item.slug === currentSlug.value)?.img || `${baseUrl}/logo.webp`;
 
   if (isNotFound.value) {
     return {
+      htmlLang: localeCode,
       title: videoTitle,
       description: videoDesc,
       keywords: `视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
       ogTitle: videoTitle,
       ogDescription: videoDesc,
       ogType: "website",
+      ogLocale,
+      ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
       ogUrl: currentUrl,
-      ogImage: `${baseUrl}/logo.webp`,
+      ogImage: currentThumbnail,
       twitterCard: "summary_large_image",
       twitterTitle: videoTitle,
       twitterDescription: videoDesc,
       canonical: currentUrl,
+      alternates: getAlternateLanguageLinks(baseUrl, stripLocalePrefix(route.path)),
     };
   }
 
   return {
+    htmlLang: localeCode,
     title: videoTitle,
     description: videoDesc,
     keywords: `${videoTitle}, 视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
     ogTitle: videoTitle,
     ogDescription: videoDesc,
     ogType: "video.other",
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
     ogUrl: currentUrl,
     ogVideo:
       getMediaType(videoInfo.value) === "video"
         ? videoInfo.value.url
         : undefined,
-    ogImage:
-      getMediaType(videoInfo.value) === "image"
-        ? videoInfo.value.url
-        : `${window.location.origin}/logo.webp`,
+    ogImage: currentThumbnail,
     twitterCard: "player",
     twitterTitle: videoTitle,
     twitterDescription: videoDesc,
     canonical: currentUrl,
+    alternates: getAlternateLanguageLinks(baseUrl, stripLocalePrefix(route.path)),
   };
 });
 
@@ -150,33 +167,69 @@ const videoStructuredData = computed(() => {
   const videoTitle = videoInfo.value.title;
   const videoDesc = videoInfo.value.desc;
   const mediaType = getMediaType(videoInfo.value);
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const localeCode = getLocaleFromPath(route.path);
+  const currentUrl = `${baseUrl}${route.path}`;
+  const thumbnailUrl =
+    videoCards.find((item) => item.slug === currentSlug.value)?.img || `${baseUrl}/logo.webp`;
 
   if (mediaType === "bilibili" || mediaType === "video") {
-    return {
-      "@context": "https://schema.org",
-      "@type": "VideoObject",
-      name: videoTitle,
-      description: videoDesc,
-      thumbnailUrl: `${window.location.origin}/logo.webp`,
-      contentUrl: videoInfo.value.url,
-      embedUrl: mediaType === "bilibili" ? videoInfo.value.url : undefined,
-      publisher: {
-        "@type": "Organization",
-        name: "ZeroAnt Technology",
-        url: window.location.origin,
+    return [
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        name: videoTitle,
+        description: videoDesc,
+        inLanguage: localeCode,
+        thumbnailUrl,
+        contentUrl: videoInfo.value.url,
+        embedUrl: mediaType === "bilibili" ? videoInfo.value.url : undefined,
+        uploadDate: videoInfo.value.publishDate,
+        mainEntityOfPage: currentUrl,
+        publisher: {
+          "@type": "Organization",
+          name: "ZeroAnt Technology",
+          url: baseUrl,
+        },
+        author: {
+          "@type": "Organization",
+          name: "ZeroAnt Technology",
+        },
       },
-      author: {
-        "@type": "Organization",
-        name: "ZeroAnt Technology",
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: t("nav.home"),
+            item: `${baseUrl}${localeCode === "en" ? "/en" : "/"}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: t("nav.solutions"),
+            item: `${baseUrl}${localeCode === "en" ? "/en/solutions" : "/solutions"}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: videoTitle,
+            item: currentUrl,
+          },
+        ],
       },
-    };
+    ];
   } else if (mediaType === "image") {
     return {
       "@context": "https://schema.org",
       "@type": "ImageObject",
       name: videoTitle,
       description: videoDesc,
+      inLanguage: localeCode,
       contentUrl: videoInfo.value.url,
+      thumbnailUrl,
       author: {
         "@type": "Organization",
         name: "ZeroAnt Technology",

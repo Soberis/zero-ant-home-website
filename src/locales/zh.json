@@ -5,18 +5,14 @@
   "slogan2": "Let robots be everywhere",
   "nav": {
     "home": "首页",
-    "systemProducts": "@:common.terms.systemProducts",
-    "multiOSVM": "@:common.terms.multiOsHybridHypervisor",
-    "industrialRTOS": "@:common.terms.industrialRealTimeOS",
-    "airos": "@:common.terms.airosRobotOperatingSystem",
-    "robotScheduler": "@:common.terms.robotSchedulerSystem",
-    "robotProducts": "@:common.terms.robotProducts",
-    "gantry2D": "@:common.terms.gantry23Dof",
-    "scara4Axis": "@:common.terms.fourAxisScaraRobot",
-    "arm6Axis": "@:common.terms.sixAxisArm",
-    "dualArmHumanoid": "@:common.terms.dualArmHumanoidRobot",
-    "mobileRobot": "@:common.terms.mobileRobot",
-    "solutions": "@:common.terms.industrySolutions",
+    "products": "产品中心",
+    "rSeries": "R 系列",
+    "mSeries": "M 系列",
+    "mrSeries": "MR 系列",
+    "embodiedPlatforms": "具身与开发平台",
+    "controller": "控制器",
+    "accessories": "扩展机构",
+    "solutions": "解决方案",
     "support": "服务支持",
     "download": "@:common.section.relatedDownloads",
     "faq": "常见问题",
@@ -36,7 +32,15 @@
       "viewSolutions": "查看解决方案",
       "contactTeam": "联系团队",
       "downloadNow": "立即下载",
-      "backToTop": "返回顶部"
+      "backToTop": "返回顶部",
+      "learnProducts": "了解产品",
+      "bookDemo": "预约演示",
+      "onlineConsult": "在线咨询",
+      "serviceHotline": "服务热线",
+      "wecomTitle": "扫码添加企业微信",
+      "wecomDesc": "获取更多信息",
+      "taobaoTitle": "官方淘宝店",
+      "taobaoDesc": "点击或扫码即刻采购"
     },
     "status": {
       "noVideo": "暂无视频",
@@ -55,29 +59,23 @@
       "industrialAutomation": "工业自动化",
       "medicalAutomation": "医疗自动化",
       "semiconductorProcessing": "半导体加工",
-      "mobileRobot": "移动机器人",
       "smartLogistics": "智能物流",
       "industrialControl": "工业控制",
       "motionControl": "运动控制",
       "offlineProgramming": "离线编程",
+      "andOthers": " 等",
+      "solutionDirections": "方案方向",
+      "relatedProducts": "关联产品",
+      "featuredCases": "代表案例",
       "autonomousNavigation": "自主导航",
       "complexTrajectory": "复杂轨迹",
-      "robotProducts": "机器人产品",
-      "systemProducts": "系统产品",
       "featuredCase": "精选案例",
       "coreValues": "核心价值观",
       "afterSalesService": "售后服务",
       "industrySolutions": "行业解决方案",
       "corporateCulture": "企业文化",
       "automation": "自动化",
-      "industrialRealTimeOS": "国产工业实时操作系统",
-      "airosRobotOperatingSystem": "AiROS机器人操作系统",
-      "multiOsHybridHypervisor": "多OS混合部署嵌入式虚拟机",
-      "robotSchedulerSystem": "移动机器人调度系统",
       "gantry23Dof": "二/三自由度龙门架",
-      "sixAxisArm": "六轴机械臂",
-      "dualArmHumanoidRobot": "双臂人型机器人",
-      "fourAxisScaraRobot": "四轴机械臂",
       "surfaceTreatment": "表面处理",
       "precisionAssembly": "精密装配",
       "compositeRobot": "复合机器人",
@@ -92,161 +90,80 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "ZeroAnt Robotics Platform",
-      "title": "高可靠机器人平台",
-      "description": "从机器人产品、行业方案到支持交付，快速判断你的场景如何落地。",
-      "panelLabel": "重点产品",
+      "title": "精密传送机器人平台",
+      "description": "聚焦精密传送、狭小空间操作与升降联动场景，帮助团队更快判断本体形态、扩展组合与交付方式。",
+      "panelLabel": "产品中心",
+      "primaryCta": "@:common.cta.learnProducts",
+      "secondaryCta": "@:common.cta.bookDemo",
       "tabs": {
         "scara": "四轴机械臂",
         "humanoid": "双臂人形"
       }
     },
     "coreProducts": {
-      "eyebrow": "Product Matrix",
-      "title": "核心产品",
-      "description": "先看系统底座、控制平台与执行终端。",
-      "systemLabel": "@:common.terms.systemProducts",
-      "robotLabel": "@:common.terms.robotProducts"
+      "title": "产品中心",
+      "description": "按 R / M / MR、具身平台、控制器与扩展机构快速浏览，先理解系列分组，再进入产品中心查看具体型号与参数。",
+      "enter": "进入产品中心",
+      "cardAction": "查看该系列",
+      "families": {
+        "rSeries": {
+          "title": "R 系列",
+          "description": "面向精密传送与狭小空间操作，覆盖四轴、六轴、升降与联动形态。"
+        },
+        "mSeries": {
+          "title": "M 系列",
+          "description": "具备自主导航能力的移动底盘平台，覆盖不同负载与部署节拍。"
+        },
+        "mrSeries": {
+          "title": "MR 系列",
+          "description": "移动底盘、升降与机械臂一体化，面向跨区域协同作业。"
+        },
+        "embodied": {
+          "title": "具身与开发平台",
+          "description": "覆盖 VR 遥操作、主从遥操作与绘画平台，服务具身训练、验证与演示。"
+        },
+        "controller": {
+          "title": "控制器",
+          "description": "算控一体控制器，承接实时控制、总线同步与密集 I/O 集成。"
+        },
+        "accessories": {
+          "title": "扩展机构",
+          "description": "地轨平台与旋转平台，用于补足行程、转位与工位扩展。"
+        }
+      }
     },
     "videoCases": {
-      "eyebrow": "Selected Cases",
       "title": "@:common.section.videoCases",
-      "description": "精选案例，帮助快速确认落地能力。"
+      "description": "用代表性视频补足产品与方案判断，快速查看 ZeroAnt 在真实场景中的落地方式。"
     },
     "industryApplications": {
-      "eyebrow": "Scenario Coverage",
       "title": "@:common.section.industryApplications",
-      "description": "按医疗、半导体、智能制造与物流场景快速定位。",
+      "description": "围绕半导体、生物医药、复合作业与具身开发等方向，快速定位代表应用入口。",
       "explore": "查看方案",
       "exploreAll": "探索所有行业应用"
     },
     "partners": {
-      "eyebrow": "Trusted By",
       "title": "合作伙伴"
-    }
-  },
-  "productPages": {
-    "common": {
-      "overviewEyebrow": "PRODUCT OVERVIEW",
-      "guideEyebrow": "SELECTION GUIDE"
-    },
-    "metrics": {
-      "focus": "核心方向",
-      "output": "输出形态",
-      "configuration": "配置形态"
-    },
-    "metricValues": {
-      "multiOsVmFocus": "混合系统",
-      "multiOsVmOutput": "边缘平台",
-      "industrialRtosFocus": "实时内核",
-      "industrialRtosOutput": "@:common.terms.motionControl",
-      "airosFocus": "机器人 OS",
-      "airosOutput": "控制栈",
-      "robotSchedulerFocus": "多机调度",
-      "robotSchedulerOutput": "跨设备协同",
-      "gantryConfig": "2 / 3 自由度",
-      "gantryOutput": "直线搬运",
-      "scaraConfig": "4 轴",
-      "scaraOutput": "高速装配",
-      "arm6Config": "6 轴",
-      "arm6Output": "@:common.terms.complexTrajectory",
-      "dualArmConfig": "双臂",
-      "dualArmOutput": "高柔性任务",
-      "mobileConfig": "AMR 平台",
-      "mobileOutput": "@:common.terms.smartLogistics"
-    },
-    "system": {
-      "hero": {
-        "eyebrow": "System Product Matrix",
-        "title": "从控制底座到协同调度",
-        "description": "围绕操作系统、实时控制、混合部署和多机调度，呈现清晰的系统产品矩阵。"
-      },
-      "metrics": {
-        "countValue": "04",
-        "countLabel": "系统产品",
-        "capabilityValue": "OS/RTOS",
-        "capabilityLabel": "核心能力",
-        "deliveryValue": "平台集成",
-        "deliveryLabel": "交付方式"
-      },
-      "overview": {
-        "title": "先看底座，再看协同边界",
-        "description": "系统页只保留最关键的能力路径，方便快速判断控制、运行、部署和协同需求是否匹配。"
-      },
-      "guide": {
-        "title": "系统选型路径",
-        "items": {
-          "foundation": {
-            "title": "先看控制底座",
-            "description": "需要统一机器人运行环境时，优先看 AiROS 与工业实时操作系统。"
-          },
-          "runtime": {
-            "title": "再看部署能力",
-            "description": "多系统并存与资源隔离场景，优先看多 OS 混合部署。"
-          },
-          "orchestration": {
-            "title": "最后看协同调度",
-            "description": "面向多机器人联动与工厂级协作时，重点看调度系统与接口能力。"
-          }
-        }
-      }
-    },
-    "robot": {
-      "hero": {
-        "eyebrow": "Robot Product Matrix",
-        "title": "从执行形态到场景能力",
-        "description": "围绕机械臂、双臂协作、移动执行和龙门平台，呈现统一的机器人能力矩阵。"
-      },
-      "metrics": {
-        "countValue": "05",
-        "countLabel": "机器人产品",
-        "coverageValue": "机械臂 / AMR",
-        "coverageLabel": "覆盖形态",
-        "scenarioValue": "装配 / 搬运",
-        "scenarioLabel": "典型场景"
-      },
-      "overview": {
-        "title": "先看执行形态，再看场景适配",
-        "description": "先判断机器人能做什么，再进入具体型号和典型场景，减少选型跳转成本。"
-      },
-      "guide": {
-        "title": "机器人选型路径",
-        "items": {
-          "assembly": {
-            "title": "精密装配",
-            "description": "需要高速取放、分拣和装配时，优先看四轴机械臂和龙门平台。"
-          },
-          "complex": {
-            "title": "复杂作业",
-            "description": "需要多姿态运动、焊接喷涂或复杂路径控制时，优先看六轴与双臂。"
-          },
-          "mobile": {
-            "title": "移动执行",
-            "description": "需要跨工位搬运、厂内配送或复合任务时，优先看移动机器人。"
-          }
-        }
-      }
     }
   },
   "solutionsPage": {
     "title": "@:common.terms.industrySolutions",
-    "subtitle": "聚焦高可靠行业，以机器人系统底座和场景交付能力支撑不同业务场景。",
+    "subtitle": "围绕现有机器人本体、控制器与扩展机构，聚焦精密作业、移动协作和具身开发三类落地方向。",
     "videoCases": "@:common.section.videoCases",
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
-      "eyebrow": "Industry Solutions",
-      "title": "面向高可靠场景的机器人与智能系统方案",
-      "description": "零蚁科技以 AiROS、实时控制、调度协同与柔性部署能力为底座，覆盖医疗、半导体、智能制造、物流巡检与科研实验场景。",
-      "primaryCta": "查看行业方案",
+      "title": "围绕现有产品组合的三类核心方案方向",
+      "description": "先判断是精密作业、移动协作还是具身开发，再看对应产品与代表案例。",
+      "primaryCta": "查看方案方向",
       "secondaryCta": "查看交付方式",
       "stats": {
         "industry": {
-          "value": "05",
-          "label": "核心行业方向"
+          "value": "03",
+          "label": "核心方案方向"
         },
         "backbone": {
           "value": "04",
-          "label": "系统能力底座"
+          "label": "产品组合底座"
         },
         "delivery": {
           "value": "01",
@@ -255,102 +172,80 @@
       }
     },
     "nav": {
-      "backbone": "能力底座",
-      "industries": "行业矩阵",
+      "backbone": "方案底座",
+      "industries": "方案方向",
       "proof": "@:common.terms.featuredCase",
       "delivery": "@:common.terms.delivery"
     },
     "backbone": {
-      "eyebrow": "Capability Backbone",
-      "title": "从机器人执行到系统部署的能力底座",
-      "description": "行业方案不靠单点设备拼接，而是由执行平台、实时控制、调度协同和部署验证共同支撑。",
-      "execution": {
-        "title": "机器人执行层",
-        "description": "覆盖四轴、六轴、双臂、移动机器人与龙门结构，适配搬运、装配、打磨、巡检等任务。"
+      "title": "围绕现有产品组合的方案底座",
+      "description": "先讲能落地的产品组合，再讲能力边界，把机械臂、移动底盘、具身平台、控制器与扩展机构收成统一方案底座。",
+      "precisionExecution": {
+        "title": "精密执行层",
+        "description": "以 R 系列和六轴形态覆盖高速取放、精密装配、上下料与表面处理等高节拍工位。"
       },
-      "control": {
-        "title": "控制与实时层",
-        "description": "以 AiROS 和国产工业实时操作系统为核心，支撑高精度控制、复杂轨迹和稳定运行。"
+      "mobileExecution": {
+        "title": "移动协作层",
+        "description": "以 M / MR 系列承接厂内搬运、跨工位联动和移动操作，把固定工位扩展成连续作业链路。"
       },
-      "scheduling": {
-        "title": "调度与协同层",
-        "description": "通过多机调度与跨设备协同能力，把移动平台、机械臂和产线任务连接成完整流程。"
+      "embodiedDevelopment": {
+        "title": "具身开发层",
+        "description": "以 MR3T、VR / 主从遥操作平台和绘画平台支撑算法训练、遥操作验证与演示研发。"
       },
-      "deployment": {
-        "title": "仿真与部署层",
-        "description": "通过多 OS 混合部署、离线编程和前置验证降低现场改造成本，缩短交付周期。"
+      "controlExpansion": {
+        "title": "控制与扩展层",
+        "description": "以 ZA-ZG100、地轨平台和旋转平台补足实时控制、接口集成与部署形态扩展。"
       }
     },
     "industries": {
-      "eyebrow": "Industry Matrix",
-      "title": "聚焦五大行业方向",
-      "description": "把现有零散应用收敛成清晰的行业入口，帮助用户更快定位场景、方案与案例。",
+      "title": "聚焦三类方案方向",
+      "description": "解决方案先收敛成 3 个清晰入口，每个方向直接对应代表应用和关联产品。",
       "applicationEntry": "代表应用",
       "viewApplication": "查看相关应用",
-      "medical": {
-        "title": "医疗与生命科学",
-        "summary": "围绕样本流转、试管上料、制药自动化等高要求场景，强调精度、安全与可追溯。",
+      "precisionWorkcell": {
+        "title": "精密传送与装配",
+        "summary": "围绕 R 系列机械臂、升降平台与控制器，覆盖精密传送、装配与表面处理工位。",
         "scenarios": [
-          "@:common.terms.medicalAutomation",
-          "制药自动化",
-          "实验室流程自动化"
-        ]
-      },
-      "precision": {
-        "title": "半导体与精密制造",
-        "summary": "面向晶圆搬运、精密装配与表面处理等工艺场景，强调稳定节拍与高精度控制。",
-        "scenarios": [
-          "@:common.terms.semiconductorProcessing",
           "@:common.terms.precisionAssembly",
-          "@:common.terms.surfaceTreatment"
+          "@:common.terms.surfaceTreatment",
+          "@:common.terms.medicalAutomation"
         ]
       },
-      "manufacturing": {
-        "title": "智能制造与柔性产线",
-        "summary": "面向多工序、多设备协同的制造场景，强调柔性切换、协同作业与平台化控制。",
+      "mobileCollaboration": {
+        "title": "移动搬运与复合作业",
+        "summary": "围绕 M / MR 系列移动底盘与复合机器人，覆盖厂内物流、跨工位搬运与联动作业。",
         "scenarios": [
-          "@:common.terms.smartManufacturing",
           "复合系统",
-          "AI 机器人"
-        ]
-      },
-      "logistics": {
-        "title": "智能物流与巡检作业",
-        "summary": "覆盖厂内物流、移动导航、全天候巡检等场景，强调调度效率、路径规划与稳定交付。",
-        "scenarios": [
           "@:common.terms.smartLogistics",
-          "智能导航",
-          "智能巡检安防"
+          "智能导航"
         ]
       },
-      "research": {
-        "title": "科研与创新实验",
-        "summary": "服务农业科研、创新实验与边缘验证场景，强调开放能力、快速验证与持续迭代。",
+      "embodiedDevelopment": {
+        "title": "具身开发与遥操作验证",
+        "summary": "围绕 MR3T、VR / 主从遥操作与绘画平台，覆盖双臂操作、训练与科研验证。",
         "scenarios": [
+          "AI 机器人",
           "农业科研自动化",
-          "文创艺术智能制造",
-          "工业网关与边缘计算"
+          "文创艺术智能制造"
         ]
       }
     },
     "proof": {
-      "eyebrow": "Featured Proof",
-      "title": "用少量案例证明落地能力",
-      "description": "精选更具代表性的案例，展示 ZeroAnt 在不同行业中的真实交付能力。",
+      "title": "先看 3 个代表案例",
+      "description": "先用 3 个代表案例判断方向，更多视频和应用按需展开。",
       "watchCase": "查看案例详情",
       "guide": "先看 3 个代表性视频案例，再按需展开完整视频与行业应用索引。",
-      "expandVideos": "查看全部视频案例 ({count})",
-      "collapseVideos": "收起全部视频案例",
+      "expandVideos": "更多视频案例 ({count})",
+      "collapseVideos": "收起视频案例",
       "browseApplications": "查看所有行业应用",
-      "expandApplications": "查看所有行业应用 ({count})",
-      "collapseApplications": "收起所有行业应用",
-      "allVideos": "全部视频案例",
-      "applicationIndex": "所有行业应用"
+      "expandApplications": "更多行业应用 ({count})",
+      "collapseApplications": "收起行业应用",
+      "allVideos": "更多视频案例",
+      "applicationIndex": "更多行业应用"
     },
     "more": {
-      "eyebrow": "More",
       "title": "更多视频与行业应用",
-      "description": "探索更多 ZeroAnt 机器人在不同行业与复杂场景下的成功验证与应用视频。",
+      "description": "继续查看 ZeroAnt 在更多真实场景中的验证案例和应用入口。",
       "videos": "查看更多视频案例",
       "applications": "更多行业应用",
       "videoGuide": "当前先展示 {visible} 个代表性视频，展开后可继续浏览全部 {total} 个案例。",
@@ -360,27 +255,44 @@
       "collapse": "收起列表"
     },
     "delivery": {
-      "eyebrow": "Delivery",
-      "title": "从场景梳理到分阶段部署的交付闭环",
-      "description": "明确场景需求，定制系统方案，通过前置仿真验证，确保最终现场高效、稳定地分阶段部署落地。",
-      "contactTitle": "让团队快速匹配行业方案",
-      "contactDescription": "如果你已经明确场景，欢迎直接联系团队沟通需求，我们会基于行业特点、设备条件和交付节奏快速给出建议。",
+      "title": "明确方向后，进入组合与交付",
+      "description": "方向确认后，按组合设计、验证和部署推进落地。",
+      "contactTitle": "方向明确后，直接联系团队",
+      "contactDescription": "我们会根据工位类型、节拍要求和部署条件，快速给出产品组合建议。",
       "steps": {
         "discovery": {
           "title": "场景梳理",
-          "description": "明确业务目标、工位约束、节拍要求与关键风险。"
+          "description": "明确作业目标、空间约束、负载范围和节拍要求。"
         },
         "design": {
           "title": "方案设计",
-          "description": "根据行业特点组合机器人本体、系统产品与集成方式。"
+          "description": "根据方向组合本体型号、控制器与扩展机构，并确认接口边界。"
         },
-        "verify": {
-          "title": "前置验证",
-          "description": "通过仿真、离线编程和测试验证减少现场调试压力。"
+        "deliver": {
+          "title": "验证与交付",
+          "description": "通过前置验证后进入联调上线和后续扩展，减少现场反复调整。"
+        }
+      }
+    },
+    "faq": {
+      "title": "常见方案问题",
+      "description": "把客户在 AI 搜索和前期咨询里最常问的几个问题，先直接回答清楚。",
+      "items": {
+        "selection": {
+          "question": "零蚁的解决方案页主要覆盖哪些方向？",
+          "answer": "当前主要收敛为三类方向：精密传送与装配、移动搬运与复合作业、具身开发与遥操作验证。每个方向都直接对应现有产品组合、代表应用和视频案例，便于先判断方案是否匹配。"
         },
-        "deploy": {
-          "title": "分阶段部署",
-          "description": "在确保稳定运行的前提下完成上线、联调与后续扩展。"
+        "precision": {
+          "question": "什么场景更适合精密传送与装配方案？",
+          "answer": "如果项目关注高速取放、精密装配、上下料或表面处理，通常更适合从 R 系列机械臂、升降平台和控制器组合开始评估。这类方案更强调节拍、定位精度和工位协同。"
+        },
+        "mobile": {
+          "question": "移动搬运与复合作业方案一般怎么组合？",
+          "answer": "这类方案通常围绕 M / MR 系列移动底盘与复合机器人展开，再结合控制器、导航和站间接口设计，适合厂内物流、跨工位转运和移动操作等连续作业链路。"
+        },
+        "delivery": {
+          "question": "零蚁通常如何推进方案落地？",
+          "answer": "一般会先确认作业目标、空间约束、负载和节拍，再组合本体型号、控制器与扩展机构，最后通过前置验证进入联调部署。这样可以更早暴露接口边界，减少现场反复调整。"
         }
       }
     },
@@ -392,10 +304,10 @@
   },
   "supportPage": {
     "title": "@:common.terms.afterSalesService",
-    "description": "售前、售后创建专属服务群，7×24小时技术支持，12小时内快速响应",
+    "description": "售前、售后创建专属服务群，提供 7×24 小时支持通道，并在 12 小时内响应。",
     "supportMapLabel": "支持路径",
-    "fastResponse": "12小时内快速解决问题",
-    "dedicatedService": "7×24小时专属服务群响应",
+    "fastResponse": "12小时内首次响应",
+    "dedicatedService": "7×24小时支持通道",
     "relatedDownloads": "@:common.section.relatedDownloads",
     "downloadIntro": "先获取手册和接口资料，帮助团队快速完成选型、安装与集成准备。",
     "faqTitle": "常见问题",
@@ -441,7 +353,7 @@
     "companyIntroDetailed": {
       "para1": "杭州零蚁科技有限公司是一家由<b>北京航空航天大学杭州创新研究院</b>科研团队创立的高科技企业，聚焦智能机器人整机解决方案研发，目前为生物医药、半导体等行业提供高可靠机器人智能系统方案。",
       "para2": "公司依托于浙江省<b>全省工业大数据与机器人智能系统重点实验室</b>，自主研发<b>AiROS</b>（智能机器人操作系统），攻克移动机器人自动导航、机械臂高速高精度控制、三维空间语义感知、多机协同调度等核心技术，打造全栈式软件生态及模块化硬件平台。",
-      "para3": "团队与国内多个顶尖机构建立常态化合作机制，形成<b>产学研用闭环创新体系</b>。作为工业智能基础设施的开拓者，零蚁科技正以<b>全自主可控技术</b>推动行业智能化升级，持续赋能制造产业高质量发展。",
+      "para3": "团队与多家高校和科研机构建立常态化合作机制，形成<b>产学研用闭环创新体系</b>。零蚁科技持续以<b>全自主可控技术</b>推进机器人系统研发与产业落地，服务制造业智能化升级。",
       "financingDesc": "团队目前处于天使轮融资阶段，对团队感兴趣或有合作意向，请邮件联系。创业团队时间宝贵，非诚勿扰！",
       "emailTips": "联系邮箱："
     },
@@ -459,10 +371,10 @@
       "2020": "启动机器人控制系统研发，获得浙江省重大专项支持",
       "2022": "启动半导体晶圆传送机器人项目研发",
       "2023": "启动四轴传送机器人项目研发",
-      "2024": "发布AiROS机器人操作系统，相关技术得到院士专家组技术鉴定国际领先",
+      "2024": "发布AiROS机器人操作系统，相关技术通过院士专家组技术鉴定",
       "2025": "正式成立杭州零蚁科技有限公司，启动产业化工作"
     },
-    "honor1": "国内首个基于Rust语言的嵌入式虚拟机监控器",
+    "honor1": "基于Rust语言的嵌入式虚拟机监控器",
     "honor2": "系统软件通过信息安全EAL5+认证",
     "honor3": "全自研的机器人智能操作系统",
     "honor4": "内核实时性抖动≤2us，支撑高精度设备应用",
@@ -628,56 +540,56 @@
   "applications": {
     "medical-automation": {
       "title": "@:common.terms.medicalAutomation",
-      "description": "聚焦医院、实验室等医疗场景，基于AiROS机器人操作系统提供高效、安全的自动化物品传送与智能调度解决方案。通过18轴同时控制、0.02mm重复定位精度的高精度控制技术，实现样本、药品、医疗器械等的智能搬运与追溯。已服务华智生物、珀金埃尔默等知名客户，实现国外设备本土化替代，成本从30万降至14万，助力医疗机构提升诊疗效率、降低人工成本、保障医疗安全。",
-      "coreAdvantages": "连续工作9万小时无损坏、支持多楼层多科室智能调度、降低人工交叉感染风险",
+      "description": "聚焦医院、实验室等医疗场景，提供样本、药品和医疗器械的自动化传送与站间协同方案，帮助团队提升流程效率、减少人工接触并增强流程可追溯性。",
+      "coreAdvantages": "流程可追溯、站间智能调度、降低人工接触风险、适配实验室与医院场景",
       "typicalApplications": "智能检验科自动流水线、自动化药房、医疗物资配送"
     },
     "semiconductor": {
       "title": "@:common.terms.semiconductorProcessing",
-      "description": "面向晶圆、芯片等高端制造领域，基于AiROS操作系统的实时性抖动≤10us技术，提供高精度、高可靠性的物品传送与智能调度系统。已出货200余台晶圆传送机器人，覆盖国内主要晶圆/芯片制造厂商，实现国产设备替代和智能制造升级。通过0.02mm重复定位精度和18轴同时控制能力，支持复杂工艺流程的自动化搬运、精准定位和数据追溯。",
-      "coreAdvantages": "连续工作9万小时无损坏、控制器成本降低50%、支持洁净室IP54防护等级",
+      "description": "面向晶圆、芯片等制造场景，提供高洁净要求下的物料传送、设备上下料与调度协同方案，支持复杂工艺流程中的稳定搬运、精准定位与过程追溯。",
+      "coreAdvantages": "洁净环境适配、稳定搬运、复杂流程协同、工艺追溯",
       "typicalApplications": "晶圆厂FOUP搬运、芯片封装测试、洁净室物流、半导体设备上下料"
     },
     "intelligent-manufacturing": {
       "title": "@:common.terms.smartManufacturing",
-      "description": "基于多OS混合部署嵌入式虚拟机和国产工业实时操作系统，为制造业提供高精度、高效率的自动化解决方案。通过双机协作抓球、UR机器人大语言模型动作抓取等核心技术，实现复杂制造工艺的智能化升级。支持6000mm/s高速运动、亚毫米级精度控制，满足电子制造、汽车生产、3C制造等高端制造需求。",
-      "coreAdvantages": "多机器人协同作业、实时性抖动≤10us、支持复杂工艺流程、国产化替代",
+      "description": "基于机器人控制、调度与多机协同能力，为制造业提供自动化单元与联动产线方案，适用于电子制造、汽车零部件和 3C 制造等场景。",
+      "coreAdvantages": "多机器人协同、复杂流程支持、柔性部署、软硬件一体化",
       "typicalApplications": "电子产品装配、汽车零部件焊接、精密器件组装、质量检测、柔性生产线"
     },
     "surface-treatment": {
       "title": "@:common.terms.surfaceTreatment",
-      "description": "基于六轴机械臂和四轴机械臂技术，提供高精度、高可靠性的工业机器人解决方案。通过先进的力控技术和路径规划算法，实现打磨、抛光、焊接、装配等多种工业应用。支持0.02mm重复定位精度和连续9万小时无故障运行，为制造业提供稳定可靠的自动化设备。",
+      "description": "基于六轴与四轴机械臂能力，面向打磨、抛光、焊接和装配等场景提供自动化方案。结合力控与路径规划能力，适配多种表面处理和精密作业流程。",
       "coreAdvantages": "高精度定位、力控技术、多轴协调、长期稳定运行",
       "typicalApplications": "金属零件打磨、精密装配、焊接作业、表面处理、去毛刺"
     },
     "smart-logistics": {
       "title": "@:common.terms.smartLogistics",
-      "description": "基于移动机器人调度系统和AGV自动导引技术，提供多品牌、多类型机器人统一调度的智能物流解决方案。通过360度雷达扫描、激光SLAM导航等先进技术，实现复杂环境下的自主导航和精准定位。支持500kg负载能力和多机协同作业，大幅提升工厂物流效率和仓储自动化水平。",
+      "description": "基于移动机器人调度系统与自主导航能力，提供多机协同的厂内物流与物料转运方案，适配复杂环境下的路径规划、避障与站间调度。",
       "coreAdvantages": "多机统一调度、智能路径规划、大负载能力、多场景适应",
       "typicalApplications": "工厂内物流、仓储搬运、配送中心、多机协同作业、智能调度"
     },
     "pharmaceutical-automation": {
       "title": "制药自动化",
-      "description": "专注于生物医药行业的自动化需求，基于AiROS机器人操作系统和高精度控制技术，为生物实验室、制药企业提供智能化解决方案。通过个性化处方制药技术和实验室自动化设备，实现药物研发、生产、检测的全流程自动化，已服务华智生物、珀金埃尔默等知名客户。",
+      "description": "面向生物实验室、制药企业等场景，提供样本处理、配药和检测环节的自动化方案，帮助团队提升流程一致性与作业效率。",
       "coreAdvantages": "高精度控制、洁净环境适配、GMP标准、国产化替代",
       "typicalApplications": "实验室自动化、个性化处方药、药物配制、生物样本处理、质量检测"
     },
     "precision-assembly": {
       "title": "@:common.terms.precisionAssembly",
-      "description": "基于四轴机械臂和六轴机械臂技术，提供0.02mm重复定位精度的高精度装配解决方案。通过先进的运动控制算法和视觉引导技术，支持6000mm/s高速运动，实现复杂产品的精密组装。广泛应用于3C电子、光学器件、精密仪器等高端制造领域，助力客户实现高质量、高效率的自动化生产。",
-      "coreAdvantages": "0.02mm重复定位精度、6000mm/s高速运动、多轴协调控制、视觉引导",
+      "description": "基于四轴和六轴机械臂技术，结合运动控制与视觉引导能力，为 3C 电子、光学器件、精密仪器等场景提供精密装配方案。",
+      "coreAdvantages": "高精度装配、视觉引导、多轴协调、柔性部署",
       "typicalApplications": "3C电子装配、光学器件组装、精密仪器制造、高速高精度作业、柔性装配线"
     },
     "ai-robotics": {
       "title": "AI机器人",
-      "description": "基于大语言模型和人工智能技术，开发具身智能机器人解决方案。通过UR机器人大语言模型动作抓取技术，实现机器人的自主学习和智能决策能力。结合双臂人型机器人的14轴设计和AiROS操作系统，提供高度智能化的人机协作解决方案，推动机器人走进千行百业。",
-      "coreAdvantages": "大语言模型驱动、14轴双臂设计、自主学习能力、人机协作",
+      "description": "围绕具身开发与双臂操作验证场景，结合双臂机器人、本体控制与算法开发能力，支持抓取、交互和实验验证等任务。",
+      "coreAdvantages": "双臂协同、算法验证、具身开发、人机协作",
       "typicalApplications": "智能抓取、教育科研、服务机器人、人机协作、具身智能"
     },
     "industrial-control": {
       "title": "@:common.terms.industrialControl",
-      "description": "基于国产工业实时操作系统和EtherCAT总线技术，提供自主可控的高性能工业控制解决方案。通过毫秒级实时响应和18轴同时控制能力，实现多轴电机的精准同步控制和实时协调运动。支持实时性抖动≤10us，满足工业自动化的严苛要求，实现关键技术的国产化替代。",
-      "coreAdvantages": "毫秒级实时响应、18轴同时控制、自主可控、国产化替代",
+      "description": "基于工业实时控制与 EtherCAT 总线能力，提供多轴同步控制、站间联动和设备集成方案，适用于需要稳定时序与接口协同的工业场景。",
+      "coreAdvantages": "多轴同步控制、实时调度、接口集成、自主可控",
       "typicalApplications": "多轴运动控制、伺服电机台站、工业自动化、精密加工、实时控制系统"
     },
     "offline-programming": {
@@ -688,7 +600,7 @@
     },
     "intelligent-navigation": {
       "title": "智能导航",
-      "description": "基于360度雷达扫描和激光SLAM技术，提供先进的机器人智能导航和环境感知解决方案。通过全方位环境感知和毫米级精准定位技术，结合移动机器人调度系统，为AGV、移动机器人等提供可靠的自主导航能力。实现复杂环境下的智能路径规划、动态避障和多机协同作业，支持500kg负载能力。",
+      "description": "基于激光 SLAM 和环境感知能力，为 AGV 和移动机器人提供建图、定位、路径规划与动态避障方案，适配工厂、仓储等复杂环境。",
       "coreAdvantages": "360度雷达扫描、激光SLAM定位、智能路径规划、多机协同导航",
       "typicalApplications": "AGV智能导航、动态环境建图、实时避障、最优路径规划、多机器人调度"
     },
@@ -700,8 +612,8 @@
     },
     "agricultural-research": {
       "title": "农业科研自动化",
-      "description": "<p>基于AI视觉识别与精准控制技术，为农业科研提供自动化实验解决方案。通过机器人技术实现水稻分子实验的重复性操作，提高实验精度和效率，降低人工成本。系统支持24小时不间断作业，确保实验条件的一致性和可重复性。</p>",
-      "coreAdvantages": "AI视觉识别、精准重复操作、24小时作业、实验一致性保障、降低人工成本",
+      "description": "<p>基于 AI 视觉识别与精准控制技术，为农业科研提供自动化实验方案，适用于分子实验、样本处理和重复性操作场景，帮助提升实验效率与一致性。</p>",
+      "coreAdvantages": "AI视觉识别、精准重复操作、实验一致性保障、科研场景适配",
       "typicalApplications": "水稻分子实验、基因研究、作物表型分析、农业自动化、科研实验辅助"
     },
     "cultural-creative": {
@@ -712,8 +624,8 @@
     },
     "intelligent-patrol": {
       "title": "智能巡检安防",
-      "description": "<p>基于移动机器人调度系统和360度雷达扫描技术，为工业园区、电力设施、仓储物流等场景提供全天候智能巡检解决方案。通过激光SLAM导航、毫米级精准定位、多传感器融合等技术，实现自主路径规划、异常检测、实时报警等功能。支持500kg负载能力，可在复杂环境下进行24小时不间断巡检，大幅提升安防效率和作业安全性。</p>",
-      "coreAdvantages": "激光SLAM导航、毫米级定位、多传感器融合、自主路径规划、24小时不间断巡检",
+      "description": "<p>基于移动机器人调度系统和激光 SLAM 导航能力，为工业园区、电力设施、仓储物流等场景提供自动化巡检方案，支持自主路径规划、异常检测与告警联动。</p>",
+      "coreAdvantages": "激光SLAM导航、环境感知、异常检测、自主巡检",
       "typicalApplications": "工业园区巡检、电力设施监控、仓储安防、异常检测报警、智能巡逻"
     },
     "industrial-gateway": {
@@ -760,7 +672,7 @@
     "benefits": {
       "techInnovation": {
         "title": "技术创新",
-        "description": "参与前沿机器人技术研发，与行业顶尖专家共同工作，推动技术边界"
+        "description": "参与机器人平台与控制系统研发，与资深研发团队协作推进产品落地"
       },
       "careerDevelopment": {
         "title": "职业发展",
@@ -768,10 +680,10 @@
       },
       "excellentTeam": {
         "title": "优秀团队",
-        "description": "与来自全球的优秀工程师合作，在开放包容的环境中共同成长"
+        "description": "与跨学科研发团队协作，在开放包容的环境中共同成长"
       },
       "generousTreatment": {
-        "title": "丰厚待遇",
+        "title": "有竞争力的待遇",
         "description": "具有竞争力的薪酬福利，完善的社保体系和灵活的工作安排"
       },
       "personalChallenge": {
@@ -813,53 +725,6 @@
       }
     }
   },
-  "products": {
-    "multiOsVm": {
-      "name": "@:common.terms.multiOsHybridHypervisor",
-      "desc": "支持多操作系统并行运行，适用于控制器和边缘设备的异构部署，可在同一硬件底座上兼顾控制隔离、资源利用与系统协同，并支持后续平台扩展与统一管理。",
-      "supportText": "适用于控制器、工业网关与边缘计算设备。"
-    },
-    "industrialRtos": {
-      "name": "@:common.terms.industrialRealTimeOS",
-      "desc": "面向工业控制的实时操作系统，保障关键任务稳定运行，并兼顾现场设备对确定性和可靠性的要求，适合长期在线与稳定交付。",
-      "supportText": "适用于运动控制、现场设备与关键任务。"
-    },
-    "airos": {
-      "name": "@:common.terms.airosRobotOperatingSystem",
-      "desc": "面向机器人本体与控制平台的一体化操作系统，连接底层控制、上层应用与后续扩展能力，便于快速落地和持续演进。",
-      "supportText": "适用于机器人本体、控制平台与应用扩展。"
-    },
-    "robotScheduler": {
-      "name": "@:common.terms.robotSchedulerSystem",
-      "desc": "统一调度多品牌移动机器人，实现跨设备协同作业，适合工厂物流与多机联动场景，提升任务分配与现场调度效率。",
-      "supportText": "适用于工厂物流、跨工位搬运与协同任务。"
-    },
-    "gantry2d": {
-      "name": "@:common.terms.gantry23Dof",
-      "desc": "适用于直线搬运和大范围定位的龙门平台，面向上下料、搬运和精密定位等节拍明确的工业任务，强调稳定性与高重复精度。",
-      "supportText": "适用于上下料、搬运与精密定位。"
-    },
-    "scara4axis": {
-      "name": "@:common.terms.fourAxisScaraRobot",
-      "desc": "面向高速装配与分拣的紧凑型四轴机械臂，适合空间受限但节拍要求高的工位，兼顾快速取放与稳定运行。",
-      "supportText": "适用于装配、取放与节拍作业。"
-    },
-    "arm6axis": {
-      "name": "@:common.terms.sixAxisArm",
-      "desc": "支持复杂轨迹控制，适配焊接、喷涂和装配任务，并能覆盖更灵活的多姿态作业，适合需要连续轨迹和多工艺切换的场景。",
-      "supportText": "适用于焊接、打磨和复杂路径任务。"
-    },
-    "dualArmHumanoid": {
-      "name": "@:common.terms.dualArmHumanoidRobot",
-      "desc": "用于双臂协作和高柔性任务的执行平台，适合灵巧操作、复合工序与多模态交互，可支持更复杂的人机协同任务。",
-      "supportText": "适用于灵巧操作和复合工序。"
-    },
-    "mobileRobot": {
-      "name": "@:common.terms.mobileRobot",
-      "desc": "融合导航、调度与搬运能力的移动机器人，适合厂内物流、跨工位搬运与复合任务，支持多机协同和现场调度。",
-      "supportText": "适用于厂内物流、跨工位搬运与调度。"
-    }
-  },
   "productDetail": {
     "features": "产品特点",
     "applications": "@:common.section.applications",
@@ -867,7 +732,13 @@
     "parameters": "@:common.section.parameters",
     "downloads": "@:common.section.relatedDownloads",
     "backToList": "返回产品列表",
-    "notFound": "未找到该产品"
+    "notFound": "未找到该产品",
+    "cta": {
+      "title": "需要深入评估您的应用场景？",
+      "description": "探索我们的一站式行业解决方案，或直接获取零蚁工程师的一对一选型与部署支持。",
+      "exploreSolutions": "探索解决方案",
+      "contactSales": "联系我们"
+    }
   },
   "applicationsPage": {
     "prev": "上一个",
@@ -902,26 +773,26 @@
   "seo": {
     "siteName": "零蚁科技",
     "defaultTitle": "零蚁科技 - 专业的机器人技术解决方案提供商",
-    "defaultDescription": "零蚁科技是一家专业的机器人技术解决方案提供商，致力于工业自动化和智能制造。我们提供包括工业机器人、自动化设备在内的创新产品线，满足医疗自动化、半导体加工等不同行业的自动化需求。",
-    "defaultKeywords": "机器人技术, 工业自动化, 智能制造, 零蚁科技, 工业机器人, 自动化设备, 医疗自动化, 半导体加工",
+    "defaultDescription": "零蚁科技聚焦智能机器人整机解决方案研发，自主研发 AiROS 智能机器人操作系统，面向生物医药、半导体等行业提供机械臂、移动底盘、复合机器人与具身开发平台。",
+    "defaultKeywords": "零蚁科技, 工业机器人, 智能机器人, AiROS, 机器人操作系统, 四轴机器人, 六轴机械臂, 移动底盘, 复合机器人, 具身开发平台, 生物医药, 半导体",
     "home": {
       "title": "零蚁科技 - 让机器人无处不在",
-      "description": "零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。",
-      "keywords": "零蚁科技, 工业机器人, 智能制造, 机器人技术, 自动化设备, 四轴机器人, 六轴机械臂, 双臂人形机器人, 移动机器人, AiROS, 机器人操作系统, 医疗自动化, 半导体加工, 精密制造, 工业自动化解决方案, 机器人控制系统, 杭州机器人公司"
+      "description": "零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。",
+      "keywords": "零蚁科技, 工业机器人, 智能机器人, 智能制造, AiROS, 机器人操作系统, 四轴机器人, 六轴机械臂, 移动底盘, 复合机器人, 具身开发平台, 生物医药, 半导体, 机器人智能系统方案, 杭州机器人公司"
     },
     "products": {
-      "title": "产品中心 - 零蚁科技专业制造商",
-      "description": "零蚁科技工业机器人产品中心，提供SCARA四轴机器人、六轴关节机器人、双臂协作机器人、AGV移动机器人等全系列产品。具备高精度定位、快速响应、智能控制等特点，广泛应用于电子制造、汽车生产、医疗器械、半导体等行业的自动化生产线。",
-      "keywords": "工业机器人, 机器人产品, SCARA机器人, 四轴机器人, 六轴机器人, 关节机器人, 双臂机器人, 协作机器人, AGV机器人, 移动机器人, 机械臂, 自动化设备, 机器人制造商, 工业自动化产品, 精密定位, 智能控制, 电子制造, 汽车生产, 医疗器械自动化"
+      "title": "产品中心 - 零蚁科技",
+      "description": "零蚁科技产品中心覆盖 R 系列机械臂、M 系列移动底盘、MR 系列复合机器人、具身开发平台、控制器与扩展机构，按系列展示当前产品与关键参数，便于快速定位适合的型号与组合方向。",
+      "keywords": "零蚁科技, 产品中心, R系列机械臂, M系列移动底盘, MR系列复合机器人, 具身开发平台, 控制器, 扩展机构, SCARA机器人, 六轴机械臂, 双臂机器人, AGV底盘, 自动化设备"
     },
     "solutions": {
-      "title": "解决方案 - 零蚁科技行业专家",
-      "description": "零蚁科技提供医疗自动化、半导体加工、精密制造等行业的智能制造解决方案。基于AiROS机器人操作系统，集成机器视觉、力控技术、路径规划等核心技术，为客户提供从产线设计到系统集成的一站式自动化服务，助力企业实现数字化转型升级。",
-      "keywords": "智能制造解决方案, 自动化解决方案, 机器人系统集成, 医疗自动化, 半导体自动化, 精密制造, 产线自动化, AiROS操作系统, 机器视觉, 力控技术, 路径规划, 数字化转型, 工业4.0, 柔性制造, 无人工厂, 智能产线, 自动化系统集成商"
+      "title": "解决方案 - 零蚁科技",
+      "description": "零蚁科技围绕 R / M / MR 系列、具身开发平台、ZA-ZG100 控制器与扩展机构，提供精密作业单元、移动作业协同和具身开发验证三类解决方案，帮助客户更快完成产品组合、前置验证与现场部署。",
+      "keywords": "零蚁科技, 解决方案, 精密作业单元, 移动作业协同, 具身开发平台, R系列机械臂, M系列移动底盘, MR复合机器人, ZA-ZG100控制器, 遥操作平台, 自动化集成"
     },
     "support": {
       "title": "技术支持 - 零蚁科技专业团队",
-      "description": "零蚁科技技术支持中心提供7x24小时专业服务，包括机器人安装调试、技术培训、远程诊断、预防性维护、备件供应等全方位技术支持。拥有资深工程师团队，为工业机器人用户提供快速响应的技术咨询和现场服务，确保设备稳定运行和生产效率最大化。",
+      "description": "零蚁科技技术支持中心提供安装调试、技术培训、远程诊断、预防性维护、备件支持等服务。团队面向工业机器人项目提供响应式技术咨询与现场支持，帮助客户推进部署、联调与稳定运行。",
       "keywords": "技术支持, 售后服务, 机器人维护, 技术培训, 远程诊断, 现场服务, 备件供应, 安装调试, 预防性维护, 技术咨询, 工程师服务, 设备维修, 故障排除, 技术文档, 用户手册, 在线支持"
     },
     "careers": {
@@ -931,23 +802,33 @@
     },
     "about": {
       "title": "关于零蚁科技 - 工业机器人技术创新企业",
-      "description": "零蚁科技成立于杭州，是一家专注工业机器人技术创新的高科技企业。公司拥有自主研发的AiROS机器人操作系统，在机器人控制、机器视觉、人工智能等领域具备核心技术优势。致力于为全球制造业客户提供高品质的工业机器人产品和智能制造解决方案，推动产业智能化升级。",
+      "description": "零蚁科技成立于杭州，是一家专注工业机器人技术创新的高科技企业。公司拥有自主研发的 AiROS 机器人操作系统，在机器人控制、机器视觉、人工智能等领域具备核心技术积累，面向制造业客户提供工业机器人产品和智能制造解决方案。",
       "keywords": "零蚁科技, 关于我们, 公司介绍, 工业机器人公司, 杭州机器人企业, 高科技公司, AiROS系统, 机器人技术创新, 智能制造企业, 自动化公司, 机器人控制技术, 人工智能, 企业文化, 发展历程, 技术实力, 核心团队"
     },
     "structuredData": {
       "solutions": {
-        "medical": {
-          "name": "医疗自动化解决方案",
-          "description": "为医疗设备制造和实验室自动化提供全面的自动化解决方案"
+        "precisionWorkcell": {
+          "name": "精密传送与装配方案",
+          "description": "围绕 R 系列机械臂、升降平台与控制器的高精度传送、装配与表面处理方案"
         },
-        "semiconductor": {
-          "name": "半导体加工解决方案",
-          "description": "为半导体制造过程提供高精度的自动化解决方案"
+        "mobileCollaboration": {
+          "name": "移动搬运与复合作业方案",
+          "description": "围绕 M / MR 系列移动底盘与复合机器人的搬运、转运与联动作业方案"
         },
-        "smartManufacturing": {
-          "name": "智能制造解决方案",
-          "description": "集人工智能和机器人技术于一体的端到端智能制造解决方案"
+        "embodiedDevelopment": {
+          "name": "具身开发与遥操作验证方案",
+          "description": "围绕 MR3T、VR / 主从遥操作与绘画平台的具身开发与验证方案"
         }
+      },
+      "solutionsFaq": {
+        "q1": "零蚁的解决方案页主要覆盖哪些方向？",
+        "a1": "当前主要收敛为三类方向：精密传送与装配、移动搬运与复合作业、具身开发与遥操作验证。每个方向都直接对应现有产品组合、代表应用和视频案例，便于先判断方案是否匹配。",
+        "q2": "什么场景更适合精密传送与装配方案？",
+        "a2": "如果项目关注高速取放、精密装配、上下料或表面处理，通常更适合从 R 系列机械臂、升降平台和控制器组合开始评估。这类方案更强调节拍、定位精度和工位协同。",
+        "q3": "移动搬运与复合作业方案一般怎么组合？",
+        "a3": "这类方案通常围绕 M / MR 系列移动底盘与复合机器人展开，再结合控制器、导航和站间接口设计，适合厂内物流、跨工位转运和移动操作等连续作业链路。",
+        "q4": "零蚁通常如何推进方案落地？",
+        "a4": "一般会先确认作业目标、空间约束、负载和节拍，再组合本体型号、控制器与扩展机构，最后通过前置验证进入联调部署。这样可以更早暴露接口边界，减少现场反复调整。"
       },
       "careers": {
         "roboticsEngineer": {
@@ -971,13 +852,254 @@
       },
       "support": {
         "q1": "零蚁科技提供哪些技术支持服务？",
-        "a1": "我们提供7x24小时的专业服务，包括机器人安装调试、技术培训、远程诊断、预防性维护、备件供应和全面的技术支持。",
+        "a1": "我们提供机器人安装调试、技术培训、远程诊断、预防性维护、备件支持和日常技术支持等服务。",
         "q2": "我如何为我的工业机器人获得技术支持？",
         "a2": "您可以通过电话、电子邮件或在线支持系统联系我们的技术支持团队。我们经验丰富的工程师将提供快速响应的技术咨询和现场服务。",
         "q3": "你们提供机器人操作和维护培训吗？",
         "a3": "是的，我们提供全面的技术培训计划，涵盖机器人操作、编程、维护和故障排除，以确保设备达到最佳性能。",
         "q4": "零蚁机器人的保修期是多少？",
         "a4": "我们的工业机器人附带全面的保修覆盖。请联系我们的支持团队，了解您产品型号的具体保修条款和条件。"
+      }
+    }
+  },
+  "productsPage": {
+    "common": {
+      "specLabel": "重点参数",
+      "tipLabel": "选型提示",
+      "ctaTitle": "不确定怎么选？",
+      "ctaDescription": "告诉我们工位类型、节拍要求和空间约束，团队会协助确认合适的型号、控制器与扩展机构组合。",
+      "contactAction": "联系团队",
+      "solutionAction": "查看解决方案",
+      "detailAction": "查看详情"
+    },
+    "hero": {
+      "title": "先看系列，再进型号，再配扩展机构。",
+      "description": "按系列集中浏览当前产品与关键参数，先快速判断方向，再进入具体型号详情。",
+      "metrics": {
+        "groups": "产品分组",
+        "products": "当前展示产品",
+        "cues": "选型要点"
+      }
+    },
+    "overview": {
+      "title": "先按系列浏览，再比较型号差异。",
+      "description": "先看 R / M / MR、具身与开发平台、控制器和扩展机构的分类，再进入各系列下的具体型号；扩展机构单独成区查看。"
+    },
+    "guide": {
+      "title": "先看三件事。",
+      "items": {
+        "family": {
+          "title": "先按系列进入",
+          "description": "先确定属于 R、M、MR、具身与开发平台、控制器还是扩展机构，再进入具体型号。"
+        },
+        "difference": {
+          "title": "同系列先看关键差异",
+          "description": "例如 ZA-R3 / ZA-R3X 主要看 SCARA 臂长，ZA-R3L / ZA-R3M / ZA-R3H 主要看立柱高度和 Z 轴行程。"
+        },
+        "accessories": {
+          "title": "本体明确后再配扩展机构",
+          "description": "地轨平台和旋转平台独立成区展示，通常在本体方向明确后再判断是否需要搭配。"
+        }
+      }
+    }
+  },
+  "productsCenter": {
+    "families": {
+      "rSeries": {
+        "title": "R 系列",
+        "intro": "面向精密传送与狭小空间操作的机械臂平台，可按臂长、立柱高度、本体形态与联动方式快速定位型号。",
+        "cards": {
+          "zar3x": {
+            "title": "ZA-R3 / ZA-R3X",
+            "summary": "SCARA 精密传送平台，ZA-R3 与 ZA-R3X 主要按 SCARA 臂长区分，适合高速取放与狭小空间工位。",
+            "specs": [
+              "SCARA 臂长：ZA-R3 450mm / ZA-R3X 592mm 水平范围",
+              "最大额定负载 3kg",
+              "重复定位精度 ±0.05mm",
+              "最大水平 / 垂直速度 1500mm/s / 500mm/s"
+            ]
+          },
+          "zar3d6": {
+            "title": "ZA-R3D6",
+            "summary": "六自由度机械臂，适合更复杂姿态和轨迹控制任务。",
+            "specs": [
+              "6 自由度 / 额定负载 3kg",
+              "最大工作半径 540.5mm",
+              "重复定位精度 ±0.03mm",
+              "末端最大线速度 1.5m/s"
+            ]
+          },
+          "zar3lmh": {
+            "title": "ZA-R3L / ZA-R3M / ZA-R3H",
+            "summary": "SCARA 升降平台，ZA-R3L / ZA-R3M / ZA-R3H 主要按立柱高度与 Z 轴行程区分。",
+            "specs": [
+              "立柱高度分级：ZA-R3L / ZA-R3M / ZA-R3H",
+              "核心差异：立柱高度 / Z 轴行程",
+              "选型建议：先按工位高度与上下料行程确认 L / M / H",
+              "产品形态：SCARA 升降平台"
+            ]
+          },
+          "zar3mleft": {
+            "title": "ZA-R3M(L) 地轨联动型",
+            "summary": "基于 ZA-R3M 的地轨联动组合形态，用于补足长行程直线作业范围。",
+            "specs": [
+              "组合含义：ZA-R3M + 地轨平台",
+              "归属：R 系列联动型号",
+              "适用场景：跨工位直线取放与联动传送",
+              "选型重点：地轨行程、节拍与整体占位"
+            ]
+          },
+          "zar3mright": {
+            "title": "ZA-R3M(R) 旋转平台联动型",
+            "summary": "基于 ZA-R3M 的旋转平台联动组合形态，用于补足转位与姿态调整能力。",
+            "specs": [
+              "组合含义：ZA-R3M + 旋转平台",
+              "归属：R 系列联动型号",
+              "适用场景：多角度转位与姿态调整",
+              "选型重点：旋转精度、节拍与工位布局"
+            ]
+          },
+          "zar3t": {
+            "title": "ZA-R3T",
+            "summary": "具身智能双臂机器人，适合双臂协同操作、具身训练与演示验证场景。",
+            "specs": [
+              "单臂 7 自由度 / 额定负载 1kg",
+              "臂展 640mm / 重复定位精度 ±0.1mm",
+              "升降轴行程 400 / 750 / 1160mm 可选",
+              "EtherCAT + 10 入 10 出 I/O"
+            ]
+          }
+        }
+      },
+      "mSeries": {
+        "title": "M 系列",
+        "intro": "移动底盘平台，优先按负载、尺寸与工位节拍判断适配关系。",
+        "cards": {
+          "zam75": {
+            "title": "ZA-M75",
+            "summary": "轻载移动底盘，适合灵活部署和中轻载转运。",
+            "specs": [
+              "最大额定负载 75kg",
+              "行驶速度 0.1~1.2m/s / 360° 原地转向",
+              "定位精度 30mm / 爬坡能力 10±1°",
+              "尺寸 Φ564 × 294(H) mm"
+            ]
+          },
+          "zam135": {
+            "title": "ZA-M135",
+            "summary": "中载移动底盘，适合更高负载的跨工位配送与搬运。",
+            "specs": [
+              "最大额定负载 135kg",
+              "行驶速度 0.1~1.2m/s / 360° 原地转向",
+              "定位精度 30mm / 爬坡能力 10±1°",
+              "尺寸 674 × 456 × 327mm"
+            ]
+          }
+        }
+      },
+      "mrSeries": {
+        "title": "MR 系列",
+        "intro": "复合机器人平台，把移动底盘、升降和机械臂组合成跨区域协同作业单元。",
+        "cards": {
+          "zamr3m": {
+            "title": "ZA-MR3M",
+            "summary": "高性能自主移动底盘与定制化四轴机械臂深度融合的复合机器人平台，面向跨区域、多高度作业场景。",
+            "specs": [
+              "整体尺寸 674 × 456 × 1408mm",
+              "整机重量 100kg / 行走速度 0.1~1.2m/s",
+              "升降距离 750mm / 工作时间 6h",
+              "导航方式：激光 SLAM"
+            ]
+          },
+          "zamr3t": {
+            "title": "ZA-MR3T",
+            "summary": "高度集成的仿人形操作平台，融合移动底盘、升降轴、机械臂及视觉相机，面向类人化高精度作业。",
+            "specs": [
+              "移动底盘 + 升降轴 + 双臂 + 视觉相机一体化",
+              "整机重量 120kg / 行走速度 0.1~1.2m/s",
+              "升降距离 750mm / 工作时间 5h",
+              "整体尺寸 674 × 575 × 1408mm"
+            ]
+          }
+        }
+      },
+      "embodiedPlatforms": {
+        "title": "具身与开发平台",
+        "intro": "围绕 VR、主从遥操作与开发平台，服务具身智能训练、验证和演示场景。",
+        "cards": {
+          "zarmvr": {
+            "title": "ZA-RMVR",
+            "summary": "集成升降轴、双臂机械臂、灵巧末端执行器、核心控制器及 VR 设备的教学科研平台。",
+            "specs": [
+              "平台尺寸 674 × 575 × 1408mm",
+              "单臂 1kg / 双臂 2kg",
+              "7 自由度 / 工作半径 640mm / 工作时间 5h",
+              "1×千兆网口 + 1×USB3.0 + 10 入 10 出 I/O"
+            ]
+          },
+          "zarmps": {
+            "title": "ZA-RMPS",
+            "summary": "具身智能双臂主从遥操作开发平台，用于双端操作映射和控制验证。",
+            "specs": [
+              "平台尺寸 1000 × 1000 × 850mm",
+              "单臂 1kg / 双臂 2kg",
+              "主从臂 7 自由度 / 工作半径 640mm",
+              "1×千兆网口 + 1×USB3.0 + 10 入 10 出 I/O"
+            ]
+          },
+          "zardp": {
+            "title": "ZA-RDP",
+            "summary": "绘画机器人平台，用于轨迹示教、绘制演示和算法验证。",
+            "specs": [
+              "平台尺寸 800 × 300 × 500mm",
+              "6 自由度 / 重量 26kg",
+              "重复定位精度 ±0.03mm",
+              "工作半径 540.5mm / 末端最大线速度 1.5m/s"
+            ]
+          }
+        }
+      },
+      "controller": {
+        "title": "控制器",
+        "intro": "算控一体控制单元，承接实时控制、总线同步和接口扩展能力。",
+        "cards": {
+          "zazg100": {
+            "title": "ZA-ZG100",
+            "summary": "面向机器人控制场景的算控一体控制器，强调实时性与接口集成。",
+            "specs": [
+              "RK3588，8 核 64 位 A76+A55，主频 2.4GHz",
+              "内置 NPU 6 Tops / 16GB 内存 / 128GB 存储",
+              "EtherCAT 总线，1ms 控制周期，控制抖动 5μs",
+              "12V / Type-C / EtherCAT / Ethernet / USB 3.0×2 / HDMI"
+            ]
+          }
+        }
+      },
+      "accessories": {
+        "title": "扩展机构",
+        "intro": "扩展机构独立成区展示，用于补足行程与旋转能力，可在确认本体后再匹配。",
+        "cards": {
+          "rail": {
+            "title": "地轨平台",
+            "summary": "用于补足长行程直线移动，适合工位联动和跨工位取放。",
+            "specs": [
+              "行程 1750mm",
+              "最大移动速度 500mm/s",
+              "定位精度 0.21mm / 300mm",
+              "整机尺寸 2229 × 280 × 146mm"
+            ]
+          },
+          "rotatingplatform": {
+            "title": "旋转平台",
+            "summary": "用于增加工位旋转自由度，适合补足姿态调整和转位需求。",
+            "specs": [
+              "整机尺寸 433 × 280 × 238mm",
+              "最大转速 30rpm / 转向能力 ±360°",
+              "定位精度 ≤1 arcmin",
+              "重复定位精度 ≤10 arcsec"
+            ]
+          }
+        }
       }
     }
   }

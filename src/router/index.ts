@@ -1,6 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-import i18n, { ensureProductDetailLocale } from "@/config/i18n";
+import type { RouteLocation } from "vue-router";
 import { scheduleScrollToTop } from "@/utils/scroll";
+import i18n from "@/config/i18n";
+import {
+  getLocaleFromPath,
+  getLocalizedRoutePath,
+  withLocalePrefix,
+} from "@/utils/localeRoute";
 
 // 核心页面直接导入（首屏关键路径）
 import Home from "@/views/Home.vue";
@@ -9,89 +15,94 @@ import Home from "@/views/Home.vue";
 const Solutions = () => import("@/views/solutions/Solutions.vue");
 const About = () => import("@/views/company/About.vue");
 const VideoDetail = () => import("@/views/media/VideoDetail.vue");
-const ProductDetail = () => import("@/views/products/ProductDetail.vue");
+const ProductsCenter = () => import("@/views/products/ProductsCenter.vue");
+const ProductCenterDetail = () => import("@/views/products/ProductCenterDetail.vue");
 const Support = () => import("@/views/support/Support.vue");
 const ApplicationDetail = () => import("@/views/applications/ApplicationDetail.vue");
-const SystemProducts = () => import("@/views/products/SystemProducts.vue");
-const RobotProducts = () => import("@/views/products/RobotProducts.vue");
 const Careers = () => import("@/views/company/Careers.vue");
 const NotFound = () => import("@/views/NotFound.vue");
 
-const productDetailRouteNames = new Set([
-  "SystemProductDetail",
-  "RobotProductDetail",
-]);
-
 let isPopStateNavigation = false;
+
+function syncLocaleFromRoute(path: string) {
+  const targetLocale = getLocaleFromPath(path);
+
+  if (i18n.global.locale.value !== targetLocale) {
+    i18n.global.locale.value = targetLocale;
+  }
+
+  if (typeof document !== "undefined") {
+    document.documentElement.setAttribute("lang", targetLocale);
+  }
+}
 
 const routes = [
   // 首页
   {
-    path: "/",
+    path: getLocalizedRoutePath("/"),
     name: "Home",
     component: Home,
   },
   // 解决方案（集成页面）
   {
-    path: "/solutions",
+    path: getLocalizedRoutePath("/solutions"),
     name: "Solutions",
     component: Solutions,
   },
   // 应用场景
   {
-    path: "/applications/:slug",
+    path: getLocalizedRoutePath("/applications/:slug"),
     name: "ApplicationDetail",
     component: ApplicationDetail,
   },
   // 服务支持
   {
-    path: "/support",
+    path: getLocalizedRoutePath("/support"),
     name: "Support",
     component: Support,
   },
+  {
+    path: getLocalizedRoutePath("/products"),
+    name: "Products",
+    component: ProductsCenter,
+  },
+  {
+    path: getLocalizedRoutePath("/products/detail/:id"),
+    name: "ProductDetail",
+    component: ProductCenterDetail,
+  },
   // 人才招聘
   {
-    path: "/careers",
+    path: getLocalizedRoutePath("/careers"),
     name: "Careers",
     component: Careers,
   },
   // 关于我们
   {
-    path: "/about",
+    path: getLocalizedRoutePath("/about"),
     name: "About",
     component: About,
   },
 
   // 视频相关
   {
-    path: "/video/:slug",
+    path: getLocalizedRoutePath("/video/:slug"),
     name: "VideoDetail",
     component: VideoDetail,
   },
-  // 系统产品
+  // 旧产品路由统一收口到产品中心，并保留语言前缀
   {
-    path: "/system-products",
-    name: "SystemProducts",
-    component: SystemProducts,
+    path: getLocalizedRoutePath("/system-products/:pathMatch(.*)*"),
+    redirect: (to: RouteLocation) =>
+      withLocalePrefix("/products", getLocaleFromPath(to.path)),
   },
   {
-    path: "/system-products/:slug",
-    name: "SystemProductDetail",
-    component: ProductDetail,
-  },
-  // 机器人产品
-  {
-    path: "/robot-products",
-    name: "RobotProducts",
-    component: RobotProducts,
+    path: getLocalizedRoutePath("/robot-products/:pathMatch(.*)*"),
+    redirect: (to: RouteLocation) =>
+      withLocalePrefix("/products", getLocaleFromPath(to.path)),
   },
   {
-    path: "/robot-products/:slug",
-    name: "RobotProductDetail",
-    component: ProductDetail,
-  },
-  {
-    path: "/:pathMatch(.*)*",
+    path: getLocalizedRoutePath("/:pathMatch(.*)*"),
     name: "NotFound",
     component: NotFound,
   },
@@ -141,27 +152,16 @@ const router = createRouter({
   },
 });
 
+router.beforeEach((to) => {
+  syncLocaleFromRoute(to.path);
+});
+
 if (typeof window !== "undefined") {
+  syncLocaleFromRoute(window.location.pathname);
   window.addEventListener("popstate", () => {
     isPopStateNavigation = true;
   });
 }
-
-router.beforeEach(async (to) => {
-  if (!productDetailRouteNames.has(String(to.name))) {
-    return true;
-  }
-
-  const locale = i18n.global.locale.value === "en" ? "en" : "zh";
-  try {
-    await ensureProductDetailLocale(locale);
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      console.warn("预热产品详情文案失败:", error);
-    }
-  }
-  return true;
-});
 
 router.afterEach((to, _from, failure) => {
   if (failure || to.hash) {
@@ -174,9 +174,12 @@ router.afterEach((to, _from, failure) => {
     return;
   }
 
+  // 百度统计埋点
+  if (typeof window !== "undefined" && (window as any)._hmt) {
+    (window as any)._hmt.push(['_trackPageview', to.fullPath]);
+  }
+
   scheduleScrollToTop({ afterTransition: true });
 });
-
-// 产品详情页的 locale 预热守卫，避免首次进入时详情文案缺失
 
 export default router;

@@ -2,6 +2,7 @@
  * SEO 元数据接口
  */
 export interface SEOMetaData {
+  htmlLang?: string;
   title?: string;
   description?: string;
   keywords?: string;
@@ -10,6 +11,8 @@ export interface SEOMetaData {
   ogTitle?: string;
   ogDescription?: string;
   ogType?: string | undefined;
+  ogLocale?: string;
+  ogLocaleAlternates?: string[];
   ogImage?: string;
   ogImageWidth?: string | number;
   ogImageHeight?: string | number;
@@ -21,6 +24,10 @@ export interface SEOMetaData {
   twitterCard?: string;
   canonical?: string;
   siteName?: string;
+  alternates?: Array<{
+    hreflang: string;
+    href: string;
+  }>;
 }
 
 /**
@@ -39,6 +46,10 @@ export function setSEO(meta: SEOMetaData) {
   try {
     // 站点名不依赖 i18n，避免把整套文案资源拖进 SEO 工具包
     const siteName = meta.siteName || "ZeroAnt Technology";
+
+    if (meta.htmlLang) {
+      document.documentElement.setAttribute("lang", meta.htmlLang);
+    }
 
     // 设置页面标题
     if (meta.title) {
@@ -93,11 +104,25 @@ export function setSEO(meta: SEOMetaData) {
     updateMetaTag("og:title", meta.ogTitle, true);
     updateMetaTag("og:description", meta.ogDescription, true);
     updateMetaTag("og:type", meta.ogType, true);
+    updateMetaTag("og:locale", meta.ogLocale, true);
     updateMetaTag("og:image", meta.ogImage, true);
     updateMetaTag("og:image:width", meta.ogImageWidth, true);
     updateMetaTag("og:image:height", meta.ogImageHeight, true);
     updateMetaTag("og:url", meta.ogUrl, true);
     updateMetaTag("og:video", meta.ogVideo, true);
+
+    const existingLocaleAlternates = document.querySelectorAll(
+      'meta[property="og:locale:alternate"][data-seo-managed="true"]'
+    );
+    existingLocaleAlternates.forEach((element) => element.remove());
+
+    (meta.ogLocaleAlternates || []).forEach((locale) => {
+      const element = document.createElement("meta");
+      element.setAttribute("property", "og:locale:alternate");
+      element.setAttribute("content", locale);
+      element.setAttribute("data-seo-managed", "true");
+      document.head.appendChild(element);
+    });
 
     // 更新 Twitter Card 标签
     updateMetaTag("twitter:title", meta.twitterTitle);
@@ -121,6 +146,20 @@ export function setSEO(meta: SEOMetaData) {
 
       canonicalElement.setAttribute("href", meta.canonical);
     }
+
+    const existingAlternates = document.querySelectorAll(
+      'link[rel="alternate"][data-seo-managed="true"]'
+    );
+    existingAlternates.forEach((element) => element.remove());
+
+    (meta.alternates || []).forEach((alternate) => {
+      const link = document.createElement("link");
+      link.setAttribute("rel", "alternate");
+      link.setAttribute("hreflang", alternate.hreflang);
+      link.setAttribute("href", alternate.href);
+      link.setAttribute("data-seo-managed", "true");
+      document.head.appendChild(link);
+    });
 
   } catch (error) {
     if (import.meta.env.DEV) {

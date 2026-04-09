@@ -1,830 +1,533 @@
 {
-  "multiOsVm": {
-    "title": "Multi-OS Embedded Virtual Machine",
-    "desc": "Type-1 Hypervisor written in advanced Rust language, designed for resource-constrained embedded systems, supporting parallel operation of multiple OS virtual machines while ensuring real-time performance of VMs themselves, isolation between VMs, and overall system reliability.<br><strong>Reliability</strong>: Using Rust as the programming language, leveraging its inherent safety features to improve code quality and ensure system software reliability at the language level.<br><strong>Isolation</strong>: System resources are isolated from four aspects: CPU, interrupts, devices, and memory, ensuring VMs cannot access resources belonging to other VMs.<br><strong>Real-time</strong>: Through interrupt passthrough mechanism and mediated pass-through device mechanism, effectively reducing the impact of virtualization on real-time performance.",
+  "za-r3-x": {
+    "title": "ZA-R3 / ZA-R3X",
+    "desc": "A SCARA transfer platform where ZA-R3 and ZA-R3X are primarily selected by SCARA arm length, suited to high-speed pick-and-place and compact workstations.",
     "features": [
-      "Multi-OS parallel operation with efficient resource isolation",
-      "Support for real-time and general-purpose OS hybrid deployment",
-      "Embedded virtualization technology with low overhead and high security",
-      "Flexible system switching and hot-plug capabilities",
-      "Support for multiple mainstream industrial protocols and interfaces",
-      "Cloud-edge collaborative management, remote monitoring and maintenance"
+      {
+        "title": "Two reach options",
+        "desc": "ZA-R3 offers 450mm reach and ZA-R3X offers 592mm horizontal reach, making it easier to match station coverage."
+      },
+      {
+        "title": "Built for fast pick-and-place",
+        "desc": "Maximum horizontal and vertical speeds of 1500mm/s and 500mm/s fit higher-frequency transfer cycles."
+      },
+      {
+        "title": "Stable repeatability",
+        "desc": "Repeatability is rated at ±0.05mm, suitable for stations that need consistent placement."
+      },
+      {
+        "title": "Complete control interfaces",
+        "desc": "Supports EtherCAT, Gigabit Ethernet, USB and 10 in / 10 out digital I/O for system integration."
+      }
     ],
-    "cases": {
-      "smartManufacturing": {
-        "title": "Smart Manufacturing Line Upgrade",
-        "desc": "Help customers achieve unified management of heterogeneous equipment systems and improve production line automation levels."
-      },
-      "industrialGateway": {
-        "title": "Industrial Gateway Virtualization",
-        "desc": "Deploy multiple systems on a single hardware platform, reducing hardware costs and maintenance complexity."
-      }
-    },
-    "scenes": [
-      "Automotive Systems",
-      "Smart Manufacturing Lines",
-      "Industrial Automation Equipment",
-      "Edge Computing",
-      "UAVs and Mixed-Criticality Systems"
-    ],
-    "params": {
-      "realTimeGuarantee": {
-        "key": "Real-time VM Maximum Interrupt Latency",
-        "value": "833ns"
-      },
-      "switchTime": {
-        "key": "Real-time VM Process Switch Overhead",
-        "value": "256 clock cycles"
-      },
-      "securityLevel": {
-        "key": "Stability",
-        "value": "7*24 hours, RTOS max interrupt latency 4.62us"
-      },
-      "memoryManagement": {
-        "key": "Inter-kernel Communication Rate",
-        "value": "10MB test data: avg write 3.226Gbps, avg read 7.631Gbps"
-      },
-      "vmCount": {
-        "key": "VM Count",
-        "value": "Up to 3 parallel VMs"
-      },
-      "supportedOSKernels": {
-        "key": "Supported OS & Kernels",
-        "value": "openEuler, Ubuntu, Zephyr, SylixOS, ArceOS"
-      },
-      "supportedHardware": {
-        "key": "Supported Hardware",
-        "value": "Firefly ROC-RK3588S-PC, NVIDIA Jetson TX2, Raspberry Pi 4 Model B, QEMU Emulator"
-      },
-      "virtualizationTech": {
-        "key": "Full Emulation Device Support",
-        "value": "Emulated GIC, Emulated IOMMU"
-      },
-      "resourceIsolation": {
-        "key": "Virtio Emulated Device Support",
-        "value": "Virtio Console, Virtio BLK, Virtio Net, Virtio GPIO"
-      }
-    },
-    "downloads": {
-      "whitepaper": {
-        "name": "Multi-OS Hybrid Deployment Embedded Virtual Machine Industry Whitepaper.pdf",
-        "url": "/downloads/多OS混合部署嵌入式虚拟机产业白皮书.pdf"
-      }
-    }
+    "params": [
+      { "key": "SCARA Arm Length", "value": "ZA-R3: 450mm; ZA-R3X: 592mm horizontal reach (plus 160mm gripper)" },
+      { "key": "Max Rated Payload", "value": "3kg" },
+      { "key": "Max Horizontal / Vertical Speed", "value": "1500mm/s / 500mm/s" },
+      { "key": "Max Acceleration", "value": "2500mm/s²" },
+      { "key": "Repeatability", "value": "±0.05mm" },
+      { "key": "Joint 1 (Z Axis)", "value": "400 / 750 / 1160mm" },
+      { "key": "Joint 2", "value": "±93°" },
+      { "key": "Joint 3", "value": "±168°" },
+      { "key": "Joint 4", "value": "±360°" },
+      { "key": "Interface", "value": "1× Gigabit Ethernet, 1× USB3.0" },
+      { "key": "I/O", "value": "10 digital inputs, 10 digital outputs (PNP)" },
+      { "key": "Communication Protocol", "value": "EtherCAT" },
+      { "key": "Rated Voltage", "value": "DC 48V" },
+      { "key": "Rated Power", "value": "800W" },
+      { "key": "Weight (Excl. Gripper)", "value": "400mm Z axis: 24kg / 26kg; 750mm Z axis: 31.5kg / 33.5kg; 1160mm Z axis: 39.5kg / 41.5kg" }
+    ]
   },
-  "industrialRtos": {
-    "title": "Domestic Industrial Real-Time OS",
-    "desc": "Real-Time Operating System Kernel: Optimizing embedded system real-time performance, developing lightweight secure container isolation technology, enhancing kernel preemption capability and multi-core scheduling, while supporting domestic CPUs and intelligent algorithm frameworks.<br>Motion Control Algorithms & Runtime Environment: Breakthrough in high-precision compliant control, intelligent motion planning (obstacle avoidance/energy optimization), and modular open runtime environment, ensuring high real-time performance and reliability in complex scenarios.<br>Componentized Function Libraries & Development Environment: Building standardized industrial model libraries (basic control, intelligent algorithms), visual programming tools, and unified interface protocols, supporting modular development and multi-language integration to enhance industrial application development efficiency.",
+  "za-r3l-m-h": {
+    "title": "ZA-R3L / ZA-R3M / ZA-R3H",
+    "desc": "A SCARA lift platform where ZA-R3L, ZA-R3M, and ZA-R3H are primarily selected by column height and Z-axis travel.",
     "features": [
-      "Millisecond real-time response meeting industrial control requirements",
-      "Autonomous and controllable, security auditable, compatible with domestic chips",
-      "Rich industrial protocol and driver support",
-      "High reliability and fault tolerance mechanisms ensuring system stable operation",
-      "Flexible task scheduling and resource management",
-      "Cloud remote monitoring and maintenance capability"
-    ],
-    "cases": {
-      "highEndEquipment": {
-        "title": "High-end Equipment Control System",
-        "desc": "Provide highly reliable real-time operating system foundation for high-end CNC machines, industrial robots, etc."
+      {
+        "title": "L / M / H variants",
+        "desc": "The family is grouped by column height and Z-axis travel so different station heights can be matched more quickly."
       },
-      "domesticReplacement": {
-        "title": "Domestic Replacement",
-        "desc": "Help customers achieve autonomous and controllable domestic replacement of critical industrial systems."
+      {
+        "title": "Fits vertical loading gaps",
+        "desc": "Suitable for transfer tasks that need extra vertical compensation between pick and place positions."
+      },
+      {
+        "title": "Compact SCARA-based form",
+        "desc": "Keeps the compact character of a SCARA platform while extending vertical operating ability."
       }
-    },
-    "scenes": [
-      "Industrial Automation Control",
-      "Robot Control Systems",
-      "High-end Equipment Manufacturing"
     ],
-    "params": {
-      "realTimeResponse": {
-        "key": "Real-time Response",
-        "value": "Interrupt response <10us"
-      },
-      "securityLevel": {
-        "key": "Security Level",
-        "value": "EAL4+"
-      },
-      "maxTasks": {
-        "key": "Maximum Tasks",
-        "value": "256 concurrent tasks"
-      },
-      "bootTime": {
-        "key": "Boot Time",
-        "value": "< 500ms"
-      },
-      "supportedArch": {
-        "key": "Supported Architecture",
-        "value": "ARM, x86, RISC-V"
-      },
-      "memoryManagement": {
-        "key": "Memory Management",
-        "value": "MPU + Dynamic memory allocation"
-      },
-      "fileSystem": {
-        "key": "File System",
-        "value": "FAT32, YAFFS2, LittleFS"
-      },
-      "networkStack": {
-        "key": "Network Protocol Stack",
-        "value": "TCP/IP, UDP, MQTT, CoAP"
-      },
-      "deviceDrivers": {
-        "key": "Device Drivers",
-        "value": "UART, SPI, I2C, CAN, Ethernet"
-      },
-      "powerManagement": {
-        "key": "Power Management",
-        "value": "Multi-level sleep modes"
-      },
-      "securityFeatures": {
-        "key": "Security Features",
-        "value": "Code signing + Secure boot"
-      },
-      "debugTools": {
-        "key": "Debug Tools",
-        "value": "GDB + System tracing"
-      },
-      "devEnvironment": {
-        "key": "Development Environment",
-        "value": "Eclipse + VS Code plugins"
-      },
-      "certificationStandard": {
-        "key": "Certification Standard",
-        "value": "IEC 61508 SIL3"
-      },
-      "compatibility": {
-        "key": "Compatibility",
-        "value": "Support mainstream industrial protocols"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "Product Form", "value": "SCARA lift platform" },
+      { "key": "Model Tiers", "value": "ZA-R3L / ZA-R3M / ZA-R3H" },
+      { "key": "Key Difference", "value": "Column height / Z-axis travel" },
+      { "key": "Selection Cue", "value": "Choose by station height and vertical loading travel first" }
+    ]
   },
-  "airos": {
-    "title": "AiROS Robot Operating System",
-    "desc": "Committed to creating an 'out-of-the-box' embodied robot basic system platform, bringing robots into thousands of industries. Building an Android system for the robotics world, installed in robots themselves, giving them souls.",
+  "za-r3d6": {
+    "title": "ZA-R3D6",
+    "desc": "6-axis robotic arm for complex orientation and path control.",
     "features": [
-      "Security: Rust language security foundation guarantee",
-      "Integration: Parallel running hybrid deployment technology",
-      "Real-time: Maximum interrupt jitter ≤ 10us",
-      "Controller cost reduced by 50%",
-      "Robot R&D cycle reduced by over 70%",
-      "Support 18-axis simultaneous control with 0.02mm repeat positioning accuracy"
-    ],
-    "cases": {
-      "semiconductorWafer": {
-        "title": "Semiconductor Wafer Transfer",
-        "desc": "Over 200 units shipped, helping customers transform from repair shops to high-tech manufacturers, operating continuously for 90,000 hours without damage."
+      {
+        "title": "Flexible 6-axis posture control",
+        "desc": "Suitable for tasks that need more orientation freedom and more complex path planning."
       },
-      "medicalLabAutomation": {
-        "title": "Medical Laboratory Automation",
-        "desc": "Achieving domestic replacement of foreign equipment, reducing costs from 300,000 to 140,000 yuan, serving customers like Huazhi Biology and PerkinElmer."
+      {
+        "title": "540.5mm working radius",
+        "desc": "Provides practical workspace coverage in a relatively compact robot body."
       },
-      "foodDeliveryRobot": {
-        "title": "Food Delivery Robot",
-        "desc": "Cooperating with Meituan and Pudu to build a 'consumption-production-delivery' golden triangle closed loop."
+      {
+        "title": "±0.03mm repeatability",
+        "desc": "Fits validation and operation scenarios that need stable repeated positioning."
+      },
+      {
+        "title": "Flexible mounting",
+        "desc": "Supports any-angle installation and IP54 protection for different equipment layouts."
       }
-    },
-    "scenes": [
-      "Semiconductor Processing",
-      "Biomedical Laboratories",
-      "Smart Catering",
-      "Community Delivery",
-      "Industrial Automation",
-      "Smart Manufacturing"
     ],
-    "params": {
-      "controlPrecision": {
-        "key": "Control Precision",
-        "value": "0.02mm repeat positioning accuracy"
-      },
-      "realTime": {
-        "key": "Real-time Performance",
-        "value": "Maximum interrupt jitter ≤ 10us"
-      },
-      "supportedAxes": {
-        "key": "Supported Axes",
-        "value": "18-axis simultaneous control"
-      },
-      "securityCertification": {
-        "key": "Security Certification",
-        "value": "Information Security EAL5+ certification"
-      },
-      "memoryUsage": {
-        "key": "Memory Usage",
-        "value": "≤ 512MB"
-      },
-      "bootTime": {
-        "key": "Boot Time",
-        "value": "≤ 3 seconds"
-      },
-      "programmingLanguage": {
-        "key": "Programming Language",
-        "value": "Rust + C/C++"
-      },
-      "supportedArch": {
-        "key": "Supported Architecture",
-        "value": "ARM64, x86_64, RISC-V"
-      },
-      "communicationProtocol": {
-        "key": "Communication Protocol",
-        "value": "EtherCAT, CAN, Modbus, OPC UA"
-      },
-      "visionAlgorithm": {
-        "key": "Vision Algorithm",
-        "value": "Deep learning object detection and tracking"
-      },
-      "multiModalFusion": {
-        "key": "Multi-modal Fusion",
-        "value": "Vision + Laser + IMU + Force sensing"
-      },
-      "cloudConnection": {
-        "key": "Cloud Connection",
-        "value": "Support 5G/WiFi6 remote monitoring"
-      },
-      "workingTemperature": {
-        "key": "Working Temperature",
-        "value": "-20°C ~ +60°C"
-      },
-      "costOptimization": {
-        "key": "Cost Optimization",
-        "value": "Controller cost reduced by 50%"
-      },
-      "devEfficiency": {
-        "key": "Development Efficiency",
-        "value": "R&D cycle reduced by over 70%"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "DOF", "value": "6" },
+      { "key": "Rated Payload", "value": "3kg (excluding hand or gripper)" },
+      { "key": "Weight", "value": "13kg (excluding hand or gripper)" },
+      { "key": "Repeatability", "value": "±0.03mm" },
+      { "key": "Max Working Radius", "value": "540.5mm (excluding hand or gripper)" },
+      { "key": "Joint Motion Range", "value": "J1±360°, J2±175°, J3±175°, J4±175°, J5±360°, J6±360°" },
+      { "key": "Max Joint Speed", "value": "J1-J6 180°/s" },
+      { "key": "Max End-Effector Linear Speed", "value": "1.5m/s (excluding hand or gripper)" },
+      { "key": "Interface", "value": "1× Ethernet" },
+      { "key": "Communication Protocol", "value": "EtherCAT" },
+      { "key": "Power Supply", "value": "DC 48V" },
+      { "key": "Average Power", "value": "150W" },
+      { "key": "Peak Power", "value": "750W" },
+      { "key": "Material", "value": "Aluminum alloy" },
+      { "key": "Operating Temperature", "value": "0~60°C" },
+      { "key": "Mounting", "value": "Any-angle mounting" },
+      { "key": "Protection Rating", "value": "IP54" }
+    ]
   },
-  "robotScheduler": {
-    "title": "Mobile Robot Scheduling System",
-    "desc": "Supports unified scheduling and collaborative operation of multi-brand, multi-type mobile robots, improving factory automation and logistics efficiency.",
+  "za-r3t": {
+    "title": "ZA-R3T",
+    "desc": "Embodied dual-arm robot platform.",
     "features": [
-      "Unified access and management of multi-brand robots",
-      "Intelligent path planning and dynamic obstacle avoidance",
-      "Multi-robot collaborative operation and task allocation",
-      "Support for external device linkage such as elevators and access control",
-      "Real-time monitoring and data analysis platform",
-      "Cloud deployment supporting large-scale cluster management"
-    ],
-    "cases": {
-      "smartFactoryLogistics": {
-        "title": "Smart Factory Logistics Scheduling",
-        "desc": "Achieve efficient collaborative operation of multiple robots in complex factory environments, improving logistics automation levels."
+      {
+        "title": "Dual-arm collaboration",
+        "desc": "Each arm has 7 DOF, supporting grasping, transfer and dual-arm validation tasks."
       },
-      "crossFloorDelivery": {
-        "title": "Cross-floor Delivery",
-        "desc": "Support robot linkage with elevator and access control systems for cross-floor material delivery."
+      {
+        "title": "Balanced reach and precision",
+        "desc": "A 640mm arm span and ±0.1mm repeatability fit common tabletop and workstation-scale operations."
+      },
+      {
+        "title": "Selectable lift travel",
+        "desc": "Lift travel options of 400 / 750 / 1160mm help match different bench and station heights."
+      },
+      {
+        "title": "Ready for integration",
+        "desc": "EtherCAT, Gigabit Ethernet, USB and digital I/O make system integration and development easier."
       }
-    },
-    "scenes": [
-      "Smart Factory Logistics",
-      "Warehouse Automation",
-      "Hospital and Office Building Delivery"
     ],
-    "params": {
-      "maxSchedulingScale": {
-        "key": "Maximum Scheduling Scale",
-        "value": "100+ units"
-      },
-      "responseTime": {
-        "key": "Response Time",
-        "value": "≤100ms (task allocation)"
-      },
-      "availability": {
-        "key": "Availability",
-        "value": "99.9% system availability"
-      },
-      "systemCapacity": {
-        "key": "System Capacity",
-        "value": "Support 100,000+ tasks/day"
-      },
-      "supportedBrands": {
-        "key": "Supported Robot Brands",
-        "value": "10+ mainstream brands"
-      },
-      "pathPlanningAlgorithm": {
-        "key": "Path Planning Algorithm",
-        "value": "A* algorithm + dynamic obstacle avoidance"
-      },
-      "taskSchedulingStrategy": {
-        "key": "Task Scheduling Strategy",
-        "value": "Priority + load balancing"
-      },
-      "systemInterface": {
-        "key": "System Interface",
-        "value": "RESTful API, MQTT, OPC UA"
-      },
-      "externalDeviceSupport": {
-        "key": "External Device Support",
-        "value": "Elevators, access control, etc."
-      },
-      "mapManagement": {
-        "key": "Map Management",
-        "value": "Multi-layer maps + real-time updates"
-      },
-      "dataStorage": {
-        "key": "Data Storage",
-        "value": "MySQL + Redis cache"
-      },
-      "monitoringInterface": {
-        "key": "Monitoring Interface",
-        "value": "Web + mobile app"
-      },
-      "alarmMechanism": {
-        "key": "Alarm Mechanism",
-        "value": "Real-time alerts + email/SMS notifications"
-      },
-      "deploymentMethod": {
-        "key": "Deployment Method",
-        "value": "Private cloud/Public cloud/Hybrid cloud"
-      },
-      "securityCertification": {
-        "key": "Security Certification",
-        "value": "HTTPS + OAuth2.0"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "Single-Arm DOF", "value": "7" },
+      { "key": "Single-Arm Rated Payload", "value": "1kg" },
+      { "key": "Single-Arm Weight", "value": "13.5kg (excluding hand or gripper)" },
+      { "key": "Repeatability", "value": "±0.1mm" },
+      { "key": "Arm Span", "value": "640mm (excluding hand or gripper)" },
+      { "key": "Joint Motion Range", "value": "J1±180°, J2±115°, J3±180°, J4±115°, J5±180°, J6±180°, J7±90°" },
+      { "key": "Max Joint Speed", "value": "J1-J7 180°/s" },
+      { "key": "Lift Axis Travel", "value": "400 / 750 / 1160mm (optional)" },
+      { "key": "Lift Axis Speed", "value": "400mm/s" },
+      { "key": "Interface", "value": "1× Gigabit Ethernet, 1× USB3.0" },
+      { "key": "I/O", "value": "10 digital inputs, 10 digital outputs (PNP)" },
+      { "key": "Communication Protocol", "value": "EtherCAT" },
+      { "key": "Overall Weight", "value": "55kg" },
+      { "key": "Power Supply", "value": "DC 48V" },
+      { "key": "Power", "value": "Max combined power ≤750W, typical power ≤300W" },
+      { "key": "Material", "value": "Aluminum alloy" },
+      { "key": "Operating Environment", "value": "0~45°C" }
+    ]
   },
-  "gantry2d": {
-    "title": "2/3-DOF Gantry",
-    "desc": "High-precision, high-rigidity 2-degree-of-freedom gantry suitable for multi-scenario automated handling and positioning, meeting industrial-grade efficient operation requirements.",
+  "za-m75": {
+    "title": "ZA-M75",
+    "desc": "Light-duty mobile base for flexible deployment and medium-light transport.",
     "features": [
-      "High-rigidity structural design with strong load capacity",
-      "Sub-millimeter positioning accuracy with smooth operation",
-      "Modular design for easy expansion and maintenance",
-      "Support for various end-effector integrations",
-      "Compatible with various industrial control systems",
-      "Intelligent fault diagnosis and predictive maintenance"
-    ],
-    "cases": {
-      "automatedAssemblyLine": {
-        "title": "Automated Assembly Line Handling",
-        "desc": "Help customers achieve efficient automated handling and precise positioning, improving production line efficiency."
+      {
+        "title": "Light-duty mobile base",
+        "desc": "With a 75kg rated payload, it fits medium-light material transfer and platform-style deployment."
       },
-      "warehouseSorting": {
-        "title": "Warehouse Sorting System",
-        "desc": "Applied in smart warehousing for automatic sorting and handling of large items."
+      {
+        "title": "Zero-turn steering",
+        "desc": "Supports 360-degree zero-turn movement for narrower aisles and tighter routing."
+      },
+      {
+        "title": "Basic navigation and obstacle avoidance",
+        "desc": "Combines map building and LiDAR-based obstacle avoidance for common indoor routes."
+      },
+      {
+        "title": "Complete charging options",
+        "desc": "Runtime is about 10 hours and both manual charging and optional charging-dock setups are supported."
       }
-    },
-    "scenes": [
-      "Automated Assembly Lines",
-      "Smart Warehouse Logistics",
-      "Precision Machining and Testing"
     ],
-    "params": {
-      "repeatPositioningAccuracy": {
-        "key": "Repeat Positioning Accuracy",
-        "value": "±0.1mm"
-      },
-      "maxLoad": {
-        "key": "Maximum Load",
-        "value": "5kg"
-      },
-      "effectiveStroke": {
-        "key": "Effective Stroke",
-        "value": "X:385mm Y:495mm Z:215mm"
-      },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "X:1m/s; Y:1m/s; Z:1m/s"
-      },
-      "driveMethod": {
-        "key": "Drive Method",
-        "value": "Servo motor + timing belt"
-      },
-      "guideRailType": {
-        "key": "Guide Rail Type",
-        "value": "Linear guide + timing belt"
-      },
-      "controlSystem": {
-        "key": "Control System",
-        "value": "PLC control"
-      },
-      "communicationInterface": {
-        "key": "Communication Interface",
-        "value": "Ethernet"
-      },
-      "workingEnvironment": {
-        "key": "Working Environment",
-        "value": "Temperature: 0-50°C; Humidity: ≤75%"
-      },
-      "installationMethod": {
-        "key": "Installation Method",
-        "value": "Fixed installation"
-      },
-      "structuralMaterial": {
-        "key": "Structural Material",
-        "value": "High-strength aluminum alloy profiles"
-      },
-      "devInterface": {
-        "key": "Development Interface",
-        "value": "C++"
-      },
-      "powerRequirement": {
-        "key": "Power Requirement",
-        "value": "AC 220V"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "Dimensions", "value": "Ø564×294(H)mm" },
+      { "key": "Max Rated Payload", "value": "75kg" },
+      { "key": "Travel Speed", "value": "0.1~1.2m/s" },
+      { "key": "Steering", "value": "360° zero-turn" },
+      { "key": "Max Acceleration", "value": "1m/s² (no load), 0.7m/s² (full load)" },
+      { "key": "Obstacle Crossing", "value": "10±2mm (no load)" },
+      { "key": "Climbing Ability", "value": "10±1° (no load)" },
+      { "key": "Travel Accuracy", "value": "Straight-line deviation ≤8mm/m" },
+      { "key": "Positioning Accuracy", "value": "30mm" },
+      { "key": "Map Building", "value": "Up to 200×200m" },
+      { "key": "Obstacle Avoidance", "value": "LiDAR range 0.1~10m, minimum detectable obstacle 100×100×100mm" },
+      { "key": "Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" },
+      { "key": "Communication Protocol", "value": "CAN" },
+      { "key": "Control Method", "value": "Wi-Fi remote control (30±5m range)" },
+      { "key": "Weight", "value": "75kg (including battery)" },
+      { "key": "Rated Power", "value": "400W" },
+      { "key": "Wheel Configuration", "value": "2 differential wheels, 4 caster wheels" },
+      { "key": "Battery", "value": "48V@20AH ternary lithium battery; max output 800W; rated charging voltage/current 54.6V@5A" },
+      { "key": "Runtime", "value": "10h" },
+      { "key": "Charging", "value": "Manual charger; automatic charging dock optional" }
+    ]
   },
-  "scara4axis": {
-    "title": "4-Axis SCARA Arm",
-    "desc": "Flexible and efficient 4-axis robotic arm suitable for assembly, handling, sorting and other industrial automation applications, featuring high-speed and high-precision characteristics.",
+  "za-m135": {
+    "title": "ZA-M135",
+    "desc": "Mid-load mobile base for cross-station delivery and handling.",
     "features": [
-      "High-speed motion with short cycle time",
-      "High-precision repeat positioning suitable for precision operations",
-      "Compact structure, easy to integrate",
-      "Support for quick change of various end tools",
-      "Open control interface for easy secondary development",
-      "Intelligent vision guidance, adaptive to working environments"
-    ],
-    "cases": {
-      "electronicAssembly": {
-        "title": "Electronic Component Assembly",
-        "desc": "Applied in electronics manufacturing for efficient automated assembly."
+      {
+        "title": "Mid-load transport capacity",
+        "desc": "A rated payload of 135kg fits heavier cross-station delivery and material handling tasks."
       },
-      "automaticSortingPackaging": {
-        "title": "Automatic Sorting and Packaging",
-        "desc": "Achieve high-speed sorting and automatic packaging in logistics sorting lines."
+      {
+        "title": "Compact deployment footprint",
+        "desc": "Dimensions of 674×456×327mm help it fit station-side deployment in tighter spaces."
+      },
+      {
+        "title": "Zero-turn and route adaptability",
+        "desc": "Supports 360-degree zero-turn steering along with basic mapping, positioning and obstacle avoidance."
+      },
+      {
+        "title": "Built for sustained work",
+        "desc": "Runtime is about 10 hours, with manual charging and optional automatic charging support."
       }
-    },
-    "scenes": [
-      "Electronic Manufacturing Assembly",
-      "Logistics Sorting",
-      "Automated Packaging"
     ],
-    "params": {
-      "repeatPositioningAccuracy": {
-        "key": "Repeat Positioning Accuracy",
-        "value": "±0.05mm"
-      },
-      "maxLoad": {
-        "key": "Maximum Load",
-        "value": "1kg"
-      },
-      "degreesOfFreedom": {
-        "key": "Degrees of Freedom",
-        "value": "4"
-      },
-      "armReach": {
-        "key": "Arm Reach",
-        "value": "Large arm: 296mm, Small arm: 282mm"
-      },
-      "workingRadius": {
-        "key": "Working Radius",
-        "value": "578mm"
-      },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "1000mm/s"
-      },
-      "verticalStroke": {
-        "key": "Vertical Stroke",
-        "value": "800mm"
-      },
-      "driveMethod": {
-        "key": "Drive Method",
-        "value": "DC servo motor + harmonic reducer"
-      },
-      "controller": {
-        "key": "Controller",
-        "value": "Dedicated 4-axis controller"
-      },
-      "programmingMethod": {
-        "key": "Programming Method",
-        "value": "Teaching programming + offline programming"
-      },
-      "communicationInterface": {
-        "key": "Communication Interface",
-        "value": "Ethernet"
-      },
-      "protectionLevel": {
-        "key": "Protection Level",
-        "value": "IP54"
-      },
-      "workingTemperature": {
-        "key": "Working Temperature",
-        "value": "0°C~60°C"
-      },
-      "powerSpec": {
-        "key": "Power Specification",
-        "value": "DC48V"
-      },
-      "installationMethod": {
-        "key": "Installation Method",
-        "value": "Floor mounting/inverted mounting/side mounting"
-      },
-      "rotationAngle": {
-        "key": "Rotation Angle",
-        "value": "J1: ±90°, J2: ±165°, Gripper: ±360°"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "Dimensions", "value": "674(L)×456(W)×327(H)mm" },
+      { "key": "Max Rated Payload", "value": "135kg" },
+      { "key": "Travel Speed", "value": "0.1~1.2m/s" },
+      { "key": "Steering", "value": "360° zero-turn" },
+      { "key": "Max Acceleration", "value": "1m/s² (no load), 0.5m/s² (full load)" },
+      { "key": "Obstacle Crossing", "value": "10±2mm (no load)" },
+      { "key": "Climbing Ability", "value": "10±1° (no load)" },
+      { "key": "Travel Accuracy", "value": "Straight-line deviation ≤8mm/m" },
+      { "key": "Positioning Accuracy", "value": "30mm" },
+      { "key": "Map Building", "value": "Up to 200×200m" },
+      { "key": "Obstacle Avoidance", "value": "LiDAR range 0.1~10m, minimum detectable obstacle 100×100×100mm" },
+      { "key": "Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" },
+      { "key": "Communication Protocol", "value": "CAN" },
+      { "key": "Control Method", "value": "Wi-Fi remote control (30±5m range)" },
+      { "key": "Weight", "value": "65kg (including battery)" },
+      { "key": "Rated Power", "value": "400W" },
+      { "key": "Wheel Configuration", "value": "2 differential wheels, 4 caster wheels" },
+      { "key": "Battery", "value": "48V@30AH ternary lithium battery; max output 1200W; rated charging voltage/current 54.6V@10A" },
+      { "key": "Runtime", "value": "10h" },
+      { "key": "Charging", "value": "Manual charger; automatic charging dock optional" }
+    ]
   },
-  "arm6axis": {
-    "title": "6-Axis Robotic Arm",
-    "desc": "Equipped with complex trajectory control capabilities, suitable for welding, spraying, assembly and other industrial scenarios, supporting multi-degree-of-freedom collaborative operations.",
+  "za-mr3m": {
+    "title": "ZA-MR3M",
+    "desc": "ZA-MR3M is an innovative composite robot platform that deeply integrates a high-performance autonomous mobile base with a customized four-axis robotic arm. By introducing a long-travel lift axis, it addresses the classic reach-up and reach-down limitations of ordinary mobile robots for cross-area and multi-height workflows.",
     "features": [
-      "Six-degree-of-freedom design, flexibly handling complex processes",
-      "High-precision trajectory control with smooth motion",
-      "Support for various end-effector and sensor integrations",
-      "Open programming and control interfaces",
-      "High reliability, adapting to harsh industrial environments",
-      "AI-assisted programming, lowering usage barriers"
-    ],
-    "cases": {
-      "automotiveWelding": {
-        "title": "Automotive Parts Welding",
-        "desc": "Applied in automotive manufacturing for high-precision automatic welding."
+      {
+        "title": "Mobile Base for Full-Area Reach",
+        "desc": "The high-precision mobile base acts as the robot arm’s legs, bringing autonomous navigation and obstacle avoidance so the operating range can extend across the workshop or laboratory."
       },
-      "sprayingAssembly": {
-        "title": "Spraying and Assembly",
-        "desc": "Achieve automatic spraying and assembly operations in home appliance and machinery industries."
+      {
+        "title": "Simplified Architecture, Better Value",
+        "desc": "The lift-plus-three-rotation configuration is optimized for logistics handling and planar operations, reducing system complexity and hardware cost while improving reliability."
       }
-    },
-    "scenes": [
-      "Automotive Manufacturing",
-      "Home Appliance Assembly",
-      "Mechanical Processing"
     ],
-    "params": {
-      "repeatPositioningAccuracy": {
-        "key": "Repeat Positioning Accuracy",
-        "value": "±0.03mm"
-      },
-      "maxLoad": {
-        "key": "Maximum Load",
-        "value": "3kg"
-      },
-      "degreesOfFreedom": {
-        "key": "Degrees of Freedom",
-        "value": "6"
-      },
-      "armReach": {
-        "key": "Arm Reach",
-        "value": "540.5mm"
-      },
-      "workingRadius": {
-        "key": "Working Radius",
-        "value": "540.5mm"
-      },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "180°/s (single joint)"
-      },
-      "driveMethod": {
-        "key": "Drive Method",
-        "value": "Integrated robotic joint"
-      },
-      "controlSystem": {
-        "key": "Control System",
-        "value": "Dedicated 6-axis controller"
-      },
-      "programmingMethod": {
-        "key": "Programming Method",
-        "value": "Teaching programming + offline programming"
-      },
-      "communicationInterface": {
-        "key": "Communication Interface",
-        "value": "Ethernet"
-      },
-      "protectionLevel": {
-        "key": "Protection Level",
-        "value": "IP54"
-      },
-      "workingTemperature": {
-        "key": "Working Temperature",
-        "value": "0°C~60°C"
-      },
-      "powerSpec": {
-        "key": "Power Specification",
-        "value": "DC48V"
-      },
-      "installationMethod": {
-        "key": "Installation Method",
-        "value": "Floor mounting/inverted mounting/side mounting"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "Product Name", "value": "Composite Lift Robot" },
+      { "key": "Model", "value": "ZA-MR3M" },
+      { "key": "Overall Dimensions", "value": "674(L)×456(W)×1408(H)mm (folded)" },
+      { "key": "Weight", "value": "100kg" },
+      { "key": "Travel Speed", "value": "0.1~1.2m/s" },
+      { "key": "Max Acceleration", "value": "0.5m/s²" },
+      { "key": "Navigation", "value": "LiDAR SLAM" },
+      { "key": "Runtime", "value": "6h" },
+      { "key": "Lift Travel", "value": "750mm" },
+      { "key": "Charging Supply", "value": "DC 48V (charging dock optional)" },
+      { "key": "Safety Protection", "value": "Laser scanning avoidance, vision avoidance, emergency stop" },
+      { "key": "External Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" }
+    ]
   },
-  "dualArmHumanoid": {
-    "title": "Dual-Arm Humanoid Robot",
-    "desc": "Equipped with dual-arm collaboration capabilities, suitable for complex assembly, service and other high-flexibility operation requirements, supporting multi-modal perception and intelligent interaction.",
+  "za-mr3t": {
+    "title": "ZA-MR3T",
+    "desc": "ZA-MR3T is a highly integrated humanoid-style manipulation platform that combines a mobile base, lift axis, robotic arms, and vision cameras. With embodied intelligence, it targets human-like, high-precision, all-scenario intelligent operation.",
     "features": [
-      "Dual-arm high-flexibility collaboration, simulating human operations",
-      "Multi-modal perception and intelligent decision-making",
-      "Support for various end tools and sensor integrations",
-      "Open software platform for easy secondary development",
-      "Safety protection and human-robot collaboration design",
-      "Natural language interaction with intelligent task understanding"
-    ],
-    "cases": {
-      "complexAssembly": {
-        "title": "Complex Assembly Operations",
-        "desc": "Achieve high-flexibility automated assembly in 3C electronics, precision manufacturing and other industries."
+      {
+        "title": "Humanoid-Style Operation",
+        "desc": "Inspired by human arm motion logic, it supports flexible multi-posture and multi-angle operation for complex bending, obstacle avoidance, precision assembly, and dexterous grasping tasks."
       },
-      "serviceDemo": {
-        "title": "Service and Demonstration Robot",
-        "desc": "Applied in exhibition halls, education and other scenarios for intelligent service and human-robot interaction."
+      {
+        "title": "High Integration",
+        "desc": "By integrating the mobile base, lift axis, robotic arms, and vision cameras into one compact system, it breaks spatial limits and supports cross-area workflows from factory lines to labs and service scenarios."
+      },
+      {
+        "title": "Embodied Intelligence",
+        "desc": "With environmental perception from vision cameras and embodied-intelligence algorithms, it closes the loop from perception to decision to action for target recognition, path planning, grasping, transport, and assembly."
       }
-    },
-    "scenes": [
-      "Precision Assembly",
-      "Education and Demonstration",
-      "Intelligent Service"
     ],
-    "params": {
-      "repeatPositioningAccuracy": {
-        "key": "Repeat Positioning Accuracy",
-        "value": "±0.05mm"
-      },
-      "maxLoad": {
-        "key": "Maximum Load",
-        "value": "3kg"
-      },
-      "degreesOfFreedom": {
-        "key": "Degrees of Freedom",
-        "value": "15 (dual arms)"
-      },
-      "armReach": {
-        "key": "Single Arm Reach",
-        "value": "840.5mm"
-      },
-      "workingRadius": {
-        "key": "Working Radius",
-        "value": "540.5mm"
-      },
-      "maxSpeed": {
-        "key": "Maximum Speed of Single Joint",
-        "value": "180°/s"
-      },
-      "verticalStroke": {
-        "key": "Vertical Stroke",
-        "value": "800mm"
-      },
-      "verticalAxisMaxSpeed": {
-        "key": "Vertical Axis Maximum Speed",
-        "value": "200mm/s"
-      },
-      "driveMethod": {
-        "key": "Drive Method",
-        "value": "Integrated robotic joint/servo motor"
-      },
-      "programmingMethod": {
-        "key": "Programming Method",
-        "value": "Teaching programming + offline programming"
-      },
-      "communicationInterface": {
-        "key": "Communication Interface",
-        "value": "Ethernet"
-      },
-      "devInterface": {
-        "key": "Development Interface",
-        "value": "ROS2, Python, C++"
-      },
-      "networkConnection": {
-        "key": "Network Connection",
-        "value": "WiFi, Ethernet"
-      },
-      "visionSystem": {
-        "key": "Vision System",
-        "value": "Depth camera"
-      },
-      "voiceInteraction": {
-        "key": "Voice Interaction",
-        "value": "Multi-language speech recognition and synthesis"
-      },
-      "protectionLevel": {
-        "key": "Protection Level",
-        "value": "IP54"
-      },
-      "workingTemperature": {
-        "key": "Working Temperature",
-        "value": "0°C~60°C"
-      },
-      "chargingMethod": {
-        "key": "Charging Method",
-        "value": "Automatic charging station docking"
-      },
-      "batteryLife": {
-        "key": "Battery Life",
-        "value": "6-8 hours"
-      },
-      "movingSpeed": {
-        "key": "Moving Speed",
-        "value": "0.5m/s"
-      },
-      "baseType": {
-        "key": "Base Type",
-        "value": "Mobile base/Fixed base"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "Product Name", "value": "Embodied Dual-Arm Robot" },
+      { "key": "Model", "value": "ZA-MR3T" },
+      { "key": "Overall Dimensions", "value": "674(L)×575(W)×1408(H)mm (folded)" },
+      { "key": "Weight", "value": "120kg" },
+      { "key": "Travel Speed", "value": "0.1~1.2m/s" },
+      { "key": "Max Acceleration", "value": "0.5m/s²" },
+      { "key": "Navigation", "value": "LiDAR SLAM" },
+      { "key": "Runtime", "value": "5h" },
+      { "key": "Lift Travel", "value": "750mm" },
+      { "key": "Charging Supply", "value": "DC 48V (charging dock optional)" },
+      { "key": "Safety Protection", "value": "Laser scanning avoidance, vision avoidance, emergency stop" },
+      { "key": "External Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" }
+    ]
   },
-  "mobileRobot": {
-    "title": "Mobile Robot",
-    "desc": "Autonomous navigation with multi-sensor fusion, suitable for factories, warehouses and other multi-scenario intelligent logistics, achieving efficient automated handling.",
+  "za-rmvr": {
+    "title": "ZA-RMVR",
+    "desc": "The embodied VR teleoperation development platform integrates a lift axis, dual robotic arms, dexterous end effectors, a core controller, and immersive VR devices into one teaching and research platform built around human-robot collaboration and data-driven workflows.",
     "features": [
-      "High-precision laser SLAM navigation with autonomous path planning",
-      "Multi-sensor fusion obstacle avoidance, safe and reliable",
-      "Support for various cargo pallet and rack docking",
-      "Remote monitoring and intelligent scheduling platform",
-      "Modular design for easy maintenance and expansion",
-      "5G network support with real-time data transmission"
-    ],
-    "cases": {
-      "factoryLogistics": {
-        "title": "Factory Intelligent Logistics Handling",
-        "desc": "Achieve automatic handling of raw materials and finished products in manufacturing factories, improving logistics efficiency."
+      {
+        "title": "Immersive Intuitive Teleoperation",
+        "desc": "Based on VR vision and pose capture, operators can use natural intuitive movements to achieve high-precision, low-latency coordinated control of both arms."
       },
-      "warehouseAutomation": {
-        "title": "Warehouse Automation",
-        "desc": "Applied in large warehouses for automatic goods sorting and delivery."
+      {
+        "title": "High-Quality Embodied Data Capture",
+        "desc": "It records multimodal operational data such as vision, pose, and torque to support embodied foundation models and imitation learning with high-quality expert datasets."
+      },
+      {
+        "title": "Flexible Operation Across Large Spaces",
+        "desc": "The lift axis dynamically adjusts working height, extending operation from desktops to multi-layer shelving and other multi-dimensional task spaces."
       }
-    },
-    "scenes": [
-      "Manufacturing Factory Logistics",
-      "Smart Warehousing",
-      "Hospital Material Delivery"
     ],
-    "params": {
-      "maxLoad": {
-        "key": "Maximum Load",
-        "value": "70kg"
+    "params": [
+      { "key": "Product Name", "value": "Embodied Dual-Arm VR Teleoperation Development Platform" },
+      { "key": "Model", "value": "ZA-RMVR" },
+      { "key": "Platform Dimensions", "value": "674(L)×575(W)×1408(H)mm (folded)" },
+      { "key": "Rated Payload", "value": "Single-arm 1kg, dual-arm 2kg" },
+      { "key": "DOF", "value": "7" },
+      { "key": "Working Radius", "value": "640mm" },
+      { "key": "Runtime", "value": "5h" },
+      { "key": "Charging Supply", "value": "DC 48V (charging dock optional)" },
+      { "key": "External Interface", "value": "1× Gigabit Ethernet, 1× USB3.0; 10 digital inputs, 10 digital outputs (PNP)" },
+      { "key": "Safety Protection", "value": "Collision detection" },
+      { "key": "Configuration", "value": "1× ZA-MR3T embodied dual-arm robot, 2× RH56DFTP dexterous hands, 1× Meta Quest VR headset, 2× controllers" }
+    ]
+  },
+  "za-rmps": {
+    "title": "ZA-RMPS",
+    "desc": "Embodied dual-arm master-slave teleoperation development platform.",
+    "features": [
+      {
+        "title": "Real force feedback",
+        "desc": "The master-slave architecture feeds contact torque back in real time so operators can sense resistance and stiffness during precise contact tasks."
       },
-      "ratedLoad": {
-        "key": "Rated Load",
-        "value": "30kg"
+      {
+        "title": "High-fidelity mapping",
+        "desc": "Matching master and slave arm structures support joint-level one-to-one mapping with low drift."
       },
-      "maxSpeed": {
-        "key": "Maximum Speed",
-        "value": "1m/s"
-      },
-      "rangingAccuracy": {
-        "key": "Ranging Accuracy",
-        "value": "±2mm"
-      },
-      "navigationMethod": {
-        "key": "Navigation Method",
-        "value": "Laser SLAM + vision fusion"
-      },
-      "communicationInterface": {
-        "key": "Communication Interface",
-        "value": "Ethernet, WiFi"
-      },
-      "chargingMethod": {
-        "key": "Charging Method",
-        "value": "Automatic charging station docking"
-      },
-      "workingTemperature": {
-        "key": "Working Temperature",
-        "value": "0°C~40°C"
-      },
-      "workingHumidity": {
-        "key": "Working Humidity",
-        "value": "5%~85%"
-      },
-      "protectionLevel": {
-        "key": "Protection Level",
-        "value": "IP54"
-      },
-      "size": {
-        "key": "Size",
-        "value": "Diameter 452mm, Height 240mm"
-      },
-      "selfWeight": {
-        "key": "Self Weight",
-        "value": "20kg"
-      },
-      "staticBatteryLife": {
-        "key": "Static Battery Life",
-        "value": "8 hours"
-      },
-      "noLoadBatteryLife": {
-        "key": "No-load Battery Life",
-        "value": "7 hours"
-      },
-      "fullLoadBatteryLife": {
-        "key": "Full-load Battery Life",
-        "value": "5 hours"
-      },
-      "climbingAbility": {
-        "key": "Climbing Ability",
-        "value": "≤3°"
-      },
-      "obstacleHeight": {
-        "key": "Obstacle Height",
-        "value": "5mm"
-      },
-      "ditchDepth": {
-        "key": "Ditch Depth",
-        "value": "5mm"
+      {
+        "title": "Fatigue-aware design",
+        "desc": "The physical master arm provides support and gravity compensation for longer data-collection and operation sessions."
       }
-    },
-    "downloads": {}
+    ],
+    "params": [
+      { "key": "Product Name", "value": "Embodied Dual-Arm Master-Slave Teleoperation Development Platform" },
+      { "key": "Model", "value": "ZA-RMPS" },
+      { "key": "Platform Dimensions", "value": "1000(L)×1000(W)×850(H)mm (folded)" },
+      { "key": "Rated Payload", "value": "Single-arm 1kg, dual-arm 2kg" },
+      { "key": "Operating Voltage", "value": "DC 48V" },
+      { "key": "Master/Slave Arm DOF", "value": "7" },
+      { "key": "Working Radius", "value": "640mm" },
+      { "key": "External Interface", "value": "1× Gigabit Ethernet, 1× USB3.0; 10 digital inputs, 10 digital outputs (PNP)" },
+      { "key": "Safety Protection", "value": "Collision detection" },
+      { "key": "Configuration", "value": "2× zero-drift robot arms, 2× RH56DFTP dexterous hands, 2× Eyou robot arms, 1× platform" }
+    ]
+  },
+  "za-rdp": {
+    "title": "ZA-RDP",
+    "desc": "Drawing robot platform.",
+    "features": [
+      {
+        "title": "Teaching and research platform",
+        "desc": "Suitable for trajectory teaching, drawing demos, algorithm validation and motion-planning experiments."
+      },
+      {
+        "title": "Built on a 6-axis arm",
+        "desc": "Uses a 6-DOF robotic arm to balance motion flexibility with path control."
+      },
+      {
+        "title": "Clear platform composition",
+        "desc": "The arm, pen module, drawing board and optical platform make experiment setup and demos easier to organize."
+      }
+    ],
+    "params": [
+      { "key": "Product Name", "value": "Drawing Robot" },
+      { "key": "Model", "value": "ZA-RDP" },
+      { "key": "Platform Dimensions", "value": "800(L)×300(W)×500(H)mm (folded)" },
+      { "key": "DOF", "value": "6" },
+      { "key": "Weight", "value": "26kg" },
+      { "key": "Repeatability", "value": "±0.03mm" },
+      { "key": "Working Radius", "value": "540.5mm (excluding pen module)" },
+      { "key": "Joint Motion Range", "value": "J1±360°, J2±175°, J3±175°, J4±175°, J5±360°, J6±360°" },
+      { "key": "Max Joint Speed", "value": "J1-J6 180°/s" },
+      { "key": "Max End-Effector Linear Speed", "value": "1.5m/s (excluding hand or gripper)" },
+      { "key": "Interface", "value": "1× Ethernet" },
+      { "key": "Communication Protocol", "value": "EtherCAT" },
+      { "key": "Power Supply", "value": "DC 48V" },
+      { "key": "Average Power", "value": "150W" },
+      { "key": "Peak Power", "value": "750W" },
+      { "key": "Safety Protection", "value": "Collision detection" },
+      { "key": "Configuration", "value": "1× ZA-R3D6 6-axis robotic arm, 1× pen module, 1× drawing board, 1× optical platform" }
+    ]
+  },
+  "za-zg100": {
+    "title": "ZA-ZG100",
+    "desc": "High-performance controller.",
+    "features": [
+      {
+        "title": "RK3588 integrated control",
+        "desc": "Built on an 8-core 64-bit RK3588 processor with an onboard NPU for AI vision workloads and motion control in one controller."
+      },
+      {
+        "title": "EtherCAT real-time coordination",
+        "desc": "Uses EtherCAT and a 1ms control cycle to support synchronized multi-axis servo control."
+      },
+      {
+        "title": "Low-jitter control",
+        "desc": "Control jitter can be compressed to 5 microseconds for scenarios that require smoother trajectories and tighter timing."
+      },
+      {
+        "title": "Compact integrated architecture",
+        "desc": "The integrated control architecture helps reduce dependence on external IPC hardware and lowers integration complexity."
+      }
+    ],
+    "params": [
+      { "key": "CPU", "value": "8-core 64-bit A76+A55, 2.4GHz" },
+      { "key": "GPU", "value": "ARM Mali-G610 MP4, 4-core GPU" },
+      { "key": "NPU", "value": "6 Tops" },
+      { "key": "Memory", "value": "16GB" },
+      { "key": "Storage", "value": "128GB" },
+      { "key": "Network Ports", "value": "EtherCAT×1, Ethernet×1" },
+      { "key": "USB", "value": "USB3.0×2" },
+      { "key": "Power / Expansion", "value": "12V, Type-C" },
+      { "key": "Display Interface", "value": "HDMI×1" },
+      { "key": "Other Interfaces", "value": "RS232×1, RS485×1, CAN×1" }
+    ]
+  },
+  "rail": {
+    "title": "Rail Platform",
+    "desc": "Used to extend long-travel linear motion.",
+    "features": [
+      {
+        "title": "Adds long linear travel",
+        "desc": "A travel length of 1750mm helps extend the robot's working range along a straight path."
+      },
+      {
+        "title": "Balances speed and positioning",
+        "desc": "A maximum speed of 500mm/s and positioning accuracy of 0.21mm/300mm fit linked transfer workflows."
+      },
+      {
+        "title": "Modular integration",
+        "desc": "Gigabit Ethernet and USB interfaces make it easier to use as an add-on module in an existing system."
+      }
+    ],
+    "params": [
+      { "key": "Overall Dimensions", "value": "2229(L)×280(W)×146(H)mm" },
+      { "key": "Travel", "value": "1750mm" },
+      { "key": "Max Travel Speed", "value": "500mm/s" },
+      { "key": "Max Acceleration Time", "value": "≥0.3s" },
+      { "key": "Positioning Accuracy", "value": "0.21mm/300mm" },
+      { "key": "Interface", "value": "1× Gigabit Ethernet, 1× USB3.0" },
+      { "key": "Weight", "value": "77kg" }
+    ]
+  },
+  "rotating-platform": {
+    "title": "Rotating Platform",
+    "desc": "Used to add rotational freedom to the workstation.",
+    "features": [
+      {
+        "title": "Adds transfer rotation",
+        "desc": "Supports ±360-degree rotation for stations that need angular switching and transfer alignment."
+      },
+      {
+        "title": "Stable rotation accuracy",
+        "desc": "Positioning accuracy of ≤1 arcmin and repeatability of ≤10 arcsec fit posture-adjustment tasks."
+      },
+      {
+        "title": "Compact expansion module",
+        "desc": "Useful as an accessory after the main robot body is chosen, helping extend station adaptability."
+      }
+    ],
+    "params": [
+      { "key": "Overall Dimensions", "value": "433(L)×280(W)×238(H)mm" },
+      { "key": "Max Speed", "value": "30rpm" },
+      { "key": "Max Acceleration Time", "value": "≥0.3s" },
+      { "key": "Rotation Capability", "value": "±360°" },
+      { "key": "Reduction Ratio", "value": "50" },
+      { "key": "Positioning Accuracy", "value": "≤1 arcmin" },
+      { "key": "Repeatability", "value": "≤10 arcsec" },
+      { "key": "Interface", "value": "1× Gigabit Ethernet, 1× USB3.0" },
+      { "key": "Weight", "value": "42kg" }
+    ]
+  },
+  "za-r3m-left": {
+    "title": "ZA-R3M(L) Rail Platform-Integrated",
+    "desc": "R-series ZA-R3M configuration integrated with a rail platform for extended long-travel linear operation.",
+    "features": [
+      {
+        "title": "Extends linear coverage",
+        "desc": "Combines ZA-R3M with a rail platform to expand straight-line operating range."
+      },
+      {
+        "title": "Fits cross-station linkage",
+        "desc": "Suitable for cross-station pick-and-place, transfer and continuous linear workflows."
+      },
+      {
+        "title": "Clear combination path",
+        "desc": "A practical option when the robot body is suitable but the straight-line travel range is not enough."
+      }
+    ],
+    "params": [
+      { "key": "Base Combination", "value": "ZA-R3M + Rail Platform" },
+      { "key": "Category", "value": "R-series linked variant" },
+      { "key": "Linked Module", "value": "Rail Platform" },
+      { "key": "Typical Scenario", "value": "Cross-station linear pick-and-place and linked transfer" },
+      { "key": "Selection Focus", "value": "Rail Platform travel, takt time, and overall footprint" }
+    ]
+  },
+  "za-r3m-right": {
+    "title": "ZA-R3M(R) Rotary-Platform Integrated",
+    "desc": "R-series ZA-R3M configuration integrated with a rotating platform for transfer and orientation adjustment.",
+    "features": [
+      {
+        "title": "Adds posture adjustment",
+        "desc": "Combines ZA-R3M with a rotating platform for tasks that need angle switching during transfer."
+      },
+      {
+        "title": "Fits rotation-based stations",
+        "desc": "Suitable for multi-angle transfer, posture switching and station-direction adjustment."
+      },
+      {
+        "title": "Selection tied to takt and layout",
+        "desc": "Useful when rotation precision, takt requirements and station layout drive the combination choice."
+      }
+    ],
+    "params": [
+      { "key": "Base Combination", "value": "ZA-R3M + Rotating Platform" },
+      { "key": "Category", "value": "R-series linked variant" },
+      { "key": "Linked Module", "value": "Rotating Platform" },
+      { "key": "Typical Scenario", "value": "Multi-angle transfer and posture adjustment" },
+      { "key": "Selection Focus", "value": "Rotation precision, takt time, and station layout" }
+    ]
   }
 }

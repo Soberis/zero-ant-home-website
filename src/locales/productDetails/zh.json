@@ -1,802 +1,533 @@
 {
-  "multiOsVm": {
-    "title": "多OS混合部署嵌入式虚拟机",
-    "desc": "使用高级语言Rust编写的Type-1型Hypervisor，面向资源受限的嵌入式系统，支持多OS虚拟机并行运行，在提高资源利用率的同时保障虚拟机自身的实时性、虚拟机间的隔离性与系统整体的可靠性。<br><strong>可靠性</strong>：选用Rust作为编程语言，利用语言本身的安全特性提升代码质量，从语言层面保障系统软件的可靠性；<br><strong>隔离性</strong>：从CPU、中断、设备、内存四个方面对系统资源进行隔离，保证虚拟机无法越界访问不属于当前虚拟机的资源；<br><strong>实时性</strong>：通过中断直通机制以及中介传递设备机制，有效降低虚拟化对实时性能的影响。",
+  "za-r3-x": {
+    "title": "ZA-R3 / ZA-R3X",
+    "desc": "SCARA 精密传送平台，ZA-R3 与 ZA-R3X 主要按 SCARA 臂长区分，适合高速取放与狭小空间工位。",
     "features": [
-      "多操作系统并行运行，资源高效隔离",
-      "支持实时操作系统与通用操作系统混合部署",
-      "嵌入式虚拟化技术，低开销高安全",
-      "灵活的系统切换与热插拔能力",
-      "支持多种主流工业协议与接口",
-      "云边协同管理，远程监控与维护"
+      {
+        "title": "双臂长规格可选",
+        "desc": "提供 ZA-R3 450mm 与 ZA-R3X 592mm 两种水平范围，便于按工位覆盖范围选择。"
+      },
+      {
+        "title": "适合高速取放节拍",
+        "desc": "最大水平 / 垂直速度可达 1500mm/s 与 500mm/s，适合高频取放与传送场景。"
+      },
+      {
+        "title": "重复定位稳定",
+        "desc": "重复定位精度为 ±0.05mm，适合对取放一致性要求较高的工位。"
+      },
+      {
+        "title": "控制接口完整",
+        "desc": "支持 EtherCAT、千兆网口、USB 及 10 入 10 出 I/O，便于整机集成与联调。"
+      }
     ],
-    "cases": {
-      "smartManufacturing": {
-        "title": "智能制造产线升级",
-        "desc": "帮助客户实现设备异构系统统一管理，提升产线自动化水平。"
-      },
-      "industrialGateway": {
-        "title": "工业网关虚拟化",
-        "desc": "在单一硬件平台上部署多套系统，降低硬件成本与维护难度。"
-      }
-    },
-    "scenes": [
-      "车载系统",
-      "智能制造产线",
-      "工业自动化设备",
-      "工业网关与边缘计算",
-      "无人机等混合关键系统"
-    ],
-    "params": {
-      "realTimeGuarantee": {
-        "key": "实时虚拟机最大中断时延",
-        "value": "833ns"
-      },
-      "switchTime": {
-        "key": "实时虚拟机进程切换开销",
-        "value": "256个时钟周期"
-      },
-      "securityLevel": {
-        "key": "稳定性",
-        "value": "7*24小时，RTOS最大中断时延 4.62us"
-      },
-      "memoryManagement": {
-        "key": "内核间通信速率",
-        "value": "10MB测试数据的平均写速率为3.226Gbps、平均读速率为7.631Gbps"
-      },
-      "vmCount": {
-        "key": "虚拟机数量",
-        "value": "最多支持3个并行虚拟机"
-      },
-      "supportedOSKernels": {
-        "key": "支持操作系统内核",
-        "value": "openEuler、 Ubuntu、 Zephyr、 Sylixos、 Arceos"
-      },
-      "supportedHardware": {
-        "key": "适配硬件",
-        "value": "Firefly ROC-RK3588S-PC、NVIDIA Jetson TX2、Raspberry Pi 4 Model B、QEMU模拟器"
-      },
-      "virtualizationTech": {
-        "key": "全模拟设备支持",
-        "value": "模拟GIC、模拟IOMMU"
-      },
-      "resourceIsolation": {
-        "key": "Virtio模拟设备支持",
-        "value": "Virtio Console、Virtio BLK、Virtio Net、Virtio GPIO"
-      }
-    },
-    "downloads": {
-      "whitepaper": {
-        "name": "多OS混合部署嵌入式虚拟机产业白皮书.pdf",
-        "url": "/downloads/多OS混合部署嵌入式虚拟机产业白皮书.pdf"
-      }
-    }
+    "params": [
+      { "key": "SCARA 臂长", "value": "ZA-R3：450mm；ZA-R3X：592mm 水平范围（夹爪增加160mm）" },
+      { "key": "最大额定负载", "value": "3kg" },
+      { "key": "最大水平 / 垂直速度", "value": "1500mm/s / 500mm/s" },
+      { "key": "重复定位精度", "value": "±0.05mm" },
+      { "key": "最大加速度", "value": "2500mm/s²" },
+      { "key": "关节1（Z轴）", "value": "400 / 750 / 1160mm" },
+      { "key": "关节2", "value": "±93°" },
+      { "key": "关节3", "value": "±168°" },
+      { "key": "关节4", "value": "±360°" },
+      { "key": "接口", "value": "1×千兆网口，1×USB3.0接口" },
+      { "key": "I/O输入输出", "value": "10路I/O输入，10路I/O输出（PNP）" },
+      { "key": "通讯协议", "value": "EtherCAT" },
+      { "key": "额定电压", "value": "DC 48V" },
+      { "key": "额定功率", "value": "800W" },
+      { "key": "重量（不含夹爪）", "value": "400mm Z轴：24kg / 26kg；750mm Z轴：31.5kg / 33.5kg；1160mm Z轴：39.5kg / 41.5kg" }
+    ]
   },
-  "industrialRtos": {
-    "title": "国产工业实时操作系统",
-    "desc": "<br><strong>实时操作系统内核</strong>：优化嵌入式系统实时性，研发轻量级安全容器隔离技术，增强内核可抢占性及多核调度能力，并支持国产CPU和智能算法框架。<br><strong>运动控制算法与运行时环境</strong>：突破高精度柔顺控制、智能运动规划（避障/能耗优化）及模块化开放式运行时环境，保障复杂场景下的高实时性与可靠性。<br><strong>组件化功能库与开发环境</strong>：构建标准化工业模型库（基础控制、智能算法）、可视化编程工具及统一接口协议，支持模块化开发与多语言集成，提升工业应用开发效率。",
+  "za-r3l-m-h": {
+    "title": "ZA-R3L / ZA-R3M / ZA-R3H",
+    "desc": "SCARA 升降平台，ZA-R3L / ZA-R3M / ZA-R3H 主要按立柱高度与 Z 轴行程区分。",
     "features": [
-      "毫秒级实时响应，满足工业控制需求",
-      "自主可控，安全可审计，适配国产芯片",
-      "丰富的工业协议与驱动支持",
-      "高可靠性与容错机制，保障系统稳定运行",
-      "灵活的任务调度与资源管理",
-      "云端远程监控与维护能力"
+      {
+        "title": "L / M / H 三档分级",
+        "desc": "同系列按立柱高度与 Z 轴行程区分，便于快速匹配不同工位高度。"
+      },
+      {
+        "title": "面向上下料高度差",
+        "desc": "适合需要竖向补偿的取放场景，可按上下料行程需求选择型号。"
+      },
+      {
+        "title": "延续 SCARA 紧凑结构",
+        "desc": "在保留 SCARA 平台紧凑性的基础上补足竖向作业能力，适合空间受限工位。"
+      }
     ],
-    "cases": {
-      "highEndEquipment": {
-        "title": "高端装备控制系统",
-        "desc": "为高端数控机床、工业机器人等提供高可靠实时操作系统底座。"
-      },
-      "domesticReplacement": {
-        "title": "国产化替代",
-        "desc": "助力客户实现关键工业系统的国产化自主可控。"
-      }
-    },
-    "scenes": ["工业自动化控制", "机器人控制系统", "高端装备制造"],
-    "params": {
-      "realTimeResponse": {
-        "key": "实时响应",
-        "value": "中断响应<10us"
-      },
-      "securityLevel": {
-        "key": "安全等级",
-        "value": "EAL4+"
-      },
-      "maxTasks": {
-        "key": "最大任务数",
-        "value": "256个并发任务"
-      },
-      "bootTime": {
-        "key": "启动时间",
-        "value": "< 500ms"
-      },
-      "supportedArch": {
-        "key": "支持架构",
-        "value": "ARM, x86, RISC-V"
-      },
-      "memoryManagement": {
-        "key": "内存管理",
-        "value": "MPU + 动态内存分配"
-      },
-      "fileSystem": {
-        "key": "文件系统",
-        "value": "FAT32, YAFFS2, LittleFS"
-      },
-      "networkStack": {
-        "key": "网络协议栈",
-        "value": "TCP/IP, UDP, MQTT, CoAP"
-      },
-      "deviceDrivers": {
-        "key": "设备驱动",
-        "value": "UART, SPI, I2C, CAN, Ethernet"
-      },
-      "powerManagement": {
-        "key": "功耗管理",
-        "value": "多级休眠模式"
-      },
-      "securityFeatures": {
-        "key": "安全特性",
-        "value": "代码签名 + 安全启动"
-      },
-      "debugTools": {
-        "key": "调试工具",
-        "value": "GDB + 系统跟踪"
-      },
-      "devEnvironment": {
-        "key": "开发环境",
-        "value": "Eclipse + VS Code插件"
-      },
-      "certificationStandard": {
-        "key": "认证标准",
-        "value": "IEC 61508 SIL3"
-      },
-      "compatibility": {
-        "key": "兼容性",
-        "value": "支持主流工业协议"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "产品形态", "value": "SCARA 升降平台" },
+      { "key": "型号分级", "value": "ZA-R3L / ZA-R3M / ZA-R3H" },
+      { "key": "核心差异", "value": "立柱高度 / Z 轴行程" },
+      { "key": "选型建议", "value": "优先按工位高度与上下料行程确认" }
+    ]
   },
-  "airos": {
-    "title": "AiROS机器人操作系统",
-    "desc": "致力于打造'开箱即用'的具身机器人基础系统平台，让机器人走进千行百业。打造一套机器人界的Android系统，装进机器人本身，赋予TA灵魂。",
+  "za-r3d6": {
+    "title": "ZA-R3D6",
+    "desc": "六自由度机械臂，适合复杂姿态和轨迹控制任务。",
     "features": [
-      "安全性：Rust语言安全底座保障",
-      "集成化：并行运行的混合部署技术",
-      "实时性：实时性最大中断抖动 ≤ 10us",
-      "控制器成本降低50%",
-      "机器人研发周期缩减70%以上",
-      "支持18轴同时控制，重复定位精度达到0.02mm"
-    ],
-    "cases": {
-      "semiconductorWafer": {
-        "title": "半导体晶圆传送",
-        "desc": "已出货200余台，帮助客户从维修厂转型为高科技制造商，连续工作9万小时无损坏。"
+      {
+        "title": "六自由度姿态更灵活",
+        "desc": "适合需要多角度姿态调整与复杂轨迹控制的作业流程。"
       },
-      "medicalLabAutomation": {
-        "title": "医药实验室自动化",
-        "desc": "实现国外设备本土化替代，成本从30万降至14万，服务华智生物、珀金埃尔默等客户。"
+      {
+        "title": "540.5mm 工作半径",
+        "desc": "在紧凑本体尺寸下提供较好的作业覆盖范围，适合教学、验证与轻量作业。"
       },
-      "foodDeliveryRobot": {
-        "title": "餐饮配送机器人",
-        "desc": "与美团、普渡合作，构建'消费-生产-配送'黄金三角闭环。"
+      {
+        "title": "重复定位精度 ±0.03mm",
+        "desc": "适合对动作一致性和定位精度要求较高的实验与作业场景。"
+      },
+      {
+        "title": "安装方式灵活",
+        "desc": "支持任意角度安装并具备 IP54 防护等级，便于适配不同设备布局。"
       }
-    },
-    "scenes": [
-      "半导体加工",
-      "生物医药实验室",
-      "智能餐饮",
-      "社区配送",
-      "工业自动化",
-      "智能制造"
     ],
-    "params": {
-      "controlPrecision": {
-        "key": "控制精度",
-        "value": "重复定位精度0.02mm"
-      },
-      "realTime": {
-        "key": "实时性",
-        "value": "最大中断抖动 ≤ 10us"
-      },
-      "supportedAxes": {
-        "key": "支持轴数",
-        "value": "18轴同时控制"
-      },
-      "securityCertification": {
-        "key": "安全认证",
-        "value": "信息安全EAL5+认证"
-      },
-      "memoryUsage": {
-        "key": "内存占用",
-        "value": "≤ 512MB"
-      },
-      "bootTime": {
-        "key": "启动时间",
-        "value": "≤ 3秒"
-      },
-      "programmingLanguage": {
-        "key": "编程语言",
-        "value": "Rust + C/C++"
-      },
-      "supportedArch": {
-        "key": "支持架构",
-        "value": "ARM64, x86_64, RISC-V"
-      },
-      "communicationProtocol": {
-        "key": "通信协议",
-        "value": "EtherCAT, CAN, Modbus, OPC UA"
-      },
-      "visionAlgorithm": {
-        "key": "视觉算法",
-        "value": "深度学习目标检测与跟踪"
-      },
-      "multiModalFusion": {
-        "key": "多模态融合",
-        "value": "视觉+激光+IMU+力觉"
-      },
-      "cloudConnection": {
-        "key": "云端连接",
-        "value": "支持5G/WiFi6远程监控"
-      },
-      "workingTemperature": {
-        "key": "工作温度",
-        "value": "-20°C ~ +60°C"
-      },
-      "costOptimization": {
-        "key": "成本优化",
-        "value": "控制器成本降低50%"
-      },
-      "devEfficiency": {
-        "key": "开发效率",
-        "value": "研发周期缩减70%以上"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "自由度", "value": "6" },
+      { "key": "额定负载", "value": "3kg（不含手或夹爪）" },
+      { "key": "重量", "value": "13kg（不含手或夹爪）" },
+      { "key": "重复定位精度", "value": "±0.03mm" },
+      { "key": "最大工作半径", "value": "540.5mm（不含手或夹爪）" },
+      { "key": "关节运动范围", "value": "J1±360°，J2±175°，J3±175°，J4±175°，J5±360°，J6±360°" },
+      { "key": "关节最大速度", "value": "J1-J6 180°/s" },
+      { "key": "末端最大线速度", "value": "1.5m/s（不含手或夹爪）" },
+      { "key": "接口", "value": "1×网口" },
+      { "key": "通讯协议", "value": "EtherCAT" },
+      { "key": "供电电压", "value": "DC 48V" },
+      { "key": "平均功率", "value": "150W" },
+      { "key": "峰值功率", "value": "750W" },
+      { "key": "材质", "value": "铝合金" },
+      { "key": "工作环境温度", "value": "0~60℃" },
+      { "key": "安装方式", "value": "任意角度安装" },
+      { "key": "防护等级", "value": "IP54" }
+    ]
   },
-  "robotScheduler": {
-    "title": "移动机器人调度系统",
-    "desc": "支持多品牌、多类型移动机器人统一调度与协同作业，提升工厂自动化与物流效率。",
+  "za-r3t": {
+    "title": "ZA-R3T",
+    "desc": "具身智能双臂机器人平台。",
     "features": [
-      "多品牌机器人统一接入与管理",
-      "智能路径规划与动态避障",
-      "多机协同作业与任务分配",
-      "支持电梯、门禁等外部设备联动",
-      "实时监控与数据分析平台",
-      "云端部署，支持大规模集群管理"
+      {
+        "title": "双臂协同作业",
+        "desc": "单臂 7 自由度，适合抓取、搬运和双臂配合验证等任务。"
+      },
+      {
+        "title": "兼顾臂展与精度",
+        "desc": "臂展 640mm、重复定位精度 ±0.1mm，可覆盖常见桌面与工位级操作范围。"
+      },
+      {
+        "title": "升降行程可选",
+        "desc": "升降轴支持 400 / 750 / 1160mm，可按实验台面或工位高度选择。"
+      },
+      {
+        "title": "便于系统集成",
+        "desc": "支持 EtherCAT、千兆网口、USB 及 I/O 接口，适合联调与二次开发。"
+      }
     ],
-    "cases": {
-      "smartFactoryLogistics": {
-        "title": "智能工厂物流调度",
-        "desc": "实现多台机器人在复杂工厂环境下高效协同作业，提升物流自动化水平。"
-      },
-      "crossFloorDelivery": {
-        "title": "跨楼层配送",
-        "desc": "支持机器人与电梯、门禁系统联动，实现跨楼层物资配送。"
-      }
-    },
-    "scenes": ["智能工厂物流", "仓储自动化", "医院与写字楼配送"],
-    "params": {
-      "maxSchedulingScale": {
-        "key": "最大调度规模",
-        "value": "100台+"
-      },
-      "responseTime": {
-        "key": "响应时间",
-        "value": "≤100ms（任务分配）"
-      },
-      "availability": {
-        "key": "可用性",
-        "value": "99.9%系统可用性"
-      },
-      "systemCapacity": {
-        "key": "系统容量",
-        "value": "支持10万+任务/天"
-      },
-      "supportedBrands": {
-        "key": "支持机器人品牌",
-        "value": "10+主流品牌"
-      },
-      "pathPlanningAlgorithm": {
-        "key": "路径规划算法",
-        "value": "A*算法+动态避障"
-      },
-      "taskSchedulingStrategy": {
-        "key": "任务调度策略",
-        "value": "优先级+负载均衡"
-      },
-      "systemInterface": {
-        "key": "系统接口",
-        "value": "RESTful API, MQTT, OPC UA"
-      },
-      "externalDeviceSupport": {
-        "key": "支持外设联动",
-        "value": "电梯、门禁等"
-      },
-      "mapManagement": {
-        "key": "地图管理",
-        "value": "多层地图+实时更新"
-      },
-      "dataStorage": {
-        "key": "数据存储",
-        "value": "MySQL + Redis缓存"
-      },
-      "monitoringInterface": {
-        "key": "监控界面",
-        "value": "Web端+移动端APP"
-      },
-      "alarmMechanism": {
-        "key": "报警机制",
-        "value": "实时告警+邮件/短信通知"
-      },
-      "deploymentMethod": {
-        "key": "部署方式",
-        "value": "私有云/公有云/混合云"
-      },
-      "securityCertification": {
-        "key": "安全认证",
-        "value": "HTTPS + OAuth2.0"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "单臂自由度", "value": "7" },
+      { "key": "单臂额定负载", "value": "1kg" },
+      { "key": "单臂重量", "value": "13.5kg（不含手或夹爪）" },
+      { "key": "重复定位精度", "value": "±0.1mm" },
+      { "key": "臂展", "value": "640mm（不含手或夹爪）" },
+      { "key": "关节运动范围", "value": "J1±180°，J2±115°，J3±180°，J4±115°，J5±180°，J6±180°，J7±90°" },
+      { "key": "关节最大速度", "value": "J1-J7 180°/s" },
+      { "key": "升降轴运动范围", "value": "400 / 750 / 1160mm（可选）" },
+      { "key": "升降轴运动速度", "value": "400mm/s" },
+      { "key": "接口", "value": "1×千兆网口，1×USB3.0接口" },
+      { "key": "I/O输入输出", "value": "10路I/O输入，10路I/O输出（PNP）" },
+      { "key": "通讯协议", "value": "EtherCAT" },
+      { "key": "整体质量", "value": "55kg" },
+      { "key": "供电电压", "value": "DC 48V" },
+      { "key": "功率", "value": "最大综合功率≤750W，典型功率≤300W" },
+      { "key": "材质", "value": "铝合金" },
+      { "key": "工作环境", "value": "0~45℃" }
+    ]
   },
-  "gantry2d": {
-    "title": "二/三自由度龙门架",
-    "desc": "高精度、高刚性的龙门架系统，适用于多场景自动化搬运与定位，满足工业级高效作业需求。",
+  "za-m75": {
+    "title": "ZA-M75",
+    "desc": "轻载移动底盘，适合灵活部署和中轻载转运。",
     "features": [
-      "高刚性结构设计，承载能力强",
-      "亚毫米级定位精度，运行平稳",
-      "模块化设计，便于扩展与维护",
-      "支持多种末端执行器集成",
-      "适配多种工业控制系统",
-      "智能故障诊断与预测性维护"
+      {
+        "title": "轻载灵活底盘",
+        "desc": "最大额定负载 75kg，适合中轻载物料转运和平台级移动部署。"
+      },
+      {
+        "title": "支持原地转向",
+        "desc": "可 360° 原地转向，适合通道较窄或需要频繁掉头的路径环境。"
+      },
+      {
+        "title": "具备基础导航与避障能力",
+        "desc": "结合地图构建与激光雷达避障，适合室内常见搬运与巡航路线。"
+      },
+      {
+        "title": "续航与充电方式完整",
+        "desc": "续航时间约 10h，并支持手动充电与选配充电桩。"
+      }
     ],
-    "cases": {
-      "automatedAssemblyLine": {
-        "title": "自动化装配线搬运",
-        "desc": "助力客户实现高效自动化搬运与精准定位，提升产线效率。"
-      },
-      "warehouseSorting": {
-        "title": "仓储分拣系统",
-        "desc": "应用于智能仓储，实现大件物品的自动分拣与搬运。"
-      }
-    },
-    "scenes": ["自动化装配线", "智能仓储物流", "精密加工与检测"],
-    "params": {
-      "repeatPositioningAccuracy": {
-        "key": "重复定位精度",
-        "value": "±0.1mm"
-      },
-      "maxLoad": {
-        "key": "最大负载",
-        "value": "5kg"
-      },
-      "effectiveStroke": {
-        "key": "有效行程",
-        "value": "x:385mm y:495mm z:215mm"
-      },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "x:1m/s；y: 1m/s；z：1m/s"
-      },
-      "driveMethod": {
-        "key": "驱动方式",
-        "value": "伺服电机+同步带"
-      },
-      "guideRailType": {
-        "key": "导轨类型",
-        "value": "直线导轨+同步带"
-      },
-      "controlSystem": {
-        "key": "控制系统",
-        "value": "PLC控制"
-      },
-      "communicationInterface": {
-        "key": "通信接口",
-        "value": "Ethernet"
-      },
-      "workingEnvironment": {
-        "key": "工作环境",
-        "value": "温度：0-50℃；湿度：<=75%"
-      },
-      "installationMethod": {
-        "key": "安装方式",
-        "value": "固定安装"
-      },
-      "structuralMaterial": {
-        "key": "结构材料",
-        "value": "高强度铝合金型材"
-      },
-      "devInterface": {
-        "key": "开发接口",
-        "value": "C++"
-      },
-      "powerRequirement": {
-        "key": "电源",
-        "value": "AC 220V"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "三维尺寸", "value": "Φ564×294(H)mm" },
+      { "key": "最大额定负载", "value": "75kg" },
+      { "key": "行驶速度", "value": "0.1~1.2m/s" },
+      { "key": "转向能力", "value": "可360°原地转向" },
+      { "key": "最大加速度", "value": "1m/s²（空载），0.7m/s²（满载）" },
+      { "key": "越障能力", "value": "10±2mm（空载）" },
+      { "key": "爬坡能力", "value": "10±1°（空载）" },
+      { "key": "行走精度", "value": "直线行走偏差≤8mm/m" },
+      { "key": "定位精度", "value": "30mm" },
+      { "key": "地图构建", "value": "最大建图面积200×200m" },
+      { "key": "避障能力", "value": "激光雷达探测距离0.1~10m，最小检测障碍物100×100×100mm" },
+      { "key": "接口", "value": "1×HDMI，2×USB3.0，1×百兆网口" },
+      { "key": "通讯协议", "value": "CAN" },
+      { "key": "控制方式", "value": "WiFi无线遥控（通信距离30±5m）" },
+      { "key": "重量", "value": "75kg（含电池）" },
+      { "key": "额定功率", "value": "400W" },
+      { "key": "轮系配置", "value": "2差速轮，4万向轮" },
+      { "key": "电池参数", "value": "48V@20AH三元锂电池；输出功率上限800W；额定充电所需电压@电流：54.6V@5A" },
+      { "key": "续航时间", "value": "10h" },
+      { "key": "充电方式", "value": "手动：充电器充电；自动：需搭载充电桩（选配）" }
+    ]
   },
-  "scara4axis": {
-    "title": "四轴机械臂",
-    "desc": "灵活高效的四轴机械臂，适合装配、搬运、分拣等工业自动化应用，具备高速高精度特性。",
+  "za-m135": {
+    "title": "ZA-M135",
+    "desc": "中载移动底盘，适合跨工位配送与搬运。",
     "features": [
-      "高速运动，循环节拍短",
-      "高精度重复定位，适合精密作业",
-      "结构紧凑，易于集成",
-      "支持多种末端工具快速更换",
-      "开放式控制接口，便于二次开发",
-      "智能视觉引导，自适应作业环境"
+      {
+        "title": "中载搬运能力",
+        "desc": "最大额定负载 135kg，适合更高载荷的跨工位配送与物料转运。"
+      },
+      {
+        "title": "紧凑机身便于部署",
+        "desc": "整体尺寸 674×456×327mm，适合在有限空间内完成底盘部署。"
+      },
+      {
+        "title": "原地转向与路径适应",
+        "desc": "支持 360° 原地转向，并具备基础建图、定位与避障能力。"
+      },
+      {
+        "title": "适合持续作业",
+        "desc": "续航时间约 10h，并支持手动充电和选配自动充电。"
+      }
     ],
-    "cases": {
-      "electronicAssembly": {
-        "title": "电子元件装配",
-        "desc": "应用于电子制造业，实现高效自动化装配。"
-      },
-      "automaticSortingPackaging": {
-        "title": "自动分拣与包装",
-        "desc": "在物流分拣线实现高速分拣与自动包装。"
-      }
-    },
-    "scenes": ["电子制造装配", "物流分拣", "自动化包装"],
-    "params": {
-      "repeatPositioningAccuracy": {
-        "key": "重复定位精度",
-        "value": "±0.05mm"
-      },
-      "maxLoad": {
-        "key": "最大负载",
-        "value": "1kg"
-      },
-      "degreesOfFreedom": {
-        "key": "自由度",
-        "value": "4"
-      },
-      "armReach": {
-        "key": "臂展",
-        "value": "大臂展：296mm、小臂展：282mm"
-      },
-      "workingRadius": {
-        "key": "工作半径",
-        "value": "578mm"
-      },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "1000mm/s"
-      },
-      "verticalStroke": {
-        "key": "垂直行程",
-        "value": "800mm"
-      },
-      "driveMethod": {
-        "key": "驱动方式",
-        "value": "DC伺服电机+谐波减速器"
-      },
-      "controller": {
-        "key": "控制系统",
-        "value": "专用四轴控制器"
-      },
-      "programmingMethod": {
-        "key": "编程方式",
-        "value": "示教编程+离线编程"
-      },
-      "communicationInterface": {
-        "key": "通信接口",
-        "value": "Ethernet"
-      },
-      "protectionLevel": {
-        "key": "防护等级",
-        "value": "IP54"
-      },
-      "workingTemperature": {
-        "key": "工作温度",
-        "value": "0-60℃"
-      },
-      "powerSpec": {
-        "key": "电源规格",
-        "value": "DC48V"
-      },
-      "installationMethod": {
-        "key": "安装方式",
-        "value": "地面安装/倒装/侧装"
-      },
-      "rotationAngle": {
-        "key": "旋转角度",
-        "value": "J1: ±90°、J2：±165°、夹爪：±360°"
-      }
-    },
-        "downloads": {}
+    "params": [
+      { "key": "三维尺寸", "value": "674(L)×456(W)×327(H)mm" },
+      { "key": "最大额定负载", "value": "135kg" },
+      { "key": "行驶速度", "value": "0.1~1.2m/s" },
+      { "key": "转向能力", "value": "可360°原地转向" },
+      { "key": "最大加速度", "value": "1m/s²（空载），0.5m/s²（满载）" },
+      { "key": "越障能力", "value": "10±2mm（空载）" },
+      { "key": "爬坡能力", "value": "10±1°（空载）" },
+      { "key": "行走精度", "value": "直线行走偏差≤8mm/m" },
+      { "key": "定位精度", "value": "30mm" },
+      { "key": "地图构建", "value": "最大建图面积200×200m" },
+      { "key": "避障能力", "value": "激光雷达探测距离0.1~10m，最小检测障碍物100×100×100mm" },
+      { "key": "接口", "value": "1×HDMI，2×USB3.0，1×百兆网口" },
+      { "key": "通讯协议", "value": "CAN" },
+      { "key": "控制方式", "value": "WiFi无线遥控（通信距离30±5m）" },
+      { "key": "重量", "value": "65kg（含电池）" },
+      { "key": "额定功率", "value": "400W" },
+      { "key": "轮系配置", "value": "2差速轮，4万向轮" },
+      { "key": "电池参数", "value": "48V@30AH三元锂电池；输出功率上限1200W；额定充电所需电压@电流：54.6V@10A" },
+      { "key": "续航时间", "value": "10h" },
+      { "key": "充电方式", "value": "手动：充电器充电；自动：需搭载充电桩（选配）" }
+    ]
   },
-  "arm6axis": {
-    "title": "六轴机械臂",
-    "desc": "具备复杂轨迹控制能力，适用于焊接、喷涂、装配等多种工业场景，支持多自由度协同作业。",
+  "za-mr3m": {
+    "title": "ZA-MR3M",
+    "desc": "ZA-MR3M 复合升降机器人是一款将高性能自主移动底盘与定制化四轴机械臂深度融合的创新型复合机器人平台。它通过引入大行程升降轴，完美解决了普通移动机器人“够不着、下不去”的痛点，是针对跨区域、多高度作业场景打造的理想解决方案。",
     "features": [
-      "六自由度设计，灵活应对复杂工艺",
-      "高精度轨迹控制，运动平稳",
-      "支持多种末端执行器与传感器集成",
-      "开放式编程与控制接口",
-      "高可靠性，适应恶劣工业环境",
-      "AI辅助编程，降低使用门槛"
+      {
+        "title": "底盘赋能实现全域机动",
+        "desc": "高精度移动底盘化身机械臂的“双腿”，具备自主导航与避障能力，将作业范围大幅扩展至整个车间或实验室，实现真正的跨场景作业。"
+      },
+      {
+        "title": "极简构型打造高性价比",
+        "desc": "“升降+三旋”构型专为物流搬运与平面操作优化。精简构型设计大幅降低了系统复杂性与硬件成本，同时提升了作业可靠性。"
+      }
     ],
-    "cases": {
-      "automotiveWelding": {
-        "title": "汽车零部件焊接",
-        "desc": "应用于汽车制造，实现高精度自动焊接。"
-      },
-      "sprayingAssembly": {
-        "title": "喷涂与装配",
-        "desc": "在家电、机械等行业实现自动喷涂与装配作业。"
-      }
-    },
-    "scenes": ["汽车制造", "家电装配", "机械加工"],
-    "params": {
-      "repeatPositioningAccuracy": {
-        "key": "重复定位精度",
-        "value": "±0.03mm"
-      },
-      "maxLoad": {
-        "key": "最大负载",
-        "value": "3kg"
-      },
-      "degreesOfFreedom": {
-        "key": "自由度",
-        "value": "6"
-      },
-      "armReach": {
-        "key": "臂展",
-        "value": "540.5mm"
-      },
-      "workingRadius": {
-        "key": "工作半径",
-        "value": "540.5mm"
-      },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "双臂单关节180°/s"
-      },
-      "driveMethod": {
-        "key": "驱动方式",
-        "value": "一体化机器人关节"
-      },
-      "controlSystem": {
-        "key": "控制系统",
-        "value": "专用六轴控制器"
-      },
-      "programmingMethod": {
-        "key": "编程方式",
-        "value": "示教编程+离线编程"
-      },
-      "communicationInterface": {
-        "key": "通信接口",
-        "value": "Ethernet"
-      },
-      "protectionLevel": {
-        "key": "防护等级",
-        "value": "IP54"
-      },
-      "workingTemperature": {
-        "key": "工作温度",
-        "value": "0-60℃"
-      },
-      "powerSpec": {
-        "key": "电源规格",
-        "value": "DC48V"
-      },
-      "installationMethod": {
-        "key": "安装方式",
-        "value": "地面安装/倒装/侧装"
-      }
-    },
-      "downloads": {}
+    "params": [
+      { "key": "产品名称", "value": "复合升降机器人" },
+      { "key": "型号", "value": "ZA-MR3M" },
+      { "key": "整体尺寸", "value": "674(L)×456(W)×1408(H)mm（收拢状态）" },
+      { "key": "重量", "value": "100kg" },
+      { "key": "行走速度", "value": "0.1~1.2m/s" },
+      { "key": "最大加速度", "value": "0.5m/s²" },
+      { "key": "导航方式", "value": "激光SLAM" },
+      { "key": "工作时间", "value": "6h" },
+      { "key": "升降距离", "value": "750mm" },
+      { "key": "充电电源", "value": "DC 48V（充电桩可选配）" },
+      { "key": "安全保护", "value": "具有激光扫描避障、视觉避障、紧急停止等功能" },
+      { "key": "对外接口", "value": "1×HDMI，2×USB3.0，1×百兆网口" }
+    ]
   },
-  "dualArmHumanoid": {
-    "title": "双臂人型机器人",
-    "desc": "具备双臂协作能力，适合复杂装配、服务等高柔性作业需求，支持多模态感知与智能交互。",
+  "za-mr3t": {
+    "title": "ZA-MR3T",
+    "desc": "ZA-MR3T 具身智能双臂机器人，是高度集成的仿人形操作平台，融合移动底盘、升降轴、机械臂及视觉相机，依托具身智能，实现类人化、高精度全场景智能作业。",
     "features": [
-      "双臂高柔性协作，模拟人类操作",
-      "多模态感知与智能决策",
-      "支持多种末端工具与传感器集成",
-      "开放式软件平台，便于二次开发",
-      "安全防护与人机协作设计",
-      "自然语言交互，智能任务理解"
+      {
+        "title": "仿人化操作",
+        "desc": "借鉴人类手臂运动逻辑，可实现多姿态、多角度灵活作业，能够轻松完成复杂弯曲、避障操作，适配精细装配、柔性抓取等类人化作业场景。"
+      },
+      {
+        "title": "高度集成",
+        "desc": "集移动底盘、升降轴、机械臂、视觉相机于一体，结构紧凑且集成度高，打破空间限制，可实现跨区域作业，适配从车间流水线、实验室到服务场景的多元化需求。"
+      },
+      {
+        "title": "具身智能赋能",
+        "desc": "依托视觉相机的环境感知能力与具身智能算法，实现“感知-决策-行动”的实时闭环，可自动识别作业目标、规划最优操作路径，精准完成抓取、搬运、装配等任务。"
+      }
     ],
-    "cases": {
-      "complexAssembly": {
-        "title": "复杂装配作业",
-        "desc": "在3C电子、精密制造等行业实现高柔性自动化装配。"
-      },
-      "serviceDemo": {
-        "title": "服务与演示机器人",
-        "desc": "应用于展厅、教育等场景，实现智能服务与人机互动。"
-      }
-    },
-    "scenes": ["精密装配", "教育与演示", "智能服务"],
-    "params": {
-      "armReach": {
-        "key": "单臂臂展",
-        "value": "840.5mm"
-      },
-      "verticalStroke": {
-        "key": "垂直行程",
-        "value": "800mm"
-      },
-      "verticalAxisMaxSpeed": {
-        "key": "垂直轴最大速度",
-        "value": "200mm/s"
-      },
-      "repeatPositioningAccuracy": {
-        "key": "重复定位精度",
-        "value": "±0.05mm"
-      },
-      "maxLoad": {
-        "key": "最大负载",
-        "value": "3kg"
-      },
-      "degreesOfFreedom": {
-        "key": "自由度",
-        "value": "15（双臂）"
-      },
-      "maxSpeed": {
-        "key": "双臂单关节最大速度",
-        "value": "180°/s"
-      },
-      "workingRadius": {
-        "key": "工作半径",
-        "value": "540.5mm"
-      },
-      "driveMethod": {
-        "key": "驱动方式",
-        "value": "一体化机器人关节/伺服电机"
-      },
-      "programmingMethod": {
-        "key": "编程方式",
-        "value": "示教编程+离线编程"
-      },
-      "communicationInterface": {
-        "key": "通信接口",
-        "value": "Ethernet"
-      },
-      "protectionLevel": {
-        "key": "防护等级",
-        "value": "IP54"
-      },
-      "workingTemperature": {
-        "key": "工作温度",
-        "value": "0-60℃"
-      },
-      "chargingMethod": {
-        "key": "充电方式",
-        "value": "自动充电桩对接"
-      },
-      "movingSpeed": {
-        "key": "移动速度",
-        "value": "0.5m/s"
-      },
-      "batteryLife": {
-        "key": "续航时间",
-        "value": "6-8小时"
-      },
-      "baseType": {
-        "key": "底座类型",
-        "value": "移动底座/固定底座"
-      },
-      "visionSystem": {
-        "key": "视觉系统",
-        "value": "深度相机"
-      },
-      "voiceInteraction": {
-        "key": "语音交互",
-        "value": "支持多语言语音识别与合成"
-      },
-      "devInterface": {
-        "key": "开发接口",
-        "value": "ROS2、Python、C++"
-      },
-      "networkConnection": {
-        "key": "连接方式",
-        "value": "WIFI、Ethernet"
-      }
-    },
-    "downloads": {}
+    "params": [
+      { "key": "产品名称", "value": "具身智能双臂机器人" },
+      { "key": "型号", "value": "ZA-MR3T" },
+      { "key": "整体尺寸", "value": "674(L)×575(W)×1408(H)mm（收拢状态）" },
+      { "key": "重量", "value": "120kg" },
+      { "key": "行走速度", "value": "0.1~1.2m/s" },
+      { "key": "最大加速度", "value": "0.5m/s²" },
+      { "key": "导航方式", "value": "激光SLAM" },
+      { "key": "工作时间", "value": "5h" },
+      { "key": "升降距离", "value": "750mm" },
+      { "key": "充电电源", "value": "DC 48V（充电桩可选配）" },
+      { "key": "安全保护", "value": "具有激光扫描避障、视觉避障、紧急停止等功能" },
+      { "key": "对外接口", "value": "1×HDMI，2×USB3.0，1×百兆网口" }
+    ]
   },
-  "mobileRobot": {
-    "title": "移动机器人",
-    "desc": "自主导航、多传感器融合，适用于工厂、仓储等多场景智能物流，实现高效自动化搬运。",
+  "za-rmvr": {
+    "title": "ZA-RMVR",
+    "desc": "具身智能 VR 遥操作开发平台是一款集成升降轴、双臂机械臂、灵巧末端执行器、核心控制器以及 VR 沉浸式设备等机构形成的综合性教学科研平台。该平台以“人机共融”与“数据驱动”为核心。",
     "features": [
-      "激光SLAM+视觉融合导航，路径自主规划",
-      "多传感器融合避障，安全可靠",
-      "支持多种货物托盘与货架对接",
-      "远程监控与智能调度平台",
-      "模块化设计，便于维护与扩展",
-      "5G网络支持，实时数据传输"
+      {
+        "title": "沉浸式直觉遥操作",
+        "desc": "基于 VR 视觉与姿态捕捉，操作者可以最自然的直觉动作，实现对双臂的高精度、低延迟协同控制。"
+      },
+      {
+        "title": "高质量具身数据采集",
+        "desc": "精准记录视觉、位姿、力矩等多模态操作数据，为具身智能大模型及模仿学习提供优质的专家数据集。"
+      },
+      {
+        "title": "大空间灵活作业",
+        "desc": "通过升降轴动态调节高度，打破传统固定基座局限，轻松覆盖从桌面到多层货架的多维度作业场景。"
+      }
     ],
-    "cases": {
-      "factoryLogistics": {
-        "title": "工厂智能物流搬运",
-        "desc": "在制造工厂实现原材料与成品的自动搬运，提升物流效率。"
+    "params": [
+      { "key": "产品名称", "value": "具身智能双臂VR遥操作开发平台" },
+      { "key": "型号", "value": "ZA-RMVR" },
+      { "key": "平台尺寸", "value": "674(L)×575(W)×1408(H)mm（收拢状态）" },
+      { "key": "额定负载", "value": "单臂1kg，双臂2kg" },
+      { "key": "自由度", "value": "7自由度" },
+      { "key": "工作半径", "value": "640mm" },
+      { "key": "工作时间", "value": "5h" },
+      { "key": "充电电源", "value": "DC 48V（充电桩可选配）" },
+      { "key": "对外接口", "value": "1×千兆网口，1×USB3.0接口；10路I/O输入，10路I/O输出（PNP）" },
+      { "key": "安全保护", "value": "碰撞检测" },
+      { "key": "产品配置", "value": "ZA-MR3T 具身智能双臂机器人×1，五指灵巧手（RH56DFTP）×2，VR眼镜（Meta Quest）×1，操控手柄×2" }
+    ]
+  },
+  "za-rmps": {
+    "title": "ZA-RMPS",
+    "desc": "具身智能双臂主从遥操作开发平台。",
+    "features": [
+      {
+        "title": "真实力反馈",
+        "desc": "主从架构实时反向传导接触力矩，操作者可真实感知阻力与刚度，适合精密装配等复杂接触任务。"
       },
-      "warehouseAutomation": {
-        "title": "仓储自动化",
-        "desc": "应用于大型仓库，实现货物自动分拣与配送。"
+      {
+        "title": "高保真映射",
+        "desc": "主从臂构型一致，可实现关节级一比一精准映射与低漂移控制。"
+      },
+      {
+        "title": "抗疲劳设计",
+        "desc": "物理主臂提供实体依托与重力补偿，适合长时间数据采集和持续操作。"
       }
-    },
-    "scenes": ["制造工厂物流", "智能仓储", "医院物资配送"],
-    "params": {
-      "navigationMethod": {
-        "key": "导航方式",
-        "value": "激光SLAM+视觉融合"
+    ],
+    "params": [
+      { "key": "产品名称", "value": "具身智能双臂主从遥操作开发平台" },
+      { "key": "型号", "value": "ZA-RMPS" },
+      { "key": "平台尺寸", "value": "1000(L)×1000(W)×850(H)mm（收拢状态）" },
+      { "key": "额定负载", "value": "单臂1kg，双臂2kg" },
+      { "key": "工作电压", "value": "DC 48V" },
+      { "key": "主从臂自由度", "value": "7自由度" },
+      { "key": "工作半径", "value": "640mm" },
+      { "key": "对外接口", "value": "1×千兆网口，1×USB3.0接口；10路I/O输入，10路I/O输出（PNP）" },
+      { "key": "安全保护", "value": "碰撞检测" },
+      { "key": "产品配置", "value": "零差机械臂×2，五指灵巧手（RH56DFTP）×2，意优机械臂×2，平台×1" }
+    ]
+  },
+  "za-rdp": {
+    "title": "ZA-RDP",
+    "desc": "绘画机器人平台。",
+    "features": [
+      {
+        "title": "面向教学与科研演示",
+        "desc": "适合轨迹示教、图形绘制、算法验证和机械臂运动规划等场景。"
       },
-      "size": {
-        "key": "尺寸",
-        "value": "直径452mm，高240mm"
+      {
+        "title": "基于六轴机械臂平台",
+        "desc": "采用 6 自由度机械臂，兼顾运动灵活性与轨迹控制能力。"
       },
-      "selfWeight": {
-        "key": "自重",
-        "value": "20kg"
-      },
-      "ratedLoad": {
-        "key": "额定载重",
-        "value": "30kg"
-      },
-      "maxLoad": {
-        "key": "最大载重",
-        "value": "70kg"
-      },
-      "staticBatteryLife": {
-        "key": "静止续航时间",
-        "value": "8小时"
-      },
-      "noLoadBatteryLife": {
-        "key": "空载续航时间",
-        "value": "7小时"
-      },
-      "fullLoadBatteryLife": {
-        "key": "满载续航时间",
-        "value": "5小时"
-      },
-      "maxSpeed": {
-        "key": "最大速度",
-        "value": "1m/s"
-      },
-      "rangingAccuracy": {
-        "key": "测距精度",
-        "value": "±2mm"
-      },
-      "workingTemperature": {
-        "key": "工作温度",
-        "value": "0-40℃"
-      },
-      "workingHumidity": {
-        "key": "工作湿度",
-        "value": "5%-85%"
-      },
-      "communicationInterface": {
-        "key": "通信接口",
-        "value": "Ethernet、WIFI"
-      },
-      "protectionLevel": {
-        "key": "安全防护",
-        "value": "IP54"
-      },
-      "chargingMethod": {
-        "key": "充电方式",
-        "value": "自动充电桩对接"
-      },
-      "climbingAbility": {
-        "key": "爬坡能力",
-        "value": "<=3°"
-      },
-      "obstacleHeight": {
-        "key": "越障高度",
-        "value": "5mm"
-      },
-      "ditchDepth": {
-        "key": "越沟深度",
-        "value": "5mm"
+      {
+        "title": "平台构成清晰",
+        "desc": "由机械臂、画笔组件、画板与光学平台构成，便于实验搭建和演示。"
       }
-    },
-    "downloads": {}
+    ],
+    "params": [
+      { "key": "产品名称", "value": "绘画机器人" },
+      { "key": "型号", "value": "ZA-RDP" },
+      { "key": "平台尺寸", "value": "800(L)×300(W)×500(H)mm（收拢状态）" },
+      { "key": "自由度", "value": "6自由度" },
+      { "key": "重量", "value": "26kg" },
+      { "key": "重复定位精度", "value": "±0.03mm" },
+      { "key": "工作半径", "value": "540.5mm（不含画笔组件）" },
+      { "key": "关节运动范围", "value": "J1±360°，J2±175°，J3±175°，J4±175°，J5±360°，J6±360°" },
+      { "key": "关节最大速度", "value": "J1-J6 180°/s" },
+      { "key": "末端最大线速度", "value": "1.5m/s（不含手或夹爪）" },
+      { "key": "接口", "value": "1×网口" },
+      { "key": "通讯协议", "value": "EtherCAT" },
+      { "key": "供电电压", "value": "DC 48V" },
+      { "key": "平均功率", "value": "150W" },
+      { "key": "峰值功率", "value": "750W" },
+      { "key": "安全保护", "value": "碰撞检测" },
+      { "key": "产品配置", "value": "ZA-R3D6 六自由度机械臂×1，画笔组件×1，画板×1，光学平台×1" }
+    ]
+  },
+  "za-zg100": {
+    "title": "ZA-ZG100",
+    "desc": "高性能控制器。",
+    "features": [
+      {
+        "title": "RK3588 算控一体",
+        "desc": "搭载 8 核 64 位 RK3588 处理器与内置 NPU，可兼顾 AI 视觉处理与复杂运动控制。"
+      },
+      {
+        "title": "EtherCAT 实时协同",
+        "desc": "采用 EtherCAT 总线与 1ms 控制周期，适合多轴伺服的同步与协同控制。"
+      },
+      {
+        "title": "低抖动控制",
+        "desc": "控制抖动可压缩至 5μs，适合对轨迹平滑性和实时性要求更高的控制场景。"
+      },
+      {
+        "title": "紧凑型架构",
+        "desc": "算控一体化架构有助于减少外部工控机依赖，降低整机体积和集成复杂度。"
+      }
+    ],
+    "params": [
+      { "key": "CPU", "value": "8核64位 A76+A55，主频2.4GHz" },
+      { "key": "GPU", "value": "ARM Mali-G610 MP4，4核GPU" },
+      { "key": "NPU", "value": "6 Tops" },
+      { "key": "内存", "value": "16GB" },
+      { "key": "存储", "value": "128GB" },
+      { "key": "网口", "value": "EtherCAT×1，Ethernet×1" },
+      { "key": "USB接口", "value": "USB3.0×2" },
+      { "key": "电源 / 扩展接口", "value": "12V，Type-C" },
+      { "key": "显示器接口", "value": "HDMI×1" },
+      { "key": "其他接口", "value": "RS232×1，RS485×1，CAN×1" }
+    ]
+  },
+  "rail": {
+    "title": "地轨平台",
+    "desc": "用于补足长行程直线移动。",
+    "features": [
+      {
+        "title": "补足长行程直线作业",
+        "desc": "行程 1750mm，适合扩展机械臂在直线方向上的覆盖范围。"
+      },
+      {
+        "title": "兼顾速度与定位",
+        "desc": "最大移动速度 500mm/s，定位精度 0.21mm/300mm，适合联动传送场景。"
+      },
+      {
+        "title": "便于模块化集成",
+        "desc": "提供千兆网口与 USB 接口，可作为扩展机构接入现有系统。"
+      }
+    ],
+    "params": [
+      { "key": "整机尺寸", "value": "2229(L)×280(W)×146(H)mm" },
+      { "key": "行程", "value": "1750mm" },
+      { "key": "最大移动速度", "value": "500mm/s" },
+      { "key": "最大加速时间", "value": "≥0.3s" },
+      { "key": "定位精度", "value": "0.21mm/300mm" },
+      { "key": "接口", "value": "1×千兆网口，1×USB3.0" },
+      { "key": "重量", "value": "77kg" }
+    ]
+  },
+  "rotating-platform": {
+    "title": "旋转平台",
+    "desc": "用于增加工位旋转自由度。",
+    "features": [
+      {
+        "title": "补足转位自由度",
+        "desc": "支持 ±360° 转向能力，适合需要角度切换和转位的工位。"
+      },
+      {
+        "title": "旋转精度稳定",
+        "desc": "定位精度 ≤1 arcmin、重复定位精度 ≤10 arcsec，适合姿态调整任务。"
+      },
+      {
+        "title": "紧凑型扩展机构",
+        "desc": "适合在本体确定后作为扩展机构补充旋转能力与工位适应性。"
+      }
+    ],
+    "params": [
+      { "key": "整机尺寸", "value": "433(L)×280(W)×238(H)mm" },
+      { "key": "最大转速", "value": "30rpm" },
+      { "key": "最大加速时间", "value": "≥0.3s" },
+      { "key": "转向能力", "value": "±360°" },
+      { "key": "减速比", "value": "50" },
+      { "key": "定位精度", "value": "≤1 arcmin" },
+      { "key": "重复定位精度", "value": "≤10 arcsec" },
+      { "key": "接口", "value": "1×千兆网口，1×USB3.0" },
+      { "key": "重量", "value": "42kg" }
+    ]
+  },
+  "za-r3m-left": {
+    "title": "ZA-R3M(L) 地轨平台联动型",
+    "desc": "ZA-R3M 与地轨平台联动的 R 系列组合形态，用于补足长行程直线作业能力。",
+    "features": [
+      {
+        "title": "扩展直线覆盖范围",
+        "desc": "基于 ZA-R3M 加入地轨平台，适合补足长行程直线作业能力。"
+      },
+      {
+        "title": "适合跨工位联动",
+        "desc": "适用于跨工位直线取放、工位间传送和连续路径作业。"
+      },
+      {
+        "title": "组合思路清晰",
+        "desc": "当本体能力满足需求、但直线范围不足时，可优先考虑该联动型组合。"
+      }
+    ],
+    "params": [
+      { "key": "组合基础", "value": "ZA-R3M + 地轨平台" },
+      { "key": "归属", "value": "R系列联动型号" },
+      { "key": "联动模块", "value": "地轨平台" },
+      { "key": "适用场景", "value": "跨工位直线取放与联动传送" },
+      { "key": "选型重点", "value": "优先看地轨平台行程、节拍与整体占位" }
+    ]
+  },
+  "za-r3m-right": {
+    "title": "ZA-R3M(R) 旋转平台联动型",
+    "desc": "ZA-R3M 与旋转平台联动的 R 系列组合形态，用于补足转位与姿态调整能力。",
+    "features": [
+      {
+        "title": "补足姿态调整能力",
+        "desc": "基于 ZA-R3M 加入旋转平台，适合需要多角度切换的取放任务。"
+      },
+      {
+        "title": "适合转位型工位",
+        "desc": "可用于多角度转位、姿态切换和工位方向调整。"
+      },
+      {
+        "title": "便于按节拍选型",
+        "desc": "当作业重点在转向精度与工位布局时，该组合更便于按节拍和空间约束判断。"
+      }
+    ],
+    "params": [
+      { "key": "组合基础", "value": "ZA-R3M + 旋转平台" },
+      { "key": "归属", "value": "R系列联动型号" },
+      { "key": "联动模块", "value": "旋转平台" },
+      { "key": "适用场景", "value": "多角度转位与姿态调整" },
+      { "key": "选型重点", "value": "优先看旋转精度、节拍与工位布局" }
+    ]
   }
 }

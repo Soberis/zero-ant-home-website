@@ -4,7 +4,6 @@
     <section class="support-hero">
       <div class="support-shell hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow">SUPPORT CENTER</p>
           <h1 id="after-sales" class="hero-title text-display-hero">{{ t("supportPage.title") }}</h1>
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
 
@@ -54,7 +53,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("supportPage.relatedDownloads") }}</span>
-            <span class="title-en">DOWNLOADS</span>
           </h2>
           <p class="detail-section__desc">{{ t("supportPage.downloadIntro") }}</p>
         </div>
@@ -81,7 +79,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("supportPage.faqTitle") }}</span>
-            <span class="title-en">FAQ</span>
           </h2>
           <p class="detail-section__desc">{{ t("supportPage.faqIntro") }}</p>
         </div>
@@ -131,7 +128,6 @@
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("nav.contact") }}</span>
-                <span class="title-en">CONTACT US</span>
               </h2>
               <p class="detail-section__desc">{{ t("supportPage.contactIntro") }}</p>
             </div>
@@ -313,7 +309,7 @@ function formatIndex(value: number): string {
   background: var(--brand-surface);
 }
 
-.support-page > .page-section:nth-of-type(even) {
+.support-page > .page-section:nth-of-type(odd) {
   background-color: var(--brand-surface-soft);
 }
 
@@ -325,30 +321,28 @@ function formatIndex(value: number): string {
 }
 
 .support-hero {
-  padding: 84px 0 88px;
+  min-height: var(--compact-hero-min-height);
+  padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
+    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  grid-template-columns: minmax(0, 1fr)
+    minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
 }
 
 .hero-copy {
   position: relative;
-  max-width: 720px;
-  padding: 16px 0 12px;
-}
-
-.hero-eyebrow {
-  display: block;
-  margin: 0 0 16px;
-  color: var(--brand-muted);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  max-width: var(--compact-hero-copy-max-width);
+  padding: var(--compact-hero-copy-padding-top) 0 var(--compact-hero-copy-padding-bottom);
 }
 
 .hero-title {
@@ -360,8 +354,8 @@ function formatIndex(value: number): string {
   max-width: 32em;
   margin: 0;
   color: var(--brand-muted);
-  font-size: 1.05rem;
-  line-height: 1.85;
+  font-size: var(--compact-hero-description-size);
+  line-height: var(--compact-hero-description-line-height);
 }
 
 .hero-actions {
@@ -369,6 +363,12 @@ function formatIndex(value: number): string {
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 28px;
+}
+
+.hero-actions .btn {
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
+  font-size: var(--compact-hero-button-font-size);
 }
 
 .hero-promises {
@@ -389,15 +389,16 @@ function formatIndex(value: number): string {
 .hero-promise-head {
   display: flex;
   align-items: flex-end;
-  gap: 6px;
+  gap: var(--compact-hero-kpi-gap);
 }
 
 .hero-promise-value {
   color: var(--brand-text);
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-family: "Outfit", sans-serif;
+  font-size: var(--compact-hero-kpi-value-size);
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: var(--compact-hero-kpi-value-line-height);
+  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
 }
 
 .hero-promise-unit {
@@ -417,17 +418,17 @@ function formatIndex(value: number): string {
 
 .hero-panel {
   width: 100%;
-  max-width: 340px;
+  max-width: var(--compact-hero-panel-width);
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding-top: 18px;
+  padding-top: var(--compact-hero-panel-padding-top);
 }
 
 .hero-panel-label {
   margin: 0 0 12px;
   color: var(--brand-muted);
-  font-size: 0.82rem;
+  font-size: var(--compact-hero-kpi-label-size);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -535,9 +536,9 @@ function formatIndex(value: number): string {
   gap: 14px;
   min-height: 220px;
   padding: 28px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: none;
   border-radius: 18px;
-  background: #ffffff;
+  background: var(--brand-surface-soft);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
@@ -593,8 +594,11 @@ function formatIndex(value: number): string {
 }
 
 .faq-item {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  background: transparent;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  padding: 0 24px;
+  background: #ffffff;
 }
 
 .card-header {
@@ -696,6 +700,9 @@ function formatIndex(value: number): string {
   flex-direction: column;
   gap: 6px;
   min-width: 0;
+  background: var(--brand-surface-soft);
+  padding: 24px;
+  border-radius: 16px;
 }
 
 .contact-card--full {

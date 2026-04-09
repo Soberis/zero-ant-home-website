@@ -3,7 +3,7 @@
     <nav class="nav-container">
       <div class="logo">
         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
-        <router-link to="/" class="logo-text" @click="handleTopNavClick('/', $event)">
+        <router-link :to="localizePath('/')" class="logo-text" @click="handleTopNavClick('/', $event)">
           {{ $t("logoText") }}
         </router-link>
       </div>
@@ -16,10 +16,10 @@
             class="nav-item"
             :class="{ 'has-dropdown': item.children }"
           >
-            <router-link
-              :to="item.to"
+              <router-link
+              :to="localizePath(item.to)"
               class="nav-link"
-              active-class="active"
+              :class="{ active: isTopNavActive(item.to) }"
               aria-current-value="page"
               @click="handleTopNavClick(item.to, $event)"
             >
@@ -31,7 +31,7 @@
                 <ul>
                   <li v-for="child in item.children" :key="child.hash">
                     <router-link
-                      :to="{ path: item.to, hash: child.hash }"
+                      :to="localizeTo({ path: item.to, hash: child.hash })"
                       class="dropdown-item"
                     >
                       {{ $t(child.label) }}
@@ -82,8 +82,9 @@
         <ul class="mobile-nav-links">
           <li v-for="item in topNavItems" :key="item.to" class="mobile-nav-item">
             <router-link
-              :to="item.to"
+              :to="localizePath(item.to)"
               class="mobile-nav-link"
+              :class="{ active: isTopNavActive(item.to) }"
               @click="handleTopNavClick(item.to, $event, true)"
             >
               {{ $t(item.label) }}
@@ -103,6 +104,11 @@ import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
 import { scheduleScrollToTop } from "@/utils/scroll";
+import {
+  localizeFullPath,
+  stripLocalePrefix,
+} from "@/utils/localeRoute";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 // 滚动状态
 const isScrolled = ref(false);
@@ -130,6 +136,7 @@ const handleDesktopBreakpointChange = (event: MediaQueryListEvent) => {
 const isMobileMenuOpen = ref(false);
 const route = useRoute();
 const router = useRouter();
+const { localizePath, localizeTo } = useLocalizedPath();
 
 // 防抖锁
 let toggleLock = false;
@@ -166,14 +173,27 @@ async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = fals
 
   event.preventDefault();
 
-  if (route.fullPath === to) {
+  const localizedTarget = localizePath(to);
+
+  if (route.path === localizedTarget) {
     scheduleScrollToTop();
     return;
   }
 
-  await router.push(to);
+  await router.push(localizedTarget);
   await nextTick();
 }
+
+function isTopNavActive(to: string): boolean {
+  const currentPath = stripLocalePrefix(route.path);
+
+  if (to === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath === to || currentPath.startsWith(`${to}/`);
+}
+
 
 // 点击背景关闭菜单
 function handleBackgroundClick(event: Event): void {
@@ -188,20 +208,7 @@ function handleBackgroundClick(event: Event): void {
 const { locale } = useI18n();
 
 function isProductDetailRoute() {
-  return (
-    route.name === "SystemProductDetail" ||
-    route.name === "RobotProductDetail"
-  );
-}
-
-function persistLanguagePreference(language: "zh" | "en"): void {
-  try {
-    localStorage.setItem("language", language);
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      console.warn("保存语言偏好失败:", error);
-    }
-  }
+  return route.name === "ProductDetail";
 }
 
 async function switchLanguage() {
@@ -217,8 +224,8 @@ async function switchLanguage() {
     }
   }
 
-  locale.value = targetLocale;
-  persistLanguagePreference(targetLocale);
+  await router.push(localizeFullPath(route.fullPath, targetLocale));
+  closeMobileMenu();
 }
 
 // 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）
@@ -231,14 +238,6 @@ const onKeydownCapture = (e: KeyboardEvent) => {
 };
 
 onMounted(() => {
-  const savedLanguage = localStorage.getItem("language");
-  if (savedLanguage && (savedLanguage === "zh" || savedLanguage === "en")) {
-    locale.value = savedLanguage;
-  } else {
-    const initialLocale = locale.value === "en" ? "en" : "zh";
-    persistLanguagePreference(initialLocale);
-  }
-
   // 监听滚动
   window.addEventListener("scroll", handleScroll);
   desktopBreakpointQuery = window.matchMedia("(min-width: 951px)");
@@ -267,26 +266,20 @@ onUnmounted(() => {
   --nav-accent-surface: rgba(26, 58, 143, 0.05);
   --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
     saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
-  background-color: rgba(255, 255, 255, 0.94);
-  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.72);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-  transition:
-    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+  transition: all var(--transition-smooth);
 
   &.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.985);
-    box-shadow: none;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-md);
+    border-bottom-color: rgba(15, 23, 42, 0.03);
     
     .nav-container {
       height: 72px;
@@ -881,7 +874,7 @@ onUnmounted(() => {
   color: var(--nav-accent-color);
 }
 
-.mobile-nav-link.router-link-active {
+.mobile-nav-link.active {
   color: var(--nav-accent-color);
   background: rgba(26, 58, 143, 0.05);
   font-weight: 600;

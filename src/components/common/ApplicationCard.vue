@@ -1,19 +1,22 @@
 <template>
   <router-link
-    class="app-divider-item"
-    :to="props.slug ? `/applications/${props.slug}` : '/solutions'"
+    class="app-card-item"
+    :to="props.slug ? localizePath(`/applications/${props.slug}`) : localizePath('/solutions')"
   >
-    <span class="app-icon" v-html="props.svg"></span>
-    
-    <div class="app-content">
-      <h3 class="app-title">
-        {{ t(props.title) }}
-      </h3>
-      <div class="app-action">
-        <span class="action-text">{{ t("solutionsPage.industries.viewApplication") }}</span>
-        <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+    <div class="app-card-bg"></div>
+    <div class="app-card-inner">
+      <div class="app-icon" v-html="props.svg"></div>
+      
+      <div class="app-content">
+        <h3 class="app-title">
+          {{ t(props.title) }}
+        </h3>
+        <div class="app-action">
+          <span class="action-text">{{ t("solutionsPage.industries.viewApplication") }}</span>
+          <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
       </div>
     </div>
   </router-link>
@@ -21,6 +24,7 @@
 
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const props = defineProps<{
   /** 应用标题 i18n key */
@@ -30,52 +34,48 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
+const { localizePath } = useLocalizedPath();
 </script>
 
 <style scoped lang="less">
-.app-divider-item {
+.app-card-item {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 32px 16px; /* Increas vertical padding for more air */
-  margin: 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.06); /* Lighter divider */
+  flex-direction: column;
+  height: 100%;
+  padding: 32px 28px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 253, 0.96) 100%);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
   text-decoration: none;
-  background: transparent;
-  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
 }
 
-.app-divider-item:hover {
-  text-decoration: none;
-  background-color: rgba(15, 23, 42, 0.02); /* Very soft highlight */
+.app-card-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.09);
+  border-color: rgba(26, 58, 143, 0.14);
 }
 
-.app-divider-item:hover .app-content {
-  transform: translateX(6px);
-}
-
-.app-divider-item:hover .app-title,
-.app-divider-item:hover .action-text,
-.app-divider-item:hover .action-arrow {
-  color: var(--brand-primary);
-}
-
-.app-divider-item:hover .action-arrow {
-  transform: translateX(4px);
-}
-
-.app-divider-item:hover .app-icon {
-  transform: scale(1.05);
+.app-card-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+  z-index: 2;
 }
 
 .app-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   flex-shrink: 0;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-icon :deep(svg) {
@@ -83,67 +83,72 @@ const { t } = useI18n();
   height: 100%;
 }
 
+.app-card-item:hover .app-icon {
+  transform: scale(1.1) translateY(-2px);
+}
+
 .app-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-top: 2px;
-  transition: transform 0.3s ease;
+  flex: 1;
+  gap: 16px;
+  justify-content: space-between;
 }
 
 .app-title {
   margin: 0;
   font-family: "Outfit", sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--color-text);
   line-height: 1.3;
-  letter-spacing: -0.012em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color 0.3s ease;
 }
 
 .app-action {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 4px;
+  gap: 8px;
+  margin-top: auto;
+  color: var(--brand-primary);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: color 0.25s ease;
 }
 
 .action-text {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  transition: color 0.3s ease;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 }
 
 .action-arrow {
-  width: 16px;
-  height: 16px;
-  color: #64748b;
-  transition: transform 0.3s ease, color 0.3s ease;
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.app-card-item:hover .app-action {
+  color: var(--brand-primary-deep);
+}
+
+.app-card-item:hover .action-arrow {
+  transform: translateX(4px);
 }
 
 @media (max-width: 560px) {
-  .app-divider-item {
+  .app-card-item {
     gap: 16px;
-    padding: 24px 0;
+    padding: 24px 20px;
   }
   
   .app-icon {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
   }
   
   .app-title {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 }
 </style>

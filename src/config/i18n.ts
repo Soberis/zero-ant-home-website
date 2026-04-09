@@ -1,6 +1,7 @@
 import { createI18n } from 'vue-i18n';
 import en from '@/locales/en.json';
 import zh from '@/locales/zh.json';
+import { getLocaleFromPath } from "@/utils/localeRoute";
 
 export type SupportedLocale = 'zh' | 'en';
 
@@ -25,13 +26,10 @@ const messages = {
   },
 };
 
-// 读取本地存储/浏览器首选项，作为初始语言
+// 语言由 URL 路径决定，避免与本地存储或浏览器偏好发生状态分叉
 const getInitialLocale = (): 'zh' | 'en' => {
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('language');
-    if (saved === 'zh' || saved === 'en') return saved;
-    const navLang = navigator.language?.toLowerCase() || '';
-    if (navLang.startsWith('zh')) return 'zh';
+    return getLocaleFromPath(window.location.pathname);
   }
   return 'zh';
 };

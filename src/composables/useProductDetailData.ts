@@ -2,7 +2,6 @@ import { computed, ref, toValue, type MaybeRefOrGetter } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications from "@/data/applications";
-import { products } from "@/data/products";
 import { videoCards } from "@/data/videos";
 import {
   getRelatedApplications,
@@ -10,12 +9,15 @@ import {
   hasProductRelations,
 } from "@/data/productRelations";
 import { createEmptyProductDetail, slugToI18nKey } from "@/data/productDetails";
+import { getProductCenterCardById } from "@/data/product-center";
 import type {
   ProductCase,
   ProductDetail,
   ProductDownload,
+  ProductFeature,
   ProductParam,
 } from "@/data/productDetails";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 export interface UseProductDetailDataOptions {
   baseDetail?: MaybeRefOrGetter<ProductDetail | null | undefined>;
@@ -41,11 +43,25 @@ export function useProductDetailData(
 ) {
   const { t, te, tm } = useI18n();
   const router = useRouter();
+  const { localizePath } = useLocalizedPath();
 
   const slugValue = computed(() => String(toValue(slug) || ""));
-  const currentProduct = computed(() =>
-    products.find((item) => item.slug === slugValue.value)
-  );
+  const currentProduct = computed(() => {
+    const record = getProductCenterCardById(slugValue.value);
+    if (!record) {
+      return null;
+    }
+
+    return {
+      slug: record.card.id,
+      image: record.card.image,
+      familyId: record.familyId,
+      familyTitleKey: record.familyTitleKey,
+      titleKey: record.card.titleKey,
+      summaryKey: record.card.summaryKey,
+      metrics: [],
+    };
+  });
   const baseDetail = computed(() => toValue(options.baseDetail) ?? null);
   const showApplications = computed(() => toValue(options.showApplications) ?? true);
   const showVideos = computed(() => toValue(options.showVideos) ?? true);
@@ -60,8 +76,12 @@ export function useProductDetailData(
     }
 
     const detail = createEmptyProductDetail();
-    detail.title = t(currentProduct.value.name);
-    detail.desc = t(currentProduct.value.desc);
+    detail.title = te(`${detailKey.value}.title`)
+      ? t(`${detailKey.value}.title`)
+      : t(currentProduct.value.titleKey);
+    detail.desc = te(`${detailKey.value}.desc`)
+      ? t(`${detailKey.value}.desc`)
+      : t(currentProduct.value.summaryKey);
     detail.image = currentProduct.value.image;
     return detail;
   };
@@ -72,9 +92,19 @@ export function useProductDetailData(
     }
 
     const fallbackTitle =
-      baseDetail.value?.title || (currentProduct.value ? t(currentProduct.value.name) : "");
+      baseDetail.value?.title ||
+      (currentProduct.value
+        ? (te(`${detailKey.value}.title`)
+            ? String(tm(`${detailKey.value}.title`))
+            : t(currentProduct.value.titleKey))
+        : "");
     const fallbackDesc =
-      baseDetail.value?.desc || (currentProduct.value ? t(currentProduct.value.desc) : "");
+      baseDetail.value?.desc ||
+      (currentProduct.value
+        ? (te(`${detailKey.value}.desc`)
+            ? String(tm(`${detailKey.value}.desc`))
+            : t(currentProduct.value.summaryKey))
+        : "");
     const fallbackImage = baseDetail.value?.image || currentProduct.value?.image || "";
     const fallbackFeatures = baseDetail.value?.features || [];
     const fallbackCases = baseDetail.value?.cases || [];
@@ -106,7 +136,7 @@ export function useProductDetailData(
       title: resolveScalar("title", fallbackTitle),
       desc: resolveScalar("desc", fallbackDesc),
       image: resolveScalar("image", fallbackImage),
-      features: resolveCollection<string>("features", fallbackFeatures),
+      features: resolveCollection<string | ProductFeature>("features", fallbackFeatures),
       cases: resolveCollection<ProductCase>("cases", fallbackCases),
       scenes: resolveCollection<string>("scenes", fallbackScenes),
       params: resolveCollection<ProductParam>("params", fallbackParams),
@@ -116,11 +146,13 @@ export function useProductDetailData(
 
   const detail = localizedProduct;
 
-  const categoryLabel = computed(() =>
-    currentProduct.value?.category === "robot"
-      ? t("home.coreProducts.robotLabel")
-      : t("home.coreProducts.systemLabel")
-  );
+  const categoryLabel = computed(() => {
+    if (!currentProduct.value) {
+      return "";
+    }
+
+    return t(currentProduct.value.familyTitleKey);
+  });
 
   const normalizedParams = computed(() =>
     (localizedProduct.value?.params || [])
@@ -140,13 +172,6 @@ export function useProductDetailData(
   );
 
   const heroMetrics = computed(() => {
-    if ((currentProduct.value?.metrics || []).length > 0) {
-      return (currentProduct.value?.metrics || []).slice(0, 4).map((metric) => ({
-        label: t(metric.label),
-        value: t(metric.value),
-      }));
-    }
-
     if (normalizedParams.value.length > 0) {
       return normalizedParams.value.slice(0, 4).map((param) => ({
         label: param.key,
@@ -181,7 +206,7 @@ export function useProductDetailData(
     return videoCards.slice(0, 3);
   });
 
-  const productFeatures = computed((): string[] => {
+  const productFeatures = computed((): Array<string | ProductFeature> => {
     return localizedProduct.value?.features || baseDetail.value?.features || [];
   });
 
@@ -198,7 +223,7 @@ export function useProductDetailData(
   const handleVideoClick = (index: number) => {
     const video = relatedVideos.value[index];
     if (video) {
-      router.push(`/video/${video.slug}`);
+      router.push(localizePath(`/video/${video.slug}`));
     }
   };
 

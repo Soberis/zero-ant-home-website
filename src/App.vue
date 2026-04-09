@@ -12,8 +12,9 @@
     </main>
     <!-- 页脚 -->
     <Footer />
-    <!-- 返回顶部按钮 -->
-    <BackToTop :visible="isBackToTopVisible" />
+    
+    <!-- 全站右侧悬浮工具栏 (包含返回顶部) -->
+    <FloatingCTA :visible="isFloatingCTALoaded" :show-back-to-top="isBackToTopVisible" />
   </div>
 </template>
 
@@ -22,11 +23,13 @@ import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/layout/NavBar.vue";
 import { scheduleScrollToTop } from "@/utils/scroll";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 // 非关键壳子组件异步加载，减少首屏同步体积
 const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue"));
-const BackToTop = defineAsyncComponent(() => import("@/components/common/BackToTop.vue"));
+const FloatingCTA = defineAsyncComponent(() => import("@/components/common/FloatingCTA.vue"));
 
 const router = useRouter();
+const { localizePath } = useLocalizedPath();
 
 function hasInAppHistory(): boolean {
   const historyState = window.history.state as { back?: string | null } | null;
@@ -74,13 +77,14 @@ const handleEscKey = (event: KeyboardEvent) => {
   if (hasInAppHistory()) {
     router.go(-1);
   } else {
-    void router.push("/").then(() => {
+    void router.push(localizePath("/")).then(() => {
       scheduleScrollToTop();
     });
   }
 };
 
 const isBackToTopVisible = ref(false);
+const isFloatingCTALoaded = ref(false);
 let ticking = false;
 
 const updateBackToTopVisibility = () => {
@@ -99,6 +103,11 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  // 延迟渲染浮动按钮，不抢占首屏资源
+  window.setTimeout(() => {
+    isFloatingCTALoaded.value = true;
+  }, 1500);
+
   // 添加全局键盘监听
   document.addEventListener("keydown", handleEscKey);
   window.addEventListener("scroll", handleScroll, true);

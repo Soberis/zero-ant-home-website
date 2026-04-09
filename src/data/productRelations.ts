@@ -1,166 +1,107 @@
-// 产品关联数据模块，管理产品与应用场景、视频案例的关联关系
+// 当前产品中心详情页的关联数据
+// 键统一使用 product-center 里的产品 id，而不是旧系统产品 slug。
 
 import type { Application } from "./applications";
 import type { VideoCard } from "./videos";
 import applications from "./applications";
 import { videoCards } from "./videos";
 
-/**
- * 产品关联配置接口
- */
 export interface ProductRelation {
-  // 关联的应用场景slug列表
   applicationSlugs: string[];
-  // 关联的视频案例slug列表
   videoSlugs: string[];
 }
 
-/**
- * 产品关联数据类型
- */
 export type ProductRelationsData = Record<string, ProductRelation>;
 
-/**
- * 产品关联配置数据
- * 键为产品slug，值为关联配置
- */
 export const productRelations: ProductRelationsData = {
-  // 系统产品
-  "multi-os-vm": {
-    applicationSlugs: [
-      "composite-systems",
-      "offline-programming",
-      "industrial-gateway",
-    ],
-    videoSlugs: [
-      "composite-robot-application",
-      "robotstudio-remote-control",
-      "offline-programming",
-    ],
+  "za-r3-x": {
+    applicationSlugs: ["semiconductor", "precision-assembly", "pharmaceutical-automation"],
+    videoSlugs: ["semiconductor", "four-axis-robot-open-fridge", "lab-tube-loading"],
   },
-
-  "industrial-rtos": {
-    applicationSlugs: [
-      "industrial-control",
-      "surface-treatment",
-      "precision-assembly",
-    ],
-    videoSlugs: [
-      "servo-motor-station",
-      "polishing-robot",
-      "rtos-ethercat-validation",
-    ],
+  "za-r3d6": {
+    applicationSlugs: ["semiconductor", "surface-treatment", "precision-assembly"],
+    videoSlugs: ["polishing-robot", "robot-polishing-demo", "assembly-robot"],
   },
-
-  airos: {
-    applicationSlugs: [
-      "semiconductor",
-      "medical-automation",
-      "intelligent-manufacturing",
-      "pharmaceutical-automation",
-    ],
-    videoSlugs: [
-      "ur-robot-llm-motion-capture",
-      "composite-robot-application",
-      "medical-automation",
-    ],
+  "za-r3l-m-h": {
+    applicationSlugs: ["pharmaceutical-automation", "precision-assembly", "semiconductor"],
+    videoSlugs: ["lab-tube-loading", "four-axis-robot-open-fridge", "semiconductor"],
   },
-
-  "robot-scheduler": {
-    applicationSlugs: ["smart-logistics", "intelligent-navigation"],
-    videoSlugs: [
-      "mobile-transfer-robot",
-      "agv-product-introduction",
-      "outdoor-patrol-robot",
-    ],
+  "za-r3m-left": {
+    applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
+    videoSlugs: ["fixed-rail-transfer-robot", "semiconductor", "gantry-2d3d"],
   },
-
-  // 机器人产品
-  "gantry-2d": {
-    applicationSlugs: ["semiconductor", "precision-assembly"],
-    videoSlugs: ["gantry-2d3d"],
+  "za-r3m-right": {
+    applicationSlugs: ["surface-treatment", "intelligent-manufacturing", "precision-assembly"],
+    videoSlugs: ["robot-polishing-demo", "polishing-robot", "assembly-robot"],
   },
-
-  "scara-4axis": {
-    applicationSlugs: [
-      "precision-assembly",
-      "pharmaceutical-automation",
-      "surface-treatment",
-    ],
-    videoSlugs: [
-      "mobile-transfer-robot",
-      "four-axis-robot-open-fridge",
-      "ur-robot-llm-motion-capture",
-    ],
+  "za-r3t": {
+    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
+    videoSlugs: ["dual-robot-ball-catching", "rice-molecular-experiment", "sketching-robot"],
   },
-
-  "arm-6axis": {
-    applicationSlugs: [
-      "semiconductor",
-      "surface-treatment",
-      "precision-assembly",
-    ],
-    videoSlugs: [
-      "polishing-robot",
-      "robot-polishing-demo",
-      "composite-robot-application",
-    ],
+  "za-m75": {
+    applicationSlugs: ["smart-logistics", "intelligent-navigation", "intelligent-patrol"],
+    videoSlugs: ["agv-product-introduction", "mobile-robot-chassis", "outdoor-patrol-robot"],
   },
-
-  "dual-arm-humanoid": {
-    applicationSlugs: ["intelligent-manufacturing"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "dual-robot-ball-catching", "vr-remote-franka-dual-arm"],
+  "za-m135": {
+    applicationSlugs: ["smart-logistics", "intelligent-navigation", "intelligent-patrol"],
+    videoSlugs: ["mobile-transfer-robot", "mobile-robot-chassis", "outdoor-patrol-robot"],
   },
-
-  "mobile-robot": {
-    applicationSlugs: ["smart-logistics", "intelligent-navigation"],
-    videoSlugs: [
-      "agv-product-introduction",
-      "outdoor-patrol-robot",
-      "mobile-robot-chassis",
-    ],
+  "za-mr3m": {
+    applicationSlugs: ["composite-systems", "smart-logistics", "intelligent-navigation"],
+    videoSlugs: ["composite-robot-application", "mobile-transfer-robot", "agv-product-introduction"],
+  },
+  "za-mr3t": {
+    applicationSlugs: ["ai-robotics", "intelligent-manufacturing", "composite-systems"],
+    videoSlugs: ["dual-robot-ball-catching", "vr-remote-franka-dual-arm", "composite-robot-application"],
+  },
+  "za-rmvr": {
+    applicationSlugs: ["ai-robotics", "offline-programming", "industrial-gateway"],
+    videoSlugs: ["vr-remote-franka-dual-arm", "offline-programming", "robotstudio-remote-control"],
+  },
+  "za-rmps": {
+    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
+    videoSlugs: ["vr-remote-franka-dual-arm", "dual-robot-ball-catching", "robotstudio-remote-control"],
+  },
+  "za-rdp": {
+    applicationSlugs: ["cultural-creative", "ai-robotics", "offline-programming"],
+    videoSlugs: ["sketching-robot", "offline-programming-logo-drawing", "offline-programming"],
+  },
+  "za-zg100": {
+    applicationSlugs: ["industrial-control", "offline-programming", "industrial-gateway"],
+    videoSlugs: ["rtos-ethercat-validation", "robotstudio-remote-control", "offline-programming"],
+  },
+  "rail": {
+    applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
+    videoSlugs: ["fixed-rail-transfer-robot", "gantry-2d3d", "semiconductor"],
+  },
+  "rotating-platform": {
+    applicationSlugs: ["surface-treatment", "precision-assembly", "intelligent-manufacturing"],
+    videoSlugs: ["robot-polishing-demo", "polishing-robot", "assembly-robot"],
   },
 };
 
-/**
- * 根据产品slug获取关联的应用场景
- * @param productSlug 产品slug
- * @returns 关联的应用场景列表
- */
 export const getRelatedApplications = (productSlug: string): Application[] => {
   const relation = productRelations[productSlug];
   if (!relation) return [];
 
-  return applications.filter((app) =>
-    relation.applicationSlugs.includes(app.slug)
-  );
+  const applicationMap = new Map(applications.map((app) => [app.slug, app] as const));
+
+  return relation.applicationSlugs
+    .map((slug) => applicationMap.get(slug))
+    .filter((app): app is Application => Boolean(app));
 };
 
-/**
- * 根据产品slug获取关联的视频案例
- * @param productSlug 产品slug
- * @returns 关联的视频案例列表
- */
 export const getRelatedVideos = (productSlug: string): VideoCard[] => {
   const relation = productRelations[productSlug];
   if (!relation) return [];
 
-  return videoCards.filter((video) => relation.videoSlugs.includes(video.slug));
+  const videoCardMap = new Map(videoCards.map((video) => [video.slug, video] as const));
+
+  return relation.videoSlugs
+    .map((slug) => videoCardMap.get(slug))
+    .filter((video): video is VideoCard => Boolean(video));
 };
 
-/**
- * 检查产品是否有关联数据
- * @param productSlug 产品slug
- * @returns 是否有关联数据
- */
 export const hasProductRelations = (productSlug: string): boolean => {
   return productSlug in productRelations;
-};
-
-/**
- * 获取所有已配置关联的产品slug列表
- * @returns 产品slug列表
- */
-export const getAllRelatedProductSlugs = (): string[] => {
-  return Object.keys(productRelations);
 };

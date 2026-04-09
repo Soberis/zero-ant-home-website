@@ -1,9 +1,8 @@
 <template>
-  <div class="products-shell" :class="[`products-shell--${theme}`]">
+  <div id="products-page-top" class="products-shell" :class="[`products-shell--${theme}`]">
     <section class="products-hero">
       <div class="products-container products-hero__inner">
         <div class="products-hero__copy">
-          <span class="products-hero__eyebrow">{{ eyebrow }}</span>
           <h1 class="products-hero__title text-display-hero">{{ title }}</h1>
           <p class="products-hero__description">{{ description }}</p>
 
@@ -21,7 +20,7 @@
 
               <router-link
                 v-else
-                :to="action.to"
+                :to="localizeTo(action.to)"
                 class="btn"
                 :class="`btn-${action.variant ?? 'primary'}`"
               >
@@ -57,9 +56,6 @@
     >
       <div class="products-container">
         <div class="products-overview__header">
-          <span v-if="overviewEyebrow" class="products-overview__eyebrow">
-            {{ overviewEyebrow }}
-          </span>
           <h2 v-if="overviewTitle" class="products-overview__title">{{ overviewTitle }}</h2>
           <p v-if="overviewDescription" class="products-overview__description">
             {{ overviewDescription }}
@@ -77,7 +73,6 @@
     <section v-if="resolvedGuideItems.length" class="products-guide">
       <div class="products-container">
         <div class="products-guide__header">
-          <span v-if="guideEyebrow" class="products-guide__eyebrow">{{ guideEyebrow }}</span>
           <h2 class="products-guide__title">{{ guideTitle }}</h2>
         </div>
 
@@ -98,6 +93,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 interface ProductsLayoutAction {
   label: string;
@@ -118,25 +114,20 @@ interface ProductsLayoutGuideItem {
 const props = withDefaults(
   defineProps<{
     theme: "system" | "robot";
-    eyebrow: string;
     title: string;
     description: string;
     actions?: ProductsLayoutAction[];
     metrics?: ProductsLayoutMetric[];
-    overviewEyebrow?: string;
     overviewTitle?: string;
     overviewDescription?: string;
-    guideEyebrow?: string;
     guideTitle?: string;
     guideItems?: ProductsLayoutGuideItem[];
   }>(),
   {
     actions: () => [],
     metrics: () => [],
-    overviewEyebrow: "",
     overviewTitle: "",
     overviewDescription: "",
-    guideEyebrow: "",
     guideTitle: "",
     guideItems: () => [],
   }
@@ -144,6 +135,7 @@ const props = withDefaults(
 
 const resolvedActions = computed(() => props.actions ?? []);
 const resolvedGuideItems = computed(() => props.guideItems ?? []);
+const { localizeTo } = useLocalizedPath();
 
 const isHashLink = (to: string): boolean => to.startsWith("#");
 const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim());
@@ -160,7 +152,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   --products-accent-soft: rgba(26, 58, 143, 0.06);
   --products-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
   min-height: 100vh;
-  padding: 80px 0 96px;
+  padding: 0 0 96px;
   background: #ffffff;
 }
 
@@ -177,21 +169,29 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 .products-hero {
   position: relative;
-  padding: 0;
+  min-height: var(--compact-hero-min-height);
+  padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
+    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
 }
 
 .products-hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  grid-template-columns: minmax(0, 1fr)
+    minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
 }
 
 .products-hero__copy {
   position: relative;
-  max-width: min(740px, 100%);
-  padding: 24px 0 0;
+  max-width: var(--compact-hero-copy-max-width);
+  padding: var(--compact-hero-copy-padding-top) 0 var(--compact-hero-copy-padding-bottom);
 }
 
 .products-hero__panel {
@@ -200,9 +200,9 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  max-width: 260px;
+  max-width: var(--compact-hero-panel-width);
   margin-left: 0;
-  padding: 24px 0 0;
+  padding: var(--compact-hero-panel-padding-top) 0 0;
   border-left: none;
   border-radius: 0;
   background: transparent;
@@ -213,18 +213,6 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__panel > * {
   position: relative;
   z-index: 1;
-}
-
-.products-hero__eyebrow,
-.products-overview__eyebrow,
-.products-guide__eyebrow {
-  display: block;
-  margin: 0 0 16px;
-  color: var(--products-text);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .products-hero__title {
@@ -246,8 +234,8 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__description {
   max-width: 40rem;
   margin: 0 0 24px;
-  font-size: 1.02rem;
-  line-height: 1.85;
+  font-size: var(--compact-hero-description-size);
+  line-height: var(--compact-hero-description-line-height);
 }
 
 .products-hero__actions {
@@ -255,6 +243,12 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 0;
+}
+
+.products-hero__actions .btn {
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
+  font-size: var(--compact-hero-button-font-size);
 }
 
 .products-hero__action {
@@ -304,7 +298,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__metrics {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 20px;
   width: 100%;
   margin-top: 0;
   padding-bottom: 0;
@@ -314,13 +308,14 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__metric {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--compact-hero-kpi-gap);
   position: relative;
-  padding: 18px 0;
+  padding: 0;
 }
 
 .products-hero__metric + .products-hero__metric {
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-top: 1px solid var(--compact-hero-kpi-divider-color);
+  padding-top: 20px;
 }
 
 .products-hero__metric-value {
@@ -333,9 +328,10 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric--numeric .products-hero__metric-value {
-  font-size: clamp(2.1rem, 3vw, 2.9rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-size: var(--compact-hero-kpi-value-size);
+  line-height: var(--compact-hero-kpi-value-line-height);
+  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
+  color: var(--products-title); /* 改回深色，保持全站一致 */
 }
 
 .products-hero__metric--text .products-hero__metric-value {
@@ -343,8 +339,8 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric-label {
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: var(--compact-hero-kpi-label-size);
+  line-height: var(--compact-hero-kpi-label-line-height);
   color: var(--products-text);
   font-weight: 500;
 }
@@ -353,12 +349,20 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   .products-hero__description {
     white-space: nowrap;
   }
+
+  .products-overview__header {
+    max-width: none;
+  }
+
+  .products-overview__description {
+    white-space: nowrap;
+  }
 }
 
 .products-overview {
-  margin-top: 28px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 32px;
+  padding-top: 40px;
+  padding-top: 40px;
 }
 
 .products-guide__item {
@@ -381,7 +385,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-main {
-  margin-top: 24px;
+  margin-top: 28px;
 }
 
 .products-main__inner {
@@ -391,32 +395,32 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-guide {
-  margin-top: 28px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 56px;
+  padding: 56px 0 0;
+  padding: 56px 0 0;
 }
 
 .products-guide__header {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .products-guide__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+  gap: 40px;
 }
 
 .products-guide__item {
+  position: relative;
   padding: 0;
   border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .products-guide__item + .products-guide__item {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
   border-left: 1px solid rgba(15, 23, 42, 0.06);
-  padding-left: 24px;
+  padding-left: 40px;
 }
 
 .products-guide__item-title {
@@ -429,7 +433,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 @media (max-width: 1100px) {
   .products-shell {
-    padding-top: 72px;
+    padding-top: 0;
   }
 
   .products-hero__inner {
@@ -444,47 +448,44 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
     max-width: none;
     margin-left: 0;
   }
-}
-
-@media (max-width: 900px) {
-  .products-hero__panel {
-    padding: 16px 0 0;
-    border-left: none;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-  }
-
-  .products-hero__metrics {
-    gap: 0;
-  }
-
-  .products-guide__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .products-hero__metric {
-    padding: 14px 0;
-  }
-
-  .products-hero__metric + .products-hero__metric {
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-  }
-  
-  .products-guide__grid {
-    gap: 0;
-  }
 
   .products-guide__item + .products-guide__item {
     border-left: none;
     padding-left: 0;
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+}
+
+@media (max-width: 900px) {
+  .products-hero {
+    padding: 104px 0 52px;
+  }
+
+  .products-hero__panel {
+    padding: 18px 0 0;
+  }
+
+  .products-guide__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .products-hero__metric {
+    padding: 0;
+  }
+
+  .products-guide__item + .products-guide__item {
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    padding-top: 24px;
   }
 }
 
 @media (max-width: 640px) {
   .products-shell {
-    padding: 72px 0 64px;
+    padding: 0 0 64px;
+  }
+
+  .products-hero {
+    padding-top: 86px;
   }
 
   .products-hero__copy {
@@ -500,8 +501,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   }
 
   .products-overview {
-    margin-top: 26px;
-    padding-top: 24px;
+    margin-top: 24px;
   }
 
   .products-guide__item {

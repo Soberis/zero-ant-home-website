@@ -6,25 +6,35 @@
     <!-- 物理层 I18n 锁定：在 JS 加载前，强制同步 html.lang 属性，消除语义抖动 -->
     <script>
       (function() {
-        var saved = localStorage.getItem('language');
-        var lang = (saved === 'zh' || saved === 'en') ? saved : (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        var pathname = window.location.pathname || '/';
+        var lang = (pathname === '/en' || pathname.indexOf('/en/') === 0) ? 'en' : 'zh';
         document.documentElement.setAttribute('lang', lang);
+      })();
+    </script>
+    <!-- 百度统计埋点代码 -->
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; // 替换为真实的 Site ID
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
       })();
     </script>
     <!-- 安全策略 -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://rsms.me; font-src 'self' https://fonts.gstatic.com https://rsms.me; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://www.google-analytics.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://player.bilibili.com https://m.bilibili.com https://www.bilibili.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://hm.baidu.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://rsms.me; font-src 'self' https://fonts.gstatic.com https://rsms.me; img-src 'self' data: https: https://hm.baidu.com; connect-src 'self' https://api.github.com https://www.google-analytics.com https://hm.baidu.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://player.bilibili.com https://m.bilibili.com https://www.bilibili.com; object-src 'none'; base-uri 'self'; form-action 'self';"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
     <link rel="dns-prefetch" href="https://player.bilibili.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <!-- SEO 基础信息 -->
-    <meta name="description" content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。" />
+    <meta name="description" content="零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。" />
     <meta
       name="keywords"
-      content="零蚁科技, 工业机器人, 智能制造, 机器人技术, 自动化设备, 四轴机器人, 六轴机械臂, 双臂人形机器人, 移动机器人, AiROS, 机器人操作系统, 医疗自动化, 半导体加工, 精密制造, 工业自动化解决方案, 机器人控制系统, 杭州机器人公司"
+      content="零蚁科技, 工业机器人, 智能机器人, 智能制造, AiROS, 机器人操作系统, 四轴机器人, 六轴机械臂, 移动底盘, 复合机器人, 具身开发平台, 生物医药, 半导体, 机器人智能系统方案, 杭州机器人公司"
     />
     <meta name="author" content="杭州零蚁科技有限公司" />
     <meta name="robots" content="index, follow" />
@@ -40,7 +50,7 @@
     <meta property="og:title" content="零蚁科技 - 让机器人无处不在" />
     <meta
       property="og:description"
-      content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
+      content="零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。"
     />
     <meta property="og:url" content="https://zeroant.com" />
     <meta property="og:type" content="website" />
@@ -53,7 +63,7 @@
     <meta name="twitter:title" content="零蚁科技 - 让机器人无处不在" />
     <meta
       name="twitter:description"
-      content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
+      content="零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。"
     />
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -68,7 +78,7 @@
         "industry": "Industrial Automation",
         "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 20 },
         "address": { "@type": "PostalAddress", "streetAddress": "浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室", "addressCountry": "CN" },
-        "description": "零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
+        "description": "零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。"
       }
     </script>
     <!-- Google Fonts - Outfit & Inter -->
@@ -81,7 +91,56 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <style>
+        .za-initial-loader {
+          position: fixed;
+          top: 0; left: 0; width: 100%; height: 100%;
+          background: #f8f9fb;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          font-family: "Outfit", -apple-system, sans-serif;
+        }
+        .za-loader-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+        .za-loader-spinner {
+          width: 36px;
+          height: 36px;
+          border: 3px solid rgba(26, 58, 143, 0.1);
+          border-top-color: #1a3a8f;
+          border-radius: 50%;
+          animation: za-spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        .za-loader-text {
+          color: #1a3a8f;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          opacity: 0.8;
+          animation: za-pulse 2s ease-in-out infinite;
+        }
+        @keyframes za-spin {
+          to { transform: rotate(360deg); }
+        }
+        @keyframes za-pulse {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
+        }
+      </style>
+      <div class="za-initial-loader">
+        <div class="za-loader-content">
+          <div class="za-loader-spinner"></div>
+          <div class="za-loader-text">ZEROANT</div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

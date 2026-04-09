@@ -12,7 +12,7 @@
           <ul>
             <li v-for="item in section.items" :key="item.hash">
               <router-link
-                :to="{ path: section.to, hash: item.hash }"
+                :to="localizeTo({ path: section.to, hash: item.hash })"
                 class="footer-link"
               >
                 {{ $t(item.label) }}
@@ -94,6 +94,9 @@ import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
 import taobaoQrcode from "@/assets/images/qrcodes/taobao.png";
 import wxQrcode from "@/assets/images/qrcodes/wx.webp";
 import { footerNavSections } from "@/data/navigation";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
+
+const { localizeTo } = useLocalizedPath();
 </script>
 
 <style scoped lang="less">
@@ -114,8 +117,8 @@ import { footerNavSections } from "@/data/navigation";
 
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); // 统一 6 列导航
-  gap: 48px 40px; // 适量增大间距
+  grid-template-columns: repeat(5, 1fr); // 完美均分 5 列导航
+  gap: 56px 40px; // 加大上下间距
   align-items: start;
 }
 
@@ -183,7 +186,7 @@ import { footerNavSections } from "@/data/navigation";
 }
 
 .qrcode-col {
-  grid-column: 5 / span 2; // 跳过第 4 列，从第 5 列开始，避免太靠右
+  grid-column: 4 / span 2; // 定位在第 4、5 列，整体往左移一点，完美避开右侧悬浮栏
   justify-self: start;
 }
 

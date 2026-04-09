@@ -10,10 +10,10 @@
   />
   <RouteNotFoundState
     v-else
-    :title="t('applicationsPage.notFound')"
-    :description="t('applicationsPage.notFoundDescription')"
-    :action-label="t('applicationsPage.backToSolutions')"
-    to="/solutions"
+    :title="t('notFoundPage.title')"
+    :description="t('notFoundPage.description')"
+    :action-label="t('notFoundPage.backHome')"
+    to="/"
   />
 </template>
 
@@ -23,15 +23,23 @@ import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications, { type Application } from "@/data/applications";
 import { computed, type ComputedRef, onMounted, watch } from "vue";
-import { videoCards, videoMap, type VideoDetail } from "@/data/videos";
+import { getVideoThumbnailById, videoMap, type VideoDetail } from "@/data/videos";
 import { setSEO, setStructuredData } from "@/utils/seo";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
 import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  getAlternateLanguageLinks,
+  getLocaleFromPath,
+  getOgLocale,
+  stripLocalePrefix,
+} from "@/utils/localeRoute";
 
 const route = useRoute();
 const router = useRouter();
 const { t, locale } = useI18n();
+const { localizePath } = useLocalizedPath();
 
 const slug: ComputedRef<string> = computed(() => route.params.slug as string);
 const rawDetail: ComputedRef<Application | undefined> = computed(() =>
@@ -60,7 +68,7 @@ const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
 
 const videoThumbnail = computed(() => {
   const videoKey = detail.value?.video;
-  return videoKey ? videoCards.find((item) => item.slug === videoKey)?.img || "" : "";
+  return videoKey ? getVideoThumbnailById(videoKey) || "" : "";
 });
 
 const mediaInfo = computed(() => {
@@ -81,72 +89,112 @@ const seoMetadata = computed(() => {
   const appTitle = detail.value.title;
   const appDesc = detail.value.description.replace(/<[^>]*>/g, ""); // 移除HTML标签
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${route.fullPath}`;
+  const localeCode = getLocaleFromPath(route.path);
+  const currentUrl = `${baseUrl}${route.path}`;
+  const ogLocale = getOgLocale(localeCode);
 
   return {
+    htmlLang: localeCode,
     title: appTitle,
     description: appDesc,
     keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化, ZeroAnt, 零蚁科技`,
     ogTitle: appTitle,
     ogDescription: appDesc,
     ogType: "article",
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
     ogUrl: currentUrl,
-    ogImage: `${baseUrl}/logo.webp`,
+    ogImage: videoThumbnail.value || `${baseUrl}/logo.webp`,
     twitterCard: "summary_large_image",
     twitterTitle: appTitle,
     twitterDescription: appDesc,
     canonical: currentUrl,
+    alternates: getAlternateLanguageLinks(baseUrl, stripLocalePrefix(route.path)),
   };
 });
 
-// Article结构化数据
-const articleStructuredData = computed(() => {
+// 应用详情结构化数据
+const applicationStructuredData = computed(() => {
   if (!detail.value) return null;
 
   const appTitle = detail.value.title;
   const appDesc = detail.value.description.replace(/<[^>]*>/g, ""); // 移除HTML标签
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const localeCode = getLocaleFromPath(route.path);
+  const currentUrl = `${baseUrl}${route.path}`;
+  const solutionsPath = stripLocalePrefix(route.path).startsWith("/applications/")
+    ? stripLocalePrefix(route.path).replace(/\/applications\/.+$/, "/solutions")
+    : "/solutions";
+  const detailImage = videoThumbnail.value || `${baseUrl}/logo.webp`;
 
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: appTitle,
-    description: appDesc,
-    author: {
-      "@type": "Organization",
-      name: "ZeroAnt Technology",
-      url: window.location.origin,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "ZeroAnt Technology",
-      url: window.location.origin,
-      logo: {
-        "@type": "ImageObject",
-        url: `${window.location.origin}/logo.webp`,
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: appTitle,
+      description: appDesc,
+      inLanguage: localeCode,
+      articleSection: "Applications",
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": currentUrl,
       },
+      image: detailImage,
+      author: {
+        "@type": "Organization",
+        name: "ZeroAnt Technology",
+        url: baseUrl,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "ZeroAnt Technology",
+        url: baseUrl,
+        logo: {
+          "@type": "ImageObject",
+          url: `${baseUrl}/logo.webp`,
+        },
+      },
+      keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化`,
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${window.location.origin}${route.fullPath}`,
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: t("nav.home"),
+          item: `${baseUrl}${localeCode === "en" ? "/en" : "/"}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: t("nav.solutions"),
+          item: `${baseUrl}${localeCode === "en" ? "/en/solutions" : solutionsPath}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: appTitle,
+          item: currentUrl,
+        },
+      ],
     },
-    image: `${window.location.origin}/logo.webp`,
-    articleSection: "应用场景",
-    keywords: `${appTitle}, 应用场景, 行业应用, 机器人, 自动化`,
-  };
+  ];
 });
 
 // 设置SEO和结构化数据
 const updateSEO = () => {
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${route.fullPath}`;
+  const currentUrl = `${baseUrl}${route.path}`;
 
   if (!seoMetadata.value) {
     setSEO({
-      title: t("applicationsPage.notFound"),
-      description: t("seo.solutions.description"),
+      title: t("notFoundPage.title"),
+      description: t("notFoundPage.description"),
       keywords: t("seo.solutions.keywords"),
-      ogTitle: t("applicationsPage.notFound"),
-      ogDescription: t("seo.solutions.description"),
+      ogTitle: t("notFoundPage.title"),
+      ogDescription: t("notFoundPage.description"),
       ogUrl: currentUrl,
       ogImage: `${baseUrl}/logo.webp`,
       ogImageWidth: 1200,
@@ -163,8 +211,8 @@ const updateSEO = () => {
     ogImageHeight: 630,
   });
 
-  if (articleStructuredData.value) {
-    setStructuredData(articleStructuredData.value);
+  if (applicationStructuredData.value) {
+    setStructuredData(applicationStructuredData.value);
   } else {
     setStructuredData([]);
   }
@@ -191,10 +239,7 @@ const nextSlug: ComputedRef<string | null> = computed(() =>
 
 function goTo(targetSlug: string | null): void {
   if (targetSlug) {
-    router.push({
-      name: route.name || undefined,
-      params: { slug: targetSlug },
-    });
+    router.push(localizePath(`/applications/${targetSlug}`));
   }
 }
 

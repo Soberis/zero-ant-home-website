@@ -59,7 +59,7 @@ const applications: Application[] = [
     slug: "precision-assembly",
     title: "applications.precision-assembly.title",
     description: "applications.precision-assembly.description",
-    video: "ur-robot-llm-motion-capture",
+    video: "assembly-robot",
     svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24V16H32V24H40V32H8V24H16Z" stroke="#14367f" stroke-width="2" stroke-linejoin="round"/><path d="M24 16V8" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {

@@ -3,7 +3,6 @@
     <section class="careers-hero">
       <div class="page-shell hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow">JOIN US</p>
           <h1 class="hero-title text-display-hero">{{ $t("careers.heroTitle") }}</h1>
           <p class="hero-subtitle">{{ $t("careers.heroSubtitle") }}</p>
 
@@ -57,7 +56,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("careers.whyJoinTitle") }}</span>
-            <span class="title-en">WHY CHOOSE US</span>
           </h2>
         </div>
 
@@ -80,7 +78,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("careers.hotPositionsTitle") }}</span>
-            <span class="title-en">OPEN POSITIONS</span>
           </h2>
         </div>
 
@@ -136,7 +133,6 @@
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ $t("careers.contactUsTitle") }}</span>
-                <span class="title-en">CONTACT US</span>
               </h2>
             </div>
             <p class="contact-description">
@@ -316,7 +312,7 @@ function applyForPosition(position: Position): void {
   background: var(--brand-surface);
 }
 
-.careers-page > .page-section:nth-of-type(even) {
+.careers-page > .page-section:nth-of-type(odd) {
   background-color: var(--brand-surface-soft);
 }
 
@@ -328,30 +324,24 @@ function applyForPosition(position: Position): void {
 }
 
 .careers-hero {
-  padding: 84px 0 88px;
+  min-height: var(--compact-hero-min-height);
+  padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
+  background:
+    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
+    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  grid-template-columns: minmax(0, 1fr)
+    minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
 }
 
 .hero-copy {
-  max-width: 720px;
-  padding: 16px 0 12px;
-}
-
-.hero-eyebrow,
-.section-eyebrow {
-  display: block;
-  margin: 0 0 16px;
-  color: var(--brand-muted);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  max-width: var(--compact-hero-copy-max-width);
+  padding: var(--compact-hero-copy-padding-top) 0 var(--compact-hero-copy-padding-bottom);
 }
 
 .hero-title {
@@ -363,8 +353,8 @@ function applyForPosition(position: Position): void {
   max-width: 32em;
   margin: 0;
   color: var(--brand-muted);
-  font-size: 1.05rem;
-  line-height: 1.85;
+  font-size: var(--compact-hero-description-size);
+  line-height: var(--compact-hero-description-line-height);
 }
 
 .hero-actions {
@@ -428,11 +418,17 @@ function applyForPosition(position: Position): void {
 
 .hero-panel {
   width: 100%;
-  max-width: 340px;
+  max-width: var(--compact-hero-panel-width);
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding-top: 18px;
+  padding-top: var(--compact-hero-panel-padding-top);
+}
+
+.hero-action {
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
+  font-size: var(--compact-hero-button-font-size);
 }
 
 .hero-promises {
@@ -453,15 +449,16 @@ function applyForPosition(position: Position): void {
 .hero-promise-head {
   display: flex;
   align-items: flex-end;
-  gap: 6px;
+  gap: var(--compact-hero-kpi-gap);
 }
 
 .hero-promise-value {
   color: var(--brand-text);
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-family: "Outfit", sans-serif;
+  font-size: var(--compact-hero-kpi-value-size);
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: var(--compact-hero-kpi-value-line-height);
+  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
 }
 
 .hero-promise-unit {
@@ -482,7 +479,7 @@ function applyForPosition(position: Position): void {
 .hero-panel-label {
   margin: 0 0 12px;
   color: var(--brand-muted);
-  font-size: 0.82rem;
+  font-size: var(--compact-hero-kpi-label-size);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -590,17 +587,13 @@ function applyForPosition(position: Position): void {
   column-gap: 16px;
   row-gap: 0;
   align-items: start;
-  padding: 20px 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.07);
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  transition: none;
+  padding: 24px;
+  background: var(--brand-surface-soft);
+  border-radius: 16px;
 }
 
 .benefit-card:nth-child(-n+2) {
-  border-top: none;
-  padding-top: 0;
+  /* removed */
 }
 
 .benefit-index {
@@ -636,18 +629,26 @@ function applyForPosition(position: Position): void {
 
 .positions-list {
   display: grid;
-  gap: 0;
+  gap: 24px;
 }
 
 .position-card {
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  background: transparent;
-  padding: 32px 0;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 32px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.position-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(26, 58, 143, 0.12);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
 }
 
 .position-card:first-child {
-  padding-top: 0;
-  border-top: none;
+  /* padding-top: 0; */
+  /* border-top: none; */
 }
 
 .position-header {

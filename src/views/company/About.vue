@@ -24,7 +24,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.companyIntro") }}</span>
-            <span class="title-en">COMPANY PROFILE</span>
           </h2>
         </div>
 
@@ -73,7 +72,6 @@
 <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.history") }}</span>
-            <span class="title-en">MILESTONES</span>
           </h2>
         </div>
 
@@ -103,7 +101,6 @@
 <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.honor") }}</span>
-            <span class="title-en">HONORS</span>
           </h2>
         </div>
 
@@ -125,17 +122,15 @@
 <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("about.coreValues.title") }}</span>
-            <span class="title-en">CORE VALUES</span>
           </h2>
         </div>
 
         <div class="values-grid">
           <article
-            v-for="(value, idx) in coreValues"
+            v-for="value in coreValues"
             :key="value"
             class="value-card"
           >
-            <span class="card-index">{{ formatIndex(idx + 1) }}</span>
             <span class="value-text">{{ value }}</span>
           </article>
         </div>
@@ -147,7 +142,6 @@
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.culture") }}</span>
-            <span class="title-en">CULTURE</span>
           </h2>
         </div>
 
@@ -171,7 +165,6 @@
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ $t("nav.contact") }}</span>
-                <span class="title-en">CONTACT US</span>
               </h2>
             </div>
           </div>
@@ -423,27 +416,42 @@ function formatIndex(value: number): string {
 }
 
 .info-panel,
-.culture-card,
 .timeline-card {
   background: transparent;
   border: none;
   box-shadow: none;
   border-radius: 0;
   padding: 0;
-  transition: none;
+  transition: transform 0.25s ease;
 }
 
 .intro-side .info-panel + .info-panel {
   padding-top: 8px;
 }
 
-.honor-card,
-.value-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0;
+.culture-card {
+  background: #f8f9fb;
+  border-radius: 16px;
+  padding: 32px 40px;
   box-shadow: none;
+}
+
+.honor-card {
+  background: var(--brand-surface-soft);
+  border: none;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: none;
+}
+
+.value-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .panel-title {
@@ -456,27 +464,38 @@ function formatIndex(value: number): string {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px 24px;
+  gap: 16px;
 }
 
 .stat-card {
-  border-radius: 0;
-  background: transparent;
-  padding: 0;
+  padding: 24px;
+  background: var(--brand-surface-soft);
+  border: none;
+  border-radius: 12px;
+  transition: all var(--transition-smooth);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: #ffffff;
+  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .stat-number {
   display: block;
   margin-bottom: 8px;
-  color: var(--brand-primary-deep);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--brand-primary-deep);
 }
 
 .stat-label {
   color: var(--brand-muted);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
+  font-weight: 500;
   line-height: 1.6;
 }
 
@@ -489,6 +508,14 @@ function formatIndex(value: number): string {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr);
   gap: 20px;
+}
+
+.timeline-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .timeline-rail {
@@ -549,12 +576,12 @@ function formatIndex(value: number): string {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 22px 0;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  padding: 24px;
+  border-bottom: none;
 }
 
 .honor-card:nth-child(odd) {
-  padding-right: 0;
+  padding-right: 24px;
 }
 
 .honor-card:nth-last-child(-n+2) {
@@ -579,46 +606,56 @@ function formatIndex(value: number): string {
 }
 
 .values-grid {
-  display: flex;
-  align-items: flex-start;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .value-card {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 0 0;
+  gap: 16px;
+  /* background/border is set in top block */
+  transition: all var(--transition-smooth);
 }
 
-.value-card:first-child {
-  padding-left: 0;
-}
-
-#core-values .card-index {
-  width: auto;
-  padding-top: 0;
-  color: rgba(26, 58, 143, 0.28);
+.value-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.04);
 }
 
 .value-text {
   color: var(--brand-text);
-  font-size: 1.08rem;
-  font-weight: 650;
+  font-size: 1.15rem;
+  font-weight: 600;
   line-height: 1.45;
 }
 
 .culture-list {
-  margin: 18px 0 0;
+  margin: 20px 0 0;
   padding: 0;
   list-style: none;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
-.culture-card {
-  padding: 28px 0;
+.culture-list li {
+  position: relative;
+  padding-left: 24px;
+  color: var(--brand-text);
+  line-height: 1.7;
+}
+
+.culture-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background-color: var(--brand-primary);
+  border-radius: 50%;
 }
 
 .contact-section {
@@ -647,7 +684,11 @@ function formatIndex(value: number): string {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-top: 0;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .contact-card--wide {

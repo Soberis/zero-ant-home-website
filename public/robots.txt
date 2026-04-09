@@ -8,10 +8,9 @@ Allow: /
 # Explicitly allow important pages for better SEO
 Allow: /about
 Allow: /careers
-Allow: /contact
 Allow: /applications
-Allow: /system-products
-Allow: /robot-products
+Allow: /products
+Allow: /solutions
 Allow: /video
 Allow: /support
 
@@ -59,8 +58,8 @@ Allow: /
 Allow: /about
 Allow: /careers
 Allow: /applications
-Allow: /system-products
-Allow: /robot-products
+Allow: /products
+Allow: /solutions
 Allow: /video
 Allow: /support
 
@@ -87,4 +86,4 @@ Sitemap: https://zeroant.com/sitemap.xml
 # Sitemap: https://zeroant.com/sitemap-images.xml
 
 # Host directive (optional, for specifying preferred domain)
-Host: https://zeroant.com
+Host: zeroant.com

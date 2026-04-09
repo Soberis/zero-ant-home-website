@@ -89,8 +89,7 @@ if (typeof window !== "undefined") {
           case "Solutions":
             setupSolutionsSEO(to);
             break;
-          case "SystemProductDetail":
-          case "RobotProductDetail":
+          case "ProductDetail":
             setupProductDetailSEO(to);
             break;
           default:

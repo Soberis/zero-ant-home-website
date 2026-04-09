@@ -5,17 +5,13 @@
   "slogan2": "Make the coolest robots",
   "nav": {
     "home": "Home",
-    "systemProducts": "System",
-    "multiOSVM": "Multi-OS Embedded VM",
-    "industrialRTOS": "@:common.terms.industrialRealTimeOS",
-    "airos": "AiROS Robot OS",
-    "robotScheduler": "@:common.terms.robotSchedulerSystem",
-    "robotProducts": "Robot",
-    "gantry2D": "@:common.terms.gantry23Dof",
-    "scara4Axis": "SCARA 4-Axis Arm",
-    "arm6Axis": "@:common.terms.sixAxisArm",
-    "dualArmHumanoid": "@:common.terms.dualArmHumanoidRobot",
-    "mobileRobot": "@:common.terms.mobileRobot",
+    "products": "Product Center",
+    "rSeries": "R Series",
+    "mSeries": "M Series",
+    "mrSeries": "MR Series",
+    "embodiedPlatforms": "Embodied & Dev Platforms",
+    "controller": "Controller",
+    "accessories": "Accessories",
     "solutions": "Solutions",
     "support": "Support",
     "download": "@:common.terms.downloads",
@@ -36,7 +32,15 @@
       "viewSolutions": "Explore Solutions",
       "contactTeam": "Contact Team",
       "downloadNow": "Download Now",
-      "backToTop": "Back to Top"
+      "backToTop": "Back to Top",
+      "learnProducts": "Explore Products",
+      "bookDemo": "Book Demo",
+      "onlineConsult": "Chat Now",
+      "serviceHotline": "Service Hotline",
+      "wecomTitle": "Scan for WeCom",
+      "wecomDesc": "Get more info",
+      "taobaoTitle": "Official Taobao",
+      "taobaoDesc": "Click or scan to buy"
     },
     "status": {
       "noVideo": "No video available",
@@ -55,29 +59,23 @@
       "industrialAutomation": "Industrial Automation",
       "medicalAutomation": "Medical Automation",
       "semiconductorProcessing": "Semiconductor Processing",
-      "mobileRobot": "Mobile Robot",
       "smartLogistics": "Smart Logistics",
       "industrialControl": "Industrial Control",
       "motionControl": "Motion Control",
       "offlineProgramming": "Offline Programming",
+      "andOthers": " / etc.",
+      "solutionDirections": "Solution directions",
+      "relatedProducts": "Related products",
+      "featuredCases": "Featured cases",
       "autonomousNavigation": "Autonomous Navigation",
       "complexTrajectory": "Complex Paths",
-      "robotProducts": "Robot Products",
-      "systemProducts": "System Products",
       "featuredCase": "Featured case",
       "coreValues": "Core Values",
       "afterSalesService": "After-sales Service",
       "industrySolutions": "Industry Solutions",
       "corporateCulture": "Corporate Culture",
       "automation": "Automation",
-      "industrialRealTimeOS": "Industrial Real-Time OS",
-      "airosRobotOperatingSystem": "AiROS Robot Operating System",
-      "multiOsHybridHypervisor": "Multi-OS Hybrid Deployment Embedded Hypervisor",
-      "robotSchedulerSystem": "Robot Scheduler System",
       "gantry23Dof": "2/3-DOF Gantry",
-      "sixAxisArm": "6-Axis Arm",
-      "dualArmHumanoidRobot": "Dual-Arm Humanoid Robot",
-      "fourAxisScaraRobot": "4-Axis SCARA Robot",
       "surfaceTreatment": "Surface Treatment",
       "precisionAssembly": "Precision Assembly",
       "compositeRobot": "Composite Robot",
@@ -92,161 +90,80 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "ZeroAnt Robotics Platform",
-      "title": "In-house robotics platform",
-      "description": "From robot products and industry solutions to delivery support, quickly see how your scenario can land.",
-      "panelLabel": "Featured Product",
+      "title": "Precision Transfer Robot Platform",
+      "description": "Built for precision transfer, compact-space operation, and lift-linked workflows so teams can judge form factor, extension combinations, and delivery paths faster.",
+      "panelLabel": "Product Center",
+      "primaryCta": "@:common.cta.learnProducts",
+      "secondaryCta": "@:common.cta.bookDemo",
       "tabs": {
         "scara": "SCARA",
         "humanoid": "Humanoid"
       }
     },
     "coreProducts": {
-      "eyebrow": "Product Matrix",
-      "title": "Core Products",
-      "description": "Start with the runtime base, control platform, and execution hardware.",
-      "systemLabel": "@:common.terms.systemProducts",
-      "robotLabel": "@:common.terms.robotProducts"
+      "title": "Product Center",
+      "description": "Browse R / M / MR, embodied platforms, controller hardware, and accessories first, then enter the product center for model-level products and specs.",
+      "enter": "Enter Product Center",
+      "cardAction": "View family",
+      "families": {
+        "rSeries": {
+          "title": "R Series",
+          "description": "For precision transfer and compact-space operation, covering SCARA, 6-axis, lift, and linked configurations."
+        },
+        "mSeries": {
+          "title": "M Series",
+          "description": "Autonomous mobile bases covering different payload classes and deployment rhythms."
+        },
+        "mrSeries": {
+          "title": "MR Series",
+          "description": "Integrated mobile, lift, and manipulation platforms for cross-area collaborative work."
+        },
+        "embodied": {
+          "title": "Embodied & Dev Platforms",
+          "description": "VR teleoperation, master-slave teleop, and drawing platforms for embodied training, validation, and demos."
+        },
+        "controller": {
+          "title": "Controller",
+          "description": "Integrated control hardware for real-time motion, bus synchronization, and dense I/O integration."
+        },
+        "accessories": {
+          "title": "Accessories",
+          "description": "Rail-platform and rotary-platform modules for extending travel, transfer, and station flexibility."
+        }
+      }
     },
     "videoCases": {
-      "eyebrow": "Case Library",
       "title": "@:common.section.videoCases",
-      "description": "Representative cases that help confirm delivery capability quickly."
+      "description": "Representative videos that make product fit and real-world deployment paths easier to judge."
     },
     "industryApplications": {
-      "eyebrow": "Scenario Coverage",
       "title": "@:common.section.industryApplications",
-      "description": "Quickly find the right path for medical, semiconductor, manufacturing, and logistics scenarios.",
+      "description": "Quickly find representative application entry points across semiconductors, biopharma, composite operations, and embodied development.",
       "explore": "View Solution",
       "exploreAll": "Explore All Industry Applications"
     },
     "partners": {
-      "eyebrow": "Trusted By",
       "title": "Partners"
-    }
-  },
-  "productPages": {
-    "common": {
-      "overviewEyebrow": "PRODUCT OVERVIEW",
-      "guideEyebrow": "SELECTION GUIDE"
-    },
-    "metrics": {
-      "focus": "Core Focus",
-      "output": "Output Type",
-      "configuration": "Configuration"
-    },
-    "metricValues": {
-      "multiOsVmFocus": "Mixed OS",
-      "multiOsVmOutput": "Edge Platform",
-      "industrialRtosFocus": "Real-time Core",
-      "industrialRtosOutput": "@:common.terms.motionControl",
-      "airosFocus": "Robot OS",
-      "airosOutput": "Control Stack",
-      "robotSchedulerFocus": "Fleet Scheduling",
-      "robotSchedulerOutput": "Cross-device",
-      "gantryConfig": "2 / 3 DOF",
-      "gantryOutput": "Linear Handling",
-      "scaraConfig": "4 Axis",
-      "scaraOutput": "Fast Assembly",
-      "arm6Config": "6 Axis",
-      "arm6Output": "@:common.terms.complexTrajectory",
-      "dualArmConfig": "Dual Arm",
-      "dualArmOutput": "Flexible Tasks",
-      "mobileConfig": "AMR Platform",
-      "mobileOutput": "@:common.terms.smartLogistics"
-    },
-    "system": {
-      "hero": {
-        "eyebrow": "System Product Matrix",
-        "title": "From Control Base to Orchestration",
-        "description": "Built around operating systems, real-time control, hybrid deployment, and multi-robot scheduling for a clear system portfolio."
-      },
-      "metrics": {
-        "countValue": "04",
-        "countLabel": "System Products",
-        "capabilityValue": "OS / RTOS",
-        "capabilityLabel": "Core Capabilities",
-        "deliveryValue": "Platform Integration",
-        "deliveryLabel": "Delivery Mode"
-      },
-      "overview": {
-        "title": "Start with the base, then check coordination boundaries",
-        "description": "The system page keeps only the key capability path so users can quickly judge whether control, runtime, deployment, and orchestration needs match."
-      },
-      "guide": {
-        "title": "System Selection Path",
-        "items": {
-          "foundation": {
-            "title": "Start with the control base",
-            "description": "If you need a unified robot runtime, start with AiROS and the industrial real-time OS."
-          },
-          "runtime": {
-            "title": "Then check deployment",
-            "description": "For mixed operating systems and resource isolation, start with the multi-OS deployment route."
-          },
-          "orchestration": {
-            "title": "Finish with orchestration",
-            "description": "For multi-robot linkage and factory-level collaboration, focus on scheduling and interface capabilities."
-          }
-        }
-      }
-    },
-    "robot": {
-      "hero": {
-        "eyebrow": "Robot Product Matrix",
-        "title": "From Execution Form to Application Fit",
-        "description": "Covers arms, dual-arm collaboration, mobile execution, and gantry platforms in one robot capability matrix."
-      },
-      "metrics": {
-        "countValue": "05",
-        "countLabel": "Robot Products",
-        "coverageValue": "Arms / AMR",
-        "coverageLabel": "Form Factors",
-        "scenarioValue": "Assembly / Handling",
-        "scenarioLabel": "Key Scenarios"
-      },
-      "overview": {
-        "title": "Start with execution form, then check scenario fit",
-        "description": "First judge what the robot can do, then move into specific models and typical scenarios to reduce selection friction."
-      },
-      "guide": {
-        "title": "Robot Selection Path",
-        "items": {
-          "assembly": {
-            "title": "Precision assembly",
-            "description": "For fast pick-and-place, sorting, and assembly, start with the 4-axis arm and gantry platform."
-          },
-          "complex": {
-            "title": "Complex work",
-            "description": "For multi-pose motion, welding, spraying, or complex path control, focus on the 6-axis arm and dual-arm options."
-          },
-          "mobile": {
-            "title": "Mobile execution",
-            "description": "For cross-station transport, in-factory delivery, or compound tasks, start with the mobile robot."
-          }
-        }
-      }
     }
   },
   "solutionsPage": {
     "title": "@:common.terms.industrySolutions",
-    "subtitle": "Built for high-reliability industries on a robotics backbone with scenario delivery capability.",
+    "subtitle": "Built around confirmed robot bodies, controller hardware, and expansion modules, focused on precision workcells, mobile collaboration, and embodied development.",
     "videoCases": "@:common.section.videoCases",
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
-      "eyebrow": "@:common.terms.industrySolutions",
-      "title": "Robotics and intelligent system solutions for high-reliability applications",
-      "description": "Built on AiROS, real-time control, orchestration and flexible deployment, ZeroAnt covers medical, semiconductor, smart manufacturing, logistics inspection and research scenarios.",
-      "primaryCta": "Explore Industry Solutions",
+      "title": "Three solution directions built from the current product lineup",
+      "description": "Start by deciding between precision workcells, mobile collaboration, and embodied development, then move into the matching products and proof cases.",
+      "primaryCta": "Explore Solution Directions",
       "secondaryCta": "View Delivery",
       "stats": {
         "industry": {
-          "value": "05",
-          "label": "Core industry verticals"
+          "value": "03",
+          "label": "Core solution directions"
         },
         "backbone": {
           "value": "04",
-          "label": "System backbone"
+          "label": "Product stack"
         },
         "delivery": {
           "value": "01",
@@ -255,102 +172,80 @@
       }
     },
     "nav": {
-      "backbone": "Backbone",
-      "industries": "Industries",
+      "backbone": "Stack",
+      "industries": "Directions",
       "proof": "Proof",
       "delivery": "@:common.terms.delivery"
     },
     "backbone": {
-      "eyebrow": "Capability Backbone",
-      "title": "Capability backbone from robot execution to system deployment",
-      "description": "Industry solutions are not assembled from isolated devices. They are supported jointly by execution platforms, real-time control, scheduling coordination and deployment validation.",
-      "execution": {
-        "title": "Execution layer",
-        "description": "Covers 4-axis, 6-axis, dual-arm, mobile robots and gantry structures for transport, assembly, polishing and inspection tasks."
+      "title": "A solution stack organized around current products",
+      "description": "Start from the product combination that can actually ship, then explain the capability boundary. Arms, mobile bases, embodied platforms, controller hardware, and accessories form one clear solution stack.",
+      "precisionExecution": {
+        "title": "Precision execution",
+        "description": "Built on the R family and 6-axis forms for high-speed pick-and-place, precision assembly, loading, and surface-treatment cells."
       },
-      "control": {
-        "title": "Control and real-time layer",
-        "description": "Built around AiROS and an industrial RTOS to support precise control, complex trajectories and stable operation."
+      "mobileExecution": {
+        "title": "Mobile collaboration",
+        "description": "Built on the M / MR families for in-factory transport, cross-station linkage, and mobile manipulation instead of isolated workstations."
       },
-      "scheduling": {
-        "title": "Scheduling and coordination layer",
-        "description": "Links mobile platforms, robotic arms and production tasks into one complete workflow through multi-robot scheduling and cross-device coordination."
+      "embodiedDevelopment": {
+        "title": "Embodied development",
+        "description": "Built on MR3T, VR / master-slave teleoperation platforms, and the drawing platform for training, teleop validation, and demos."
       },
-      "deployment": {
-        "title": "Simulation and deployment layer",
-        "description": "Uses mixed-OS deployment, offline programming and pre-validation to reduce on-site retrofit costs and shorten delivery cycles."
+      "controlExpansion": {
+        "title": "Control and expansion",
+        "description": "Built on ZA-ZG100, rail platform, and rotating platform modules to extend real-time control, interface density, and deployment form."
       }
     },
     "industries": {
-      "eyebrow": "Industry Matrix",
-      "title": "Five key industry directions",
-      "description": "Scattered applications are consolidated into clear industry entry points so users can locate scenarios, solutions and cases faster.",
+      "title": "Three focused solution directions",
+      "description": "The page is reduced to 3 clear entry points, each tied directly to representative applications and related products.",
       "applicationEntry": "Featured application",
       "viewApplication": "View related applications",
-      "medical": {
-        "title": "Medical & Life Science",
-        "summary": "Built for sample handling, tube loading and pharmaceutical automation where precision, safety and traceability matter.",
+      "precisionWorkcell": {
+        "title": "Precision Transfer & Assembly",
+        "summary": "Built around the R-series arms, lift platforms, and controller hardware for precision transfer, assembly, and surface-treatment stations.",
         "scenarios": [
-          "Medical automation",
-          "Pharmaceutical automation",
-          "Laboratory workflow automation"
-        ]
-      },
-      "precision": {
-        "title": "Semiconductor & Precision Manufacturing",
-        "summary": "Designed for wafer transfer, precision assembly and surface treatment with stable takt time and high-precision control.",
-        "scenarios": [
-          "Semiconductor processing",
           "Precision assembly",
-          "Surface treatment"
+          "Surface treatment",
+          "Medical automation"
         ]
       },
-      "manufacturing": {
-        "title": "Smart Manufacturing & Flexible Lines",
-        "summary": "For multi-process and multi-device manufacturing environments that need flexible switching, collaboration and platformized control.",
+      "mobileCollaboration": {
+        "title": "Mobile Transfer & Composite Work",
+        "summary": "Built around the M / MR families for in-factory logistics, cross-station transfer, and linked robotic work.",
         "scenarios": [
-          "Smart manufacturing",
           "Composite systems",
-          "AI robotics"
-        ]
-      },
-      "logistics": {
-        "title": "Logistics & Inspection Operations",
-        "summary": "Covers in-factory logistics, mobile navigation and all-weather inspection with strong scheduling efficiency and stable delivery.",
-        "scenarios": [
           "Smart logistics",
-          "Intelligent navigation",
-          "Intelligent patrol and security"
+          "Intelligent navigation"
         ]
       },
-      "research": {
-        "title": "Research & Innovation Lab",
-        "summary": "Supports agricultural research, innovation experiments and edge validation scenarios with openness, rapid verification and continuous iteration.",
+      "embodiedDevelopment": {
+        "title": "Embodied Development & Teleoperation Validation",
+        "summary": "Built around MR3T, VR / master-slave teleoperation, and the drawing platform for dual-arm operation, training, and research validation.",
         "scenarios": [
+          "AI robotics",
           "Agricultural research automation",
-          "Cultural and creative intelligent manufacturing",
-          "Industrial gateway and edge computing"
+          "Creative manufacturing"
         ]
       }
     },
     "proof": {
-      "eyebrow": "Featured Proof",
-      "title": "A few cases are enough to prove delivery capability",
-      "description": "Selected representative cases show how ZeroAnt delivers across industries in practice.",
+      "title": "Start with 3 representative cases",
+      "description": "Use 3 representative cases to judge the direction first, then expand more videos and applications if needed.",
       "watchCase": "View case details",
       "guide": "Start with 3 representative video cases, then expand the full video archive and industry application index as needed.",
-      "expandVideos": "View all video cases ({count})",
-      "collapseVideos": "Collapse all video cases",
+      "expandVideos": "More video cases ({count})",
+      "collapseVideos": "Collapse video cases",
       "browseApplications": "View all industry applications",
-      "expandApplications": "View all industry applications ({count})",
-      "collapseApplications": "Collapse all industry applications",
-      "allVideos": "All video cases",
-      "applicationIndex": "All industry applications"
+      "expandApplications": "More industry applications ({count})",
+      "collapseApplications": "Collapse industry applications",
+      "allVideos": "More video cases",
+      "applicationIndex": "More industry applications"
     },
     "more": {
-      "eyebrow": "More",
       "title": "More video cases and industry applications",
-      "description": "Explore more verified ZeroAnt deployments across industries and complex scenarios.",
+      "description": "Browse more verified ZeroAnt deployments across additional real-world scenarios.",
       "videos": "View more video cases",
       "applications": "More industry applications",
       "videoGuide": "Showing {visible} representative videos first. Expand to browse all {total} cases.",
@@ -360,27 +255,44 @@
       "collapse": "Collapse list"
     },
     "delivery": {
-      "eyebrow": "@:common.terms.delivery",
-      "title": "A delivery loop from discovery to phased rollout",
-      "description": "The page should not only show directions. It should also clarify how ZeroAnt delivers: understand the scenario, design the solution, validate in advance and then deploy.",
-      "contactTitle": "Let the team match the right solution faster",
-      "contactDescription": "If your scenario is already clear, contact the team directly. We can quickly provide suggestions based on industry characteristics, equipment conditions and delivery rhythm.",
+      "title": "After the direction is clear, move into combination and delivery",
+      "description": "Once the direction is confirmed, move through combination design, validation, and rollout.",
+      "contactTitle": "Once the direction is clear, contact the team directly",
+      "contactDescription": "We can quickly recommend a product combination based on workstation type, takt target, and deployment conditions.",
       "steps": {
         "discovery": {
           "title": "Scenario Discovery",
-          "description": "Clarify business goals, workstation constraints, takt time and key risks."
+          "description": "Clarify the task target, space constraints, payload range, and takt requirements."
         },
         "design": {
           "title": "Solution Design",
-          "description": "Combine robot platforms, system products and integration approaches according to the industry."
+          "description": "Combine the body, controller, and expansion modules around the chosen direction, then confirm interface boundaries."
         },
-        "verify": {
-          "title": "Pre-validation",
-          "description": "Use simulation, offline programming and testing to reduce on-site commissioning pressure."
+        "deliver": {
+          "title": "Validation & Rollout",
+          "description": "Complete pre-validation first, then move into launch, integration, and further expansion with fewer on-site iterations."
+        }
+      }
+    },
+    "faq": {
+      "title": "Common Solution Questions",
+      "description": "These are the questions customers most often ask in AI search and early qualification, answered directly.",
+      "items": {
+        "selection": {
+          "question": "What solution directions does the ZeroAnt solutions page cover?",
+          "answer": "The page is currently organized into three directions: precision transfer and assembly, mobile transfer and composite work, and embodied development with teleoperation validation. Each direction maps directly to current product combinations, representative applications, and proof videos."
         },
-        "deploy": {
-          "title": "Phased Rollout",
-          "description": "Go live, integrate and scale further while keeping the operation stable."
+        "precision": {
+          "question": "What kinds of projects fit the precision transfer and assembly direction?",
+          "answer": "Projects focused on high-speed pick-and-place, precision assembly, loading, unloading, or surface treatment usually start with R-series arms, lift platforms, and controller hardware. This direction is more sensitive to takt time, positioning accuracy, and workstation coordination."
+        },
+        "mobile": {
+          "question": "How is a mobile transfer or composite-work solution usually assembled?",
+          "answer": "These solutions typically combine M / MR mobile bases or composite robots with controller hardware, navigation, and station-level interface design. They fit in-factory logistics, cross-station transfer, and mobile manipulation workflows."
+        },
+        "delivery": {
+          "question": "How does ZeroAnt usually move a solution into delivery?",
+          "answer": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That helps expose interface boundaries earlier and reduces on-site iteration."
         }
       }
     },
@@ -392,10 +304,10 @@
   },
   "supportPage": {
     "title": "@:common.terms.afterSalesService",
-    "description": "Dedicated service groups for pre-sales and after-sales, 7×24 hours technical support, rapid response within 12 hours",
+    "description": "Dedicated pre-sales and after-sales service groups with a 7×24 support channel and response within 12 hours.",
     "supportMapLabel": "Support Path",
-    "fastResponse": "Rapid problem resolution within 12 hours",
-    "dedicatedService": "7×24 hours dedicated service group response",
+    "fastResponse": "First response within 12 hours",
+    "dedicatedService": "7×24 support channel",
     "relatedDownloads": "@:common.section.relatedDownloads",
     "downloadIntro": "Start with manuals and interface materials so the team can prepare for selection, installation and integration faster.",
     "faqTitle": "Frequently Asked Questions",
@@ -441,7 +353,7 @@
     "companyIntroDetailed": {
       "para1": "Hangzhou ZeroAnt Technology Co., Ltd. is a high-tech enterprise founded by the research team from <b>Beihang University Hangzhou Innovation Research Institute</b>, focusing on the R&D of intelligent robot complete solutions. Currently, it provides highly reliable robot intelligent system solutions for biopharmaceutical, semiconductor and other industries.",
       "para2": "The company relies on the <b>Zhejiang Provincial Key Laboratory of Industrial Big Data and Robot Intelligent Systems</b>, independently developing <b>AiROS</b> (Intelligent Robot Operating System), conquering core technologies such as mobile robot autonomous navigation, high-speed and high-precision control of robotic arms, 3D spatial semantic perception, and multi-robot collaborative scheduling, creating a full-stack software ecosystem and modular hardware platform.",
-      "para3": "The team has established normalized cooperation mechanisms with multiple top domestic institutions, forming a <b>closed-loop innovation system of industry-university-research-application</b>. As a pioneer of industrial intelligent infrastructure, ZeroAnt Technology is promoting industry intelligent upgrades with <b>fully autonomous and controllable technology</b>, continuously empowering high-quality development of the manufacturing industry.",
+      "para3": "The team has established ongoing collaboration with universities and research institutes, forming a <b>closed-loop innovation system of industry, academia, research and application</b>. ZeroAnt continues to advance robotics R&D and industrial deployment with <b>fully self-developed and controllable technology</b>, serving manufacturing digitalization and intelligent upgrading.",
       "financingDesc": "The team is currently in the angel round financing stage. If you are interested in the team or have cooperation intentions, please contact us by email. Startup teams value time, no casual inquiries please!",
       "emailTips": "Contact email:"
     },
@@ -459,17 +371,15 @@
       "2020": "Launched robot control system R&D, received support from Zhejiang Province major project",
       "2022": "Started semiconductor wafer transport robot project R&D",
       "2023": "Launched four-axis transport robot project R&D",
-      "2024": "Released AiROS robot operating system, technology certified as internationally leading by academician expert panel",
+      "2024": "Released AiROS robot operating system, with related technology reviewed by an academician expert panel",
       "2025": "Officially established Hangzhou ZeroAnt Technology Co., Ltd., launched industrialization initiatives"
     },
-    "honor1": "First Rust-based embedded hypervisor in China",
+    "honor1": "Rust-based embedded hypervisor technology",
     "honor2": "System software certified with EAL5+ information security standard",
     "honor3": "Fully self-developed intelligent robot operating system",
     "honor4": "Kernel real-time jitter ≤2us, supporting high-precision device applications",
     "honor5": "Backed by provincial key laboratories with deep technical expertise",
     "honor6": "Core team leads multiple national and provincial key projects",
-    "marketInfo": "In 2024, the global industrial robot market is about $70 billion, and the total potential market size of embodied robots is about $60 trillion.",
-    "financing": "Plans to divest 10% equity, raise 20 million yuan, preliminary valuation of 200 million yuan.",
     "coreValues": {
       "title": "@:common.terms.coreValues",
       "value1": "Practical Application",
@@ -630,32 +540,32 @@
   "applications": {
     "medical-automation": {
       "title": "@:common.terms.medicalAutomation",
-      "description": "Provides efficient automated item transfer and intelligent scheduling for hospitals and labs using AiROS. Features 18-axis control and 0.02mm positioning accuracy for samples, drugs, and medical devices. Serves customers like Huazhi Biology and PerkinElmer, reducing costs from 300K to 140K yuan.",
-      "coreAdvantages": "90,000-hour continuous operation, multi-floor intelligent scheduling, reduced cross-infection risk",
+      "description": "Provides automated transfer and station-to-station coordination for samples, medicines and medical devices in hospitals and laboratories, helping improve process efficiency, reduce manual contact and enhance traceability.",
+      "coreAdvantages": "Process traceability, cross-station scheduling, reduced manual contact risk, fit for hospital and lab workflows",
       "typicalApplications": "Lab automation pipeline, automated pharmacy, medical supply distribution, ultrasound robots"
     },
     "semiconductor": {
       "title": "@:common.terms.semiconductorProcessing",
-      "description": "High-precision wafer and chip handling systems using AiROS with ≤10us real-time jitter. Over 200 wafer transfer robots shipped to major domestic manufacturers. Features 0.02mm positioning accuracy and 18-axis control for complex process flows.",
-      "coreAdvantages": "90,000-hour operation, 50% cost reduction, cleanroom IP54 protection",
+      "description": "Provides material transfer, equipment loading and scheduling coordination for wafer and chip manufacturing under clean and process-sensitive conditions, supporting stable handling, precise positioning and process traceability.",
+      "coreAdvantages": "Cleanroom fit, stable handling, complex process coordination, process traceability",
       "typicalApplications": "Wafer FOUP handling, chip packaging/testing, cleanroom logistics, equipment loading"
     },
     "intelligent-manufacturing": {
       "title": "Intelligent Manufacturing",
-      "description": "Multi-OS embedded systems with domestic real-time OS for high-precision automation. Features dual-robot collaboration and high-speed arms supporting 6000mm/s motion and sub-millimeter control for electronics, automotive, and 3C manufacturing.",
-      "coreAdvantages": "Multi-robot collaboration, ≤10us real-time jitter, complex process support, domestic replacement",
+      "description": "Built around robot control, scheduling and multi-robot coordination capabilities, this direction supports automation cells and linked production workflows across electronics, automotive parts and 3C manufacturing.",
+      "coreAdvantages": "Multi-robot coordination, complex workflow support, flexible deployment, integrated hardware-software stack",
       "typicalApplications": "Electronics assembly, automotive welding, precision assembly, quality inspection, flexible lines"
     },
     "ai-robotics": {
       "title": "AI Robotics",
-      "description": "Based on large language models and AI technology, developing embodied intelligent robot solutions. Through UR robot LLM motion capture technology, it enables natural language instruction understanding, autonomous path planning, and precise object recognition. Combined with 14-axis dual-arm humanoid robot design and AiROS operating system, it provides highly intelligent human-robot collaboration solutions, enabling zero-shot learning capabilities for complex tasks.",
-      "coreAdvantages": "LLM real-time understanding, autonomous path planning, 14-axis dual-arm coordination, zero-shot learning capability",
+      "description": "Focused on embodied development and dual-arm operation validation, this direction combines dual-arm robot hardware, body control and algorithm development for grasping, interaction and experimental validation tasks.",
+      "coreAdvantages": "Dual-arm coordination, algorithm validation, embodied development, human-robot collaboration",
       "typicalApplications": "Intelligent grasping and assembly, human-robot collaboration workstations, service robots, education and research platforms, embodied intelligence"
     },
     "industrial-control": {
       "title": "@:common.terms.industrialControl",
-      "description": "Based on domestic industrial real-time operating system and EtherCAT bus technology, providing autonomous and controllable high-performance industrial control solutions. Through millisecond real-time response and 18-axis simultaneous control capabilities, it enables precise synchronous control and real-time coordinated motion of multi-axis motors. Supporting real-time jitter ≤10us, it meets stringent requirements of industrial automation and achieves domestic substitution of key technologies.",
-      "coreAdvantages": "Millisecond real-time response, 18-axis simultaneous control, autonomous and controllable, domestic substitution",
+      "description": "Built on industrial real-time control and EtherCAT capabilities, this direction supports multi-axis synchronized control, equipment linkage and interface integration for industrial scenarios that require stable timing and coordination.",
+      "coreAdvantages": "Multi-axis synchronization, real-time scheduling, interface integration, self-developed stack",
       "typicalApplications": "Multi-axis motion control, servo motor stations, industrial automation, precision machining, real-time control systems"
     },
     "offline-programming": {
@@ -666,32 +576,32 @@
     },
     "intelligent-navigation": {
       "title": "Intelligent Navigation",
-      "description": "Based on 360-degree LiDAR scanning and laser SLAM technology, providing advanced robot intelligent navigation and environmental perception solutions. Through comprehensive environmental perception and millimeter-level precise positioning technology, combined with mobile robot scheduling systems, it provides reliable autonomous navigation capabilities for AGVs and mobile robots. It enables intelligent path planning, dynamic obstacle avoidance, and multi-machine collaborative operations in complex environments, supporting 500kg load capacity.",
+      "description": "Built on laser SLAM and environment perception capabilities, this direction supports mapping, localization, path planning and dynamic obstacle avoidance for AGVs and mobile robots in factories, warehouses and other complex environments.",
       "coreAdvantages": "360-degree LiDAR scanning, laser SLAM positioning, intelligent path planning, multi-machine collaborative navigation",
       "typicalApplications": "AGV intelligent navigation, dynamic environment mapping, real-time obstacle avoidance, optimal path planning, multi-robot scheduling"
     },
     "surface-treatment": {
       "title": "@:common.terms.surfaceTreatment",
-      "description": "Based on six-axis and four-axis robotic arm technology, providing high-precision, high-reliability industrial robot solutions. Through advanced force control technology and path planning algorithms, it enables grinding, polishing, welding, assembly and other industrial applications. Supporting 0.02mm repeat positioning accuracy and continuous 90,000-hour fault-free operation, providing stable and reliable automation equipment for manufacturing.",
+      "description": "Built on six-axis and four-axis robot capabilities, this direction supports grinding, polishing, welding and assembly workflows. Combined with force control and path planning, it fits a range of surface-treatment and precision-operation tasks.",
       "coreAdvantages": "High-precision positioning, force control technology, multi-axis coordination, long-term stable operation",
       "typicalApplications": "Metal parts grinding, precision assembly, welding operations, surface treatment, deburring"
     },
     "smart-logistics": {
       "title": "@:common.terms.smartLogistics",
-      "description": "Based on mobile robot scheduling systems and AGV automatic guidance technology, providing intelligent logistics solutions for unified scheduling of multi-brand, multi-type robots. Through advanced technologies such as 360-degree radar scanning and laser SLAM navigation, it enables autonomous navigation and precise positioning in complex environments. Supporting 500kg load capacity and multi-machine collaborative operations, significantly improving factory logistics efficiency and warehouse automation levels.",
+      "description": "Built on mobile robot scheduling and autonomous navigation capabilities, this direction supports in-factory logistics and material transfer with path planning, obstacle avoidance and station-to-station coordination in complex environments.",
       "coreAdvantages": "Multi-machine unified scheduling, intelligent path planning, large load capacity, multi-scenario adaptation",
       "typicalApplications": "Factory internal logistics, warehouse handling, distribution centers, multi-machine collaborative operations, intelligent scheduling"
     },
     "pharmaceutical-automation": {
       "title": "Pharmaceutical Automation",
-      "description": "Focusing on automation needs in the biopharmaceutical industry, based on AiROS robot operating system and high-precision control technology, providing intelligent solutions for biological laboratories and pharmaceutical companies. Through personalized prescription pharmaceutical technology and laboratory automation equipment, it enables full-process automation of drug research, production, and testing, serving well-known customers such as Huazhi Biology and PerkinElmer.",
+      "description": "For biopharma laboratories and pharmaceutical operations, this direction supports automation across sample handling, dispensing and testing workflows to improve consistency and operational efficiency.",
       "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic substitution",
       "typicalApplications": "Laboratory automation, personalized prescription drugs, drug preparation, biological sample processing, quality testing"
     },
     "precision-assembly": {
       "title": "@:common.terms.precisionAssembly",
-      "description": "Based on four-axis and six-axis robotic arm technology, providing high-precision assembly solutions with 0.02mm repeat positioning accuracy. Through advanced motion control algorithms and vision-guided technology, supporting 6000mm/s high-speed motion to achieve precise assembly of complex products. Widely applied in 3C electronics, optical devices, precision instruments and other high-end manufacturing fields, helping customers achieve high-quality, high-efficiency automated production.",
-      "coreAdvantages": "0.02mm repeat positioning accuracy, 6000mm/s high-speed motion, multi-axis coordinated control, vision guidance",
+      "description": "Built on four-axis and six-axis robotic arm capabilities, and combined with motion control and vision-guided techniques, this direction supports precision assembly in 3C electronics, optical devices and precision instruments.",
+      "coreAdvantages": "Precision assembly, vision guidance, multi-axis coordination, flexible deployment",
       "typicalApplications": "3C electronics assembly, optical device assembly, precision instrument manufacturing, high-speed high-precision operations, flexible assembly lines"
     },
     "composite-systems": {
@@ -702,7 +612,7 @@
     },
     "agricultural-research": {
       "title": "AgriTech Automation",
-      "description": "For modern agricultural research needs, based on AiROS robot operating system and high-precision control technology, providing intelligent molecular experiment solutions for agricultural research institutes and seed companies. Through innovative applications like rice molecular repetition experiments, it enables full-process automation of crop gene research, quality testing, and seed screening. Combined with vision recognition and precision control technology, it supports high-throughput, high-precision experimental needs in agricultural research, promoting agricultural technology innovation.",
+      "description": "Built on AI vision recognition and precision control, this direction supports automated laboratory workflows for agricultural research, including molecular experiments, sample handling and repetitive operations, helping improve efficiency and consistency.",
       "coreAdvantages": "High-precision experimental operations, automated molecular detection, agricultural research-specific adaptation, high-throughput processing capability",
       "typicalApplications": "Rice molecular experiments, seed quality testing, gene research automation, crop phenotype analysis, agricultural research laboratories"
     },
@@ -714,8 +624,8 @@
     },
     "intelligent-patrol": {
       "title": "Intelligent Patrol Security",
-      "description": "Based on mobile robot scheduling systems and 360-degree LiDAR scanning technology, providing intelligent patrol and security solutions for industrial parks, warehouses, and public facilities. Through laser SLAM navigation and environmental perception technology, combined with real-time video monitoring and AI analysis, it enables autonomous patrol, anomaly detection, and security alerts. Supporting 500kg load capacity and multi-machine collaborative operations, it provides 24/7 automated security patrol services, significantly improving security efficiency and reducing labor costs.",
-      "coreAdvantages": "360-degree environmental scanning, autonomous patrol navigation, real-time anomaly detection, multi-machine collaborative security",
+      "description": "Built on mobile robot scheduling and laser SLAM navigation, this direction supports automated patrol workflows for industrial parks, power facilities and warehouses, including route planning, anomaly detection and alert linkage.",
+      "coreAdvantages": "Laser SLAM navigation, environment perception, anomaly detection, autonomous patrol",
       "typicalApplications": "Industrial park patrol, warehouse security, facility monitoring, autonomous security rounds, emergency response"
     },
     "industrial-gateway": {
@@ -723,53 +633,6 @@
       "description": "Based on multi-OS hybrid deployment embedded virtualization technology, provides highly reliable and secure virtualization solutions for industrial gateways and edge computing devices. Through heterogeneous system unified management and efficient resource isolation, multiple systems can be deployed on a single hardware platform, reducing hardware costs and maintenance complexity. Successfully applied in industrial automation, smart grids, smart cities and other fields.",
       "coreAdvantages": "Multi-operating system parallel operation, efficient resource isolation, support for hybrid deployment of real-time and general-purpose operating systems, embedded virtualization technology",
       "typicalApplications": "Industrial gateway virtualization, edge computing devices, heterogeneous system unified management, smart grids, smart cities"
-    }
-  },
-  "products": {
-    "multiOsVm": {
-      "name": "@:common.terms.multiOsHybridHypervisor",
-      "desc": "Supports parallel operation of multiple operating systems for heterogeneous deployment across controllers and edge devices, balancing control isolation, resource utilization, and system coordination on the same hardware base with room for future expansion and unified management.",
-      "supportText": "Fit for heterogeneous deployment across controllers, industrial gateways, and edge computing devices."
-    },
-    "airos": {
-      "name": "@:common.terms.airosRobotOperatingSystem",
-      "desc": "An integrated operating system for robot bodies and control platforms, connecting low-level control, upper-layer applications, and future expansion to make deployment faster and evolution easier.",
-      "supportText": "Fit for a unified software foundation across robot bodies, control platforms, and upper-layer applications."
-    },
-    "industrialRtos": {
-      "name": "@:common.terms.industrialRealTimeOS",
-      "desc": "A real-time operating system for industrial control that keeps critical tasks running stably while meeting the determinism and reliability requirements of field equipment, suitable for long-term online operation and dependable delivery.",
-      "supportText": "Fit for high-reliability motion control, field equipment, and critical runtime scenarios."
-    },
-    "robotScheduler": {
-      "name": "@:common.terms.robotSchedulerSystem",
-      "desc": "A unified scheduling system for multi-brand mobile robots, enabling cross-device collaboration for factory logistics and multi-robot coordination while improving task allocation and on-site dispatch efficiency.",
-      "supportText": "Fit for multi-robot collaboration, cross-device linkage, and factory-level orchestration scenarios."
-    },
-    "gantry2d": {
-      "name": "@:common.terms.gantry23Dof",
-      "desc": "A gantry platform for linear transfer and large-area positioning, suited to industrial tasks such as loading, unloading, handling, and precision positioning with clear takt demands, emphasizing stability and repeatability.",
-      "supportText": "Fit for linear transfer, loading and unloading, and precision positioning over larger working ranges."
-    },
-    "scara4axis": {
-      "name": "@:common.terms.fourAxisScaraRobot",
-      "desc": "A compact 4-axis robotic arm for high-speed assembly and sorting, ideal for space-constrained stations with demanding cycle times while balancing fast pick-and-place with stable operation.",
-      "supportText": "Fit for fast assembly, sorting, pick-and-place, and takt-driven industrial workstations."
-    },
-    "arm6axis": {
-      "name": "@:common.terms.sixAxisArm",
-      "desc": "Supports complex trajectory control for welding, spraying, and assembly, covering more flexible multi-pose work and scenarios that require continuous paths and frequent process changes.",
-      "supportText": "Fit for welding, grinding, spraying, and richer multi-posture trajectory tasks."
-    },
-    "dualArmHumanoid": {
-      "name": "@:common.terms.dualArmHumanoidRobot",
-      "desc": "An execution platform for dual-arm collaboration and highly flexible tasks, suited to dexterous manipulation, compound processes, and multimodal interaction with support for more complex human-robot cooperation.",
-      "supportText": "Fit for dual-arm collaboration, dexterous manipulation, and highly flexible compound processes."
-    },
-    "mobileRobot": {
-      "name": "@:common.terms.mobileRobot",
-      "desc": "A mobile robot that combines navigation, scheduling, and handling capabilities, ideal for in-factory logistics, cross-station transfer, and compound tasks with multi-robot collaboration and on-site dispatch.",
-      "supportText": "Fit for factory logistics, cross-station transport, and compound task scheduling."
     }
   },
   "careers": {
@@ -809,7 +672,7 @@
     "benefits": {
       "techInnovation": {
         "title": "Technical Innovation",
-        "description": "Participate in cutting-edge robotics R&D, work with industry top experts, and push technological boundaries"
+        "description": "Work on robotics platforms and control systems with experienced R&D teammates to help move products into real deployments"
       },
       "careerDevelopment": {
         "title": "Career Development",
@@ -817,7 +680,7 @@
       },
       "excellentTeam": {
         "title": "Excellent Team",
-        "description": "Collaborate with outstanding engineers from around the world in an open and inclusive environment"
+        "description": "Collaborate with a cross-disciplinary engineering team in an open and inclusive environment"
       },
       "generousTreatment": {
         "title": "Competitive Benefits",
@@ -869,7 +732,13 @@
     "parameters": "@:common.section.parameters",
     "downloads": "@:common.section.relatedDownloads",
     "backToList": "Back to Product List",
-    "notFound": "Product not found"
+    "notFound": "Product not found",
+    "cta": {
+      "title": "Looking for comprehensive automation solutions?",
+      "description": "Explore our industry solutions or contact engineers for dedicated support.",
+      "exploreSolutions": "Explore Solutions",
+      "contactSales": "Contact Sales"
+    }
   },
   "applicationsPage": {
     "prev": "Previous",
@@ -904,26 +773,26 @@
   "seo": {
     "siteName": "ZeroAnt Technology",
     "defaultTitle": "ZeroAnt Technology - Professional Robot Technology Solutions Provider",
-    "defaultDescription": "ZeroAnt Technology is a professional robot technology solutions provider dedicated to industrial automation and smart manufacturing. We offer innovative product lines including industrial robots and automation equipment to meet automation needs in medical automation, semiconductor processing and other industries.",
-    "defaultKeywords": "robot technology, industrial automation, smart manufacturing, ZeroAnt, ZeroAnt Technology, industrial robots, automation equipment, medical automation, semiconductor processing",
+    "defaultDescription": "ZeroAnt Technology focuses on complete intelligent robotic solutions and develops its own AiROS intelligent robot operating system. The company provides robotic arms, mobile bases, composite robots, and embodied development platforms for biopharma, semiconductor, and related industries.",
+    "defaultKeywords": "ZeroAnt Technology, industrial robots, intelligent robotics, AiROS, robot operating system, 4-axis robot, 6-axis robotic arm, mobile base, composite robot, embodied development platform, biopharma, semiconductor",
     "home": {
       "title": "ZeroAnt Technology - Let robots be everywhere",
-      "description": "ZeroAnt Technology specializes in industrial robotics R&D and smart manufacturing solutions, offering 4-axis robots, 6-axis robotic arms, dual-arm humanoid robots, and mobile robots. Based on AiROS robotic operating system, we provide high-precision, high-reliability automation equipment and technical services for medical automation, semiconductor processing, precision manufacturing and other industries.",
-      "keywords": "ZeroAnt Technology, industrial robots, smart manufacturing, robotics technology, automation equipment, 4-axis robot, 6-axis robotic arm, dual-arm humanoid robot, mobile robot, AiROS, robotic operating system, medical automation, semiconductor processing, precision manufacturing, industrial automation solutions, robot control system, Hangzhou robotics company"
+      "description": "Founded by a research team from the Hangzhou Innovation Research Institute of Beihang University, ZeroAnt Technology focuses on complete intelligent robotic solutions. Powered by its self-developed AiROS intelligent robot operating system, the company offers 4-axis robots, 6-axis robotic arms, mobile bases, composite robots, and embodied development platforms for biopharma, semiconductor, and related industries.",
+      "keywords": "ZeroAnt Technology, industrial robots, intelligent robotics, smart manufacturing, AiROS, robot operating system, 4-axis robot, 6-axis robotic arm, mobile base, composite robot, embodied development platform, biopharma, semiconductor, robotic system solutions, Hangzhou robotics company"
     },
     "products": {
-      "title": "Products Center - ZeroAnt Technology Professional Manufacturer",
-      "description": "ZeroAnt Technology industrial robot products center offers comprehensive SCARA 4-axis robots, 6-axis articulated robots, dual-arm collaborative robots, AGV mobile robots and complete product series. Features high-precision positioning, rapid response, and intelligent control, widely applied in electronics manufacturing, automotive production, medical devices, semiconductors and other automated production lines.",
-      "keywords": "industrial robots, robot products, SCARA robot, 4-axis robot, 6-axis robot, articulated robot, dual-arm robot, collaborative robot, AGV robot, mobile robot, robotic arm, automation equipment, robot manufacturer, industrial automation products, precision positioning, intelligent control, electronics manufacturing, automotive production, medical device automation"
+      "title": "Product Center - ZeroAnt Technology",
+      "description": "ZeroAnt Technology's product center covers R-series arms, M-series mobile bases, MR-series composite robots, embodied development platforms, controllers, and accessories, organized by family with current products and key specs for faster model comparison.",
+      "keywords": "ZeroAnt Technology, products center, R-series arm, M-series mobile base, MR-series composite robot, embodied platform, controller, accessories, SCARA robot, 6-axis arm, dual-arm robot, AGV base, automation equipment"
     },
     "solutions": {
-      "title": "Solutions - ZeroAnt Technology Industry Expert",
-      "description": "ZeroAnt Technology provides smart manufacturing solutions for medical automation, semiconductor processing, precision manufacturing and other industries. Based on AiROS robotic operating system, integrating machine vision, force control technology, path planning and other core technologies, we offer one-stop automation services from production line design to system integration, helping enterprises achieve digital transformation and upgrading.",
-      "keywords": "smart manufacturing solutions, automation solutions, robot system integration, medical automation, semiconductor automation, precision manufacturing, production line automation, AiROS operating system, machine vision, force control technology, path planning, digital transformation, Industry 4.0, flexible manufacturing, unmanned factory, smart production line, automation system integrator"
+      "title": "Solutions - ZeroAnt Technology",
+      "description": "Built around the R / M / MR families, embodied platforms, ZA-ZG100 controller hardware, and accessories, ZeroAnt now offers three focused solution directions: precision workcells, mobile collaboration, and embodied development validation.",
+      "keywords": "ZeroAnt solutions, precision workcells, mobile collaboration, embodied development platform, R series robotic arm, M series mobile base, MR composite robot, ZA-ZG100 controller, teleoperation platform, automation integration"
     },
     "support": {
       "title": "Technical Support - ZeroAnt Technology Professional Team",
-      "description": "ZeroAnt Technology technical support center provides 7x24 professional services, including robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare parts supply and comprehensive technical support. With experienced engineering team, we provide rapid response technical consultation and on-site services for industrial robot users, ensuring stable equipment operation and maximum production efficiency.",
+      "description": "The ZeroAnt technical support center provides installation and commissioning, technical training, remote diagnostics, preventive maintenance and spare-parts support. The team offers responsive technical consultation and on-site support to help customers move through deployment, integration and stable operation.",
       "keywords": "technical support, after-sales service, robot maintenance, technical training, remote diagnostics, on-site service, spare parts supply, installation commissioning, preventive maintenance, technical consultation, engineering services, equipment repair, troubleshooting, technical documentation, user manual, online support"
     },
     "careers": {
@@ -933,23 +802,33 @@
     },
     "about": {
       "title": "About ZeroAnt Technology - Industrial Robotics Technology Innovation Enterprise",
-      "description": "ZeroAnt Technology was founded in Hangzhou as a high-tech enterprise focusing on industrial robotics technology innovation. The company owns independently developed AiROS robotic operating system and has core technological advantages in robot control, machine vision, artificial intelligence and other fields. We are committed to providing high-quality industrial robot products and smart manufacturing solutions for global manufacturing customers, driving industrial intelligent upgrading.",
+      "description": "ZeroAnt Technology was founded in Hangzhou as a high-tech enterprise focused on industrial robotics innovation. The company develops its own AiROS robotic operating system and has accumulated capabilities in robot control, machine vision and artificial intelligence, serving manufacturing customers with industrial robot products and smart manufacturing solutions.",
       "keywords": "ZeroAnt Technology, about us, company introduction, industrial robotics company, Hangzhou robotics enterprise, high-tech company, AiROS system, robotics technology innovation, smart manufacturing enterprise, automation company, robot control technology, artificial intelligence, corporate culture, development history, technical strength, core team"
     },
     "structuredData": {
       "solutions": {
-        "medical": {
-          "name": "Medical Automation Solutions",
-          "description": "Comprehensive automation solutions for medical device manufacturing and laboratory automation"
+        "precisionWorkcell": {
+          "name": "Precision Transfer & Assembly Solutions",
+          "description": "High-precision transfer, assembly, and surface-treatment solutions built around R-series arms, lift platforms, and controller hardware"
         },
-        "semiconductor": {
-          "name": "Semiconductor Processing Solutions",
-          "description": "High-precision automation solutions for semiconductor manufacturing processes"
+        "mobileCollaboration": {
+          "name": "Mobile Transfer & Composite Work Solutions",
+          "description": "Transfer and linked-work solutions built around M / MR mobile bases and composite robots"
         },
-        "smartManufacturing": {
-          "name": "Smart Manufacturing Solutions",
-          "description": "End-to-end smart manufacturing solutions with AI and robotics integration"
+        "embodiedDevelopment": {
+          "name": "Embodied Development & Teleoperation Validation Solutions",
+          "description": "Embodied development platforms built around MR3T, VR teleoperation, master-slave teleoperation, and drawing workflows"
         }
+      },
+      "solutionsFaq": {
+        "q1": "What solution directions does the ZeroAnt solutions page cover?",
+        "a1": "The page is currently organized into three directions: precision transfer and assembly, mobile transfer and composite work, and embodied development with teleoperation validation. Each direction maps directly to current product combinations, representative applications, and proof videos.",
+        "q2": "What kinds of projects fit the precision transfer and assembly direction?",
+        "a2": "Projects focused on high-speed pick-and-place, precision assembly, loading, unloading, or surface treatment usually start with R-series arms, lift platforms, and controller hardware. This direction is more sensitive to takt time, positioning accuracy, and workstation coordination.",
+        "q3": "How is a mobile transfer or composite-work solution usually assembled?",
+        "a3": "These solutions typically combine M / MR mobile bases or composite robots with controller hardware, navigation, and station-level interface design. They fit in-factory logistics, cross-station transfer, and mobile manipulation workflows.",
+        "q4": "How does ZeroAnt usually move a solution into delivery?",
+        "a4": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That helps expose interface boundaries earlier and reduces on-site iteration."
       },
       "careers": {
         "roboticsEngineer": {
@@ -973,13 +852,254 @@
       },
       "support": {
         "q1": "What technical support services does ZeroAnt Technology provide?",
-        "a1": "We provide 7x24 professional services including robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare parts supply and comprehensive technical support.",
+        "a1": "We provide robot installation and commissioning, technical training, remote diagnostics, preventive maintenance, spare-parts support and day-to-day technical support.",
         "q2": "How can I get technical support for my industrial robot?",
         "a2": "You can contact our technical support team through phone, email, or online support system. Our experienced engineers provide rapid response technical consultation and on-site services.",
         "q3": "Do you provide training for robot operation and maintenance?",
         "a3": "Yes, we offer comprehensive technical training programs covering robot operation, programming, maintenance, and troubleshooting to ensure optimal equipment performance.",
         "q4": "What is the warranty period for ZeroAnt robots?",
         "a4": "Our industrial robots come with comprehensive warranty coverage. Please contact our support team for specific warranty terms and conditions for your product model."
+      }
+    }
+  },
+  "productsPage": {
+    "common": {
+      "specLabel": "Key Specs",
+      "tipLabel": "Selection Tip",
+      "ctaTitle": "Need help choosing?",
+      "ctaDescription": "Tell us the workstation type, takt target, and space constraints. The team can help confirm the right model, controller, and accessory combination.",
+      "contactAction": "Contact Team",
+      "solutionAction": "View Solutions",
+      "detailAction": "View Details"
+    },
+    "hero": {
+      "title": "Start with families, then models, then extensions.",
+      "description": "Browse current products and key specs by family first, then move into the right model details faster.",
+      "metrics": {
+        "groups": "Product groups",
+        "products": "Current products",
+        "cues": "Selection cues"
+      }
+    },
+    "overview": {
+      "title": "Browse by family first. Compare model differences next.",
+      "description": "Start from R / M / MR, embodied and development platforms, controller, and accessories, then move into specific models under each family. Accessories stay in their own section."
+    },
+    "guide": {
+      "title": "Three quick checks.",
+      "items": {
+        "family": {
+          "title": "Start by family",
+          "description": "Confirm whether the need belongs to R, M, MR, embodied and development platforms, controller, or accessories before opening a specific model."
+        },
+        "difference": {
+          "title": "Check the key difference inside a family",
+          "description": "For example, ZA-R3 / ZA-R3X is mainly separated by SCARA arm length, while ZA-R3L / ZA-R3M / ZA-R3H is mainly separated by column height and Z-axis travel."
+        },
+        "accessories": {
+          "title": "Match accessories after the robot body",
+          "description": "Rail platform and rotating platform are shown in a separate section and are usually matched after the robot body is clear."
+        }
+      }
+    }
+  },
+  "productsCenter": {
+    "families": {
+      "rSeries": {
+        "title": "R Series",
+        "intro": "Precision arm platforms for transfer and confined-space operation. Use arm length, column height, body form, and linked configuration to narrow the right model.",
+        "cards": {
+          "zar3x": {
+            "title": "ZA-R3 / ZA-R3X",
+            "summary": "A SCARA transfer platform where ZA-R3 and ZA-R3X are primarily selected by SCARA arm length, suited to high-speed pick-and-place and compact workstations.",
+            "specs": [
+              "SCARA arm length: ZA-R3 450mm / ZA-R3X 592mm horizontal reach",
+              "Max rated payload 3kg",
+              "Repeatability ±0.05mm",
+              "Max horizontal / vertical speed 1500mm/s / 500mm/s"
+            ]
+          },
+          "zar3d6": {
+            "title": "ZA-R3D6",
+            "summary": "A 6-axis arm for more complex orientations and path control.",
+            "specs": [
+              "6 DOF / rated payload 3kg",
+              "Max working radius 540.5mm",
+              "Repeatability ±0.03mm",
+              "Max end-effector linear speed 1.5m/s"
+            ]
+          },
+          "zar3lmh": {
+            "title": "ZA-R3L / ZA-R3M / ZA-R3H",
+            "summary": "A SCARA lift platform where ZA-R3L, ZA-R3M, and ZA-R3H are primarily selected by column height and Z-axis travel.",
+            "specs": [
+              "Column-height variants: ZA-R3L / ZA-R3M / ZA-R3H",
+              "Key difference: column height / Z-axis travel",
+              "Selection cue: choose L / M / H by station height and vertical travel first",
+              "Product form: SCARA lift platform"
+            ]
+          },
+          "zar3mleft": {
+            "title": "ZA-R3M(L) Rail-Integrated",
+            "summary": "A rail-integrated ZA-R3M configuration for extending long-travel linear operation range.",
+            "specs": [
+              "Combination: ZA-R3M + Rail Platform",
+              "Category: R-series linked variant",
+              "Scenario: Cross-station linear pick-and-place and linked transfer",
+              "Selection cue: Rail travel, takt requirements, and overall footprint"
+            ]
+          },
+          "zar3mright": {
+            "title": "ZA-R3M(R) Rotary-Platform Integrated",
+            "summary": "A rotating-platform-integrated ZA-R3M configuration for transfer and orientation adjustment.",
+            "specs": [
+              "Combination: ZA-R3M + Rotating Platform",
+              "Category: R-series linked variant",
+              "Scenario: Multi-angle station transfer and posture adjustment",
+              "Selection cue: Rotation precision, takt requirements, and station layout"
+            ]
+          },
+          "zar3t": {
+            "title": "ZA-R3T",
+            "summary": "An embodied dual-arm robot for bimanual operation, embodied training, and demonstration workflows.",
+            "specs": [
+              "Single arm: 7 DOF / rated payload 1kg",
+              "Arm span 640mm / repeatability ±0.1mm",
+              "Lift axis travel 400 / 750 / 1160mm optional",
+              "EtherCAT + 10 in / 10 out I/O"
+            ]
+          }
+        }
+      },
+      "mSeries": {
+        "title": "M Series",
+        "intro": "Mobile bases, first selected by payload, footprint, and station rhythm.",
+        "cards": {
+          "zam75": {
+            "title": "ZA-M75",
+            "summary": "A light-duty mobile base for flexible deployment and mid-light transport.",
+            "specs": [
+              "Max payload 75kg",
+              "Travel speed 0.1~1.2m/s / 360° zero-turn steering",
+              "Positioning accuracy 30mm / climbing ability 10±1°",
+              "Dimensions Φ564 × 294(H) mm"
+            ]
+          },
+          "zam135": {
+            "title": "ZA-M135",
+            "summary": "A mid-load mobile base for higher-payload transfer across workstations.",
+            "specs": [
+              "Max payload 135kg",
+              "Travel speed 0.1~1.2m/s / 360° zero-turn steering",
+              "Positioning accuracy 30mm / climbing ability 10±1°",
+              "Dimensions 674 × 456 × 327mm"
+            ]
+          }
+        }
+      },
+      "mrSeries": {
+        "title": "MR Series",
+        "intro": "Composite robotic platforms that combine mobility, lift, and manipulation into one cross-area unit.",
+        "cards": {
+          "zamr3m": {
+            "title": "ZA-MR3M",
+            "summary": "A composite robot platform that integrates a high-performance autonomous mobile base with a customized four-axis robotic arm for cross-area, multi-height workflows.",
+            "specs": [
+              "Overall size 674 × 456 × 1408mm",
+              "Weight 100kg / travel speed 0.1~1.2m/s",
+              "Lift travel 750mm / runtime 6h",
+              "Navigation: laser SLAM"
+            ]
+          },
+          "zamr3t": {
+            "title": "ZA-MR3T",
+            "summary": "A highly integrated humanoid-style manipulation platform that combines a mobile base, lift axis, robotic arms, and vision cameras for human-like high-precision operation.",
+            "specs": [
+              "Integrated mobile base, lift axis, dual arms, and vision cameras",
+              "Weight 120kg / travel speed 0.1~1.2m/s",
+              "Lift travel 750mm / runtime 5h",
+              "Overall size 674 × 575 × 1408mm"
+            ]
+          }
+        }
+      },
+      "embodiedPlatforms": {
+        "title": "Embodied & Dev Platforms",
+        "intro": "Platforms for VR, master-slave teleoperation, and embodied AI development workflows.",
+        "cards": {
+          "zarmvr": {
+            "title": "ZA-RMVR",
+            "summary": "A teaching and research platform integrating a lift axis, dual robotic arms, dexterous end effectors, a core controller, and VR devices.",
+            "specs": [
+              "Platform size 674 × 575 × 1408mm",
+              "Single-arm 1kg / dual-arm 2kg",
+              "7 DOF / 640mm working radius / 5h runtime",
+              "1× Gigabit Ethernet + 1× USB3.0 + 10 in / 10 out I/O"
+            ]
+          },
+          "zarmps": {
+            "title": "ZA-RMPS",
+            "summary": "A dual-arm master-slave teleoperation platform for mirrored operation and control validation.",
+            "specs": [
+              "Platform size 1000 × 1000 × 850mm",
+              "Single-arm 1kg / dual-arm 2kg",
+              "Master/slave arms with 7 DOF / 640mm working radius",
+              "1× Gigabit Ethernet + 1× USB3.0 + 10 in / 10 out I/O"
+            ]
+          },
+          "zardp": {
+            "title": "ZA-RDP",
+            "summary": "A drawing robot platform for path teaching, drawing demos, and algorithm validation.",
+            "specs": [
+              "Platform size 800 × 300 × 500mm",
+              "6 DOF / weight 26kg",
+              "Repeatability ±0.03mm",
+              "540.5mm working radius / 1.5m/s max end speed"
+            ]
+          }
+        }
+      },
+      "controller": {
+        "title": "Controller",
+        "intro": "Integrated control hardware for real-time motion, bus synchronization, and interface expansion.",
+        "cards": {
+          "zazg100": {
+            "title": "ZA-ZG100",
+            "summary": "An integrated controller focused on real-time robotics control and dense I/O integration.",
+            "specs": [
+              "RK3588, 8-core 64-bit A76+A55 at 2.4GHz",
+              "Built-in NPU 6 Tops / 16GB memory / 128GB storage",
+              "EtherCAT bus, 1ms control cycle, 5μs control jitter",
+              "12V / Type-C / EtherCAT / Ethernet / USB 3.0×2 / HDMI"
+            ]
+          }
+        }
+      },
+      "accessories": {
+        "title": "Accessories",
+        "intro": "Accessories are shown in a separate section to extend travel and rotation, and can be matched after the robot body is confirmed.",
+        "cards": {
+          "rail": {
+            "title": "Rail Platform",
+            "summary": "Extends long-range linear travel for linked stations and cross-station transfer.",
+            "specs": [
+              "Travel 1750mm",
+              "Max speed 500mm/s",
+              "Positioning accuracy 0.21mm / 300mm",
+              "Dimensions 2229 × 280 × 146mm"
+            ]
+          },
+          "rotatingplatform": {
+            "title": "Rotating Platform",
+            "summary": "Adds rotational freedom for orientation adjustment and station transfer needs.",
+            "specs": [
+              "Dimensions 433 × 280 × 238mm",
+              "Max speed 30rpm / rotation ±360°",
+              "Positioning accuracy ≤1 arcmin",
+              "Repeatability ≤10 arcsec"
+            ]
+          }
+        }
       }
     }
   }

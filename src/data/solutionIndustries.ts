@@ -1,105 +1,86 @@
 export interface SolutionCapabilityLayerConfig {
-  key: "execution" | "control" | "scheduling" | "deployment";
+  key:
+    | "precisionExecution"
+    | "mobileExecution"
+    | "embodiedDevelopment"
+    | "controlExpansion";
   productSlugs: string[];
 }
 
 export interface SolutionIndustryGroupConfig {
   key:
-    | "medical"
-    | "precision"
-    | "manufacturing"
-    | "logistics"
-    | "research";
+    | "precisionWorkcell"
+    | "mobileCollaboration"
+    | "embodiedDevelopment";
   applicationSlugs: string[];
   productSlugs: string[];
   proofVideoSlug: string;
 }
 
 export interface FeaturedProofConfig {
-  key: "medical-proof" | "precision-proof" | "logistics-proof";
+  key: "precision-proof" | "mobile-proof" | "embodied-proof";
   industryKey: SolutionIndustryGroupConfig["key"];
   videoSlug: string;
 }
 
 export const solutionCapabilityLayers: SolutionCapabilityLayerConfig[] = [
   {
-    key: "execution",
+    key: "precisionExecution",
     productSlugs: [
-      "scara-4axis",
-      "arm-6axis",
-      "dual-arm-humanoid",
-      "mobile-robot",
+      "za-r3-x",
+      "za-r3d6",
+      "za-r3l-m-h",
     ],
   },
   {
-    key: "control",
-    productSlugs: ["airos", "industrial-rtos"],
+    key: "mobileExecution",
+    productSlugs: ["za-m75", "za-m135", "za-mr3m", "za-mr3t"],
   },
   {
-    key: "scheduling",
-    productSlugs: ["robot-scheduler", "mobile-robot", "airos"],
+    key: "embodiedDevelopment",
+    productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
   },
   {
-    key: "deployment",
-    productSlugs: ["multi-os-vm", "industrial-rtos", "airos"],
+    key: "controlExpansion",
+    productSlugs: ["za-zg100", "rail", "rotating-platform"],
   },
 ];
 
 export const solutionIndustryGroups: SolutionIndustryGroupConfig[] = [
   {
-    key: "medical",
-    applicationSlugs: ["medical-automation", "pharmaceutical-automation"],
-    productSlugs: ["airos", "scara-4axis", "robot-scheduler"],
-    proofVideoSlug: "medical-automation",
+    key: "precisionWorkcell",
+    applicationSlugs: ["precision-assembly", "surface-treatment", "medical-automation"],
+    productSlugs: ["za-r3-x", "za-r3l-m-h", "za-r3d6", "za-zg100"],
+    proofVideoSlug: "assembly-robot",
   },
   {
-    key: "precision",
-    applicationSlugs: ["semiconductor", "precision-assembly", "surface-treatment"],
-    productSlugs: ["airos", "industrial-rtos", "arm-6axis"],
-    proofVideoSlug: "semiconductor",
-  },
-  {
-    key: "manufacturing",
-    applicationSlugs: [
-      "intelligent-manufacturing",
-      "composite-systems",
-      "ai-robotics",
-    ],
-    productSlugs: ["multi-os-vm", "industrial-rtos", "dual-arm-humanoid"],
+    key: "mobileCollaboration",
+    applicationSlugs: ["composite-systems", "smart-logistics", "intelligent-navigation"],
+    productSlugs: ["za-m75", "za-m135", "za-mr3m", "za-mr3t"],
     proofVideoSlug: "composite-robot-application",
   },
   {
-    key: "logistics",
-    applicationSlugs: ["smart-logistics", "intelligent-navigation", "intelligent-patrol"],
-    productSlugs: ["robot-scheduler", "mobile-robot", "airos"],
-    proofVideoSlug: "agv-product-introduction",
-  },
-  {
-    key: "research",
-    applicationSlugs: [
-      "agricultural-research",
-      "cultural-creative",
-      "industrial-gateway",
-    ],
-    productSlugs: ["multi-os-vm", "airos", "dual-arm-humanoid"],
-    proofVideoSlug: "rice-molecular-experiment",
+    key: "embodiedDevelopment",
+    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
+    productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
+    proofVideoSlug: "sketching-robot",
   },
 ];
 
 export const featuredProofs: FeaturedProofConfig[] = [
   {
-    key: "medical-proof",
-    industryKey: "medical",
-    videoSlug: "medical-automation",
-  },
-  {
     key: "precision-proof",
-    industryKey: "precision",
-    videoSlug: "semiconductor",
+    industryKey: "precisionWorkcell",
+    videoSlug: "assembly-robot",
   },
   {
-    key: "logistics-proof",
-    industryKey: "logistics",
-    videoSlug: "agv-product-introduction",
+    key: "mobile-proof",
+    industryKey: "mobileCollaboration",
+    videoSlug: "composite-robot-application",
+  },
+  {
+    key: "embodied-proof",
+    industryKey: "embodiedDevelopment",
+    videoSlug: "sketching-robot",
   },
 ];
