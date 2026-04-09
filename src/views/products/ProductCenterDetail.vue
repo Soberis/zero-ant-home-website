@@ -620,7 +620,7 @@ const goBack = () => {
   font-size: 1.12rem;
   line-height: 1.35;
   font-weight: 700;
-  color: var(--color-primary, #1a3a8f);
+  color: #0f172a;
   word-break: break-word;
 }
 
@@ -628,14 +628,14 @@ const goBack = () => {
   font-size: 1.55rem;
   letter-spacing: -0.015em;
   line-height: 1.2;
-  color: var(--color-primary, #1a3a8f);
+  color: #0f172a;
   font-weight: 800;
 }
 
 .product-hero__metric-value--compact {
   font-size: 1.04rem;
   line-height: 1.55;
-  color: var(--color-primary, #1a3a8f);
+  color: #0f172a;
   font-weight: 600;
 }
 

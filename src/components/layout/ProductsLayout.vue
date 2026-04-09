@@ -167,11 +167,11 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 .products-hero {
   position: relative;
-  min-height: calc(100vh - var(--nav-height));
-  padding: 40px 0 56px;
+  min-height: var(--compact-hero-min-height);
+  padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background:
     radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
     linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
@@ -180,15 +180,16 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  grid-template-columns: minmax(0, 1fr)
+    minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
 }
 
 .products-hero__copy {
   position: relative;
-  max-width: min(740px, 100%);
-  padding: 24px 0 0;
+  max-width: var(--compact-hero-copy-max-width);
+  padding: var(--compact-hero-copy-padding-top) 0 var(--compact-hero-copy-padding-bottom);
 }
 
 .products-hero__panel {
@@ -197,9 +198,9 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  max-width: 260px;
+  max-width: var(--compact-hero-panel-width);
   margin-left: 0;
-  padding: 18px 0 0;
+  padding: var(--compact-hero-panel-padding-top) 0 0;
   border-left: none;
   border-radius: 0;
   background: transparent;
@@ -231,8 +232,8 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__description {
   max-width: 40rem;
   margin: 0 0 24px;
-  font-size: 1.02rem;
-  line-height: 1.85;
+  font-size: var(--compact-hero-description-size);
+  line-height: var(--compact-hero-description-line-height);
 }
 
 .products-hero__actions {
@@ -240,6 +241,12 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 0;
+}
+
+.products-hero__actions .btn {
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
+  font-size: var(--compact-hero-button-font-size);
 }
 
 .products-hero__action {
@@ -299,13 +306,13 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__metric {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--compact-hero-kpi-gap);
   position: relative;
   padding: 0;
 }
 
 .products-hero__metric + .products-hero__metric {
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-top: 1px solid var(--compact-hero-kpi-divider-color);
   padding-top: 20px;
 }
 
@@ -319,9 +326,9 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric--numeric .products-hero__metric-value {
-  font-size: clamp(2.1rem, 3vw, 2.9rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-size: var(--compact-hero-kpi-value-size);
+  line-height: var(--compact-hero-kpi-value-line-height);
+  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
   color: var(--products-title); /* 改回深色，保持全站一致 */
 }
 
@@ -330,8 +337,8 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric-label {
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: var(--compact-hero-kpi-label-size);
+  line-height: var(--compact-hero-kpi-label-line-height);
   color: var(--products-text);
   font-weight: 500;
 }
@@ -447,6 +454,10 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 @media (max-width: 900px) {
+  .products-hero {
+    padding: 104px 0 52px;
+  }
+
   .products-hero__panel {
     padding: 18px 0 0;
   }
@@ -469,6 +480,10 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 @media (max-width: 640px) {
   .products-shell {
     padding: 0 0 64px;
+  }
+
+  .products-hero {
+    padding-top: 86px;
   }
 
   .products-hero__copy {

@@ -468,11 +468,11 @@ function toggleApplicationArchive(): void {
 
 .solutions-hero {
   position: relative;
-  min-height: calc(100vh - var(--nav-height));
-  padding: 40px 0 56px;
+  min-height: var(--compact-hero-min-height);
+  padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background:
     radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
     linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
@@ -480,15 +480,16 @@ function toggleApplicationArchive(): void {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  grid-template-columns: minmax(0, 1fr)
+    minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
   max-width: var(--container-max-width);
 }
 
 .hero-copy {
-  max-width: 720px;
-  padding: 24px 0 0;
+  max-width: var(--compact-hero-copy-max-width);
+  padding: var(--compact-hero-copy-padding-top) 0 var(--compact-hero-copy-padding-bottom);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -516,7 +517,8 @@ function toggleApplicationArchive(): void {
 .hero-description {
   max-width: 40rem;
   margin: 0 0 24px;
-  font-size: 1.02rem;
+  font-size: var(--compact-hero-description-size);
+  line-height: var(--compact-hero-description-line-height);
 }
 
 .hero-actions,
@@ -531,44 +533,50 @@ function toggleApplicationArchive(): void {
   align-items: center;
 }
 
+.hero-actions .btn {
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
+  font-size: var(--compact-hero-button-font-size);
+}
+
 .hero-panel {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
   width: 100%;
-  max-width: 260px;
+  max-width: var(--compact-hero-panel-width);
   margin-left: 0;
   padding-left: 0;
-  padding-top: 24px;
+  padding-top: var(--compact-hero-panel-padding-top);
   border-left: none;
 }
 
 .hero-stat {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 18px 0;
+  gap: var(--compact-hero-kpi-gap);
+  padding: var(--compact-hero-kpi-padding-top) 0;
 }
 
 .hero-stat + .hero-stat {
-  border-top: 1px solid rgba(15, 23, 42, 0.12);
+  border-top: 1px solid var(--compact-hero-kpi-divider-color);
 }
 
 .hero-stat-value {
   color: var(--brand-text);
   font-family: "Outfit", sans-serif;
-  font-size: clamp(2.1rem, 3.6vw, 3rem);
+  font-size: var(--compact-hero-kpi-value-size);
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: var(--compact-hero-kpi-value-line-height);
+  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
 }
 
 .hero-stat-label {
   color: var(--brand-muted);
-  font-size: 0.84rem;
+  font-size: var(--compact-hero-kpi-label-size);
   font-weight: 500;
-  line-height: 1.55;
+  line-height: var(--compact-hero-kpi-label-line-height);
   text-align: left;
 }
 

@@ -321,11 +321,11 @@ function formatIndex(value: number): string {
 }
 
 .support-hero {
-  min-height: calc(100vh - var(--nav-height));
-  padding: 40px 0 88px;
+  min-height: var(--compact-hero-min-height);
+  padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background:
     radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
     linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
@@ -333,15 +333,16 @@ function formatIndex(value: number): string {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  grid-template-columns: minmax(0, 1fr)
+    minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
 }
 
 .hero-copy {
   position: relative;
-  max-width: 720px;
-  padding: 16px 0 12px;
+  max-width: var(--compact-hero-copy-max-width);
+  padding: var(--compact-hero-copy-padding-top) 0 var(--compact-hero-copy-padding-bottom);
 }
 
 .hero-title {
@@ -353,8 +354,8 @@ function formatIndex(value: number): string {
   max-width: 32em;
   margin: 0;
   color: var(--brand-muted);
-  font-size: 1.05rem;
-  line-height: 1.85;
+  font-size: var(--compact-hero-description-size);
+  line-height: var(--compact-hero-description-line-height);
 }
 
 .hero-actions {
@@ -362,6 +363,12 @@ function formatIndex(value: number): string {
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 28px;
+}
+
+.hero-actions .btn {
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
+  font-size: var(--compact-hero-button-font-size);
 }
 
 .hero-promises {
@@ -382,15 +389,16 @@ function formatIndex(value: number): string {
 .hero-promise-head {
   display: flex;
   align-items: flex-end;
-  gap: 6px;
+  gap: var(--compact-hero-kpi-gap);
 }
 
 .hero-promise-value {
   color: var(--brand-text);
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-family: "Outfit", sans-serif;
+  font-size: var(--compact-hero-kpi-value-size);
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: var(--compact-hero-kpi-value-line-height);
+  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
 }
 
 .hero-promise-unit {
@@ -410,17 +418,17 @@ function formatIndex(value: number): string {
 
 .hero-panel {
   width: 100%;
-  max-width: 340px;
+  max-width: var(--compact-hero-panel-width);
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding-top: 18px;
+  padding-top: var(--compact-hero-panel-padding-top);
 }
 
 .hero-panel-label {
   margin: 0 0 12px;
   color: var(--brand-muted);
-  font-size: 0.82rem;
+  font-size: var(--compact-hero-kpi-label-size);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;

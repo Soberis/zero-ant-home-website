@@ -46,6 +46,31 @@
   --container-max-width: 1440px; /* Increased from 1200px to fit large screens gracefully */
   --container-padding-x: 48px;
   --nav-height: 80px;
+  --compact-hero-padding-top: 84px;
+  --compact-hero-padding-bottom: 64px;
+  --compact-hero-min-height: 520px;
+  --compact-hero-copy-max-width: 720px;
+  --compact-hero-copy-padding-top: 16px;
+  --compact-hero-copy-padding-bottom: 12px;
+  --compact-hero-description-size: 1.04rem;
+  --compact-hero-description-line-height: 1.85;
+  --compact-hero-button-height: 56px;
+  --compact-hero-button-padding-inline: 32px;
+  --compact-hero-button-font-size: 0.95rem;
+  --compact-hero-side-column-min: 280px;
+  --compact-hero-side-column-max: 340px;
+  --compact-hero-panel-width: 340px;
+  --compact-hero-panel-padding-top: 18px;
+  --compact-hero-kpi-gap: 6px;
+  --compact-hero-kpi-padding-top: 18px;
+  --compact-hero-kpi-value-size: clamp(2.1rem, 3vw, 2.9rem);
+  --compact-hero-kpi-value-line-height: 1;
+  --compact-hero-kpi-value-letter-spacing: -0.04em;
+  --compact-hero-kpi-label-size: 0.84rem;
+  --compact-hero-kpi-label-line-height: 1.55;
+  --compact-hero-kpi-divider-color: rgba(15, 23, 42, 0.08);
+  --home-hero-max-height: 680px;
+  --home-hero-height: min(calc(100svh - var(--nav-height)), var(--home-hero-max-height));
 
   /* ── 过渡 ── */
   --transition-fast: 0.2s ease;
@@ -229,6 +254,10 @@ body {
   :root {
     --section-padding-y: 64px;
     --container-padding-x: 20px;
+    --compact-hero-min-height: 0;
+    --compact-hero-button-height: 52px;
+    --compact-hero-button-padding-inline: 24px;
+    --home-hero-height: calc(100svh - var(--nav-height));
   }
 }
 
