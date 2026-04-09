@@ -64,7 +64,7 @@
 
       <div class="content-desc-block">
         <!-- 富文本渲染 (Application) -->
-        <div v-if="contentHtml" class="content-html" v-html="contentHtml"></div>
+        <div v-if="contentHtml" class="content-html" v-html="sanitizedContentHtml"></div>
         
         <!-- 分段文本渲染 (Video) -->
         <template v-else-if="contentParagraphs && contentParagraphs.length">
@@ -140,6 +140,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import { sanitizeHtmlAllowList } from '@/utils/security';
 import fallbackFacadeImg from '@/assets/images/videos/mobile-transfer-robot.webp';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
 
@@ -168,6 +169,11 @@ const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
 
 const thumbnailUrl = computed(() => props.mediaInfo.thumbnailUrl || fallbackFacadeImg);
+
+const sanitizedContentHtml = computed(() => {
+  if (!props.contentHtml) return '';
+  return sanitizeHtmlAllowList(props.contentHtml);
+});
 
 const bottomBarClass = computed(() => {
   if (props.prevSlug && props.nextSlug) return "both";
