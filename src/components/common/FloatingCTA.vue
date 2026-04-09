@@ -137,7 +137,7 @@ const scrollToTop = () => {
     .sidebar-popup {
       opacity: 1;
       visibility: visible;
-      transform: translateX(0) scale(1);
+      transform: translateY(-50%) translateX(0) scale(1);
       pointer-events: auto;
     }
   }
