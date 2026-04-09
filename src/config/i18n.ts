@@ -1,3 +1,4 @@
+import { computed } from 'vue';
 import { createI18n } from 'vue-i18n';
 import en from '@/locales/en.json';
 import zh from '@/locales/zh.json';
@@ -64,19 +65,19 @@ if (typeof document !== 'undefined') {
 
 // 极致 I18n 增强：跨语言日期与数字格式化工具
 export const useLocaleFormat = () => {
-  const currentLocale = i18n.global.locale.value;
+  const currentLocale = computed(() => i18n.global.locale.value as SupportedLocale);
   
   return {
     /** 格式化日期：随语言自动切换 (zh: 2025/03/25, en: Mar 25, 2025) */
     formatDate: (date: Date | string | number) => {
       const d = new Date(date);
-      return new Intl.DateTimeFormat(currentLocale === 'zh' ? 'zh-CN' : 'en-US', {
+      return new Intl.DateTimeFormat(currentLocale.value === 'zh' ? 'zh-CN' : 'en-US', {
         year: 'numeric', month: 'short', day: 'numeric'
       }).format(d);
     },
     /** 格式化数字：自动添加千分位 */
     formatNumber: (num: number) => {
-      return new Intl.NumberFormat(currentLocale === 'zh' ? 'zh-CN' : 'en-US').format(num);
+      return new Intl.NumberFormat(currentLocale.value === 'zh' ? 'zh-CN' : 'en-US').format(num);
     }
   };
 };

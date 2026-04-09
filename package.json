@@ -29,7 +29,6 @@
   "dependencies": {
     "@intlify/core-base": "^11.3.0",
     "element-plus": "^2.10.4",
-    "esbuild": "^0.25.8",
     "vue": "^3.4.21",
     "vue-i18n": "^11.3.0",
     "vue-router": "^4.4.0"
@@ -38,6 +37,7 @@
     "@intlify/unplugin-vue-i18n": "^6.0.8",
     "@types/node": "^24.0.15",
     "@vitejs/plugin-vue": "^5.0.5",
+    "esbuild": "^0.25.8",
     "less": "^4.4.0",
     "rollup-plugin-visualizer": "^6.0.3",
     "sharp": "^0.34.3",

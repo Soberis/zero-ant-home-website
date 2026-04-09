@@ -20,7 +20,7 @@
               :to="localizePath(item.to)"
               class="nav-link"
               :class="{ active: isTopNavActive(item.to) }"
-              aria-current-value="page"
+              :aria-current="isTopNavActive(item.to) ? 'page' : undefined"
               @click="handleTopNavClick(item.to, $event)"
             >
               <span class="nav-text">{{ $t(item.label) }}</span>

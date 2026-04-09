@@ -53,7 +53,7 @@ export default defineConfig({
     // 启用源码映射（可选，生产环境可关闭）
     sourcemap: false,
     // 设置构建目标
-    target: "es2020",
+    target: "es2022",
     // 启用压缩
     minify: "terser",
     terserOptions: {
