@@ -274,6 +274,28 @@
         }
       }
     },
+    "faq": {
+      "title": "Common Solution Questions",
+      "description": "These are the questions customers most often ask in AI search and early qualification, answered directly.",
+      "items": {
+        "selection": {
+          "question": "What solution directions does the ZeroAnt solutions page cover?",
+          "answer": "The page is currently organized into three directions: precision transfer and assembly, mobile transfer and composite work, and embodied development with teleoperation validation. Each direction maps directly to current product combinations, representative applications, and proof videos."
+        },
+        "precision": {
+          "question": "What kinds of projects fit the precision transfer and assembly direction?",
+          "answer": "Projects focused on high-speed pick-and-place, precision assembly, loading, unloading, or surface treatment usually start with R-series arms, lift platforms, and controller hardware. This direction is more sensitive to takt time, positioning accuracy, and workstation coordination."
+        },
+        "mobile": {
+          "question": "How is a mobile transfer or composite-work solution usually assembled?",
+          "answer": "These solutions typically combine M / MR mobile bases or composite robots with controller hardware, navigation, and station-level interface design. They fit in-factory logistics, cross-station transfer, and mobile manipulation workflows."
+        },
+        "delivery": {
+          "question": "How does ZeroAnt usually move a solution into delivery?",
+          "answer": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That helps expose interface boundaries earlier and reduces on-site iteration."
+        }
+      }
+    },
     "tags": {
       "typicalScenes": "Typical scenarios",
       "relatedProducts": "@:common.section.relatedProducts",
@@ -797,6 +819,16 @@
           "name": "Embodied Development & Teleoperation Validation Solutions",
           "description": "Embodied development platforms built around MR3T, VR teleoperation, master-slave teleoperation, and drawing workflows"
         }
+      },
+      "solutionsFaq": {
+        "q1": "What solution directions does the ZeroAnt solutions page cover?",
+        "a1": "The page is currently organized into three directions: precision transfer and assembly, mobile transfer and composite work, and embodied development with teleoperation validation. Each direction maps directly to current product combinations, representative applications, and proof videos.",
+        "q2": "What kinds of projects fit the precision transfer and assembly direction?",
+        "a2": "Projects focused on high-speed pick-and-place, precision assembly, loading, unloading, or surface treatment usually start with R-series arms, lift platforms, and controller hardware. This direction is more sensitive to takt time, positioning accuracy, and workstation coordination.",
+        "q3": "How is a mobile transfer or composite-work solution usually assembled?",
+        "a3": "These solutions typically combine M / MR mobile bases or composite robots with controller hardware, navigation, and station-level interface design. They fit in-factory logistics, cross-station transfer, and mobile manipulation workflows.",
+        "q4": "How does ZeroAnt usually move a solution into delivery?",
+        "a4": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That helps expose interface boundaries earlier and reduces on-site iteration."
       },
       "careers": {
         "roboticsEngineer": {

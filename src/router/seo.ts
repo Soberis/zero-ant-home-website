@@ -242,6 +242,24 @@ export function setupPageSEO(to: RouteLocationNormalized) {
 export function setupSolutionsSEO(to: RouteLocationNormalized) {
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const currentUrl = `${baseUrl}${to.path}`;
+  const faqEntries = [
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q1"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a1"),
+    },
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q2"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a2"),
+    },
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q3"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a3"),
+    },
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q4"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a4"),
+    },
+  ];
 
   // 设置解决方案页面 SEO
   setSEO({
@@ -322,7 +340,20 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     },
   };
 
-  setStructuredData(structuredData);
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqEntries.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
+  setStructuredData([structuredData, faqStructuredData]);
 }
 
 /**

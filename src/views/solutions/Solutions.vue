@@ -215,6 +215,30 @@
         </div>
       </div>
     </section>
+
+    <section id="faq" ref="faqRef" class="page-section page-section--muted reveal-ready">
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main text-display-large">{{ t("solutionsPage.faq.title") }}</span>
+          </h2>
+          <p class="section-description">
+            {{ t("solutionsPage.faq.description") }}
+          </p>
+        </div>
+
+        <div class="faq-grid">
+          <article
+            v-for="item in faqItems"
+            :key="item.question"
+            class="faq-card"
+          >
+            <h3 class="faq-question">{{ item.question }}</h3>
+            <p class="faq-answer">{{ item.answer }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -250,8 +274,9 @@ interface SolutionIndustryCard {
 const industriesRef = ref<HTMLElement | null>(null);
 const proofRef = ref<HTMLElement | null>(null);
 const deliveryRef = ref<HTMLElement | null>(null);
+const faqRef = ref<HTMLElement | null>(null);
 
-useScrollRevealList([industriesRef, proofRef, deliveryRef]);
+useScrollRevealList([industriesRef, proofRef, deliveryRef, faqRef]);
 
 const route = useRoute();
 const router = useRouter();
@@ -402,6 +427,25 @@ const deliverySteps = computed(() => [
   {
     title: t("solutionsPage.delivery.steps.deliver.title"),
     description: t("solutionsPage.delivery.steps.deliver.description"),
+  },
+]);
+
+const faqItems = computed(() => [
+  {
+    question: t("solutionsPage.faq.items.selection.question"),
+    answer: t("solutionsPage.faq.items.selection.answer"),
+  },
+  {
+    question: t("solutionsPage.faq.items.precision.question"),
+    answer: t("solutionsPage.faq.items.precision.answer"),
+  },
+  {
+    question: t("solutionsPage.faq.items.mobile.question"),
+    answer: t("solutionsPage.faq.items.mobile.answer"),
+  },
+  {
+    question: t("solutionsPage.faq.items.delivery.question"),
+    answer: t("solutionsPage.faq.items.delivery.answer"),
   },
 ]);
 
@@ -949,6 +993,35 @@ function toggleApplicationArchive(): void {
   color: var(--brand-primary);
 }
 
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.faq-card {
+  padding: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.faq-question {
+  margin: 0 0 12px;
+  color: var(--brand-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.faq-answer {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 0.96rem;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
 @media (max-width: 1100px) {
   .hero-grid,
   .proof-feature-grid,
@@ -957,7 +1030,8 @@ function toggleApplicationArchive(): void {
     grid-template-columns: 1fr;
   }
 
-  .industry-grid {
+  .industry-grid,
+  .faq-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -985,7 +1059,8 @@ function toggleApplicationArchive(): void {
 }
 
 @media (max-width: 900px) {
-  .industry-grid {
+  .industry-grid,
+  .faq-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1020,6 +1095,10 @@ function toggleApplicationArchive(): void {
   }
 
   .industry-block {
+    padding: 24px;
+  }
+
+  .faq-card {
     padding: 24px;
   }
 
