@@ -47,12 +47,12 @@
 </template>
 
 <script setup lang="ts">
-import zaR3XImg from '@/assets/images/product/ZA-R3-X.png';
-import zaM135Img from '@/assets/images/product/ZA-M135.png';
-import zaMR3TImg from '@/assets/images/product/ZA-MR3T.png';
-import zaRMVRImg from '@/assets/images/product/ZA-RMVR具身智能双臂VR遥操作开发平台.jpg';
-import zaZG100Img from '@/assets/images/product/ZA-ZG100.png';
-import rotatingPlatformImg from '@/assets/images/product/旋转平台.png';
+import zaR3XImg from '@/assets/images/product/ZA-R3-X.webp';
+import zaM135Img from '@/assets/images/product/ZA-M135.webp';
+import zaMR3TImg from '@/assets/images/product/ZA-MR3T.webp';
+import zaRMVRImg from '@/assets/images/product/ZA-RMVR具身智能双臂VR遥操作开发平台.webp';
+import zaZG100Img from '@/assets/images/product/ZA-ZG100.webp';
+import rotatingPlatformImg from '@/assets/images/product/旋转平台.webp';
 import { useI18n } from 'vue-i18n';
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
