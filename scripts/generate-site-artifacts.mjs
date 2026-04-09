@@ -53,6 +53,10 @@ function escapeHtml(value = "") {
     .replace(/'/g, "&#39;");
 }
 
+function stripHtml(value = "") {
+  return String(value).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 function getMessage(messages, key) {
   const segments = key.split(".");
   let current = messages;
@@ -117,8 +121,24 @@ function parseProductFamilies(source) {
   return families;
 }
 
-function parseProductIds(source) {
-  return uniqueMatches(source, /id:\s*"([^"]+)",\s*image:/g);
+function parseProductCards(source) {
+  const cards = [];
+  const regex =
+    /id:\s*"([^"]+)",\s*image:[\s\S]*?titleKey:\s*"([^"]+)",\s*summaryKey:\s*"([^"]+)",\s*specKeys:\s*\[([\s\S]*?)\](?:,\s*noteKey:\s*"([^"]+)")?/g;
+  let match = regex.exec(source);
+
+  while (match) {
+    cards.push({
+      id: match[1],
+      titleKey: match[2],
+      summaryKey: match[3],
+      specKeys: uniqueMatches(match[4], /"([^"]+)"/g),
+      noteKey: match[5] || "",
+    });
+    match = regex.exec(source);
+  }
+
+  return cards;
 }
 
 function parseApplications(source) {
@@ -312,39 +332,172 @@ function renderListSection(title, description, items) {
   `;
 }
 
-function getStructuredData(routeKey, locale, routePath, messages) {
-  const pageUrl = `${siteUrl}${withLocalePath(routePath, locale)}`;
-  const siteName = getMessage(messages, "seo.siteName") || "ZeroAnt";
+function getPublisherData(siteName) {
+  return {
+    "@type": "Organization",
+    name: siteName,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/logo.webp`,
+    },
+  };
+}
+
+function buildBreadcrumbList(locale, items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${siteUrl}${withLocalePath(item.path, locale)}`,
+    })),
+  };
+}
+
+function getStructuredData(page, messages) {
+  const pageUrl = `${siteUrl}${withLocalePath(page.path, page.locale)}`;
+  const siteName = page.siteName || getMessage(messages, "seo.siteName") || "ZeroAnt";
+  const publisher = getPublisherData(siteName);
   const common = {
     "@context": "https://schema.org",
-    name: getMessage(messages, `seo.${routeKey}.title`) || getMessage(messages, "seo.home.title"),
-    description:
-      getMessage(messages, `seo.${routeKey}.description`) ||
-      getMessage(messages, "seo.home.description"),
+    name: page.title,
+    description: page.description,
     url: pageUrl,
-    inLanguage: locale,
+    inLanguage: page.locale,
     isPartOf: {
       "@type": "WebSite",
       name: siteName,
       url: siteUrl,
     },
+    publisher,
   };
 
-  switch (routeKey) {
+  switch (page.routeKey) {
     case "products":
       return {
         ...common,
         "@type": "CollectionPage",
       };
+    case "productDetail":
+      return [
+        {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: page.title,
+          description: page.description,
+          url: pageUrl,
+          sku: page.itemId,
+          image: [`${siteUrl}/logo.webp`],
+          brand: {
+            "@type": "Brand",
+            name: siteName,
+          },
+          manufacturer: {
+            "@type": "Organization",
+            name: siteName,
+          },
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.products"), path: "/products" },
+          { name: page.title, path: page.path },
+        ]),
+      ];
     case "solutions":
-      return {
-        ...common,
-        "@type": "CollectionPage",
-      };
+      return [
+        {
+          ...common,
+          "@type": "CollectionPage",
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: SOLUTION_GROUP_KEYS.map((key) => ({
+              "@type": "Service",
+              name: getMessage(messages, `seo.structuredData.solutions.${key}.name`),
+              description: getMessage(
+                messages,
+                `seo.structuredData.solutions.${key}.description`
+              ),
+              provider: {
+                "@type": "Organization",
+                name: siteName,
+              },
+            })),
+          },
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: ["q1", "q2", "q3", "q4"].map((key) => ({
+            "@type": "Question",
+            name: getMessage(messages, `seo.structuredData.solutionsFaq.${key}`),
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: getMessage(
+                messages,
+                `seo.structuredData.solutionsFaq.a${key.slice(1)}`
+              ),
+            },
+          })),
+        },
+      ];
+    case "applicationDetail":
+      return [
+        {
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: page.title,
+          description: page.description,
+          inLanguage: page.locale,
+          articleSection: "Applications",
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": pageUrl,
+          },
+          author: publisher,
+          publisher,
+          image: `${siteUrl}/logo.webp`,
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.solutions"), path: "/solutions" },
+          { name: page.title, path: page.path },
+        ]),
+      ];
+    case "videoDetail":
+      return [
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          name: page.title,
+          description: page.description,
+          inLanguage: page.locale,
+          thumbnailUrl: `${siteUrl}/logo.webp`,
+          contentUrl: pageUrl,
+          mainEntityOfPage: pageUrl,
+          author: publisher,
+          publisher,
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.solutions"), path: "/solutions" },
+          { name: page.title, path: page.path },
+        ]),
+      ];
     case "support":
       return {
         ...common,
         "@type": "FAQPage",
+        mainEntity: SUPPORT_FAQ_KEYS.map((key) => ({
+          "@type": "Question",
+          name: getMessage(messages, `supportPage.faqs.${key}.question`),
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: getMessage(messages, `supportPage.faqs.${key}.answer`),
+          },
+        })),
       };
     case "careers":
       return {
@@ -427,8 +580,8 @@ function renderBody(html, content) {
   );
 }
 
-function buildPageContent(routeKey, locale, messages, data) {
-  switch (routeKey) {
+function buildPageContent(page, messages, data) {
+  switch (page.routeKey) {
     case "home": {
       const familyCards = HOME_FAMILY_KEYS.map((key) => ({
         title: escapeHtml(getMessage(messages, `home.coreProducts.families.${key}.title`)),
@@ -651,6 +804,48 @@ function buildPageContent(routeKey, locale, messages, data) {
         ]
       );
     }
+    case "productDetail": {
+      const sections = [];
+      const specItems = (page.specKeys || [])
+        .map((key) => escapeHtml(getMessage(messages, key)))
+        .filter(Boolean);
+
+      if (specItems.length > 0) {
+        sections.push(
+          renderListSection(
+            escapeHtml(getMessage(messages, "productDetail.parameters")),
+            "",
+            specItems
+          )
+        );
+      }
+
+      if (page.noteKey) {
+        const note = escapeHtml(getMessage(messages, page.noteKey));
+        if (note) {
+          sections.push(
+            renderListSection(
+              escapeHtml(getMessage(messages, "productsPage.common.tipLabel")),
+              "",
+              [note]
+            )
+          );
+        }
+      }
+
+      return renderStaticShell(
+        escapeHtml(page.title),
+        escapeHtml(page.description),
+        sections
+      );
+    }
+    case "applicationDetail":
+    case "videoDetail":
+      return renderStaticShell(
+        escapeHtml(page.title),
+        escapeHtml(page.description),
+        []
+      );
     default:
       return renderStaticShell(
         escapeHtml(getMessage(messages, "seo.home.title")),
@@ -661,28 +856,81 @@ function buildPageContent(routeKey, locale, messages, data) {
 }
 
 function buildPageDefinitions(messages, data) {
-  return [
+  const topLevelPages = [
     { routeKey: "home", path: "/", ogType: "website" },
     { routeKey: "products", path: "/products", ogType: "website" },
     { routeKey: "solutions", path: "/solutions", ogType: "website" },
     { routeKey: "support", path: "/support", ogType: "website" },
     { routeKey: "about", path: "/about", ogType: "website" },
     { routeKey: "careers", path: "/careers", ogType: "website" },
-  ].flatMap((page) =>
-    ["zh", "en"].map((locale) => ({
-      ...page,
-      locale,
-      title: getMessage(messages[locale], `seo.${page.routeKey}.title`) || getMessage(messages[locale], "seo.home.title"),
-      description:
-        getMessage(messages[locale], `seo.${page.routeKey}.description`) ||
-        getMessage(messages[locale], "seo.home.description"),
-      keywords:
-        getMessage(messages[locale], `seo.${page.routeKey}.keywords`) ||
-        getMessage(messages[locale], "seo.home.keywords"),
-      siteName: getMessage(messages[locale], "seo.siteName") || "ZeroAnt Technology",
-      structuredData: getStructuredData(page.routeKey, locale, page.path, messages[locale]),
-      bodyHtml: buildPageContent(page.routeKey, locale, messages[locale], data),
-    }))
+  ];
+
+  const productDetailPages = data.productCards.map((item) => ({
+    routeKey: "productDetail",
+    path: `/products/detail/${item.id}`,
+    ogType: "product",
+    itemId: item.id,
+    titleKey: item.titleKey,
+    descriptionKey: item.summaryKey,
+    specKeys: item.specKeys,
+    noteKey: item.noteKey,
+  }));
+
+  const applicationPages = data.applications.map((item) => ({
+    routeKey: "applicationDetail",
+    path: `/applications/${item.slug}`,
+    ogType: "article",
+    itemId: item.slug,
+    titleKey: item.titleKey,
+    descriptionKey: item.descriptionKey,
+  }));
+
+  const videoPages = data.videos.map((item) => ({
+    routeKey: "videoDetail",
+    path: `/video/${item.slug}`,
+    ogType: "video.other",
+    itemId: item.slug,
+    titleKey: item.titleKey,
+    descriptionKey: item.descriptionKey,
+  }));
+
+  const pages = [...topLevelPages, ...productDetailPages, ...applicationPages, ...videoPages];
+
+  return pages.flatMap((page) =>
+    ["zh", "en"].map((locale) => {
+      const localeMessages = messages[locale];
+      const title = page.titleKey
+        ? stripHtml(getMessage(localeMessages, page.titleKey))
+        : getMessage(localeMessages, `seo.${page.routeKey}.title`) ||
+          getMessage(localeMessages, "seo.home.title");
+      const description = page.descriptionKey
+        ? stripHtml(getMessage(localeMessages, page.descriptionKey))
+        : getMessage(localeMessages, `seo.${page.routeKey}.description`) ||
+          getMessage(localeMessages, "seo.home.description");
+      const defaultKeywords =
+        getMessage(localeMessages, "seo.home.keywords") || "ZeroAnt Technology";
+      const keywords =
+        page.routeKey === "productDetail" ||
+        page.routeKey === "applicationDetail" ||
+        page.routeKey === "videoDetail"
+          ? `${title}, ${defaultKeywords}`
+          : getMessage(localeMessages, `seo.${page.routeKey}.keywords`) || defaultKeywords;
+
+      const localizedPage = {
+        ...page,
+        locale,
+        title,
+        description,
+        keywords,
+        siteName: getMessage(localeMessages, "seo.siteName") || "ZeroAnt Technology",
+      };
+
+      return {
+        ...localizedPage,
+        structuredData: getStructuredData(localizedPage, localeMessages),
+        bodyHtml: buildPageContent(localizedPage, localeMessages, data),
+      };
+    })
   );
 }
 
@@ -703,7 +951,7 @@ async function loadData() {
     },
     data: {
       productFamilies: parseProductFamilies(productSource),
-      productIds: parseProductIds(productSource),
+      productCards: parseProductCards(productSource),
       applications: parseApplications(applicationSource),
       videos: parseVideoEntries(videoSource),
     },
@@ -761,8 +1009,8 @@ async function writeSitemap(data) {
     "/about",
     "/careers",
   ].flatMap(localeVariants);
-  const productPaths = data.productIds.flatMap((id) =>
-    localeVariants(`/products/detail/${id}`)
+  const productPaths = data.productCards.flatMap((item) =>
+    localeVariants(`/products/detail/${item.id}`)
   );
   const applicationPaths = data.applications.flatMap((item) =>
     localeVariants(`/applications/${item.slug}`)

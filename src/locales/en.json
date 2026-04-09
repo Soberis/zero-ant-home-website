@@ -777,32 +777,32 @@
     "defaultKeywords": "ZeroAnt Technology, industrial robots, intelligent robotics, AiROS, robot operating system, 4-axis robot, 6-axis robotic arm, mobile base, composite robot, embodied development platform, biopharma, semiconductor",
     "home": {
       "title": "ZeroAnt Technology - Let robots be everywhere",
-      "description": "Founded by a research team from the Hangzhou Innovation Research Institute of Beihang University, ZeroAnt Technology focuses on complete intelligent robotic solutions. Powered by its self-developed AiROS intelligent robot operating system, the company offers 4-axis robots, 6-axis robotic arms, mobile bases, composite robots, and embodied development platforms for biopharma, semiconductor, and related industries.",
-      "keywords": "ZeroAnt Technology, industrial robots, intelligent robotics, smart manufacturing, AiROS, robot operating system, 4-axis robot, 6-axis robotic arm, mobile base, composite robot, embodied development platform, biopharma, semiconductor, robotic system solutions, Hangzhou robotics company"
+      "description": "ZeroAnt Technology focuses on complete intelligent robotic solutions, independently developing the AiROS operating system to provide 4-axis robots, 6-axis robotic arms, mobile bases, composite robots, and embodied development platforms for biopharma, semiconductor, and other industries, making robots ubiquitous.",
+      "keywords": "ZeroAnt Technology, industrial robots, intelligent robotics, AiROS operating system, 4-axis robot, 6-axis robotic arm, mobile base, composite robot, embodied development platform, biopharma, semiconductor, robotic intelligent systems, Hangzhou robotics company, industrial automation, smart manufacturing"
     },
     "products": {
-      "title": "Product Center - ZeroAnt Technology",
-      "description": "ZeroAnt Technology's product center covers R-series arms, M-series mobile bases, MR-series composite robots, embodied development platforms, controllers, and accessories, organized by family with current products and key specs for faster model comparison.",
-      "keywords": "ZeroAnt Technology, products center, R-series arm, M-series mobile base, MR-series composite robot, embodied platform, controller, accessories, SCARA robot, 6-axis arm, dual-arm robot, AGV base, automation equipment"
+      "title": "ZeroAnt Technology Product Center - Robot Bodies & Core Modules",
+      "description": "Explore ZeroAnt Technology's complete product lineup: R-series robotic arms, M-series mobile bases, MR-series composite robots, embodied development platforms, controllers, and accessories. Detailed specifications and application scenarios help you quickly select the most suitable robotic solutions.",
+      "keywords": "ZeroAnt Technology product center, R-series robotic arm, M-series mobile base, MR-series composite robot, embodied development platform, controller, accessories, SCARA robot, 6-axis robotic arm, dual-arm robot, AGV base, automation equipment, industrial robots, robot modules"
     },
     "solutions": {
-      "title": "Solutions - ZeroAnt Technology",
-      "description": "Built around the R / M / MR families, embodied platforms, ZA-ZG100 controller hardware, and accessories, ZeroAnt now offers three focused solution directions: precision workcells, mobile collaboration, and embodied development validation.",
-      "keywords": "ZeroAnt solutions, precision workcells, mobile collaboration, embodied development platform, R series robotic arm, M series mobile base, MR composite robot, ZA-ZG100 controller, teleoperation platform, automation integration"
+      "title": "ZeroAnt Technology Solutions - Full-stack Industry Applications",
+      "description": "ZeroAnt Technology provides three major solution directions: precision workcells, mobile collaboration, and embodied development validation, based on R/M/MR series products, ZA-ZG100 controllers, and accessories, helping enterprises achieve efficient automation deployment and smart manufacturing upgrades.",
+      "keywords": "ZeroAnt Technology solutions, precision workcells, mobile collaboration, embodied development platform, R-series robotic arm, M-series mobile base, MR composite robot, ZA-ZG100 controller, teleoperation platform, automation integration, industrial solutions, smart manufacturing solutions"
     },
     "support": {
-      "title": "Technical Support - ZeroAnt Technology Professional Team",
-      "description": "The ZeroAnt technical support center provides installation and commissioning, technical training, remote diagnostics, preventive maintenance and spare-parts support. The team offers responsive technical consultation and on-site support to help customers move through deployment, integration and stable operation.",
-      "keywords": "technical support, after-sales service, robot maintenance, technical training, remote diagnostics, on-site service, spare parts supply, installation commissioning, preventive maintenance, technical consultation, engineering services, equipment repair, troubleshooting, technical documentation, user manual, online support"
+      "title": "ZeroAnt Technology Technical Support - Professional After-sales Team",
+      "description": "ZeroAnt Technology provides comprehensive technical support: installation and commissioning, technical training, remote diagnostics, preventive maintenance, and spare parts supply. Professional engineering teams offer responsive consultations and on-site support for industrial robotics projects to ensure stable system operation.",
+      "keywords": "ZeroAnt Technology technical support, after-sales service, robot maintenance, technical training, remote diagnostics, on-site service, spare parts supply, installation commissioning, preventive maintenance, technical consultation, engineering services, equipment repair, troubleshooting, technical documentation, user manual, online support"
     },
     "careers": {
-      "title": "Talent Recruitment - ZeroAnt Technology Seeking Excellence",
-      "description": "ZeroAnt Technology is hiring Software Engineers, Robotics Systems Engineers and Electrical Engineers for robotics platforms, system integration and full-system delivery. We offer competitive compensation, clear growth paths and opportunities to work on real products and deployments.",
-      "keywords": "talent recruitment, software engineer, robotics systems engineer, electrical engineer, robotics platform, control systems, system integration, full-system delivery, Hangzhou recruitment, robotics company jobs, technical positions, engineering careers, career development, innovation team"
+      "title": "ZeroAnt Technology Recruitment - Seeking Robotics Talent",
+      "description": "Join ZeroAnt Technology! We recruit software engineers, robotics systems engineers, and electrical engineers, offering competitive salaries and benefits, clear career development paths, and opportunities to work on cutting-edge projects. Together, we drive innovation in highly reliable robotic systems for smart manufacturing.",
+      "keywords": "ZeroAnt Technology recruitment, software engineer, robotics systems engineer, electrical engineer, robotics platform, control systems, system integration, full-system delivery, Hangzhou recruitment, robotics company jobs, technical positions, engineering careers, career development, innovation team, smart manufacturing talent"
     },
     "about": {
-      "title": "About ZeroAnt Technology - Industrial Robotics Technology Innovation Enterprise",
-      "description": "ZeroAnt Technology was founded in Hangzhou as a high-tech enterprise focused on industrial robotics innovation. The company develops its own AiROS robotic operating system and has accumulated capabilities in robot control, machine vision and artificial intelligence, serving manufacturing customers with industrial robot products and smart manufacturing solutions.",
+      "title": "About ZeroAnt Technology - Leading Industrial Robotics Innovation Enterprise",
+      "description": "ZeroAnt Technology was founded in Hangzhou, focusing on industrial robotics technology innovation. The company independently develops the AiROS robotics operating system and possesses core technologies in robot control, machine vision, and artificial intelligence, providing advanced industrial robot products and comprehensive smart manufacturing solutions to manufacturing customers.",
       "keywords": "ZeroAnt Technology, about us, company introduction, industrial robotics company, Hangzhou robotics enterprise, high-tech company, AiROS system, robotics technology innovation, smart manufacturing enterprise, automation company, robot control technology, artificial intelligence, corporate culture, development history, technical strength, core team"
     },
     "structuredData": {
