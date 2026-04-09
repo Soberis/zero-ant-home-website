@@ -23,7 +23,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    # 兼容较老版本或未编译 http_v2 模块的 Nginx，避免 reload 失败
+    listen 443 ssl;
     server_name {{SERVER_NAME}};
     client_max_body_size 30M;
     client_header_buffer_size 16K;
@@ -35,12 +36,12 @@ server {
     ssl_certificate cert/zeroant.com.pem;
     ssl_certificate_key cert/zeroant.com.key;
 
-    # TLS 配置（现代浏览器兼容）
+    # TLS 配置（兼容线上较老版本 Nginx）
     ssl_session_timeout 5m;
     ssl_session_cache shared:SSL:10m;
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers 'TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:EECDH+AESGCM:EDH+AESGCM';
-    ssl_prefer_server_ciphers off;
+    ssl_protocols TLSv1.2;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
 
     # HSTS（仅在确认 HTTPS 全站可用后启用）
     # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;

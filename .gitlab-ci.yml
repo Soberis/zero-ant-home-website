@@ -105,6 +105,7 @@ deploy_ALI_CLOUD_ECS:
     - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}/rewrite ^(.*)$ https:\/\/\$host\$1 permanent;/g" config/nginx.conf.template > dist/nginx.conf
     # 部署到阿里云上
     - rsync -avz --delete dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
+    - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -t -c /mnt/disk1/zeroant/home_web/nginx.conf"
     - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
   # 仅仅在打指定标签的时候进行部署
   rules:
