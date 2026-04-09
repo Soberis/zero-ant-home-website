@@ -33,10 +33,16 @@
           :key="card.id"
           :id="card.id"
           class="product-card"
-          :to="`/products/detail/${card.id}`"
+          :to="localizePath(`/products/detail/${card.id}`)"
         >
           <div class="product-card__visual">
-            <img :src="card.image" :alt="card.title" class="product-card__image" loading="lazy" />
+            <img
+              :src="card.image"
+              :alt="card.title"
+              class="product-card__image"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
           <div class="product-card__body">
@@ -80,10 +86,10 @@
       </div>
 
       <div class="product-center-cta__actions">
-        <router-link class="btn btn-primary" to="/support#contact">
+        <router-link class="btn btn-primary" :to="localizePath('/support#contact')">
           {{ pageCopy.contactAction }}
         </router-link>
-        <router-link class="btn btn-secondary" to="/solutions">
+        <router-link class="btn btn-secondary" :to="localizePath('/solutions')">
           {{ pageCopy.solutionAction }}
         </router-link>
       </div>
@@ -98,15 +104,18 @@ import ProductsLayout from "@/components/layout/ProductsLayout.vue";
 import {
   productCenterFamilies,
 } from "@/data/product-center";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const { t } = useI18n();
+const { localizePath } = useLocalizedPath();
 
 // resolveText removed as we now use standard i18n keys
 
 const activeFamilyId = ref("");
+let familyObserver: IntersectionObserver | null = null;
 
 onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
+  familyObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         activeFamilyId.value = entry.target.id;
@@ -119,12 +128,13 @@ onMounted(() => {
 
   families.value.forEach((family) => {
     const el = document.getElementById(family.id);
-    if (el) observer.observe(el);
+    if (el) familyObserver?.observe(el);
   });
+});
 
-  onUnmounted(() => {
-    observer.disconnect();
-  });
+onUnmounted(() => {
+  familyObserver?.disconnect();
+  familyObserver = null;
 });
 
 const pageCopy = computed(() => ({

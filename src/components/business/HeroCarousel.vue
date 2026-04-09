@@ -24,11 +24,11 @@
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
-            <span class="btn btn-primary" @click.stop.prevent="$router.push({ path: '/products', hash: '#products-page-top' })">
-              {{ t('home.hero.primaryCta') }}
-            </span>
-          </div>
+            <span class="btn btn-primary" @click.stop.prevent="$router.push(localizeTo({ path: '/products', hash: '#products-page-top' }))">
+            {{ t('home.hero.primaryCta') }}
+          </span>
         </div>
+      </div>
       </div>
     </router-link>
   </section>
@@ -38,6 +38,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import coverImg from '@/assets/images/product/封面.png';
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 interface SlideItem {
   img: string;
@@ -51,11 +52,12 @@ interface SlideItem {
 }
 
 const { t } = useI18n();
+const { localizePath, localizeTo } = useLocalizedPath();
 
 const activeSlide = computed<SlideItem>(() => ({
   img: coverImg,
   title: t('home.hero.title'),
-  routePath: '/products#products-page-top',
+  routePath: `${localizePath('/products')}#products-page-top`,
   imageScale: 1.0,
   imageShiftX: '0px',
   imageShiftY: '0px',

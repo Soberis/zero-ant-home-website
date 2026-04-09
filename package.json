@@ -17,9 +17,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:analyze": "ANALYZE=true vite build",
-    "build:prod": "NODE_ENV=production vite build",
+    "build": "vite build && node scripts/generate-site-artifacts.mjs",
+    "build:analyze": "ANALYZE=true vite build && node scripts/generate-site-artifacts.mjs",
+    "build:prod": "NODE_ENV=production vite build && node scripts/generate-site-artifacts.mjs",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
     "validate": "yarn type-check && yarn build && echo 'All checks passed successfully!'",

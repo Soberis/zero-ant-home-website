@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="app-card-item"
-    :to="props.slug ? `/applications/${props.slug}` : '/solutions'"
+    :to="props.slug ? localizePath(`/applications/${props.slug}`) : localizePath('/solutions')"
   >
     <div class="app-card-bg"></div>
     <div class="app-card-inner">
@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const props = defineProps<{
   /** 应用标题 i18n key */
@@ -33,6 +34,7 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
+const { localizePath } = useLocalizedPath();
 </script>
 
 <style scoped lang="less">
@@ -43,8 +45,9 @@ const { t } = useI18n();
   height: 100%;
   padding: 32px 28px;
   border-radius: 16px;
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  background: var(--brand-surface-soft, #f8f9fb);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 253, 0.96) 100%);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
   text-decoration: none;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -53,8 +56,8 @@ const { t } = useI18n();
 
 .app-card-item:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
-  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.09);
+  border-color: rgba(26, 58, 143, 0.14);
 }
 
 .app-card-inner {

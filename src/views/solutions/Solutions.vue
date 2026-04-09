@@ -197,7 +197,7 @@
             <h3 class="delivery-contact__title">{{ t("solutionsPage.delivery.contactTitle") }}</h3>
             <p class="delivery-contact__desc">{{ t("solutionsPage.delivery.contactDescription") }}</p>
             <div class="delivery-contact__actions">
-              <router-link class="btn btn-primary" to="/support#contact">
+              <router-link class="btn btn-primary" :to="localizePath('/support#contact')">
                 {{ t("common.cta.contactTeam") }}
               </router-link>
             </div>
@@ -256,6 +256,7 @@ import {
   solutionIndustryGroups,
 } from "@/data/solutionIndustries";
 import { useScrollRevealList } from "@/composables/useScrollReveal";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 interface SolutionApplicationRef {
   slug: string;
@@ -281,6 +282,7 @@ useScrollRevealList([industriesRef, proofRef, deliveryRef, faqRef]);
 const route = useRoute();
 const router = useRouter();
 const { t, tm } = useI18n();
+const { localizePath } = useLocalizedPath();
 
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
@@ -458,7 +460,7 @@ function scrollToSection(id: string): void {
 }
 
 function goToApplication(slug: string): void {
-  router.push({ path: `/applications/${slug}` });
+  router.push({ path: localizePath(`/applications/${slug}`) });
 }
 
 function openApplication(application: SolutionApplicationRef | null): void {
@@ -470,7 +472,7 @@ function openApplication(application: SolutionApplicationRef | null): void {
 }
 
 function goToVideo(slug: string): void {
-  router.push({ path: `/video/${slug}` });
+  router.push({ path: localizePath(`/video/${slug}`) });
 }
 
 function setMoreVideoHover(idx: number): void {

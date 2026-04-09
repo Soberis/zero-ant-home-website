@@ -773,12 +773,12 @@
   "seo": {
     "siteName": "ZeroAnt Technology",
     "defaultTitle": "ZeroAnt Technology - Professional Robot Technology Solutions Provider",
-    "defaultDescription": "ZeroAnt Technology is a professional robot technology solutions provider dedicated to industrial automation and smart manufacturing. We offer innovative product lines including industrial robots and automation equipment to meet automation needs in medical automation, semiconductor processing and other industries.",
-    "defaultKeywords": "robot technology, industrial automation, smart manufacturing, ZeroAnt, ZeroAnt Technology, industrial robots, automation equipment, medical automation, semiconductor processing",
+    "defaultDescription": "ZeroAnt Technology focuses on complete intelligent robotic solutions and develops its own AiROS intelligent robot operating system. The company provides robotic arms, mobile bases, composite robots, and embodied development platforms for biopharma, semiconductor, and related industries.",
+    "defaultKeywords": "ZeroAnt Technology, industrial robots, intelligent robotics, AiROS, robot operating system, 4-axis robot, 6-axis robotic arm, mobile base, composite robot, embodied development platform, biopharma, semiconductor",
     "home": {
       "title": "ZeroAnt Technology - Let robots be everywhere",
-      "description": "ZeroAnt Technology specializes in industrial robotics R&D and smart manufacturing solutions, offering 4-axis robots, 6-axis robotic arms, dual-arm humanoid robots, and mobile robots. Based on AiROS robotic operating system, we provide high-precision, high-reliability automation equipment and technical services for medical automation, semiconductor processing, precision manufacturing and other industries.",
-      "keywords": "ZeroAnt Technology, industrial robots, smart manufacturing, robotics technology, automation equipment, 4-axis robot, 6-axis robotic arm, dual-arm humanoid robot, mobile robot, AiROS, robotic operating system, medical automation, semiconductor processing, precision manufacturing, industrial automation solutions, robot control system, Hangzhou robotics company"
+      "description": "Founded by a research team from the Hangzhou Innovation Research Institute of Beihang University, ZeroAnt Technology focuses on complete intelligent robotic solutions. Powered by its self-developed AiROS intelligent robot operating system, the company offers 4-axis robots, 6-axis robotic arms, mobile bases, composite robots, and embodied development platforms for biopharma, semiconductor, and related industries.",
+      "keywords": "ZeroAnt Technology, industrial robots, intelligent robotics, smart manufacturing, AiROS, robot operating system, 4-axis robot, 6-axis robotic arm, mobile base, composite robot, embodied development platform, biopharma, semiconductor, robotic system solutions, Hangzhou robotics company"
     },
     "products": {
       "title": "Product Center - ZeroAnt Technology",

@@ -6,7 +6,7 @@
         <p class="home-section-description core-products__description">{{ t('home.coreProducts.description') }}</p>
       </div>
 
-      <router-link :to="{ path: '/products', hash: '#products-page-top' }" class="section-cta">
+      <router-link :to="localizeTo({ path: '/products', hash: '#products-page-top' })" class="section-cta">
         <span>{{ t('home.coreProducts.enter') }}</span>
         <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -18,7 +18,7 @@
       <router-link
         v-for="family in productFamilies"
         :key="family.key"
-        :to="{ path: '/products', hash: `#${family.key}` }"
+        :to="localizeTo({ path: '/products', hash: `#${family.key}` })"
         class="family-card"
       >
         <div class="family-card__visual">
@@ -54,8 +54,10 @@ import zaRMVRImg from '@/assets/images/product/ZA-RMVR具身智能双臂VR遥操
 import zaZG100Img from '@/assets/images/product/ZA-ZG100.png';
 import rotatingPlatformImg from '@/assets/images/product/旋转平台.png';
 import { useI18n } from 'vue-i18n';
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const { t } = useI18n();
+const { localizeTo } = useLocalizedPath();
 
 const productFamilies = [
   {

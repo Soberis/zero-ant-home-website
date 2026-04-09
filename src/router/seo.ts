@@ -1,6 +1,12 @@
 import { RouteLocationNormalized } from "vue-router";
 import { setSEO, getSeoConfigs, setStructuredData } from "@/utils/seo";
 import i18n from "@/config/i18n"; // 导入i18n实例
+import {
+  getAlternateLanguageLinks,
+  getLocaleFromPath,
+  getOgLocale,
+  stripLocalePrefix,
+} from "@/utils/localeRoute";
 
 /**
  * 安全获取翻译文本，确保 i18n 已初始化
@@ -123,6 +129,22 @@ function getRouteSEOMap(): Record<string, any> {
   };
 }
 
+function getSeoRouteContext(to: RouteLocationNormalized) {
+  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const locale = getLocaleFromPath(to.path);
+  const canonicalPath = stripLocalePrefix(to.path);
+  const currentPath = to.path;
+
+  return {
+    locale,
+    baseUrl,
+    currentUrl: `${baseUrl}${currentPath}`,
+    canonicalPath,
+    ogLocale: getOgLocale(locale),
+    alternateLinks: getAlternateLanguageLinks(baseUrl, canonicalPath),
+  };
+}
+
 /**
  * 设置页面 SEO 信息
  * @param to 目标路由
@@ -134,18 +156,21 @@ export function setupPageSEO(to: RouteLocationNormalized) {
 
   if (seoConfig) {
     // 基础 SEO 配置
-    const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-    const currentUrl = `${baseUrl}${to.path}`;
+    const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+      getSeoRouteContext(to);
     const companyName = getCompanyName();
     const contactTel = safeTranslate("footer.telValue");
     const postalAddress = getPostalAddress();
 
     setSEO({
+      htmlLang: locale,
       title: seoConfig.title,
       description: seoConfig.description,
       keywords: seoConfig.keywords,
       ogTitle: seoConfig.title,
       ogDescription: seoConfig.description,
+      ogLocale,
+      ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
       ogUrl: currentUrl,
       ogImage: `${baseUrl}/logo.webp`,
       ogImageWidth: 1200,
@@ -155,6 +180,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       twitterImage: `${baseUrl}/logo.webp`,
       canonical: currentUrl,
       siteName: safeTranslate("seo.siteName"),
+      alternates: alternateLinks,
     });
 
     // 设置结构化数据
@@ -164,6 +190,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
       name: seoConfig.title,
       description: seoConfig.description,
       url: currentUrl,
+      inLanguage: locale,
       isPartOf: {
         "@type": "WebSite",
         name: safeTranslate("seo.siteName"),
@@ -240,8 +267,8 @@ export function setupPageSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupSolutionsSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${to.path}`;
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
   const faqEntries = [
     {
       question: safeTranslate("seo.structuredData.solutionsFaq.q1"),
@@ -263,11 +290,14 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
 
   // 设置解决方案页面 SEO
   setSEO({
+    htmlLang: locale,
     title: safeTranslate("seo.solutions.title"),
     description: safeTranslate("seo.solutions.description"),
     keywords: safeTranslate("seo.solutions.keywords"),
     ogTitle: safeTranslate("seo.solutions.title"),
     ogDescription: safeTranslate("seo.solutions.description"),
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
@@ -277,6 +307,7 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
+    alternates: alternateLinks,
   });
 
   // 解决方案页面结构化数据
@@ -286,6 +317,7 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     name: safeTranslate("seo.solutions.title"),
     description: safeTranslate("seo.solutions.description"),
     url: currentUrl,
+    inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
       name: safeTranslate("seo.siteName"),
@@ -361,16 +393,19 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupAboutSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${to.path}`;
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
 
   // 设置关于我们页面 SEO
   setSEO({
+    htmlLang: locale,
     title: safeTranslate("seo.about.title"),
     description: safeTranslate("seo.about.description"),
     keywords: safeTranslate("seo.about.keywords"),
     ogTitle: safeTranslate("seo.about.title"),
     ogDescription: safeTranslate("seo.about.description"),
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
@@ -380,6 +415,7 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
+    alternates: alternateLinks,
   });
 
   // 关于我们页面结构化数据
@@ -389,6 +425,7 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
     name: safeTranslate("seo.about.title"),
     description: safeTranslate("seo.about.description"),
     url: currentUrl,
+    inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
       name: safeTranslate("seo.siteName"),
@@ -413,16 +450,19 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupCareersSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${to.path}`;
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
 
   // 设置招聘页面 SEO
   setSEO({
+    htmlLang: locale,
     title: safeTranslate("seo.careers.title"),
     description: safeTranslate("seo.careers.description"),
     keywords: safeTranslate("seo.careers.keywords"),
     ogTitle: safeTranslate("seo.careers.title"),
     ogDescription: safeTranslate("seo.careers.description"),
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
@@ -432,6 +472,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
+    alternates: alternateLinks,
   });
 
   // 招聘页面结构化数据 - 使用CollectionPage包含多个JobPosting
@@ -441,6 +482,7 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     name: safeTranslate("seo.careers.title"),
     description: safeTranslate("seo.careers.description"),
     url: currentUrl,
+    inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
       name: safeTranslate("seo.siteName"),
@@ -474,8 +516,8 @@ export async function setupProductDetailSEO(to: RouteLocationNormalized) {
 
   if (!product) return;
 
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${to.path}`;
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
   const productName = safeTranslate(product.card.titleKey);
   const productDesc = safeTranslate(product.card.summaryKey);
   const siteName = safeTranslate("seo.siteName");
@@ -484,40 +526,78 @@ export async function setupProductDetailSEO(to: RouteLocationNormalized) {
     : `${baseUrl}${product.card.image}`;
 
   setSEO({
+    htmlLang: locale,
     title: productName,
     description: productDesc,
     keywords: `${productName}, ${safeTranslate("seo.home.keywords")}`,
     ogTitle: productName,
     ogDescription: productDesc,
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
     ogUrl: currentUrl,
     ogImage: productImage,
     twitterTitle: productName,
     twitterDescription: productDesc,
     canonical: currentUrl,
     siteName: siteName,
+    alternates: alternateLinks,
   });
 
   // 产品结构化数据 - Schema.org/Product
-  setStructuredData({
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: productName,
-    description: productDesc,
-    image: productImage,
-    brand: {
-      "@type": "Brand",
-      name: siteName,
-    },
-    offers: {
-      "@type": "Offer",
+  setStructuredData([
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: productName,
+      description: productDesc,
+      image: [productImage],
       url: currentUrl,
-      availability: "https://schema.org/InStock",
-      seller: {
+      sku: product.card.id,
+      category: safeTranslate(product.familyTitleKey),
+      inLanguage: locale,
+      brand: {
+        "@type": "Brand",
+        name: siteName,
+      },
+      manufacturer: {
         "@type": "Organization",
         name: siteName,
       },
+      offers: {
+        "@type": "Offer",
+        url: currentUrl,
+        availability: "https://schema.org/InStock",
+        seller: {
+          "@type": "Organization",
+          name: siteName,
+        },
+      },
     },
-  });
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: safeTranslate("nav.home"),
+          item: `${baseUrl}${locale === "en" ? "/en" : "/"}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: safeTranslate("nav.products"),
+          item: `${baseUrl}${to.path.split("/detail/")[0]}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: productName,
+          item: currentUrl,
+        },
+      ],
+    },
+  ]);
 }
 
 /**
@@ -525,16 +605,19 @@ export async function setupProductDetailSEO(to: RouteLocationNormalized) {
  * @param to 目标路由
  */
 export function setupSupportSEO(to: RouteLocationNormalized) {
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${to.path}`;
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
 
   // 设置支持页面 SEO
   setSEO({
+    htmlLang: locale,
     title: safeTranslate("seo.support.title"),
     description: safeTranslate("seo.support.description"),
     keywords: safeTranslate("seo.support.keywords"),
     ogTitle: safeTranslate("seo.support.title"),
     ogDescription: safeTranslate("seo.support.description"),
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
     ogUrl: currentUrl,
     ogImage: `${baseUrl}/logo.webp`,
     ogImageWidth: 1200,
@@ -544,6 +627,7 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
     twitterImage: `${baseUrl}/logo.webp`,
     canonical: currentUrl,
     siteName: safeTranslate("seo.siteName"),
+    alternates: alternateLinks,
   });
 
   // 支持页面结构化数据
@@ -553,6 +637,7 @@ export function setupSupportSEO(to: RouteLocationNormalized) {
     name: safeTranslate("seo.support.title"),
     description: safeTranslate("seo.support.description"),
     url: currentUrl,
+    inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
       name: safeTranslate("seo.siteName"),

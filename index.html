@@ -6,8 +6,8 @@
     <!-- 物理层 I18n 锁定：在 JS 加载前，强制同步 html.lang 属性，消除语义抖动 -->
     <script>
       (function() {
-        var saved = localStorage.getItem('language');
-        var lang = (saved === 'zh' || saved === 'en') ? saved : (navigator.language.startsWith('zh') ? 'zh' : 'en');
+        var pathname = window.location.pathname || '/';
+        var lang = (pathname === '/en' || pathname.indexOf('/en/') === 0) ? 'en' : 'zh';
         document.documentElement.setAttribute('lang', lang);
       })();
     </script>
@@ -31,10 +31,10 @@
     <link rel="dns-prefetch" href="https://player.bilibili.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <!-- SEO 基础信息 -->
-    <meta name="description" content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。" />
+    <meta name="description" content="零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。" />
     <meta
       name="keywords"
-      content="零蚁科技, 工业机器人, 智能制造, 机器人技术, 自动化设备, 四轴机器人, 六轴机械臂, 双臂人形机器人, 移动机器人, AiROS, 机器人操作系统, 医疗自动化, 半导体加工, 精密制造, 工业自动化解决方案, 机器人控制系统, 杭州机器人公司"
+      content="零蚁科技, 工业机器人, 智能机器人, 智能制造, AiROS, 机器人操作系统, 四轴机器人, 六轴机械臂, 移动底盘, 复合机器人, 具身开发平台, 生物医药, 半导体, 机器人智能系统方案, 杭州机器人公司"
     />
     <meta name="author" content="杭州零蚁科技有限公司" />
     <meta name="robots" content="index, follow" />
@@ -50,7 +50,7 @@
     <meta property="og:title" content="零蚁科技 - 让机器人无处不在" />
     <meta
       property="og:description"
-      content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
+      content="零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。"
     />
     <meta property="og:url" content="https://zeroant.com" />
     <meta property="og:type" content="website" />
@@ -63,7 +63,7 @@
     <meta name="twitter:title" content="零蚁科技 - 让机器人无处不在" />
     <meta
       name="twitter:description"
-      content="零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
+      content="零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。"
     />
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -78,7 +78,7 @@
         "industry": "Industrial Automation",
         "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 20 },
         "address": { "@type": "PostalAddress", "streetAddress": "浙江省杭州市滨江区长河街道炬航弄99号4幢1号楼310室", "addressCountry": "CN" },
-        "description": "零蚁科技专注工业机器人研发与智能制造解决方案，提供四轴机器人、六轴机械臂、双臂人形机器人、移动机器人等产品。基于AiROS机器人操作系统，为医疗自动化、半导体加工、精密制造等行业提供高精度、高可靠性的自动化设备与技术服务。"
+        "description": "零蚁科技由北京航空航天大学杭州创新研究院科研团队创立，聚焦智能机器人整机解决方案研发。基于自主研发的 AiROS 智能机器人操作系统，提供四轴机器人、六轴机械臂、移动底盘、复合机器人与具身开发平台，为生物医药、半导体等行业提供高可靠机器人智能系统方案。"
       }
     </script>
     <!-- Google Fonts - Outfit & Inter -->

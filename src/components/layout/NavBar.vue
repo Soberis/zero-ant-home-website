@@ -3,7 +3,7 @@
     <nav class="nav-container">
       <div class="logo">
         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
-        <router-link to="/" class="logo-text" @click="handleTopNavClick('/', $event)">
+        <router-link :to="localizePath('/')" class="logo-text" @click="handleTopNavClick('/', $event)">
           {{ $t("logoText") }}
         </router-link>
       </div>
@@ -16,8 +16,8 @@
             class="nav-item"
             :class="{ 'has-dropdown': item.children }"
           >
-            <router-link
-              :to="item.to"
+              <router-link
+              :to="localizePath(item.to)"
               class="nav-link"
               :class="{ active: isTopNavActive(item.to) }"
               aria-current-value="page"
@@ -31,7 +31,7 @@
                 <ul>
                   <li v-for="child in item.children" :key="child.hash">
                     <router-link
-                      :to="{ path: item.to, hash: child.hash }"
+                      :to="localizeTo({ path: item.to, hash: child.hash })"
                       class="dropdown-item"
                     >
                       {{ $t(child.label) }}
@@ -82,7 +82,7 @@
         <ul class="mobile-nav-links">
           <li v-for="item in topNavItems" :key="item.to" class="mobile-nav-item">
             <router-link
-              :to="item.to"
+              :to="localizePath(item.to)"
               class="mobile-nav-link"
               :class="{ active: isTopNavActive(item.to) }"
               @click="handleTopNavClick(item.to, $event, true)"
@@ -104,6 +104,11 @@ import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
 import { scheduleScrollToTop } from "@/utils/scroll";
+import {
+  localizeFullPath,
+  stripLocalePrefix,
+} from "@/utils/localeRoute";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 // 滚动状态
 const isScrolled = ref(false);
@@ -131,6 +136,7 @@ const handleDesktopBreakpointChange = (event: MediaQueryListEvent) => {
 const isMobileMenuOpen = ref(false);
 const route = useRoute();
 const router = useRouter();
+const { localizePath, localizeTo } = useLocalizedPath();
 
 // 防抖锁
 let toggleLock = false;
@@ -167,21 +173,25 @@ async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = fals
 
   event.preventDefault();
 
-  if (route.fullPath === to) {
+  const localizedTarget = localizePath(to);
+
+  if (route.path === localizedTarget) {
     scheduleScrollToTop();
     return;
   }
 
-  await router.push(to);
+  await router.push(localizedTarget);
   await nextTick();
 }
 
 function isTopNavActive(to: string): boolean {
+  const currentPath = stripLocalePrefix(route.path);
+
   if (to === "/") {
-    return route.path === "/";
+    return currentPath === "/";
   }
 
-  return route.path === to || route.path.startsWith(`${to}/`);
+  return currentPath === to || currentPath.startsWith(`${to}/`);
 }
 
 
@@ -201,16 +211,6 @@ function isProductDetailRoute() {
   return route.name === "ProductDetail";
 }
 
-function persistLanguagePreference(language: "zh" | "en"): void {
-  try {
-    localStorage.setItem("language", language);
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      console.warn("保存语言偏好失败:", error);
-    }
-  }
-}
-
 async function switchLanguage() {
   const targetLocale = locale.value === "zh" ? "en" : "zh";
 
@@ -224,8 +224,8 @@ async function switchLanguage() {
     }
   }
 
-  locale.value = targetLocale;
-  persistLanguagePreference(targetLocale);
+  await router.push(localizeFullPath(route.fullPath, targetLocale));
+  closeMobileMenu();
 }
 
 // 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）
@@ -238,14 +238,6 @@ const onKeydownCapture = (e: KeyboardEvent) => {
 };
 
 onMounted(() => {
-  const savedLanguage = localStorage.getItem("language");
-  if (savedLanguage && (savedLanguage === "zh" || savedLanguage === "en")) {
-    locale.value = savedLanguage;
-  } else {
-    const initialLocale = locale.value === "en" ? "en" : "zh";
-    persistLanguagePreference(initialLocale);
-  }
-
   // 监听滚动
   window.addEventListener("scroll", handleScroll);
   desktopBreakpointQuery = window.matchMedia("(min-width: 951px)");

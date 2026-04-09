@@ -17,6 +17,7 @@ import type {
   ProductFeature,
   ProductParam,
 } from "@/data/productDetails";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 export interface UseProductDetailDataOptions {
   baseDetail?: MaybeRefOrGetter<ProductDetail | null | undefined>;
@@ -42,6 +43,7 @@ export function useProductDetailData(
 ) {
   const { t, te, tm } = useI18n();
   const router = useRouter();
+  const { localizePath } = useLocalizedPath();
 
   const slugValue = computed(() => String(toValue(slug) || ""));
   const currentProduct = computed(() => {
@@ -221,7 +223,7 @@ export function useProductDetailData(
   const handleVideoClick = (index: number) => {
     const video = relatedVideos.value[index];
     if (video) {
-      router.push(`/video/${video.slug}`);
+      router.push(localizePath(`/video/${video.slug}`));
     }
   };
 

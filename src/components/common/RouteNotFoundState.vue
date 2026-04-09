@@ -4,7 +4,7 @@
       <p class="route-not-found__eyebrow">{{ eyebrow }}</p>
       <h1 class="route-not-found__title">{{ title }}</h1>
       <p class="route-not-found__desc">{{ description }}</p>
-      <RouterLink class="btn btn-primary route-not-found__action" :to="to">
+      <RouterLink class="btn btn-primary route-not-found__action" :to="localizedTarget">
         {{ actionLabel }}
       </RouterLink>
     </div>
@@ -13,8 +13,10 @@
 
 <script setup lang="ts">
 import { RouterLink, type RouteLocationRaw } from "vue-router";
+import { computed } from "vue";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title: string;
     description: string;
@@ -26,6 +28,9 @@ withDefaults(
     eyebrow: "404",
   }
 );
+
+const { localizeTo } = useLocalizedPath();
+const localizedTarget = computed(() => localizeTo(props.to));
 </script>
 
 <style scoped>

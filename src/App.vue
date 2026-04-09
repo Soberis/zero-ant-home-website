@@ -23,11 +23,13 @@ import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/layout/NavBar.vue";
 import { scheduleScrollToTop } from "@/utils/scroll";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 // 非关键壳子组件异步加载，减少首屏同步体积
 const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue"));
 const FloatingCTA = defineAsyncComponent(() => import("@/components/common/FloatingCTA.vue"));
 
 const router = useRouter();
+const { localizePath } = useLocalizedPath();
 
 function hasInAppHistory(): boolean {
   const historyState = window.history.state as { back?: string | null } | null;
@@ -75,7 +77,7 @@ const handleEscKey = (event: KeyboardEvent) => {
   if (hasInAppHistory()) {
     router.go(-1);
   } else {
-    void router.push("/").then(() => {
+    void router.push(localizePath("/")).then(() => {
       scheduleScrollToTop();
     });
   }

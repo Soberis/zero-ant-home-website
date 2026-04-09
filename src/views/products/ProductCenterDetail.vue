@@ -27,7 +27,7 @@
                   <span>{{ t("productDetail.backToList") }}</span>
                 </button>
                 <router-link
-                  :to="{ path: '/about', hash: '#contact' }"
+                  :to="localizeTo({ path: '/about', hash: '#contact' })"
                   class="btn btn-primary product-hero__contact-btn"
                 >
                   {{ t("common.cta.contactTeam") }}
@@ -42,6 +42,9 @@
                 class="product-hero__image"
                 :width="heroImageSize.width"
                 :height="heroImageSize.height"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
               />
             </div>
           </div>
@@ -219,10 +222,10 @@
                 {{ t("productDetail.cta.description") }}
               </p>
               <div class="product-footer-cta__actions">
-                <router-link to="/solutions" class="btn btn-primary">
+                <router-link :to="localizePath('/solutions')" class="btn btn-primary">
                   {{ t("productDetail.cta.exploreSolutions") }}
                 </router-link>
-                <router-link :to="{ path: '/about', hash: '#contact' }" class="btn product-footer-cta__ghost-btn">
+                <router-link :to="localizeTo({ path: '/about', hash: '#contact' })" class="btn product-footer-cta__ghost-btn">
                   {{ t("productDetail.cta.contactSales") }}
                 </router-link>
               </div>
@@ -248,6 +251,7 @@ import { useProductDetailData } from "@/composables/useProductDetailData";
 import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
 import type { ProductDetail, ProductFeature } from "@/data/productDetails";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 type FeatureItem = string | ProductFeature;
 type LocalizedParam = { key: string; value: string };
@@ -266,6 +270,7 @@ type HeroImageSize = {
 const route = useRoute();
 const router = useRouter();
 const { t, tm, locale } = useI18n();
+const { localizePath, localizeTo } = useLocalizedPath();
 const detailLocaleReady = ref(false);
 
 const isEn = computed(() => locale.value === "en");
@@ -441,7 +446,7 @@ const heroImageSize = computed<HeroImageSize>(() =>
 );
 
 const goBack = () => {
-  router.push("/products");
+  router.push(localizePath("/products"));
 };
 </script>
 

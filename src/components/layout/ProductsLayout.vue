@@ -20,7 +20,7 @@
 
               <router-link
                 v-else
-                :to="action.to"
+                :to="localizeTo(action.to)"
                 class="btn"
                 :class="`btn-${action.variant ?? 'primary'}`"
               >
@@ -93,6 +93,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 interface ProductsLayoutAction {
   label: string;
@@ -134,6 +135,7 @@ const props = withDefaults(
 
 const resolvedActions = computed(() => props.actions ?? []);
 const resolvedGuideItems = computed(() => props.guideItems ?? []);
+const { localizeTo } = useLocalizedPath();
 
 const isHashLink = (to: string): boolean => to.startsWith("#");
 const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim());

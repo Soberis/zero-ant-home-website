@@ -12,7 +12,7 @@
           <ul>
             <li v-for="item in section.items" :key="item.hash">
               <router-link
-                :to="{ path: section.to, hash: item.hash }"
+                :to="localizeTo({ path: section.to, hash: item.hash })"
                 class="footer-link"
               >
                 {{ $t(item.label) }}
@@ -94,6 +94,9 @@ import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
 import taobaoQrcode from "@/assets/images/qrcodes/taobao.png";
 import wxQrcode from "@/assets/images/qrcodes/wx.webp";
 import { footerNavSections } from "@/data/navigation";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
+
+const { localizeTo } = useLocalizedPath();
 </script>
 
 <style scoped lang="less">

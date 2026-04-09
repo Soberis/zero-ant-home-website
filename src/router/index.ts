@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import type { RouteLocation } from "vue-router";
 import { scheduleScrollToTop } from "@/utils/scroll";
+import i18n from "@/config/i18n";
+import {
+  getLocaleFromPath,
+  getLocalizedRoutePath,
+  withLocalePrefix,
+} from "@/utils/localeRoute";
 
 // 核心页面直接导入（首屏关键路径）
 import Home from "@/views/Home.vue";
@@ -17,71 +24,85 @@ const NotFound = () => import("@/views/NotFound.vue");
 
 let isPopStateNavigation = false;
 
+function syncLocaleFromRoute(path: string) {
+  const targetLocale = getLocaleFromPath(path);
+
+  if (i18n.global.locale.value !== targetLocale) {
+    i18n.global.locale.value = targetLocale;
+  }
+
+  if (typeof document !== "undefined") {
+    document.documentElement.setAttribute("lang", targetLocale);
+  }
+}
+
 const routes = [
   // 首页
   {
-    path: "/",
+    path: getLocalizedRoutePath("/"),
     name: "Home",
     component: Home,
   },
   // 解决方案（集成页面）
   {
-    path: "/solutions",
+    path: getLocalizedRoutePath("/solutions"),
     name: "Solutions",
     component: Solutions,
   },
   // 应用场景
   {
-    path: "/applications/:slug",
+    path: getLocalizedRoutePath("/applications/:slug"),
     name: "ApplicationDetail",
     component: ApplicationDetail,
   },
   // 服务支持
   {
-    path: "/support",
+    path: getLocalizedRoutePath("/support"),
     name: "Support",
     component: Support,
   },
   {
-    path: "/products",
+    path: getLocalizedRoutePath("/products"),
     name: "Products",
     component: ProductsCenter,
   },
   {
-    path: "/products/detail/:id",
+    path: getLocalizedRoutePath("/products/detail/:id"),
     name: "ProductDetail",
     component: ProductCenterDetail,
   },
   // 人才招聘
   {
-    path: "/careers",
+    path: getLocalizedRoutePath("/careers"),
     name: "Careers",
     component: Careers,
   },
   // 关于我们
   {
-    path: "/about",
+    path: getLocalizedRoutePath("/about"),
     name: "About",
     component: About,
   },
 
   // 视频相关
   {
-    path: "/video/:slug",
+    path: getLocalizedRoutePath("/video/:slug"),
     name: "VideoDetail",
     component: VideoDetail,
   },
-  // 旧产品路由统一收口到产品中心
+  // 旧产品路由统一收口到产品中心，并保留语言前缀
   {
-    path: "/system-products/:pathMatch(.*)*",
-    redirect: "/products",
+    path: getLocalizedRoutePath("/system-products/:pathMatch(.*)*"),
+    redirect: (to: RouteLocation) =>
+      withLocalePrefix("/products", getLocaleFromPath(to.path)),
   },
   {
-    path: "/robot-products/:pathMatch(.*)*",
-    redirect: "/products",
+    path: getLocalizedRoutePath("/robot-products/:pathMatch(.*)*"),
+    redirect: (to: RouteLocation) =>
+      withLocalePrefix("/products", getLocaleFromPath(to.path)),
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: getLocalizedRoutePath("/:pathMatch(.*)*"),
     name: "NotFound",
     component: NotFound,
   },
@@ -131,7 +152,12 @@ const router = createRouter({
   },
 });
 
+router.beforeEach((to) => {
+  syncLocaleFromRoute(to.path);
+});
+
 if (typeof window !== "undefined") {
+  syncLocaleFromRoute(window.location.pathname);
   window.addEventListener("popstate", () => {
     isPopStateNavigation = true;
   });
