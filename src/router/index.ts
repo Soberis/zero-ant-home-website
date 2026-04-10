@@ -215,9 +215,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  // 在 beforeEach 中转移 pendingPopState，确保 afterEach 能正确读取
-  isPopStateNavigation = pendingPopState;
-  pendingPopState = false;
+  // 仅在接收到浏览器历史导航时置位，避免 redirect 链路把状态覆盖回 false
+  if (pendingPopState) {
+    isPopStateNavigation = true;
+    pendingPopState = false;
+  }
   syncLocaleFromRoute(to.path);
 });
 
