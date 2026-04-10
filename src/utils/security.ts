@@ -43,33 +43,45 @@ export function sanitizeHtmlAllowList(
     const parser = new DOMParser();
     const doc = parser.parseFromString(input, "text/html");
     const nodes = Array.from(doc.body.querySelectorAll("*"));
+    const allowedAttributes = ["class", "style", "target", "rel", "alt", "title", "href", "src", "id", "name"];
 
     nodes.forEach((node) => {
       const tag = node.tagName.toLowerCase();
       if (!allowedTags.includes(tag)) {
-        const textNode = doc.createTextNode(node.textContent || "");
-        node.replaceWith(textNode);
+        const fragment = doc.createDocumentFragment();
+        while (node.firstChild) {
+          fragment.appendChild(node.firstChild);
+        }
+        node.replaceWith(fragment);
         return;
       }
 
-      // 清理属性，保留 a[href] 使链接可用
+      // 清理属性，保留安全白名单属性
       Array.from(node.attributes).forEach((attr) => {
-        if (tag === "a" && attr.name === "href") {
-          // 仅允许 http/https/mailto/tel 协议，防止 javascript:/data: 等 XSS 向量注入
-          const href = attr.value.trim().toLowerCase();
-          if (
-            href.startsWith("http://") ||
-            href.startsWith("https://") ||
-            href.startsWith("mailto:") ||
-            href.startsWith("tel:")
-          ) {
-            return;
-          }
-          // 非白名单协议的 href 也移除
+        const attrName = attr.name.toLowerCase();
+        if (!allowedAttributes.includes(attrName)) {
           node.removeAttribute(attr.name);
           return;
         }
-        node.removeAttribute(attr.name);
+
+        if (tag === "a" && attrName === "href") {
+          // 允许 http/https/mailto/tel 协议，以及相对路径/锚点，防止 javascript:/data: 等 XSS 向量注入
+          const href = attr.value.trim().toLowerCase();
+          const isAllowedProtocol =
+            href.startsWith("http://") ||
+            href.startsWith("https://") ||
+            href.startsWith("mailto:") ||
+            href.startsWith("tel:");
+          const isRelative =
+            href.startsWith("/") ||
+            href.startsWith("#") ||
+            href.startsWith("?");
+            
+          if (!isAllowedProtocol && !isRelative) {
+            // 非白名单协议或非相对路径的 href 移除
+            node.removeAttribute(attr.name);
+          }
+        }
       });
     });
 

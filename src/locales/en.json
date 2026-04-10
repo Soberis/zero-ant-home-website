@@ -911,7 +911,7 @@
         "cards": {
           "zar3x": {
             "title": "ZA-R3 / ZA-R3X",
-            "summary": "A SCARA transfer platform where ZA-R3 and ZA-R3X are primarily selected by SCARA arm length, suited to high-speed pick-and-place and compact workstations.",
+            "summary": "A SCARA precision-transfer platform for high-speed pick-and-place and compact workstations, where ZA-R3 and ZA-R3X are mainly selected by reach.",
             "specs": [
               "SCARA arm length: ZA-R3 450mm / ZA-R3X 592mm horizontal reach",
               "Max rated payload 3kg",
@@ -921,7 +921,7 @@
           },
           "zar3d6": {
             "title": "ZA-R3D6",
-            "summary": "A 6-axis arm for more complex orientations and path control.",
+            "summary": "A 6-axis robotic arm for complex postures and path control, suitable for teaching, validation, and light-duty tasks.",
             "specs": [
               "6 DOF / rated payload 3kg",
               "Max working radius 540.5mm",
@@ -931,7 +931,7 @@
           },
           "zar3lmh": {
             "title": "ZA-R3L / ZA-R3M / ZA-R3H",
-            "summary": "A SCARA lift platform where ZA-R3L, ZA-R3M, and ZA-R3H are primarily selected by column height and Z-axis travel.",
+            "summary": "A SCARA lift variant that adds Z-axis travel, mainly selected by column height and vertical travel needs.",
             "specs": [
               "Column-height variants: ZA-R3L / ZA-R3M / ZA-R3H",
               "Key difference: column height / Z-axis travel",
@@ -941,7 +941,7 @@
           },
           "zar3mleft": {
             "title": "ZA-R3M(L) Rail-Integrated",
-            "summary": "A rail-integrated ZA-R3M configuration for extending long-travel linear operation range.",
+            "summary": "A ZA-R3M plus rail-platform configuration for cross-station linear pick-and-place, continuous transfer, and long-travel coverage.",
             "specs": [
               "Combination: ZA-R3M + Rail Platform",
               "Category: R-series linked variant",
@@ -951,7 +951,7 @@
           },
           "zar3mright": {
             "title": "ZA-R3M(R) Rotary-Platform Integrated",
-            "summary": "A rotating-platform-integrated ZA-R3M configuration for transfer and orientation adjustment.",
+            "summary": "A ZA-R3M plus rotating-platform configuration for multi-angle transfer, posture adjustment, and station direction changes.",
             "specs": [
               "Combination: ZA-R3M + Rotating Platform",
               "Category: R-series linked variant",
@@ -961,7 +961,7 @@
           },
           "zar3t": {
             "title": "ZA-R3T",
-            "summary": "An embodied dual-arm robot for bimanual operation, embodied training, and demonstration workflows.",
+            "summary": "An integrated dual-arm platform with a lift axis for grasping, transfer, and bimanual validation tasks from desktop to workstation height.",
             "specs": [
               "Single arm: 7 DOF / rated payload 1kg",
               "Arm span 640mm / repeatability ±0.1mm",
@@ -977,7 +977,7 @@
         "cards": {
           "zam75": {
             "title": "ZA-M75",
-            "summary": "A light-duty mobile base for flexible deployment and mid-light transport.",
+            "summary": "An autonomous mobile base for light-duty transfer and top-module deployment, with 75kg rated payload, 360° zero-turn steering, and basic indoor navigation.",
             "specs": [
               "Max payload 75kg",
               "Travel speed 0.1~1.2m/s / 360° zero-turn steering",
@@ -987,7 +987,7 @@
           },
           "zam135": {
             "title": "ZA-M135",
-            "summary": "A mid-load mobile base for higher-payload transfer across workstations.",
+            "summary": "An autonomous mobile base for cross-station delivery and mid-load transfer, with 135kg rated payload, 360° zero-turn steering, and basic indoor navigation.",
             "specs": [
               "Max payload 135kg",
               "Travel speed 0.1~1.2m/s / 360° zero-turn steering",
@@ -1003,7 +1003,7 @@
         "cards": {
           "zamr3m": {
             "title": "ZA-MR3M",
-            "summary": "A composite robot platform that integrates a high-performance autonomous mobile base with a customized four-axis robotic arm for cross-area, multi-height workflows.",
+            "summary": "A composite lift robot that combines a mobile base, lift axis, and four-axis robotic arm for cross-area, multi-height handling and planar-operation tasks.",
             "specs": [
               "Overall size 674 × 456 × 1408mm",
               "Weight 100kg / travel speed 0.1~1.2m/s",
@@ -1013,7 +1013,7 @@
           },
           "zamr3t": {
             "title": "ZA-MR3T",
-            "summary": "A highly integrated humanoid-style manipulation platform that combines a mobile base, lift axis, robotic arms, and vision cameras for human-like high-precision operation.",
+            "summary": "An embodied operation platform integrating a mobile base, lift axis, dual arms, and vision cameras for cross-area, multi-station grasping, transfer, and assembly validation.",
             "specs": [
               "Integrated mobile base, lift axis, dual arms, and vision cameras",
               "Weight 120kg / travel speed 0.1~1.2m/s",
@@ -1029,7 +1029,7 @@
         "cards": {
           "zarmvr": {
             "title": "ZA-RMVR",
-            "summary": "A teaching and research platform integrating a lift axis, dual robotic arms, dexterous end effectors, a core controller, and VR devices.",
+            "summary": "A teleoperation development platform that integrates a lift axis, dual robotic arms, dexterous hands, a controller, and VR devices for teaching, research, and embodied data collection.",
             "specs": [
               "Platform size 674 × 575 × 1408mm",
               "Single-arm 1kg / dual-arm 2kg",
@@ -1039,7 +1039,7 @@
           },
           "zarmps": {
             "title": "ZA-RMPS",
-            "summary": "A dual-arm master-slave teleoperation platform for mirrored operation and control validation.",
+            "summary": "A teleoperation development platform for dual-arm master-slave control, contact-task validation, and embodied data collection.",
             "specs": [
               "Platform size 1000 × 1000 × 850mm",
               "Single-arm 1kg / dual-arm 2kg",
@@ -1049,7 +1049,7 @@
           },
           "zardp": {
             "title": "ZA-RDP",
-            "summary": "A drawing robot platform for path teaching, drawing demos, and algorithm validation.",
+            "summary": "A drawing and trajectory-teaching platform built on a 6-axis robotic arm for teaching demos, algorithm validation, and motion-planning experiments.",
             "specs": [
               "Platform size 800 × 300 × 500mm",
               "6 DOF / weight 26kg",
@@ -1065,7 +1065,7 @@
         "cards": {
           "zazg100": {
             "title": "ZA-ZG100",
-            "summary": "An integrated controller focused on real-time robotics control and dense I/O integration.",
+            "summary": "An integrated control unit based on RK3588 for robot motion control, AI vision processing, and interface integration.",
             "specs": [
               "RK3588, 8-core 64-bit A76+A55 at 2.4GHz",
               "Built-in NPU 6 Tops / 16GB memory / 128GB storage",
@@ -1081,7 +1081,7 @@
         "cards": {
           "rail": {
             "title": "Rail Platform",
-            "summary": "Extends long-range linear travel for linked stations and cross-station transfer.",
+            "summary": "A rail platform that extends a robot's linear working range for cross-station linkage and long-travel transfer tasks.",
             "specs": [
               "Travel 1750mm",
               "Max speed 500mm/s",
@@ -1091,7 +1091,7 @@
           },
           "rotatingplatform": {
             "title": "Rotating Platform",
-            "summary": "Adds rotational freedom for orientation adjustment and station transfer needs.",
+            "summary": "A rotating platform that adds station indexing and posture adjustment for multi-angle pick-and-place and direction-change tasks.",
             "specs": [
               "Dimensions 433 × 280 × 238mm",
               "Max speed 30rpm / rotation ±360°",

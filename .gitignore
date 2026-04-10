@@ -30,8 +30,8 @@ dist-ssr
 # Trae AI 规则文件 (避免提交AI助手配置)
 .trae/
 
-# Trae AI 辅助配置目录（避免提交AI相关配置文件）
 .promptx/
+.codex_tmp/
 .playwright-cli/
 
 output/
