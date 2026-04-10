@@ -8,6 +8,7 @@
         ref="iframeRef"
         class="video-iframe"
         :src="frameUrl"
+        :title="props.title || 'Bilibili video player'"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -51,7 +52,7 @@
         </p>
         <div class="fallback-actions">
           <a
-            :href="originalUrl"
+            :href="props.url"
             target="_blank"
             rel="noopener noreferrer"
             class="fallback-btn primary"
@@ -170,12 +171,9 @@ const embedUrl = computed(() => {
   return `https://player.bilibili.com/player.html?bvid=${videoInfo.bvid}&page=${videoInfo.page}&autoplay=0&high_quality=1&as_wide=1&allowfullscreen=true&from=outer`;
 });
 
-// 原始URL
-const originalUrl = computed(() => props.url);
-
 const directPlayUrl = computed(() => {
   if (isMobileDevice.value) {
-    return props.url.replace("https://www.bilibili.com", "https://m.bilibili.com");
+    return props.url.replace(/https:\/\/(www\.)?bilibili\.com/, "https://m.bilibili.com");
   }
   return props.url;
 });
@@ -249,6 +247,7 @@ const tryDirectPlay = async () => {
   useDirectPlay.value = true;
   showFallback.value = false;
   isLoading.value = true;
+  autoRetryCount.value = 0;
 
   await nextTick();
 
@@ -307,11 +306,7 @@ watch(
 
 watch(
   () => useDirectPlay.value,
-  (isDirectPlay, wasDirectPlay) => {
-    if (isDirectPlay === wasDirectPlay) {
-      return;
-    }
-
+  () => {
     reloadToken.value = 0;
     showFallback.value = false;
     isLoading.value = true;

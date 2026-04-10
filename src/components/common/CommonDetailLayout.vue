@@ -137,7 +137,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
 import { sanitizeHtmlAllowList } from '@/utils/security';
@@ -167,6 +167,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
+const dialogRef = ref<HTMLDivElement>();
 
 const thumbnailUrl = computed(() => props.mediaInfo.thumbnailUrl || fallbackFacadeImg);
 
@@ -195,18 +196,53 @@ function handleDialogEscape(event: KeyboardEvent): void {
   showContact.value = false;
 }
 
+function handleTabTrap(event: KeyboardEvent): void {
+  if (event.key !== "Tab" || !showContact.value || !dialogRef.value) return;
+
+  const focusable = dialogRef.value.querySelectorAll<HTMLElement>(
+    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+  );
+  if (focusable.length === 0) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (event.shiftKey) {
+    if (document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    }
+  } else {
+    if (document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+}
+
 // 当路由切换 (通过传参的标题或slug等变更判断) 需要关闭弹窗
 watch(() => props.title, () => {
   showContact.value = false;
   videoStarted.value = false;
 });
 
+watch(showContact, (open) => {
+  if (open) {
+    nextTick(() => {
+      const closeBtn = dialogRef.value?.querySelector<HTMLButtonElement>('.contact-close-x');
+      closeBtn?.focus();
+    });
+  }
+});
+
 onMounted(() => {
   document.addEventListener("keydown", handleDialogEscape, true);
+  document.addEventListener("keydown", handleTabTrap, true);
 });
 
 onUnmounted(() => {
   document.removeEventListener("keydown", handleDialogEscape, true);
+  document.removeEventListener("keydown", handleTabTrap, true);
 });
 </script>
 
