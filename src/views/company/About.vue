@@ -29,11 +29,27 @@
 
         <div class="intro-layout">
           <div class="intro-prose">
-            <p
-              v-for="(paragraph, index) in companyIntroParagraphs"
-              :key="`intro-${index}`"
-              v-html="paragraph"
-            ></p>
+            <i18n-t keypath="about.companyIntroDetailed.para1" tag="p" scope="global">
+              <template #org>
+                <strong>{{ $t("about.richText.org") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.companyIntroDetailed.para2" tag="p" scope="global">
+              <template #lab>
+                <strong>{{ $t("about.richText.lab") }}</strong>
+              </template>
+              <template #airos>
+                <strong>{{ $t("about.richText.airos") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.companyIntroDetailed.para3" tag="p" scope="global">
+              <template #loop>
+                <strong>{{ $t("about.richText.loop") }}</strong>
+              </template>
+              <template #selfControlled>
+                <strong>{{ $t("about.richText.selfControlled") }}</strong>
+              </template>
+            </i18n-t>
           </div>
 
           <div class="intro-side">
@@ -146,13 +162,32 @@
         </div>
 
         <div class="culture-card">
-          <p class="info-text" v-html="cultureDescription"></p>
+          <i18n-t keypath="about.enterpriseCulture.description" tag="p" class="info-text" scope="global">
+            <template #coreConcept>
+              <strong>{{ $t("about.richText.coreConcept") }}</strong>
+            </template>
+          </i18n-t>
           <ul class="culture-list">
-            <li
-              v-for="(item, index) in cultureItems"
-              :key="`culture-${index}`"
-              v-html="item"
-            ></li>
+            <i18n-t keypath="about.enterpriseCulture.item1" tag="li" scope="global">
+              <template #deepAccumulation>
+                <strong>{{ $t("about.richText.deepAccumulation") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.enterpriseCulture.item2" tag="li" scope="global">
+              <template #scenarioRevolution>
+                <strong>{{ $t("about.richText.scenarioRevolution") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.enterpriseCulture.item3" tag="li" scope="global">
+              <template #ecosystemCoConstruction>
+                <strong>{{ $t("about.richText.ecosystemCoConstruction") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.enterpriseCulture.item4" tag="li" scope="global">
+              <template #extremeEvolution>
+                <strong>{{ $t("about.richText.extremeEvolution") }}</strong>
+              </template>
+            </i18n-t>
           </ul>
         </div>
       </div>
@@ -199,7 +234,6 @@ import { computed, ref, type ComputedRef } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
-import { sanitizeHtmlAllowList } from "@/utils/security";
 
 const { t, locale } = useI18n();
 
@@ -234,22 +268,6 @@ const coreValues = computed(() => [
   t("about.coreValues.value4"),
 ]);
 
-const companyIntroParagraphs = computed(() =>
-  ["para1", "para2", "para3"].map((key) =>
-    sanitizeHtmlAllowList(t(`about.companyIntroDetailed.${key}`))
-  )
-);
-
-const cultureItems = computed(() =>
-  ["item1", "item2", "item3", "item4"].map((key) =>
-    sanitizeHtmlAllowList(t(`about.enterpriseCulture.${key}`))
-  )
-);
-
-const cultureDescription = computed(() =>
-  sanitizeHtmlAllowList(t("about.enterpriseCulture.description"))
-);
-
 function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");
 }
@@ -264,6 +282,12 @@ function formatIndex(value: number): string {
 
 .about-page > .about-main > .page-section:nth-of-type(even) {
   background-color: var(--brand-surface-soft);
+}
+
+.intro-prose strong,
+.culture-card strong {
+  font-weight: 700;
+  color: inherit;
 }
 
 .page-shell {
@@ -659,15 +683,15 @@ function formatIndex(value: number): string {
 }
 
 .contact-section {
-  margin-bottom: 0;
+  padding-top: var(--section-padding-y);
 }
 
 .contact-panel {
   display: grid;
-  grid-template-columns: minmax(0, 0.74fr) minmax(420px, 1fr);
-  gap: 64px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 48px;
   align-items: start;
-  padding-top: 20px;
+  padding-top: 4px;
 }
 
 .contact-header {
@@ -678,12 +702,14 @@ function formatIndex(value: number): string {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px 36px;
+  padding-top: 4px;
 }
 
 .contact-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
+  min-width: 0;
   padding: 24px;
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.06);
@@ -693,6 +719,10 @@ function formatIndex(value: number): string {
 
 .contact-card--wide {
   grid-column: 1 / -1;
+}
+
+.contact-card--wide .contact-value {
+  white-space: nowrap;
 }
 
 .contact-label {
@@ -711,6 +741,8 @@ function formatIndex(value: number): string {
   line-height: 1.5;
   text-decoration: none;
   transition: color 0.3s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-value[href]:hover {
@@ -788,6 +820,10 @@ function formatIndex(value: number): string {
 
   .contact-card--wide {
     grid-column: auto;
+  }
+
+  .contact-card--wide .contact-value {
+    white-space: normal;
   }
 }
 

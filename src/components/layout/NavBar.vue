@@ -103,6 +103,7 @@ import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
+import { preserveScrollForNextNavigation } from "@/router";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import {
   localizeFullPath,
@@ -213,6 +214,14 @@ function isProductDetailRoute() {
 
 async function switchLanguage() {
   const targetLocale = locale.value === "zh" ? "en" : "zh";
+  const preservedScrollPosition = {
+    left: window.scrollX,
+    top: Math.max(
+      window.scrollY,
+      document.documentElement?.scrollTop ?? 0,
+      document.body?.scrollTop ?? 0
+    ),
+  };
 
   if (isProductDetailRoute()) {
     try {
@@ -224,8 +233,9 @@ async function switchLanguage() {
     }
   }
 
-  await router.push(localizeFullPath(route.fullPath, targetLocale));
   closeMobileMenu();
+  preserveScrollForNextNavigation(preservedScrollPosition);
+  await router.push(localizeFullPath(route.fullPath, targetLocale));
 }
 
 // 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）

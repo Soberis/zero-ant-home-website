@@ -351,11 +351,23 @@
   },
   "about": {
     "companyIntroDetailed": {
-      "para1": "Hangzhou ZeroAnt Technology Co., Ltd. is a high-tech enterprise founded by the research team from <b>Beihang University Hangzhou Innovation Research Institute</b>, focusing on the R&D of intelligent robot complete solutions. Currently, it provides highly reliable robot intelligent system solutions for biopharmaceutical, semiconductor and other industries.",
-      "para2": "The company relies on the <b>Zhejiang Provincial Key Laboratory of Industrial Big Data and Robot Intelligent Systems</b>, independently developing <b>AiROS</b> (Intelligent Robot Operating System), conquering core technologies such as mobile robot autonomous navigation, high-speed and high-precision control of robotic arms, 3D spatial semantic perception, and multi-robot collaborative scheduling, creating a full-stack software ecosystem and modular hardware platform.",
-      "para3": "The team has established ongoing collaboration with universities and research institutes, forming a <b>closed-loop innovation system of industry, academia, research and application</b>. ZeroAnt continues to advance robotics R&D and industrial deployment with <b>fully self-developed and controllable technology</b>, serving manufacturing digitalization and intelligent upgrading.",
+      "para1": "Hangzhou ZeroAnt Technology Co., Ltd. is a high-tech enterprise founded by the research team from {org}, focusing on the R&D of intelligent robot complete solutions. Currently, it provides highly reliable robot intelligent system solutions for biopharmaceutical, semiconductor and other industries.",
+      "para2": "The company relies on the {lab}, independently developing {airos} (Intelligent Robot Operating System), conquering core technologies such as mobile robot autonomous navigation, high-speed and high-precision control of robotic arms, 3D spatial semantic perception, and multi-robot collaborative scheduling, creating a full-stack software ecosystem and modular hardware platform.",
+      "para3": "The team has established ongoing collaboration with universities and research institutes, forming a {loop}. ZeroAnt continues to advance robotics R&D and industrial deployment with {selfControlled}, serving manufacturing digitalization and intelligent upgrading.",
       "financingDesc": "The team is currently in the angel round financing stage. If you are interested in the team or have cooperation intentions, please contact us by email. Startup teams value time, no casual inquiries please!",
       "emailTips": "Contact email:"
+    },
+    "richText": {
+      "org": "Beihang University Hangzhou Innovation Research Institute",
+      "lab": "Zhejiang Provincial Key Laboratory of Industrial Big Data and Robot Intelligent Systems",
+      "airos": "AiROS",
+      "loop": "closed-loop innovation system of industry, academia, research and application",
+      "selfControlled": "fully self-developed and controllable technology",
+      "coreConcept": "Innovation Drives Smart Manufacturing",
+      "deepAccumulation": "Deep Accumulation",
+      "scenarioRevolution": "Scenario Revolution",
+      "ecosystemCoConstruction": "Ecosystem Co-construction",
+      "extremeEvolution": "Extreme Evolution"
     },
     "teamOverview": "Team Overview",
     "teamSize": "Team Size",
@@ -388,11 +400,11 @@
       "value4": "Agile Iteration"
     },
     "enterpriseCulture": {
-      "description": "ZeroAnt Technology builds an open and collaborative engineering culture with <b>Innovation Drives Smart Manufacturing</b> as its core concept:",
-      "item1": "<b>Deep Accumulation</b>: Deeply cultivating fundamental technologies, ten years to forge a sword, creating core systems",
-      "item2": "<b>Scenario Revolution</b>: Focusing on industrial pain points, reshaping production processes with robotics technology",
-      "item3": "<b>Ecosystem Co-construction</b>: Partnering with universities and research institutes to create a closed-loop innovation system of industry-university-research-application",
-      "item4": "<b>Extreme Evolution</b>: Making a little progress every day, continuously iterating knowledge systems"
+      "description": "ZeroAnt Technology builds an open and collaborative engineering culture with {coreConcept} as its core concept:",
+      "item1": "{deepAccumulation}: Deeply cultivating fundamental technologies, ten years to forge a sword, creating core systems",
+      "item2": "{scenarioRevolution}: Focusing on industrial pain points, reshaping production processes with robotics technology",
+      "item3": "{ecosystemCoConstruction}: Partnering with universities and research institutes to create a closed-loop innovation system of industry-university-research-application",
+      "item4": "{extremeEvolution}: Making a little progress every day, continuously iterating knowledge systems"
     }
   },
   "videos": {

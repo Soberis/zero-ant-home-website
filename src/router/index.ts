@@ -24,13 +24,104 @@ const NotFound = () => import("@/views/NotFound.vue");
 
 let isPopStateNavigation = false;
 let pendingPopState = false;
+let pendingPreservedScrollPosition: { left: number; top: number } | null = null;
+let isPreservingScrollNavigation = false;
 
 const SAVED_POSITION_DELAY_MS = 100;
+const PRESERVED_SCROLL_DELAY_MS = 90;
+const PRESERVED_SCROLL_RETRY_DELAY_MS = 60;
+const PRESERVED_SCROLL_MAX_ATTEMPTS = 12;
 const HASH_SCROLL_RETRY_DELAY_MS = 50;
 const HASH_SCROLL_MAX_ATTEMPTS = 20;
 const HASH_SCROLL_CROSS_VIEW_DELAY_MS = 460;
 const HASH_SCROLL_REALIGN_DELAY_MS = 220;
 const HASH_SCROLL_REALIGN_THRESHOLD_PX = 24;
+
+export function preserveScrollForNextNavigation(position: { left: number; top: number }): void {
+  pendingPreservedScrollPosition = position;
+  isPreservingScrollNavigation = true;
+}
+
+function getScrollingElement(): Element | null {
+  return document.scrollingElement ?? document.documentElement ?? document.body;
+}
+
+function getCurrentScrollTop(): number {
+  return Math.max(
+    window.scrollY,
+    document.documentElement?.scrollTop ?? 0,
+    document.body?.scrollTop ?? 0
+  );
+}
+
+function getMaxScrollTop(): number {
+  const scrollingElement = getScrollingElement();
+  const scrollingElementHeight =
+    scrollingElement && "scrollHeight" in scrollingElement ? scrollingElement.scrollHeight : 0;
+  const documentHeight = document.documentElement?.scrollHeight ?? 0;
+  const bodyHeight = document.body?.scrollHeight ?? 0;
+
+  return Math.max(scrollingElementHeight, documentHeight, bodyHeight) - window.innerHeight;
+}
+
+function setScrollPosition(position: { left: number; top: number }): void {
+  window.scrollTo({
+    left: position.left,
+    top: position.top,
+    behavior: "auto",
+  });
+
+  if (document.documentElement) {
+    document.documentElement.scrollLeft = position.left;
+    document.documentElement.scrollTop = position.top;
+  }
+
+  if (document.body) {
+    document.body.scrollLeft = position.left;
+    document.body.scrollTop = position.top;
+  }
+}
+
+function restorePreservedScrollPosition(position: {
+  left: number;
+  top: number;
+}): Promise<false> {
+  return new Promise((resolve) => {
+    let attempts = 0;
+
+    const tryRestore = () => {
+      const maxScrollTop = getMaxScrollTop();
+      const targetTop = Math.min(position.top, maxScrollTop);
+
+      setScrollPosition({
+        left: position.left,
+        top: targetTop,
+      });
+
+      const reachedTarget = Math.abs(getCurrentScrollTop() - targetTop) <= 2;
+      const pageReadyForTarget = maxScrollTop >= position.top;
+
+      if (reachedTarget && (pageReadyForTarget || attempts >= PRESERVED_SCROLL_MAX_ATTEMPTS)) {
+        resolve(false);
+        return;
+      }
+
+      if (attempts >= PRESERVED_SCROLL_MAX_ATTEMPTS) {
+        resolve(false);
+        return;
+      }
+
+      attempts += 1;
+      window.setTimeout(() => {
+        window.requestAnimationFrame(tryRestore);
+      }, PRESERVED_SCROLL_RETRY_DELAY_MS);
+    };
+
+    window.setTimeout(() => {
+      window.requestAnimationFrame(tryRestore);
+    }, PRESERVED_SCROLL_DELAY_MS);
+  });
+}
 
 function syncLocaleFromRoute(path: string) {
   const targetLocale = getLocaleFromPath(path);
@@ -169,6 +260,12 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
+    if (pendingPreservedScrollPosition) {
+      const preservedPosition = pendingPreservedScrollPosition;
+      pendingPreservedScrollPosition = null;
+      return restorePreservedScrollPosition(preservedPosition);
+    }
+
     if (savedPosition) {
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -231,7 +328,20 @@ if (typeof window !== "undefined") {
 }
 
 router.afterEach((to, _from, failure) => {
-  if (failure || to.hash) {
+  if (failure) {
+    pendingPreservedScrollPosition = null;
+    isPreservingScrollNavigation = false;
+    isPopStateNavigation = false;
+    return;
+  }
+
+  if (isPreservingScrollNavigation) {
+    isPreservingScrollNavigation = false;
+    isPopStateNavigation = false;
+    return;
+  }
+
+  if (to.hash) {
     isPopStateNavigation = false;
     return;
   }

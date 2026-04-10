@@ -39,8 +39,8 @@ const i18n = createI18n({
   legacy: false, // 使用 Composition API 模式
   locale: getInitialLocale(),
   fallbackLocale: 'en',
-  // 项目里部分文案使用受控 HTML 标记做强调，关闭 HTML 警告避免控制台噪声。
-  warnHtmlInMessage: "off",
+  // 当前版本使用 warnHtmlMessage 控制 HTML 告警；其余历史富文本文案先避免控制台噪声。
+  warnHtmlMessage: false,
   messages,
 });
 
