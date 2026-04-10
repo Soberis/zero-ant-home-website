@@ -60,9 +60,9 @@ function goTo(slug: string | null): void {
 const defaultVideoInfo: VideoDetail = {
   type: "bilibili",
   slug: "not-found",
-  title: "notFoundPage.title",
+  title: "",
   url: "",
-  desc: "notFoundPage.description",
+  desc: "",
 };
 
 const rawVideoInfo = computed<VideoDetail>(

@@ -52,8 +52,20 @@ export function sanitizeHtmlAllowList(
         return;
       }
 
-      // 清理所有属性，避免事件/样式注入
+      // 清理属性，保留 a[href] 使链接可用
       Array.from(node.attributes).forEach((attr) => {
+        if (tag === "a" && attr.name === "href") {
+          // 仅允许 http/https/mailto/tel 协议，防止 javascript: 注入
+          const href = attr.value.trim().toLowerCase();
+          if (
+            href.startsWith("http://") ||
+            href.startsWith("https://") ||
+            href.startsWith("mailto:") ||
+            href.startsWith("tel:")
+          ) {
+            return;
+          }
+        }
         node.removeAttribute(attr.name);
       });
     });
@@ -186,7 +198,8 @@ function setupSecurityPolicies() {
  */
 function disableConsole() {
   const noop = () => {};
-  const methods = ["log", "warn", "error", "info", "debug", "trace"];
+  // 保留 warn 和 error，便于线上问题排查
+  const methods = ["log", "info", "debug", "trace"];
 
   methods.forEach((method) => {
     (console as any)[method] = noop;

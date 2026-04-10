@@ -160,6 +160,7 @@
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { normalizeCollection } from "@/composables/useProductDetailData";
 
 const { t, tm } = useI18n();
 
@@ -257,9 +258,10 @@ const positions = computed<Position[]>(() => [
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
     experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.softwareEngineer.requirements"
-    ) as string[],
+    requirements: normalizeCollection<string>(
+      tm("careers.positions.softwareEngineer.requirements"),
+      []
+    ),
   },
   {
     id: 2,
@@ -267,9 +269,10 @@ const positions = computed<Position[]>(() => [
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
     experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.robotSystemsEngineer.requirements"
-    ) as string[],
+    requirements: normalizeCollection<string>(
+      tm("careers.positions.robotSystemsEngineer.requirements"),
+      []
+    ),
   },
   {
     id: 3,
@@ -277,9 +280,10 @@ const positions = computed<Position[]>(() => [
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
     experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.electricalEngineer.requirements"
-    ) as string[],
+    requirements: normalizeCollection<string>(
+      tm("careers.positions.electricalEngineer.requirements"),
+      []
+    ),
   },
 ]);
 

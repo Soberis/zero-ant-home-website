@@ -247,7 +247,7 @@ import { sanitizeHtmlAllowList } from "@/utils/security";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
 import { scheduleScrollToTop } from "@/utils/scroll";
-import { useProductDetailData } from "@/composables/useProductDetailData";
+import { useProductDetailData, normalizeCollection } from "@/composables/useProductDetailData";
 import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
 import type { ProductDetail, ProductFeature } from "@/data/productDetails";
@@ -276,20 +276,6 @@ const detailLocaleReady = ref(false);
 const isEn = computed(() => locale.value === "en");
 const cardId = computed(() => String(route.params.id || ""));
 const cardRecord = computed(() => getProductCenterCardById(cardId.value));
-
-function normalizeParams(value: LocaleProductDetail["params"]): LocalizedParam[] {
-  if (Array.isArray(value)) return value;
-  if (value && typeof value === "object") return Object.values(value);
-  return [];
-}
-
-function normalizeDownloads(
-  value: LocaleProductDetail["downloads"]
-): Array<{ name: string; url: string }> {
-  if (Array.isArray(value)) return value;
-  if (value && typeof value === "object") return Object.values(value);
-  return [];
-}
 
 const loadProductDetailLocale = async () => {
   detailLocaleReady.value = false;
@@ -329,7 +315,7 @@ const detail = computed<ProductDetail | null>(() => {
   const specs = record.card.specKeys.map((key) => t(key));
   const note = record.card.noteKey ? t(record.card.noteKey) : "";
   const localized = tm(`productDetails.${record.card.id}`) as LocaleProductDetail;
-  const localizedParams = normalizeParams(localized?.params);
+  const localizedParams = normalizeCollection<LocalizedParam>(localized?.params, []);
 
   const params = localizedParams.length
     ? localizedParams
@@ -353,14 +339,14 @@ const detail = computed<ProductDetail | null>(() => {
       : specs;
 
   return {
-    title: localized?.title || title,
-    desc: localized?.desc || desc,
+    title: (typeof localized?.title === "string" ? localized.title : null) || title,
+    desc: (typeof localized?.desc === "string" ? localized.desc : null) || desc,
     image: record.card.image,
     features,
     cases: [],
     scenes: [],
     params,
-    downloads: normalizeDownloads(localized?.downloads),
+    downloads: normalizeCollection<{ name: string; url: string }>(localized?.downloads, []),
   };
 });
 

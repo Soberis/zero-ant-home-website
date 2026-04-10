@@ -195,6 +195,7 @@ export function setStructuredData(
       try {
         const script = document.createElement("script");
         script.type = "application/ld+json";
+        script.setAttribute("data-seo-managed", "structured-data");
         script.textContent = JSON.stringify(item);
         document.head.appendChild(script);
       } catch (error) {
@@ -215,8 +216,9 @@ export function setStructuredData(
  */
 function removeStructuredData(): void {
   try {
+    // 仅移除由本模块管理的结构化数据，避免误删第三方脚本
     const existingScripts = document.querySelectorAll(
-      'script[type="application/ld+json"]'
+      'script[type="application/ld+json"][data-seo-managed="structured-data"]'
     );
     existingScripts.forEach((script) => {
       try {

@@ -44,8 +44,7 @@ export function slugToI18nKey(slug: string): string {
 export type ProductDetailsData = Record<string, ProductDetail>;
 
 /**
- * 获取产品详情的工具函数
- * 现在通过国际化系统获取数据，而不是硬编码
+ * @deprecated 此函数已废弃，产品详情数据通过国际化系统获取
  */
 export function getProductDetailKeys(): string[] {
   return [];

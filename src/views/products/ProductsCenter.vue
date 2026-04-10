@@ -194,7 +194,7 @@ const pageMetrics = computed(() => [
     label: t("productsPage.hero.metrics.products"),
   },
   {
-    value: formatMetricCount(guideItems.value.length),
+    value: formatMetricCount(3),
     label: t("productsPage.hero.metrics.cues"),
   },
 ]);

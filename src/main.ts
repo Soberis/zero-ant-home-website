@@ -1,4 +1,4 @@
-import { createApp, watch } from "vue";
+import { createApp, nextTick, watch } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
 import i18n from "@/config/i18n";
@@ -71,7 +71,7 @@ if (typeof window !== "undefined") {
     } = await import("@/router/seo");
     
     const applyRouteSEO = (to: RouteLocationNormalizedLoaded) => {
-      setTimeout(() => {
+      void nextTick().then(() => {
         if (typeof document !== "undefined") {
           document.documentElement.setAttribute("lang", String(i18n.global.locale.value));
         }
@@ -95,7 +95,7 @@ if (typeof window !== "undefined") {
           default:
             setupPageSEO(to);
         }
-      }, 0);
+      });
     };
     
     applyRouteSEO(router.currentRoute.value);

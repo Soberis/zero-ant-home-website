@@ -41,7 +41,7 @@ const router = useRouter();
 const { t, locale } = useI18n();
 const { localizePath } = useLocalizedPath();
 
-const slug: ComputedRef<string> = computed(() => route.params.slug as string);
+const slug: ComputedRef<string> = computed(() => String(route.params.slug || ""));
 const rawDetail: ComputedRef<Application | undefined> = computed(() =>
   applications.find((item) => item.slug === slug.value)
 );

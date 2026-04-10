@@ -23,6 +23,7 @@ const Careers = () => import("@/views/company/Careers.vue");
 const NotFound = () => import("@/views/NotFound.vue");
 
 let isPopStateNavigation = false;
+let pendingPopState = false;
 
 function syncLocaleFromRoute(path: string) {
   const targetLocale = getLocaleFromPath(path);
@@ -153,13 +154,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
+  // 在 beforeEach 中转移 pendingPopState，确保 afterEach 能正确读取
+  isPopStateNavigation = pendingPopState;
+  pendingPopState = false;
   syncLocaleFromRoute(to.path);
 });
 
 if (typeof window !== "undefined") {
   syncLocaleFromRoute(window.location.pathname);
   window.addEventListener("popstate", () => {
-    isPopStateNavigation = true;
+    pendingPopState = true;
   });
 }
 

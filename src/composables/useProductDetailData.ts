@@ -25,7 +25,7 @@ export interface UseProductDetailDataOptions {
   showVideos?: MaybeRefOrGetter<boolean>;
 }
 
-function normalizeCollection<T>(value: unknown, fallback: T[]): T[] {
+export function normalizeCollection<T>(value: unknown, fallback: T[]): T[] {
   if (Array.isArray(value)) {
     return value as T[];
   }
@@ -95,14 +95,18 @@ export function useProductDetailData(
       baseDetail.value?.title ||
       (currentProduct.value
         ? (te(`${detailKey.value}.title`)
-            ? String(tm(`${detailKey.value}.title`))
+            ? (typeof tm(`${detailKey.value}.title`) === "string"
+              ? tm(`${detailKey.value}.title`) as string
+              : t(currentProduct.value.titleKey))
             : t(currentProduct.value.titleKey))
         : "");
     const fallbackDesc =
       baseDetail.value?.desc ||
       (currentProduct.value
         ? (te(`${detailKey.value}.desc`)
-            ? String(tm(`${detailKey.value}.desc`))
+            ? (typeof tm(`${detailKey.value}.desc`) === "string"
+              ? tm(`${detailKey.value}.desc`) as string
+              : t(currentProduct.value.summaryKey))
             : t(currentProduct.value.summaryKey))
         : "");
     const fallbackImage = baseDetail.value?.image || currentProduct.value?.image || "";
@@ -119,7 +123,11 @@ export function useProductDetailData(
       }
 
       const translated = tm(fullKey);
-      return (translated as T) || fallback;
+      // tm() 可能返回嵌套对象而非原始值，需要运行时类型检查
+      if (typeof translated === "string") {
+        return translated as T;
+      }
+      return fallback;
     };
 
     const resolveCollection = <T,>(
