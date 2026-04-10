@@ -58,9 +58,10 @@ export default defineConfig({
     minify: "terser",
     terserOptions: {
       compress: {
-        drop_console: true, // 移除console.log
+        // 不使用 drop_console，避免移除 console.warn/error
+        // 仅移除调试用 console 调用，保留 warn/error 便于线上排查
+        pure_funcs: ["console.log", "console.info", "console.debug", "console.trace"],
         drop_debugger: true, // 移除debugger语句
-        pure_funcs: ["console.log", "console.warn"], // 移除指定函数
       },
       mangle: {
         safari10: true, // 解决Safari 10的兼容性问题

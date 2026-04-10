@@ -55,7 +55,7 @@ export function sanitizeHtmlAllowList(
       // 清理属性，保留 a[href] 使链接可用
       Array.from(node.attributes).forEach((attr) => {
         if (tag === "a" && attr.name === "href") {
-          // 仅允许 http/https/mailto/tel 协议，防止 javascript: 注入
+          // 仅允许 http/https/mailto/tel 协议，防止 javascript:/data: 等 XSS 向量注入
           const href = attr.value.trim().toLowerCase();
           if (
             href.startsWith("http://") ||
@@ -65,6 +65,9 @@ export function sanitizeHtmlAllowList(
           ) {
             return;
           }
+          // 非白名单协议的 href 也移除
+          node.removeAttribute(attr.name);
+          return;
         }
         node.removeAttribute(attr.name);
       });
@@ -81,6 +84,17 @@ export function sanitizeHtmlAllowList(
  * @returns 安全特性支持情况
  */
 export function checkSecurityFeatures() {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return {
+      https: false,
+      crypto: false,
+      csp: false,
+      referrerPolicy: false,
+      secureContext: false,
+      serviceWorker: false,
+    };
+  }
+
   return {
     https: location.protocol === "https:",
     crypto: !!(window.crypto && window.crypto.getRandomValues),
@@ -99,13 +113,11 @@ export function checkSecurityFeatures() {
 export function logSecurityEvent(_event: string, _details?: any) {
   // 开发环境输出到控制台
   if (import.meta.env.DEV) {
+    console.warn(`[Security] ${_event}`, _details);
   }
 
   // 生产环境可以发送到安全监控服务
-  if (import.meta.env.PROD) {
-    // 这里可以集成安全监控服务
-    // 例如：发送到 Sentry、LogRocket 等
-  }
+  // 例如：发送到 Sentry、LogRocket 等
 }
 
 /**
@@ -131,6 +143,7 @@ export function initSecurity() {
   const features = checkSecurityFeatures();
 
   if (import.meta.env.DEV) {
+    console.warn("[Security] Features:", features);
   }
 
   // 设置全局错误处理

@@ -332,8 +332,9 @@ const detail = computed<ProductDetail | null>(() => {
         };
       });
 
-  const features = Array.isArray(localized?.features) && localized.features.length
-    ? localized.features
+  const localizedFeatures = normalizeCollection<FeatureItem>(localized?.features, []);
+  const features = localizedFeatures.length
+    ? localizedFeatures
     : note
       ? [note, ...specs]
       : specs;
