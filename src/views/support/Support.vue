@@ -702,10 +702,9 @@ function formatIndex(value: number): string {
   gap: 6px;
   min-width: 0;
   padding: 24px;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--brand-surface-soft);
+  border: none;
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .contact-card--full {

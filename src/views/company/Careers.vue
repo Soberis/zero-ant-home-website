@@ -580,8 +580,11 @@ function applyForPosition(position: Position): void {
 .benefits-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 64px;
+  column-gap: 0;
   row-gap: 0;
+  background: var(--brand-surface-soft);
+  border-radius: 24px;
+  padding: 40px;
 }
 
 .benefit-card {
@@ -591,13 +594,17 @@ function applyForPosition(position: Position): void {
   column-gap: 16px;
   row-gap: 0;
   align-items: start;
-  padding: 24px;
-  background: var(--brand-surface-soft);
-  border-radius: 16px;
+  padding: 24px 40px 24px 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
-.benefit-card:nth-child(-n+2) {
-  /* removed */
+.benefit-card:nth-child(even) {
+  padding: 24px 0 24px 40px;
+}
+
+.benefit-card:nth-last-child(-n+2) {
+  border-bottom: none;
 }
 
 .benefit-index {
@@ -606,9 +613,11 @@ function applyForPosition(position: Position): void {
   display: inline-block;
   padding-top: 3px;
   color: rgba(26, 58, 143, 0.36);
-  font-size: 0.78rem;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.12em;
+  transition: color 0.3s ease;
 }
 
 .benefit-title {
@@ -616,9 +625,10 @@ function applyForPosition(position: Position): void {
   grid-row: 1;
   margin: 0 0 6px;
   color: var(--brand-text);
-  font-size: 1.06rem;
-  font-weight: 600;
-  line-height: 1.45;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.5;
+  transition: transform 0.3s ease;
 }
 
 .benefit-description {
@@ -629,6 +639,16 @@ function applyForPosition(position: Position): void {
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.7;
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-index {
+  color: var(--brand-primary);
+}
+
+.benefit-card:hover .benefit-title,
+.benefit-card:hover .benefit-description {
+  transform: translateX(4px);
 }
 
 .positions-list {
@@ -779,10 +799,9 @@ function applyForPosition(position: Position): void {
   gap: 6px;
   min-width: 0;
   padding: 24px;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--brand-surface-soft);
+  border: none;
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .contact-label {
@@ -811,9 +830,26 @@ function applyForPosition(position: Position): void {
 
 @media (max-width: 1100px) {
   .hero-grid,
-  .contact-panel,
+  .contact-panel {
+    grid-template-columns: 1fr;
+  }
+
   .benefits-grid {
     grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .benefit-card {
+    padding: 24px 0 !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .benefit-card:nth-last-child(-n+2) {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .benefit-card:last-child {
+    border-bottom: none;
   }
 
   .hero-copy {
@@ -870,7 +906,7 @@ function applyForPosition(position: Position): void {
   }
 
   .position-card {
-    padding: 24px 0;
+    padding: 28px 24px;
   }
 }
 </style>

@@ -81,11 +81,11 @@
           </div>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="history" ref="historyRef" class="page-section reveal-ready">
       <div class="page-shell">
-<div class="detail-section__header">
+        <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.history") }}</span>
           </h2>
@@ -110,11 +110,11 @@
           </article>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="honors" ref="honorsRef" class="page-section reveal-ready">
       <div class="page-shell">
-<div class="detail-section__header">
+        <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.honor") }}</span>
           </h2>
@@ -131,11 +131,11 @@
           </article>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="core-values" ref="valuesRef" class="page-section reveal-ready">
       <div class="page-shell">
-<div class="detail-section__header">
+        <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("about.coreValues.title") }}</span>
           </h2>
@@ -151,7 +151,7 @@
           </article>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="culture" ref="cultureRef" class="page-section reveal-ready">
       <div class="page-shell">
@@ -191,7 +191,7 @@
           </ul>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="contact" ref="aboutContactRef" class="page-section contact-section reveal-ready">
       <div class="page-shell">
@@ -224,7 +224,7 @@
           </div>
         </div>
       </div>
-</section>
+    </section>
     </main>
   </div>
 </template>
@@ -460,15 +460,6 @@ function formatIndex(value: number): string {
   box-shadow: none;
 }
 
-.honor-card {
-  background: var(--brand-surface-soft);
-  border: none;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: none;
-}
-
 .value-card {
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.06);
@@ -593,19 +584,27 @@ function formatIndex(value: number): string {
 .honor-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 52px;
+  column-gap: 0;
+  row-gap: 0;
+  background: var(--brand-surface-soft);
+  border-radius: 24px;
+  padding: 40px;
 }
 
 .honor-card {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 24px;
-  border-bottom: none;
+  padding: 24px 40px 24px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.honor-card:nth-child(even) {
+  padding: 24px 0 24px 40px;
 }
 
 .honor-card:nth-child(odd) {
-  padding-right: 24px;
+  padding-right: 40px;
 }
 
 .honor-card:nth-last-child(-n+2) {
@@ -616,17 +615,29 @@ function formatIndex(value: number): string {
   flex-shrink: 0;
   width: 40px;
   color: rgba(26, 58, 143, 0.36);
-  font-size: 0.78rem;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   padding-top: 3px;
+  transition: color 0.3s ease;
 }
 
 .honor-text {
   margin: 0;
   color: var(--brand-text);
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
   line-height: 1.6;
+  transition: transform 0.3s ease;
+}
+
+.honor-card:hover .card-index {
+  color: var(--brand-primary);
+}
+
+.honor-card:hover .honor-text {
+  transform: translateX(4px);
 }
 
 .values-grid {
@@ -711,10 +722,9 @@ function formatIndex(value: number): string {
   gap: 6px;
   min-width: 0;
   padding: 24px;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--brand-surface-soft);
+  border: none;
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .contact-card--wide {
@@ -757,6 +767,20 @@ function formatIndex(value: number): string {
 
   .honor-grid {
     grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .honor-card {
+    padding: 24px 0 !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .honor-card:nth-last-child(-n+2) {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .honor-card:last-child {
+    border-bottom: none;
   }
 
   .values-grid {
