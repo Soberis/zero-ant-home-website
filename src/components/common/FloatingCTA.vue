@@ -253,6 +253,29 @@ const scrollToTop = () => {
   }
 }
 
+@media (max-width: 1440px) and (min-width: 769px) {
+  .floating-sidebar {
+    right: calc(8px + env(safe-area-inset-right, 0px));
+    padding: 10px 0;
+  }
+
+  .sidebar-item {
+    width: 40px;
+    height: 40px;
+    margin: 3px 6px;
+  }
+
+  .sidebar-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .back-to-top .sidebar-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 @media (max-width: 768px) {
   .floating-sidebar {
     right: 12px;

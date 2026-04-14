@@ -1,7 +1,7 @@
 // 视频数据模块，包含视频详情映射和视频卡片列表
 
 // 图片资源导入
-import radar360Img from "@/assets/images/videos/radar-360-scanning.webp";
+// [已隐藏] import radar360Img from "@/assets/images/videos/radar-360-scanning.webp";
 import agvImg from "@/assets/images/videos/agv-intro.webp";
 import compositeRobotImg from "@/assets/images/videos/composite-robot-transfer.webp";
 // [已隐藏] import waferTransferImg from "@/assets/images/videos/wafer-transfer-control.webp";
@@ -18,14 +18,14 @@ import rtosEthercatImg from "@/assets/images/videos/rtos-ethercat-validation.web
 // [已隐藏] import robotPolishingDemoImg from "@/assets/images/videos/robot-polishing-demo.webp";
 // [已隐藏] import palletizingRobotImg from "@/assets/images/videos/palletizing-robot.webp";
 // [已隐藏] import robotStudioRemoteControlImg from "@/assets/images/videos/robotstudio-remote.webp";
-import labTubeLoadingImg from "@/assets/images/videos/lab-tube-loading.webp";
-import outdoorPatrolRobotImg from "@/assets/images/videos/outdoor-patrol-robot.webp";
+// [已隐藏] import labTubeLoadingImg from "@/assets/images/videos/lab-tube-loading.webp";
+// [已隐藏] import outdoorPatrolRobotImg from "@/assets/images/videos/outdoor-patrol-robot.webp";
 // [已隐藏] import dualRobotBallCatchingImg from "@/assets/images/videos/dual-robot-ball-catching.webp";
-import riceMolecularExperimentImg from "@/assets/images/videos/rice-molecular-experiment.webp";
+// [已隐藏] import riceMolecularExperimentImg from "@/assets/images/videos/rice-molecular-experiment.webp";
 import sketchingRobotImg from "@/assets/images/videos/sketching-robot.webp";
 // [已隐藏] import gantry2d3dImg from "@/assets/images/videos/gantry-2d3d.webp";
 // [已隐藏] import assemblyRobotImg from "@/assets/images/videos/assembly-robot.webp";
-import garageCleaningRobotImg from "@/assets/images/videos/garage-cleaning-robot.webp";
+// [已隐藏] import garageCleaningRobotImg from "@/assets/images/videos/garage-cleaning-robot.webp";
 import mobileRobotChassisImg from "@/assets/images/videos/mobile-robot-chassis.webp";
 import fixedRailTransferRobotImg from "@/assets/images/videos/fixed-rail-transfer-robot.webp";
 // [已隐藏] import plateWeldingDemoImg from "@/assets/images/videos/plate-welding-demo.webp";
@@ -78,10 +78,10 @@ const videoThumbnailMap: Record<string, string> = {
   // [已隐藏] "dual-robot-ball-catching": dualRobotBallCatchingImg,
   // [已隐藏] "polishing-robot": polishingRobotImg,
   "composite-robot-application": compositeRobotAppImg,
-  "radar-360-scanning": radar360Img,
+  // [已隐藏] "radar-360-scanning": radar360Img,
   "agv-product-introduction": agvImg,
   "ur-robot-llm-motion-capture": urRobotLLMImg,
-  "rice-molecular-experiment": riceMolecularExperimentImg,
+  // [已隐藏] "rice-molecular-experiment": riceMolecularExperimentImg,
   "four-axis-robot-open-fridge": fourAxisRobotFridgeImg,
   "sketching-robot": sketchingRobotImg,
   // [已隐藏] "gantry-2d3d": gantry2d3dImg,
@@ -94,10 +94,10 @@ const videoThumbnailMap: Record<string, string> = {
   // [已隐藏] "robot-polishing-demo": robotPolishingDemoImg,
   // [已隐藏] "palletizing-robot": palletizingRobotImg,
   // [已隐藏] "robotstudio-remote-control": robotStudioRemoteControlImg,
-  "lab-tube-loading": labTubeLoadingImg,
-  "outdoor-patrol-robot": outdoorPatrolRobotImg,
+  // [已隐藏] "lab-tube-loading": labTubeLoadingImg,
+  // [已隐藏] "outdoor-patrol-robot": outdoorPatrolRobotImg,
   // [已隐藏] "plate-welding-demo": plateWeldingDemoImg,
-  "underground-garage-cleaning": garageCleaningRobotImg,
+  // [已隐藏] "underground-garage-cleaning": garageCleaningRobotImg,
   // [已隐藏] "assembly-robot": assemblyRobotImg,
   "mobile-robot-chassis": mobileRobotChassisImg,
   "fixed-rail-transfer-robot": fixedRailTransferRobotImg,
@@ -222,20 +222,20 @@ export const videoMap: VideoMapData = {
     tags: ["ur-robot", "llm", "motion-capture", "smart-manufacturing"],
     publishDate: "2024-05-01",
   },
-  "rice-molecular-experiment": {
-    slug: "rice-molecular-experiment",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1Bu8QzAEHq/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.rice-molecular-experiment.title",
-    desc: "videos.rice-molecular-experiment.desc",
-    tags: [
-      "bio-experiment",
-      "molecular-detection",
-      "agricultural-automation",
-      "research-application",
-    ],
-    publishDate: "2024-12-25",
-  },
+  // [已隐藏] "rice-molecular-experiment": {
+  //   slug: "rice-molecular-experiment",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1Bu8QzAEHq/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.rice-molecular-experiment.title",
+  //   desc: "videos.rice-molecular-experiment.desc",
+  //   tags: [
+  //     "bio-experiment",
+  //     "molecular-detection",
+  //     "agricultural-automation",
+  //     "research-application",
+  //   ],
+  //   publishDate: "2024-12-25",
+  // },
   "four-axis-robot-open-fridge": {
     slug: "four-axis-robot-open-fridge",
     type: "bilibili",
@@ -369,21 +369,21 @@ export const videoMap: VideoMapData = {
     tags: ["bio-lab", "tube-loading", "automation", "medical-robot", "lab-automation"],
     publishDate: "2024-12-20",
   },
-  "outdoor-patrol-robot": {
-    slug: "outdoor-patrol-robot",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1n68LzKE5P/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.outdoor-patrol-robot.title",
-    desc: "videos.outdoor-patrol-robot.desc",
-    tags: [
-      "mobile-inspection",
-      "outdoor-robot",
-      "laser-slam",
-      "autonomous-navigation",
-      "environment-perception",
-    ],
-    publishDate: "2024-12-20",
-  },
+  // [已隐藏] "outdoor-patrol-robot": {
+  //   slug: "outdoor-patrol-robot",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1n68LzKE5P/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.outdoor-patrol-robot.title",
+  //   desc: "videos.outdoor-patrol-robot.desc",
+  //   tags: [
+  //     "mobile-inspection",
+  //     "outdoor-robot",
+  //     "laser-slam",
+  //     "autonomous-navigation",
+  //     "environment-perception",
+  //   ],
+  //   publishDate: "2024-12-20",
+  // },
   // [已隐藏] "plate-welding-demo": {
   //   slug: "plate-welding-demo",
   //   type: "bilibili",
@@ -488,11 +488,11 @@ export const videoCards: VideoCard[] = [
   },
 
   // 复合系统
-  {
-    title: "videos.underground-garage-cleaning.title",
-    img: garageCleaningRobotImg,
-    slug: "underground-garage-cleaning",
-  },
+  // [已隐藏] {
+  //   title: "videos.underground-garage-cleaning.title",
+  //   img: garageCleaningRobotImg,
+  //   slug: "underground-garage-cleaning",
+  // },
   {
     title: "videos.medical-automation.title",
     img: compositeRobotImg,
@@ -513,22 +513,22 @@ export const videoCards: VideoCard[] = [
     img: urRobotLLMImg,
     slug: "ur-robot-llm-motion-capture",
   },
-  {
-    title: "videos.rice-molecular-experiment.title",
-    img: riceMolecularExperimentImg,
-    slug: "rice-molecular-experiment",
-  },
+  // [已隐藏] {
+  //   title: "videos.rice-molecular-experiment.title",
+  //   img: riceMolecularExperimentImg,
+  //   slug: "rice-molecular-experiment",
+  // },
   {
     title: "videos.composite-robot-application.title",
     img: compositeRobotAppImg,
     slug: "composite-robot-application",
   },
   // 单一应用
-  {
-    title: "videos.lab-tube-loading.title",
-    img: labTubeLoadingImg,
-    slug: "lab-tube-loading",
-  },
+  // [已隐藏] {
+  //   title: "videos.lab-tube-loading.title",
+  //   img: labTubeLoadingImg,
+  //   slug: "lab-tube-loading",
+  // },
   // [已隐藏] {
   //   title: "videos.personalized-prescription-pharmaceutical.title",
   //   img: personalizedPrescriptionImg,
@@ -544,11 +544,11 @@ export const videoCards: VideoCard[] = [
     img: fixedRailTransferRobotImg,
     slug: "fixed-rail-transfer-robot",
   },
-  {
-    title: "videos.outdoor-patrol-robot.title",
-    img: outdoorPatrolRobotImg,
-    slug: "outdoor-patrol-robot",
-  },
+  // [已隐藏] {
+  //   title: "videos.outdoor-patrol-robot.title",
+  //   img: outdoorPatrolRobotImg,
+  //   slug: "outdoor-patrol-robot",
+  // },
   // [已隐藏] { title: "videos.polishing-robot.title", img: polishingRobotImg, slug: "polishing-robot" },
   // [已隐藏] {
   //   title: "videos.robot-polishing-demo.title",
@@ -596,11 +596,11 @@ export const videoCards: VideoCard[] = [
     img: rtosEthercatImg,
     slug: "rtos-ethercat-validation",
   },
-  {
-    title: "videos.radar-360-scanning.title",
-    img: radar360Img,
-    slug: "radar-360-scanning",
-  },
+  // [已隐藏] {
+  //   title: "videos.radar-360-scanning.title",
+  //   img: radar360Img,
+  //   slug: "radar-360-scanning",
+  // },
   {
     title: "videos.agv-product-introduction.title",
     img: agvImg,
