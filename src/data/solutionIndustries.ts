@@ -49,9 +49,9 @@ export const solutionCapabilityLayers: SolutionCapabilityLayerConfig[] = [
 export const solutionIndustryGroups: SolutionIndustryGroupConfig[] = [
   {
     key: "precisionWorkcell",
-    applicationSlugs: ["precision-assembly", "surface-treatment", "medical-automation"],
+    applicationSlugs: ["semiconductor", "precision-assembly", "medical-automation"],
     productSlugs: ["za-r3-x", "za-r3l-m-h", "za-r3d6", "za-zg100"],
-    proofVideoSlug: "assembly-robot",
+    proofVideoSlug: "servo-motor-station",
   },
   {
     key: "mobileCollaboration",
@@ -61,7 +61,7 @@ export const solutionIndustryGroups: SolutionIndustryGroupConfig[] = [
   },
   {
     key: "embodiedDevelopment",
-    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
+    applicationSlugs: ["ai-robotics", "offline-programming", "cultural-creative"],
     productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
     proofVideoSlug: "sketching-robot",
   },
@@ -71,7 +71,7 @@ export const featuredProofs: FeaturedProofConfig[] = [
   {
     key: "precision-proof",
     industryKey: "precisionWorkcell",
-    videoSlug: "assembly-robot",
+    videoSlug: "servo-motor-station",
   },
   {
     key: "mobile-proof",

@@ -15,68 +15,68 @@ export type ProductRelationsData = Record<string, ProductRelation>;
 
 export const productRelations: ProductRelationsData = {
   "za-r3-x": {
-    applicationSlugs: ["semiconductor", "precision-assembly", "pharmaceutical-automation"],
-    videoSlugs: ["semiconductor", "lab-tube-loading"],
+    applicationSlugs: ["semiconductor", "precision-assembly", "medical-automation"],
+    videoSlugs: ["fixed-rail-transfer-robot", "four-axis-robot-open-fridge", "medical-automation"],
   },
   "za-r3d6": {
-    applicationSlugs: ["semiconductor", "surface-treatment", "precision-assembly"],
-    videoSlugs: ["polishing-robot", "robot-polishing-demo", "assembly-robot"],
+    applicationSlugs: ["semiconductor", "intelligent-manufacturing", "precision-assembly"],
+    videoSlugs: ["fixed-rail-transfer-robot", "servo-motor-station", "four-axis-robot-open-fridge"],
   },
   "za-r3l-m-h": {
-    applicationSlugs: ["pharmaceutical-automation", "precision-assembly", "semiconductor"],
-    videoSlugs: ["lab-tube-loading", "semiconductor"],
+    applicationSlugs: ["medical-automation", "precision-assembly", "semiconductor"],
+    videoSlugs: ["medical-automation", "four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
   },
   "za-r3m-left": {
     applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
-    videoSlugs: ["fixed-rail-transfer-robot", "semiconductor", "gantry-2d3d"],
+    videoSlugs: ["fixed-rail-transfer-robot", "composite-robot-application", "four-axis-robot-open-fridge"],
   },
   "za-r3m-right": {
-    applicationSlugs: ["surface-treatment", "intelligent-manufacturing", "precision-assembly"],
-    videoSlugs: ["robot-polishing-demo", "polishing-robot", "assembly-robot"],
+    applicationSlugs: ["intelligent-manufacturing", "precision-assembly", "composite-systems"],
+    videoSlugs: ["servo-motor-station", "four-axis-robot-open-fridge", "composite-robot-application"],
   },
   "za-r3t": {
-    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
-    videoSlugs: ["dual-robot-ball-catching", "rice-molecular-experiment", "sketching-robot"],
+    applicationSlugs: ["ai-robotics", "cultural-creative", "precision-assembly"],
+    videoSlugs: ["ur-robot-llm-motion-capture", "sketching-robot", "four-axis-robot-open-fridge"],
   },
   "za-m75": {
     applicationSlugs: ["smart-logistics", "intelligent-navigation", "intelligent-patrol"],
-    videoSlugs: ["agv-product-introduction", "mobile-robot-chassis", "outdoor-patrol-robot"],
+    videoSlugs: ["agv-product-introduction", "mobile-robot-chassis", "mobile-transfer-robot"],
   },
   "za-m135": {
     applicationSlugs: ["smart-logistics", "intelligent-navigation", "intelligent-patrol"],
-    videoSlugs: ["mobile-transfer-robot", "mobile-robot-chassis", "outdoor-patrol-robot"],
+    videoSlugs: ["agv-product-introduction", "mobile-robot-chassis", "mobile-transfer-robot"],
   },
   "za-mr3m": {
     applicationSlugs: ["composite-systems", "smart-logistics", "intelligent-navigation"],
-    videoSlugs: ["composite-robot-application", "mobile-transfer-robot", "agv-product-introduction"],
+    videoSlugs: ["composite-robot-application", "agv-product-introduction", "mobile-robot-chassis"],
   },
   "za-mr3t": {
-    applicationSlugs: ["ai-robotics", "intelligent-manufacturing", "composite-systems"],
-    videoSlugs: ["dual-robot-ball-catching", "composite-robot-application"],
+    applicationSlugs: ["ai-robotics", "composite-systems", "offline-programming"],
+    videoSlugs: ["ur-robot-llm-motion-capture", "composite-robot-application", "vr-remote-franka-dual-arm"],
   },
   "za-rmvr": {
-    applicationSlugs: ["ai-robotics", "offline-programming", "industrial-gateway"],
-    videoSlugs: [],
+    applicationSlugs: ["ai-robotics", "offline-programming", "cultural-creative"],
+    videoSlugs: ["ur-robot-llm-motion-capture", "vr-remote-franka-dual-arm", "sketching-robot"],
   },
   "za-rmps": {
-    applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
-    videoSlugs: [],
+    applicationSlugs: ["ai-robotics", "cultural-creative", "offline-programming"],
+    videoSlugs: ["ur-robot-llm-motion-capture", "sketching-robot", "vr-remote-franka-dual-arm"],
   },
   "za-rdp": {
     applicationSlugs: ["cultural-creative", "ai-robotics", "offline-programming"],
-    videoSlugs: ["sketching-robot", "offline-programming-logo-drawing"],
+    videoSlugs: ["sketching-robot", "ur-robot-llm-motion-capture", "vr-remote-franka-dual-arm"],
   },
   "za-zg100": {
-    applicationSlugs: ["industrial-control", "offline-programming", "industrial-gateway"],
-    videoSlugs: ["rtos-ethercat-validation", "robotstudio-remote-control", "offline-programming"],
+    applicationSlugs: ["industrial-control", "offline-programming", "intelligent-manufacturing"],
+    videoSlugs: ["rtos-ethercat-validation", "vr-remote-franka-dual-arm", "servo-motor-station"],
   },
   "rail": {
     applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
-    videoSlugs: ["fixed-rail-transfer-robot", "gantry-2d3d", "semiconductor"],
+    videoSlugs: ["fixed-rail-transfer-robot", "composite-robot-application", "four-axis-robot-open-fridge"],
   },
   "rotating-platform": {
-    applicationSlugs: ["surface-treatment", "precision-assembly", "intelligent-manufacturing"],
-    videoSlugs: ["robot-polishing-demo", "polishing-robot", "assembly-robot"],
+    applicationSlugs: ["precision-assembly", "intelligent-manufacturing", "composite-systems"],
+    videoSlugs: ["four-axis-robot-open-fridge", "servo-motor-station", "composite-robot-application"],
   },
 };
 

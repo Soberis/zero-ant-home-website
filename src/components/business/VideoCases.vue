@@ -42,7 +42,7 @@ const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
 
 const SPOTLIGHT_SLUGS = [
-  "semiconductor",
+  "vr-remote-franka-dual-arm",
   "composite-robot-application",
   "sketching-robot",
 ];
@@ -102,6 +102,12 @@ const goToVideo = (slug: string) => {
   margin-bottom: var(--space-lg);
 }
 
+@media (max-width: 1680px) and (min-width: 901px) {
+  .section-heading-row {
+    padding-right: 72px;
+  }
+}
+
 .section-heading {
   max-width: 700px;
   margin-bottom: 0;
@@ -155,6 +161,8 @@ const goToVideo = (slug: string) => {
   .section-heading-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 20px;
+    padding-right: 72px;
   }
 }
 
@@ -162,6 +170,10 @@ const goToVideo = (slug: string) => {
   .spotlight-section {
     padding-left: var(--space-sm);
     padding-right: var(--space-sm);
+  }
+
+  .section-heading-row {
+    padding-right: 64px;
   }
 }
 

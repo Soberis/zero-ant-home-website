@@ -287,8 +287,8 @@ const { localizePath } = useLocalizedPath();
 const hoverMoreVideoIdx = ref(-1);
 const showAllVideos = ref(false);
 const showAllApps = ref(false);
-const hiddenSolutionApplicationSlugs = new Set(["semiconductor"]);
-const hiddenSolutionVideoSlugs = new Set(["semiconductor"]);
+const hiddenSolutionApplicationSlugs = new Set<string>();
+const hiddenSolutionVideoSlugs = new Set<string>();
 
 function isDefined<T>(value: T | null | undefined): value is T {
   return value != null;

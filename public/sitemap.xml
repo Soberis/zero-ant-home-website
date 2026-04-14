@@ -337,18 +337,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/surface-treatment</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/applications/surface-treatment</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://zeroant.com/applications/smart-logistics</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -356,18 +344,6 @@
   </url>
   <url>
     <loc>https://zeroant.com/en/applications/smart-logistics</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/applications/pharmaceutical-automation</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/applications/pharmaceutical-automation</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -409,18 +385,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/agricultural-research</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/applications/agricultural-research</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://zeroant.com/applications/cultural-creative</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -440,18 +404,6 @@
   </url>
   <url>
     <loc>https://zeroant.com/en/applications/intelligent-patrol</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/applications/industrial-gateway</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/applications/industrial-gateway</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
