@@ -280,8 +280,15 @@ function formatIndex(value: number): string {
   background: var(--brand-surface);
 }
 
-.about-page > .about-main > .page-section:nth-of-type(even) {
-  background-color: var(--brand-surface-soft);
+.about-main > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
+}
+
+.about-main > .page-section:nth-of-type(odd) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
 }
 
 .intro-prose strong,
@@ -304,8 +311,14 @@ function formatIndex(value: number): string {
   box-sizing: border-box;
   overflow: hidden;
   background:
-    radial-gradient(circle at 82% 24%, rgba(26, 58, 143, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(247, 249, 252, 0.72) 0%, rgba(255, 255, 255, 0.96) 100%);
+    radial-gradient(circle at 80% 22%, rgba(26, 58, 143, 0.1), transparent 24%),
+    radial-gradient(circle at 18% 16%, rgba(15, 23, 42, 0.04), transparent 30%),
+    linear-gradient(
+      180deg,
+      rgba(247, 249, 252, 0.88) 0%,
+      rgba(249, 250, 252, 0.96) 48%,
+      rgba(248, 249, 251, 0.98) 100%
+    );
 }
 
 .about-hero::before {
@@ -454,14 +467,15 @@ function formatIndex(value: number): string {
 }
 
 .culture-card {
-  background: #f8f9fb;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
   padding: 32px 40px;
   box-shadow: none;
 }
 
 .value-card {
-  background: #ffffff;
+  background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
   padding: 32px 24px;
@@ -484,8 +498,8 @@ function formatIndex(value: number): string {
 
 .stat-card {
   padding: 24px;
-  background: var(--brand-surface-soft);
-  border: none;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 12px;
   transition: all var(--transition-smooth);
 }
@@ -526,7 +540,7 @@ function formatIndex(value: number): string {
 }
 
 .timeline-card {
-  background: #ffffff;
+  background: var(--section-card-surface);
   padding: 24px;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.06);
@@ -586,7 +600,8 @@ function formatIndex(value: number): string {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 0;
   row-gap: 0;
-  background: var(--brand-surface-soft);
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 24px;
   padding: 40px;
 }
@@ -722,8 +737,8 @@ function formatIndex(value: number): string {
   gap: 6px;
   min-width: 0;
   padding: 24px;
-  background: var(--brand-surface-soft);
-  border: none;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
 }
 

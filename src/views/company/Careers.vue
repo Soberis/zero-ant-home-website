@@ -316,8 +316,15 @@ function applyForPosition(position: Position): void {
   background: var(--brand-surface);
 }
 
-.careers-page > .page-section:nth-of-type(odd) {
-  background-color: var(--brand-surface-soft);
+.careers-page > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
+}
+
+.careers-page > .page-section:nth-of-type(even) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
 }
 
 .page-shell {
@@ -582,7 +589,8 @@ function applyForPosition(position: Position): void {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 0;
   row-gap: 0;
-  background: var(--brand-surface-soft);
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 24px;
   padding: 40px;
 }
@@ -659,7 +667,7 @@ function applyForPosition(position: Position): void {
 .position-card {
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--section-card-surface);
   padding: 32px;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -799,8 +807,8 @@ function applyForPosition(position: Position): void {
   gap: 6px;
   min-width: 0;
   padding: 24px;
-  background: var(--brand-surface-soft);
-  border: none;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
 }
 

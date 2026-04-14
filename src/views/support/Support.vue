@@ -330,8 +330,15 @@ function formatIndex(value: number): string {
   background: var(--brand-surface);
 }
 
-.support-page > .page-section:nth-of-type(odd) {
-  background-color: var(--brand-surface-soft);
+.support-page > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
+}
+
+.support-page > .page-section:nth-of-type(even) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
 }
 
 .support-shell {
@@ -564,9 +571,9 @@ function formatIndex(value: number): string {
   gap: 14px;
   min-height: 220px;
   padding: 28px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 18px;
-  background: var(--brand-surface-soft);
+  background: var(--section-card-surface);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
@@ -646,7 +653,7 @@ function formatIndex(value: number): string {
   border-radius: 16px;
   margin-bottom: 16px;
   padding: 0 24px;
-  background: #ffffff;
+  background: var(--section-card-surface);
 }
 
 .card-header {
@@ -749,8 +756,8 @@ function formatIndex(value: number): string {
   gap: 6px;
   min-width: 0;
   padding: 24px;
-  background: var(--brand-surface-soft);
-  border: none;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
 }
 

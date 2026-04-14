@@ -4,31 +4,31 @@
 import radar360Img from "@/assets/images/videos/radar-360-scanning.webp";
 import agvImg from "@/assets/images/videos/agv-intro.webp";
 import compositeRobotImg from "@/assets/images/videos/composite-robot-transfer.webp";
-import waferTransferImg from "@/assets/images/videos/wafer-transfer-control.webp";
-import polishingRobotImg from "@/assets/images/videos/polishing-robot.webp";
+// [已隐藏] import waferTransferImg from "@/assets/images/videos/wafer-transfer-control.webp";
+// [已隐藏] import polishingRobotImg from "@/assets/images/videos/polishing-robot.webp";
 import compositeRobotAppImg from "@/assets/images/videos/composite-robot-app.webp";
 import urRobotLLMImg from "@/assets/images/videos/ur-llm-grab.webp";
 import fourAxisRobotFridgeImg from "@/assets/images/videos/four-axis-fridge.webp";
 import servoMotorStationImg from "@/assets/images/videos/servo-motor-station.webp";
-import personalizedPrescriptionImg from "@/assets/images/videos/personalized-pharmaceutical.webp";
+// [已隐藏] import personalizedPrescriptionImg from "@/assets/images/videos/personalized-pharmaceutical.webp";
 import mobileTransferRobotImg from "@/assets/images/videos/mobile-transfer-robot.webp";
-import offlineProgrammingImg from "@/assets/images/videos/offline-programming.webp";
-import offlineProgrammingLogoDrawingImg from "@/assets/images/videos/offline-programming-logo.webp";
+// [已隐藏] import offlineProgrammingImg from "@/assets/images/videos/offline-programming.webp";
+// [已隐藏] import offlineProgrammingLogoDrawingImg from "@/assets/images/videos/offline-programming-logo.webp";
 import rtosEthercatImg from "@/assets/images/videos/rtos-ethercat-validation.webp";
-import robotPolishingDemoImg from "@/assets/images/videos/robot-polishing-demo.webp";
-import palletizingRobotImg from "@/assets/images/videos/palletizing-robot.webp";
-import robotStudioRemoteControlImg from "@/assets/images/videos/robotstudio-remote.webp";
+// [已隐藏] import robotPolishingDemoImg from "@/assets/images/videos/robot-polishing-demo.webp";
+// [已隐藏] import palletizingRobotImg from "@/assets/images/videos/palletizing-robot.webp";
+// [已隐藏] import robotStudioRemoteControlImg from "@/assets/images/videos/robotstudio-remote.webp";
 import labTubeLoadingImg from "@/assets/images/videos/lab-tube-loading.webp";
 import outdoorPatrolRobotImg from "@/assets/images/videos/outdoor-patrol-robot.webp";
-import dualRobotBallCatchingImg from "@/assets/images/videos/dual-robot-ball-catching.webp";
+// [已隐藏] import dualRobotBallCatchingImg from "@/assets/images/videos/dual-robot-ball-catching.webp";
 import riceMolecularExperimentImg from "@/assets/images/videos/rice-molecular-experiment.webp";
 import sketchingRobotImg from "@/assets/images/videos/sketching-robot.webp";
-import gantry2d3dImg from "@/assets/images/videos/gantry-2d3d.webp";
-import assemblyRobotImg from "@/assets/images/videos/assembly-robot.webp";
+// [已隐藏] import gantry2d3dImg from "@/assets/images/videos/gantry-2d3d.webp";
+// [已隐藏] import assemblyRobotImg from "@/assets/images/videos/assembly-robot.webp";
 import garageCleaningRobotImg from "@/assets/images/videos/garage-cleaning-robot.webp";
 import mobileRobotChassisImg from "@/assets/images/videos/mobile-robot-chassis.webp";
 import fixedRailTransferRobotImg from "@/assets/images/videos/fixed-rail-transfer-robot.webp";
-import plateWeldingDemoImg from "@/assets/images/videos/plate-welding-demo.webp";
+// [已隐藏] import plateWeldingDemoImg from "@/assets/images/videos/plate-welding-demo.webp";
 import vrRemoteFrankaDualArmImg from "@/assets/images/videos/vr-teleop-franka.webp";
 
 // 常量定义
@@ -74,9 +74,9 @@ export type VideoMapData = Record<string, VideoDetail>;
  */
 const videoThumbnailMap: Record<string, string> = {
   "medical-automation": compositeRobotImg,
-  semiconductor: waferTransferImg,
-  "dual-robot-ball-catching": dualRobotBallCatchingImg,
-  "polishing-robot": polishingRobotImg,
+  // [已隐藏] semiconductor: waferTransferImg,
+  // [已隐藏] "dual-robot-ball-catching": dualRobotBallCatchingImg,
+  // [已隐藏] "polishing-robot": polishingRobotImg,
   "composite-robot-application": compositeRobotAppImg,
   "radar-360-scanning": radar360Img,
   "agv-product-introduction": agvImg,
@@ -84,21 +84,21 @@ const videoThumbnailMap: Record<string, string> = {
   "rice-molecular-experiment": riceMolecularExperimentImg,
   "four-axis-robot-open-fridge": fourAxisRobotFridgeImg,
   "sketching-robot": sketchingRobotImg,
-  "gantry-2d3d": gantry2d3dImg,
+  // [已隐藏] "gantry-2d3d": gantry2d3dImg,
   "servo-motor-station": servoMotorStationImg,
-  "personalized-prescription-pharmaceutical": personalizedPrescriptionImg,
+  // [已隐藏] "personalized-prescription-pharmaceutical": personalizedPrescriptionImg,
   "mobile-transfer-robot": mobileTransferRobotImg,
-  "offline-programming": offlineProgrammingImg,
-  "offline-programming-logo-drawing": offlineProgrammingLogoDrawingImg,
+  // [已隐藏] "offline-programming": offlineProgrammingImg,
+  // [已隐藏] "offline-programming-logo-drawing": offlineProgrammingLogoDrawingImg,
   "rtos-ethercat-validation": rtosEthercatImg,
-  "robot-polishing-demo": robotPolishingDemoImg,
-  "palletizing-robot": palletizingRobotImg,
-  "robotstudio-remote-control": robotStudioRemoteControlImg,
+  // [已隐藏] "robot-polishing-demo": robotPolishingDemoImg,
+  // [已隐藏] "palletizing-robot": palletizingRobotImg,
+  // [已隐藏] "robotstudio-remote-control": robotStudioRemoteControlImg,
   "lab-tube-loading": labTubeLoadingImg,
   "outdoor-patrol-robot": outdoorPatrolRobotImg,
-  "plate-welding-demo": plateWeldingDemoImg,
+  // [已隐藏] "plate-welding-demo": plateWeldingDemoImg,
   "underground-garage-cleaning": garageCleaningRobotImg,
-  "assembly-robot": assemblyRobotImg,
+  // [已隐藏] "assembly-robot": assemblyRobotImg,
   "mobile-robot-chassis": mobileRobotChassisImg,
   "fixed-rail-transfer-robot": fixedRailTransferRobotImg,
   "vr-remote-franka-dual-arm": vrRemoteFrankaDualArmImg,
@@ -152,38 +152,38 @@ export const videoMap: VideoMapData = {
     tags: ["medical-automation", "smart-scheduling", "hospital-logistics"],
     publishDate: "2024-04-01",
   },
-  semiconductor: {
-    slug: "semiconductor",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1NKuXzaEff/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.semiconductor.title",
-    desc: "videos.semiconductor.desc",
-    tags: ["semiconductor-processing", "automation", "smart-manufacturing"],
-    publishDate: "2024-04-01",
-  },
-  "dual-robot-ball-catching": {
-    slug: "dual-robot-ball-catching",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1zK8QzNEtD/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.dual-robot-ball-catching.title",
-    desc: "videos.dual-robot-ball-catching.desc",
-    tags: [
-      "dual-robot-collaboration",
-      "vision-recognition",
-      "motion-control",
-      "intelligent-grasping",
-    ],
-    publishDate: "2024-12-25",
-  },
-  "polishing-robot": {
-    slug: "polishing-robot",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1AYgqzQE3E/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.polishing-robot.title",
-    desc: "videos.polishing-robot.desc",
-    tags: ["grinding-robot", "industrial-automation", "surface-treatment"],
-    publishDate: "2024-04-15",
-  },
+  // [已隐藏] semiconductor: {
+  //   slug: "semiconductor",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1NKuXzaEff/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.semiconductor.title",
+  //   desc: "videos.semiconductor.desc",
+  //   tags: ["semiconductor-processing", "automation", "smart-manufacturing"],
+  //   publishDate: "2024-04-01",
+  // },
+  // [已隐藏] "dual-robot-ball-catching": {
+  //   slug: "dual-robot-ball-catching",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1zK8QzNEtD/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.dual-robot-ball-catching.title",
+  //   desc: "videos.dual-robot-ball-catching.desc",
+  //   tags: [
+  //     "dual-robot-collaboration",
+  //     "vision-recognition",
+  //     "motion-control",
+  //     "intelligent-grasping",
+  //   ],
+  //   publishDate: "2024-12-25",
+  // },
+  // [已隐藏] "polishing-robot": {
+  //   slug: "polishing-robot",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1AYgqzQE3E/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.polishing-robot.title",
+  //   desc: "videos.polishing-robot.desc",
+  //   tags: ["grinding-robot", "industrial-automation", "surface-treatment"],
+  //   publishDate: "2024-04-15",
+  // },
   "composite-robot-application": {
     slug: "composite-robot-application",
     type: "bilibili",
@@ -254,20 +254,20 @@ export const videoMap: VideoMapData = {
     tags: ["sketching-robot", "art-creation", "ai-drawing"],
     publishDate: "2024-12-25",
   },
-  "gantry-2d3d": {
-    slug: "gantry-2d3d",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1yf8XzmEyD/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.gantry-2d3d.title",
-    desc: "videos.gantry-2d3d.desc",
-    tags: [
-      "2-dof-gantry",
-      "3-dof-gantry",
-      "industrial-automation",
-      "precision-control",
-    ],
-    publishDate: "2024-12-25",
-  },
+  // [已隐藏] "gantry-2d3d": {
+  //   slug: "gantry-2d3d",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1yf8XzmEyD/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.gantry-2d3d.title",
+  //   desc: "videos.gantry-2d3d.desc",
+  //   tags: [
+  //     "2-dof-gantry",
+  //     "3-dof-gantry",
+  //     "industrial-automation",
+  //     "precision-control",
+  //   ],
+  //   publishDate: "2024-12-25",
+  // },
   "servo-motor-station": {
     slug: "servo-motor-station",
     type: "bilibili",
@@ -277,20 +277,20 @@ export const videoMap: VideoMapData = {
     tags: ["servo-motor", "automation", "smart-manufacturing", "industrial-control"],
     publishDate: "2024-05-01",
   },
-  "personalized-prescription-pharmaceutical": {
-    slug: "personalized-prescription-pharmaceutical",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1U2bdz8Evd/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.personalized-prescription-pharmaceutical.title",
-    desc: "videos.personalized-prescription-pharmaceutical.desc",
-    tags: [
-      "personalized-pharmaceutical",
-      "medical-automation",
-      "smart-customization",
-      "precision-medicine",
-    ],
-    publishDate: "2024-04-20",
-  },
+  // [已隐藏] "personalized-prescription-pharmaceutical": {
+  //   slug: "personalized-prescription-pharmaceutical",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1U2bdz8Evd/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.personalized-prescription-pharmaceutical.title",
+  //   desc: "videos.personalized-prescription-pharmaceutical.desc",
+  //   tags: [
+  //     "personalized-pharmaceutical",
+  //     "medical-automation",
+  //     "smart-customization",
+  //     "precision-medicine",
+  //   ],
+  //   publishDate: "2024-04-20",
+  // },
   "mobile-transfer-robot": {
     slug: "mobile-transfer-robot",
     type: "bilibili",
@@ -300,30 +300,30 @@ export const videoMap: VideoMapData = {
     tags: ["mobile-robot", "automated-transfer", "smart-navigation", "logistics-automation"],
     publishDate: "2024-05-15",
   },
-  "offline-programming": {
-    slug: "offline-programming",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1Et8TzGEkm/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.offline-programming.title",
-    desc: "videos.offline-programming.desc",
-    tags: ["offline-programming", "digital-simulation", "virtual-debugging", "smart-manufacturing"],
-    publishDate: "2024-05-25",
-  },
-  "offline-programming-logo-drawing": {
-    slug: "offline-programming-logo-drawing",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1R6bUznE1C/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.offline-programming-logo-drawing.title",
-    desc: "videos.offline-programming-logo-drawing.desc",
-    tags: [
-      "offline-programming",
-      "trajectory-control",
-      "digital-simulation",
-      "smart-manufacturing",
-      "logo-drawing",
-    ],
-    publishDate: "2024-06-20",
-  },
+  // [已隐藏] "offline-programming": {
+  //   slug: "offline-programming",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1Et8TzGEkm/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.offline-programming.title",
+  //   desc: "videos.offline-programming.desc",
+  //   tags: ["offline-programming", "digital-simulation", "virtual-debugging", "smart-manufacturing"],
+  //   publishDate: "2024-05-25",
+  // },
+  // [已隐藏] "offline-programming-logo-drawing": {
+  //   slug: "offline-programming-logo-drawing",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1R6bUznE1C/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.offline-programming-logo-drawing.title",
+  //   desc: "videos.offline-programming-logo-drawing.desc",
+  //   tags: [
+  //     "offline-programming",
+  //     "trajectory-control",
+  //     "digital-simulation",
+  //     "smart-manufacturing",
+  //     "logo-drawing",
+  //   ],
+  //   publishDate: "2024-06-20",
+  // },
   "rtos-ethercat-validation": {
     slug: "rtos-ethercat-validation",
     type: "bilibili",
@@ -333,33 +333,33 @@ export const videoMap: VideoMapData = {
     tags: ["rtos", "ethercat", "motor-control", "real-time-system", "industrial-control"],
     publishDate: "2024-05-28",
   },
-  "robot-polishing-demo": {
-    slug: "robot-polishing-demo",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1Bt8TzGEEb/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.robot-polishing-demo.title",
-    desc: "videos.robot-polishing-demo.desc",
-    tags: ["robot-grinding", "surface-treatment", "force-control", "industrial-automation"],
-    publishDate: "2024-05-30",
-  },
-  "palletizing-robot": {
-    slug: "palletizing-robot",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1d6bUznEue/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.palletizing-robot.title",
-    desc: "videos.palletizing-robot.desc",
-    tags: ["palletizing-robot", "logistics-automation", "smart-manufacturing", "industrial-robot"],
-    publishDate: "2024-06-15",
-  },
-  "robotstudio-remote-control": {
-    slug: "robotstudio-remote-control",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1J68LzKEHd/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.robotstudio-remote-control.title",
-    desc: "videos.robotstudio-remote-control.desc",
-    tags: ["robotstudio-ide", "remote-control", "simulation", "industrial-robot", "host-integration"],
-    publishDate: "2024-12-20",
-  },
+  // [已隐藏] "robot-polishing-demo": {
+  //   slug: "robot-polishing-demo",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1Bt8TzGEEb/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.robot-polishing-demo.title",
+  //   desc: "videos.robot-polishing-demo.desc",
+  //   tags: ["robot-grinding", "surface-treatment", "force-control", "industrial-automation"],
+  //   publishDate: "2024-05-30",
+  // },
+  // [已隐藏] "palletizing-robot": {
+  //   slug: "palletizing-robot",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1d6bUznEue/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.palletizing-robot.title",
+  //   desc: "videos.palletizing-robot.desc",
+  //   tags: ["palletizing-robot", "logistics-automation", "smart-manufacturing", "industrial-robot"],
+  //   publishDate: "2024-06-15",
+  // },
+  // [已隐藏] "robotstudio-remote-control": {
+  //   slug: "robotstudio-remote-control",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1J68LzKEHd/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.robotstudio-remote-control.title",
+  //   desc: "videos.robotstudio-remote-control.desc",
+  //   tags: ["robotstudio-ide", "remote-control", "simulation", "industrial-robot", "host-integration"],
+  //   publishDate: "2024-12-20",
+  // },
   "lab-tube-loading": {
     slug: "lab-tube-loading",
     type: "bilibili",
@@ -384,21 +384,21 @@ export const videoMap: VideoMapData = {
     ],
     publishDate: "2024-12-20",
   },
-  "plate-welding-demo": {
-    slug: "plate-welding-demo",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1MJ8fzzEyb/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.plate-welding-demo.title",
-    desc: "videos.plate-welding-demo.desc",
-    tags: [
-      "welding-process",
-      "industrial-automation",
-      "smart-manufacturing",
-      "robot-control",
-      "thick-plate-welding",
-    ],
-    publishDate: "2024-12-25",
-  },
+  // [已隐藏] "plate-welding-demo": {
+  //   slug: "plate-welding-demo",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1MJ8fzzEyb/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.plate-welding-demo.title",
+  //   desc: "videos.plate-welding-demo.desc",
+  //   tags: [
+  //     "welding-process",
+  //     "industrial-automation",
+  //     "smart-manufacturing",
+  //     "robot-control",
+  //     "thick-plate-welding",
+  //   ],
+  //   publishDate: "2024-12-25",
+  // },
   "underground-garage-cleaning": {
     slug: "underground-garage-cleaning",
     type: "bilibili",
@@ -414,15 +414,15 @@ export const videoMap: VideoMapData = {
     ],
     publishDate: "2024-12-25",
   },
-  "assembly-robot": {
-    slug: "assembly-robot",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1Th86zJEe8/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.assembly-robot.title",
-    desc: "videos.assembly-robot.desc",
-    tags: ["assembly-robot", "industrial-automation", "smart-manufacturing", "precision-assembly"],
-    publishDate: "2024-12-25",
-  },
+  // [已隐藏] "assembly-robot": {
+  //   slug: "assembly-robot",
+  //   type: "bilibili",
+  //   url: `https://www.bilibili.com/video/BV1Th86zJEe8/${BILIBILI_BASE_PARAMS}`,
+  //   title: "videos.assembly-robot.title",
+  //   desc: "videos.assembly-robot.desc",
+  //   tags: ["assembly-robot", "industrial-automation", "smart-manufacturing", "precision-assembly"],
+  //   publishDate: "2024-12-25",
+  // },
   "mobile-robot-chassis": {
     slug: "mobile-robot-chassis",
     type: "bilibili",
@@ -471,16 +471,16 @@ export const videoMap: VideoMapData = {
  */
 export const videoCards: VideoCard[] = [
   // AI智能
-  {
-    title: "videos.plate-welding-demo.title",
-    img: plateWeldingDemoImg,
-    slug: "plate-welding-demo",
-  },
-  {
-    title: "videos.robotstudio-remote-control.title",
-    img: robotStudioRemoteControlImg,
-    slug: "robotstudio-remote-control",
-  },
+  // [已隐藏] {
+  //   title: "videos.plate-welding-demo.title",
+  //   img: plateWeldingDemoImg,
+  //   slug: "plate-welding-demo",
+  // },
+  // [已隐藏] {
+  //   title: "videos.robotstudio-remote-control.title",
+  //   img: robotStudioRemoteControlImg,
+  //   slug: "robotstudio-remote-control",
+  // },
   {
     title: "videos.vr-remote-franka-dual-arm.title",
     img: vrRemoteFrankaDualArmImg,
@@ -498,16 +498,16 @@ export const videoCards: VideoCard[] = [
     img: compositeRobotImg,
     slug: "medical-automation",
   },
-  {
-    title: "videos.semiconductor.title",
-    img: waferTransferImg,
-    slug: "semiconductor",
-  },
-  {
-    title: "videos.dual-robot-ball-catching.title",
-    img: dualRobotBallCatchingImg,
-    slug: "dual-robot-ball-catching",
-  },
+  // [已隐藏] {
+  //   title: "videos.semiconductor.title",
+  //   img: waferTransferImg,
+  //   slug: "semiconductor",
+  // },
+  // [已隐藏] {
+  //   title: "videos.dual-robot-ball-catching.title",
+  //   img: dualRobotBallCatchingImg,
+  //   slug: "dual-robot-ball-catching",
+  // },
   {
     title: "videos.ur-robot-llm-motion-capture.title",
     img: urRobotLLMImg,
@@ -529,11 +529,11 @@ export const videoCards: VideoCard[] = [
     img: labTubeLoadingImg,
     slug: "lab-tube-loading",
   },
-  {
-    title: "videos.personalized-prescription-pharmaceutical.title",
-    img: personalizedPrescriptionImg,
-    slug: "personalized-prescription-pharmaceutical",
-  },
+  // [已隐藏] {
+  //   title: "videos.personalized-prescription-pharmaceutical.title",
+  //   img: personalizedPrescriptionImg,
+  //   slug: "personalized-prescription-pharmaceutical",
+  // },
   {
     title: "videos.mobile-transfer-robot.title",
     img: mobileTransferRobotImg,
@@ -549,12 +549,12 @@ export const videoCards: VideoCard[] = [
     img: outdoorPatrolRobotImg,
     slug: "outdoor-patrol-robot",
   },
-  { title: "videos.polishing-robot.title", img: polishingRobotImg, slug: "polishing-robot" },
-  {
-    title: "videos.robot-polishing-demo.title",
-    img: robotPolishingDemoImg,
-    slug: "robot-polishing-demo",
-  },
+  // [已隐藏] { title: "videos.polishing-robot.title", img: polishingRobotImg, slug: "polishing-robot" },
+  // [已隐藏] {
+  //   title: "videos.robot-polishing-demo.title",
+  //   img: robotPolishingDemoImg,
+  //   slug: "robot-polishing-demo",
+  // },
   {
     title: "videos.four-axis-robot-open-fridge.title",
     img: fourAxisRobotFridgeImg,
@@ -565,32 +565,32 @@ export const videoCards: VideoCard[] = [
     img: sketchingRobotImg,
     slug: "sketching-robot",
   },
-  {
-    title: "videos.palletizing-robot.title",
-    img: palletizingRobotImg,
-    slug: "palletizing-robot",
-  },
-  {
-    title: "videos.gantry-2d3d.title",
-    img: gantry2d3dImg,
-    slug: "gantry-2d3d",
-  },
-  {
-    title: "videos.assembly-robot.title",
-    img: assemblyRobotImg,
-    slug: "assembly-robot",
-  },
+  // [已隐藏] {
+  //   title: "videos.palletizing-robot.title",
+  //   img: palletizingRobotImg,
+  //   slug: "palletizing-robot",
+  // },
+  // [已隐藏] {
+  //   title: "videos.gantry-2d3d.title",
+  //   img: gantry2d3dImg,
+  //   slug: "gantry-2d3d",
+  // },
+  // [已隐藏] {
+  //   title: "videos.assembly-robot.title",
+  //   img: assemblyRobotImg,
+  //   slug: "assembly-robot",
+  // },
   // 基础技术
-  {
-    title: "videos.offline-programming.title",
-    img: offlineProgrammingImg,
-    slug: "offline-programming",
-  },
-  {
-    title: "videos.offline-programming-logo-drawing.title",
-    img: offlineProgrammingLogoDrawingImg,
-    slug: "offline-programming-logo-drawing",
-  },
+  // [已隐藏] {
+  //   title: "videos.offline-programming.title",
+  //   img: offlineProgrammingImg,
+  //   slug: "offline-programming",
+  // },
+  // [已隐藏] {
+  //   title: "videos.offline-programming-logo-drawing.title",
+  //   img: offlineProgrammingLogoDrawingImg,
+  //   slug: "offline-programming-logo-drawing",
+  // },
   {
     title: "videos.rtos-ethercat-validation.title",
     img: rtosEthercatImg,
