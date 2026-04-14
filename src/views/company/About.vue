@@ -310,15 +310,7 @@ function formatIndex(value: number): string {
   padding-top: 0;
   box-sizing: border-box;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 80% 22%, rgba(26, 58, 143, 0.1), transparent 24%),
-    radial-gradient(circle at 18% 16%, rgba(15, 23, 42, 0.04), transparent 30%),
-    linear-gradient(
-      180deg,
-      rgba(247, 249, 252, 0.88) 0%,
-      rgba(249, 250, 252, 0.96) 48%,
-      rgba(248, 249, 251, 0.98) 100%
-    );
+  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
 }
 
 .about-hero::before {
@@ -333,18 +325,7 @@ function formatIndex(value: number): string {
   pointer-events: none;
 }
 
-.about-hero::after {
-  content: "";
-  position: absolute;
-  inset: auto -8% 14% auto;
-  width: 34vw;
-  min-width: 320px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(26, 58, 143, 0.09), transparent 68%);
-  filter: blur(8px);
-  pointer-events: none;
-}
+/* Glowing blob removed for minimal styling */
 
 .hero-shell {
   position: relative;
@@ -386,9 +367,18 @@ function formatIndex(value: number): string {
   line-height: 1.85;
 }
 
-.page-section {
+.about-main > .page-section {
+  --section-surface: #ffffff;
+  --section-card-surface: #f8f9fb;
+  background-color: var(--section-surface);
   padding: 88px 0;
   scroll-margin-top: calc(var(--nav-height) + 16px);
+}
+
+.about-main > .page-section:nth-of-type(even) {
+  --section-surface: #f8f9fb;
+  --section-card-surface: #ffffff;
+  background-color: var(--section-surface);
 }
 
 .detail-section__header {
