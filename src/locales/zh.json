@@ -58,11 +58,9 @@
       "smartManufacturing": "智能制造",
       "industrialAutomation": "工业自动化",
       "medicalAutomation": "医疗自动化",
-      "semiconductorProcessing": "半导体加工",
       "smartLogistics": "智能物流",
       "industrialControl": "工业控制",
       "motionControl": "运动控制",
-      "offlineProgramming": "离线编程",
       "andOthers": " 等",
       "solutionDirections": "方案方向",
       "relatedProducts": "关联产品",
@@ -75,12 +73,10 @@
       "industrySolutions": "行业解决方案",
       "corporateCulture": "企业文化",
       "automation": "自动化",
-      "gantry23Dof": "二/三自由度龙门架",
       "surfaceTreatment": "表面处理",
       "precisionAssembly": "精密装配",
       "compositeRobot": "复合机器人",
       "industrialRobot": "工业机器人",
-      "palletizingRobot": "码垛机器人",
       "environmentalPerception": "环境感知",
       "contactUs": "联系我们",
       "email": "邮箱",
@@ -409,21 +405,20 @@
     }
   },
   "videos": {
+    "videoDetail": {
+      "qrCodeTitle": "联系方式",
+      "qrCodeDesc": "扫码添加企业微信，获取更多信息",
+      "notFoundTitle": "未找到视频",
+      "notFoundDesc": "当前链接对应的视频案例不存在或已下线，你可以返回行业方案页继续浏览其他视频案例。",
+      "browserNotSupport": "您的浏览器不支持视频播放。"
+    },
     "medical-automation": {
       "title": "@:common.terms.medicalAutomation",
       "desc": "本视频展示了零蚁科技在医疗自动化领域的应用案例，包括自动化物品传送、智能调度等创新技术，助力医院与实验室提升效率与安全。"
     },
-    "polishing-robot": {
-      "title": "打磨机器人",
-      "desc": "本视频展示了零蚁科技自主研发的打磨机器人在工业自动化生产线中的应用，通过智能控制与高精度打磨技术，实现高效、稳定的表面处理作业，提升产品质量与生产效率。"
-    },
     "composite-robot-application": {
       "title": "复合机器人应用",
       "desc": "本视频展示了零蚁科技复合机器人在智能制造与自动化物流中的创新应用，通过多功能集成与智能调度，实现复杂场景下的高效协作与柔性生产。"
-    },
-    "radar-360-scanning": {
-      "title": "360度雷达扫描",
-      "desc": "展示零蚁科技先进的360度雷达扫描技术，实现全方位环境感知和精准定位，为机器人导航提供可靠的技术支撑。"
     },
     "agv-product-introduction": {
       "title": "AGV产品介绍",
@@ -437,49 +432,21 @@
       "title": "四轴机器人开冰箱",
       "desc": "本视频展示了零蚁科技四轴机器人在自动化场景下开冰箱的创新应用，通过高精度运动控制与智能感知，实现复杂动作的自主执行，体现了机器人柔性作业与智能制造的深度融合。"
     },
+    "sketching-robot": {
+      "title": "素描机器人",
+      "desc": "本视频展示了零蚁科技素描机器人的创新应用，通过先进的视觉识别技术和精密运动控制，实现机器人自主完成素描绘画创作。结合AI算法和机械臂控制，展现机器人技术在艺术创作领域的突破性应用。"
+    },
     "servo-motor-station": {
       "title": "伺服电机台站",
       "desc": "本视频展示了零蚁科技伺服电机台站的自动化控制与应用，通过高性能伺服系统实现精准定位与高效作业，助力智能制造与工业自动化升级。"
-    },
-    "plate-welding-demo": {
-      "title": "中厚板焊接工艺演示",
-      "desc": "本视频展示了零蚁科技在工业焊接领域的创新应用，通过先进的机器人焊接技术实现中厚板的高质量、高效率焊接作业，体现了智能制造在工业制造中的重要作用。"
-    },
-    "underground-garage-cleaning": {
-      "title": "无人清扫车地下车库",
-      "desc": "本视频展示了零蚁科技无人清扫车在地下车库的智能清扫应用，通过自主导航与智能路径规划，实现复杂环境下的高效清洁作业，推动智能清洁与无人化运维的发展。"
-    },
-    "personalized-prescription-pharmaceutical": {
-      "title": "个性化处方制药",
-      "desc": "本视频展示了零蚁科技在个性化处方制药领域的创新应用，通过智能自动化技术实现个性化药物定制，提升医疗精准度和患者治疗效果。"
     },
     "mobile-transfer-robot": {
       "title": "移动传送机器人",
       "desc": "展示零蚁科技移动传送机器人的自动化作业流程，实现物料在不同工位间的高效、精准传送，提升生产线柔性化水平。"
     },
-    "palletizing-robot": {
-      "title": "@:common.terms.palletizingRobot",
-      "desc": "本视频展示了零蚁科技码垛机器人在物流自动化中的高效应用，通过智能路径规划与精准抓取控制，实现货物的高效堆垛与搬运，大幅提升仓储物流效率与作业安全性。"
-    },
-    "dual-robot-ball-catching": {
-      "title": "双机协作抓球",
-      "desc": "本视频展示了零蚁科技双机协作系统在复杂抓取任务中的创新应用，通过双机器人智能协作与视觉识别技术，实现两台机器人对高速运动物体的协同捕获，体现多机器人系统的协调控制能力和智能决策水平。"
-    },
-    "rice-molecular-experiment": {
-      "title": "水稻分子重复实验",
-      "desc": "本视频展示了零蚁科技在农业科研领域的创新应用，通过高精度机器人技术实现水稻分子实验的自动化操作，包括样本处理、数据采集和实验流程的标准化，大幅提升农业科研效率和实验准确性，助力现代农业科技发展。"
-    },
-    "sketching-robot": {
-      "title": "素描机器人",
-      "desc": "本视频展示了零蚁科技素描机器人的创新应用，通过先进的视觉识别技术和精密运动控制，实现机器人自主完成素描绘画创作。结合AI算法和机械臂控制，展现机器人技术在艺术创作领域的突破性应用。"
-    },
-    "gantry-2d3d": {
-      "title": "@:common.terms.gantry23Dof",
-      "desc": "展示零蚁科技二/三自由度龙门架机器人在工业自动化中的精准运动控制与高效作业能力，通过先进的轨迹规划算法和伺服控制技术，实现大范围空间内的精密定位与重复作业，适用于物料搬运、精密装配、检测测量等多种工业应用场景。"
-    },
-    "assembly-robot": {
-      "title": "装配机器人",
-      "desc": "本视频展示了零蚁科技装配机器人在工业自动化生产线中的精密装配应用，通过高精度定位与智能控制技术，实现复杂产品的自动化装配作业，大幅提升装配精度与生产效率，助力制造业智能化升级。"
+    "rtos-ethercat-validation": {
+      "title": "RTOS-EtherCAT电机控制验证",
+      "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线技术的电机控制验证系统，通过毫秒级实时响应和多轴同步控制，实现高精度的工业运动控制解决方案。"
     },
     "mobile-robot-chassis": {
       "title": "自研移动机器人底盘",
@@ -492,33 +459,6 @@
     "vr-remote-franka-dual-arm": {
       "title": "VR遥操作Franka双臂机器人",
       "desc": "本视频展示了零蚁科技基于VR技术的Franka双臂机器人遥操作系统，通过沉浸式交互界面实现远程精准控制，展现人机协作在复杂作业场景中的创新应用。"
-    },
-    "robotstudio-remote-control": {
-      "title": "上位机IDE远程控制",
-      "desc": "展示零蚁科技基于RobotStudioIDE的上位机远程控制与仿真技术，实现机器人系统的可视化编程、远程监控与虚拟调试，大幅提升开发效率与系统可靠性。"
-    },
-    "robot-polishing-demo": {
-      "title": "机器人打磨工艺演示",
-      "desc": "本视频展示了零蚁科技机器人打磨工艺的完整流程，通过先进的路径规划算法和力控技术，实现高精度的表面处理作业，展现工业自动化中机器人打磨技术的卓越性能。"
-    },
-    "rtos-ethercat-validation": {
-      "title": "RTOS-EtherCAT电机控制验证",
-      "desc": "本视频展示了零蚁科技基于RTOS实时操作系统和EtherCAT总线技术的电机控制验证系统，通过毫秒级实时响应和多轴同步控制，实现高精度的工业运动控制解决方案。"
-    },
-    "lab-tube-loading": {
-      "title": "生物实验室试管上料",
-      "desc": "展示零蚁科技在生物实验室自动化领域的创新应用，通过高精度机器人实现试管自动上料，提高实验室工作效率和准确性。"
-    },
-    "outdoor-patrol-robot": {
-      "title": "室外移动巡检机器人",
-      "desc": "演示零蚁科技室外移动巡检机器人的智能导航与巡检能力，通过激光SLAM和360度环境感知技术，实现复杂环境下的自主巡检任务。"
-    },
-    "videoDetail": {
-      "qrCodeTitle": "联系方式",
-      "qrCodeDesc": "扫码添加企业微信，获取更多信息",
-      "notFoundTitle": "未找到视频",
-      "notFoundDesc": "当前链接对应的视频案例不存在或已下线，你可以返回行业方案页继续浏览其他视频案例。",
-      "browserNotSupport": "您的浏览器不支持视频播放。"
     }
   },
   "bilibiliPlayer": {
