@@ -174,9 +174,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
-    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
+  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
 }
 
 .products-hero__inner {

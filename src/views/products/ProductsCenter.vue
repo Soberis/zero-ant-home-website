@@ -276,7 +276,11 @@ const pageContent = computed(() => ({
   padding: 64px 0;
   scroll-margin-top: calc(var(--nav-height) + 96px);
 }
-.product-family::before {
+.product-family:nth-of-type(even) {
+  --section-card-surface: #ffffff;
+}
+
+.product-family:nth-of-type(even)::before {
   content: "";
   position: absolute;
   top: 0;
@@ -288,6 +292,24 @@ const pageContent = computed(() => ({
   transform: translateX(-50%);
   z-index: -1;
   background-color: #f8f9fb;
+}
+
+.product-family:nth-of-type(odd) {
+  --section-card-surface: #f8f9fb;
+}
+
+.product-family:nth-of-type(odd)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  padding-left: 100vw;
+  padding-right: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-color: #ffffff;
 }
 
 .product-family + .product-family {
@@ -332,7 +354,7 @@ const pageContent = computed(() => ({
   z-index: 1;
   text-decoration: none;
   cursor: pointer;
-  background: #ffffff;
+  background: var(--section-card-surface, #ffffff);
   border: 1px solid rgba(15, 23, 42, 0.04);
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
 }
@@ -424,6 +446,7 @@ const pageContent = computed(() => ({
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

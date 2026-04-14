@@ -46,7 +46,7 @@ const { localizePath } = useLocalizedPath();
   padding: 32px 28px;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #ffffff;
+  background: var(--section-card-surface, #ffffff);
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
   text-decoration: none;
   overflow: hidden;

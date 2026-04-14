@@ -33,7 +33,7 @@
       </div>
     </section>
 
-    <section id="industries" ref="industriesRef" class="page-section page-section--plain reveal-ready">
+    <section id="industries" ref="industriesRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -81,7 +81,7 @@
     </section>
 
     <!-- 精选案例默认收缩展示，完整案例索引按需展开 -->
-    <section id="proof" ref="proofRef" class="page-section page-section--muted reveal-ready">
+    <section id="proof" ref="proofRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -167,7 +167,7 @@
       </div>
     </section>
 
-    <section id="delivery" ref="deliveryRef" class="page-section page-section--plain delivery-section reveal-ready">
+    <section id="delivery" ref="deliveryRef" class="page-section delivery-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -216,7 +216,7 @@
       </div>
     </section>
 
-    <section id="faq" ref="faqRef" class="page-section page-section--muted reveal-ready">
+    <section id="faq" ref="faqRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -520,8 +520,8 @@ function toggleApplicationArchive(): void {
   flex-direction: column;
   justify-content: flex-start;
   background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
-    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
+    linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%),
+    linear-gradient(180deg, transparent, transparent);
 }
 
 .hero-grid {
@@ -631,12 +631,16 @@ function toggleApplicationArchive(): void {
   scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
-.page-section--plain {
-  background: #ffffff;
+.solutions-page > .page-section {
+  --section-surface: #ffffff;
+  --section-card-surface: #f8f9fb;
+  background-color: var(--section-surface);
 }
 
-.page-section--muted {
-  background: #f8f9fb;
+.solutions-page > .page-section:nth-of-type(even) {
+  --section-surface: #f8f9fb;
+  --section-card-surface: #ffffff;
+  background-color: var(--section-surface);
 }
 
 .detail-section__header {
@@ -689,7 +693,7 @@ function toggleApplicationArchive(): void {
   padding: 28px;
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 20px;
-  background: rgba(248, 250, 253, 0.72);
+  background: var(--section-card-surface);
   cursor: pointer;
   transition:
     border-color 0.25s ease,
@@ -701,7 +705,7 @@ function toggleApplicationArchive(): void {
 .industry-block:hover {
   transform: translateY(-2px);
   border-color: rgba(26, 58, 143, 0.14);
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--section-surface);
 }
 
 .industry-block__header {
@@ -902,7 +906,7 @@ function toggleApplicationArchive(): void {
   min-height: 100%;
   padding: 32px;
   border-radius: 16px;
-  background: var(--brand-surface-soft);
+  background: var(--section-card-surface);
 }
 
 .delivery-step .card-index {
@@ -930,7 +934,7 @@ function toggleApplicationArchive(): void {
   gap: 40px 56px;
   padding: 40px;
   border-radius: 20px;
-  background: var(--brand-surface-soft);
+  background: var(--section-card-surface);
 }
 
 .delivery-contact__copy {
@@ -1005,7 +1009,7 @@ function toggleApplicationArchive(): void {
   padding: 28px;
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--section-card-surface);
 }
 
 .faq-question {
