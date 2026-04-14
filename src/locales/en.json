@@ -7,6 +7,7 @@
     "home": "Home",
     "products": "Product Center",
     "rSeries": "R Series",
+    "dtSeries": "D & T Series",
     "mSeries": "M Series",
     "mrSeries": "MR Series",
     "embodiedPlatforms": "Embodied & Dev Platforms",
@@ -863,7 +864,7 @@
     "families": {
       "rSeries": {
         "title": "R Series",
-        "intro": "Precision arm platforms for transfer and confined-space operation. Use arm length, column height, body form, and linked configuration to narrow the right model.",
+        "intro": "Precision SCARA arm platforms for transfer and confined-space operation. Use arm length, column height, and linked configuration to narrow the right model.",
         "cards": {
           "zar3x": {
             "title": "ZA-R3 / ZA-R3X",
@@ -873,16 +874,6 @@
               "Max rated payload 3kg",
               "Repeatability ±0.05mm",
               "Max horizontal / vertical speed 1500mm/s / 500mm/s"
-            ]
-          },
-          "zar3d6": {
-            "title": "ZA-R3D6",
-            "summary": "A 6-axis robotic arm for complex postures and path control, suitable for teaching, validation, and light-duty tasks.",
-            "specs": [
-              "6 DOF / rated payload 3kg",
-              "Max working radius 540.5mm",
-              "Repeatability ±0.03mm",
-              "Max end-effector linear speed 1.5m/s"
             ]
           },
           "zar3lmh": {
@@ -913,6 +904,22 @@
               "Category: R-series linked variant",
               "Scenario: Multi-angle station transfer and posture adjustment",
               "Selection cue: Rotation precision, takt requirements, and station layout"
+            ]
+          }
+        }
+      },
+      "dtSeries": {
+        "title": "D & T Series",
+        "intro": "Multi-axis and dual-arm collaborative robotic platforms for academic research, embodied AI algorithm validation, and education scenarios.",
+        "cards": {
+          "zar3d6": {
+            "title": "ZA-R3D6",
+            "summary": "A 6-axis robotic arm for complex postures and path control, suitable for teaching, validation, and light-duty tasks.",
+            "specs": [
+              "6 DOF / rated payload 3kg",
+              "Max working radius 540.5mm",
+              "Repeatability ±0.03mm",
+              "Max end-effector linear speed 1.5m/s"
             ]
           },
           "zar3t": {

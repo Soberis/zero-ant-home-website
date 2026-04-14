@@ -71,12 +71,13 @@
       </section>
 
       <main class="product-main">
-        <div class="container product-main__inner">
+        <div class="product-main__inner">
           <section
             v-if="productFeatures.length"
             id="features-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.features") }}</span>
@@ -103,6 +104,7 @@
                 </div>
               </article>
             </div>
+            </div>
           </section>
 
           <section
@@ -110,6 +112,7 @@
             id="applications-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.applications") }}</span>
@@ -124,6 +127,7 @@
                 :svg="item.svg"
                 :slug="item.slug"
               />
+              </div>
             </div>
           </section>
 
@@ -132,6 +136,7 @@
             id="cases-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.videoCases") }}</span>
@@ -149,6 +154,7 @@
                 @leave="handleVideoLeave"
                 @click="handleVideoClick"
               />
+              </div>
             </div>
           </section>
 
@@ -157,6 +163,7 @@
             id="parameters-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.parameters") }}</span>
@@ -179,9 +186,11 @@
                 </article>
               </div>
             </div>
+            </div>
           </section>
 
           <section id="downloads-section" class="detail-section">
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.downloads") }}</span>
@@ -211,9 +220,11 @@
             <div v-else class="downloads-placeholder">
               <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
             </div>
+            </div>
           </section>
 
           <section class="detail-section product-footer-cta">
+            <div class="container">
             <div class="product-footer-cta__inner">
               <h2 class="product-footer-cta__title">
                 {{ t("productDetail.cta.title") }}
@@ -229,6 +240,7 @@
                   {{ t("productDetail.cta.contactSales") }}
                 </router-link>
               </div>
+            </div>
             </div>
           </section>
         </div>
@@ -649,15 +661,41 @@ const goBack = () => {
 .product-main__inner {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0;
 }
 
 .detail-section {
+  position: relative;
   padding: 80px 0;
   border-radius: 0;
   scroll-margin-top: calc(var(--nav-height, 72px) + 54px);
   background: transparent;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-top: none;
+  z-index: 1;
+}
+
+.detail-section:nth-of-type(even)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-color: var(--brand-surface-soft, #f8f9fb);
+}
+
+.detail-section:nth-of-type(odd)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-color: var(--brand-surface, #ffffff);
 }
 
 .detail-section__header {
@@ -702,7 +740,7 @@ const goBack = () => {
   max-width: 100%;
   margin: 0;
   padding: 28px 24px;
-  background: #f8fafc;
+  background: var(--brand-surface-soft, #f8f9fb);
   border: 1px solid rgba(15, 23, 42, 0.04);
   border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
@@ -712,7 +750,7 @@ const goBack = () => {
 .feature-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025);
-  background: #ffffff;
+  background: var(--brand-surface, #ffffff);
   border-color: rgba(22, 58, 135, 0.15);
 }
 
@@ -756,11 +794,11 @@ const goBack = () => {
 .params-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 52px;
+  gap: 0 80px; /* Increased gap between columns for better breathing space */
 }
 
 #parameters-section .detail-section__header {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 #parameters-section .detail-section__title {
@@ -774,43 +812,47 @@ const goBack = () => {
 
 .param-card {
   display: grid;
-  grid-template-columns: minmax(120px, 10.5rem) minmax(0, 1fr);
-  align-items: center;
+  grid-template-columns: minmax(100px, 9rem) minmax(0, 1fr);
+  align-items: baseline; /* Align by text baseline */
   gap: 24px;
-  padding: 16px 20px;
-  border-radius: 8px;
-  margin-bottom: 4px;
-  transition: background-color 0.2s ease;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06); /* Subtle divider line */
+  background: transparent;
+  border-radius: 0;
+  margin-bottom: 0;
+  transition: none;
 }
 
-.param-card:nth-child(even) {
-  background: #f8fafc;
+.param-card:last-child {
+  border-bottom: none; /* Remove last divider */
 }
 
 .param-card:hover {
-  background: rgba(22, 58, 135, 0.04);
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.param-card:hover .param-card__label {
+  color: var(--brand-primary);
 }
 
 .param-card__label {
-  padding-top: 2px;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  letter-spacing: 0;
-  text-transform: none;
+  padding-top: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
   color: #667085;
-  font-weight: 600;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .param-card__value {
   margin-top: 0;
-  justify-self: stretch;
-  max-width: none;
-  font-size: 1.08rem;
-  line-height: 1.7;
+  font-size: 1.02rem;
+  line-height: 1.5;
   text-align: left;
   color: #0f172a;
   font-weight: 600;
-  overflow-wrap: anywhere;
   word-break: break-word;
 }
 
@@ -828,7 +870,7 @@ const goBack = () => {
   padding: 28px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 18px;
-  background: #ffffff;
+  background: var(--brand-surface-soft, #f8f9fb);
   text-decoration: none;
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
@@ -922,9 +964,10 @@ const goBack = () => {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: var(--brand-surface-soft, #f8f9fb);
+  background: var(--brand-surface, #ffffff);
   border-radius: 16px;
   padding: 56px 32px;
+  box-shadow: var(--shadow-sm);
 }
 
 .product-footer-cta__title {

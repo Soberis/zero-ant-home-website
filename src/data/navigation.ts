@@ -5,6 +5,7 @@
 
 export const productCenterNav = [
   { hash: "#r-series", label: "nav.rSeries" },
+  { hash: "#dt-series", label: "nav.dtSeries" },
   { hash: "#m-series", label: "nav.mSeries" },
   { hash: "#mr-series", label: "nav.mrSeries" },
   { hash: "#embodied-platforms", label: "nav.embodiedPlatforms" },

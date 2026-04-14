@@ -49,16 +49,6 @@ export const productCenterFamilies: ProductCenterFamily[] = [
         
       },
       {
-        id: "za-r3d6",
-        image: zaR3D6Img,
-        titleKey: "productsCenter.families.rSeries.cards.zar3d6.title",
-        summaryKey: "productsCenter.families.rSeries.cards.zar3d6.summary",
-        specKeys: [
-          "productsCenter.families.rSeries.cards.zar3d6.specs.0", "productsCenter.families.rSeries.cards.zar3d6.specs.1", "productsCenter.families.rSeries.cards.zar3d6.specs.2", "productsCenter.families.rSeries.cards.zar3d6.specs.3"
-        ]
-        
-      },
-      {
         id: "za-r3l-m-h",
         image: zaR3LMHImg,
         titleKey: "productsCenter.families.rSeries.cards.zar3lmh.title",
@@ -88,13 +78,30 @@ export const productCenterFamilies: ProductCenterFamily[] = [
         ]
         
       },
+    ]
+  },
+  {
+    id: "dt-series",
+    titleKey: "productsCenter.families.dtSeries.title",
+    introKey: "productsCenter.families.dtSeries.intro",
+    cards: [
+      {
+        id: "za-r3d6",
+        image: zaR3D6Img,
+        titleKey: "productsCenter.families.dtSeries.cards.zar3d6.title",
+        summaryKey: "productsCenter.families.dtSeries.cards.zar3d6.summary",
+        specKeys: [
+          "productsCenter.families.dtSeries.cards.zar3d6.specs.0", "productsCenter.families.dtSeries.cards.zar3d6.specs.1", "productsCenter.families.dtSeries.cards.zar3d6.specs.2", "productsCenter.families.dtSeries.cards.zar3d6.specs.3"
+        ]
+        
+      },
       {
         id: "za-r3t",
         image: zaR3TImg,
-        titleKey: "productsCenter.families.rSeries.cards.zar3t.title",
-        summaryKey: "productsCenter.families.rSeries.cards.zar3t.summary",
+        titleKey: "productsCenter.families.dtSeries.cards.zar3t.title",
+        summaryKey: "productsCenter.families.dtSeries.cards.zar3t.summary",
         specKeys: [
-          "productsCenter.families.rSeries.cards.zar3t.specs.0", "productsCenter.families.rSeries.cards.zar3t.specs.1", "productsCenter.families.rSeries.cards.zar3t.specs.2", "productsCenter.families.rSeries.cards.zar3t.specs.3"
+          "productsCenter.families.dtSeries.cards.zar3t.specs.0", "productsCenter.families.dtSeries.cards.zar3t.specs.1", "productsCenter.families.dtSeries.cards.zar3t.specs.2", "productsCenter.families.dtSeries.cards.zar3t.specs.3"
         ]
         
       },
