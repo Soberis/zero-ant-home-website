@@ -171,7 +171,7 @@ const productFamilies = [
   min-height: 100%;
   padding: 32px;
   border-radius: 16px;
-  background: var(--brand-surface-soft, #f8f9fb);
+  background: #ffffff;
   text-decoration: none;
   color: inherit;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -181,7 +181,7 @@ const productFamilies = [
 
 .family-card:hover {
   transform: translateY(-6px);
-  background-color: var(--brand-surface-soft, #f8f9fb);
+  background-color: #ffffff;
   box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
 }
 
@@ -197,12 +197,12 @@ const productFamilies = [
   min-height: 200px;
   padding: 12px 8px;
   border-radius: 12px;
-  background: #ffffff;
+  background: #f8f9fb;
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .family-card:hover .family-card__visual {
-  background: #ffffff;
+  background: #f8f9fb;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
 }
 

@@ -61,19 +61,19 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 
 .home-section--products {
   border-top: none;
-  background: #ffffff;
+  background: #f8f9fb;
 }
 
 .home-section--applications {
-  background: #f8f9fb;
-}
-
-.home-section--videos {
   background: #ffffff;
 }
 
-.home-section--partners {
+.home-section--videos {
   background: #f8f9fb;
+}
+
+.home-section--partners {
+  background: #ffffff;
 }
 
 @media screen and (max-width: 991px) {

@@ -46,7 +46,7 @@ const { localizePath } = useLocalizedPath();
   padding: 32px 28px;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 253, 0.96) 100%);
+  background: #f8f9fb;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
   text-decoration: none;
   overflow: hidden;

@@ -88,14 +88,12 @@ const partnersTyped: Partner[] = partners;
   max-width: 88%;
   object-fit: contain;
   display: block;
-  opacity: 0.6;
-  filter: grayscale(100%);
-  transition: opacity var(--transition-normal), filter var(--transition-normal), transform var(--transition-normal);
+  opacity: 1;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
 }
 
 .ecosystem-card:hover img {
   opacity: 1;
-  filter: grayscale(0%);
   transform: scale(1.08);
 }
 
