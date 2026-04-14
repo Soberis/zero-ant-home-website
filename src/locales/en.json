@@ -421,10 +421,6 @@
       "title": "@:common.terms.medicalAutomation",
       "desc": "Showcases automated item transfer and intelligent scheduling in hospitals and labs, improving efficiency and safety."
     },
-    "semiconductor": {
-      "title": "@:common.terms.semiconductorProcessing",
-      "desc": "Demonstrates automated handling and intelligent scheduling in chip manufacturing and testing."
-    },
     "polishing-robot": {
       "title": "Polishing Robot",
       "desc": "Demonstrates intelligent polishing robot for efficient surface treatment in industrial automation."
@@ -468,14 +464,6 @@
     "mobile-transfer-robot": {
       "title": "Mobile Transfer Robot",
       "desc": "Showcases ZeroAnt Technology's mobile transfer robot automation workflow, achieving efficient and precise material transfer between different workstations."
-    },
-    "offline-programming": {
-      "title": "@:common.terms.offlineProgramming",
-      "desc": "Showcases ZeroAnt Technology's advanced offline programming technology, achieving efficient robot program development and optimization through digital simulation and virtual debugging."
-    },
-    "offline-programming-logo-drawing": {
-      "title": "Offline Programming Logo Drawing",
-      "desc": "Demonstrates ZeroAnt Technology's offline programming technology in precisely drawing logo patterns through trajectory control and path planning."
     },
     "palletizing-robot": {
       "title": "@:common.terms.palletizingRobot",

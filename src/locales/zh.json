@@ -214,20 +214,12 @@
       "mobileCollaboration": {
         "title": "移动搬运与复合作业",
         "summary": "围绕 M / MR 系列移动底盘与复合机器人，覆盖厂内物流、跨工位搬运与联动作业。",
-        "scenarios": [
-          "复合系统",
-          "@:common.terms.smartLogistics",
-          "智能导航"
-        ]
+        "scenarios": ["复合系统", "@:common.terms.smartLogistics", "智能导航"]
       },
       "embodiedDevelopment": {
         "title": "具身开发与遥操作验证",
         "summary": "围绕 MR3T、VR / 主从遥操作与绘画平台，覆盖双臂操作、训练与科研验证。",
-        "scenarios": [
-          "AI 机器人",
-          "农业科研自动化",
-          "文创艺术智能制造"
-        ]
+        "scenarios": ["AI 机器人", "农业科研自动化", "文创艺术智能制造"]
       }
     },
     "proof": {
@@ -421,10 +413,6 @@
       "title": "@:common.terms.medicalAutomation",
       "desc": "本视频展示了零蚁科技在医疗自动化领域的应用案例，包括自动化物品传送、智能调度等创新技术，助力医院与实验室提升效率与安全。"
     },
-    "semiconductor": {
-      "title": "@:common.terms.semiconductorProcessing",
-      "desc": "本视频展示了零蚁科技在半导体加工领域的自动化搬运、智能调度等创新应用，助力芯片制造与封装测试提质增效。"
-    },
     "polishing-robot": {
       "title": "打磨机器人",
       "desc": "本视频展示了零蚁科技自主研发的打磨机器人在工业自动化生产线中的应用，通过智能控制与高精度打磨技术，实现高效、稳定的表面处理作业，提升产品质量与生产效率。"
@@ -468,14 +456,6 @@
     "mobile-transfer-robot": {
       "title": "移动传送机器人",
       "desc": "展示零蚁科技移动传送机器人的自动化作业流程，实现物料在不同工位间的高效、精准传送，提升生产线柔性化水平。"
-    },
-    "offline-programming": {
-      "title": "@:common.terms.offlineProgramming",
-      "desc": "本视频展示了零蚁科技先进的离线编程技术，通过数字化仿真与虚拟调试，实现机器人程序的高效开发与优化，大幅提升编程效率与作业安全性。"
-    },
-    "offline-programming-logo-drawing": {
-      "title": "离线编程绘制logo",
-      "desc": "本视频展示了零蚁科技离线编程技术在精确绘制logo图案中的应用，通过轨迹控制与路径规划，实现机器人精确绘制复杂logo图案，体现离线编程技术的高精度控制能力。"
     },
     "palletizing-robot": {
       "title": "@:common.terms.palletizingRobot",

@@ -29,7 +29,7 @@ const applications: Application[] = [
     title: "applications.fixed-rail-transfer.title",
     description: "applications.fixed-rail-transfer.description",
     video: "fixed-rail-transfer-robot",
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="16" y="16" width="16" height="16" rx="2" stroke="#14367f" stroke-width="2"/><path d="M12 20h4M12 28h4M32 20h4M32 28h4M20 12v4M28 12v4M20 32v4M28 32v4" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 32h32M8 40h32" stroke="#14367f" stroke-width="2" stroke-linecap="round"/><rect x="16" y="16" width="16" height="16" rx="2" stroke="#14367f" stroke-width="2"/><path d="M24 8v8M12 24h4M32 24h4" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   // AI智能
   {
@@ -60,7 +60,7 @@ const applications: Application[] = [
     title: "applications.robot-daily-task.title",
     description: "applications.robot-daily-task.description",
     video: "four-axis-robot-open-fridge",
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24V16H32V24H40V32H8V24H16Z" stroke="#14367f" stroke-width="2" stroke-linejoin="round"/><path d="M24 16V8" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 12V26C14 31.5228 18.4772 36 24 36C29.5228 36 34 31.5228 34 26V12H14Z" stroke="#14367f" stroke-width="2" stroke-linejoin="round"/><path d="M34 16h4c2.209 0 4 1.791 4 4v2c0 2.209-1.791 4-4 4h-4" stroke="#14367f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 6v4M24 6v4M30 6v4" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {
     slug: "smart-logistics",
@@ -75,21 +75,21 @@ const applications: Application[] = [
     title: "applications.industrial-control.title",
     description: "applications.industrial-control.description",
     video: "rtos-ethercat-validation",
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16H36M12 32H36" stroke="#14367f" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="16" r="4" fill="#fff" stroke="#14367f" stroke-width="2"/><circle cx="30" cy="32" r="4" fill="#fff" stroke="#14367f" stroke-width="2"/></svg>`,
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="14" width="20" height="20" rx="2" stroke="#14367f" stroke-width="2"/><path d="M20 14V10M24 14V10M28 14V10M20 34v4M24 34v4M28 34v4M14 20h-4M14 24h-4M14 28h-4M34 20h4M34 24h4M34 28h4" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {
     slug: "vr-teleoperation",
     title: "applications.vr-teleoperation.title",
     description: "applications.vr-teleoperation.description",
     video: "vr-remote-franka-dual-arm",
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="10" width="32" height="28" rx="3" stroke="#14367f" stroke-width="2"/><path d="M8 18h32" stroke="#14367f" stroke-width="2"/><path d="M14 26l4 4-4 4 M22 34h6" stroke="#14367f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16C9.79086 16 8 17.7909 8 20V28C8 30.2091 9.79086 32 12 32H20V28C20 25.7909 21.7909 24 24 24C26.2091 24 28 25.7909 28 28V32H36C38.2091 32 40 30.2091 40 28V20C40 17.7909 38.2091 16 36 16H12Z" stroke="#14367f" stroke-width="2" stroke-linejoin="round"/><path d="M2 24H8M40 24H46" stroke="#14367f" stroke-width="2" stroke-linecap="round"/><path d="M8 22H40" stroke="#14367f" stroke-width="2"/></svg>`,
   },
   {
     slug: "mobile-robot-platform",
     title: "applications.mobile-robot-platform.title",
     description: "applications.mobile-robot-platform.description",
     video: "mobile-robot-chassis",
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 10C17.373 10 12 15.373 12 22C12 30 24 40 24 40C24 40 36 30 36 22C36 15.373 30.627 10 24 10Z" stroke="#14367f" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="22" r="4" stroke="#14367f" stroke-width="2"/></svg>`,
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="20" width="32" height="12" rx="2" stroke="#14367f" stroke-width="2"/><circle cx="16" cy="36" r="4" stroke="#14367f" stroke-width="2"/><circle cx="32" cy="36" r="4" stroke="#14367f" stroke-width="2"/><path d="M12 20v-4h24v4" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {
     slug: "cultural-creative",
@@ -103,7 +103,7 @@ const applications: Application[] = [
     title: "applications.mobile-material-transfer.title",
     description: "applications.mobile-material-transfer.description",
     video: "mobile-transfer-robot",
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 10L12 14V24C12 30 16 36 24 40C32 36 36 30 36 24V14L24 10Z" stroke="#14367f" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#14367f" stroke-width="2"/></svg>`,
+    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="28" width="28" height="8" rx="2" stroke="#14367f" stroke-width="2"/><circle cx="16" cy="40" r="4" stroke="#14367f" stroke-width="2"/><circle cx="32" cy="40" r="4" stroke="#14367f" stroke-width="2"/><rect x="16" y="12" width="16" height="16" rx="1" stroke="#14367f" stroke-width="2"/><path d="M16 20h16M24 12v16" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
 ];
 

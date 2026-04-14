@@ -277,13 +277,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/semiconductor</loc>
+    <loc>https://zeroant.com/applications/fixed-rail-transfer</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/en/applications/semiconductor</loc>
+    <loc>https://zeroant.com/en/applications/fixed-rail-transfer</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -313,25 +313,25 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/intelligent-manufacturing</loc>
+    <loc>https://zeroant.com/applications/servo-motor-station</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/en/applications/intelligent-manufacturing</loc>
+    <loc>https://zeroant.com/en/applications/servo-motor-station</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/precision-assembly</loc>
+    <loc>https://zeroant.com/applications/robot-daily-task</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/en/applications/precision-assembly</loc>
+    <loc>https://zeroant.com/en/applications/robot-daily-task</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -361,25 +361,25 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/offline-programming</loc>
+    <loc>https://zeroant.com/applications/vr-teleoperation</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/en/applications/offline-programming</loc>
+    <loc>https://zeroant.com/en/applications/vr-teleoperation</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/intelligent-navigation</loc>
+    <loc>https://zeroant.com/applications/mobile-robot-platform</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/en/applications/intelligent-navigation</loc>
+    <loc>https://zeroant.com/en/applications/mobile-robot-platform</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -397,13 +397,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/intelligent-patrol</loc>
+    <loc>https://zeroant.com/applications/mobile-material-transfer</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/en/applications/intelligent-patrol</loc>
+    <loc>https://zeroant.com/en/applications/mobile-material-transfer</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
