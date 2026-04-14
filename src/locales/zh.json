@@ -565,17 +565,17 @@
       "coreAdvantages": "流程可追溯、站间智能调度、降低人工接触风险、适配实验室与医院场景",
       "typicalApplications": "智能检验科自动流水线、自动化药房、医疗物资配送"
     },
-    "semiconductor": {
-      "title": "@:common.terms.semiconductorProcessing",
-      "description": "面向晶圆、芯片等制造场景，提供高洁净要求下的物料传送、设备上下料与调度协同方案，支持复杂工艺流程中的稳定搬运、精准定位与过程追溯。",
-      "coreAdvantages": "洁净环境适配、稳定搬运、复杂流程协同、工艺追溯",
-      "typicalApplications": "晶圆厂FOUP搬运、芯片封装测试、洁净室物流、半导体设备上下料"
+    "fixed-rail-transfer": {
+      "title": "固定轨道搬运",
+      "description": "提供基于固定轨道的物料传送与精准定位方案，适用于需要稳定、可重复点位搬运的工业场景。支持高精度定位与过程追溯，满足产线间的自动化转运需求。",
+      "coreAdvantages": "稳定搬运、精准定位、过程追溯、固定路径可靠性",
+      "typicalApplications": "固定轨道物料搬运、精密定位搬运、产线间转运、自动上下料"
     },
-    "intelligent-manufacturing": {
-      "title": "@:common.terms.smartManufacturing",
-      "description": "基于机器人控制、调度与多机协同能力，为制造业提供自动化单元与联动产线方案，适用于电子制造、汽车零部件和 3C 制造等场景。",
-      "coreAdvantages": "多机器人协同、复杂流程支持、柔性部署、软硬件一体化",
-      "typicalApplications": "电子产品装配、汽车零部件焊接、精密器件组装、质量检测、柔性生产线"
+    "servo-motor-station": {
+      "title": "伺服电机工位",
+      "description": "展示伺服电机工位自动化控制与应用，通过高性能伺服系统实现精准定位与高效作业。支持多轴同步控制，适用于工业自动化场景。",
+      "coreAdvantages": "精准定位、高性能伺服控制、多轴同步、高效作业",
+      "typicalApplications": "伺服电机工位、多轴运动控制、精密加工、自动化工作站"
     },
     "surface-treatment": {
       "title": "@:common.terms.surfaceTreatment",
@@ -595,11 +595,11 @@
       "coreAdvantages": "高精度控制、洁净环境适配、GMP标准、国产化替代",
       "typicalApplications": "实验室自动化、个性化处方药、药物配制、生物样本处理、质量检测"
     },
-    "precision-assembly": {
-      "title": "@:common.terms.precisionAssembly",
-      "description": "基于四轴和六轴机械臂技术，结合运动控制与视觉引导能力，为 3C 电子、光学器件、精密仪器等场景提供精密装配方案。",
-      "coreAdvantages": "高精度装配、视觉引导、多轴协调、柔性部署",
-      "typicalApplications": "3C电子装配、光学器件组装、精密仪器制造、高速高精度作业、柔性装配线"
+    "robot-daily-task": {
+      "title": "机器人日常任务",
+      "description": "展示机械臂在日常操作场景中的应用能力，如开冰箱、抓取物品和执行常见任务。体现四轴和六轴机器人在实际应用中的灵活性与适应性。",
+      "coreAdvantages": "灵活操作、任务适应性、实际场景部署、多场景支持",
+      "typicalApplications": "物品抓取、日常任务自动化、食品操作、家庭服务机器人"
     },
     "ai-robotics": {
       "title": "AI机器人",
@@ -613,17 +613,17 @@
       "coreAdvantages": "多轴同步控制、实时调度、接口集成、自主可控",
       "typicalApplications": "多轴运动控制、伺服电机台站、工业自动化、精密加工、实时控制系统"
     },
-    "offline-programming": {
-      "title": "@:common.terms.offlineProgramming",
-      "description": "基于多OS混合部署嵌入式虚拟机技术，提供先进的离线编程和虚拟仿真解决方案。通过数字孪生技术和虚拟调试环境，实现机器人程序的高效开发与优化，无需现场实物即可完成复杂工艺的编程调试。支持异构系统统一管理，大幅提升编程效率和作业安全性，降低现场调试时间和成本。",
-      "coreAdvantages": "虚拟仿真环境、数字孪生技术、离线调试、异构系统统一管理",
-      "typicalApplications": "机器人离线编程、工艺路径仿真、虚拟调试验证、复杂轨迹规划、系统集成测试"
+    "vr-teleoperation": {
+      "title": "VR遥操作",
+      "description": "展示基于VR的双臂机器人远程操作系统，通过沉浸式交互界面实现精准远程操控。验证人机协作在复杂作业场景中的创新应用，支持直观的VR控制与实时机器人响应。",
+      "coreAdvantages": "沉浸式控制、双臂协同、实时响应、人机协作",
+      "typicalApplications": "VR远程操控、双臂遥操作、危险环境作业、远程操作"
     },
-    "intelligent-navigation": {
-      "title": "智能导航",
-      "description": "基于激光 SLAM 和环境感知能力，为 AGV 和移动机器人提供建图、定位、路径规划与动态避障方案，适配工厂、仓储等复杂环境。",
-      "coreAdvantages": "360度雷达扫描、激光SLAM定位、智能路径规划、多机协同导航",
-      "typicalApplications": "AGV智能导航、动态环境建图、实时避障、最优路径规划、多机器人调度"
+    "mobile-robot-platform": {
+      "title": "移动机器人平台",
+      "description": "展示自主研发的移动机器人底盘平台，呈现先进的导航与运动能力。具备稳健的机械设计、精准的运动控制和智能导航系统，适用于自主移动机器人应用。",
+      "coreAdvantages": "自主底盘、自主导航、稳健机械设计、智能运动",
+      "typicalApplications": "移动机器人底盘、自主导航、移动平台开发、机器人运动"
     },
     "composite-systems": {
       "title": "复合系统",
@@ -643,11 +643,11 @@
       "coreAdvantages": "AI视觉识别、高精度绘画、风格多样化、艺术复现、智能制造",
       "typicalApplications": "素描机器人、艺术复制品制作、文创产品设计、个性化定制、艺术教育"
     },
-    "intelligent-patrol": {
-      "title": "智能巡检安防",
-      "description": "<p>基于移动机器人调度系统和激光 SLAM 导航能力，为工业园区、电力设施、仓储物流等场景提供自动化巡检方案，支持自主路径规划、异常检测与告警联动。</p>",
-      "coreAdvantages": "激光SLAM导航、环境感知、异常检测、自主巡检",
-      "typicalApplications": "工业园区巡检、电力设施监控、仓储安防、异常检测报警、智能巡逻"
+    "mobile-material-transfer": {
+      "title": "移动物料搬运",
+      "description": "<p>展示移动搬运机器人在自动化物料搬运与物流中的应用。支持智能导航、路径规划与站间调度，实现工厂和仓储中的高效物料流转。</p>",
+      "coreAdvantages": "智能导航、自动搬运、多站协同、柔性物料搬运",
+      "typicalApplications": "工厂物料搬运、仓储搬运、站间物流、自动化物料流转"
     },
     "industrial-gateway": {
       "title": "工业网关与边缘计算",

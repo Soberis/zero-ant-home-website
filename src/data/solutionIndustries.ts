@@ -49,19 +49,19 @@ export const solutionCapabilityLayers: SolutionCapabilityLayerConfig[] = [
 export const solutionIndustryGroups: SolutionIndustryGroupConfig[] = [
   {
     key: "precisionWorkcell",
-    applicationSlugs: ["semiconductor", "precision-assembly", "medical-automation"],
+    applicationSlugs: ["fixed-rail-transfer", "robot-daily-task", "medical-automation"],
     productSlugs: ["za-r3-x", "za-r3l-m-h", "za-r3d6", "za-zg100"],
     proofVideoSlug: "servo-motor-station",
   },
   {
     key: "mobileCollaboration",
-    applicationSlugs: ["composite-systems", "smart-logistics", "intelligent-navigation"],
+    applicationSlugs: ["composite-systems", "smart-logistics", "mobile-robot-platform"],
     productSlugs: ["za-m75", "za-m135", "za-mr3m", "za-mr3t"],
     proofVideoSlug: "composite-robot-application",
   },
   {
     key: "embodiedDevelopment",
-    applicationSlugs: ["ai-robotics", "offline-programming", "cultural-creative"],
+    applicationSlugs: ["ai-robotics", "vr-teleoperation", "cultural-creative"],
     productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
     proofVideoSlug: "sketching-robot",
   },

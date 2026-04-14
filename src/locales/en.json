@@ -565,17 +565,17 @@
       "coreAdvantages": "Process traceability, cross-station scheduling, reduced manual contact risk, fit for hospital and lab workflows",
       "typicalApplications": "Lab automation pipeline, automated pharmacy, medical supply distribution, ultrasound robots"
     },
-    "semiconductor": {
-      "title": "@:common.terms.semiconductorProcessing",
-      "description": "Provides material transfer, equipment loading and scheduling coordination for wafer and chip manufacturing under clean and process-sensitive conditions, supporting stable handling, precise positioning and process traceability.",
-      "coreAdvantages": "Cleanroom fit, stable handling, complex process coordination, process traceability",
-      "typicalApplications": "Wafer FOUP handling, chip packaging/testing, cleanroom logistics, equipment loading"
+    "fixed-rail-transfer": {
+      "title": "Fixed Rail Transfer",
+      "description": "Provides fixed-rail based material transfer and precise positioning solutions for industrial scenarios requiring stable, repeatable point-to-point transport. Supports high-precision positioning and process traceability across manufacturing lines.",
+      "coreAdvantages": "Stable handling, precise positioning, process traceability, fixed-path reliability",
+      "typicalApplications": "Fixed-rail material transfer, precision positioning, production line transport, automated loading and unloading"
     },
-    "intelligent-manufacturing": {
-      "title": "Intelligent Manufacturing",
-      "description": "Built around robot control, scheduling and multi-robot coordination capabilities, this direction supports automation cells and linked production workflows across electronics, automotive parts and 3C manufacturing.",
-      "coreAdvantages": "Multi-robot coordination, complex workflow support, flexible deployment, integrated hardware-software stack",
-      "typicalApplications": "Electronics assembly, automotive welding, precision assembly, quality inspection, flexible lines"
+    "servo-motor-station": {
+      "title": "Servo Motor Station",
+      "description": "Demonstrates servo motor station automation control and applications, achieving precise positioning and efficient operations through high-performance servo systems. Supports multi-axis synchronized control for industrial automation scenarios.",
+      "coreAdvantages": "Precise positioning, high-performance servo control, multi-axis synchronization, efficient operations",
+      "typicalApplications": "Servo motor stations, multi-axis motion control, precision machining, automated workstations"
     },
     "ai-robotics": {
       "title": "AI Robotics",
@@ -589,17 +589,17 @@
       "coreAdvantages": "Multi-axis synchronization, real-time scheduling, interface integration, self-developed stack",
       "typicalApplications": "Multi-axis motion control, servo motor stations, industrial automation, precision machining, real-time control systems"
     },
-    "offline-programming": {
-      "title": "@:common.terms.offlineProgramming",
-      "description": "Based on multi-OS hybrid deployment embedded virtual machine technology, providing advanced offline programming and virtual simulation solutions. Through digital twin technology and virtual debugging environment, it enables efficient development and optimization of robot programs without requiring on-site physical objects. Supporting unified management of heterogeneous systems, it significantly improves programming efficiency and operational safety, reducing on-site debugging time and costs.",
-      "coreAdvantages": "Virtual simulation environment, digital twin technology, offline debugging, unified management of heterogeneous systems",
-      "typicalApplications": "Robot offline programming, process path simulation, virtual debugging verification, complex trajectory planning, system integration testing"
+    "vr-teleoperation": {
+      "title": "VR Teleoperation",
+      "description": "Showcases VR-based remote operation systems for dual-arm robots, achieving precise remote control through immersive interaction interfaces. Demonstrates innovative applications of human-robot collaboration in complex operational scenarios, featuring intuitive VR control and real-time robot response.",
+      "coreAdvantages": "Immersive control, dual-arm coordination, real-time response, human-robot collaboration",
+      "typicalApplications": "VR remote operation, dual-arm teleoperation, hazardous environment handling, remote manipulation"
     },
-    "intelligent-navigation": {
-      "title": "Intelligent Navigation",
-      "description": "Built on laser SLAM and environment perception capabilities, this direction supports mapping, localization, path planning and dynamic obstacle avoidance for AGVs and mobile robots in factories, warehouses and other complex environments.",
-      "coreAdvantages": "360-degree LiDAR scanning, laser SLAM positioning, intelligent path planning, multi-machine collaborative navigation",
-      "typicalApplications": "AGV intelligent navigation, dynamic environment mapping, real-time obstacle avoidance, optimal path planning, multi-robot scheduling"
+    "mobile-robot-platform": {
+      "title": "Mobile Robot Platform",
+      "description": "Showcases self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control and intelligent navigation systems for autonomous mobile robot applications.",
+      "coreAdvantages": "Self-developed chassis, autonomous navigation, robust mechanical design, intelligent mobility",
+      "typicalApplications": "Mobile robot chassis, autonomous navigation, mobile platform development, robot mobility"
     },
     "surface-treatment": {
       "title": "@:common.terms.surfaceTreatment",
@@ -619,11 +619,11 @@
       "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic substitution",
       "typicalApplications": "Laboratory automation, personalized prescription drugs, drug preparation, biological sample processing, quality testing"
     },
-    "precision-assembly": {
-      "title": "@:common.terms.precisionAssembly",
-      "description": "Built on four-axis and six-axis robotic arm capabilities, and combined with motion control and vision-guided techniques, this direction supports precision assembly in 3C electronics, optical devices and precision instruments.",
-      "coreAdvantages": "Precision assembly, vision guidance, multi-axis coordination, flexible deployment",
-      "typicalApplications": "3C electronics assembly, optical device assembly, precision instrument manufacturing, high-speed high-precision operations, flexible assembly lines"
+    "robot-daily-task": {
+      "title": "Robot Daily Task",
+      "description": "Demonstrates robotic arm capabilities in everyday manipulation scenarios, such as opening refrigerators, grasping objects and performing common tasks. Showcases the flexibility and adaptability of four-axis and six-axis robots in real-world applications.",
+      "coreAdvantages": "Flexible manipulation, task adaptability, real-world deployment, multi-scenario support",
+      "typicalApplications": "Object grasping, daily task automation, food handling, household service robots"
     },
     "composite-systems": {
       "title": "Composite Systems",
@@ -643,11 +643,11 @@
       "coreAdvantages": "High-precision art creation, personalized customization capability, digital art production, cultural creativity integration",
       "typicalApplications": "Intelligent sketching and painting, cultural product manufacturing, art reproduction, personalized gift customization, digital art creation"
     },
-    "intelligent-patrol": {
-      "title": "Intelligent Patrol Security",
-      "description": "Built on mobile robot scheduling and laser SLAM navigation, this direction supports automated patrol workflows for industrial parks, power facilities and warehouses, including route planning, anomaly detection and alert linkage.",
-      "coreAdvantages": "Laser SLAM navigation, environment perception, anomaly detection, autonomous patrol",
-      "typicalApplications": "Industrial park patrol, warehouse security, facility monitoring, autonomous security rounds, emergency response"
+    "mobile-material-transfer": {
+      "title": "Mobile Material Transfer",
+      "description": "Demonstrates mobile transfer robot applications for automated material handling and logistics. Supports intelligent navigation, path planning and station-to-station coordination for efficient material flow in factories and warehouses.",
+      "coreAdvantages": "Intelligent navigation, automated transfer, multi-station coordination, flexible material handling",
+      "typicalApplications": "Factory material transfer, warehouse handling, station-to-station logistics, automated material flow"
     },
     "industrial-gateway": {
       "title": "Edge Computing",
