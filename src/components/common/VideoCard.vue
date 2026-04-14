@@ -60,15 +60,24 @@ const emit = defineEmits(["hover", "leave", "click"]);
   cursor: pointer;
   text-decoration: none;
   width: 100%;
+  padding: 20px;
+  background: #f8f9fb;
+  border-radius: 24px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.video-block:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
 }
 
 .video-media {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  background: var(--brand-surface-soft, #f8fafc);
+  background: #ffffff;
   /* subtle edge definition without strong shadow */
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); 
 }
