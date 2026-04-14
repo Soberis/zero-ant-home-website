@@ -310,15 +310,24 @@
     "dedicatedService": "7×24 support channel",
     "relatedDownloads": "@:common.section.relatedDownloads",
     "downloadIntro": "Start with manuals and interface materials so the team can prepare for selection, installation and integration faster.",
+    "downloadNotice": "Public download files are not hosted on the site yet. Contact the team by email for the latest package.",
     "faqTitle": "Frequently Asked Questions",
     "faqIntro": "This section focuses on the three highest-frequency topics: navigation, secondary development and custom delivery.",
     "contactIntro": "If materials and FAQs still do not cover the on-site issue, contact the team directly to enter the support flow.",
+    "hotlineAction": "Call Support",
     "downloads": {
       "productManual": "Product Manual",
       "productManualDesc": "For installation, wiring, basic operation and day-to-day maintenance reference.",
       "jointMaterials": "Joint Materials",
       "jointMaterialsDesc": "For parameter confirmation, interface integration and mechanical preparation.",
-      "updating": "Updating"
+      "updating": "Updating",
+      "contactToGet": "Contact to get",
+      "requestByEmail": "Request by Email"
+    },
+    "emailSubjects": {
+      "support": "After-sales support request",
+      "productManual": "Request product manual",
+      "jointMaterials": "Request interface and joint materials"
     },
     "paths": {
       "downloads": {
@@ -878,6 +887,13 @@
     "common": {
       "specLabel": "Key Specs",
       "tipLabel": "Selection Tip",
+      "searchLabel": "Search Products",
+      "searchPlaceholder": "Search by model, family, or spec keyword",
+      "filterIntro": "Besides browsing by family, you can also jump straight to a model or spec keyword.",
+      "matchedProducts": "Matched products",
+      "clearFilterAction": "Clear Filter",
+      "emptyTitle": "No matching product found",
+      "emptyDescription": "Try another model keyword, or contact the team with payload, takt, and space constraints.",
       "ctaTitle": "Need help choosing?",
       "ctaDescription": "Tell us the workstation type, takt target, and space constraints. The team can help confirm the right model, controller, and accessory combination.",
       "contactAction": "Contact Team",

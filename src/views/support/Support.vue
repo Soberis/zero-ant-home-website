@@ -11,6 +11,9 @@
             <a href="#contact" class="btn btn-primary">
               {{ t("supportPage.paths.contact.title") }}
             </a>
+            <a :href="supportHotlineHref" class="btn btn-secondary">
+              {{ t("supportPage.hotlineAction") }}
+            </a>
           </div>
 
           <div class="hero-promises">
@@ -55,6 +58,7 @@
             <span class="title-main text-display-large">{{ t("supportPage.relatedDownloads") }}</span>
           </h2>
           <p class="detail-section__desc">{{ t("supportPage.downloadIntro") }}</p>
+          <p class="download-note">{{ t("supportPage.downloadNotice") }}</p>
         </div>
 
         <div class="download-grid">
@@ -69,6 +73,11 @@
             </div>
             <h3 class="download-title">{{ item.title }}</h3>
             <p class="download-desc">{{ item.desc }}</p>
+            <div class="download-card-actions">
+              <a class="download-link" :href="item.href">
+                {{ item.actionLabel }}
+              </a>
+            </div>
           </article>
         </div>
       </div>
@@ -175,6 +184,8 @@ interface DownloadItem {
   desc: string;
   tag: string;
   status: string;
+  href: string;
+  actionLabel: string;
 }
 
 interface FaqItem {
@@ -208,18 +219,30 @@ const servicePromises = computed<PromiseItem[]>(() => [
   },
 ]);
 
+// i18n JSON 中邮箱使用 {'@'} 代替 @ 防止爬虫抓取，渲染时还原为真实邮箱
+const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
+const supportHotlineHref = computed(() => `tel:${t("footer.telValue")}`);
+
+function buildMailtoHref(subject: string): string {
+  return `mailto:${supportEmail.value}?subject=${encodeURIComponent(subject)}`;
+}
+
 const downloads = computed<DownloadItem[]>(() => [
   {
     title: t("supportPage.downloads.productManual"),
     desc: t("supportPage.downloads.productManualDesc"),
     tag: "PDF",
-    status: t("supportPage.downloads.updating"),
+    status: t("supportPage.downloads.contactToGet"),
+    href: buildMailtoHref(t("supportPage.emailSubjects.productManual")),
+    actionLabel: t("supportPage.downloads.requestByEmail"),
   },
   {
     title: t("supportPage.downloads.jointMaterials"),
     desc: t("supportPage.downloads.jointMaterialsDesc"),
     tag: "ZIP",
-    status: t("supportPage.downloads.updating"),
+    status: t("supportPage.downloads.contactToGet"),
+    href: buildMailtoHref(t("supportPage.emailSubjects.jointMaterials")),
+    actionLabel: t("supportPage.downloads.requestByEmail"),
   },
 ]);
 
@@ -258,9 +281,6 @@ const supportPaths = computed<SupportPath[]>(() => [
     description: t("supportPage.paths.contact.description"),
   },
 ]);
-
-// i18n JSON 中邮箱使用 {'@'} 代替 @ 防止爬虫抓取，渲染时还原为真实邮箱
-const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
 
 const contactItems = computed(() => [
   {
@@ -525,6 +545,13 @@ function formatIndex(value: number): string {
   line-height: 1.8;
 }
 
+.download-note {
+  margin: 10px 0 0;
+  color: var(--brand-primary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
 .download-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -537,7 +564,7 @@ function formatIndex(value: number): string {
   gap: 14px;
   min-height: 220px;
   padding: 28px;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 18px;
   background: var(--brand-surface-soft);
   transition: border-color 0.25s ease, transform 0.25s ease;
@@ -577,6 +604,26 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: 0.98rem;
   line-height: 1.8;
+}
+
+.download-card-actions {
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--brand-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.download-link:hover {
+  color: var(--brand-primary-deep, #142a66);
+  transform: translateX(2px);
 }
 
 .card-tag {

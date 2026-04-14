@@ -25,12 +25,23 @@
           <h4>{{ $t("footer.companyFullName") }}</h4>
 
           <div class="contact-info">
-            <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
+            <div class="contact-row">
+              <span class="contact-label">{{ $t("contacts.phone") }}：</span>
+              <a class="contact-link" :href="`tel:${$t('footer.telValue')}`">
+                {{ $t("footer.telValue") }}
+              </a>
+            </div>
 
-            <div>{{ $t("contacts.email") }}：{{ $t("footer.emailValue") }}</div>
+            <div class="contact-row">
+              <span class="contact-label">{{ $t("contacts.email") }}：</span>
+              <a class="contact-link" :href="`mailto:${supportEmail}`">
+                {{ supportEmail }}
+              </a>
+            </div>
 
-            <div style="margin-top: 8px">
-              {{ $t("contacts.address") }}：{{ $t("footer.address") }}
+            <div class="contact-row" style="margin-top: 8px">
+              <span class="contact-label">{{ $t("contacts.address") }}：</span>
+              <span class="contact-text">{{ $t("footer.address") }}</span>
             </div>
           </div>
         </div>
@@ -90,13 +101,17 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
 import taobaoQrcode from "@/assets/images/qrcodes/taobao.png";
 import wxQrcode from "@/assets/images/qrcodes/wx.webp";
 import { footerNavSections } from "@/data/navigation";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
+const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
+const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
 </script>
 
 <style scoped lang="less">
@@ -171,12 +186,38 @@ const { localizeTo } = useLocalizedPath();
 }
 
 .contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   font-family: "Inter", sans-serif;
   color: #d4d4d8;
   font-size: 13px;
   line-height: 2;
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.contact-label {
+  flex: 0 0 auto;
+}
+
+.contact-link,
+.contact-text {
+  color: #d4d4d8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.contact-link:hover {
+  color: #ffffff;
 }
 
 .footer-qrcodes {

@@ -22,21 +22,14 @@
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { videoMap, videoCards, type VideoDetail } from "@/data/videos";
-import { computed, onMounted, watch } from "vue";
-import { setSEO, setStructuredData } from "@/utils/seo";
+import { computed } from "vue";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
 import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-import {
-  getAlternateLanguageLinks,
-  getLocaleFromPath,
-  getOgLocale,
-  stripLocalePrefix,
-} from "@/utils/localeRoute";
 
 const route = useRoute();
 const router = useRouter();
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
 const currentSlug = computed(() => String(route.params.slug || ""));
 const isNotFound = computed(() => !videoMap[currentSlug.value]);
@@ -106,160 +99,4 @@ const mediaInfo = computed(() => {
   };
 });
 
-// 动态SEO元数据
-const seoMetadata = computed(() => {
-  const videoTitle = videoInfo.value.title;
-  const videoDesc = videoInfo.value.desc;
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const localeCode = getLocaleFromPath(route.path);
-  const currentUrl = `${baseUrl}${route.path}`;
-  const ogLocale = getOgLocale(localeCode);
-  const currentThumbnail =
-    videoCards.find((item) => item.slug === currentSlug.value)?.img || `${baseUrl}/logo.webp`;
-
-  if (isNotFound.value) {
-    return {
-      htmlLang: localeCode,
-      title: videoTitle,
-      description: videoDesc,
-      keywords: `视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
-      ogTitle: videoTitle,
-      ogDescription: videoDesc,
-      ogType: "website",
-      ogLocale,
-      ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
-      ogUrl: currentUrl,
-      ogImage: currentThumbnail,
-      twitterCard: "summary_large_image",
-      twitterTitle: videoTitle,
-      twitterDescription: videoDesc,
-      canonical: currentUrl,
-      alternates: getAlternateLanguageLinks(baseUrl, stripLocalePrefix(route.path)),
-    };
-  }
-
-  return {
-    htmlLang: localeCode,
-    title: videoTitle,
-    description: videoDesc,
-    keywords: `${videoTitle}, 视频案例, 机器人, 自动化, ZeroAnt, 零蚁科技`,
-    ogTitle: videoTitle,
-    ogDescription: videoDesc,
-    ogType: "video.other",
-    ogLocale,
-    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
-    ogUrl: currentUrl,
-    ogVideo:
-      getMediaType(videoInfo.value) === "video"
-        ? videoInfo.value.url
-        : undefined,
-    ogImage: currentThumbnail,
-    twitterCard: "player",
-    twitterTitle: videoTitle,
-    twitterDescription: videoDesc,
-    canonical: currentUrl,
-    alternates: getAlternateLanguageLinks(baseUrl, stripLocalePrefix(route.path)),
-  };
-});
-
-// VideoObject结构化数据
-const videoStructuredData = computed(() => {
-  const videoTitle = videoInfo.value.title;
-  const videoDesc = videoInfo.value.desc;
-  const mediaType = getMediaType(videoInfo.value);
-  const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const localeCode = getLocaleFromPath(route.path);
-  const currentUrl = `${baseUrl}${route.path}`;
-  const thumbnailUrl =
-    videoCards.find((item) => item.slug === currentSlug.value)?.img || `${baseUrl}/logo.webp`;
-
-  if (mediaType === "bilibili" || mediaType === "video") {
-    return [
-      {
-        "@context": "https://schema.org",
-        "@type": "VideoObject",
-        name: videoTitle,
-        description: videoDesc,
-        inLanguage: localeCode,
-        thumbnailUrl,
-        contentUrl: videoInfo.value.url,
-        embedUrl: mediaType === "bilibili" ? videoInfo.value.url : undefined,
-        uploadDate: videoInfo.value.publishDate,
-        mainEntityOfPage: currentUrl,
-        publisher: {
-          "@type": "Organization",
-          name: "ZeroAnt Technology",
-          url: baseUrl,
-        },
-        author: {
-          "@type": "Organization",
-          name: "ZeroAnt Technology",
-        },
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: t("nav.home"),
-            item: `${baseUrl}${localeCode === "en" ? "/en" : "/"}`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: t("nav.solutions"),
-            item: `${baseUrl}${localeCode === "en" ? "/en/solutions" : "/solutions"}`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: videoTitle,
-            item: currentUrl,
-          },
-        ],
-      },
-    ];
-  } else if (mediaType === "image") {
-    return {
-      "@context": "https://schema.org",
-      "@type": "ImageObject",
-      name: videoTitle,
-      description: videoDesc,
-      inLanguage: localeCode,
-      contentUrl: videoInfo.value.url,
-      thumbnailUrl,
-      author: {
-        "@type": "Organization",
-        name: "ZeroAnt Technology",
-      },
-    };
-  }
-
-  return null;
-});
-
-// 设置SEO和结构化数据
-const updateSEO = () => {
-  if (seoMetadata.value) {
-    setSEO({
-      ...seoMetadata.value,
-      ogImageWidth: 1200,
-      ogImageHeight: 630,
-    });
-  }
-  if (videoStructuredData.value) {
-    setStructuredData(videoStructuredData.value);
-  } else {
-    setStructuredData([]);
-  }
-};
-
-// 监听数据变化并更新SEO
-watch([videoInfo, locale], updateSEO, { immediate: false });
-
-onMounted(() => {
-  updateSEO();
-});
 </script>

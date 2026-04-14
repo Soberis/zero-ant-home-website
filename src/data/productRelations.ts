@@ -16,7 +16,7 @@ export type ProductRelationsData = Record<string, ProductRelation>;
 export const productRelations: ProductRelationsData = {
   "za-r3-x": {
     applicationSlugs: ["semiconductor", "precision-assembly", "pharmaceutical-automation"],
-    videoSlugs: ["semiconductor", "four-axis-robot-open-fridge", "lab-tube-loading"],
+    videoSlugs: ["semiconductor", "lab-tube-loading"],
   },
   "za-r3d6": {
     applicationSlugs: ["semiconductor", "surface-treatment", "precision-assembly"],
@@ -24,7 +24,7 @@ export const productRelations: ProductRelationsData = {
   },
   "za-r3l-m-h": {
     applicationSlugs: ["pharmaceutical-automation", "precision-assembly", "semiconductor"],
-    videoSlugs: ["lab-tube-loading", "four-axis-robot-open-fridge", "semiconductor"],
+    videoSlugs: ["lab-tube-loading", "semiconductor"],
   },
   "za-r3m-left": {
     applicationSlugs: ["semiconductor", "composite-systems", "precision-assembly"],
@@ -52,19 +52,19 @@ export const productRelations: ProductRelationsData = {
   },
   "za-mr3t": {
     applicationSlugs: ["ai-robotics", "intelligent-manufacturing", "composite-systems"],
-    videoSlugs: ["dual-robot-ball-catching", "vr-remote-franka-dual-arm", "composite-robot-application"],
+    videoSlugs: ["dual-robot-ball-catching", "composite-robot-application"],
   },
   "za-rmvr": {
     applicationSlugs: ["ai-robotics", "offline-programming", "industrial-gateway"],
-    videoSlugs: ["vr-remote-franka-dual-arm", "offline-programming", "robotstudio-remote-control"],
+    videoSlugs: [],
   },
   "za-rmps": {
     applicationSlugs: ["ai-robotics", "agricultural-research", "cultural-creative"],
-    videoSlugs: ["vr-remote-franka-dual-arm", "dual-robot-ball-catching", "robotstudio-remote-control"],
+    videoSlugs: [],
   },
   "za-rdp": {
     applicationSlugs: ["cultural-creative", "ai-robotics", "offline-programming"],
-    videoSlugs: ["sketching-robot", "offline-programming-logo-drawing", "offline-programming"],
+    videoSlugs: ["sketching-robot", "offline-programming-logo-drawing"],
   },
   "za-zg100": {
     applicationSlugs: ["industrial-control", "offline-programming", "industrial-gateway"],

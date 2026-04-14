@@ -8,9 +8,14 @@
       <div class="hero-media" :class="{ 'hero-entered': entered }">
         <img
           :src="activeSlide.img"
+          :srcset="heroImageSrcSet"
+          sizes="(max-width: 900px) 100vw, 58vw"
           :alt="activeSlide.title"
           class="hero-image"
           :style="activeSlideImageStyle"
+          width="1600"
+          height="2844"
+          loading="eager"
           fetchpriority="high"
           decoding="async"
         />
@@ -38,6 +43,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import coverImg from '@/assets/images/product/封面.webp';
+import coverImgMobile from '@/assets/images/product/封面-mobile.webp';
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 interface SlideItem {
@@ -53,6 +59,7 @@ interface SlideItem {
 
 const { t } = useI18n();
 const { localizePath, localizeTo } = useLocalizedPath();
+const heroImageSrcSet = `${coverImgMobile} 900w, ${coverImg} 1600w`;
 
 const activeSlide = computed<SlideItem>(() => ({
   img: coverImg,

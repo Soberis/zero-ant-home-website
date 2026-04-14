@@ -67,6 +67,8 @@ if (typeof window !== "undefined") {
       setupAboutSEO, 
       setupCareersSEO, 
       setupSolutionsSEO,
+      setupApplicationDetailSEO,
+      setupVideoDetailSEO,
       setupProductDetailSEO
     } = await import("@/router/seo");
     
@@ -89,8 +91,14 @@ if (typeof window !== "undefined") {
           case "Solutions":
             setupSolutionsSEO(to);
             break;
+          case "ApplicationDetail":
+            void setupApplicationDetailSEO(to);
+            break;
+          case "VideoDetail":
+            void setupVideoDetailSEO(to);
+            break;
           case "ProductDetail":
-            setupProductDetailSEO(to);
+            void setupProductDetailSEO(to);
             break;
           default:
             setupPageSEO(to);

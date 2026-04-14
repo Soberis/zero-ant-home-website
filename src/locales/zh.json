@@ -310,15 +310,24 @@
     "dedicatedService": "7×24小时支持通道",
     "relatedDownloads": "@:common.section.relatedDownloads",
     "downloadIntro": "先获取手册和接口资料，帮助团队快速完成选型、安装与集成准备。",
+    "downloadNotice": "当前站点暂未托管公开资料包，如需最新版本，请直接邮件联系团队获取。",
     "faqTitle": "常见问题",
     "faqIntro": "优先覆盖导航方式、二次开发与定制交付三类高频问题。",
     "contactIntro": "如果资料和 FAQ 仍不足以回答现场问题，直接联系团队进入支持沟通。",
+    "hotlineAction": "电话咨询",
     "downloads": {
       "productManual": "产品手册",
       "productManualDesc": "适合安装、接线、基础操作与日常维护参考。",
       "jointMaterials": "关节资料",
       "jointMaterialsDesc": "适合参数确认、接口对接与结构集成准备。",
-      "updating": "资料更新中"
+      "updating": "资料更新中",
+      "contactToGet": "联系获取",
+      "requestByEmail": "邮件获取"
+    },
+    "emailSubjects": {
+      "support": "售后支持咨询",
+      "productManual": "申请产品手册",
+      "jointMaterials": "申请接口与关节资料"
     },
     "paths": {
       "downloads": {
@@ -878,6 +887,13 @@
     "common": {
       "specLabel": "重点参数",
       "tipLabel": "选型提示",
+      "searchLabel": "搜索产品",
+      "searchPlaceholder": "按型号、系列、参数关键词搜索",
+      "filterIntro": "按系列浏览之外，也可以直接按型号和参数关键词快速定位。",
+      "matchedProducts": "当前匹配产品",
+      "clearFilterAction": "清除筛选",
+      "emptyTitle": "没有找到匹配的产品",
+      "emptyDescription": "换一个型号关键词，或直接联系团队说明负载、节拍和空间约束。",
       "ctaTitle": "不确定怎么选？",
       "ctaDescription": "告诉我们工位类型、节拍要求和空间约束，团队会协助确认合适的型号、控制器与扩展机构组合。",
       "contactAction": "联系团队",
