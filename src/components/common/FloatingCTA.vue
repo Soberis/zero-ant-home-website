@@ -99,7 +99,7 @@ const scrollToTop = () => {
 <style scoped lang="less">
 .floating-sidebar {
   position: fixed;
-  right: calc(16px + env(safe-area-inset-right, 0px));
+  right: calc(12px + env(safe-area-inset-right, 0px));
   top: 50%;
   transform: translateY(-50%);
   z-index: 2000;
@@ -253,47 +253,57 @@ const scrollToTop = () => {
   }
 }
 
-@media (max-width: 1440px) and (min-width: 769px) {
+@media (max-width: 1680px) and (min-width: 769px) {
   .floating-sidebar {
-    right: calc(8px + env(safe-area-inset-right, 0px));
-    padding: 10px 0;
+    right: calc(6px + env(safe-area-inset-right, 0px));
+    padding: 8px 0;
   }
 
   .sidebar-item {
-    width: 40px;
-    height: 40px;
-    margin: 3px 6px;
+    width: 38px;
+    height: 38px;
+    margin: 3px 5px;
   }
 
   .sidebar-icon svg {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
   }
 
   .back-to-top .sidebar-icon svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (max-width: 768px) {
   .floating-sidebar {
-    right: 12px;
+    right: 8px;
     top: auto;
-    bottom: 60px;
+    bottom: 56px;
     transform: none;
     border-radius: 100px;
-    padding: 8px 0;
+    padding: 6px 0;
   }
   
   .sidebar-item {
-    width: 38px;
-    height: 38px;
-    margin: 4px 6px;
+    width: 36px;
+    height: 36px;
+    margin: 4px 5px;
     
     &:hover {
       transform: none;
     }
+  }
+
+  .sidebar-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .back-to-top .sidebar-icon svg {
+    width: 20px;
+    height: 20px;
   }
   
   .sidebar-popup {

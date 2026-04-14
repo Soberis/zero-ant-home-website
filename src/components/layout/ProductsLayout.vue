@@ -431,12 +431,6 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   font-weight: 600;
 }
 
-@media (max-width: 1440px) and (min-width: 901px) {
-  .products-container {
-    padding-right: calc(var(--container-padding-x) + 52px);
-  }
-}
-
 @media (max-width: 1100px) {
   .products-shell {
     padding-top: 0;
