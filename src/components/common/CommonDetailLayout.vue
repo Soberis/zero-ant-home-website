@@ -379,7 +379,7 @@ onUnmounted(() => {
 
 .content-desc-block {
   width: 100%;
-  max-width: 760px;
+  max-width: 940px;
   margin-bottom: 36px;
 }
 
