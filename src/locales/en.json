@@ -135,13 +135,14 @@
     },
     "videoCases": {
       "title": "@:common.section.videoCases",
-      "description": "Representative videos that make product fit and real-world deployment paths easier to judge."
+      "description": "Representative videos that make product fit and real-world deployment paths easier to judge.",
+      "exploreAll": "View Video Proof"
     },
     "industryApplications": {
       "title": "@:common.section.industryApplications",
       "description": "Quickly find representative application entry points across semiconductors, biopharma, composite operations, and embodied development.",
       "explore": "View Solution",
-      "exploreAll": "Explore All Industry Applications"
+      "exploreAll": "View Industry Applications"
     },
     "partners": {
       "title": "Partners"
@@ -154,11 +155,11 @@
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "Solutions",
-      "title": "Robot solutions for life science, manufacturing logistics, and embodied R&D",
-      "description": "ZeroAnt organizes its current products into three solution directions so teams can judge fit first, then move on to product combinations and delivery paths.",
+      "title": "Robot solutions from scenario fit to rollout",
+      "description": "Built around life science, smart manufacturing logistics, and embodied R&D, the page helps teams judge fit first and then move into product combinations, proof, and delivery path.",
       "primaryCta": "View Three Directions",
       "secondaryCta": "Contact an Engineer",
-      "featuredLabel": "Featured R&D Product",
+      "featuredLabel": "Planned Workstation Direction",
       "featuredTitle": "Dual-Arm Sterile Preparation Workstation",
       "featuredDescription": "A closed dual-arm workstation for sample handling, liquid preparation, and sterile workflows. Currently in development.",
       "promises": {
@@ -209,13 +210,15 @@
     },
     "directions": {
       "title": "Three directions tied directly to scenarios and products",
-      "description": "Start with fit, then move into the recommended combination and proof entry.",
+      "description": "Start with the direction, then review the product combination and application entry.",
       "common": {
         "scenariosLabel": "Fit Scenarios",
         "highlightsLabel": "Key Capabilities",
         "productsLabel": "Recommended Combination",
         "applicationLabel": "Related Application",
+        "applicationAction": "View Related Application",
         "videoLabel": "Related Video",
+        "videoAction": "View Related Video",
         "featuredCaseLabel": "Featured Case",
         "featuredProductLabel": "Featured R&D Product"
       },
@@ -258,7 +261,7 @@
           "End-of-line transfer, packing, and circulation"
         ],
         "overviewAction": "View Scenarios",
-        "primaryAction": "View Related Cases",
+        "primaryAction": "View Related Applications",
         "secondaryAction": "Open Product Center"
       },
       "embodiedResearchTeleop": {
@@ -276,7 +279,7 @@
           "Experiment loops from training to real deployment"
         ],
         "overviewAction": "View the Platform",
-        "primaryAction": "View Related Cases",
+        "primaryAction": "View Related Applications",
         "secondaryAction": "View Related Products"
       }
     },
@@ -347,15 +350,20 @@
       "applicationIndex": "More industry applications"
     },
     "more": {
-      "title": "More video cases and industry applications",
-      "description": "Browse more verified ZeroAnt deployments across additional real-world scenarios.",
+      "title": "Industry Applications / Video Proof",
+      "description": "Start with industry fit, then review video proof.",
       "videos": "View more video cases",
       "applications": "More industry applications",
-      "videoGuide": "Showing {visible} representative videos first. Expand to browse all {total} cases.",
-      "applicationGuide": "Showing {visible} high-relevance application entries first. Expand to browse all {total} industry applications.",
-      "expandVideos": "Expand all video cases ({count}+)",
-      "expandApplications": "Expand all industry applications ({count}+)",
-      "collapse": "Collapse list"
+      "applicationsTab": "Industry Applications",
+      "videosTab": "Video Proof",
+      "applicationsTitle": "Industry Applications",
+      "videosTitle": "Video Proof",
+      "videoGuide": "Showing {visible} videos first.",
+      "videoGuideExpanded": "Showing all {total} videos.",
+      "applicationGuide": "Showing {visible} high-relevance applications first.",
+      "applicationGuideExpanded": "Showing all {total} applications.",
+      "viewAll": "View all",
+      "collapse": "Collapse"
     },
     "delivery": {
       "title": "Four steps from evaluation to rollout",

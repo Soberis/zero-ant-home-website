@@ -135,13 +135,14 @@
     },
     "videoCases": {
       "title": "@:common.section.videoCases",
-      "description": "用代表性视频补足产品与方案判断，快速查看 ZeroAnt 在真实场景中的落地方式。"
+      "description": "用代表性视频补足产品与方案判断，快速查看 ZeroAnt 在真实场景中的落地方式。",
+      "exploreAll": "查看视频验证"
     },
     "industryApplications": {
       "title": "@:common.section.industryApplications",
       "description": "围绕半导体、生物医药、复合作业与具身开发等方向，快速定位代表应用入口。",
       "explore": "查看方案",
-      "exploreAll": "探索所有行业应用"
+      "exploreAll": "查看行业应用"
     },
     "partners": {
       "title": "合作伙伴"
@@ -154,11 +155,11 @@
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
       "eyebrow": "Solutions",
-      "title": "面向生命科学、制造物流与具身研发的机器人方案",
-      "description": "零蚁把现有产品整理成 3 个方案方向，方便您先判断场景是否匹配，再继续了解产品组合与交付方式。",
+      "title": "从场景到交付的机器人方案",
+      "description": "围绕生命科学、智能制造物流与具身研发三类方向，帮助团队先判断场景匹配，再进入产品组合、验证案例与交付路径。",
       "primaryCta": "看三类方案",
       "secondaryCta": "联系工程师",
-      "featuredLabel": "重点研发产品",
+      "featuredLabel": "规划中的重点工作站",
       "featuredTitle": "双臂无菌制备工作站",
       "featuredDescription": "面向样本处理、配液配药和无菌制备的封闭式双臂工作站，目前处于在研阶段。",
       "promises": {
@@ -209,13 +210,15 @@
     },
     "directions": {
       "title": "三类方案，直接对应场景和产品",
-      "description": "先看适用场景，再看推荐组合和案例入口。",
+      "description": "先判断方向，再看推荐组合和应用入口。",
       "common": {
         "scenariosLabel": "适用场景",
         "highlightsLabel": "关键能力",
         "productsLabel": "推荐组合",
         "applicationLabel": "相关应用",
+        "applicationAction": "查看相关应用",
         "videoLabel": "相关视频",
+        "videoAction": "查看相关视频",
         "featuredCaseLabel": "代表案例",
         "featuredProductLabel": "重点研发产品"
       },
@@ -258,7 +261,7 @@
           "产线首末端搬运、包装与流转"
         ],
         "overviewAction": "查看相关场景",
-        "primaryAction": "查看相关案例",
+        "primaryAction": "查看相关应用",
         "secondaryAction": "查看产品中心"
       },
       "embodiedResearchTeleop": {
@@ -276,7 +279,7 @@
           "算法训练到真实部署的实验闭环"
         ],
         "overviewAction": "查看研发平台",
-        "primaryAction": "查看相关案例",
+        "primaryAction": "查看相关应用",
         "secondaryAction": "查看相关产品"
       }
     },
@@ -339,15 +342,20 @@
       "applicationIndex": "更多行业应用"
     },
     "more": {
-      "title": "更多视频与行业应用",
-      "description": "继续查看 ZeroAnt 在更多真实场景中的验证案例和应用入口。",
+      "title": "行业应用 / 视频验证",
+      "description": "先按行业判断匹配，再看视频验证。",
       "videos": "查看更多视频案例",
       "applications": "更多行业应用",
-      "videoGuide": "当前先展示 {visible} 个代表性视频，展开后可继续浏览全部 {total} 个案例。",
-      "applicationGuide": "当前先展示 {visible} 个高相关应用入口，展开后可继续浏览全部 {total} 个行业应用。",
-      "expandVideos": "展开全部视频案例 ({count}+)",
-      "expandApplications": "展开全部行业应用 ({count}+)",
-      "collapse": "收起列表"
+      "applicationsTab": "行业应用",
+      "videosTab": "视频验证",
+      "applicationsTitle": "行业应用",
+      "videosTitle": "视频验证",
+      "videoGuide": "先看 {visible} 个代表视频。",
+      "videoGuideExpanded": "已显示全部 {total} 个视频。",
+      "applicationGuide": "先看 {visible} 个高相关应用。",
+      "applicationGuideExpanded": "已显示全部 {total} 个行业应用。",
+      "viewAll": "查看全部",
+      "collapse": "收起"
     },
     "delivery": {
       "title": "方案从评估到落地的 4 步",

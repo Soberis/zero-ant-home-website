@@ -7,26 +7,12 @@
           <p class="hero-description">{{ t("solutionsPage.hero.description") }}</p>
 
           <div class="hero-actions">
-            <button type="button" class="btn btn-primary" @click="scrollToSection('directions')">
+            <button type="button" class="btn btn-primary" @click="scrollToSection('overview')">
               {{ t("solutionsPage.hero.primaryCta") }}
             </button>
             <router-link class="btn btn-secondary" :to="localizeTo({ path: '/support', hash: '#contact' })">
               {{ t("solutionsPage.hero.secondaryCta") }}
             </router-link>
-          </div>
-
-          <div class="hero-promises">
-            <article
-              v-for="promise in heroPromises"
-              :key="`${promise.metric}-${promise.description}`"
-              class="hero-promise"
-            >
-              <div class="hero-promise-head">
-                <span class="hero-promise-value">{{ promise.metric }}</span>
-                <span v-if="promise.unit" class="hero-promise-unit">{{ promise.unit }}</span>
-              </div>
-              <p class="hero-promise-label">{{ promise.description }}</p>
-            </article>
           </div>
         </div>
 
@@ -48,6 +34,54 @@
       </div>
     </section>
 
+    <section id="overview" ref="overviewRef" class="page-section reveal-ready">
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main text-display-large">{{ t("solutionsPage.overview.title") }}</span>
+          </h2>
+          <p class="detail-section__desc">{{ t("solutionsPage.overview.description") }}</p>
+        </div>
+
+        <div class="overview-grid">
+          <article
+            v-for="(direction, index) in directions"
+            :key="`overview-${direction.key}`"
+            class="overview-card"
+            :class="{ 'overview-card--planning': Boolean(direction.status) }"
+          >
+            <div class="overview-card__meta">
+              <span class="card-index">{{ formatIndex(index + 1) }}</span>
+              <span
+                v-if="direction.status"
+                class="status-chip status-chip--planning"
+              >
+                {{ direction.status }}
+              </span>
+            </div>
+            <h3 class="overview-card__title">{{ direction.title }}</h3>
+            <p class="overview-card__summary">{{ direction.summary }}</p>
+            <div class="overview-card__support">
+              <span class="overview-card__support-label">
+                {{ t("solutionsPage.directions.common.productsLabel") }}
+              </span>
+              <span class="overview-card__support-value">{{ direction.combo }}</span>
+            </div>
+            <button
+              type="button"
+              class="overview-card__link"
+              @click="scrollToSection(direction.anchorId)"
+            >
+              <span>{{ direction.overviewActionLabel }}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="directions" ref="directionsRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
@@ -63,24 +97,21 @@
             :id="direction.anchorId"
             :key="direction.key"
             class="direction-card"
+            :class="{ 'direction-card--planning': Boolean(direction.status) }"
           >
             <div class="direction-card__header">
               <div class="direction-card__heading">
                 <div class="direction-card__meta">
                   <span class="card-index">{{ formatIndex(index + 1) }}</span>
-                  <span v-if="direction.status" class="status-chip">{{ direction.status }}</span>
+                  <span
+                    v-if="direction.status"
+                    class="status-chip status-chip--planning"
+                  >
+                    {{ direction.status }}
+                  </span>
                 </div>
                 <h3 class="direction-card__title">{{ direction.title }}</h3>
                 <p class="direction-card__summary">{{ direction.summary }}</p>
-
-                <div class="direction-card__header-actions">
-                  <router-link class="btn btn-primary" :to="direction.primaryActionTo">
-                    {{ direction.primaryActionLabel }}
-                  </router-link>
-                  <router-link class="btn btn-secondary" :to="direction.secondaryActionTo">
-                    {{ direction.secondaryActionLabel }}
-                  </router-link>
-                </div>
               </div>
             </div>
 
@@ -94,9 +125,7 @@
                     decoding="async"
                   />
                 </div>
-                <figcaption class="direction-card__visual-caption">
-                  <p class="direction-card__visual-title">{{ direction.visualTitle }}</p>
-                </figcaption>
+
               </figure>
 
               <div class="direction-card__content">
@@ -156,29 +185,43 @@
                   </div>
                 </div>
 
-                <div class="direction-card__links">
-                  <router-link
-                    v-if="direction.applicationTitle"
-                    class="text-link"
-                    :to="direction.applicationTo"
+                <div
+                  class="direction-card__footer"
+                  :class="{ 'direction-card__footer--single': !direction.weakActionText }"
+                >
+                  <div
+                    v-if="direction.weakActionText"
+                    class="direction-card__links"
                   >
-                    <span class="text-link__label">
-                      {{ t("solutionsPage.directions.common.applicationLabel") }}
-                    </span>
-                    <span class="text-link__value">{{ direction.applicationTitle }}</span>
-                  </router-link>
+                    <router-link
+                      v-if="direction.weakActionType === 'route' && direction.weakActionTo"
+                      class="text-link"
+                      :to="direction.weakActionTo"
+                    >
+                      <span class="text-link__text">{{ direction.weakActionText }}</span>
+                      <svg class="text-link__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </router-link>
 
-                  <button
-                    v-if="direction.videoSlug"
-                    type="button"
-                    class="text-link"
-                    @click="openVideo(direction.videoSlug)"
-                  >
-                    <span class="text-link__label">
-                      {{ t("solutionsPage.directions.common.videoLabel") }}
-                    </span>
-                    <span class="text-link__value">{{ direction.videoTitle }}</span>
-                  </button>
+                    <button
+                      v-else-if="direction.weakActionType === 'video' && direction.weakActionVideoSlug"
+                      type="button"
+                      class="text-link"
+                      @click="openVideo(direction.weakActionVideoSlug)"
+                    >
+                      <span class="text-link__text">{{ direction.weakActionText }}</span>
+                      <svg class="text-link__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div class="direction-card__actions">
+                    <router-link class="btn btn-primary" :to="direction.primaryActionTo">
+                      {{ direction.primaryActionLabel }}
+                    </router-link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -187,7 +230,86 @@
       </div>
     </section>
 
-    <section id="delivery" ref="deliveryRef" class="page-section reveal-ready">
+    <section id="more" ref="moreRef" class="page-section reveal-ready">
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main text-display-large">{{ t("solutionsPage.more.title") }}</span>
+          </h2>
+          <p class="detail-section__desc">{{ t("solutionsPage.more.description") }}</p>
+        </div>
+
+        <div class="more-stack">
+          <div id="more-applications" class="more-anchor" />
+          <div id="more-videos" class="more-anchor" />
+
+          <div class="more-panel">
+            <div class="more-switcher" role="tablist" :aria-label="t('solutionsPage.more.title')">
+              <button
+                type="button"
+                class="more-switcher__item"
+                :class="{ active: moreMode === 'applications' }"
+                :aria-selected="moreMode === 'applications'"
+                @click="setMoreMode('applications')"
+              >
+                {{ t("solutionsPage.more.applicationsTab") }}
+              </button>
+              <button
+                type="button"
+                class="more-switcher__item"
+                :class="{ active: moreMode === 'videos' }"
+                :aria-selected="moreMode === 'videos'"
+                @click="setMoreMode('videos')"
+              >
+                {{ t("solutionsPage.more.videosTab") }}
+              </button>
+            </div>
+
+            <div class="more-panel__header">
+              <div class="more-panel__heading">
+                <h3 class="more-panel__title">{{ activeMoreTitle }}</h3>
+                <p class="more-panel__guide">{{ activeMoreGuide }}</p>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-secondary more-toggle"
+                :aria-expanded="activeMoreExpanded"
+                @click="toggleMoreExpanded"
+              >
+                {{ activeMoreExpanded ? t("solutionsPage.more.collapse") : t("solutionsPage.more.viewAll") }}
+              </button>
+            </div>
+
+            <div v-if="moreMode === 'applications'" class="more-application-grid">
+              <ApplicationCard
+                v-for="application in visibleMoreApplications"
+                :key="application.slug"
+                :title="application.title"
+                :svg="application.svg"
+                :slug="application.slug"
+              />
+            </div>
+
+            <div v-else class="more-video-grid">
+              <VideoCard
+                v-for="(video, index) in visibleMoreVideos"
+                :key="video.slug"
+                :card="video"
+                :description="video.description"
+                :index="index"
+                :active="moreVideoHoverIdx === index"
+                @hover="moreVideoHoverIdx = index"
+                @leave="moreVideoHoverIdx = -1"
+                @click="openVideo(video.slug)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="delivery" ref="deliveryRef" class="page-section page-section--muted reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -285,25 +407,21 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import type { RouteLocationRaw } from "vue-router";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import lifeScienceShowcaseImg from "@/assets/images/product/life-science-concept.png";
+import ApplicationCard from "@/components/common/ApplicationCard.vue";
+import VideoCard from "@/components/common/VideoCard.vue";
 import applications from "@/data/applications";
 import { productCenterCards } from "@/data/product-center";
 import { solutionDirections } from "@/data/solutionIndustries";
-import { videoCards } from "@/data/videos";
+import { videoCards, videoMap } from "@/data/videos";
 import { useScrollRevealList } from "@/composables/useScrollReveal";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 interface ProductView {
   title: string;
   image: string;
-}
-
-interface HeroPromise {
-  metric: string;
-  unit?: string;
-  description: string;
 }
 
 interface FaqItem {
@@ -323,35 +441,86 @@ interface SolutionDirectionView {
   featuredProduct: string;
   featuredDescription: string;
   applicationTitle: string;
-  applicationTo: RouteLocationRaw;
-  videoSlug: string;
-  videoTitle: string;
   visualSrc: string;
   visualAlt: string;
-  visualTitle: string;
+  visualCaption: string;
+  overviewActionLabel: string;
   primaryActionLabel: string;
   primaryActionTo: RouteLocationRaw;
-  secondaryActionLabel: string;
-  secondaryActionTo: RouteLocationRaw;
+  weakActionType: "route" | "video" | "";
+  weakActionText: string;
+  weakActionTo: RouteLocationRaw | undefined;
+  weakActionVideoSlug: string;
+}
+
+interface MoreVideoView {
+  slug: string;
+  title: string;
+  description: string;
+  img: string;
+}
+
+interface MoreApplicationView {
+  slug: string;
+  title: string;
+  svg: string;
 }
 
 const featuredHeroImage = lifeScienceShowcaseImg;
+const featuredVideoSlugs = [
+  "medical-automation",
+  "composite-robot-application",
+  "vr-teleop-dual-arm",
+] as const;
+const featuredApplicationSlugs = [
+  "medical-automation",
+  "fixed-rail-transfer",
+  "composite-systems",
+  "ai-robotics",
+] as const;
+const defaultVisibleVideoCount = 3;
+const defaultVisibleApplicationCount = 4;
 
+const overviewRef = ref<HTMLElement | null>(null);
 const directionsRef = ref<HTMLElement | null>(null);
+const moreRef = ref<HTMLElement | null>(null);
 const deliveryRef = ref<HTMLElement | null>(null);
 const faqRef = ref<HTMLElement | null>(null);
 const ctaRef = ref<HTMLElement | null>(null);
 
-useScrollRevealList([directionsRef, deliveryRef, faqRef, ctaRef]);
+useScrollRevealList([overviewRef, directionsRef, moreRef, deliveryRef, faqRef, ctaRef]);
 
 const router = useRouter();
+const route = useRoute();
 const { t, tm } = useI18n();
 const { localizeTo } = useLocalizedPath();
 
 const faqStates = ref<boolean[]>([]);
+const videosExpanded = ref(false);
+const applicationsExpanded = ref(false);
+const moreVideoHoverIdx = ref(-1);
+const moreMode = ref<"applications" | "videos">("applications");
 
 function isDefined<T>(value: T | null | undefined): value is T {
   return value != null;
+}
+
+function normalizeComparableText(value: string): string {
+  return value.trim().toLowerCase();
+}
+
+function orderByFeatured<T extends { slug: string }>(
+  items: readonly T[],
+  featuredSlugs: readonly string[]
+): T[] {
+  const itemMap = new Map(items.map((item) => [item.slug, item] as const));
+  const featuredItems = featuredSlugs.map((slug) => itemMap.get(slug)).filter(isDefined);
+  const featuredSet = new Set(featuredSlugs);
+
+  return [
+    ...featuredItems,
+    ...items.filter((item) => !featuredSet.has(item.slug)),
+  ];
 }
 
 function readMessageArray(key: string): string[] {
@@ -395,6 +564,19 @@ function toggleFaq(index: number): void {
   faqStates.value[index] = !faqStates.value[index];
 }
 
+function setMoreMode(mode: "applications" | "videos"): void {
+  moreMode.value = mode;
+}
+
+function toggleMoreExpanded(): void {
+  if (moreMode.value === "applications") {
+    applicationsExpanded.value = !applicationsExpanded.value;
+    return;
+  }
+
+  videosExpanded.value = !videosExpanded.value;
+}
+
 const faqItems = computed<FaqItem[]>(() => [
   {
     question: t("solutionsPage.faq.items.selection.question"),
@@ -411,19 +593,6 @@ const faqItems = computed<FaqItem[]>(() => [
   {
     question: t("solutionsPage.faq.items.delivery.question"),
     answer: t("solutionsPage.faq.items.delivery.answer"),
-  },
-]);
-
-const heroPromises = computed<HeroPromise[]>(() => [
-  {
-    metric: t("solutionsPage.hero.promises.directions.metric"),
-    unit: t("solutionsPage.hero.promises.directions.unit"),
-    description: t("solutionsPage.hero.promises.directions.description"),
-  },
-  {
-    metric: t("solutionsPage.hero.promises.delivery.metric"),
-    unit: t("solutionsPage.hero.promises.delivery.unit"),
-    description: t("solutionsPage.hero.promises.delivery.description"),
   },
 ]);
 
@@ -463,16 +632,19 @@ const directions = computed<SolutionDirectionView[]>(() =>
     const applicationSlug = direction.applicationSlug ?? "";
     const applicationTitle = applicationTitleMap.value[applicationSlug] ?? "";
     const videoCard = direction.videoSlug ? videoCardMap.value[direction.videoSlug] : undefined;
+    const featuredProduct = t(`solutionsPage.directions.${direction.key}.featuredProduct`);
+    const visualTitle = isLifeScience
+      ? t("solutionsPage.hero.featuredTitle")
+      : visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`);
+    const visualCaption = visualTitle && normalizeComparableText(visualTitle) !== normalizeComparableText(featuredProduct)
+      ? visualTitle
+      : "";
 
     const primaryActionTo = isLifeScience
       ? localizeTo({ path: "/support", hash: "#contact" })
       : localizeTo({ path: `/applications/${applicationSlug}` });
-
-    const secondaryActionTo = localizeTo(
-      direction.productSectionHash
-        ? { path: "/products", hash: direction.productSectionHash }
-        : { path: "/products" }
-    );
+    const showApplicationAsWeakAction = Boolean(isLifeScience && applicationTitle);
+    const showVideoAsWeakAction = false;
 
     return {
       key: direction.key,
@@ -481,27 +653,92 @@ const directions = computed<SolutionDirectionView[]>(() =>
       status: direction.status ? t(`solutionsPage.directions.${direction.key}.status`) : "",
       summary: t(`solutionsPage.directions.${direction.key}.summary`),
       combo: t(`solutionsPage.directions.${direction.key}.combo`),
-      scenarios: readMessageArray(`solutionsPage.directions.${direction.key}.scenarios`),
-      capabilityPoints: readMessageArray(`solutionsPage.directions.${direction.key}.capabilityPoints`),
-      featuredProduct: t(`solutionsPage.directions.${direction.key}.featuredProduct`),
+      scenarios: readMessageArray(`solutionsPage.directions.${direction.key}.scenarios`).slice(0, 3),
+      capabilityPoints: readMessageArray(`solutionsPage.directions.${direction.key}.capabilityPoints`).slice(0, 3),
+      featuredProduct,
       featuredDescription: t(`solutionsPage.directions.${direction.key}.featuredDescription`),
       applicationTitle,
-      applicationTo: localizeTo({ path: `/applications/${applicationSlug}` }),
-      videoSlug: direction.videoSlug ?? "",
-      videoTitle: videoCard ? t(videoCard.title) : "",
       visualSrc: isLifeScience ? featuredHeroImage : visualProduct?.image ?? featuredHeroImage,
       visualAlt: isLifeScience
         ? t("solutionsPage.hero.featuredTitle")
         : visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`),
-      visualTitle: isLifeScience
-        ? t("solutionsPage.hero.featuredTitle")
-        : visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`),
+      visualCaption,
+      overviewActionLabel: t(`solutionsPage.directions.${direction.key}.overviewAction`),
       primaryActionLabel: t(`solutionsPage.directions.${direction.key}.primaryAction`),
       primaryActionTo,
-      secondaryActionLabel: t(`solutionsPage.directions.${direction.key}.secondaryAction`),
-      secondaryActionTo,
+      weakActionType: showApplicationAsWeakAction ? "route" : showVideoAsWeakAction ? "video" : "",
+      weakActionText: showApplicationAsWeakAction
+        ? t("solutionsPage.directions.common.applicationAction")
+        : showVideoAsWeakAction
+          ? t("solutionsPage.directions.common.videoAction")
+          : "",
+      weakActionTo: showApplicationAsWeakAction
+        ? localizeTo({ path: `/applications/${applicationSlug}` })
+        : undefined,
+      weakActionVideoSlug: showVideoAsWeakAction ? direction.videoSlug ?? "" : "",
     };
   })
+);
+
+const moreVideos = computed<MoreVideoView[]>(() =>
+  orderByFeatured(videoCards, featuredVideoSlugs).map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    description: t(videoMap[item.slug]?.desc ?? ""),
+    img: item.img,
+  }))
+);
+
+const moreApplications = computed<MoreApplicationView[]>(() =>
+  orderByFeatured(applications, featuredApplicationSlugs).map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    svg: item.svg,
+  }))
+);
+
+const visibleMoreVideos = computed(() =>
+  videosExpanded.value
+    ? moreVideos.value
+    : moreVideos.value.slice(0, defaultVisibleVideoCount)
+);
+
+const visibleMoreApplications = computed(() =>
+  applicationsExpanded.value
+    ? moreApplications.value
+    : moreApplications.value.slice(0, defaultVisibleApplicationCount)
+);
+
+const activeMoreExpanded = computed(() =>
+  moreMode.value === "applications" ? applicationsExpanded.value : videosExpanded.value
+);
+
+const activeMoreTitle = computed(() =>
+  moreMode.value === "applications"
+    ? t("solutionsPage.more.applicationsTitle")
+    : t("solutionsPage.more.videosTitle")
+);
+
+const activeMoreGuide = computed(() =>
+  moreMode.value === "applications"
+    ? t(
+        applicationsExpanded.value
+          ? "solutionsPage.more.applicationGuideExpanded"
+          : "solutionsPage.more.applicationGuide",
+        {
+          visible: defaultVisibleApplicationCount,
+          total: moreApplications.value.length,
+        }
+      )
+    : t(
+        videosExpanded.value
+          ? "solutionsPage.more.videoGuideExpanded"
+          : "solutionsPage.more.videoGuide",
+        {
+          visible: defaultVisibleVideoCount,
+          total: moreVideos.value.length,
+        }
+      )
 );
 
 const deliverySteps = computed(() => [
@@ -532,6 +769,21 @@ watch(
   },
   { immediate: true }
 );
+
+watch(
+  () => route.hash,
+  (hash) => {
+    if (hash === "#more-videos") {
+      moreMode.value = "videos";
+      return;
+    }
+
+    if (hash === "#more-applications" || hash === "#more") {
+      moreMode.value = "applications";
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped lang="less">
@@ -546,7 +798,7 @@ watch(
   background-color: var(--section-surface);
 }
 
-.solutions-page > .page-section:nth-of-type(even) {
+.solutions-page > .page-section.page-section--muted {
   --section-surface: var(--brand-surface-soft);
   --section-card-surface: var(--brand-surface);
 }
@@ -567,7 +819,7 @@ watch(
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(520px, 0.92fr);
-  gap: 48px;
+  gap: 32px;
   align-items: start;
 }
 
@@ -619,7 +871,8 @@ watch(
 }
 
 .hero-actions .btn,
-.direction-card__header-actions .btn,
+.direction-card__actions .btn,
+.more-toggle,
 .contact-actions .btn {
   min-height: var(--compact-hero-button-height);
   padding: 0 var(--compact-hero-button-padding-inline);
@@ -632,7 +885,7 @@ watch(
   width: min(100%, 760px);
   margin: var(--compact-hero-panel-padding-top) 0 0 auto;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 24px;
   border: 1px solid rgba(15, 23, 42, 0.06);
   background: radial-gradient(circle at center, #ffffff 0%, #eef2f8 100%);
   box-shadow: 0 24px 56px rgba(15, 23, 42, 0.08);
@@ -692,51 +945,6 @@ watch(
   line-height: 1.68;
 }
 
-.hero-promises {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px 28px;
-  margin-top: 36px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-.hero-promise {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.hero-promise-head {
-  display: flex;
-  align-items: flex-end;
-  gap: var(--compact-hero-kpi-gap);
-}
-
-.hero-promise-value {
-  color: var(--brand-text);
-  font-family: "Outfit", sans-serif;
-  font-size: var(--compact-hero-kpi-value-size);
-  font-weight: 600;
-  line-height: var(--compact-hero-kpi-value-line-height);
-  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
-}
-
-.hero-promise-unit {
-  color: var(--brand-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  padding-bottom: 2px;
-}
-
-.hero-promise-label {
-  margin: 0;
-  color: var(--brand-muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
 .page-section {
   padding: 84px 0;
   scroll-margin-top: calc(var(--nav-height) + 72px);
@@ -776,23 +984,134 @@ watch(
   gap: 24px;
 }
 
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.overview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100%;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.overview-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.05);
+}
+
+.overview-card--planning,
+.direction-card--planning {
+  border-color: rgba(245, 158, 11, 0.18);
+  box-shadow: 0 8px 24px rgba(146, 64, 14, 0.04);
+}
+
+.overview-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.overview-card__title {
+  margin: 0;
+  color: var(--brand-text);
+  font-family: "Outfit", sans-serif;
+}
+
+.overview-card__title {
+  font-size: 1.3rem;
+  line-height: 1.28;
+}
+
+.overview-card__summary,
+.overview-card__support-value,
+.more-panel__guide {
+  margin: 0;
+  color: var(--brand-muted);
+  line-height: 1.72;
+}
+
+.overview-card__summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.overview-card__support {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.overview-card__support-label {
+  color: var(--brand-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.overview-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  margin-top: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(15, 23, 42, 0.74);
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.overview-card__link:hover {
+  color: var(--brand-primary);
+  transform: translateX(2px);
+}
+
+.overview-card__link svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
+}
+
+.overview-card__link:hover svg {
+  transform: translateX(4px);
+}
+
 .delivery-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
   min-height: 100%;
   padding: 28px;
-  border-radius: 20px;
+  border-radius: 16px;
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.05);
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-.delivery-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.12);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.05);
+.delivery-card::after,
+.delivery-card::before {
+  display: none;
 }
 
 .card-index {
@@ -816,12 +1135,12 @@ watch(
 .direction-list {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 40px;
 }
 
 .direction-card {
   padding: 28px;
-  border-radius: 20px;
+  border-radius: 16px;
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.05);
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
@@ -830,7 +1149,7 @@ watch(
 
 .direction-card:hover {
   border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.045);
 }
 
 .direction-card__header {
@@ -867,22 +1186,34 @@ watch(
   color: #55627d;
 }
 
+.status-chip--planning {
+  background: rgba(196, 138, 47, 0.08);
+  border-color: rgba(196, 138, 47, 0.16);
+  color: #8b6a20;
+}
+
 .direction-card__title {
   font-size: clamp(1.55rem, 2vw, 2rem);
 }
 
 .direction-card__summary {
   margin-top: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.direction-card__header-actions {
+.direction-card__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  justify-content: flex-end;
 }
 
-.direction-card__header-actions .btn {
+.direction-card__actions .btn {
   min-height: 46px;
   padding: 0 20px;
   font-size: 0.94rem;
@@ -911,7 +1242,7 @@ watch(
   min-height: 360px;
   padding: 24px;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 16px;
   background: radial-gradient(circle at center, #ffffff 0%, #eef2f8 100%);
   border: 1px solid rgba(15, 23, 42, 0.05);
 }
@@ -931,34 +1262,41 @@ watch(
 
 .direction-card__visual-title {
   margin: 0;
-  color: var(--brand-text);
-  font-size: 0.98rem;
-  font-weight: 600;
+  color: rgba(15, 23, 42, 0.56);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   line-height: 1.6;
 }
 
 .direction-card__content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .direction-card__sections {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 28px;
+  gap: 18px 32px;
 }
 
 .content-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  gap: 8px;
+}
+
+.content-group + .content-group {
+  padding-top: 18px;
 }
 
 .content-group--primary {
   grid-column: 1 / -1;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.024);
+  border: 1px solid rgba(15, 23, 42, 0.045);
 }
 
 .content-group__label {
@@ -973,21 +1311,21 @@ watch(
 .content-block__combo {
   margin: 0;
   color: var(--brand-text);
-  font-size: 1rem;
+  font-size: 1.02rem;
   font-weight: 600;
-  line-height: 1.75;
+  line-height: 1.68;
 }
 
 .content-block__support {
   margin: 0;
   color: var(--brand-muted);
-  font-size: 0.95rem;
-  line-height: 1.78;
+  font-size: 0.92rem;
+  line-height: 1.72;
 }
 
 .detail-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -995,28 +1333,42 @@ watch(
 
 .detail-list li {
   position: relative;
-  padding-left: 18px;
+  padding-left: 16px;
   color: var(--brand-text);
-  line-height: 1.76;
+  line-height: 1.68;
 }
 
 .detail-list li::before {
   content: "";
   position: absolute;
-  top: 12px;
+  top: 11px;
   left: 0;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--brand-primary);
+}
+
+.direction-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.direction-card__footer--single {
+  justify-content: flex-end;
 }
 
 .direction-card__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .text-link {
@@ -1026,7 +1378,7 @@ watch(
   padding: 0;
   border: none;
   background: transparent;
-  color: inherit;
+  color: rgba(15, 23, 42, 0.62);
   text-align: left;
   cursor: pointer;
   transition: color 0.25s ease, transform 0.25s ease;
@@ -1038,17 +1390,113 @@ watch(
   text-decoration: none;
 }
 
-.text-link__label {
-  color: var(--brand-muted);
-  font-size: 0.82rem;
+.text-link__text {
+  color: currentColor;
+  font-size: 0.94rem;
+  font-weight: 500;
   line-height: 1.5;
-  flex-shrink: 0;
 }
 
-.text-link__value {
-  color: var(--brand-primary);
+.text-link__arrow {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.text-link:hover .text-link__arrow {
+  transform: translateX(4px);
+}
+
+.more-stack {
+  display: grid;
+  gap: 20px;
+}
+
+.more-anchor {
+  height: 0;
+  scroll-margin-top: calc(var(--nav-height) + 72px);
+}
+
+.more-panel {
+  display: grid;
+  gap: 24px;
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.03);
+}
+
+.more-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.more-switcher__item {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--brand-muted);
+  font-size: 0.92rem;
   font-weight: 600;
-  line-height: 1.6;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.more-switcher__item.active {
+  background: #ffffff;
+  color: var(--brand-text);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.more-panel__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.more-panel__heading {
+  max-width: 640px;
+}
+
+.more-panel__title {
+  margin: 0;
+  color: var(--brand-text);
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.24;
+}
+
+.more-panel__guide {
+  margin-top: 8px;
+  color: rgba(15, 23, 42, 0.58);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.more-toggle {
+  flex: none;
+}
+
+.more-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.more-application-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
 }
 
 .delivery-grid {
@@ -1066,7 +1514,7 @@ watch(
 
 .faq-item {
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.06);
   background: var(--section-card-surface);
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
@@ -1126,16 +1574,10 @@ watch(
   justify-content: space-between;
   gap: 32px;
   padding: 36px;
-  border-radius: 28px;
+  border-radius: 24px;
   background: linear-gradient(135deg, #ffffff 0%, #f3f6fb 100%);
   border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.contact-panel:hover {
-  border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.06);
 }
 
 .contact-copy {
@@ -1170,6 +1612,12 @@ watch(
     grid-template-columns: 1fr;
   }
 
+  .overview-grid,
+  .more-application-grid,
+  .more-video-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .hero-stage {
     width: 100%;
     max-width: none;
@@ -1179,12 +1627,13 @@ watch(
     margin-bottom: 24px;
   }
 
-  .direction-card__header-actions {
-    margin-top: 22px;
-  }
-
   .delivery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .delivery-card::after,
+  .delivery-card::before {
+    display: none;
   }
 }
 
@@ -1193,9 +1642,13 @@ watch(
     padding-bottom: 32px;
   }
 
-  .hero-promises,
   .direction-card__sections {
     grid-template-columns: 1fr;
+  }
+
+  .more-panel__header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .contact-panel {
@@ -1209,6 +1662,9 @@ watch(
     padding: 64px 0;
   }
 
+  .overview-grid,
+  .more-application-grid,
+  .more-video-grid,
   .delivery-grid {
     grid-template-columns: 1fr;
   }
@@ -1218,6 +1674,8 @@ watch(
   }
 
   .direction-card,
+  .overview-card,
+  .more-panel,
   .delivery-card,
   .contact-panel {
     padding: 24px;
@@ -1258,18 +1716,33 @@ watch(
     padding: 12px 18px 20px;
   }
 
+  .direction-card__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .direction-card__links {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
+  }
+
+  .more-switcher {
+    width: 100%;
+  }
+
+  .more-switcher__item {
+    flex: 1 1 0;
   }
 
   .contact-actions,
-  .direction-card__header-actions {
+  .direction-card__actions {
     width: 100%;
   }
 
   .contact-actions .btn,
-  .direction-card__header-actions .btn {
+  .direction-card__actions .btn,
+  .more-toggle {
     width: 100%;
     justify-content: center;
   }

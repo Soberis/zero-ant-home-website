@@ -5,8 +5,8 @@
         <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
         <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
       </div>
-      <router-link :to="localizeTo({ path: '/solutions', hash: '#directions' })" class="section-cta">
-        <span>{{ t("solutionsPage.more.videos") }}</span>
+      <router-link :to="localizeTo({ path: '/solutions', hash: '#more-videos' })" class="section-cta">
+        <span>{{ t("home.videoCases.exploreAll") }}</span>
         <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
@@ -102,14 +102,8 @@ const goToVideo = (slug: string) => {
   margin-bottom: var(--space-lg);
 }
 
-@media (max-width: 1680px) and (min-width: 901px) {
-  .section-heading-row {
-    padding-right: 72px;
-  }
-}
-
 .section-heading {
-  max-width: 700px;
+  max-width: 760px;
   margin-bottom: 0;
 }
 
@@ -157,23 +151,12 @@ const goToVideo = (slug: string) => {
   .spotlight-section {
     padding: var(--space-xl) var(--space-md);
   }
-
-  .section-heading-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding-right: 72px;
-  }
 }
 
 @media (max-width: 680px) {
   .spotlight-section {
     padding-left: var(--space-sm);
     padding-right: var(--space-sm);
-  }
-
-  .section-heading-row {
-    padding-right: 64px;
   }
 }
 
