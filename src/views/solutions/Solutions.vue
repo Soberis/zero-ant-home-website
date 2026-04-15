@@ -10,9 +10,22 @@
             <button type="button" class="btn btn-primary" @click="scrollToSection('overview')">
               {{ t("solutionsPage.hero.primaryCta") }}
             </button>
-            <router-link class="btn btn-secondary" :to="localizeTo({ path: '/support', hash: '#contact' })">
-              {{ t("solutionsPage.hero.secondaryCta") }}
-            </router-link>
+          </div>
+
+          <div class="hero-promises">
+            <article class="hero-promise">
+              <div class="hero-promise-head">
+                <span class="hero-promise-value">{{ t("solutionsPage.hero.promises.directions.metric") }}</span>
+              </div>
+              <p class="hero-promise-label">{{ t("solutionsPage.hero.promises.directions.description") }}</p>
+            </article>
+            <article class="hero-promise">
+              <div class="hero-promise-head">
+                <span class="hero-promise-value">{{ t("solutionsPage.hero.promises.delivery.metric") }}</span>
+                <span class="hero-promise-unit">{{ t("solutionsPage.hero.promises.delivery.unit") }}</span>
+              </div>
+              <p class="hero-promise-label">{{ t("solutionsPage.hero.promises.delivery.description") }}</p>
+            </article>
           </div>
         </div>
 
@@ -34,7 +47,7 @@
       </div>
     </section>
 
-    <section id="overview" ref="overviewRef" class="page-section reveal-ready">
+    <section id="overview" ref="overviewRef" class="page-section page-section--muted reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -185,38 +198,7 @@
                   </div>
                 </div>
 
-                <div
-                  class="direction-card__footer"
-                  :class="{ 'direction-card__footer--single': !direction.weakActionText }"
-                >
-                  <div
-                    v-if="direction.weakActionText"
-                    class="direction-card__links"
-                  >
-                    <router-link
-                      v-if="direction.weakActionType === 'route' && direction.weakActionTo"
-                      class="text-link"
-                      :to="direction.weakActionTo"
-                    >
-                      <span class="text-link__text">{{ direction.weakActionText }}</span>
-                      <svg class="text-link__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </router-link>
-
-                    <button
-                      v-else-if="direction.weakActionType === 'video' && direction.weakActionVideoSlug"
-                      type="button"
-                      class="text-link"
-                      @click="openVideo(direction.weakActionVideoSlug)"
-                    >
-                      <span class="text-link__text">{{ direction.weakActionText }}</span>
-                      <svg class="text-link__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </button>
-                  </div>
-
+                <div class="direction-card__footer direction-card__footer--single">
                   <div class="direction-card__actions">
                     <router-link class="btn btn-primary" :to="direction.primaryActionTo">
                       {{ direction.primaryActionLabel }}
@@ -230,7 +212,7 @@
       </div>
     </section>
 
-    <section id="more" ref="moreRef" class="page-section reveal-ready">
+    <section id="more" ref="moreRef" class="page-section page-section--muted reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -309,7 +291,7 @@
       </div>
     </section>
 
-    <section id="delivery" ref="deliveryRef" class="page-section page-section--muted reveal-ready">
+    <section id="delivery" ref="deliveryRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -332,7 +314,7 @@
       </div>
     </section>
 
-    <section id="faq" ref="faqRef" class="page-section reveal-ready">
+    <section id="faq" ref="faqRef" class="page-section page-section--muted reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
@@ -378,7 +360,7 @@
       </div>
     </section>
 
-    <section ref="ctaRef" class="page-section page-section--final reveal-ready">
+    <section ref="ctaRef" class="page-section page-section--muted reveal-ready">
       <div class="page-shell">
         <div class="contact-panel">
           <div class="contact-copy">
@@ -391,12 +373,9 @@
           </div>
 
           <div class="contact-actions">
-            <router-link class="btn btn-primary" :to="localizeTo({ path: '/support', hash: '#contact' })">
+            <router-link class="btn btn-primary" :to="localizeTo({ path: '/about', hash: '#contact' })">
               {{ t("solutionsPage.finalCta.primaryCta") }}
             </router-link>
-            <a class="btn btn-secondary" href="mailto:liqingfeng@zeroant.com">
-              {{ t("solutionsPage.finalCta.secondaryCta") }}
-            </a>
           </div>
         </div>
       </div>
@@ -447,10 +426,6 @@ interface SolutionDirectionView {
   overviewActionLabel: string;
   primaryActionLabel: string;
   primaryActionTo: RouteLocationRaw;
-  weakActionType: "route" | "video" | "";
-  weakActionText: string;
-  weakActionTo: RouteLocationRaw | undefined;
-  weakActionVideoSlug: string;
 }
 
 interface MoreVideoView {
@@ -643,8 +618,6 @@ const directions = computed<SolutionDirectionView[]>(() =>
     const primaryActionTo = isLifeScience
       ? localizeTo({ path: "/support", hash: "#contact" })
       : localizeTo({ path: `/applications/${applicationSlug}` });
-    const showApplicationAsWeakAction = Boolean(isLifeScience && applicationTitle);
-    const showVideoAsWeakAction = false;
 
     return {
       key: direction.key,
@@ -666,16 +639,6 @@ const directions = computed<SolutionDirectionView[]>(() =>
       overviewActionLabel: t(`solutionsPage.directions.${direction.key}.overviewAction`),
       primaryActionLabel: t(`solutionsPage.directions.${direction.key}.primaryAction`),
       primaryActionTo,
-      weakActionType: showApplicationAsWeakAction ? "route" : showVideoAsWeakAction ? "video" : "",
-      weakActionText: showApplicationAsWeakAction
-        ? t("solutionsPage.directions.common.applicationAction")
-        : showVideoAsWeakAction
-          ? t("solutionsPage.directions.common.videoAction")
-          : "",
-      weakActionTo: showApplicationAsWeakAction
-        ? localizeTo({ path: `/applications/${applicationSlug}` })
-        : undefined,
-      weakActionVideoSlug: showVideoAsWeakAction ? direction.videoSlug ?? "" : "",
     };
   })
 );
@@ -813,7 +776,7 @@ watch(
 .solutions-hero {
   min-height: var(--compact-hero-min-height);
   padding: var(--compact-hero-padding-top) 0 40px;
-  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
+  background: radial-gradient(circle at center, #ffffff 0%, #f1f3f8 100%);
 }
 
 .hero-grid {
@@ -870,6 +833,51 @@ watch(
   margin-top: 28px;
 }
 
+.hero-promises {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+  margin-top: 44px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.hero-promise {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-promise-head {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--compact-hero-kpi-gap);
+}
+
+.hero-promise-value {
+  color: var(--brand-text);
+  font-family: "Outfit", sans-serif;
+  font-size: var(--compact-hero-kpi-value-size);
+  font-weight: 600;
+  line-height: var(--compact-hero-kpi-value-line-height);
+  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
+}
+
+.hero-promise-unit {
+  color: var(--brand-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding-bottom: 2px;
+}
+
+.hero-promise-label {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
 .hero-actions .btn,
 .direction-card__actions .btn,
 .more-toggle,
@@ -887,7 +895,7 @@ watch(
   overflow: hidden;
   border-radius: 24px;
   border: 1px solid rgba(15, 23, 42, 0.06);
-  background: radial-gradient(circle at center, #ffffff 0%, #eef2f8 100%);
+  background: radial-gradient(circle at center, var(--color-background-white) 0%, var(--color-primary-light) 100%);
   box-shadow: 0 24px 56px rgba(15, 23, 42, 0.08);
 }
 
@@ -1005,15 +1013,11 @@ watch(
 
 .overview-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.05);
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 16px 32px rgba(26, 58, 143, 0.08);
 }
 
-.overview-card--planning,
-.direction-card--planning {
-  border-color: rgba(245, 158, 11, 0.18);
-  box-shadow: 0 8px 24px rgba(146, 64, 14, 0.04);
-}
+
 
 .overview-card__meta {
   display: flex;
@@ -1105,8 +1109,15 @@ watch(
   padding: 28px;
   border-radius: 16px;
   background: var(--section-card-surface);
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.02);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delivery-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 58, 143, 0.12);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.05);
 }
 
 .delivery-card::after,
@@ -1148,8 +1159,8 @@ watch(
 }
 
 .direction-card:hover {
-  border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.045);
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 14px 30px rgba(26, 58, 143, 0.06);
 }
 
 .direction-card__header {
@@ -1243,7 +1254,7 @@ watch(
   padding: 24px;
   overflow: hidden;
   border-radius: 16px;
-  background: radial-gradient(circle at center, #ffffff 0%, #eef2f8 100%);
+  background: radial-gradient(circle at center, var(--color-background-white) 0%, var(--color-primary-light) 100%);
   border: 1px solid rgba(15, 23, 42, 0.05);
 }
 
@@ -1295,8 +1306,8 @@ watch(
   grid-column: 1 / -1;
   padding: 16px 18px;
   border-radius: 14px;
-  background: rgba(15, 23, 42, 0.024);
-  border: 1px solid rgba(15, 23, 42, 0.045);
+  background: rgba(26, 58, 143, 0.024);
+  border: 1px solid rgba(26, 58, 143, 0.06);
 }
 
 .content-group__label {
@@ -1352,60 +1363,11 @@ watch(
 .direction-card__footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 18px;
   margin-top: auto;
   padding-top: 16px;
   border-top: 1px solid rgba(15, 23, 42, 0.06);
-}
-
-.direction-card__footer--single {
-  justify-content: flex-end;
-}
-
-.direction-card__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: rgba(15, 23, 42, 0.62);
-  text-align: left;
-  cursor: pointer;
-  transition: color 0.25s ease, transform 0.25s ease;
-}
-
-.text-link:hover {
-  transform: translateX(2px);
-  color: var(--brand-primary);
-  text-decoration: none;
-}
-
-.text-link__text {
-  color: currentColor;
-  font-size: 0.94rem;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.text-link__arrow {
-  width: 18px;
-  height: 18px;
-  color: currentColor;
-  transition: transform 0.25s ease;
-}
-
-.text-link:hover .text-link__arrow {
-  transform: translateX(4px);
 }
 
 .more-stack {
@@ -1580,6 +1542,33 @@ watch(
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
 }
 
+.contact-panel .title-main {
+  color: var(--brand-text);
+}
+
+.contact-panel .detail-section__desc {
+  color: var(--brand-muted);
+}
+
+.contact-panel .btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.contact-panel .btn-primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.contact-panel .btn-secondary {
+  border-color: var(--brand-border);
+  color: var(--brand-text);
+}
+
+.contact-panel .btn-secondary:hover {
+  background: var(--brand-surface-soft);
+  border-color: rgba(15, 23, 42, 0.18);
+}
+
 .contact-copy {
   max-width: 720px;
 }
@@ -1662,6 +1651,10 @@ watch(
     padding: 64px 0;
   }
 
+  .hero-promises {
+    grid-template-columns: 1fr;
+  }
+
   .overview-grid,
   .more-application-grid,
   .more-video-grid,
@@ -1719,12 +1712,6 @@ watch(
   .direction-card__footer {
     flex-direction: column;
     align-items: stretch;
-  }
-
-  .direction-card__links {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
   }
 
   .more-switcher {

@@ -159,9 +159,9 @@
       "description": "Built around life science, smart manufacturing logistics, and embodied R&D, the page helps teams judge fit first and then move into product combinations, proof, and delivery path.",
       "primaryCta": "View Three Directions",
       "secondaryCta": "Contact an Engineer",
-      "featuredLabel": "Planned Workstation Direction",
+      "featuredLabel": "In Development",
       "featuredTitle": "Dual-Arm Sterile Preparation Workstation",
-      "featuredDescription": "A closed dual-arm workstation for sample handling, liquid preparation, and sterile workflows. Currently in development.",
+      "featuredDescription": "Architected around a closed chamber and dual-arm coordination — a next-gen intelligent preparation platform for life sciences, in active development.",
       "promises": {
         "directions": {
           "metric": "03",
@@ -175,10 +175,10 @@
         }
       },
       "featurePoints": [
-        "Closed work chamber",
-        "Dual-arm precision handling",
-        "Multi-modal visual sensing",
-        "Standardized material organization"
+        "ISO-grade closed chamber",
+        "Millimeter-level dual-arm coordination",
+        "Multi-modal vision fusion",
+        "Standardized workflow orchestration"
       ],
       "stats": {
         "industry": {
@@ -224,23 +224,23 @@
       },
       "lifeScienceAutomation": {
         "title": "Life Science & Sterile Automation",
-        "status": "Planning Direction",
-        "summary": "A workstation direction for sample handling, liquid preparation, dispensing, and sterile workflows.",
-        "detail": "This direction plans single-arm or dual-arm workstations around clean handling, samples, consumables, and sterile process flows.",
+        "status": "In Development",
+        "summary": "Redefining sample processing and sterile preparation with closed-chamber dual-arm architecture for the life sciences.",
+        "detail": "Building next-gen single- and dual-arm workstation platforms for clean operations, sample flows, and formulation processes — actively in development.",
         "combo": "D / T Series + ZA-ZG100 + vision modules + high-precision end effectors",
         "featuredProduct": "Dual-Arm Sterile Preparation Workstation",
-        "featuredDescription": "Centered on a closed work chamber and dual-arm coordination for samples, consumables, and sterile process tasks.",
+        "featuredDescription": "A next-gen intelligent platform architected around a closed chamber and dual-arm coordination for samples, consumables, and formulation workflows.",
         "capabilityPoints": [
-          "Closed work chamber for cleaner organization",
-          "Dual-arm fine handling for small materials",
-          "Top-view and near-field vision working together",
-          "Standardized setup around sample and consumable workflows"
+          "ISO-grade closed chamber for full-process contamination control",
+          "High-precision dual-arm coordination with millimeter-level end manipulation",
+          "Multi-modal vision fusion — top-down and near-field sensing in concert",
+          "Standardized orchestration engine for sample and consumable workflows"
         ],
         "scenarios": [
-          "Sample sorting, scanning, and tube loading",
-          "Precise liquid handling and consumable assembly",
-          "Dual-arm coordinated operation in enclosed spaces",
-          "Planning for intelligent dispensing workstations"
+          "Intelligent sample sorting, barcode scanning, and automated tube racking",
+          "Precision liquid handling, titration, and consumable assembly",
+          "Dual-arm coordinated sterile operation in enclosed environments",
+          "In-development intelligent dispensing and formulation workstation"
         ],
         "overviewAction": "Explore This Direction",
         "primaryAction": "Ask About Development Progress",
@@ -390,7 +390,7 @@
     "finalCta": {
       "title": "Want to judge fit first?",
       "description": "Share the workstation target, takt, and space limits. ZeroAnt engineers can suggest a more suitable solution path.",
-      "primaryCta": "Submit Requirements",
+      "primaryCta": "Contact Our Team",
       "secondaryCta": "Contact an Engineer"
     },
     "faq": {

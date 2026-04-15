@@ -368,17 +368,47 @@ function formatIndex(value: number): string {
 }
 
 .about-main > .page-section {
-  --section-surface: #ffffff;
-  --section-card-surface: #f8f9fb;
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
   background-color: var(--section-surface);
   padding: 88px 0;
   scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
-.about-main > .page-section:nth-of-type(even) {
-  --section-surface: #f8f9fb;
-  --section-card-surface: #ffffff;
-  background-color: var(--section-surface);
+/* 公司介绍 - 灰色背景，白色卡片 */
+.about-main > .page-section:nth-of-type(1) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+/* 发展历史 - 白色背景，灰色卡片 */
+.about-main > .page-section:nth-of-type(2) {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+}
+
+/* 成果荣誉 - 灰色背景，白色卡片 */
+.about-main > .page-section:nth-of-type(3) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+/* 核心价值观 - 白色背景，灰色卡片 */
+.about-main > .page-section:nth-of-type(4) {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+}
+
+/* 企业文化 - 灰色背景，白色卡片 */
+.about-main > .page-section:nth-of-type(5) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+/* 联系我们 - 白色背景，灰色卡片 */
+.about-main > .page-section:nth-of-type(6) {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
 }
 
 .detail-section__header {
