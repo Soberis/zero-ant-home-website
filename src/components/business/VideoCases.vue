@@ -42,9 +42,9 @@ const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
 
 const SPOTLIGHT_SLUGS = [
-  "vr-remote-franka-dual-arm",
   "composite-robot-application",
-  "sketching-robot",
+  "vr-teleop-dual-arm",
+  "vla-dual-arm-cable-grasping",
 ];
 
 const hoverIdx = ref(-1);
@@ -147,7 +147,7 @@ const goToVideo = (slug: string) => {
   margin-top: var(--space-sm);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 960px) {
   .spotlight-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

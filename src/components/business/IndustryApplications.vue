@@ -102,7 +102,7 @@ const featuredApps = computed(() =>
   gap: 24px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 960px) {
   .apps-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

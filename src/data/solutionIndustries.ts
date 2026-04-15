@@ -18,6 +18,7 @@ export const solutionDirections: SolutionDirectionConfig[] = [
     key: "lifeScienceAutomation",
     productSlugs: ["za-r3t", "za-r3d6", "za-zg100"],
     applicationSlug: "medical-automation",
+    videoSlug: "medical-automation",
     productSectionHash: "#dt-series",
     status: "planning",
   },
@@ -33,7 +34,7 @@ export const solutionDirections: SolutionDirectionConfig[] = [
     productSlugs: ["za-r3t", "za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
     visualProductSlug: "za-rmvr",
     applicationSlug: "ai-robotics",
-    videoSlug: "vr-remote-franka-dual-arm",
+    videoSlug: "vr-teleop-dual-arm",
     productSectionHash: "#embodied-platforms",
   },
 ];

@@ -48,6 +48,7 @@
 
 <script setup lang="ts">
 import zaR3XImg from '@/assets/images/product/ZA-R3-X.webp';
+import zaR3TImg from '@/assets/images/product/ZA-R3T.webp';
 import zaM135Img from '@/assets/images/product/ZA-M135.webp';
 import zaMR3TImg from '@/assets/images/product/ZA-MR3T.webp';
 import zaRMVRImg from '@/assets/images/product/ZA-RMVR具身智能双臂VR遥操作开发平台.webp';
@@ -66,6 +67,13 @@ const productFamilies = [
     descriptionKey: 'home.coreProducts.families.rSeries.description',
     image: zaR3XImg,
     models: ['ZA-R3', 'ZA-R3X', 'ZA-R3M(L)', 'ZA-R3M(R)'],
+  },
+  {
+    key: 'dt-series',
+    titleKey: 'home.coreProducts.families.dtSeries.title',
+    descriptionKey: 'home.coreProducts.families.dtSeries.description',
+    image: zaR3TImg,
+    models: ['ZA-R3D6', 'ZA-R3T'],
   },
   {
     key: 'm-series',
@@ -161,7 +169,7 @@ const productFamilies = [
 
 .family-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 28px;
 }
 
@@ -267,7 +275,13 @@ const productFamilies = [
   transform: translateX(3px);
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1280px) {
+  .family-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
   .family-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

@@ -313,18 +313,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/applications/servo-motor-station</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/applications/servo-motor-station</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://zeroant.com/applications/robot-daily-task</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -344,30 +332,6 @@
   </url>
   <url>
     <loc>https://zeroant.com/en/applications/smart-logistics</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/applications/industrial-control</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/applications/industrial-control</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/applications/vr-teleoperation</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/applications/vr-teleoperation</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -481,18 +445,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/video/servo-motor-station</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/video/servo-motor-station</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://zeroant.com/video/mobile-transfer-robot</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -500,18 +452,6 @@
   </url>
   <url>
     <loc>https://zeroant.com/en/video/mobile-transfer-robot</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/video/rtos-ethercat-validation</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroant.com/en/video/rtos-ethercat-validation</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -541,13 +481,49 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/video/vr-remote-franka-dual-arm</loc>
+    <loc>https://zeroant.com/video/za-r3ml-demo</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroant.com/en/video/vr-remote-franka-dual-arm</loc>
+    <loc>https://zeroant.com/en/video/za-r3ml-demo</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zeroant.com/video/vr-teleop-dual-arm</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zeroant.com/en/video/vr-teleop-dual-arm</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zeroant.com/video/vla-dual-arm-cable-grasping</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zeroant.com/en/video/vla-dual-arm-cable-grasping</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zeroant.com/video/vla-dual-arm-data-collection</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zeroant.com/en/video/vla-dual-arm-data-collection</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

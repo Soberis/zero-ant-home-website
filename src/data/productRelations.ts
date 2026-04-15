@@ -16,11 +16,11 @@ export type ProductRelationsData = Record<string, ProductRelation>;
 export const productRelations: ProductRelationsData = {
   "za-r3-x": {
     applicationSlugs: ["fixed-rail-transfer", "robot-daily-task", "medical-automation"],
-    videoSlugs: ["fixed-rail-transfer-robot", "four-axis-robot-open-fridge", "medical-automation"],
+    videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo", "medical-automation"],
   },
   "za-r3d6": {
-    applicationSlugs: ["fixed-rail-transfer", "servo-motor-station", "robot-daily-task"],
-    videoSlugs: ["fixed-rail-transfer-robot", "servo-motor-station", "four-axis-robot-open-fridge"],
+    applicationSlugs: ["cultural-creative"],
+    videoSlugs: ["sketching-robot"],
   },
   "za-r3l-m-h": {
     applicationSlugs: ["medical-automation", "robot-daily-task", "fixed-rail-transfer"],
@@ -28,15 +28,15 @@ export const productRelations: ProductRelationsData = {
   },
   "za-r3m-left": {
     applicationSlugs: ["fixed-rail-transfer", "composite-systems", "robot-daily-task"],
-    videoSlugs: ["fixed-rail-transfer-robot", "composite-robot-application", "four-axis-robot-open-fridge"],
+    videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo"],
   },
   "za-r3m-right": {
-    applicationSlugs: ["servo-motor-station", "robot-daily-task", "composite-systems"],
-    videoSlugs: ["servo-motor-station", "four-axis-robot-open-fridge", "composite-robot-application"],
+    applicationSlugs: [],
+    videoSlugs: [],
   },
   "za-r3t": {
     applicationSlugs: ["ai-robotics", "cultural-creative", "robot-daily-task"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "sketching-robot", "four-axis-robot-open-fridge"],
+    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "vla-dual-arm-data-collection"],
   },
   "za-m75": {
     applicationSlugs: ["smart-logistics", "mobile-robot-platform", "mobile-material-transfer"],
@@ -51,32 +51,32 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["composite-robot-application", "agv-product-introduction", "mobile-robot-chassis"],
   },
   "za-mr3t": {
-    applicationSlugs: ["ai-robotics", "composite-systems", "vr-teleoperation"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "composite-robot-application", "vr-remote-franka-dual-arm"],
+    applicationSlugs: ["ai-robotics", "composite-systems", "cultural-creative"],
+    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "composite-robot-application"],
   },
   "za-rmvr": {
-    applicationSlugs: ["ai-robotics", "vr-teleoperation", "cultural-creative"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "vr-remote-franka-dual-arm", "sketching-robot"],
+    applicationSlugs: ["ai-robotics", "cultural-creative", "composite-systems"],
+    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-data-collection", "composite-robot-application"],
   },
   "za-rmps": {
-    applicationSlugs: ["ai-robotics", "cultural-creative", "vr-teleoperation"],
-    videoSlugs: ["ur-robot-llm-motion-capture", "sketching-robot", "vr-remote-franka-dual-arm"],
+    applicationSlugs: ["ai-robotics", "cultural-creative", "composite-systems"],
+    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "vla-dual-arm-data-collection"],
   },
   "za-rdp": {
-    applicationSlugs: ["cultural-creative", "ai-robotics", "vr-teleoperation"],
-    videoSlugs: ["sketching-robot", "ur-robot-llm-motion-capture", "vr-remote-franka-dual-arm"],
+    applicationSlugs: ["cultural-creative", "ai-robotics", "composite-systems"],
+    videoSlugs: ["sketching-robot", "vr-teleop-dual-arm", "composite-robot-application"],
   },
   "za-zg100": {
-    applicationSlugs: ["industrial-control", "vr-teleoperation", "servo-motor-station"],
-    videoSlugs: ["rtos-ethercat-validation", "vr-remote-franka-dual-arm", "servo-motor-station"],
+    applicationSlugs: ["ai-robotics", "robot-daily-task", "composite-systems"],
+    videoSlugs: ["composite-robot-application", "four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
   },
   "rail": {
     applicationSlugs: ["fixed-rail-transfer", "composite-systems", "robot-daily-task"],
-    videoSlugs: ["fixed-rail-transfer-robot", "composite-robot-application", "four-axis-robot-open-fridge"],
+    videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo", "composite-robot-application"],
   },
   "rotating-platform": {
-    applicationSlugs: ["robot-daily-task", "servo-motor-station", "composite-systems"],
-    videoSlugs: ["four-axis-robot-open-fridge", "servo-motor-station", "composite-robot-application"],
+    applicationSlugs: [],
+    videoSlugs: [],
   },
 };
 

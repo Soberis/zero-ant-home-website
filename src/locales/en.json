@@ -107,6 +107,10 @@
           "title": "R Series",
           "description": "For precision transfer and compact-space operation, covering SCARA, 6-axis, lift, and linked configurations."
         },
+        "dtSeries": {
+          "title": "D & T Series",
+          "description": "Multi-axis and dual-arm collaborative robotic platforms for academic research, embodied AI algorithm validation, and education scenarios."
+        },
         "mSeries": {
           "title": "M Series",
           "description": "Autonomous mobile bases covering different payload classes and deployment rhythms."
@@ -555,17 +559,9 @@
       "title": "Sketching Robot",
       "desc": "Demonstrates ZeroAnt Technology's innovative sketching robot application, achieving autonomous sketching creation through advanced visual recognition technology and precision motion control. Combined with AI algorithms and robotic arm control, showcasing breakthrough applications of robotics in artistic creation."
     },
-    "servo-motor-station": {
-      "title": "Servo Motor Station",
-      "desc": "Demonstrates ZeroAnt Technology's servo motor station automation control and applications, achieving precise positioning and efficient operations through high-performance servo systems."
-    },
     "mobile-transfer-robot": {
       "title": "Mobile Transfer Robot",
       "desc": "Showcases ZeroAnt Technology's mobile transfer robot automation workflow, achieving efficient and precise material transfer between different workstations."
-    },
-    "rtos-ethercat-validation": {
-      "title": "RTOS-EtherCAT Motor Control Validation",
-      "desc": "Demonstrates ZeroAnt Technology's motor control validation system based on RTOS real-time operating system and EtherCAT bus technology."
     },
     "mobile-robot-chassis": {
       "title": "Self-Developed Mobile Robot Chassis",
@@ -575,9 +571,21 @@
       "title": "Fixed Rail Transfer Robot",
       "desc": "Demonstrates ZeroAnt Technology's fixed rail transfer robot with precise positioning capabilities. Features high-precision positioning systems and intelligent control algorithms for efficient and stable material transfer on fixed tracks, suitable for precise logistics transport needs in industrial production lines."
     },
-    "vr-remote-franka-dual-arm": {
-      "title": "VR Remote Franka Dual-Arm Robot",
-      "desc": "Showcases ZeroAnt Technology's VR-based remote operation system for Franka dual-arm robots, achieving precise remote control through immersive interaction interfaces. Demonstrates innovative applications of human-robot collaboration in complex operational scenarios, featuring intuitive VR control and real-time robot response for advanced teleoperation tasks."
+    "za-r3ml-demo": {
+      "title": "SCARA Visual Fruit Picking",
+      "desc": "Demonstrates ZeroAnt Technology's ZA-R3M(L) SCARA robot using visual recognition to precisely pick fruit, showcasing the deep integration of robotic visual perception and motion control."
+    },
+    "vr-teleop-dual-arm": {
+      "title": "VR Teleoperation Dual-Arm Robot",
+      "desc": "Demonstrates ZeroAnt Technology's VR teleoperation dual-arm robot platform, using VR devices for real-time control of dual-arm operation tasks, suitable for embodied intelligence training, teleoperation teaching, and research validation."
+    },
+    "vla-dual-arm-cable-grasping": {
+      "title": "VLA Dual-Arm Cable Grasping",
+      "desc": "Demonstrates a VLA (Vision-Language-Action) model-based dual-arm robot precisely grasping cables, showcasing the deep integration of visual perception, language understanding, and action execution."
+    },
+    "vla-dual-arm-data-collection": {
+      "title": "VLA Dual-Arm Data Collection",
+      "desc": "Demonstrates the VLA (Vision-Language-Action) model-based dual-arm robot data collection workflow, collecting high-quality operation data through teleoperation to support embodied intelligence algorithm training."
     }
   },
   "bilibiliPlayer": {
@@ -610,30 +618,14 @@
       "coreAdvantages": "Stable handling, precise positioning, process traceability, fixed-path reliability",
       "typicalApplications": "Fixed-rail material transfer, precision positioning, production line transport, automated loading and unloading"
     },
-    "servo-motor-station": {
-      "title": "Servo Motor Station",
-      "description": "Demonstrates servo motor station automation control and applications, achieving precise positioning and efficient operations through high-performance servo systems. Supports multi-axis synchronized control for industrial automation scenarios.",
-      "coreAdvantages": "Precise positioning, high-performance servo control, multi-axis synchronization, efficient operations",
-      "typicalApplications": "Servo motor stations, multi-axis motion control, precision machining, automated workstations"
-    },
+
     "ai-robotics": {
       "title": "AI Robotics",
       "description": "Focused on embodied development and dual-arm operation validation, this direction combines dual-arm robot hardware, body control and algorithm development for grasping, interaction and experimental validation tasks.",
       "coreAdvantages": "Dual-arm coordination, algorithm validation, embodied development, human-robot collaboration",
       "typicalApplications": "Intelligent grasping and assembly, human-robot collaboration workstations, service robots, education and research platforms, embodied intelligence"
     },
-    "industrial-control": {
-      "title": "@:common.terms.industrialControl",
-      "description": "Built on industrial real-time control and EtherCAT capabilities, this direction supports multi-axis synchronized control, equipment linkage and interface integration for industrial scenarios that require stable timing and coordination.",
-      "coreAdvantages": "Multi-axis synchronization, real-time scheduling, interface integration, self-developed stack",
-      "typicalApplications": "Multi-axis motion control, servo motor stations, industrial automation, precision machining, real-time control systems"
-    },
-    "vr-teleoperation": {
-      "title": "VR Teleoperation",
-      "description": "Showcases VR-based remote operation systems for dual-arm robots, achieving precise remote control through immersive interaction interfaces. Demonstrates innovative applications of human-robot collaboration in complex operational scenarios, featuring intuitive VR control and real-time robot response.",
-      "coreAdvantages": "Immersive control, dual-arm coordination, real-time response, human-robot collaboration",
-      "typicalApplications": "VR remote operation, dual-arm teleoperation, hazardous environment handling, remote manipulation"
-    },
+
     "mobile-robot-platform": {
       "title": "Mobile Robot Platform",
       "description": "Showcases self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control and intelligent navigation systems for autonomous mobile robot applications.",

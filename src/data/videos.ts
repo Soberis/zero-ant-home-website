@@ -5,13 +5,17 @@ import compositeRobotImg from "@/assets/images/videos/composite-robot-transfer.w
 import compositeRobotAppImg from "@/assets/images/videos/composite-robot-app.webp";
 import urRobotLLMImg from "@/assets/images/videos/ur-llm-grab.webp";
 import fourAxisRobotFridgeImg from "@/assets/images/videos/four-axis-fridge.webp";
-import servoMotorStationImg from "@/assets/images/videos/servo-motor-station.webp";
+
 import mobileTransferRobotImg from "@/assets/images/videos/mobile-transfer-robot.webp";
-import rtosEthercatImg from "@/assets/images/videos/rtos-ethercat-validation.webp";
+
 import sketchingRobotImg from "@/assets/images/videos/sketching-robot.webp";
 import mobileRobotChassisImg from "@/assets/images/videos/mobile-robot-chassis.webp";
 import fixedRailTransferRobotImg from "@/assets/images/videos/fixed-rail-transfer-robot.webp";
-import vrRemoteFrankaDualArmImg from "@/assets/images/videos/vr-teleop-franka.webp";
+
+import zaR3mlDemoImg from "@/assets/images/videos/za-r3ml-demo.jpg";
+import vrTeleopDualArmImg from "@/assets/images/videos/vr-teleop-dual-arm.jpg";
+import vlaDualArmCableGraspingImg from "@/assets/images/videos/vla-dual-arm-cable-grasping.jpg";
+import vlaDualArmDataCollectionImg from "@/assets/images/videos/vla-dual-arm-data-collection.jpg";
 
 // 常量定义
 const BILIBILI_BASE_PARAMS =
@@ -55,18 +59,20 @@ export type VideoMapData = Record<string, VideoDetail>;
  * 视频缩略图映射，供卡片和详情页共用，避免详情页再依赖卡片列表取封面。
  */
 const videoThumbnailMap: Record<string, string> = {
+  // TODO: medical-automation 当前暂借 compositeRobotImg，待有专属医疗素材后替换
   "medical-automation": compositeRobotImg,
   "composite-robot-application": compositeRobotAppImg,
   "agv-product-introduction": agvImg,
   "ur-robot-llm-motion-capture": urRobotLLMImg,
   "four-axis-robot-open-fridge": fourAxisRobotFridgeImg,
   "sketching-robot": sketchingRobotImg,
-  "servo-motor-station": servoMotorStationImg,
   "mobile-transfer-robot": mobileTransferRobotImg,
-  "rtos-ethercat-validation": rtosEthercatImg,
   "mobile-robot-chassis": mobileRobotChassisImg,
   "fixed-rail-transfer-robot": fixedRailTransferRobotImg,
-  "vr-remote-franka-dual-arm": vrRemoteFrankaDualArmImg,
+  "za-r3ml-demo": zaR3mlDemoImg,
+  "vr-teleop-dual-arm": vrTeleopDualArmImg,
+  "vla-dual-arm-cable-grasping": vlaDualArmCableGraspingImg,
+  "vla-dual-arm-data-collection": vlaDualArmDataCollectionImg,
 };
 
 /**
@@ -163,15 +169,6 @@ export const videoMap: VideoMapData = {
     tags: ["sketching-robot", "art-creation", "ai-drawing"],
     publishDate: "2024-12-25",
   },
-  "servo-motor-station": {
-    slug: "servo-motor-station",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1KXg7zTECP/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.servo-motor-station.title",
-    desc: "videos.servo-motor-station.desc",
-    tags: ["servo-motor", "automation", "smart-manufacturing", "industrial-control"],
-    publishDate: "2024-05-01",
-  },
   "mobile-transfer-robot": {
     slug: "mobile-transfer-robot",
     type: "bilibili",
@@ -180,15 +177,6 @@ export const videoMap: VideoMapData = {
     desc: "videos.mobile-transfer-robot.desc",
     tags: ["mobile-robot", "automated-transfer", "smart-navigation", "logistics-automation"],
     publishDate: "2024-05-15",
-  },
-  "rtos-ethercat-validation": {
-    slug: "rtos-ethercat-validation",
-    type: "bilibili",
-    url: `https://www.bilibili.com/video/BV17t8TzGE2i/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.rtos-ethercat-validation.title",
-    desc: "videos.rtos-ethercat-validation.desc",
-    tags: ["rtos", "ethercat", "motor-control", "real-time-system", "industrial-control"],
-    publishDate: "2024-05-28",
   },
   "mobile-robot-chassis": {
     slug: "mobile-robot-chassis",
@@ -214,20 +202,41 @@ export const videoMap: VideoMapData = {
     ],
     publishDate: "2025-01-15",
   },
-  "vr-remote-franka-dual-arm": {
-    slug: "vr-remote-franka-dual-arm",
+  "za-r3ml-demo": {
+    slug: "za-r3ml-demo",
     type: "bilibili",
-    url: `https://www.bilibili.com/video/BV1q1eMzWE16/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.vr-remote-franka-dual-arm.title",
-    desc: "videos.vr-remote-franka-dual-arm.desc",
-    tags: [
-      "vr-teleoperation",
-      "franka-robot",
-      "dual-arm-collaboration",
-      "remote-control",
-      "human-robot-interaction",
-    ],
-    publishDate: "2025-01-20",
+    url: `https://www.bilibili.com/video/BV1tiQjBWEip/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.za-r3ml-demo.title",
+    desc: "videos.za-r3ml-demo.desc",
+    tags: ["za-r3m", "robot-demo", "smart-manufacturing", "automation"],
+    publishDate: "2025-04-15",
+  },
+  "vr-teleop-dual-arm": {
+    slug: "vr-teleop-dual-arm",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1atQjBfEwZ/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.vr-teleop-dual-arm.title",
+    desc: "videos.vr-teleop-dual-arm.desc",
+    tags: ["vr-teleoperation", "dual-arm", "embodied-development", "data-collection"],
+    publishDate: "2025-04-13",
+  },
+  "vla-dual-arm-cable-grasping": {
+    slug: "vla-dual-arm-cable-grasping",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1atQjBfEG3/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.vla-dual-arm-cable-grasping.title",
+    desc: "videos.vla-dual-arm-cable-grasping.desc",
+    tags: ["vla", "dual-arm", "cable-grasping", "embodied-intelligence"],
+    publishDate: "2025-04-15",
+  },
+  "vla-dual-arm-data-collection": {
+    slug: "vla-dual-arm-data-collection",
+    type: "bilibili",
+    url: `https://www.bilibili.com/video/BV1atQjBfEnu/${BILIBILI_BASE_PARAMS}`,
+    title: "videos.vla-dual-arm-data-collection.title",
+    desc: "videos.vla-dual-arm-data-collection.desc",
+    tags: ["vla", "dual-arm", "data-collection", "embodied-intelligence"],
+    publishDate: "2025-04-14",
   },
 };
 
@@ -237,11 +246,6 @@ export const videoMap: VideoMapData = {
  * 按照 AI智能 → 复合系统 → 单一应用 → 基础技术 的顺序排列
  */
 export const videoCards: VideoCard[] = [
-  {
-    title: "videos.vr-remote-franka-dual-arm.title",
-    img: vrRemoteFrankaDualArmImg,
-    slug: "vr-remote-franka-dual-arm",
-  },
   {
     title: "videos.medical-automation.title",
     img: compositeRobotImg,
@@ -278,24 +282,34 @@ export const videoCards: VideoCard[] = [
     slug: "sketching-robot",
   },
   {
-    title: "videos.rtos-ethercat-validation.title",
-    img: rtosEthercatImg,
-    slug: "rtos-ethercat-validation",
-  },
-  {
     title: "videos.agv-product-introduction.title",
     img: agvImg,
     slug: "agv-product-introduction",
   },
   {
-    title: "videos.servo-motor-station.title",
-    img: servoMotorStationImg,
-    slug: "servo-motor-station",
-  },
-  {
     title: "videos.mobile-robot-chassis.title",
     img: mobileRobotChassisImg,
     slug: "mobile-robot-chassis",
+  },
+  {
+    title: "videos.za-r3ml-demo.title",
+    img: zaR3mlDemoImg,
+    slug: "za-r3ml-demo",
+  },
+  {
+    title: "videos.vr-teleop-dual-arm.title",
+    img: vrTeleopDualArmImg,
+    slug: "vr-teleop-dual-arm",
+  },
+  {
+    title: "videos.vla-dual-arm-cable-grasping.title",
+    img: vlaDualArmCableGraspingImg,
+    slug: "vla-dual-arm-cable-grasping",
+  },
+  {
+    title: "videos.vla-dual-arm-data-collection.title",
+    img: vlaDualArmDataCollectionImg,
+    slug: "vla-dual-arm-data-collection",
   },
 ].filter((card) => {
   const video = getVideoById(card.slug);
