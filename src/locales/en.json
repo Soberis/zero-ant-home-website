@@ -131,7 +131,6 @@
       "promises": {
         "directions": {
           "metric": "03",
-          "unit": "",
           "description": "solution directions to judge fit first"
         },
         "delivery": {
@@ -304,7 +303,6 @@
       "requestByEmail": "Request by Email"
     },
     "emailSubjects": {
-      "support": "After-sales support request",
       "productManual": "Request product manual",
       "jointMaterials": "Request interface and joint materials"
     },
@@ -399,8 +397,6 @@
     "videoDetail": {
       "qrCodeTitle": "Contact Information",
       "qrCodeDesc": "Scan QR code to add WeCom for more information",
-      "notFoundTitle": "Video Not Found",
-      "notFoundDesc": "This video case link is unavailable or no longer exists. Return to the solutions page to continue exploring other video cases.",
       "browserNotSupport": "Your browser does not support video playback."
     },
     "medical-automation": {
@@ -498,12 +494,6 @@
       "coreAdvantages": "Self-developed chassis, autonomous navigation, robust mechanical design, intelligent mobility",
       "typicalApplications": "Mobile robot chassis, autonomous navigation, mobile platform development, robot mobility"
     },
-    "surface-treatment": {
-      "title": "@:common.terms.surfaceTreatment",
-      "description": "Built on six-axis and four-axis robot capabilities, this direction supports grinding, polishing, welding and assembly workflows. Combined with force control and path planning, it fits a range of surface-treatment and precision-operation tasks.",
-      "coreAdvantages": "High-precision positioning, force control technology, multi-axis coordination, long-term stable operation",
-      "typicalApplications": "Metal parts grinding, precision assembly, welding operations, surface treatment, deburring"
-    },
     "smart-logistics": {
       "title": "@:common.terms.smartLogistics",
       "description": "Built on mobile robot scheduling and autonomous navigation capabilities, this direction supports in-factory logistics and material transfer with path planning, obstacle avoidance and station-to-station coordination in complex environments.",
@@ -527,6 +517,18 @@
       "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
       "coreAdvantages": "Multi-functional integration, intelligent scheduling, flexible production, unified management of heterogeneous systems",
       "typicalApplications": "Composite robot applications, intelligent manufacturing, automated logistics, multi-task collaboration, flexible production lines"
+    },
+    "cultural-creative": {
+      "title": "Cultural Creative",
+      "description": "Integrating robotics technology with artistic creativity, providing expressive automation solutions for digital art, interactive installations, and cultural exhibitions. Combining motion control and visual presentation capabilities to support dynamic art creation and intelligent interactive experiences.",
+      "coreAdvantages": "Motion control, visual presentation, artistic creation, intelligent interaction",
+      "typicalApplications": "Sketching robots, digital art, interactive installations, cultural exhibitions, creative performances"
+    },
+    "mobile-material-transfer": {
+      "title": "Mobile Material Transfer",
+      "description": "Based on mobile robot platforms, providing flexible and efficient automation solutions for material handling and transfer needs in warehouses and factories. Supporting autonomous navigation, path planning, and multi-robot collaboration, adapting to material flow requirements in complex environments.",
+      "coreAdvantages": "Autonomous navigation, path planning, multi-robot collaboration, flexible and efficient",
+      "typicalApplications": "Warehouse handling, factory material flow, production line delivery, cross-zone transfer"
     }
   },
   "careers": {

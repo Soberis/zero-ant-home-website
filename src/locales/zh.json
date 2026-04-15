@@ -131,7 +131,6 @@
       "promises": {
         "directions": {
           "metric": "03",
-          "unit": "",
           "description": "方案方向，先判断场景是否匹配"
         },
         "delivery": {
@@ -304,7 +303,6 @@
       "requestByEmail": "邮件获取"
     },
     "emailSubjects": {
-      "support": "售后支持咨询",
       "productManual": "申请产品手册",
       "jointMaterials": "申请接口与关节资料"
     },
@@ -399,8 +397,6 @@
     "videoDetail": {
       "qrCodeTitle": "联系方式",
       "qrCodeDesc": "扫码添加企业微信，获取更多信息",
-      "notFoundTitle": "未找到视频",
-      "notFoundDesc": "当前链接对应的视频案例不存在或已下线，你可以返回行业方案页继续浏览其他视频案例。",
       "browserNotSupport": "您的浏览器不支持视频播放。"
     },
     "medical-automation": {
@@ -510,12 +506,6 @@
       "coreAdvantages": "多机统一调度、智能路径规划、大负载能力、多场景适应",
       "typicalApplications": "工厂内物流、仓储搬运、配送中心、多机协同作业、智能调度"
     },
-    "pharmaceutical-automation": {
-      "title": "制药自动化",
-      "description": "面向生物实验室、制药企业等场景，提供样本处理、配药和检测环节的自动化方案，帮助团队提升流程一致性与作业效率。",
-      "coreAdvantages": "高精度控制、洁净环境适配、GMP标准、国产化替代",
-      "typicalApplications": "实验室自动化、个性化处方药、药物配制、生物样本处理、质量检测"
-    },
     "robot-daily-task": {
       "title": "机器人日常任务",
       "description": "展示机械臂在日常操作场景中的应用能力，如开冰箱、抓取物品和执行常见任务。体现四轴和六轴机器人在实际应用中的灵活性与适应性。",
@@ -527,6 +517,18 @@
       "description": "基于复合机器人技术和多OS混合部署虚拟机，集成多种功能模块，提供综合性的自动化解决方案。通过多功能集成、智能调度和异构系统统一管理，实现复杂场景下的高效协作与柔性生产。支持移动平台+机械臂的复合配置，满足多样化的工业应用需求，提升整体系统效率。",
       "coreAdvantages": "多功能集成、智能调度、柔性生产、异构系统统一管理",
       "typicalApplications": "复合机器人应用、智能制造、自动化物流、多任务协作、柔性生产线"
+    },
+    "cultural-creative": {
+      "title": "文化创意",
+      "description": "融合机器人技术与艺术创意，面向数字艺术、互动装置和文化展览场景，提供富有表现力的自动化解决方案。结合运动控制和视觉呈现能力，支持动态艺术创作和智能互动体验。",
+      "coreAdvantages": "运动控制、视觉呈现、艺术创作、智能互动",
+      "typicalApplications": "绘画机器人、数字艺术、互动装置、文化展览、创意表演"
+    },
+    "mobile-material-transfer": {
+      "title": "移动物料转运",
+      "description": "基于移动机器人平台，面向仓储、工厂等场景的物料搬运与转运需求，提供灵活高效的自动化方案。支持自主导航、路径规划和多机协同，适应复杂环境下的物料流转需求。",
+      "coreAdvantages": "自主导航、路径规划、多机协同、灵活高效",
+      "typicalApplications": "仓库搬运、工厂物料流转、产线配送、跨区转运"
     }
   },
   "careers": {
