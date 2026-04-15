@@ -15,7 +15,7 @@
     "accessories": "Accessories",
     "solutions": "Solutions",
     "support": "Support",
-    "download": "@:common.terms.downloads",
+    "download": "@:common.section.relatedDownloads",
     "faq": "FAQ",
     "careers": "Careers",
     "about": "About Us",
@@ -30,13 +30,10 @@
   "common": {
     "cta": {
       "viewDetails": "View Details",
-      "viewSolutions": "Explore Solutions",
       "contactTeam": "Contact Team",
       "downloadNow": "Download Now",
       "backToTop": "Back to Top",
       "learnProducts": "Explore Products",
-      "bookDemo": "Book Demo",
-      "onlineConsult": "Chat Now",
       "serviceHotline": "Service Hotline",
       "wecomTitle": "Scan for WeCom",
       "wecomDesc": "Get more info",
@@ -56,33 +53,14 @@
       "relatedProducts": "Related Products"
     },
     "terms": {
-      "smartManufacturing": "Smart Manufacturing",
-      "industrialAutomation": "Industrial Automation",
       "medicalAutomation": "Medical Automation",
       "smartLogistics": "Smart Logistics",
-      "industrialControl": "Industrial Control",
-      "motionControl": "Motion Control",
-      "andOthers": " / etc.",
-      "solutionDirections": "Solution directions",
-      "relatedProducts": "Related products",
-      "featuredCases": "Featured cases",
-      "autonomousNavigation": "Autonomous Navigation",
-      "complexTrajectory": "Complex Paths",
-      "featuredCase": "Featured case",
       "coreValues": "Core Values",
       "afterSalesService": "After-sales Service",
-      "industrySolutions": "Industry Solutions",
       "corporateCulture": "Corporate Culture",
-      "automation": "Automation",
       "surfaceTreatment": "Surface Treatment",
-      "precisionAssembly": "Precision Assembly",
-      "compositeRobot": "Composite Robot",
-      "industrialRobot": "Industrial Robot",
-      "environmentalPerception": "Environmental Perception",
       "contactUs": "Contact Us",
-      "email": "Email",
-      "downloads": "Downloads",
-      "delivery": "Delivery"
+      "email": "Email"
     }
   },
   "home": {
@@ -90,12 +68,7 @@
       "title": "Precision Transfer Robot Platform",
       "description": "Built for precision transfer, compact-space operation, and lift-linked workflows so teams can judge form factor, extension combinations, and delivery paths faster.",
       "panelLabel": "Product Center",
-      "primaryCta": "@:common.cta.learnProducts",
-      "secondaryCta": "@:common.cta.bookDemo",
-      "tabs": {
-        "scara": "SCARA",
-        "humanoid": "Humanoid"
-      }
+      "primaryCta": "@:common.cta.learnProducts"
     },
     "coreProducts": {
       "title": "Product Center",
@@ -141,7 +114,6 @@
     "industryApplications": {
       "title": "@:common.section.industryApplications",
       "description": "Quickly find representative application entry points across semiconductors, biopharma, composite operations, and embodied development.",
-      "explore": "View Solution",
       "exploreAll": "View Industry Applications"
     },
     "partners": {
@@ -149,16 +121,10 @@
     }
   },
   "solutionsPage": {
-    "title": "@:common.terms.industrySolutions",
-    "subtitle": "Built around confirmed robot bodies, controller hardware, and expansion modules, focused on precision workcells, mobile collaboration, and embodied development.",
-    "videoCases": "@:common.section.videoCases",
-    "industryApplications": "@:common.section.industryApplications",
     "hero": {
-      "eyebrow": "Solutions",
       "title": "Robot solutions from scenario fit to rollout",
       "description": "Built around life science, smart manufacturing logistics, and embodied R&D, the page helps teams judge fit first and then move into product combinations, proof, and delivery path.",
       "primaryCta": "View Three Directions",
-      "secondaryCta": "Contact an Engineer",
       "featuredLabel": "In Development",
       "featuredTitle": "Dual-Arm Sterile Preparation Workstation",
       "featuredDescription": "Architected around a closed chamber and dual-arm coordination — a next-gen intelligent preparation platform for life sciences, in active development.",
@@ -173,40 +139,16 @@
           "unit": "STEPS",
           "description": "from combination design to rollout"
         }
-      },
-      "featurePoints": [
-        "ISO-grade closed chamber",
-        "Millimeter-level dual-arm coordination",
-        "Multi-modal vision fusion",
-        "Standardized workflow orchestration"
-      ],
-      "stats": {
-        "industry": {
-          "value": "03",
-          "label": "Core solution directions"
-        },
-        "backbone": {
-          "value": "04",
-          "label": "Product stack"
-        },
-        "delivery": {
-          "value": "01",
-          "label": "Unified delivery loop"
-        }
       }
     },
     "nav": {
-      "backbone": "Stack",
-      "industries": "Directions",
-      "proof": "Proof",
       "overview": "Overview",
       "directions": "Directions",
       "delivery": "Delivery"
     },
     "overview": {
       "title": "Three directions, one clear page",
-      "description": "Start with the direction and product combination, then move into the matching scenarios and products.",
-      "cardLabel": "Solution Direction"
+      "description": "Start with the direction and product combination, then move into the matching scenarios and products."
     },
     "directions": {
       "title": "Three directions tied directly to scenarios and products",
@@ -215,18 +157,12 @@
         "scenariosLabel": "Fit Scenarios",
         "highlightsLabel": "Key Capabilities",
         "productsLabel": "Recommended Combination",
-        "applicationLabel": "Related Application",
-        "applicationAction": "View Related Application",
-        "videoLabel": "Related Video",
-        "videoAction": "View Related Video",
-        "featuredCaseLabel": "Featured Case",
-        "featuredProductLabel": "Featured R&D Product"
+        "applicationLabel": "Related Application"
       },
       "lifeScienceAutomation": {
         "title": "Life Science & Sterile Automation",
         "status": "In Development",
         "summary": "Redefining sample processing and sterile preparation with closed-chamber dual-arm architecture for the life sciences.",
-        "detail": "Building next-gen single- and dual-arm workstation platforms for clean operations, sample flows, and formulation processes — actively in development.",
         "combo": "D / T Series + ZA-ZG100 + vision modules + high-precision end effectors",
         "featuredProduct": "Dual-Arm Sterile Preparation Workstation",
         "featuredDescription": "A next-gen intelligent platform architected around a closed chamber and dual-arm coordination for samples, consumables, and formulation workflows.",
@@ -243,13 +179,11 @@
           "In-development intelligent dispensing and formulation workstation"
         ],
         "overviewAction": "Explore This Direction",
-        "primaryAction": "Ask About Development Progress",
-        "secondaryAction": "View Related Products"
+        "primaryAction": "Ask About Development Progress"
       },
       "smartManufacturingLogistics": {
         "title": "Smart Manufacturing & Logistics Collaboration",
         "summary": "A flexible automation direction for loading, transfer, and composite robotic work.",
-        "detail": "This direction connects fixed stations, mobile transfer, and composite robotic work across machining, handling, and station coordination.",
         "combo": "R / M / MR Series + ZA-ZG100 + rail / rotating platform",
         "featuredProduct": "",
         "featuredDescription": "",
@@ -261,13 +195,11 @@
           "End-of-line transfer, packing, and circulation"
         ],
         "overviewAction": "View Scenarios",
-        "primaryAction": "View Related Applications",
-        "secondaryAction": "Open Product Center"
+        "primaryAction": "View Related Applications"
       },
       "embodiedResearchTeleop": {
         "title": "Embodied R&D & Teleoperation Validation",
         "summary": "A validation platform for universities, labs, and AI teams.",
-        "detail": "This direction supports embodied research, teleoperation teaching, and data collection with platforms that are easy to start quickly.",
         "combo": "ZA-R3T / ZA-MR3T + RMVR / RMPS + RDP",
         "featuredProduct": "",
         "featuredDescription": "",
@@ -279,81 +211,15 @@
           "Experiment loops from training to real deployment"
         ],
         "overviewAction": "View the Platform",
-        "primaryAction": "View Related Applications",
-        "secondaryAction": "View Related Products"
-      }
-    },
-    "backbone": {
-      "title": "A solution stack organized around current products",
-      "description": "Start from the product combination that can actually ship, then explain the capability boundary. Arms, mobile bases, embodied platforms, controller hardware, and accessories form one clear solution stack.",
-      "precisionExecution": {
-        "title": "Precision execution",
-        "description": "Built on the R family and 6-axis forms for high-speed pick-and-place, precision assembly, loading, and surface-treatment cells."
-      },
-      "mobileExecution": {
-        "title": "Mobile collaboration",
-        "description": "Built on the M / MR families for in-factory transport, cross-station linkage, and mobile manipulation instead of isolated workstations."
-      },
-      "embodiedDevelopment": {
-        "title": "Embodied development",
-        "description": "Built on MR3T, VR / master-slave teleoperation platforms, and the drawing platform for training, teleop validation, and demos."
-      },
-      "controlExpansion": {
-        "title": "Control and expansion",
-        "description": "Built on ZA-ZG100, rail platform, and rotating platform modules to extend real-time control, interface density, and deployment form."
+        "primaryAction": "View Related Applications"
       }
     },
     "industries": {
-      "title": "Three focused solution directions",
-      "description": "The page is reduced to 3 clear entry points, each tied directly to representative applications and related products.",
-      "applicationEntry": "Featured application",
-      "viewApplication": "View related applications",
-      "precisionWorkcell": {
-        "title": "Precision Transfer & Assembly",
-        "summary": "Built around the R-series arms, lift platforms, and controller hardware for precision transfer, assembly, and surface-treatment stations.",
-        "scenarios": [
-          "Precision assembly",
-          "Surface treatment",
-          "Medical automation"
-        ]
-      },
-      "mobileCollaboration": {
-        "title": "Mobile Transfer & Composite Work",
-        "summary": "Built around the M / MR families for in-factory logistics, cross-station transfer, and linked robotic work.",
-        "scenarios": [
-          "Composite systems",
-          "Smart logistics",
-          "Intelligent navigation"
-        ]
-      },
-      "embodiedDevelopment": {
-        "title": "Embodied Development & Teleoperation Validation",
-        "summary": "Built around MR3T, VR / master-slave teleoperation, and the drawing platform for dual-arm operation, training, and research validation.",
-        "scenarios": [
-          "AI robotics",
-          "Agricultural research automation",
-          "Creative manufacturing"
-        ]
-      }
-    },
-    "proof": {
-      "title": "Start with 3 representative cases",
-      "description": "Use 3 representative cases to judge the direction first, then expand more videos and applications if needed.",
-      "watchCase": "View case details",
-      "guide": "Start with 3 representative video cases, then expand the full video archive and industry application index as needed.",
-      "expandVideos": "More video cases ({count})",
-      "collapseVideos": "Collapse video cases",
-      "browseApplications": "View all industry applications",
-      "expandApplications": "More industry applications ({count})",
-      "collapseApplications": "Collapse industry applications",
-      "allVideos": "More video cases",
-      "applicationIndex": "More industry applications"
+      "viewApplication": "View related applications"
     },
     "more": {
       "title": "Industry Applications / Video Proof",
       "description": "Start with industry fit, then review video proof.",
-      "videos": "View more video cases",
-      "applications": "More industry applications",
       "applicationsTab": "Industry Applications",
       "videosTab": "Video Proof",
       "applicationsTitle": "Industry Applications",
@@ -390,8 +256,7 @@
     "finalCta": {
       "title": "Want to judge fit first?",
       "description": "Share the workstation target, takt, and space limits. ZeroAnt engineers can suggest a more suitable solution path.",
-      "primaryCta": "Contact Our Team",
-      "secondaryCta": "Contact an Engineer"
+      "primaryCta": "Contact Our Team"
     },
     "faq": {
       "title": "Common Questions",
@@ -414,11 +279,6 @@
           "answer": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That exposes interface boundaries earlier and reduces on-site iteration."
         }
       }
-    },
-    "tags": {
-      "typicalScenes": "Typical scenarios",
-      "relatedProducts": "@:common.section.relatedProducts",
-      "featuredCase": "@:common.terms.featuredCase"
     }
   },
   "supportPage": {
@@ -618,7 +478,7 @@
       "title": "@:common.terms.medicalAutomation",
       "description": "Provides automated transfer and station-to-station coordination for samples, medicines and medical devices in hospitals and laboratories, helping improve process efficiency, reduce manual contact and enhance traceability.",
       "coreAdvantages": "Process traceability, cross-station scheduling, reduced manual contact risk, fit for hospital and lab workflows",
-      "typicalApplications": "Lab automation pipeline, automated pharmacy, medical supply distribution, ultrasound robots"
+      "typicalApplications": "Lab automation pipeline, automated pharmacy, medical supply distribution"
     },
     "fixed-rail-transfer": {
       "title": "Fixed Rail Transfer",
@@ -626,14 +486,12 @@
       "coreAdvantages": "Stable handling, precise positioning, process traceability, fixed-path reliability",
       "typicalApplications": "Fixed-rail material transfer, precision positioning, production line transport, automated loading and unloading"
     },
-
     "ai-robotics": {
       "title": "AI Robotics",
       "description": "Focused on embodied development and dual-arm operation validation, this direction combines dual-arm robot hardware, body control and algorithm development for grasping, interaction and experimental validation tasks.",
       "coreAdvantages": "Dual-arm coordination, algorithm validation, embodied development, human-robot collaboration",
-      "typicalApplications": "Intelligent grasping and assembly, human-robot collaboration workstations, service robots, education and research platforms, embodied intelligence"
+      "typicalApplications": "Intelligent grasping, education and research, service robots, human-robot collaboration, embodied intelligence"
     },
-
     "mobile-robot-platform": {
       "title": "Mobile Robot Platform",
       "description": "Showcases self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control and intelligent navigation systems for autonomous mobile robot applications.",
@@ -669,30 +527,6 @@
       "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
       "coreAdvantages": "Multi-functional integration, intelligent scheduling, flexible production, unified management of heterogeneous systems",
       "typicalApplications": "Composite robot applications, intelligent manufacturing, automated logistics, multi-task collaboration, flexible production lines"
-    },
-    "agricultural-research": {
-      "title": "AgriTech Automation",
-      "description": "Built on AI vision recognition and precision control, this direction supports automated laboratory workflows for agricultural research, including molecular experiments, sample handling and repetitive operations, helping improve efficiency and consistency.",
-      "coreAdvantages": "High-precision experimental operations, automated molecular detection, agricultural research-specific adaptation, high-throughput processing capability",
-      "typicalApplications": "Rice molecular experiments, seed quality testing, gene research automation, crop phenotype analysis, agricultural research laboratories"
-    },
-    "cultural-creative": {
-      "title": "Creative Manufacturing",
-      "description": "Based on high-precision robotic arms and vision recognition technology, providing intelligent art creation solutions for the cultural and creative industries. Through innovative applications like sketching robots, it enables digitalization, intelligence, and scaled production of artistic creation. Combined with AiROS robot operating system and precision control algorithms, it supports precise rendering of complex artistic patterns and personalized customization, promoting deep integration of traditional culture and modern technology, injecting new vitality into the cultural and creative industries.",
-      "coreAdvantages": "High-precision art creation, personalized customization capability, digital art production, cultural creativity integration",
-      "typicalApplications": "Intelligent sketching and painting, cultural product manufacturing, art reproduction, personalized gift customization, digital art creation"
-    },
-    "mobile-material-transfer": {
-      "title": "Mobile Material Transfer",
-      "description": "Demonstrates mobile transfer robot applications for automated material handling and logistics. Supports intelligent navigation, path planning and station-to-station coordination for efficient material flow in factories and warehouses.",
-      "coreAdvantages": "Intelligent navigation, automated transfer, multi-station coordination, flexible material handling",
-      "typicalApplications": "Factory material transfer, warehouse handling, station-to-station logistics, automated material flow"
-    },
-    "industrial-gateway": {
-      "title": "Edge Computing",
-      "description": "Based on multi-OS hybrid deployment embedded virtualization technology, provides highly reliable and secure virtualization solutions for industrial gateways and edge computing devices. Through heterogeneous system unified management and efficient resource isolation, multiple systems can be deployed on a single hardware platform, reducing hardware costs and maintenance complexity. Successfully applied in industrial automation, smart grids, smart cities and other fields.",
-      "coreAdvantages": "Multi-operating system parallel operation, efficient resource isolation, support for hybrid deployment of real-time and general-purpose operating systems, embedded virtualization technology",
-      "typicalApplications": "Industrial gateway virtualization, edge computing devices, heterogeneous system unified management, smart grids, smart cities"
     }
   },
   "careers": {
@@ -889,26 +723,6 @@
         "a3": "These solutions usually combine R / M / MR products, ZA-ZG100 controller hardware, rail platforms, and rotating platforms. They fit machine tending, cross-station transfer, composite robotic work, and production-line circulation.",
         "q4": "How does ZeroAnt usually move a solution into delivery?",
         "a4": "The usual path is to confirm the scenario target, space limits, takt needs, and deployment conditions first, then complete combination design, validation, and on-site rollout. That exposes interface boundaries earlier and reduces on-site iteration."
-      },
-      "careers": {
-        "roboticsEngineer": {
-          "title": "Robotics Engineer",
-          "description": "Develop and optimize industrial robot systems, work on robot control algorithms and mechanical design.",
-          "qualifications": "Bachelor's degree in Robotics, Mechanical Engineering, or related field. 3+ years experience in industrial robotics.",
-          "responsibilities": "Design and develop robotic systems, optimize control algorithms, collaborate with cross-functional teams."
-        },
-        "algorithmEngineer": {
-          "title": "Algorithm Engineer",
-          "description": "Develop AI algorithms for robot perception, planning, and control systems.",
-          "qualifications": "Master's degree in Computer Science, AI, or related field. Strong background in machine learning and robotics.",
-          "responsibilities": "Develop AI algorithms, implement machine learning models, optimize robot performance."
-        },
-        "softwareEngineer": {
-          "title": "Software Development Engineer",
-          "description": "Develop software systems for robot control, user interfaces, and system integration.",
-          "qualifications": "Bachelor's degree in Software Engineering or Computer Science. Proficiency in C++, Python, and embedded systems.",
-          "responsibilities": "Develop robot control software, create user interfaces, integrate hardware and software systems."
-        }
       },
       "support": {
         "q1": "What technical support services does ZeroAnt Technology provide?",

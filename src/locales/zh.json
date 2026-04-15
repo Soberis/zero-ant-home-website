@@ -30,13 +30,10 @@
   "common": {
     "cta": {
       "viewDetails": "查看详情",
-      "viewSolutions": "查看解决方案",
       "contactTeam": "联系团队",
       "downloadNow": "立即下载",
       "backToTop": "返回顶部",
       "learnProducts": "了解产品",
-      "bookDemo": "预约演示",
-      "onlineConsult": "在线咨询",
       "serviceHotline": "服务热线",
       "wecomTitle": "扫码添加企业微信",
       "wecomDesc": "获取更多信息",
@@ -56,33 +53,14 @@
       "relatedProducts": "相关产品"
     },
     "terms": {
-      "smartManufacturing": "智能制造",
-      "industrialAutomation": "工业自动化",
       "medicalAutomation": "医疗自动化",
       "smartLogistics": "智能物流",
-      "industrialControl": "工业控制",
-      "motionControl": "运动控制",
-      "andOthers": " 等",
-      "solutionDirections": "方案方向",
-      "relatedProducts": "关联产品",
-      "featuredCases": "代表案例",
-      "autonomousNavigation": "自主导航",
-      "complexTrajectory": "复杂轨迹",
-      "featuredCase": "精选案例",
       "coreValues": "核心价值观",
       "afterSalesService": "售后服务",
-      "industrySolutions": "行业解决方案",
       "corporateCulture": "企业文化",
-      "automation": "自动化",
       "surfaceTreatment": "表面处理",
-      "precisionAssembly": "精密装配",
-      "compositeRobot": "复合机器人",
-      "industrialRobot": "工业机器人",
-      "environmentalPerception": "环境感知",
       "contactUs": "联系我们",
-      "email": "邮箱",
-      "downloads": "下载资料",
-      "delivery": "交付方式"
+      "email": "邮箱"
     }
   },
   "home": {
@@ -90,12 +68,7 @@
       "title": "精密传送机器人平台",
       "description": "聚焦精密传送、狭小空间操作与升降联动场景，帮助团队更快判断本体形态、扩展组合与交付方式。",
       "panelLabel": "产品中心",
-      "primaryCta": "@:common.cta.learnProducts",
-      "secondaryCta": "@:common.cta.bookDemo",
-      "tabs": {
-        "scara": "四轴机械臂",
-        "humanoid": "双臂人形"
-      }
+      "primaryCta": "@:common.cta.learnProducts"
     },
     "coreProducts": {
       "title": "产品中心",
@@ -141,7 +114,6 @@
     "industryApplications": {
       "title": "@:common.section.industryApplications",
       "description": "围绕半导体、生物医药、复合作业与具身开发等方向，快速定位代表应用入口。",
-      "explore": "查看方案",
       "exploreAll": "查看行业应用"
     },
     "partners": {
@@ -149,16 +121,10 @@
     }
   },
   "solutionsPage": {
-    "title": "@:common.terms.industrySolutions",
-    "subtitle": "围绕现有机器人本体、控制器与扩展机构，聚焦精密作业、移动协作和具身开发三类落地方向。",
-    "videoCases": "@:common.section.videoCases",
-    "industryApplications": "@:common.section.industryApplications",
     "hero": {
-      "eyebrow": "Solutions",
       "title": "从场景到交付的机器人方案",
       "description": "围绕生命科学、智能制造物流与具身研发三类方向，帮助团队先判断场景匹配，再进入产品组合、验证案例与交付路径。",
       "primaryCta": "看三类方案",
-      "secondaryCta": "联系工程师",
       "featuredLabel": "规划中的重点工作站",
       "featuredTitle": "双臂无菌制备工作站",
       "featuredDescription": "面向样本处理、配液配药和无菌制备的封闭式双臂工作站，目前处于在研阶段。",
@@ -173,40 +139,16 @@
           "unit": "步",
           "description": "推进路径，从组合设计到部署交付"
         }
-      },
-      "featurePoints": [
-        "ISO 级封闭腔体",
-        "双臂毫米级协同",
-        "多模态视觉融合",
-        "流程标准化编排"
-      ],
-      "stats": {
-        "industry": {
-          "value": "03",
-          "label": "核心方案方向"
-        },
-        "backbone": {
-          "value": "04",
-          "label": "产品组合底座"
-        },
-        "delivery": {
-          "value": "01",
-          "label": "统一交付闭环"
-        }
       }
     },
     "nav": {
-      "backbone": "方案底座",
-      "industries": "方案方向",
-      "proof": "@:common.terms.featuredCase",
       "overview": "方案概览",
       "directions": "方案方向",
       "delivery": "交付流程"
     },
     "overview": {
       "title": "三类方案，一页看清",
-      "description": "先看方向和推荐组合，再进入对应场景与产品。",
-      "cardLabel": "方案方向"
+      "description": "先看方向和推荐组合，再进入对应场景与产品。"
     },
     "directions": {
       "title": "三类方案，直接对应场景和产品",
@@ -215,18 +157,12 @@
         "scenariosLabel": "适用场景",
         "highlightsLabel": "关键能力",
         "productsLabel": "推荐组合",
-        "applicationLabel": "相关应用",
-        "applicationAction": "查看相关应用",
-        "videoLabel": "相关视频",
-        "videoAction": "查看相关视频",
-        "featuredCaseLabel": "代表案例",
-        "featuredProductLabel": "重点研发产品"
+        "applicationLabel": "相关应用"
       },
       "lifeScienceAutomation": {
         "title": "生命科学与制剂自动化",
         "status": "在研前瞻",
         "summary": "以封闭腔体与双臂协同为架构，重塑生命科学领域的样本处理与无菌制备范式。",
-        "detail": "面向洁净操作、样本流转与制剂流程，构建新一代单臂 / 双臂工作站平台，正在研发推进中。",
         "combo": "D / T 系列 + ZA-ZG100 + 视觉模块 + 高精度末端执行器",
         "featuredProduct": "双臂无菌制备工作站",
         "featuredDescription": "以封闭腔体和双臂协同为核心，适合样本、耗材与制剂流程。",
@@ -243,13 +179,11 @@
           "智能配药工作站规划"
         ],
         "overviewAction": "查看方案方向",
-        "primaryAction": "咨询在研进展",
-        "secondaryAction": "查看相关产品"
+        "primaryAction": "咨询在研进展"
       },
       "smartManufacturingLogistics": {
         "title": "智能制造与物流协同",
         "summary": "面向上下料、转运和复合作业的柔性自动化方案。",
-        "detail": "围绕固定工位、移动转运与复合作业，覆盖加工、搬运和站间协同。",
         "combo": "R / M / MR 系列 + ZA-ZG100 + 地轨 / 旋转平台",
         "featuredProduct": "",
         "featuredDescription": "",
@@ -261,13 +195,11 @@
           "产线首末端搬运、包装与流转"
         ],
         "overviewAction": "查看相关场景",
-        "primaryAction": "查看相关应用",
-        "secondaryAction": "查看产品中心"
+        "primaryAction": "查看相关应用"
       },
       "embodiedResearchTeleop": {
         "title": "具身研发与遥操作验证",
         "summary": "面向高校、实验室和 AI 团队的研发验证平台。",
-        "detail": "支持具身研究、遥操作示教与数据采集，便于快速启动验证。",
         "combo": "ZA-R3T / ZA-MR3T + RMVR / RMPS + RDP",
         "featuredProduct": "",
         "featuredDescription": "",
@@ -279,73 +211,15 @@
           "算法训练到真实部署的实验闭环"
         ],
         "overviewAction": "查看研发平台",
-        "primaryAction": "查看相关应用",
-        "secondaryAction": "查看相关产品"
-      }
-    },
-    "backbone": {
-      "title": "围绕现有产品组合的方案底座",
-      "description": "先讲能落地的产品组合，再讲能力边界，把机械臂、移动底盘、具身平台、控制器与扩展机构收成统一方案底座。",
-      "precisionExecution": {
-        "title": "精密执行层",
-        "description": "以 R 系列和六轴形态覆盖高速取放、精密装配、上下料与表面处理等高节拍工位。"
-      },
-      "mobileExecution": {
-        "title": "移动协作层",
-        "description": "以 M / MR 系列承接厂内搬运、跨工位联动和移动操作，把固定工位扩展成连续作业链路。"
-      },
-      "embodiedDevelopment": {
-        "title": "具身开发层",
-        "description": "以 MR3T、VR / 主从遥操作平台和绘画平台支撑算法训练、遥操作验证与演示研发。"
-      },
-      "controlExpansion": {
-        "title": "控制与扩展层",
-        "description": "以 ZA-ZG100、地轨平台和旋转平台补足实时控制、接口集成与部署形态扩展。"
+        "primaryAction": "查看相关应用"
       }
     },
     "industries": {
-      "title": "聚焦三类方案方向",
-      "description": "解决方案先收敛成 3 个清晰入口，每个方向直接对应代表应用和关联产品。",
-      "applicationEntry": "代表应用",
-      "viewApplication": "查看相关应用",
-      "precisionWorkcell": {
-        "title": "精密传送与装配",
-        "summary": "围绕 R 系列机械臂、升降平台与控制器，覆盖精密传送、装配与表面处理工位。",
-        "scenarios": [
-          "@:common.terms.precisionAssembly",
-          "@:common.terms.surfaceTreatment",
-          "@:common.terms.medicalAutomation"
-        ]
-      },
-      "mobileCollaboration": {
-        "title": "移动搬运与复合作业",
-        "summary": "围绕 M / MR 系列移动底盘与复合机器人，覆盖厂内物流、跨工位搬运与联动作业。",
-        "scenarios": ["复合系统", "@:common.terms.smartLogistics", "智能导航"]
-      },
-      "embodiedDevelopment": {
-        "title": "具身开发与遥操作验证",
-        "summary": "围绕 MR3T、VR / 主从遥操作与绘画平台，覆盖双臂操作、训练与科研验证。",
-        "scenarios": ["AI 机器人", "农业科研自动化", "文创艺术智能制造"]
-      }
-    },
-    "proof": {
-      "title": "先看 3 个代表案例",
-      "description": "先用 3 个代表案例判断方向，更多视频和应用按需展开。",
-      "watchCase": "查看案例详情",
-      "guide": "先看 3 个代表性视频案例，再按需展开完整视频与行业应用索引。",
-      "expandVideos": "更多视频案例 ({count})",
-      "collapseVideos": "收起视频案例",
-      "browseApplications": "查看所有行业应用",
-      "expandApplications": "更多行业应用 ({count})",
-      "collapseApplications": "收起行业应用",
-      "allVideos": "更多视频案例",
-      "applicationIndex": "更多行业应用"
+      "viewApplication": "查看相关应用"
     },
     "more": {
       "title": "行业应用 / 视频验证",
       "description": "先按行业判断匹配，再看视频验证。",
-      "videos": "查看更多视频案例",
-      "applications": "更多行业应用",
       "applicationsTab": "行业应用",
       "videosTab": "视频验证",
       "applicationsTitle": "行业应用",
@@ -382,8 +256,7 @@
     "finalCta": {
       "title": "想先判断方案是否匹配？",
       "description": "告诉我们您的工位、节拍和空间条件，零蚁工程师会给出更合适的方案建议。",
-      "primaryCta": "联系团队",
-      "secondaryCta": "联系工程师"
+      "primaryCta": "联系团队"
     },
     "faq": {
       "title": "常见问题",
@@ -406,11 +279,6 @@
           "answer": "一般会先确认作业目标、空间约束、负载和节拍，再组合本体型号、控制器与扩展机构，最后通过前置验证进入联调部署。这样能更早暴露接口边界，减少现场反复调整。"
         }
       }
-    },
-    "tags": {
-      "typicalScenes": "典型场景",
-      "relatedProducts": "@:common.section.relatedProducts",
-      "featuredCase": "@:common.terms.featuredCase"
     }
   },
   "supportPage": {
@@ -618,6 +486,18 @@
       "coreAdvantages": "稳定搬运、精准定位、过程追溯、固定路径可靠性",
       "typicalApplications": "固定轨道物料搬运、精密定位搬运、产线间转运、自动上下料"
     },
+    "ai-robotics": {
+      "title": "AI机器人",
+      "description": "围绕具身开发与双臂操作验证场景，结合双臂机器人、本体控制与算法开发能力，支持抓取、交互和实验验证等任务。",
+      "coreAdvantages": "双臂协同、算法验证、具身开发、人机协作",
+      "typicalApplications": "智能抓取、教育科研、服务机器人、人机协作、具身智能"
+    },
+    "mobile-robot-platform": {
+      "title": "移动机器人平台",
+      "description": "展示自主研发的移动机器人底盘平台，呈现先进的导航与运动能力。具备稳健的机械设计、精准的运动控制和智能导航系统，适用于自主移动机器人应用。",
+      "coreAdvantages": "自主底盘、自主导航、稳健机械设计、智能运动",
+      "typicalApplications": "移动机器人底盘、自主导航、移动平台开发、机器人运动"
+    },
     "surface-treatment": {
       "title": "@:common.terms.surfaceTreatment",
       "description": "基于六轴与四轴机械臂能力，面向打磨、抛光、焊接和装配等场景提供自动化方案。结合力控与路径规划能力，适配多种表面处理和精密作业流程。",
@@ -642,47 +522,11 @@
       "coreAdvantages": "灵活操作、任务适应性、实际场景部署、多场景支持",
       "typicalApplications": "物品抓取、日常任务自动化、食品操作、家庭服务机器人"
     },
-    "ai-robotics": {
-      "title": "AI机器人",
-      "description": "围绕具身开发与双臂操作验证场景，结合双臂机器人、本体控制与算法开发能力，支持抓取、交互和实验验证等任务。",
-      "coreAdvantages": "双臂协同、算法验证、具身开发、人机协作",
-      "typicalApplications": "智能抓取、教育科研、服务机器人、人机协作、具身智能"
-    },
-    "mobile-robot-platform": {
-      "title": "移动机器人平台",
-      "description": "展示自主研发的移动机器人底盘平台，呈现先进的导航与运动能力。具备稳健的机械设计、精准的运动控制和智能导航系统，适用于自主移动机器人应用。",
-      "coreAdvantages": "自主底盘、自主导航、稳健机械设计、智能运动",
-      "typicalApplications": "移动机器人底盘、自主导航、移动平台开发、机器人运动"
-    },
     "composite-systems": {
       "title": "复合系统",
       "description": "基于复合机器人技术和多OS混合部署虚拟机，集成多种功能模块，提供综合性的自动化解决方案。通过多功能集成、智能调度和异构系统统一管理，实现复杂场景下的高效协作与柔性生产。支持移动平台+机械臂的复合配置，满足多样化的工业应用需求，提升整体系统效率。",
       "coreAdvantages": "多功能集成、智能调度、柔性生产、异构系统统一管理",
       "typicalApplications": "复合机器人应用、智能制造、自动化物流、多任务协作、柔性生产线"
-    },
-    "agricultural-research": {
-      "title": "农业科研自动化",
-      "description": "<p>基于 AI 视觉识别与精准控制技术，为农业科研提供自动化实验方案，适用于分子实验、样本处理和重复性操作场景，帮助提升实验效率与一致性。</p>",
-      "coreAdvantages": "AI视觉识别、精准重复操作、实验一致性保障、科研场景适配",
-      "typicalApplications": "水稻分子实验、基因研究、作物表型分析、农业自动化、科研实验辅助"
-    },
-    "cultural-creative": {
-      "title": "文创艺术智能制造",
-      "description": "<p>基于AI视觉识别与机器人控制技术，为文创艺术领域提供智能制造解决方案。通过视觉识别技术实现素描艺术的自动化创作，结合高精度机械臂控制，实现艺术作品的精准复现。支持多种绘画风格，为文创产业提供新的创作方式和商业模式。</p>",
-      "coreAdvantages": "AI视觉识别、高精度绘画、风格多样化、艺术复现、智能制造",
-      "typicalApplications": "素描机器人、艺术复制品制作、文创产品设计、个性化定制、艺术教育"
-    },
-    "mobile-material-transfer": {
-      "title": "移动物料搬运",
-      "description": "<p>展示移动搬运机器人在自动化物料搬运与物流中的应用。支持智能导航、路径规划与站间调度，实现工厂和仓储中的高效物料流转。</p>",
-      "coreAdvantages": "智能导航、自动搬运、多站协同、柔性物料搬运",
-      "typicalApplications": "工厂物料搬运、仓储搬运、站间物流、自动化物料流转"
-    },
-    "industrial-gateway": {
-      "title": "工业网关与边缘计算",
-      "description": "<p>基于多OS混合部署嵌入式虚拟机技术，为工业网关和边缘计算设备提供高可靠、高安全的虚拟化解决方案。通过异构系统统一管理和资源高效隔离，在单一硬件平台上部署多套系统，降低硬件成本与维护难度。已成功应用于工业自动化、智能电网、智慧城市等领域。</p>",
-      "coreAdvantages": "多操作系统并行运行、资源高效隔离、支持实时操作系统与通用操作系统混合部署、嵌入式虚拟化技术",
-      "typicalApplications": "工业网关虚拟化、边缘计算设备、异构系统统一管理、智能电网、智慧城市"
     }
   },
   "careers": {
@@ -879,26 +723,6 @@
         "a3": "这类方案通常围绕 R / M / MR 系列、ZA-ZG100 控制器、地轨和旋转平台展开，适合机床上下料、跨工位转运、复合作业与产线流转场景。",
         "q4": "零蚁通常如何推进方案落地？",
         "a4": "一般会先确认场景目标、空间限制、节拍要求与部署条件，再完成产品组合设计、验证联调和现场部署。这样可以更早暴露接口边界，减少现场反复调整。"
-      },
-      "careers": {
-        "roboticsEngineer": {
-          "title": "机器人工程师",
-          "description": "开发和优化工业机器人系统，从事机器人控制算法和机械设计。",
-          "qualifications": "机器人、机械工程或相关专业本科以上学历。3年以上工业机器人经验。",
-          "responsibilities": "设计和开发机器人系统，优化控制算法，与跨职能团队合作。"
-        },
-        "algorithmEngineer": {
-          "title": "算法工程师",
-          "description": "开发用于机器人感知、规划和控制系统的人工智能算法。",
-          "qualifications": "计算机科学、人工智能或相关专业硕士学位。具有深厚的机器学习和机器人背景。",
-          "responsibilities": "开发人工智能算法，实施机器学习模型，优化机器人性能。"
-        },
-        "softwareEngineer": {
-          "title": "软件开发工程师",
-          "description": "开发用于机器人控制、用户界面和系统集成的软件系统。",
-          "qualifications": "软件工程或计算机科学专业本科以上学历。精通C++、Python和嵌入式系统。",
-          "responsibilities": "开发机器人控制软件，创建用户界面，集成硬件和软件系统。"
-        }
       },
       "support": {
         "q1": "零蚁科技提供哪些技术支持服务？",
