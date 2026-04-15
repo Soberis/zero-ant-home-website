@@ -1,86 +1,39 @@
-export interface SolutionCapabilityLayerConfig {
-  key:
-    | "precisionExecution"
-    | "mobileExecution"
-    | "embodiedDevelopment"
-    | "controlExpansion";
+export type SolutionDirectionKey =
+  | "lifeScienceAutomation"
+  | "smartManufacturingLogistics"
+  | "embodiedResearchTeleop";
+
+export interface SolutionDirectionConfig {
+  key: SolutionDirectionKey;
   productSlugs: string[];
+  visualProductSlug?: string;
+  applicationSlug?: string;
+  videoSlug?: string;
+  productSectionHash?: string;
+  status?: "planning";
 }
 
-export interface SolutionIndustryGroupConfig {
-  key:
-    | "precisionWorkcell"
-    | "mobileCollaboration"
-    | "embodiedDevelopment";
-  applicationSlugs: string[];
-  productSlugs: string[];
-  proofVideoSlug: string;
-}
-
-export interface FeaturedProofConfig {
-  key: "precision-proof" | "mobile-proof" | "embodied-proof";
-  industryKey: SolutionIndustryGroupConfig["key"];
-  videoSlug: string;
-}
-
-export const solutionCapabilityLayers: SolutionCapabilityLayerConfig[] = [
+export const solutionDirections: SolutionDirectionConfig[] = [
   {
-    key: "precisionExecution",
-    productSlugs: [
-      "za-r3-x",
-      "za-r3d6",
-      "za-r3l-m-h",
-    ],
+    key: "lifeScienceAutomation",
+    productSlugs: ["za-r3t", "za-r3d6", "za-zg100"],
+    applicationSlug: "medical-automation",
+    productSectionHash: "#dt-series",
+    status: "planning",
   },
   {
-    key: "mobileExecution",
-    productSlugs: ["za-m75", "za-m135", "za-mr3m", "za-mr3t"],
-  },
-  {
-    key: "embodiedDevelopment",
-    productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
-  },
-  {
-    key: "controlExpansion",
-    productSlugs: ["za-zg100", "rail", "rotating-platform"],
-  },
-];
-
-export const solutionIndustryGroups: SolutionIndustryGroupConfig[] = [
-  {
-    key: "precisionWorkcell",
-    applicationSlugs: ["fixed-rail-transfer", "robot-daily-task", "medical-automation"],
-    productSlugs: ["za-r3-x", "za-r3l-m-h", "za-r3d6", "za-zg100"],
-    proofVideoSlug: "servo-motor-station",
-  },
-  {
-    key: "mobileCollaboration",
-    applicationSlugs: ["composite-systems", "smart-logistics", "mobile-robot-platform"],
-    productSlugs: ["za-m75", "za-m135", "za-mr3m", "za-mr3t"],
-    proofVideoSlug: "composite-robot-application",
-  },
-  {
-    key: "embodiedDevelopment",
-    applicationSlugs: ["ai-robotics", "vr-teleoperation", "cultural-creative"],
-    productSlugs: ["za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
-    proofVideoSlug: "sketching-robot",
-  },
-];
-
-export const featuredProofs: FeaturedProofConfig[] = [
-  {
-    key: "precision-proof",
-    industryKey: "precisionWorkcell",
-    videoSlug: "servo-motor-station",
-  },
-  {
-    key: "mobile-proof",
-    industryKey: "mobileCollaboration",
+    key: "smartManufacturingLogistics",
+    productSlugs: ["za-r3-x", "za-r3l-m-h", "za-m75", "za-mr3m", "za-zg100"],
+    visualProductSlug: "za-mr3m",
+    applicationSlug: "composite-systems",
     videoSlug: "composite-robot-application",
   },
   {
-    key: "embodied-proof",
-    industryKey: "embodiedDevelopment",
-    videoSlug: "sketching-robot",
+    key: "embodiedResearchTeleop",
+    productSlugs: ["za-r3t", "za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
+    visualProductSlug: "za-rmvr",
+    applicationSlug: "ai-robotics",
+    videoSlug: "vr-remote-franka-dual-arm",
+    productSectionHash: "#embodied-platforms",
   },
 ];

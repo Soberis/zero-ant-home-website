@@ -20,8 +20,8 @@ export const supportNav = [
 ];
 
 export const solutionsNav = [
-  { hash: "#industries", label: "solutionsPage.nav.industries" },
-  { hash: "#proof", label: "solutionsPage.nav.proof" },
+  { hash: "#overview", label: "solutionsPage.nav.overview" },
+  { hash: "#directions", label: "solutionsPage.nav.directions" },
   { hash: "#delivery", label: "solutionsPage.nav.delivery" },
 ];
 

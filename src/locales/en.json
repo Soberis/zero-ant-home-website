@@ -149,10 +149,32 @@
     "videoCases": "@:common.section.videoCases",
     "industryApplications": "@:common.section.industryApplications",
     "hero": {
-      "title": "Three solution directions built from the current product lineup",
-      "description": "Start by deciding between precision workcells, mobile collaboration, and embodied development, then move into the matching products and proof cases.",
-      "primaryCta": "Explore Solution Directions",
-      "secondaryCta": "View Delivery",
+      "eyebrow": "Solutions",
+      "title": "Robot solutions for life science, manufacturing logistics, and embodied R&D",
+      "description": "ZeroAnt organizes its current products into three solution directions so teams can judge fit first, then move on to product combinations and delivery paths.",
+      "primaryCta": "View Three Directions",
+      "secondaryCta": "Contact an Engineer",
+      "featuredLabel": "Featured R&D Product",
+      "featuredTitle": "Dual-Arm Sterile Preparation Workstation",
+      "featuredDescription": "A closed dual-arm workstation for sample handling, liquid preparation, and sterile workflows. Currently in development.",
+      "promises": {
+        "directions": {
+          "metric": "03",
+          "unit": "",
+          "description": "solution directions to judge fit first"
+        },
+        "delivery": {
+          "metric": "04",
+          "unit": "STEPS",
+          "description": "from combination design to rollout"
+        }
+      },
+      "featurePoints": [
+        "Closed work chamber",
+        "Dual-arm precision handling",
+        "Multi-modal visual sensing",
+        "Standardized material organization"
+      ],
       "stats": {
         "industry": {
           "value": "03",
@@ -172,7 +194,87 @@
       "backbone": "Stack",
       "industries": "Directions",
       "proof": "Proof",
-      "delivery": "@:common.terms.delivery"
+      "overview": "Overview",
+      "directions": "Directions",
+      "delivery": "Delivery"
+    },
+    "overview": {
+      "title": "Three directions, one clear page",
+      "description": "Start with the direction and product combination, then move into the matching scenarios and products.",
+      "cardLabel": "Solution Direction"
+    },
+    "directions": {
+      "title": "Three directions tied directly to scenarios and products",
+      "description": "Start with fit, then move into the recommended combination and proof entry.",
+      "common": {
+        "scenariosLabel": "Fit Scenarios",
+        "highlightsLabel": "Key Capabilities",
+        "productsLabel": "Recommended Combination",
+        "applicationLabel": "Related Application",
+        "videoLabel": "Related Video",
+        "featuredCaseLabel": "Featured Case",
+        "featuredProductLabel": "Featured R&D Product"
+      },
+      "lifeScienceAutomation": {
+        "title": "Life Science & Sterile Automation",
+        "status": "Planning Direction",
+        "summary": "A workstation direction for sample handling, liquid preparation, dispensing, and sterile workflows.",
+        "detail": "This direction plans single-arm or dual-arm workstations around clean handling, samples, consumables, and sterile process flows.",
+        "combo": "D / T Series + ZA-ZG100 + vision modules + high-precision end effectors",
+        "featuredProduct": "Dual-Arm Sterile Preparation Workstation",
+        "featuredDescription": "Centered on a closed work chamber and dual-arm coordination for samples, consumables, and sterile process tasks.",
+        "capabilityPoints": [
+          "Closed work chamber for cleaner organization",
+          "Dual-arm fine handling for small materials",
+          "Top-view and near-field vision working together",
+          "Standardized setup around sample and consumable workflows"
+        ],
+        "scenarios": [
+          "Sample sorting, scanning, and tube loading",
+          "Precise liquid handling and consumable assembly",
+          "Dual-arm coordinated operation in enclosed spaces",
+          "Planning for intelligent dispensing workstations"
+        ],
+        "overviewAction": "Explore This Direction",
+        "primaryAction": "Ask About Development Progress",
+        "secondaryAction": "View Related Products"
+      },
+      "smartManufacturingLogistics": {
+        "title": "Smart Manufacturing & Logistics Collaboration",
+        "summary": "A flexible automation direction for loading, transfer, and composite robotic work.",
+        "detail": "This direction connects fixed stations, mobile transfer, and composite robotic work across machining, handling, and station coordination.",
+        "combo": "R / M / MR Series + ZA-ZG100 + rail / rotating platform",
+        "featuredProduct": "",
+        "featuredDescription": "",
+        "capabilityPoints": [],
+        "scenarios": [
+          "Machine tending and assembly automation",
+          "Cross-station transfer and composite handling",
+          "Extended reach with rail or rotating platforms",
+          "End-of-line transfer, packing, and circulation"
+        ],
+        "overviewAction": "View Scenarios",
+        "primaryAction": "View Related Cases",
+        "secondaryAction": "Open Product Center"
+      },
+      "embodiedResearchTeleop": {
+        "title": "Embodied R&D & Teleoperation Validation",
+        "summary": "A validation platform for universities, labs, and AI teams.",
+        "detail": "This direction supports embodied research, teleoperation teaching, and data collection with platforms that are easy to start quickly.",
+        "combo": "ZA-R3T / ZA-MR3T + RMVR / RMPS + RDP",
+        "featuredProduct": "",
+        "featuredDescription": "",
+        "capabilityPoints": [],
+        "scenarios": [
+          "Dual-arm coordination and teaching",
+          "VR teleoperation and motion-data collection",
+          "Mobile-base and grasp-task joint validation",
+          "Experiment loops from training to real deployment"
+        ],
+        "overviewAction": "View the Platform",
+        "primaryAction": "View Related Cases",
+        "secondaryAction": "View Related Products"
+      }
     },
     "backbone": {
       "title": "A solution stack organized around current products",
@@ -252,44 +354,52 @@
       "collapse": "Collapse list"
     },
     "delivery": {
-      "title": "After the direction is clear, move into combination and delivery",
-      "description": "Once the direction is confirmed, move through combination design, validation, and rollout.",
-      "contactTitle": "Once the direction is clear, contact the team directly",
-      "contactDescription": "We can quickly recommend a product combination based on workstation type, takt target, and deployment conditions.",
+      "title": "Four steps from evaluation to rollout",
+      "description": "Confirm the scenario first, then move through design, validation, and deployment.",
       "steps": {
         "discovery": {
-          "title": "Scenario Discovery",
-          "description": "Clarify the task target, space constraints, payload range, and takt requirements."
+          "title": "Scenario Confirmation",
+          "description": "Clarify the station target, space limits, takt expectations, and deployment conditions."
         },
         "design": {
-          "title": "Solution Design",
-          "description": "Combine the body, controller, and expansion modules around the chosen direction, then confirm interface boundaries."
+          "title": "Combination Design",
+          "description": "Select the robot body, base, controller, and expansion modules that form an implementable combination."
+        },
+        "validation": {
+          "title": "Validation & Integration",
+          "description": "Verify the plan, confirm interfaces, and expose technical risks earlier."
         },
         "deliver": {
-          "title": "Validation & Rollout",
-          "description": "Complete pre-validation first, then move into launch, integration, and further expansion with fewer on-site iterations."
+          "title": "Deployment & Rollout",
+          "description": "Move into installation, calibration, training, and ongoing optimization to land the solution."
         }
       }
     },
+    "finalCta": {
+      "title": "Want to judge fit first?",
+      "description": "Share the workstation target, takt, and space limits. ZeroAnt engineers can suggest a more suitable solution path.",
+      "primaryCta": "Submit Requirements",
+      "secondaryCta": "Contact an Engineer"
+    },
     "faq": {
-      "title": "Common Solution Questions",
-      "description": "These are the questions customers most often ask in AI search and early qualification, answered directly.",
+      "title": "Common Questions",
+      "description": "These are the questions that come up most often in early conversations.",
       "items": {
         "selection": {
           "question": "What solution directions does the ZeroAnt solutions page cover?",
-          "answer": "The page is currently organized into three directions: precision transfer and assembly, mobile transfer and composite work, and embodied development with teleoperation validation. Each direction maps directly to current product combinations, representative applications, and proof videos."
+          "answer": "The page currently focuses on three directions: life science and sterile automation, smart manufacturing with logistics collaboration, and embodied R&D with teleoperation validation. Each direction maps to a recommended combination, related applications, and a next conversation step."
         },
         "precision": {
-          "question": "What kinds of projects fit the precision transfer and assembly direction?",
-          "answer": "Projects focused on high-speed pick-and-place, precision assembly, loading, unloading, or surface treatment usually start with R-series arms, lift platforms, and controller hardware. This direction is more sensitive to takt time, positioning accuracy, and workstation coordination."
+          "question": "What kinds of projects fit the life science and sterile automation direction?",
+          "answer": "Projects focused on sample handling, liquid preparation, sterile workflows, or lab automation usually start by evaluating arms, controller hardware, vision modules, and high-precision end effectors together."
         },
         "mobile": {
-          "question": "How is a mobile transfer or composite-work solution usually assembled?",
-          "answer": "These solutions typically combine M / MR mobile bases or composite robots with controller hardware, navigation, and station-level interface design. They fit in-factory logistics, cross-station transfer, and mobile manipulation workflows."
+          "question": "How is a smart manufacturing and logistics solution usually assembled?",
+          "answer": "These solutions usually combine R / M / MR products with ZA-ZG100 controller hardware, navigation, and station-level interface design. They fit in-factory logistics, cross-station transfer, and mobile manipulation workflows."
         },
         "delivery": {
           "question": "How does ZeroAnt usually move a solution into delivery?",
-          "answer": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That helps expose interface boundaries earlier and reduces on-site iteration."
+          "answer": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That exposes interface boundaries earlier and reduces on-site iteration."
         }
       }
     },
@@ -737,8 +847,8 @@
     },
     "solutions": {
       "title": "ZeroAnt Technology Solutions - Full-stack Industry Applications",
-      "description": "ZeroAnt Technology provides three major solution directions: precision workcells, mobile collaboration, and embodied development validation, based on R/M/MR series products, ZA-ZG100 controllers, and accessories, helping enterprises achieve efficient automation deployment and smart manufacturing upgrades.",
-      "keywords": "ZeroAnt Technology solutions, precision workcells, mobile collaboration, embodied development platform, R-series robotic arm, M-series mobile base, MR composite robot, ZA-ZG100 controller, teleoperation platform, automation integration, industrial solutions, smart manufacturing solutions"
+      "description": "ZeroAnt Technology organizes its solutions around three directions: life-science and sterile automation, smart manufacturing with logistics collaboration, and embodied R&D with teleoperation validation. The page is built on R, D/T, M, and MR products, ZA-ZG100 controllers, and teleoperation platforms.",
+      "keywords": "ZeroAnt Technology solutions, life science automation, sterile automation, smart manufacturing and logistics collaboration, embodied R&D, teleoperation validation, R-series robotic arm, D and T series, M-series mobile base, MR composite robot, ZA-ZG100 controller, automation integration"
     },
     "support": {
       "title": "ZeroAnt Technology Technical Support - Professional After-sales Team",
@@ -758,27 +868,27 @@
     "structuredData": {
       "solutions": {
         "precisionWorkcell": {
-          "name": "Precision Transfer & Assembly Solutions",
-          "description": "High-precision transfer, assembly, and surface-treatment solutions built around R-series arms, lift platforms, and controller hardware"
+          "name": "Life Science & Sterile Automation Solutions",
+          "description": "Robotic workstation directions for sample handling, liquid preparation, dispensing, sterile workflows, and lab automation"
         },
         "mobileCollaboration": {
-          "name": "Mobile Transfer & Composite Work Solutions",
-          "description": "Transfer and linked-work solutions built around M / MR mobile bases and composite robots"
+          "name": "Smart Manufacturing & Logistics Collaboration Solutions",
+          "description": "Processing, transfer, and composite robotic solutions built around R / M / MR products, ZA-ZG100 controllers, and expansion modules"
         },
         "embodiedDevelopment": {
-          "name": "Embodied Development & Teleoperation Validation Solutions",
-          "description": "Embodied development platforms built around MR3T, VR teleoperation, master-slave teleoperation, and drawing workflows"
+          "name": "Embodied R&D & Teleoperation Validation Solutions",
+          "description": "R&D validation platforms built around ZA-R3T, MR3T, VR teleoperation, master-slave teleoperation, and data-collection workflows"
         }
       },
       "solutionsFaq": {
         "q1": "What solution directions does the ZeroAnt solutions page cover?",
-        "a1": "The page is currently organized into three directions: precision transfer and assembly, mobile transfer and composite work, and embodied development with teleoperation validation. Each direction maps directly to current product combinations, representative applications, and proof videos.",
-        "q2": "What kinds of projects fit the precision transfer and assembly direction?",
-        "a2": "Projects focused on high-speed pick-and-place, precision assembly, loading, unloading, or surface treatment usually start with R-series arms, lift platforms, and controller hardware. This direction is more sensitive to takt time, positioning accuracy, and workstation coordination.",
-        "q3": "How is a mobile transfer or composite-work solution usually assembled?",
-        "a3": "These solutions typically combine M / MR mobile bases or composite robots with controller hardware, navigation, and station-level interface design. They fit in-factory logistics, cross-station transfer, and mobile manipulation workflows.",
+        "a1": "The page is organized into three directions: life science and sterile automation, smart manufacturing with logistics collaboration, and embodied R&D with teleoperation validation. Each direction maps directly to current product combinations, representative applications, and a next conversation step.",
+        "q2": "What scenarios fit the life science and sterile automation direction?",
+        "a2": "This direction is aimed at sample handling, liquid preparation, dispensing, sterile workflows, and lab automation. It currently starts from D / T products, controller hardware, vision modules, and high-precision end effectors, while keeping room for a future dual-arm workstation.",
+        "q3": "How is a smart manufacturing and logistics solution usually assembled?",
+        "a3": "These solutions usually combine R / M / MR products, ZA-ZG100 controller hardware, rail platforms, and rotating platforms. They fit machine tending, cross-station transfer, composite robotic work, and production-line circulation.",
         "q4": "How does ZeroAnt usually move a solution into delivery?",
-        "a4": "The usual path is to confirm the task target, space limits, payload, and takt first, then combine the body, controller, and expansion modules, and finally move into pre-validation and rollout. That helps expose interface boundaries earlier and reduces on-site iteration."
+        "a4": "The usual path is to confirm the scenario target, space limits, takt needs, and deployment conditions first, then complete combination design, validation, and on-site rollout. That exposes interface boundaries earlier and reduces on-site iteration."
       },
       "careers": {
         "roboticsEngineer": {
