@@ -27,7 +27,7 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["medical-automation", "four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
   },
   "za-r3m-left": {
-    applicationSlugs: ["fixed-rail-transfer", "composite-systems", "robot-daily-task"],
+    applicationSlugs: ["fixed-rail-transfer", "robot-daily-task"],
     videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo"],
   },
   "za-r3m-right": {
@@ -35,7 +35,7 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [],
   },
   "za-r3t": {
-    applicationSlugs: ["ai-robotics", "cultural-creative", "robot-daily-task"],
+    applicationSlugs: ["ai-robotics"],
     videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "vla-dual-arm-data-collection"],
   },
   "za-m75": {
@@ -51,15 +51,15 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["composite-robot-application", "agv-product-introduction", "mobile-robot-chassis"],
   },
   "za-mr3t": {
-    applicationSlugs: ["ai-robotics", "composite-systems", "cultural-creative"],
+    applicationSlugs: ["ai-robotics", "composite-systems"],
     videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "composite-robot-application"],
   },
   "za-rmvr": {
-    applicationSlugs: ["ai-robotics", "cultural-creative", "composite-systems"],
+    applicationSlugs: ["ai-robotics", "composite-systems"],
     videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-data-collection", "composite-robot-application"],
   },
   "za-rmps": {
-    applicationSlugs: ["ai-robotics", "cultural-creative", "composite-systems"],
+    applicationSlugs: ["ai-robotics"],
     videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "vla-dual-arm-data-collection"],
   },
   "za-rdp": {
@@ -67,7 +67,7 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["sketching-robot"],
   },
   "za-zg100": {
-    applicationSlugs: ["ai-robotics", "robot-daily-task", "composite-systems"],
+    applicationSlugs: ["robot-daily-task", "composite-systems"],
     videoSlugs: ["composite-robot-application", "four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
   },
   "rail": {

@@ -842,13 +842,13 @@ const goBack = () => {
   font-size: 0.92rem;
   line-height: 1.5;
   color: #667085;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .param-card__value {
   margin-top: 0;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   line-height: 1.5;
   text-align: left;
   color: #0f172a;
