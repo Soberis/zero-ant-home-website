@@ -303,9 +303,8 @@ onUnmounted(() => {
   position: relative;
   width: 100%;
   border-radius: 10px;
-  overflow: hidden;
   background: #2d3748;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
 }
 
 .iframe-container {

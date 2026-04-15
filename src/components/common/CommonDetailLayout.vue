@@ -1,6 +1,9 @@
 <template>
   <div class="common-detail-page">
-    <div class="player-hero-container">
+    <div
+      class="player-hero-container"
+      :class="{ 'player-hero-container--bilibili': mediaInfo.type === 'bilibili' }"
+    >
       <div class="media-wrapper">
         <template v-if="mediaInfo.type === 'bilibili'">
           <button
@@ -272,6 +275,14 @@ onUnmounted(() => {
 .media-wrapper {
   width: 100%;
   height: 100%;
+}
+
+.player-hero-container--bilibili :deep(.bilibili-player),
+.player-hero-container--bilibili :deep(.iframe-container),
+.player-hero-container--bilibili :deep(.fallback-container) {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 .video-player,
@@ -571,6 +582,9 @@ onUnmounted(() => {
     border-radius: 16px;
     margin-bottom: 36px;
   }
+  .player-hero-container--bilibili {
+    aspect-ratio: 16 / 10;
+  }
   .content-wrapper { max-width: 100%; }
   .detail-title { font-size: clamp(1.75rem, 4vw, 2.35rem); }
 }
@@ -580,6 +594,9 @@ onUnmounted(() => {
   .player-hero-container {
     border-radius: 14px;
     margin-bottom: 28px;
+  }
+  .player-hero-container--bilibili {
+    aspect-ratio: 16 / 10.6;
   }
   .facade-play-btn {
     width: 60px;
@@ -607,6 +624,9 @@ onUnmounted(() => {
 @media (max-width: 480px) {
   .common-detail-page { padding: 20px 12px 52px; }
   .player-hero-container { border-radius: 12px; }
+  .player-hero-container--bilibili {
+    aspect-ratio: 16 / 11;
+  }
   .facade-play-btn {
     width: 56px;
     height: 56px;
