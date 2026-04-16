@@ -724,13 +724,6 @@
     "common": {
       "specLabel": "Key Specs",
       "tipLabel": "Selection Tip",
-      "searchLabel": "Search Products",
-      "searchPlaceholder": "Search by model, family, or spec keyword",
-      "filterIntro": "Besides browsing by family, you can also jump straight to a model or spec keyword.",
-      "matchedProducts": "Matched products",
-      "clearFilterAction": "Clear Filter",
-      "emptyTitle": "No matching product found",
-      "emptyDescription": "Try another model keyword, or contact the team with payload, takt, and space constraints.",
       "ctaTitle": "Need help choosing?",
       "ctaDescription": "Tell us the workstation type, takt target, and space constraints. The team can help confirm the right model, controller, and accessory combination.",
       "contactAction": "Contact Team",
@@ -749,23 +742,6 @@
     "overview": {
       "title": "Browse by family first. Compare model differences next.",
       "description": "Start from R / M / MR, embodied and development platforms, controller, and accessories, then move into specific models under each family. Accessories stay in their own section."
-    },
-    "guide": {
-      "title": "Three quick checks.",
-      "items": {
-        "family": {
-          "title": "Start by family",
-          "description": "Confirm whether the need belongs to R, M, MR, embodied and development platforms, controller, or accessories before opening a specific model."
-        },
-        "difference": {
-          "title": "Check the key difference inside a family",
-          "description": "For example, ZA-R3 / ZA-R3X is mainly separated by SCARA arm length, while ZA-R3L / ZA-R3M / ZA-R3H is mainly separated by column height and Z-axis travel."
-        },
-        "accessories": {
-          "title": "Match accessories after the robot body",
-          "description": "Rail platform and rotating platform are shown in a separate section and are usually matched after the robot body is clear."
-        }
-      }
     }
   },
   "productsCenter": {

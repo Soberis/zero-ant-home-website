@@ -724,13 +724,6 @@
     "common": {
       "specLabel": "重点参数",
       "tipLabel": "选型提示",
-      "searchLabel": "搜索产品",
-      "searchPlaceholder": "按型号、系列、参数关键词搜索",
-      "filterIntro": "按系列浏览之外，也可以直接按型号和参数关键词快速定位。",
-      "matchedProducts": "当前匹配产品",
-      "clearFilterAction": "清除筛选",
-      "emptyTitle": "没有找到匹配的产品",
-      "emptyDescription": "换一个型号关键词，或直接联系团队说明负载、节拍和空间约束。",
       "ctaTitle": "不确定怎么选？",
       "ctaDescription": "告诉我们工位类型、节拍要求和空间约束，团队会协助确认合适的型号、控制器与扩展机构组合。",
       "contactAction": "联系团队",
@@ -749,23 +742,6 @@
     "overview": {
       "title": "先按系列浏览，再比较型号差异。",
       "description": "先看 R / M / MR、具身与开发平台、控制器和扩展机构的分类，再进入各系列下的具体型号；扩展机构单独成区查看。"
-    },
-    "guide": {
-      "title": "先看三件事。",
-      "items": {
-        "family": {
-          "title": "先按系列进入",
-          "description": "先确定属于 R、M、MR、具身与开发平台、控制器还是扩展机构，再进入具体型号。"
-        },
-        "difference": {
-          "title": "同系列先看关键差异",
-          "description": "例如 ZA-R3 / ZA-R3X 主要看 SCARA 臂长，ZA-R3L / ZA-R3M / ZA-R3H 主要看立柱高度和 Z 轴行程。"
-        },
-        "accessories": {
-          "title": "本体明确后再配扩展机构",
-          "description": "地轨平台和旋转平台独立成区展示，通常在本体方向明确后再判断是否需要搭配。"
-        }
-      }
     }
   },
   "productsCenter": {
