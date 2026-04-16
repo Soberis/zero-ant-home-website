@@ -449,9 +449,10 @@ const featuredVideoSlugs = [
 ] as const;
 const featuredApplicationSlugs = [
   "medical-automation",
-  "fixed-rail-transfer",
   "composite-systems",
+  "smart-logistics",
   "ai-robotics",
+  "fixed-rail-transfer",
 ] as const;
 const defaultVisibleVideoCount = 3;
 const defaultVisibleApplicationCount = 4;
@@ -588,13 +589,6 @@ const applicationTitleMap = computed<Record<string, string>>(() =>
   }, {})
 );
 
-const videoCardMap = computed(() =>
-  videoCards.reduce<Record<string, (typeof videoCards)[number]>>((map, item) => {
-    map[item.slug] = item;
-    return map;
-  }, {})
-);
-
 const directions = computed<SolutionDirectionView[]>(() =>
   solutionDirections.map((direction) => {
     const isLifeScience = direction.key === "lifeScienceAutomation";
@@ -606,7 +600,6 @@ const directions = computed<SolutionDirectionView[]>(() =>
       : products[0];
     const applicationSlug = direction.applicationSlug ?? "";
     const applicationTitle = applicationTitleMap.value[applicationSlug] ?? "";
-    const videoCard = direction.videoSlug ? videoCardMap.value[direction.videoSlug] : undefined;
     const featuredProduct = t(`solutionsPage.directions.${direction.key}.featuredProduct`);
     const visualTitle = isLifeScience
       ? t("solutionsPage.hero.featuredTitle")

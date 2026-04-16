@@ -8,7 +8,7 @@
  * @param input 用户输入字符串
  * @returns 清理后的安全字符串
  */
-export function sanitizeInput(input: string): string {
+function sanitizeInput(input: string): string {
   if (typeof input !== "string") {
     return "";
   }
@@ -95,7 +95,7 @@ export function sanitizeHtmlAllowList(
  * 检查浏览器安全特性支持
  * @returns 安全特性支持情况
  */
-export function checkSecurityFeatures() {
+function checkSecurityFeatures() {
   if (typeof window === "undefined" || typeof document === "undefined") {
     return {
       https: false,
@@ -122,7 +122,7 @@ export function checkSecurityFeatures() {
  * @param event 安全事件
  * @param details 事件详情
  */
-export function logSecurityEvent(_event: string, _details?: any) {
+function logSecurityEvent(_event: string, _details?: any) {
   // 开发环境输出到控制台
   if (import.meta.env.DEV) {
     console.warn(`[Security] ${_event}`, _details);
@@ -135,7 +135,7 @@ export function logSecurityEvent(_event: string, _details?: any) {
 /**
  * 内容安全策略违规处理
  */
-export function setupCSPViolationReporting() {
+function setupCSPViolationReporting() {
   document.addEventListener("securitypolicyviolation", (event) => {
     logSecurityEvent("CSP_VIOLATION", {
       blockedURI: event.blockedURI,

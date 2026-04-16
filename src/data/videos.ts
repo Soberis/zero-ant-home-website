@@ -51,11 +51,6 @@ export interface VideoCard {
 }
 
 /**
- * 视频详情映射类型
- */
-export type VideoMapData = Record<string, VideoDetail>;
-
-/**
  * 视频缩略图映射，供卡片和详情页共用，避免详情页再依赖卡片列表取封面。
  */
 const videoThumbnailMap: Record<string, string> = {
@@ -78,14 +73,14 @@ const videoThumbnailMap: Record<string, string> = {
 /**
  * 数据验证函数
  */
-export const validateVideoData = (video: VideoDetail): boolean => {
+const validateVideoData = (video: VideoDetail): boolean => {
   return !!(video.slug && video.url && video.title && video.desc);
 };
 
 /**
  * 工具函数：根据slug获取视频详情
  */
-export const getVideoById = (slug: string): VideoDetail | undefined => {
+const getVideoById = (slug: string): VideoDetail | undefined => {
   return videoMap[slug];
 };
 
@@ -97,23 +92,9 @@ export const getVideoThumbnailById = (slug: string): string | undefined => {
 };
 
 /**
- * 工具函数：根据标签 key 获取视频列表
- */
-export const getVideosByTag = (tag: string): VideoDetail[] => {
-  return Object.values(videoMap).filter((video) => video.tags?.includes(tag));
-};
-
-/**
- * 工具函数：获取所有视频列表
- */
-export const getAllVideos = (): VideoDetail[] => {
-  return Object.values(videoMap);
-};
-
-/**
  * 视频详情映射（以 slug 作为 key）
  */
-export const videoMap: VideoMapData = {
+export const videoMap: Record<string, VideoDetail> = {
   "medical-automation": {
     slug: "medical-automation",
     type: "bilibili",
@@ -240,66 +221,12 @@ export const videoMap: VideoMapData = {
   },
 };
 
-/**
- * 视频卡片列表（用于 Video.vue）
- * title 存放 i18n key，按 slug 统一取文案
- * 按照 AI智能 → 复合系统 → 单一应用 → 基础技术 的顺序排列
- */
 export const videoCards: VideoCard[] = [
-  {
-    title: "videos.medical-automation.title",
-    img: compositeRobotImg,
-    slug: "medical-automation",
-  },
-  {
-    title: "videos.ur-robot-llm-motion-capture.title",
-    img: urRobotLLMImg,
-    slug: "ur-robot-llm-motion-capture",
-  },
-  {
-    title: "videos.composite-robot-application.title",
-    img: compositeRobotAppImg,
-    slug: "composite-robot-application",
-  },
-  {
-    title: "videos.mobile-transfer-robot.title",
-    img: mobileTransferRobotImg,
-    slug: "mobile-transfer-robot",
-  },
-  {
-    title: "videos.fixed-rail-transfer-robot.title",
-    img: fixedRailTransferRobotImg,
-    slug: "fixed-rail-transfer-robot",
-  },
-  {
-    title: "videos.four-axis-robot-open-fridge.title",
-    img: fourAxisRobotFridgeImg,
-    slug: "four-axis-robot-open-fridge",
-  },
-  {
-    title: "videos.sketching-robot.title",
-    img: sketchingRobotImg,
-    slug: "sketching-robot",
-  },
-  {
-    title: "videos.agv-product-introduction.title",
-    img: agvImg,
-    slug: "agv-product-introduction",
-  },
-  {
-    title: "videos.mobile-robot-chassis.title",
-    img: mobileRobotChassisImg,
-    slug: "mobile-robot-chassis",
-  },
+  // 按 publishDate 倒序排列（最新在前）
   {
     title: "videos.za-r3ml-demo.title",
     img: zaR3mlDemoImg,
     slug: "za-r3ml-demo",
-  },
-  {
-    title: "videos.vr-teleop-dual-arm.title",
-    img: vrTeleopDualArmImg,
-    slug: "vr-teleop-dual-arm",
   },
   {
     title: "videos.vla-dual-arm-cable-grasping.title",
@@ -310,6 +237,56 @@ export const videoCards: VideoCard[] = [
     title: "videos.vla-dual-arm-data-collection.title",
     img: vlaDualArmDataCollectionImg,
     slug: "vla-dual-arm-data-collection",
+  },
+  {
+    title: "videos.vr-teleop-dual-arm.title",
+    img: vrTeleopDualArmImg,
+    slug: "vr-teleop-dual-arm",
+  },
+  {
+    title: "videos.fixed-rail-transfer-robot.title",
+    img: fixedRailTransferRobotImg,
+    slug: "fixed-rail-transfer-robot",
+  },
+  {
+    title: "videos.sketching-robot.title",
+    img: sketchingRobotImg,
+    slug: "sketching-robot",
+  },
+  {
+    title: "videos.mobile-robot-chassis.title",
+    img: mobileRobotChassisImg,
+    slug: "mobile-robot-chassis",
+  },
+  {
+    title: "videos.mobile-transfer-robot.title",
+    img: mobileTransferRobotImg,
+    slug: "mobile-transfer-robot",
+  },
+  {
+    title: "videos.ur-robot-llm-motion-capture.title",
+    img: urRobotLLMImg,
+    slug: "ur-robot-llm-motion-capture",
+  },
+  {
+    title: "videos.four-axis-robot-open-fridge.title",
+    img: fourAxisRobotFridgeImg,
+    slug: "four-axis-robot-open-fridge",
+  },
+  {
+    title: "videos.composite-robot-application.title",
+    img: compositeRobotAppImg,
+    slug: "composite-robot-application",
+  },
+  {
+    title: "videos.medical-automation.title",
+    img: compositeRobotImg,
+    slug: "medical-automation",
+  },
+  {
+    title: "videos.agv-product-introduction.title",
+    img: agvImg,
+    slug: "agv-product-introduction",
   },
 ].filter((card) => {
   const video = getVideoById(card.slug);

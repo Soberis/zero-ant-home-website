@@ -199,7 +199,7 @@
       "embodiedResearchTeleop": {
         "title": "具身研发与遥操作验证",
         "summary": "面向高校、实验室和 AI 团队的研发验证平台。",
-        "combo": "ZA-R3T / ZA-MR3T + RMVR / RMPS + RDP",
+        "combo": "ZA-R3T / ZA-MR3T + RMVR / RMPS + 视觉 / 灵巧手模块",
         "featuredProduct": "",
         "featuredDescription": "",
         "capabilityPoints": [],
@@ -484,15 +484,9 @@
     },
     "ai-robotics": {
       "title": "AI机器人",
-      "description": "围绕具身开发与双臂操作验证场景，结合双臂机器人、本体控制与算法开发能力，支持抓取、交互和实验验证等任务。",
-      "coreAdvantages": "双臂协同、算法验证、具身开发、人机协作",
-      "typicalApplications": "智能抓取、教育科研、服务机器人、人机协作、具身智能"
-    },
-    "mobile-robot-platform": {
-      "title": "移动机器人平台",
-      "description": "展示自主研发的移动机器人底盘平台，呈现先进的导航与运动能力。具备稳健的机械设计、精准的运动控制和智能导航系统，适用于自主移动机器人应用。",
-      "coreAdvantages": "自主底盘、自主导航、稳健机械设计、智能运动",
-      "typicalApplications": "移动机器人底盘、自主导航、移动平台开发、机器人运动"
+      "description": "围绕具身智能研发、遥操作示教与 VLA 任务验证场景，结合双臂机器人、本体控制与算法开发能力，支持抓取、数据采集、交互和实验验证等任务。",
+      "coreAdvantages": "双臂协同、遥操作示教、数据采集、算法验证",
+      "typicalApplications": "双臂抓取、VR遥操作、具身数据采集、VLA任务验证、教育科研"
     },
     "surface-treatment": {
       "title": "@:common.terms.surfaceTreatment",
@@ -506,12 +500,6 @@
       "coreAdvantages": "多机统一调度、智能路径规划、大负载能力、多场景适应",
       "typicalApplications": "工厂内物流、仓储搬运、配送中心、多机协同作业、智能调度"
     },
-    "robot-daily-task": {
-      "title": "机器人日常任务",
-      "description": "展示机械臂在日常操作场景中的应用能力，如开冰箱、抓取物品和执行常见任务。体现四轴和六轴机器人在实际应用中的灵活性与适应性。",
-      "coreAdvantages": "灵活操作、任务适应性、实际场景部署、多场景支持",
-      "typicalApplications": "物品抓取、日常任务自动化、食品操作、家庭服务机器人"
-    },
     "composite-systems": {
       "title": "复合系统",
       "description": "基于复合机器人技术和多OS混合部署虚拟机，集成多种功能模块，提供综合性的自动化解决方案。通过多功能集成、智能调度和异构系统统一管理，实现复杂场景下的高效协作与柔性生产。支持移动平台+机械臂的复合配置，满足多样化的工业应用需求，提升整体系统效率。",
@@ -523,12 +511,6 @@
       "description": "融合机器人技术与艺术创意，面向数字艺术、互动装置和文化展览场景，提供富有表现力的自动化解决方案。结合运动控制和视觉呈现能力，支持动态艺术创作和智能互动体验。",
       "coreAdvantages": "运动控制、视觉呈现、艺术创作、智能互动",
       "typicalApplications": "绘画机器人、数字艺术、互动装置、文化展览、创意表演"
-    },
-    "mobile-material-transfer": {
-      "title": "移动物料转运",
-      "description": "基于移动机器人平台，面向仓储、工厂等场景的物料搬运与转运需求，提供灵活高效的自动化方案。支持自主导航、路径规划和多机协同，适应复杂环境下的物料流转需求。",
-      "coreAdvantages": "自主导航、路径规划、多机协同、灵活高效",
-      "typicalApplications": "仓库搬运、工厂物料流转、产线配送、跨区转运"
     }
   },
   "careers": {

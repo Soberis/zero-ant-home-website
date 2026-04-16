@@ -22,7 +22,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications, { type Application } from "@/data/applications";
-import { computed, type ComputedRef } from "vue";
+import { computed, type ComputedRef, watchEffect } from "vue";
 import { getVideoThumbnailById, videoMap, type VideoDetail } from "@/data/videos";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
@@ -34,10 +34,23 @@ const router = useRouter();
 const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
 
+const legacyApplicationRedirects: Record<string, string> = {
+  "mobile-material-transfer": "smart-logistics",
+  "mobile-robot-platform": "smart-logistics",
+  "robot-daily-task": "ai-robotics",
+};
+
 const slug: ComputedRef<string> = computed(() => String(route.params.slug || ""));
 const rawDetail: ComputedRef<Application | undefined> = computed(() =>
   applications.find((item) => item.slug === slug.value)
 );
+
+watchEffect(() => {
+  const redirectTarget = legacyApplicationRedirects[slug.value];
+  if (!rawDetail.value && redirectTarget && redirectTarget !== slug.value) {
+    router.replace(localizePath(`/applications/${redirectTarget}`));
+  }
+});
 
 // 国际化的应用详情
 const detail: ComputedRef<Application | undefined> = computed(() => {

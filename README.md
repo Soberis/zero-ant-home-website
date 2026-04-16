@@ -66,9 +66,8 @@
 
 - vue
 - vue-router
-- vuex
-- element-plus
-- @fortawesome/fontawesome-svg-core
+- vue-i18n
+- less
 
 ## 反馈与贡献
 

@@ -199,7 +199,7 @@
       "embodiedResearchTeleop": {
         "title": "Embodied R&D & Teleoperation Validation",
         "summary": "A validation platform for universities, labs, and AI teams.",
-        "combo": "ZA-R3T / ZA-MR3T + RMVR / RMPS + RDP",
+        "combo": "ZA-R3T / ZA-MR3T + RMVR / RMPS + vision / dexterous-hand modules",
         "featuredProduct": "",
         "featuredDescription": "",
         "capabilityPoints": [],
@@ -484,15 +484,9 @@
     },
     "ai-robotics": {
       "title": "AI Robotics",
-      "description": "Focused on embodied development and dual-arm operation validation, this direction combines dual-arm robot hardware, body control and algorithm development for grasping, interaction and experimental validation tasks.",
-      "coreAdvantages": "Dual-arm coordination, algorithm validation, embodied development, human-robot collaboration",
-      "typicalApplications": "Intelligent grasping, education and research, service robots, human-robot collaboration, embodied intelligence"
-    },
-    "mobile-robot-platform": {
-      "title": "Mobile Robot Platform",
-      "description": "Showcases self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control and intelligent navigation systems for autonomous mobile robot applications.",
-      "coreAdvantages": "Self-developed chassis, autonomous navigation, robust mechanical design, intelligent mobility",
-      "typicalApplications": "Mobile robot chassis, autonomous navigation, mobile platform development, robot mobility"
+      "description": "Focused on embodied AI development, teleoperation teaching and VLA task validation, this direction combines dual-arm robot hardware, body control and algorithm development for grasping, data collection, interaction and experimental validation.",
+      "coreAdvantages": "Dual-arm coordination, teleoperation teaching, data collection, algorithm validation",
+      "typicalApplications": "Dual-arm grasping, VR teleoperation, embodied data collection, VLA task validation, education and research"
     },
     "smart-logistics": {
       "title": "@:common.terms.smartLogistics",
@@ -506,12 +500,6 @@
       "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic substitution",
       "typicalApplications": "Laboratory automation, personalized prescription drugs, drug preparation, biological sample processing, quality testing"
     },
-    "robot-daily-task": {
-      "title": "Robot Daily Task",
-      "description": "Demonstrates robotic arm capabilities in everyday manipulation scenarios, such as opening refrigerators, grasping objects and performing common tasks. Showcases the flexibility and adaptability of four-axis and six-axis robots in real-world applications.",
-      "coreAdvantages": "Flexible manipulation, task adaptability, real-world deployment, multi-scenario support",
-      "typicalApplications": "Object grasping, daily task automation, food handling, household service robots"
-    },
     "composite-systems": {
       "title": "Composite Systems",
       "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
@@ -523,12 +511,6 @@
       "description": "Integrating robotics technology with artistic creativity, providing expressive automation solutions for digital art, interactive installations, and cultural exhibitions. Combining motion control and visual presentation capabilities to support dynamic art creation and intelligent interactive experiences.",
       "coreAdvantages": "Motion control, visual presentation, artistic creation, intelligent interaction",
       "typicalApplications": "Sketching robots, digital art, interactive installations, cultural exhibitions, creative performances"
-    },
-    "mobile-material-transfer": {
-      "title": "Mobile Material Transfer",
-      "description": "Based on mobile robot platforms, providing flexible and efficient automation solutions for material handling and transfer needs in warehouses and factories. Supporting autonomous navigation, path planning, and multi-robot collaboration, adapting to material flow requirements in complex environments.",
-      "coreAdvantages": "Autonomous navigation, path planning, multi-robot collaboration, flexible and efficient",
-      "typicalApplications": "Warehouse handling, factory material flow, production line delivery, cross-zone transfer"
     }
   },
   "careers": {

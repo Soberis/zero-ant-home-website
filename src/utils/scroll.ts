@@ -1,11 +1,11 @@
 const DEFAULT_RETRY_DELAY_MS = 140;
 const PAGE_TRANSITION_DELAY_MS = 460;
 
-export interface ScheduleScrollToTopOptions {
+interface ScheduleScrollToTopOptions {
   afterTransition?: boolean;
 }
 
-export function forceScrollToTop(): void {
+function forceScrollToTop(): void {
   if (typeof window === "undefined") {
     return;
   }

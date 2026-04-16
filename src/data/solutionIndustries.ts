@@ -31,7 +31,7 @@ export const solutionDirections: SolutionDirectionConfig[] = [
   },
   {
     key: "embodiedResearchTeleop",
-    productSlugs: ["za-r3t", "za-mr3t", "za-rmvr", "za-rmps", "za-rdp"],
+    productSlugs: ["za-r3t", "za-mr3t", "za-rmvr", "za-rmps"],
     visualProductSlug: "za-rmvr",
     applicationSlug: "ai-robotics",
     videoSlug: "vr-teleop-dual-arm",

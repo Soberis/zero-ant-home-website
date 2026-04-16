@@ -15,7 +15,7 @@ export type ProductRelationsData = Record<string, ProductRelation>;
 
 export const productRelations: ProductRelationsData = {
   "za-r3-x": {
-    applicationSlugs: ["fixed-rail-transfer", "robot-daily-task", "medical-automation"],
+    applicationSlugs: ["fixed-rail-transfer", "medical-automation"],
     videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo", "medical-automation"],
   },
   "za-r3d6": {
@@ -23,11 +23,11 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["sketching-robot"],
   },
   "za-r3l-m-h": {
-    applicationSlugs: ["medical-automation", "robot-daily-task", "fixed-rail-transfer"],
+    applicationSlugs: ["medical-automation", "fixed-rail-transfer"],
     videoSlugs: ["medical-automation", "four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
   },
   "za-r3m-left": {
-    applicationSlugs: ["fixed-rail-transfer", "robot-daily-task"],
+    applicationSlugs: ["fixed-rail-transfer"],
     videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo"],
   },
   "za-r3m-right": {
@@ -35,19 +35,24 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [],
   },
   "za-r3t": {
-    applicationSlugs: ["ai-robotics"],
-    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "vla-dual-arm-data-collection"],
+    applicationSlugs: ["ai-robotics", "medical-automation"],
+    videoSlugs: [
+      "vr-teleop-dual-arm",
+      "vla-dual-arm-cable-grasping",
+      "vla-dual-arm-data-collection",
+      "medical-automation",
+    ],
   },
   "za-m75": {
-    applicationSlugs: ["smart-logistics", "mobile-robot-platform", "mobile-material-transfer"],
+    applicationSlugs: ["smart-logistics"],
     videoSlugs: ["agv-product-introduction", "mobile-robot-chassis", "mobile-transfer-robot"],
   },
   "za-m135": {
-    applicationSlugs: [],
+    applicationSlugs: ["smart-logistics"],
     videoSlugs: [],
   },
   "za-mr3m": {
-    applicationSlugs: ["composite-systems", "smart-logistics", "mobile-robot-platform"],
+    applicationSlugs: ["composite-systems", "smart-logistics"],
     videoSlugs: ["composite-robot-application", "agv-product-introduction", "mobile-robot-chassis"],
   },
   "za-mr3t": {
@@ -67,11 +72,11 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["sketching-robot"],
   },
   "za-zg100": {
-    applicationSlugs: ["robot-daily-task", "composite-systems"],
-    videoSlugs: ["composite-robot-application", "four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
+    applicationSlugs: ["medical-automation", "composite-systems", "ai-robotics"],
+    videoSlugs: ["medical-automation", "composite-robot-application", "vr-teleop-dual-arm"],
   },
   "rail": {
-    applicationSlugs: ["fixed-rail-transfer", "robot-daily-task"],
+    applicationSlugs: ["fixed-rail-transfer"],
     videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo"],
   },
   "rotating-platform": {

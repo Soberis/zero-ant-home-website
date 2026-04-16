@@ -1,4 +1,3 @@
-import coverImg from "@/assets/images/product/封面.webp";
 import railImg from "@/assets/images/product/地轨平台.webp";
 import rotatingPlatformImg from "@/assets/images/product/旋转平台.webp";
 import zaM135Img from "@/assets/images/product/ZA-M135.webp";
@@ -243,8 +242,6 @@ export const productCenterFamilies: ProductCenterFamily[] = [
     ]
   },
 ];
-
-export const productCenterCover = coverImg;
 
 export interface ProductCenterCardWithFamily {
   familyId: string;

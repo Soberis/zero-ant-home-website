@@ -39,24 +39,6 @@ export function slugToI18nKey(slug: string): string {
 }
 
 /**
- * 产品详情数据类型
- */
-export type ProductDetailsData = Record<string, ProductDetail>;
-
-/**
- * @deprecated 此函数已废弃，产品详情数据通过国际化系统获取
- */
-export function getProductDetailKeys(): string[] {
-  return [];
-}
-
-/**
- * @deprecated 此数据对象已废弃，请使用国际化系统获取产品详情数据
- * 通过 useI18n() 的 t() 函数访问 productDetails.{productSlug} 路径下的数据
- */
-export const productDetails: Partial<ProductDetailsData> = {};
-
-/**
  * 创建空的产品详情对象，用于类型兼容
  */
 export function createEmptyProductDetail(): ProductDetail {

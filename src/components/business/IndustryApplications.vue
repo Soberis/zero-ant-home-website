@@ -33,7 +33,7 @@ import ApplicationCard from '@/components/common/ApplicationCard.vue';
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const FEATURED_SLUGS = [
-  'fixed-rail-transfer',
+  'medical-automation',
   'composite-systems',
   'ai-robotics',
 ];
