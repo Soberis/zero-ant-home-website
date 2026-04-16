@@ -177,7 +177,7 @@
           "Dual-arm coordinated sterile operation in enclosed environments",
           "In-development intelligent dispensing and formulation workstation"
         ],
-        "overviewAction": "Explore This Direction",
+        "overviewAction": "View solution details",
         "primaryAction": "Ask About Development Progress"
       },
       "smartManufacturingLogistics": {
@@ -193,7 +193,7 @@
           "Extended reach with rail or rotating platforms",
           "End-of-line transfer, packing, and circulation"
         ],
-        "overviewAction": "View Scenarios",
+        "overviewAction": "View solution details",
         "primaryAction": "View Related Applications"
       },
       "embodiedResearchTeleop": {
@@ -209,7 +209,7 @@
           "Mobile-base and grasp-task joint validation",
           "Experiment loops from training to real deployment"
         ],
-        "overviewAction": "View the Platform",
+        "overviewAction": "View solution details",
         "primaryAction": "View Related Applications"
       }
     },

@@ -923,9 +923,10 @@ watch(
   width: fit-content;
   min-height: 28px;
   margin-bottom: 0;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: rgba(26, 58, 143, 0.08);
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(26, 58, 143, 0.06);
+  border: 1px solid rgba(26, 58, 143, 0.08);
   color: var(--brand-primary);
   letter-spacing: 0.08em;
 }
@@ -1178,8 +1179,8 @@ watch(
   display: inline-flex;
   align-items: center;
   min-height: 30px;
-  padding: 0 12px;
-  border-radius: 999px;
+  padding: 4px 10px;
+  border-radius: 12px;
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -1388,28 +1389,29 @@ watch(
   align-items: center;
   gap: 8px;
   width: fit-content;
-  padding: 6px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
+  padding: 4px;
+  border-radius: 14px;
+  background: #f8f9fb;
+  border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .more-switcher__item {
   min-height: 40px;
   padding: 0 16px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 10px;
   background: transparent;
   color: var(--brand-muted);
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .more-switcher__item.active {
   background: #ffffff;
   color: var(--brand-text);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 
 .more-panel__header {

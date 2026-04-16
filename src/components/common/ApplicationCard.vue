@@ -109,10 +109,11 @@ const { localizePath } = useLocalizedPath();
   align-items: center;
   gap: 8px;
   margin-top: auto;
-  color: var(--brand-primary);
+  width: fit-content;
+  color: rgba(15, 23, 42, 0.74);
   font-size: 0.92rem;
-  font-weight: 500;
-  transition: color 0.25s ease;
+  font-weight: 600;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .action-text {
@@ -129,7 +130,8 @@ const { localizePath } = useLocalizedPath();
 }
 
 .app-card-item:hover .app-action {
-  color: var(--brand-primary-deep);
+  color: var(--brand-primary);
+  transform: translateX(2px);
 }
 
 .app-card-item:hover .action-arrow {

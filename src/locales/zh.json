@@ -177,7 +177,7 @@
           "封闭空间内的双臂协同操作",
           "智能配药工作站规划"
         ],
-        "overviewAction": "查看方案方向",
+        "overviewAction": "查看方案详情",
         "primaryAction": "咨询在研进展"
       },
       "smartManufacturingLogistics": {
@@ -193,7 +193,7 @@
           "通过地轨或旋转平台扩展作业范围",
           "产线首末端搬运、包装与流转"
         ],
-        "overviewAction": "查看相关场景",
+        "overviewAction": "查看方案详情",
         "primaryAction": "查看相关应用"
       },
       "embodiedResearchTeleop": {
@@ -209,7 +209,7 @@
           "移动底盘与抓取任务联合验证",
           "算法训练到真实部署的实验闭环"
         ],
-        "overviewAction": "查看研发平台",
+        "overviewAction": "查看方案详情",
         "primaryAction": "查看相关应用"
       }
     },

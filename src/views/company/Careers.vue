@@ -9,7 +9,7 @@
           <div class="hero-actions">
             <button
               type="button"
-              class="hero-action"
+              class="btn btn-primary hero-action"
               @click="scrollToSection('positions')"
             >
               {{ $t("careers.heroAction") }}
@@ -116,7 +116,7 @@
             </div>
 
             <div class="position-actions">
-              <button class="apply-btn" type="button" @click="applyForPosition(position)">
+              <button class="btn btn-secondary apply-btn" type="button" @click="applyForPosition(position)">
                 {{ $t("careers.applyNow") }}
                 <svg class="apply-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </button>
@@ -377,10 +377,9 @@ function applyForPosition(position: Position): void {
 
 .hero-action,
 .apply-btn {
-  border-radius: 999px;
-  padding: 12px 24px;
-  font-size: 0.95rem;
-  font-weight: 500;
+  gap: 8px;
+  font-size: var(--compact-hero-button-font-size);
+  font-weight: 600;
   cursor: pointer;
   transition:
     transform 0.3s ease,
@@ -390,30 +389,8 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-action {
-  border: 1px solid transparent;
-  background: var(--brand-primary);
-  color: #ffffff;
-  box-shadow: none;
-}
-
-.hero-action:hover {
-  transform: translateY(-2px);
-  background: var(--brand-primary-deep);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.12);
-}
-
-.apply-btn {
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: #ffffff;
-  color: var(--brand-text);
-  box-shadow: none;
-}
-
-.apply-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(15, 23, 42, 0.02);
-  border-color: rgba(15, 23, 42, 0.22);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
 }
 
 .apply-btn-arrow {
@@ -710,14 +687,14 @@ function applyForPosition(position: Position): void {
 .meta-chip {
   width: fit-content;
   border-radius: 999px;
-  padding: 5px 11px;
-  font-size: 0.78rem;
+  padding: 6px 14px;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 .position-type {
-  background: rgba(26, 58, 143, 0.05);
+  background: rgba(26, 58, 143, 0.08);
   color: var(--brand-primary);
 }
 
@@ -731,7 +708,7 @@ function applyForPosition(position: Position): void {
 .meta-chip {
   border: 1px solid rgba(15, 23, 42, 0.08);
   color: rgba(15, 23, 42, 0.68);
-  background: transparent;
+  background: #ffffff;
 }
 
 .position-body {
