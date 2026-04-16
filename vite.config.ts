@@ -3,9 +3,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { visualizer } from "rollup-plugin-visualizer";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
@@ -14,13 +12,7 @@ export default defineConfig({
   // 设置基础路径为相对路径，确保服务器部署时资源能正确加载
   plugins: [
     vue(),
-    // Element Plus 按需导入
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-      dts: true, // 生成类型声明文件
-    }),
     Components({
-      resolvers: [ElementPlusResolver()],
       dts: true, // 生成类型声明文件
     }),
     // Bundle 分析工具（Windows 下也兼容：当脚本为 build:analyze 时启用）
@@ -82,14 +74,6 @@ export default defineConfig({
             ) {
               return "vue-vendor";
             }
-            // UI 组件库
-            if (id.includes("element-plus")) {
-              return "ui-vendor";
-            }
-            // 工具库 - 根据实际使用情况动态添加
-            if (id.includes("axios")) {
-              return "utils-vendor";
-            }
             // 其他第三方库
             return "vendor";
           }
@@ -128,6 +112,6 @@ export default defineConfig({
   },
   // 优化依赖预构建
   optimizeDeps: {
-    include: ["vue", "vue-router", "vue-i18n", "element-plus"],
+    include: ["vue", "vue-router", "vue-i18n"],
   },
 });
