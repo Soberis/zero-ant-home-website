@@ -536,7 +536,7 @@ const goBack = () => {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  border-radius: 99px;
+  border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #ffffff;
   color: rgba(15, 23, 42, 0.76);
@@ -998,7 +998,7 @@ const goBack = () => {
   justify-content: center;
   padding: 0 24px;
   height: 48px;
-  border-radius: 99px;
+  border-radius: 16px;
   font-weight: 600;
   font-size: 0.95rem;
   background: transparent;

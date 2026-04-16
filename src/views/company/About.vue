@@ -318,10 +318,10 @@ function formatIndex(value: number): string {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(15, 23, 42, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.028) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 85%);
+    linear-gradient(rgba(15, 23, 42, 0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.014) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 82%);
   pointer-events: none;
 }
 
@@ -355,7 +355,8 @@ function formatIndex(value: number): string {
 
 .hero-title--single-line {
   max-width: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
   font-size: clamp(3rem, 5.4vw, 5.3rem);
 }
 
@@ -431,8 +432,7 @@ function formatIndex(value: number): string {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--brand-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .intro-layout {
@@ -525,10 +525,10 @@ function formatIndex(value: number): string {
 }
 
 .stat-card:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-1px);
   background: #ffffff;
   border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.04);
 }
 
 .stat-number {
@@ -564,7 +564,7 @@ function formatIndex(value: number): string {
   padding: 24px;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
 }
 
 .timeline-rail {
@@ -594,7 +594,7 @@ function formatIndex(value: number): string {
   margin-top: 4px;
   border-radius: 50%;
   background: var(--brand-primary);
-  box-shadow: 0 0 0 5px rgba(26, 58, 143, 0.08);
+  box-shadow: 0 0 0 4px rgba(26, 58, 143, 0.06);
 }
 
 .timeline-year {
@@ -653,7 +653,7 @@ function formatIndex(value: number): string {
   font-family: "Outfit", sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   padding-top: 3px;
   transition: color 0.3s ease;
 }
@@ -664,7 +664,7 @@ function formatIndex(value: number): string {
   font-size: 1.05rem;
   font-weight: 500;
   line-height: 1.6;
-  transition: transform 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .honor-card:hover .card-index {
@@ -672,7 +672,7 @@ function formatIndex(value: number): string {
 }
 
 .honor-card:hover .honor-text {
-  transform: translateX(4px);
+  color: var(--brand-primary-deep);
 }
 
 .values-grid {
@@ -690,8 +690,8 @@ function formatIndex(value: number): string {
 }
 
 .value-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.04);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.035);
 }
 
 .value-text {
@@ -767,7 +767,7 @@ function formatIndex(value: number): string {
 }
 
 .contact-card--wide .contact-value {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .contact-label {
@@ -775,8 +775,7 @@ function formatIndex(value: number): string {
   color: rgba(15, 23, 42, 0.5);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .contact-value {

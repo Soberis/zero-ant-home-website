@@ -108,13 +108,13 @@ onUnmounted(() => {
   min-height: calc(100svh - var(--nav-height));
   overflow: hidden;
   background:
-    radial-gradient(circle at 76% 22%, rgba(26, 58, 143, 0.11), transparent 24%),
-    radial-gradient(circle at 18% 14%, rgba(15, 23, 42, 0.045), transparent 28%),
+    radial-gradient(circle at 76% 22%, rgba(26, 58, 143, 0.06), transparent 26%),
+    radial-gradient(circle at 18% 14%, rgba(15, 23, 42, 0.02), transparent 30%),
     linear-gradient(
       180deg,
-      rgba(247, 249, 252, 0.82) 0%,
-      rgba(255, 255, 255, 0.98) 40%,
-      rgba(248, 250, 252, 0.88) 100%
+      rgba(248, 250, 252, 0.9) 0%,
+      rgba(255, 255, 255, 0.98) 42%,
+      rgba(248, 250, 252, 0.92) 100%
     );
   cursor: pointer;
   color: inherit;
@@ -159,7 +159,7 @@ onUnmounted(() => {
   transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
     scale(var(--hero-image-scale, 1));
   transform-origin: center center;
-  filter: drop-shadow(0 28px 44px rgba(15, 23, 42, 0.12));
+  filter: drop-shadow(0 18px 30px rgba(15, 23, 42, 0.08));
 }
 
 .hero-overlay {

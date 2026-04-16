@@ -220,12 +220,10 @@ const pageContent = computed(() => ({
   flex-wrap: wrap;
   gap: 8px;
   padding: 8px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(15, 23, 42, 0.05);
-  border-radius: 99px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
   max-width: 100%;
 }
 
@@ -240,7 +238,7 @@ const pageContent = computed(() => ({
   color: #475467;
   font-size: 0.9rem;
   font-weight: 500;
-  border-radius: 99px;
+  border-radius: 12px;
   background-color: transparent;
   transition: all 0.25s ease;
   text-decoration: none;
@@ -333,13 +331,13 @@ const pageContent = computed(() => ({
   cursor: pointer;
   background: var(--section-card-surface, #ffffff);
   border: 1px solid rgba(15, 23, 42, 0.04);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.02);
 }
 
 .product-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-2px);
   border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05);
 }
 
 .product-card__visual {
@@ -349,7 +347,7 @@ const pageContent = computed(() => ({
   width: 100%;
   height: 250px;
   padding: 20px;
-  background: radial-gradient(circle at center, #ffffff 0%, #f1f3f8 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f3f5f9 100%);
   border-bottom: 1px solid rgba(15, 23, 42, 0.03);
 }
 
@@ -362,7 +360,7 @@ const pageContent = computed(() => ({
 }
 
 .product-card:hover .product-card__image {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .product-card__body {
@@ -493,7 +491,7 @@ const pageContent = computed(() => ({
   background: linear-gradient(135deg, #ffffff 0%, #f4f7fb 100%);
   border: 1px solid rgba(15, 23, 42, 0.04);
   border-radius: 24px;
-  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.025);
 }
 
 .product-center-cta__copy {
@@ -520,7 +518,6 @@ const pageContent = computed(() => ({
 @media (min-width: 1360px) {
   .product-family__intro {
     max-width: none;
-    white-space: nowrap;
   }
 }
 

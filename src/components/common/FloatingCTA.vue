@@ -105,12 +105,11 @@ const scrollToTop = () => {
   z-index: 2000;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-radius: 100px; /* 恢复全悬浮药丸形态 */
-  padding: 12px 0;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 20px;
+  padding: 8px 0;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -121,23 +120,22 @@ const scrollToTop = () => {
   justify-content: center;
   width: 44px;
   height: 44px;
-  margin: 4px 8px; /* 恢复对称边距 */
+  margin: 4px 6px;
   background: transparent;
-  color: var(--color-primary); /* Use tech blue by default instead of slate gray */
-  border-radius: 50%;
+  color: var(--color-primary);
+  border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   
   &:hover {
-    background: var(--color-primary);
-    color: #ffffff;
-    
-    /* 移除之前的位移和外阴影，保持药丸内部的纯净感 */
+    background: rgba(26, 58, 143, 0.08);
+    color: var(--brand-primary-deep, #142a66);
+
     .sidebar-popup {
       opacity: 1;
       visibility: visible;
-      transform: translateY(-50%) translateX(0) scale(1);
+      transform: translateY(-50%) translateX(0);
       pointer-events: auto;
     }
   }
@@ -154,9 +152,9 @@ const scrollToTop = () => {
 .sidebar-popup {
   position: absolute;
   right: 100%;
-  margin-right: 12px; /* 弹窗距离边缘的距离 */
+  margin-right: 12px;
   top: 50%;
-  transform: translateY(-50%) translateX(10px) scale(0.95);
+  transform: translateY(-50%) translateX(6px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -176,16 +174,16 @@ const scrollToTop = () => {
 }
 
 .popup-content {
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
   padding: 16px;
   border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(15, 23, 42, 0.12), inset 0 0 0 1px rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 140px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .link-popup .popup-content, .group:first-child .popup-content {
@@ -282,7 +280,7 @@ const scrollToTop = () => {
     top: auto;
     bottom: 56px;
     transform: none;
-    border-radius: 100px;
+    border-radius: 18px;
     padding: 6px 0;
   }
   

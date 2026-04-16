@@ -62,13 +62,13 @@ const emit = defineEmits(["hover", "leave", "click"]);
   width: 100%;
   padding: 20px;
   background: #f8f9fb;
-  border-radius: 24px;
+  border-radius: 16px;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .video-block:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
 }
 
 .video-media {
@@ -79,7 +79,7 @@ const emit = defineEmits(["hover", "leave", "click"]);
   overflow: hidden;
   background: #ffffff;
   /* subtle edge definition without strong shadow */
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); 
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
 }
 
 .video-media img {
@@ -92,7 +92,7 @@ const emit = defineEmits(["hover", "leave", "click"]);
 
 .video-block:hover .video-media img,
 .video-block.active .video-media img {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .play-icon {
@@ -104,25 +104,23 @@ const emit = defineEmits(["hover", "leave", "click"]);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.94);
+  color: #163a87;
+  border: 1px solid rgba(15, 23, 42, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
 }
 
 .video-block:hover .play-icon,
 .video-block.active .play-icon {
-  background: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  transform: translate(-50%, -50%) scale(1.1);
-  border-color: rgba(255, 255, 255, 0.52);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+  background: #ffffff;
+  color: #142a66;
+  transform: translate(-50%, -50%) scale(1.04);
+  border-color: rgba(22, 58, 135, 0.16);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
 }
 
 .video-content {

@@ -47,7 +47,7 @@ const { localizePath } = useLocalizedPath();
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: var(--section-card-surface, #ffffff);
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
   text-decoration: none;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -55,9 +55,9 @@ const { localizePath } = useLocalizedPath();
 }
 
 .app-card-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.09);
-  border-color: rgba(26, 58, 143, 0.14);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+  border-color: rgba(26, 58, 143, 0.12);
 }
 
 .app-card-inner {
@@ -75,7 +75,7 @@ const { localizePath } = useLocalizedPath();
   width: 56px;
   height: 56px;
   flex-shrink: 0;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-icon :deep(svg) {
@@ -84,7 +84,7 @@ const { localizePath } = useLocalizedPath();
 }
 
 .app-card-item:hover .app-icon {
-  transform: scale(1.1) translateY(-2px);
+  transform: scale(1.03);
 }
 
 .app-content {

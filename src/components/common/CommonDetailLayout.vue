@@ -264,9 +264,9 @@ onUnmounted(() => {
   width: min(100%, 1080px, calc((100svh - var(--nav-height) - 140px) * 16 / 9));
   aspect-ratio: 16 / 9;
   max-height: min(60svh, 600px);
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
-  background: #000;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
   border: 1px solid rgba(15, 23, 42, 0.08);
   margin-bottom: 36px;
@@ -305,7 +305,7 @@ onUnmounted(() => {
   border: none;
   padding: 0;
   text-align: inherit;
-  background: #000;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
   overflow: hidden;
 }
 
@@ -316,39 +316,37 @@ onUnmounted(() => {
   transform: translate(-50%, -50%);
   width: 72px;
   height: 72px;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.94);
+  color: #163a87;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 5;
 }
 
 .video-facade:hover .facade-play-btn {
-  background: rgba(255, 255, 255, 0.28);
-  transform: translate(-50%, -50%) scale(1.06);
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.22);
+  background: #ffffff;
+  transform: translate(-50%, -50%) scale(1.03);
+  border-color: rgba(22, 58, 135, 0.16);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
 }
 
 .facade-image {
-  opacity: 0.7;
+  opacity: 0.82;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
 
 .video-facade:hover .facade-image {
-  transform: scale(1.05);
-  opacity: 0.8;
+  transform: scale(1.02);
+  opacity: 0.9;
 }
 
 .video-placeholder {
-  background: #1e293b;
+  background: #f1f5f9;
   color: #64748b;
   font-size: 1.2rem;
   letter-spacing: 1px;
@@ -424,7 +422,7 @@ onUnmounted(() => {
 
 .contact-cta {
   flex-shrink: 0;
-  white-space: nowrap;
+  white-space: normal;
   min-height: 44px;
   padding: 0 20px;
   gap: 8px;
@@ -446,9 +444,7 @@ onUnmounted(() => {
 .contact-dialog-mask {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.32);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -457,12 +453,10 @@ onUnmounted(() => {
 }
 
 .contact-dialog {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
   padding: 40px 48px;
   min-width: 380px;
   text-align: center;
@@ -561,7 +555,7 @@ onUnmounted(() => {
 
 .detail-nav-btn {
   flex-shrink: 0;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* Responsive */

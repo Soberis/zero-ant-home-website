@@ -145,7 +145,6 @@ const productFamilies = [
   font-weight: 600;
   text-decoration: none;
   transition: color 0.25s ease, transform 0.25s ease;
-  white-space: nowrap;
 }
 
 .cta-arrow {
@@ -188,9 +187,9 @@ const productFamilies = [
 }
 
 .family-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-2px);
   background-color: #f8f9fb;
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05);
 }
 
 .family-card:focus-visible {
@@ -211,7 +210,7 @@ const productFamilies = [
 
 .family-card:hover .family-card__visual {
   background: #ffffff;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.025);
 }
 
 .family-card__image {
@@ -224,7 +223,7 @@ const productFamilies = [
 }
 
 .family-card:hover .family-card__image {
-  transform: translateY(-2px);
+  transform: none;
 }
 
 .family-card__content {
@@ -325,9 +324,4 @@ const productFamilies = [
   }
 }
 
-@media (min-width: 1280px) {
-  .core-products__description {
-    white-space: nowrap;
-  }
-}
 </style>

@@ -118,8 +118,8 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
 .footer {
   width: 100%;
   margin-top: auto;
-  padding: var(--section-padding-y) 0 0; // 大气间距
-  background: #0a0f1d; // 深邃高级底色
+  padding: var(--section-padding-y) 0 0;
+  background: #0a0f1d;
   color: #a1a1aa;
   font-size: 14px;
 }
@@ -132,8 +132,8 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
 
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); // 完美均分 5 列导航
-  gap: 56px 40px; // 加大上下间距
+  grid-template-columns: repeat(5, 1fr);
+  gap: 56px 40px;
   align-items: start;
 }
 
@@ -151,8 +151,7 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase; // 建筑化排版
+  letter-spacing: 0.06em;
 }
 
 .footer-col ul {
@@ -170,15 +169,13 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
 .footer-link {
   color: #8a8a91;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: color 0.25s ease;
   display: inline-block;
-  white-space: nowrap; // 防止长文字换行
 }
 
 .footer-col ul li a:hover,
 .footer-link:hover {
   color: #ffffff;
-  transform: translateX(4px); // 轻微平移交互
 }
 
 .contact-col {
@@ -227,7 +224,7 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
 }
 
 .qrcode-col {
-  grid-column: 4 / span 2; // 定位在第 4、5 列，整体往左移一点，完美避开右侧悬浮栏
+  grid-column: 4 / span 2;
   justify-self: start;
 }
 
@@ -244,13 +241,13 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
   padding: 6px;
   border-radius: 12px;
   background: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
   object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .qrcode-item:hover .qrcode-img {
-  transform: translateY(-4px) scale(1.05);
+  transform: translateY(-1px);
 }
 
 .bilibili-qrcode-img {

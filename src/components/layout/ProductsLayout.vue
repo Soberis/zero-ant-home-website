@@ -255,7 +255,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   justify-content: center;
   min-width: 154px;
   padding: 12px 18px;
-  border-radius: 999px;
+  border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.12);
   font-weight: 600;
   font-size: 0.92rem;
@@ -270,9 +270,9 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 .products-hero__action--primary {
   color: #fff;
-  background: linear-gradient(135deg, var(--products-accent) 0%, #2a57b3 100%);
+  background: var(--products-accent);
   border-color: transparent;
-  box-shadow: 0 12px 24px rgba(20, 54, 127, 0.14);
+  box-shadow: 0 10px 20px rgba(20, 54, 127, 0.12);
 }
 
 .products-hero__action--primary:link,
@@ -333,7 +333,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric--text .products-hero__metric-value {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .products-hero__metric-label {
@@ -344,16 +344,8 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 @media (min-width: 1360px) {
-  .products-hero__description {
-    white-space: nowrap;
-  }
-
   .products-overview__header {
     max-width: none;
-  }
-
-  .products-overview__description {
-    white-space: nowrap;
   }
 }
 

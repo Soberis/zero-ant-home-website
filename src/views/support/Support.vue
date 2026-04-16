@@ -458,8 +458,7 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: var(--compact-hero-kpi-label-size);
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .support-path {
@@ -480,7 +479,6 @@ function formatIndex(value: number): string {
 .support-path:hover {
   color: var(--brand-primary);
   text-decoration: none;
-  transform: translateX(4px);
 }
 
 .support-path-index {
@@ -488,7 +486,7 @@ function formatIndex(value: number): string {
   color: rgba(26, 58, 143, 0.42);
   font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
 }
 
 .support-path-copy {
@@ -514,6 +512,11 @@ function formatIndex(value: number): string {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.support-path:hover .support-path-arrow {
+  transform: translateX(3px);
 }
 
 .page-section {
@@ -540,8 +543,7 @@ function formatIndex(value: number): string {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--brand-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .detail-section__desc {
@@ -572,13 +574,13 @@ function formatIndex(value: number): string {
   min-height: 220px;
   padding: 28px;
   border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 18px;
+  border-radius: 16px;
   background: var(--section-card-surface);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .download-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   border-color: rgba(26, 58, 143, 0.18);
 }
 
@@ -594,8 +596,7 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .download-title {
@@ -766,15 +767,14 @@ function formatIndex(value: number): string {
 }
 
 .contact-card--full .contact-value {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .contact-label {
   color: var(--brand-muted);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .contact-value {
@@ -798,7 +798,7 @@ function formatIndex(value: number): string {
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-4px);
 }
 
 @media (max-width: 1100px) {
