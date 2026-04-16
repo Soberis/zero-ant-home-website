@@ -167,7 +167,8 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
 
 .footer-col ul li a,
 .footer-link {
-  color: #8a8a91;
+  color: #a6adbb;
+  font-weight: 500;
   text-decoration: none;
   transition: color 0.25s ease;
   display: inline-block;
