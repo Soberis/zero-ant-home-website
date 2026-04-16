@@ -165,21 +165,6 @@ const families = computed(() =>
   }))
 );
 
-const guideItems = computed(() => [
-  {
-    title: t("productsPage.guide.items.family.title"),
-    description: t("productsPage.guide.items.family.description"),
-  },
-  {
-    title: t("productsPage.guide.items.difference.title"),
-    description: t("productsPage.guide.items.difference.description"),
-  },
-  {
-    title: t("productsPage.guide.items.accessories.title"),
-    description: t("productsPage.guide.items.accessories.description"),
-  },
-]);
-
 const formatMetricCount = (count: number): string => String(count).padStart(2, "0");
 
 const pageMetrics = computed(() => [
@@ -218,8 +203,6 @@ const pageContent = computed(() => ({
   metrics: pageMetrics.value,
   overviewTitle: t("productsPage.overview.title"),
   overviewDescription: t("productsPage.overview.description"),
-  guideTitle: t("productsPage.guide.title"),
-  guideItems: guideItems.value,
 }));
 </script>
 
@@ -275,8 +258,6 @@ const pageContent = computed(() => ({
   position: relative;
   padding: 64px 0;
   scroll-margin-top: calc(var(--nav-height) + 96px);
-}
-.product-family:nth-of-type(even) {
   --section-card-surface: #ffffff;
 }
 
@@ -291,11 +272,7 @@ const pageContent = computed(() => ({
   height: 100%;
   transform: translateX(-50%);
   z-index: -1;
-  background-color: #f8f9fb;
-}
-
-.product-family:nth-of-type(odd) {
-  --section-card-surface: #f8f9fb;
+  background-color: var(--brand-surface-soft);
 }
 
 .product-family:nth-of-type(odd)::before {
@@ -309,7 +286,7 @@ const pageContent = computed(() => ({
   height: 100%;
   transform: translateX(-50%);
   z-index: -1;
-  background-color: #ffffff;
+  background-color: var(--brand-surface);
 }
 
 .product-family + .product-family {

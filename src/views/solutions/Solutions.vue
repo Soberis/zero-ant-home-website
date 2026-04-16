@@ -769,7 +769,7 @@ watch(
 .solutions-hero {
   min-height: var(--compact-hero-min-height);
   padding: var(--compact-hero-padding-top) 0 40px;
-  background: radial-gradient(circle at center, #ffffff 0%, #f1f3f8 100%);
+  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
 }
 
 .hero-grid {

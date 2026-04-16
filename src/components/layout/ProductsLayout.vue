@@ -157,7 +157,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-shell--robot {
-  background: #fbfcfe;
+  background: var(--brand-surface);
 }
 
 .products-container {
