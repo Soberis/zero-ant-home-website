@@ -40,7 +40,6 @@ export const productRelations: ProductRelationsData = {
       "vr-teleop-dual-arm",
       "vla-dual-arm-cable-grasping",
       "vla-dual-arm-data-collection",
-      "medical-automation",
     ],
   },
   "za-m75": {
@@ -61,7 +60,11 @@ export const productRelations: ProductRelationsData = {
   },
   "za-rmvr": {
     applicationSlugs: ["ai-robotics", "composite-systems"],
-    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-data-collection", "composite-robot-application"],
+    videoSlugs: [
+      "vr-teleop-dual-arm",
+      "vla-dual-arm-cable-grasping",
+      "vla-dual-arm-data-collection",
+    ],
   },
   "za-rmps": {
     applicationSlugs: ["ai-robotics"],
