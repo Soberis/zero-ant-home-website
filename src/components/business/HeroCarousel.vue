@@ -194,7 +194,7 @@ onUnmounted(() => {
 .hero-title {
   margin: 0;
   font-family: "Outfit", sans-serif;
-  color: #1d1d1f;
+  color: var(--brand-text, #1a1a2e);
   white-space: normal;
   letter-spacing: -0.03em;
 }
@@ -205,14 +205,14 @@ onUnmounted(() => {
   font-family: "Outfit", sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #1a3a8f;
+  color: var(--brand-primary, #1a3a8f);
   letter-spacing: 0.06em;
 }
 
 .hero-description {
   margin: 20px 0 0;
   max-width: 24em;
-  color: #445066;
+  color: var(--brand-muted, #5a6178);
   line-height: 1.75;
 }
 
