@@ -5,7 +5,7 @@ import zaM75Img from "@/assets/images/product/ZA-M75.webp";
 import zaMR3MImg from "@/assets/images/product/ZA-MR3M.webp";
 import zaMR3TImg from "@/assets/images/product/ZA-MR3T.webp";
 import zaR3XImg from "@/assets/images/product/ZA-R3-X.webp";
-import zaR3D6Img from "@/assets/images/product/ZA-R3D6.webp";
+import zaR3D6Img from "@/assets/images/product/ZA-R3D6.png";
 import zaR3LMHImg from "@/assets/images/product/ZA-R3L-M-H.webp";
 import zaR3MLImg from "@/assets/images/product/ZA-R3M-L.webp";
 import zaR3MRImg from "@/assets/images/product/ZA-R3M-R.webp";

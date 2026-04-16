@@ -1242,7 +1242,7 @@ watch(
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 360px;
+  min-height: 380px;
   padding: 24px;
   overflow: hidden;
   border-radius: 16px;
@@ -1251,9 +1251,9 @@ watch(
 }
 
 .direction-card__visual img {
-  width: min(82%, 420px);
+  width: min(92%, 420px);
   height: auto;
-  max-height: 290px;
+  max-height: 320px;
   object-fit: contain;
   object-position: center;
   display: block;
