@@ -216,7 +216,7 @@ const productFamilies = [
 .family-card__image {
   width: auto;
   max-width: 100%;
-  height: 180px;
+  height: 220px;
   object-fit: contain;
   object-position: center;
   transition: transform 0.25s ease;

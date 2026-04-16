@@ -206,8 +206,7 @@ onUnmounted(() => {
   font-size: 0.78rem;
   font-weight: 600;
   color: #1a3a8f;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .hero-description {

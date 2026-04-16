@@ -793,8 +793,7 @@ watch(
   color: rgba(26, 58, 143, 0.72);
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .hero-title {
@@ -860,7 +859,7 @@ watch(
   color: var(--brand-muted);
   font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   padding-bottom: 2px;
 }
 
@@ -888,8 +887,8 @@ watch(
   overflow: hidden;
   border-radius: 24px;
   border: 1px solid rgba(15, 23, 42, 0.06);
-  background: radial-gradient(circle at center, var(--color-background-white) 0%, var(--color-primary-light) 100%);
-  box-shadow: 0 24px 56px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
 }
 
 .hero-stage__media {
@@ -1001,14 +1000,14 @@ watch(
   border-radius: 16px;
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.02);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .overview-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-1px);
   border-color: rgba(26, 58, 143, 0.2);
-  box-shadow: 0 16px 32px rgba(26, 58, 143, 0.08);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.045);
 }
 
 
@@ -1059,8 +1058,7 @@ watch(
   color: var(--brand-muted);
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .overview-card__link {
@@ -1109,9 +1107,9 @@ watch(
 }
 
 .delivery-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-1px);
   border-color: rgba(26, 58, 143, 0.12);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
 }
 
 .delivery-card::after,
@@ -1126,7 +1124,7 @@ watch(
   font-family: "Outfit", sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
 }
 
 .direction-card__title,
@@ -1148,13 +1146,13 @@ watch(
   border-radius: 16px;
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.05);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.025);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .direction-card:hover {
   border-color: rgba(26, 58, 143, 0.2);
-  box-shadow: 0 14px 30px rgba(26, 58, 143, 0.06);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
 }
 
 .direction-card__header {
@@ -1248,7 +1246,7 @@ watch(
   padding: 24px;
   overflow: hidden;
   border-radius: 16px;
-  background: radial-gradient(circle at center, var(--color-background-white) 0%, var(--color-primary-light) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
   border: 1px solid rgba(15, 23, 42, 0.05);
 }
 
@@ -1309,8 +1307,7 @@ watch(
   color: var(--brand-muted);
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .content-block__combo {
@@ -1381,7 +1378,7 @@ watch(
   border-radius: 20px;
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.05);
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.025);
 }
 
 .more-switcher {
@@ -1480,7 +1477,7 @@ watch(
 
 .faq-item:hover {
   border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.035);
 }
 
 .faq-item__trigger {
@@ -1534,7 +1531,7 @@ watch(
   border-radius: 24px;
   background: linear-gradient(135deg, #ffffff 0%, #f3f6fb 100%);
   border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
 
 .contact-panel .title-main {
@@ -1587,7 +1584,7 @@ watch(
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-4px);
 }
 
 @media (max-width: 1200px) {

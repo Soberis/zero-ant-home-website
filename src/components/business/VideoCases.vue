@@ -116,7 +116,6 @@ const goToVideo = (slug: string) => {
   font-weight: 600;
   text-decoration: none;
   transition: color var(--transition-fast), transform var(--transition-fast);
-  white-space: nowrap;
 }
 
 .section-cta .cta-arrow {
