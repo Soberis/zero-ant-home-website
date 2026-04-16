@@ -52,7 +52,7 @@ export const productRelations: ProductRelationsData = {
   },
   "za-mr3m": {
     applicationSlugs: ["composite-systems", "smart-logistics"],
-    videoSlugs: ["composite-robot-application", "agv-product-introduction", "mobile-robot-chassis"],
+    videoSlugs: ["composite-robot-application"],
   },
   "za-mr3t": {
     applicationSlugs: ["ai-robotics", "composite-systems"],
