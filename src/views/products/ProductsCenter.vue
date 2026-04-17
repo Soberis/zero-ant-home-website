@@ -6,7 +6,7 @@
           v-for="family in families"
           :key="family.id"
           :href="`#${family.id}`"
-          class="product-center-filter__link"
+          class="product-center-filter__link ui-jump-link"
           :class="{ 'is-active': activeFamilyId === family.id }"
         >
           <span>{{ family.title }}</span>
@@ -67,7 +67,7 @@
             </p>
 
             <div class="product-card__actions">
-              <div class="app-action product-card__detail-link">
+              <div class="app-action product-card__detail-link ui-action-link">
                 <span class="action-text">{{ pageCopy.detailAction }}</span>
                 <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -228,26 +228,7 @@ const pageContent = computed(() => ({
 }
 
 .product-center-filter__link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   min-width: 80px;
-  min-height: 36px;
-  padding: 0 16px;
-  color: #475467;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 12px;
-  background-color: transparent;
-  transition: all 0.25s ease;
-  text-decoration: none;
-}
-
-.product-center-filter__link:hover,
-.product-center-filter__link.is-active {
-  color: var(--brand-primary, var(--color-primary));
-  background-color: var(--brand-surface-soft, rgba(26, 58, 143, 0.06));
 }
 
 /* active link state could be handled with JS, but for anchor links a soft hover is good enough for now. */
@@ -330,6 +311,7 @@ const pageContent = computed(() => ({
   text-decoration: none;
   cursor: pointer;
   background: var(--section-card-surface, #ffffff);
+  color: var(--color-text-secondary);
   border: 1px solid rgba(15, 23, 42, 0.04);
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.02);
 }
@@ -379,25 +361,11 @@ const pageContent = computed(() => ({
 }
 
 .product-card__detail-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  color: inherit;
+}
+
+.product-card:hover .product-card__detail-link {
   color: var(--brand-primary, var(--color-primary));
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.25s ease;
-  text-decoration: none;
-}
-
-.product-card__detail-link:hover {
-  color: var(--brand-primary-deep, #142a66);
-}
-
-.product-card__detail-link .action-arrow {
-  width: 18px;
-  height: 18px;
-  color: currentColor;
-  transition: transform 0.25s ease;
 }
 
 .product-card:hover .product-card__detail-link .action-arrow {

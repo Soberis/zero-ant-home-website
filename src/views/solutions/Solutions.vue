@@ -82,7 +82,7 @@
             </div>
             <button
               type="button"
-              class="overview-card__link"
+              class="overview-card__link ui-action-link"
               @click="scrollToSection(direction.anchorId)"
             >
               <span>{{ direction.overviewActionLabel }}</span>
@@ -1062,34 +1062,11 @@ watch(
 }
 
 .overview-card__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  width: fit-content;
   margin-top: auto;
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgba(15, 23, 42, 0.74);
-  font-weight: 600;
-  line-height: 1.5;
   cursor: pointer;
-  transition: color 0.25s ease, transform 0.25s ease;
-}
-
-.overview-card__link:hover {
-  color: var(--brand-primary);
-  transform: translateX(2px);
-}
-
-.overview-card__link svg {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.25s ease;
-}
-
-.overview-card__link:hover svg {
-  transform: translateX(4px);
 }
 
 .delivery-card {
@@ -1540,25 +1517,6 @@ watch(
 
 .contact-panel .detail-section__desc {
   color: var(--brand-muted);
-}
-
-.contact-panel .btn-primary {
-  background: var(--color-primary);
-  color: #ffffff;
-}
-
-.contact-panel .btn-primary:hover {
-  background: var(--color-primary-dark);
-}
-
-.contact-panel .btn-secondary {
-  border-color: var(--brand-border);
-  color: var(--brand-text);
-}
-
-.contact-panel .btn-secondary:hover {
-  background: var(--brand-surface-soft);
-  border-color: rgba(15, 23, 42, 0.18);
 }
 
 .contact-copy {

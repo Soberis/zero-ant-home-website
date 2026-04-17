@@ -11,7 +11,7 @@
         <h3 class="app-title">
           {{ t(props.title) }}
         </h3>
-        <div class="app-action">
+        <div class="app-action ui-action-link">
           <span class="action-text">{{ t("solutionsPage.industries.viewApplication") }}</span>
           <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -105,28 +105,14 @@ const { localizePath } = useLocalizedPath();
 }
 
 .app-action {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   margin-top: auto;
-  width: fit-content;
-  color: rgba(15, 23, 42, 0.74);
   font-size: 0.92rem;
-  font-weight: 600;
-  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .action-text {
   font-size: inherit;
   font-weight: inherit;
   color: inherit;
-}
-
-.action-arrow {
-  width: 18px;
-  height: 18px;
-  color: currentColor;
-  transition: transform 0.25s ease;
 }
 
 .app-card-item:hover .app-action {

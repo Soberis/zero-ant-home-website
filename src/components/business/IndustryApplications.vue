@@ -5,7 +5,7 @@
         <h2 class="home-section-title">{{ t('home.industryApplications.title') }}</h2>
         <p class="home-section-description">{{ t('home.industryApplications.description') }}</p>
       </div>
-      <router-link :to="localizeTo({ path: '/solutions', hash: '#more-applications' })" class="section-cta">
+      <router-link :to="localizeTo({ path: '/solutions', hash: '#more-applications' })" class="section-cta ui-action-link">
         <span>{{ t('home.industryApplications.exploreAll') }}</span>
         <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -70,14 +70,7 @@ const featuredApps = computed(() =>
 }
 
 .section-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-text-secondary);
   font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .section-cta .cta-arrow {
@@ -87,7 +80,6 @@ const featuredApps = computed(() =>
 }
 
 .section-cta:hover {
-  color: var(--color-primary);
   transform: translateY(-1px);
 }
 

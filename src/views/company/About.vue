@@ -457,8 +457,7 @@ function formatIndex(value: number): string {
   line-height: 1.8;
 }
 
-.contact-value {
-  color: var(--brand-text);
+.intro-side a.contact-value {
   font-size: 1.05rem;
   font-weight: 500;
   line-height: 1.8;
@@ -778,8 +777,7 @@ function formatIndex(value: number): string {
   letter-spacing: 0.06em;
 }
 
-.contact-value {
-  color: var(--brand-text);
+.contact-card .contact-value {
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -789,8 +787,8 @@ function formatIndex(value: number): string {
   word-break: break-word;
 }
 
-.contact-value[href]:hover {
-  color: var(--brand-primary);
+.contact-card span.contact-value {
+  color: var(--brand-text);
 }
 
 @media (max-width: 1100px) {

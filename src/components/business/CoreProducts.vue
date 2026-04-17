@@ -6,7 +6,7 @@
         <p class="home-section-description core-products__description">{{ t('home.coreProducts.description') }}</p>
       </div>
 
-      <router-link :to="localizeTo({ path: '/products', hash: '#products-page-top' })" class="section-cta">
+      <router-link :to="localizeTo({ path: '/products', hash: '#products-page-top' })" class="section-cta ui-action-link">
         <span>{{ t('home.coreProducts.enter') }}</span>
         <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -39,7 +39,12 @@
             {{ family.models.join(' / ') }}
           </p>
 
-          <span class="family-card__action">{{ t('home.coreProducts.cardAction') }}</span>
+          <span class="family-card__action ui-action-link">
+            <span>{{ t('home.coreProducts.cardAction') }}</span>
+            <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
         </div>
       </router-link>
     </div>
@@ -137,14 +142,7 @@ const productFamilies = [
 }
 
 .section-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-text-secondary);
   font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .cta-arrow {
@@ -154,7 +152,6 @@ const productFamilies = [
 }
 
 .section-cta:hover {
-  color: var(--color-primary);
   transform: translateY(-1px);
 }
 
@@ -256,22 +253,8 @@ const productFamilies = [
 }
 
 .family-card__action {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   margin-top: 8px;
-  color: var(--color-primary);
   font-size: 0.92rem;
-  font-weight: 500;
-}
-
-.family-card__action::after {
-  content: "→";
-  transition: transform 0.25s ease;
-}
-
-.family-card:hover .family-card__action::after {
-  transform: translateX(3px);
 }
 
 @media (max-width: 1280px) {

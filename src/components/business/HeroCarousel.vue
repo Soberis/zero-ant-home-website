@@ -29,9 +29,13 @@
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
-            <span class="btn btn-primary" @click.stop.prevent="$router.push(localizeTo({ path: '/products', hash: '#products-page-top' }))">
-            {{ t('home.hero.primaryCta') }}
-          </span>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click.stop.prevent="goProductCenter"
+            >
+              {{ t('home.hero.primaryCta') }}
+            </button>
         </div>
       </div>
       </div>
@@ -41,6 +45,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import coverImg from '@/assets/images/product/封面.webp';
 import coverImgMobile from '@/assets/images/product/封面-mobile.webp';
@@ -58,7 +63,12 @@ interface SlideItem {
 }
 
 const { t } = useI18n();
+const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
+
+const goProductCenter = () => {
+  router.push(localizeTo({ path: '/products', hash: '#products-page-top' }));
+};
 const heroImageSrcSet = `${coverImgMobile} 900w, ${coverImg} 1600w`;
 
 const activeSlide = computed<SlideItem>(() => ({
@@ -220,6 +230,7 @@ onUnmounted(() => {
   display: flex;
   gap: 16px;
   margin-top: 36px;
+  pointer-events: auto;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),

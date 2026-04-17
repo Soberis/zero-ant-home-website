@@ -38,7 +38,7 @@
             v-for="path in recruitmentPaths"
             :key="path.id"
             :href="path.href"
-            class="career-path"
+            class="career-path ui-row-link"
           >
             <span class="career-path-index">{{ formatIndex(path.id) }}</span>
             <div class="career-path-copy">
@@ -479,7 +479,6 @@ function applyForPosition(position: Position): void {
   gap: 18px;
   align-items: center;
   padding: 22px 0;
-  color: inherit;
   text-decoration: none;
   transition: color 0.25s ease, transform 0.25s ease;
 }
@@ -489,7 +488,6 @@ function applyForPosition(position: Position): void {
 }
 
 .career-path:hover {
-  color: var(--brand-primary);
   text-decoration: none;
   transform: translateX(4px);
 }
@@ -798,7 +796,6 @@ function applyForPosition(position: Position): void {
 }
 
 .contact-value {
-  color: var(--brand-text);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -808,9 +805,8 @@ function applyForPosition(position: Position): void {
   word-break: break-word;
 }
 
-.contact-value[href]:hover {
-  color: var(--brand-primary);
-  text-decoration: none;
+span.contact-value {
+  color: var(--brand-text);
 }
 
 @media (max-width: 1100px) {

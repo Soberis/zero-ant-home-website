@@ -158,6 +158,94 @@ a {
 }
 
 /* ================================================================
+   链接样式系统（统一跳转/动作链接）
+   ================================================================ */
+.ui-jump-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: transparent;
+  color: #475467;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  word-break: keep-all;
+  text-decoration: none;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.ui-jump-link:hover,
+.ui-jump-link.is-active {
+  color: var(--brand-primary, var(--color-primary));
+  background: var(--brand-surface-soft, rgba(26, 58, 143, 0.06));
+}
+
+.ui-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  color: rgba(15, 23, 42, 0.74);
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  word-break: keep-all;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.ui-action-link:hover {
+  color: var(--brand-primary, var(--color-primary));
+  transform: translateX(2px);
+}
+
+.ui-action-link .action-arrow {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+  transition: transform var(--transition-fast);
+}
+
+.ui-action-link .cta-arrow {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+  transition: transform var(--transition-fast);
+}
+
+.ui-action-link:hover .action-arrow {
+  transform: translateX(4px);
+}
+
+.ui-action-link:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* 支持/招聘页侧栏：整行路径链接（非单行动作文案，不用 ui-action-link） */
+a.ui-row-link {
+  color: var(--color-text);
+
+  &:hover {
+    color: var(--brand-primary, var(--color-primary));
+  }
+}
+
+/* 联系卡片内可点击联系方式：默认灰字、hover 蓝（页面保留字号 / 字重） */
+a.contact-value {
+  color: var(--color-text-secondary);
+
+  &:hover {
+    color: var(--brand-primary, var(--color-primary));
+  }
+}
+
+/* ================================================================
    布局骨架
    ================================================================ */
 body,
@@ -401,6 +489,12 @@ small {
     transform var(--transition-normal);
   white-space: nowrap;
   font-family: inherit;
+}
+
+.btn .btn-arrow {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .btn-primary {

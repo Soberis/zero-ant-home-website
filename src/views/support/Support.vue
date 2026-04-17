@@ -38,7 +38,7 @@
             v-for="path in supportPaths"
             :key="path.id"
             :href="path.href"
-            class="support-path"
+            class="support-path ui-row-link"
           >
             <span class="support-path-index">{{ formatIndex(path.id) }}</span>
             <div class="support-path-copy">
@@ -74,7 +74,7 @@
             <h3 class="download-title">{{ item.title }}</h3>
             <p class="download-desc">{{ item.desc }}</p>
             <div class="download-card-actions">
-              <a class="download-link" :href="item.href">
+              <a class="download-link ui-action-link" :href="item.href">
                 {{ item.actionLabel }}
               </a>
             </div>
@@ -467,18 +467,12 @@ function formatIndex(value: number): string {
   gap: 18px;
   align-items: center;
   padding: 22px 0;
-  color: inherit;
   text-decoration: none;
   transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .support-path + .support-path {
   border-top: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-.support-path:hover {
-  color: var(--brand-primary);
-  text-decoration: none;
 }
 
 .support-path-index {
@@ -617,21 +611,6 @@ function formatIndex(value: number): string {
 .download-card-actions {
   margin-top: auto;
   padding-top: 6px;
-}
-
-.download-link {
-  display: inline-flex;
-  align-items: center;
-  color: var(--brand-primary);
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.download-link:hover {
-  color: var(--brand-primary-deep, #142a66);
-  transform: translateX(2px);
 }
 
 .card-tag {
@@ -778,7 +757,6 @@ function formatIndex(value: number): string {
 }
 
 .contact-value {
-  color: var(--brand-text);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -788,7 +766,9 @@ function formatIndex(value: number): string {
   word-break: break-word;
 }
 
-.contact-value[href]:hover { color: var(--brand-primary); }
+span.contact-value {
+  color: var(--brand-text);
+}
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {

@@ -427,7 +427,7 @@ onUnmounted(() => {
   padding: 0 20px;
   gap: 8px;
   border-color: rgba(15, 23, 42, 0.12);
-  color: #0f172a;
+  color: var(--color-text-secondary);
 }
 
 .contact-cta:hover {
