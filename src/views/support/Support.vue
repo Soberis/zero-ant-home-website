@@ -578,6 +578,11 @@ function formatIndex(value: number): string {
   border-color: rgba(26, 58, 143, 0.18);
 }
 
+.download-card:hover .download-link {
+  color: var(--brand-primary, var(--color-primary));
+  transform: translateX(2px);
+}
+
 .download-card-head {
   display: flex;
   align-items: center;

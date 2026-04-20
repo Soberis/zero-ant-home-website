@@ -86,7 +86,7 @@
               @click="scrollToSection(direction.anchorId)"
             >
               <span>{{ direction.overviewActionLabel }}</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
@@ -1008,6 +1008,15 @@ watch(
   transform: translateY(-1px);
   border-color: rgba(26, 58, 143, 0.2);
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.045);
+}
+
+.overview-card:hover .overview-card__link {
+  color: var(--brand-primary, var(--color-primary));
+  transform: translateX(2px);
+}
+
+.overview-card:hover .overview-card__link .action-arrow {
+  transform: translateX(4px);
 }
 
 
