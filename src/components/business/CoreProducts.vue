@@ -257,6 +257,15 @@ const productFamilies = [
   font-size: 0.92rem;
 }
 
+.family-card:hover .family-card__action {
+  color: var(--brand-primary, var(--color-primary));
+  transform: translateX(2px);
+}
+
+.family-card:hover .family-card__action .action-arrow {
+  transform: translateX(4px);
+}
+
 @media (max-width: 1280px) {
   .family-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
