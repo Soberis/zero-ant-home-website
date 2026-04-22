@@ -6,7 +6,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const distDir = path.join(projectRoot, "dist");
-const publicDir = path.join(projectRoot, "public");
 const localeDir = path.join(projectRoot, "src", "locales");
 const sourceDir = path.join(projectRoot, "src", "data");
 const siteUrl = (process.env.VITE_SITE_URL || "https://zeroant.com").replace(/\/+$/, "");
@@ -1162,7 +1161,6 @@ async function writeSitemap(data) {
     ...videoPaths,
   ]);
 
-  await fs.writeFile(path.join(publicDir, "sitemap.xml"), sitemapXml, "utf8");
   await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml, "utf8");
 }
 

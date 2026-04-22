@@ -13,7 +13,23 @@
             :aria-label="`${t('common.cta.viewDetails')} ${mediaInfo.title}`"
             @click="videoStarted = true"
           >
+            <picture v-if="responsiveVideoSrcSet" class="detail-media-picture">
+              <source
+                :srcset="responsiveVideoSrcSet"
+                :sizes="detailMediaSizes"
+                type="image/webp"
+              />
+              <img
+                :src="thumbnailUrl"
+                :alt="mediaInfo.title"
+                class="facade-image"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </picture>
             <img
+              v-else
               :src="thumbnailUrl"
               :alt="mediaInfo.title"
               class="facade-image"
@@ -46,7 +62,24 @@
           </video>
         </template>
         <template v-else-if="mediaInfo.type === 'image'">
+          <picture v-if="responsiveVideoSrcSet" class="detail-media-picture">
+            <source
+              :srcset="responsiveVideoSrcSet"
+              :sizes="detailMediaSizes"
+              type="image/webp"
+            />
+            <img
+              :key="mediaInfo.url"
+              class="video-image"
+              :src="mediaInfo.url"
+              :alt="mediaInfo.title"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </picture>
           <img
+            v-else
             :key="mediaInfo.url"
             class="video-image"
             :src="mediaInfo.url"
@@ -158,12 +191,17 @@ import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
 import { sanitizeHtmlAllowList } from '@/utils/security';
 import fallbackFacadeImg from '@/assets/images/videos/mobile-transfer-robot.webp';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
+import {
+  buildResponsiveSrcSet,
+  getResponsiveVideoImage,
+} from "@/utils/responsiveImage";
 
 interface MediaInfo {
   type: 'bilibili' | 'video' | 'image' | 'none';
   url: string;
   title: string;
   thumbnailUrl?: string;
+  responsiveKey?: string;
 }
 
 const props = defineProps<{
@@ -185,6 +223,14 @@ const videoStarted = ref<boolean>(false);
 const dialogRef = ref<HTMLDivElement | null>(null);
 
 const thumbnailUrl = computed(() => props.mediaInfo.thumbnailUrl || fallbackFacadeImg);
+const responsiveVideoSrcSet = computed(() =>
+  buildResponsiveSrcSet(
+    props.mediaInfo.responsiveKey
+      ? getResponsiveVideoImage(props.mediaInfo.responsiveKey)
+      : null
+  )
+);
+const detailMediaSizes = "(max-width: 960px) 100vw, 1080px";
 
 const sanitizedContentHtml = computed(() => {
   if (!props.contentHtml) return '';
@@ -306,6 +352,12 @@ onUnmounted(() => {
   height: 100%;
   object-fit: cover;
   border: none;
+  display: block;
+}
+
+.detail-media-picture {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 

@@ -21,7 +21,7 @@
 // 视频详情页，根据slug展示视频内容，支持bilibili、video、image等类型
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { videoMap, videoCards, type VideoDetail } from "@/data/videos";
+import { getVideoThumbnailById, videoMap, videoCards, type VideoDetail } from "@/data/videos";
 import { computed } from "vue";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
 import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
@@ -95,7 +95,8 @@ const mediaInfo = computed(() => {
     type: getMediaType(videoInfo.value),
     url: videoInfo.value.url,
     title: videoInfo.value.title,
-    thumbnailUrl: videoCards.find((item) => item.slug === currentSlug.value)?.img || "",
+    thumbnailUrl: getVideoThumbnailById(currentSlug.value) || "",
+    responsiveKey: currentSlug.value,
   };
 });
 

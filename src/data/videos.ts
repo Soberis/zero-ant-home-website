@@ -91,6 +91,22 @@ export const getVideoThumbnailById = (slug: string): string | undefined => {
   return videoThumbnailMap[slug];
 };
 
+const getRequiredVideoThumbnailById = (slug: string): string => {
+  const thumbnail = getVideoThumbnailById(slug);
+
+  if (!thumbnail) {
+    throw new Error(`[videos] Missing thumbnail for slug: ${slug}`);
+  }
+
+  return thumbnail;
+};
+
+const createVideoCard = (slug: string, title: string): VideoCard => ({
+  title,
+  slug,
+  img: getRequiredVideoThumbnailById(slug),
+});
+
 /**
  * 视频详情映射（以 slug 作为 key）
  */
@@ -223,71 +239,19 @@ export const videoMap: Record<string, VideoDetail> = {
 
 export const videoCards: VideoCard[] = [
   // 按 publishDate 倒序排列（最新在前）
-  {
-    title: "videos.za-r3ml-demo.title",
-    img: zaR3mlDemoImg,
-    slug: "za-r3ml-demo",
-  },
-  {
-    title: "videos.vla-dual-arm-cable-grasping.title",
-    img: vlaDualArmCableGraspingImg,
-    slug: "vla-dual-arm-cable-grasping",
-  },
-  {
-    title: "videos.vla-dual-arm-data-collection.title",
-    img: vlaDualArmDataCollectionImg,
-    slug: "vla-dual-arm-data-collection",
-  },
-  {
-    title: "videos.vr-teleop-dual-arm.title",
-    img: vrTeleopDualArmImg,
-    slug: "vr-teleop-dual-arm",
-  },
-  {
-    title: "videos.fixed-rail-transfer-robot.title",
-    img: fixedRailTransferRobotImg,
-    slug: "fixed-rail-transfer-robot",
-  },
-  {
-    title: "videos.sketching-robot.title",
-    img: sketchingRobotImg,
-    slug: "sketching-robot",
-  },
-  {
-    title: "videos.mobile-robot-chassis.title",
-    img: mobileRobotChassisImg,
-    slug: "mobile-robot-chassis",
-  },
-  {
-    title: "videos.mobile-transfer-robot.title",
-    img: mobileTransferRobotImg,
-    slug: "mobile-transfer-robot",
-  },
-  {
-    title: "videos.ur-robot-llm-motion-capture.title",
-    img: urRobotLLMImg,
-    slug: "ur-robot-llm-motion-capture",
-  },
-  {
-    title: "videos.four-axis-robot-open-fridge.title",
-    img: fourAxisRobotFridgeImg,
-    slug: "four-axis-robot-open-fridge",
-  },
-  {
-    title: "videos.composite-robot-application.title",
-    img: compositeRobotAppImg,
-    slug: "composite-robot-application",
-  },
-  {
-    title: "videos.medical-automation.title",
-    img: compositeRobotImg,
-    slug: "medical-automation",
-  },
-  {
-    title: "videos.agv-product-introduction.title",
-    img: agvImg,
-    slug: "agv-product-introduction",
-  },
+  createVideoCard("za-r3ml-demo", "videos.za-r3ml-demo.title"),
+  createVideoCard("vla-dual-arm-cable-grasping", "videos.vla-dual-arm-cable-grasping.title"),
+  createVideoCard("vla-dual-arm-data-collection", "videos.vla-dual-arm-data-collection.title"),
+  createVideoCard("vr-teleop-dual-arm", "videos.vr-teleop-dual-arm.title"),
+  createVideoCard("fixed-rail-transfer-robot", "videos.fixed-rail-transfer-robot.title"),
+  createVideoCard("sketching-robot", "videos.sketching-robot.title"),
+  createVideoCard("mobile-robot-chassis", "videos.mobile-robot-chassis.title"),
+  createVideoCard("mobile-transfer-robot", "videos.mobile-transfer-robot.title"),
+  createVideoCard("ur-robot-llm-motion-capture", "videos.ur-robot-llm-motion-capture.title"),
+  createVideoCard("four-axis-robot-open-fridge", "videos.four-axis-robot-open-fridge.title"),
+  createVideoCard("composite-robot-application", "videos.composite-robot-application.title"),
+  createVideoCard("medical-automation", "videos.medical-automation.title"),
+  createVideoCard("agv-product-introduction", "videos.agv-product-introduction.title"),
 ].filter((card) => {
   const video = getVideoById(card.slug);
   if (!video || !validateVideoData(video)) {

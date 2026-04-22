@@ -83,8 +83,9 @@ const mediaInfo = computed(() => {
       ? videoDetail.value.type
       : ((typeof videoDetail.value?.type === "string" && videoDetail.value.type === "local") ? "video" : "none") as "bilibili" | "video" | "image" | "none",
     url: videoDetail.value?.url || "",
-    title: videoDetail.value?.title || detail.value?.title || "",
+    title: videoDetail.value?.title ? t(videoDetail.value.title) : detail.value?.title || "",
     thumbnailUrl: videoThumbnail.value,
+    responsiveKey: detail.value?.video || "",
   };
 });
 

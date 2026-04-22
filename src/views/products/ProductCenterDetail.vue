@@ -36,7 +36,25 @@
             </div>
 
             <div class="product-hero__media-wrapper">
+              <picture v-if="heroImageResponsiveSrcSet" class="product-hero__picture">
+                <source
+                  :srcset="heroImageResponsiveSrcSet"
+                  :sizes="heroImageSizes"
+                  type="image/webp"
+                />
+                <img
+                  :src="heroImageSrc"
+                  :alt="productData.title"
+                  class="product-hero__image"
+                  :width="heroImageSize.width"
+                  :height="heroImageSize.height"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </picture>
               <img
+                v-else
                 :src="heroImageSrc"
                 :alt="productData.title"
                 class="product-hero__image"
@@ -264,6 +282,10 @@ import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
 import type { ProductDetail, ProductFeature } from "@/data/productDetails";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  buildResponsiveSrcSet,
+  getResponsiveProductImage,
+} from "@/utils/responsiveImage";
 
 type FeatureItem = string | ProductFeature;
 type LocalizedParam = { key: string; value: string };
@@ -386,6 +408,9 @@ const productData = computed<ProductDetail | null>(() =>
   resolvedLocalizedProduct.value ?? detail.value
 );
 const heroImageSrc = computed(() => productData.value?.image || "");
+const heroImageResponsiveSrcSet = computed(() =>
+  buildResponsiveSrcSet(getResponsiveProductImage(cardId.value))
+);
 const productFeatures = computed<FeatureItem[]>(() =>
   resolvedProductFeatures.value.slice(0, 4)
 );
@@ -443,6 +468,8 @@ const HERO_IMAGE_SIZE_MAP: Record<string, HeroImageSize> = {
 const heroImageSize = computed<HeroImageSize>(() =>
   HERO_IMAGE_SIZE_MAP[cardId.value] || { width: 1200, height: 900 }
 );
+const heroImageSizes =
+  "(max-width: 768px) calc(100vw - 28px), (max-width: 1100px) 76vw, 44vw";
 
 const goBack = () => {
   router.push(localizePath("/products"));
@@ -580,7 +607,13 @@ const goBack = () => {
   max-height: clamp(260px, 42svh, 480px);
   min-height: 200px;
   object-fit: contain;
+  display: block;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-hero__picture {
+  width: 100%;
+  display: block;
 }
 
 .product-hero__image:hover {

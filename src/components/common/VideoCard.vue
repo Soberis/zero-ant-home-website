@@ -7,12 +7,20 @@
     @click="emit('click', index)"
   >
     <div class="video-media">
-      <img
-        :src="card.img"
-        :alt="t(card.title)"
-        loading="lazy"
-        decoding="async"
-      />
+      <picture class="video-media__picture">
+        <source
+          v-if="responsiveImageSrcSet"
+          :srcset="responsiveImageSrcSet"
+          :sizes="videoCardSizes"
+          type="image/webp"
+        />
+        <img
+          :src="fallbackImageSrc"
+          :alt="t(card.title)"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
       <div class="play-icon">
         <svg viewBox="0 0 24 24" width="28" height="28">
           <path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5z" />
@@ -32,22 +40,39 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import {
+  buildResponsiveSrcSet,
+  getResponsiveVideoImage,
+} from "@/utils/responsiveImage";
+import { getVideoThumbnailById } from "@/data/videos";
 
 const { t } = useI18n();
 
-/**
- * @prop {Object} card 视频卡片数据
- * @prop {String} description 可选的描述文本，如果不通过card.description传递，则通过prop传递
- * @prop {Number} index 当前卡片索引
- * @prop {Boolean} active 是否高亮
- */
-defineProps({
-  card: { type: Object, required: true },
-  description: { type: String, default: "" },
-  index: { type: Number, required: true },
-  active: { type: Boolean, default: false },
+const props = withDefaults(defineProps<{
+  card: {
+    title: string;
+    img: string;
+    slug: string;
+    description?: string;
+  };
+  description?: string;
+  index: number;
+  active?: boolean;
+}>(), {
+  description: "",
+  active: false,
 });
+
+const responsiveImageSrcSet = computed(() =>
+  buildResponsiveSrcSet(getResponsiveVideoImage(props.card.slug))
+);
+const fallbackImageSrc = computed(() =>
+  getVideoThumbnailById(props.card.slug) || props.card.img
+);
+const videoCardSizes =
+  "(max-width: 639px) calc(100vw - 72px), (max-width: 1023px) calc(50vw - 40px), calc(33vw - 40px)";
 
 const emit = defineEmits(["hover", "leave", "click"]);
 </script>
@@ -80,6 +105,12 @@ const emit = defineEmits(["hover", "leave", "click"]);
   background: #ffffff;
   /* subtle edge definition without strong shadow */
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+}
+
+.video-media__picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .video-media img {

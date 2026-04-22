@@ -2,19 +2,32 @@
   <section class="hero-carousel">
     <div class="hero-stage">
       <div class="hero-media" :class="{ 'hero-entered': entered }">
-        <img
-          :src="activeSlide.img"
-          :srcset="heroImageSrcSet"
-          sizes="(max-width: 900px) 100vw, 58vw"
-          :alt="activeSlide.title"
-          class="hero-image"
-          :style="activeSlideImageStyle"
-          width="1600"
-          height="2844"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
+        <picture class="hero-picture">
+          <source
+            v-if="heroMobileSrcSet"
+            media="(max-width: 900px)"
+            :srcset="heroMobileSrcSet"
+            sizes="100vw"
+            type="image/webp"
+          />
+          <source
+            v-if="heroDesktopSrcSet"
+            :srcset="heroDesktopSrcSet"
+            sizes="(max-width: 900px) 100vw, (max-width: 1100px) 54vw, 58vw"
+            type="image/webp"
+          />
+          <img
+            :src="activeSlide.img"
+            :alt="activeSlide.title"
+            class="hero-image"
+            :style="activeSlideImageStyle"
+            width="1600"
+            height="2844"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
 
       <div class="hero-overlay">
@@ -42,8 +55,11 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import coverImg from '@/assets/images/product/封面.webp';
-import coverImgMobile from '@/assets/images/product/封面-mobile.webp';
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  buildResponsiveSrcSet,
+  getResponsiveHeroImage,
+} from "@/utils/responsiveImage";
 
 interface SlideItem {
   img: string;
@@ -57,7 +73,8 @@ interface SlideItem {
 
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
-const heroImageSrcSet = `${coverImgMobile} 900w, ${coverImg} 1600w`;
+const heroDesktopSrcSet = buildResponsiveSrcSet(getResponsiveHeroImage("homeDesktop"));
+const heroMobileSrcSet = buildResponsiveSrcSet(getResponsiveHeroImage("homeMobile"));
 const productCenterRoute = computed(() =>
   localizeTo({ path: '/products', hash: '#products-page-top' })
 );
@@ -143,15 +160,23 @@ onUnmounted(() => {
 .hero-image {
   position: relative;
   z-index: 1;
-  width: 58%;
-  max-width: none;
-  height: 84%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center right;
   transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
     scale(var(--hero-image-scale, 1));
   transform-origin: center center;
   filter: drop-shadow(0 18px 30px rgba(15, 23, 42, 0.08));
+}
+
+.hero-picture {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 58%;
+  max-width: none;
+  height: 84%;
 }
 
 .hero-overlay {
@@ -251,10 +276,13 @@ onUnmounted(() => {
   }
 
   .hero-image {
-    width: 54%;
     object-position: center right;
     transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
       scale(var(--hero-image-scale, 1));
+  }
+
+  .hero-picture {
+    width: 54%;
   }
 }
 
@@ -285,10 +313,13 @@ onUnmounted(() => {
   }
 
   .hero-image {
-    width: 100%;
     object-position: center bottom;
     transform: translate(var(--hero-image-shift-x-mobile, 0), var(--hero-image-shift-y-mobile, 0))
       scale(var(--hero-image-scale, 1));
+  }
+
+  .hero-picture {
+    width: 100%;
   }
 }
 
