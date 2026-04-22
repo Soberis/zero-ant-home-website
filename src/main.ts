@@ -16,7 +16,7 @@ app.mount("#app");
 
 // 初始化安全监控和SEO（仅在浏览器环境）
 if (typeof window !== "undefined") {
-  const DEV_CACHE_PREFIX = "zeroant-cache";
+  const DEV_CACHE_PREFIX = "zeroant-";
 
   if ("scrollRestoration" in window.history) {
     window.history.scrollRestoration = "manual";
@@ -53,7 +53,7 @@ if (typeof window !== "undefined") {
   // 注册 Service Worker (PWA)
   if (import.meta.env.PROD && "serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      navigator.serviceWorker.register(`/sw.js?v=${__APP_BUILD_ID__}`).catch(() => {});
     });
   }
 

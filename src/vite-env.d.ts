@@ -21,6 +21,8 @@ declare module 'vue-i18n' {
 }
 
 declare global {
+  const __APP_BUILD_ID__: string;
+
   namespace JSX {
     interface IntrinsicElements {
       [elemName: string]: any;

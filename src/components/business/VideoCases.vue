@@ -21,9 +21,9 @@
         :description="item.description"
         :index="idx"
         :active="hoverIdx === idx"
+        :to="localizePath(`/video/${item.slug}`)"
         @hover="onHover"
         @leave="onLeave"
-        @click="goToVideo(item.slug)"
       />
     </div>
   </section>
@@ -32,13 +32,11 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
 import { videoCards, videoMap } from "@/data/videos";
 import VideoCard from "@/components/common/VideoCard.vue";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const { t } = useI18n();
-const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
 
 const SPOTLIGHT_SLUGS = [
@@ -78,10 +76,6 @@ const onHover = (idx: number) => {
 
 const onLeave = () => {
   hoverIdx.value = -1;
-};
-
-const goToVideo = (slug: string) => {
-  router.push(localizePath(`/video/${slug}`));
 };
 </script>
 

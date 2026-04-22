@@ -270,26 +270,26 @@ onUnmounted(() => {
 
 <style scoped lang="less">
 .header {
-  --nav-text-color: #111111;
-  --nav-accent-color: #1a3a8f;
-  --nav-logo-text-color: #111111;
-  --nav-accent-surface: rgba(26, 58, 143, 0.05);
+  --nav-text-color: var(--brand-text);
+  --nav-accent-color: var(--brand-primary);
+  --nav-logo-text-color: var(--brand-text);
+  --nav-accent-surface: var(--brand-accent-soft);
   --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
     saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
-  background-color: rgba(255, 255, 255, 0.88);
+  background-color: var(--brand-surface-frosted);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid var(--brand-border-subtle);
   transition: all var(--transition-smooth);
 
   &.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.96);
+    background-color: var(--brand-surface-frosted-strong);
     box-shadow: var(--shadow-sm);
-    border-bottom-color: rgba(15, 23, 42, 0.1);
+    border-bottom-color: var(--brand-border-strong);
     
     .nav-container {
       height: 72px;

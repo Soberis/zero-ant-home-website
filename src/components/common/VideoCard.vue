@@ -1,10 +1,13 @@
 <template>
-  <div
+  <router-link
     class="video-block"
+    :to="to"
+    :aria-label="t(card.title)"
     :class="{ active: active }"
     @mouseenter="emit('hover', index)"
     @mouseleave="emit('leave')"
-    @click="emit('click', index)"
+    @focus="emit('hover', index)"
+    @blur="emit('leave')"
   >
     <div class="video-media">
       <picture class="video-media__picture">
@@ -36,12 +39,13 @@
         {{ card.description || description }}
       </p>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import type { RouteLocationRaw } from "vue-router";
 import {
   buildResponsiveSrcSet,
   getResponsiveVideoImage,
@@ -60,6 +64,7 @@ const props = withDefaults(defineProps<{
   description?: string;
   index: number;
   active?: boolean;
+  to: RouteLocationRaw;
 }>(), {
   description: "",
   active: false,
@@ -74,7 +79,7 @@ const fallbackImageSrc = computed(() =>
 const videoCardSizes =
   "(max-width: 639px) calc(100vw - 72px), (max-width: 1023px) calc(50vw - 40px), calc(33vw - 40px)";
 
-const emit = defineEmits(["hover", "leave", "click"]);
+const emit = defineEmits(["hover", "leave"]);
 </script>
 
 <style scoped>
@@ -86,14 +91,24 @@ const emit = defineEmits(["hover", "leave", "click"]);
   text-decoration: none;
   width: 100%;
   padding: 20px;
-  background: #f8f9fb;
+  background: var(--brand-surface-panel, #f8f9fb);
   border-radius: 16px;
+  border: 1px solid transparent;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.video-block:hover {
+.video-block:hover,
+.video-block:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+  box-shadow: var(--brand-shadow-card, 0 12px 28px rgba(15, 23, 42, 0.05));
+}
+
+.video-block:focus-visible {
+  outline: none;
+  border-color: var(--brand-focus-ring, rgba(26, 58, 143, 0.28));
+  box-shadow:
+    var(--brand-shadow-card, 0 12px 28px rgba(15, 23, 42, 0.05)),
+    0 0 0 3px var(--brand-focus-outline, rgba(26, 58, 143, 0.14));
 }
 
 .video-media {
@@ -102,9 +117,9 @@ const emit = defineEmits(["hover", "leave", "click"]);
   aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--brand-surface, #ffffff);
   /* subtle edge definition without strong shadow */
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+  box-shadow: var(--shadow-sm);
 }
 
 .video-media__picture {
@@ -138,20 +153,21 @@ const emit = defineEmits(["hover", "leave", "click"]);
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.94);
-  color: #163a87;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: var(--brand-surface-frosted-strong, rgba(255, 255, 255, 0.94));
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-border-subtle, rgba(15, 23, 42, 0.08));
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .video-block:hover .play-icon,
-.video-block.active .play-icon {
-  background: #ffffff;
-  color: #142a66;
+.video-block.active .play-icon,
+.video-block:focus-visible .play-icon {
+  background: var(--brand-surface, #ffffff);
+  color: var(--brand-primary-deep, #142a66);
   transform: translate(-50%, -50%) scale(1.04);
-  border-color: rgba(22, 58, 135, 0.16);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  border-color: var(--brand-focus-ring, rgba(22, 58, 135, 0.16));
+  box-shadow: var(--shadow-md);
 }
 
 .video-content {
@@ -165,7 +181,7 @@ const emit = defineEmits(["hover", "leave", "click"]);
   margin: 0;
   font-size: 1.25rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--brand-text-strong, #0f172a);
   line-height: 1.4;
   min-height: 3.5rem;
 
@@ -177,7 +193,8 @@ const emit = defineEmits(["hover", "leave", "click"]);
 }
 
 .video-block:hover .video-title,
-.video-block.active .video-title {
+.video-block.active .video-title,
+.video-block:focus-visible .video-title {
   color: var(--brand-primary);
 }
 
@@ -185,7 +202,7 @@ const emit = defineEmits(["hover", "leave", "click"]);
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #64748b;
+  color: var(--brand-text-subtle, #64748b);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;

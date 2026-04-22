@@ -281,9 +281,9 @@
                 :description="video.description"
                 :index="index"
                 :active="moreVideoHoverIdx === index"
+                :to="localizeTo({ path: `/video/${video.slug}` })"
                 @hover="moreVideoHoverIdx = index"
                 @leave="moreVideoHoverIdx = -1"
-                @click="openVideo(video.slug)"
               />
             </div>
           </div>
@@ -386,7 +386,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import type { RouteLocationRaw } from "vue-router";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import lifeScienceShowcaseImg from "@/assets/images/product/life-science-concept.png";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
@@ -466,7 +466,6 @@ const ctaRef = ref<HTMLElement | null>(null);
 
 useScrollRevealList([overviewRef, directionsRef, moreRef, deliveryRef, faqRef, ctaRef]);
 
-const router = useRouter();
 const route = useRoute();
 const { t, tm } = useI18n();
 const { localizeTo } = useLocalizedPath();
@@ -526,14 +525,6 @@ function scrollToSection(id: string): void {
   }
 
   element.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function openVideo(slug: string): void {
-  if (!slug) {
-    return;
-  }
-
-  router.push(localizeTo({ path: `/video/${slug}` }));
 }
 
 function toggleFaq(index: number): void {

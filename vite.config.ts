@@ -7,6 +7,8 @@ import Components from "unplugin-vue-components/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
+const buildId = process.env.BUILD_ID || new Date().toISOString().replace(/[-:.TZ]/g, "");
+
 // https://vitejs.dev/config/
 export default defineConfig({
   // 设置基础路径为相对路径，确保服务器部署时资源能正确加载
@@ -27,8 +29,15 @@ export default defineConfig({
         ]
       : []),
     // 图片优化插件
-    ViteImageOptimizer({}),
+    ViteImageOptimizer({
+      test: /\.(png|svg)$/i,
+      includePublic: true,
+      exclude: [/\/responsive\//],
+    }),
   ],
+  define: {
+    __APP_BUILD_ID__: JSON.stringify(buildId),
+  },
   resolve: {
     alias: {
       "@": path.resolve(dirname(fileURLToPath(import.meta.url)), "src"),

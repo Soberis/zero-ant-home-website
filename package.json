@@ -21,8 +21,9 @@
     "build:analyze": "node scripts/generate-responsive-images.mjs && ANALYZE=true vite build && node scripts/generate-site-artifacts.mjs",
     "build:prod": "node scripts/generate-responsive-images.mjs && NODE_ENV=production vite build && node scripts/generate-site-artifacts.mjs",
     "preview": "vite preview",
+    "smoke": "node scripts/smoke-check.mjs",
     "type-check": "vue-tsc --noEmit",
-    "validate": "yarn type-check && yarn build && echo 'All checks passed successfully!'",
+    "validate": "yarn type-check && yarn build && yarn smoke && echo 'All checks passed successfully!'",
     "audit": "yarn audit --level moderate",
     "perf": "yarn build:analyze && yarn preview"
   },

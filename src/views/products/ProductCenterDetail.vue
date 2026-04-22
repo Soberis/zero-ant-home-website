@@ -168,9 +168,9 @@
                 :card="video"
                 :index="index"
                 :active="activeVideoIndex === index"
+                :to="localizePath(`/video/${video.slug}`)"
                 @hover="handleVideoHover"
                 @leave="handleVideoLeave"
-                @click="handleVideoClick"
               />
               </div>
             </div>
@@ -397,7 +397,6 @@ const {
   activeVideoIndex,
   handleVideoHover,
   handleVideoLeave,
-  handleVideoClick,
 } = useProductDetailData(() => cardId.value, {
   baseDetail: () => detail.value,
   showApplications: true,

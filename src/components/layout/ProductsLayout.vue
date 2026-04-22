@@ -143,17 +143,17 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 <style scoped lang="less">
 .products-shell {
-  --products-surface: rgba(255, 255, 255, 0.96);
-  --products-surface-strong: #ffffff;
-  --products-border: rgba(15, 23, 42, 0.08);
-  --products-title: #0f172a;
-  --products-text: #556074;
-  --products-accent: #1a3a8f;
-  --products-accent-soft: rgba(26, 58, 143, 0.06);
-  --products-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  --products-surface: var(--brand-surface-frosted-strong);
+  --products-surface-strong: var(--brand-surface);
+  --products-border: var(--brand-border-subtle);
+  --products-title: var(--brand-text-strong);
+  --products-text: var(--brand-text-soft);
+  --products-accent: var(--brand-primary);
+  --products-accent-soft: var(--brand-accent-soft);
+  --products-shadow: var(--shadow-md);
   min-height: 100vh;
   padding: 0 0 96px;
-  background: #ffffff;
+  background: var(--brand-surface);
 }
 
 .products-shell--robot {

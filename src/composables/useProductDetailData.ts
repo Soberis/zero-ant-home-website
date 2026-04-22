@@ -1,5 +1,4 @@
 import { computed, ref, toValue, type MaybeRefOrGetter } from "vue";
-import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import applications from "@/data/applications";
 import { videoCards } from "@/data/videos";
@@ -17,7 +16,6 @@ import type {
   ProductFeature,
   ProductParam,
 } from "@/data/productDetails";
-import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 export interface UseProductDetailDataOptions {
   baseDetail?: MaybeRefOrGetter<ProductDetail | null | undefined>;
@@ -42,8 +40,6 @@ export function useProductDetailData(
   options: UseProductDetailDataOptions = {}
 ) {
   const { t, te, tm } = useI18n();
-  const router = useRouter();
-  const { localizePath } = useLocalizedPath();
 
   const slugValue = computed(() => String(toValue(slug) || ""));
   const currentProduct = computed(() => {
@@ -228,13 +224,6 @@ export function useProductDetailData(
     activeVideoIndex.value = -1;
   };
 
-  const handleVideoClick = (index: number) => {
-    const video = relatedVideos.value[index];
-    if (video) {
-      router.push(localizePath(`/video/${video.slug}`));
-    }
-  };
-
   return {
     slug: slugValue,
     currentProduct,
@@ -250,6 +239,5 @@ export function useProductDetailData(
     activeVideoIndex,
     handleVideoHover,
     handleVideoLeave,
-    handleVideoClick,
   };
 }
