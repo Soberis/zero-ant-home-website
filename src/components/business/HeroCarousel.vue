@@ -1,10 +1,6 @@
 <template>
   <section class="hero-carousel">
-    <router-link
-      class="hero-stage"
-      :to="activeSlide.routePath"
-      :aria-label="`${activeSlide.title} ${t('common.cta.viewDetails')}`"
-    >
+    <div class="hero-stage">
       <div class="hero-media" :class="{ 'hero-entered': entered }">
         <img
           :src="activeSlide.img"
@@ -29,23 +25,21 @@
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
-            <button
-              type="button"
+            <router-link
+              :to="productCenterRoute"
               class="btn btn-primary"
-              @click.stop.prevent="goProductCenter"
             >
               {{ t('home.hero.primaryCta') }}
-            </button>
+            </router-link>
         </div>
       </div>
       </div>
-    </router-link>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import coverImg from '@/assets/images/product/封面.webp';
 import coverImgMobile from '@/assets/images/product/封面-mobile.webp';
@@ -54,7 +48,6 @@ import { useLocalizedPath } from "@/composables/useLocalizedPath";
 interface SlideItem {
   img: string;
   title: string;
-  routePath: string;
   imageScale?: number;
   imageShiftX?: string;
   imageShiftY?: string;
@@ -63,18 +56,15 @@ interface SlideItem {
 }
 
 const { t } = useI18n();
-const router = useRouter();
-const { localizePath, localizeTo } = useLocalizedPath();
-
-const goProductCenter = () => {
-  router.push(localizeTo({ path: '/products', hash: '#products-page-top' }));
-};
+const { localizeTo } = useLocalizedPath();
 const heroImageSrcSet = `${coverImgMobile} 900w, ${coverImg} 1600w`;
+const productCenterRoute = computed(() =>
+  localizeTo({ path: '/products', hash: '#products-page-top' })
+);
 
 const activeSlide = computed<SlideItem>(() => ({
   img: coverImg,
   title: t('home.hero.title'),
-  routePath: `${localizePath('/products')}#products-page-top`,
   imageScale: 1.0,
   imageShiftX: '0px',
   imageShiftY: '0px',
@@ -126,14 +116,6 @@ onUnmounted(() => {
       rgba(255, 255, 255, 0.98) 42%,
       rgba(248, 250, 252, 0.92) 100%
     );
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-}
-
-.hero-stage:focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.72);
-  outline-offset: -2px;
 }
 
 .hero-media {

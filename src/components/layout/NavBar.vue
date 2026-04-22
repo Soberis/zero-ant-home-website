@@ -2,7 +2,7 @@
   <header class="header" :class="{ 'is-scrolled': isScrolled }">
     <nav class="nav-container">
       <div class="logo">
-        <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
+        <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" decoding="async" />
         <router-link :to="localizePath('/')" class="logo-text" @click="handleTopNavClick('/', $event)">
           {{ $t("logoText") }}
         </router-link>

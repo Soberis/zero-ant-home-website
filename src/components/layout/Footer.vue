@@ -54,6 +54,7 @@
                 :alt="$t('footer.taobao')"
                 class="qrcode-img"
                 loading="lazy"
+                decoding="async"
                 aria-label="Taobao QR Code"
               />
               <div class="qrcode-label">{{ $t("footer.taobao") }}</div>
@@ -65,6 +66,7 @@
                 :alt="$t('footer.wx')"
                 class="qrcode-img"
                 loading="lazy"
+                decoding="async"
                 aria-label="WeChat Official Account QR Code"
               />
               <div class="qrcode-label">{{ $t("footer.wx") }}</div>
@@ -76,6 +78,7 @@
                 :alt="$t('footer.bilibili')"
                 class="qrcode-img bilibili-qrcode-img"
                 loading="lazy"
+                decoding="async"
                 aria-label="Bilibili Channel QR Code"
               />
               <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>

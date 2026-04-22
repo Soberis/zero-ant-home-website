@@ -13,7 +13,14 @@
             :aria-label="`${t('common.cta.viewDetails')} ${mediaInfo.title}`"
             @click="videoStarted = true"
           >
-            <img :src="thumbnailUrl" :alt="mediaInfo.title" class="facade-image" />
+            <img
+              :src="thumbnailUrl"
+              :alt="mediaInfo.title"
+              class="facade-image"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
             <span class="facade-play-btn" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="48" height="48">
                 <path fill="currentColor" d="M8 5v14l11-7z" />
@@ -44,6 +51,9 @@
             class="video-image"
             :src="mediaInfo.url"
             :alt="mediaInfo.title"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           />
         </template>
         <template v-else>
@@ -127,6 +137,8 @@
               :src="wxworkQrcode"
               :alt="t('videos.videoDetail.qrCodeDesc')"
               class="qrcode-img"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

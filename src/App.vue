@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import NavBar from "@/components/layout/NavBar.vue";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
@@ -29,6 +29,7 @@ const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue
 const FloatingCTA = defineAsyncComponent(() => import("@/components/common/FloatingCTA.vue"));
 
 const router = useRouter();
+const route = useRoute();
 const { localizePath } = useLocalizedPath();
 
 function hasInAppHistory(): boolean {
@@ -36,10 +37,31 @@ function hasInAppHistory(): boolean {
   return typeof historyState?.back === "string" && historyState.back.length > 0;
 }
 
+function isEscNavigationEnabled(): boolean {
+  return (
+    route.name === "ApplicationDetail" ||
+    route.name === "VideoDetail" ||
+    route.name === "ProductDetail"
+  );
+}
+
+function getEscFallbackPath(): string {
+  if (route.name === "ProductDetail") {
+    return "/products";
+  }
+
+  if (route.name === "ApplicationDetail" || route.name === "VideoDetail") {
+    return "/solutions";
+  }
+
+  return "/";
+}
+
 // 全局ESC键返回功能
 const handleEscKey = (event: KeyboardEvent) => {
   // 只在按下ESC键时处理
   if (event.key !== "Escape") return;
+  if (event.defaultPrevented || !isEscNavigationEnabled()) return;
 
   // 检查当前是否有活动的模态框、视频全屏或其他需要ESC的交互
   const activeElements = [
@@ -77,7 +99,7 @@ const handleEscKey = (event: KeyboardEvent) => {
   if (hasInAppHistory()) {
     router.go(-1);
   } else {
-    void router.push(localizePath("/")).then(() => {
+    void router.push(localizePath(getEscFallbackPath())).then(() => {
       scheduleScrollToTop();
     });
   }

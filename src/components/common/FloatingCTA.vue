@@ -25,7 +25,13 @@
         </div>
         <div class="sidebar-popup qrcode-popup">
           <div class="popup-content">
-            <img :src="wxworkQrcode" alt="WeChat QR Code" class="qrcode-image" />
+            <img
+              :src="wxworkQrcode"
+              alt="WeChat QR Code"
+              class="qrcode-image"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="popup-title">{{ t("common.cta.wecomTitle") }}</div>
             <div class="popup-desc">{{ t("common.cta.wecomDesc") }}</div>
           </div>
@@ -41,7 +47,13 @@
         </div>
         <div class="sidebar-popup qrcode-popup">
           <div class="popup-content">
-            <img :src="taobaoQrcode" alt="Taobao QR Code" class="qrcode-image" />
+            <img
+              :src="taobaoQrcode"
+              alt="Taobao QR Code"
+              class="qrcode-image"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="popup-title">{{ t("common.cta.taobaoTitle") }}</div>
             <div class="popup-desc">{{ t("common.cta.taobaoDesc") }}</div>
           </div>

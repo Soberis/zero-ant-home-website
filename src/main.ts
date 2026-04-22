@@ -12,7 +12,6 @@ const app = createApp(App);
 app.use(router);
 app.use(i18n);
 
-// Element Plus 组件和样式通过按需导入自动处理
 app.mount("#app");
 
 // 初始化安全监控和SEO（仅在浏览器环境）
