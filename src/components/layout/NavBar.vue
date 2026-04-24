@@ -1,8 +1,8 @@
 <template>
   <header class="header" :class="{ 'is-scrolled': isScrolled }">
-    <nav class="nav-container">
+    <nav class="nav-container" :aria-label="$t('nav.primaryNavigation')">
       <div class="logo">
-        <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" />
+        <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" decoding="async" />
         <router-link :to="localizePath('/')" class="logo-text" @click="handleTopNavClick('/', $event)">
           {{ $t("logoText") }}
         </router-link>
@@ -20,7 +20,7 @@
               :to="localizePath(item.to)"
               class="nav-link"
               :class="{ active: isTopNavActive(item.to) }"
-              aria-current-value="page"
+              :aria-current="isTopNavActive(item.to) ? 'page' : undefined"
               @click="handleTopNavClick(item.to, $event)"
             >
               <span class="nav-text">{{ $t(item.label) }}</span>
@@ -46,8 +46,9 @@
 
       <div class="nav-actions">
         <div class="language-switcher">
-          <button 
-            class="language-btn" 
+          <button
+            type="button"
+            class="language-btn"
             @click="switchLanguage()"
             :aria-label="locale === 'zh' ? 'Switch to English' : '切换至中文'"
           >
@@ -63,9 +64,9 @@
           aria-controls="mobile-nav-panel"
           @click="toggleMobileMenu"
         >
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
+          <span class="hamburger-line" aria-hidden="true"></span>
+          <span class="hamburger-line" aria-hidden="true"></span>
+          <span class="hamburger-line" aria-hidden="true"></span>
         </button>
       </div>
     </nav>
@@ -73,22 +74,58 @@
     <div
       class="mobile-nav"
       :class="{ open: isMobileMenuOpen }"
-      @click="handleBackgroundClick"
       id="mobile-nav-panel"
+      :aria-label="$t('nav.mobileMenu')"
+      :aria-hidden="!isMobileMenuOpen"
+      @click="handleBackgroundClick"
       role="dialog"
       aria-modal="true"
     >
       <div class="mobile-nav-content">
         <ul class="mobile-nav-links">
           <li v-for="item in topNavItems" :key="item.to" class="mobile-nav-item">
-            <router-link
-              :to="localizePath(item.to)"
-              class="mobile-nav-link"
-              :class="{ active: isTopNavActive(item.to) }"
-              @click="handleTopNavClick(item.to, $event, true)"
-            >
-              {{ $t(item.label) }}
-            </router-link>
+            <div class="mobile-nav-row">
+              <router-link
+                :to="localizePath(item.to)"
+                class="mobile-nav-link"
+                :class="{ active: isTopNavActive(item.to) }"
+                :aria-current="isTopNavActive(item.to) ? 'page' : undefined"
+                @click="handleTopNavClick(item.to, $event, true)"
+              >
+                {{ $t(item.label) }}
+              </router-link>
+              <button
+                v-if="item.children"
+                type="button"
+                class="mobile-nav-expand"
+                :class="{ 'is-open': openMobileSubmenu === item.to }"
+                :aria-expanded="openMobileSubmenu === item.to"
+                :aria-controls="getMobileSubmenuId(item.to)"
+                :aria-label="getMobileSubmenuLabel(item)"
+                @click="toggleMobileSubmenu(item.to)"
+              >
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+            </div>
+            <transition name="mobile-submenu">
+              <ul
+                v-if="item.children && openMobileSubmenu === item.to"
+                :id="getMobileSubmenuId(item.to)"
+                class="mobile-submenu"
+              >
+                <li v-for="child in item.children" :key="child.hash">
+                  <router-link
+                    :to="localizeTo({ path: item.to, hash: child.hash })"
+                    class="mobile-submenu-link"
+                    @click="closeMobileMenu"
+                  >
+                    {{ $t(child.label) }}
+                  </router-link>
+                </li>
+              </ul>
+            </transition>
           </li>
         </ul>
       </div>
@@ -103,6 +140,10 @@ import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
+import type { NavigationItem } from "@/data/navigation";
+// 语言切换时保持滚动位置 — 与 router/scrollBehavior 联动，
+// 详见 router/scrollBehavior.ts 的 preservedScroll 处理
+import { preserveScrollForNextNavigation } from "@/router";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import {
   localizeFullPath,
@@ -134,6 +175,7 @@ const handleDesktopBreakpointChange = (event: MediaQueryListEvent) => {
 
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
+const openMobileSubmenu = ref<string | null>(null);
 const route = useRoute();
 const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
@@ -159,7 +201,22 @@ function toggleMobileMenu() {
 // 关闭移动端菜单
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
+  openMobileSubmenu.value = null;
   document.body.style.overflow = "";
+}
+
+function toggleMobileSubmenu(itemTo: string) {
+  openMobileSubmenu.value = openMobileSubmenu.value === itemTo ? null : itemTo;
+}
+
+function getMobileSubmenuId(itemTo: string): string {
+  return `mobile-submenu-${itemTo.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "root"}`;
+}
+
+function getMobileSubmenuLabel(item: NavigationItem): string {
+  const actionKey =
+    openMobileSubmenu.value === item.to ? "nav.collapseSubmenu" : "nav.expandSubmenu";
+  return `${t(actionKey)}：${t(item.label)}`;
 }
 
 async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = false): Promise<void> {
@@ -205,7 +262,7 @@ function handleBackgroundClick(event: Event): void {
 
 // 顶部导航项已从 @/data/navigation 统一导入
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 function isProductDetailRoute() {
   return route.name === "ProductDetail";
@@ -213,6 +270,14 @@ function isProductDetailRoute() {
 
 async function switchLanguage() {
   const targetLocale = locale.value === "zh" ? "en" : "zh";
+  const preservedScrollPosition = {
+    left: window.scrollX,
+    top: Math.max(
+      window.scrollY,
+      document.documentElement?.scrollTop ?? 0,
+      document.body?.scrollTop ?? 0
+    ),
+  };
 
   if (isProductDetailRoute()) {
     try {
@@ -224,8 +289,9 @@ async function switchLanguage() {
     }
   }
 
-  await router.push(localizeFullPath(route.fullPath, targetLocale));
   closeMobileMenu();
+  preserveScrollForNextNavigation(preservedScrollPosition);
+  await router.push(localizeFullPath(route.fullPath, targetLocale));
 }
 
 // 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）
@@ -260,26 +326,26 @@ onUnmounted(() => {
 
 <style scoped lang="less">
 .header {
-  --nav-text-color: #111111;
-  --nav-accent-color: #1a3a8f;
-  --nav-logo-text-color: #111111;
-  --nav-accent-surface: rgba(26, 58, 143, 0.05);
+  --nav-text-color: var(--brand-text);
+  --nav-accent-color: var(--brand-primary);
+  --nav-logo-text-color: var(--brand-text);
+  --nav-accent-surface: var(--brand-accent-soft);
   --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
     saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
-  background-color: rgba(255, 255, 255, 0.72);
+  background-color: var(--brand-surface-frosted);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--brand-border-subtle);
   transition: all var(--transition-smooth);
 
   &.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.85);
-    box-shadow: var(--shadow-md);
-    border-bottom-color: rgba(15, 23, 42, 0.03);
+    background-color: var(--brand-surface-frosted-strong);
+    box-shadow: var(--shadow-sm);
+    border-bottom-color: var(--brand-border-strong);
     
     .nav-container {
       height: 72px;
@@ -479,18 +545,17 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.985);
+  background: var(--brand-surface);
   width: 100%;
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.05);
+  box-shadow: var(--shadow-sm);
   border-radius: 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
   opacity: 0;
   visibility: hidden;
   transition:
     opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 999;
-  backdrop-filter: blur(10px);
   height: auto;
   transform-origin: top;
 }
@@ -526,13 +591,13 @@ onUnmounted(() => {
 
 .dropdown-item {
   display: block;
-  padding: 8px 18px;
+  padding: 10px 16px;
   white-space: nowrap;
   line-height: 1.5;
-  border-radius: 100px;
+  border-radius: 12px;
   box-sizing: border-box;
   text-align: center;
-  background-color: transparent;
+  background-color: var(--brand-surface);
   border: 1px solid transparent;
   min-width: 0;
   flex: 0 0 auto;
@@ -567,10 +632,10 @@ onUnmounted(() => {
 }
 
 .dropdown-item:hover {
-  background: rgba(15, 23, 42, 0.04);
+  background: var(--brand-surface-panel);
   color: var(--nav-accent-color);
   transform: none;
-  border-color: transparent;
+  border-color: rgba(15, 23, 42, 0.08);
   box-shadow: none;
 }
 
@@ -595,14 +660,14 @@ onUnmounted(() => {
 }
 
 .language-btn {
-  background: #ffffff;
+  background: var(--brand-surface-panel);
   border: 1px solid rgba(15, 23, 42, 0.1);
   color: var(--nav-text-color);
   font-size: 13px;
   font-weight: 600;
-  padding: 6px 16px;
-  min-height: 38px;
-  border-radius: 100px;
+  padding: 0 14px;
+  min-height: 40px;
+  border-radius: 12px;
   cursor: pointer;
   transition:
     background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -613,8 +678,7 @@ onUnmounted(() => {
   box-shadow: none;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(8px);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   min-width: 64px;
   text-align: center;
   display: flex;
@@ -623,10 +687,10 @@ onUnmounted(() => {
 }
 
 .language-btn:hover {
-  background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.14);
+  background: var(--brand-surface);
+  border-color: rgba(15, 23, 42, 0.18);
   transform: none;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
   color: var(--nav-text-color);
 }
 
@@ -728,8 +792,8 @@ onUnmounted(() => {
   align-items: center;
   width: 40px;
   height: 40px;
-  background: rgba(26, 58, 143, 0.03);
-  border: 1px solid rgba(26, 58, 143, 0.05);
+  background: var(--brand-surface);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 10px;
   cursor: pointer;
   padding: 0;
@@ -743,8 +807,8 @@ onUnmounted(() => {
 }
 
 .hamburger-menu:hover {
-  background: rgba(26, 58, 143, 0.08);
-  transform: scale(1.05);
+  background: var(--brand-surface-panel);
+  transform: none;
 }
 
 .hamburger-line {
@@ -777,8 +841,9 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(4px);
+  background: rgba(15, 23, 42, 0.32);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -797,9 +862,8 @@ onUnmounted(() => {
   right: 0;
   width: 300px;
   height: 100svh;
-  background: rgba(255, 255, 255, 0.995);
-  backdrop-filter: blur(4px);
-  box-shadow: -12px 0 40px rgba(15, 23, 42, 0.08);
+  background: var(--brand-surface);
+  box-shadow: -8px 0 24px rgba(15, 23, 42, 0.08);
   transform: translateX(100%);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   padding-top: 80px;
@@ -865,12 +929,12 @@ onUnmounted(() => {
   right: 20px;
   bottom: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(26, 58, 143, 0.05), transparent);
+  background: rgba(15, 23, 42, 0.06);
 }
 
 .mobile-nav-link:hover {
   background: rgba(26, 58, 143, 0.03);
-  padding-left: 40px;
+  padding-left: 36px;
   color: var(--nav-accent-color);
 }
 
@@ -878,6 +942,117 @@ onUnmounted(() => {
   color: var(--nav-accent-color);
   background: rgba(26, 58, 143, 0.05);
   font-weight: 600;
+}
+
+/* 移动端子菜单行布局 */
+.mobile-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-nav-row .mobile-nav-link {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 子菜单展开按钮 */
+.mobile-nav-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--nav-text-color);
+  border-radius: 8px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.mobile-nav-expand:hover {
+  background: rgba(26, 58, 143, 0.05);
+  color: var(--nav-accent-color);
+}
+
+.mobile-nav-expand.is-open {
+  color: var(--nav-accent-color);
+  transform: rotate(180deg);
+}
+
+/* 子菜单列表 */
+.mobile-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px 0;
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.mobile-submenu-link {
+  display: block;
+  padding: 14px 32px 14px 48px;
+  color: var(--nav-text-color);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    padding-left 0.2s ease;
+  position: relative;
+}
+
+.mobile-submenu-link::before {
+  content: "";
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.2);
+  transition: background 0.2s ease;
+}
+
+.mobile-submenu-link:hover {
+  background: rgba(26, 58, 143, 0.03);
+  color: var(--nav-accent-color);
+  padding-left: 54px;
+}
+
+.mobile-submenu-link:hover::before {
+  background: var(--nav-accent-color);
+}
+
+/* 子菜单过渡动画 */
+.mobile-submenu-enter-active {
+  transition:
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-submenu-leave-active {
+  transition:
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-submenu-enter-from {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.mobile-submenu-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
 }
 
 @media (max-width: 950px) {
@@ -895,11 +1070,11 @@ onUnmounted(() => {
   }
 
   .header {
-    background-color: rgba(255, 255, 255, 0.965);
+    background-color: rgba(255, 255, 255, 0.96);
   }
 
   .header.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.99);
+    background-color: rgba(255, 255, 255, 0.98);
   }
 
   .logo {
@@ -983,8 +1158,7 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 260px;
     padding-top: 70px;
-    background: rgba(255, 255, 255, 0.998);
-    backdrop-filter: none;
+    background: var(--brand-surface);
   }
 }
 
@@ -1028,8 +1202,7 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 240px;
     padding-top: 65px;
-    background: rgba(255, 255, 255, 0.998);
-    backdrop-filter: none;
+    background: var(--brand-surface);
   }
 
   .mobile-nav-link {
@@ -1082,20 +1255,13 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 220px;
     padding-top: 60px;
-    background: rgba(255, 255, 255, 0.998);
-    backdrop-filter: none;
+    background: var(--brand-surface);
   }
 
   .mobile-nav-link {
     padding: 12px 16px;
     font-size: 14px;
   }
-}
-
-.nav-item:hover .dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scaleY(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1113,7 +1279,7 @@ onUnmounted(() => {
 
   .nav-link:hover,
   .nav-link.active {
-    border-color: #1a3a8f;
+    border-color: var(--brand-primary);
   }
 }
 </style>

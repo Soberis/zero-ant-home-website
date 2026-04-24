@@ -5,8 +5,8 @@
         <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
         <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
       </div>
-      <router-link :to="localizeTo({ path: '/solutions', query: { tab: 'videos' }, hash: '#proof' })" class="section-cta">
-        <span>{{ t("solutionsPage.more.videos") }}</span>
+      <router-link :to="localizeTo({ path: '/solutions', hash: '#more-videos' })" class="section-cta ui-action-link">
+        <span>{{ t("home.videoCases.exploreAll") }}</span>
         <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
@@ -21,9 +21,9 @@
         :description="item.description"
         :index="idx"
         :active="hoverIdx === idx"
+        :to="localizePath(`/video/${item.slug}`)"
         @hover="onHover"
         @leave="onLeave"
-        @click="goToVideo(item.slug)"
       />
     </div>
   </section>
@@ -32,19 +32,17 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
 import { videoCards, videoMap } from "@/data/videos";
 import VideoCard from "@/components/common/VideoCard.vue";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const { t } = useI18n();
-const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
 
 const SPOTLIGHT_SLUGS = [
-  "semiconductor",
   "composite-robot-application",
-  "sketching-robot",
+  "vr-teleop-dual-arm",
+  "vla-dual-arm-cable-grasping",
 ];
 
 const hoverIdx = ref(-1);
@@ -79,10 +77,6 @@ const onHover = (idx: number) => {
 const onLeave = () => {
   hoverIdx.value = -1;
 };
-
-const goToVideo = (slug: string) => {
-  router.push(localizePath(`/video/${slug}`));
-};
 </script>
 
 <style scoped lang="less">
@@ -103,20 +97,12 @@ const goToVideo = (slug: string) => {
 }
 
 .section-heading {
-  max-width: 700px;
+  max-width: 760px;
   margin-bottom: 0;
 }
 
 .section-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-text-secondary);
   font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
-  white-space: nowrap;
 }
 
 .section-cta .cta-arrow {
@@ -126,7 +112,6 @@ const goToVideo = (slug: string) => {
 }
 
 .section-cta:hover {
-  color: var(--color-primary);
   transform: translateY(-1px);
 }
 
@@ -141,7 +126,7 @@ const goToVideo = (slug: string) => {
   margin-top: var(--space-sm);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 960px) {
   .spotlight-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -150,11 +135,6 @@ const goToVideo = (slug: string) => {
 @media (max-width: 900px) {
   .spotlight-section {
     padding: var(--space-xl) var(--space-md);
-  }
-
-  .section-heading-row {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 

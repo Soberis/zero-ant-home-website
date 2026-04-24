@@ -29,11 +29,27 @@
 
         <div class="intro-layout">
           <div class="intro-prose">
-            <p
-              v-for="(paragraph, index) in companyIntroParagraphs"
-              :key="`intro-${index}`"
-              v-html="paragraph"
-            ></p>
+            <i18n-t keypath="about.companyIntroDetailed.para1" tag="p" scope="global">
+              <template #org>
+                <strong>{{ $t("about.richText.org") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.companyIntroDetailed.para2" tag="p" scope="global">
+              <template #lab>
+                <strong>{{ $t("about.richText.lab") }}</strong>
+              </template>
+              <template #airos>
+                <strong>{{ $t("about.richText.airos") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.companyIntroDetailed.para3" tag="p" scope="global">
+              <template #loop>
+                <strong>{{ $t("about.richText.loop") }}</strong>
+              </template>
+              <template #selfControlled>
+                <strong>{{ $t("about.richText.selfControlled") }}</strong>
+              </template>
+            </i18n-t>
           </div>
 
           <div class="intro-side">
@@ -65,11 +81,11 @@
           </div>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="history" ref="historyRef" class="page-section reveal-ready">
       <div class="page-shell">
-<div class="detail-section__header">
+        <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.history") }}</span>
           </h2>
@@ -94,11 +110,11 @@
           </article>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="honors" ref="honorsRef" class="page-section reveal-ready">
       <div class="page-shell">
-<div class="detail-section__header">
+        <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("nav.honor") }}</span>
           </h2>
@@ -115,11 +131,11 @@
           </article>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="core-values" ref="valuesRef" class="page-section reveal-ready">
       <div class="page-shell">
-<div class="detail-section__header">
+        <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ $t("about.coreValues.title") }}</span>
           </h2>
@@ -135,7 +151,7 @@
           </article>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="culture" ref="cultureRef" class="page-section reveal-ready">
       <div class="page-shell">
@@ -146,17 +162,36 @@
         </div>
 
         <div class="culture-card">
-          <p class="info-text" v-html="cultureDescription"></p>
+          <i18n-t keypath="about.enterpriseCulture.description" tag="p" class="info-text" scope="global">
+            <template #coreConcept>
+              <strong>{{ $t("about.richText.coreConcept") }}</strong>
+            </template>
+          </i18n-t>
           <ul class="culture-list">
-            <li
-              v-for="(item, index) in cultureItems"
-              :key="`culture-${index}`"
-              v-html="item"
-            ></li>
+            <i18n-t keypath="about.enterpriseCulture.item1" tag="li" scope="global">
+              <template #deepAccumulation>
+                <strong>{{ $t("about.richText.deepAccumulation") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.enterpriseCulture.item2" tag="li" scope="global">
+              <template #scenarioRevolution>
+                <strong>{{ $t("about.richText.scenarioRevolution") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.enterpriseCulture.item3" tag="li" scope="global">
+              <template #ecosystemCoConstruction>
+                <strong>{{ $t("about.richText.ecosystemCoConstruction") }}</strong>
+              </template>
+            </i18n-t>
+            <i18n-t keypath="about.enterpriseCulture.item4" tag="li" scope="global">
+              <template #extremeEvolution>
+                <strong>{{ $t("about.richText.extremeEvolution") }}</strong>
+              </template>
+            </i18n-t>
           </ul>
         </div>
       </div>
-</section>
+    </section>
 
       <section id="contact" ref="aboutContactRef" class="page-section contact-section reveal-ready">
       <div class="page-shell">
@@ -189,7 +224,7 @@
           </div>
         </div>
       </div>
-</section>
+    </section>
     </main>
   </div>
 </template>
@@ -199,7 +234,6 @@ import { computed, ref, type ComputedRef } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
-import { sanitizeHtmlAllowList } from "@/utils/security";
 
 const { t, locale } = useI18n();
 
@@ -234,22 +268,6 @@ const coreValues = computed(() => [
   t("about.coreValues.value4"),
 ]);
 
-const companyIntroParagraphs = computed(() =>
-  ["para1", "para2", "para3"].map((key) =>
-    sanitizeHtmlAllowList(t(`about.companyIntroDetailed.${key}`))
-  )
-);
-
-const cultureItems = computed(() =>
-  ["item1", "item2", "item3", "item4"].map((key) =>
-    sanitizeHtmlAllowList(t(`about.enterpriseCulture.${key}`))
-  )
-);
-
-const cultureDescription = computed(() =>
-  sanitizeHtmlAllowList(t("about.enterpriseCulture.description"))
-);
-
 function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");
 }
@@ -262,8 +280,21 @@ function formatIndex(value: number): string {
   background: var(--brand-surface);
 }
 
-.about-page > .about-main > .page-section:nth-of-type(even) {
-  background-color: var(--brand-surface-soft);
+.about-main > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
+}
+
+.about-main > .page-section:nth-of-type(odd) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+.intro-prose strong,
+.culture-card strong {
+  font-weight: 700;
+  color: inherit;
 }
 
 .page-shell {
@@ -279,9 +310,7 @@ function formatIndex(value: number): string {
   padding-top: 0;
   box-sizing: border-box;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 82% 24%, rgba(26, 58, 143, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(247, 249, 252, 0.72) 0%, rgba(255, 255, 255, 0.96) 100%);
+  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
 }
 
 .about-hero::before {
@@ -289,25 +318,14 @@ function formatIndex(value: number): string {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(15, 23, 42, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.028) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 85%);
+    linear-gradient(rgba(15, 23, 42, 0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.014) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 82%);
   pointer-events: none;
 }
 
-.about-hero::after {
-  content: "";
-  position: absolute;
-  inset: auto -8% 14% auto;
-  width: 34vw;
-  min-width: 320px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(26, 58, 143, 0.09), transparent 68%);
-  filter: blur(8px);
-  pointer-events: none;
-}
+/* Glowing blob removed for minimal styling */
 
 .hero-shell {
   position: relative;
@@ -337,7 +355,8 @@ function formatIndex(value: number): string {
 
 .hero-title--single-line {
   max-width: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
   font-size: clamp(3rem, 5.4vw, 5.3rem);
 }
 
@@ -349,9 +368,48 @@ function formatIndex(value: number): string {
   line-height: 1.85;
 }
 
-.page-section {
+.about-main > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
   padding: 88px 0;
   scroll-margin-top: calc(var(--nav-height) + 16px);
+}
+
+/* 公司介绍 - 灰色背景，白色卡片 */
+.about-main > .page-section:nth-of-type(1) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+/* 发展历史 - 白色背景，灰色卡片 */
+.about-main > .page-section:nth-of-type(2) {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+}
+
+/* 成果荣誉 - 灰色背景，白色卡片 */
+.about-main > .page-section:nth-of-type(3) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+/* 核心价值观 - 白色背景，灰色卡片 */
+.about-main > .page-section:nth-of-type(4) {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+}
+
+/* 企业文化 - 灰色背景，白色卡片 */
+.about-main > .page-section:nth-of-type(5) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+/* 联系我们 - 白色背景，灰色卡片 */
+.about-main > .page-section:nth-of-type(6) {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
 }
 
 .detail-section__header {
@@ -374,8 +432,7 @@ function formatIndex(value: number): string {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--brand-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .intro-layout {
@@ -400,8 +457,7 @@ function formatIndex(value: number): string {
   line-height: 1.8;
 }
 
-.contact-value {
-  color: var(--brand-text);
+.intro-side a.contact-value {
   font-size: 1.05rem;
   font-weight: 500;
   line-height: 1.8;
@@ -430,23 +486,15 @@ function formatIndex(value: number): string {
 }
 
 .culture-card {
-  background: #f8f9fb;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
   padding: 32px 40px;
   box-shadow: none;
 }
 
-.honor-card {
-  background: var(--brand-surface-soft);
-  border: none;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: none;
-}
-
 .value-card {
-  background: #ffffff;
+  background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
   padding: 32px 24px;
@@ -469,17 +517,17 @@ function formatIndex(value: number): string {
 
 .stat-card {
   padding: 24px;
-  background: var(--brand-surface-soft);
-  border: none;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 12px;
   transition: all var(--transition-smooth);
 }
 
 .stat-card:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-1px);
   background: #ffffff;
   border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.04);
 }
 
 .stat-number {
@@ -511,11 +559,11 @@ function formatIndex(value: number): string {
 }
 
 .timeline-card {
-  background: #ffffff;
+  background: var(--section-card-surface);
   padding: 24px;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
 }
 
 .timeline-rail {
@@ -545,7 +593,7 @@ function formatIndex(value: number): string {
   margin-top: 4px;
   border-radius: 50%;
   background: var(--brand-primary);
-  box-shadow: 0 0 0 5px rgba(26, 58, 143, 0.08);
+  box-shadow: 0 0 0 4px rgba(26, 58, 143, 0.06);
 }
 
 .timeline-year {
@@ -569,19 +617,28 @@ function formatIndex(value: number): string {
 .honor-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 52px;
+  column-gap: 0;
+  row-gap: 0;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 24px;
+  padding: 40px;
 }
 
 .honor-card {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 24px;
-  border-bottom: none;
+  padding: 24px 40px 24px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.honor-card:nth-child(even) {
+  padding: 24px 0 24px 40px;
 }
 
 .honor-card:nth-child(odd) {
-  padding-right: 24px;
+  padding-right: 40px;
 }
 
 .honor-card:nth-last-child(-n+2) {
@@ -592,17 +649,29 @@ function formatIndex(value: number): string {
   flex-shrink: 0;
   width: 40px;
   color: rgba(26, 58, 143, 0.36);
-  font-size: 0.78rem;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   padding-top: 3px;
+  transition: color 0.3s ease;
 }
 
 .honor-text {
   margin: 0;
   color: var(--brand-text);
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
   line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.honor-card:hover .card-index {
+  color: var(--brand-primary);
+}
+
+.honor-card:hover .honor-text {
+  color: var(--brand-primary-deep);
 }
 
 .values-grid {
@@ -620,8 +689,8 @@ function formatIndex(value: number): string {
 }
 
 .value-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.04);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.035);
 }
 
 .value-text {
@@ -659,15 +728,15 @@ function formatIndex(value: number): string {
 }
 
 .contact-section {
-  margin-bottom: 0;
+  padding-top: var(--section-padding-y);
 }
 
 .contact-panel {
   display: grid;
-  grid-template-columns: minmax(0, 0.74fr) minmax(420px, 1fr);
-  gap: 64px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 48px;
   align-items: start;
-  padding-top: 20px;
+  padding-top: 4px;
 }
 
 .contact-header {
@@ -678,21 +747,26 @@ function formatIndex(value: number): string {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px 36px;
+  padding-top: 4px;
 }
 
 .contact-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
+  min-width: 0;
   padding: 24px;
-  background: #ffffff;
+  background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .contact-card--wide {
   grid-column: 1 / -1;
+}
+
+.contact-card--wide .contact-value {
+  white-space: normal;
 }
 
 .contact-label {
@@ -700,21 +774,21 @@ function formatIndex(value: number): string {
   color: rgba(15, 23, 42, 0.5);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-.contact-value {
-  color: var(--brand-text);
+.contact-card .contact-value {
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
   text-decoration: none;
   transition: color 0.3s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-.contact-value[href]:hover {
-  color: var(--brand-primary);
+.contact-card span.contact-value {
+  color: var(--brand-text);
 }
 
 @media (max-width: 1100px) {
@@ -725,6 +799,20 @@ function formatIndex(value: number): string {
 
   .honor-grid {
     grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .honor-card {
+    padding: 24px 0 !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .honor-card:nth-last-child(-n+2) {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .honor-card:last-child {
+    border-bottom: none;
   }
 
   .values-grid {
@@ -788,6 +876,10 @@ function formatIndex(value: number): string {
 
   .contact-card--wide {
     grid-column: auto;
+  }
+
+  .contact-card--wide .contact-value {
+    white-space: normal;
   }
 }
 

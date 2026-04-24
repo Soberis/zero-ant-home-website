@@ -5,6 +5,7 @@
 
 export const productCenterNav = [
   { hash: "#r-series", label: "nav.rSeries" },
+  { hash: "#dt-series", label: "nav.dtSeries" },
   { hash: "#m-series", label: "nav.mSeries" },
   { hash: "#mr-series", label: "nav.mrSeries" },
   { hash: "#embodied-platforms", label: "nav.embodiedPlatforms" },
@@ -19,8 +20,8 @@ export const supportNav = [
 ];
 
 export const solutionsNav = [
-  { hash: "#industries", label: "solutionsPage.nav.industries" },
-  { hash: "#proof", label: "solutionsPage.nav.proof" },
+  { hash: "#overview", label: "solutionsPage.nav.overview" },
+  { hash: "#directions", label: "solutionsPage.nav.directions" },
   { hash: "#delivery", label: "solutionsPage.nav.delivery" },
 ];
 

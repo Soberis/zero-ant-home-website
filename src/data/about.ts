@@ -8,16 +8,6 @@ export interface TimelineEvent {
   events: string[];
 }
 
-/**
- * 团队信息接口
- */
-export interface TeamInfo {
-  size: number;
-  masterRatio: string;
-  avgAge: number;
-  background: string;
-}
-
 type TranslationFunction = (key: string) => string;
 
 /**
@@ -64,16 +54,4 @@ export function getHonors(t: TranslationFunction): string[] {
     t('about.honor5'),
     t('about.honor6'),
   ];
-}
-
-/**
- * 获取团队信息
- */
-export function getTeamInfo(t: TranslationFunction): TeamInfo {
-  return {
-    size: 20,
-    masterRatio: '90%',
-    avgAge: 30,
-    background: t('about.team.background'),
-  };
 }

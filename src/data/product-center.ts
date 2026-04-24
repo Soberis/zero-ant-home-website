@@ -1,4 +1,3 @@
-import coverImg from "@/assets/images/product/封面.webp";
 import railImg from "@/assets/images/product/地轨平台.webp";
 import rotatingPlatformImg from "@/assets/images/product/旋转平台.webp";
 import zaM135Img from "@/assets/images/product/ZA-M135.webp";
@@ -6,7 +5,7 @@ import zaM75Img from "@/assets/images/product/ZA-M75.webp";
 import zaMR3MImg from "@/assets/images/product/ZA-MR3M.webp";
 import zaMR3TImg from "@/assets/images/product/ZA-MR3T.webp";
 import zaR3XImg from "@/assets/images/product/ZA-R3-X.webp";
-import zaR3D6Img from "@/assets/images/product/ZA-R3D6.webp";
+import zaR3D6Img from "@/assets/images/product/ZA-R3D6.png";
 import zaR3LMHImg from "@/assets/images/product/ZA-R3L-M-H.webp";
 import zaR3MLImg from "@/assets/images/product/ZA-R3M-L.webp";
 import zaR3MRImg from "@/assets/images/product/ZA-R3M-R.webp";
@@ -23,6 +22,8 @@ export interface ProductCenterCard {
   summaryKey: string;
   specKeys: string[];
   noteKey?: string;
+  /** Hero 区图片原始尺寸，用于 <img width/height> 与 CLS 优化 */
+  heroImageSize?: { width: number; height: number };
 }
 
 export interface ProductCenterFamily {
@@ -41,6 +42,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-r3-x",
         image: zaR3XImg,
+        heroImageSize: { width: 1600, height: 2133 },
         titleKey: "productsCenter.families.rSeries.cards.zar3x.title",
         summaryKey: "productsCenter.families.rSeries.cards.zar3x.summary",
         specKeys: [
@@ -49,18 +51,9 @@ export const productCenterFamilies: ProductCenterFamily[] = [
         
       },
       {
-        id: "za-r3d6",
-        image: zaR3D6Img,
-        titleKey: "productsCenter.families.rSeries.cards.zar3d6.title",
-        summaryKey: "productsCenter.families.rSeries.cards.zar3d6.summary",
-        specKeys: [
-          "productsCenter.families.rSeries.cards.zar3d6.specs.0", "productsCenter.families.rSeries.cards.zar3d6.specs.1", "productsCenter.families.rSeries.cards.zar3d6.specs.2", "productsCenter.families.rSeries.cards.zar3d6.specs.3"
-        ]
-        
-      },
-      {
         id: "za-r3l-m-h",
         image: zaR3LMHImg,
+        heroImageSize: { width: 1600, height: 2133 },
         titleKey: "productsCenter.families.rSeries.cards.zar3lmh.title",
         summaryKey: "productsCenter.families.rSeries.cards.zar3lmh.summary",
         specKeys: [
@@ -71,6 +64,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-r3m-left",
         image: zaR3MLImg,
+        heroImageSize: { width: 1600, height: 1280 },
         titleKey: "productsCenter.families.rSeries.cards.zar3mleft.title",
         summaryKey: "productsCenter.families.rSeries.cards.zar3mleft.summary",
         specKeys: [
@@ -81,6 +75,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-r3m-right",
         image: zaR3MRImg,
+        heroImageSize: { width: 1280, height: 1707 },
         titleKey: "productsCenter.families.rSeries.cards.zar3mright.title",
         summaryKey: "productsCenter.families.rSeries.cards.zar3mright.summary",
         specKeys: [
@@ -88,13 +83,32 @@ export const productCenterFamilies: ProductCenterFamily[] = [
         ]
         
       },
+    ]
+  },
+  {
+    id: "dt-series",
+    titleKey: "productsCenter.families.dtSeries.title",
+    introKey: "productsCenter.families.dtSeries.intro",
+    cards: [
+      {
+        id: "za-r3d6",
+        image: zaR3D6Img,
+        heroImageSize: { width: 854, height: 1474 },
+        titleKey: "productsCenter.families.dtSeries.cards.zar3d6.title",
+        summaryKey: "productsCenter.families.dtSeries.cards.zar3d6.summary",
+        specKeys: [
+          "productsCenter.families.dtSeries.cards.zar3d6.specs.0", "productsCenter.families.dtSeries.cards.zar3d6.specs.1", "productsCenter.families.dtSeries.cards.zar3d6.specs.2", "productsCenter.families.dtSeries.cards.zar3d6.specs.3"
+        ]
+        
+      },
       {
         id: "za-r3t",
         image: zaR3TImg,
-        titleKey: "productsCenter.families.rSeries.cards.zar3t.title",
-        summaryKey: "productsCenter.families.rSeries.cards.zar3t.summary",
+        heroImageSize: { width: 1600, height: 2844 },
+        titleKey: "productsCenter.families.dtSeries.cards.zar3t.title",
+        summaryKey: "productsCenter.families.dtSeries.cards.zar3t.summary",
         specKeys: [
-          "productsCenter.families.rSeries.cards.zar3t.specs.0", "productsCenter.families.rSeries.cards.zar3t.specs.1", "productsCenter.families.rSeries.cards.zar3t.specs.2", "productsCenter.families.rSeries.cards.zar3t.specs.3"
+          "productsCenter.families.dtSeries.cards.zar3t.specs.0", "productsCenter.families.dtSeries.cards.zar3t.specs.1", "productsCenter.families.dtSeries.cards.zar3t.specs.2", "productsCenter.families.dtSeries.cards.zar3t.specs.3"
         ]
         
       },
@@ -108,6 +122,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-m75",
         image: zaM75Img,
+        heroImageSize: { width: 1600, height: 1280 },
         titleKey: "productsCenter.families.mSeries.cards.zam75.title",
         summaryKey: "productsCenter.families.mSeries.cards.zam75.summary",
         specKeys: [
@@ -118,6 +133,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-m135",
         image: zaM135Img,
+        heroImageSize: { width: 1600, height: 1200 },
         titleKey: "productsCenter.families.mSeries.cards.zam135.title",
         summaryKey: "productsCenter.families.mSeries.cards.zam135.summary",
         specKeys: [
@@ -135,6 +151,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-mr3m",
         image: zaMR3MImg,
+        heroImageSize: { width: 1600, height: 2133 },
         titleKey: "productsCenter.families.mrSeries.cards.zamr3m.title",
         summaryKey: "productsCenter.families.mrSeries.cards.zamr3m.summary",
         specKeys: [
@@ -145,6 +162,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-mr3t",
         image: zaMR3TImg,
+        heroImageSize: { width: 1600, height: 2844 },
         titleKey: "productsCenter.families.mrSeries.cards.zamr3t.title",
         summaryKey: "productsCenter.families.mrSeries.cards.zamr3t.summary",
         specKeys: [
@@ -162,6 +180,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-rmvr",
         image: zaRMVRImg,
+        heroImageSize: { width: 3840, height: 2603 },
         titleKey: "productsCenter.families.embodiedPlatforms.cards.zarmvr.title",
         summaryKey: "productsCenter.families.embodiedPlatforms.cards.zarmvr.summary",
         specKeys: [
@@ -172,6 +191,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-rmps",
         image: zaRMPSImg,
+        heroImageSize: { width: 3840, height: 2880 },
         titleKey: "productsCenter.families.embodiedPlatforms.cards.zarmps.title",
         summaryKey: "productsCenter.families.embodiedPlatforms.cards.zarmps.summary",
         specKeys: [
@@ -182,6 +202,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-rdp",
         image: zaRDPImg,
+        heroImageSize: { width: 1920, height: 1080 },
         titleKey: "productsCenter.families.embodiedPlatforms.cards.zardp.title",
         summaryKey: "productsCenter.families.embodiedPlatforms.cards.zardp.summary",
         specKeys: [
@@ -199,6 +220,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "za-zg100",
         image: zaZG100Img,
+        heroImageSize: { width: 1600, height: 2844 },
         titleKey: "productsCenter.families.controller.cards.zazg100.title",
         summaryKey: "productsCenter.families.controller.cards.zazg100.summary",
         specKeys: [
@@ -216,6 +238,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "rotating-platform",
         image: rotatingPlatformImg,
+        heroImageSize: { width: 1600, height: 1280 },
         titleKey: "productsCenter.families.accessories.cards.rotatingplatform.title",
         summaryKey: "productsCenter.families.accessories.cards.rotatingplatform.summary",
         specKeys: [
@@ -226,6 +249,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
       {
         id: "rail",
         image: railImg,
+        heroImageSize: { width: 1600, height: 1280 },
         titleKey: "productsCenter.families.accessories.cards.rail.title",
         summaryKey: "productsCenter.families.accessories.cards.rail.summary",
         specKeys: [
@@ -236,8 +260,6 @@ export const productCenterFamilies: ProductCenterFamily[] = [
     ]
   },
 ];
-
-export const productCenterCover = coverImg;
 
 export interface ProductCenterCardWithFamily {
   familyId: string;

@@ -4,75 +4,207 @@
       <div class="page-shell hero-grid">
         <div class="hero-copy">
           <h1 class="hero-title text-display-hero">{{ t("solutionsPage.hero.title") }}</h1>
-          <p class="hero-description">
-            {{ t("solutionsPage.hero.description") }}
-          </p>
+          <p class="hero-description">{{ t("solutionsPage.hero.description") }}</p>
 
           <div class="hero-actions">
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="scrollToSection('industries')"
-            >
-              <span>{{ t("solutionsPage.hero.primaryCta") }}</span>
-              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <button type="button" class="btn btn-primary" @click="scrollToSection('overview')">
+              {{ t("solutionsPage.hero.primaryCta") }}
             </button>
+          </div>
+
+          <div class="hero-promises">
+            <article class="hero-promise">
+              <div class="hero-promise-head">
+                <span class="hero-promise-value">{{ t("solutionsPage.hero.promises.directions.metric") }}</span>
+              </div>
+              <p class="hero-promise-label">{{ t("solutionsPage.hero.promises.directions.description") }}</p>
+            </article>
+            <article class="hero-promise">
+              <div class="hero-promise-head">
+                <span class="hero-promise-value">{{ t("solutionsPage.hero.promises.delivery.metric") }}</span>
+                <span class="hero-promise-unit">{{ t("solutionsPage.hero.promises.delivery.unit") }}</span>
+              </div>
+              <p class="hero-promise-label">{{ t("solutionsPage.hero.promises.delivery.description") }}</p>
+            </article>
           </div>
         </div>
 
-        <div class="hero-panel">
+        <figure class="hero-stage">
+          <div class="hero-stage__media">
+            <img
+              :src="featuredHeroImage"
+              :alt="t('solutionsPage.hero.featuredTitle')"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+          <figcaption class="hero-stage__caption">
+            <span class="hero-stage__label">{{ t("solutionsPage.hero.featuredLabel") }}</span>
+            <strong class="hero-stage__title">{{ t("solutionsPage.hero.featuredTitle") }}</strong>
+            <span class="hero-stage__description">{{ t("solutionsPage.hero.featuredDescription") }}</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="overview" ref="overviewRef" class="page-section page-section--muted reveal-ready">
+      <div class="page-shell">
+        <div class="detail-section__header">
+          <h2 class="detail-section__title">
+            <span class="title-main text-display-large">{{ t("solutionsPage.overview.title") }}</span>
+          </h2>
+          <p class="detail-section__desc">{{ t("solutionsPage.overview.description") }}</p>
+        </div>
+
+        <div class="overview-grid">
           <article
-            v-for="stat in heroStats"
-            :key="stat.label"
-            class="hero-stat"
+            v-for="(direction, index) in directions"
+            :key="`overview-${direction.key}`"
+            class="overview-card"
+            :class="{ 'overview-card--planning': Boolean(direction.status) }"
           >
-            <span class="hero-stat-value">{{ stat.value }}</span>
-            <span class="hero-stat-label">{{ stat.label }}</span>
+            <div class="overview-card__meta">
+              <span class="card-index">{{ formatIndex(index + 1) }}</span>
+              <span
+                v-if="direction.status"
+                class="status-chip status-chip--planning"
+              >
+                {{ direction.status }}
+              </span>
+            </div>
+            <h3 class="overview-card__title">{{ direction.title }}</h3>
+            <p class="overview-card__summary">{{ direction.summary }}</p>
+            <div class="overview-card__support">
+              <span class="overview-card__support-label">
+                {{ t("solutionsPage.directions.common.productsLabel") }}
+              </span>
+              <span class="overview-card__support-value">{{ direction.combo }}</span>
+            </div>
+            <button
+              type="button"
+              class="overview-card__link ui-action-link"
+              @click="scrollToSection(direction.anchorId)"
+            >
+              <span>{{ direction.overviewActionLabel }}</span>
+              <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="industries" ref="industriesRef" class="page-section page-section--plain reveal-ready">
+    <section id="directions" ref="directionsRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("solutionsPage.industries.title") }}</span>
+            <span class="title-main text-display-large">{{ t("solutionsPage.directions.title") }}</span>
           </h2>
-          <p class="section-description">
-            {{ t("solutionsPage.industries.description") }}
-          </p>
+          <p class="detail-section__desc">{{ t("solutionsPage.directions.description") }}</p>
         </div>
 
-        <div class="industry-grid">
+        <div class="direction-list">
           <article
-            v-for="industry in industries"
-            :key="industry.key"
-            class="industry-block"
-            :aria-disabled="industry.primaryApplication ? 'false' : 'true'"
-            :tabindex="industry.primaryApplication ? 0 : -1"
-            role="link"
-            @click="openApplication(industry.primaryApplication)"
-            @keydown.enter.prevent="openApplication(industry.primaryApplication)"
-            @keydown.space.prevent="openApplication(industry.primaryApplication)"
+            v-for="(direction, index) in directions"
+            :id="direction.anchorId"
+            :key="direction.key"
+            class="direction-card"
+            :class="{ 'direction-card--planning': Boolean(direction.status) }"
           >
-            <div class="industry-block__header">
-              <h3 class="card-title">{{ industry.title }}</h3>
+            <div class="direction-card__header">
+              <div class="direction-card__heading">
+                <div class="direction-card__meta">
+                  <span class="card-index">{{ formatIndex(index + 1) }}</span>
+                  <span
+                    v-if="direction.status"
+                    class="status-chip status-chip--planning"
+                  >
+                    {{ direction.status }}
+                  </span>
+                </div>
+                <h3 class="direction-card__title">{{ direction.title }}</h3>
+                <p class="direction-card__summary">{{ direction.summary }}</p>
+              </div>
             </div>
 
-            <p class="card-description">{{ industry.summary }}</p>
+            <div class="direction-card__layout">
+              <figure class="direction-card__visual">
+                <div class="direction-card__visual-media">
+                  <img
+                    :src="direction.visualSrc"
+                    :alt="direction.visualAlt"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
 
-            <div class="industry-footer">
-              <p v-if="industry.productLine" class="industry-products">
-                {{ industry.productLine }}
-              </p>
+              </figure>
 
-              <div v-if="industry.primaryApplication" class="industry-footer-link" aria-hidden="true">
-                <span class="link-text">{{ industry.primaryApplication.title }}</span>
-                <svg class="action-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <div class="direction-card__content">
+                <div class="direction-card__sections">
+                  <div class="content-group content-group--primary">
+                    <p class="content-group__label">
+                      {{ t("solutionsPage.directions.common.productsLabel") }}
+                    </p>
+                    <p class="content-block__combo">{{ direction.combo }}</p>
+                    <p
+                      v-if="direction.featuredProduct || direction.featuredDescription"
+                      class="content-block__support"
+                    >
+                      <span v-if="direction.featuredProduct">{{ direction.featuredProduct }}</span>
+                      <span v-if="direction.featuredProduct && direction.featuredDescription"> · </span>
+                      <span v-if="direction.featuredDescription">{{ direction.featuredDescription }}</span>
+                    </p>
+                  </div>
+
+                  <div class="content-group">
+                    <p class="content-group__label">
+                      {{ t("solutionsPage.directions.common.scenariosLabel") }}
+                    </p>
+                    <ul class="detail-list">
+                      <li
+                        v-for="scenario in direction.scenarios"
+                        :key="`${direction.key}-${scenario}`"
+                      >
+                        {{ scenario }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="content-group">
+                    <p class="content-group__label">
+                      {{
+                        direction.capabilityPoints.length > 0
+                          ? t("solutionsPage.directions.common.highlightsLabel")
+                          : t("solutionsPage.directions.common.applicationLabel")
+                      }}
+                    </p>
+                    <template v-if="direction.capabilityPoints.length > 0">
+                      <ul class="detail-list">
+                        <li
+                          v-for="point in direction.capabilityPoints"
+                          :key="`${direction.key}-${point}`"
+                        >
+                          {{ point }}
+                        </li>
+                      </ul>
+                    </template>
+                    <template v-else>
+                      <p class="content-block__support">
+                        {{ direction.applicationTitle || direction.featuredDescription || direction.summary }}
+                      </p>
+                    </template>
+                  </div>
+                </div>
+
+                <div class="direction-card__footer direction-card__footer--single">
+                  <div class="direction-card__actions">
+                    <router-link class="btn btn-primary" :to="direction.primaryActionTo">
+                      {{ direction.primaryActionLabel }}
+                    </router-link>
+                  </div>
+                </div>
               </div>
             </div>
           </article>
@@ -80,138 +212,104 @@
       </div>
     </section>
 
-    <!-- 精选案例默认收缩展示，完整案例索引按需展开 -->
-    <section id="proof" ref="proofRef" class="page-section page-section--muted reveal-ready">
+    <section id="more" ref="moreRef" class="page-section page-section--muted reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("solutionsPage.proof.title") }}</span>
+            <span class="title-main text-display-large">{{ t("solutionsPage.more.title") }}</span>
           </h2>
-          <p class="section-description">
-            {{ t("solutionsPage.proof.description") }}
-          </p>
+          <p class="detail-section__desc">{{ t("solutionsPage.more.description") }}</p>
         </div>
 
-        <div class="proof-feature-grid">
-          <VideoCard
-            v-for="(card, idx) in featuredVideoCards"
-            :key="card.slug"
-            :card="card"
-            :index="idx"
-            :active="hoverMoreVideoIdx === idx"
-            @hover="setMoreVideoHover"
-            @leave="clearMoreVideoHover"
-            @click="goToVideo(card.slug)"
-          />
-        </div>
+        <div class="more-stack">
+          <div id="more-applications" class="more-anchor" />
+          <div id="more-videos" class="more-anchor" />
 
-        <div class="proof-links">
-          <button
-            type="button"
-            class="proof-link"
-            :class="{ active: showAllVideos }"
-            @click="toggleVideoArchive"
-          >
-            {{
-              showAllVideos
-                ? t("solutionsPage.proof.collapseVideos")
-                : t("solutionsPage.proof.expandVideos", {
-                    count: allVideoCards.length,
-                  })
-            }}
-          </button>
-          <button
-            type="button"
-            class="proof-link"
-            :class="{ active: showAllApps }"
-            @click="toggleApplicationArchive"
-          >
-            {{
-              showAllApps
-                ? t("solutionsPage.proof.collapseApplications")
-                : t("solutionsPage.proof.expandApplications", {
-                    count: allApplications.length,
-                  })
-            }}
-          </button>
-        </div>
+          <div class="more-panel">
+            <div class="more-switcher" role="tablist" :aria-label="t('solutionsPage.more.title')">
+              <button
+                type="button"
+                class="more-switcher__item"
+                :class="{ active: moreMode === 'applications' }"
+                :aria-selected="moreMode === 'applications'"
+                @click="setMoreMode('applications')"
+              >
+                {{ t("solutionsPage.more.applicationsTab") }}
+              </button>
+              <button
+                type="button"
+                class="more-switcher__item"
+                :class="{ active: moreMode === 'videos' }"
+                :aria-selected="moreMode === 'videos'"
+                @click="setMoreMode('videos')"
+              >
+                {{ t("solutionsPage.more.videosTab") }}
+              </button>
+            </div>
 
-        <div v-if="showAllVideos" class="proof-archive">
-          <p class="proof-archive-title">{{ t("solutionsPage.proof.allVideos") }}</p>
-          <div class="more-video-grid">
-            <VideoCard
-              v-for="(card, idx) in allVideoCards"
-              :key="card.slug"
-              :card="card"
-              :index="idx + 100"
-              :active="hoverMoreVideoIdx === idx + 100"
-              @hover="setMoreVideoHover"
-              @leave="clearMoreVideoHover"
-              @click="goToVideo(card.slug)"
-            />
-          </div>
-        </div>
+            <div class="more-panel__header">
+              <div class="more-panel__heading">
+                <h3 class="more-panel__title">{{ activeMoreTitle }}</h3>
+                <p class="more-panel__guide">{{ activeMoreGuide }}</p>
+              </div>
 
-        <div v-if="showAllApps" class="proof-archive">
-          <p class="proof-archive-title">{{ t("solutionsPage.proof.applicationIndex") }}</p>
-          <div class="more-application-grid">
-            <ApplicationCard
-              v-for="item in allApplications"
-              :key="item.slug"
-              :title="item.title"
-              :svg="item.svg"
-              :slug="item.slug"
-            />
+              <button
+                type="button"
+                class="btn btn-secondary more-toggle"
+                :aria-expanded="activeMoreExpanded"
+                @click="toggleMoreExpanded"
+              >
+                {{ activeMoreExpanded ? t("solutionsPage.more.collapse") : t("solutionsPage.more.viewAll") }}
+              </button>
+            </div>
+
+            <div v-if="moreMode === 'applications'" class="more-application-grid">
+              <ApplicationCard
+                v-for="application in visibleMoreApplications"
+                :key="application.slug"
+                :title="application.title"
+                :svg="application.svg"
+                :slug="application.slug"
+              />
+            </div>
+
+            <div v-else class="more-video-grid">
+              <VideoCard
+                v-for="(video, index) in visibleMoreVideos"
+                :key="video.slug"
+                :card="video"
+                :description="video.description"
+                :index="index"
+                :active="moreVideoHoverIdx === index"
+                :to="localizeTo({ path: `/video/${video.slug}` })"
+                @hover="moreVideoHoverIdx = index"
+                @leave="moreVideoHoverIdx = -1"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="delivery" ref="deliveryRef" class="page-section page-section--plain delivery-section reveal-ready">
+    <section id="delivery" ref="deliveryRef" class="page-section reveal-ready">
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.delivery.title") }}</span>
           </h2>
-          <p class="section-description">
-            {{ t("solutionsPage.delivery.description") }}
-          </p>
+          <p class="detail-section__desc">{{ t("solutionsPage.delivery.description") }}</p>
         </div>
 
-        <div class="delivery-steps">
+        <div class="delivery-grid">
           <article
-            v-for="(step, idx) in deliverySteps"
+            v-for="(step, index) in deliverySteps"
             :key="step.title"
-            class="delivery-step"
+            class="delivery-card"
           >
-            <span class="card-index step-index">{{ formatIndex(idx + 1) }}</span>
-            <div class="step-content">
-              <h3 class="step-title">{{ step.title }}</h3>
-              <p class="step-description">{{ step.description }}</p>
-            </div>
+            <span class="card-index">{{ formatIndex(index + 1) }}</span>
+            <h3 class="delivery-card__title">{{ step.title }}</h3>
+            <p class="delivery-card__description">{{ step.description }}</p>
           </article>
-        </div>
-
-        <div class="delivery-contact">
-          <div class="delivery-contact__copy">
-            <h3 class="delivery-contact__title">{{ t("solutionsPage.delivery.contactTitle") }}</h3>
-            <p class="delivery-contact__desc">{{ t("solutionsPage.delivery.contactDescription") }}</p>
-            <div class="delivery-contact__actions">
-              <router-link class="btn btn-primary" :to="localizePath('/support#contact')">
-                {{ t("common.cta.contactTeam") }}
-              </router-link>
-            </div>
-          </div>
-          <div class="delivery-contact__meta">
-            <div class="delivery-contact__row">
-              <span class="delivery-contact__label">{{ t("contacts.phone") }}</span>
-              <a class="delivery-contact__link" :href="`tel:${t('footer.telValue')}`">{{ t("footer.telValue") }}</a>
-            </div>
-            <div class="delivery-contact__row">
-              <span class="delivery-contact__label">{{ t("contacts.email") }}</span>
-              <a class="delivery-contact__link" href="mailto:liqingfeng@zeroant.com">liqingfeng@zeroant.com</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -222,20 +320,63 @@
           <h2 class="detail-section__title">
             <span class="title-main text-display-large">{{ t("solutionsPage.faq.title") }}</span>
           </h2>
-          <p class="section-description">
-            {{ t("solutionsPage.faq.description") }}
-          </p>
+          <p class="detail-section__desc">{{ t("solutionsPage.faq.description") }}</p>
         </div>
 
-        <div class="faq-grid">
+        <div class="faq-list">
           <article
-            v-for="item in faqItems"
-            :key="item.question"
-            class="faq-card"
+            v-for="(faq, index) in faqItems"
+            :key="faq.question"
+            class="faq-item"
+            :class="{ open: faqStates[index] }"
           >
-            <h3 class="faq-question">{{ item.question }}</h3>
-            <p class="faq-answer">{{ item.answer }}</p>
+            <button
+              type="button"
+              class="faq-item__trigger"
+              :aria-expanded="faqStates[index]"
+              :aria-controls="`solution-faq-${index}`"
+              @click="toggleFaq(index)"
+            >
+              <div class="faq-item__heading">
+                <span class="card-index">{{ formatIndex(index + 1) }}</span>
+                <span class="faq-item__question">{{ faq.question }}</span>
+              </div>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <transition name="fade-slide">
+              <div
+                v-if="faqStates[index]"
+                :id="`solution-faq-${index}`"
+                class="faq-item__content"
+              >
+                <p class="faq-item__answer">{{ faq.answer }}</p>
+              </div>
+            </transition>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section ref="ctaRef" class="page-section page-section--muted reveal-ready">
+      <div class="page-shell">
+        <div class="contact-panel">
+          <div class="contact-copy">
+            <div class="detail-section__header contact-header">
+              <h2 class="detail-section__title">
+                <span class="title-main text-display-large">{{ t("solutionsPage.finalCta.title") }}</span>
+              </h2>
+              <p class="detail-section__desc">{{ t("solutionsPage.finalCta.description") }}</p>
+            </div>
+          </div>
+
+          <div class="contact-actions">
+            <router-link class="btn btn-primary" :to="localizeTo({ path: '/about', hash: '#contact' })">
+              {{ t("solutionsPage.finalCta.primaryCta") }}
+            </router-link>
+          </div>
         </div>
       </div>
     </section>
@@ -244,195 +385,166 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import type { RouteLocationRaw } from "vue-router";
+import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
+import lifeScienceShowcaseImg from "@/assets/images/product/life-science-concept.png";
+import ApplicationCard from "@/components/common/ApplicationCard.vue";
+import VideoCard from "@/components/common/VideoCard.vue";
 import applications from "@/data/applications";
 import { productCenterCards } from "@/data/product-center";
-import { videoCards } from "@/data/videos";
-import VideoCard from "@/components/common/VideoCard.vue";
-import ApplicationCard from "@/components/common/ApplicationCard.vue";
-import {
-  featuredProofs,
-  solutionIndustryGroups,
-} from "@/data/solutionIndustries";
+import { solutionDirections } from "@/data/solutionIndustries";
+import { videoCards, videoMap } from "@/data/videos";
 import { useScrollRevealList } from "@/composables/useScrollReveal";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
-interface SolutionApplicationRef {
+interface ProductView {
+  title: string;
+  image: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface SolutionDirectionView {
+  key: string;
+  anchorId: string;
+  title: string;
+  status: string;
+  summary: string;
+  combo: string;
+  scenarios: string[];
+  capabilityPoints: string[];
+  featuredProduct: string;
+  featuredDescription: string;
+  applicationTitle: string;
+  visualSrc: string;
+  visualAlt: string;
+  visualCaption: string;
+  overviewActionLabel: string;
+  primaryActionLabel: string;
+  primaryActionTo: RouteLocationRaw;
+}
+
+interface MoreVideoView {
   slug: string;
   title: string;
   description: string;
+  img: string;
 }
 
-interface SolutionIndustryCard {
-  key: string;
+interface MoreApplicationView {
+  slug: string;
   title: string;
-  summary: string;
-  productLine: string;
-  primaryApplication: SolutionApplicationRef | null;
+  svg: string;
 }
 
-const industriesRef = ref<HTMLElement | null>(null);
-const proofRef = ref<HTMLElement | null>(null);
+const featuredHeroImage = lifeScienceShowcaseImg;
+const featuredVideoSlugs = [
+  "medical-automation",
+  "composite-robot-application",
+  "vr-teleop-dual-arm",
+] as const;
+const featuredApplicationSlugs = [
+  "medical-automation",
+  "composite-systems",
+  "smart-logistics",
+  "ai-robotics",
+  "fixed-rail-transfer",
+] as const;
+const defaultVisibleVideoCount = 3;
+const defaultVisibleApplicationCount = 4;
+
+const overviewRef = ref<HTMLElement | null>(null);
+const directionsRef = ref<HTMLElement | null>(null);
+const moreRef = ref<HTMLElement | null>(null);
 const deliveryRef = ref<HTMLElement | null>(null);
 const faqRef = ref<HTMLElement | null>(null);
+const ctaRef = ref<HTMLElement | null>(null);
 
-useScrollRevealList([industriesRef, proofRef, deliveryRef, faqRef]);
+useScrollRevealList([overviewRef, directionsRef, moreRef, deliveryRef, faqRef, ctaRef]);
 
 const route = useRoute();
-const router = useRouter();
 const { t, tm } = useI18n();
-const { localizePath } = useLocalizedPath();
+const { localizeTo } = useLocalizedPath();
 
-const hoverMoreVideoIdx = ref(-1);
-const showAllVideos = ref(false);
-const showAllApps = ref(false);
-const hiddenSolutionApplicationSlugs = new Set(["semiconductor"]);
-const hiddenSolutionVideoSlugs = new Set(["semiconductor"]);
+const faqStates = ref<boolean[]>([]);
+const videosExpanded = ref(false);
+const applicationsExpanded = ref(false);
+const moreVideoHoverIdx = ref(-1);
+const moreMode = ref<"applications" | "videos">("applications");
 
 function isDefined<T>(value: T | null | undefined): value is T {
   return value != null;
 }
 
-function stripHtml(value: string): string {
-  return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+function normalizeComparableText(value: string): string {
+  return value.trim().toLowerCase();
 }
 
-function getRawMessage(key: string): string {
+function orderByFeatured<T extends { slug: string }>(
+  items: readonly T[],
+  featuredSlugs: readonly string[]
+): T[] {
+  const itemMap = new Map(items.map((item) => [item.slug, item] as const));
+  const featuredItems = featuredSlugs.map((slug) => itemMap.get(slug)).filter(isDefined);
+  const featuredSet = new Set(featuredSlugs);
+
+  return [
+    ...featuredItems,
+    ...items.filter((item) => !featuredSet.has(item.slug)),
+  ];
+}
+
+function readMessageArray(key: string): string[] {
   const raw = tm(key) as unknown;
-  if (typeof raw === "string") {
-    return raw.startsWith("@:") ? t(raw.slice(2)) : raw;
-  }
-  return t(key);
-}
 
-function truncate(value: string, maxLength: number): string {
-  if (value.length <= maxLength) {
-    return value;
+  if (!Array.isArray(raw)) {
+    return [];
   }
-  return `${value.slice(0, maxLength).trim()}...`;
+
+  return raw.map((item) => {
+    if (typeof item !== "string") {
+      return String(item);
+    }
+
+    return item.startsWith("@:") ? t(item.slice(2)) : item;
+  });
 }
 
 function formatIndex(value: number): string {
   return value.toString().padStart(2, "0");
 }
 
-function formatProductLine(products: string[]): string {
-  const visibleProducts = products.slice(0, 3).join(" / ");
-
-  if (products.length <= 3) {
-    return visibleProducts;
+function scrollToSection(id: string): void {
+  const element = document.getElementById(id);
+  if (!element) {
+    return;
   }
 
-  return `${visibleProducts}${t("common.terms.andOthers")}`;
+  element.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-const relatedProductCount = computed(() =>
-  new Set(solutionIndustryGroups.flatMap((group) => group.productSlugs)).size
-);
+function toggleFaq(index: number): void {
+  faqStates.value[index] = !faqStates.value[index];
+}
 
-const heroStats = computed(() => {
-  return [
-    {
-      value: formatIndex(solutionIndustryGroups.length),
-      label: t("common.terms.solutionDirections"),
-    },
-    {
-      value: formatIndex(relatedProductCount.value),
-      label: t("common.terms.relatedProducts"),
-    },
-    {
-      value: formatIndex(featuredProofs.length),
-      label: t("common.terms.featuredCases"),
-    },
-  ];
-});
+function setMoreMode(mode: "applications" | "videos"): void {
+  moreMode.value = mode;
+}
 
-const productTitleMap = computed<Record<string, string>>(() =>
-  productCenterCards.reduce<Record<string, string>>((map, item) => {
-    map[item.card.id] = t(item.card.titleKey);
+function toggleMoreExpanded(): void {
+  if (moreMode.value === "applications") {
+    applicationsExpanded.value = !applicationsExpanded.value;
+    return;
+  }
 
-    return map;
-  }, {})
-);
+  videosExpanded.value = !videosExpanded.value;
+}
 
-const applicationMap = computed<Record<string, SolutionApplicationRef>>(() =>
-  applications.reduce<Record<string, SolutionApplicationRef>>((map, app) => {
-    map[app.slug] = {
-      slug: app.slug,
-      title: t(app.title),
-      description: truncate(stripHtml(getRawMessage(app.description)), 88),
-    };
-
-    return map;
-  }, {})
-);
-
-const industries = computed<SolutionIndustryCard[]>(() =>
-  solutionIndustryGroups.map((group) => {
-    const applicationsForGroup = group.applicationSlugs
-      .map((slug) => applicationMap.value[slug])
-      .filter(isDefined);
-
-    return {
-      key: group.key,
-      title: t(`solutionsPage.industries.${group.key}.title`),
-      summary: t(`solutionsPage.industries.${group.key}.summary`),
-      productLine: formatProductLine(
-        group.productSlugs
-          .map((slug) => productTitleMap.value[slug])
-          .filter(isDefined)
-      ),
-      primaryApplication: applicationsForGroup[0] ?? null,
-    };
-  })
-);
-
-const allVideoCards = computed(() =>
-  videoCards.filter((card) => !hiddenSolutionVideoSlugs.has(card.slug))
-);
-const allApplications = computed(() =>
-  applications.filter((item) => !hiddenSolutionApplicationSlugs.has(item.slug))
-);
-const videoCardMap = computed(() =>
-  allVideoCards.value.reduce<Record<string, (typeof videoCards)[number]>>((map, card) => {
-    map[card.slug] = card;
-    return map;
-  }, {})
-);
-const featuredVideoCards = computed(() => {
-  const selected = featuredProofs
-    .map((item) => videoCardMap.value[item.videoSlug])
-    .filter(isDefined);
-
-  return selected.length > 0 ? selected : allVideoCards.value.slice(0, 3);
-});
-
-watch(
-  () => route.query.tab,
-  (tab) => {
-    showAllVideos.value = tab === "videos";
-    showAllApps.value = tab === "applications";
-  },
-  { immediate: true }
-);
-
-const deliverySteps = computed(() => [
-  {
-    title: t("solutionsPage.delivery.steps.discovery.title"),
-    description: t("solutionsPage.delivery.steps.discovery.description"),
-  },
-  {
-    title: t("solutionsPage.delivery.steps.design.title"),
-    description: t("solutionsPage.delivery.steps.design.description"),
-  },
-  {
-    title: t("solutionsPage.delivery.steps.deliver.title"),
-    description: t("solutionsPage.delivery.steps.deliver.description"),
-  },
-]);
-
-const faqItems = computed(() => [
+const faqItems = computed<FaqItem[]>(() => [
   {
     question: t("solutionsPage.faq.items.selection.question"),
     answer: t("solutionsPage.faq.items.selection.answer"),
@@ -451,58 +563,191 @@ const faqItems = computed(() => [
   },
 ]);
 
-function scrollToSection(id: string): void {
-  const element = document.getElementById(id);
-  if (!element) {
-    return;
-  }
-  element.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+const productMap = computed<Record<string, ProductView>>(() =>
+  productCenterCards.reduce<Record<string, ProductView>>((map, item) => {
+    map[item.card.id] = {
+      title: t(item.card.titleKey),
+      image: item.card.image,
+    };
+    return map;
+  }, {})
+);
 
-function goToApplication(slug: string): void {
-  router.push({ path: localizePath(`/applications/${slug}`) });
-}
+const applicationTitleMap = computed<Record<string, string>>(() =>
+  applications.reduce<Record<string, string>>((map, item) => {
+    map[item.slug] = t(item.title);
+    return map;
+  }, {})
+);
 
-function openApplication(application: SolutionApplicationRef | null): void {
-  if (!application) {
-    return;
-  }
+const directions = computed<SolutionDirectionView[]>(() =>
+  solutionDirections.map((direction) => {
+    const isLifeScience = direction.key === "lifeScienceAutomation";
+    const products = direction.productSlugs
+      .map((slug) => productMap.value[slug])
+      .filter(isDefined);
+    const visualProduct = direction.visualProductSlug
+      ? productMap.value[direction.visualProductSlug]
+      : products[0];
+    const applicationSlug = direction.applicationSlug ?? "";
+    const applicationTitle = applicationTitleMap.value[applicationSlug] ?? "";
+    const featuredProduct = t(`solutionsPage.directions.${direction.key}.featuredProduct`);
+    const visualTitle = isLifeScience
+      ? t("solutionsPage.hero.featuredTitle")
+      : visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`);
+    const visualCaption = visualTitle && normalizeComparableText(visualTitle) !== normalizeComparableText(featuredProduct)
+      ? visualTitle
+      : "";
 
-  goToApplication(application.slug);
-}
+    const primaryActionTo = isLifeScience
+      ? localizeTo({ path: "/support", hash: "#contact" })
+      : localizeTo({ path: `/applications/${applicationSlug}` });
 
-function goToVideo(slug: string): void {
-  router.push({ path: localizePath(`/video/${slug}`) });
-}
+    return {
+      key: direction.key,
+      anchorId: `direction-${direction.key}`,
+      title: t(`solutionsPage.directions.${direction.key}.title`),
+      status: direction.status ? t(`solutionsPage.directions.${direction.key}.status`) : "",
+      summary: t(`solutionsPage.directions.${direction.key}.summary`),
+      combo: t(`solutionsPage.directions.${direction.key}.combo`),
+      scenarios: readMessageArray(`solutionsPage.directions.${direction.key}.scenarios`).slice(0, 3),
+      capabilityPoints: readMessageArray(`solutionsPage.directions.${direction.key}.capabilityPoints`).slice(0, 3),
+      featuredProduct,
+      featuredDescription: t(`solutionsPage.directions.${direction.key}.featuredDescription`),
+      applicationTitle,
+      visualSrc: isLifeScience ? featuredHeroImage : visualProduct?.image ?? featuredHeroImage,
+      visualAlt: isLifeScience
+        ? t("solutionsPage.hero.featuredTitle")
+        : visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`),
+      visualCaption,
+      overviewActionLabel: t(`solutionsPage.directions.${direction.key}.overviewAction`),
+      primaryActionLabel: t(`solutionsPage.directions.${direction.key}.primaryAction`),
+      primaryActionTo,
+    };
+  })
+);
 
-function setMoreVideoHover(idx: number): void {
-  hoverMoreVideoIdx.value = idx;
-}
+const moreVideos = computed<MoreVideoView[]>(() =>
+  orderByFeatured(videoCards, featuredVideoSlugs).map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    description: t(videoMap[item.slug]?.desc ?? ""),
+    img: item.img,
+  }))
+);
 
-function clearMoreVideoHover(): void {
-  hoverMoreVideoIdx.value = -1;
-}
+const moreApplications = computed<MoreApplicationView[]>(() =>
+  orderByFeatured(applications, featuredApplicationSlugs).map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    svg: item.svg,
+  }))
+);
 
-function toggleVideoArchive(): void {
-  showAllVideos.value = !showAllVideos.value;
-  if (showAllVideos.value) {
-    showAllApps.value = false;
-  }
-}
+const visibleMoreVideos = computed(() =>
+  videosExpanded.value
+    ? moreVideos.value
+    : moreVideos.value.slice(0, defaultVisibleVideoCount)
+);
 
-function toggleApplicationArchive(): void {
-  showAllApps.value = !showAllApps.value;
-  if (showAllApps.value) {
-    showAllVideos.value = false;
-  }
-}
+const visibleMoreApplications = computed(() =>
+  applicationsExpanded.value
+    ? moreApplications.value
+    : moreApplications.value.slice(0, defaultVisibleApplicationCount)
+);
+
+const activeMoreExpanded = computed(() =>
+  moreMode.value === "applications" ? applicationsExpanded.value : videosExpanded.value
+);
+
+const activeMoreTitle = computed(() =>
+  moreMode.value === "applications"
+    ? t("solutionsPage.more.applicationsTitle")
+    : t("solutionsPage.more.videosTitle")
+);
+
+const activeMoreGuide = computed(() =>
+  moreMode.value === "applications"
+    ? t(
+        applicationsExpanded.value
+          ? "solutionsPage.more.applicationGuideExpanded"
+          : "solutionsPage.more.applicationGuide",
+        {
+          visible: defaultVisibleApplicationCount,
+          total: moreApplications.value.length,
+        }
+      )
+    : t(
+        videosExpanded.value
+          ? "solutionsPage.more.videoGuideExpanded"
+          : "solutionsPage.more.videoGuide",
+        {
+          visible: defaultVisibleVideoCount,
+          total: moreVideos.value.length,
+        }
+      )
+);
+
+const deliverySteps = computed(() => [
+  {
+    title: t("solutionsPage.delivery.steps.discovery.title"),
+    description: t("solutionsPage.delivery.steps.discovery.description"),
+  },
+  {
+    title: t("solutionsPage.delivery.steps.design.title"),
+    description: t("solutionsPage.delivery.steps.design.description"),
+  },
+  {
+    title: t("solutionsPage.delivery.steps.validation.title"),
+    description: t("solutionsPage.delivery.steps.validation.description"),
+  },
+  {
+    title: t("solutionsPage.delivery.steps.deliver.title"),
+    description: t("solutionsPage.delivery.steps.deliver.description"),
+  },
+]);
+
+watch(
+  () => faqItems.value.length,
+  (length) => {
+    if (faqStates.value.length !== length) {
+      faqStates.value = Array.from({ length }, (_, index) => faqStates.value[index] ?? false);
+    }
+  },
+  { immediate: true }
+);
+
+watch(
+  () => route.hash,
+  (hash) => {
+    if (hash === "#more-videos") {
+      moreMode.value = "videos";
+      return;
+    }
+
+    if (hash === "#more-applications" || hash === "#more") {
+      moreMode.value = "applications";
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped lang="less">
 .solutions-page {
-  position: relative;
   color: var(--brand-text);
-  background: #ffffff;
+  background: var(--brand-surface);
+}
+
+.solutions-page > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
+}
+
+.solutions-page > .page-section.page-section--muted {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
 }
 
 .page-shell {
@@ -513,103 +758,86 @@ function toggleApplicationArchive(): void {
 }
 
 .solutions-hero {
-  position: relative;
   min-height: var(--compact-hero-min-height);
-  padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
-    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
+  padding: var(--compact-hero-padding-top) 0 40px;
+  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr)
-    minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
-  gap: 48px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(520px, 0.92fr);
+  gap: 32px;
   align-items: start;
-  max-width: var(--container-max-width);
 }
 
 .hero-copy {
-  max-width: var(--compact-hero-copy-max-width);
+  position: relative;
+  max-width: 680px;
   padding: var(--compact-hero-copy-padding-top) 0 var(--compact-hero-copy-padding-bottom);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+}
+
+.block-label,
+.hero-stage__label {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 14px;
+  color: rgba(26, 58, 143, 0.72);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
 .hero-title {
-  max-width: 14em;
   margin: 0 0 24px;
   color: var(--brand-text);
 }
 
 .hero-description,
-.section-description,
-.card-description,
-.proof-description,
-.proof-card-description,
-.step-description,
-.contact-description,
-.contact-value {
+.detail-section__desc,
+.direction-card__summary,
+.content-block__text,
+.delivery-card__description,
+.faq-item__answer {
+  margin: 0;
   color: var(--brand-muted);
-  line-height: 1.85;
-  font-weight: 500;
+  line-height: 1.78;
 }
 
 .hero-description {
-  max-width: 40rem;
-  margin: 0 0 24px;
+  max-width: 32em;
   font-size: var(--compact-hero-description-size);
   line-height: var(--compact-hero-description-line-height);
 }
 
-.hero-actions,
-.chip-list,
-.nav-scroll {
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
 }
 
-.hero-actions {
-  gap: 12px;
-  align-items: center;
+.hero-promises {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+  margin-top: 44px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.hero-actions .btn {
-  min-height: var(--compact-hero-button-height);
-  padding: 0 var(--compact-hero-button-padding-inline);
-  font-size: var(--compact-hero-button-font-size);
-}
-
-.hero-panel {
+.hero-promise {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 0;
-  width: 100%;
-  max-width: var(--compact-hero-panel-width);
-  margin-left: 0;
-  padding-left: 0;
-  padding-top: var(--compact-hero-panel-padding-top);
-  border-left: none;
+  gap: 8px;
 }
 
-.hero-stat {
+.hero-promise-head {
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
   gap: var(--compact-hero-kpi-gap);
-  padding: var(--compact-hero-kpi-padding-top) 0;
 }
 
-.hero-stat + .hero-stat {
-  border-top: 1px solid var(--compact-hero-kpi-divider-color);
-}
-
-.hero-stat-value {
+.hero-promise-value {
   color: var(--brand-text);
   font-family: "Outfit", sans-serif;
   font-size: var(--compact-hero-kpi-value-size);
@@ -618,528 +846,852 @@ function toggleApplicationArchive(): void {
   letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
 }
 
-.hero-stat-label {
+.hero-promise-unit {
   color: var(--brand-muted);
-  font-size: var(--compact-hero-kpi-label-size);
-  font-weight: 500;
-  line-height: var(--compact-hero-kpi-label-line-height);
-  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding-bottom: 2px;
+}
+
+.hero-promise-label {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.hero-actions .btn,
+.direction-card__actions .btn,
+.more-toggle,
+.contact-actions .btn {
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
+  font-size: var(--compact-hero-button-font-size);
+}
+
+.hero-stage {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 760px);
+  margin: var(--compact-hero-panel-padding-top) 0 0 auto;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+}
+
+.hero-stage__media {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: clamp(280px, 30vw, 420px);
+  padding: 16px 16px 0;
+  flex: 1 0 auto;
+}
+
+.hero-stage__media img {
+  width: 100%;
+  height: auto;
+  max-height: clamp(280px, 45vh, 420px);
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+}
+
+.hero-stage__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 24px 24px;
+  background: transparent;
+  z-index: 10;
+}
+
+.hero-stage__label {
+  width: fit-content;
+  min-height: 28px;
+  margin-bottom: 0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(26, 58, 143, 0.06);
+  border: 1px solid rgba(26, 58, 143, 0.08);
+  color: var(--brand-primary);
+  letter-spacing: 0.08em;
+}
+
+.hero-stage__title {
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.32;
+  color: var(--brand-text);
+}
+
+.hero-stage__description {
+  max-width: 34em;
+  color: var(--brand-muted);
+  font-size: 0.92rem;
+  line-height: 1.68;
 }
 
 .page-section {
-  padding: 88px 0;
-  scroll-margin-top: calc(var(--nav-height) + 16px);
+  padding: 84px 0;
+  scroll-margin-top: calc(var(--nav-height) + 72px);
 }
 
-.page-section--plain {
-  background: #ffffff;
-}
-
-.page-section--muted {
-  background: #f8f9fb;
+.page-section--final {
+  padding-top: 72px;
 }
 
 .detail-section__header {
   max-width: 760px;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .detail-section__title {
-  margin: 0 0 12px 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;
 }
 
 .title-main {
   color: var(--brand-text);
 }
 
-.section-description {
-  max-width: 42rem;
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.75;
+.detail-section__desc {
+  margin: 14px 0 0;
+  max-width: 34em;
   color: var(--brand-muted);
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
-.more-video-grid,
-.more-application-grid {
+.delivery-grid {
   display: grid;
   gap: 24px;
 }
 
-.more-video-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.more-application-grid {
+.overview-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  gap: 20px;
 }
 
-.industry-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.industry-block {
+.overview-card {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   min-height: 100%;
-  padding: 28px;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 20px;
-  background: rgba(248, 250, 253, 0.72);
-  cursor: pointer;
-  transition:
-    border-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease,
-    background 0.25s ease;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.02);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.industry-block:hover {
-  transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.14);
-  background: rgba(255, 255, 255, 0.96);
+.overview-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.045);
 }
 
-.industry-block__header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 14px;
+.overview-card:hover .overview-card__link {
+  color: var(--brand-primary, var(--color-primary));
+  transform: translateX(2px);
 }
 
-.industry-block__header .card-title {
-  margin: 0;
-}
-
-.industry-footer {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding-top: 16px;
-  color: var(--brand-text);
-  transition: color 0.25s ease, opacity 0.25s ease;
-}
-
-.industry-products {
-  margin: 0;
-  color: rgba(15, 23, 42, 0.58);
-  font-size: 0.92rem;
-  font-weight: 600;
-  line-height: 1.7;
-}
-
-.industry-footer-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--brand-primary);
-  transition: color 0.25s ease;
-}
-
-.industry-block:hover .industry-footer-link {
-  color: var(--brand-primary-deep);
-}
-
-.industry-block:hover .action-icon {
+.overview-card:hover .overview-card__link .action-arrow {
   transform: translateX(4px);
 }
 
-.link-text {
-  font-size: 0.92rem;
-  font-weight: 500;
-  line-height: 1.55;
-}
 
-.action-icon {
-  width: 16px;
-  height: 16px;
-  color: currentColor;
-  transition: transform 0.3s ease;
-}
 
-.card-index {
-  display: inline-block;
-  margin-bottom: 14px;
-  color: rgba(15, 23, 42, 0.25);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-}
-
-.card-title {
-  margin: 0 0 12px;
-  color: var(--brand-text);
-  font-size: 1.28rem;
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.card-description {
-  margin: 0;
-  font-size: 0.98rem;
-}
-.proof-card-title,
-.step-title {
-  color: var(--brand-text);
-}
-
-.proof-card-title {
-  margin-bottom: 8px;
-  font-size: 1.15rem;
-  color: var(--brand-text);
-  font-weight: 600;
-  line-height: 1.45;
-}
-
-.proof-card-description {
-  margin: 0;
-  font-size: 0.92rem;
-}
-
-.delivery-section {
-  padding-bottom: 88px;
-}
-
-.proof-feature-grid {
-  display: grid;
-  gap: 28px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 8px;
-}
-
-.proof-feature-grid :deep(.video-title),
-.more-video-grid :deep(.video-title) {
-  font-weight: 600;
-}
-
-.proof-feature-grid :deep(.video-desc),
-.more-video-grid :deep(.video-desc) {
-  color: rgba(15, 23, 42, 0.62);
-  font-weight: 500;
-}
-
-.proof-links {
+.overview-card__meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  margin-top: 20px;
+  align-items: center;
+  gap: 12px;
 }
 
-.proof-archive {
-  margin-top: 36px;
-  padding-top: 28px;
+.overview-card__title {
+  margin: 0;
+  color: var(--brand-text);
+  font-family: "Outfit", sans-serif;
+}
+
+.overview-card__title {
+  font-size: 1.3rem;
+  line-height: 1.28;
+}
+
+.overview-card__summary,
+.overview-card__support-value,
+.more-panel__guide {
+  margin: 0;
+  color: var(--brand-muted);
+  line-height: 1.72;
+}
+
+.overview-card__summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.overview-card__support {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 16px;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.proof-archive-title {
-  margin: 0 0 16px;
-  color: rgba(15, 23, 42, 0.44);
+.overview-card__support-label {
+  color: var(--brand-muted);
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.overview-card__link {
+  margin-top: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.delivery-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 100%;
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.02);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delivery-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(26, 58, 143, 0.12);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
+}
+
+.delivery-card::after,
+.delivery-card::before {
+  display: none;
+}
+
+.card-index {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(16, 33, 63, 0.3);
+  font-family: "Outfit", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.direction-card__title,
+.delivery-card__title {
+  margin: 0;
+  color: var(--brand-text);
+  font-family: "Outfit", sans-serif;
+  line-height: 1.2;
+}
+
+.direction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.direction-card {
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.025);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.direction-card:hover {
+  border-color: rgba(26, 58, 143, 0.2);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
+}
+
+.direction-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.direction-card__heading {
+  max-width: 900px;
+}
+
+.direction-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.status-chip {
+  background: rgba(232, 237, 247, 0.72);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  color: #55627d;
+}
+
+.status-chip--planning {
+  background: rgba(196, 138, 47, 0.08);
+  border-color: rgba(196, 138, 47, 0.16);
+  color: #8b6a20;
+}
+
+.direction-card__title {
+  font-size: clamp(1.55rem, 2vw, 2rem);
+}
+
+.direction-card__summary {
+  margin-top: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.direction-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.direction-card__actions .btn {
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 0.94rem;
+}
+
+.direction-card__layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.2fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.direction-card__visual {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-content: start;
+  min-height: 100%;
+  margin: 0;
+}
+
+.direction-card__visual-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  padding: 24px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.direction-card__visual img {
+  width: min(92%, 420px);
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.direction-card__visual-caption {
+  padding-left: 4px;
+}
+
+.direction-card__visual-title {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.56);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+.direction-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.direction-card__sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 32px;
+}
+
+.content-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.content-group + .content-group {
+  padding-top: 18px;
+}
+
+.content-group--primary {
+  grid-column: 1 / -1;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(26, 58, 143, 0.024);
+  border: 1px solid rgba(26, 58, 143, 0.06);
+}
+
+.content-group__label {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.content-block__combo {
+  margin: 0;
+  color: var(--brand-text);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.68;
+}
+
+.content-block__support {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 0.92rem;
+  line-height: 1.72;
+}
+
+.detail-list {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.detail-list li {
+  position: relative;
+  padding-left: 16px;
+  color: var(--brand-text);
+  line-height: 1.68;
+}
+
+.detail-list li::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+}
+
+.direction-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.more-stack {
+  display: grid;
+  gap: 20px;
+}
+
+.more-anchor {
+  height: 0;
+  scroll-margin-top: calc(var(--nav-height) + 72px);
+}
+
+.more-panel {
+  display: grid;
+  gap: 24px;
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.025);
+}
+
+.more-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 4px;
+  border-radius: 14px;
+  background: #f8f9fb;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.more-switcher__item {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--brand-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.more-switcher__item.active {
+  background: #ffffff;
+  color: var(--brand-text);
+  box-shadow: var(--shadow-sm);
+}
+
+.more-panel__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.more-panel__heading {
+  max-width: 640px;
+}
+
+.more-panel__title {
+  margin: 0;
+  color: var(--brand-text);
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.24;
+}
+
+.more-panel__guide {
+  margin-top: 8px;
+  color: rgba(15, 23, 42, 0.58);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.more-toggle {
+  flex: none;
 }
 
 .more-video-grid {
   display: grid;
-  gap: 32px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 
 .more-application-grid {
   display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
 }
 
-.more-application-grid :deep(.app-title) {
-  font-weight: 600;
+.delivery-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.more-application-grid :deep(.action-text) {
-  color: rgba(15, 23, 42, 0.62);
-  font-weight: 600;
+.delivery-card__title {
+  font-size: 1.18rem;
 }
 
-.proof-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: rgba(15, 23, 42, 0.68);
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.proof-link:hover {
-  color: var(--brand-primary);
-}
-
-.proof-link.active {
-  color: rgba(15, 23, 42, 0.72);
-}
-
-.delivery-steps {
+.faq-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  margin-bottom: 48px;
+  gap: 16px;
 }
 
-.delivery-step {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  min-height: 100%;
-  padding: 32px;
+.faq-item {
+  overflow: hidden;
   border-radius: 16px;
-  background: var(--brand-surface-soft);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--section-card-surface);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.delivery-step .card-index {
-  margin-bottom: 0;
-  color: rgba(15, 23, 42, 0.35);
+.faq-item:hover {
+  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.035);
 }
 
+.faq-item__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px 24px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
 
-.step-title {
-  margin: 0 0 8px;
+.faq-item__heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.faq-item__question {
+  color: var(--brand-text);
   font-size: 1rem;
   font-weight: 600;
+  line-height: 1.6;
 }
 
-.step-description,
-.contact-description {
-  margin: 0;
-  font-size: 0.96rem;
+.faq-item__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--brand-muted);
+  transition: transform 0.25s ease;
 }
 
-.delivery-contact {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
-  align-items: flex-start;
-  gap: 40px 56px;
-  padding: 40px;
-  border-radius: 20px;
-  background: var(--brand-surface-soft);
+.faq-item.open .faq-item__icon {
+  transform: rotate(180deg);
 }
 
-.delivery-contact__copy {
+.faq-item__content {
+  padding: 0 24px 24px;
+}
+
+.contact-panel {
   display: flex;
-  flex-direction: column;
-  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #f3f6fb 100%);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+}
+
+.contact-panel .title-main {
+  color: var(--brand-text);
+}
+
+.contact-panel .detail-section__desc {
+  color: var(--brand-muted);
+}
+
+.contact-copy {
   max-width: 720px;
 }
 
-.delivery-contact__title {
-  margin: 6px 0 10px;
-  font-size: 1.28rem;
-  font-weight: 600;
-  color: var(--brand-text);
-  line-height: 1.35;
+.contact-header {
+  margin-bottom: 0;
 }
 
-.delivery-contact__desc {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--brand-muted);
-  line-height: 1.8;
-}
-
-.delivery-contact__actions {
-  margin-top: 18px;
-}
-
-.delivery-contact__row {
+.contact-actions {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
 }
 
-.delivery-contact__label {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: rgba(15, 23, 42, 0.46);
-  text-transform: uppercase;
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.delivery-contact__meta {
-  display: grid;
-  gap: 18px;
-  min-width: 0;
-  padding-top: 2px;
-  align-content: start;
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
 }
 
-.delivery-contact__link {
-  width: fit-content;
-  font-size: 1.02rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: var(--brand-text);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.delivery-contact__link:hover {
-  color: var(--brand-primary);
-}
-
-.faq-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.faq-card {
-  padding: 28px;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.88);
-}
-
-.faq-question {
-  margin: 0 0 12px;
-  color: var(--brand-text);
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.45;
-}
-
-.faq-answer {
-  margin: 0;
-  color: var(--brand-muted);
-  font-size: 0.96rem;
-  line-height: 1.8;
-  font-weight: 500;
-}
-
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .hero-grid,
-  .proof-feature-grid,
-  .more-video-grid,
-  .more-application-grid {
+  .direction-card__layout {
     grid-template-columns: 1fr;
   }
 
-  .industry-grid,
-  .faq-grid {
+  .overview-grid,
+  .more-application-grid,
+  .more-video-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero-panel {
-    max-width: none;
-    margin-left: 0;
-    padding-left: 0;
-    padding-top: 0;
-    border-left: none;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-  }
-
-  .hero-title {
+  .hero-stage {
+    width: 100%;
     max-width: none;
   }
 
-  .hero-stat-label {
-    text-align: left;
+  .direction-card__header {
+    margin-bottom: 24px;
   }
 
-  .delivery-steps {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .delivery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .delivery-card::after,
+  .delivery-card::before {
+    display: none;
   }
 }
 
-@media (max-width: 900px) {
-  .industry-grid,
-  .faq-grid {
-    grid-template-columns: 1fr;
-  }
-
+@media (max-width: 991px) {
   .solutions-hero {
-    padding: 88px 0 36px;
+    padding-bottom: 32px;
   }
 
-  .hero-copy {
-    padding: 0;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-actions .btn {
-    width: 100%;
-    max-width: 240px;
-    padding: 12px 20px;
-    font-size: 0.95rem;
-    margin: 0 auto;
-  }
-
-  .hero-actions .btn-arrow {
-    width: 18px;
-    height: 18px;
-  }
-
-  .hero-panel {
-    padding-top: 20px;
-  }
-
-  .industry-block {
-    padding: 24px;
-  }
-
-  .faq-card {
-    padding: 24px;
-  }
-
-  .delivery-contact {
+  .direction-card__sections {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding-top: 24px;
   }
 
-  .delivery-step {
-    gap: 14px;
-    padding-top: 18px;
+  .more-panel__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .contact-panel {
+    display: grid;
+    justify-content: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-section {
+    padding: 64px 0;
+  }
+
+  .hero-promises {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-grid,
+  .more-application-grid,
+  .more-video-grid,
+  .delivery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stage {
+    border-radius: 24px;
+  }
+
+  .direction-card,
+  .overview-card,
+  .more-panel,
+  .delivery-card,
+  .contact-panel {
+    padding: 24px;
+  }
+
+  .direction-card__visual {
+    gap: 12px;
+  }
+
+  .direction-card__visual-media {
+    min-height: 320px;
+    padding: 20px;
+  }
+
+  .hero-stage__media {
+    min-height: 300px;
+    padding: 16px 16px 0;
+  }
+
+  .direction-card__visual img {
+    width: min(86%, 360px);
+    max-height: 260px;
+  }
+
+  .faq-item__trigger,
+  .faq-item__content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .faq-item__heading {
+    align-items: flex-start;
   }
 }
 
 @media (max-width: 640px) {
-  .hero-stat {
+  .hero-stage__caption {
+    padding: 12px 18px 20px;
+  }
+
+  .direction-card__visual-media {
+    min-height: 220px;
+    padding: 16px;
+  }
+
+  .direction-card__visual img {
+    width: min(88%, 280px);
+    max-height: 180px;
+  }
+
+  .direction-card__footer {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
   }
 
-  .hero-actions .btn {
-    padding: 10px 18px;
-    font-size: 0.9rem;
+  .more-switcher {
+    width: 100%;
   }
 
-  .delivery-step {
-    gap: 10px;
+  .more-switcher__item {
+    flex: 1 1 0;
   }
 
-  .industry-footer {
-    gap: 10px;
+  .contact-actions,
+  .direction-card__actions {
+    width: 100%;
   }
 
-  .delivery-steps {
-    grid-template-columns: 1fr;
-    gap: 18px;
+  .contact-actions .btn,
+  .direction-card__actions .btn,
+  .more-toggle {
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>
-
-

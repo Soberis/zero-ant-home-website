@@ -1,5 +1,6 @@
 import { RouteLocationNormalized } from "vue-router";
 import { setSEO, getSeoConfigs, setStructuredData } from "@/utils/seo";
+import type { StructuredData } from "@/utils/seo";
 import i18n from "@/config/i18n"; // 导入i18n实例
 import {
   getAlternateLanguageLinks,
@@ -27,7 +28,7 @@ function safeTranslate(key: string): string {
 
 function safeTranslateArray(key: string): string[] {
   try {
-    const message = i18n.global.tm(key);
+    const message: unknown = i18n.global.tm(key);
     if (!Array.isArray(message)) {
       return [];
     }
@@ -68,7 +69,47 @@ function getPublisher(baseUrl: string) {
   };
 }
 
-function getCareerStructuredJobs(baseUrl: string): Record<string, any>[] {
+function stripHtmlTags(content: string): string {
+  return content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function setDetailNotFoundSEO(to: RouteLocationNormalized) {
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
+
+  setSEO({
+    htmlLang: locale,
+    title: safeTranslate("notFoundPage.title"),
+    description: safeTranslate("notFoundPage.description"),
+    robots: "noindex, nofollow",
+    ogTitle: safeTranslate("notFoundPage.title"),
+    ogDescription: safeTranslate("notFoundPage.description"),
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
+    ogUrl: currentUrl,
+    ogImage: `${baseUrl}/logo.webp`,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    twitterTitle: safeTranslate("notFoundPage.title"),
+    twitterDescription: safeTranslate("notFoundPage.description"),
+    twitterImage: `${baseUrl}/logo.webp`,
+    canonical: currentUrl,
+    siteName: safeTranslate("seo.siteName"),
+    alternates: alternateLinks,
+  });
+
+  setStructuredData([]);
+}
+
+interface RouteSEOConfig {
+  title: string;
+  description: string;
+  keywords: string;
+}
+
+type RouteSEOActiveCheck = () => boolean;
+
+function getCareerStructuredJobs(baseUrl: string): StructuredData[] {
   const jobKeys = [
     "softwareEngineer",
     "robotSystemsEngineer",
@@ -105,11 +146,11 @@ function getCareerStructuredJobs(baseUrl: string): Record<string, any>[] {
 /**
  * 获取路由 SEO 配置映射
  */
-function getRouteSEOMap(): Record<string, any> {
+function getRouteSEOMap(): Record<string, RouteSEOConfig> {
   const seoConfigs = getSeoConfigs();
 
   // 应用翻译函数到SEO配置
-  const translatedSeoConfigs: Record<string, any> = {};
+  const translatedSeoConfigs: Record<string, RouteSEOConfig> = {};
   for (const [key, config] of Object.entries(seoConfigs)) {
     translatedSeoConfigs[key] = {
       title: safeTranslate(config.title),
@@ -184,7 +225,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
     });
 
     // 设置结构化数据
-    let structuredData: Record<string, any> = {
+    const structuredData: StructuredData = {
       "@context": "https://schema.org",
       "@type": "WebPage",
       name: seoConfig.title,
@@ -507,14 +548,231 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
 }
 
 /**
+ * 设置应用详情页 SEO 和结构化数据
+ */
+export async function setupApplicationDetailSEO(
+  to: RouteLocationNormalized,
+  isActive?: RouteSEOActiveCheck
+) {
+  const [{ default: applications }, { getVideoThumbnailById }] = await Promise.all([
+    import("@/data/applications"),
+    import("@/data/videos"),
+  ]);
+
+  if (isActive && !isActive()) {
+    return;
+  }
+
+  const slug = String(to.params.slug || "");
+  const application = applications.find((item) => item.slug === slug);
+
+  if (!application) {
+    setDetailNotFoundSEO(to);
+    return;
+  }
+
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
+  const applicationTitle = safeTranslate(application.title);
+  const applicationDescription = stripHtmlTags(safeTranslate(application.description));
+  const thumbnailUrl = getVideoThumbnailById(application.video) || `${baseUrl}/logo.webp`;
+
+  setSEO({
+    htmlLang: locale,
+    title: applicationTitle,
+    description: applicationDescription,
+    keywords: `${applicationTitle}, ${safeTranslate("seo.solutions.keywords")}`,
+    ogTitle: applicationTitle,
+    ogDescription: applicationDescription,
+    ogType: "article",
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
+    ogUrl: currentUrl,
+    ogImage: thumbnailUrl,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    twitterCard: "summary_large_image",
+    twitterTitle: applicationTitle,
+    twitterDescription: applicationDescription,
+    twitterImage: thumbnailUrl,
+    canonical: currentUrl,
+    siteName: safeTranslate("seo.siteName"),
+    alternates: alternateLinks,
+  });
+
+  setStructuredData([
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: applicationTitle,
+      description: applicationDescription,
+      inLanguage: locale,
+      articleSection: safeTranslate("common.section.applications"),
+      image: thumbnailUrl,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": currentUrl,
+      },
+      author: getPublisher(baseUrl),
+      publisher: getPublisher(baseUrl),
+      keywords: `${applicationTitle}, ${safeTranslate("seo.solutions.keywords")}`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: safeTranslate("nav.home"),
+          item: `${baseUrl}${locale === "en" ? "/en" : "/"}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: safeTranslate("nav.solutions"),
+          item: `${baseUrl}${locale === "en" ? "/en/solutions" : "/solutions"}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: applicationTitle,
+          item: currentUrl,
+        },
+      ],
+    },
+  ]);
+}
+
+/**
+ * 设置视频详情页 SEO 和结构化数据
+ */
+export async function setupVideoDetailSEO(
+  to: RouteLocationNormalized,
+  isActive?: RouteSEOActiveCheck
+) {
+  const [{ videoMap, getVideoThumbnailById }] = await Promise.all([import("@/data/videos")]);
+
+  if (isActive && !isActive()) {
+    return;
+  }
+
+  const slug = String(to.params.slug || "");
+  const video = videoMap[slug];
+
+  if (!video) {
+    setDetailNotFoundSEO(to);
+    return;
+  }
+
+  const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
+    getSeoRouteContext(to);
+  const videoTitle = safeTranslate(video.title);
+  const videoDescription = stripHtmlTags(safeTranslate(video.desc));
+  const thumbnailUrl = getVideoThumbnailById(slug) || `${baseUrl}/logo.webp`;
+  const isVideoMedia = video.type === "bilibili" || video.type === "video";
+
+  setSEO({
+    htmlLang: locale,
+    title: videoTitle,
+    description: videoDescription,
+    keywords: `${videoTitle}, ${safeTranslate("seo.solutions.keywords")}`,
+    ogTitle: videoTitle,
+    ogDescription: videoDescription,
+    ogType: isVideoMedia ? "video.other" : "article",
+    ogLocale,
+    ogLocaleAlternates: ["zh_CN", "en_US"].filter((item) => item !== ogLocale),
+    ogUrl: currentUrl,
+    ogVideo: video.type === "video" ? video.url : undefined,
+    ogImage: thumbnailUrl,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    twitterCard: "summary_large_image",
+    twitterTitle: videoTitle,
+    twitterDescription: videoDescription,
+    twitterImage: thumbnailUrl,
+    canonical: currentUrl,
+    siteName: safeTranslate("seo.siteName"),
+    alternates: alternateLinks,
+  });
+
+  setStructuredData([
+    ...(isVideoMedia
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: videoTitle,
+            description: videoDescription,
+            inLanguage: locale,
+            thumbnailUrl,
+            contentUrl: video.url,
+            embedUrl: video.type === "bilibili" ? video.url : undefined,
+            uploadDate: video.publishDate,
+            mainEntityOfPage: currentUrl,
+            publisher: getPublisher(baseUrl),
+            author: getPublisher(baseUrl),
+          },
+        ]
+      : [
+          {
+            "@context": "https://schema.org",
+            "@type": "ImageObject",
+            name: videoTitle,
+            description: videoDescription,
+            inLanguage: locale,
+            contentUrl: video.url,
+            thumbnailUrl,
+            author: getPublisher(baseUrl),
+          },
+        ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: safeTranslate("nav.home"),
+          item: `${baseUrl}${locale === "en" ? "/en" : "/"}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: safeTranslate("common.section.videoCases"),
+          item: `${baseUrl}${locale === "en" ? "/en/solutions" : "/solutions"}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: videoTitle,
+          item: currentUrl,
+        },
+      ],
+    },
+  ]);
+}
+
+/**
  * 设置产品详情页 SEO 和结构化数据
  */
-export async function setupProductDetailSEO(to: RouteLocationNormalized) {
+export async function setupProductDetailSEO(
+  to: RouteLocationNormalized,
+  isActive?: RouteSEOActiveCheck
+) {
   const { getProductCenterCardById } = await import("@/data/product-center");
+
+  if (isActive && !isActive()) {
+    return;
+  }
+
   const productId = String(to.params.id || "");
   const product = getProductCenterCardById(productId);
 
-  if (!product) return;
+  if (!product) {
+    setDetailNotFoundSEO(to);
+    return;
+  }
 
   const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
     getSeoRouteContext(to);

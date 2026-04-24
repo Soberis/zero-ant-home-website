@@ -9,7 +9,7 @@
           <div class="hero-actions">
             <button
               type="button"
-              class="hero-action"
+              class="btn btn-primary hero-action"
               @click="scrollToSection('positions')"
             >
               {{ $t("careers.heroAction") }}
@@ -38,7 +38,7 @@
             v-for="path in recruitmentPaths"
             :key="path.id"
             :href="path.href"
-            class="career-path"
+            class="career-path ui-row-link"
           >
             <span class="career-path-index">{{ formatIndex(path.id) }}</span>
             <div class="career-path-copy">
@@ -116,7 +116,7 @@
             </div>
 
             <div class="position-actions">
-              <button class="apply-btn" type="button" @click="applyForPosition(position)">
+              <button class="btn btn-primary apply-btn" type="button" @click="applyForPosition(position)">
                 {{ $t("careers.applyNow") }}
                 <svg class="apply-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </button>
@@ -160,6 +160,7 @@
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { normalizeCollection } from "@/composables/useProductDetailData";
 
 const { t, tm } = useI18n();
 
@@ -257,9 +258,10 @@ const positions = computed<Position[]>(() => [
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
     experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.softwareEngineer.requirements"
-    ) as string[],
+    requirements: normalizeCollection<string>(
+      tm("careers.positions.softwareEngineer.requirements"),
+      []
+    ),
   },
   {
     id: 2,
@@ -267,9 +269,10 @@ const positions = computed<Position[]>(() => [
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
     experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.robotSystemsEngineer.requirements"
-    ) as string[],
+    requirements: normalizeCollection<string>(
+      tm("careers.positions.robotSystemsEngineer.requirements"),
+      []
+    ),
   },
   {
     id: 3,
@@ -277,9 +280,10 @@ const positions = computed<Position[]>(() => [
     type: t("careers.fullTime"),
     location: t("careers.hangzhou"),
     experience: t("careers.unlimited"),
-    requirements: tm(
-      "careers.positions.electricalEngineer.requirements"
-    ) as string[],
+    requirements: normalizeCollection<string>(
+      tm("careers.positions.electricalEngineer.requirements"),
+      []
+    ),
   },
 ]);
 
@@ -312,8 +316,15 @@ function applyForPosition(position: Position): void {
   background: var(--brand-surface);
 }
 
-.careers-page > .page-section:nth-of-type(odd) {
-  background-color: var(--brand-surface-soft);
+.careers-page > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
+}
+
+.careers-page > .page-section:nth-of-type(even) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
 }
 
 .page-shell {
@@ -327,8 +338,8 @@ function applyForPosition(position: Position): void {
   min-height: var(--compact-hero-min-height);
   padding: var(--compact-hero-padding-top) 0 var(--compact-hero-padding-bottom);
   background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
-    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
+    linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%),
+    linear-gradient(180deg, transparent, transparent);
 }
 
 .hero-grid {
@@ -366,10 +377,9 @@ function applyForPosition(position: Position): void {
 
 .hero-action,
 .apply-btn {
-  border-radius: 999px;
-  padding: 12px 24px;
-  font-size: 0.95rem;
-  font-weight: 500;
+  gap: 8px;
+  font-size: var(--compact-hero-button-font-size);
+  font-weight: 600;
   cursor: pointer;
   transition:
     transform 0.3s ease,
@@ -379,30 +389,8 @@ function applyForPosition(position: Position): void {
 }
 
 .hero-action {
-  border: 1px solid transparent;
-  background: var(--brand-primary);
-  color: #ffffff;
-  box-shadow: none;
-}
-
-.hero-action:hover {
-  transform: translateY(-2px);
-  background: var(--brand-primary-deep);
-  box-shadow: 0 8px 24px rgba(26, 58, 143, 0.12);
-}
-
-.apply-btn {
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: #ffffff;
-  color: var(--brand-text);
-  box-shadow: none;
-}
-
-.apply-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(15, 23, 42, 0.02);
-  border-color: rgba(15, 23, 42, 0.22);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  min-height: var(--compact-hero-button-height);
+  padding: 0 var(--compact-hero-button-padding-inline);
 }
 
 .apply-btn-arrow {
@@ -491,7 +479,6 @@ function applyForPosition(position: Position): void {
   gap: 18px;
   align-items: center;
   padding: 22px 0;
-  color: inherit;
   text-decoration: none;
   transition: color 0.25s ease, transform 0.25s ease;
 }
@@ -501,7 +488,6 @@ function applyForPosition(position: Position): void {
 }
 
 .career-path:hover {
-  color: var(--brand-primary);
   text-decoration: none;
   transform: translateX(4px);
 }
@@ -576,8 +562,12 @@ function applyForPosition(position: Position): void {
 .benefits-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 64px;
+  column-gap: 0;
   row-gap: 0;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 24px;
+  padding: 40px;
 }
 
 .benefit-card {
@@ -587,13 +577,17 @@ function applyForPosition(position: Position): void {
   column-gap: 16px;
   row-gap: 0;
   align-items: start;
-  padding: 24px;
-  background: var(--brand-surface-soft);
-  border-radius: 16px;
+  padding: 24px 40px 24px 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
-.benefit-card:nth-child(-n+2) {
-  /* removed */
+.benefit-card:nth-child(even) {
+  padding: 24px 0 24px 40px;
+}
+
+.benefit-card:nth-last-child(-n+2) {
+  border-bottom: none;
 }
 
 .benefit-index {
@@ -602,9 +596,11 @@ function applyForPosition(position: Position): void {
   display: inline-block;
   padding-top: 3px;
   color: rgba(26, 58, 143, 0.36);
-  font-size: 0.78rem;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.12em;
+  transition: color 0.3s ease;
 }
 
 .benefit-title {
@@ -612,9 +608,10 @@ function applyForPosition(position: Position): void {
   grid-row: 1;
   margin: 0 0 6px;
   color: var(--brand-text);
-  font-size: 1.06rem;
-  font-weight: 600;
-  line-height: 1.45;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.5;
+  transition: transform 0.3s ease;
 }
 
 .benefit-description {
@@ -625,6 +622,16 @@ function applyForPosition(position: Position): void {
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.7;
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-index {
+  color: var(--brand-primary);
+}
+
+.benefit-card:hover .benefit-title,
+.benefit-card:hover .benefit-description {
+  transform: translateX(4px);
 }
 
 .positions-list {
@@ -635,7 +642,7 @@ function applyForPosition(position: Position): void {
 .position-card {
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--section-card-surface);
   padding: 32px;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -678,14 +685,14 @@ function applyForPosition(position: Position): void {
 .meta-chip {
   width: fit-content;
   border-radius: 999px;
-  padding: 5px 11px;
-  font-size: 0.78rem;
+  padding: 6px 14px;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 .position-type {
-  background: rgba(26, 58, 143, 0.05);
+  background: rgba(26, 58, 143, 0.08);
   color: var(--brand-primary);
 }
 
@@ -699,7 +706,7 @@ function applyForPosition(position: Position): void {
 .meta-chip {
   border: 1px solid rgba(15, 23, 42, 0.08);
   color: rgba(15, 23, 42, 0.68);
-  background: transparent;
+  background: #ffffff;
 }
 
 .position-body {
@@ -774,6 +781,10 @@ function applyForPosition(position: Position): void {
   flex-direction: column;
   gap: 6px;
   min-width: 0;
+  padding: 24px;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
 }
 
 .contact-label {
@@ -785,7 +796,6 @@ function applyForPosition(position: Position): void {
 }
 
 .contact-value {
-  color: var(--brand-text);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -795,16 +805,32 @@ function applyForPosition(position: Position): void {
   word-break: break-word;
 }
 
-.contact-value[href]:hover {
-  color: var(--brand-primary);
-  text-decoration: none;
+span.contact-value {
+  color: var(--brand-text);
 }
 
 @media (max-width: 1100px) {
   .hero-grid,
-  .contact-panel,
+  .contact-panel {
+    grid-template-columns: 1fr;
+  }
+
   .benefits-grid {
     grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .benefit-card {
+    padding: 24px 0 !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .benefit-card:nth-last-child(-n+2) {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .benefit-card:last-child {
+    border-bottom: none;
   }
 
   .hero-copy {
@@ -861,7 +887,7 @@ function applyForPosition(position: Position): void {
   }
 
   .position-card {
-    padding: 24px 0;
+    padding: 28px 24px;
   }
 }
 </style>

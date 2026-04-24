@@ -8,7 +8,6 @@
     "vue",
     "typescript",
     "vite",
-    "element-plus",
     "zeroant"
   ],
   "engines": {
@@ -16,45 +15,58 @@
     "yarn": ">=1.22.0"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && node scripts/generate-site-artifacts.mjs",
-    "build:analyze": "ANALYZE=true vite build && node scripts/generate-site-artifacts.mjs",
-    "build:prod": "NODE_ENV=production vite build && node scripts/generate-site-artifacts.mjs",
+    "generate:responsive-images": "node scripts/generate-responsive-images.mjs",
+    "dev": "node scripts/generate-responsive-images.mjs && vite",
+    "build": "node scripts/generate-responsive-images.mjs && vite build && node scripts/generate-site-artifacts.mjs",
+    "build:analyze": "node scripts/generate-responsive-images.mjs && ANALYZE=true vite build && node scripts/generate-site-artifacts.mjs",
+    "build:prod": "node scripts/generate-responsive-images.mjs && NODE_ENV=production vite build && node scripts/generate-site-artifacts.mjs",
     "preview": "vite preview",
+    "smoke": "node scripts/smoke-check.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "type-check": "vue-tsc --noEmit",
-    "validate": "yarn type-check && yarn build && echo 'All checks passed successfully!'",
+    "validate": "yarn lint && yarn type-check && yarn build && yarn smoke && echo 'All checks passed successfully!'",
     "audit": "yarn audit --level moderate",
     "perf": "yarn build:analyze && yarn preview"
   },
   "dependencies": {
     "@intlify/core-base": "^11.3.0",
-    "element-plus": "^2.10.4",
-    "esbuild": "^0.25.8",
     "vue": "^3.4.21",
     "vue-i18n": "^11.3.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.4",
     "@intlify/unplugin-vue-i18n": "^6.0.8",
     "@types/node": "^24.0.15",
     "@vitejs/plugin-vue": "^5.0.5",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.9.0",
+    "globals": "^17.5.0",
     "less": "^4.4.0",
+    "prettier": "^3.8.3",
     "rollup-plugin-visualizer": "^6.0.3",
     "sharp": "^0.34.3",
     "svgo": "^4.0.0",
     "terser": "^5.43.1",
     "typescript": "^5.8.3",
-    "unplugin-auto-import": "^19.3.0",
+    "typescript-eslint": "^8.55.0",
     "unplugin-vue-components": "^28.8.0",
     "vite": "^5.4.10",
     "vite-plugin-image-optimizer": "^2.0.2",
+    "vue-eslint-parser": "^10.4.0",
     "vue-tsc": "^2.0.29"
   },
   "resolutions": {
-    "esbuild": ">=0.25.0",
     "semver": ">=5.7.2",
     "brace-expansion": ">=2.0.2",
     "minimatch": ">=9.0.0",
+    "eslint-scope": "^8.4.0",
+    "eslint-visitor-keys": "4.2.1",
+    "espree": "^10.0.0",
     "vue-tsc": "^2.0.29"
   }
 }

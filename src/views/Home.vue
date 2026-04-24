@@ -26,13 +26,42 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue';
 import HeroCarousel from '@/components/business/HeroCarousel.vue';
+import SectionError from '@/components/common/SectionError.vue';
+import SectionSkeleton from '@/components/common/SectionSkeleton.vue';
 import { useScrollRevealList } from '@/composables/useScrollReveal';
 
 // 首页下半屏内容异步加载，先把首屏路径跑轻
-const CoreProducts = defineAsyncComponent(() => import('@/components/business/CoreProducts.vue'));
-const IndustryApplications = defineAsyncComponent(() => import('@/components/business/IndustryApplications.vue'));
-const VideoCases = defineAsyncComponent(() => import('@/components/business/VideoCases.vue'));
-const Partners = defineAsyncComponent(() => import('@/components/business/Partners.vue'));
+const CoreProducts = defineAsyncComponent({
+  loader: () => import('@/components/business/CoreProducts.vue'),
+  loadingComponent: SectionSkeleton,
+  errorComponent: SectionError,
+  delay: 200,
+  timeout: 8000,
+});
+
+const IndustryApplications = defineAsyncComponent({
+  loader: () => import('@/components/business/IndustryApplications.vue'),
+  loadingComponent: SectionSkeleton,
+  errorComponent: SectionError,
+  delay: 200,
+  timeout: 8000,
+});
+
+const VideoCases = defineAsyncComponent({
+  loader: () => import('@/components/business/VideoCases.vue'),
+  loadingComponent: SectionSkeleton,
+  errorComponent: SectionError,
+  delay: 200,
+  timeout: 8000,
+});
+
+const Partners = defineAsyncComponent({
+  loader: () => import('@/components/business/Partners.vue'),
+  loadingComponent: SectionSkeleton,
+  errorComponent: SectionError,
+  delay: 200,
+  timeout: 8000,
+});
 
 const productsRef = ref<HTMLElement | null>(null);
 const appsRef = ref<HTMLElement | null>(null);
@@ -61,19 +90,19 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 
 .home-section--products {
   border-top: none;
-  background: #ffffff;
+  background: var(--color-background-white);
 }
 
 .home-section--applications {
-  background: #f8f9fb;
+  background: var(--brand-surface-panel);
 }
 
 .home-section--videos {
-  background: #ffffff;
+  background: var(--color-background-white);
 }
 
 .home-section--partners {
-  background: #f8f9fb;
+  background: var(--brand-surface-panel);
 }
 
 @media screen and (max-width: 991px) {
@@ -82,5 +111,3 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
   }
 }
 </style>
-
-

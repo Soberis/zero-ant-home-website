@@ -1,0 +1,12 @@
+dist
+dist-ssr
+node_modules
+output
+public/responsive
+.agents
+.tasks
+.workbuddy
+docs
+components.d.ts
+typecheck-result.txt
+yarn.lock

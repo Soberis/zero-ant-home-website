@@ -17,6 +17,13 @@ stages:
 # 构建阶段
 build:
   stage: build
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+      - scheduler_failure
+      - api_failure
   script:
     - yarn install
     - yarn build

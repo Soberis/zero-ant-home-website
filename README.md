@@ -1,6 +1,6 @@
 # ZeroAnt Home Website
 
-本项目为 ZeroAnt 官网前端，基于 Vue 3、Vite、Element Plus 等现代前端技术栈开发，支持多环境自动化部署。
+本项目为 ZeroAnt 官网前端，基于 Vue 3、TypeScript、Vite 等现代前端技术栈开发，支持多环境自动化部署。
 
 ## 目录结构
 
@@ -66,9 +66,8 @@
 
 - vue
 - vue-router
-- vuex
-- element-plus
-- @fortawesome/fontawesome-svg-core
+- vue-i18n
+- less
 
 ## 反馈与贡献
 

@@ -30,6 +30,8 @@ export interface SEOMetaData {
   }>;
 }
 
+export type StructuredData = Record<string, unknown>;
+
 /**
  * 设置页面 SEO 元数据
  * @param meta SEO 元数据对象
@@ -173,7 +175,7 @@ export function setSEO(meta: SEOMetaData) {
  * @param data 结构化数据对象或对象数组
  */
 export function setStructuredData(
-  data: Record<string, any> | Record<string, any>[]
+  data: StructuredData | StructuredData[]
 ) {
   // 确保在浏览器环境中运行
   if (typeof document === "undefined" || !document.head) {
@@ -195,6 +197,7 @@ export function setStructuredData(
       try {
         const script = document.createElement("script");
         script.type = "application/ld+json";
+        script.setAttribute("data-seo-managed", "structured-data");
         script.textContent = JSON.stringify(item);
         document.head.appendChild(script);
       } catch (error) {
@@ -215,8 +218,9 @@ export function setStructuredData(
  */
 function removeStructuredData(): void {
   try {
+    // 仅移除由本模块管理的结构化数据，避免误删第三方脚本
     const existingScripts = document.querySelectorAll(
-      'script[type="application/ld+json"]'
+      'script[type="application/ld+json"][data-seo-managed="structured-data"]'
     );
     existingScripts.forEach((script) => {
       try {

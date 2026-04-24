@@ -1,6 +1,10 @@
 <template>
   <div class="common-detail-page">
-    <div class="player-hero-container">
+    <UiBreadcrumb v-if="safeBreadcrumbItems.length" :items="safeBreadcrumbItems" />
+    <div
+      class="player-hero-container"
+      :class="{ 'player-hero-container--bilibili': mediaInfo.type === 'bilibili' }"
+    >
       <div class="media-wrapper">
         <template v-if="mediaInfo.type === 'bilibili'">
           <button
@@ -10,7 +14,30 @@
             :aria-label="`${t('common.cta.viewDetails')} ${mediaInfo.title}`"
             @click="videoStarted = true"
           >
-            <img :src="thumbnailUrl" :alt="mediaInfo.title" class="facade-image" />
+            <picture v-if="responsiveVideoSrcSet" class="detail-media-picture">
+              <source
+                :srcset="responsiveVideoSrcSet"
+                :sizes="detailMediaSizes"
+                type="image/webp"
+              />
+              <img
+                :src="thumbnailUrl"
+                :alt="mediaInfo.title"
+                class="facade-image"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </picture>
+            <img
+              v-else
+              :src="thumbnailUrl"
+              :alt="mediaInfo.title"
+              class="facade-image"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
             <span class="facade-play-btn" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="48" height="48">
                 <path fill="currentColor" d="M8 5v14l11-7z" />
@@ -36,11 +63,31 @@
           </video>
         </template>
         <template v-else-if="mediaInfo.type === 'image'">
+          <picture v-if="responsiveVideoSrcSet" class="detail-media-picture">
+            <source
+              :srcset="responsiveVideoSrcSet"
+              :sizes="detailMediaSizes"
+              type="image/webp"
+            />
+            <img
+              :key="mediaInfo.url"
+              class="video-image"
+              :src="mediaInfo.url"
+              :alt="mediaInfo.title"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </picture>
           <img
+            v-else
             :key="mediaInfo.url"
             class="video-image"
             :src="mediaInfo.url"
             :alt="mediaInfo.title"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           />
         </template>
         <template v-else>
@@ -64,7 +111,7 @@
 
       <div class="content-desc-block">
         <!-- 富文本渲染 (Application) -->
-        <div v-if="contentHtml" class="content-html" v-html="contentHtml"></div>
+        <div v-if="contentHtml" class="content-html" v-html="sanitizedContentHtml"></div>
         
         <!-- 分段文本渲染 (Video) -->
         <template v-else-if="contentParagraphs && contentParagraphs.length">
@@ -108,7 +155,7 @@
         :aria-label="t('videos.videoDetail.qrCodeTitle')"
         @click.self="showContact = false"
       >
-        <div class="contact-dialog">
+        <div ref="dialogRef" class="contact-dialog">
           <button type="button" class="contact-close-x" @click="showContact = false">
             <svg viewBox="0 0 24 24" width="24" height="24">
               <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -124,6 +171,8 @@
               :src="wxworkQrcode"
               :alt="t('videos.videoDetail.qrCodeDesc')"
               class="qrcode-img"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -137,17 +186,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import UiBreadcrumb from '@/components/common/UiBreadcrumb.vue';
+import type { BreadcrumbItem } from '@/types/breadcrumb';
+import { sanitizeHtmlAllowList } from '@/utils/security';
 import fallbackFacadeImg from '@/assets/images/videos/mobile-transfer-robot.webp';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
+import {
+  buildResponsiveSrcSet,
+  getResponsiveVideoImage,
+} from "@/utils/responsiveImage";
 
 interface MediaInfo {
   type: 'bilibili' | 'video' | 'image' | 'none';
   url: string;
   title: string;
   thumbnailUrl?: string;
+  responsiveKey?: string;
 }
 
 const props = defineProps<{
@@ -157,7 +214,10 @@ const props = defineProps<{
   contentParagraphs?: string[];
   prevSlug?: string | null;
   nextSlug?: string | null;
+  breadcrumbItems?: BreadcrumbItem[];
 }>();
+
+const safeBreadcrumbItems = computed(() => props.breadcrumbItems ?? []);
 
 const emit = defineEmits<{
   (e: 'navigate', slug: string): void;
@@ -166,8 +226,22 @@ const emit = defineEmits<{
 const { t } = useI18n();
 const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
+const dialogRef = ref<HTMLDivElement | null>(null);
 
 const thumbnailUrl = computed(() => props.mediaInfo.thumbnailUrl || fallbackFacadeImg);
+const responsiveVideoSrcSet = computed(() =>
+  buildResponsiveSrcSet(
+    props.mediaInfo.responsiveKey
+      ? getResponsiveVideoImage(props.mediaInfo.responsiveKey)
+      : null
+  )
+);
+const detailMediaSizes = "(max-width: 960px) 100vw, 1080px";
+
+const sanitizedContentHtml = computed(() => {
+  if (!props.contentHtml) return '';
+  return sanitizeHtmlAllowList(props.contentHtml);
+});
 
 const bottomBarClass = computed(() => {
   if (props.prevSlug && props.nextSlug) return "both";
@@ -185,8 +259,33 @@ function handleDialogEscape(event: KeyboardEvent): void {
     return;
   }
   event.preventDefault();
-  event.stopImmediatePropagation();
+  // 仅阻止冒泡，不阻止同层级其他捕获监听器，避免与 NavBar 的 Esc 处理冲突
+  event.stopPropagation();
   showContact.value = false;
+}
+
+function handleTabTrap(event: KeyboardEvent): void {
+  if (event.key !== "Tab" || !showContact.value || !dialogRef.value) return;
+
+  const focusable = dialogRef.value.querySelectorAll<HTMLElement>(
+    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+  );
+  if (focusable.length === 0) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (event.shiftKey) {
+    if (document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    }
+  } else {
+    if (document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 }
 
 // 当路由切换 (通过传参的标题或slug等变更判断) 需要关闭弹窗
@@ -195,18 +294,29 @@ watch(() => props.title, () => {
   videoStarted.value = false;
 });
 
+watch(showContact, (open) => {
+  if (open) {
+    nextTick(() => {
+      const closeBtn = dialogRef.value?.querySelector<HTMLButtonElement>('.contact-close-x');
+      closeBtn?.focus();
+    });
+  }
+});
+
 onMounted(() => {
   document.addEventListener("keydown", handleDialogEscape, true);
+  document.addEventListener("keydown", handleTabTrap, true);
 });
 
 onUnmounted(() => {
   document.removeEventListener("keydown", handleDialogEscape, true);
+  document.removeEventListener("keydown", handleTabTrap, true);
 });
 </script>
 
 <style scoped>
 .common-detail-page {
-  background: #ffffff;
+  background: var(--brand-surface);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -219,9 +329,9 @@ onUnmounted(() => {
   width: min(100%, 1080px, calc((100svh - var(--nav-height) - 140px) * 16 / 9));
   aspect-ratio: 16 / 9;
   max-height: min(60svh, 600px);
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
-  background: #000;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
   border: 1px solid rgba(15, 23, 42, 0.08);
   margin-bottom: 36px;
@@ -230,6 +340,14 @@ onUnmounted(() => {
 .media-wrapper {
   width: 100%;
   height: 100%;
+}
+
+.player-hero-container--bilibili :deep(.bilibili-player),
+.player-hero-container--bilibili :deep(.iframe-container),
+.player-hero-container--bilibili :deep(.fallback-container) {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 .video-player,
@@ -244,6 +362,12 @@ onUnmounted(() => {
   display: block;
 }
 
+.detail-media-picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .video-facade {
   position: relative;
   width: 100%;
@@ -252,7 +376,7 @@ onUnmounted(() => {
   border: none;
   padding: 0;
   text-align: inherit;
-  background: #000;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
   overflow: hidden;
 }
 
@@ -263,40 +387,38 @@ onUnmounted(() => {
   transform: translate(-50%, -50%);
   width: 72px;
   height: 72px;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--brand-primary-deep);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 5;
 }
 
 .video-facade:hover .facade-play-btn {
-  background: rgba(255, 255, 255, 0.28);
-  transform: translate(-50%, -50%) scale(1.06);
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.22);
+  background: var(--brand-surface);
+  transform: translate(-50%, -50%) scale(1.03);
+  border-color: rgba(22, 58, 135, 0.16);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
 }
 
 .facade-image {
-  opacity: 0.7;
+  opacity: 0.82;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
 
 .video-facade:hover .facade-image {
-  transform: scale(1.05);
-  opacity: 0.8;
+  transform: scale(1.02);
+  opacity: 0.9;
 }
 
 .video-placeholder {
-  background: #1e293b;
-  color: #64748b;
+  background: #f1f5f9;
+  color: var(--brand-text-subtle);
   font-size: 1.2rem;
   letter-spacing: 1px;
   display: flex;
@@ -337,14 +459,14 @@ onUnmounted(() => {
 
 .content-desc-block {
   width: 100%;
-  max-width: 760px;
+  max-width: 940px;
   margin-bottom: 36px;
 }
 
 /* 兼容 HTML 富文本内容的样式 */
 .content-html {
   font-size: 1.06rem;
-  color: #556074;
+  color: var(--brand-text-soft);
   line-height: 1.85;
   font-weight: 500;
   white-space: normal;
@@ -359,7 +481,7 @@ onUnmounted(() => {
 /* 兼容分段文本的样式 */
 .content-para {
   font-size: 1.05rem;
-  color: #556074;
+  color: var(--brand-text-soft);
   line-height: 1.85;
   font-weight: 500;
   margin-block-start: 0;
@@ -371,18 +493,18 @@ onUnmounted(() => {
 
 .contact-cta {
   flex-shrink: 0;
-  white-space: nowrap;
+  white-space: normal;
   min-height: 44px;
   padding: 0 20px;
   gap: 8px;
   border-color: rgba(15, 23, 42, 0.12);
-  color: #0f172a;
+  color: var(--color-text-secondary);
 }
 
 .contact-cta:hover {
   background: rgba(15, 23, 42, 0.02);
   border-color: rgba(15, 23, 42, 0.22);
-  color: #163a87;
+  color: var(--brand-primary-deep);
 }
 
 .contact-cta svg {
@@ -393,9 +515,7 @@ onUnmounted(() => {
 .contact-dialog-mask {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.32);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -404,12 +524,10 @@ onUnmounted(() => {
 }
 
 .contact-dialog {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--brand-surface);
   border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
   padding: 40px 48px;
   min-width: 380px;
   text-align: center;
@@ -434,21 +552,21 @@ onUnmounted(() => {
 }
 
 .contact-close-x:hover {
-  color: #0f172a;
+  color: var(--brand-text-strong);
   background: #e2e8f0;
 }
 
 .contact-title {
   font-size: 1.4rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   margin: 0 0 24px 0;
 }
 
 .contact-qrcode-placeholder {
   width: 200px;
   height: 200px;
-  background: #f8fafc;
+  background: var(--brand-surface-panel);
   border: 1px dashed #cbd5e1;
   border-radius: 16px;
   display: flex;
@@ -466,7 +584,7 @@ onUnmounted(() => {
 }
 
 .contact-qrcode-desc {
-  color: #64748b;
+  color: var(--brand-text-subtle);
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0;
@@ -508,7 +626,7 @@ onUnmounted(() => {
 
 .detail-nav-btn {
   flex-shrink: 0;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* Responsive */
@@ -529,6 +647,9 @@ onUnmounted(() => {
     border-radius: 16px;
     margin-bottom: 36px;
   }
+  .player-hero-container--bilibili {
+    aspect-ratio: 16 / 10;
+  }
   .content-wrapper { max-width: 100%; }
   .detail-title { font-size: clamp(1.75rem, 4vw, 2.35rem); }
 }
@@ -538,6 +659,9 @@ onUnmounted(() => {
   .player-hero-container {
     border-radius: 14px;
     margin-bottom: 28px;
+  }
+  .player-hero-container--bilibili {
+    aspect-ratio: 16 / 10.6;
   }
   .facade-play-btn {
     width: 60px;
@@ -565,6 +689,9 @@ onUnmounted(() => {
 @media (max-width: 480px) {
   .common-detail-page { padding: 20px 12px 52px; }
   .player-hero-container { border-radius: 12px; }
+  .player-hero-container--bilibili {
+    aspect-ratio: 16 / 11;
+  }
   .facade-play-btn {
     width: 56px;
     height: 56px;

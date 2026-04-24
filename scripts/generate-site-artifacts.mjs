@@ -6,11 +6,21 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const distDir = path.join(projectRoot, "dist");
-const publicDir = path.join(projectRoot, "public");
 const localeDir = path.join(projectRoot, "src", "locales");
 const sourceDir = path.join(projectRoot, "src", "data");
 const siteUrl = (process.env.VITE_SITE_URL || "https://zeroant.com").replace(/\/+$/, "");
 const buildDate = new Date().toISOString().slice(0, 10);
+const DEFAULT_SHARE_IMAGE = `${siteUrl}/logo.webp`;
+const IMAGE_FILE_EXTENSIONS = new Set([
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".webp",
+  ".gif",
+  ".svg",
+  ".ico",
+  ".avif",
+]);
 
 const HOME_FAMILY_KEYS = [
   "rSeries",
@@ -104,6 +114,23 @@ function uniqueMatches(source, regex) {
   return Array.from(values);
 }
 
+function escapeRegExp(value = "") {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function parseAssetImports(source) {
+  const imports = {};
+  const regex = /import\s+([A-Za-z_$][\w$]*)\s+from\s+["'](@\/[^"']+)["']/g;
+  let match = regex.exec(source);
+
+  while (match) {
+    imports[match[1]] = match[2].replace(/^@\//, "src/");
+    match = regex.exec(source);
+  }
+
+  return imports;
+}
+
 function parseProductFamilies(source) {
   const families = [];
   const regex = /id:\s*"([^"]+)",\s*titleKey:\s*"([^"]+)",\s*introKey:\s*"([^"]+)"/g;
@@ -121,19 +148,20 @@ function parseProductFamilies(source) {
   return families;
 }
 
-function parseProductCards(source) {
+function parseProductCards(source, assetImports = {}) {
   const cards = [];
   const regex =
-    /id:\s*"([^"]+)",\s*image:[\s\S]*?titleKey:\s*"([^"]+)",\s*summaryKey:\s*"([^"]+)",\s*specKeys:\s*\[([\s\S]*?)\](?:,\s*noteKey:\s*"([^"]+)")?/g;
+    /\{\s*id:\s*"([^"]+)",\s*image:\s*([A-Za-z_$][\w$]*),[\s\S]*?titleKey:\s*"([^"]+)",\s*summaryKey:\s*"([^"]+)",\s*specKeys:\s*\[([\s\S]*?)\](?:,\s*noteKey:\s*"([^"]+)")?/g;
   let match = regex.exec(source);
 
   while (match) {
     cards.push({
       id: match[1],
-      titleKey: match[2],
-      summaryKey: match[3],
-      specKeys: uniqueMatches(match[4], /"([^"]+)"/g),
-      noteKey: match[5] || "",
+      imageSource: assetImports[match[2]] || "",
+      titleKey: match[3],
+      summaryKey: match[4],
+      specKeys: uniqueMatches(match[5], /"([^"]+)"/g),
+      noteKey: match[6] || "",
     });
     match = regex.exec(source);
   }
@@ -159,7 +187,34 @@ function parseApplications(source) {
   return items;
 }
 
-function parseVideoEntries(source) {
+function parseVideoThumbnailMap(source, assetImports = {}) {
+  const thumbnailMap = {};
+  const mapAnchor = source.indexOf("const videoThumbnailMap");
+
+  if (mapAnchor < 0) {
+    return thumbnailMap;
+  }
+
+  const mapStart = source.indexOf("{", mapAnchor);
+  const mapEnd = source.indexOf("};", mapStart);
+
+  if (mapStart < 0 || mapEnd < 0) {
+    return thumbnailMap;
+  }
+
+  const mapSource = source.slice(mapStart + 1, mapEnd);
+  const regex = /"([^"]+)":\s*([A-Za-z_$][\w$]*)/g;
+  let match = regex.exec(mapSource);
+
+  while (match) {
+    thumbnailMap[match[1]] = assetImports[match[2]] || "";
+    match = regex.exec(mapSource);
+  }
+
+  return thumbnailMap;
+}
+
+function parseVideoEntries(source, videoThumbnailMap = {}) {
   const items = [];
   const regex =
     /"([^"]+)":\s*{\s*slug:\s*"([^"]+)",[\s\S]*?title:\s*"([^"]+)",\s*desc:\s*"([^"]+)"/g;
@@ -170,6 +225,7 @@ function parseVideoEntries(source) {
       slug: match[2],
       titleKey: match[3],
       descriptionKey: match[4],
+      imageSource: videoThumbnailMap[match[2]] || "",
     });
     match = regex.exec(source);
   }
@@ -361,6 +417,7 @@ function getStructuredData(page, messages) {
   const pageUrl = `${siteUrl}${withLocalePath(page.path, page.locale)}`;
   const siteName = page.siteName || getMessage(messages, "seo.siteName") || "ZeroAnt";
   const publisher = getPublisherData(siteName);
+  const shareImage = page.ogImage || DEFAULT_SHARE_IMAGE;
   const common = {
     "@context": "https://schema.org",
     name: page.title,
@@ -390,7 +447,7 @@ function getStructuredData(page, messages) {
           description: page.description,
           url: pageUrl,
           sku: page.itemId,
-          image: [`${siteUrl}/logo.webp`],
+          image: [shareImage],
           brand: {
             "@type": "Brand",
             name: siteName,
@@ -458,7 +515,7 @@ function getStructuredData(page, messages) {
           },
           author: publisher,
           publisher,
-          image: `${siteUrl}/logo.webp`,
+          image: shareImage,
         },
         buildBreadcrumbList(page.locale, [
           { name: getMessage(messages, "nav.home"), path: "/" },
@@ -474,7 +531,7 @@ function getStructuredData(page, messages) {
           name: page.title,
           description: page.description,
           inLanguage: page.locale,
-          thumbnailUrl: `${siteUrl}/logo.webp`,
+          thumbnailUrl: shareImage,
           contentUrl: pageUrl,
           mainEntityOfPage: pageUrl,
           author: publisher,
@@ -524,10 +581,17 @@ function renderHead(html, page) {
   const pageUrl = `${siteUrl}${withLocalePath(page.path, page.locale)}`;
   const ogLocale = page.locale === "en" ? "en_US" : "zh_CN";
   const alternateOgLocale = page.locale === "en" ? "zh_CN" : "en_US";
+  const shareImage = page.ogImage || DEFAULT_SHARE_IMAGE;
+  const twitterImage = page.twitterImage || shareImage;
 
   let nextHtml = html.replace(/<html lang="[^"]*">/i, `<html lang="${page.locale}">`);
 
   const replaceOrInsert = (pattern, replacement) => {
+    if (!replacement) {
+      nextHtml = nextHtml.replace(pattern, "");
+      return;
+    }
+
     nextHtml = pattern.test(nextHtml)
       ? nextHtml.replace(pattern, replacement)
       : nextHtml.replace("</head>", `    ${replacement}\n  </head>`);
@@ -543,13 +607,20 @@ function renderHead(html, page) {
   replaceOrInsert(/<meta[^>]+property="og:url"[^>]*>/i, `<meta property="og:url" content="${pageUrl}" />`);
   replaceOrInsert(/<meta[^>]+property="og:type"[^>]*>/i, `<meta property="og:type" content="${page.ogType}" />`);
   replaceOrInsert(/<meta[^>]+property="og:site_name"[^>]*>/i, `<meta property="og:site_name" content="${escapeHtml(page.siteName)}" />`);
-  replaceOrInsert(/<meta[^>]+property="og:image"[^>]*>/i, `<meta property="og:image" content="${siteUrl}/logo.webp" />`);
-  replaceOrInsert(/<meta[^>]+property="og:image:width"[^>]*>/i, `<meta property="og:image:width" content="1200" />`);
-  replaceOrInsert(/<meta[^>]+property="og:image:height"[^>]*>/i, `<meta property="og:image:height" content="630" />`);
+  replaceOrInsert(/<meta[^>]+property="og:image"[^>]*>/i, `<meta property="og:image" content="${shareImage}" />`);
+  replaceOrInsert(
+    /<meta[^>]+property="og:image:width"[^>]*>/i,
+    page.ogImageWidth ? `<meta property="og:image:width" content="${page.ogImageWidth}" />` : ""
+  );
+  replaceOrInsert(
+    /<meta[^>]+property="og:image:height"[^>]*>/i,
+    page.ogImageHeight ? `<meta property="og:image:height" content="${page.ogImageHeight}" />` : ""
+  );
   replaceOrInsert(/<meta[^>]+property="og:locale"[^>]*>/i, `<meta property="og:locale" content="${ogLocale}" />`);
   replaceOrInsert(/<meta[^>]+name="twitter:card"[^>]*>/i, `<meta name="twitter:card" content="summary_large_image" />`);
   replaceOrInsert(/<meta[^>]+name="twitter:title"[^>]*>/i, `<meta name="twitter:title" content="${title}" />`);
   replaceOrInsert(/<meta[^>]+name="twitter:description"[^>]*>/i, `<meta name="twitter:description" content="${description}" />`);
+  replaceOrInsert(/<meta[^>]+name="twitter:image"[^>]*>/i, `<meta name="twitter:image" content="${twitterImage}" />`);
 
   nextHtml = nextHtml.replace(/\s*<meta[^>]+property="og:locale:alternate"[^>]*>/gi, "");
   nextHtml = nextHtml.replace(/\s*<link[^>]+rel="alternate"[^>]*>/gi, "");
@@ -855,7 +926,7 @@ function buildPageContent(page, messages, data) {
   }
 }
 
-function buildPageDefinitions(messages, data) {
+function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
   const topLevelPages = [
     { routeKey: "home", path: "/", ogType: "website" },
     { routeKey: "products", path: "/products", ogType: "website" },
@@ -870,6 +941,7 @@ function buildPageDefinitions(messages, data) {
     path: `/products/detail/${item.id}`,
     ogType: "product",
     itemId: item.id,
+    imageSource: item.imageSource,
     titleKey: item.titleKey,
     descriptionKey: item.summaryKey,
     specKeys: item.specKeys,
@@ -890,6 +962,7 @@ function buildPageDefinitions(messages, data) {
     path: `/video/${item.slug}`,
     ogType: "video.other",
     itemId: item.slug,
+    imageSource: item.imageSource,
     titleKey: item.titleKey,
     descriptionKey: item.descriptionKey,
   }));
@@ -924,6 +997,16 @@ function buildPageDefinitions(messages, data) {
         keywords,
         siteName: getMessage(localeMessages, "seo.siteName") || "ZeroAnt Technology",
       };
+      const resolvedImagePath = localizedPage.imageSource
+        ? resolveBuiltAssetPath(localizedPage.imageSource)
+        : "";
+      const shareImage = resolvedImagePath
+        ? `${siteUrl}${resolvedImagePath}`
+        : DEFAULT_SHARE_IMAGE;
+      localizedPage.ogImage = shareImage;
+      localizedPage.twitterImage = shareImage;
+      localizedPage.ogImageWidth = resolvedImagePath ? undefined : 1200;
+      localizedPage.ogImageHeight = resolvedImagePath ? undefined : 630;
 
       return {
         ...localizedPage,
@@ -943,6 +1026,9 @@ async function loadData() {
       fs.readFile(path.join(sourceDir, "applications.ts"), "utf8"),
       fs.readFile(path.join(sourceDir, "videos.ts"), "utf8"),
     ]);
+  const productAssetImports = parseAssetImports(productSource);
+  const videoAssetImports = parseAssetImports(videoSource);
+  const videoThumbnailMap = parseVideoThumbnailMap(videoSource, videoAssetImports);
 
   return {
     messages: {
@@ -951,10 +1037,60 @@ async function loadData() {
     },
     data: {
       productFamilies: parseProductFamilies(productSource),
-      productCards: parseProductCards(productSource),
+      productCards: parseProductCards(productSource, productAssetImports),
       applications: parseApplications(applicationSource),
-      videos: parseVideoEntries(videoSource),
+      videos: parseVideoEntries(videoSource, videoThumbnailMap),
     },
+  };
+}
+
+async function collectBuiltAssetPublicPaths(currentDir = distDir) {
+  const entries = await fs.readdir(currentDir, { withFileTypes: true });
+  const assetPaths = [];
+
+  for (const entry of entries) {
+    const absolutePath = path.join(currentDir, entry.name);
+
+    if (entry.isDirectory()) {
+      assetPaths.push(...(await collectBuiltAssetPublicPaths(absolutePath)));
+      continue;
+    }
+
+    if (!IMAGE_FILE_EXTENSIONS.has(path.extname(entry.name).toLowerCase())) {
+      continue;
+    }
+
+    assetPaths.push(`/${path.relative(distDir, absolutePath).replace(/\\/g, "/")}`);
+  }
+
+  return assetPaths;
+}
+
+async function createBuiltAssetResolver() {
+  const assetPaths = await collectBuiltAssetPublicPaths();
+
+  return (sourceAssetPath = "") => {
+    if (!sourceAssetPath) {
+      return "";
+    }
+
+    const ext = path.extname(sourceAssetPath);
+    const baseName = path.basename(sourceAssetPath, ext);
+
+    if (!ext || !baseName) {
+      return "";
+    }
+
+    const filePattern = new RegExp(
+      `^${escapeRegExp(baseName)}(?:-[^.]+)?${escapeRegExp(ext)}$`,
+      "i"
+    );
+
+    return (
+      assetPaths.find((publicPath) =>
+        filePattern.test(path.posix.basename(publicPath))
+      ) || ""
+    );
   };
 }
 
@@ -1025,7 +1161,6 @@ async function writeSitemap(data) {
     ...videoPaths,
   ]);
 
-  await fs.writeFile(path.join(publicDir, "sitemap.xml"), sitemapXml, "utf8");
   await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml, "utf8");
 }
 
@@ -1033,7 +1168,8 @@ async function run() {
   const indexPath = path.join(distDir, "index.html");
   const baseHtml = await fs.readFile(indexPath, "utf8");
   const { messages, data } = await loadData();
-  const pages = buildPageDefinitions(messages, data);
+  const resolveBuiltAssetPath = await createBuiltAssetResolver();
+  const pages = buildPageDefinitions(messages, data, resolveBuiltAssetPath);
 
   await writePrerenderedPages(baseHtml, pages);
   await writeSitemap(data);

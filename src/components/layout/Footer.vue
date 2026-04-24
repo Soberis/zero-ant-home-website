@@ -6,10 +6,18 @@
           v-for="section in footerNavSections"
           :key="section.to"
           class="footer-col footer-col--nav"
+          :class="{ 'is-open': openSection === section.to }"
         >
-          <h4>{{ $t(section.title) }}</h4>
+          <h4
+            class="footer-accordion-trigger"
+            :aria-expanded="openSection === section.to"
+            @click="toggleSection(section.to)"
+          >
+            <span>{{ $t(section.title) }}</span>
+            <span class="footer-accordion-icon" aria-hidden="true" />
+          </h4>
 
-          <ul>
+          <ul class="footer-accordion-body">
             <li v-for="item in section.items" :key="item.hash">
               <router-link
                 :to="localizeTo({ path: section.to, hash: item.hash })"
@@ -25,12 +33,23 @@
           <h4>{{ $t("footer.companyFullName") }}</h4>
 
           <div class="contact-info">
-            <div>{{ $t("contacts.phone") }}：{{ $t("footer.telValue") }}</div>
+            <div class="contact-row">
+              <span class="contact-label">{{ $t("contacts.phone") }}：</span>
+              <a class="contact-link" :href="`tel:${$t('footer.telValue')}`">
+                {{ $t("footer.telValue") }}
+              </a>
+            </div>
 
-            <div>{{ $t("contacts.email") }}：{{ $t("footer.emailValue") }}</div>
+            <div class="contact-row">
+              <span class="contact-label">{{ $t("contacts.email") }}：</span>
+              <a class="contact-link" :href="`mailto:${supportEmail}`">
+                {{ supportEmail }}
+              </a>
+            </div>
 
-            <div style="margin-top: 8px">
-              {{ $t("contacts.address") }}：{{ $t("footer.address") }}
+            <div class="contact-row" style="margin-top: 8px">
+              <span class="contact-label">{{ $t("contacts.address") }}：</span>
+              <span class="contact-text">{{ $t("footer.address") }}</span>
             </div>
           </div>
         </div>
@@ -43,6 +62,7 @@
                 :alt="$t('footer.taobao')"
                 class="qrcode-img"
                 loading="lazy"
+                decoding="async"
                 aria-label="Taobao QR Code"
               />
               <div class="qrcode-label">{{ $t("footer.taobao") }}</div>
@@ -54,6 +74,7 @@
                 :alt="$t('footer.wx')"
                 class="qrcode-img"
                 loading="lazy"
+                decoding="async"
                 aria-label="WeChat Official Account QR Code"
               />
               <div class="qrcode-label">{{ $t("footer.wx") }}</div>
@@ -65,6 +86,7 @@
                 :alt="$t('footer.bilibili')"
                 class="qrcode-img bilibili-qrcode-img"
                 loading="lazy"
+                decoding="async"
                 aria-label="Bilibili Channel QR Code"
               />
               <div class="qrcode-label">{{ $t("footer.bilibili") }}</div>
@@ -90,21 +112,32 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
 import taobaoQrcode from "@/assets/images/qrcodes/taobao.png";
 import wxQrcode from "@/assets/images/qrcodes/wx.webp";
 import { footerNavSections } from "@/data/navigation";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
+const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
+const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
+
+// 移动端手风琴：记录当前展开的导航分区 key，同一时间只展开一个
+const openSection = ref<string | null>(null);
+
+function toggleSection(sectionTo: string): void {
+  openSection.value = openSection.value === sectionTo ? null : sectionTo;
+}
 </script>
 
 <style scoped lang="less">
 .footer {
   width: 100%;
   margin-top: auto;
-  padding: var(--section-padding-y) 0 0; // 大气间距
-  background: #0a0f1d; // 深邃高级底色
+  padding: var(--section-padding-y) 0 0;
+  background: #0a0f1d;
   color: #a1a1aa;
   font-size: 14px;
 }
@@ -117,8 +150,8 @@ const { localizeTo } = useLocalizedPath();
 
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); // 完美均分 5 列导航
-  gap: 56px 40px; // 加大上下间距
+  grid-template-columns: repeat(5, 1fr);
+  gap: 56px 40px;
   align-items: start;
 }
 
@@ -130,14 +163,27 @@ const { localizeTo } = useLocalizedPath();
   display: block;
 }
 
+/* 桌面端默认隐藏手风琴图标，accordion-body 正常展示 */
+.footer-accordion-trigger {
+  cursor: default;
+}
+
+.footer-accordion-icon {
+  display: none;
+}
+
+.footer-accordion-body {
+  max-height: none;
+  overflow: visible;
+}
+
 .footer-col h4 {
   margin: 0 0 16px;
   font-family: "Outfit", sans-serif;
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase; // 建筑化排版
+  letter-spacing: 0.06em;
 }
 
 .footer-col ul {
@@ -153,17 +199,16 @@ const { localizeTo } = useLocalizedPath();
 
 .footer-col ul li a,
 .footer-link {
-  color: #8a8a91;
+  color: #a6adbb;
+  font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: color 0.25s ease;
   display: inline-block;
-  white-space: nowrap; // 防止长文字换行
 }
 
 .footer-col ul li a:hover,
 .footer-link:hover {
   color: #ffffff;
-  transform: translateX(4px); // 轻微平移交互
 }
 
 .contact-col {
@@ -171,12 +216,38 @@ const { localizeTo } = useLocalizedPath();
 }
 
 .contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   font-family: "Inter", sans-serif;
   color: #d4d4d8;
   font-size: 13px;
   line-height: 2;
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.contact-label {
+  flex: 0 0 auto;
+}
+
+.contact-link,
+.contact-text {
+  color: #d4d4d8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.contact-link:hover {
+  color: #ffffff;
 }
 
 .footer-qrcodes {
@@ -186,7 +257,7 @@ const { localizeTo } = useLocalizedPath();
 }
 
 .qrcode-col {
-  grid-column: 4 / span 2; // 定位在第 4、5 列，整体往左移一点，完美避开右侧悬浮栏
+  grid-column: 4 / span 2;
   justify-self: start;
 }
 
@@ -203,13 +274,13 @@ const { localizeTo } = useLocalizedPath();
   padding: 6px;
   border-radius: 12px;
   background: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
   object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .qrcode-item:hover .qrcode-img {
-  transform: translateY(-4px) scale(1.05);
+  transform: translateY(-1px);
 }
 
 .bilibili-qrcode-img {
@@ -284,16 +355,82 @@ const { localizeTo } = useLocalizedPath();
 @media (max-width: 768px) {
   .footer-columns {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 0;
   }
 
-  .footer-col--nav {
-    display: none;
+  /* 手风琴触发器：仅在移动端可点击 */
+  .footer-accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .footer-accordion-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .footer-accordion-icon::before,
+  .footer-accordion-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 1px;
+  }
+
+  .footer-accordion-icon::before {
+    transform: translate(-50%, -50%);
+  }
+
+  .footer-accordion-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  /* 展开时旋转 + 号为 − 号 */
+  .is-open .footer-accordion-icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .is-open .footer-accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  /* 手风琴主体：默认收起 */
+  .footer-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+  }
+
+  .is-open .footer-accordion-body {
+    max-height: 300px;
+    padding: 8px 0 16px;
   }
 
   .contact-col,
   .qrcode-col {
     grid-column: span 1;
+  }
+
+  .contact-col h4 {
+    border-bottom: none;
   }
 }
 

@@ -5,10 +5,9 @@
     <div v-if="!showFallback" class="iframe-container">
       <iframe
         :key="frameUrl"
-        ref="iframeRef"
         class="video-iframe"
         :src="frameUrl"
-        frameborder="0"
+        :title="props.title || 'Bilibili video player'"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
         referrerpolicy="strict-origin-when-cross-origin"
         sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation-by-user-activation allow-presentation allow-popups-to-escape-sandbox"
@@ -51,7 +50,7 @@
         </p>
         <div class="fallback-actions">
           <a
-            :href="originalUrl"
+            :href="props.url"
             target="_blank"
             rel="noopener noreferrer"
             class="fallback-btn primary"
@@ -65,7 +64,7 @@
           <button @click="tryDirectPlay" class="fallback-btn secondary">
             {{ t("bilibiliPlayer.tryDirectPlay") }}
           </button>
-          <button @click="retryIframe" class="fallback-btn tertiary">
+          <button @click="retryIframe" class="fallback-btn tertiary" :disabled="retryExhausted">
             {{ t("bilibiliPlayer.retryEmbed") }}
           </button>
         </div>
@@ -119,14 +118,19 @@ const { t } = useI18n();
 
 const props = defineProps<Props>();
 
-const iframeRef = ref<HTMLIFrameElement>();
+const emit = defineEmits<{
+  loaded: [];
+  error: [];
+  fallback: [];
+}>();
+
 const showFallback = ref(false);
 const isLoading = ref(true);
 const retryCount = ref(0);
 const maxRetries = 2;
 const autoRetryCount = ref(0);
 const maxAutoRetries = 1;
-const useDirectPlay = ref(false);
+const retryExhausted = computed(() => retryCount.value >= maxRetries);
 const isMobileDevice = ref(false);
 const reloadToken = ref(0);
 let loadTimeoutId: number | null = null;
@@ -142,15 +146,15 @@ function parseVideoInfo(url: string): ParsedVideoInfo | null {
     return null;
   }
 
-  let page = "1";
-
-  try {
-    const parsedUrl = new URL(url);
-    page = parsedUrl.searchParams.get("p") || parsedUrl.searchParams.get("page") || "1";
-  } catch {
-    const pageMatch = url.match(/[?&](?:p|page)=(\d+)/i);
-    page = pageMatch?.[1] || "1";
-  }
+  const page = (() => {
+    try {
+      const parsedUrl = new URL(url);
+      return parsedUrl.searchParams.get("p") || parsedUrl.searchParams.get("page") || "1";
+    } catch {
+      const pageMatch = url.match(/[?&](?:p|page)=(\d+)/i);
+      return pageMatch?.[1] || "1";
+    }
+  })();
 
   return {
     bvid: match[1],
@@ -170,25 +174,15 @@ const embedUrl = computed(() => {
   return `https://player.bilibili.com/player.html?bvid=${videoInfo.bvid}&page=${videoInfo.page}&autoplay=0&high_quality=1&as_wide=1&allowfullscreen=true&from=outer`;
 });
 
-// 原始URL
-const originalUrl = computed(() => props.url);
-
-const directPlayUrl = computed(() => {
-  if (isMobileDevice.value) {
-    return props.url.replace("https://www.bilibili.com", "https://m.bilibili.com");
-  }
-  return props.url;
-});
-
 const frameUrl = computed(() => {
-  const baseUrl = useDirectPlay.value ? directPlayUrl.value : embedUrl.value;
+  const baseUrl = embedUrl.value;
   if (!baseUrl) {
     return "";
   }
 
   try {
     const url = new URL(baseUrl);
-    if (reloadToken.value) {
+    if (reloadToken.value > 0) {
       url.searchParams.set("_ts", String(reloadToken.value));
     }
     return url.toString();
@@ -209,7 +203,7 @@ function scheduleLoadTimeout(duration: number): void {
 
   loadTimeoutId = window.setTimeout(() => {
     if (isLoading.value && !showFallback.value) {
-      if (!useDirectPlay.value && autoRetryCount.value < maxAutoRetries) {
+      if (autoRetryCount.value < maxAutoRetries) {
         autoRetryCount.value += 1;
         reloadToken.value = Date.now();
         nextTick(() => {
@@ -235,6 +229,7 @@ function resetPlayerState(): void {
 const handleIframeLoad = () => {
   clearLoadTimeout();
   isLoading.value = false;
+  emit("loaded");
 };
 
 // iframe加载错误
@@ -242,17 +237,16 @@ const handleIframeError = () => {
   clearLoadTimeout();
   isLoading.value = false;
   showFallback.value = true;
+  emit("error");
+  emit("fallback");
 };
 
-// 尝试直接播放
-const tryDirectPlay = async () => {
-  useDirectPlay.value = true;
-  showFallback.value = false;
-  isLoading.value = true;
-
-  await nextTick();
-
-  scheduleLoadTimeout(8000);
+// 直接播放：在新窗口打开B站页面
+const tryDirectPlay = () => {
+  const url = isMobileDevice.value
+    ? props.url.replace(/https:\/\/(www\.)?bilibili\.com/, "https://m.bilibili.com")
+    : props.url;
+  window.open(url, "_blank", "noopener,noreferrer");
 };
 
 // 重试iframe播放
@@ -263,7 +257,6 @@ const retryIframe = async () => {
 
   retryCount.value++;
   autoRetryCount.value = 0;
-  useDirectPlay.value = false;
   showFallback.value = false;
   isLoading.value = true;
   reloadToken.value = Date.now();
@@ -287,34 +280,13 @@ onMounted(() => {
   // 首屏进入时开启超时检测
   scheduleLoadTimeout(isMobileDevice.value ? 8000 : 10000);
 
-  // 移动端特殊处理：如果检测到是移动端，优先尝试移动端播放方式
-  if (isMobileDevice.value && !useDirectPlay.value) {
-    // 可以在这里添加移动端特定的优化
-  }
 });
 
 watch(
   () => props.url,
   () => {
-    useDirectPlay.value = false;
     reloadToken.value = 0;
     resetPlayerState();
-    nextTick(() => {
-      scheduleLoadTimeout(isMobileDevice.value ? 8000 : 10000);
-    });
-  }
-);
-
-watch(
-  () => useDirectPlay.value,
-  (isDirectPlay, wasDirectPlay) => {
-    if (isDirectPlay === wasDirectPlay) {
-      return;
-    }
-
-    reloadToken.value = 0;
-    showFallback.value = false;
-    isLoading.value = true;
     nextTick(() => {
       scheduleLoadTimeout(isMobileDevice.value ? 8000 : 10000);
     });
@@ -330,12 +302,9 @@ onUnmounted(() => {
 .bilibili-player {
   position: relative;
   width: 100%;
-  height: auto;
-  min-height: 360px;
   border-radius: 10px;
-  overflow: hidden;
   background: #2d3748;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
 }
 
 .iframe-container {
@@ -347,10 +316,8 @@ onUnmounted(() => {
 .video-iframe {
   width: 100%;
   height: 100%;
-  min-height: 360px;
   border: none;
   border-radius: 10px;
-  aspect-ratio: 16/9;
 }
 
 .loading-overlay {
@@ -506,6 +473,12 @@ onUnmounted(() => {
   transform: translateY(-1px);
 }
 
+.fallback-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 .fallback-tips {
   text-align: left;
   background: rgba(255, 255, 255, 0.8);
@@ -532,12 +505,10 @@ onUnmounted(() => {
 /* 响应式设计 */
 @media (max-width: 768px) {
   .bilibili-player {
-    min-height: 280px;
     border-radius: 8px;
   }
 
   .video-iframe {
-    min-height: 280px;
     border-radius: 8px;
   }
 
@@ -577,12 +548,10 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
   .bilibili-player {
-    min-height: 220px;
     border-radius: 6px;
   }
 
   .video-iframe {
-    min-height: 220px;
     border-radius: 6px;
   }
 
@@ -625,14 +594,6 @@ onUnmounted(() => {
 }
 
 @media (max-width: 400px) {
-  .bilibili-player {
-    min-height: 200px;
-  }
-
-  .video-iframe {
-    min-height: 200px;
-  }
-
   .fallback-content {
     max-width: 240px;
   }

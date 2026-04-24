@@ -1,6 +1,7 @@
 <template>
   <div v-if="detailLocaleReady">
     <div v-if="productData" class="product-detail">
+      <UiBreadcrumb :items="breadcrumbItems" />
       <section id="product-overview" class="product-hero">
         <div class="container product-hero__container">
           <div class="product-hero__inner">
@@ -36,7 +37,25 @@
             </div>
 
             <div class="product-hero__media-wrapper">
+              <picture v-if="heroImageResponsiveSrcSet" class="product-hero__picture">
+                <source
+                  :srcset="heroImageResponsiveSrcSet"
+                  :sizes="heroImageSizes"
+                  type="image/webp"
+                />
+                <img
+                  :src="heroImageSrc"
+                  :alt="productData.title"
+                  class="product-hero__image"
+                  :width="heroImageSize.width"
+                  :height="heroImageSize.height"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </picture>
               <img
+                v-else
                 :src="heroImageSrc"
                 :alt="productData.title"
                 class="product-hero__image"
@@ -71,12 +90,13 @@
       </section>
 
       <main class="product-main">
-        <div class="container product-main__inner">
+        <div class="product-main__inner">
           <section
             v-if="productFeatures.length"
             id="features-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.features") }}</span>
@@ -103,6 +123,7 @@
                 </div>
               </article>
             </div>
+            </div>
           </section>
 
           <section
@@ -110,6 +131,7 @@
             id="applications-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.applications") }}</span>
@@ -124,6 +146,7 @@
                 :svg="item.svg"
                 :slug="item.slug"
               />
+              </div>
             </div>
           </section>
 
@@ -132,6 +155,7 @@
             id="cases-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.videoCases") }}</span>
@@ -145,10 +169,11 @@
                 :card="video"
                 :index="index"
                 :active="activeVideoIndex === index"
+                :to="localizePath(`/video/${video.slug}`)"
                 @hover="handleVideoHover"
                 @leave="handleVideoLeave"
-                @click="handleVideoClick"
               />
+              </div>
             </div>
           </section>
 
@@ -157,6 +182,7 @@
             id="parameters-section"
             class="detail-section"
           >
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.parameters") }}</span>
@@ -179,9 +205,11 @@
                 </article>
               </div>
             </div>
+            </div>
           </section>
 
           <section id="downloads-section" class="detail-section">
+            <div class="container">
             <div class="detail-section__header">
               <h2 class="detail-section__title">
                 <span class="title-main text-display-large">{{ t("productDetail.downloads") }}</span>
@@ -211,9 +239,11 @@
             <div v-else class="downloads-placeholder">
               <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
             </div>
+            </div>
           </section>
 
           <section class="detail-section product-footer-cta">
+            <div class="container">
             <div class="product-footer-cta__inner">
               <h2 class="product-footer-cta__title">
                 {{ t("productDetail.cta.title") }}
@@ -229,6 +259,7 @@
                   {{ t("productDetail.cta.contactSales") }}
                 </router-link>
               </div>
+            </div>
             </div>
           </section>
         </div>
@@ -246,12 +277,18 @@ import { useI18n } from "vue-i18n";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
+import UiBreadcrumb from "@/components/common/UiBreadcrumb.vue";
+import type { BreadcrumbItem } from "@/types/breadcrumb";
 import { scheduleScrollToTop } from "@/utils/scroll";
-import { useProductDetailData } from "@/composables/useProductDetailData";
+import { useProductDetailData, normalizeCollection } from "@/composables/useProductDetailData";
 import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
 import type { ProductDetail, ProductFeature } from "@/data/productDetails";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  buildResponsiveSrcSet,
+  getResponsiveProductImage,
+} from "@/utils/responsiveImage";
 
 type FeatureItem = string | ProductFeature;
 type LocalizedParam = { key: string; value: string };
@@ -275,21 +312,14 @@ const detailLocaleReady = ref(false);
 
 const isEn = computed(() => locale.value === "en");
 const cardId = computed(() => String(route.params.id || ""));
+
+const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
+  { label: t('nav.home'), to: localizePath('/') },
+  { label: t('nav.products'), to: localizePath('/products') },
+  { label: productData.value?.title || '', to: localizePath(`/products/detail/${cardId.value}`) },
+]);
+
 const cardRecord = computed(() => getProductCenterCardById(cardId.value));
-
-function normalizeParams(value: LocaleProductDetail["params"]): LocalizedParam[] {
-  if (Array.isArray(value)) return value;
-  if (value && typeof value === "object") return Object.values(value);
-  return [];
-}
-
-function normalizeDownloads(
-  value: LocaleProductDetail["downloads"]
-): Array<{ name: string; url: string }> {
-  if (Array.isArray(value)) return value;
-  if (value && typeof value === "object") return Object.values(value);
-  return [];
-}
 
 const loadProductDetailLocale = async () => {
   detailLocaleReady.value = false;
@@ -329,7 +359,7 @@ const detail = computed<ProductDetail | null>(() => {
   const specs = record.card.specKeys.map((key) => t(key));
   const note = record.card.noteKey ? t(record.card.noteKey) : "";
   const localized = tm(`productDetails.${record.card.id}`) as LocaleProductDetail;
-  const localizedParams = normalizeParams(localized?.params);
+  const localizedParams = normalizeCollection<LocalizedParam>(localized?.params, []);
 
   const params = localizedParams.length
     ? localizedParams
@@ -346,21 +376,22 @@ const detail = computed<ProductDetail | null>(() => {
         };
       });
 
-  const features = Array.isArray(localized?.features) && localized.features.length
-    ? localized.features
+  const localizedFeatures = normalizeCollection<FeatureItem>(localized?.features, []);
+  const features = localizedFeatures.length
+    ? localizedFeatures
     : note
       ? [note, ...specs]
       : specs;
 
   return {
-    title: localized?.title || title,
-    desc: localized?.desc || desc,
+    title: (typeof localized?.title === "string" ? localized.title : null) || title,
+    desc: (typeof localized?.desc === "string" ? localized.desc : null) || desc,
     image: record.card.image,
     features,
     cases: [],
     scenes: [],
     params,
-    downloads: normalizeDownloads(localized?.downloads),
+    downloads: normalizeCollection<{ name: string; url: string }>(localized?.downloads, []),
   };
 });
 
@@ -376,7 +407,6 @@ const {
   activeVideoIndex,
   handleVideoHover,
   handleVideoLeave,
-  handleVideoClick,
 } = useProductDetailData(() => cardId.value, {
   baseDetail: () => detail.value,
   showApplications: true,
@@ -387,6 +417,9 @@ const productData = computed<ProductDetail | null>(() =>
   resolvedLocalizedProduct.value ?? detail.value
 );
 const heroImageSrc = computed(() => productData.value?.image || "");
+const heroImageResponsiveSrcSet = computed(() =>
+  buildResponsiveSrcSet(getResponsiveProductImage(cardId.value))
+);
 const productFeatures = computed<FeatureItem[]>(() =>
   resolvedProductFeatures.value.slice(0, 4)
 );
@@ -409,41 +442,23 @@ const getDownloadDisplayName = (name: string) =>
   name.replace(/\.[a-z0-9]+$/i, "");
 
 const METRIC_EMPHASIS_PATTERN =
-  /(^[±+\-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
+  /(^[±+-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
 
 const isMetricEmphasis = (value: string) => {
   const normalized = value.trim();
   if (!normalized) return false;
   // Prevent long sentences from being rendered with massive emphasis font
   if (normalized.length > 26) return false;
-  if (/[\u4e00-\u9fff]/.test(normalized)) {
-    return METRIC_EMPHASIS_PATTERN.test(normalized);
-  }
   return METRIC_EMPHASIS_PATTERN.test(normalized);
 };
 
-const HERO_IMAGE_SIZE_MAP: Record<string, HeroImageSize> = {
-  "rail": { width: 1600, height: 1280 },
-  "rotating-platform": { width: 1600, height: 1280 },
-  "za-m135": { width: 1600, height: 1200 },
-  "za-m75": { width: 1600, height: 1280 },
-  "za-mr3m": { width: 1600, height: 2133 },
-  "za-mr3t": { width: 1600, height: 2844 },
-  "za-r3-x": { width: 1600, height: 2133 },
-  "za-r3d6": { width: 854, height: 1474 },
-  "za-r3l-m-h": { width: 1600, height: 2133 },
-  "za-r3m-left": { width: 1600, height: 1280 },
-  "za-r3m-right": { width: 1280, height: 1707 },
-  "za-r3t": { width: 1600, height: 2844 },
-  "za-rdp": { width: 1920, height: 1080 },
-  "za-rmps": { width: 3840, height: 2880 },
-  "za-rmvr": { width: 3840, height: 2603 },
-  "za-zg100": { width: 1600, height: 2844 },
-};
+const DEFAULT_HERO_IMAGE_SIZE: HeroImageSize = { width: 1200, height: 900 };
 
-const heroImageSize = computed<HeroImageSize>(() =>
-  HERO_IMAGE_SIZE_MAP[cardId.value] || { width: 1200, height: 900 }
+const heroImageSize = computed<HeroImageSize>(
+  () => cardRecord.value?.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE
 );
+const heroImageSizes =
+  "(max-width: 768px) calc(100vw - 28px), (max-width: 1100px) 76vw, 44vw";
 
 const goBack = () => {
   router.push(localizePath("/products"));
@@ -454,7 +469,7 @@ const goBack = () => {
 .product-detail {
   min-height: 100vh;
   padding-bottom: 80px;
-  background: #ffffff;
+  background: var(--brand-surface);
 }
 
 .product-hero {
@@ -503,7 +518,7 @@ const goBack = () => {
   border-radius: 0;
   background: transparent;
   border-left: none;
-  color: #667085;
+  color: var(--brand-text-subtle);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -512,7 +527,7 @@ const goBack = () => {
 
 .product-hero__title {
   margin: 18px 0 16px;
-  color: #0f172a;
+  color: var(--brand-text-strong);
 }
 
 .product-hero__description {
@@ -520,7 +535,7 @@ const goBack = () => {
   max-width: 560px;
   font-size: 1.125rem;
   line-height: 1.6;
-  color: #556074;
+  color: var(--brand-text-soft);
   font-weight: 500;
 }
 
@@ -537,9 +552,9 @@ const goBack = () => {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  border-radius: 99px;
+  border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #ffffff;
+  background: var(--brand-surface);
   color: rgba(15, 23, 42, 0.76);
   font-size: 0.92rem;
   font-weight: 600;
@@ -581,7 +596,13 @@ const goBack = () => {
   max-height: clamp(260px, 42svh, 480px);
   min-height: 200px;
   object-fit: contain;
+  display: block;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-hero__picture {
+  width: 100%;
+  display: block;
 }
 
 .product-hero__image:hover {
@@ -601,7 +622,7 @@ const goBack = () => {
   min-width: 0;
   padding: 24px;
   border-radius: 12px;
-  background: #f8fafc;
+  background: var(--brand-surface-panel);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -611,7 +632,7 @@ const goBack = () => {
 }
 
 .product-hero__metric:hover {
-  background: #ffffff;
+  background: var(--brand-surface);
   border-color: rgba(22, 58, 135, 0.15);
   box-shadow: 0 10px 20px rgba(15, 23, 42, 0.03);
   transform: translateY(-2px);
@@ -625,7 +646,7 @@ const goBack = () => {
   font-size: 1.12rem;
   line-height: 1.35;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   word-break: break-word;
 }
 
@@ -633,14 +654,14 @@ const goBack = () => {
   font-size: 1.55rem;
   letter-spacing: -0.015em;
   line-height: 1.2;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-weight: 800;
 }
 
 .product-hero__metric-value--compact {
   font-size: 1.04rem;
   line-height: 1.55;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-weight: 600;
 }
 
@@ -662,15 +683,41 @@ const goBack = () => {
 .product-main__inner {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0;
 }
 
 .detail-section {
+  position: relative;
   padding: 80px 0;
   border-radius: 0;
   scroll-margin-top: calc(var(--nav-height, 72px) + 54px);
   background: transparent;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-top: none;
+  z-index: 1;
+}
+
+.detail-section:nth-of-type(even)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-color: var(--brand-surface-soft, #f8f9fb);
+}
+
+.detail-section:nth-of-type(odd)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-color: var(--brand-surface, #ffffff);
 }
 
 .detail-section__header {
@@ -684,7 +731,7 @@ const goBack = () => {
   flex-direction: column-reverse;
   align-items: flex-start;
   gap: 10px;
-  color: #0f172a;
+  color: var(--brand-text-strong);
 }
 
 .title-en {
@@ -715,7 +762,7 @@ const goBack = () => {
   max-width: 100%;
   margin: 0;
   padding: 28px 24px;
-  background: #f8fafc;
+  background: var(--brand-surface-soft, #f8f9fb);
   border: 1px solid rgba(15, 23, 42, 0.04);
   border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
@@ -725,7 +772,7 @@ const goBack = () => {
 .feature-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025);
-  background: #ffffff;
+  background: var(--brand-surface, #ffffff);
   border-color: rgba(22, 58, 135, 0.15);
 }
 
@@ -746,7 +793,7 @@ const goBack = () => {
   background: rgba(22, 58, 135, 0.08);
   font-size: 0.9rem;
   font-weight: 700;
-  color: #163a87;
+  color: var(--brand-primary-deep);
   margin-bottom: 16px;
 }
 
@@ -754,14 +801,14 @@ const goBack = () => {
   font-size: 1.22rem;
   font-weight: 600;
   line-height: 1.45;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   margin: 0;
 }
 
 .feature-card__description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #556074;
+  color: var(--brand-text-soft);
   font-weight: 500;
   margin: 8px 0 0;
 }
@@ -769,11 +816,11 @@ const goBack = () => {
 .params-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 52px;
+  gap: 0 80px; /* Increased gap between columns for better breathing space */
 }
 
 #parameters-section .detail-section__header {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 #parameters-section .detail-section__title {
@@ -787,43 +834,47 @@ const goBack = () => {
 
 .param-card {
   display: grid;
-  grid-template-columns: minmax(120px, 10.5rem) minmax(0, 1fr);
-  align-items: center;
+  grid-template-columns: minmax(100px, 9rem) minmax(0, 1fr);
+  align-items: baseline; /* Align by text baseline */
   gap: 24px;
-  padding: 16px 20px;
-  border-radius: 8px;
-  margin-bottom: 4px;
-  transition: background-color 0.2s ease;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06); /* Subtle divider line */
+  background: transparent;
+  border-radius: 0;
+  margin-bottom: 0;
+  transition: none;
 }
 
-.param-card:nth-child(even) {
-  background: #f8fafc;
+.param-card:last-child {
+  border-bottom: none; /* Remove last divider */
 }
 
 .param-card:hover {
-  background: rgba(22, 58, 135, 0.04);
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.param-card:hover .param-card__label {
+  color: var(--brand-primary);
 }
 
 .param-card__label {
-  padding-top: 2px;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  letter-spacing: 0;
-  text-transform: none;
-  color: #667085;
+  padding-top: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--brand-text-subtle);
   font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .param-card__value {
   margin-top: 0;
-  justify-self: stretch;
-  max-width: none;
-  font-size: 1.08rem;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.5;
   text-align: left;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-weight: 600;
-  overflow-wrap: anywhere;
   word-break: break-word;
 }
 
@@ -841,7 +892,7 @@ const goBack = () => {
   padding: 28px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 18px;
-  background: #ffffff;
+  background: var(--brand-surface-soft, #f8f9fb);
   text-decoration: none;
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
@@ -870,7 +921,7 @@ const goBack = () => {
   border-radius: 4px;
   border: 0;
   background: rgba(26, 58, 143, 0.08);
-  color: #163a87;
+  color: var(--brand-primary-deep);
   padding: 4px 12px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -878,7 +929,7 @@ const goBack = () => {
 }
 
 .download-status {
-  color: #667085;
+  color: var(--brand-text-subtle);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -887,7 +938,7 @@ const goBack = () => {
 
 .download-title {
   margin: 0;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-size: 1.18rem;
   font-weight: 600;
   line-height: 1.55;
@@ -896,7 +947,7 @@ const goBack = () => {
 
 .download-desc {
   margin: 0;
-  color: #667085;
+  color: var(--brand-text-subtle);
   font-size: 0.98rem;
   line-height: 1.8;
   overflow-wrap: anywhere;
@@ -915,7 +966,7 @@ const goBack = () => {
 
 .downloads-placeholder__text {
   margin: 0;
-  color: #667085;
+  color: var(--brand-text-subtle);
 }
 
 .not-found {
@@ -935,9 +986,10 @@ const goBack = () => {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: var(--brand-surface-soft, #f8f9fb);
+  background: var(--brand-surface, #ffffff);
   border-radius: 16px;
   padding: 56px 32px;
+  box-shadow: var(--shadow-sm);
 }
 
 .product-footer-cta__title {
@@ -968,7 +1020,7 @@ const goBack = () => {
   justify-content: center;
   padding: 0 24px;
   height: 48px;
-  border-radius: 99px;
+  border-radius: 16px;
   font-weight: 600;
   font-size: 0.95rem;
   background: transparent;
@@ -979,7 +1031,7 @@ const goBack = () => {
 }
 
 .product-footer-cta__ghost-btn:hover {
-  background: #ffffff;
+  background: var(--brand-surface);
   border-color: rgba(26, 58, 143, 0.2);
   color: var(--brand-primary);
 }
@@ -1061,7 +1113,7 @@ const goBack = () => {
   }
 
   .product-hero__metrics {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .features-grid {
@@ -1076,6 +1128,9 @@ const goBack = () => {
 }
 
 @media (max-width: 560px) {
+  .product-hero__metrics {
+    grid-template-columns: 1fr;
+  }
   .product-hero__actions {
     flex-direction: column;
     align-items: stretch;

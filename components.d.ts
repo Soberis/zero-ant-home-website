@@ -22,6 +22,9 @@ declare module 'vue' {
     RouteNotFoundState: typeof import('./src/components/common/RouteNotFoundState.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SectionError: typeof import('./src/components/common/SectionError.vue')['default']
+    SectionSkeleton: typeof import('./src/components/common/SectionSkeleton.vue')['default']
+    UiBreadcrumb: typeof import('./src/components/common/UiBreadcrumb.vue')['default']
     VideoCard: typeof import('./src/components/common/VideoCard.vue')['default']
     VideoCases: typeof import('./src/components/business/VideoCases.vue')['default']
   }

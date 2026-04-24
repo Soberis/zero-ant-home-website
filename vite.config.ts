@@ -3,24 +3,18 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { visualizer } from "rollup-plugin-visualizer";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+
+const buildId = process.env.BUILD_ID || new Date().toISOString().replace(/[-:.TZ]/g, "");
 
 // https://vitejs.dev/config/
 export default defineConfig({
   // 设置基础路径为相对路径，确保服务器部署时资源能正确加载
   plugins: [
     vue(),
-    // Element Plus 按需导入
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-      dts: true, // 生成类型声明文件
-    }),
     Components({
-      resolvers: [ElementPlusResolver()],
       dts: true, // 生成类型声明文件
     }),
     // Bundle 分析工具（Windows 下也兼容：当脚本为 build:analyze 时启用）
@@ -34,9 +28,16 @@ export default defineConfig({
           }),
         ]
       : []),
-    // 图片优化插件
-    ViteImageOptimizer({}),
+    // 图片优化插件（覆盖 png/svg/jpg，排除 responsive 目录下已优化的预生成图）
+    ViteImageOptimizer({
+      test: /\.(png|svg|jpe?g)$/i,
+      includePublic: true,
+      exclude: [/\/responsive\//],
+    }),
   ],
+  define: {
+    __APP_BUILD_ID__: JSON.stringify(buildId),
+  },
   resolve: {
     alias: {
       "@": path.resolve(dirname(fileURLToPath(import.meta.url)), "src"),
@@ -53,14 +54,15 @@ export default defineConfig({
     // 启用源码映射（可选，生产环境可关闭）
     sourcemap: false,
     // 设置构建目标
-    target: "es2020",
+    target: "es2022",
     // 启用压缩
     minify: "terser",
     terserOptions: {
       compress: {
-        drop_console: true, // 移除console.log
+        // 不使用 drop_console，避免移除 console.warn/error
+        // 仅移除调试用 console 调用，保留 warn/error 便于线上排查
+        pure_funcs: ["console.log", "console.info", "console.debug", "console.trace"],
         drop_debugger: true, // 移除debugger语句
-        pure_funcs: ["console.log", "console.warn"], // 移除指定函数
       },
       mangle: {
         safari10: true, // 解决Safari 10的兼容性问题
@@ -81,34 +83,16 @@ export default defineConfig({
             ) {
               return "vue-vendor";
             }
-            // UI 组件库
-            if (id.includes("element-plus")) {
-              return "ui-vendor";
-            }
-            // 工具库 - 根据实际使用情况动态添加
-            if (id.includes("axios")) {
-              return "utils-vendor";
-            }
             // 其他第三方库
             return "vendor";
           }
         },
         // 优化文件命名
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId;
-          if (facadeModuleId) {
-            const fileName = facadeModuleId
-              .split("/")
-              .pop()
-              ?.replace(/\.[^.]*$/, "");
-            return `js/[name]-[hash].js`;
-          }
+        chunkFileNames: () => {
           return "js/[name]-[hash].js";
         },
         entryFileNames: "js/[name]-[hash].js",
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name?.split(".") || [];
-          const ext = info[info.length - 1];
           if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(assetInfo.name || "")) {
             return "images/[name]-[hash].[ext]";
           }
@@ -127,6 +111,6 @@ export default defineConfig({
   },
   // 优化依赖预构建
   optimizeDeps: {
-    include: ["vue", "vue-router", "vue-i18n", "element-plus"],
+    include: ["vue", "vue-router", "vue-i18n"],
   },
 });

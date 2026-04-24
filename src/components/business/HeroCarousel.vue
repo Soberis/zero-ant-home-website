@@ -1,19 +1,32 @@
 <template>
   <section class="hero-carousel">
-    <router-link
-      class="hero-stage"
-      :to="activeSlide.routePath"
-      :aria-label="`${activeSlide.title} ${t('common.cta.viewDetails')}`"
-    >
+    <div class="hero-stage">
       <div class="hero-media" :class="{ 'hero-entered': entered }">
-        <img
-          :src="activeSlide.img"
-          :alt="activeSlide.title"
-          class="hero-image"
-          :style="activeSlideImageStyle"
-          fetchpriority="high"
-          decoding="async"
-        />
+        <picture class="hero-picture">
+          <source
+            v-if="heroMobileSrcSet"
+            media="(max-width: 900px)"
+            :srcset="heroMobileSrcSet"
+            sizes="100vw"
+            type="image/webp"
+          />
+          <source
+            v-if="heroDesktopSrcSet"
+            :srcset="heroDesktopSrcSet"
+            sizes="(max-width: 900px) 100vw, (max-width: 1100px) 54vw, 58vw"
+            type="image/webp"
+          />
+          <img
+            :src="heroImgFallback"
+            :alt="t('home.hero.title')"
+            class="hero-image"
+            width="1600"
+            height="2844"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
 
       <div class="hero-overlay">
@@ -24,53 +37,47 @@
           </div>
           <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
           <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
-            <span class="btn btn-primary" @click.stop.prevent="$router.push(localizeTo({ path: '/products', hash: '#products-page-top' }))">
-            {{ t('home.hero.primaryCta') }}
-          </span>
+            <router-link
+              :to="productCenterRoute"
+              class="btn btn-primary"
+            >
+              {{ t('home.hero.primaryCta') }}
+            </router-link>
         </div>
       </div>
       </div>
-    </router-link>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import coverImg from '@/assets/images/product/封面.webp';
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-
-interface SlideItem {
-  img: string;
-  title: string;
-  routePath: string;
-  imageScale?: number;
-  imageShiftX?: string;
-  imageShiftY?: string;
-  imageShiftXMobile?: string;
-  imageShiftYMobile?: string;
-}
+import {
+  buildResponsiveSrcSet,
+  getLargestResponsiveImage,
+  getResponsiveHeroImage,
+} from "@/utils/responsiveImage";
 
 const { t } = useI18n();
-const { localizePath, localizeTo } = useLocalizedPath();
+const { localizeTo } = useLocalizedPath();
 
-const activeSlide = computed<SlideItem>(() => ({
-  img: coverImg,
-  title: t('home.hero.title'),
-  routePath: `${localizePath('/products')}#products-page-top`,
-  imageScale: 1.0,
-  imageShiftX: '0px',
-  imageShiftY: '0px',
-}));
+// Responsive srcset 供 <source> 使用（浏览器按设备/网络自动选最佳尺寸）
+const heroDesktopEntry = getResponsiveHeroImage("homeDesktop");
+const heroMobileEntry = getResponsiveHeroImage("homeMobile");
+const heroDesktopSrcSet = buildResponsiveSrcSet(heroDesktopEntry);
+const heroMobileSrcSet = buildResponsiveSrcSet(heroMobileEntry);
+
+// <img> fallback：使用 responsive 图片系统中最大的桌面图，而非 343KB 的静态导入
+// 旧实现 import coverImg 将封面图打进 JS bundle，导致首屏多加载 343KB
+const heroImgFallback = getLargestResponsiveImage(heroDesktopEntry);
+
+const productCenterRoute = computed(() =>
+  localizeTo({ path: '/products', hash: '#products-page-top' })
+);
 
 const entered = ref(false);
-const activeSlideImageStyle = computed(() => ({
-  '--hero-image-scale': String(activeSlide.value.imageScale ?? 1),
-  '--hero-image-shift-x': activeSlide.value.imageShiftX ?? '0px',
-  '--hero-image-shift-y': activeSlide.value.imageShiftY ?? '0px',
-  '--hero-image-shift-x-mobile': activeSlide.value.imageShiftXMobile ?? activeSlide.value.imageShiftX ?? '0px',
-  '--hero-image-shift-y-mobile': activeSlide.value.imageShiftYMobile ?? activeSlide.value.imageShiftY ?? '0px',
-}));
 
 let enterTimer: number | null = null;
 
@@ -101,22 +108,14 @@ onUnmounted(() => {
   min-height: calc(100svh - var(--nav-height));
   overflow: hidden;
   background:
-    radial-gradient(circle at 76% 22%, rgba(26, 58, 143, 0.11), transparent 24%),
-    radial-gradient(circle at 18% 14%, rgba(15, 23, 42, 0.045), transparent 28%),
+    radial-gradient(circle at 76% 22%, rgba(26, 58, 143, 0.06), transparent 26%),
+    radial-gradient(circle at 18% 14%, rgba(15, 23, 42, 0.02), transparent 30%),
     linear-gradient(
       180deg,
-      rgba(247, 249, 252, 0.82) 0%,
-      rgba(255, 255, 255, 0.98) 40%,
-      rgba(248, 250, 252, 0.88) 100%
+      rgba(248, 250, 252, 0.9) 0%,
+      rgba(255, 255, 255, 0.98) 42%,
+      rgba(248, 250, 252, 0.92) 100%
     );
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-}
-
-.hero-stage:focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.72);
-  outline-offset: -2px;
 }
 
 .hero-media {
@@ -144,15 +143,23 @@ onUnmounted(() => {
 .hero-image {
   position: relative;
   z-index: 1;
-  width: 58%;
-  max-width: none;
-  height: 84%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center right;
   transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
     scale(var(--hero-image-scale, 1));
   transform-origin: center center;
-  filter: drop-shadow(0 28px 44px rgba(15, 23, 42, 0.12));
+  filter: drop-shadow(0 18px 30px rgba(15, 23, 42, 0.08));
+}
+
+.hero-picture {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 58%;
+  max-width: none;
+  height: 84%;
 }
 
 .hero-overlay {
@@ -187,7 +194,7 @@ onUnmounted(() => {
 .hero-title {
   margin: 0;
   font-family: "Outfit", sans-serif;
-  color: #1d1d1f;
+  color: var(--brand-text, #1a1a2e);
   white-space: normal;
   letter-spacing: -0.03em;
 }
@@ -198,15 +205,14 @@ onUnmounted(() => {
   font-family: "Outfit", sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #1a3a8f;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  color: var(--brand-primary, #1a3a8f);
+  letter-spacing: 0.06em;
 }
 
 .hero-description {
   margin: 20px 0 0;
   max-width: 24em;
-  color: #445066;
+  color: var(--brand-muted, #5a6178);
   line-height: 1.75;
 }
 
@@ -214,6 +220,7 @@ onUnmounted(() => {
   display: flex;
   gap: 16px;
   margin-top: 36px;
+  pointer-events: auto;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
@@ -252,10 +259,13 @@ onUnmounted(() => {
   }
 
   .hero-image {
-    width: 54%;
     object-position: center right;
     transform: translate(var(--hero-image-shift-x, 0), var(--hero-image-shift-y, 0))
       scale(var(--hero-image-scale, 1));
+  }
+
+  .hero-picture {
+    width: 54%;
   }
 }
 
@@ -286,10 +296,13 @@ onUnmounted(() => {
   }
 
   .hero-image {
-    width: 100%;
     object-position: center bottom;
     transform: translate(var(--hero-image-shift-x-mobile, 0), var(--hero-image-shift-y-mobile, 0))
       scale(var(--hero-image-scale, 1));
+  }
+
+  .hero-picture {
+    width: 100%;
   }
 }
 

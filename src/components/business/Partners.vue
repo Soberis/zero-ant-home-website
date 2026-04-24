@@ -60,7 +60,7 @@ const partnersTyped: Partner[] = partners;
 
 .ecosystem-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: var(--space-md);
   width: 100%;
 }
@@ -69,8 +69,8 @@ const partnersTyped: Partner[] = partners;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 88px;
-  padding: 12px;
+  min-height: 100px;
+  padding: 16px;
   border-radius: 0;
   background: transparent;
   border: none;
@@ -84,95 +84,70 @@ const partnersTyped: Partner[] = partners;
 
 .ecosystem-card img {
   width: auto;
-  height: 46px;
-  max-width: 88%;
+  height: 44px;
+  max-width: 85%;
   object-fit: contain;
   display: block;
-  opacity: 0.6;
-  filter: grayscale(100%);
-  transition: opacity var(--transition-normal), filter var(--transition-normal), transform var(--transition-normal);
+  opacity: 1;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
 }
 
 .ecosystem-card:hover img {
   opacity: 1;
-  filter: grayscale(0%);
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
-.ecosystem-card img.logo-huawei {
-  max-width: 80%;
-}
+/* ====== 光学平衡 (Optical Balancing) ====== */
 
-.ecosystem-card img.logo-schneider {
-  max-width: 96%;
-}
-
-.ecosystem-card img.logo-meituan {
-  max-width: 72%;
-}
-
-.ecosystem-card img.logo-perkinelmer {
-  max-width: 88%;
-  max-height: 48px;
-}
-
-.ecosystem-card img.logo-pudu {
-  max-width: 70%;
-}
-
+/* 1. 特重型 / 实心块 Logo：适当缩小，防止视觉上过于突兀霸道 */
+.ecosystem-card img.logo-pudu,
+.ecosystem-card img.logo-xinsong,
+.ecosystem-card img.logo-qingzhi,
+.ecosystem-card img.logo-meituan,
+.ecosystem-card img.logo-qisheng,
 .ecosystem-card img.logo-yihui {
-  max-width: 78%;
+  height: 38px;
 }
 
-.ecosystem-card img.logo-nabote {
-  max-width: 68%;
-}
+/* 2. 常规型 Logo 使用基础高度 44px (默认) */
 
-.ecosystem-card img.logo-qisheng {
-  max-width: 76%;
-}
-
-.ecosystem-card img.logo-xinsong {
-  max-width: 74%;
-}
-
+/* 3. 偏宽或细节较多 Logo：适当适度放大 */
+.ecosystem-card img.logo-huawei,
+.ecosystem-card img.logo-schneider,
 .ecosystem-card img.logo-huazhi {
-  max-width: 76%;
+  height: 48px;
 }
 
-.ecosystem-card img.logo-qingzhi {
-  max-width: 68%;
+/* 4. 极宽、纯细文字 Logo：加大高度以保证可读性 */
+.ecosystem-card img.logo-perkinelmer,
+.ecosystem-card img.logo-open,
+.ecosystem-card img.logo-honghu {
+  height: 52px;
+  max-width: 92%;
 }
 
-.ecosystem-card img.logo-hongxu {
-  max-width: 80%;
-}
-
-.ecosystem-card img.logo-open {
-  max-width: 78%;
-}
-
-.ecosystem-card img.logo-dizhi {
-  max-width: 90%;
-}
-
+/* 5. 高校学术机构：校徽+长文字组合需要最大的空间 */
 .ecosystem-card img.logo-dongnan,
 .ecosystem-card img.logo-fudan,
 .ecosystem-card img.logo-zhongshan,
 .ecosystem-card img.logo-hunan,
-.ecosystem-card img.logo-qinghua {
-  max-width: 94%;
+.ecosystem-card img.logo-qinghua,
+.ecosystem-card img.logo-buaa,
+.ecosystem-card img.logo-buaahyy,
+.ecosystem-card img.logo-dizhi {
+  height: 54px;
+  max-width: 95%;
 }
 
-.ecosystem-card img.logo-buaa,
-.ecosystem-card img.logo-buaahyy {
-  max-width: 94%;
-  max-height: 58px;
-}
+
 
 @media (max-width: 900px) {
   .ecosystem-section {
     padding: var(--space-xl) var(--space-md);
+  }
+
+  .ecosystem-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -186,8 +161,17 @@ const partnersTyped: Partner[] = partners;
     gap: var(--space-md);
   }
 
+  .ecosystem-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .ecosystem-card {
-    min-height: 88px;
+    min-height: 80px;
+    padding: 12px;
+  }
+
+  .ecosystem-card img {
+    height: 40px;
   }
 }
 </style>

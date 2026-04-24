@@ -143,21 +143,21 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 <style scoped lang="less">
 .products-shell {
-  --products-surface: rgba(255, 255, 255, 0.96);
-  --products-surface-strong: #ffffff;
-  --products-border: rgba(15, 23, 42, 0.08);
-  --products-title: #0f172a;
-  --products-text: #556074;
-  --products-accent: #1a3a8f;
-  --products-accent-soft: rgba(26, 58, 143, 0.06);
-  --products-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  --products-surface: var(--brand-surface-frosted-strong);
+  --products-surface-strong: var(--brand-surface);
+  --products-border: var(--brand-border-subtle);
+  --products-title: var(--brand-text-strong);
+  --products-text: var(--brand-text-soft);
+  --products-accent: var(--brand-primary);
+  --products-accent-soft: var(--brand-accent-soft);
+  --products-shadow: var(--shadow-md);
   min-height: 100vh;
   padding: 0 0 96px;
-  background: #ffffff;
+  background: var(--brand-surface);
 }
 
 .products-shell--robot {
-  background: #fbfcfe;
+  background: var(--brand-surface);
 }
 
 .products-container {
@@ -174,9 +174,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
-    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
+  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
 }
 
 .products-hero__inner {
@@ -257,7 +255,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   justify-content: center;
   min-width: 154px;
   padding: 12px 18px;
-  border-radius: 999px;
+  border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.12);
   font-weight: 600;
   font-size: 0.92rem;
@@ -272,9 +270,9 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 
 .products-hero__action--primary {
   color: #fff;
-  background: linear-gradient(135deg, var(--products-accent) 0%, #2a57b3 100%);
+  background: var(--products-accent);
   border-color: transparent;
-  box-shadow: 0 12px 24px rgba(20, 54, 127, 0.14);
+  box-shadow: 0 10px 20px rgba(20, 54, 127, 0.12);
 }
 
 .products-hero__action--primary:link,
@@ -335,7 +333,7 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric--text .products-hero__metric-value {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .products-hero__metric-label {
@@ -346,16 +344,8 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 @media (min-width: 1360px) {
-  .products-hero__description {
-    white-space: nowrap;
-  }
-
   .products-overview__header {
     max-width: none;
-  }
-
-  .products-overview__description {
-    white-space: nowrap;
   }
 }
 

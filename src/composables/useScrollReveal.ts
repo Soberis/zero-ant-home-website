@@ -31,30 +31,44 @@ export function useScrollReveal(
 
   let observer: IntersectionObserver | null = null;
 
-  onMounted(() => {
-    if (!target.value) return;
+  const revealImmediately = (element: HTMLElement) => {
+    element.classList.add('revealed');
+  };
 
-    // 尊重用户减少动画偏好
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      target.value.classList.add('revealed');
+  onMounted(() => {
+    const element = target.value;
+    if (!element) return;
+
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      revealImmediately(element);
       return;
     }
 
-    observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            if (once && observer) {
-              observer.unobserve(entry.target);
+    // 尊重用户减少动画偏好
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      revealImmediately(element);
+      return;
+    }
+
+    try {
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              if (once && observer) {
+                observer.unobserve(entry.target);
+              }
             }
           }
-        }
-      },
-      { threshold, rootMargin },
-    );
+        },
+        { threshold, rootMargin },
+      );
 
-    observer.observe(target.value);
+      observer.observe(element);
+    } catch {
+      revealImmediately(element);
+    }
   });
 
   onUnmounted(() => {

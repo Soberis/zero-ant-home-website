@@ -11,6 +11,9 @@
             <a href="#contact" class="btn btn-primary">
               {{ t("supportPage.paths.contact.title") }}
             </a>
+            <a :href="supportHotlineHref" class="btn btn-secondary">
+              {{ t("supportPage.hotlineAction") }}
+            </a>
           </div>
 
           <div class="hero-promises">
@@ -35,7 +38,7 @@
             v-for="path in supportPaths"
             :key="path.id"
             :href="path.href"
-            class="support-path"
+            class="support-path ui-row-link"
           >
             <span class="support-path-index">{{ formatIndex(path.id) }}</span>
             <div class="support-path-copy">
@@ -55,6 +58,7 @@
             <span class="title-main text-display-large">{{ t("supportPage.relatedDownloads") }}</span>
           </h2>
           <p class="detail-section__desc">{{ t("supportPage.downloadIntro") }}</p>
+          <p class="download-note">{{ t("supportPage.downloadNotice") }}</p>
         </div>
 
         <div class="download-grid">
@@ -69,6 +73,11 @@
             </div>
             <h3 class="download-title">{{ item.title }}</h3>
             <p class="download-desc">{{ item.desc }}</p>
+            <div class="download-card-actions">
+              <a class="download-link ui-action-link" :href="item.href">
+                {{ item.actionLabel }}
+              </a>
+            </div>
           </article>
         </div>
       </div>
@@ -175,6 +184,8 @@ interface DownloadItem {
   desc: string;
   tag: string;
   status: string;
+  href: string;
+  actionLabel: string;
 }
 
 interface FaqItem {
@@ -208,18 +219,30 @@ const servicePromises = computed<PromiseItem[]>(() => [
   },
 ]);
 
+// i18n JSON 中邮箱使用 {'@'} 代替 @ 防止爬虫抓取，渲染时还原为真实邮箱
+const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
+const supportHotlineHref = computed(() => `tel:${t("footer.telValue")}`);
+
+function buildMailtoHref(subject: string): string {
+  return `mailto:${supportEmail.value}?subject=${encodeURIComponent(subject)}`;
+}
+
 const downloads = computed<DownloadItem[]>(() => [
   {
     title: t("supportPage.downloads.productManual"),
     desc: t("supportPage.downloads.productManualDesc"),
     tag: "PDF",
-    status: t("supportPage.downloads.updating"),
+    status: t("supportPage.downloads.contactToGet"),
+    href: buildMailtoHref(t("supportPage.emailSubjects.productManual")),
+    actionLabel: t("supportPage.downloads.requestByEmail"),
   },
   {
     title: t("supportPage.downloads.jointMaterials"),
     desc: t("supportPage.downloads.jointMaterialsDesc"),
     tag: "ZIP",
-    status: t("supportPage.downloads.updating"),
+    status: t("supportPage.downloads.contactToGet"),
+    href: buildMailtoHref(t("supportPage.emailSubjects.jointMaterials")),
+    actionLabel: t("supportPage.downloads.requestByEmail"),
   },
 ]);
 
@@ -258,8 +281,6 @@ const supportPaths = computed<SupportPath[]>(() => [
     description: t("supportPage.paths.contact.description"),
   },
 ]);
-
-const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
 
 const contactItems = computed(() => [
   {
@@ -309,8 +330,15 @@ function formatIndex(value: number): string {
   background: var(--brand-surface);
 }
 
-.support-page > .page-section:nth-of-type(odd) {
-  background-color: var(--brand-surface-soft);
+.support-page > .page-section {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+  background-color: var(--section-surface);
+}
+
+.support-page > .page-section:nth-of-type(even) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
 }
 
 .support-shell {
@@ -327,8 +355,8 @@ function formatIndex(value: number): string {
   flex-direction: column;
   justify-content: flex-start;
   background:
-    radial-gradient(circle at top left, rgba(26, 58, 143, 0.08), transparent 34%),
-    linear-gradient(180deg, #f6f8fb 0, #eef3f9 100%);
+    linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%),
+    linear-gradient(180deg, transparent, transparent);
 }
 
 .hero-grid {
@@ -430,8 +458,7 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: var(--compact-hero-kpi-label-size);
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .support-path {
@@ -440,7 +467,6 @@ function formatIndex(value: number): string {
   gap: 18px;
   align-items: center;
   padding: 22px 0;
-  color: inherit;
   text-decoration: none;
   transition: color 0.25s ease, transform 0.25s ease;
 }
@@ -449,18 +475,12 @@ function formatIndex(value: number): string {
   border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.support-path:hover {
-  color: var(--brand-primary);
-  text-decoration: none;
-  transform: translateX(4px);
-}
-
 .support-path-index {
   min-width: 34px;
   color: rgba(26, 58, 143, 0.42);
   font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
 }
 
 .support-path-copy {
@@ -486,6 +506,11 @@ function formatIndex(value: number): string {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.support-path:hover .support-path-arrow {
+  transform: translateX(3px);
 }
 
 .page-section {
@@ -512,8 +537,7 @@ function formatIndex(value: number): string {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--brand-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .detail-section__desc {
@@ -522,6 +546,13 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: 1rem;
   line-height: 1.8;
+}
+
+.download-note {
+  margin: 10px 0 0;
+  color: var(--brand-primary);
+  font-size: 0.92rem;
+  line-height: 1.7;
 }
 
 .download-grid {
@@ -536,15 +567,20 @@ function formatIndex(value: number): string {
   gap: 14px;
   min-height: 220px;
   padding: 28px;
-  border: none;
-  border-radius: 18px;
-  background: var(--brand-surface-soft);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  background: var(--section-card-surface);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .download-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   border-color: rgba(26, 58, 143, 0.18);
+}
+
+.download-card:hover .download-link {
+  color: var(--brand-primary, var(--color-primary));
+  transform: translateX(2px);
 }
 
 .download-card-head {
@@ -559,8 +595,7 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .download-title {
@@ -576,6 +611,11 @@ function formatIndex(value: number): string {
   color: var(--brand-muted);
   font-size: 0.98rem;
   line-height: 1.8;
+}
+
+.download-card-actions {
+  margin-top: auto;
+  padding-top: 6px;
 }
 
 .card-tag {
@@ -598,7 +638,7 @@ function formatIndex(value: number): string {
   border-radius: 16px;
   margin-bottom: 16px;
   padding: 0 24px;
-  background: #ffffff;
+  background: var(--section-card-surface);
 }
 
 .card-header {
@@ -700,8 +740,9 @@ function formatIndex(value: number): string {
   flex-direction: column;
   gap: 6px;
   min-width: 0;
-  background: var(--brand-surface-soft);
   padding: 24px;
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
 }
 
@@ -710,19 +751,17 @@ function formatIndex(value: number): string {
 }
 
 .contact-card--full .contact-value {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .contact-label {
   color: var(--brand-muted);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .contact-value {
-  color: var(--brand-text);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
@@ -732,7 +771,9 @@ function formatIndex(value: number): string {
   word-break: break-word;
 }
 
-.contact-value[href]:hover { color: var(--brand-primary); }
+span.contact-value {
+  color: var(--brand-text);
+}
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
@@ -742,7 +783,7 @@ function formatIndex(value: number): string {
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-4px);
 }
 
 @media (max-width: 1100px) {

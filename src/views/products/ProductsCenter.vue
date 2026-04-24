@@ -1,12 +1,13 @@
 <template>
   <ProductsLayout v-bind="pageContent">
-    <section class="product-center-filter">
-      <div class="product-center-filter__inner">
+    <section class="product-center-filter" ref="filterRef">
+      <div class="product-center-filter__inner" ref="filterInnerRef">
         <a
           v-for="family in families"
           :key="family.id"
+          :ref="el => setFilterLinkRef(family.id, el)"
           :href="`#${family.id}`"
-          class="product-center-filter__link"
+          class="product-center-filter__link ui-jump-link"
           :class="{ 'is-active': activeFamilyId === family.id }"
         >
           <span>{{ family.title }}</span>
@@ -32,14 +33,14 @@
           v-for="card in family.cards"
           :key="card.id"
           :id="card.id"
-          class="product-card"
+          class="product-card ui-card ui-card--product"
           :to="localizePath(`/products/detail/${card.id}`)"
         >
-          <div class="product-card__visual">
+          <div class="product-card__visual ui-card__visual">
             <img
               :src="card.image"
               :alt="card.title"
-              class="product-card__image"
+              class="product-card__image ui-card__image"
               loading="lazy"
               decoding="async"
             />
@@ -67,7 +68,7 @@
             </p>
 
             <div class="product-card__actions">
-              <div class="app-action product-card__detail-link">
+              <div class="app-action product-card__detail-link ui-action-link">
                 <span class="action-text">{{ pageCopy.detailAction }}</span>
                 <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -98,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
 import {
@@ -112,7 +113,37 @@ const { localizePath } = useLocalizedPath();
 // resolveText removed as we now use standard i18n keys
 
 const activeFamilyId = ref("");
+const filterRef = ref<HTMLElement | null>(null);
+const filterInnerRef = ref<HTMLElement | null>(null);
+const filterLinkRefs = new Map<string, HTMLElement>();
 let familyObserver: IntersectionObserver | null = null;
+
+function setFilterLinkRef(id: string, el: unknown) {
+  if (el instanceof HTMLElement) {
+    filterLinkRefs.set(id, el);
+  }
+}
+
+function scrollFilterToActive(id: string) {
+  const linkEl = filterLinkRefs.get(id);
+  const container = filterInnerRef.value;
+  if (!linkEl || !container) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const linkRect = linkEl.getBoundingClientRect();
+  const scrollOffset = linkRect.left - containerRect.left - (containerRect.width / 2) + (linkRect.width / 2);
+
+  container.scrollBy({
+    left: scrollOffset,
+    behavior: 'smooth',
+  });
+}
+
+watch(activeFamilyId, (newId) => {
+  if (newId) {
+    nextTick(() => scrollFilterToActive(newId));
+  }
+});
 
 onMounted(() => {
   familyObserver = new IntersectionObserver((entries) => {
@@ -135,6 +166,7 @@ onMounted(() => {
 onUnmounted(() => {
   familyObserver?.disconnect();
   familyObserver = null;
+  filterLinkRefs.clear();
 });
 
 const pageCopy = computed(() => ({
@@ -165,21 +197,6 @@ const families = computed(() =>
   }))
 );
 
-const guideItems = computed(() => [
-  {
-    title: t("productsPage.guide.items.family.title"),
-    description: t("productsPage.guide.items.family.description"),
-  },
-  {
-    title: t("productsPage.guide.items.difference.title"),
-    description: t("productsPage.guide.items.difference.description"),
-  },
-  {
-    title: t("productsPage.guide.items.accessories.title"),
-    description: t("productsPage.guide.items.accessories.description"),
-  },
-]);
-
 const formatMetricCount = (count: number): string => String(count).padStart(2, "0");
 
 const pageMetrics = computed(() => [
@@ -194,7 +211,7 @@ const pageMetrics = computed(() => [
     label: t("productsPage.hero.metrics.products"),
   },
   {
-    value: formatMetricCount(guideItems.value.length),
+    value: formatMetricCount(3),
     label: t("productsPage.hero.metrics.cues"),
   },
 ]);
@@ -218,8 +235,6 @@ const pageContent = computed(() => ({
   metrics: pageMetrics.value,
   overviewTitle: t("productsPage.overview.title"),
   overviewDescription: t("productsPage.overview.description"),
-  guideTitle: t("productsPage.guide.title"),
-  guideItems: guideItems.value,
 }));
 </script>
 
@@ -237,36 +252,15 @@ const pageContent = computed(() => ({
   flex-wrap: wrap;
   gap: 8px;
   padding: 8px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(15, 23, 42, 0.05);
-  border-radius: 99px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
   max-width: 100%;
 }
 
 .product-center-filter__link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   min-width: 80px;
-  min-height: 36px;
-  padding: 0 16px;
-  color: #475467;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 99px;
-  background-color: transparent;
-  transition: all 0.25s ease;
-  text-decoration: none;
-}
-
-.product-center-filter__link:hover,
-.product-center-filter__link.is-active {
-  color: var(--brand-primary, var(--color-primary));
-  background-color: var(--brand-surface-soft, rgba(26, 58, 143, 0.06));
 }
 
 /* active link state could be handled with JS, but for anchor links a soft hover is good enough for now. */
@@ -275,8 +269,10 @@ const pageContent = computed(() => ({
   position: relative;
   padding: 64px 0;
   scroll-margin-top: calc(var(--nav-height) + 96px);
+  --section-card-surface: #ffffff;
 }
-.product-family::before {
+
+.product-family:nth-of-type(even)::before {
   content: "";
   position: absolute;
   top: 0;
@@ -287,7 +283,21 @@ const pageContent = computed(() => ({
   height: 100%;
   transform: translateX(-50%);
   z-index: -1;
-  background-color: #f8f9fb;
+  background-color: var(--brand-surface-soft);
+}
+
+.product-family:nth-of-type(odd)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  padding-left: 100vw;
+  padding-right: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-color: var(--brand-surface);
 }
 
 .product-family + .product-family {
@@ -320,50 +330,26 @@ const pageContent = computed(() => ({
 }
 
 .product-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
   gap: 0;
   padding: 0;
-  border-radius: 16px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
   scroll-margin-top: calc(var(--nav-height) + 96px);
-  overflow: hidden;
-  z-index: 1;
-  text-decoration: none;
-  cursor: pointer;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.04);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
-}
-
-.product-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
+  color: var(--color-text-secondary);
 }
 
 .product-card__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 250px;
   padding: 20px;
-  background: radial-gradient(circle at center, #ffffff 0%, #f1f3f8 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f3f5f9 100%);
   border-bottom: 1px solid rgba(15, 23, 42, 0.03);
-}
-
-.product-card__image {
-  width: auto;
-  max-width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0;
+  /* 列表页使用固定高度而非全局 ui-card__visual 的 4:3 比例，
+     因为产品图在此布局下需要统一高度以保持网格对齐 */
+  aspect-ratio: auto;
 }
 
 .product-card:hover .product-card__image {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .product-card__body {
@@ -382,25 +368,11 @@ const pageContent = computed(() => ({
 }
 
 .product-card__detail-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  color: inherit;
+}
+
+.product-card:hover .product-card__detail-link {
   color: var(--brand-primary, var(--color-primary));
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.25s ease;
-  text-decoration: none;
-}
-
-.product-card__detail-link:hover {
-  color: var(--brand-primary-deep, #142a66);
-}
-
-.product-card__detail-link .action-arrow {
-  width: 18px;
-  height: 18px;
-  color: currentColor;
-  transition: transform 0.25s ease;
 }
 
 .product-card:hover .product-card__detail-link .action-arrow {
@@ -424,6 +396,7 @@ const pageContent = computed(() => ({
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -493,7 +466,7 @@ const pageContent = computed(() => ({
   background: linear-gradient(135deg, #ffffff 0%, #f4f7fb 100%);
   border: 1px solid rgba(15, 23, 42, 0.04);
   border-radius: 24px;
-  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.025);
 }
 
 .product-center-cta__copy {
@@ -520,7 +493,6 @@ const pageContent = computed(() => ({
 @media (min-width: 1360px) {
   .product-family__intro {
     max-width: none;
-    white-space: nowrap;
   }
 }
 
@@ -550,14 +522,25 @@ const pageContent = computed(() => ({
   }
 
   .product-center-filter__inner {
-    gap: 8px;
-    padding: 10px 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding: 10px 12px;
+    scroll-snap-type: x proximity;
+  }
+
+  .product-center-filter__inner::-webkit-scrollbar {
+    display: none;
   }
 
   .product-center-filter__link {
+    flex-shrink: 0;
     min-height: 36px;
-    padding: 0 8px;
+    padding: 0 12px;
     font-size: 0.86rem;
+    scroll-snap-align: center;
   }
 
   .product-family + .product-family {

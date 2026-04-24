@@ -1,7 +1,7 @@
-import { createApp, watch } from "vue";
+import { createApp, nextTick, watch } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
-import i18n from "@/config/i18n";
+import i18n, { initI18n } from "@/config/i18n";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 import "@/assets/style.less";
 
@@ -12,25 +12,33 @@ const app = createApp(App);
 app.use(router);
 app.use(i18n);
 
-// Element Plus 组件和样式通过按需导入自动处理
-app.mount("#app");
+// 初始化 i18n 语言包（按需加载，仅当前语言阻塞首屏）
+// 必须在 mount 之前完成，确保首屏渲染时文案已就绪
+initI18n().then(() => {
+  app.mount("#app");
+}).catch(() => {
+  // 语言包加载失败时仍挂载，避免白屏
+  app.mount("#app");
+});
 
 // 初始化安全监控和SEO（仅在浏览器环境）
 if (typeof window !== "undefined") {
-  const DEV_CACHE_PREFIX = "zeroant-cache";
+  const DEV_CACHE_PREFIX = "zeroant-";
 
   if ("scrollRestoration" in window.history) {
     window.history.scrollRestoration = "manual";
   }
 
-  // 延后初始化安全监控，避免阻塞首屏脚本解析
-  window.setTimeout(() => {
-    void import("@/utils/security")
-      .then(({ initSecurity }) => {
-        initSecurity();
-      })
-      .catch(() => {});
-  }, 0);
+  // 安全监控仅在开发环境启用，生产环境避免引入额外副作用
+  if (import.meta.env.DEV) {
+    window.setTimeout(() => {
+      void import("@/utils/security")
+        .then(({ initSecurity }) => {
+          initSecurity();
+        })
+        .catch(() => {});
+    }, 0);
+  }
 
   // dev 环境主动清理已注册的 SW 和缓存，避免旧包干扰本地调试
   if (import.meta.env.DEV && "serviceWorker" in navigator) {
@@ -54,24 +62,38 @@ if (typeof window !== "undefined") {
   // 注册 Service Worker (PWA)
   if (import.meta.env.PROD && "serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      navigator.serviceWorker.register(`/sw.js?v=${__APP_BUILD_ID__}`).catch(() => {});
     });
   }
 
   // 初始化默认SEO和路由守卫
   router.isReady().then(async () => {
     // 动态导入SEO函数，避免循环依赖
-    const { 
-      setupPageSEO, 
-      setupSupportSEO, 
-      setupAboutSEO, 
-      setupCareersSEO, 
+    const {
+      setupPageSEO,
+      setupSupportSEO,
+      setupAboutSEO,
+      setupCareersSEO,
       setupSolutionsSEO,
+      setupApplicationDetailSEO,
+      setupVideoDetailSEO,
       setupProductDetailSEO
     } = await import("@/router/seo");
-    
+
+    let routeSEORequestId = 0;
+
     const applyRouteSEO = (to: RouteLocationNormalizedLoaded) => {
-      setTimeout(() => {
+      const requestId = ++routeSEORequestId;
+      const targetFullPath = to.fullPath;
+      const isCurrentRouteSEO = () =>
+        requestId === routeSEORequestId &&
+        router.currentRoute.value.fullPath === targetFullPath;
+
+      void nextTick().then(async () => {
+        if (!isCurrentRouteSEO()) {
+          return;
+        }
+
         if (typeof document !== "undefined") {
           document.documentElement.setAttribute("lang", String(i18n.global.locale.value));
         }
@@ -89,13 +111,19 @@ if (typeof window !== "undefined") {
           case "Solutions":
             setupSolutionsSEO(to);
             break;
+          case "ApplicationDetail":
+            await setupApplicationDetailSEO(to, isCurrentRouteSEO);
+            break;
+          case "VideoDetail":
+            await setupVideoDetailSEO(to, isCurrentRouteSEO);
+            break;
           case "ProductDetail":
-            setupProductDetailSEO(to);
+            await setupProductDetailSEO(to, isCurrentRouteSEO);
             break;
           default:
             setupPageSEO(to);
         }
-      }, 0);
+      });
     };
     
     applyRouteSEO(router.currentRoute.value);
