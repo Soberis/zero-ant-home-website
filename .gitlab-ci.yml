@@ -3,8 +3,6 @@ image: $HARBOR_HOST/$HARBOR_PROJECT/zeroant_homewebsite:latest
 variables:
   NPM_CONFIG_CACHE: .npm
   CI: true
-  # 如内网已提供 Harbor / 依赖代理，可直接在 CI 变量覆盖这个值
-  BUILD_NODE_IMAGE: node:20.19.0-bullseye
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}-${CI_PROJECT_ID}
@@ -19,7 +17,6 @@ stages:
 # 构建阶段
 build:
   stage: build
-  image: $BUILD_NODE_IMAGE
   retry:
     max: 2
     when:
@@ -27,9 +24,6 @@ build:
       - stuck_or_timeout_failure
       - scheduler_failure
       - api_failure
-  before_script:
-    - corepack enable
-    - corepack prepare yarn@1.22.22 --activate
   script:
     - yarn install
     - yarn build
