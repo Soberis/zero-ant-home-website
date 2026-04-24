@@ -19,9 +19,9 @@
         v-for="family in productFamilies"
         :key="family.key"
         :to="localizeTo({ path: '/products', hash: `#${family.key}` })"
-        class="family-card"
+        class="family-card ui-card ui-card--product"
       >
-        <div class="family-card__visual">
+        <div class="family-card__visual ui-card__visual">
           <picture v-if="family.responsiveSrcSet" class="family-card__picture">
             <source
               :srcset="family.responsiveSrcSet"
@@ -31,7 +31,7 @@
             <img
               :src="family.image"
               :alt="t(family.titleKey)"
-              class="family-card__image"
+              class="family-card__image ui-card__image"
               loading="lazy"
               decoding="async"
             />
@@ -40,21 +40,21 @@
             v-else
             :src="family.image"
             :alt="t(family.titleKey)"
-            class="family-card__image"
+            class="family-card__image ui-card__image"
             loading="lazy"
             decoding="async"
           />
         </div>
 
-        <div class="family-card__content">
-          <h3 class="family-card__title">{{ t(family.titleKey) }}</h3>
-          <p class="family-card__description">{{ t(family.descriptionKey) }}</p>
+        <div class="family-card__content ui-card__content">
+          <h3 class="family-card__title ui-card__title">{{ t(family.titleKey) }}</h3>
+          <p class="family-card__description ui-card__description">{{ t(family.descriptionKey) }}</p>
 
           <p class="family-card__models">
             {{ family.models.join(' / ') }}
           </p>
 
-          <span class="family-card__action ui-action-link">
+          <span class="family-card__action ui-card__action ui-action-link">
             <span>{{ t('home.coreProducts.cardAction') }}</span>
             <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
@@ -207,35 +207,6 @@ const productFamilies = rawProductFamilies.map((family) => ({
   gap: 22px;
   min-height: 100%;
   padding: 32px;
-  border-radius: 16px;
-  background: #f8f9fb;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.4s ease;
-}
-
-.family-card:hover {
-  transform: translateY(-2px);
-  background-color: #f8f9fb;
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05);
-}
-
-.family-card:focus-visible {
-  outline: 2px solid rgba(26, 58, 143, 0.24);
-  outline-offset: 4px;
-}
-
-.family-card__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-  padding: 12px 8px;
-  border-radius: 12px;
-  background: #ffffff;
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .family-card__picture {
@@ -246,65 +217,11 @@ const productFamilies = rawProductFamilies.map((family) => ({
   height: 100%;
 }
 
-.family-card:hover .family-card__visual {
-  background: #ffffff;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.025);
-}
-
-.family-card__image {
-  width: auto;
-  max-width: 100%;
-  height: 180px;
-  object-fit: contain;
-  object-position: center;
-  transition: transform 0.25s ease;
-}
-
-.family-card:hover .family-card__image {
-  transform: none;
-}
-
-.family-card__content {
-  display: grid;
-  gap: 10px;
-}
-
-.family-card__title {
-  margin: 0;
-  font-family: "Outfit", sans-serif;
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--color-text);
-  letter-spacing: -0.02em;
-}
-
-.family-card__description {
-  margin: 0;
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.75;
-}
-
 .family-card__models {
   margin: 4px 0 0;
   color: #344054;
   font-size: 0.92rem;
   line-height: 1.8;
-}
-
-.family-card__action {
-  margin-top: 8px;
-  font-size: 0.92rem;
-}
-
-.family-card:hover .family-card__action {
-  color: var(--brand-primary, var(--color-primary));
-  transform: translateX(2px);
-}
-
-.family-card:hover .family-card__action .action-arrow {
-  transform: translateX(4px);
 }
 
 @media (max-width: 1280px) {
@@ -348,12 +265,12 @@ const productFamilies = rawProductFamilies.map((family) => ({
   }
 
   .family-card__visual {
-    min-height: 168px;
+    aspect-ratio: 16 / 10;
     padding: 8px 0;
   }
 
   .family-card__image {
-    height: 152px;
+    max-height: 152px;
   }
 }
 

@@ -17,6 +17,23 @@
   --color-background-white: #ffffff;
   --color-background-dark: #111111;
 
+  /* ── 语义色 ── */
+  --color-success: #10b981;
+  --color-success-light: #ecfdf5;
+  --color-success-dark: #065f46;
+
+  --color-warning: #f59e0b;
+  --color-warning-light: #fffbeb;
+  --color-warning-dark: #92400e;
+
+  --color-error: #ef4444;
+  --color-error-light: #fef2f2;
+  --color-error-dark: #991b1b;
+
+  --color-info: #3b82f6;
+  --color-info-light: #eff6ff;
+  --color-info-dark: #1e40af;
+
   /* ── 品牌（统一变量） ── */
   --brand-primary: var(--color-primary);
   --brand-primary-deep: var(--color-primary-dark);
@@ -413,6 +430,41 @@ body {
   color: var(--color-primary);
 }
 
+.text-success {
+  color: var(--color-success-dark);
+}
+
+.text-warning {
+  color: var(--color-warning-dark);
+}
+
+.text-error {
+  color: var(--color-error-dark);
+}
+
+.text-info {
+  color: var(--color-info-dark);
+}
+
+/* ================================================================
+   语义色背景工具类
+   ================================================================ */
+.bg-success {
+  background-color: var(--color-success-light);
+}
+
+.bg-warning {
+  background-color: var(--color-warning-light);
+}
+
+.bg-error {
+  background-color: var(--color-error-light);
+}
+
+.bg-info {
+  background-color: var(--color-info-light);
+}
+
 /* ================================================================
    HTML 元素默认字体规范
    ================================================================ */
@@ -577,6 +629,8 @@ small {
 /* ================================================================
    卡片系统
    ================================================================ */
+
+/* ── 基础卡片 ── */
 .card {
   background: var(--color-background-white);
   border: none;
@@ -600,6 +654,106 @@ small {
   img {
     border-radius: var(--radius-md);
   }
+}
+
+/* ── 产品卡片基础 ── */
+.ui-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              background-color 0.4s ease;
+}
+
+.ui-card:hover {
+  transform: translateY(-2px);
+}
+
+.ui-card:focus-visible {
+  outline: 2px solid var(--brand-focus-ring);
+  outline-offset: 4px;
+}
+
+/* ── 产品卡片 ── */
+.ui-card--product {
+  background: var(--brand-surface-panel, #f8f9fb);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.02);
+}
+
+.ui-card--product:hover {
+  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05);
+}
+
+/* 产品卡片 — 图片区 */
+.ui-card__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.ui-card--product:hover .ui-card__visual {
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.025);
+}
+
+.ui-card__image {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.25s ease;
+}
+
+/* 产品卡片 — 内容区 */
+.ui-card__content {
+  display: grid;
+  gap: 10px;
+}
+
+.ui-card__title {
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.ui-card__description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.ui-card__action {
+  margin-top: 8px;
+  font-size: 0.92rem;
+}
+
+.ui-card--product:hover .ui-card__action {
+  color: var(--brand-primary, var(--color-primary));
+  transform: translateX(2px);
+}
+
+.ui-card--product:hover .ui-card__action .action-arrow {
+  transform: translateX(4px);
 }
 
 /* ================================================================

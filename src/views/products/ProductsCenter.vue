@@ -32,14 +32,14 @@
           v-for="card in family.cards"
           :key="card.id"
           :id="card.id"
-          class="product-card"
+          class="product-card ui-card ui-card--product"
           :to="localizePath(`/products/detail/${card.id}`)"
         >
-          <div class="product-card__visual">
+          <div class="product-card__visual ui-card__visual">
             <img
               :src="card.image"
               :alt="card.title"
-              class="product-card__image"
+              class="product-card__image ui-card__image"
               loading="lazy"
               decoding="async"
             />
@@ -298,47 +298,20 @@ const pageContent = computed(() => ({
 }
 
 .product-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
   gap: 0;
   padding: 0;
-  border-radius: 16px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
   scroll-margin-top: calc(var(--nav-height) + 96px);
-  overflow: hidden;
-  z-index: 1;
-  text-decoration: none;
-  cursor: pointer;
-  background: var(--section-card-surface, #ffffff);
   color: var(--color-text-secondary);
-  border: 1px solid rgba(15, 23, 42, 0.04);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.02);
-}
-
-.product-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(26, 58, 143, 0.1);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05);
 }
 
 .product-card__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 250px;
   padding: 20px;
   background: linear-gradient(180deg, #ffffff 0%, #f3f5f9 100%);
   border-bottom: 1px solid rgba(15, 23, 42, 0.03);
-}
-
-.product-card__image {
-  width: auto;
-  max-width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0;
+  aspect-ratio: auto;
 }
 
 .product-card:hover .product-card__image {

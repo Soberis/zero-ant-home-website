@@ -1,6 +1,7 @@
 <template>
   <div v-if="detailLocaleReady">
     <div v-if="productData" class="product-detail">
+      <UiBreadcrumb :items="breadcrumbItems" />
       <section id="product-overview" class="product-hero">
         <div class="container product-hero__container">
           <div class="product-hero__inner">
@@ -276,6 +277,8 @@ import { useI18n } from "vue-i18n";
 import { sanitizeHtmlAllowList } from "@/utils/security";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
+import UiBreadcrumb from "@/components/common/UiBreadcrumb.vue";
+import type { BreadcrumbItem } from "@/components/common/UiBreadcrumb.vue";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import { useProductDetailData, normalizeCollection } from "@/composables/useProductDetailData";
 import { getProductCenterCardById } from "@/data/product-center";

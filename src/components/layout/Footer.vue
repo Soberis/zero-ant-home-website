@@ -6,10 +6,18 @@
           v-for="section in footerNavSections"
           :key="section.to"
           class="footer-col footer-col--nav"
+          :class="{ 'is-open': openSection === section.to }"
         >
-          <h4>{{ $t(section.title) }}</h4>
+          <h4
+            class="footer-accordion-trigger"
+            :aria-expanded="openSection === section.to"
+            @click="toggleSection(section.to)"
+          >
+            <span>{{ $t(section.title) }}</span>
+            <span class="footer-accordion-icon" aria-hidden="true" />
+          </h4>
 
-          <ul>
+          <ul class="footer-accordion-body">
             <li v-for="item in section.items" :key="item.hash">
               <router-link
                 :to="localizeTo({ path: section.to, hash: item.hash })"
@@ -104,7 +112,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import bilibiliQrcode from "@/assets/images/qrcodes/bilibili.webp";
 import taobaoQrcode from "@/assets/images/qrcodes/taobao.png";
@@ -115,6 +123,13 @@ import { useLocalizedPath } from "@/composables/useLocalizedPath";
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
 const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
+
+// 移动端手风琴：记录当前展开的导航分区 key，同一时间只展开一个
+const openSection = ref<string | null>(null);
+
+function toggleSection(sectionTo: string): void {
+  openSection.value = openSection.value === sectionTo ? null : sectionTo;
+}
 </script>
 
 <style scoped lang="less">
@@ -146,6 +161,20 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
 
 .footer-col--nav {
   display: block;
+}
+
+/* 桌面端默认隐藏手风琴图标，accordion-body 正常展示 */
+.footer-accordion-trigger {
+  cursor: default;
+}
+
+.footer-accordion-icon {
+  display: none;
+}
+
+.footer-accordion-body {
+  max-height: none;
+  overflow: visible;
 }
 
 .footer-col h4 {
@@ -326,16 +355,82 @@ const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@")
 @media (max-width: 768px) {
   .footer-columns {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 0;
   }
 
-  .footer-col--nav {
-    display: none;
+  /* 手风琴触发器：仅在移动端可点击 */
+  .footer-accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .footer-accordion-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .footer-accordion-icon::before,
+  .footer-accordion-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 1px;
+  }
+
+  .footer-accordion-icon::before {
+    transform: translate(-50%, -50%);
+  }
+
+  .footer-accordion-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  /* 展开时旋转 + 号为 − 号 */
+  .is-open .footer-accordion-icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .is-open .footer-accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  /* 手风琴主体：默认收起 */
+  .footer-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+  }
+
+  .is-open .footer-accordion-body {
+    max-height: 300px;
+    padding: 8px 0 16px;
   }
 
   .contact-col,
   .qrcode-col {
     grid-column: span 1;
+  }
+
+  .contact-col h4 {
+    border-bottom: none;
   }
 }
 
