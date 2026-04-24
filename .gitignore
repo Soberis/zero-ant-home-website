@@ -44,3 +44,6 @@ docs/
 参数/
 DESIGN.md
 .workbuddy/
+
+yarn.lock
+package-lock.json

@@ -66,6 +66,7 @@
     "minimatch": ">=9.0.0",
     "eslint-scope": "^8.4.0",
     "eslint-visitor-keys": "4.2.1",
+    "espree": "^10.0.0",
     "vue-tsc": "^2.0.29"
   }
 }
