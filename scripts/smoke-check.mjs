@@ -55,6 +55,43 @@ async function checkServiceWorkerPolicy() {
   }
 }
 
+async function checkNotFoundSeoPolicy() {
+  const notFoundSource = await readFile(path.join(srcDir, "views", "NotFound.vue"));
+
+  assert(
+    /robots:\s*"noindex,\s*nofollow"/.test(notFoundSource),
+    "[smoke] NotFound should mark routes as noindex"
+  );
+  assert(
+    /watch\(\[locale,\s*\(\)\s*=>\s*route\.fullPath\],\s*updateSEO,\s*\{\s*immediate:\s*true\s*\}\)/.test(
+      notFoundSource
+    ),
+    "[smoke] NotFound SEO should react to route reuse"
+  );
+}
+
+async function checkNginxFallbackPolicy() {
+  const [baseTemplate, optimizedTemplate] = await Promise.all([
+    readFile(path.join(projectRoot, "config", "nginx.conf.template")),
+    readFile(path.join(projectRoot, "config", "nginx-optimized.conf.template")),
+  ]);
+
+  for (const content of [baseTemplate, optimizedTemplate]) {
+    assert(
+      /try_files\s+\$uri\s+\$uri\/\s+=404;/.test(content),
+      "[smoke] Nginx should return 404 for unknown static routes"
+    );
+    assert(
+      content.includes("system-products|robot-products"),
+      "[smoke] Nginx should preserve legacy product redirects"
+    );
+    assert(
+      !content.includes("try_files $uri $uri/ /index.html;"),
+      "[smoke] Nginx should not fall back unknown routes to index.html"
+    );
+  }
+}
+
 async function checkVideoCardSemantics() {
   const videoCardSource = await readFile(path.join(srcDir, "components", "common", "VideoCard.vue"));
   const videoCasesSource = await readFile(path.join(srcDir, "components", "business", "VideoCases.vue"));
@@ -94,6 +131,8 @@ async function checkBuildArtifacts() {
 async function main() {
   await checkResponsiveManifest();
   await checkServiceWorkerPolicy();
+  await checkNotFoundSeoPolicy();
+  await checkNginxFallbackPolicy();
   await checkVideoCardSemantics();
   await checkBuildArtifacts();
   console.log("[smoke] All smoke checks passed");

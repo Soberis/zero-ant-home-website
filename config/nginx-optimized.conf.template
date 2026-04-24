@@ -116,14 +116,19 @@ server {
         try_files $uri =404;
     }
 
-    # ---- SPA 路由处理 ----
+    # ---- 旧产品路由静态重定向 ----
+    location ~ ^/(en/)?(system-products|robot-products)(/.*)?$ {
+        return 301 /$1products;
+    }
+
+    # ---- 静态路由处理 ----
     location / {
-        # index.html 不缓存，确保每次获取最新版本
+        # 仅对已预渲染页面放行，未知路径直接 404，避免坏链接被索引
         add_header Cache-Control "no-cache, no-store, must-revalidate";
         add_header X-Frame-Options "SAMEORIGIN" always;
         add_header X-Content-Type-Options "nosniff" always;
         add_header X-XSS-Protection "1; mode=block" always;
         add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ =404;
     }
 }

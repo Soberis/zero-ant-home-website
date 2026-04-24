@@ -11,9 +11,14 @@ server {
     gzip on;
     gzip_types text/css application/javascript;
 
-    # 处理 SPA 路由：所有路由返回 index.html
+    # 旧产品路由保留跳转，避免依赖前端路由兜底
+    location ~ ^/(en/)?(system-products|robot-products)(/.*)?$ {
+        return 301 /$1products;
+    }
+
+    # 站点已预渲染为静态页面；未知路径直接返回 404，避免错误 URL 被当作首页收录
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ =404;
     }
 
     # 生产环境开启 HTTP 跳转 HTTPS
@@ -51,7 +56,11 @@ server {
     gzip_min_length 1024;
     gzip_comp_level 6;
 
+    location ~ ^/(en/)?(system-products|robot-products)(/.*)?$ {
+        return 301 /$1products;
+    }
+
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ =404;
     }
 }

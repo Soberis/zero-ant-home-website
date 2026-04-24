@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch } from "vue";
+import { watch } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
@@ -19,14 +19,17 @@ const { t, locale } = useI18n();
 
 function updateSEO(): void {
   const baseUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const currentUrl = `${baseUrl}${route.fullPath}`;
+  const currentPath = route.fullPath.split("#")[0];
+  const currentUrl = `${baseUrl}${currentPath}`;
   const title = t("notFoundPage.title");
   const description = t("notFoundPage.description");
 
   setSEO({
+    htmlLang: String(locale.value),
     title,
     description,
     keywords: t("seo.defaultKeywords"),
+    robots: "noindex, nofollow",
     ogTitle: title,
     ogDescription: description,
     ogUrl: currentUrl,
@@ -43,9 +46,5 @@ function updateSEO(): void {
   setStructuredData([]);
 }
 
-watch(locale, updateSEO, { immediate: false });
-
-onMounted(() => {
-  updateSEO();
-});
+watch([locale, () => route.fullPath], updateSEO, { immediate: true });
 </script>

@@ -29,14 +29,16 @@ if (typeof window !== "undefined") {
     window.history.scrollRestoration = "manual";
   }
 
-  // 延后初始化安全监控，避免阻塞首屏脚本解析
-  window.setTimeout(() => {
-    void import("@/utils/security")
-      .then(({ initSecurity }) => {
-        initSecurity();
-      })
-      .catch(() => {});
-  }, 0);
+  // 安全监控仅在开发环境启用，生产环境避免引入额外副作用
+  if (import.meta.env.DEV) {
+    window.setTimeout(() => {
+      void import("@/utils/security")
+        .then(({ initSecurity }) => {
+          initSecurity();
+        })
+        .catch(() => {});
+    }, 0);
+  }
 
   // dev 环境主动清理已注册的 SW 和缓存，避免旧包干扰本地调试
   if (import.meta.env.DEV && "serviceWorker" in navigator) {

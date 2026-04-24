@@ -91,53 +91,24 @@ export function sanitizeHtmlAllowList(
   }
 }
 
-/**
- * 检查浏览器安全特性支持
- * @returns 安全特性支持情况
- */
-function checkSecurityFeatures() {
-  if (typeof window === "undefined" || typeof document === "undefined") {
-    return {
-      https: false,
-      crypto: false,
-      csp: false,
-      referrerPolicy: false,
-      secureContext: false,
-      serviceWorker: false,
-    };
-  }
-
-  return {
-    https: location.protocol === "https:",
-    crypto: !!(window.crypto && window.crypto.getRandomValues),
-    csp: !!document.querySelector('meta[http-equiv="Content-Security-Policy"]'),
-    referrerPolicy: !!document.querySelector('meta[name="referrer"]'),
-    secureContext: window.isSecureContext,
-    serviceWorker: "serviceWorker" in navigator,
-  };
-}
-
-/**
- * 安全日志记录
- * @param event 安全事件
- * @param details 事件详情
- */
 type SecurityEventDetails = Record<string, unknown>;
 
 function logSecurityEvent(_event: string, _details?: SecurityEventDetails) {
-  // 开发环境输出到控制台
-  if (import.meta.env.DEV) {
-    console.warn(`[Security] ${_event}`, _details);
+  if (!import.meta.env.DEV) {
+    return;
   }
 
-  // 生产环境可以发送到安全监控服务
-  // 例如：发送到 Sentry、LogRocket 等
+  console.warn(`[Security] ${_event}`, _details);
 }
 
 /**
- * 内容安全策略违规处理
+ * 内容安全策略违规处理（仅开发环境辅助排查）
  */
 function setupCSPViolationReporting() {
+  if (typeof document === "undefined") {
+    return;
+  }
+
   document.addEventListener("securitypolicyviolation", (event) => {
     logSecurityEvent("CSP_VIOLATION", {
       blockedURI: event.blockedURI,
@@ -153,87 +124,15 @@ function setupCSPViolationReporting() {
  * 初始化安全监控
  */
 export function initSecurity() {
-  // 检查安全特性
-  const features = checkSecurityFeatures();
-
-  if (import.meta.env.DEV) {
-    console.warn("[Security] Features:", features);
+  if (!import.meta.env.DEV || typeof window === "undefined" || typeof document === "undefined") {
+    return;
   }
 
-  // 设置全局错误处理
-  setupGlobalErrorHandling();
-
-  // 初始化安全策略
-  setupSecurityPolicies();
-
-  // 设置 CSP 违规报告
   setupCSPViolationReporting();
 
-  // 记录安全初始化事件
-  logSecurityEvent("SECURITY_INIT", features);
-}
-
-/**
- * 设置全局错误处理
- */
-function setupGlobalErrorHandling() {
-  window.addEventListener("error", (event) => {
-    const errorInfo = {
-      message: event.message,
-      filename: event.filename,
-      lineno: event.lineno,
-      colno: event.colno,
-      error: event.error?.stack,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      url: window.location.href,
-    };
-
-    // 生产环境错误上报
-    if (import.meta.env.PROD) {
-      logSecurityEvent("JAVASCRIPT_ERROR", errorInfo);
-    }
-  });
-
-  window.addEventListener("unhandledrejection", (event) => {
-    const errorInfo = {
-      reason: event.reason,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      url: window.location.href,
-    };
-
-    // 生产环境错误上报
-    if (import.meta.env.PROD) {
-      logSecurityEvent("PROMISE_REJECTION", errorInfo);
-    }
-  });
-}
-
-/**
- * 设置安全策略
- */
-function setupSecurityPolicies() {
-  // 禁用控制台（生产环境）
-  if (import.meta.env.PROD) {
-    disableConsole();
-  }
-}
-
-/**
- * 禁用控制台（生产环境安全措施）
- */
-function disableConsole() {
-  const noop = () => {};
-  // 保留 warn 和 error，便于线上问题排查
-  const methods: Array<"log" | "info" | "debug" | "trace"> = [
-    "log",
-    "info",
-    "debug",
-    "trace",
-  ];
-
-  methods.forEach((method) => {
-    console[method] = noop;
+  logSecurityEvent("SECURITY_INIT", {
+    secureContext: window.isSecureContext,
+    csp: !!document.querySelector('meta[http-equiv="Content-Security-Policy"]'),
+    serviceWorker: "serviceWorker" in navigator,
   });
 }
