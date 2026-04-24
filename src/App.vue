@@ -22,11 +22,20 @@
 import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import NavBar from "@/components/layout/NavBar.vue";
+import SectionError from "@/components/common/SectionError.vue";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 // 非关键壳子组件异步加载，减少首屏同步体积
-const Footer = defineAsyncComponent(() => import("@/components/layout/Footer.vue"));
-const FloatingCTA = defineAsyncComponent(() => import("@/components/common/FloatingCTA.vue"));
+const Footer = defineAsyncComponent({
+  loader: () => import("@/components/layout/Footer.vue"),
+  errorComponent: SectionError,
+  timeout: 8000,
+});
+const FloatingCTA = defineAsyncComponent({
+  loader: () => import("@/components/common/FloatingCTA.vue"),
+  errorComponent: SectionError,
+  timeout: 8000,
+});
 
 const router = useRouter();
 const route = useRoute();

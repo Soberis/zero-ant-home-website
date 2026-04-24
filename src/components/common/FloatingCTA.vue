@@ -1,10 +1,19 @@
 <template>
   <transition name="fade">
-    <div class="floating-sidebar" v-show="visible">
+    <aside
+      v-show="visible"
+      class="floating-sidebar"
+      :aria-hidden="!visible"
+      :aria-label="t('common.cta.quickActions')"
+    >
       <!-- 电话咨询 -->
-      <a :href="`tel:${t('footer.telValue')}`" class="sidebar-item group sidebar-item--phone-mobile">
+      <a
+        :href="`tel:${t('footer.telValue')}`"
+        class="sidebar-item group sidebar-item--phone-mobile"
+        :aria-label="`${t('common.cta.serviceHotline')} ${t('footer.telValue')}`"
+      >
         <div class="sidebar-icon">
-          <svg viewBox="0 0 24 24" width="20" height="20">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20">
             <path fill="currentColor" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
           </svg>
         </div>
@@ -17,9 +26,13 @@
       </a>
 
       <!-- 微信咨询 -->
-      <router-link :to="localizeTo({ path: '/support', hash: '#contact' })" class="sidebar-item group sidebar-item--wechat-mobile">
+      <router-link
+        :to="localizeTo({ path: '/support', hash: '#contact' })"
+        class="sidebar-item group sidebar-item--wechat-mobile"
+        :aria-label="`${t('common.cta.wecomTitle')} - ${t('common.cta.wecomDesc')}`"
+      >
         <div class="sidebar-icon">
-          <svg viewBox="0 0 24 24" width="20" height="20">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20">
             <path fill="currentColor" d="M8.25 15.5c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm7.5 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm5.75-5.5c0 3.87-3.69 7.08-8.25 7.08-1.52 0-2.95-.36-4.18-1-.53.4-1.15.8-1.78 1.12-.55.28-.9.41-1.16.48-.19.05-.33.05-.41-.01-.07-.06-.11-.2-.11-.32 0-.15.02-.38.07-.65.04-.26.11-.57.19-.88-1.34-1.3-2.12-3.04-2.12-4.82 0-3.87 3.69-7.08 8.25-7.08s8.25 3.21 8.25 7.08z"/>
           </svg>
         </div>
@@ -39,9 +52,15 @@
       </router-link>
 
       <!-- 官方淘宝 -->
-      <a href="https://shop477181376.taobao.com/" target="_blank" rel="noopener noreferrer" class="sidebar-item group">
+      <a
+        href="https://shop477181376.taobao.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="sidebar-item group"
+        :aria-label="`${t('common.cta.taobaoTitle')} - ${t('common.cta.taobaoDesc')}`"
+      >
         <div class="sidebar-icon">
-          <svg viewBox="0 0 24 24" width="20" height="20">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20">
             <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
           </svg>
         </div>
@@ -64,18 +83,19 @@
       <transition name="fade">
         <button
           v-show="showBackToTop"
+          type="button"
           class="sidebar-item back-to-top"
           @click.prevent="scrollToTop"
           :aria-label="t('common.cta.backToTop')"
         >
           <div class="sidebar-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24">
               <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
             </svg>
           </div>
         </button>
       </transition>
-    </div>
+    </aside>
   </transition>
 </template>
 
@@ -84,6 +104,7 @@ import { useI18n } from 'vue-i18n';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
 import taobaoQrcode from '@/assets/images/qrcodes/taobao.png';
 import { useLocalizedPath } from '@/composables/useLocalizedPath';
+import { scheduleScrollToTop } from '@/utils/scroll';
 
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
@@ -94,7 +115,7 @@ defineProps<{
 }>();
 
 const scrollToTop = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  scheduleScrollToTop();
 };
 </script>
 
@@ -132,7 +153,7 @@ const scrollToTop = () => {
   
   &:hover {
     background: rgba(26, 58, 143, 0.08);
-    color: var(--brand-primary-deep, #142a66);
+    color: var(--brand-primary-deep);
 
     .sidebar-popup {
       opacity: 1;
@@ -171,12 +192,12 @@ const scrollToTop = () => {
     transform: translateY(-50%);
     border-width: 5px 0 5px 5px;
     border-style: solid;
-    border-color: transparent transparent transparent #ffffff;
+    border-color: transparent transparent transparent var(--brand-surface);
   }
 }
 
 .popup-content {
-  background: #ffffff;
+  background: var(--brand-surface);
   padding: 16px;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.06);
@@ -204,14 +225,14 @@ const scrollToTop = () => {
 }
 
 .popup-title {
-  color: #1a1a1a;
+  color: var(--brand-text);
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
 .popup-desc {
-  color: #64748b;
+  color: var(--brand-text-subtle);
   font-size: 12px;
 }
 
@@ -287,8 +308,8 @@ const scrollToTop = () => {
   }
   
   .sidebar-item {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     margin: 4px 5px;
     
     &:hover {

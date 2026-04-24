@@ -122,7 +122,9 @@ function checkSecurityFeatures() {
  * @param event 安全事件
  * @param details 事件详情
  */
-function logSecurityEvent(_event: string, _details?: any) {
+type SecurityEventDetails = Record<string, unknown>;
+
+function logSecurityEvent(_event: string, _details?: SecurityEventDetails) {
   // 开发环境输出到控制台
   if (import.meta.env.DEV) {
     console.warn(`[Security] ${_event}`, _details);
@@ -224,9 +226,14 @@ function setupSecurityPolicies() {
 function disableConsole() {
   const noop = () => {};
   // 保留 warn 和 error，便于线上问题排查
-  const methods = ["log", "info", "debug", "trace"];
+  const methods: Array<"log" | "info" | "debug" | "trace"> = [
+    "log",
+    "info",
+    "debug",
+    "trace",
+  ];
 
   methods.forEach((method) => {
-    (console as any)[method] = noop;
+    console[method] = noop;
   });
 }

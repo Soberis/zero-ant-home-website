@@ -1,6 +1,6 @@
 <template>
   <header class="header" :class="{ 'is-scrolled': isScrolled }">
-    <nav class="nav-container">
+    <nav class="nav-container" :aria-label="$t('nav.primaryNavigation')">
       <div class="logo">
         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" decoding="async" />
         <router-link :to="localizePath('/')" class="logo-text" @click="handleTopNavClick('/', $event)">
@@ -46,8 +46,9 @@
 
       <div class="nav-actions">
         <div class="language-switcher">
-          <button 
-            class="language-btn" 
+          <button
+            type="button"
+            class="language-btn"
             @click="switchLanguage()"
             :aria-label="locale === 'zh' ? 'Switch to English' : '切换至中文'"
           >
@@ -63,9 +64,9 @@
           aria-controls="mobile-nav-panel"
           @click="toggleMobileMenu"
         >
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
+          <span class="hamburger-line" aria-hidden="true"></span>
+          <span class="hamburger-line" aria-hidden="true"></span>
+          <span class="hamburger-line" aria-hidden="true"></span>
         </button>
       </div>
     </nav>
@@ -73,8 +74,10 @@
     <div
       class="mobile-nav"
       :class="{ open: isMobileMenuOpen }"
-      @click="handleBackgroundClick"
       id="mobile-nav-panel"
+      :aria-label="$t('nav.mobileMenu')"
+      :aria-hidden="!isMobileMenuOpen"
+      @click="handleBackgroundClick"
       role="dialog"
       aria-modal="true"
     >
@@ -86,6 +89,7 @@
                 :to="localizePath(item.to)"
                 class="mobile-nav-link"
                 :class="{ active: isTopNavActive(item.to) }"
+                :aria-current="isTopNavActive(item.to) ? 'page' : undefined"
                 @click="handleTopNavClick(item.to, $event, true)"
               >
                 {{ $t(item.label) }}
@@ -96,10 +100,11 @@
                 class="mobile-nav-expand"
                 :class="{ 'is-open': openMobileSubmenu === item.to }"
                 :aria-expanded="openMobileSubmenu === item.to"
-                :aria-label="$t(item.label)"
+                :aria-controls="getMobileSubmenuId(item.to)"
+                :aria-label="getMobileSubmenuLabel(item)"
                 @click="toggleMobileSubmenu(item.to)"
               >
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </button>
@@ -107,6 +112,7 @@
             <transition name="mobile-submenu">
               <ul
                 v-if="item.children && openMobileSubmenu === item.to"
+                :id="getMobileSubmenuId(item.to)"
                 class="mobile-submenu"
               >
                 <li v-for="child in item.children" :key="child.hash">
@@ -134,8 +140,9 @@ import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
+import type { NavigationItem } from "@/data/navigation";
 // 语言切换时保持滚动位置 — 与 router/scrollBehavior 联动，
-// 详见 router/index.ts 的 scrollBehavior 中 preservedScroll 处理
+// 详见 router/scrollBehavior.ts 的 preservedScroll 处理
 import { preserveScrollForNextNavigation } from "@/router";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import {
@@ -202,6 +209,16 @@ function toggleMobileSubmenu(itemTo: string) {
   openMobileSubmenu.value = openMobileSubmenu.value === itemTo ? null : itemTo;
 }
 
+function getMobileSubmenuId(itemTo: string): string {
+  return `mobile-submenu-${itemTo.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "root"}`;
+}
+
+function getMobileSubmenuLabel(item: NavigationItem): string {
+  const actionKey =
+    openMobileSubmenu.value === item.to ? "nav.collapseSubmenu" : "nav.expandSubmenu";
+  return `${t(actionKey)}：${t(item.label)}`;
+}
+
 async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = false): Promise<void> {
   if (closeMenu) {
     closeMobileMenu();
@@ -245,7 +262,7 @@ function handleBackgroundClick(event: Event): void {
 
 // 顶部导航项已从 @/data/navigation 统一导入
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 function isProductDetailRoute() {
   return route.name === "ProductDetail";
@@ -528,7 +545,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   transform: translateY(-8px);
-  background: #ffffff;
+  background: var(--brand-surface);
   width: 100%;
   box-shadow: var(--shadow-sm);
   border-radius: 0;
@@ -580,7 +597,7 @@ onUnmounted(() => {
   border-radius: 12px;
   box-sizing: border-box;
   text-align: center;
-  background-color: #ffffff;
+  background-color: var(--brand-surface);
   border: 1px solid transparent;
   min-width: 0;
   flex: 0 0 auto;
@@ -615,7 +632,7 @@ onUnmounted(() => {
 }
 
 .dropdown-item:hover {
-  background: #f8f9fb;
+  background: var(--brand-surface-panel);
   color: var(--nav-accent-color);
   transform: none;
   border-color: rgba(15, 23, 42, 0.08);
@@ -643,7 +660,7 @@ onUnmounted(() => {
 }
 
 .language-btn {
-  background: #f8f9fb;
+  background: var(--brand-surface-panel);
   border: 1px solid rgba(15, 23, 42, 0.1);
   color: var(--nav-text-color);
   font-size: 13px;
@@ -670,7 +687,7 @@ onUnmounted(() => {
 }
 
 .language-btn:hover {
-  background: #ffffff;
+  background: var(--brand-surface);
   border-color: rgba(15, 23, 42, 0.18);
   transform: none;
   box-shadow: var(--shadow-sm);
@@ -775,7 +792,7 @@ onUnmounted(() => {
   align-items: center;
   width: 40px;
   height: 40px;
-  background: #ffffff;
+  background: var(--brand-surface);
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 10px;
   cursor: pointer;
@@ -790,7 +807,7 @@ onUnmounted(() => {
 }
 
 .hamburger-menu:hover {
-  background: #f8f9fb;
+  background: var(--brand-surface-panel);
   transform: none;
 }
 
@@ -845,7 +862,7 @@ onUnmounted(() => {
   right: 0;
   width: 300px;
   height: 100svh;
-  background: #ffffff;
+  background: var(--brand-surface);
   box-shadow: -8px 0 24px rgba(15, 23, 42, 0.08);
   transform: translateX(100%);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1141,7 +1158,7 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 260px;
     padding-top: 70px;
-    background: #ffffff;
+    background: var(--brand-surface);
   }
 }
 
@@ -1185,7 +1202,7 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 240px;
     padding-top: 65px;
-    background: #ffffff;
+    background: var(--brand-surface);
   }
 
   .mobile-nav-link {
@@ -1238,7 +1255,7 @@ onUnmounted(() => {
   .mobile-nav-content {
     width: 220px;
     padding-top: 60px;
-    background: #ffffff;
+    background: var(--brand-surface);
   }
 
   .mobile-nav-link {
@@ -1262,7 +1279,7 @@ onUnmounted(() => {
 
   .nav-link:hover,
   .nav-link.active {
-    border-color: #1a3a8f;
+    border-color: var(--brand-primary);
   }
 }
 </style>

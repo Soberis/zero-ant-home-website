@@ -1,5 +1,6 @@
 import { RouteLocationNormalized } from "vue-router";
 import { setSEO, getSeoConfigs, setStructuredData } from "@/utils/seo";
+import type { StructuredData } from "@/utils/seo";
 import i18n from "@/config/i18n"; // 导入i18n实例
 import {
   getAlternateLanguageLinks,
@@ -100,7 +101,15 @@ function setDetailNotFoundSEO(to: RouteLocationNormalized) {
   setStructuredData([]);
 }
 
-function getCareerStructuredJobs(baseUrl: string): Record<string, any>[] {
+interface RouteSEOConfig {
+  title: string;
+  description: string;
+  keywords: string;
+}
+
+type RouteSEOActiveCheck = () => boolean;
+
+function getCareerStructuredJobs(baseUrl: string): StructuredData[] {
   const jobKeys = [
     "softwareEngineer",
     "robotSystemsEngineer",
@@ -137,11 +146,11 @@ function getCareerStructuredJobs(baseUrl: string): Record<string, any>[] {
 /**
  * 获取路由 SEO 配置映射
  */
-function getRouteSEOMap(): Record<string, any> {
+function getRouteSEOMap(): Record<string, RouteSEOConfig> {
   const seoConfigs = getSeoConfigs();
 
   // 应用翻译函数到SEO配置
-  const translatedSeoConfigs: Record<string, any> = {};
+  const translatedSeoConfigs: Record<string, RouteSEOConfig> = {};
   for (const [key, config] of Object.entries(seoConfigs)) {
     translatedSeoConfigs[key] = {
       title: safeTranslate(config.title),
@@ -216,7 +225,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
     });
 
     // 设置结构化数据
-    const structuredData: Record<string, any> = {
+    const structuredData: StructuredData = {
       "@context": "https://schema.org",
       "@type": "WebPage",
       name: seoConfig.title,
@@ -541,11 +550,18 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
 /**
  * 设置应用详情页 SEO 和结构化数据
  */
-export async function setupApplicationDetailSEO(to: RouteLocationNormalized) {
+export async function setupApplicationDetailSEO(
+  to: RouteLocationNormalized,
+  isActive?: RouteSEOActiveCheck
+) {
   const [{ default: applications }, { getVideoThumbnailById }] = await Promise.all([
     import("@/data/applications"),
     import("@/data/videos"),
   ]);
+
+  if (isActive && !isActive()) {
+    return;
+  }
 
   const slug = String(to.params.slug || "");
   const application = applications.find((item) => item.slug === slug);
@@ -631,8 +647,15 @@ export async function setupApplicationDetailSEO(to: RouteLocationNormalized) {
 /**
  * 设置视频详情页 SEO 和结构化数据
  */
-export async function setupVideoDetailSEO(to: RouteLocationNormalized) {
+export async function setupVideoDetailSEO(
+  to: RouteLocationNormalized,
+  isActive?: RouteSEOActiveCheck
+) {
   const [{ videoMap, getVideoThumbnailById }] = await Promise.all([import("@/data/videos")]);
+
+  if (isActive && !isActive()) {
+    return;
+  }
 
   const slug = String(to.params.slug || "");
   const video = videoMap[slug];
@@ -733,12 +756,23 @@ export async function setupVideoDetailSEO(to: RouteLocationNormalized) {
 /**
  * 设置产品详情页 SEO 和结构化数据
  */
-export async function setupProductDetailSEO(to: RouteLocationNormalized) {
+export async function setupProductDetailSEO(
+  to: RouteLocationNormalized,
+  isActive?: RouteSEOActiveCheck
+) {
   const { getProductCenterCardById } = await import("@/data/product-center");
+
+  if (isActive && !isActive()) {
+    return;
+  }
+
   const productId = String(to.params.id || "");
   const product = getProductCenterCardById(productId);
 
-  if (!product) return;
+  if (!product) {
+    setDetailNotFoundSEO(to);
+    return;
+  }
 
   const { baseUrl, currentUrl, locale, ogLocale, alternateLinks } =
     getSeoRouteContext(to);

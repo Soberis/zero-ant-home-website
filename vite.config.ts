@@ -88,21 +88,11 @@ export default defineConfig({
           }
         },
         // 优化文件命名
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId;
-          if (facadeModuleId) {
-            const fileName = facadeModuleId
-              .split("/")
-              .pop()
-              ?.replace(/\.[^.]*$/, "");
-            return `js/[name]-[hash].js`;
-          }
+        chunkFileNames: () => {
           return "js/[name]-[hash].js";
         },
         entryFileNames: "js/[name]-[hash].js",
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name?.split(".") || [];
-          const ext = info[info.length - 1];
           if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(assetInfo.name || "")) {
             return "images/[name]-[hash].[ext]";
           }

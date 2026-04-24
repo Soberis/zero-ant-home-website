@@ -316,7 +316,7 @@ onUnmounted(() => {
 
 <style scoped>
 .common-detail-page {
-  background: #ffffff;
+  background: var(--brand-surface);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -388,7 +388,7 @@ onUnmounted(() => {
   width: 72px;
   height: 72px;
   background: rgba(255, 255, 255, 0.94);
-  color: #163a87;
+  color: var(--brand-primary-deep);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -400,7 +400,7 @@ onUnmounted(() => {
 }
 
 .video-facade:hover .facade-play-btn {
-  background: #ffffff;
+  background: var(--brand-surface);
   transform: translate(-50%, -50%) scale(1.03);
   border-color: rgba(22, 58, 135, 0.16);
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
@@ -418,7 +418,7 @@ onUnmounted(() => {
 
 .video-placeholder {
   background: #f1f5f9;
-  color: #64748b;
+  color: var(--brand-text-subtle);
   font-size: 1.2rem;
   letter-spacing: 1px;
   display: flex;
@@ -466,7 +466,7 @@ onUnmounted(() => {
 /* 兼容 HTML 富文本内容的样式 */
 .content-html {
   font-size: 1.06rem;
-  color: #556074;
+  color: var(--brand-text-soft);
   line-height: 1.85;
   font-weight: 500;
   white-space: normal;
@@ -481,7 +481,7 @@ onUnmounted(() => {
 /* 兼容分段文本的样式 */
 .content-para {
   font-size: 1.05rem;
-  color: #556074;
+  color: var(--brand-text-soft);
   line-height: 1.85;
   font-weight: 500;
   margin-block-start: 0;
@@ -504,7 +504,7 @@ onUnmounted(() => {
 .contact-cta:hover {
   background: rgba(15, 23, 42, 0.02);
   border-color: rgba(15, 23, 42, 0.22);
-  color: #163a87;
+  color: var(--brand-primary-deep);
 }
 
 .contact-cta svg {
@@ -524,7 +524,7 @@ onUnmounted(() => {
 }
 
 .contact-dialog {
-  background: #ffffff;
+  background: var(--brand-surface);
   border: 1px solid #e2e8f0;
   border-radius: 20px;
   box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
@@ -552,21 +552,21 @@ onUnmounted(() => {
 }
 
 .contact-close-x:hover {
-  color: #0f172a;
+  color: var(--brand-text-strong);
   background: #e2e8f0;
 }
 
 .contact-title {
   font-size: 1.4rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   margin: 0 0 24px 0;
 }
 
 .contact-qrcode-placeholder {
   width: 200px;
   height: 200px;
-  background: #f8fafc;
+  background: var(--brand-surface-panel);
   border: 1px dashed #cbd5e1;
   border-radius: 16px;
   display: flex;
@@ -584,7 +584,7 @@ onUnmounted(() => {
 }
 
 .contact-qrcode-desc {
-  color: #64748b;
+  color: var(--brand-text-subtle);
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0;

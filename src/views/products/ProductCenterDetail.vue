@@ -469,7 +469,7 @@ const goBack = () => {
 .product-detail {
   min-height: 100vh;
   padding-bottom: 80px;
-  background: #ffffff;
+  background: var(--brand-surface);
 }
 
 .product-hero {
@@ -518,7 +518,7 @@ const goBack = () => {
   border-radius: 0;
   background: transparent;
   border-left: none;
-  color: #667085;
+  color: var(--brand-text-subtle);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -527,7 +527,7 @@ const goBack = () => {
 
 .product-hero__title {
   margin: 18px 0 16px;
-  color: #0f172a;
+  color: var(--brand-text-strong);
 }
 
 .product-hero__description {
@@ -535,7 +535,7 @@ const goBack = () => {
   max-width: 560px;
   font-size: 1.125rem;
   line-height: 1.6;
-  color: #556074;
+  color: var(--brand-text-soft);
   font-weight: 500;
 }
 
@@ -554,7 +554,7 @@ const goBack = () => {
   padding: 8px 16px;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #ffffff;
+  background: var(--brand-surface);
   color: rgba(15, 23, 42, 0.76);
   font-size: 0.92rem;
   font-weight: 600;
@@ -622,7 +622,7 @@ const goBack = () => {
   min-width: 0;
   padding: 24px;
   border-radius: 12px;
-  background: #f8fafc;
+  background: var(--brand-surface-panel);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -632,7 +632,7 @@ const goBack = () => {
 }
 
 .product-hero__metric:hover {
-  background: #ffffff;
+  background: var(--brand-surface);
   border-color: rgba(22, 58, 135, 0.15);
   box-shadow: 0 10px 20px rgba(15, 23, 42, 0.03);
   transform: translateY(-2px);
@@ -646,7 +646,7 @@ const goBack = () => {
   font-size: 1.12rem;
   line-height: 1.35;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   word-break: break-word;
 }
 
@@ -654,14 +654,14 @@ const goBack = () => {
   font-size: 1.55rem;
   letter-spacing: -0.015em;
   line-height: 1.2;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-weight: 800;
 }
 
 .product-hero__metric-value--compact {
   font-size: 1.04rem;
   line-height: 1.55;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-weight: 600;
 }
 
@@ -731,7 +731,7 @@ const goBack = () => {
   flex-direction: column-reverse;
   align-items: flex-start;
   gap: 10px;
-  color: #0f172a;
+  color: var(--brand-text-strong);
 }
 
 .title-en {
@@ -793,7 +793,7 @@ const goBack = () => {
   background: rgba(22, 58, 135, 0.08);
   font-size: 0.9rem;
   font-weight: 700;
-  color: #163a87;
+  color: var(--brand-primary-deep);
   margin-bottom: 16px;
 }
 
@@ -801,14 +801,14 @@ const goBack = () => {
   font-size: 1.22rem;
   font-weight: 600;
   line-height: 1.45;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   margin: 0;
 }
 
 .feature-card__description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #556074;
+  color: var(--brand-text-soft);
   font-weight: 500;
   margin: 8px 0 0;
 }
@@ -863,7 +863,7 @@ const goBack = () => {
   padding-top: 0;
   font-size: 0.92rem;
   line-height: 1.5;
-  color: #667085;
+  color: var(--brand-text-subtle);
   font-weight: 600;
   transition: color 0.2s ease;
 }
@@ -873,7 +873,7 @@ const goBack = () => {
   font-size: 1.05rem;
   line-height: 1.5;
   text-align: left;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-weight: 600;
   word-break: break-word;
 }
@@ -921,7 +921,7 @@ const goBack = () => {
   border-radius: 4px;
   border: 0;
   background: rgba(26, 58, 143, 0.08);
-  color: #163a87;
+  color: var(--brand-primary-deep);
   padding: 4px 12px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -929,7 +929,7 @@ const goBack = () => {
 }
 
 .download-status {
-  color: #667085;
+  color: var(--brand-text-subtle);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -938,7 +938,7 @@ const goBack = () => {
 
 .download-title {
   margin: 0;
-  color: #0f172a;
+  color: var(--brand-text-strong);
   font-size: 1.18rem;
   font-weight: 600;
   line-height: 1.55;
@@ -947,7 +947,7 @@ const goBack = () => {
 
 .download-desc {
   margin: 0;
-  color: #667085;
+  color: var(--brand-text-subtle);
   font-size: 0.98rem;
   line-height: 1.8;
   overflow-wrap: anywhere;
@@ -966,7 +966,7 @@ const goBack = () => {
 
 .downloads-placeholder__text {
   margin: 0;
-  color: #667085;
+  color: var(--brand-text-subtle);
 }
 
 .not-found {
@@ -1031,7 +1031,7 @@ const goBack = () => {
 }
 
 .product-footer-cta__ghost-btn:hover {
-  background: #ffffff;
+  background: var(--brand-surface);
   border-color: rgba(26, 58, 143, 0.2);
   color: var(--brand-primary);
 }

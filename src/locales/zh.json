@@ -25,15 +25,21 @@
     "coreValues": "@:common.terms.coreValues",
     "culture": "@:common.terms.corporateCulture",
     "contact": "@:common.terms.contactUs",
-    "toggleMenu": "切换导航菜单"
+    "toggleMenu": "切换导航菜单",
+    "primaryNavigation": "主导航",
+    "mobileMenu": "移动端导航菜单",
+    "expandSubmenu": "展开子菜单",
+    "collapseSubmenu": "收起子菜单"
   },
   "common": {
     "cta": {
       "viewDetails": "查看详情",
       "contactTeam": "联系团队",
       "downloadNow": "立即下载",
+      "retry": "重试",
       "backToTop": "返回顶部",
       "learnProducts": "了解产品",
+      "quickActions": "快捷操作",
       "serviceHotline": "服务热线",
       "wecomTitle": "扫码添加企业微信",
       "wecomDesc": "获取更多信息",
@@ -41,6 +47,7 @@
       "taobaoDesc": "点击或扫码即刻采购"
     },
     "status": {
+      "loadError": "内容加载失败，请稍后重试",
       "noVideo": "暂无视频",
       "preparingMessage": "工程师正在精心准备中，敬请期待"
     },

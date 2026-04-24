@@ -25,15 +25,21 @@
     "coreValues": "@:common.terms.coreValues",
     "culture": "@:common.terms.corporateCulture",
     "contact": "@:common.terms.contactUs",
-    "toggleMenu": "Toggle navigation menu"
+    "toggleMenu": "Toggle navigation menu",
+    "primaryNavigation": "Primary navigation",
+    "mobileMenu": "Mobile navigation menu",
+    "expandSubmenu": "Expand submenu",
+    "collapseSubmenu": "Collapse submenu"
   },
   "common": {
     "cta": {
       "viewDetails": "View Details",
       "contactTeam": "Contact Team",
       "downloadNow": "Download Now",
+      "retry": "Retry",
       "backToTop": "Back to Top",
       "learnProducts": "Explore Products",
+      "quickActions": "Quick actions",
       "serviceHotline": "Service Hotline",
       "wecomTitle": "Scan for WeCom",
       "wecomDesc": "Get more info",
@@ -41,6 +47,7 @@
       "taobaoDesc": "Click or scan to buy"
     },
     "status": {
+      "loadError": "Content failed to load. Please try again later.",
       "noVideo": "No video available",
       "preparingMessage": "Engineers are carefully preparing, please stay tuned"
     },

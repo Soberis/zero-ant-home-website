@@ -60,19 +60,31 @@ if (typeof window !== "undefined") {
   // 初始化默认SEO和路由守卫
   router.isReady().then(async () => {
     // 动态导入SEO函数，避免循环依赖
-    const { 
-      setupPageSEO, 
-      setupSupportSEO, 
-      setupAboutSEO, 
-      setupCareersSEO, 
+    const {
+      setupPageSEO,
+      setupSupportSEO,
+      setupAboutSEO,
+      setupCareersSEO,
       setupSolutionsSEO,
       setupApplicationDetailSEO,
       setupVideoDetailSEO,
       setupProductDetailSEO
     } = await import("@/router/seo");
-    
+
+    let routeSEORequestId = 0;
+
     const applyRouteSEO = (to: RouteLocationNormalizedLoaded) => {
-      void nextTick().then(() => {
+      const requestId = ++routeSEORequestId;
+      const targetFullPath = to.fullPath;
+      const isCurrentRouteSEO = () =>
+        requestId === routeSEORequestId &&
+        router.currentRoute.value.fullPath === targetFullPath;
+
+      void nextTick().then(async () => {
+        if (!isCurrentRouteSEO()) {
+          return;
+        }
+
         if (typeof document !== "undefined") {
           document.documentElement.setAttribute("lang", String(i18n.global.locale.value));
         }
@@ -91,13 +103,13 @@ if (typeof window !== "undefined") {
             setupSolutionsSEO(to);
             break;
           case "ApplicationDetail":
-            void setupApplicationDetailSEO(to);
+            await setupApplicationDetailSEO(to, isCurrentRouteSEO);
             break;
           case "VideoDetail":
-            void setupVideoDetailSEO(to);
+            await setupVideoDetailSEO(to, isCurrentRouteSEO);
             break;
           case "ProductDetail":
-            void setupProductDetailSEO(to);
+            await setupProductDetailSEO(to, isCurrentRouteSEO);
             break;
           default:
             setupPageSEO(to);
