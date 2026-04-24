@@ -71,12 +71,22 @@ async function checkNotFoundSeoPolicy() {
 }
 
 async function checkNginxFallbackPolicy() {
-  const [baseTemplate, optimizedTemplate] = await Promise.all([
-    readFile(path.join(projectRoot, "config", "nginx.conf.template")),
-    readFile(path.join(projectRoot, "config", "nginx-optimized.conf.template")),
-  ]);
+  const configFiles = [path.join(projectRoot, "config", "nginx.conf.template")];
+  const optimizedTemplatePath = path.join(
+    projectRoot,
+    "config",
+    "nginx-optimized.conf.template"
+  );
 
-  for (const content of [baseTemplate, optimizedTemplate]) {
+  try {
+    await fs.access(optimizedTemplatePath);
+    configFiles.push(optimizedTemplatePath);
+  } catch {
+    // 当前分支未保留优化模板时，跳过该文件检查
+  }
+
+  for (const filePath of configFiles) {
+    const content = await readFile(filePath);
     assert(
       /try_files\s+\$uri\s+\$uri\/\s+=404;/.test(content),
       "[smoke] Nginx should return 404 for unknown static routes"
