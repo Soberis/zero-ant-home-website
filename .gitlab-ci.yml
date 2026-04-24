@@ -17,6 +17,10 @@ stages:
 # 构建阶段
 build:
   stage: build
+  image: node:20.19.0-bullseye
+  before_script:
+    - corepack enable
+    - corepack prepare yarn@1.22.22 --activate
   script:
     - yarn install
     - yarn build
