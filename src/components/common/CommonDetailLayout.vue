@@ -1,5 +1,6 @@
 <template>
   <div class="common-detail-page">
+    <UiBreadcrumb v-if="safeBreadcrumbItems.length" :items="safeBreadcrumbItems" />
     <div
       class="player-hero-container"
       :class="{ 'player-hero-container--bilibili': mediaInfo.type === 'bilibili' }"
@@ -188,6 +189,8 @@
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
+import UiBreadcrumb from '@/components/common/UiBreadcrumb.vue';
+import type { BreadcrumbItem } from '@/types/breadcrumb';
 import { sanitizeHtmlAllowList } from '@/utils/security';
 import fallbackFacadeImg from '@/assets/images/videos/mobile-transfer-robot.webp';
 import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
@@ -211,7 +214,10 @@ const props = defineProps<{
   contentParagraphs?: string[];
   prevSlug?: string | null;
   nextSlug?: string | null;
+  breadcrumbItems?: BreadcrumbItem[];
 }>();
+
+const safeBreadcrumbItems = computed(() => props.breadcrumbItems ?? []);
 
 const emit = defineEmits<{
   (e: 'navigate', slug: string): void;
@@ -253,7 +259,8 @@ function handleDialogEscape(event: KeyboardEvent): void {
     return;
   }
   event.preventDefault();
-  event.stopImmediatePropagation();
+  // 仅阻止冒泡，不阻止同层级其他捕获监听器，避免与 NavBar 的 Esc 处理冲突
+  event.stopPropagation();
   showContact.value = false;
 }
 

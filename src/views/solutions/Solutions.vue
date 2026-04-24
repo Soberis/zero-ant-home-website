@@ -1659,6 +1659,16 @@ watch(
     padding: 12px 18px 20px;
   }
 
+  .direction-card__visual-media {
+    min-height: 220px;
+    padding: 16px;
+  }
+
+  .direction-card__visual img {
+    width: min(88%, 280px);
+    max-height: 180px;
+  }
+
   .direction-card__footer {
     flex-direction: column;
     align-items: stretch;

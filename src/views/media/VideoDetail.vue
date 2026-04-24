@@ -13,6 +13,7 @@
     :content-paragraphs="descParagraphs"
     :prev-slug="prevSlug"
     :next-slug="nextSlug"
+    :breadcrumb-items="breadcrumbItems"
     @navigate="goTo"
   />
 </template>
@@ -26,12 +27,19 @@ import { computed } from "vue";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
 import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import type { BreadcrumbItem } from "@/types/breadcrumb";
 
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
 const currentSlug = computed(() => String(route.params.slug || ""));
+
+const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
+  { label: t('nav.home'), to: localizePath('/') },
+  { label: t('nav.solutions'), to: localizePath('/solutions') },
+  { label: videoInfo.value.title || '', to: localizePath(`/video/${currentSlug.value}`) },
+]);
 const isNotFound = computed(() => !videoMap[currentSlug.value]);
 
 const currentIndex = computed(() =>
@@ -82,11 +90,10 @@ const descParagraphs = computed(() => {
 
 type MediaType = "bilibili" | "video" | "image" | "none";
 
-function getMediaType(info: VideoDetail | { value: VideoDetail }): MediaType {
-  const videoData = "value" in info ? info.value : info;
-  if (videoData.type === "bilibili" && videoData.url) return "bilibili";
-  if (videoData.type === "video" && videoData.url) return "video";
-  if (videoData.type === "image" && videoData.url) return "image";
+function getMediaType(info: VideoDetail): MediaType {
+  if (info.type === "bilibili" && info.url) return "bilibili";
+  if (info.type === "video" && info.url) return "video";
+  if (info.type === "image" && info.url) return "image";
   return "none";
 }
 

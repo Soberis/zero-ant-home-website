@@ -81,14 +81,45 @@
       <div class="mobile-nav-content">
         <ul class="mobile-nav-links">
           <li v-for="item in topNavItems" :key="item.to" class="mobile-nav-item">
-            <router-link
-              :to="localizePath(item.to)"
-              class="mobile-nav-link"
-              :class="{ active: isTopNavActive(item.to) }"
-              @click="handleTopNavClick(item.to, $event, true)"
-            >
-              {{ $t(item.label) }}
-            </router-link>
+            <div class="mobile-nav-row">
+              <router-link
+                :to="localizePath(item.to)"
+                class="mobile-nav-link"
+                :class="{ active: isTopNavActive(item.to) }"
+                @click="handleTopNavClick(item.to, $event, true)"
+              >
+                {{ $t(item.label) }}
+              </router-link>
+              <button
+                v-if="item.children"
+                type="button"
+                class="mobile-nav-expand"
+                :class="{ 'is-open': openMobileSubmenu === item.to }"
+                :aria-expanded="openMobileSubmenu === item.to"
+                :aria-label="$t(item.label)"
+                @click="toggleMobileSubmenu(item.to)"
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+            </div>
+            <transition name="mobile-submenu">
+              <ul
+                v-if="item.children && openMobileSubmenu === item.to"
+                class="mobile-submenu"
+              >
+                <li v-for="child in item.children" :key="child.hash">
+                  <router-link
+                    :to="localizeTo({ path: item.to, hash: child.hash })"
+                    class="mobile-submenu-link"
+                    @click="closeMobileMenu"
+                  >
+                    {{ $t(child.label) }}
+                  </router-link>
+                </li>
+              </ul>
+            </transition>
           </li>
         </ul>
       </div>
@@ -103,6 +134,8 @@ import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
 import { ensureProductDetailLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
+// 语言切换时保持滚动位置 — 与 router/scrollBehavior 联动，
+// 详见 router/index.ts 的 scrollBehavior 中 preservedScroll 处理
 import { preserveScrollForNextNavigation } from "@/router";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import {
@@ -135,6 +168,7 @@ const handleDesktopBreakpointChange = (event: MediaQueryListEvent) => {
 
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
+const openMobileSubmenu = ref<string | null>(null);
 const route = useRoute();
 const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
@@ -160,7 +194,12 @@ function toggleMobileMenu() {
 // 关闭移动端菜单
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
+  openMobileSubmenu.value = null;
   document.body.style.overflow = "";
+}
+
+function toggleMobileSubmenu(itemTo: string) {
+  openMobileSubmenu.value = openMobileSubmenu.value === itemTo ? null : itemTo;
 }
 
 async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = false): Promise<void> {
@@ -886,6 +925,117 @@ onUnmounted(() => {
   color: var(--nav-accent-color);
   background: rgba(26, 58, 143, 0.05);
   font-weight: 600;
+}
+
+/* 移动端子菜单行布局 */
+.mobile-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-nav-row .mobile-nav-link {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 子菜单展开按钮 */
+.mobile-nav-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--nav-text-color);
+  border-radius: 8px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.mobile-nav-expand:hover {
+  background: rgba(26, 58, 143, 0.05);
+  color: var(--nav-accent-color);
+}
+
+.mobile-nav-expand.is-open {
+  color: var(--nav-accent-color);
+  transform: rotate(180deg);
+}
+
+/* 子菜单列表 */
+.mobile-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px 0;
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.mobile-submenu-link {
+  display: block;
+  padding: 14px 32px 14px 48px;
+  color: var(--nav-text-color);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    padding-left 0.2s ease;
+  position: relative;
+}
+
+.mobile-submenu-link::before {
+  content: "";
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.2);
+  transition: background 0.2s ease;
+}
+
+.mobile-submenu-link:hover {
+  background: rgba(26, 58, 143, 0.03);
+  color: var(--nav-accent-color);
+  padding-left: 54px;
+}
+
+.mobile-submenu-link:hover::before {
+  background: var(--nav-accent-color);
+}
+
+/* 子菜单过渡动画 */
+.mobile-submenu-enter-active {
+  transition:
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-submenu-leave-active {
+  transition:
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-submenu-enter-from {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.mobile-submenu-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
 }
 
 @media (max-width: 950px) {

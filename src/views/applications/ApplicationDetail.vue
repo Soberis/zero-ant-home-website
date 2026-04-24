@@ -6,6 +6,7 @@
     :content-html="sanitizedDescription"
     :prev-slug="prevSlug"
     :next-slug="nextSlug"
+    :breadcrumb-items="breadcrumbItems"
     @navigate="goTo"
   />
   <RouteNotFoundState
@@ -28,11 +29,18 @@ import { sanitizeHtmlAllowList } from "@/utils/security";
 import CommonDetailLayout from "@/components/common/CommonDetailLayout.vue";
 import RouteNotFoundState from "@/components/common/RouteNotFoundState.vue";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import type { BreadcrumbItem } from "@/types/breadcrumb";
 
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
+
+const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
+  { label: t('nav.home'), to: localizePath('/') },
+  { label: t('nav.solutions'), to: localizePath('/solutions') },
+  { label: detail.value?.title || '', to: localizePath(`/applications/${slug.value}`) },
+]);
 
 const legacyApplicationRedirects: Record<string, string> = {
   "mobile-material-transfer": "smart-logistics",

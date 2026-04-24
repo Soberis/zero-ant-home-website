@@ -61,6 +61,9 @@
       "surfaceTreatment": "表面处理",
       "contactUs": "联系我们",
       "email": "邮箱"
+    },
+    "breadcrumb": {
+      "label": "面包屑导航"
     }
   },
   "home": {

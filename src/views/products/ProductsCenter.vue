@@ -1,10 +1,11 @@
 <template>
   <ProductsLayout v-bind="pageContent">
-    <section class="product-center-filter">
-      <div class="product-center-filter__inner">
+    <section class="product-center-filter" ref="filterRef">
+      <div class="product-center-filter__inner" ref="filterInnerRef">
         <a
           v-for="family in families"
           :key="family.id"
+          :ref="el => setFilterLinkRef(family.id, el)"
           :href="`#${family.id}`"
           class="product-center-filter__link ui-jump-link"
           :class="{ 'is-active': activeFamilyId === family.id }"
@@ -98,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
 import {
@@ -112,7 +113,37 @@ const { localizePath } = useLocalizedPath();
 // resolveText removed as we now use standard i18n keys
 
 const activeFamilyId = ref("");
+const filterRef = ref<HTMLElement | null>(null);
+const filterInnerRef = ref<HTMLElement | null>(null);
+const filterLinkRefs = new Map<string, HTMLElement>();
 let familyObserver: IntersectionObserver | null = null;
+
+function setFilterLinkRef(id: string, el: unknown) {
+  if (el instanceof HTMLElement) {
+    filterLinkRefs.set(id, el);
+  }
+}
+
+function scrollFilterToActive(id: string) {
+  const linkEl = filterLinkRefs.get(id);
+  const container = filterInnerRef.value;
+  if (!linkEl || !container) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const linkRect = linkEl.getBoundingClientRect();
+  const scrollOffset = linkRect.left - containerRect.left - (containerRect.width / 2) + (linkRect.width / 2);
+
+  container.scrollBy({
+    left: scrollOffset,
+    behavior: 'smooth',
+  });
+}
+
+watch(activeFamilyId, (newId) => {
+  if (newId) {
+    nextTick(() => scrollFilterToActive(newId));
+  }
+});
 
 onMounted(() => {
   familyObserver = new IntersectionObserver((entries) => {
@@ -135,6 +166,7 @@ onMounted(() => {
 onUnmounted(() => {
   familyObserver?.disconnect();
   familyObserver = null;
+  filterLinkRefs.clear();
 });
 
 const pageCopy = computed(() => ({
@@ -311,6 +343,8 @@ const pageContent = computed(() => ({
   background: linear-gradient(180deg, #ffffff 0%, #f3f5f9 100%);
   border-bottom: 1px solid rgba(15, 23, 42, 0.03);
   border-radius: 0;
+  /* 列表页使用固定高度而非全局 ui-card__visual 的 4:3 比例，
+     因为产品图在此布局下需要统一高度以保持网格对齐 */
   aspect-ratio: auto;
 }
 
@@ -488,14 +522,25 @@ const pageContent = computed(() => ({
   }
 
   .product-center-filter__inner {
-    gap: 8px;
-    padding: 10px 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding: 10px 12px;
+    scroll-snap-type: x proximity;
+  }
+
+  .product-center-filter__inner::-webkit-scrollbar {
+    display: none;
   }
 
   .product-center-filter__link {
+    flex-shrink: 0;
     min-height: 36px;
-    padding: 0 8px;
+    padding: 0 12px;
     font-size: 0.86rem;
+    scroll-snap-align: center;
   }
 
   .product-family + .product-family {

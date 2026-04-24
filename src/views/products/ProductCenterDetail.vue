@@ -278,7 +278,7 @@ import { sanitizeHtmlAllowList } from "@/utils/security";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
 import UiBreadcrumb from "@/components/common/UiBreadcrumb.vue";
-import type { BreadcrumbItem } from "@/components/common/UiBreadcrumb.vue";
+import type { BreadcrumbItem } from "@/types/breadcrumb";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import { useProductDetailData, normalizeCollection } from "@/composables/useProductDetailData";
 import { getProductCenterCardById } from "@/data/product-center";
@@ -312,6 +312,13 @@ const detailLocaleReady = ref(false);
 
 const isEn = computed(() => locale.value === "en");
 const cardId = computed(() => String(route.params.id || ""));
+
+const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
+  { label: t('nav.home'), to: localizePath('/') },
+  { label: t('nav.products'), to: localizePath('/products') },
+  { label: productData.value?.title || '', to: localizePath(`/products/detail/${cardId.value}`) },
+]);
+
 const cardRecord = computed(() => getProductCenterCardById(cardId.value));
 
 const loadProductDetailLocale = async () => {
@@ -442,33 +449,13 @@ const isMetricEmphasis = (value: string) => {
   if (!normalized) return false;
   // Prevent long sentences from being rendered with massive emphasis font
   if (normalized.length > 26) return false;
-  if (/[\u4e00-\u9fff]/.test(normalized)) {
-    return METRIC_EMPHASIS_PATTERN.test(normalized);
-  }
   return METRIC_EMPHASIS_PATTERN.test(normalized);
 };
 
-const HERO_IMAGE_SIZE_MAP: Record<string, HeroImageSize> = {
-  "rail": { width: 1600, height: 1280 },
-  "rotating-platform": { width: 1600, height: 1280 },
-  "za-m135": { width: 1600, height: 1200 },
-  "za-m75": { width: 1600, height: 1280 },
-  "za-mr3m": { width: 1600, height: 2133 },
-  "za-mr3t": { width: 1600, height: 2844 },
-  "za-r3-x": { width: 1600, height: 2133 },
-  "za-r3d6": { width: 854, height: 1474 },
-  "za-r3l-m-h": { width: 1600, height: 2133 },
-  "za-r3m-left": { width: 1600, height: 1280 },
-  "za-r3m-right": { width: 1280, height: 1707 },
-  "za-r3t": { width: 1600, height: 2844 },
-  "za-rdp": { width: 1920, height: 1080 },
-  "za-rmps": { width: 3840, height: 2880 },
-  "za-rmvr": { width: 3840, height: 2603 },
-  "za-zg100": { width: 1600, height: 2844 },
-};
+const DEFAULT_HERO_IMAGE_SIZE: HeroImageSize = { width: 1200, height: 900 };
 
-const heroImageSize = computed<HeroImageSize>(() =>
-  HERO_IMAGE_SIZE_MAP[cardId.value] || { width: 1200, height: 900 }
+const heroImageSize = computed<HeroImageSize>(
+  () => cardRecord.value?.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE
 );
 const heroImageSizes =
   "(max-width: 768px) calc(100vw - 28px), (max-width: 1100px) 76vw, 44vw";
@@ -1126,7 +1113,7 @@ const goBack = () => {
   }
 
   .product-hero__metrics {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .features-grid {
@@ -1141,6 +1128,9 @@ const goBack = () => {
 }
 
 @media (max-width: 560px) {
+  .product-hero__metrics {
+    grid-template-columns: 1fr;
+  }
   .product-hero__actions {
     flex-direction: column;
     align-items: stretch;
