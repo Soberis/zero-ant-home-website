@@ -22,7 +22,22 @@
         class="family-card"
       >
         <div class="family-card__visual">
+          <picture v-if="family.responsiveSrcSet" class="family-card__picture">
+            <source
+              :srcset="family.responsiveSrcSet"
+              :sizes="familyImageSizes"
+              type="image/webp"
+            />
+            <img
+              :src="family.image"
+              :alt="t(family.titleKey)"
+              class="family-card__image"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           <img
+            v-else
             :src="family.image"
             :alt="t(family.titleKey)"
             class="family-card__image"
@@ -61,13 +76,20 @@ import zaZG100Img from '@/assets/images/product/ZA-ZG100.webp';
 import rotatingPlatformImg from '@/assets/images/product/旋转平台.webp';
 import { useI18n } from 'vue-i18n';
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  buildResponsiveSrcSet,
+  getResponsiveProductImage,
+} from "@/utils/responsiveImage";
 
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
+const familyImageSizes =
+  "(max-width: 640px) calc(100vw - 72px), (max-width: 960px) calc((100vw - 88px) / 2), (max-width: 1280px) calc((100vw - 128px) / 3), 300px";
 
-const productFamilies = [
+const rawProductFamilies = [
   {
     key: 'r-series',
+    responsiveKey: 'za-r3-x',
     titleKey: 'home.coreProducts.families.rSeries.title',
     descriptionKey: 'home.coreProducts.families.rSeries.description',
     image: zaR3XImg,
@@ -75,6 +97,7 @@ const productFamilies = [
   },
   {
     key: 'dt-series',
+    responsiveKey: 'za-r3t',
     titleKey: 'home.coreProducts.families.dtSeries.title',
     descriptionKey: 'home.coreProducts.families.dtSeries.description',
     image: zaR3TImg,
@@ -82,6 +105,7 @@ const productFamilies = [
   },
   {
     key: 'm-series',
+    responsiveKey: 'za-m135',
     titleKey: 'home.coreProducts.families.mSeries.title',
     descriptionKey: 'home.coreProducts.families.mSeries.description',
     image: zaM135Img,
@@ -89,6 +113,7 @@ const productFamilies = [
   },
   {
     key: 'mr-series',
+    responsiveKey: 'za-mr3t',
     titleKey: 'home.coreProducts.families.mrSeries.title',
     descriptionKey: 'home.coreProducts.families.mrSeries.description',
     image: zaMR3TImg,
@@ -96,6 +121,7 @@ const productFamilies = [
   },
   {
     key: 'embodied-platforms',
+    responsiveKey: 'za-rmvr',
     titleKey: 'home.coreProducts.families.embodied.title',
     descriptionKey: 'home.coreProducts.families.embodied.description',
     image: zaRMVRImg,
@@ -103,6 +129,7 @@ const productFamilies = [
   },
   {
     key: 'controller',
+    responsiveKey: 'za-zg100',
     titleKey: 'home.coreProducts.families.controller.title',
     descriptionKey: 'home.coreProducts.families.controller.description',
     image: zaZG100Img,
@@ -110,12 +137,18 @@ const productFamilies = [
   },
   {
     key: 'accessories',
+    responsiveKey: 'rotating-platform',
     titleKey: 'home.coreProducts.families.accessories.title',
     descriptionKey: 'home.coreProducts.families.accessories.description',
     image: rotatingPlatformImg,
     models: ['地轨平台', '旋转平台'],
   },
 ] as const;
+
+const productFamilies = rawProductFamilies.map((family) => ({
+  ...family,
+  responsiveSrcSet: buildResponsiveSrcSet(getResponsiveProductImage(family.responsiveKey)),
+}));
 </script>
 
 <style scoped lang="less">
@@ -203,6 +236,14 @@ const productFamilies = [
   border-radius: 12px;
   background: #ffffff;
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.family-card__picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .family-card:hover .family-card__visual {
