@@ -28,7 +28,7 @@ function safeTranslate(key: string): string {
 
 function safeTranslateArray(key: string): string[] {
   try {
-    const message = i18n.global.tm(key);
+    const message: unknown = i18n.global.tm(key);
     if (!Array.isArray(message)) {
       return [];
     }

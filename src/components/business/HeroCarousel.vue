@@ -17,10 +17,9 @@
             type="image/webp"
           />
           <img
-            :src="activeSlide.img"
-            :alt="activeSlide.title"
+            :src="heroImgFallback"
+            :alt="t('home.hero.title')"
             class="hero-image"
-            :style="activeSlideImageStyle"
             width="1600"
             height="2844"
             loading="eager"
@@ -54,47 +53,31 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import coverImg from '@/assets/images/product/封面.webp';
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 import {
   buildResponsiveSrcSet,
+  getLargestResponsiveImage,
   getResponsiveHeroImage,
 } from "@/utils/responsiveImage";
 
-interface SlideItem {
-  img: string;
-  title: string;
-  imageScale?: number;
-  imageShiftX?: string;
-  imageShiftY?: string;
-  imageShiftXMobile?: string;
-  imageShiftYMobile?: string;
-}
-
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
-const heroDesktopSrcSet = buildResponsiveSrcSet(getResponsiveHeroImage("homeDesktop"));
-const heroMobileSrcSet = buildResponsiveSrcSet(getResponsiveHeroImage("homeMobile"));
+
+// Responsive srcset 供 <source> 使用（浏览器按设备/网络自动选最佳尺寸）
+const heroDesktopEntry = getResponsiveHeroImage("homeDesktop");
+const heroMobileEntry = getResponsiveHeroImage("homeMobile");
+const heroDesktopSrcSet = buildResponsiveSrcSet(heroDesktopEntry);
+const heroMobileSrcSet = buildResponsiveSrcSet(heroMobileEntry);
+
+// <img> fallback：使用 responsive 图片系统中最大的桌面图，而非 343KB 的静态导入
+// 旧实现 import coverImg 将封面图打进 JS bundle，导致首屏多加载 343KB
+const heroImgFallback = getLargestResponsiveImage(heroDesktopEntry);
+
 const productCenterRoute = computed(() =>
   localizeTo({ path: '/products', hash: '#products-page-top' })
 );
 
-const activeSlide = computed<SlideItem>(() => ({
-  img: coverImg,
-  title: t('home.hero.title'),
-  imageScale: 1.0,
-  imageShiftX: '0px',
-  imageShiftY: '0px',
-}));
-
 const entered = ref(false);
-const activeSlideImageStyle = computed(() => ({
-  '--hero-image-scale': String(activeSlide.value.imageScale ?? 1),
-  '--hero-image-shift-x': activeSlide.value.imageShiftX ?? '0px',
-  '--hero-image-shift-y': activeSlide.value.imageShiftY ?? '0px',
-  '--hero-image-shift-x-mobile': activeSlide.value.imageShiftXMobile ?? activeSlide.value.imageShiftX ?? '0px',
-  '--hero-image-shift-y-mobile': activeSlide.value.imageShiftYMobile ?? activeSlide.value.imageShiftY ?? '0px',
-}));
 
 let enterTimer: number | null = null;
 

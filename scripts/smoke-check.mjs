@@ -68,7 +68,7 @@ async function checkVideoCardSemantics() {
   assert(videoCasesSource.includes(":to=\"localizePath(`/video/${item.slug}`)\""), "[smoke] Home video cards should pass localized routes");
   assert(solutionsSource.includes(":to=\"localizeTo({ path: `/video/${video.slug}` })\""), "[smoke] Solutions video cards should pass localized routes");
   assert(productDetailSource.includes(":to=\"localizePath(`/video/${video.slug}`)\""), "[smoke] Product detail video cards should pass localized routes");
-  assert(/test:\s*\/\\\.\(png\|svg\)\$\/i/.test(viteConfigSource), "[smoke] Image optimizer filter regression");
+  assert(/test:\s*\/\\\.\(png\|svg\|jpe\?g\)\$\/i/.test(viteConfigSource), "[smoke] Image optimizer filter regression");
   assert(/exclude:\s*\[\s*\/\\\/responsive\\\//.test(viteConfigSource), "[smoke] Image optimizer should exclude responsive assets");
 }
 

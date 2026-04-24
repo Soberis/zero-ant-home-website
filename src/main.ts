@@ -1,7 +1,7 @@
 import { createApp, nextTick, watch } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
-import i18n from "@/config/i18n";
+import i18n, { initI18n } from "@/config/i18n";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 import "@/assets/style.less";
 
@@ -12,7 +12,14 @@ const app = createApp(App);
 app.use(router);
 app.use(i18n);
 
-app.mount("#app");
+// 初始化 i18n 语言包（按需加载，仅当前语言阻塞首屏）
+// 必须在 mount 之前完成，确保首屏渲染时文案已就绪
+initI18n().then(() => {
+  app.mount("#app");
+}).catch(() => {
+  // 语言包加载失败时仍挂载，避免白屏
+  app.mount("#app");
+});
 
 // 初始化安全监控和SEO（仅在浏览器环境）
 if (typeof window !== "undefined") {

@@ -28,9 +28,9 @@ export default defineConfig({
           }),
         ]
       : []),
-    // 图片优化插件
+    // 图片优化插件（覆盖 png/svg/jpg，排除 responsive 目录下已优化的预生成图）
     ViteImageOptimizer({
-      test: /\.(png|svg)$/i,
+      test: /\.(png|svg|jpe?g)$/i,
       includePublic: true,
       exclude: [/\/responsive\//],
     }),
