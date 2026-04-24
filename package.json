@@ -64,6 +64,7 @@
     "semver": ">=5.7.2",
     "brace-expansion": ">=2.0.2",
     "minimatch": ">=9.0.0",
+    "eslint-scope": "^8.4.0",
     "eslint-visitor-keys": "4.2.1",
     "vue-tsc": "^2.0.29"
   }
