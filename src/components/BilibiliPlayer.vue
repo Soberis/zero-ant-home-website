@@ -146,15 +146,15 @@ function parseVideoInfo(url: string): ParsedVideoInfo | null {
     return null;
   }
 
-  let page = "1";
-
-  try {
-    const parsedUrl = new URL(url);
-    page = parsedUrl.searchParams.get("p") || parsedUrl.searchParams.get("page") || "1";
-  } catch {
-    const pageMatch = url.match(/[?&](?:p|page)=(\d+)/i);
-    page = pageMatch?.[1] || "1";
-  }
+  const page = (() => {
+    try {
+      const parsedUrl = new URL(url);
+      return parsedUrl.searchParams.get("p") || parsedUrl.searchParams.get("page") || "1";
+    } catch {
+      const pageMatch = url.match(/[?&](?:p|page)=(\d+)/i);
+      return pageMatch?.[1] || "1";
+    }
+  })();
 
   return {
     bvid: match[1],

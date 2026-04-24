@@ -216,7 +216,7 @@ export function setupPageSEO(to: RouteLocationNormalized) {
     });
 
     // 设置结构化数据
-    let structuredData: Record<string, any> = {
+    const structuredData: Record<string, any> = {
       "@context": "https://schema.org",
       "@type": "WebPage",
       name: seoConfig.title,

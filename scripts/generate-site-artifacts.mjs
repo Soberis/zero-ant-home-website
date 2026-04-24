@@ -151,7 +151,7 @@ function parseProductFamilies(source) {
 function parseProductCards(source, assetImports = {}) {
   const cards = [];
   const regex =
-    /id:\s*"([^"]+)",\s*image:\s*([A-Za-z_$][\w$]*),\s*titleKey:\s*"([^"]+)",\s*summaryKey:\s*"([^"]+)",\s*specKeys:\s*\[([\s\S]*?)\](?:,\s*noteKey:\s*"([^"]+)")?/g;
+    /\{\s*id:\s*"([^"]+)",\s*image:\s*([A-Za-z_$][\w$]*),[\s\S]*?titleKey:\s*"([^"]+)",\s*summaryKey:\s*"([^"]+)",\s*specKeys:\s*\[([\s\S]*?)\](?:,\s*noteKey:\s*"([^"]+)")?/g;
   let match = regex.exec(source);
 
   while (match) {

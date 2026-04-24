@@ -442,7 +442,7 @@ const getDownloadDisplayName = (name: string) =>
   name.replace(/\.[a-z0-9]+$/i, "");
 
 const METRIC_EMPHASIS_PATTERN =
-  /(^[±+\-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
+  /(^[±+-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
 
 const isMetricEmphasis = (value: string) => {
   const normalized = value.trim();
