@@ -1,66 +1,64 @@
-http {
-    server {
-        listen 80;
-        server_name {{SERVER_NAME}};
-        charset utf-8;
+server {
+    listen 80;
+    server_name {{SERVER_NAME}};
+    charset utf-8;
 
-        # 静态文件路径（指向 Vite 构建后的 dist 目录）
-        root /mnt/disk1/zeroant/home_web;
-        index index.html;
+    # 静态文件路径（指向 Vite 构建后的 dist 目录）
+    root /mnt/disk1/zeroant/home_web;
+    index index.html;
 
-        # 启用 gzip 压缩
-        gzip on;
-        gzip_types text/css application/javascript;
+    # 启用 gzip 压缩
+    gzip on;
+    gzip_types text/css application/javascript;
 
-        # 旧产品路由保留跳转，避免依赖前端路由兜底
-        location ~ ^/(en/)?(system-products|robot-products)(/.*)?$ {
-            return 301 /$1products;
-        }
-
-        # 站点已预渲染为静态页面；未知路径直接返回 404，避免错误 URL 被当作首页收录
-        location / {
-            try_files $uri $uri/ =404;
-        }
-
-        # 生产环境开启 HTTP 跳转 HTTPS（由 CI 替换 {{REWRITE_HTTPS}} 占位符启用）
-        # {{REWRITE_HTTPS}}
+    # 旧产品路由保留跳转，避免依赖前端路由兜底
+    location ~ ^/(en/)?(system-products|robot-products)(/.*)?$ {
+        return 301 /$1products;
     }
 
-    server {
-        # 兼容较老版本或未编译 http_v2 模块的 Nginx，避免 reload 失败
-        listen 443 ssl;
-        server_name {{SERVER_NAME}};
-        client_max_body_size 30M;
-        client_header_buffer_size 16K;
-        large_client_header_buffers 4 64K;
+    # 站点已预渲染为静态页面；未知路径直接返回 404，避免错误 URL 被当作首页收录
+    location / {
+        try_files $uri $uri/ =404;
+    }
 
-        root /mnt/disk1/zeroant/home_web;
-        index index.html;
+    # 生产环境开启 HTTP 跳转 HTTPS（由 CI 替换 {{REWRITE_HTTPS}} 占位符启用）
+    # {{REWRITE_HTTPS}}
+}
 
-        ssl_certificate cert/zeroant.com.pem;
-        ssl_certificate_key cert/zeroant.com.key;
+server {
+    # 兼容较老版本或未编译 http_v2 模块的 Nginx，避免 reload 失败
+    listen 443 ssl;
+    server_name {{SERVER_NAME}};
+    client_max_body_size 30M;
+    client_header_buffer_size 16K;
+    large_client_header_buffers 4 64K;
 
-        # TLS 配置（兼容线上较老版本 Nginx）
-        ssl_session_timeout 5m;
-        ssl_session_cache shared:SSL:10m;
-        ssl_protocols TLSv1.2;
-        ssl_ciphers HIGH:!aNULL:!MD5;
-        ssl_prefer_server_ciphers on;
+    root /mnt/disk1/zeroant/home_web;
+    index index.html;
 
-        # HSTS（仅在确认 HTTPS 全站可用后启用）
-        # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    ssl_certificate cert/zeroant.com.pem;
+    ssl_certificate_key cert/zeroant.com.key;
 
-        gzip on;
-        gzip_types text/css application/javascript application/json application/xml image/svg+xml;
-        gzip_min_length 1024;
-        gzip_comp_level 6;
+    # TLS 配置（兼容线上较老版本 Nginx）
+    ssl_session_timeout 5m;
+    ssl_session_cache shared:SSL:10m;
+    ssl_protocols TLSv1.2;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
 
-        location ~ ^/(en/)?(system-products|robot-products)(/.*)?$ {
-            return 301 /$1products;
-        }
+    # HSTS（仅在确认 HTTPS 全站可用后启用）
+    # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
-        location / {
-            try_files $uri $uri/ =404;
-        }
+    gzip on;
+    gzip_types text/css application/javascript application/json application/xml image/svg+xml;
+    gzip_min_length 1024;
+    gzip_comp_level 6;
+
+    location ~ ^/(en/)?(system-products|robot-products)(/.*)?$ {
+        return 301 /$1products;
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
     }
 }
