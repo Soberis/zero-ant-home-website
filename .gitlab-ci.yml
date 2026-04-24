@@ -56,7 +56,7 @@ deploy_test_server:
   script:
     - echo "Deploying to test server"
     - export SERVER_NAME="test_www.zeroant.com"
-    # 只替换 SERVER_NAME，REWRITE_HTTPS 为空，并删除 443 server 块
+    # 替换 SERVER_NAME，清空 REWRITE_HTTPS 占位符，并删除 443 server 块
     - |
       sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}//g" config/nginx.conf.template | awk '
         BEGIN { block=0; brace=0 }
@@ -107,9 +107,7 @@ deploy_ALI_CLOUD_ECS:
   script:
     - echo "Deploying to production"
     - export SERVER_NAME="zeroant.com www.zeroant.com"
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g" config/nginx.conf.template > dist/nginx.conf
-    # 替换 SERVER_NAME，并将 {{REWRITE_HTTPS}} 替换为 rewrite 规则
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}/rewrite ^(.*)$ https:\/\/\$host\$1 permanent;/g" config/nginx.conf.template > dist/nginx.conf
+    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}/return 301 https:\/\/\$host\$request_uri;/" config/nginx.conf.template > dist/nginx.conf
     # 部署到阿里云上
     - rsync -avz --delete dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
     - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -t -c /mnt/disk1/zeroant/home_web/nginx.conf"
