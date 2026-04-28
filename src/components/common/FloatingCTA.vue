@@ -42,6 +42,8 @@
               :src="wxworkQrcode"
               alt="WeChat QR Code"
               class="qrcode-image"
+              width="120"
+              height="120"
               loading="lazy"
               decoding="async"
             />
@@ -70,6 +72,8 @@
               :src="taobaoQrcode"
               alt="Taobao QR Code"
               class="qrcode-image"
+              width="120"
+              height="120"
               loading="lazy"
               decoding="async"
             />
