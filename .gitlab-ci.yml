@@ -41,8 +41,8 @@ deploy_test_server:
   cache:
     key:
       files:
-        - package-lock.json
-      prefix: npm
+        - yarn.lock
+      prefix: yarn
     paths:
       - node_modules/
   before_script:
@@ -92,8 +92,8 @@ deploy_ALI_CLOUD_ECS:
   cache:
     key:
       files:
-        - package-lock.json
-      prefix: npm
+        - yarn.lock
+      prefix: yarn
     paths:
       - node_modules/
   before_script:
