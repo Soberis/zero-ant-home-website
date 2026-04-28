@@ -12,6 +12,12 @@
     <div class="video-media ui-card__visual">
       <picture class="video-media__picture">
         <source
+          v-if="responsiveImageAvifSrcSet"
+          :srcset="responsiveImageAvifSrcSet"
+          :sizes="videoCardSizes"
+          type="image/avif"
+        />
+        <source
           v-if="responsiveImageSrcSet"
           :srcset="responsiveImageSrcSet"
           :sizes="videoCardSizes"
@@ -72,6 +78,9 @@ const props = withDefaults(defineProps<{
 
 const responsiveImageSrcSet = computed(() =>
   buildResponsiveSrcSet(getResponsiveVideoImage(props.card.slug))
+);
+const responsiveImageAvifSrcSet = computed(() =>
+  buildResponsiveSrcSet(getResponsiveVideoImage(props.card.slug, "avif"))
 );
 const fallbackImageSrc = computed(() =>
   getVideoThumbnailById(props.card.slug) || props.card.img

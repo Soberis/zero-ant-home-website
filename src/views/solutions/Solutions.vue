@@ -15,33 +15,62 @@
           <div class="hero-promises">
             <article class="hero-promise">
               <div class="hero-promise-head">
-                <span class="hero-promise-value">{{ t("solutionsPage.hero.promises.directions.metric") }}</span>
+                <span class="hero-promise-value">{{
+                  t("solutionsPage.hero.promises.directions.metric")
+                }}</span>
               </div>
-              <p class="hero-promise-label">{{ t("solutionsPage.hero.promises.directions.description") }}</p>
+              <p class="hero-promise-label">
+                {{ t("solutionsPage.hero.promises.directions.description") }}
+              </p>
             </article>
             <article class="hero-promise">
               <div class="hero-promise-head">
-                <span class="hero-promise-value">{{ t("solutionsPage.hero.promises.delivery.metric") }}</span>
-                <span class="hero-promise-unit">{{ t("solutionsPage.hero.promises.delivery.unit") }}</span>
+                <span class="hero-promise-value">{{
+                  t("solutionsPage.hero.promises.delivery.metric")
+                }}</span>
+                <span class="hero-promise-unit">{{
+                  t("solutionsPage.hero.promises.delivery.unit")
+                }}</span>
               </div>
-              <p class="hero-promise-label">{{ t("solutionsPage.hero.promises.delivery.description") }}</p>
+              <p class="hero-promise-label">
+                {{ t("solutionsPage.hero.promises.delivery.description") }}
+              </p>
             </article>
           </div>
         </div>
 
         <figure class="hero-stage">
           <div class="hero-stage__media">
-            <img
-              :src="featuredHeroImage"
-              :alt="t('solutionsPage.hero.featuredTitle')"
-              loading="eager"
-              decoding="async"
-            />
+            <picture class="hero-stage__picture">
+              <source
+                v-if="featuredHeroAvifSrcSet"
+                :srcset="featuredHeroAvifSrcSet"
+                sizes="(max-width: 1200px) 100vw, 760px"
+                type="image/avif"
+              />
+              <source
+                v-if="featuredHeroSrcSet"
+                :srcset="featuredHeroSrcSet"
+                sizes="(max-width: 1200px) 100vw, 760px"
+                type="image/webp"
+              />
+              <img
+                :src="featuredHeroImage"
+                :alt="t('solutionsPage.hero.featuredTitle')"
+                :width="LIFE_SCIENCE_IMAGE_SIZE.width"
+                :height="LIFE_SCIENCE_IMAGE_SIZE.height"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </picture>
           </div>
           <figcaption class="hero-stage__caption">
             <span class="hero-stage__label">{{ t("solutionsPage.hero.featuredLabel") }}</span>
             <strong class="hero-stage__title">{{ t("solutionsPage.hero.featuredTitle") }}</strong>
-            <span class="hero-stage__description">{{ t("solutionsPage.hero.featuredDescription") }}</span>
+            <span class="hero-stage__description">{{
+              t("solutionsPage.hero.featuredDescription")
+            }}</span>
           </figcaption>
         </figure>
       </div>
@@ -51,7 +80,9 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("solutionsPage.overview.title") }}</span>
+            <span class="title-main text-display-large">{{
+              t("solutionsPage.overview.title")
+            }}</span>
           </h2>
           <p class="detail-section__desc">{{ t("solutionsPage.overview.description") }}</p>
         </div>
@@ -65,10 +96,7 @@
           >
             <div class="overview-card__meta">
               <span class="card-index">{{ formatIndex(index + 1) }}</span>
-              <span
-                v-if="direction.status"
-                class="status-chip status-chip--planning"
-              >
+              <span v-if="direction.status" class="status-chip status-chip--planning">
                 {{ direction.status }}
               </span>
             </div>
@@ -86,7 +114,13 @@
               @click="scrollToSection(direction.anchorId)"
             >
               <span>{{ direction.overviewActionLabel }}</span>
-              <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                class="action-arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
@@ -99,7 +133,9 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("solutionsPage.directions.title") }}</span>
+            <span class="title-main text-display-large">{{
+              t("solutionsPage.directions.title")
+            }}</span>
           </h2>
           <p class="detail-section__desc">{{ t("solutionsPage.directions.description") }}</p>
         </div>
@@ -116,10 +152,7 @@
               <div class="direction-card__heading">
                 <div class="direction-card__meta">
                   <span class="card-index">{{ formatIndex(index + 1) }}</span>
-                  <span
-                    v-if="direction.status"
-                    class="status-chip status-chip--planning"
-                  >
+                  <span v-if="direction.status" class="status-chip status-chip--planning">
                     {{ direction.status }}
                   </span>
                 </div>
@@ -134,11 +167,12 @@
                   <img
                     :src="direction.visualSrc"
                     :alt="direction.visualAlt"
+                    :width="direction.visualSize.width"
+                    :height="direction.visualSize.height"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
-
               </figure>
 
               <div class="direction-card__content">
@@ -153,8 +187,12 @@
                       class="content-block__support"
                     >
                       <span v-if="direction.featuredProduct">{{ direction.featuredProduct }}</span>
-                      <span v-if="direction.featuredProduct && direction.featuredDescription"> · </span>
-                      <span v-if="direction.featuredDescription">{{ direction.featuredDescription }}</span>
+                      <span v-if="direction.featuredProduct && direction.featuredDescription">
+                        ·
+                      </span>
+                      <span v-if="direction.featuredDescription">{{
+                        direction.featuredDescription
+                      }}</span>
                     </p>
                   </div>
 
@@ -192,7 +230,11 @@
                     </template>
                     <template v-else>
                       <p class="content-block__support">
-                        {{ direction.applicationTitle || direction.featuredDescription || direction.summary }}
+                        {{
+                          direction.applicationTitle ||
+                          direction.featuredDescription ||
+                          direction.summary
+                        }}
                       </p>
                     </template>
                   </div>
@@ -259,7 +301,11 @@
                 :aria-expanded="activeMoreExpanded"
                 @click="toggleMoreExpanded"
               >
-                {{ activeMoreExpanded ? t("solutionsPage.more.collapse") : t("solutionsPage.more.viewAll") }}
+                {{
+                  activeMoreExpanded
+                    ? t("solutionsPage.more.collapse")
+                    : t("solutionsPage.more.viewAll")
+                }}
               </button>
             </div>
 
@@ -295,17 +341,15 @@
       <div class="page-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("solutionsPage.delivery.title") }}</span>
+            <span class="title-main text-display-large">{{
+              t("solutionsPage.delivery.title")
+            }}</span>
           </h2>
           <p class="detail-section__desc">{{ t("solutionsPage.delivery.description") }}</p>
         </div>
 
         <div class="delivery-grid">
-          <article
-            v-for="(step, index) in deliverySteps"
-            :key="step.title"
-            class="delivery-card"
-          >
+          <article v-for="(step, index) in deliverySteps" :key="step.title" class="delivery-card">
             <span class="card-index">{{ formatIndex(index + 1) }}</span>
             <h3 class="delivery-card__title">{{ step.title }}</h3>
             <p class="delivery-card__description">{{ step.description }}</p>
@@ -341,17 +385,22 @@
                 <span class="card-index">{{ formatIndex(index + 1) }}</span>
                 <span class="faq-item__question">{{ faq.question }}</span>
               </div>
-              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg
+                class="faq-item__icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </button>
 
             <transition name="fade-slide">
-              <div
-                v-if="faqStates[index]"
-                :id="`solution-faq-${index}`"
-                class="faq-item__content"
-              >
+              <div v-if="faqStates[index]" :id="`solution-faq-${index}`" class="faq-item__content">
                 <p class="faq-item__answer">{{ faq.answer }}</p>
               </div>
             </transition>
@@ -366,14 +415,19 @@
           <div class="contact-copy">
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ t("solutionsPage.finalCta.title") }}</span>
+                <span class="title-main text-display-large">{{
+                  t("solutionsPage.finalCta.title")
+                }}</span>
               </h2>
               <p class="detail-section__desc">{{ t("solutionsPage.finalCta.description") }}</p>
             </div>
           </div>
 
           <div class="contact-actions">
-            <router-link class="btn btn-primary" :to="localizeTo({ path: '/about', hash: '#contact' })">
+            <router-link
+              class="btn btn-primary"
+              :to="localizeTo({ path: '/about', hash: '#contact' })"
+            >
               {{ t("solutionsPage.finalCta.primaryCta") }}
             </router-link>
           </div>
@@ -388,7 +442,6 @@ import { computed, ref, watch } from "vue";
 import type { RouteLocationRaw } from "vue-router";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
-import lifeScienceShowcaseImg from "@/assets/images/product/life-science-concept.png";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
 import applications from "@/data/applications";
@@ -397,10 +450,16 @@ import { solutionDirections } from "@/data/solutionIndustries";
 import { videoCards, videoMap } from "@/data/videos";
 import { useScrollRevealList } from "@/composables/useScrollReveal";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  buildResponsiveSrcSet,
+  getLargestResponsiveImage,
+  getResponsiveShowcaseImage,
+} from "@/utils/responsiveImage";
 
 interface ProductView {
   title: string;
   image: string;
+  imageSize: { width: number; height: number };
 }
 
 interface FaqItem {
@@ -421,6 +480,7 @@ interface SolutionDirectionView {
   featuredDescription: string;
   applicationTitle: string;
   visualSrc: string;
+  visualSize: { width: number; height: number };
   visualAlt: string;
   visualCaption: string;
   overviewActionLabel: string;
@@ -441,7 +501,12 @@ interface MoreApplicationView {
   svg: string;
 }
 
-const featuredHeroImage = lifeScienceShowcaseImg;
+const LIFE_SCIENCE_IMAGE_SIZE = { width: 2304, height: 1842 } as const;
+const featuredHeroEntry = getResponsiveShowcaseImage("life-science-concept");
+const featuredHeroAvifEntry = getResponsiveShowcaseImage("life-science-concept", "avif");
+const featuredHeroImage = getLargestResponsiveImage(featuredHeroEntry);
+const featuredHeroAvifSrcSet = buildResponsiveSrcSet(featuredHeroAvifEntry);
+const featuredHeroSrcSet = buildResponsiveSrcSet(featuredHeroEntry);
 const featuredVideoSlugs = [
   "medical-automation",
   "composite-robot-application",
@@ -492,10 +557,7 @@ function orderByFeatured<T extends { slug: string }>(
   const featuredItems = featuredSlugs.map((slug) => itemMap.get(slug)).filter(isDefined);
   const featuredSet = new Set(featuredSlugs);
 
-  return [
-    ...featuredItems,
-    ...items.filter((item) => !featuredSet.has(item.slug)),
-  ];
+  return [...featuredItems, ...items.filter((item) => !featuredSet.has(item.slug))];
 }
 
 function readMessageArray(key: string): string[] {
@@ -568,6 +630,7 @@ const productMap = computed<Record<string, ProductView>>(() =>
     map[item.card.id] = {
       title: t(item.card.titleKey),
       image: item.card.image,
+      imageSize: item.card.heroImageSize ?? { width: 1200, height: 900 },
     };
     return map;
   }, {})
@@ -583,9 +646,7 @@ const applicationTitleMap = computed<Record<string, string>>(() =>
 const directions = computed<SolutionDirectionView[]>(() =>
   solutionDirections.map((direction) => {
     const isLifeScience = direction.key === "lifeScienceAutomation";
-    const products = direction.productSlugs
-      .map((slug) => productMap.value[slug])
-      .filter(isDefined);
+    const products = direction.productSlugs.map((slug) => productMap.value[slug]).filter(isDefined);
     const visualProduct = direction.visualProductSlug
       ? productMap.value[direction.visualProductSlug]
       : products[0];
@@ -594,10 +655,12 @@ const directions = computed<SolutionDirectionView[]>(() =>
     const featuredProduct = t(`solutionsPage.directions.${direction.key}.featuredProduct`);
     const visualTitle = isLifeScience
       ? t("solutionsPage.hero.featuredTitle")
-      : visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`);
-    const visualCaption = visualTitle && normalizeComparableText(visualTitle) !== normalizeComparableText(featuredProduct)
-      ? visualTitle
-      : "";
+      : (visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`));
+    const visualCaption =
+      visualTitle &&
+      normalizeComparableText(visualTitle) !== normalizeComparableText(featuredProduct)
+        ? visualTitle
+        : "";
 
     const primaryActionTo = isLifeScience
       ? localizeTo({ path: "/support", hash: "#contact" })
@@ -610,15 +673,23 @@ const directions = computed<SolutionDirectionView[]>(() =>
       status: direction.status ? t(`solutionsPage.directions.${direction.key}.status`) : "",
       summary: t(`solutionsPage.directions.${direction.key}.summary`),
       combo: t(`solutionsPage.directions.${direction.key}.combo`),
-      scenarios: readMessageArray(`solutionsPage.directions.${direction.key}.scenarios`).slice(0, 3),
-      capabilityPoints: readMessageArray(`solutionsPage.directions.${direction.key}.capabilityPoints`).slice(0, 3),
+      scenarios: readMessageArray(`solutionsPage.directions.${direction.key}.scenarios`).slice(
+        0,
+        3
+      ),
+      capabilityPoints: readMessageArray(
+        `solutionsPage.directions.${direction.key}.capabilityPoints`
+      ).slice(0, 3),
       featuredProduct,
       featuredDescription: t(`solutionsPage.directions.${direction.key}.featuredDescription`),
       applicationTitle,
-      visualSrc: isLifeScience ? featuredHeroImage : visualProduct?.image ?? featuredHeroImage,
+      visualSrc: isLifeScience ? featuredHeroImage : (visualProduct?.image ?? featuredHeroImage),
+      visualSize: isLifeScience
+        ? LIFE_SCIENCE_IMAGE_SIZE
+        : (visualProduct?.imageSize ?? LIFE_SCIENCE_IMAGE_SIZE),
       visualAlt: isLifeScience
         ? t("solutionsPage.hero.featuredTitle")
-        : visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`),
+        : (visualProduct?.title ?? t(`solutionsPage.directions.${direction.key}.title`)),
       visualCaption,
       overviewActionLabel: t(`solutionsPage.directions.${direction.key}.overviewAction`),
       primaryActionLabel: t(`solutionsPage.directions.${direction.key}.primaryAction`),
@@ -645,9 +716,7 @@ const moreApplications = computed<MoreApplicationView[]>(() =>
 );
 
 const visibleMoreVideos = computed(() =>
-  videosExpanded.value
-    ? moreVideos.value
-    : moreVideos.value.slice(0, defaultVisibleVideoCount)
+  videosExpanded.value ? moreVideos.value : moreVideos.value.slice(0, defaultVisibleVideoCount)
 );
 
 const visibleMoreApplications = computed(() =>
@@ -891,6 +960,11 @@ watch(
   flex: 1 0 auto;
 }
 
+.hero-stage__picture {
+  display: block;
+  width: 100%;
+}
+
 .hero-stage__media img {
   width: 100%;
   height: auto;
@@ -992,7 +1066,10 @@ watch(
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.02);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .overview-card:hover {
@@ -1009,8 +1086,6 @@ watch(
 .overview-card:hover .overview-card__link .action-arrow {
   transform: translateX(4px);
 }
-
-
 
 .overview-card__meta {
   display: flex;
@@ -1080,7 +1155,10 @@ watch(
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.02);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .delivery-card:hover {
@@ -1124,7 +1202,9 @@ watch(
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.05);
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.025);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .direction-card:hover {
@@ -1379,7 +1459,11 @@ watch(
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .more-switcher__item.active {
@@ -1449,7 +1533,9 @@ watch(
   border: 1px solid rgba(15, 23, 42, 0.06);
   background: var(--section-card-surface);
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .faq-item:hover {
@@ -1536,7 +1622,9 @@ watch(
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .fade-slide-enter-from,

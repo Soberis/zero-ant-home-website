@@ -6,21 +6,38 @@ export interface ResponsiveImageEntry {
   widths: number[];
 }
 
+export type ResponsiveImageFormat = "webp" | "avif";
+
 interface ResponsiveImageManifest {
   hero: Record<string, ResponsiveImageEntry>;
+  heroAvif: Record<string, ResponsiveImageEntry>;
   products: Record<string, ResponsiveImageEntry>;
+  productsAvif: Record<string, ResponsiveImageEntry>;
   videos: Record<string, ResponsiveImageEntry>;
+  videosAvif: Record<string, ResponsiveImageEntry>;
+  showcase: Record<string, ResponsiveImageEntry>;
+  showcaseAvif: Record<string, ResponsiveImageEntry>;
 }
 
 const manifest = responsiveImages as ResponsiveImageManifest;
+type ResponsiveImageGroup = "hero" | "products" | "videos" | "showcase";
 
 function buildResponsiveImagePath(entry: ResponsiveImageEntry, width: number): string {
   return `${entry.basePath}-${width}.${entry.format}`;
 }
 
-export function buildResponsiveSrcSet(
-  entry: ResponsiveImageEntry | null | undefined
-): string {
+function getManifestGroup(
+  group: ResponsiveImageGroup,
+  format: ResponsiveImageFormat = "webp"
+): Record<string, ResponsiveImageEntry> {
+  if (format === "avif") {
+    return manifest[`${group}Avif` as const] || {};
+  }
+
+  return manifest[group] || {};
+}
+
+export function buildResponsiveSrcSet(entry: ResponsiveImageEntry | null | undefined): string {
   if (!entry || !entry.widths.length) {
     return "";
   }
@@ -30,9 +47,7 @@ export function buildResponsiveSrcSet(
     .join(", ");
 }
 
-export function getLargestResponsiveImage(
-  entry: ResponsiveImageEntry | null | undefined
-): string {
+export function getLargestResponsiveImage(entry: ResponsiveImageEntry | null | undefined): string {
   if (!entry || !entry.widths.length) {
     return "";
   }
@@ -40,16 +55,30 @@ export function getLargestResponsiveImage(
   return buildResponsiveImagePath(entry, entry.widths[entry.widths.length - 1]);
 }
 
-export function getResponsiveHeroImage(key: string): ResponsiveImageEntry | null {
-  return manifest.hero[key] || null;
+export function getResponsiveHeroImage(
+  key: string,
+  format: ResponsiveImageFormat = "webp"
+): ResponsiveImageEntry | null {
+  return getManifestGroup("hero", format)[key] || null;
 }
 
 export function getResponsiveProductImage(
-  slug: string
+  slug: string,
+  format: ResponsiveImageFormat = "webp"
 ): ResponsiveImageEntry | null {
-  return manifest.products[slug] || null;
+  return getManifestGroup("products", format)[slug] || null;
 }
 
-export function getResponsiveVideoImage(slug: string): ResponsiveImageEntry | null {
-  return manifest.videos[slug] || null;
+export function getResponsiveVideoImage(
+  slug: string,
+  format: ResponsiveImageFormat = "webp"
+): ResponsiveImageEntry | null {
+  return getManifestGroup("videos", format)[slug] || null;
+}
+
+export function getResponsiveShowcaseImage(
+  key: string,
+  format: ResponsiveImageFormat = "webp"
+): ResponsiveImageEntry | null {
+  return getManifestGroup("showcase", format)[key] || null;
 }

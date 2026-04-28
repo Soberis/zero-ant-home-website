@@ -1,22 +1,6 @@
 // 视频数据模块，包含当前素材池中的视频详情映射和视频卡片列表
 
-import agvImg from "@/assets/images/videos/agv-intro.webp";
-import compositeRobotImg from "@/assets/images/videos/composite-robot-transfer.webp";
-import compositeRobotAppImg from "@/assets/images/videos/composite-robot-app.webp";
-import urRobotLLMImg from "@/assets/images/videos/ur-llm-grab.webp";
-import fourAxisRobotFridgeImg from "@/assets/images/videos/four-axis-fridge.webp";
-
-import mobileTransferRobotImg from "@/assets/images/videos/mobile-transfer-robot.webp";
-
-import sketchingRobotImg from "@/assets/images/videos/sketching-robot.webp";
-import mobileRobotChassisImg from "@/assets/images/videos/mobile-robot-chassis.webp";
-import fixedRailTransferRobotImg from "@/assets/images/videos/fixed-rail-transfer-robot.webp";
-
-import zaR3mlDemoImg from "@/assets/images/videos/za-r3ml-demo.jpg";
-import vrTeleopDualArmImg from "@/assets/images/videos/vr-teleop-dual-arm.jpg";
-import vlaDualArmCableGraspingImg from "@/assets/images/videos/vla-dual-arm-cable-grasping.jpg";
-import vlaDualArmDataCollectionImg from "@/assets/images/videos/vla-dual-arm-data-collection.jpg";
-
+import { getLargestResponsiveImage, getResponsiveVideoImage } from "@/utils/responsiveImage";
 // 常量定义
 const BILIBILI_BASE_PARAMS =
   "?spm_id_from=333.1387.homepage.video_card.click&vd_source=7daba5cbb058d519718a2849fb57ed71";
@@ -53,21 +37,31 @@ export interface VideoCard {
 /**
  * 视频缩略图映射，供卡片和详情页共用，避免详情页再依赖卡片列表取封面。
  */
+const getRequiredVideoThumbnail = (slug: string): string => {
+  const thumbnail = getLargestResponsiveImage(getResponsiveVideoImage(slug));
+
+  if (!thumbnail) {
+    throw new Error(`[videos] Missing responsive thumbnail for slug: ${slug}`);
+  }
+
+  return thumbnail;
+};
+
 const videoThumbnailMap: Record<string, string> = {
-  // TODO: medical-automation 当前暂借 compositeRobotImg，待有专属医疗素材后替换
-  "medical-automation": compositeRobotImg,
-  "composite-robot-application": compositeRobotAppImg,
-  "agv-product-introduction": agvImg,
-  "ur-robot-llm-motion-capture": urRobotLLMImg,
-  "four-axis-robot-open-fridge": fourAxisRobotFridgeImg,
-  "sketching-robot": sketchingRobotImg,
-  "mobile-transfer-robot": mobileTransferRobotImg,
-  "mobile-robot-chassis": mobileRobotChassisImg,
-  "fixed-rail-transfer-robot": fixedRailTransferRobotImg,
-  "za-r3ml-demo": zaR3mlDemoImg,
-  "vr-teleop-dual-arm": vrTeleopDualArmImg,
-  "vla-dual-arm-cable-grasping": vlaDualArmCableGraspingImg,
-  "vla-dual-arm-data-collection": vlaDualArmDataCollectionImg,
+  // TODO: medical-automation 当前暂借 composite-robot-application 封面，待有专属医疗素材后替换
+  "medical-automation": getRequiredVideoThumbnail("medical-automation"),
+  "composite-robot-application": getRequiredVideoThumbnail("composite-robot-application"),
+  "agv-product-introduction": getRequiredVideoThumbnail("agv-product-introduction"),
+  "ur-robot-llm-motion-capture": getRequiredVideoThumbnail("ur-robot-llm-motion-capture"),
+  "four-axis-robot-open-fridge": getRequiredVideoThumbnail("four-axis-robot-open-fridge"),
+  "sketching-robot": getRequiredVideoThumbnail("sketching-robot"),
+  "mobile-transfer-robot": getRequiredVideoThumbnail("mobile-transfer-robot"),
+  "mobile-robot-chassis": getRequiredVideoThumbnail("mobile-robot-chassis"),
+  "fixed-rail-transfer-robot": getRequiredVideoThumbnail("fixed-rail-transfer-robot"),
+  "za-r3ml-demo": getRequiredVideoThumbnail("za-r3ml-demo"),
+  "vr-teleop-dual-arm": getRequiredVideoThumbnail("vr-teleop-dual-arm"),
+  "vla-dual-arm-cable-grasping": getRequiredVideoThumbnail("vla-dual-arm-cable-grasping"),
+  "vla-dual-arm-data-collection": getRequiredVideoThumbnail("vla-dual-arm-data-collection"),
 };
 
 /**

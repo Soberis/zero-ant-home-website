@@ -1,0 +1,38 @@
+{
+  "products": {
+    "za-r3-x": "src/assets/images/product/ZA-R3-X.webp",
+    "za-r3l-m-h": "src/assets/images/product/ZA-R3L-M-H.webp",
+    "za-r3m-left": "src/assets/images/product/ZA-R3M-L.webp",
+    "za-r3m-right": "src/assets/images/product/ZA-R3M-R.webp",
+    "za-r3d6": "src/assets/images/product/ZA-R3D6.png",
+    "za-r3t": "src/assets/images/product/ZA-R3T.webp",
+    "za-m75": "src/assets/images/product/ZA-M75.webp",
+    "za-m135": "src/assets/images/product/ZA-M135.webp",
+    "za-mr3m": "src/assets/images/product/ZA-MR3M.webp",
+    "za-mr3t": "src/assets/images/product/ZA-MR3T.webp",
+    "za-rmvr": "src/assets/images/product/ZA-RMVR具身智能双臂VR遥操作开发平台.webp",
+    "za-rmps": "src/assets/images/product/ZA-RMPS具身智能双臂主从遥操作开发平台.webp",
+    "za-rdp": "src/assets/images/product/ZA-RDP绘画机器人.webp",
+    "za-zg100": "src/assets/images/product/ZA-ZG100.webp",
+    "rotating-platform": "src/assets/images/product/旋转平台.webp",
+    "rail": "src/assets/images/product/地轨平台.webp"
+  },
+  "videos": {
+    "medical-automation": "src/assets/images/videos/composite-robot-app.webp",
+    "composite-robot-application": "src/assets/images/videos/composite-robot-app.webp",
+    "agv-product-introduction": "src/assets/images/videos/agv-intro.webp",
+    "ur-robot-llm-motion-capture": "src/assets/images/videos/ur-llm-grab.webp",
+    "four-axis-robot-open-fridge": "src/assets/images/videos/four-axis-fridge.webp",
+    "sketching-robot": "src/assets/images/videos/sketching-robot.webp",
+    "mobile-transfer-robot": "src/assets/images/videos/mobile-transfer-robot.webp",
+    "mobile-robot-chassis": "src/assets/images/videos/mobile-robot-chassis.webp",
+    "fixed-rail-transfer-robot": "src/assets/images/videos/fixed-rail-transfer-robot.webp",
+    "za-r3ml-demo": "src/assets/images/videos/za-r3ml-demo.jpg",
+    "vr-teleop-dual-arm": "src/assets/images/videos/vr-teleop-dual-arm.jpg",
+    "vla-dual-arm-cable-grasping": "src/assets/images/videos/vla-dual-arm-cable-grasping.jpg",
+    "vla-dual-arm-data-collection": "src/assets/images/videos/vla-dual-arm-data-collection.jpg"
+  },
+  "showcase": {
+    "life-science-concept": "src/assets/images/product/life-science-concept.png"
+  }
+}

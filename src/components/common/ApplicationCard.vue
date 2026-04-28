@@ -5,15 +5,22 @@
   >
     <div class="app-card-bg"></div>
     <div class="app-card-inner">
+      <!-- eslint-disable-next-line vue/no-v-html -- 本地静态 SVG 字面量，非用户输入 -->
       <div class="app-icon ui-card__icon" v-html="props.svg"></div>
-      
+
       <div class="app-content ui-card__content">
         <h3 class="app-title ui-card__title">
           {{ t(props.title) }}
         </h3>
         <div class="app-action ui-card__action ui-action-link">
           <span class="action-text">{{ t("solutionsPage.industries.viewApplication") }}</span>
-          <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            class="action-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
@@ -71,7 +78,7 @@ const { localizePath } = useLocalizedPath();
     gap: 16px;
     padding: 24px 20px;
   }
-  
+
   .app-title {
     font-size: 1.25rem;
   }

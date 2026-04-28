@@ -1,11 +1,11 @@
 <template>
   <ProductsLayout v-bind="pageContent">
-    <section class="product-center-filter" ref="filterRef">
-      <div class="product-center-filter__inner" ref="filterInnerRef">
+    <section ref="filterRef" class="product-center-filter">
+      <div ref="filterInnerRef" class="product-center-filter__inner">
         <a
           v-for="family in families"
           :key="family.id"
-          :ref="el => setFilterLinkRef(family.id, el)"
+          :ref="(el) => setFilterLinkRef(family.id, el)"
           :href="`#${family.id}`"
           class="product-center-filter__link ui-jump-link"
           :class="{ 'is-active': activeFamilyId === family.id }"
@@ -15,12 +15,7 @@
       </div>
     </section>
 
-    <section
-      v-for="family in families"
-      :id="family.id"
-      :key="family.id"
-      class="product-family"
-    >
+    <section v-for="family in families" :id="family.id" :key="family.id" class="product-family">
       <div class="product-family__header">
         <div>
           <h2 class="product-family__title">{{ family.title }}</h2>
@@ -31,8 +26,8 @@
       <div class="product-family__grid">
         <router-link
           v-for="card in family.cards"
-          :key="card.id"
           :id="card.id"
+          :key="card.id"
           class="product-card ui-card ui-card--product"
           :to="localizePath(`/products/detail/${card.id}`)"
         >
@@ -41,6 +36,8 @@
               :src="card.image"
               :alt="card.title"
               class="product-card__image ui-card__image"
+              :width="card.imageSize.width"
+              :height="card.imageSize.height"
               loading="lazy"
               decoding="async"
             />
@@ -70,7 +67,13 @@
             <div class="product-card__actions">
               <div class="app-action product-card__detail-link ui-action-link">
                 <span class="action-text">{{ pageCopy.detailAction }}</span>
-                <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  class="action-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </div>
@@ -102,9 +105,7 @@
 import { computed, ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
-import {
-  productCenterFamilies,
-} from "@/data/product-center";
+import { productCenterFamilies } from "@/data/product-center";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const { t } = useI18n();
@@ -131,11 +132,12 @@ function scrollFilterToActive(id: string) {
 
   const containerRect = container.getBoundingClientRect();
   const linkRect = linkEl.getBoundingClientRect();
-  const scrollOffset = linkRect.left - containerRect.left - (containerRect.width / 2) + (linkRect.width / 2);
+  const scrollOffset =
+    linkRect.left - containerRect.left - containerRect.width / 2 + linkRect.width / 2;
 
   container.scrollBy({
     left: scrollOffset,
-    behavior: 'smooth',
+    behavior: "smooth",
   });
 }
 
@@ -146,16 +148,19 @@ watch(activeFamilyId, (newId) => {
 });
 
 onMounted(() => {
-  familyObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        activeFamilyId.value = entry.target.id;
-      }
-    });
-  }, {
-    rootMargin: "-20% 0px -60% 0px",
-    threshold: 0
-  });
+  familyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeFamilyId.value = entry.target.id;
+        }
+      });
+    },
+    {
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0,
+    }
+  );
 
   families.value.forEach((family) => {
     const el = document.getElementById(family.id);
@@ -188,6 +193,7 @@ const families = computed(() =>
     cards: family.cards.map((card) => ({
       id: card.id,
       image: card.image,
+      imageSize: card.heroImageSize ?? { width: 1200, height: 900 },
       title: t(card.titleKey),
       summary: t(card.summaryKey),
       primarySpecs: card.specKeys.slice(0, 3).map((key) => t(key)),
@@ -205,9 +211,7 @@ const pageMetrics = computed(() => [
     label: t("productsPage.hero.metrics.groups"),
   },
   {
-    value: formatMetricCount(
-      families.value.reduce((sum, family) => sum + family.cards.length, 0)
-    ),
+    value: formatMetricCount(families.value.reduce((sum, family) => sum + family.cards.length, 0)),
     label: t("productsPage.hero.metrics.products"),
   },
   {
@@ -555,8 +559,6 @@ const pageContent = computed(() => ({
   .product-card__visual {
     height: 200px;
   }
-
-
 
   .product-center-cta__actions {
     width: 100%;

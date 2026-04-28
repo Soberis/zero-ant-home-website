@@ -49,8 +49,8 @@
           <button
             type="button"
             class="language-btn"
-            @click="switchLanguage()"
             :aria-label="locale === 'zh' ? 'Switch to English' : '切换至中文'"
+            @click="switchLanguage()"
           >
             <span class="lang-text">{{ locale === "zh" ? "EN" : "中文" }}</span>
           </button>
@@ -72,14 +72,14 @@
     </nav>
     <!-- 移动端导航菜单 -->
     <div
+      id="mobile-nav-panel"
       class="mobile-nav"
       :class="{ open: isMobileMenuOpen }"
-      id="mobile-nav-panel"
       :aria-label="$t('nav.mobileMenu')"
       :aria-hidden="!isMobileMenuOpen"
-      @click="handleBackgroundClick"
       role="dialog"
       aria-modal="true"
+      @click="handleBackgroundClick"
     >
       <div class="mobile-nav-content">
         <ul class="mobile-nav-links">

@@ -4,11 +4,24 @@
       <div class="hero-media" :class="{ 'hero-entered': entered }">
         <picture class="hero-picture">
           <source
+            v-if="heroMobileAvifSrcSet"
+            media="(max-width: 900px)"
+            :srcset="heroMobileAvifSrcSet"
+            sizes="100vw"
+            type="image/avif"
+          />
+          <source
             v-if="heroMobileSrcSet"
             media="(max-width: 900px)"
             :srcset="heroMobileSrcSet"
             sizes="100vw"
             type="image/webp"
+          />
+          <source
+            v-if="heroDesktopAvifSrcSet"
+            :srcset="heroDesktopAvifSrcSet"
+            sizes="(max-width: 900px) 100vw, (max-width: 1100px) 54vw, 58vw"
+            type="image/avif"
           />
           <source
             v-if="heroDesktopSrcSet"
@@ -66,8 +79,12 @@ const { localizeTo } = useLocalizedPath();
 // Responsive srcset 供 <source> 使用（浏览器按设备/网络自动选最佳尺寸）
 const heroDesktopEntry = getResponsiveHeroImage("homeDesktop");
 const heroMobileEntry = getResponsiveHeroImage("homeMobile");
+const heroDesktopAvifEntry = getResponsiveHeroImage("homeDesktop", "avif");
+const heroMobileAvifEntry = getResponsiveHeroImage("homeMobile", "avif");
 const heroDesktopSrcSet = buildResponsiveSrcSet(heroDesktopEntry);
 const heroMobileSrcSet = buildResponsiveSrcSet(heroMobileEntry);
+const heroDesktopAvifSrcSet = buildResponsiveSrcSet(heroDesktopAvifEntry);
+const heroMobileAvifSrcSet = buildResponsiveSrcSet(heroMobileAvifEntry);
 
 // <img> fallback：使用 responsive 图片系统中最大的桌面图，而非 343KB 的静态导入
 // 旧实现 import coverImg 将封面图打进 JS bundle，导致首屏多加载 343KB

@@ -61,10 +61,10 @@
                 : t("bilibiliPlayer.watchOnBilibili")
             }}
           </a>
-          <button @click="tryDirectPlay" class="fallback-btn secondary">
+          <button class="fallback-btn secondary" @click="tryDirectPlay">
             {{ t("bilibiliPlayer.tryDirectPlay") }}
           </button>
-          <button @click="retryIframe" class="fallback-btn tertiary" :disabled="retryExhausted">
+          <button class="fallback-btn tertiary" :disabled="retryExhausted" @click="retryIframe">
             {{ t("bilibiliPlayer.retryEmbed") }}
           </button>
         </div>

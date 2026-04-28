@@ -16,10 +16,12 @@
           >
             <picture v-if="responsiveVideoSrcSet" class="detail-media-picture">
               <source
-                :srcset="responsiveVideoSrcSet"
+                v-if="responsiveVideoAvifSrcSet"
+                :srcset="responsiveVideoAvifSrcSet"
                 :sizes="detailMediaSizes"
-                type="image/webp"
+                type="image/avif"
               />
+              <source :srcset="responsiveVideoSrcSet" :sizes="detailMediaSizes" type="image/webp" />
               <img
                 :src="thumbnailUrl"
                 :alt="mediaInfo.title"
@@ -65,10 +67,12 @@
         <template v-else-if="mediaInfo.type === 'image'">
           <picture v-if="responsiveVideoSrcSet" class="detail-media-picture">
             <source
-              :srcset="responsiveVideoSrcSet"
+              v-if="responsiveVideoAvifSrcSet"
+              :srcset="responsiveVideoAvifSrcSet"
               :sizes="detailMediaSizes"
-              type="image/webp"
+              type="image/avif"
             />
+            <source :srcset="responsiveVideoSrcSet" :sizes="detailMediaSizes" type="image/webp" />
             <img
               :key="mediaInfo.url"
               class="video-image"
@@ -104,22 +108,22 @@
         <button type="button" class="btn btn-secondary contact-cta" @click="showContact = true">
           {{ t("common.cta.contactTeam") }}
           <svg viewBox="0 0 24 24" width="15" height="15">
-            <path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+            <path
+              fill="currentColor"
+              d="M9.29 15.88L13.17 12 9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"
+            />
           </svg>
         </button>
       </div>
 
       <div class="content-desc-block">
         <!-- 富文本渲染 (Application) -->
+        <!-- eslint-disable-next-line vue/no-v-html -- 仅渲染白名单清洗后的本地富文本 -->
         <div v-if="contentHtml" class="content-html" v-html="sanitizedContentHtml"></div>
-        
+
         <!-- 分段文本渲染 (Video) -->
         <template v-else-if="contentParagraphs && contentParagraphs.length">
-          <p
-            v-for="(para, idx) in contentParagraphs"
-            :key="idx"
-            class="content-para"
-          >
+          <p v-for="(para, idx) in contentParagraphs" :key="idx" class="content-para">
             {{ para }}
           </p>
         </template>
@@ -158,10 +162,13 @@
         <div ref="dialogRef" class="contact-dialog">
           <button type="button" class="contact-close-x" @click="showContact = false">
             <svg viewBox="0 0 24 24" width="24" height="24">
-              <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              <path
+                fill="currentColor"
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
             </svg>
           </button>
-          
+
           <h3 class="contact-title">
             {{ t("videos.videoDetail.qrCodeTitle") }}
           </h3>
@@ -186,21 +193,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue';
-import { useI18n } from 'vue-i18n';
-import BilibiliPlayer from '@/components/BilibiliPlayer.vue';
-import UiBreadcrumb from '@/components/common/UiBreadcrumb.vue';
-import type { BreadcrumbItem } from '@/types/breadcrumb';
-import { sanitizeHtmlAllowList } from '@/utils/security';
-import fallbackFacadeImg from '@/assets/images/videos/mobile-transfer-robot.webp';
-import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from "vue";
+import { useI18n } from "vue-i18n";
+import BilibiliPlayer from "@/components/BilibiliPlayer.vue";
+import UiBreadcrumb from "@/components/common/UiBreadcrumb.vue";
+import type { BreadcrumbItem } from "@/types/breadcrumb";
+import { sanitizeHtmlAllowList } from "@/utils/security";
+import wxworkQrcode from "@/assets/images/qrcodes/wxwork.webp";
 import {
   buildResponsiveSrcSet,
+  getLargestResponsiveImage,
   getResponsiveVideoImage,
 } from "@/utils/responsiveImage";
 
 interface MediaInfo {
-  type: 'bilibili' | 'video' | 'image' | 'none';
+  type: "bilibili" | "video" | "image" | "none";
   url: string;
   title: string;
   thumbnailUrl?: string;
@@ -220,7 +227,7 @@ const props = defineProps<{
 const safeBreadcrumbItems = computed(() => props.breadcrumbItems ?? []);
 
 const emit = defineEmits<{
-  (e: 'navigate', slug: string): void;
+  (e: "navigate", slug: string): void;
 }>();
 
 const { t } = useI18n();
@@ -228,18 +235,27 @@ const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
 const dialogRef = ref<HTMLDivElement | null>(null);
 
-const thumbnailUrl = computed(() => props.mediaInfo.thumbnailUrl || fallbackFacadeImg);
+const thumbnailUrl = computed(
+  () =>
+    props.mediaInfo.thumbnailUrl ||
+    getLargestResponsiveImage(getResponsiveVideoImage("mobile-transfer-robot"))
+);
 const responsiveVideoSrcSet = computed(() =>
   buildResponsiveSrcSet(
+    props.mediaInfo.responsiveKey ? getResponsiveVideoImage(props.mediaInfo.responsiveKey) : null
+  )
+);
+const responsiveVideoAvifSrcSet = computed(() =>
+  buildResponsiveSrcSet(
     props.mediaInfo.responsiveKey
-      ? getResponsiveVideoImage(props.mediaInfo.responsiveKey)
+      ? getResponsiveVideoImage(props.mediaInfo.responsiveKey, "avif")
       : null
   )
 );
 const detailMediaSizes = "(max-width: 960px) 100vw, 1080px";
 
 const sanitizedContentHtml = computed(() => {
-  if (!props.contentHtml) return '';
+  if (!props.contentHtml) return "";
   return sanitizeHtmlAllowList(props.contentHtml);
 });
 
@@ -251,7 +267,7 @@ const bottomBarClass = computed(() => {
 });
 
 function emitNavigate(slug: string | null) {
-  if (slug) emit('navigate', slug);
+  if (slug) emit("navigate", slug);
 }
 
 function handleDialogEscape(event: KeyboardEvent): void {
@@ -289,15 +305,18 @@ function handleTabTrap(event: KeyboardEvent): void {
 }
 
 // 当路由切换 (通过传参的标题或slug等变更判断) 需要关闭弹窗
-watch(() => props.title, () => {
-  showContact.value = false;
-  videoStarted.value = false;
-});
+watch(
+  () => props.title,
+  () => {
+    showContact.value = false;
+    videoStarted.value = false;
+  }
+);
 
 watch(showContact, (open) => {
   if (open) {
     nextTick(() => {
-      const closeBtn = dialogRef.value?.querySelector<HTMLButtonElement>('.contact-close-x');
+      const closeBtn = dialogRef.value?.querySelector<HTMLButtonElement>(".contact-close-x");
       closeBtn?.focus();
     });
   }
@@ -408,7 +427,9 @@ onUnmounted(() => {
 
 .facade-image {
   opacity: 0.82;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  transition:
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s ease;
 }
 
 .video-facade:hover .facade-image {
@@ -620,9 +641,15 @@ onUnmounted(() => {
   gap: 16px;
 }
 
-.detail-bottom-bar.both { justify-content: space-between; }
-.detail-bottom-bar.only-prev { justify-content: flex-start; }
-.detail-bottom-bar.only-next { justify-content: flex-end; }
+.detail-bottom-bar.both {
+  justify-content: space-between;
+}
+.detail-bottom-bar.only-prev {
+  justify-content: flex-start;
+}
+.detail-bottom-bar.only-next {
+  justify-content: flex-end;
+}
 
 .detail-nav-btn {
   flex-shrink: 0;
@@ -631,16 +658,22 @@ onUnmounted(() => {
 
 /* Responsive */
 @media (max-width: 1200px) {
-  .common-detail-page { padding: 44px 28px 84px; }
+  .common-detail-page {
+    padding: 44px 28px 84px;
+  }
   .player-hero-container {
     width: min(100%, 980px, calc((100svh - var(--nav-height) - 148px) * 16 / 9));
     max-height: min(56svh, 540px);
   }
-  .content-wrapper { max-width: 900px; }
+  .content-wrapper {
+    max-width: 900px;
+  }
 }
 
 @media (max-width: 960px) {
-  .common-detail-page { padding: 36px 24px 76px; }
+  .common-detail-page {
+    padding: 36px 24px 76px;
+  }
   .player-hero-container {
     width: 100%;
     max-height: none;
@@ -650,12 +683,18 @@ onUnmounted(() => {
   .player-hero-container--bilibili {
     aspect-ratio: 16 / 10;
   }
-  .content-wrapper { max-width: 100%; }
-  .detail-title { font-size: clamp(1.75rem, 4vw, 2.35rem); }
+  .content-wrapper {
+    max-width: 100%;
+  }
+  .detail-title {
+    font-size: clamp(1.75rem, 4vw, 2.35rem);
+  }
 }
 
 @media (max-width: 768px) {
-  .common-detail-page { padding: 24px 14px 64px; }
+  .common-detail-page {
+    padding: 24px 14px 64px;
+  }
   .player-hero-container {
     border-radius: 14px;
     margin-bottom: 28px;
@@ -673,22 +712,44 @@ onUnmounted(() => {
     gap: 14px;
     margin-bottom: 24px;
   }
-  .detail-title { font-size: clamp(1.65rem, 7vw, 2.1rem); }
+  .detail-title {
+    font-size: clamp(1.65rem, 7vw, 2.1rem);
+  }
   .contact-cta {
     align-self: stretch;
     width: 100%;
     justify-content: center;
   }
-  .content-desc-block { margin-bottom: 32px; }
-  .content-html, .content-para { font-size: 1rem; line-height: 1.7; }
-  .contact-dialog { min-width: 0; width: 100%; padding: 32px 24px; }
-  .detail-bottom-bar { flex-direction: column; align-items: stretch; }
-  .detail-nav-btn { width: 100%; text-align: center; }
+  .content-desc-block {
+    margin-bottom: 32px;
+  }
+  .content-html,
+  .content-para {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .contact-dialog {
+    min-width: 0;
+    width: 100%;
+    padding: 32px 24px;
+  }
+  .detail-bottom-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .detail-nav-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
-  .common-detail-page { padding: 20px 12px 52px; }
-  .player-hero-container { border-radius: 12px; }
+  .common-detail-page {
+    padding: 20px 12px 52px;
+  }
+  .player-hero-container {
+    border-radius: 12px;
+  }
   .player-hero-container--bilibili {
     aspect-ratio: 16 / 11;
   }

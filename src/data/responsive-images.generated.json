@@ -17,6 +17,24 @@
       ]
     }
   },
+  "heroAvif": {
+    "homeDesktop": {
+      "basePath": "/responsive/hero/home-desktop",
+      "format": "avif",
+      "widths": [
+        960,
+        1600
+      ]
+    },
+    "homeMobile": {
+      "basePath": "/responsive/hero/home-mobile",
+      "format": "avif",
+      "widths": [
+        480,
+        900
+      ]
+    }
+  },
   "products": {
     "za-r3-x": {
       "basePath": "/responsive/products/za-r3-x",
@@ -163,6 +181,152 @@
       ]
     }
   },
+  "productsAvif": {
+    "za-r3-x": {
+      "basePath": "/responsive/products/za-r3-x",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-r3l-m-h": {
+      "basePath": "/responsive/products/za-r3l-m-h",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-r3m-left": {
+      "basePath": "/responsive/products/za-r3m-left",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-r3m-right": {
+      "basePath": "/responsive/products/za-r3m-right",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-r3d6": {
+      "basePath": "/responsive/products/za-r3d6",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        854
+      ]
+    },
+    "za-r3t": {
+      "basePath": "/responsive/products/za-r3t",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-m75": {
+      "basePath": "/responsive/products/za-m75",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-m135": {
+      "basePath": "/responsive/products/za-m135",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-mr3m": {
+      "basePath": "/responsive/products/za-mr3m",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-mr3t": {
+      "basePath": "/responsive/products/za-mr3t",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-rmvr": {
+      "basePath": "/responsive/products/za-rmvr",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-rmps": {
+      "basePath": "/responsive/products/za-rmps",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-rdp": {
+      "basePath": "/responsive/products/za-rdp",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "za-zg100": {
+      "basePath": "/responsive/products/za-zg100",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "rotating-platform": {
+      "basePath": "/responsive/products/rotating-platform",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    },
+    "rail": {
+      "basePath": "/responsive/products/rail",
+      "format": "avif",
+      "widths": [
+        480,
+        760,
+        1200
+      ]
+    }
+  },
   "videos": {
     "medical-automation": {
       "basePath": "/responsive/videos/medical-automation",
@@ -170,7 +334,7 @@
       "widths": [
         480,
         854,
-        960
+        1000
       ]
     },
     "composite-robot-application": {
@@ -276,6 +440,144 @@
         480,
         854,
         1280
+      ]
+    }
+  },
+  "videosAvif": {
+    "medical-automation": {
+      "basePath": "/responsive/videos/medical-automation",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1000
+      ]
+    },
+    "composite-robot-application": {
+      "basePath": "/responsive/videos/composite-robot-application",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1000
+      ]
+    },
+    "agv-product-introduction": {
+      "basePath": "/responsive/videos/agv-product-introduction",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1000
+      ]
+    },
+    "ur-robot-llm-motion-capture": {
+      "basePath": "/responsive/videos/ur-robot-llm-motion-capture",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1000
+      ]
+    },
+    "four-axis-robot-open-fridge": {
+      "basePath": "/responsive/videos/four-axis-robot-open-fridge",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1000
+      ]
+    },
+    "sketching-robot": {
+      "basePath": "/responsive/videos/sketching-robot",
+      "format": "avif",
+      "widths": [
+        480,
+        544
+      ]
+    },
+    "mobile-transfer-robot": {
+      "basePath": "/responsive/videos/mobile-transfer-robot",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        960
+      ]
+    },
+    "mobile-robot-chassis": {
+      "basePath": "/responsive/videos/mobile-robot-chassis",
+      "format": "avif",
+      "widths": [
+        480,
+        720
+      ]
+    },
+    "fixed-rail-transfer-robot": {
+      "basePath": "/responsive/videos/fixed-rail-transfer-robot",
+      "format": "avif",
+      "widths": [
+        480,
+        854
+      ]
+    },
+    "za-r3ml-demo": {
+      "basePath": "/responsive/videos/za-r3ml-demo",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1280
+      ]
+    },
+    "vr-teleop-dual-arm": {
+      "basePath": "/responsive/videos/vr-teleop-dual-arm",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1280
+      ]
+    },
+    "vla-dual-arm-cable-grasping": {
+      "basePath": "/responsive/videos/vla-dual-arm-cable-grasping",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1280
+      ]
+    },
+    "vla-dual-arm-data-collection": {
+      "basePath": "/responsive/videos/vla-dual-arm-data-collection",
+      "format": "avif",
+      "widths": [
+        480,
+        854,
+        1280
+      ]
+    }
+  },
+  "showcase": {
+    "life-science-concept": {
+      "basePath": "/responsive/showcase/life-science-concept",
+      "format": "webp",
+      "widths": [
+        640,
+        960,
+        1400
+      ]
+    }
+  },
+  "showcaseAvif": {
+    "life-science-concept": {
+      "basePath": "/responsive/showcase/life-science-concept",
+      "format": "avif",
+      "widths": [
+        640,
+        960,
+        1400
       ]
     }
   }

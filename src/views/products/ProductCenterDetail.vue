@@ -8,6 +8,7 @@
             <div class="product-hero__header">
               <span class="product-hero__eyebrow">{{ categoryLabel }}</span>
               <h1 class="product-hero__title text-display-hero">{{ productData.title }}</h1>
+              <!-- eslint-disable-next-line vue/no-v-html -- 仅渲染白名单清洗后的本地富文本 -->
               <p class="product-hero__description" v-html="sanitizedDescription"></p>
 
               <div class="product-hero__actions">
@@ -38,6 +39,12 @@
 
             <div class="product-hero__media-wrapper">
               <picture v-if="heroImageResponsiveSrcSet" class="product-hero__picture">
+                <source
+                  v-if="heroImageAvifSrcSet"
+                  :srcset="heroImageAvifSrcSet"
+                  :sizes="heroImageSizes"
+                  type="image/avif"
+                />
                 <source
                   :srcset="heroImageResponsiveSrcSet"
                   :sizes="heroImageSizes"
@@ -91,38 +98,32 @@
 
       <main class="product-main">
         <div class="product-main__inner">
-          <section
-            v-if="productFeatures.length"
-            id="features-section"
-            class="detail-section"
-          >
+          <section v-if="productFeatures.length" id="features-section" class="detail-section">
             <div class="container">
-            <div class="detail-section__header">
-              <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ t("productDetail.features") }}</span>
-              </h2>
-            </div>
+              <div class="detail-section__header">
+                <h2 class="detail-section__title">
+                  <span class="title-main text-display-large">{{
+                    t("productDetail.features")
+                  }}</span>
+                </h2>
+              </div>
 
-            <div class="features-grid">
-              <article
-                v-for="(feature, idx) in productFeatures"
-                :key="idx"
-                class="feature-card"
-              >
-                <div class="feature-card__content">
-                  <span class="feature-card__index">{{ String(idx + 1).padStart(2, "0") }}</span>
-                  <h3 class="feature-card__title">
-                    {{ typeof feature === "string" ? feature : feature.title || "" }}
-                  </h3>
-                  <p
-                    v-if="typeof feature === 'object' && feature.desc"
-                    class="feature-card__description"
-                  >
-                    {{ feature.desc }}
-                  </p>
-                </div>
-              </article>
-            </div>
+              <div class="features-grid">
+                <article v-for="(feature, idx) in productFeatures" :key="idx" class="feature-card">
+                  <div class="feature-card__content">
+                    <span class="feature-card__index">{{ String(idx + 1).padStart(2, "0") }}</span>
+                    <h3 class="feature-card__title">
+                      {{ typeof feature === "string" ? feature : feature.title || "" }}
+                    </h3>
+                    <p
+                      v-if="typeof feature === 'object' && feature.desc"
+                      class="feature-card__description"
+                    >
+                      {{ feature.desc }}
+                    </p>
+                  </div>
+                </article>
+              </div>
             </div>
           </section>
 
@@ -132,134 +133,136 @@
             class="detail-section"
           >
             <div class="container">
-            <div class="detail-section__header">
-              <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ t("productDetail.applications") }}</span>
-              </h2>
-            </div>
+              <div class="detail-section__header">
+                <h2 class="detail-section__title">
+                  <span class="title-main text-display-large">{{
+                    t("productDetail.applications")
+                  }}</span>
+                </h2>
+              </div>
 
-            <div class="application-grid">
-              <ApplicationCard
-                v-for="item in relatedApplications"
-                :key="item.slug"
-                :title="item.title"
-                :svg="item.svg"
-                :slug="item.slug"
-              />
+              <div class="application-grid">
+                <ApplicationCard
+                  v-for="item in relatedApplications"
+                  :key="item.slug"
+                  :title="item.title"
+                  :svg="item.svg"
+                  :slug="item.slug"
+                />
               </div>
             </div>
           </section>
 
-          <section
-            v-if="relatedVideos.length > 0"
-            id="cases-section"
-            class="detail-section"
-          >
+          <section v-if="relatedVideos.length > 0" id="cases-section" class="detail-section">
             <div class="container">
-            <div class="detail-section__header">
-              <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ t("productDetail.videoCases") }}</span>
-              </h2>
-            </div>
+              <div class="detail-section__header">
+                <h2 class="detail-section__title">
+                  <span class="title-main text-display-large">{{
+                    t("productDetail.videoCases")
+                  }}</span>
+                </h2>
+              </div>
 
-            <div class="videos-grid">
-              <VideoCard
-                v-for="(video, index) in relatedVideos"
-                :key="video.slug"
-                :card="video"
-                :index="index"
-                :active="activeVideoIndex === index"
-                :to="localizePath(`/video/${video.slug}`)"
-                @hover="handleVideoHover"
-                @leave="handleVideoLeave"
-              />
+              <div class="videos-grid">
+                <VideoCard
+                  v-for="(video, index) in relatedVideos"
+                  :key="video.slug"
+                  :card="video"
+                  :index="index"
+                  :active="activeVideoIndex === index"
+                  :to="localizePath(`/video/${video.slug}`)"
+                  @hover="handleVideoHover"
+                  @leave="handleVideoLeave"
+                />
               </div>
             </div>
           </section>
 
-          <section
-            v-if="normalizedParams.length"
-            id="parameters-section"
-            class="detail-section"
-          >
+          <section v-if="normalizedParams.length" id="parameters-section" class="detail-section">
             <div class="container">
-            <div class="detail-section__header">
-              <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ t("productDetail.parameters") }}</span>
-              </h2>
-            </div>
+              <div class="detail-section__header">
+                <h2 class="detail-section__title">
+                  <span class="title-main text-display-large">{{
+                    t("productDetail.parameters")
+                  }}</span>
+                </h2>
+              </div>
 
-            <div class="params-grid">
-              <div
-                v-for="(column, columnIndex) in parameterColumns"
-                :key="`params-column-${columnIndex}`"
-                class="params-column"
-              >
-                <article
-                  v-for="param in column"
-                  :key="`${param.key}-${param.value}`"
-                  class="param-card"
+              <div class="params-grid">
+                <div
+                  v-for="(column, columnIndex) in parameterColumns"
+                  :key="`params-column-${columnIndex}`"
+                  class="params-column"
                 >
-                  <div class="param-card__label">{{ param.key }}</div>
-                  <div class="param-card__value">{{ param.value }}</div>
-                </article>
+                  <article
+                    v-for="param in column"
+                    :key="`${param.key}-${param.value}`"
+                    class="param-card"
+                  >
+                    <div class="param-card__label">{{ param.key }}</div>
+                    <div class="param-card__value">{{ param.value }}</div>
+                  </article>
+                </div>
               </div>
-            </div>
             </div>
           </section>
 
           <section id="downloads-section" class="detail-section">
             <div class="container">
-            <div class="detail-section__header">
-              <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ t("productDetail.downloads") }}</span>
-              </h2>
-            </div>
+              <div class="detail-section__header">
+                <h2 class="detail-section__title">
+                  <span class="title-main text-display-large">{{
+                    t("productDetail.downloads")
+                  }}</span>
+                </h2>
+              </div>
 
-            <div
-              v-if="normalizedDownloads.length"
-              class="downloads-grid"
-            >
-              <a
-                v-for="download in normalizedDownloads"
-                :key="`${download.name}-${download.url}`"
-                class="download-card"
-                :href="download.url"
-                :download="download.name"
-              >
-                <div class="download-card-head">
-                  <span class="card-tag">{{ getDownloadFormat(download.name, download.url) }}</span>
-                  <span class="download-status">{{ t("common.cta.downloadNow") }}</span>
-                </div>
-                <h3 class="download-title">{{ getDownloadDisplayName(download.name) }}</h3>
-                <p class="download-desc">{{ download.name }}</p>
-              </a>
-            </div>
+              <div v-if="normalizedDownloads.length" class="downloads-grid">
+                <a
+                  v-for="download in normalizedDownloads"
+                  :key="`${download.name}-${download.url}`"
+                  class="download-card"
+                  :href="download.url"
+                  :download="download.name"
+                >
+                  <div class="download-card-head">
+                    <span class="card-tag">{{
+                      getDownloadFormat(download.name, download.url)
+                    }}</span>
+                    <span class="download-status">{{ t("common.cta.downloadNow") }}</span>
+                  </div>
+                  <h3 class="download-title">{{ getDownloadDisplayName(download.name) }}</h3>
+                  <p class="download-desc">{{ download.name }}</p>
+                </a>
+              </div>
 
-            <div v-else class="downloads-placeholder">
-              <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
-            </div>
+              <div v-else class="downloads-placeholder">
+                <p class="downloads-placeholder__text">{{ t("common.status.preparingMessage") }}</p>
+              </div>
             </div>
           </section>
 
           <section class="detail-section product-footer-cta">
             <div class="container">
-            <div class="product-footer-cta__inner">
-              <h2 class="product-footer-cta__title">
-                {{ t("productDetail.cta.title") }}
-              </h2>
-              <p class="product-footer-cta__desc">
-                {{ t("productDetail.cta.description") }}
-              </p>
-              <div class="product-footer-cta__actions">
-                <router-link :to="localizePath('/solutions')" class="btn btn-primary">
-                  {{ t("productDetail.cta.exploreSolutions") }}
-                </router-link>
-                <router-link :to="localizeTo({ path: '/about', hash: '#contact' })" class="btn product-footer-cta__ghost-btn">
-                  {{ t("productDetail.cta.contactSales") }}
-                </router-link>
+              <div class="product-footer-cta__inner">
+                <h2 class="product-footer-cta__title">
+                  {{ t("productDetail.cta.title") }}
+                </h2>
+                <p class="product-footer-cta__desc">
+                  {{ t("productDetail.cta.description") }}
+                </p>
+                <div class="product-footer-cta__actions">
+                  <router-link :to="localizePath('/solutions')" class="btn btn-primary">
+                    {{ t("productDetail.cta.exploreSolutions") }}
+                  </router-link>
+                  <router-link
+                    :to="localizeTo({ path: '/about', hash: '#contact' })"
+                    class="btn product-footer-cta__ghost-btn"
+                  >
+                    {{ t("productDetail.cta.contactSales") }}
+                  </router-link>
+                </div>
               </div>
-            </div>
             </div>
           </section>
         </div>
@@ -285,10 +288,7 @@ import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
 import type { ProductDetail, ProductFeature } from "@/data/productDetails";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-import {
-  buildResponsiveSrcSet,
-  getResponsiveProductImage,
-} from "@/utils/responsiveImage";
+import { buildResponsiveSrcSet, getResponsiveProductImage } from "@/utils/responsiveImage";
 
 type FeatureItem = string | ProductFeature;
 type LocalizedParam = { key: string; value: string };
@@ -314,9 +314,9 @@ const isEn = computed(() => locale.value === "en");
 const cardId = computed(() => String(route.params.id || ""));
 
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
-  { label: t('nav.home'), to: localizePath('/') },
-  { label: t('nav.products'), to: localizePath('/products') },
-  { label: productData.value?.title || '', to: localizePath(`/products/detail/${cardId.value}`) },
+  { label: t("nav.home"), to: localizePath("/") },
+  { label: t("nav.products"), to: localizePath("/products") },
+  { label: productData.value?.title || "", to: localizePath(`/products/detail/${cardId.value}`) },
 ]);
 
 const cardRecord = computed(() => getProductCenterCardById(cardId.value));
@@ -327,9 +327,13 @@ const loadProductDetailLocale = async () => {
   detailLocaleReady.value = true;
 };
 
-watch(locale, () => {
-  void loadProductDetailLocale();
-}, { immediate: true });
+watch(
+  locale,
+  () => {
+    void loadProductDetailLocale();
+  },
+  { immediate: true }
+);
 
 watch(
   [cardId, detailLocaleReady],
@@ -377,11 +381,7 @@ const detail = computed<ProductDetail | null>(() => {
       });
 
   const localizedFeatures = normalizeCollection<FeatureItem>(localized?.features, []);
-  const features = localizedFeatures.length
-    ? localizedFeatures
-    : note
-      ? [note, ...specs]
-      : specs;
+  const features = localizedFeatures.length ? localizedFeatures : note ? [note, ...specs] : specs;
 
   return {
     title: (typeof localized?.title === "string" ? localized.title : null) || title,
@@ -413,16 +413,17 @@ const {
   showVideos: true,
 });
 
-const productData = computed<ProductDetail | null>(() =>
-  resolvedLocalizedProduct.value ?? detail.value
+const productData = computed<ProductDetail | null>(
+  () => resolvedLocalizedProduct.value ?? detail.value
 );
 const heroImageSrc = computed(() => productData.value?.image || "");
+const heroImageAvifSrcSet = computed(() =>
+  buildResponsiveSrcSet(getResponsiveProductImage(cardId.value, "avif"))
+);
 const heroImageResponsiveSrcSet = computed(() =>
   buildResponsiveSrcSet(getResponsiveProductImage(cardId.value))
 );
-const productFeatures = computed<FeatureItem[]>(() =>
-  resolvedProductFeatures.value.slice(0, 4)
-);
+const productFeatures = computed<FeatureItem[]>(() => resolvedProductFeatures.value.slice(0, 4));
 const parameterColumns = computed(() => {
   const params = normalizedParams.value;
   const midpoint = Math.ceil(params.length / 2);
@@ -438,11 +439,9 @@ const getDownloadFormat = (name: string, url: string) => {
   return match ? match[1].toUpperCase() : "FILE";
 };
 
-const getDownloadDisplayName = (name: string) =>
-  name.replace(/\.[a-z0-9]+$/i, "");
+const getDownloadDisplayName = (name: string) => name.replace(/\.[a-z0-9]+$/i, "");
 
-const METRIC_EMPHASIS_PATTERN =
-  /(^[±+-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
+const METRIC_EMPHASIS_PATTERN = /(^[±+-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
 
 const isMetricEmphasis = (value: string) => {
   const normalized = value.trim();
@@ -457,8 +456,7 @@ const DEFAULT_HERO_IMAGE_SIZE: HeroImageSize = { width: 1200, height: 900 };
 const heroImageSize = computed<HeroImageSize>(
   () => cardRecord.value?.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE
 );
-const heroImageSizes =
-  "(max-width: 768px) calc(100vw - 28px), (max-width: 1100px) 76vw, 44vw";
+const heroImageSizes = "(max-width: 768px) calc(100vw - 28px), (max-width: 1100px) 76vw, 44vw";
 
 const goBack = () => {
   router.push(localizePath("/products"));
@@ -628,7 +626,10 @@ const goBack = () => {
   align-items: flex-start;
   text-align: left;
   border: 1px solid rgba(15, 23, 42, 0.04);
-  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .product-hero__metric:hover {
@@ -765,13 +766,20 @@ const goBack = () => {
   background: var(--brand-surface-soft, #f8f9fb);
   border: 1px solid rgba(15, 23, 42, 0.04);
   border-radius: 16px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.02),
+    0 2px 4px -2px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 4px 6px -4px rgba(0, 0, 0, 0.025);
   background: var(--brand-surface, #ffffff);
   border-color: rgba(22, 58, 135, 0.15);
 }
@@ -894,7 +902,9 @@ const goBack = () => {
   border-radius: 18px;
   background: var(--brand-surface-soft, #f8f9fb);
   text-decoration: none;
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .download-card:hover {

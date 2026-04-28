@@ -8,6 +8,7 @@ const projectRoot = path.resolve(__dirname, "..");
 const distDir = path.join(projectRoot, "dist");
 const localeDir = path.join(projectRoot, "src", "locales");
 const sourceDir = path.join(projectRoot, "src", "data");
+const responsiveManifestPath = path.join(sourceDir, "responsive-images.generated.json");
 const siteUrl = (process.env.VITE_SITE_URL || "https://zeroant.com").replace(/\/+$/, "");
 const buildDate = new Date().toISOString().slice(0, 10);
 const DEFAULT_SHARE_IMAGE = `${siteUrl}/logo.webp`;
@@ -118,17 +119,13 @@ function escapeRegExp(value = "") {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function parseAssetImports(source) {
-  const imports = {};
-  const regex = /import\s+([A-Za-z_$][\w$]*)\s+from\s+["'](@\/[^"']+)["']/g;
-  let match = regex.exec(source);
-
-  while (match) {
-    imports[match[1]] = match[2].replace(/^@\//, "src/");
-    match = regex.exec(source);
+function buildLargestResponsiveImagePath(entry) {
+  if (!entry || !Array.isArray(entry.widths) || entry.widths.length === 0) {
+    return "";
   }
 
-  return imports;
+  const largestWidth = entry.widths[entry.widths.length - 1];
+  return `${entry.basePath}-${largestWidth}.${entry.format}`;
 }
 
 function parseProductFamilies(source) {
@@ -148,22 +145,88 @@ function parseProductFamilies(source) {
   return families;
 }
 
-function parseProductCards(source, assetImports = {}) {
-  const cards = [];
-  const regex =
-    /\{\s*id:\s*"([^"]+)",\s*image:\s*([A-Za-z_$][\w$]*),[\s\S]*?titleKey:\s*"([^"]+)",\s*summaryKey:\s*"([^"]+)",\s*specKeys:\s*\[([\s\S]*?)\](?:,\s*noteKey:\s*"([^"]+)")?/g;
-  let match = regex.exec(source);
+function extractTopLevelObjectBlocks(source, arrayLabel) {
+  const blocks = [];
+  let searchStart = 0;
 
-  while (match) {
+  while (searchStart < source.length) {
+    const labelIndex = source.indexOf(arrayLabel, searchStart);
+
+    if (labelIndex < 0) {
+      break;
+    }
+
+    const arrayStart = source.indexOf("[", labelIndex);
+
+    if (arrayStart < 0) {
+      throw new Error(`[generate-site-artifacts] Missing array start for ${arrayLabel}`);
+    }
+
+    let bracketDepth = 0;
+    let braceDepth = 0;
+    let objectStart = -1;
+    let foundArrayEnd = false;
+
+    for (let index = arrayStart; index < source.length; index += 1) {
+      const char = source[index];
+
+      if (char === "[") {
+        bracketDepth += 1;
+      } else if (char === "]") {
+        bracketDepth -= 1;
+
+        if (bracketDepth === 0) {
+          searchStart = index + 1;
+          foundArrayEnd = true;
+          break;
+        }
+      } else if (char === "{" && bracketDepth > 0) {
+        braceDepth += 1;
+
+        if (braceDepth === 1) {
+          objectStart = index;
+        }
+      } else if (char === "}" && braceDepth > 0) {
+        braceDepth -= 1;
+
+        if (braceDepth === 0 && objectStart >= 0) {
+          blocks.push(source.slice(objectStart, index + 1));
+          objectStart = -1;
+        }
+      }
+    }
+
+    if (!foundArrayEnd) {
+      throw new Error(`[generate-site-artifacts] Unbalanced array block for ${arrayLabel}`);
+    }
+  }
+
+  return blocks;
+}
+
+function parseProductCards(source, responsiveProducts = {}) {
+  const cards = [];
+  const productBlocks = extractTopLevelObjectBlocks(source, "cards:");
+
+  for (const block of productBlocks) {
+    const idMatch = block.match(/id:\s*"([^"]+)"/);
+    const titleKeyMatch = block.match(/titleKey:\s*"([^"]+)"/);
+    const summaryKeyMatch = block.match(/summaryKey:\s*"([^"]+)"/);
+    const specKeysMatch = block.match(/specKeys:\s*\[([\s\S]*?)\]/);
+    const noteKeyMatch = block.match(/noteKey:\s*"([^"]+)"/);
+
+    if (!idMatch || !titleKeyMatch || !summaryKeyMatch || !specKeysMatch) {
+      continue;
+    }
+
     cards.push({
-      id: match[1],
-      imageSource: assetImports[match[2]] || "",
-      titleKey: match[3],
-      summaryKey: match[4],
-      specKeys: uniqueMatches(match[5], /"([^"]+)"/g),
-      noteKey: match[6] || "",
+      id: idMatch[1],
+      imageSource: responsiveProducts[idMatch[1]] || "",
+      titleKey: titleKeyMatch[1],
+      summaryKey: summaryKeyMatch[1],
+      specKeys: uniqueMatches(specKeysMatch[1], /"([^"]+)"/g),
+      noteKey: noteKeyMatch?.[1] || "",
     });
-    match = regex.exec(source);
   }
 
   return cards;
@@ -187,34 +250,7 @@ function parseApplications(source) {
   return items;
 }
 
-function parseVideoThumbnailMap(source, assetImports = {}) {
-  const thumbnailMap = {};
-  const mapAnchor = source.indexOf("const videoThumbnailMap");
-
-  if (mapAnchor < 0) {
-    return thumbnailMap;
-  }
-
-  const mapStart = source.indexOf("{", mapAnchor);
-  const mapEnd = source.indexOf("};", mapStart);
-
-  if (mapStart < 0 || mapEnd < 0) {
-    return thumbnailMap;
-  }
-
-  const mapSource = source.slice(mapStart + 1, mapEnd);
-  const regex = /"([^"]+)":\s*([A-Za-z_$][\w$]*)/g;
-  let match = regex.exec(mapSource);
-
-  while (match) {
-    thumbnailMap[match[1]] = assetImports[match[2]] || "";
-    match = regex.exec(mapSource);
-  }
-
-  return thumbnailMap;
-}
-
-function parseVideoEntries(source, videoThumbnailMap = {}) {
+function parseVideoEntries(source, responsiveVideos = {}) {
   const items = [];
   const regex =
     /"([^"]+)":\s*{\s*slug:\s*"([^"]+)",[\s\S]*?title:\s*"([^"]+)",\s*desc:\s*"([^"]+)"/g;
@@ -225,12 +261,32 @@ function parseVideoEntries(source, videoThumbnailMap = {}) {
       slug: match[2],
       titleKey: match[3],
       descriptionKey: match[4],
-      imageSource: videoThumbnailMap[match[2]] || "",
+      imageSource: responsiveVideos[match[2]] || "",
     });
     match = regex.exec(source);
   }
 
   return items;
+}
+
+function buildResponsiveImageMap(entries = {}) {
+  return Object.fromEntries(
+    Object.entries(entries).map(([key, entry]) => [key, buildLargestResponsiveImagePath(entry)])
+  );
+}
+
+function assertEntriesHaveImages(label, items, keyField) {
+  if (items.length === 0) {
+    throw new Error(`[generate-site-artifacts] No ${label} entries parsed`);
+  }
+
+  const missingKeys = items.filter((item) => !item.imageSource).map((item) => item[keyField]);
+
+  if (missingKeys.length > 0) {
+    throw new Error(
+      `[generate-site-artifacts] Missing responsive images for ${label}: ${missingKeys.join(", ")}`
+    );
+  }
 }
 
 function renderStaticShell(title, description, sections) {
@@ -998,7 +1054,9 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
         siteName: getMessage(localeMessages, "seo.siteName") || "ZeroAnt Technology",
       };
       const resolvedImagePath = localizedPage.imageSource
-        ? resolveBuiltAssetPath(localizedPage.imageSource)
+        ? localizedPage.imageSource.startsWith("/")
+          ? localizedPage.imageSource
+          : resolveBuiltAssetPath(localizedPage.imageSource)
         : "";
       const shareImage = resolvedImagePath
         ? `${siteUrl}${resolvedImagePath}`
@@ -1018,17 +1076,22 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
 }
 
 async function loadData() {
-  const [zhMessages, enMessages, productSource, applicationSource, videoSource] =
+  const [zhMessages, enMessages, productSource, applicationSource, videoSource, responsiveManifest] =
     await Promise.all([
       fs.readFile(path.join(localeDir, "zh.json"), "utf8").then(JSON.parse),
       fs.readFile(path.join(localeDir, "en.json"), "utf8").then(JSON.parse),
       fs.readFile(path.join(sourceDir, "product-center.ts"), "utf8"),
       fs.readFile(path.join(sourceDir, "applications.ts"), "utf8"),
       fs.readFile(path.join(sourceDir, "videos.ts"), "utf8"),
+      fs.readFile(responsiveManifestPath, "utf8").then(JSON.parse),
     ]);
-  const productAssetImports = parseAssetImports(productSource);
-  const videoAssetImports = parseAssetImports(videoSource);
-  const videoThumbnailMap = parseVideoThumbnailMap(videoSource, videoAssetImports);
+  const responsiveProducts = buildResponsiveImageMap(responsiveManifest.products);
+  const responsiveVideos = buildResponsiveImageMap(responsiveManifest.videos);
+  const productCards = parseProductCards(productSource, responsiveProducts);
+  const videos = parseVideoEntries(videoSource, responsiveVideos);
+
+  assertEntriesHaveImages("product cards", productCards, "id");
+  assertEntriesHaveImages("videos", videos, "slug");
 
   return {
     messages: {
@@ -1037,9 +1100,9 @@ async function loadData() {
     },
     data: {
       productFamilies: parseProductFamilies(productSource),
-      productCards: parseProductCards(productSource, productAssetImports),
+      productCards,
       applications: parseApplications(applicationSource),
-      videos: parseVideoEntries(videoSource, videoThumbnailMap),
+      videos,
     },
   };
 }
