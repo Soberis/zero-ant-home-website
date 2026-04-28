@@ -138,7 +138,7 @@ function toggleSection(sectionTo: string): void {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .footer {
   width: 100%;
   margin-top: auto;

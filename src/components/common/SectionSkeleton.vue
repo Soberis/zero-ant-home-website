@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped>
 .section-skeleton {
   max-width: var(--container-max-width);
   margin: 0 auto;

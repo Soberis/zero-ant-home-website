@@ -310,7 +310,7 @@ function applyForPosition(position: Position): void {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .careers-page {
   color: var(--brand-text);
   background: var(--brand-surface);

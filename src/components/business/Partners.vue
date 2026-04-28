@@ -31,7 +31,7 @@ import { partners, type Partner } from "@/data/partners";
 const partnersTyped: Partner[] = partners;
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .ecosystem-section {
   position: relative;
   z-index: 1;

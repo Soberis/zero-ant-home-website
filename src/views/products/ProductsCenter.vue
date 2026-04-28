@@ -242,7 +242,7 @@ const pageContent = computed(() => ({
 }));
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .product-center-filter {
   position: sticky;
   top: calc(var(--nav-height) + 12px);

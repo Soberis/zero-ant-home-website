@@ -802,7 +802,7 @@ watch(
 );
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .solutions-page {
   color: var(--brand-text);
   background: var(--brand-surface);

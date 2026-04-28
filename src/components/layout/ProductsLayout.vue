@@ -141,7 +141,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim());
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .products-shell {
   --products-surface: var(--brand-surface-frosted-strong);
   --products-surface-strong: var(--brand-surface);

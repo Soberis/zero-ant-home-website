@@ -44,7 +44,7 @@ const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .app-card-item {
   position: relative;
   height: 100%;

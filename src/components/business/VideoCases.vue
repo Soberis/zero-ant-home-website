@@ -79,7 +79,7 @@ const onLeave = () => {
 };
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .spotlight-section {
   position: relative;
   z-index: 1;

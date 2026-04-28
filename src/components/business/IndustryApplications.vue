@@ -47,7 +47,7 @@ const featuredApps = computed(() =>
 );
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .industry-apps {
   position: relative;
   z-index: 1;

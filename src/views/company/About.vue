@@ -274,7 +274,7 @@ function formatIndex(value: number): string {
 
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .about-page {
   color: var(--brand-text);
   background: var(--brand-surface);

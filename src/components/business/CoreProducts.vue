@@ -196,7 +196,7 @@ const productFamilies = rawProductFamilies.map((family) => ({
 }));
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .core-products {
   position: relative;
   z-index: 1;

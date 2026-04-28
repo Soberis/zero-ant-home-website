@@ -46,7 +46,7 @@ defineProps<{
 const { t } = useI18n();
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .ui-breadcrumb {
   width: 100%;
   max-width: var(--container-max-width);
@@ -78,17 +78,17 @@ const { t } = useI18n();
   text-decoration: none;
   white-space: nowrap;
   transition: color var(--transition-fast);
+}
 
-  &:hover {
-    color: var(--brand-primary, var(--color-primary));
-    text-decoration: none;
-  }
+.ui-breadcrumb__link:hover {
+  color: var(--brand-primary, var(--color-primary));
+  text-decoration: none;
+}
 
-  &:focus-visible {
-    outline: 2px solid var(--brand-focus-ring);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
+.ui-breadcrumb__link:focus-visible {
+  outline: 2px solid var(--brand-focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .ui-breadcrumb__current {

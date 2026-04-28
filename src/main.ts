@@ -14,7 +14,7 @@ import "@fontsource/outfit/500.css";
 import "@fontsource/outfit/600.css";
 import "@fontsource/outfit/700.css";
 
-import "@/assets/style.less";
+import "@/assets/style.css";
 
 // 创建应用实例
 const app = createApp(App);

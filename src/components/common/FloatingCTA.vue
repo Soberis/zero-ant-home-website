@@ -123,7 +123,7 @@ const scrollToTop = () => {
 };
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .floating-sidebar {
   position: fixed;
   right: calc(12px + env(safe-area-inset-right, 0px));
@@ -154,18 +154,18 @@ const scrollToTop = () => {
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  
-  &:hover {
-    background: rgba(26, 58, 143, 0.08);
-    color: var(--brand-primary-deep);
+}
 
-    .sidebar-popup {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(-50%) translateX(0);
-      pointer-events: auto;
-    }
-  }
+.sidebar-item:hover {
+  background: rgba(26, 58, 143, 0.08);
+  color: var(--brand-primary-deep);
+}
+
+.sidebar-item:hover .sidebar-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: auto;
 }
 
 .sidebar-icon {
@@ -187,17 +187,17 @@ const scrollToTop = () => {
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: right center;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    right: -5px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-width: 5px 0 5px 5px;
-    border-style: solid;
-    border-color: transparent transparent transparent var(--brand-surface);
-  }
+}
+
+.sidebar-popup::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 0 5px 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--brand-surface);
 }
 
 .popup-content {
@@ -261,21 +261,20 @@ const scrollToTop = () => {
 
 .back-to-top {
   margin-top: 10px;
-  
-  /* 添加一条极细的分割线 */
-  &::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: 10px;
-    right: 10px;
-    height: 1px;
-    background: rgba(15, 23, 42, 0.06);
-  }
-  
-  &:hover::before {
-    display: none; /* 悬停时隐藏分割线避免杂乱 */
-  }
+}
+
+.back-to-top::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  right: 10px;
+  height: 1px;
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.back-to-top:hover::before {
+  display: none;
 }
 
 @media (max-width: 1680px) and (min-width: 769px) {
@@ -315,10 +314,10 @@ const scrollToTop = () => {
     width: 44px;
     height: 44px;
     margin: 4px 5px;
-    
-    &:hover {
-      transform: none;
-    }
+  }
+
+  .sidebar-item:hover {
+    transform: none;
   }
 
   .sidebar-icon svg {

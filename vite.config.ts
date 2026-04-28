@@ -43,13 +43,6 @@ export default defineConfig({
       "@": path.resolve(dirname(fileURLToPath(import.meta.url)), "src"),
     },
   },
-  css: {
-    preprocessorOptions: {
-      less: {
-        charset: "utf-8",
-      },
-    },
-  },
   build: {
     // 启用源码映射（可选，生产环境可关闭）
     sourcemap: false,

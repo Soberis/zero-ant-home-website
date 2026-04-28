@@ -112,7 +112,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .hero-carousel {
   position: relative;
   overflow: hidden;

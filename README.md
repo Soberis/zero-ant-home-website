@@ -67,7 +67,6 @@
 - vue
 - vue-router
 - vue-i18n
-- less
 
 ## 反馈与贡献
 

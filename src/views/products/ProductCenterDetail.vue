@@ -463,7 +463,7 @@ const goBack = () => {
 };
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .product-detail {
   min-height: 100vh;
   padding-bottom: 80px;

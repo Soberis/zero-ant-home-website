@@ -324,7 +324,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .header {
   --nav-text-color: var(--brand-text);
   --nav-accent-color: var(--brand-primary);
@@ -341,29 +341,29 @@ onUnmounted(() => {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--brand-border-subtle);
   transition: all var(--transition-smooth);
+}
 
-  &.is-scrolled {
-    background-color: var(--brand-surface-frosted-strong);
-    box-shadow: var(--shadow-sm);
-    border-bottom-color: var(--brand-border-strong);
-    
-    .nav-container {
-      height: 72px;
-    }
-    
-    .logo {
-      transform: none;
-      margin-left: 0;
-    }
+.header.is-scrolled {
+  background-color: var(--brand-surface-frosted-strong);
+  box-shadow: var(--shadow-sm);
+  border-bottom-color: var(--brand-border-strong);
+}
 
-    .dropdown {
-      top: 72px;
-    }
-    
-    .logo-text {
-      font-size: 22px;
-    }
-  }
+.header.is-scrolled .nav-container {
+  height: 72px;
+}
+
+.header.is-scrolled .logo {
+  transform: none;
+  margin-left: 0;
+}
+
+.header.is-scrolled .dropdown {
+  top: 72px;
+}
+
+.header.is-scrolled .logo-text {
+  font-size: 22px;
 }
 
 .nav-container {
@@ -409,7 +409,7 @@ onUnmounted(() => {
   color: var(--nav-logo-text-color);
   text-decoration: none;
   font-family: "Outfit", sans-serif;
-  font-weight: 700; // 更具建筑感的细体/黑体切换
+  font-weight: 700; /* 更具建筑感的细体/黑体切换 */
   padding: 12px 0;
   position: relative;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -853,7 +853,7 @@ onUnmounted(() => {
 .mobile-nav.open {
   opacity: 1;
   visibility: visible;
-  touch-action: none; // 禁止背景滚动
+  touch-action: none; /* 禁止背景滚动 */
 }
 
 .mobile-nav-content {
@@ -897,14 +897,46 @@ onUnmounted(() => {
 .mobile-nav.open .mobile-nav-item {
   opacity: 1;
   transform: translateX(0);
-  .generate-delays(10);
 }
 
-.generate-delays(@n, @i: 1) when (@i =< @n) {
-  &:nth-child(@{i}) {
-    transition-delay: (@i * 0.05s);
-  }
-  .generate-delays(@n, (@i + 1));
+.mobile-nav.open .mobile-nav-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(5) {
+  transition-delay: 0.25s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(6) {
+  transition-delay: 0.3s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(7) {
+  transition-delay: 0.35s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(8) {
+  transition-delay: 0.4s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(9) {
+  transition-delay: 0.45s;
+}
+
+.mobile-nav.open .mobile-nav-item:nth-child(10) {
+  transition-delay: 0.5s;
 }
 
 .mobile-nav-link {

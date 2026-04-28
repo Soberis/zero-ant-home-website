@@ -71,7 +71,7 @@ const partnersRef = ref<HTMLElement | null>(null);
 useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .home-page {
   position: relative;
   overflow: hidden;
