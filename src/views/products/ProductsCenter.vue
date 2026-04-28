@@ -1,6 +1,6 @@
 <template>
   <ProductsLayout v-bind="pageContent">
-    <section ref="filterRef" class="product-center-filter">
+    <section class="product-center-filter">
       <div ref="filterInnerRef" class="product-center-filter__inner">
         <a
           v-for="family in families"
@@ -114,7 +114,6 @@ const { localizePath } = useLocalizedPath();
 // resolveText removed as we now use standard i18n keys
 
 const activeFamilyId = ref("");
-const filterRef = ref<HTMLElement | null>(null);
 const filterInnerRef = ref<HTMLElement | null>(null);
 const filterLinkRefs = new Map<string, HTMLElement>();
 let familyObserver: IntersectionObserver | null = null;
