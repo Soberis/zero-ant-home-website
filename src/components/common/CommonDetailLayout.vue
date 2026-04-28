@@ -193,9 +193,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch, nextTick, defineAsyncComponent } from "vue";
 import { useI18n } from "vue-i18n";
-import BilibiliPlayer from "@/components/BilibiliPlayer.vue";
 import UiBreadcrumb from "@/components/common/UiBreadcrumb.vue";
 import type { BreadcrumbItem } from "@/types/breadcrumb";
 import { sanitizeHtmlAllowList } from "@/utils/security";
@@ -205,6 +204,8 @@ import {
   getLargestResponsiveImage,
   getResponsiveVideoImage,
 } from "@/utils/responsiveImage";
+
+const BilibiliPlayer = defineAsyncComponent(() => import("@/components/BilibiliPlayer.vue"));
 
 interface MediaInfo {
   type: "bilibili" | "video" | "image" | "none";
