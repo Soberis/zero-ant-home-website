@@ -3,6 +3,17 @@ import App from "@/App.vue";
 import router from "@/router";
 import i18n, { initI18n } from "@/config/i18n";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
+
+// Import Self-hosted Fonts
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/500.css";
+import "@fontsource/outfit/600.css";
+import "@fontsource/outfit/700.css";
+
 import "@/assets/style.less";
 
 // 创建应用实例

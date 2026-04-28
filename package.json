@@ -32,6 +32,8 @@
     "perf": "yarn build:analyze && yarn preview"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
     "@intlify/core-base": "^11.3.0",
     "vue": "^3.4.21",
     "vue-i18n": "^11.3.0",
