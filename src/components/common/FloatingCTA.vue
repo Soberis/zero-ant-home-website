@@ -206,7 +206,7 @@ const scrollToTop = () => {
   flex-direction: column;
   align-items: center;
   min-width: 140px;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .link-popup .popup-content, .group:first-child .popup-content {
