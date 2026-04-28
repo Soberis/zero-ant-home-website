@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+package-lock.json
 
 # Editor directories and files
 .vscode/*
@@ -39,8 +40,12 @@ public/responsive/
 
 skills-lock.json
 .agents/
-
-docs/
 参数/
 DESIGN.md
 .workbuddy/
+
+# 忽略文档
+docs/
+# 忽略测试代码及配置 (如果不打算维护测试)
+tests/
+vitest.config.ts

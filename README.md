@@ -18,6 +18,8 @@
    yarn install
    ```
 
+   本项目以 `yarn` 作为唯一包管理器，请不要混用 `npm install`。
+
 2. 启动开发环境
 
    ```bash
@@ -30,7 +32,14 @@
    yarn build
    ```
 
-4. 本地预览
+4. 浏览器级测试
+
+   ```bash
+   yarn test:browser:install
+   yarn test:browser
+   ```
+
+5. 本地预览
 
    ```bash
    yarn preview
@@ -56,6 +65,7 @@
 ## 注意事项
 
 - **不要直接修改 `dist/` 目录内容**，所有内容均由构建生成。
+- **统一使用 `yarn` 安装依赖**，避免 `yarn.lock` 与 `package-lock.json` 分叉。
 - **nginx 配置请修改 `config/nginx.conf.template`**，不要直接修改服务器上的 nginx.conf。
 - **如需新增环境变量或敏感信息，请在 GitLab 项目设置中配置，不要写入代码仓库。**
 - **生产环境部署需打 tag，且仅支持 `main` 分支。**
