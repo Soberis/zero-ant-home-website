@@ -48,19 +48,8 @@ export default defineConfig({
     sourcemap: false,
     // 设置构建目标
     target: "es2022",
-    // 启用压缩
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        // 不使用 drop_console，避免移除 console.warn/error
-        // 仅移除调试用 console 调用，保留 warn/error 便于线上排查
-        pure_funcs: ["console.log", "console.info", "console.debug", "console.trace"],
-        drop_debugger: true, // 移除debugger语句
-      },
-      mangle: {
-        safari10: true, // 解决Safari 10的兼容性问题
-      },
-    },
+    // 启用压缩 (esbuild — 比 terser 快 20-40x)
+    minify: "esbuild",
     rollupOptions: {
       output: {
         // 优化代码分割策略

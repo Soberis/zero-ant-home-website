@@ -32,15 +32,27 @@
           :to="localizePath(`/products/detail/${card.id}`)"
         >
           <div class="product-card__visual ui-card__visual">
-            <img
-              :src="card.image"
-              :alt="card.title"
-              class="product-card__image ui-card__image"
-              :width="card.imageSize.width"
-              :height="card.imageSize.height"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source
+                v-if="getCardSrcset(card.id, 'avif')"
+                :srcset="getCardSrcset(card.id, 'avif')"
+                type="image/avif"
+              />
+              <source
+                v-if="getCardSrcset(card.id, 'webp')"
+                :srcset="getCardSrcset(card.id, 'webp')"
+                type="image/webp"
+              />
+              <img
+                :src="card.image"
+                :alt="card.title"
+                class="product-card__image ui-card__image"
+                :width="card.imageSize.width"
+                :height="card.imageSize.height"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
 
           <div class="product-card__body">
@@ -107,9 +119,23 @@ import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
 import { productCenterFamilies } from "@/data/product-center";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import { getResponsiveProductImage, buildResponsiveSrcSet } from "@/utils/responsiveImage";
+import type { ResponsiveImageFormat } from "@/utils/responsiveImage";
 
 const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
+
+const cardSrcsetCache = new Map<string, Map<string, string>>();
+function getCardSrcset(cardId: string, format: ResponsiveImageFormat): string {
+  if (!cardSrcsetCache.has(cardId)) {
+    cardSrcsetCache.set(cardId, new Map());
+  }
+  const cache = cardSrcsetCache.get(cardId)!;
+  if (!cache.has(format)) {
+    cache.set(format, buildResponsiveSrcSet(getResponsiveProductImage(cardId, format)));
+  }
+  return cache.get(format)!;
+}
 
 // resolveText removed as we now use standard i18n keys
 

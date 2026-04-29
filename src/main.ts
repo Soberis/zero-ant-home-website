@@ -4,15 +4,19 @@ import router from "@/router";
 import i18n, { initI18n } from "@/config/i18n";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 
-// Import Self-hosted Fonts
+// Fonts — only critical weights block rendering (Inter: body+nav, Outfit: hero headings)
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/outfit/400.css";
-import "@fontsource/outfit/500.css";
 import "@fontsource/outfit/600.css";
-import "@fontsource/outfit/700.css";
+
+// Non-critical weights loaded after mount to unblock first paint
+function loadDeferredFonts() {
+  import("@fontsource/inter/600.css");
+  import("@fontsource/inter/700.css");
+  import("@fontsource/outfit/400.css");
+  import("@fontsource/outfit/500.css");
+  import("@fontsource/outfit/700.css");
+}
 
 import "@/assets/style.css";
 
@@ -27,9 +31,11 @@ app.use(i18n);
 // 必须在 mount 之前完成，确保首屏渲染时文案已就绪
 initI18n().then(() => {
   app.mount("#app");
+  window.setTimeout(loadDeferredFonts, 0);
 }).catch(() => {
   // 语言包加载失败时仍挂载，避免白屏
   app.mount("#app");
+  window.setTimeout(loadDeferredFonts, 0);
 });
 
 // 初始化安全监控和SEO（仅在浏览器环境）
