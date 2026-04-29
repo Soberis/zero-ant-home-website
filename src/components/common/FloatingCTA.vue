@@ -239,7 +239,7 @@ defineProps<{
 }
 
 .tel-value {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   color: var(--color-primary);
   font-size: 18px;
   font-weight: 700;

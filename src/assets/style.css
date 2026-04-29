@@ -429,18 +429,21 @@ h3 {
   margin: 0 0 var(--space-sm) 0;
 }
 h4 {
+  font-family: "Outfit", sans-serif;
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.35;
   margin: 0 0 var(--space-sm) 0;
 }
 h5 {
+  font-family: "Outfit", sans-serif;
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.4;
   margin: 0 0 var(--space-xs) 0;
 }
 h6 {
+  font-family: "Outfit", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;

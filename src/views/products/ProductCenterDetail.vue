@@ -627,6 +627,7 @@ const goBack = () => {
 }
 
 .product-hero__metric-value {
+  font-family: "Outfit", sans-serif;
   font-size: 1.25rem;
   line-height: 1.35;
   font-weight: 700;
@@ -760,6 +761,7 @@ const goBack = () => {
   height: 32px;
   border-radius: 8px;
   background: rgba(22, 58, 135, 0.08);
+  font-family: "Outfit", sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--brand-primary-deep);

@@ -225,7 +225,6 @@ function toggleSection(sectionTo: string): void {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-family: "Inter", sans-serif;
   color: #d4d4d8;
   font-size: 13px;
   line-height: 2;
