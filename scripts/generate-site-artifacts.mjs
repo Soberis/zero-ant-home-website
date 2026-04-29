@@ -206,6 +206,7 @@ function normalizeProductCards(productCards = []) {
   return productCards.map((item) => ({
     id: item.card.id,
     imageSource: item.card.image || "",
+    heroImageSize: item.card.heroImageSize,
     titleKey: item.card.titleKey,
     summaryKey: item.card.summaryKey,
     specKeys: item.card.specKeys || [],
@@ -445,10 +446,16 @@ function getStructuredData(page, messages) {
 
   switch (page.routeKey) {
     case "products":
-      return {
-        ...common,
-        "@type": "CollectionPage",
-      };
+      return [
+        {
+          ...common,
+          "@type": "CollectionPage",
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.products"), path: "/products" },
+        ]),
+      ];
     case "productDetail":
       return [
         {
@@ -555,18 +562,24 @@ function getStructuredData(page, messages) {
         ]),
       ];
     case "support":
-      return {
-        ...common,
-        "@type": "FAQPage",
-        mainEntity: SUPPORT_FAQ_KEYS.map((key) => ({
-          "@type": "Question",
-          name: getMessage(messages, `supportPage.faqs.${key}.question`),
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: getMessage(messages, `supportPage.faqs.${key}.answer`),
-          },
-        })),
-      };
+      return [
+        {
+          ...common,
+          "@type": "FAQPage",
+          mainEntity: SUPPORT_FAQ_KEYS.map((key) => ({
+            "@type": "Question",
+            name: getMessage(messages, `supportPage.faqs.${key}.question`),
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: getMessage(messages, `supportPage.faqs.${key}.answer`),
+            },
+          })),
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.support"), path: "/support" },
+        ]),
+      ];
     case "careers":
       return {
         ...common,
@@ -963,6 +976,7 @@ export function buildPageDefinitions(messages, data, resolveBuiltAssetPath, seoC
     ogType: "product",
     itemId: item.id,
     imageSource: item.imageSource,
+    heroImageSize: item.heroImageSize,
     titleKey: item.titleKey,
     descriptionKey: item.summaryKey,
     specKeys: item.specKeys,
@@ -1026,10 +1040,19 @@ export function buildPageDefinitions(messages, data, resolveBuiltAssetPath, seoC
       const shareImage = resolvedImagePath
         ? `${siteUrl}${resolvedImagePath}`
         : DEFAULT_SHARE_IMAGE;
+      const responsiveImageDimensions =
+        localizedPage.routeKey === "productDetail"
+          ? getResponsiveImageDimensions(
+              resolvedImagePath || localizedPage.imageSource,
+              localizedPage.heroImageSize
+            )
+          : {};
       localizedPage.ogImage = shareImage;
       localizedPage.twitterImage = shareImage;
-      localizedPage.ogImageWidth = resolvedImagePath ? undefined : 1200;
-      localizedPage.ogImageHeight = resolvedImagePath ? undefined : 630;
+      localizedPage.ogImageWidth =
+        responsiveImageDimensions.width ?? (resolvedImagePath ? undefined : 1200);
+      localizedPage.ogImageHeight =
+        responsiveImageDimensions.height ?? (resolvedImagePath ? undefined : 630);
 
       return {
         ...localizedPage,
@@ -1081,6 +1104,28 @@ export async function loadData() {
       applications,
       videos,
     },
+  };
+}
+
+function getResponsiveImageDimensions(imagePath, originalSize) {
+  const responsiveWidthMatch = String(imagePath).match(
+    /-(\d+)\.(?:avif|webp|png|jpe?g|gif|svg)$/i
+  );
+  const targetWidth = Number(responsiveWidthMatch?.[1]);
+
+  if (
+    !targetWidth ||
+    !originalSize?.width ||
+    !originalSize.height ||
+    originalSize.width <= 0 ||
+    originalSize.height <= 0
+  ) {
+    return {};
+  }
+
+  return {
+    width: targetWidth,
+    height: Math.round((targetWidth * originalSize.height) / originalSize.width),
   };
 }
 

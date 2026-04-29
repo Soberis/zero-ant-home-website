@@ -16,10 +16,13 @@ yarn lint:fix                         # ESLint auto-fix
 yarn format                           # Prettier format
 yarn format:check                     # Prettier check only
 yarn type-check                       # vue-tsc type check (noEmit)
+yarn test:node                        # Run Node-level tests (SSG artifact checks)
+yarn test:node -- path/to/test        # Run a single Node test file
 yarn smoke                            # Post-build smoke checks (run after build)
 yarn test:browser:install             # Install Playwright Chromium (one-time)
 yarn test:browser                     # Run browser tests (vitest + playwright)
 yarn test:browser:watch               # Browser tests in watch mode
+yarn test:browser -- path/to/test     # Run a single browser test file
 yarn validate                         # Full pipeline: lint + type-check + build + smoke
 yarn audit                            # Yarn audit (moderate level+)
 ```
@@ -32,7 +35,7 @@ This is **ZeroAnt's official website** — a Vue 3 + TypeScript static site serv
 
 1. **`scripts/generate-responsive-images.mjs`** — Uses `sharp` to resize product/video/hero images into multiple widths (WebP + AVIF). Reads `src/data/responsive-image-sources.json` and `src/data/product-center.ts`, writes to `public/responsive/` and `src/data/responsive-images.generated.json`.
 
-2. **`vite build`** — Standard Vite SPA build. Output goes to `dist/`, with `dist/index.html` as the SPA shell. Code-split into `vue-vendor`, `vendor`, and per-route chunks. Terser minification strips `console.log/info/debug/trace`.
+2. **`vite build`** — Standard Vite SPA build. Output goes to `dist/`, with `dist/index.html` as the SPA shell. Code-split into `vue-vendor`, `vendor`, and per-route chunks. Terser minification strips `console.log/info/debug/trace`. Also runs `vite-plugin-image-optimizer` on non-responsive images (png/svg/jpg) and `unplugin-vue-components` auto-imports components from `src/components/` (no manual imports needed in `.vue` files for components used in templates).
 
 3. **`scripts/generate-site-artifacts.mjs`** — **SSG post-processing**. Reads `dist/index.html` as a template, then:
    - Pre-renders every route (zh + en for all pages, product detail pages, application detail pages, video detail pages) into `<route>/index.html` with static HTML shells containing translated content and SEO metadata
@@ -104,7 +107,15 @@ GitLab CI (`.gitlab-ci.yml`): `develop` branch → test server (`test_www.zeroan
 
 ### Testing
 
-Browser-level tests using **vitest 3.2 + playwright 1.59** (not jsdom). Tests live in `tests/browser/` and are configured in `vitest.config.ts`. They run in real Chromium via `@vitest/browser` with `vitest-browser-vue` for component mounting. Only files matching `*.browser.test.ts` are included.
+Two test environments:
+
+- **Browser tests** (`tests/browser/`) — vitest 3.2 + playwright 1.59, real Chromium via `@vitest/browser` with `vitest-browser-vue` for component mounting. Files matching `*.browser.test.ts`. Shared utilities in `tests/browser/test-utils.ts`. Browser tests disable `fileParallelism` (run sequentially to avoid resource contention).
+- **Node tests** (`tests/node/`) — vitest with `environment: "node"`. Used for build output validation (SSG artifact checks). Files matching `*.test.ts`.
+
+### TypeScript Config
+
+- `tsconfig.json` — strict mode, applies to `src/**` (Vue/TS source). Uses `vue-tsc --noEmit` for type checking (not plain `tsc`).
+- `tsconfig.node.json` — separate config for Node-side files (`vite.config.ts`, scripts). Less strict — no `noUnusedLocals`/`noUnusedParameters`.
 
 ### Key Conventions
 
@@ -112,5 +123,16 @@ Browser-level tests using **vitest 3.2 + playwright 1.59** (not jsdom). Tests li
 - Props/emits have TypeScript types
 - Async components with `defineAsyncComponent` get both `loadingComponent` (SectionSkeleton) and `errorComponent` (SectionError)
 - The `@` alias maps to `src/`
-- `__APP_BUILD_ID__` is a global define injected at build time
+- `__APP_BUILD_ID__` is a global define injected at build time (from CI `BUILD_ID` env var, or ISO timestamp fallback). Used for service worker versioning.
 - Environment variable `VITE_SITE_URL` controls the canonical URL (defaults to `https://zeroant.com`)
+
+### Gotchas
+
+- **Don't remove `cross-env`** — `build:analyze` and `build:prod` scripts use it for Windows compatibility. Even though Vite sets `NODE_ENV=production` by default during build, `build:prod` explicitly sets it for the SSG step that follows.
+- **Responsive image script has mtime caching** — `scripts/generate-responsive-images.mjs` skips regeneration if `public/responsive/` is newer than source images. But it still incurs Node startup cost on every `dev`/`build`.
+- **`@intlify/core-base` and `@intlify/unplugin-vue-i18n`** are listed as direct dependencies but are unused — `core-base` is a transitive of `vue-i18n`, and the unplugin is never configured in `vite.config.ts`.
+- **NavBar imports from `@/router`** rather than directly from `@/router/scrollBehavior` — be aware this creates an indirect dependency through `router/index.ts`.
+- **`components.d.ts`** is auto-generated by `unplugin-vue-components`. Never edit it manually.
+- **`eslint.config.js`** uses flat config format (ESLint 9+). Uses `typescript-eslint` with specific rule overrides for `.vue` and `.d.ts` files. `no-unused-vars` is set to `warn` with `_` prefix ignore pattern.
+- **Smoke check** (`scripts/smoke-check.mjs`) validates the built `dist/` — checks HTML files exist for all routes, sitemap presence, and basic content integrity.
+- **`fileParallelism: false`** in browser vitest config — tests run sequentially by design. Don't enable without verifying no resource contention issues.
