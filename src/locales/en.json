@@ -410,55 +410,55 @@
     },
     "composite-robot-transfer": {
       "title": "Composite Robot Board Transfer",
-      "desc": "Shows a composite robot performing a board-transfer task."
+      "desc": "This video shows ZeroAnt's composite robot performing a board-transfer task, highlighting coordinated work between the mobile base and robotic arm for station-to-station material transfer."
     },
     "composite-robot-application": {
       "title": "Composite Robot Application",
-      "desc": "Showcases composite robots in smart manufacturing with multi-functional integration and intelligent scheduling."
+      "desc": "This video shows ZeroAnt's composite robot in mobile work scenarios, highlighting coordinated transfer and pick-and-place tasks by the mobile base and robotic arm."
     },
     "agv-product-introduction": {
       "title": "AGV Product Introduction",
-      "desc": "Introduction to AGV automated guided vehicles with core features and application demonstrations."
+      "desc": "This video introduces ZeroAnt's AGV product and shows its basic capabilities in autonomous navigation, station-to-station transfer, and dispatch coordination."
     },
     "ur-robot-llm-motion-capture": {
       "title": "UR Robot LLM Motion Capture",
-      "desc": "Demonstrates ZeroAnt Technology's UR robot motion capture and intelligent control based on large language models, achieving autonomous learning and efficient execution of complex tasks through deep integration of AI and robotics."
+      "desc": "This video shows a UR robot performing motion capture tasks with large-language-model-based control, highlighting the combination of language understanding and robot execution."
     },
     "four-axis-robot-open-fridge": {
       "title": "Four-Axis Robot Opening Fridge",
-      "desc": "Showcases ZeroAnt Technology's four-axis robot opening a fridge in automation scenarios, demonstrating autonomous execution of complex actions through high-precision motion control and intelligent perception."
+      "desc": "This video shows a four-axis robot opening a refrigerator, highlighting motion control and task execution in a structured automation scenario."
     },
     "sketching-robot": {
       "title": "Sketching Robot",
-      "desc": "Demonstrates ZeroAnt Technology's innovative sketching robot application, achieving autonomous sketching creation through advanced visual recognition technology and precision motion control. Combined with AI algorithms and robotic arm control, showcasing breakthrough applications of robotics in artistic creation."
+      "desc": "This video shows a sketching robot creating drawings, highlighting the combination of visual recognition and motion control in an art-creation task."
     },
     "mobile-transfer-robot": {
       "title": "Mobile Transfer Robot",
-      "desc": "Showcases ZeroAnt Technology's mobile transfer robot automation workflow, achieving efficient and precise material transfer between different workstations."
+      "desc": "This video shows a mobile transfer robot moving materials between workstations, highlighting autonomous mobility and task handoff in flexible intralogistics scenarios."
     },
     "mobile-robot-chassis": {
       "title": "Self-Developed Mobile Robot Chassis",
-      "desc": "Showcases ZeroAnt Technology's self-developed mobile robot chassis platform, demonstrating advanced navigation and mobility capabilities. Features robust mechanical design, precise motion control, and intelligent navigation systems for autonomous mobile robot applications."
+      "desc": "This video shows ZeroAnt's self-developed mobile robot chassis in operation, highlighting its basic capabilities in autonomous movement, path execution, and platform support."
     },
     "fixed-rail-transfer-robot": {
       "title": "Fixed Rail Transfer Robot",
-      "desc": "Demonstrates ZeroAnt Technology's fixed rail transfer robot with precise positioning capabilities. Features high-precision positioning systems and intelligent control algorithms for efficient and stable material transfer on fixed tracks, suitable for precise logistics transport needs in industrial production lines."
+      "desc": "This video shows a fixed-rail transfer robot moving materials along a track, highlighting stable transfer and precise positioning for fixed-path handling tasks."
     },
     "za-r3ml-demo": {
       "title": "SCARA Visual Fruit Picking",
-      "desc": "Demonstrates ZeroAnt Technology's ZA-R3M(L) SCARA robot using visual recognition to precisely pick fruit, showcasing the deep integration of robotic visual perception and motion control."
+      "desc": "This video shows the ZA-R3M(L) SCARA robot using visual recognition to pick fruit, highlighting the combination of machine vision and high-speed pick-and-place execution."
     },
     "vr-teleop-dual-arm": {
       "title": "VR Teleoperation Dual-Arm Robot",
-      "desc": "Demonstrates ZeroAnt Technology's VR teleoperation dual-arm robot platform, using VR devices for real-time control of dual-arm operation tasks, suitable for embodied intelligence training, teleoperation teaching, and research validation."
+      "desc": "This video shows a VR teleoperation dual-arm robot platform in operation, highlighting dual-arm coordination and real-time teleoperation for embodied-AI training and research validation."
     },
     "vla-dual-arm-cable-grasping": {
       "title": "VLA Dual-Arm Cable Grasping",
-      "desc": "Demonstrates a VLA (Vision-Language-Action) model-based dual-arm robot precisely grasping cables, showcasing the deep integration of visual perception, language understanding, and action execution."
+      "desc": "This video shows a dual-arm robot grasping cables with a VLA model, highlighting the coordination of visual perception, language understanding, and action execution."
     },
     "vla-dual-arm-data-collection": {
       "title": "VLA Dual-Arm Data Collection",
-      "desc": "Demonstrates the VLA (Vision-Language-Action) model-based dual-arm robot data collection workflow, collecting high-quality operation data through teleoperation to support embodied intelligence algorithm training."
+      "desc": "This video shows a dual-arm robot data-collection workflow built on a VLA model, highlighting teleoperated capture and task recording for embodied-AI training data."
     }
   },
   "bilibiliPlayer": {
