@@ -46,6 +46,8 @@ DESIGN.md
 
 # 忽略文档
 docs/
-# 忽略测试代码及配置 (如果不打算维护测试)
+# 测试代码本地保留但不提交（避免仓库膨胀，CI 中无测试阶段）
 tests/
 vitest.config.ts
+
+.claude/
