@@ -24,7 +24,7 @@ lint:
       - runner_system_failure
       - stuck_or_timeout_failure
   script:
-    - yarn install --frozen-lockfile
+    - yarn install --frozen-lockfile --ignore-engines
     - yarn lint
     - yarn type-check
 
@@ -39,7 +39,7 @@ build:
       - scheduler_failure
       - api_failure
   script:
-    - yarn install --frozen-lockfile
+    - yarn install --frozen-lockfile --ignore-engines
     - yarn build
   artifacts:
     paths:
