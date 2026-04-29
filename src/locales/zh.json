@@ -2,7 +2,7 @@
   "logoAlt": "零蚁科技标志",
   "logoText": "零蚁科技",
   "slogan": "让机器人无处不在",
-  "slogan2": "Let robots be everywhere",
+  "slogan2": "打造最酷的机器人",
   "nav": {
     "home": "首页",
     "products": "产品中心",
@@ -497,12 +497,6 @@
       "description": "围绕具身智能研发、遥操作示教与 VLA 任务验证场景，结合双臂机器人、本体控制与算法开发能力，支持抓取、数据采集、交互和实验验证等任务。",
       "coreAdvantages": "双臂协同、遥操作示教、数据采集、算法验证",
       "typicalApplications": "双臂抓取、VR遥操作、具身数据采集、VLA任务验证、教育科研"
-    },
-    "surface-treatment": {
-      "title": "@:common.terms.surfaceTreatment",
-      "description": "基于六轴与四轴机械臂能力，面向打磨、抛光、焊接和装配等场景提供自动化方案。结合力控与路径规划能力，适配多种表面处理和精密作业流程。",
-      "coreAdvantages": "高精度定位、力控技术、多轴协调、长期稳定运行",
-      "typicalApplications": "金属零件打磨、精密装配、焊接作业、表面处理、去毛刺"
     },
     "smart-logistics": {
       "title": "@:common.terms.smartLogistics",

@@ -504,12 +504,6 @@
       "coreAdvantages": "Multi-machine unified scheduling, intelligent path planning, large load capacity, multi-scenario adaptation",
       "typicalApplications": "Factory internal logistics, warehouse handling, distribution centers, multi-machine collaborative operations, intelligent scheduling"
     },
-    "pharmaceutical-automation": {
-      "title": "Pharmaceutical Automation",
-      "description": "For biopharma laboratories and pharmaceutical operations, this direction supports automation across sample handling, dispensing and testing workflows to improve consistency and operational efficiency.",
-      "coreAdvantages": "High-precision control, clean environment adaptation, GMP standards, domestic substitution",
-      "typicalApplications": "Laboratory automation, personalized prescription drugs, drug preparation, biological sample processing, quality testing"
-    },
     "composite-systems": {
       "title": "Composite Systems",
       "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
@@ -529,18 +523,18 @@
     "heroAction": "View Open Positions",
     "techAccumulation": "Technical Accumulation",
     "successfulProjects": "Successful Projects",
-    "pathsLabel": "Application Flow",
+    "pathsLabel": "Hiring Path",
     "whyJoinTitle": "Why Choose ZeroAnt Technology",
     "hotPositionsTitle": "Hot Positions",
     "contactUsTitle": "@:common.terms.contactUs",
-    "contactDescription": "If your target role is already clear, send your resume directly to the HR team and we will arrange the next conversation as soon as possible.",
+    "contactDescription": "If you already know which role you want, send your resume directly to our HR team and we'll follow up shortly.",
     "email": "@:common.terms.email",
     "workLocation": "Work Location",
     "workExperience": "Work Experience",
     "positionRequirements": "Position Requirements",
     "applyNow": "Apply Now",
     "fullTime": "Full-time",
-    "unlimited": "Unlimited",
+    "unlimited": "No restriction",
     "hangzhou": "Hangzhou",
     "applySubject": "Apply for position: ",
     "paths": {

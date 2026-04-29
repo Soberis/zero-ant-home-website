@@ -355,8 +355,7 @@ function formatIndex(value: number): string {
 
 .hero-title--single-line {
   max-width: none;
-  white-space: normal;
-  text-wrap: balance;
+  white-space: nowrap;
   font-size: clamp(3rem, 5.4vw, 5.3rem);
 }
 
@@ -860,7 +859,7 @@ function formatIndex(value: number): string {
   }
 
   .hero-title--single-line {
-    white-space: normal;
+    white-space: nowrap;
     font-size: clamp(2.8rem, 7vw, 4.2rem);
   }
 
@@ -891,6 +890,10 @@ function formatIndex(value: number): string {
 
   .hero-shell {
     min-height: inherit;
+  }
+
+  .hero-title--single-line {
+    font-size: clamp(1.45rem, 6.6vw, 2.6rem);
   }
 
   .timeline-item {
