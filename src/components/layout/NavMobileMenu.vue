@@ -200,7 +200,7 @@ function handleDesktopBreakpointChange(event: MediaQueryListEvent) {
   }
 }
 
-// 菜单打开时的副作用
+// 菜单打开/关闭的副作用
 watch(() => props.isOpen, (open) => {
   if (open) {
     document.body.style.overflow = "hidden";
@@ -212,6 +212,12 @@ watch(() => props.isOpen, (open) => {
         if (focusable.length > 0) focusable[0].focus();
       }
     });
+  } else {
+    openMobileSubmenu.value = null;
+    document.body.style.overflow = "";
+    removeInertFromMain();
+    lastFocusedElement?.focus();
+    lastFocusedElement = null;
   }
 });
 
