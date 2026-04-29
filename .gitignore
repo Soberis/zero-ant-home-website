@@ -46,8 +46,7 @@ DESIGN.md
 
 # 忽略文档
 docs/
-# 测试代码本地保留但不提交（避免仓库膨胀，CI 中无测试阶段）
+# 测试截图产物本地保留，不提交
 tests/
-vitest.config.ts
 
 .claude/

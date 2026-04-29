@@ -212,12 +212,16 @@ function trapFocus(e: KeyboardEvent) {
 
 function applyInertToMain() {
   const main = document.querySelector('main');
-  if (main) main.setAttribute('inert', '');
+  if (!main) return;
+  main.setAttribute('inert', '');
+  main.setAttribute('aria-hidden', 'true');
 }
 
 function removeInertFromMain() {
   const main = document.querySelector('main');
-  if (main) main.removeAttribute('inert');
+  if (!main) return;
+  main.removeAttribute('inert');
+  main.removeAttribute('aria-hidden');
 }
 
 // 切换移动端菜单

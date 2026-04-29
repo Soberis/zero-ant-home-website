@@ -1,6 +1,8 @@
 import { promises as fs } from "node:fs";
+import vm from "node:vm";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import ts from "typescript";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -107,18 +109,6 @@ function getAlternates(routePath) {
   ];
 }
 
-function uniqueMatches(source, regex) {
-  const values = new Set();
-  let match = regex.exec(source);
-
-  while (match) {
-    values.add(match[1]);
-    match = regex.exec(source);
-  }
-
-  return Array.from(values);
-}
-
 function escapeRegExp(value = "") {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -132,151 +122,112 @@ function buildLargestResponsiveImagePath(entry) {
   return `${entry.basePath}-${largestWidth}.${entry.format}`;
 }
 
-function parseProductFamilies(source) {
-  const families = [];
-  const regex = /id:\s*"([^"]+)",\s*titleKey:\s*"([^"]+)",\s*introKey:\s*"([^"]+)"/g;
-  let match = regex.exec(source);
+const transpiledModuleCache = new Map();
 
-  while (match) {
-    families.push({
-      id: match[1],
-      titleKey: match[2],
-      introKey: match[3],
-    });
-    match = regex.exec(source);
-  }
+function createResponsiveImageRuntime(responsiveManifest = {}) {
+  const products = responsiveManifest.products || {};
+  const videos = responsiveManifest.videos || {};
 
-  return families;
+  return {
+    getLargestResponsiveImage: buildLargestResponsiveImagePath,
+    getResponsiveProductImage(slug) {
+      return products[slug] || null;
+    },
+    getResponsiveVideoImage(slug) {
+      return videos[slug] || null;
+    },
+  };
 }
 
-function extractTopLevelObjectBlocks(source, arrayLabel) {
-  const blocks = [];
-  let searchStart = 0;
-
-  while (searchStart < source.length) {
-    const labelIndex = source.indexOf(arrayLabel, searchStart);
-
-    if (labelIndex < 0) {
-      break;
-    }
-
-    const arrayStart = source.indexOf("[", labelIndex);
-
-    if (arrayStart < 0) {
-      throw new Error(`[generate-site-artifacts] Missing array start for ${arrayLabel}`);
-    }
-
-    let bracketDepth = 0;
-    let braceDepth = 0;
-    let objectStart = -1;
-    let foundArrayEnd = false;
-
-    for (let index = arrayStart; index < source.length; index += 1) {
-      const char = source[index];
-
-      if (char === "[") {
-        bracketDepth += 1;
-      } else if (char === "]") {
-        bracketDepth -= 1;
-
-        if (bracketDepth === 0) {
-          searchStart = index + 1;
-          foundArrayEnd = true;
-          break;
-        }
-      } else if (char === "{" && bracketDepth > 0) {
-        braceDepth += 1;
-
-        if (braceDepth === 1) {
-          objectStart = index;
-        }
-      } else if (char === "}" && braceDepth > 0) {
-        braceDepth -= 1;
-
-        if (braceDepth === 0 && objectStart >= 0) {
-          blocks.push(source.slice(objectStart, index + 1));
-          objectStart = -1;
-        }
-      }
-    }
-
-    if (!foundArrayEnd) {
-      throw new Error(`[generate-site-artifacts] Unbalanced array block for ${arrayLabel}`);
-    }
+async function loadTsModule(modulePath, { dependencies = {} } = {}) {
+  if (transpiledModuleCache.has(modulePath)) {
+    return transpiledModuleCache.get(modulePath);
   }
 
-  return blocks;
-}
+  const source = await fs.readFile(modulePath, "utf8");
+  const sanitizedSource = source.replace(/import\.meta\.env\.DEV/g, "false");
+  const transpiled = ts.transpileModule(sanitizedSource, {
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2020,
+      resolveJsonModule: true,
+      esModuleInterop: true,
+    },
+    fileName: modulePath,
+  });
 
-function parseProductCards(source, responsiveProducts = {}) {
-  const cards = [];
-  const productBlocks = extractTopLevelObjectBlocks(source, "cards:");
-
-  for (const block of productBlocks) {
-    const idMatch = block.match(/id:\s*"([^"]+)"/);
-    const titleKeyMatch = block.match(/titleKey:\s*"([^"]+)"/);
-    const summaryKeyMatch = block.match(/summaryKey:\s*"([^"]+)"/);
-    const specKeysMatch = block.match(/specKeys:\s*\[([\s\S]*?)\]/);
-    const noteKeyMatch = block.match(/noteKey:\s*"([^"]+)"/);
-
-    if (!idMatch || !titleKeyMatch || !summaryKeyMatch || !specKeysMatch) {
-      continue;
+  const module = { exports: {} };
+  const dirname = path.dirname(modulePath);
+  const localRequire = (specifier) => {
+    if (specifier in dependencies) {
+      return dependencies[specifier];
     }
 
-    cards.push({
-      id: idMatch[1],
-      imageSource: responsiveProducts[idMatch[1]] || "",
-      titleKey: titleKeyMatch[1],
-      summaryKey: summaryKeyMatch[1],
-      specKeys: uniqueMatches(specKeysMatch[1], /"([^"]+)"/g),
-      noteKey: noteKeyMatch?.[1] || "",
-    });
-  }
+    throw new Error(
+      `[generate-site-artifacts] Unsupported import "${specifier}" while loading ${path.relative(projectRoot, modulePath)}`
+    );
+  };
 
-  return cards;
+  vm.runInNewContext(transpiled.outputText, {
+    module,
+    exports: module.exports,
+    require: localRequire,
+    __dirname: dirname,
+    __filename: modulePath,
+    console,
+    process,
+  }, {
+    filename: modulePath,
+  });
+
+  transpiledModuleCache.set(modulePath, module.exports);
+  return module.exports;
 }
 
-function parseApplications(source) {
-  const items = [];
-  const regex =
-    /slug:\s*"([^"]+)",\s*title:\s*"([^"]+)",\s*description:\s*"([^"]+)"/g;
-  let match = regex.exec(source);
+export async function loadSeoConfigs() {
+  const seoModule = await loadTsModule(path.join(projectRoot, "src", "utils", "seo.ts"));
 
-  while (match) {
-    items.push({
-      slug: match[1],
-      titleKey: match[2],
-      descriptionKey: match[3],
-    });
-    match = regex.exec(source);
+  if (typeof seoModule.getSeoConfigs !== "function") {
+    throw new Error("[generate-site-artifacts] Failed to load getSeoConfigs from src/utils/seo.ts");
   }
 
-  return items;
+  return seoModule.getSeoConfigs();
 }
 
-function parseVideoEntries(source, responsiveVideos = {}) {
-  const items = [];
-  const regex =
-    /"([^"]+)":\s*{\s*slug:\s*"([^"]+)",[\s\S]*?title:\s*"([^"]+)",\s*desc:\s*"([^"]+)"/g;
-  let match = regex.exec(source);
-
-  while (match) {
-    items.push({
-      slug: match[2],
-      titleKey: match[3],
-      descriptionKey: match[4],
-      imageSource: responsiveVideos[match[2]] || "",
-    });
-    match = regex.exec(source);
-  }
-
-  return items;
+function normalizeProductFamilies(productFamilies = []) {
+  return productFamilies.map((family) => ({
+    id: family.id,
+    titleKey: family.titleKey,
+    introKey: family.introKey,
+  }));
 }
 
-function buildResponsiveImageMap(entries = {}) {
-  return Object.fromEntries(
-    Object.entries(entries).map(([key, entry]) => [key, buildLargestResponsiveImagePath(entry)])
-  );
+function normalizeProductCards(productCards = []) {
+  return productCards.map((item) => ({
+    id: item.card.id,
+    imageSource: item.card.image || "",
+    titleKey: item.card.titleKey,
+    summaryKey: item.card.summaryKey,
+    specKeys: item.card.specKeys || [],
+    noteKey: item.card.noteKey || "",
+  }));
+}
+
+function normalizeApplications(applications = []) {
+  return applications.map((item) => ({
+    slug: item.slug,
+    titleKey: item.title,
+    descriptionKey: item.description,
+  }));
+}
+
+function normalizeVideos(videoMap = {}, getVideoThumbnailById) {
+  return Object.values(videoMap).map((video) => ({
+    slug: video.slug,
+    titleKey: video.title,
+    descriptionKey: video.desc,
+    imageSource: getVideoThumbnailById(video.slug) || "",
+  }));
 }
 
 function assertEntriesHaveImages(label, items, keyField) {
@@ -986,14 +937,24 @@ function buildPageContent(page, messages, data) {
   }
 }
 
-function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
+function getSeoConfigField(messages, seoConfigs, seoKey, field) {
+  const messageKey = seoConfigs?.[seoKey]?.[field];
+
+  if (typeof messageKey === "string") {
+    return getMessage(messages, messageKey);
+  }
+
+  return getMessage(messages, `seo.home.${field}`);
+}
+
+export function buildPageDefinitions(messages, data, resolveBuiltAssetPath, seoConfigs) {
   const topLevelPages = [
-    { routeKey: "home", path: "/", ogType: "website" },
-    { routeKey: "products", path: "/products", ogType: "website" },
-    { routeKey: "solutions", path: "/solutions", ogType: "website" },
-    { routeKey: "support", path: "/support", ogType: "website" },
-    { routeKey: "about", path: "/about", ogType: "website" },
-    { routeKey: "careers", path: "/careers", ogType: "website" },
+    { routeKey: "home", seoKey: "home", path: "/", ogType: "website" },
+    { routeKey: "products", seoKey: "products", path: "/products", ogType: "website" },
+    { routeKey: "solutions", seoKey: "solutions", path: "/solutions", ogType: "website" },
+    { routeKey: "support", seoKey: "support", path: "/support", ogType: "website" },
+    { routeKey: "about", seoKey: "about", path: "/about", ogType: "website" },
+    { routeKey: "careers", seoKey: "careers", path: "/careers", ogType: "website" },
   ];
 
   const productDetailPages = data.productCards.map((item) => ({
@@ -1034,20 +995,20 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
       const localeMessages = messages[locale];
       const title = page.titleKey
         ? stripHtml(getMessage(localeMessages, page.titleKey))
-        : getMessage(localeMessages, `seo.${page.routeKey}.title`) ||
-          getMessage(localeMessages, "seo.home.title");
+        : getSeoConfigField(localeMessages, seoConfigs, page.seoKey, "title");
       const description = page.descriptionKey
         ? stripHtml(getMessage(localeMessages, page.descriptionKey))
-        : getMessage(localeMessages, `seo.${page.routeKey}.description`) ||
-          getMessage(localeMessages, "seo.home.description");
+        : getSeoConfigField(localeMessages, seoConfigs, page.seoKey, "description");
       const defaultKeywords =
-        getMessage(localeMessages, "seo.home.keywords") || "ZeroAnt Technology";
+        getSeoConfigField(localeMessages, seoConfigs, "home", "keywords") ||
+        "ZeroAnt Technology";
       const keywords =
         page.routeKey === "productDetail" ||
         page.routeKey === "applicationDetail" ||
         page.routeKey === "videoDetail"
           ? `${title}, ${defaultKeywords}`
-          : getMessage(localeMessages, `seo.${page.routeKey}.keywords`) || defaultKeywords;
+          : getSeoConfigField(localeMessages, seoConfigs, page.seoKey, "keywords") ||
+            defaultKeywords;
 
       const localizedPage = {
         ...page,
@@ -1079,20 +1040,32 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
   );
 }
 
-async function loadData() {
-  const [zhMessages, enMessages, productSource, applicationSource, videoSource, responsiveManifest] =
+export async function loadData() {
+  const [zhMessages, enMessages, responsiveManifest] =
     await Promise.all([
       fs.readFile(path.join(localeDir, "zh.json"), "utf8").then(JSON.parse),
       fs.readFile(path.join(localeDir, "en.json"), "utf8").then(JSON.parse),
-      fs.readFile(path.join(sourceDir, "product-center.ts"), "utf8"),
-      fs.readFile(path.join(sourceDir, "applications.ts"), "utf8"),
-      fs.readFile(path.join(sourceDir, "videos.ts"), "utf8"),
       fs.readFile(responsiveManifestPath, "utf8").then(JSON.parse),
     ]);
-  const responsiveProducts = buildResponsiveImageMap(responsiveManifest.products);
-  const responsiveVideos = buildResponsiveImageMap(responsiveManifest.videos);
-  const productCards = parseProductCards(productSource, responsiveProducts);
-  const videos = parseVideoEntries(videoSource, responsiveVideos);
+  const responsiveRuntime = createResponsiveImageRuntime(responsiveManifest);
+  const [productModule, applicationsModule, videoModule] = await Promise.all([
+    loadTsModule(path.join(sourceDir, "product-center.ts"), {
+      dependencies: {
+        "@/utils/responsiveImage": responsiveRuntime,
+      },
+    }),
+    loadTsModule(path.join(sourceDir, "applications.ts")),
+    loadTsModule(path.join(sourceDir, "videos.ts"), {
+      dependencies: {
+        "@/utils/responsiveImage": responsiveRuntime,
+      },
+    }),
+  ]);
+
+  const productFamilies = normalizeProductFamilies(productModule.productCenterFamilies);
+  const productCards = normalizeProductCards(productModule.productCenterCards);
+  const applications = normalizeApplications(applicationsModule.default || []);
+  const videos = normalizeVideos(videoModule.videoMap, videoModule.getVideoThumbnailById);
 
   assertEntriesHaveImages("product cards", productCards, "id");
   assertEntriesHaveImages("videos", videos, "slug");
@@ -1103,9 +1076,9 @@ async function loadData() {
       en: enMessages,
     },
     data: {
-      productFamilies: parseProductFamilies(productSource),
+      productFamilies,
       productCards,
-      applications: parseApplications(applicationSource),
+      applications,
       videos,
     },
   };
@@ -1133,7 +1106,7 @@ async function collectBuiltAssetPublicPaths(currentDir = distDir) {
   return assetPaths;
 }
 
-async function createBuiltAssetResolver() {
+export async function createBuiltAssetResolver() {
   const assetPaths = await collectBuiltAssetPublicPaths();
 
   return (sourceAssetPath = "") => {
@@ -1161,10 +1134,14 @@ async function createBuiltAssetResolver() {
   };
 }
 
+export function renderPageHtml(baseHtml, page) {
+  const withHead = renderHead(baseHtml, page);
+  return renderBody(withHead, page.bodyHtml);
+}
+
 async function writePrerenderedPages(baseHtml, pages) {
   for (const page of pages) {
-    const withHead = renderHead(baseHtml, page);
-    const finalHtml = renderBody(withHead, page.bodyHtml);
+    const finalHtml = renderPageHtml(baseHtml, page);
     const outputDir =
       page.path === "/" && page.locale === "zh"
         ? distDir
@@ -1231,18 +1208,27 @@ async function writeSitemap(data) {
   await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml, "utf8");
 }
 
-async function run() {
+export async function generateSiteArtifacts() {
   const indexPath = path.join(distDir, "index.html");
   const baseHtml = await fs.readFile(indexPath, "utf8");
-  const { messages, data } = await loadData();
+  const [seoConfigs, { messages, data }] = await Promise.all([
+    loadSeoConfigs(),
+    loadData(),
+  ]);
   const resolveBuiltAssetPath = await createBuiltAssetResolver();
-  const pages = buildPageDefinitions(messages, data, resolveBuiltAssetPath);
+  const pages = buildPageDefinitions(messages, data, resolveBuiltAssetPath, seoConfigs);
 
   await writePrerenderedPages(baseHtml, pages);
   await writeSitemap(data);
 }
 
-run().catch((error) => {
-  console.error("[generate-site-artifacts] failed:", error);
-  process.exitCode = 1;
-});
+const isDirectExecution =
+  typeof process.argv[1] === "string" &&
+  pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url;
+
+if (isDirectExecution) {
+  generateSiteArtifacts().catch((error) => {
+    console.error("[generate-site-artifacts] failed:", error);
+    process.exitCode = 1;
+  });
+}

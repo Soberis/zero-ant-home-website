@@ -23,6 +23,7 @@
     "build:prod": "node scripts/generate-responsive-images.mjs && cross-env NODE_ENV=production vite build && node scripts/generate-site-artifacts.mjs",
     "preview": "vite preview",
     "smoke": "node scripts/smoke-check.mjs",
+    "test:node": "vitest --config vitest.node.config.ts --run",
     "test:browser:install": "playwright install chromium",
     "test:browser": "vitest --config vitest.config.ts --run",
     "test:browser:watch": "vitest --config vitest.config.ts",
