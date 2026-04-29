@@ -115,6 +115,7 @@ import { productCenterFamilies } from "@/data/product-center";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 import { getResponsiveProductImage, buildResponsiveSrcSet, DEFAULT_HERO_IMAGE_SIZE } from "@/utils/responsiveImage";
 import type { ResponsiveImageFormat } from "@/utils/responsiveImage";
+import { formatIndex } from "@/utils/format";
 
 const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
@@ -131,7 +132,6 @@ function getCardSrcset(cardId: string, format: ResponsiveImageFormat): string {
   return cache.get(format)!;
 }
 
-// resolveText removed as we now use standard i18n keys
 
 const activeFamilyId = ref("");
 const filterInnerRef = ref<HTMLElement | null>(null);
@@ -214,27 +214,25 @@ const families = computed(() =>
       image: card.image,
       imageSize: card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE,
       title: t(card.titleKey),
-      summary: t(card.summaryKey),
       primarySpecs: card.specKeys.slice(0, 3).map((key) => t(key)),
-      secondarySpec: card.specKeys[3] ? t(card.specKeys[3]) : "",
       note: card.noteKey ? t(card.noteKey) : "",
     })),
   }))
 );
 
-const formatMetricCount = (count: number): string => String(count).padStart(2, "0");
+
 
 const pageMetrics = computed(() => [
   {
-    value: formatMetricCount(families.value.length),
+    value: formatIndex(families.value.length),
     label: t("productsPage.hero.metrics.groups"),
   },
   {
-    value: formatMetricCount(families.value.reduce((sum, family) => sum + family.cards.length, 0)),
+    value: formatIndex(families.value.reduce((sum, family) => sum + family.cards.length, 0)),
     label: t("productsPage.hero.metrics.products"),
   },
   {
-    value: formatMetricCount(3),
+    value: formatIndex(3),
     label: t("productsPage.hero.metrics.cues"),
   },
 ]);

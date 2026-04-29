@@ -628,8 +628,7 @@ function toggleFaq(idx: number): void {
   letter-spacing: 0.04em;
 }
 
-.faq-list {
-}
+
 
 .faq-item {
   border: 1px solid rgba(15, 23, 42, 0.06);

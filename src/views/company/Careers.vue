@@ -645,10 +645,6 @@ function applyForPosition(position: Position): void {
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
 }
 
-.position-card:first-child {
-  /* padding-top: 0; */
-  /* border-top: none; */
-}
 
 .position-header {
   display: flex;
