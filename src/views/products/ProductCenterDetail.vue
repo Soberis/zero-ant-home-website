@@ -82,13 +82,7 @@
               class="product-hero__metric"
             >
               <div class="product-hero__metric-label">{{ metric.label }}</div>
-              <div
-                class="product-hero__metric-value"
-                :class="{
-                  'product-hero__metric-value--emphasis': isMetricEmphasis(metric.value),
-                  'product-hero__metric-value--compact': !isMetricEmphasis(metric.value),
-                }"
-              >
+              <div class="product-hero__metric-value">
                 {{ metric.value }}
               </div>
             </article>
@@ -441,15 +435,6 @@ const getDownloadFormat = (name: string, url: string) => {
 
 const getDownloadDisplayName = (name: string) => name.replace(/\.[a-z0-9]+$/i, "");
 
-const METRIC_EMPHASIS_PATTERN = /(^[±+-]?\d)|(\d+\s?(kg|mm|cm|m|rpm|arcmin|arcsec|h|ms|tops|gb))/i;
-
-const isMetricEmphasis = (value: string) => {
-  const normalized = value.trim();
-  if (!normalized) return false;
-  // Prevent long sentences from being rendered with massive emphasis font
-  if (normalized.length > 26) return false;
-  return METRIC_EMPHASIS_PATTERN.test(normalized);
-};
 
 const heroImageSize = computed<HeroImageSize>(
   () => cardRecord.value?.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE
@@ -642,26 +627,12 @@ const goBack = () => {
 }
 
 .product-hero__metric-value {
-  font-size: 1.12rem;
+  font-size: 1.25rem;
   line-height: 1.35;
   font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--brand-text-strong);
   word-break: break-word;
-}
-
-.product-hero__metric-value--emphasis {
-  font-size: 1.55rem;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  color: var(--brand-text-strong);
-  font-weight: 800;
-}
-
-.product-hero__metric-value--compact {
-  font-size: 1.04rem;
-  line-height: 1.55;
-  color: var(--brand-text-strong);
-  font-weight: 600;
 }
 
 .product-hero__metric-label {
