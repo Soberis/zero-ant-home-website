@@ -409,6 +409,9 @@ export function setupPageSEO(to: RouteLocationNormalized) {
 export function setupSolutionsSEO(to: RouteLocationNormalized) {
   const routeContext = getSeoRouteContext(to);
   const { baseUrl, currentUrl, locale } = routeContext;
+  const pageTitle = safeTranslate("seo.solutions.title");
+  const pageDescription = safeTranslate("seo.solutions.description");
+  const siteName = safeTranslate("seo.siteName");
   const faqEntries = [
     {
       question: safeTranslate("seo.structuredData.solutionsFaq.q1"),
@@ -431,8 +434,8 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
   // 设置解决方案页面 SEO
   setSEO(
     buildBaseSeoMeta(routeContext, {
-      title: safeTranslate("seo.solutions.title"),
-      description: safeTranslate("seo.solutions.description"),
+      title: pageTitle,
+      description: pageDescription,
       keywords: safeTranslate("seo.solutions.keywords"),
     })
   );
@@ -441,18 +444,18 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: safeTranslate("seo.solutions.title"),
-    description: safeTranslate("seo.solutions.description"),
+    name: pageTitle,
+    description: pageDescription,
     url: currentUrl,
     inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
-      name: safeTranslate("seo.siteName"),
+      name: siteName,
       url: baseUrl,
     },
     publisher: {
       ...getPublisher(baseUrl),
-      name: safeTranslate("seo.siteName"),
+      name: siteName,
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
@@ -512,7 +515,10 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
     })),
   };
 
-  setStructuredData([structuredData, faqStructuredData]);
+  setStructuredData([structuredData, faqStructuredData, buildBreadcrumbStructuredData(baseUrl, locale, [
+    { name: safeTranslate("nav.home"), path: "/" },
+    { name: pageTitle, path: "/solutions" },
+  ])]);
 }
 
 /**
@@ -522,12 +528,15 @@ export function setupSolutionsSEO(to: RouteLocationNormalized) {
 export function setupAboutSEO(to: RouteLocationNormalized) {
   const routeContext = getSeoRouteContext(to);
   const { baseUrl, currentUrl, locale } = routeContext;
+  const pageTitle = safeTranslate("seo.about.title");
+  const pageDescription = safeTranslate("seo.about.description");
+  const siteName = safeTranslate("seo.siteName");
 
   // 设置关于我们页面 SEO
   setSEO(
     buildBaseSeoMeta(routeContext, {
-      title: safeTranslate("seo.about.title"),
-      description: safeTranslate("seo.about.description"),
+      title: pageTitle,
+      description: pageDescription,
       keywords: safeTranslate("seo.about.keywords"),
     })
   );
@@ -536,18 +545,18 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: safeTranslate("seo.about.title"),
-    description: safeTranslate("seo.about.description"),
+    name: pageTitle,
+    description: pageDescription,
     url: currentUrl,
     inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
-      name: safeTranslate("seo.siteName"),
+      name: siteName,
       url: baseUrl,
     },
     publisher: {
       ...getPublisher(baseUrl),
-      name: safeTranslate("seo.siteName"),
+      name: siteName,
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
@@ -556,7 +565,10 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
     },
   };
 
-  setStructuredData(structuredData);
+  setStructuredData([structuredData, buildBreadcrumbStructuredData(baseUrl, locale, [
+    { name: safeTranslate("nav.home"), path: "/" },
+    { name: pageTitle, path: "/about" },
+  ])]);
 }
 
 /**
@@ -566,12 +578,15 @@ export function setupAboutSEO(to: RouteLocationNormalized) {
 export function setupCareersSEO(to: RouteLocationNormalized) {
   const routeContext = getSeoRouteContext(to);
   const { baseUrl, currentUrl, locale } = routeContext;
+  const pageTitle = safeTranslate("seo.careers.title");
+  const pageDescription = safeTranslate("seo.careers.description");
+  const siteName = safeTranslate("seo.siteName");
 
   // 设置招聘页面 SEO
   setSEO(
     buildBaseSeoMeta(routeContext, {
-      title: safeTranslate("seo.careers.title"),
-      description: safeTranslate("seo.careers.description"),
+      title: pageTitle,
+      description: pageDescription,
       keywords: safeTranslate("seo.careers.keywords"),
     })
   );
@@ -580,18 +595,18 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: safeTranslate("seo.careers.title"),
-    description: safeTranslate("seo.careers.description"),
+    name: pageTitle,
+    description: pageDescription,
     url: currentUrl,
     inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
-      name: safeTranslate("seo.siteName"),
+      name: siteName,
       url: baseUrl,
     },
     publisher: {
       ...getPublisher(baseUrl),
-      name: safeTranslate("seo.siteName"),
+      name: siteName,
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
@@ -604,7 +619,10 @@ export function setupCareersSEO(to: RouteLocationNormalized) {
     },
   };
 
-  setStructuredData(structuredData);
+  setStructuredData([structuredData, buildBreadcrumbStructuredData(baseUrl, locale, [
+    { name: safeTranslate("nav.home"), path: "/" },
+    { name: pageTitle, path: "/careers" },
+  ])]);
 }
 
 /**

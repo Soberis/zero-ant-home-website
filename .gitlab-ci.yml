@@ -11,8 +11,22 @@ cache:
     - .npm/
 
 stages:
+  - test
   - build
   - deploy
+
+# 代码质量检查阶段
+lint:
+  stage: test
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+  script:
+    - yarn install --frozen-lockfile
+    - yarn lint
+    - yarn type-check
 
 # 构建阶段
 build:
@@ -25,7 +39,7 @@ build:
       - scheduler_failure
       - api_failure
   script:
-    - yarn install
+    - yarn install --frozen-lockfile
     - yarn build
   artifacts:
     paths:

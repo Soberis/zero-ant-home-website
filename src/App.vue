@@ -1,9 +1,11 @@
 <template>
   <div id="app" class="page">
+    <!-- 跳过导航，直达主内容 -->
+    <a href="#main-content" class="skip-to-content">{{ $t('common.a11y.skipToContent') }}</a>
     <!-- 导航栏 -->
     <NavBar />
     <!-- 主体内容 -->
-    <main class="main-content">
+    <main id="main-content" class="main-content">
       <router-view v-slot="{ Component }">
         <transition name="page-fade" mode="out-in">
           <component :is="Component" />
@@ -183,6 +185,29 @@ body {
 .main-content {
   flex: 1;
   padding-top: var(--nav-height);
+}
+
+/* Skip-to-content — visually hidden until focused */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid var(--brand-primary-deep);
+  outline-offset: 2px;
 }
 
 /* Page Transitions */

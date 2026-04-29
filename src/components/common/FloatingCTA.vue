@@ -161,7 +161,8 @@ const scrollToTop = () => {
   color: var(--brand-primary-deep);
 }
 
-.sidebar-item:hover .sidebar-popup {
+.sidebar-item:hover .sidebar-popup,
+.sidebar-item:focus-within .sidebar-popup {
   opacity: 1;
   visibility: visible;
   transform: translateY(-50%) translateX(0);

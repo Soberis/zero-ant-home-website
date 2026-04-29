@@ -517,6 +517,10 @@ function getStructuredData(page, messages) {
             },
           })),
         },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.solutions"), path: "/solutions" },
+        ]),
       ];
     case "applicationDetail":
       return [
@@ -581,15 +585,27 @@ function getStructuredData(page, messages) {
         ]),
       ];
     case "careers":
-      return {
-        ...common,
-        "@type": "CollectionPage",
-      };
+      return [
+        {
+          ...common,
+          "@type": "CollectionPage",
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.careers"), path: "/careers" },
+        ]),
+      ];
     case "about":
-      return {
-        ...common,
-        "@type": "AboutPage",
-      };
+      return [
+        {
+          ...common,
+          "@type": "AboutPage",
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.about"), path: "/about" },
+        ]),
+      ];
     default:
       return {
         ...common,

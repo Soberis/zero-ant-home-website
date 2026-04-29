@@ -32,6 +32,9 @@
     "collapseSubmenu": "收起子菜单"
   },
   "common": {
+    "a11y": {
+      "skipToContent": "跳到主要内容"
+    },
     "cta": {
       "viewDetails": "查看详情",
       "contactTeam": "联系团队",

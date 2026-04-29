@@ -32,6 +32,9 @@
     "collapseSubmenu": "Collapse submenu"
   },
   "common": {
+    "a11y": {
+      "skipToContent": "Skip to main content"
+    },
     "cta": {
       "viewDetails": "View Details",
       "contactTeam": "Contact Team",
