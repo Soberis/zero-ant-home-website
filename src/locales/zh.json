@@ -60,7 +60,6 @@
       "relatedProducts": "相关产品"
     },
     "terms": {
-      "medicalAutomation": "医疗自动化",
       "smartLogistics": "智能物流",
       "coreValues": "核心价值观",
       "afterSalesService": "售后服务",
@@ -409,9 +408,9 @@
       "qrCodeDesc": "扫码添加企业微信，获取更多信息",
       "browserNotSupport": "您的浏览器不支持视频播放。"
     },
-    "medical-automation": {
-      "title": "@:common.terms.medicalAutomation",
-      "desc": "本视频展示了零蚁科技在医疗自动化领域的应用案例，包括自动化物品传送、智能调度等创新技术，助力医院与实验室提升效率与安全。"
+    "composite-robot-transfer": {
+      "title": "复合机器人传板",
+      "desc": "本视频展示了复合机器人在传板任务中的作业过程。"
     },
     "composite-robot-application": {
       "title": "复合机器人应用",
@@ -480,12 +479,6 @@
     "allowPopupsMobile": "请允许浏览器打开外部应用，或检查系统设置"
   },
   "applications": {
-    "medical-automation": {
-      "title": "@:common.terms.medicalAutomation",
-      "description": "聚焦医院、实验室等医疗场景，提供样本、药品和医疗器械的自动化传送与站间协同方案，帮助团队提升流程效率、减少人工接触并增强流程可追溯性。",
-      "coreAdvantages": "流程可追溯、站间智能调度、降低人工接触风险、适配实验室与医院场景",
-      "typicalApplications": "智能检验科自动流水线、自动化药房、医疗物资配送"
-    },
     "fixed-rail-transfer": {
       "title": "固定轨道搬运",
       "description": "提供基于固定轨道的物料传送与精准定位方案，适用于需要稳定、可重复点位搬运的工业场景。支持高精度定位与过程追溯，满足产线间的自动化转运需求。",
@@ -506,9 +499,9 @@
     },
     "composite-systems": {
       "title": "复合系统",
-      "description": "基于复合机器人技术和多OS混合部署虚拟机，集成多种功能模块，提供综合性的自动化解决方案。通过多功能集成、智能调度和异构系统统一管理，实现复杂场景下的高效协作与柔性生产。支持移动平台+机械臂的复合配置，满足多样化的工业应用需求，提升整体系统效率。",
-      "coreAdvantages": "多功能集成、智能调度、柔性生产、异构系统统一管理",
-      "typicalApplications": "复合机器人应用、智能制造、自动化物流、多任务协作、柔性生产线"
+      "description": "面向移动底盘与机械臂协同作业场景，提供复合机器人一体化方案，支持跨工位转运、上下料、传板与站间协同等任务，兼顾柔性调度与现场部署效率。",
+      "coreAdvantages": "底盘与机械臂一体化、跨工位协同、柔性调度、适配多工序搬运",
+      "typicalApplications": "复合机器人传板、跨工位转运、移动上下料、多任务协同作业"
     },
     "cultural-creative": {
       "title": "文化创意",

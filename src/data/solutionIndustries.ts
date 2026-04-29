@@ -17,8 +17,6 @@ export const solutionDirections: SolutionDirectionConfig[] = [
   {
     key: "lifeScienceAutomation",
     productSlugs: ["za-r3t", "za-r3d6", "za-zg100"],
-    applicationSlug: "medical-automation",
-    videoSlug: "medical-automation",
     productSectionHash: "#dt-series",
     status: "planning",
   },

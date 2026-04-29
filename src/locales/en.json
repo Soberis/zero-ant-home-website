@@ -60,7 +60,6 @@
       "relatedProducts": "Related Products"
     },
     "terms": {
-      "medicalAutomation": "Medical Automation",
       "smartLogistics": "Smart Logistics",
       "coreValues": "Core Values",
       "afterSalesService": "After-sales Service",
@@ -409,9 +408,9 @@
       "qrCodeDesc": "Scan QR code to add WeCom for more information",
       "browserNotSupport": "Your browser does not support video playback."
     },
-    "medical-automation": {
-      "title": "@:common.terms.medicalAutomation",
-      "desc": "Showcases automated item transfer and intelligent scheduling in hospitals and labs, improving efficiency and safety."
+    "composite-robot-transfer": {
+      "title": "Composite Robot Board Transfer",
+      "desc": "Shows a composite robot performing a board-transfer task."
     },
     "composite-robot-application": {
       "title": "Composite Robot Application",
@@ -480,12 +479,6 @@
     "allowPopupsMobile": "Please allow external app launches or check your device settings"
   },
   "applications": {
-    "medical-automation": {
-      "title": "@:common.terms.medicalAutomation",
-      "description": "Provides automated transfer and station-to-station coordination for samples, medicines and medical devices in hospitals and laboratories, helping improve process efficiency, reduce manual contact and enhance traceability.",
-      "coreAdvantages": "Process traceability, cross-station scheduling, reduced manual contact risk, fit for hospital and lab workflows",
-      "typicalApplications": "Lab automation pipeline, automated pharmacy, medical supply distribution"
-    },
     "fixed-rail-transfer": {
       "title": "Fixed Rail Transfer",
       "description": "Provides fixed-rail based material transfer and precise positioning solutions for industrial scenarios requiring stable, repeatable point-to-point transport. Supports high-precision positioning and process traceability across manufacturing lines.",
@@ -506,9 +499,9 @@
     },
     "composite-systems": {
       "title": "Composite Systems",
-      "description": "Based on composite robot technology and multi-OS hybrid deployment virtual machines, integrating multiple functional modules to provide comprehensive automation solutions. Through multi-functional integration, intelligent scheduling, and unified management of heterogeneous systems, it enables efficient collaboration and flexible production in complex scenarios. Supporting composite configurations of mobile platforms + robotic arms, it meets diverse industrial application needs and improves overall system efficiency.",
-      "coreAdvantages": "Multi-functional integration, intelligent scheduling, flexible production, unified management of heterogeneous systems",
-      "typicalApplications": "Composite robot applications, intelligent manufacturing, automated logistics, multi-task collaboration, flexible production lines"
+      "description": "Built for coordinated mobile-base and robotic-arm workflows, this direction provides integrated composite robot solutions for cross-station transfer, loading and unloading, board transfer, and station-to-station collaboration, balancing flexible scheduling with deployment efficiency.",
+      "coreAdvantages": "Integrated mobile base and robotic arm, cross-station coordination, flexible scheduling, fit for multi-step handling tasks",
+      "typicalApplications": "Composite robot board transfer, cross-station transfer, mobile loading and unloading, multi-task collaborative work"
     },
     "cultural-creative": {
       "title": "Cultural Creative",

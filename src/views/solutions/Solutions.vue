@@ -508,16 +508,16 @@ const featuredHeroImage = getLargestResponsiveImage(featuredHeroEntry);
 const featuredHeroAvifSrcSet = buildResponsiveSrcSet(featuredHeroAvifEntry);
 const featuredHeroSrcSet = buildResponsiveSrcSet(featuredHeroEntry);
 const featuredVideoSlugs = [
-  "medical-automation",
+  "fixed-rail-transfer-robot",
   "composite-robot-application",
   "vr-teleop-dual-arm",
 ] as const;
 const featuredApplicationSlugs = [
-  "medical-automation",
   "composite-systems",
   "smart-logistics",
   "ai-robotics",
   "fixed-rail-transfer",
+  "cultural-creative",
 ] as const;
 const defaultVisibleVideoCount = 3;
 const defaultVisibleApplicationCount = 4;

@@ -328,13 +328,13 @@
     }
   },
   "videos": {
-    "medical-automation": {
-      "basePath": "/responsive/videos/medical-automation",
+    "composite-robot-transfer": {
+      "basePath": "/responsive/videos/composite-robot-transfer",
       "format": "webp",
       "widths": [
         480,
         854,
-        1000
+        960
       ]
     },
     "composite-robot-application": {
@@ -444,13 +444,13 @@
     }
   },
   "videosAvif": {
-    "medical-automation": {
-      "basePath": "/responsive/videos/medical-automation",
+    "composite-robot-transfer": {
+      "basePath": "/responsive/videos/composite-robot-transfer",
       "format": "avif",
       "widths": [
         480,
         854,
-        1000
+        960
       ]
     },
     "composite-robot-application": {

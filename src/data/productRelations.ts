@@ -15,16 +15,16 @@ export type ProductRelationsData = Record<string, ProductRelation>;
 
 export const productRelations: ProductRelationsData = {
   "za-r3-x": {
-    applicationSlugs: ["fixed-rail-transfer", "medical-automation"],
-    videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo", "medical-automation"],
+    applicationSlugs: ["fixed-rail-transfer"],
+    videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo"],
   },
   "za-r3d6": {
     applicationSlugs: ["cultural-creative"],
     videoSlugs: ["sketching-robot"],
   },
   "za-r3l-m-h": {
-    applicationSlugs: ["medical-automation", "fixed-rail-transfer"],
-    videoSlugs: ["medical-automation", "four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
+    applicationSlugs: ["fixed-rail-transfer"],
+    videoSlugs: ["four-axis-robot-open-fridge", "fixed-rail-transfer-robot"],
   },
   "za-r3m-left": {
     applicationSlugs: ["fixed-rail-transfer"],
@@ -35,7 +35,7 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: [],
   },
   "za-r3t": {
-    applicationSlugs: ["ai-robotics", "medical-automation"],
+    applicationSlugs: ["ai-robotics"],
     videoSlugs: [
       "vr-teleop-dual-arm",
       "vla-dual-arm-cable-grasping",
@@ -52,7 +52,7 @@ export const productRelations: ProductRelationsData = {
   },
   "za-mr3m": {
     applicationSlugs: ["composite-systems", "smart-logistics"],
-    videoSlugs: ["composite-robot-application"],
+    videoSlugs: ["composite-robot-transfer", "composite-robot-application"],
   },
   "za-mr3t": {
     applicationSlugs: ["ai-robotics", "composite-systems"],
@@ -75,8 +75,8 @@ export const productRelations: ProductRelationsData = {
     videoSlugs: ["sketching-robot"],
   },
   "za-zg100": {
-    applicationSlugs: ["medical-automation", "composite-systems", "ai-robotics"],
-    videoSlugs: ["medical-automation", "composite-robot-application", "vr-teleop-dual-arm"],
+    applicationSlugs: ["composite-systems", "ai-robotics"],
+    videoSlugs: ["composite-robot-application", "vr-teleop-dual-arm"],
   },
   "rail": {
     applicationSlugs: ["fixed-rail-transfer"],

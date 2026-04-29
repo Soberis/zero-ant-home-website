@@ -18,7 +18,7 @@
     "rail": "src/assets/images/product/地轨平台.webp"
   },
   "videos": {
-    "medical-automation": "src/assets/images/videos/composite-robot-app.webp",
+    "composite-robot-transfer": "src/assets/images/videos/composite-robot-transfer.jpg",
     "composite-robot-application": "src/assets/images/videos/composite-robot-app.webp",
     "agv-product-introduction": "src/assets/images/videos/agv-intro.webp",
     "ur-robot-llm-motion-capture": "src/assets/images/videos/ur-llm-grab.webp",
