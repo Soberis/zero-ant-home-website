@@ -540,17 +540,6 @@ function applyForPosition(position: Position): void {
   margin: 0 0 16px 0;
 }
 
-.title-main {  color: var(--brand-text);
-}
-
-.title-en {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--brand-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
 .benefits-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

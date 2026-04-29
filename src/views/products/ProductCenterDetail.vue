@@ -733,14 +733,6 @@ const goBack = () => {
   color: var(--brand-text-strong);
 }
 
-.title-en {
-  font-size: 1rem;
-  font-weight: 600;
-  color: rgba(15, 23, 42, 0.5);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
 .features-list,
 .application-grid,
 .videos-grid {

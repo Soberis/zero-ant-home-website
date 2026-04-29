@@ -1025,9 +1025,6 @@ watch(
   margin: 0;
 }
 
-.title-main {
-  color: var(--brand-text);
-}
 
 .detail-section__desc {
   margin: 14px 0 0;
@@ -1589,9 +1586,6 @@ watch(
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
 
-.contact-panel .title-main {
-  color: var(--brand-text);
-}
 
 .contact-panel .detail-section__desc {
   color: var(--brand-muted);

@@ -528,16 +528,6 @@ function toggleFaq(idx: number): void {
   margin: 0;
 }
 
-.title-main {  color: var(--brand-text);
-}
-
-.title-en {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--brand-muted);
-  letter-spacing: 0.06em;
-}
-
 .detail-section__desc {
   margin: 14px 0 0;
   max-width: 34em;

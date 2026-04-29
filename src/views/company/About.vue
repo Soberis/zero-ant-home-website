@@ -423,16 +423,6 @@ const coreValues = computed(() => [
   margin: 0 0 12px 0;
 }
 
-.title-main {  color: var(--brand-text);
-}
-
-.title-en {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--brand-muted);
-  letter-spacing: 0.06em;
-}
-
 .intro-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
