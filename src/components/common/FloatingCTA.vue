@@ -90,7 +90,7 @@
           type="button"
           class="sidebar-item back-to-top"
           :aria-label="t('common.cta.backToTop')"
-          @click.prevent="scrollToTop"
+          @click.prevent="scheduleScrollToTop()"
         >
           <div class="sidebar-icon">
             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24">
@@ -118,9 +118,6 @@ defineProps<{
   showBackToTop?: boolean;
 }>();
 
-const scrollToTop = () => {
-  scheduleScrollToTop();
-};
 </script>
 
 <style scoped>

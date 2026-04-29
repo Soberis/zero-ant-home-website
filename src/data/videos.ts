@@ -8,7 +8,7 @@ const BILIBILI_BASE_PARAMS =
 /**
  * 视频类型枚举
  */
-export type VideoType = "bilibili" | "youtube" | "local" | "video" | "image";
+type VideoType = "bilibili" | "youtube" | "local" | "video" | "image";
 
 /**
  * 视频详情接口

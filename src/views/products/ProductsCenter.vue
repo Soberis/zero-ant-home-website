@@ -57,8 +57,6 @@
 
           <div class="product-card__body">
             <h3 class="product-card__title">{{ card.title }}</h3>
-            <!-- <p class="product-card__summary">{{ card.summary }}</p> -->
-
             <div class="product-card__spec-block">
               <ul class="product-card__specs">
                 <li v-for="spec in card.primarySpecs" :key="spec">
@@ -66,10 +64,6 @@
                 </li>
               </ul>
             </div>
-
-            <!-- <p v-if="card.secondarySpec" class="product-card__secondary-spec">
-              {{ card.secondarySpec }}
-            </p> -->
 
             <p v-if="card.note" class="product-card__note">
               <span class="product-card__note-label">{{ pageCopy.tipLabel }}</span>
@@ -119,7 +113,7 @@ import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
 import { productCenterFamilies } from "@/data/product-center";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-import { getResponsiveProductImage, buildResponsiveSrcSet } from "@/utils/responsiveImage";
+import { getResponsiveProductImage, buildResponsiveSrcSet, DEFAULT_HERO_IMAGE_SIZE } from "@/utils/responsiveImage";
 import type { ResponsiveImageFormat } from "@/utils/responsiveImage";
 
 const { t } = useI18n();
@@ -218,7 +212,7 @@ const families = computed(() =>
     cards: family.cards.map((card) => ({
       id: card.id,
       image: card.image,
-      imageSize: card.heroImageSize ?? { width: 1200, height: 900 },
+      imageSize: card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE,
       title: t(card.titleKey),
       summary: t(card.summaryKey),
       primarySpecs: card.specKeys.slice(0, 3).map((key) => t(key)),

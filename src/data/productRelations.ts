@@ -6,14 +6,14 @@ import type { VideoCard } from "./videos";
 import applications from "./applications";
 import { videoCards } from "./videos";
 
-export interface ProductRelation {
+interface ProductRelation {
   applicationSlugs: string[];
   videoSlugs: string[];
 }
 
-export type ProductRelationsData = Record<string, ProductRelation>;
+type ProductRelationsData = Record<string, ProductRelation>;
 
-export const productRelations: ProductRelationsData = {
+const productRelations: ProductRelationsData = {
   "za-r3-x": {
     applicationSlugs: ["fixed-rail-transfer"],
     videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo"],

@@ -171,6 +171,10 @@ import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
 
+function formatIndex(value: number): string {
+  return value.toString().padStart(2, "0");
+}
+
 const { t } = useI18n();
 
 const downloadRef = ref<HTMLElement | null>(null);
@@ -318,9 +322,6 @@ function toggleFaq(idx: number): void {
   faqStates.value[idx] = !faqStates.value[idx];
 }
 
-function formatIndex(value: number): string {
-  return value.toString().padStart(2, "0");
-}
 </script>
 
 <style scoped>

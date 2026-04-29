@@ -450,10 +450,16 @@ import { solutionDirections } from "@/data/solutionIndustries";
 import { videoCards, videoMap } from "@/data/videos";
 import { useScrollRevealList } from "@/composables/useScrollReveal";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import { scrollToSection } from "@/utils/scroll";
+
+function formatIndex(value: number): string {
+  return value.toString().padStart(2, "0");
+}
 import {
   buildResponsiveSrcSet,
   getLargestResponsiveImage,
   getResponsiveShowcaseImage,
+  DEFAULT_HERO_IMAGE_SIZE,
 } from "@/utils/responsiveImage";
 
 interface ProductView {
@@ -576,18 +582,6 @@ function readMessageArray(key: string): string[] {
   });
 }
 
-function formatIndex(value: number): string {
-  return value.toString().padStart(2, "0");
-}
-
-function scrollToSection(id: string): void {
-  const element = document.getElementById(id);
-  if (!element) {
-    return;
-  }
-
-  element.scrollIntoView({ behavior: "smooth", block: "start" });
-}
 
 function toggleFaq(index: number): void {
   faqStates.value[index] = !faqStates.value[index];
@@ -630,7 +624,7 @@ const productMap = computed<Record<string, ProductView>>(() =>
     map[item.card.id] = {
       title: t(item.card.titleKey),
       image: item.card.image,
-      imageSize: item.card.heroImageSize ?? { width: 1200, height: 900 },
+      imageSize: item.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE,
     };
     return map;
   }, {})

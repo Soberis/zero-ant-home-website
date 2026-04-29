@@ -288,7 +288,7 @@ import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
 import type { ProductDetail, ProductFeature } from "@/data/productDetails";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-import { buildResponsiveSrcSet, getResponsiveProductImage } from "@/utils/responsiveImage";
+import { buildResponsiveSrcSet, getResponsiveProductImage, DEFAULT_HERO_IMAGE_SIZE } from "@/utils/responsiveImage";
 
 type FeatureItem = string | ProductFeature;
 type LocalizedParam = { key: string; value: string };
@@ -450,8 +450,6 @@ const isMetricEmphasis = (value: string) => {
   if (normalized.length > 26) return false;
   return METRIC_EMPHASIS_PATTERN.test(normalized);
 };
-
-const DEFAULT_HERO_IMAGE_SIZE: HeroImageSize = { width: 1200, height: 900 };
 
 const heroImageSize = computed<HeroImageSize>(
   () => cardRecord.value?.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE

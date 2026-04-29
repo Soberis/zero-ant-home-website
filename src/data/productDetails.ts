@@ -31,25 +31,3 @@ export interface ProductDetail {
   downloads: ProductDownload[];
 }
 
-/**
- * 将产品 slug 转换为 i18n key
- */
-export function slugToI18nKey(slug: string): string {
-  return slug;
-}
-
-/**
- * 创建空的产品详情对象，用于类型兼容
- */
-export function createEmptyProductDetail(): ProductDetail {
-  return {
-    title: "",
-    desc: "",
-    image: "",
-    features: [],
-    cases: [],
-    scenes: [],
-    params: [],
-    downloads: [],
-  };
-}

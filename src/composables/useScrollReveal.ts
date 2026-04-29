@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, type Ref } from 'vue';
 
-export interface ScrollRevealOptions {
+interface ScrollRevealOptions {
   /** IntersectionObserver threshold (0-1), default 0.15 */
   threshold?: number;
   /** Root margin, default '0px 0px -60px 0px' to trigger slightly before fully in view */

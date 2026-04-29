@@ -161,6 +161,11 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
 import { normalizeCollection } from "@/composables/useProductDetailData";
+import { scrollToSection } from "@/utils/scroll";
+
+function formatIndex(value: number): string {
+  return value.toString().padStart(2, "0");
+}
 
 const { t, tm } = useI18n();
 
@@ -287,17 +292,6 @@ const positions = computed<Position[]>(() => [
   },
 ]);
 
-function formatIndex(value: number): string {
-  return value.toString().padStart(2, "0");
-}
-
-function scrollToSection(id: string): void {
-  const element = document.getElementById(id);
-  if (!element) {
-    return;
-  }
-  element.scrollIntoView({ behavior: "smooth", block: "start" });
-}
 
 function openMailto(subject?: string): void {
   const mailSubject = subject ? encodeURIComponent(subject) : "";

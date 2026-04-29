@@ -235,6 +235,10 @@ import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
 
+function formatIndex(value: number): string {
+  return value.toString().padStart(2, "0");
+}
+
 const { t, locale } = useI18n();
 
 const introRef = ref<HTMLElement | null>(null);
@@ -268,9 +272,6 @@ const coreValues = computed(() => [
   t("about.coreValues.value4"),
 ]);
 
-function formatIndex(value: number): string {
-  return value.toString().padStart(2, "0");
-}
 
 </script>
 

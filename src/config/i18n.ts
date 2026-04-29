@@ -44,7 +44,7 @@ const getInitialLocale = (): SupportedLocale => {
   return 'zh';
 };
 
-export const initialLocale = getInitialLocale();
+const initialLocale = getInitialLocale();
 
 const i18n = createI18n({
   legacy: false, // 使用 Composition API 模式
@@ -71,7 +71,7 @@ export async function initI18n(): Promise<void> {
 /**
  * 确保基础语言包已加载
  */
-export async function ensureBaseLocale(
+async function ensureBaseLocale(
   locale: SupportedLocale
 ): Promise<void> {
   if (loadedBaseLocales.has(locale)) {

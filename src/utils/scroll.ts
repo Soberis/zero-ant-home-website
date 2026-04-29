@@ -48,3 +48,9 @@ export function scheduleScrollToTop(
     forceScrollToTop();
   }, PAGE_TRANSITION_DELAY_MS);
 }
+
+export function scrollToSection(id: string): void {
+  const element = document.getElementById(id);
+  if (!element) return;
+  element.scrollIntoView({ behavior: "smooth", block: "start" });
+}

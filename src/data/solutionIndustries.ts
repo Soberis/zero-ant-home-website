@@ -1,9 +1,9 @@
-export type SolutionDirectionKey =
+type SolutionDirectionKey =
   | "lifeScienceAutomation"
   | "smartManufacturingLogistics"
   | "embodiedResearchTeleop";
 
-export interface SolutionDirectionConfig {
+interface SolutionDirectionConfig {
   key: SolutionDirectionKey;
   productSlugs: string[];
   visualProductSlug?: string;

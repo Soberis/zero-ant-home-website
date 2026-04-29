@@ -1,12 +1,14 @@
 import responsiveImages from "@/data/responsive-images.generated.json";
 
-export interface ResponsiveImageEntry {
+interface ResponsiveImageEntry {
   basePath: string;
   format: string;
   widths: number[];
 }
 
 export type ResponsiveImageFormat = "webp" | "avif";
+
+export const DEFAULT_HERO_IMAGE_SIZE = { width: 1200, height: 900 } as const;
 
 interface ResponsiveImageManifest {
   hero: Record<string, ResponsiveImageEntry>;

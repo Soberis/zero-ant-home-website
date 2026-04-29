@@ -10,7 +10,7 @@ function getRequiredProductCenterImage(id: string): string {
   return image;
 }
 
-export interface ProductCenterCard {
+interface ProductCenterCard {
   id: string;
   image: string;
   titleKey: string;
@@ -21,7 +21,7 @@ export interface ProductCenterCard {
   heroImageSize?: { width: number; height: number };
 }
 
-export interface ProductCenterFamily {
+interface ProductCenterFamily {
   id: string;
   titleKey: string;
   introKey: string;
@@ -288,7 +288,7 @@ export const productCenterFamilies: ProductCenterFamily[] = [
   },
 ];
 
-export interface ProductCenterCardWithFamily {
+interface ProductCenterCardWithFamily {
   familyId: string;
   familyTitleKey: string;
   familyIntroKey: string;

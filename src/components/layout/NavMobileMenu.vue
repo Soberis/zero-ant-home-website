@@ -66,7 +66,7 @@ import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import type { NavigationItem } from "@/data/navigation";
 import { scheduleScrollToTop } from "@/utils/scroll";
-import { stripLocalePrefix } from "@/utils/localeRoute";
+import { isPathActive } from "@/utils/localeRoute";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const props = defineProps<{
@@ -137,6 +137,9 @@ function close() {
 function toggleMobileSubmenu(itemTo: string) {
   openMobileSubmenu.value = openMobileSubmenu.value === itemTo ? null : itemTo;
 }
+function isTopNavActive(to: string): boolean {
+  return isPathActive(route.path, to);
+}
 
 function getMobileSubmenuId(itemTo: string): string {
   return `mobile-submenu-${itemTo.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "root"}`;
@@ -146,12 +149,6 @@ function getMobileSubmenuLabel(item: NavigationItem): string {
   const actionKey =
     openMobileSubmenu.value === item.to ? "nav.collapseSubmenu" : "nav.expandSubmenu";
   return `${t(actionKey)}：${t(item.label)}`;
-}
-
-function isTopNavActive(to: string): boolean {
-  const currentPath = stripLocalePrefix(route.path);
-  if (to === "/") return currentPath === "/";
-  return currentPath === to || currentPath.startsWith(`${to}/`);
 }
 
 async function handleNavClick(to: string, event: MouseEvent): Promise<void> {

@@ -342,8 +342,6 @@ onUnmounted(() => {
     padding: 72px 16px 22px;
   }
 
-  .hero-copy {
-  }
 }
 
 @media (max-width: 480px) {
@@ -360,8 +358,6 @@ onUnmounted(() => {
     padding-top: 68px;
   }
 
-  .hero-copy {
-  }
 }
 
 @media (max-width: 360px) {

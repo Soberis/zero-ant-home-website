@@ -62,7 +62,7 @@
           :aria-label="$t('nav.toggleMenu') || 'Toggle navigation menu'"
           :aria-expanded="isMobileMenuOpen ? 'true' : 'false'"
           aria-controls="mobile-nav-panel"
-          @click="toggleMobileMenu"
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
         >
           <span class="hamburger-line" aria-hidden="true"></span>
           <span class="hamburger-line" aria-hidden="true"></span>
@@ -74,7 +74,7 @@
     <NavMobileMenu
       :is-open="isMobileMenuOpen"
       :top-nav-items="topNavItems"
-      @close="closeMobileMenu"
+      @close="isMobileMenuOpen = false"
     />
   </header>
 </template>
@@ -93,7 +93,7 @@ import { preserveScrollForNextNavigation } from "@/router";
 import { scheduleScrollToTop } from "@/utils/scroll";
 import {
   localizeFullPath,
-  stripLocalePrefix,
+  isPathActive,
 } from "@/utils/localeRoute";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
@@ -117,12 +117,8 @@ const route = useRoute();
 const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
 
-function toggleMobileMenu() {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value;
-}
-
-function closeMobileMenu() {
-  isMobileMenuOpen.value = false;
+function isTopNavActive(to: string): boolean {
+  return isPathActive(route.path, to);
 }
 
 async function handleTopNavClick(to: string, event: MouseEvent): Promise<void> {
@@ -141,16 +137,6 @@ async function handleTopNavClick(to: string, event: MouseEvent): Promise<void> {
 
   await router.push(localizedTarget);
   await nextTick();
-}
-
-function isTopNavActive(to: string): boolean {
-  const currentPath = stripLocalePrefix(route.path);
-
-  if (to === "/") {
-    return currentPath === "/";
-  }
-
-  return currentPath === to || currentPath.startsWith(`${to}/`);
 }
 
 const { locale } = useI18n();
@@ -180,7 +166,7 @@ async function switchLanguage() {
     }
   }
 
-  closeMobileMenu();
+  isMobileMenuOpen.value = false;
   preserveScrollForNextNavigation(preservedScrollPosition);
   await router.push(localizeFullPath(route.fullPath, targetLocale));
 }
@@ -495,10 +481,6 @@ onUnmounted(() => {
 
 .dropdown-item:hover {
   text-decoration: none;
-}
-
-.dropdown-item::before {
-  display: none;
 }
 
 .dropdown-item:hover {

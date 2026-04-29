@@ -99,9 +99,8 @@ import {
   buildResponsiveSrcSet,
   getResponsiveProductImage,
   getLargestResponsiveImage,
+  DEFAULT_HERO_IMAGE_SIZE,
 } from "@/utils/responsiveImage";
-
-const DEFAULT_IMAGE_SIZE = { width: 1200, height: 900 } as const;
 
 const getOptimizedImage = (slug: string) => {
   const responsiveImage = getResponsiveProductImage(slug);
@@ -114,7 +113,7 @@ const getOptimizedImage = (slug: string) => {
 };
 
 const getProductImageSize = (slug: string) =>
-  getProductCenterCardById(slug)?.card.heroImageSize ?? DEFAULT_IMAGE_SIZE;
+  getProductCenterCardById(slug)?.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE;
 
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();

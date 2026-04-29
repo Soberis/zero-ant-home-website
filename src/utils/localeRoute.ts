@@ -1,8 +1,8 @@
 import type { RouteLocationRaw } from "vue-router";
 import type { SupportedLocale } from "@/config/i18n";
 
-export const DEFAULT_LOCALE: SupportedLocale = "zh";
-export const ENGLISH_LOCALE: SupportedLocale = "en";
+const DEFAULT_LOCALE: SupportedLocale = "zh";
+const ENGLISH_LOCALE: SupportedLocale = "en";
 const ENGLISH_PREFIX = "/en";
 
 function normalizePath(path: string): string {
@@ -86,6 +86,12 @@ export function localizeRouteLocation(
 
 export function getOgLocale(locale: SupportedLocale): string {
   return locale === ENGLISH_LOCALE ? "en_US" : "zh_CN";
+}
+
+export function isPathActive(currentPath: string, to: string): boolean {
+  const stripped = stripLocalePrefix(currentPath);
+  if (to === "/") return stripped === "/";
+  return stripped === to || stripped.startsWith(`${to}/`);
 }
 
 export function getAlternateLanguageLinks(baseUrl: string, path: string) {

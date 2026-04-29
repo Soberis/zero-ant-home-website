@@ -7,7 +7,6 @@ import {
   getRelatedVideos,
   hasProductRelations,
 } from "@/data/productRelations";
-import { createEmptyProductDetail, slugToI18nKey } from "@/data/productDetails";
 import { getProductCenterCardById } from "@/data/product-center";
 import type {
   ProductCase,
@@ -17,7 +16,7 @@ import type {
   ProductParam,
 } from "@/data/productDetails";
 
-export interface UseProductDetailDataOptions {
+interface UseProductDetailDataOptions {
   baseDetail?: MaybeRefOrGetter<ProductDetail | null | undefined>;
   showApplications?: MaybeRefOrGetter<boolean>;
   showVideos?: MaybeRefOrGetter<boolean>;
@@ -62,7 +61,7 @@ export function useProductDetailData(
   const showApplications = computed(() => toValue(options.showApplications) ?? true);
   const showVideos = computed(() => toValue(options.showVideos) ?? true);
 
-  const i18nKey = computed(() => slugToI18nKey(slugValue.value));
+  const i18nKey = slugValue;
   const detailKey = computed(() => `productDetails.${i18nKey.value}`);
   const hasDetailTranslation = computed(() => te(`${detailKey.value}.title`));
 
@@ -71,15 +70,20 @@ export function useProductDetailData(
       return null;
     }
 
-    const detail = createEmptyProductDetail();
-    detail.title = te(`${detailKey.value}.title`)
-      ? t(`${detailKey.value}.title`)
-      : t(currentProduct.value.titleKey);
-    detail.desc = te(`${detailKey.value}.desc`)
-      ? t(`${detailKey.value}.desc`)
-      : t(currentProduct.value.summaryKey);
-    detail.image = currentProduct.value.image;
-    return detail;
+    return {
+      title: te(`${detailKey.value}.title`)
+        ? t(`${detailKey.value}.title`)
+        : t(currentProduct.value.titleKey),
+      desc: te(`${detailKey.value}.desc`)
+        ? t(`${detailKey.value}.desc`)
+        : t(currentProduct.value.summaryKey),
+      image: currentProduct.value.image,
+      features: [],
+      cases: [],
+      scenes: [],
+      params: [],
+      downloads: [],
+    };
   };
 
   const localizedProduct = computed<ProductDetail | null>(() => {

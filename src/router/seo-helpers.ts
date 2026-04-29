@@ -13,7 +13,7 @@ const DEFAULT_SHARE_IMAGE_WIDTH = 1200;
 const DEFAULT_SHARE_IMAGE_HEIGHT = 630;
 const DEFAULT_TWITTER_CARD = "summary_large_image";
 
-export interface BaseSEOConfig {
+interface BaseSEOConfig {
   title: string;
   description: string;
   keywords?: string;
@@ -32,7 +32,7 @@ export interface BaseSEOConfig {
   siteName?: string;
 }
 
-export interface RouteSEOConfig {
+interface RouteSEOConfig {
   title: string;
   description: string;
   keywords: string;
@@ -68,7 +68,7 @@ export function getCompanyName(): string {
   return safeTranslate("footer.companyFullName") || safeTranslate("seo.siteName");
 }
 
-export function getCompanyAddress(): string {
+function getCompanyAddress(): string {
   return safeTranslate("footer.address");
 }
 
@@ -162,7 +162,7 @@ export function getSeoRouteContext(to: RouteLocationNormalized) {
   };
 }
 
-export type SeoRouteContext = ReturnType<typeof getSeoRouteContext>;
+type SeoRouteContext = ReturnType<typeof getSeoRouteContext>;
 
 export function buildBaseSeoMeta(
   routeContext: SeoRouteContext,
