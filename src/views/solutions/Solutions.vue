@@ -451,16 +451,14 @@ import { videoCards, videoMap } from "@/data/videos";
 import { useScrollRevealList } from "@/composables/useScrollReveal";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 import { scrollToSection } from "@/utils/scroll";
-
-function formatIndex(value: number): string {
-  return value.toString().padStart(2, "0");
-}
 import {
   buildResponsiveSrcSet,
   getLargestResponsiveImage,
   getResponsiveShowcaseImage,
   DEFAULT_HERO_IMAGE_SIZE,
 } from "@/utils/responsiveImage";
+
+import { formatIndex } from "@/utils/format";
 
 interface ProductView {
   title: string;

@@ -171,9 +171,7 @@ import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useScrollRevealList } from '@/composables/useScrollReveal';
 
-function formatIndex(value: number): string {
-  return value.toString().padStart(2, "0");
-}
+import { formatIndex } from "@/utils/format";
 
 const { t } = useI18n();
 

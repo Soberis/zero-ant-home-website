@@ -163,9 +163,7 @@ import { useScrollRevealList } from '@/composables/useScrollReveal';
 import { normalizeCollection } from "@/composables/useProductDetailData";
 import { scrollToSection } from "@/utils/scroll";
 
-function formatIndex(value: number): string {
-  return value.toString().padStart(2, "0");
-}
+import { formatIndex } from "@/utils/format";
 
 const { t, tm } = useI18n();
 
