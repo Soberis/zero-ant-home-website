@@ -645,7 +645,9 @@
   "contacts": {
     "phone": "Phone",
     "email": "@:common.terms.email",
-    "address": "Address"
+    "address": "Address",
+    "supportEmail": "liqingfeng{'@'}zeroant.com",
+    "hrEmail": "hr{'@'}zeroant.com"
   },
   "footer": {
     "companyFullName": "Hangzhou ZeroAnt Technology Co., Ltd.",
@@ -655,7 +657,6 @@
     "bilibili": "Bilibili",
     "copyright": "All Rights Reserved",
     "telValue": "13001001954",
-    "emailValue": "liqingfeng{'@'}zeroant.com",
     "icpNumber": "ICP Record No.: Zhe ICP Bei 2022031941-4"
   },
   "seo": {

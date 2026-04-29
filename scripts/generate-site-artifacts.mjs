@@ -80,11 +80,15 @@ function getMessage(messages, key) {
     current = current[segment];
   }
 
-  if (typeof current === "string" && current.startsWith("@:")) {
+  if (typeof current !== "string") return current;
+
+  // @:xxx 链接解析 — 与 vue-i18n linked message 行为一致
+  if (current.startsWith("@:")) {
     return getMessage(messages, current.slice(2));
   }
 
-  return current;
+  // {'@'} → @ — 与 vue-i18n 命名插值渲染行为一致
+  return current.replaceAll("{'@'}", "@");
 }
 
 function withLocalePath(routePath, locale) {
@@ -845,7 +849,7 @@ function buildPageContent(page, messages, data) {
                 getMessage(messages, "footer.telValue")
               )}`,
               `${escapeHtml(getMessage(messages, "contacts.email"))}: ${escapeHtml(
-                String(getMessage(messages, "footer.emailValue")).replace("{'@'}", "@")
+                getMessage(messages, "contacts.supportEmail")
               )}`,
               `${escapeHtml(getMessage(messages, "contacts.address"))}: ${escapeHtml(
                 getMessage(messages, "footer.address")
@@ -882,7 +886,7 @@ function buildPageContent(page, messages, data) {
               `${escapeHtml(getMessage(messages, "contacts.phone"))}: ${escapeHtml(
                 getMessage(messages, "footer.telValue")
               )}`,
-              `${escapeHtml(getMessage(messages, "contacts.email"))}: liqingfeng@zeroant.com`,
+              `${escapeHtml(getMessage(messages, "contacts.email"))}: ${escapeHtml(getMessage(messages, "contacts.supportEmail"))}`,
               `${escapeHtml(getMessage(messages, "contacts.address"))}: ${escapeHtml(
                 getMessage(messages, "footer.address")
               )}`,
@@ -925,7 +929,7 @@ function buildPageContent(page, messages, data) {
               `${escapeHtml(getMessage(messages, "careers.workLocation"))}: ${escapeHtml(
                 getMessage(messages, "careers.hangzhou")
               )}`,
-              `${escapeHtml(getMessage(messages, "careers.email"))}: hr@zeroant.com`,
+              `${escapeHtml(getMessage(messages, "careers.email"))}: ${escapeHtml(getMessage(messages, "contacts.hrEmail"))}`,
             ]
           ),
         ]

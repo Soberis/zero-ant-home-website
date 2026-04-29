@@ -75,7 +75,7 @@
               </p>
               <p class="info-text">
                 {{ $t("about.companyIntroDetailed.emailTips") }}
-                <a class="contact-value" href="mailto:liqingfeng@zeroant.com">liqingfeng@zeroant.com</a>
+                <a class="contact-value" :href="`mailto:${$t('contacts.supportEmail')}`">{{ $t("contacts.supportEmail") }}</a>
               </p>
             </article>
           </div>
@@ -213,8 +213,8 @@
             </div>
             <div class="contact-card">
               <span class="contact-label">{{ $t("contacts.email") }}</span>
-              <a class="contact-value" href="mailto:liqingfeng@zeroant.com">
-                liqingfeng@zeroant.com
+              <a class="contact-value" :href="`mailto:${$t('contacts.supportEmail')}`">
+                {{ $t("contacts.supportEmail") }}
               </a>
             </div>
             <div class="contact-card contact-card--wide">

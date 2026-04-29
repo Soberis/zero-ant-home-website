@@ -219,8 +219,7 @@ const servicePromises = computed<PromiseItem[]>(() => [
   },
 ]);
 
-// i18n JSON 中邮箱使用 {'@'} 代替 @ 防止爬虫抓取，渲染时还原为真实邮箱
-const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
+const supportEmail = computed(() => t("contacts.supportEmail"));
 const supportHotlineHref = computed(() => `tel:${t("footer.telValue")}`);
 
 function buildMailtoHref(subject: string): string {

@@ -128,7 +128,7 @@ import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
-const supportEmail = computed(() => t("footer.emailValue").replace("{'@'}", "@"));
+const supportEmail = computed(() => t("contacts.supportEmail"));
 
 // 移动端手风琴：记录当前展开的导航分区 key，同一时间只展开一个
 const openSection = ref<string | null>(null);

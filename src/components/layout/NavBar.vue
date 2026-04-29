@@ -81,7 +81,7 @@
       aria-modal="true"
       @click="handleBackgroundClick"
     >
-      <div class="mobile-nav-content">
+      <div ref="mobileNavContent" class="mobile-nav-content">
         <ul class="mobile-nav-links">
           <li v-for="item in topNavItems" :key="item.to" class="mobile-nav-item">
             <div class="mobile-nav-row">
@@ -183,6 +183,42 @@ const { localizePath, localizeTo } = useLocalizedPath();
 // 防抖锁
 let toggleLock = false;
 
+// 可访问性：焦点管理与 focus trap
+const mobileNavContent = ref<HTMLElement | null>(null);
+let lastFocusedElement: HTMLElement | null = null;
+
+function getFocusableElements(container: HTMLElement): HTMLElement[] {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((el) => el.offsetParent !== null);
+}
+
+function trapFocus(e: KeyboardEvent) {
+  if (e.key !== 'Tab' || !mobileNavContent.value) return;
+  const focusable = getFocusableElements(mobileNavContent.value);
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+function applyInertToMain() {
+  const main = document.querySelector('main');
+  if (main) main.setAttribute('inert', '');
+}
+
+function removeInertFromMain() {
+  const main = document.querySelector('main');
+  if (main) main.removeAttribute('inert');
+}
 
 // 切换移动端菜单
 function toggleMobileMenu() {
@@ -192,8 +228,19 @@ function toggleMobileMenu() {
   // 防止背景滚动
   if (isMobileMenuOpen.value) {
     document.body.style.overflow = "hidden";
+    lastFocusedElement = document.activeElement as HTMLElement;
+    applyInertToMain();
+    nextTick(() => {
+      if (mobileNavContent.value) {
+        const focusable = getFocusableElements(mobileNavContent.value);
+        if (focusable.length > 0) focusable[0].focus();
+      }
+    });
   } else {
     document.body.style.overflow = "";
+    removeInertFromMain();
+    lastFocusedElement?.focus();
+    lastFocusedElement = null;
   }
   window.setTimeout(() => (toggleLock = false), 350);
 }
@@ -203,6 +250,9 @@ function closeMobileMenu() {
   isMobileMenuOpen.value = false;
   openMobileSubmenu.value = null;
   document.body.style.overflow = "";
+  removeInertFromMain();
+  lastFocusedElement?.focus();
+  lastFocusedElement = null;
 }
 
 function toggleMobileSubmenu(itemTo: string) {
@@ -303,6 +353,12 @@ const onKeydownCapture = (e: KeyboardEvent) => {
   }
 };
 
+// 菜单打开时注册 focus trap
+function onMenuKeydown(e: KeyboardEvent) {
+  if (!isMobileMenuOpen.value) return;
+  if (e.key === 'Tab') trapFocus(e);
+}
+
 onMounted(() => {
   // 监听滚动
   window.addEventListener("scroll", handleScroll);
@@ -311,16 +367,20 @@ onMounted(() => {
 
   // 捕获阶段监听 Esc，优先关闭移动菜单，避免触发全局返回
   document.addEventListener('keydown', onKeydownCapture, true);
+  // focus trap — 菜单打开时 Tab 在面板内循环
+  document.addEventListener('keydown', onMenuKeydown);
 });
 
 onUnmounted(() => {
   // 清理body样式
   document.body.style.overflow = "";
-  
+  removeInertFromMain();
+
   // 清理事件监听
   window.removeEventListener("scroll", handleScroll);
   desktopBreakpointQuery?.removeEventListener("change", handleDesktopBreakpointChange);
   document.removeEventListener('keydown', onKeydownCapture, true);
+  document.removeEventListener('keydown', onMenuKeydown);
 });
 </script>
 

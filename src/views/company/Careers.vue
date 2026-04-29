@@ -147,7 +147,7 @@
             </div>
             <div class="contact-card">
               <span class="contact-label">{{ $t("careers.email") }}</span>
-              <a class="contact-value" href="mailto:hr@zeroant.com">hr@zeroant.com</a>
+              <a class="contact-value" :href="`mailto:${$t('contacts.hrEmail')}`">{{ $t("contacts.hrEmail") }}</a>
             </div>
           </div>
         </div>
@@ -302,7 +302,7 @@ function scrollToSection(id: string): void {
 function openMailto(subject?: string): void {
   const mailSubject = subject ? encodeURIComponent(subject) : "";
   const query = mailSubject ? `?subject=${mailSubject}` : "";
-  window.location.href = `mailto:hr@zeroant.com${query}`;
+  window.location.href = `mailto:${t("contacts.hrEmail")}${query}`;
 }
 
 function applyForPosition(position: Position): void {
