@@ -44,12 +44,12 @@
 
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
-          <h1 class="text-display-hero hero-title" style="transition-delay: 0.2s">{{ t('home.hero.title') }}</h1>
-          <div class="hero-product-name" style="transition-delay: 0.25s">
+          <h1 class="text-display-hero hero-title" style="transition-delay: 0.15s">{{ t('home.hero.title') }}</h1>
+          <div class="hero-product-name" style="transition-delay: 0.28s">
             {{ t('home.hero.panelLabel') }}
           </div>
-          <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
-          <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
+          <p class="text-body-large hero-description" style="transition-delay: 0.42s">{{ t('home.hero.description') }}</p>
+          <div class="hero-actions" style="transition-delay: 0.55s" :class="{ 'hero-entered': entered }">
             <router-link
               :to="productCenterRoute"
               class="btn btn-primary"
@@ -135,7 +135,7 @@ onUnmounted(() => {
     );
 }
 
-/* 精密点阵纹理叠加 — 纯 CSS，零 DOM 开销 */
+/* 精密点阵纹理叠加 — 延迟入场，与 staggered reveal 同步 */
 .hero-stage::before {
   content: '';
   position: absolute;
@@ -144,7 +144,12 @@ onUnmounted(() => {
   pointer-events: none;
   background-image: radial-gradient(circle, rgba(15, 23, 42, 0.045) 0.5px, transparent 0.5px);
   background-size: 12px 12px;
-  opacity: 0.6;
+  opacity: 0;
+  animation: texture-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+@keyframes texture-reveal {
+  to { opacity: 0.6; }
 }
 
 .hero-media {
@@ -159,14 +164,14 @@ onUnmounted(() => {
   padding-right: var(--container-padding-x);
   pointer-events: none;
   opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  transform: translateX(40px) scale(0.94);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
 }
 
 .hero-media.hero-entered {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
 }
 
 .hero-image {
@@ -209,13 +214,17 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   padding: 0 0 20px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero-copy.hero-entered {
+/* 子元素独立入场 — 真正的 staggered reveal */
+.hero-copy > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-copy.hero-entered > * {
   opacity: 1;
   transform: translateY(0);
 }
@@ -250,15 +259,6 @@ onUnmounted(() => {
   gap: 16px;
   margin-top: 36px;
   pointer-events: auto;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-actions.hero-entered {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 @media (max-width: 1500px) and (min-width: 901px) {
