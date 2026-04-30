@@ -334,8 +334,7 @@ background-size: 20px 20px;
   - 新增按钮：`.btn-accent`
   - 新增阴影：`--shadow-accent-glow`, `--shadow-accent-ring`
   - 焦点环升级：深蓝 → 电光青
-
-### 待实施
+  - ⚠️ 变量保留为设计资产，暂不在组件中大面积应用
 
 - [x] **P0-1 背景纹理系统**（2026-04-30）
   - 文件：`src/assets/style.css`（新增纹理变量和 class）
@@ -349,20 +348,18 @@ background-size: 20px 20px;
   - 文件：`public/css/reset.css`（同步更新）
   - 移除：`@fontsource/inter` 依赖
 
-- [ ] **P1-2 Hero 动效增强**
+- [x] **P1-2 Hero 动效增强**（2026-04-30）
   - 文件：`src/components/business/HeroCarousel.vue`
-  - 内容：标题/描述/CTA 按钮 staggered reveal（已有时序基础，加大延迟差）
-  - 可选：背景几何线稿微动效
+  - 内容：真正的 staggered reveal + 媒体 scale 入场 + 纹理动画入场
+  - 时序：标题 0.15s → 产品名 0.28s → 描述 0.42s → CTA 0.55s
 
-- [ ] **P2-1 卡片边框光效**
-  - 文件：`src/assets/style.css`（`.ui-card--product:hover` 等）
-  - 内容：hover 时叠加电光青边框光 (`box-shadow: var(--shadow-accent-glow)`)
+### 已回退（经验总结）
 
-- [ ] **P2-2 色彩实际应用**
-  - 将 `--color-accent` 和 `--color-accent-warm` 应用到具体业务组件
-  - FloatingCTA 图标色升级
-  - 合作伙伴 logo 区域点缀
-  - KPI 数字使用暖琥珀高亮
+- [~] **P2-1 卡片边框光效** — 电光青辉光与深蓝主调不协调，已回退
+- [~] **P2-2 色彩实际应用** — 新颜色大面积铺开显得花哨，已回退
+  - 教训：新强调色应通过设计稿→评审→小步验证的流程引入，
+    不应直接从变量跳到全站应用
+  - 变量保留为未来 UI 迭代的设计资产
 
 ### 远期考虑
 
