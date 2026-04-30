@@ -632,9 +632,8 @@ small {
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.02);
 }
 .ui-card--product:hover {
-  border-color: rgba(0, 198, 255, 0.12);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05),
-    var(--shadow-accent-glow);
+  border-color: rgba(26, 58, 143, 0.1);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05);
 }
 /* 产品卡片 — 图片区 */
 .ui-card__visual {
@@ -699,9 +698,8 @@ small {
   gap: 24px;
 }
 .ui-card--application:hover {
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06),
-    var(--shadow-accent-glow);
-  border-color: rgba(0, 198, 255, 0.15);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+  border-color: rgba(26, 58, 143, 0.12);
 }
 /* 应用卡片 — 图标区 */
 .ui-card__icon {
@@ -748,14 +746,12 @@ small {
 }
 .ui-card--video:hover,
 .ui-card--video:focus-visible {
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04),
-    var(--shadow-accent-glow);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
 }
 .ui-card--video:focus-visible {
   outline: none;
-  border-color: var(--brand-focus-ring);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04),
-    0 0 0 3px var(--brand-focus-outline);
+  border-color: var(--brand-focus-ring, rgba(26, 58, 143, 0.28));
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05), 0 0 0 3px var(--brand-focus-outline, rgba(26, 58, 143, 0.14));
 }
 /* 视频卡片 — 媒体区 */
 .ui-card--video .ui-card__visual {
