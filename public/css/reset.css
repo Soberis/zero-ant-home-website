@@ -44,14 +44,10 @@ html, body {
 }
 
 /* 基础元素样式 */
+/* 标题和段落的完整排版由 style.css 统一管理 */
 h1, h2, h3, h4, h5, h6, p {
   margin: 0 0 var(--spacing-sm) 0;
 }
-
-h1 { font-size: var(--font-size-display); font-weight: var(--font-weight-bold); }
-h2 { font-size: var(--font-size-headline); font-weight: var(--font-weight-semibold); }
-h3 { font-size: var(--font-size-title); font-weight: var(--font-weight-semibold); }
-h4, h5, h6 { font-size: var(--font-size-body); font-weight: var(--font-weight-semibold); }
 
 p { font-size: var(--font-size-body); font-weight: var(--font-weight-normal); }
 

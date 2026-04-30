@@ -140,11 +140,22 @@ function toggleSection(sectionTo: string): void {
 
 <style scoped>
 .footer {
+  /* 深色主题变量 */
+  --footer-bg: #0a0f1d;
+  --footer-text: #a1a1aa;
+  --footer-text-light: #d4d4d8;
+  --footer-text-link: #a6adbb;
+  --footer-text-heading: #ffffff;
+  --footer-border: rgba(255, 255, 255, 0.06);
+  --footer-border-bottom: rgba(255, 255, 255, 0.05);
+  --footer-icon: rgba(255, 255, 255, 0.5);
+  --footer-muted: rgba(161, 161, 170, 0.6);
+
   width: 100%;
   margin-top: auto;
   padding: var(--section-padding-y) 0 0;
-  background: #0a0f1d;
-  color: #a1a1aa;
+  background: var(--footer-bg);
+  color: var(--footer-text);
   font-size: 14px;
 }
 
@@ -186,7 +197,7 @@ function toggleSection(sectionTo: string): void {
 .footer-col h4 {
   margin: 0 0 16px;
   font-family: "Outfit", sans-serif;
-  color: #ffffff;
+  color: var(--footer-text-heading);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -205,7 +216,7 @@ function toggleSection(sectionTo: string): void {
 
 .footer-col ul li a,
 .footer-link {
-  color: #a6adbb;
+  color: var(--footer-text-link);
   font-weight: 500;
   text-decoration: none;
   transition: color 0.25s ease;
@@ -214,7 +225,7 @@ function toggleSection(sectionTo: string): void {
 
 .footer-col ul li a:hover,
 .footer-link:hover {
-  color: #ffffff;
+  color: var(--footer-text-heading);
 }
 
 .contact-col {
@@ -225,7 +236,7 @@ function toggleSection(sectionTo: string): void {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: #d4d4d8;
+  color: var(--footer-text-light);
   font-size: 13px;
   line-height: 2;
   overflow-wrap: anywhere;
@@ -244,7 +255,7 @@ function toggleSection(sectionTo: string): void {
 
 .contact-link,
 .contact-text {
-  color: #d4d4d8;
+  color: var(--footer-text-light);
   text-decoration: none;
   transition: color 0.2s ease;
   overflow-wrap: anywhere;
@@ -252,7 +263,7 @@ function toggleSection(sectionTo: string): void {
 }
 
 .contact-link:hover {
-  color: #ffffff;
+  color: var(--footer-text-heading);
 }
 
 .footer-qrcodes {
@@ -278,7 +289,7 @@ function toggleSection(sectionTo: string): void {
   height: 88px;
   padding: 6px;
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--brand-surface);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
   object-fit: contain;
   transition: transform 0.3s ease;
@@ -293,7 +304,7 @@ function toggleSection(sectionTo: string): void {
 }
 
 .qrcode-label {
-  color: #d4d4d8;
+  color: var(--footer-text-light);
   font-size: 12px;
   font-weight: 500;
 }
@@ -302,20 +313,20 @@ function toggleSection(sectionTo: string): void {
   margin-top: 80px;
   padding: 32px 24px 40px;
   text-align: center;
-  color: rgba(161, 161, 170, 0.6);
+  color: var(--footer-muted);
   font-size: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--footer-border-bottom);
 }
 
 .icp-link {
   margin-left: 12px;
-  color: rgba(212, 212, 216, 0.6) !important;
+  color: var(--footer-muted) !important;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .icp-link:hover {
-  color: #ffffff !important;
+  color: var(--footer-text-heading) !important;
 }
 
 @media (max-width: 1024px) {
@@ -371,7 +382,7 @@ function toggleSection(sectionTo: string): void {
     cursor: pointer;
     margin: 0;
     padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--footer-border);
     user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
@@ -393,7 +404,7 @@ function toggleSection(sectionTo: string): void {
     left: 50%;
     width: 10px;
     height: 1.5px;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--footer-icon);
     border-radius: 1px;
   }
 

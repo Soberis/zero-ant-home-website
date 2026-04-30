@@ -263,7 +263,7 @@ const productFamilies = rawProductFamilies.map((family) => ({
 
 .family-card__models {
   margin: 4px 0 0;
-  color: #344054;
+  color: var(--brand-text-soft);
   font-size: 0.92rem;
   line-height: 1.8;
 }
