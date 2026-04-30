@@ -26,13 +26,6 @@
   --spacing-sm: 1rem;      /* 16px */
   --spacing-md: 1.5rem;    /* 24px */
   --spacing-lg: 2rem;      /* 32px */
-
-  /* 基础颜色 */
-  --color-text: #1a1a1a;
-  --color-text-light: #666;
-  --color-text-muted: #999;
-  --color-border: #e5e5e5;
-  --color-bg: #ffffff;
 }
 
 /* 全局重置 */
@@ -97,7 +90,7 @@ input, textarea, select, button {
 .font-semibold { font-weight: var(--font-weight-semibold); }
 
 .text-muted { color: var(--color-text-muted); }
-.text-light { color: var(--color-text-light); }
+.text-light { color: var(--color-text-secondary); }
 
 .spacing-top { margin-top: var(--spacing-sm); }
 .spacing-bottom { margin-bottom: var(--spacing-sm); }
