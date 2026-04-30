@@ -37,6 +37,7 @@
     "perf": "yarn build:analyze && yarn preview"
   },
   "dependencies": {
+    "@fontsource/geist-sans": "^5.2.5",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/outfit": "^5.2.8",
     "vue": "^3.5.33",
