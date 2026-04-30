@@ -1,8 +1,8 @@
 # DESIGN.md — ZeroAnt 官网设计系统
 
-> 设计方向：**精密工程（Precision Engineering）**
+> 设计方向：**大道至简（Refined Industrial Minimalism）**
 >
-> 核心比喻：半导体洁净室中看机器人 — 简洁、精密、有技术质感。
+> 少即是多。用克制、精准、留白和材质感传递专业气质，而非堆砌装饰。
 > 这份文档面向人类阅读和 AI 执行，所有 CSS 变量名、class 名、文件路径均与代码库一致。
 
 ---
@@ -20,11 +20,11 @@
 
 ### 1.2 美学方向
 
-**精密工程** — 设计应该让人联想到精密仪器、实验室设备、工程图纸。
+**大道至简** — 受 Dieter Rams 设计哲学启发：好的设计是尽可能少的设计。
 
-- **氛围**：克制、冷静、技术感，但不过度冷淡
-- **差异化**：用微几何纹理和电光青点缀，在同类 B2B 科技网站中形成记忆点
-- **核心原则**：材质感 > 装饰感；精准 > 花哨；克制但有个性
+- **氛围**：干净、自信、专业，用留白和质感说话
+- **差异化**：在 B2B 科技网站普遍过度设计的趋势中反其道而行，用极致的克制形成辨识度
+- **核心原则**：删 > 加；留白 > 填充；质感 > 装饰；每个元素必须能解释自己的存在
 
 ### 1.3 当前设计评估
 
@@ -51,17 +51,6 @@
 --color-primary-dark: #0f2560;  /* hover/active */
 --color-primary-light: #e8edf7; /* 浅色背景 */
 
-/* === 强调色 — 电光青（CTA、交互态、焦点环）=== */
---color-accent: #00C6FF;        /* 主强调色 */
---color-accent-light: #e6f9ff;  /* 浅色背景 */
---color-accent-dark: #0098cc;   /* hover/active */
---color-accent-glow: rgba(0, 198, 255, 0.18); /* 辉光 */
-
-/* === 强调色 — 暖琥珀（KPI 数据、数值高亮）=== */
---color-accent-warm: #FF6B35;        /* 数据高亮 */
---color-accent-warm-light: #fff4ef;  /* 浅色背景 */
---color-accent-warm-dark: #d4532b;   /* hover/active */
-
 /* === 中性色 === */
 --color-text: #1a1a2e;
 --color-text-secondary: #5a6178;
@@ -84,21 +73,20 @@
 
 ```css
 --brand-primary: var(--color-primary);
---brand-accent: var(--color-accent);          /* 新增 */
---brand-accent-warm: var(--color-accent-warm); /* 新增 */
---brand-accent-glow: var(--color-accent-glow); /* 新增 */
---brand-focus-ring: rgba(0, 198, 255, 0.28);  /* 已改为电光青 */
---brand-focus-outline: rgba(0, 198, 255, 0.14);
+--brand-focus-ring: rgba(26, 58, 143, 0.28);
+--brand-focus-outline: rgba(26, 58, 143, 0.14);
 ```
 
 ### 2.3 颜色使用规则
 
 | 颜色 | 使用场景 | 禁止场景 |
 |------|---------|---------|
-| `--color-primary` | 品牌标识、主按钮、链接 | 大块背景 |
-| `--color-accent` | CTA 高亮、hover 边框光效、焦点环 | 正文文字（对比度不足） |
-| `--color-accent-warm` | KPI 数值、关键数据点 | 大面积使用（过于刺眼） |
-| 电光青辉光阴影 | 卡片 hover 态、按钮 hover 态 | 静态元素（会分散注意力） |
+| `--color-primary` | 品牌标识、主按钮、链接、焦点环 | 大块背景（用 primary-light） |
+| `--color-text` | 正文、标题 | 浅色背景上不可用 |
+| `--color-text-secondary` | 描述文字、辅助信息 | — |
+| `--color-text-muted` | 占位符、禁用态 | 正文（对比度不足） |
+| `--color-background` / `white` | 页面背景 | — |
+| `--brand-surface-panel` | 交替 section 背景 | — |
 
 ---
 
@@ -328,45 +316,36 @@ background-size: 20px 20px;
 
 ### 已完成
 
-- [x] **P0-2 色彩系统升级** — 引入电光青 + 暖琥珀强调色（2026-04-30）
-  - 文件：`src/assets/style.css`
-  - 新增变量：`--color-accent*` ×4, `--color-accent-warm*` ×3
-  - 新增按钮：`.btn-accent`
-  - 新增阴影：`--shadow-accent-glow`, `--shadow-accent-ring`
-  - 焦点环升级：深蓝 → 电光青
-  - ⚠️ 变量保留为设计资产，暂不在组件中大面积应用
-
 - [x] **P0-1 背景纹理系统**（2026-04-30）
-  - 文件：`src/assets/style.css`（新增纹理变量和 class）
-  - 文件：`src/components/business/HeroCarousel.vue`（Hero 背景点阵纹理）
-  - 文件：`src/views/Home.vue`（section 分隔带纹理）
-  - 关键约束：性能开销为零（纯 CSS），不增加 DOM 节点
+  - Hero `.hero-stage::before` — 12px 点阵纹理
+  - Home `.home-section--applications/partners::before` — 16px 点阵纹理
+  - 纯 CSS 伪元素，零性能开销
 
-- [x] **P1-1 字体替换（Inter → Geist）**（2026-04-30）
-  - 文件：`src/main.ts`（字体导入替换）
-  - 文件：`src/assets/style.css`（`body` font-family）
-  - 文件：`public/css/reset.css`（同步更新）
-  - 移除：`@fontsource/inter` 依赖
+- [x] **P1-1 字体替换（Inter → Geist Sans）**（2026-04-30）
+  - Geist Sans 400/500 阻塞首屏，600/700 延迟加载
+  - 移除 `@fontsource/inter` 依赖
 
 - [x] **P1-2 Hero 动效增强**（2026-04-30）
-  - 文件：`src/components/business/HeroCarousel.vue`
-  - 内容：真正的 staggered reveal + 媒体 scale 入场 + 纹理动画入场
-  - 时序：标题 0.15s → 产品名 0.28s → 描述 0.42s → CTA 0.55s
+  - 子元素独立 staggered reveal：0.15s → 0.28s → 0.42s → 0.55s
+  - 媒体 scale(0.94)→1 + translateX(40px)→0
+  - 纹理 ::before 延迟动画入场
 
-### 已回退（经验总结）
+- [x] **大道至简清理**（2026-04-30）
+  - 统一 reset.css 和 style.css 的变量定义
+  - 移除闲置的强调色变量和按钮变体
+  - 恢复焦点环为深蓝
 
-- [~] **P2-1 卡片边框光效** — 电光青辉光与深蓝主调不协调，已回退
-- [~] **P2-2 色彩实际应用** — 新颜色大面积铺开显得花哨，已回退
-  - 教训：新强调色应通过设计稿→评审→小步验证的流程引入，
-    不应直接从变量跳到全站应用
-  - 变量保留为未来 UI 迭代的设计资产
+### 经验教训
+
+- **新颜色引入需经过视觉评审**。从变量定义到全站应用跳过了最关键的设计验证环节。
+- **删比加重要**。简约设计的关键不是添加纹理/动效，而是去掉不需要的东西。
+- **先看后改**。Any color change should be previewed in context before committing.
 
 ### 远期考虑
 
 - [ ] 暗色模式支持（`prefers-color-scheme`）
 - [ ] 产品详情页独立设计升级
-- [ ] 自定义光标样式
-- [ ] 页面过渡动画优化
+- [ ] 移动端体验专项优化
 
 ---
 
