@@ -167,6 +167,12 @@
   /* ── 材质 ── */
   --glass-blur: blur(12px);
   --glass-surface: rgba(255, 255, 255, 0.85);
+  /* ── 背景纹理（精密工程 — 纯 CSS，零性能开销）── */
+  --texture-dot-sm: radial-gradient(circle, rgba(15, 23, 42, 0.05) 0.5px, transparent 0.5px);
+  --texture-dot-md: radial-gradient(circle, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  --texture-dot-lg: radial-gradient(circle, rgba(15, 23, 42, 0.035) 1.5px, transparent 1.5px);
+  --texture-grid: linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
 }
 /* ================================================================
    全局基础样式
@@ -920,6 +926,36 @@ small {
 }
 .reveal-stagger.revealed > .reveal-item:nth-child(12) {
   transition-delay: 0.77s;
+}
+/* ================================================================
+   背景纹理工具类（精密工程方向）
+   ================================================================ */
+.bg-dot-sm {
+  background-image: var(--texture-dot-sm);
+  background-size: 8px 8px;
+}
+.bg-dot-md {
+  background-image: var(--texture-dot-md);
+  background-size: 20px 20px;
+}
+.bg-dot-lg {
+  background-image: var(--texture-dot-lg);
+  background-size: 32px 32px;
+}
+.bg-grid {
+  background-image: var(--texture-grid);
+  background-size: 40px 40px;
+}
+/* 纹理叠加 mixin 用法：在元素上同时使用 bg-dot-* + 原有背景 */
+.bg-texture-overlay {
+  position: relative;
+}
+.bg-texture-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 /* ================================================================
    图片占位符

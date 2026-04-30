@@ -97,6 +97,16 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
   background: var(--brand-surface-panel);
 }
 
+.home-section--applications::before,
+.home-section--partners::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.03) 0.5px, transparent 0.5px);
+  background-size: 16px 16px;
+}
+
 .home-section--videos {
   background: var(--color-background-white);
 }

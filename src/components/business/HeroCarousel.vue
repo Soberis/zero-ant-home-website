@@ -135,6 +135,18 @@ onUnmounted(() => {
     );
 }
 
+/* 精密点阵纹理叠加 — 纯 CSS，零 DOM 开销 */
+.hero-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.045) 0.5px, transparent 0.5px);
+  background-size: 12px 12px;
+  opacity: 0.6;
+}
+
 .hero-media {
   position: absolute;
   inset: 0;
