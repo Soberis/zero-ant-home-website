@@ -4,15 +4,15 @@ import router from "@/router";
 import i18n, { initI18n } from "@/config/i18n";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 
-// Fonts — only critical weights block rendering (Inter: body+nav, Outfit: hero headings)
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
+// Fonts — only critical weights block rendering (Geist: body+nav, Outfit: hero headings)
+import "@fontsource/geist-sans/400.css";
+import "@fontsource/geist-sans/500.css";
 import "@fontsource/outfit/600.css";
 
 // Non-critical weights loaded after mount to unblock first paint
 function loadDeferredFonts() {
-  import("@fontsource/inter/600.css");
-  import("@fontsource/inter/700.css");
+  import("@fontsource/geist-sans/600.css");
+  import("@fontsource/geist-sans/700.css");
   import("@fontsource/outfit/400.css");
   import("@fontsource/outfit/500.css");
   import("@fontsource/outfit/700.css");

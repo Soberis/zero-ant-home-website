@@ -337,18 +337,17 @@ background-size: 20px 20px;
 
 ### 待实施
 
-- [ ] **P0-1 背景纹理系统**
+- [x] **P0-1 背景纹理系统**（2026-04-30）
   - 文件：`src/assets/style.css`（新增纹理变量和 class）
   - 文件：`src/components/business/HeroCarousel.vue`（Hero 背景点阵纹理）
   - 文件：`src/views/Home.vue`（section 分隔带纹理）
   - 关键约束：性能开销为零（纯 CSS），不增加 DOM 节点
 
-- [ ] **P1-1 字体替换（Inter → Geist）**
-  - 安装：`yarn add @fontsource/geist-sans`
-  - 文件：`src/main.ts`（import 语句）
+- [x] **P1-1 字体替换（Inter → Geist）**（2026-04-30）
+  - 文件：`src/main.ts`（字体导入替换）
   - 文件：`src/assets/style.css`（`body` font-family）
   - 文件：`public/css/reset.css`（同步更新）
-  - 注意：中英混排兼容性需实测
+  - 移除：`@fontsource/inter` 依赖
 
 - [ ] **P1-2 Hero 动效增强**
   - 文件：`src/components/business/HeroCarousel.vue`

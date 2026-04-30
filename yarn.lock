@@ -241,11 +241,6 @@
   resolved "https://registry.npmmirror.com/@fontsource/geist-sans/-/geist-sans-5.2.5.tgz#025bd279367f7b58c2875d2ef12bd369cbd8602a"
   integrity sha512-anllOHyJbElRs9fV15TeDRqAeb1IKm4bSknPl6ZMoyPTx1BBy7logudcUwpNjmQLkzn4Q0JGQLRCUKJYoyST6A==
 
-"@fontsource/inter@^5.2.8":
-  version "5.2.8"
-  resolved "https://registry.npmmirror.com/@fontsource/inter/-/inter-5.2.8.tgz#10c95d877d972c7de5bd4592309d42fb6a5e1a5b"
-  integrity sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==
-
 "@fontsource/outfit@^5.2.8":
   version "5.2.8"
   resolved "https://registry.npmmirror.com/@fontsource/outfit/-/outfit-5.2.8.tgz#03edbab365ff05222fbf3b7efd0894f47247765e"
