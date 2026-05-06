@@ -77,9 +77,9 @@
   },
   "home": {
     "hero": {
-      "title": "Precision Transfer Robot Platform",
-      "description": "Built for precision transfer, compact-space operation, and lift-linked workflows so teams can judge form factor, extension combinations, and delivery paths faster.",
-      "panelLabel": "Product Center",
+      "title": "Intelligent Robot & Embodied Development Platform",
+      "description": "Covering robot hardware, teleoperation training, and data collection scenarios — helping teams match the right form factor, dev tools, and delivery path faster.",
+      "panelLabel": "Robots · Teleop · Data",
       "primaryCta": "@:common.cta.learnProducts"
     },
     "coreProducts": {

@@ -77,9 +77,9 @@
   },
   "home": {
     "hero": {
-      "title": "精密传送机器人平台",
-      "description": "聚焦精密传送、狭小空间操作与升降联动场景，帮助团队更快判断本体形态、扩展组合与交付方式。",
-      "panelLabel": "产品中心",
+      "title": "智能机器人整机与具身开发平台",
+      "description": "覆盖机器人本体、遥操作示教与数据采集场景，帮助团队更快匹配产品形态、开发工具与交付方式。",
+      "panelLabel": "整机 · 遥操作 · 数据采集",
       "primaryCta": "@:common.cta.learnProducts"
     },
     "coreProducts": {

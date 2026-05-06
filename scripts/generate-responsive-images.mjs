@@ -32,12 +32,12 @@ const OUTPUT_FORMATS = {
 
 const HERO_VARIANTS = {
   homeDesktop: {
-    source: "src/assets/images/product/封面.webp",
+    source: "src/assets/images/product/ZA-MR3T.webp",
     outputBase: "hero/home-desktop",
     widths: [960, 1600],
   },
   homeMobile: {
-    source: "src/assets/images/product/封面-mobile.webp",
+    source: "src/assets/images/product/ZA-MR3T.webp",
     outputBase: "hero/home-mobile",
     widths: [480, 900],
   },
