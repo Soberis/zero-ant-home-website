@@ -168,7 +168,7 @@ function toggleSection(sectionTo: string): void {
 .footer-columns {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 56px 40px;
+  gap: 56px 80px;
   align-items: start;
 }
 
@@ -315,7 +315,6 @@ function toggleSection(sectionTo: string): void {
   text-align: center;
   color: var(--footer-muted);
   font-size: 12px;
-  border-top: 1px solid var(--footer-border-bottom);
 }
 
 .icp-link {

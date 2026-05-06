@@ -25,12 +25,12 @@
       </router-link>
     </div>
 
-    <div class="family-grid">
+    <div ref="familyGridRef" class="family-grid reveal-stagger">
       <router-link
         v-for="family in productFamilies"
         :key="family.key"
         :to="localizeTo({ path: '/products', hash: `#${family.key}` })"
-        class="family-card ui-card ui-card--product"
+        class="family-card ui-card ui-card--product reveal-item"
       >
         <div class="family-card__visual ui-card__visual">
           <picture v-if="family.responsiveSrcSet" class="family-card__picture">
@@ -89,8 +89,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import { useScrollReveal } from "@/composables/useScrollReveal";
 import { getProductCenterCardById } from "@/data/product-center";
 import {
   buildResponsiveSrcSet,
@@ -116,6 +118,9 @@ const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
 const familyImageSizes =
   "(max-width: 640px) calc(100vw - 72px), (max-width: 960px) calc((100vw - 88px) / 2), (max-width: 1280px) calc((100vw - 128px) / 3), 300px";
+
+const familyGridRef = ref<HTMLElement | null>(null);
+useScrollReveal(familyGridRef);
 
 const rawProductFamilies = [
   {
