@@ -65,9 +65,6 @@
 
         <div class="family-card__content ui-card__content">
           <h3 class="family-card__title ui-card__title">{{ t(family.titleKey) }}</h3>
-          <p class="family-card__description ui-card__description">
-            {{ t(family.descriptionKey) }}
-          </p>
 
           <p class="family-card__models">
             {{ family.models.join(" / ") }}
@@ -128,7 +125,7 @@ const rawProductFamilies = [
     descriptionKey: "home.coreProducts.families.rSeries.description",
     image: getOptimizedImage("za-r3-x"),
     imageSize: getProductImageSize("za-r3-x"),
-    models: ["ZA-R3", "ZA-R3X", "ZA-R3M(L)", "ZA-R3M(R)"],
+    models: ["ZA-R3", "ZA-R3X", "ZA-R3M(L/R)"],
   },
   {
     key: "dt-series",

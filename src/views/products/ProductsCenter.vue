@@ -58,7 +58,7 @@
           <div class="product-card__body">
             <h3 class="product-card__title">{{ card.title }}</h3>
             <div class="product-card__spec-block">
-              <ul class="product-card__specs">
+              <ul class="product-card__specs-clean">
                 <li v-for="spec in card.primarySpecs" :key="spec">
                   {{ spec }}
                 </li>
@@ -427,35 +427,20 @@ const pageContent = computed(() => ({
   margin-top: 8px;
 }
 
-.product-card__specs {
+.product-card__specs-clean {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
-.product-card__specs li {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding-left: 12px;
-  color: #344054;
+.product-card__specs-clean li {
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.product-card__specs li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 5px;
-  height: 5px;
-  background: var(--color-primary);
-  border-radius: 50%;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .product-card__secondary-spec {

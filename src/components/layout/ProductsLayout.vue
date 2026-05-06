@@ -326,10 +326,10 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric--numeric .products-hero__metric-value {
-  font-size: var(--compact-hero-kpi-value-size);
-  line-height: var(--compact-hero-kpi-value-line-height);
-  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
-  color: var(--products-title); /* 改回深色，保持全站一致 */
+  font-size: clamp(3rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--products-title);
 }
 
 .products-hero__metric--text .products-hero__metric-value {
