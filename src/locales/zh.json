@@ -77,8 +77,8 @@
   },
   "home": {
     "hero": {
-      "title": "智能机器人整机与具身开发平台",
-      "description": "覆盖机器人本体、遥操作示教与数据采集场景，帮助团队更快匹配产品形态、开发工具与交付方式。",
+      "title": "智能机器人整机<br class=\"hero-br\" />与具身开发平台",
+      "description": "覆盖机器人本体、遥操作示教与数据采集场景，<br class=\"hero-br\" />帮助团队更快匹配产品形态、开发工具与交付方式。",
       "panelLabel": "整机 · 遥操作 · 数据采集",
       "primaryCta": "@:common.cta.learnProducts"
     },

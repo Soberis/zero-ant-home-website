@@ -44,11 +44,9 @@
 
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
-          <h1 class="text-display-hero hero-title" style="transition-delay: 0.15s">{{ t('home.hero.title') }}</h1>
-          <div class="hero-product-name" style="transition-delay: 0.28s">
-            {{ t('home.hero.panelLabel') }}
-          </div>
-          <p class="text-body-large hero-description" style="transition-delay: 0.42s">{{ t('home.hero.description') }}</p>
+          <h1 class="text-display-hero hero-title" style="transition-delay: 0.15s" v-html="t('home.hero.title')"></h1>
+          <div class="hero-product-name" style="transition-delay: 0.28s" v-html="t('home.hero.panelLabel')"></div>
+          <p class="text-body-large hero-description" style="transition-delay: 0.42s" v-html="t('home.hero.description')"></p>
           <div class="hero-actions" style="transition-delay: 0.55s" :class="{ 'hero-entered': entered }">
             <router-link
               :to="productCenterRoute"
@@ -56,8 +54,8 @@
             >
               {{ t('home.hero.primaryCta') }}
             </router-link>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </section>
@@ -235,6 +233,11 @@ onUnmounted(() => {
   color: var(--brand-text, #1a1a2e);
   white-space: normal;
   letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+:deep(.hero-br) {
+  display: block;
 }
 
 .hero-product-name {
@@ -252,6 +255,7 @@ onUnmounted(() => {
   max-width: 24em;
   color: var(--brand-muted, #5a6178);
   line-height: 1.75;
+  text-wrap: pretty;
 }
 
 .hero-actions {
@@ -345,7 +349,6 @@ onUnmounted(() => {
     inset: 22px -8px 206px;
   }
 
-  
   .hero-description {
     font-size: 0.96rem;
   }
@@ -354,6 +357,9 @@ onUnmounted(() => {
     padding: 72px 16px 22px;
   }
 
+  :deep(.hero-br) {
+    display: inline;
+  }
 }
 
 @media (max-width: 480px) {
