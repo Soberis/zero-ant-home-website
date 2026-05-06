@@ -23,9 +23,20 @@ interface ResponsiveImageManifest {
 
 const manifest = responsiveImages as ResponsiveImageManifest;
 type ResponsiveImageGroup = "hero" | "products" | "videos" | "showcase";
+const responsiveImageVersion =
+  typeof __APP_BUILD_ID__ === "string" && __APP_BUILD_ID__ ? __APP_BUILD_ID__ : "";
+
+function appendBuildVersion(imagePath: string): string {
+  if (!responsiveImageVersion) {
+    return imagePath;
+  }
+
+  const separator = imagePath.includes("?") ? "&" : "?";
+  return `${imagePath}${separator}v=${encodeURIComponent(responsiveImageVersion)}`;
+}
 
 function buildResponsiveImagePath(entry: ResponsiveImageEntry, width: number): string {
-  return `${entry.basePath}-${width}.${entry.format}`;
+  return appendBuildVersion(`${entry.basePath}-${width}.${entry.format}`);
 }
 
 function getManifestGroup(

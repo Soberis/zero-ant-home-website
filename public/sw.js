@@ -25,6 +25,10 @@ function isStaticAssetRequest(request, requestUrl) {
   return STATIC_ASSET_PATH_SEGMENTS.some((segment) => requestUrl.pathname.includes(segment));
 }
 
+function isResponsiveAssetRequest(requestUrl) {
+  return isSameOriginRequest(requestUrl) && requestUrl.pathname.startsWith("/responsive/");
+}
+
 async function cacheStaticAsset(request, response) {
   if (!response || response.status !== 200) {
     return response;
@@ -71,6 +75,15 @@ self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
   if (!isStaticAssetRequest(event.request, requestUrl)) {
+    return;
+  }
+
+  if (isResponsiveAssetRequest(requestUrl)) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => cacheStaticAsset(event.request, networkResponse))
+        .catch(() => caches.match(event.request))
+    );
     return;
   }
 
