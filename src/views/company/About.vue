@@ -161,34 +161,30 @@
           </h2>
         </div>
 
-        <div class="culture-card">
-          <i18n-t keypath="about.enterpriseCulture.description" tag="p" class="info-text" scope="global">
+        <div class="culture-wrapper">
+          <i18n-t keypath="about.enterpriseCulture.description" tag="p" class="info-text culture-desc" scope="global">
             <template #coreConcept>
               <strong>{{ $t("about.richText.coreConcept") }}</strong>
             </template>
           </i18n-t>
-          <ul class="culture-list">
-            <i18n-t keypath="about.enterpriseCulture.item1" tag="li" scope="global">
-              <template #deepAccumulation>
-                <strong>{{ $t("about.richText.deepAccumulation") }}</strong>
-              </template>
-            </i18n-t>
-            <i18n-t keypath="about.enterpriseCulture.item2" tag="li" scope="global">
-              <template #scenarioRevolution>
-                <strong>{{ $t("about.richText.scenarioRevolution") }}</strong>
-              </template>
-            </i18n-t>
-            <i18n-t keypath="about.enterpriseCulture.item3" tag="li" scope="global">
-              <template #ecosystemCoConstruction>
-                <strong>{{ $t("about.richText.ecosystemCoConstruction") }}</strong>
-              </template>
-            </i18n-t>
-            <i18n-t keypath="about.enterpriseCulture.item4" tag="li" scope="global">
-              <template #extremeEvolution>
-                <strong>{{ $t("about.richText.extremeEvolution") }}</strong>
-              </template>
-            </i18n-t>
-          </ul>
+          <div class="culture-grid">
+            <article class="culture-item">
+              <h3 class="culture-item-title">{{ $t("about.richText.deepAccumulation") }}</h3>
+              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item1") }}</p>
+            </article>
+            <article class="culture-item">
+              <h3 class="culture-item-title">{{ $t("about.richText.scenarioRevolution") }}</h3>
+              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item2") }}</p>
+            </article>
+            <article class="culture-item">
+              <h3 class="culture-item-title">{{ $t("about.richText.ecosystemCoConstruction") }}</h3>
+              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item3") }}</p>
+            </article>
+            <article class="culture-item">
+              <h3 class="culture-item-title">{{ $t("about.richText.extremeEvolution") }}</h3>
+              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item4") }}</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -290,10 +286,61 @@ const coreValues = computed(() => [
   --section-card-surface: var(--brand-surface);
 }
 
-.intro-prose strong,
-.culture-card strong {
+.intro-prose strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+.culture-wrapper {
+  display: grid;
+  gap: 32px;
+}
+
+.culture-desc {
+  margin: 0;
+  font-size: 1.15rem;
+  max-width: 65ch;
+  text-align: justify;
+}
+
+.culture-desc strong {
   font-weight: 700;
   color: inherit;
+}
+
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.culture-item {
+  background: var(--section-card-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  padding: 32px;
+  transition: all var(--transition-smooth);
+}
+
+.culture-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  border-color: rgba(26, 58, 143, 0.1);
+}
+
+.culture-item-title {
+  margin: 0 0 12px 0;
+  color: var(--brand-text);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.culture-item-desc {
+  margin: 0;
+  color: var(--brand-text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-align: justify;
 }
 
 .page-shell {
@@ -804,19 +851,14 @@ const coreValues = computed(() => [
   }
 
   .values-grid {
-    flex-wrap: wrap;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
 
   .value-card {
-    flex: 0 0 calc(50% - 16px);
-    border-left: none;
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
-    padding: 20px 0;
-  }
-
-  .value-card:first-child,
-  .value-card:nth-child(2) {
-    border-top: none;
+    padding: 24px 16px;
+    align-items: center;
+    text-align: center;
   }
 
   .contact-grid {
@@ -857,6 +899,7 @@ const coreValues = computed(() => [
   }
 
   .honor-grid,
+  .culture-grid,
   .contact-grid {
     grid-template-columns: 1fr;
     column-gap: 0;
