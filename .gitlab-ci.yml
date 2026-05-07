@@ -15,8 +15,8 @@ stages:
   - build
   - deploy
 
-# 代码质量检查阶段
-lint:
+# 代码质量 + Node 端测试
+validate:
   stage: test
   retry:
     max: 2
@@ -27,6 +27,20 @@ lint:
     - yarn install --frozen-lockfile --ignore-engines
     - yarn lint
     - yarn type-check
+    - yarn test:node
+
+# 浏览器端测试（Playwright 安装较慢，独立 job 并行运行）
+test-browser:
+  stage: test
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+  script:
+    - yarn install --frozen-lockfile --ignore-engines
+    - yarn test:browser:install
+    - yarn test:browser
 
 # 构建阶段
 build:

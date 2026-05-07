@@ -284,7 +284,8 @@ export function getApplicationDetailStructuredData(
   locale: string,
   applicationTitle: string,
   applicationDescription: string,
-  thumbnailUrl: string
+  thumbnailUrl: string,
+  currentPath: string
 ): StructuredData[] {
   const techArticle: StructuredData = {
     "@context": "https://schema.org",
@@ -303,7 +304,7 @@ export function getApplicationDetailStructuredData(
   const breadcrumb = buildBreadcrumbStructuredData(baseUrl, locale, [
     { name: safeTranslate("nav.home"), path: "/" },
     { name: safeTranslate("nav.solutions"), path: "/solutions" },
-    { name: applicationTitle, path: currentUrl },
+    { name: applicationTitle, path: currentPath },
   ]);
 
   return [techArticle, breadcrumb];
@@ -319,7 +320,8 @@ export function getVideoDetailStructuredData(
   videoUrl: string,
   isVideoMedia: boolean,
   videoType: string,
-  publishDate?: string
+  publishDate?: string,
+  currentPath?: string
 ): StructuredData[] {
   const mediaData: StructuredData = isVideoMedia
     ? {
@@ -350,7 +352,7 @@ export function getVideoDetailStructuredData(
   const breadcrumb = buildBreadcrumbStructuredData(baseUrl, locale, [
     { name: safeTranslate("nav.home"), path: "/" },
     { name: safeTranslate("common.section.videoCases"), path: "/solutions" },
-    { name: videoTitle, path: currentUrl },
+    { name: videoTitle, path: currentPath || "/solutions" },
   ]);
 
   return [mediaData, breadcrumb];
@@ -364,7 +366,8 @@ export function getProductDetailStructuredData(
   productDesc: string,
   productImage: string,
   productId: string,
-  familyTitleKey: string
+  familyTitleKey: string,
+  currentPath?: string
 ): StructuredData[] {
   const siteName = safeTranslate("seo.siteName");
 
@@ -391,7 +394,7 @@ export function getProductDetailStructuredData(
   const breadcrumb = buildBreadcrumbStructuredData(baseUrl, locale, [
     { name: safeTranslate("nav.home"), path: "/" },
     { name: safeTranslate("nav.products"), path: "/products" },
-    { name: productName, path: currentUrl },
+    { name: productName, path: currentPath || "/products" },
   ]);
 
   return [product, breadcrumb];

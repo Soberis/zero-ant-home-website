@@ -4,13 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- 物理层 I18n 锁定：在 JS 加载前，强制同步 html.lang 属性，消除语义抖动 -->
-    <script>
-      (function () {
-        var pathname = window.location.pathname || "/";
-        var lang = pathname === "/en" || pathname.indexOf("/en/") === 0 ? "en" : "zh";
-        document.documentElement.setAttribute("lang", lang);
-      })();
-    </script>
+    <script src="/js/i18n-lang-fix.js"></script>
     <!-- 安全策略 -->
     <!-- Note: Content-Security-Policy has been moved to Nginx Response Headers for better security and maintainability -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -36,6 +30,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <!-- 初始 Loading Spinner 样式 -->
+    <link rel="stylesheet" href="/css/loader.css" />
     <meta name="theme-color" content="#1a3a8f" />
     <link rel="canonical" href="https://zeroant.com" />
     <!-- Open Graph Tags -->
@@ -82,61 +78,6 @@
 
   <body>
     <div id="app">
-      <style>
-        .za-initial-loader {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: #f8f9fb;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 9999;
-          font-family:
-            "Outfit",
-            -apple-system,
-            sans-serif;
-        }
-        .za-loader-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 20px;
-        }
-        .za-loader-spinner {
-          width: 36px;
-          height: 36px;
-          border: 3px solid rgba(26, 58, 143, 0.1);
-          border-top-color: #1a3a8f;
-          border-radius: 50%;
-          animation: za-spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-        .za-loader-text {
-          color: #1a3a8f;
-          font-size: 12px;
-          font-weight: 600;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          opacity: 0.8;
-          animation: za-pulse 2s ease-in-out infinite;
-        }
-        @keyframes za-spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        @keyframes za-pulse {
-          0%,
-          100% {
-            opacity: 0.5;
-          }
-          50% {
-            opacity: 1;
-          }
-        }
-      </style>
       <div class="za-initial-loader">
         <div class="za-loader-content">
           <div class="za-loader-spinner"></div>

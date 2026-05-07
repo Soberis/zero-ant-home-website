@@ -180,7 +180,7 @@ export async function setupApplicationDetailSEO(
   );
 
   setStructuredData(
-    getApplicationDetailStructuredData(baseUrl, currentUrl, locale, applicationTitle, applicationDescription, thumbnailUrl)
+    getApplicationDetailStructuredData(baseUrl, currentUrl, locale, applicationTitle, applicationDescription, thumbnailUrl, routeContext.canonicalPath)
   );
 }
 
@@ -223,7 +223,8 @@ export async function setupVideoDetailSEO(
     getVideoDetailStructuredData(
       baseUrl, currentUrl, locale,
       videoTitle, videoDescription, thumbnailUrl,
-      video.url, isVideoMedia, video.type, video.publishDate
+      video.url, isVideoMedia, video.type, video.publishDate,
+      routeContext.canonicalPath
     )
   );
 }
@@ -278,7 +279,8 @@ export async function setupProductDetailSEO(
     getProductDetailStructuredData(
       baseUrl, currentUrl, locale,
       productName, productDesc, productImage,
-      product.card.id, product.familyTitleKey
+      product.card.id, product.familyTitleKey,
+      routeContext.canonicalPath
     )
   );
 }

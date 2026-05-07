@@ -1216,16 +1216,16 @@ async function writePrerenderedPages(baseHtml, pages) {
   }
 }
 
-function buildSitemapXml(paths) {
-  const urls = paths
-    .map((routePath) => {
-      const location = `${siteUrl}${routePath}`;
+function buildSitemapXml(entries) {
+  const urls = entries
+    .map(({ path, priority }) => {
+      const location = `${siteUrl}${path}`;
       return [
         "  <url>",
         `    <loc>${location}</loc>`,
         `    <lastmod>${buildDate}</lastmod>`,
         "    <changefreq>weekly</changefreq>",
-        "    <priority>0.8</priority>",
+        `    <priority>${priority}</priority>`,
         "  </url>",
       ].join("\n");
     })
@@ -1242,28 +1242,31 @@ function buildSitemapXml(paths) {
 
 async function writeSitemap(data) {
   const localeVariants = (routePath) => [withLocalePath(routePath, "zh"), withLocalePath(routePath, "en")];
-  const pagePaths = [
-    "/",
-    "/products",
-    "/solutions",
-    "/support",
-    "/about",
-    "/careers",
-  ].flatMap(localeVariants);
-  const productPaths = data.productCards.flatMap((item) =>
-    localeVariants(`/products/detail/${item.id}`)
+  const entry = (path, priority) => ({ path, priority });
+
+  // 首页优先级 1.0，顶层页面 0.8，详情页 0.6
+  const pageEntries = [
+    entry("/", "1.0"),
+    entry("/products", "0.8"),
+    entry("/solutions", "0.8"),
+    entry("/support", "0.8"),
+    entry("/about", "0.8"),
+    entry("/careers", "0.8"),
+  ].flatMap((e) => localeVariants(e.path).map((p) => ({ path: p, priority: e.priority })));
+  const productEntries = data.productCards.flatMap((item) =>
+    localeVariants(`/products/detail/${item.id}`).map((p) => ({ path: p, priority: "0.6" }))
   );
-  const applicationPaths = data.applications.flatMap((item) =>
-    localeVariants(`/applications/${item.slug}`)
+  const applicationEntries = data.applications.flatMap((item) =>
+    localeVariants(`/applications/${item.slug}`).map((p) => ({ path: p, priority: "0.6" }))
   );
-  const videoPaths = data.videos.flatMap((item) =>
-    localeVariants(`/video/${item.slug}`)
+  const videoEntries = data.videos.flatMap((item) =>
+    localeVariants(`/video/${item.slug}`).map((p) => ({ path: p, priority: "0.6" }))
   );
   const sitemapXml = buildSitemapXml([
-    ...pagePaths,
-    ...productPaths,
-    ...applicationPaths,
-    ...videoPaths,
+    ...pageEntries,
+    ...productEntries,
+    ...applicationEntries,
+    ...videoEntries,
   ]);
 
   await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml, "utf8");

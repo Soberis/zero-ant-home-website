@@ -43,7 +43,11 @@ export type RouteSEOActiveCheck = () => boolean;
 export function safeTranslate(key: string): string {
   try {
     if (i18n && i18n.global && typeof i18n.global.t === "function") {
-      return i18n.global.t(key);
+      const result = i18n.global.t(key);
+      if (import.meta.env.DEV && result === key) {
+        console.warn(`[i18n] Missing translation for key: "${key}"`);
+      }
+      return result;
     }
     return key;
   } catch (error) {
@@ -56,6 +60,9 @@ export function safeTranslateArray(key: string): string[] {
   try {
     const message: unknown = i18n.global.tm(key);
     if (!Array.isArray(message)) {
+      if (import.meta.env.DEV) {
+        console.warn(`[i18n] Missing or non-array translation for key: "${key}"`);
+      }
       return [];
     }
     return message.filter((item): item is string => typeof item === "string");
@@ -99,6 +106,10 @@ export function getAlternateOgLocales(ogLocale: string): string[] {
 }
 
 export function buildLocalizedAbsoluteUrl(baseUrl: string, locale: string, routePath: string): string {
+  // 如果 routePath 已经是绝对 URL，直接返回（避免重复拼接 baseUrl）
+  if (/^https?:\/\//i.test(routePath)) {
+    return routePath;
+  }
   if (locale === "en") {
     return `${baseUrl}${routePath === "/" ? "/en" : `/en${routePath}`}`;
   }

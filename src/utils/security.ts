@@ -26,6 +26,9 @@ function sanitizeInput(input: string): string {
  * 允许有限标签的 HTML 清洗（默认仅保留基础排版标签）
  * @param input HTML 字符串
  * @param allowedTags 允许的标签名列表（小写）
+ * @note 基于 DOMParser 实现，仅处理 <body> 内的节点；<head> 中的内容（如 <meta>、<script>）
+ *       不会出现在最终输出中，因为返回值取自 doc.body.innerHTML。若未来改为返回完整
+ *       文档 HTML，需同步遍历 doc.head.querySelectorAll("*") 进行清洗。
  */
 export function sanitizeHtmlAllowList(
   input: string,

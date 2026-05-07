@@ -27,7 +27,12 @@ export function normalizeCollection<T>(value: unknown, fallback: T[]): T[] {
     return value as T[];
   }
 
-  if (value && typeof value === "object") {
+  // 仅处理纯对象（排除 null、Date、RegExp 等），避免 Object.values 产生空数组
+  if (
+    value !== null &&
+    typeof value === "object" &&
+    (value as object).constructor === Object
+  ) {
     return Object.values(value as Record<string, T>);
   }
 
@@ -165,7 +170,10 @@ export function useProductDetailData(
   const normalizedParams = computed(() =>
     (localizedProduct.value?.params || [])
       .map((param) => (typeof param === "string" ? null : param))
-      .filter((param): param is ProductParam => Boolean(param))
+      .filter(
+        (param): param is ProductParam =>
+          param !== null && Boolean(param.key) && Boolean(param.value)
+      )
   );
 
   const normalizedDownloads = computed(() =>

@@ -65,7 +65,8 @@ export function getLargestResponsiveImage(entry: ResponsiveImageEntry | null | u
     return "";
   }
 
-  return buildResponsiveImagePath(entry, entry.widths[entry.widths.length - 1]);
+  const maxWidth = Math.max(...entry.widths);
+  return buildResponsiveImagePath(entry, maxWidth);
 }
 
 export function getResponsiveHeroImage(
