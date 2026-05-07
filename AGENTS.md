@@ -11,8 +11,7 @@ Use `yarn` only; the repo is pinned to Yarn 1 and Node `>=20.16.0`.
 - `yarn preview`: serve the built site locally for verification.
 - `yarn lint` / `yarn lint:fix`: run ESLint, optionally auto-fixing issues.
 - `yarn type-check`: run `vue-tsc --noEmit`.
-- `yarn test:node`: run Node-side Vitest checks such as SSG artifact tests.
-- `yarn test:browser`: run browser Vitest tests; install Chromium first with `yarn test:browser:install`.
+- `yarn test:node`: run Node-side Vitest checks (routing, i18n, formatting, SSG artifacts).
 - `yarn smoke`: run the post-build smoke check.
 - `yarn validate`: full local gate: lint, type-check, build, and smoke.
 
@@ -20,7 +19,7 @@ Use `yarn` only; the repo is pinned to Yarn 1 and Node `>=20.16.0`.
 Follow the existing Prettier config: 2-space indentation, semicolons, double quotes, trailing commas where valid, and 100-column wrap. Use TypeScript and Vue SFCs consistently. Prefer PascalCase for Vue components, camelCase for utilities/composables, and kebab-case for route-facing files. Keep changes small and aligned with the current structure; do not introduce new dependencies without a clear need.
 
 ## Testing Guidelines
-Tests live under `tests/node` and `tests/browser`. Name new files `*.test.ts`; browser tests commonly use `*.browser.test.ts`. No coverage threshold is enforced, so focus on regression tests for routing, SEO, generated artifacts, and page rendering. When UI behavior changes, update or add browser tests and verify screenshots under `tests/browser/__screenshots__/` only when changed.
+Tests live under `tests/node`. Name new files `*.test.ts`. No coverage threshold is enforced, so focus on regression tests for routing, SEO, generated artifacts, and page rendering.
 
 ## Commit & Pull Request Guidelines
 Recent history follows Conventional Commit prefixes such as `feat:`, `fix:`, and `refactor:`. Keep subjects short and imperative, for example: `fix: correct mobile nav aria labels`. PRs should include a concise summary, linked issue if applicable, and screenshots or preview notes for visible UI changes. Call out changes to locales, routing, SEO artifacts, or generated assets so reviewers know what to verify.

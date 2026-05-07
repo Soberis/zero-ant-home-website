@@ -7,7 +7,7 @@
 - **Language:** TypeScript
 - **Build Tool:** Vite
 - **Internationalization:** Vue I18n
-- **Testing:** Vitest, Playwright (for browser testing)
+- **Testing:** Vitest
 - **Code Quality:** ESLint, Prettier, Vue-TSC
 - **Package Manager:** Yarn (strictly enforced)
 
@@ -39,9 +39,7 @@ The project strictly relies on `yarn` as the package manager. **Do not use `npm 
 
 - **Run Tests:**
   ```bash
-  yarn test:node             # Run Node-based tests
-  yarn test:browser:install  # Install Playwright browser dependencies
-  yarn test:browser          # Run browser-based tests
+yarn test:node             # Run Node-based tests
   ```
 
 - **Build for Production:**

@@ -32,11 +32,10 @@
    yarn build
    ```
 
-4. 浏览器级测试
+4. Node 端测试
 
    ```bash
-   yarn test:browser:install
-   yarn test:browser
+   yarn test:node
    ```
 
 5. 本地预览

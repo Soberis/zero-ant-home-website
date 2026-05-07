@@ -388,7 +388,7 @@ yarn lint          # ESLint 检查
 yarn type-check    # TypeScript 类型检查
 yarn build         # 完整构建（图片 + Vite + SSG）
 yarn dev           # 开发服务器（含热更新）
-yarn test:browser  # 浏览器测试
+yarn test:node     # Node 测试
 ```
 
 ---
