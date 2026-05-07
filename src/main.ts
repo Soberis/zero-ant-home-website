@@ -18,7 +18,9 @@ function loadDeferredFonts() {
   import("@fontsource/outfit/700.css");
 }
 
+import "@/assets/reset.css";
 import "@/assets/style.css";
+import { initBaiduAnalytics } from "@/utils/analytics";
 
 // 创建应用实例
 const app = createApp(App);
@@ -29,14 +31,16 @@ app.use(i18n);
 
 // 初始化 i18n 语言包（按需加载，仅当前语言阻塞首屏）
 // 必须在 mount 之前完成，确保首屏渲染时文案已就绪
-initI18n().then(() => {
-  app.mount("#app");
-  window.setTimeout(loadDeferredFonts, 0);
-}).catch(() => {
-  // 语言包加载失败时仍挂载，避免白屏
-  app.mount("#app");
-  window.setTimeout(loadDeferredFonts, 0);
-});
+initI18n()
+  .then(() => {
+    app.mount("#app");
+    window.setTimeout(loadDeferredFonts, 0);
+  })
+  .catch(() => {
+    // 语言包加载失败时仍挂载，避免白屏
+    app.mount("#app");
+    window.setTimeout(loadDeferredFonts, 0);
+  });
 
 // 初始化安全监控和SEO（仅在浏览器环境）
 if (typeof window !== "undefined") {
@@ -56,6 +60,8 @@ if (typeof window !== "undefined") {
         .catch(() => {});
     }, 0);
   }
+
+  initBaiduAnalytics();
 
   // dev 环境主动清理已注册的 SW 和缓存，避免旧包干扰本地调试
   if (import.meta.env.DEV && "serviceWorker" in navigator) {
@@ -94,7 +100,7 @@ if (typeof window !== "undefined") {
       setupSolutionsSEO,
       setupApplicationDetailSEO,
       setupVideoDetailSEO,
-      setupProductDetailSEO
+      setupProductDetailSEO,
     } = await import("@/router/seo");
 
     let routeSEORequestId = 0;
@@ -103,8 +109,7 @@ if (typeof window !== "undefined") {
       const requestId = ++routeSEORequestId;
       const targetFullPath = to.fullPath;
       const isCurrentRouteSEO = () =>
-        requestId === routeSEORequestId &&
-        router.currentRoute.value.fullPath === targetFullPath;
+        requestId === routeSEORequestId && router.currentRoute.value.fullPath === targetFullPath;
 
       void nextTick().then(async () => {
         if (!isCurrentRouteSEO()) {
@@ -142,9 +147,9 @@ if (typeof window !== "undefined") {
         }
       });
     };
-    
+
     applyRouteSEO(router.currentRoute.value);
-    
+
     // 设置路由守卫：自动设置 SEO 信息
     router.afterEach((to) => {
       applyRouteSEO(to);
@@ -154,7 +159,7 @@ if (typeof window !== "undefined") {
       () => i18n.global.locale.value,
       (newLocale) => {
         if (typeof document !== "undefined") {
-          document.documentElement.setAttribute('lang', String(newLocale));
+          document.documentElement.setAttribute("lang", String(newLocale));
         }
         applyRouteSEO(router.currentRoute.value);
       }

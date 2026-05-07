@@ -3,7 +3,11 @@
     <nav class="nav-container" :aria-label="$t('nav.primaryNavigation')">
       <div class="logo">
         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" decoding="async" />
-        <router-link :to="localizePath('/')" class="logo-text" @click="handleTopNavClick('/', $event)">
+        <router-link
+          :to="localizePath('/')"
+          class="logo-text"
+          @click="handleTopNavClick('/', $event)"
+        >
           {{ $t("logoText") }}
         </router-link>
       </div>
@@ -16,7 +20,7 @@
             class="nav-item"
             :class="{ 'has-dropdown': item.children }"
           >
-              <router-link
+            <router-link
               :to="localizePath(item.to)"
               class="nav-link"
               :class="{ active: isTopNavActive(item.to) }"
@@ -84,17 +88,15 @@ import { nextTick, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
-import { ensureProductDetailLocale } from "@/config/i18n";
+import { ensureBaseLocale, ensureProductDetailLocale } from "@/config/i18n";
+import type { SupportedLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
 import NavMobileMenu from "@/components/layout/NavMobileMenu.vue";
 // 语言切换时保持滚动位置 — 与 router/scrollBehavior 联动，
 // 详见 router/scrollBehavior.ts 的 preservedScroll 处理
 import { preserveScrollForNextNavigation } from "@/router";
 import { scheduleScrollToTop } from "@/utils/scroll";
-import {
-  localizeFullPath,
-  isPathActive,
-} from "@/utils/localeRoute";
+import { localizeFullPath, isPathActive } from "@/utils/localeRoute";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 // 滚动状态
@@ -146,7 +148,7 @@ function isProductDetailRoute() {
 }
 
 async function switchLanguage() {
-  const targetLocale = locale.value === "zh" ? "en" : "zh";
+  const targetLocale: SupportedLocale = locale.value === "zh" ? "en" : "zh";
   const preservedScrollPosition = {
     left: window.scrollX,
     top: Math.max(
@@ -155,6 +157,15 @@ async function switchLanguage() {
       document.body?.scrollTop ?? 0
     ),
   };
+
+  try {
+    await ensureBaseLocale(targetLocale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn("切换语言前加载基础文案失败:", error);
+    }
+    return;
+  }
 
   if (isProductDetailRoute()) {
     try {
@@ -186,8 +197,8 @@ onUnmounted(() => {
   --nav-accent-color: var(--brand-primary);
   --nav-logo-text-color: var(--brand-text);
   --nav-accent-surface: var(--brand-accent-soft);
-  --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
-    saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
+  --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%) saturate(1827%)
+    hue-rotate(208deg) brightness(83%) contrast(98%);
   background-color: var(--brand-surface-frosted);
   position: fixed;
   top: 0;
@@ -355,7 +366,9 @@ onUnmounted(() => {
 
 .dropdown-icon {
   color: var(--nav-text-color);
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
   transform: rotate(0deg);
 }
 

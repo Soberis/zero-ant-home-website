@@ -27,3 +27,21 @@ Recent history follows Conventional Commit prefixes such as `feat:`, `fix:`, and
 
 ## Configuration & Deployment Notes
 Do not edit `dist/` directly. Update `config/nginx.conf.template` instead of server-side config. Keep secrets out of the repo and use CI/CD variables for environment-specific values.
+
+
+<claude-mem-context>
+# Memory Context
+
+# claude-mem status
+
+This project has no memory yet. The current session will seed it; subsequent sessions will receive auto-injected context for relevant past work.
+
+Memory injection starts on your second session in a project.
+
+`/learn-codebase` is available if the user wants to front-load the entire repo into memory in a single pass (~5 minutes on a typical repo, optional). Otherwise memory builds passively as work happens.
+
+Live activity: http://localhost:37777
+How it works: `/how-it-works`
+
+This message disappears once the first observation lands.
+</claude-mem-context>

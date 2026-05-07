@@ -70,6 +70,11 @@
 - **如需新增环境变量或敏感信息，请在 GitLab 项目设置中配置，不要写入代码仓库。**
 - **生产环境部署需打 tag，且仅支持 `main` 分支。**
 
+## 可选环境变量
+
+- `VITE_SITE_URL`：站点绝对地址，默认 `https://zeroant.com`。
+- `VITE_BAIDU_ANALYTICS_ID`：百度统计 Site ID；未配置时不会加载统计脚本。
+
 ## 主要依赖
 
 详见 `package.json`，主要依赖包括：
