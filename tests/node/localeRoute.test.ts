@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import type { RouteLocationRaw } from "vue-router";
 import {
   getLocaleFromPath,
   stripLocalePrefix,
@@ -119,7 +120,8 @@ describe("localizeRouteLocation", () => {
   });
 
   it("handles null by returning unchanged", () => {
-    expect(localizeRouteLocation(null as any, "en")).toBeNull();
+    const invalidRoute = null as unknown as RouteLocationRaw;
+    expect(localizeRouteLocation(invalidRoute, "en")).toBeNull();
   });
 });
 

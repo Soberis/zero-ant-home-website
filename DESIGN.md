@@ -370,7 +370,7 @@ background-size: 20px 20px;
 | 文件 | 内容 |
 |------|------|
 | `src/assets/style.css` | 全局设计系统：CSS 变量、排版、按钮、卡片、动画 |
-| `public/css/reset.css` | 基础重置（⚠ 部分变量与 style.css 重复，修改时需同步） |
+| `src/assets/reset.css` | 基础重置（由 `src/main.ts` 导入，进入 Vite 构建链路） |
 | `src/App.vue` | 根布局：NavBar + router-view + Footer + FloatingCTA |
 | `src/views/Home.vue` | 首页：Hero + 4 个异步 section |
 | `src/components/business/HeroCarousel.vue` | Hero 区域 |
