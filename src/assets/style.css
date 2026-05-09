@@ -178,9 +178,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-background);
+  scroll-behavior: smooth;
 }
 * {
   box-sizing: border-box;
+}
+
+::selection {
+  background-color: rgba(26, 58, 143, 0.2);
+  color: var(--brand-text-strong);
 }
 /* 滚动条 */
 * {
