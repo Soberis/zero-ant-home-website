@@ -416,9 +416,10 @@ onUnmounted(() => {
   transform: translateY(-8px);
   background: var(--brand-surface);
   width: 100%;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
   border-radius: 0;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   opacity: 0;
   visibility: hidden;
   transition:

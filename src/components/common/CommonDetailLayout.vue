@@ -341,7 +341,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 52px 40px 96px;
+  padding: 0 40px 96px;
 }
 
 /* Floating Player Box */
@@ -660,7 +660,7 @@ onUnmounted(() => {
 /* Responsive */
 @media (max-width: 1200px) {
   .common-detail-page {
-    padding: 44px 28px 84px;
+    padding: 0 28px 84px;
   }
   .player-hero-container {
     width: min(100%, 980px, calc((100svh - var(--nav-height) - 148px) * 16 / 9));
@@ -673,7 +673,7 @@ onUnmounted(() => {
 
 @media (max-width: 960px) {
   .common-detail-page {
-    padding: 36px 24px 76px;
+    padding: 0 24px 76px;
   }
   .player-hero-container {
     width: 100%;
@@ -694,7 +694,7 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .common-detail-page {
-    padding: 24px 14px 64px;
+    padding: 0 14px 64px;
   }
   .player-hero-container {
     border-radius: 14px;
@@ -746,7 +746,7 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
   .common-detail-page {
-    padding: 20px 12px 52px;
+    padding: 0 12px 52px;
   }
   .player-hero-container {
     border-radius: 12px;
