@@ -44,8 +44,11 @@
 
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
+          <!-- eslint-disable-next-line vue/no-v-html -->
           <h1 class="text-display-hero hero-title" style="transition-delay: 0.15s" v-html="t('home.hero.title')"></h1>
+          <!-- eslint-disable-next-line vue/no-v-html -->
           <div class="hero-product-name" style="transition-delay: 0.28s" v-html="t('home.hero.panelLabel')"></div>
+          <!-- eslint-disable-next-line vue/no-v-html -->
           <p class="text-body-large hero-description" style="transition-delay: 0.42s" v-html="t('home.hero.description')"></p>
           <div class="hero-actions" style="transition-delay: 0.55s" :class="{ 'hero-entered': entered }">
             <router-link

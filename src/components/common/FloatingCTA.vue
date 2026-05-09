@@ -277,7 +277,7 @@ defineProps<{
 
 @media (max-width: 1680px) and (min-width: 769px) {
   .floating-sidebar {
-    right: calc(6px + env(safe-area-inset-right, 0px));
+    right: calc(10px + env(safe-area-inset-right, 0px));
     padding: 8px 0;
   }
 
