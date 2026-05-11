@@ -11,6 +11,7 @@ import {
 
 const DEFAULT_SHARE_IMAGE_WIDTH = 1200;
 const DEFAULT_SHARE_IMAGE_HEIGHT = 630;
+const DEFAULT_SHARE_IMAGE_PATH = "/og-image.webp";
 const DEFAULT_TWITTER_CARD = "summary_large_image";
 
 interface BaseSEOConfig {
@@ -105,7 +106,11 @@ export function getAlternateOgLocales(ogLocale: string): string[] {
   return ["zh_CN", "en_US"].filter((item) => item !== ogLocale);
 }
 
-export function buildLocalizedAbsoluteUrl(baseUrl: string, locale: string, routePath: string): string {
+export function buildLocalizedAbsoluteUrl(
+  baseUrl: string,
+  locale: string,
+  routePath: string
+): string {
   // 如果 routePath 已经是绝对 URL，直接返回（避免重复拼接 baseUrl）
   if (/^https?:\/\//i.test(routePath)) {
     return routePath;
@@ -140,7 +145,10 @@ export function getResponsiveImageDimensions(
 }
 
 export function stripHtmlTags(content: string): string {
-  return content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  return content
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export function setDetailNotFoundSEO(to: RouteLocationNormalized) {
@@ -179,7 +187,7 @@ export function buildBaseSeoMeta(
   routeContext: SeoRouteContext,
   config: BaseSEOConfig
 ): SEOMetaData {
-  const shareImage = config.ogImage || `${routeContext.baseUrl}/logo.webp`;
+  const shareImage = config.ogImage || `${routeContext.baseUrl}${DEFAULT_SHARE_IMAGE_PATH}`;
   const meta: SEOMetaData = {
     htmlLang: routeContext.locale,
     title: config.title,

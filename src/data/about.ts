@@ -16,28 +16,28 @@ type TranslationFunction = (key: string) => string;
 export function getTimelineData(t: TranslationFunction): TimelineEvent[] {
   return [
     {
-      year: '2017',
-      events: [t('about.timeline.2017')],
+      year: "2017",
+      events: [t("about.timeline.2017")],
     },
     {
-      year: '2020',
-      events: [t('about.timeline.2020')],
+      year: "2020",
+      events: [t("about.timeline.2020")],
     },
     {
-      year: '2022',
-      events: [t('about.timeline.2022')],
+      year: "2022",
+      events: [t("about.timeline.2022")],
     },
     {
-      year: '2023',
-      events: [t('about.timeline.2023')],
+      year: "2023",
+      events: [t("about.timeline.2023")],
     },
     {
-      year: '2024',
-      events: [t('about.timeline.2024')],
+      year: "2024",
+      events: [t("about.timeline.2024")],
     },
     {
-      year: '2025',
-      events: [t('about.timeline.2025')],
+      year: "2025",
+      events: [t("about.timeline.2025")],
     },
   ];
 }
@@ -47,11 +47,11 @@ export function getTimelineData(t: TranslationFunction): TimelineEvent[] {
  */
 export function getHonors(t: TranslationFunction): string[] {
   return [
-    t('about.honor1'),
-    t('about.honor2'),
-    t('about.honor3'),
-    t('about.honor4'),
-    t('about.honor5'),
-    t('about.honor6'),
+    t("about.honor1"),
+    t("about.honor2"),
+    t("about.honor3"),
+    t("about.honor4"),
+    t("about.honor5"),
+    t("about.honor6"),
   ];
 }

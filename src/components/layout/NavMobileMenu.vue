@@ -32,7 +32,18 @@
               :aria-label="getMobileSubmenuLabel(item)"
               @click="toggleMobileSubmenu(item.to)"
             >
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </button>
@@ -97,7 +108,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
 }
 
 function trapFocus(e: KeyboardEvent) {
-  if (e.key !== 'Tab' || !mobileNavContent.value) return;
+  if (e.key !== "Tab" || !mobileNavContent.value) return;
   const focusable = getFocusableElements(mobileNavContent.value);
   if (focusable.length === 0) return;
   const first = focusable[0];
@@ -112,17 +123,17 @@ function trapFocus(e: KeyboardEvent) {
 }
 
 function applyInertToMain() {
-  const main = document.querySelector('main');
+  const main = document.querySelector("main");
   if (!main) return;
-  main.setAttribute('inert', '');
-  main.setAttribute('aria-hidden', 'true');
+  main.setAttribute("inert", "");
+  main.setAttribute("aria-hidden", "true");
 }
 
 function removeInertFromMain() {
-  const main = document.querySelector('main');
+  const main = document.querySelector("main");
   if (!main) return;
-  main.removeAttribute('inert');
-  main.removeAttribute('aria-hidden');
+  main.removeAttribute("inert");
+  main.removeAttribute("aria-hidden");
 }
 
 function close() {
@@ -179,7 +190,7 @@ function handleBackgroundClick(event: Event): void {
 }
 
 function onKeydownCapture(e: KeyboardEvent) {
-  if (e.key === 'Escape' && props.isOpen) {
+  if (e.key === "Escape" && props.isOpen) {
     e.preventDefault();
     e.stopImmediatePropagation();
     close();
@@ -188,7 +199,7 @@ function onKeydownCapture(e: KeyboardEvent) {
 
 function onMenuKeydown(e: KeyboardEvent) {
   if (!props.isOpen) return;
-  if (e.key === 'Tab') trapFocus(e);
+  if (e.key === "Tab") trapFocus(e);
 }
 
 function handleDesktopBreakpointChange(event: MediaQueryListEvent) {
@@ -198,39 +209,42 @@ function handleDesktopBreakpointChange(event: MediaQueryListEvent) {
 }
 
 // 菜单打开/关闭的副作用
-watch(() => props.isOpen, (open) => {
-  if (open) {
-    document.body.style.overflow = "hidden";
-    lastFocusedElement = document.activeElement as HTMLElement;
-    applyInertToMain();
-    nextTick(() => {
-      if (mobileNavContent.value) {
-        const focusable = getFocusableElements(mobileNavContent.value);
-        if (focusable.length > 0) focusable[0].focus();
-      }
-    });
-  } else {
-    openMobileSubmenu.value = null;
-    document.body.style.overflow = "";
-    removeInertFromMain();
-    lastFocusedElement?.focus();
-    lastFocusedElement = null;
+watch(
+  () => props.isOpen,
+  (open) => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+      lastFocusedElement = document.activeElement as HTMLElement;
+      applyInertToMain();
+      nextTick(() => {
+        if (mobileNavContent.value) {
+          const focusable = getFocusableElements(mobileNavContent.value);
+          if (focusable.length > 0) focusable[0].focus();
+        }
+      });
+    } else {
+      openMobileSubmenu.value = null;
+      document.body.style.overflow = "";
+      removeInertFromMain();
+      lastFocusedElement?.focus();
+      lastFocusedElement = null;
+    }
   }
-});
+);
 
 onMounted(() => {
   desktopBreakpointQuery = window.matchMedia("(min-width: 951px)");
   desktopBreakpointQuery.addEventListener("change", handleDesktopBreakpointChange);
-  document.addEventListener('keydown', onKeydownCapture, true);
-  document.addEventListener('keydown', onMenuKeydown);
+  document.addEventListener("keydown", onKeydownCapture, true);
+  document.addEventListener("keydown", onMenuKeydown);
 });
 
 onUnmounted(() => {
   document.body.style.overflow = "";
   removeInertFromMain();
   desktopBreakpointQuery?.removeEventListener("change", handleDesktopBreakpointChange);
-  document.removeEventListener('keydown', onKeydownCapture, true);
-  document.removeEventListener('keydown', onMenuKeydown);
+  document.removeEventListener("keydown", onKeydownCapture, true);
+  document.removeEventListener("keydown", onMenuKeydown);
 });
 </script>
 
@@ -299,16 +313,36 @@ onUnmounted(() => {
   transform: translateX(0);
 }
 
-.mobile-nav.open .mobile-nav-item:nth-child(1) { transition-delay: 0.05s; }
-.mobile-nav.open .mobile-nav-item:nth-child(2) { transition-delay: 0.1s; }
-.mobile-nav.open .mobile-nav-item:nth-child(3) { transition-delay: 0.15s; }
-.mobile-nav.open .mobile-nav-item:nth-child(4) { transition-delay: 0.2s; }
-.mobile-nav.open .mobile-nav-item:nth-child(5) { transition-delay: 0.25s; }
-.mobile-nav.open .mobile-nav-item:nth-child(6) { transition-delay: 0.3s; }
-.mobile-nav.open .mobile-nav-item:nth-child(7) { transition-delay: 0.35s; }
-.mobile-nav.open .mobile-nav-item:nth-child(8) { transition-delay: 0.4s; }
-.mobile-nav.open .mobile-nav-item:nth-child(9) { transition-delay: 0.45s; }
-.mobile-nav.open .mobile-nav-item:nth-child(10) { transition-delay: 0.5s; }
+.mobile-nav.open .mobile-nav-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(5) {
+  transition-delay: 0.25s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(6) {
+  transition-delay: 0.3s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(7) {
+  transition-delay: 0.35s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(8) {
+  transition-delay: 0.4s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(9) {
+  transition-delay: 0.45s;
+}
+.mobile-nav.open .mobile-nav-item:nth-child(10) {
+  transition-delay: 0.5s;
+}
 
 .mobile-nav-link {
   display: block;

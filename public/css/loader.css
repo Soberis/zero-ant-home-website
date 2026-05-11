@@ -10,7 +10,10 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  font-family: "Outfit", -apple-system, sans-serif;
+  font-family:
+    "Outfit",
+    -apple-system,
+    sans-serif;
 }
 .za-loader-content {
   display: flex;

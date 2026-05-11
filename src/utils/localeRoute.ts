@@ -53,8 +53,7 @@ export function localizeFullPath(fullPath: string, locale: SupportedLocale): str
   const normalizedFullPath = fullPath || "/";
   const hashIndex = normalizedFullPath.indexOf("#");
   const hash = hashIndex >= 0 ? normalizedFullPath.slice(hashIndex) : "";
-  const pathAndQuery =
-    hashIndex >= 0 ? normalizedFullPath.slice(0, hashIndex) : normalizedFullPath;
+  const pathAndQuery = hashIndex >= 0 ? normalizedFullPath.slice(0, hashIndex) : normalizedFullPath;
   const queryIndex = pathAndQuery.indexOf("?");
   const query = queryIndex >= 0 ? pathAndQuery.slice(queryIndex) : "";
   const path = queryIndex >= 0 ? pathAndQuery.slice(0, queryIndex) : pathAndQuery;

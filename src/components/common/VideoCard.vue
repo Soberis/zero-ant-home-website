@@ -23,12 +23,7 @@
           :sizes="videoCardSizes"
           type="image/webp"
         />
-        <img
-          :src="fallbackImageSrc"
-          :alt="t(card.title)"
-          loading="lazy"
-          decoding="async"
-        />
+        <img :src="fallbackImageSrc" :alt="t(card.title)" loading="lazy" decoding="async" />
       </picture>
       <div class="play-icon ui-card__play-icon">
         <svg viewBox="0 0 24 24" width="28" height="28">
@@ -52,29 +47,29 @@
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import type { RouteLocationRaw } from "vue-router";
-import {
-  buildResponsiveSrcSet,
-  getResponsiveVideoImage,
-} from "@/utils/responsiveImage";
+import { buildResponsiveSrcSet, getResponsiveVideoImage } from "@/utils/responsiveImage";
 import { getVideoThumbnailById } from "@/data/videos";
 
 const { t } = useI18n();
 
-const props = withDefaults(defineProps<{
-  card: {
-    title: string;
-    img: string;
-    slug: string;
+const props = withDefaults(
+  defineProps<{
+    card: {
+      title: string;
+      img: string;
+      slug: string;
+      description?: string;
+    };
     description?: string;
-  };
-  description?: string;
-  index: number;
-  active?: boolean;
-  to: RouteLocationRaw;
-}>(), {
-  description: "",
-  active: false,
-});
+    index: number;
+    active?: boolean;
+    to: RouteLocationRaw;
+  }>(),
+  {
+    description: "",
+    active: false,
+  }
+);
 
 const responsiveImageSrcSet = computed(() =>
   buildResponsiveSrcSet(getResponsiveVideoImage(props.card.slug))
@@ -82,9 +77,7 @@ const responsiveImageSrcSet = computed(() =>
 const responsiveImageAvifSrcSet = computed(() =>
   buildResponsiveSrcSet(getResponsiveVideoImage(props.card.slug, "avif"))
 );
-const fallbackImageSrc = computed(() =>
-  getVideoThumbnailById(props.card.slug) || props.card.img
-);
+const fallbackImageSrc = computed(() => getVideoThumbnailById(props.card.slug) || props.card.img);
 const videoCardSizes =
   "(max-width: 639px) calc(100vw - 72px), (max-width: 1023px) calc(50vw - 40px), calc(33vw - 40px)";
 

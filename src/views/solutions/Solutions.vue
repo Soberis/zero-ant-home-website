@@ -580,7 +580,6 @@ function readMessageArray(key: string): string[] {
   });
 }
 
-
 function toggleFaq(index: number): void {
   faqStates.value[index] = !faqStates.value[index];
 }
@@ -1024,7 +1023,6 @@ watch(
   gap: 12px;
   margin: 0;
 }
-
 
 .detail-section__desc {
   margin: 14px 0 0;
@@ -1585,7 +1583,6 @@ watch(
   border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
-
 
 .contact-panel .detail-section__desc {
   color: var(--brand-muted);

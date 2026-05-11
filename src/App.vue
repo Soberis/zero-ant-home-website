@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="page">
     <!-- 跳过导航，直达主内容 -->
-    <a href="#main-content" class="skip-to-content">{{ $t('common.a11y.skipToContent') }}</a>
+    <a href="#main-content" class="skip-to-content">{{ $t("common.a11y.skipToContent") }}</a>
     <!-- 导航栏 -->
     <NavBar />
     <!-- 主体内容 -->
@@ -14,7 +14,7 @@
     </main>
     <!-- 页脚 -->
     <Footer />
-    
+
     <!-- 全站右侧悬浮工具栏 (包含返回顶部) -->
     <FloatingCTA :visible="isFloatingCTALoaded" :show-back-to-top="isBackToTopVisible" />
   </div>
@@ -129,7 +129,9 @@ body {
 /* Page Transitions */
 .page-fade-enter-active,
 .page-fade-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .page-fade-enter-from {
@@ -142,5 +144,3 @@ body {
   transform: translateY(-10px);
 }
 </style>
-
-

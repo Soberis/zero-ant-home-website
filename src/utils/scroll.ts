@@ -25,9 +25,7 @@ function forceScrollToTop(): void {
   document.body.scrollTop = 0;
 }
 
-export function scheduleScrollToTop(
-  options: ScheduleScrollToTopOptions = {}
-): void {
+export function scheduleScrollToTop(options: ScheduleScrollToTopOptions = {}): void {
   const { afterTransition = false } = options;
 
   forceScrollToTop();

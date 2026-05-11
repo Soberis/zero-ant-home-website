@@ -4,7 +4,9 @@
     <section class="support-hero">
       <div class="support-shell hero-grid">
         <div class="hero-copy">
-          <h1 id="after-sales" class="hero-title text-display-hero">{{ t("supportPage.title") }}</h1>
+          <h1 id="after-sales" class="hero-title text-display-hero">
+            {{ t("supportPage.title") }}
+          </h1>
           <p class="hero-desc">{{ t("supportPage.description") }}</p>
 
           <div class="hero-actions">
@@ -45,7 +47,19 @@
               <span class="support-path-title">{{ path.title }}</span>
               <p class="support-path-desc">{{ path.description }}</p>
             </div>
-            <svg class="support-path-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg
+              class="support-path-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
           </a>
         </div>
       </div>
@@ -55,18 +69,16 @@
       <div class="support-shell">
         <div class="detail-section__header">
           <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ t("supportPage.relatedDownloads") }}</span>
+            <span class="title-main text-display-large">{{
+              t("supportPage.relatedDownloads")
+            }}</span>
           </h2>
           <p class="detail-section__desc">{{ t("supportPage.downloadIntro") }}</p>
           <p class="download-note">{{ t("supportPage.downloadNotice") }}</p>
         </div>
 
         <div class="download-grid">
-          <article
-            v-for="item in downloads"
-            :key="item.title"
-            class="download-card"
-          >
+          <article v-for="item in downloads" :key="item.title" class="download-card">
             <div class="download-card-head">
               <span class="card-tag">{{ item.tag }}</span>
               <span class="download-status">{{ item.status }}</span>
@@ -113,15 +125,22 @@
                   <span class="card-title">{{ faq.q }}</span>
                 </div>
               </div>
-              <svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              <svg
+                class="card-toggle"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </button>
 
             <transition name="fade-slide">
-              <div
-                v-if="faqStates[idx]"
-                :id="`faq-content-${idx}`"
-                class="card-content"
-              >
+              <div v-if="faqStates[idx]" :id="`faq-content-${idx}`" class="card-content">
                 <p class="card-body">{{ faq.a }}</p>
               </div>
             </transition>
@@ -150,11 +169,7 @@
               :class="{ 'contact-card--full': item.fullWidth }"
             >
               <span class="contact-label">{{ item.label }}</span>
-              <a
-                v-if="item.href"
-                class="contact-value"
-                :href="item.href"
-              >
+              <a v-if="item.href" class="contact-value" :href="item.href">
                 {{ item.value }}
               </a>
               <span v-else class="contact-value">{{ item.value }}</span>
@@ -169,7 +184,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { useScrollRevealList } from "@/composables/useScrollReveal";
 
 import { formatIndex } from "@/utils/format";
 
@@ -308,8 +323,9 @@ watch(
   () => faqs.value.length,
   (faqLength) => {
     if (faqStates.value.length !== faqLength) {
-      faqStates.value = Array.from({ length: faqLength }, (_, index) =>
-        faqStates.value[index] ?? false
+      faqStates.value = Array.from(
+        { length: faqLength },
+        (_, index) => faqStates.value[index] ?? false
       );
     }
   },
@@ -319,7 +335,6 @@ watch(
 function toggleFaq(idx: number): void {
   faqStates.value[idx] = !faqStates.value[idx];
 }
-
 </script>
 
 <style scoped>
@@ -359,7 +374,8 @@ function toggleFaq(idx: number): void {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr)
+  grid-template-columns:
+    minmax(0, 1fr)
     minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
@@ -466,7 +482,9 @@ function toggleFaq(idx: number): void {
   align-items: center;
   padding: 22px 0;
   text-decoration: none;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .support-path + .support-path {
@@ -558,7 +576,9 @@ function toggleFaq(idx: number): void {
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
   background: var(--section-card-surface);
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .download-card:hover {
@@ -617,8 +637,6 @@ function toggleFaq(idx: number): void {
   font-weight: 600;
   letter-spacing: 0.04em;
 }
-
-
 
 .faq-item {
   border: 1px solid rgba(15, 23, 42, 0.06);
@@ -680,7 +698,9 @@ function toggleFaq(idx: number): void {
   width: 20px;
   height: 20px;
   color: rgba(15, 23, 42, 0.5);
-  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+  transition:
+    transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s ease;
 }
 
 .faq-item.open .card-toggle {
@@ -876,4 +896,3 @@ span.contact-value {
   }
 }
 </style>
-

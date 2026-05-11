@@ -58,7 +58,9 @@ async function checkResponsiveManifest() {
 }
 
 async function checkResponsiveImageSemantics() {
-  const heroSource = await readFile(path.join(srcDir, "components", "business", "HeroCarousel.vue"));
+  const heroSource = await readFile(
+    path.join(srcDir, "components", "business", "HeroCarousel.vue")
+  );
   const coreProductsSource = await readFile(
     path.join(srcDir, "components", "business", "CoreProducts.vue")
   );

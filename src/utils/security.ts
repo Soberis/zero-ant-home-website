@@ -32,7 +32,24 @@ function sanitizeInput(input: string): string {
  */
 export function sanitizeHtmlAllowList(
   input: string,
-  allowedTags: string[] = ["p", "br", "b", "strong", "em", "i", "ul", "ol", "li", "h1", "h2", "h3", "h4", "a", "span", "div"]
+  allowedTags: string[] = [
+    "p",
+    "br",
+    "b",
+    "strong",
+    "em",
+    "i",
+    "ul",
+    "ol",
+    "li",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "a",
+    "span",
+    "div",
+  ]
 ): string {
   if (typeof input !== "string") {
     return "";
@@ -46,7 +63,18 @@ export function sanitizeHtmlAllowList(
     const parser = new DOMParser();
     const doc = parser.parseFromString(input, "text/html");
     const nodes = Array.from(doc.body.querySelectorAll("*"));
-    const allowedAttributes = ["class", "style", "target", "rel", "alt", "title", "href", "src", "id", "name"];
+    const allowedAttributes = [
+      "class",
+      "style",
+      "target",
+      "rel",
+      "alt",
+      "title",
+      "href",
+      "src",
+      "id",
+      "name",
+    ];
 
     nodes.forEach((node) => {
       const tag = node.tagName.toLowerCase();
@@ -75,11 +103,8 @@ export function sanitizeHtmlAllowList(
             href.startsWith("https://") ||
             href.startsWith("mailto:") ||
             href.startsWith("tel:");
-          const isRelative =
-            href.startsWith("/") ||
-            href.startsWith("#") ||
-            href.startsWith("?");
-            
+          const isRelative = href.startsWith("/") || href.startsWith("#") || href.startsWith("?");
+
           if (!isAllowedProtocol && !isRelative) {
             // 非白名单协议或非相对路径的 href 移除
             node.removeAttribute(attr.name);

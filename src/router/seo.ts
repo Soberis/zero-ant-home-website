@@ -45,7 +45,14 @@ export function setupPageSEO(to: RouteLocationNormalized) {
 
   if (routeName === "Home") {
     setStructuredData(
-      getHomeStructuredData(baseUrl, currentUrl, locale, seoConfig.title, seoConfig.description, contactTel)
+      getHomeStructuredData(
+        baseUrl,
+        currentUrl,
+        locale,
+        seoConfig.title,
+        seoConfig.description,
+        contactTel
+      )
     );
   } else if (routeName === "Products") {
     setStructuredData([
@@ -180,7 +187,15 @@ export async function setupApplicationDetailSEO(
   );
 
   setStructuredData(
-    getApplicationDetailStructuredData(baseUrl, currentUrl, locale, applicationTitle, applicationDescription, thumbnailUrl, routeContext.canonicalPath)
+    getApplicationDetailStructuredData(
+      baseUrl,
+      currentUrl,
+      locale,
+      applicationTitle,
+      applicationDescription,
+      thumbnailUrl,
+      routeContext.canonicalPath
+    )
   );
 }
 
@@ -221,9 +236,16 @@ export async function setupVideoDetailSEO(
 
   setStructuredData(
     getVideoDetailStructuredData(
-      baseUrl, currentUrl, locale,
-      videoTitle, videoDescription, thumbnailUrl,
-      video.url, isVideoMedia, video.type, video.publishDate,
+      baseUrl,
+      currentUrl,
+      locale,
+      videoTitle,
+      videoDescription,
+      thumbnailUrl,
+      video.url,
+      isVideoMedia,
+      video.type,
+      video.publishDate,
       routeContext.canonicalPath
     )
   );
@@ -277,9 +299,14 @@ export async function setupProductDetailSEO(
 
   setStructuredData(
     getProductDetailStructuredData(
-      baseUrl, currentUrl, locale,
-      productName, productDesc, productImage,
-      product.card.id, product.familyTitleKey,
+      baseUrl,
+      currentUrl,
+      locale,
+      productName,
+      productDesc,
+      productImage,
+      product.card.id,
+      product.familyTitleKey,
       routeContext.canonicalPath
     )
   );

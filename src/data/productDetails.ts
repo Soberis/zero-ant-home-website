@@ -30,4 +30,3 @@ export interface ProductDetail {
   params: ProductParam[];
   downloads: ProductDownload[];
 }
-

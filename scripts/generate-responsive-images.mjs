@@ -276,10 +276,7 @@ async function loadExpectedSourceUsage() {
   ]);
 
   return {
-    products: collectLiteralArguments(
-      productSource,
-      /getRequiredProductCenterImage\("([^"]+)"\)/g
-    ),
+    products: collectLiteralArguments(productSource, /getRequiredProductCenterImage\("([^"]+)"\)/g),
     videos: collectLiteralArguments(videoSource, /getRequiredVideoThumbnail\("([^"]+)"\)/g),
     showcase,
   };

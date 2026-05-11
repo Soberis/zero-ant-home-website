@@ -28,11 +28,7 @@ export function normalizeCollection<T>(value: unknown, fallback: T[]): T[] {
   }
 
   // 仅处理纯对象（排除 null、Date、RegExp 等），避免 Object.values 产生空数组
-  if (
-    value !== null &&
-    typeof value === "object" &&
-    (value as object).constructor === Object
-  ) {
+  if (value !== null && typeof value === "object" && (value as object).constructor === Object) {
     return Object.values(value as Record<string, T>);
   }
 
@@ -99,20 +95,20 @@ export function useProductDetailData(
     const fallbackTitle =
       baseDetail.value?.title ||
       (currentProduct.value
-        ? (te(`${detailKey.value}.title`)
-            ? (typeof tm(`${detailKey.value}.title`) === "string"
-              ? tm(`${detailKey.value}.title`) as string
-              : t(currentProduct.value.titleKey))
-            : t(currentProduct.value.titleKey))
+        ? te(`${detailKey.value}.title`)
+          ? typeof tm(`${detailKey.value}.title`) === "string"
+            ? (tm(`${detailKey.value}.title`) as string)
+            : t(currentProduct.value.titleKey)
+          : t(currentProduct.value.titleKey)
         : "");
     const fallbackDesc =
       baseDetail.value?.desc ||
       (currentProduct.value
-        ? (te(`${detailKey.value}.desc`)
-            ? (typeof tm(`${detailKey.value}.desc`) === "string"
-              ? tm(`${detailKey.value}.desc`) as string
-              : t(currentProduct.value.summaryKey))
-            : t(currentProduct.value.summaryKey))
+        ? te(`${detailKey.value}.desc`)
+          ? typeof tm(`${detailKey.value}.desc`) === "string"
+            ? (tm(`${detailKey.value}.desc`) as string)
+            : t(currentProduct.value.summaryKey)
+          : t(currentProduct.value.summaryKey)
         : "");
     const fallbackImage = baseDetail.value?.image || currentProduct.value?.image || "";
     const fallbackFeatures = baseDetail.value?.features || [];
@@ -121,7 +117,7 @@ export function useProductDetailData(
     const fallbackParams = baseDetail.value?.params || [];
     const fallbackDownloads = baseDetail.value?.downloads || [];
 
-    const resolveScalar = <T,>(field: "title" | "desc" | "image", fallback: T): T => {
+    const resolveScalar = <T>(field: "title" | "desc" | "image", fallback: T): T => {
       const fullKey = `${detailKey.value}.${field}`;
       if (!te(fullKey)) {
         return fallback;
@@ -135,7 +131,7 @@ export function useProductDetailData(
       return fallback;
     };
 
-    const resolveCollection = <T,>(
+    const resolveCollection = <T>(
       field: "features" | "cases" | "scenes" | "params" | "downloads",
       fallback: T[]
     ): T[] => {

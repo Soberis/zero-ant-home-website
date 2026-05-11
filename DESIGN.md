@@ -11,12 +11,12 @@
 
 ### 1.1 品牌语境
 
-| 维度 | 描述 |
-|------|------|
-| 公司 | 零蚁科技（ZeroAnt）— 智能机器人整机解决方案 |
-| 客户行业 | 生物医药、半导体 |
-| 客户角色 | 工程师、采购决策者、技术管理者 |
-| 品牌关键词 | 精密、可靠、自主技术、工程创新 |
+| 维度       | 描述                                        |
+| ---------- | ------------------------------------------- |
+| 公司       | 零蚁科技（ZeroAnt）— 智能机器人整机解决方案 |
+| 客户行业   | 生物医药、半导体                            |
+| 客户角色   | 工程师、采购决策者、技术管理者              |
+| 品牌关键词 | 精密、可靠、自主技术、工程创新              |
 
 ### 1.2 美学方向
 
@@ -28,16 +28,16 @@
 
 ### 1.3 当前设计评估
 
-| 维度 | 评级 | 说明 |
-|------|------|------|
-| CSS 变量体系 | ★★★★ | 组织清晰，变量命名规范 |
-| 字体排版 | ★★★ | Inter 过于通用，Outfit 标题尚可 |
-| 色彩系统 | ★★★ | 单一深蓝，缺少强调色（P0-2 已改善） |
-| 背景材质 | ★★ | 纯色背景为主，无纹理/图案 |
-| 动效 | ★★★ | 基础 fade-in + scroll-reveal，缺少惊喜 |
-| 响应式 | ★★★★★ | 精细断点覆盖 360px–1600px+ |
-| 可访问性 | ★★★★ | prefers-reduced-motion、skip-link、aria 属性 |
-| 性能 | ★★★★★ | AVIF/WebP 响应式图片、异步组件、骨架屏 |
+| 维度         | 评级  | 说明                                         |
+| ------------ | ----- | -------------------------------------------- |
+| CSS 变量体系 | ★★★★  | 组织清晰，变量命名规范                       |
+| 字体排版     | ★★★   | Inter 过于通用，Outfit 标题尚可              |
+| 色彩系统     | ★★★   | 单一深蓝，缺少强调色（P0-2 已改善）          |
+| 背景材质     | ★★    | 纯色背景为主，无纹理/图案                    |
+| 动效         | ★★★   | 基础 fade-in + scroll-reveal，缺少惊喜       |
+| 响应式       | ★★★★★ | 精细断点覆盖 360px–1600px+                   |
+| 可访问性     | ★★★★  | prefers-reduced-motion、skip-link、aria 属性 |
+| 性能         | ★★★★★ | AVIF/WebP 响应式图片、异步组件、骨架屏       |
 
 ---
 
@@ -47,8 +47,8 @@
 
 ```css
 /* === 主色系（品牌深蓝）=== */
---color-primary: #1a3a8f;        /* 主品牌色 */
---color-primary-dark: #0f2560;  /* hover/active */
+--color-primary: #1a3a8f; /* 主品牌色 */
+--color-primary-dark: #0f2560; /* hover/active */
 --color-primary-light: #e8edf7; /* 浅色背景 */
 
 /* === 中性色 === */
@@ -79,14 +79,14 @@
 
 ### 2.3 颜色使用规则
 
-| 颜色 | 使用场景 | 禁止场景 |
-|------|---------|---------|
-| `--color-primary` | 品牌标识、主按钮、链接、焦点环 | 大块背景（用 primary-light） |
-| `--color-text` | 正文、标题 | 浅色背景上不可用 |
-| `--color-text-secondary` | 描述文字、辅助信息 | — |
-| `--color-text-muted` | 占位符、禁用态 | 正文（对比度不足） |
-| `--color-background` / `white` | 页面背景 | — |
-| `--brand-surface-panel` | 交替 section 背景 | — |
+| 颜色                           | 使用场景                       | 禁止场景                     |
+| ------------------------------ | ------------------------------ | ---------------------------- |
+| `--color-primary`              | 品牌标识、主按钮、链接、焦点环 | 大块背景（用 primary-light） |
+| `--color-text`                 | 正文、标题                     | 浅色背景上不可用             |
+| `--color-text-secondary`       | 描述文字、辅助信息             | —                            |
+| `--color-text-muted`           | 占位符、禁用态                 | 正文（对比度不足）           |
+| `--color-background` / `white` | 页面背景                       | —                            |
+| `--brand-surface-panel`        | 交替 section 背景              | —                            |
 
 ---
 
@@ -94,10 +94,10 @@
 
 ### 3.1 当前配置
 
-| 用途 | 字体 | 评价 |
-|------|------|------|
-| 标题 | Outfit (sans-serif) | 几何感好，保留 |
-| 正文 | Inter (sans-serif) | 过于通用，计划替换 |
+| 用途 | 字体                | 评价               |
+| ---- | ------------------- | ------------------ |
+| 标题 | Outfit (sans-serif) | 几何感好，保留     |
+| 正文 | Inter (sans-serif)  | 过于通用，计划替换 |
 
 ### 3.2 计划替换
 
@@ -106,8 +106,7 @@
 ```css
 /* 目标配置 */
 body {
-  font-family: "Geist", "PingFang SC", "Hiragino Sans GB",
-               "Microsoft YaHei", sans-serif;
+  font-family: "Geist", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 ```
 
@@ -130,8 +129,12 @@ body {
 ### 4.1 8px 网格
 
 ```css
---space-xs: 8px;    --space-sm: 16px;   --space-md: 24px;
---space-lg: 40px;   --space-xl: 64px;   --space-2xl: 100px;
+--space-xs: 8px;
+--space-sm: 16px;
+--space-md: 24px;
+--space-lg: 40px;
+--space-xl: 64px;
+--space-2xl: 100px;
 --space-3xl: 140px;
 ```
 
@@ -140,17 +143,17 @@ body {
 ```css
 --container-max-width: 1440px;
 --container-padding-x: 48px; /* 900px 以下缩至 20px/16px */
---section-padding-y: 100px;  /* 900px → 64px, 640px → 48px */
---nav-height: 80px;          /* 逐级响应式：85/80/70/60/55/50 */
+--section-padding-y: 100px; /* 900px → 64px, 640px → 48px */
+--nav-height: 80px; /* 逐级响应式：85/80/70/60/55/50 */
 ```
 
 ### 4.3 圆角
 
 ```css
---radius-sm: 8px;    /* 小型元素：标签、工具提示 */
---radius-md: 16px;   /* 默认：卡片、按钮、输入框 */
---radius-lg: 24px;   /* 大型容器 */
---radius-full: 999px;/* 胶囊：徽章、药丸按钮 */
+--radius-sm: 8px; /* 小型元素：标签、工具提示 */
+--radius-md: 16px; /* 默认：卡片、按钮、输入框 */
+--radius-lg: 24px; /* 大型容器 */
+--radius-full: 999px; /* 胶囊：徽章、药丸按钮 */
 ```
 
 ---
@@ -160,12 +163,12 @@ body {
 ### 5.1 阴影层次
 
 ```css
---shadow-sm: 0 2px 8px rgba(15,23,42,0.04);    /* 微妙提升 */
---shadow-md: 0 12px 32px rgba(15,23,42,0.06);   /* 卡片 hover */
---shadow-lg: 0 20px 50px rgba(15,23,42,0.1);    /* 模态框 */
---shadow-highlight: ...;                          /* 高亮卡片 */
---shadow-accent-glow: 0 0 20px rgba(0,198,255,0.12), 0 0 60px rgba(0,198,255,0.04);
---shadow-accent-ring: 0 0 0 3px rgba(0,198,255,0.1);
+--shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04); /* 微妙提升 */
+--shadow-md: 0 12px 32px rgba(15, 23, 42, 0.06); /* 卡片 hover */
+--shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.1); /* 模态框 */
+--shadow-highlight: ...; /* 高亮卡片 */
+--shadow-accent-glow: 0 0 20px rgba(0, 198, 255, 0.12), 0 0 60px rgba(0, 198, 255, 0.04);
+--shadow-accent-ring: 0 0 0 3px rgba(0, 198, 255, 0.1);
 ```
 
 ### 5.2 材质
@@ -183,45 +186,47 @@ body {
 
 ### 6.1 按钮系统
 
-| 变体 | class | 用途 |
-|------|-------|------|
-| 主按钮 | `.btn-primary` | 主要 CTA |
-| 强调按钮 | `.btn-accent` | 次要但需吸引注意的 CTA（新增） |
-| 次按钮 | `.btn-secondary` | 辅助操作 |
-| 幽灵按钮 | `.btn-ghost` | 最低优先级操作 |
+| 变体     | class            | 用途                           |
+| -------- | ---------------- | ------------------------------ |
+| 主按钮   | `.btn-primary`   | 主要 CTA                       |
+| 强调按钮 | `.btn-accent`    | 次要但需吸引注意的 CTA（新增） |
+| 次按钮   | `.btn-secondary` | 辅助操作                       |
+| 幽灵按钮 | `.btn-ghost`     | 最低优先级操作                 |
 
 ### 6.2 卡片系统
 
-| 变体 | class | 用途 | 文件 |
-|------|-------|------|------|
-| 基础卡片 | `.card` | 通用容器 | style.css |
-| 产品卡片 | `.ui-card--product` | 产品系列展示 | CoreProducts.vue |
+| 变体     | class                   | 用途         | 文件                |
+| -------- | ----------------------- | ------------ | ------------------- |
+| 基础卡片 | `.card`                 | 通用容器     | style.css           |
+| 产品卡片 | `.ui-card--product`     | 产品系列展示 | CoreProducts.vue    |
 | 应用卡片 | `.ui-card--application` | 行业应用场景 | ApplicationCard.vue |
-| 视频卡片 | `.ui-card--video` | 视频案例 | VideoCard.vue |
+| 视频卡片 | `.ui-card--video`       | 视频案例     | VideoCard.vue       |
 
 所有卡片共享以下交互模式：
+
 - 基础态：`border: 1px solid rgba(15,23,42,0.04–0.08)` + `box-shadow: var(--shadow-sm)`
 - hover 态（计划）→ `box-shadow: var(--shadow-accent-glow)` + 电光青边框微光
 - 过渡：`0.4s cubic-bezier(0.16, 1, 0.3, 1)`
 
 ### 6.3 链接系统
 
-| class | 用途 |
-|-------|------|
-| `.ui-jump-link` | 导航跳转链接（有背景 hover 态） |
-| `.ui-action-link` | 箭头动效链接（hover 箭头右移） |
-| `.ui-row-link` | 整行路径链接（支持/招聘页侧栏） |
-| `a.contact-value` | 联系方式链接（灰→蓝） |
+| class             | 用途                            |
+| ----------------- | ------------------------------- |
+| `.ui-jump-link`   | 导航跳转链接（有背景 hover 态） |
+| `.ui-action-link` | 箭头动效链接（hover 箭头右移）  |
+| `.ui-row-link`    | 整行路径链接（支持/招聘页侧栏） |
+| `a.contact-value` | 联系方式链接（灰→蓝）           |
 
 ### 6.4 Navigation
 
-| 组件 | 文件 |
-|------|------|
-| NavBar | `src/components/layout/NavBar.vue` |
+| 组件          | 文件                                      |
+| ------------- | ----------------------------------------- |
+| NavBar        | `src/components/layout/NavBar.vue`        |
 | NavMobileMenu | `src/components/layout/NavMobileMenu.vue` |
-| Footer | `src/components/layout/Footer.vue` |
+| Footer        | `src/components/layout/Footer.vue`        |
 
 NavBar 特性：
+
 - 固定定位 + `backdrop-filter: blur(12px)`
 - 滚动后增强阴影和背景不透明度
 - 桌面端 dropdown 支持（`has-dropdown`）
@@ -230,13 +235,13 @@ NavBar 特性：
 
 ### 6.5 通用组件
 
-| 组件 | 文件 | 说明 |
-|------|------|------|
-| FloatingCTA | `src/components/common/FloatingCTA.vue` | 右侧悬浮工具栏（电话/微信/淘宝/返回顶部） |
-| SectionSkeleton | `src/components/common/SectionSkeleton.vue` | 骨架屏加载态 |
-| SectionError | `src/components/common/SectionError.vue` | 加载失败降级 |
-| UiBreadcrumb | `src/components/common/UiBreadcrumb.vue` | 面包屑导航 |
-| BilibiliPlayer | `src/components/BilibiliPlayer.vue` | B 站视频嵌入 |
+| 组件            | 文件                                        | 说明                                      |
+| --------------- | ------------------------------------------- | ----------------------------------------- |
+| FloatingCTA     | `src/components/common/FloatingCTA.vue`     | 右侧悬浮工具栏（电话/微信/淘宝/返回顶部） |
+| SectionSkeleton | `src/components/common/SectionSkeleton.vue` | 骨架屏加载态                              |
+| SectionError    | `src/components/common/SectionError.vue`    | 加载失败降级                              |
+| UiBreadcrumb    | `src/components/common/UiBreadcrumb.vue`    | 面包屑导航                                |
+| BilibiliPlayer  | `src/components/BilibiliPlayer.vue`         | B 站视频嵌入                              |
 
 ---
 
@@ -266,12 +271,12 @@ NavBar 特性：
 
 ### 7.2 计划动效增强
 
-| 优先级 | 动效 | 实施位置 | 说明 |
-|--------|------|---------|------|
-| P1 | Hero staggered reveal | HeroCarousel.vue | 标题/描述/按钮依次入场，增强戏剧性 |
-| P2 | 卡片边框光效 | style.css | hover 时电光青边缘光渐变出现 |
-| P2 | 滚动视差 | Home.vue sections | 轻微的背景/前景速率差 |
-| — | 减少动画 | 全局 | `prefers-reduced-motion` 已支持 |
+| 优先级 | 动效                  | 实施位置          | 说明                               |
+| ------ | --------------------- | ----------------- | ---------------------------------- |
+| P1     | Hero staggered reveal | HeroCarousel.vue  | 标题/描述/按钮依次入场，增强戏剧性 |
+| P2     | 卡片边框光效          | style.css         | hover 时电光青边缘光渐变出现       |
+| P2     | 滚动视差              | Home.vue sections | 轻微的背景/前景速率差              |
+| —      | 减少动画              | 全局              | `prefers-reduced-motion` 已支持    |
 
 ### 7.3 过渡变量
 
@@ -293,17 +298,17 @@ NavBar 特性：
 
 ### 8.2 纹理类型
 
-| 纹理 | 实现方式 | 适用场景 |
-|------|---------|---------|
-| 点阵网格 | CSS `radial-gradient` 重复图案 | Hero 背景、section 分隔带 |
-| 细线网格 | CSS `linear-gradient` 交叉 | 产品卡片内部、数据面板 |
-| 噪点叠加 | SVG feTurbulence + CSS `mix-blend-mode` | 全局 5% 不透明度（可选） |
+| 纹理     | 实现方式                                | 适用场景                  |
+| -------- | --------------------------------------- | ------------------------- |
+| 点阵网格 | CSS `radial-gradient` 重复图案          | Hero 背景、section 分隔带 |
+| 细线网格 | CSS `linear-gradient` 交叉              | 产品卡片内部、数据面板    |
+| 噪点叠加 | SVG feTurbulence + CSS `mix-blend-mode` | 全局 5% 不透明度（可选）  |
 
 ### 8.3 实施方式
 
 ```css
 /* 示例：点阵纹理 */
---dot-pattern: radial-gradient(circle, rgba(15,23,42,0.06) 1px, transparent 1px);
+--dot-pattern: radial-gradient(circle, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
 background: var(--dot-pattern);
 background-size: 20px 20px;
 ```
@@ -367,19 +372,19 @@ background-size: 20px 20px;
 
 ### 10.3 关键文件索引
 
-| 文件 | 内容 |
-|------|------|
-| `src/assets/style.css` | 全局设计系统：CSS 变量、排版、按钮、卡片、动画 |
-| `src/assets/reset.css` | 基础重置（由 `src/main.ts` 导入，进入 Vite 构建链路） |
-| `src/App.vue` | 根布局：NavBar + router-view + Footer + FloatingCTA |
-| `src/views/Home.vue` | 首页：Hero + 4 个异步 section |
-| `src/components/business/HeroCarousel.vue` | Hero 区域 |
-| `src/components/business/CoreProducts.vue` | 核心产品卡片网格 |
-| `src/components/layout/NavBar.vue` | 导航栏（毛玻璃效果） |
-| `src/components/layout/Footer.vue` | 深色页脚 |
-| `src/components/common/FloatingCTA.vue` | 悬浮操作栏 |
-| `src/components/common/SectionSkeleton.vue` | 骨架屏 |
-| `CLAUDE.md` | 项目架构和开发命令 |
+| 文件                                        | 内容                                                  |
+| ------------------------------------------- | ----------------------------------------------------- |
+| `src/assets/style.css`                      | 全局设计系统：CSS 变量、排版、按钮、卡片、动画        |
+| `src/assets/reset.css`                      | 基础重置（由 `src/main.ts` 导入，进入 Vite 构建链路） |
+| `src/App.vue`                               | 根布局：NavBar + router-view + Footer + FloatingCTA   |
+| `src/views/Home.vue`                        | 首页：Hero + 4 个异步 section                         |
+| `src/components/business/HeroCarousel.vue`  | Hero 区域                                             |
+| `src/components/business/CoreProducts.vue`  | 核心产品卡片网格                                      |
+| `src/components/layout/NavBar.vue`          | 导航栏（毛玻璃效果）                                  |
+| `src/components/layout/Footer.vue`          | 深色页脚                                              |
+| `src/components/common/FloatingCTA.vue`     | 悬浮操作栏                                            |
+| `src/components/common/SectionSkeleton.vue` | 骨架屏                                                |
+| `CLAUDE.md`                                 | 项目架构和开发命令                                    |
 
 ### 10.4 验证命令
 

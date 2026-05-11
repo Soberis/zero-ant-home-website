@@ -45,17 +45,30 @@
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <h1 class="text-display-hero hero-title" style="transition-delay: 0.15s" v-html="t('home.hero.title')"></h1>
+          <h1
+            class="text-display-hero hero-title"
+            style="transition-delay: 0.15s"
+            v-html="t('home.hero.title')"
+          ></h1>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <div class="hero-product-name" style="transition-delay: 0.28s" v-html="t('home.hero.panelLabel')"></div>
+          <div
+            class="hero-product-name"
+            style="transition-delay: 0.28s"
+            v-html="t('home.hero.panelLabel')"
+          ></div>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <p class="text-body-large hero-description" style="transition-delay: 0.42s" v-html="t('home.hero.description')"></p>
-          <div class="hero-actions" style="transition-delay: 0.55s" :class="{ 'hero-entered': entered }">
-            <router-link
-              :to="productCenterRoute"
-              class="btn btn-primary"
-            >
-              {{ t('home.hero.primaryCta') }}
+          <p
+            class="text-body-large hero-description"
+            style="transition-delay: 0.42s"
+            v-html="t('home.hero.description')"
+          ></p>
+          <div
+            class="hero-actions"
+            style="transition-delay: 0.55s"
+            :class="{ 'hero-entered': entered }"
+          >
+            <router-link :to="productCenterRoute" class="btn btn-primary">
+              {{ t("home.hero.primaryCta") }}
             </router-link>
           </div>
         </div>
@@ -65,8 +78,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 import {
   buildResponsiveSrcSet,
@@ -92,7 +105,7 @@ const heroMobileAvifSrcSet = buildResponsiveSrcSet(heroMobileAvifEntry);
 const heroImgFallback = getLargestResponsiveImage(heroDesktopEntry);
 
 const productCenterRoute = computed(() =>
-  localizeTo({ path: '/products', hash: '#products-page-top' })
+  localizeTo({ path: "/products", hash: "#products-page-top" })
 );
 
 const entered = ref(false);
@@ -138,7 +151,7 @@ onUnmounted(() => {
 
 /* 精密点阵纹理叠加 — 延迟入场，与 staggered reveal 同步 */
 .hero-stage::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -150,7 +163,9 @@ onUnmounted(() => {
 }
 
 @keyframes texture-reveal {
-  to { opacity: 0.6; }
+  to {
+    opacity: 0.6;
+  }
 }
 
 .hero-media {
@@ -166,7 +181,8 @@ onUnmounted(() => {
   pointer-events: none;
   opacity: 0;
   transform: translateX(40px) scale(0.94);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
 }
 
@@ -221,7 +237,8 @@ onUnmounted(() => {
 .hero-copy > * {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -378,7 +395,6 @@ onUnmounted(() => {
   .hero-overlay {
     padding-top: 68px;
   }
-
 }
 
 @media (max-width: 360px) {

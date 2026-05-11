@@ -397,7 +397,7 @@ function toggleSection(sectionTo: string): void {
 
   .footer-accordion-icon::before,
   .footer-accordion-icon::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -429,8 +429,9 @@ function toggleSection(sectionTo: string): void {
     max-height: 0;
     overflow: hidden;
     margin: 0;
-    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 0;
   }
 

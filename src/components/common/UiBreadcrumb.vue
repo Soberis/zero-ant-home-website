@@ -7,11 +7,7 @@
         class="ui-breadcrumb__item"
         :class="{ 'ui-breadcrumb__item--current': index === items.length - 1 }"
       >
-        <router-link
-          v-if="index < items.length - 1"
-          :to="item.to"
-          class="ui-breadcrumb__link"
-        >
+        <router-link v-if="index < items.length - 1" :to="item.to" class="ui-breadcrumb__link">
           {{ item.label }}
         </router-link>
         <span v-else class="ui-breadcrumb__current" aria-current="page">
@@ -36,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import type { BreadcrumbItem } from '@/types/breadcrumb';
+import { useI18n } from "vue-i18n";
+import type { BreadcrumbItem } from "@/types/breadcrumb";
 
 defineProps<{
   items: BreadcrumbItem[];

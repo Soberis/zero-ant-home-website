@@ -8,7 +8,7 @@
             :class="[
               'hero-title',
               'text-display-super',
-              { 'hero-title--single-line': locale === 'en' }
+              { 'hero-title--single-line': locale === 'en' },
             ]"
           >
             {{ $t("slogan") }}
@@ -20,207 +20,200 @@
 
     <main class="about-main">
       <section id="company-intro" ref="introRef" class="page-section intro-section reveal-ready">
-      <div class="page-shell">
-        <div class="detail-section__header">
-          <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ $t("nav.companyIntro") }}</span>
-          </h2>
-        </div>
-
-        <div class="intro-layout">
-          <div class="intro-prose">
-            <i18n-t keypath="about.companyIntroDetailed.para1" tag="p" scope="global">
-              <template #org>
-                <strong>{{ $t("about.richText.org") }}</strong>
-              </template>
-            </i18n-t>
-            <i18n-t keypath="about.companyIntroDetailed.para2" tag="p" scope="global">
-              <template #lab>
-                <strong>{{ $t("about.richText.lab") }}</strong>
-              </template>
-              <template #airos>
-                <strong>{{ $t("about.richText.airos") }}</strong>
-              </template>
-            </i18n-t>
-            <i18n-t keypath="about.companyIntroDetailed.para3" tag="p" scope="global">
-              <template #loop>
-                <strong>{{ $t("about.richText.loop") }}</strong>
-              </template>
-              <template #selfControlled>
-                <strong>{{ $t("about.richText.selfControlled") }}</strong>
-              </template>
-            </i18n-t>
+        <div class="page-shell">
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ $t("nav.companyIntro") }}</span>
+            </h2>
           </div>
 
-          <div class="intro-side">
-            <article class="info-panel">
-              <h3 class="panel-title">{{ $t("about.teamOverview") }}</h3>
+          <div class="intro-layout">
+            <div class="intro-prose">
+              <i18n-t keypath="about.companyIntroDetailed.para1" tag="p" scope="global">
+                <template #org>
+                  <strong>{{ $t("about.richText.org") }}</strong>
+                </template>
+              </i18n-t>
+              <i18n-t keypath="about.companyIntroDetailed.para2" tag="p" scope="global">
+                <template #lab>
+                  <strong>{{ $t("about.richText.lab") }}</strong>
+                </template>
+                <template #airos>
+                  <strong>{{ $t("about.richText.airos") }}</strong>
+                </template>
+              </i18n-t>
+              <i18n-t keypath="about.companyIntroDetailed.para3" tag="p" scope="global">
+                <template #loop>
+                  <strong>{{ $t("about.richText.loop") }}</strong>
+                </template>
+                <template #selfControlled>
+                  <strong>{{ $t("about.richText.selfControlled") }}</strong>
+                </template>
+              </i18n-t>
+            </div>
 
-              <div class="stats-grid">
-                <div
-                  v-for="stat in teamStats"
-                  :key="stat.label"
-                  class="stat-card"
-                >
-                  <span class="stat-number">{{ stat.value }}</span>
-                  <span class="stat-label">{{ stat.label }}</span>
+            <div class="intro-side">
+              <article class="info-panel">
+                <h3 class="panel-title">{{ $t("about.teamOverview") }}</h3>
+
+                <div class="stats-grid">
+                  <div v-for="stat in teamStats" :key="stat.label" class="stat-card">
+                    <span class="stat-number">{{ stat.value }}</span>
+                    <span class="stat-label">{{ stat.label }}</span>
+                  </div>
                 </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="info-panel">
-              <h3 class="panel-title">{{ $t("about.financingPlan") }}</h3>
-              <p class="info-text">
-                {{ $t("about.companyIntroDetailed.financingDesc") }}
-              </p>
-              <p class="info-text">
-                {{ $t("about.companyIntroDetailed.emailTips") }}
-                <a class="contact-value" :href="`mailto:${$t('contacts.supportEmail')}`">{{ $t("contacts.supportEmail") }}</a>
-              </p>
-            </article>
+              <article class="info-panel">
+                <h3 class="panel-title">{{ $t("about.financingPlan") }}</h3>
+                <p class="info-text">
+                  {{ $t("about.companyIntroDetailed.financingDesc") }}
+                </p>
+                <p class="info-text">
+                  {{ $t("about.companyIntroDetailed.emailTips") }}
+                  <a class="contact-value" :href="`mailto:${$t('contacts.supportEmail')}`">{{
+                    $t("contacts.supportEmail")
+                  }}</a>
+                </p>
+              </article>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <section id="history" ref="historyRef" class="page-section reveal-ready">
-      <div class="page-shell">
-        <div class="detail-section__header">
-          <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ $t("nav.history") }}</span>
-          </h2>
-        </div>
+        <div class="page-shell">
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ $t("nav.history") }}</span>
+            </h2>
+          </div>
 
-        <div class="timeline">
-          <article
-            v-for="item in timelineData"
-            :key="item.year"
-            class="timeline-item"
-          >
-            <div class="timeline-rail">
-              <span class="timeline-dot"></span>
-            </div>
+          <div class="timeline">
+            <article v-for="item in timelineData" :key="item.year" class="timeline-item">
+              <div class="timeline-rail">
+                <span class="timeline-dot"></span>
+              </div>
 
-            <div class="timeline-card">
-              <div class="timeline-year">{{ item.year }}</div>
-              <ul class="timeline-events">
-                <li v-for="event in item.events" :key="event">{{ event }}</li>
-              </ul>
-            </div>
-          </article>
+              <div class="timeline-card">
+                <div class="timeline-year">{{ item.year }}</div>
+                <ul class="timeline-events">
+                  <li v-for="event in item.events" :key="event">{{ event }}</li>
+                </ul>
+              </div>
+            </article>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <section id="honors" ref="honorsRef" class="page-section reveal-ready">
-      <div class="page-shell">
-        <div class="detail-section__header">
-          <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ $t("nav.honor") }}</span>
-          </h2>
-        </div>
+        <div class="page-shell">
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ $t("nav.honor") }}</span>
+            </h2>
+          </div>
 
-        <div class="honor-grid">
-          <article
-            v-for="(honor, idx) in honors"
-            :key="honor"
-            class="honor-card"
-          >
-            <span class="card-index">{{ formatIndex(idx + 1) }}</span>
-            <p class="honor-text">{{ honor }}</p>
-          </article>
+          <div class="honor-grid">
+            <article v-for="(honor, idx) in honors" :key="honor" class="honor-card">
+              <span class="card-index">{{ formatIndex(idx + 1) }}</span>
+              <p class="honor-text">{{ honor }}</p>
+            </article>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <section id="core-values" ref="valuesRef" class="page-section reveal-ready">
-      <div class="page-shell">
-        <div class="detail-section__header">
-          <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ $t("about.coreValues.title") }}</span>
-          </h2>
-        </div>
+        <div class="page-shell">
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ $t("about.coreValues.title") }}</span>
+            </h2>
+          </div>
 
-        <div class="values-grid">
-          <article
-            v-for="value in coreValues"
-            :key="value"
-            class="value-card"
-          >
-            <span class="value-text">{{ value }}</span>
-          </article>
+          <div class="values-grid">
+            <article v-for="value in coreValues" :key="value" class="value-card">
+              <span class="value-text">{{ value }}</span>
+            </article>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <section id="culture" ref="cultureRef" class="page-section reveal-ready">
-      <div class="page-shell">
-        <div class="detail-section__header">
-          <h2 class="detail-section__title">
-            <span class="title-main text-display-large">{{ $t("nav.culture") }}</span>
-          </h2>
-        </div>
+        <div class="page-shell">
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ $t("nav.culture") }}</span>
+            </h2>
+          </div>
 
-        <div class="culture-wrapper">
-          <i18n-t keypath="about.enterpriseCulture.description" tag="p" class="info-text culture-desc" scope="global">
-            <template #coreConcept>
-              <strong>{{ $t("about.richText.coreConcept") }}</strong>
-            </template>
-          </i18n-t>
-          <div class="culture-grid">
-            <article class="culture-item">
-              <h3 class="culture-item-title">{{ $t("about.richText.deepAccumulation") }}</h3>
-              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item1") }}</p>
-            </article>
-            <article class="culture-item">
-              <h3 class="culture-item-title">{{ $t("about.richText.scenarioRevolution") }}</h3>
-              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item2") }}</p>
-            </article>
-            <article class="culture-item">
-              <h3 class="culture-item-title">{{ $t("about.richText.ecosystemCoConstruction") }}</h3>
-              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item3") }}</p>
-            </article>
-            <article class="culture-item">
-              <h3 class="culture-item-title">{{ $t("about.richText.extremeEvolution") }}</h3>
-              <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item4") }}</p>
-            </article>
+          <div class="culture-wrapper">
+            <i18n-t
+              keypath="about.enterpriseCulture.description"
+              tag="p"
+              class="info-text culture-desc"
+              scope="global"
+            >
+              <template #coreConcept>
+                <strong>{{ $t("about.richText.coreConcept") }}</strong>
+              </template>
+            </i18n-t>
+            <div class="culture-grid">
+              <article class="culture-item">
+                <h3 class="culture-item-title">{{ $t("about.richText.deepAccumulation") }}</h3>
+                <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item1") }}</p>
+              </article>
+              <article class="culture-item">
+                <h3 class="culture-item-title">{{ $t("about.richText.scenarioRevolution") }}</h3>
+                <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item2") }}</p>
+              </article>
+              <article class="culture-item">
+                <h3 class="culture-item-title">
+                  {{ $t("about.richText.ecosystemCoConstruction") }}
+                </h3>
+                <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item3") }}</p>
+              </article>
+              <article class="culture-item">
+                <h3 class="culture-item-title">{{ $t("about.richText.extremeEvolution") }}</h3>
+                <p class="culture-item-desc">{{ $t("about.enterpriseCulture.item4") }}</p>
+              </article>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <section id="contact" ref="aboutContactRef" class="page-section contact-section reveal-ready">
-      <div class="page-shell">
-        <div class="contact-panel">
-          <div class="contact-copy">
-            <div class="detail-section__header contact-header">
-              <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ $t("nav.contact") }}</span>
-              </h2>
+        <div class="page-shell">
+          <div class="contact-panel">
+            <div class="contact-copy">
+              <div class="detail-section__header contact-header">
+                <h2 class="detail-section__title">
+                  <span class="title-main text-display-large">{{ $t("nav.contact") }}</span>
+                </h2>
+              </div>
             </div>
-          </div>
 
-          <div class="contact-grid">
-            <div class="contact-card">
-              <span class="contact-label">{{ $t("contacts.phone") }}</span>
-              <a class="contact-value" :href="`tel:${$t('footer.telValue')}`">
-                {{ $t("footer.telValue") }}
-              </a>
-            </div>
-            <div class="contact-card">
-              <span class="contact-label">{{ $t("contacts.email") }}</span>
-              <a class="contact-value" :href="`mailto:${$t('contacts.supportEmail')}`">
-                {{ $t("contacts.supportEmail") }}
-              </a>
-            </div>
-            <div class="contact-card contact-card--wide">
-              <span class="contact-label">{{ $t("contacts.address") }}</span>
-              <span class="contact-value">{{ $t("footer.address") }}</span>
+            <div class="contact-grid">
+              <div class="contact-card">
+                <span class="contact-label">{{ $t("contacts.phone") }}</span>
+                <a class="contact-value" :href="`tel:${$t('footer.telValue')}`">
+                  {{ $t("footer.telValue") }}
+                </a>
+              </div>
+              <div class="contact-card">
+                <span class="contact-label">{{ $t("contacts.email") }}</span>
+                <a class="contact-value" :href="`mailto:${$t('contacts.supportEmail')}`">
+                  {{ $t("contacts.supportEmail") }}
+                </a>
+              </div>
+              <div class="contact-card contact-card--wide">
+                <span class="contact-label">{{ $t("contacts.address") }}</span>
+                <span class="contact-value">{{ $t("footer.address") }}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     </main>
   </div>
 </template>
@@ -229,7 +222,7 @@
 import { computed, ref, type ComputedRef } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTimelineData, getHonors, type TimelineEvent } from "@/data/about";
-import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { useScrollRevealList } from "@/composables/useScrollReveal";
 
 import { formatIndex } from "@/utils/format";
 
@@ -248,9 +241,7 @@ const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
   getTimelineData(t).map((item) => ({ ...item }))
 );
 
-const honors: ComputedRef<string[]> = computed(() =>
-  getHonors(t).map((item) => item)
-);
+const honors: ComputedRef<string[]> = computed(() => getHonors(t).map((item) => item));
 
 const teamStats = computed(() => [
   { value: "20+", label: t("about.teamSize") },
@@ -265,8 +256,6 @@ const coreValues = computed(() => [
   t("about.coreValues.value3"),
   t("about.coreValues.value4"),
 ]);
-
-
 </script>
 
 <style scoped>
@@ -534,7 +523,9 @@ const coreValues = computed(() => [
   border-radius: 16px;
   padding: 32px 24px;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .panel-title {
@@ -676,7 +667,7 @@ const coreValues = computed(() => [
   padding-right: 40px;
 }
 
-.honor-card:nth-last-child(-n+2) {
+.honor-card:nth-last-child(-n + 2) {
   border-bottom: none;
 }
 
@@ -842,7 +833,7 @@ const coreValues = computed(() => [
     border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
-  .honor-card:nth-last-child(-n+2) {
+  .honor-card:nth-last-child(-n + 2) {
     border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
@@ -933,4 +924,3 @@ const coreValues = computed(() => [
   }
 }
 </style>
-

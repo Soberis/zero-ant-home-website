@@ -24,15 +24,15 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref } from 'vue';
-import HeroCarousel from '@/components/business/HeroCarousel.vue';
-import SectionError from '@/components/common/SectionError.vue';
-import SectionSkeleton from '@/components/common/SectionSkeleton.vue';
-import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { defineAsyncComponent, ref } from "vue";
+import HeroCarousel from "@/components/business/HeroCarousel.vue";
+import SectionError from "@/components/common/SectionError.vue";
+import SectionSkeleton from "@/components/common/SectionSkeleton.vue";
+import { useScrollRevealList } from "@/composables/useScrollReveal";
 
 // 首页下半屏内容异步加载，先把首屏路径跑轻
 const CoreProducts = defineAsyncComponent({
-  loader: () => import('@/components/business/CoreProducts.vue'),
+  loader: () => import("@/components/business/CoreProducts.vue"),
   loadingComponent: SectionSkeleton,
   errorComponent: SectionError,
   delay: 200,
@@ -40,7 +40,7 @@ const CoreProducts = defineAsyncComponent({
 });
 
 const IndustryApplications = defineAsyncComponent({
-  loader: () => import('@/components/business/IndustryApplications.vue'),
+  loader: () => import("@/components/business/IndustryApplications.vue"),
   loadingComponent: SectionSkeleton,
   errorComponent: SectionError,
   delay: 200,
@@ -48,7 +48,7 @@ const IndustryApplications = defineAsyncComponent({
 });
 
 const VideoCases = defineAsyncComponent({
-  loader: () => import('@/components/business/VideoCases.vue'),
+  loader: () => import("@/components/business/VideoCases.vue"),
   loadingComponent: SectionSkeleton,
   errorComponent: SectionError,
   delay: 200,
@@ -56,7 +56,7 @@ const VideoCases = defineAsyncComponent({
 });
 
 const Partners = defineAsyncComponent({
-  loader: () => import('@/components/business/Partners.vue'),
+  loader: () => import("@/components/business/Partners.vue"),
   loadingComponent: SectionSkeleton,
   errorComponent: SectionError,
   delay: 200,
@@ -99,7 +99,7 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 
 .home-section--applications::before,
 .home-section--partners::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;

@@ -282,7 +282,11 @@ import { getProductCenterCardById } from "@/data/product-center";
 import { ensureProductDetailLocale, type SupportedLocale } from "@/config/i18n";
 import type { ProductDetail, ProductFeature } from "@/data/productDetails";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-import { buildResponsiveSrcSet, getResponsiveProductImage, DEFAULT_HERO_IMAGE_SIZE } from "@/utils/responsiveImage";
+import {
+  buildResponsiveSrcSet,
+  getResponsiveProductImage,
+  DEFAULT_HERO_IMAGE_SIZE,
+} from "@/utils/responsiveImage";
 
 type FeatureItem = string | ProductFeature;
 type LocalizedParam = { key: string; value: string };
@@ -434,7 +438,6 @@ const getDownloadFormat = (name: string, url: string) => {
 };
 
 const getDownloadDisplayName = (name: string) => name.replace(/\.[a-z0-9]+$/i, "");
-
 
 const heroImageSize = computed<HeroImageSize>(
   () => cardRecord.value?.card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE

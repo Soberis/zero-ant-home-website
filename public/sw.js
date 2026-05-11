@@ -40,9 +40,7 @@ async function cacheStaticAsset(request, response) {
 }
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS)));
   self.skipWaiting();
 });
 
@@ -52,8 +50,7 @@ self.addEventListener("activate", (event) => {
       Promise.all(
         cacheNames.map((cacheName) => {
           const isLegacyCache = cacheName.startsWith("zeroant-cache");
-          const isStaleStaticCache =
-            cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME;
+          const isStaleStaticCache = cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME;
 
           if (isLegacyCache || isStaleStaticCache) {
             return caches.delete(cacheName);

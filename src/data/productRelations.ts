@@ -56,7 +56,11 @@ const productRelations: ProductRelationsData = {
   },
   "za-mr3t": {
     applicationSlugs: ["ai-robotics", "composite-systems"],
-    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "composite-robot-application"],
+    videoSlugs: [
+      "vr-teleop-dual-arm",
+      "vla-dual-arm-cable-grasping",
+      "composite-robot-application",
+    ],
   },
   "za-rmvr": {
     applicationSlugs: ["ai-robotics", "composite-systems"],
@@ -68,7 +72,11 @@ const productRelations: ProductRelationsData = {
   },
   "za-rmps": {
     applicationSlugs: ["ai-robotics"],
-    videoSlugs: ["vr-teleop-dual-arm", "vla-dual-arm-cable-grasping", "vla-dual-arm-data-collection"],
+    videoSlugs: [
+      "vr-teleop-dual-arm",
+      "vla-dual-arm-cable-grasping",
+      "vla-dual-arm-data-collection",
+    ],
   },
   "za-rdp": {
     applicationSlugs: ["cultural-creative"],
@@ -78,7 +86,7 @@ const productRelations: ProductRelationsData = {
     applicationSlugs: ["composite-systems", "ai-robotics"],
     videoSlugs: ["composite-robot-application", "vr-teleop-dual-arm"],
   },
-  "rail": {
+  rail: {
     applicationSlugs: ["fixed-rail-transfer"],
     videoSlugs: ["fixed-rail-transfer-robot", "za-r3ml-demo"],
   },

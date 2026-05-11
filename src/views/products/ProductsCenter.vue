@@ -113,7 +113,11 @@ import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
 import { productCenterFamilies } from "@/data/product-center";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-import { getResponsiveProductImage, buildResponsiveSrcSet, DEFAULT_HERO_IMAGE_SIZE } from "@/utils/responsiveImage";
+import {
+  getResponsiveProductImage,
+  buildResponsiveSrcSet,
+  DEFAULT_HERO_IMAGE_SIZE,
+} from "@/utils/responsiveImage";
 import type { ResponsiveImageFormat } from "@/utils/responsiveImage";
 import { formatIndex } from "@/utils/format";
 
@@ -131,7 +135,6 @@ function getCardSrcset(cardId: string, format: ResponsiveImageFormat): string {
   }
   return cache.get(format)!;
 }
-
 
 const activeFamilyId = ref("");
 const filterInnerRef = ref<HTMLElement | null>(null);
@@ -219,8 +222,6 @@ const families = computed(() =>
     })),
   }))
 );
-
-
 
 const pageMetrics = computed(() => [
   {

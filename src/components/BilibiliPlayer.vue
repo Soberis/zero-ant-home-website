@@ -8,7 +8,16 @@
         class="video-iframe"
         :src="frameUrl"
         :title="props.title || 'Bilibili video player'"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+        allow="
+          accelerometer;
+          autoplay;
+          clipboard-write;
+          encrypted-media;
+          gyroscope;
+          picture-in-picture;
+          web-share;
+          fullscreen;
+        "
         referrerpolicy="strict-origin-when-cross-origin"
         sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation-by-user-activation allow-presentation allow-popups-to-escape-sandbox"
         loading="lazy"
@@ -272,14 +281,12 @@ const retryIframe = async () => {
 // 组件挂载时检查iframe加载状态
 onMounted(() => {
   // 检测移动端并优化加载策略
-  isMobileDevice.value =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+  isMobileDevice.value = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
 
   // 首屏进入时开启超时检测
   scheduleLoadTimeout(isMobileDevice.value ? 8000 : 10000);
-
 });
 
 watch(
@@ -437,12 +444,7 @@ onUnmounted(() => {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
 

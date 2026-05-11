@@ -7,15 +7,15 @@ import type { RouteLocationNormalizedLoaded } from "vue-router";
 // Fonts — only critical weights block rendering (Geist: body+nav, Outfit: hero headings)
 import "@fontsource/geist-sans/400.css";
 import "@fontsource/geist-sans/500.css";
-import "@fontsource/outfit/600.css";
+import "@fontsource/outfit/latin-600.css";
 
 // Non-critical weights loaded after mount to unblock first paint
 function loadDeferredFonts() {
   import("@fontsource/geist-sans/600.css");
   import("@fontsource/geist-sans/700.css");
-  import("@fontsource/outfit/400.css");
-  import("@fontsource/outfit/500.css");
-  import("@fontsource/outfit/700.css");
+  import("@fontsource/outfit/latin-400.css");
+  import("@fontsource/outfit/latin-500.css");
+  import("@fontsource/outfit/latin-700.css");
 }
 
 import "@/assets/reset.css";

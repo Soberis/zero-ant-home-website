@@ -37,9 +37,9 @@ const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
 
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
-  { label: t('nav.home'), to: localizePath('/') },
-  { label: t('nav.solutions'), to: localizePath('/solutions') },
-  { label: detail.value?.title || '', to: localizePath(`/applications/${slug.value}`) },
+  { label: t("nav.home"), to: localizePath("/") },
+  { label: t("nav.solutions"), to: localizePath("/solutions") },
+  { label: detail.value?.title || "", to: localizePath(`/applications/${slug.value}`) },
 ]);
 
 const legacyApplicationRedirects: Record<string, string> = {
@@ -70,9 +70,7 @@ const detail: ComputedRef<Application | undefined> = computed(() => {
   };
 });
 
-const sanitizedDescription = computed(() =>
-  sanitizeHtmlAllowList(detail.value?.description || "")
-);
+const sanitizedDescription = computed(() => sanitizeHtmlAllowList(detail.value?.description || ""));
 
 // 获取视频详情对象
 const videoDetail: ComputedRef<VideoDetail | undefined> = computed(() => {
@@ -87,9 +85,14 @@ const videoThumbnail = computed(() => {
 
 const mediaInfo = computed(() => {
   return {
-    type: (videoDetail.value?.type === "bilibili" || videoDetail.value?.type === "video" || videoDetail.value?.type === "image")
-      ? videoDetail.value.type
-      : ((typeof videoDetail.value?.type === "string" && videoDetail.value.type === "local") ? "video" : "none") as "bilibili" | "video" | "image" | "none",
+    type:
+      videoDetail.value?.type === "bilibili" ||
+      videoDetail.value?.type === "video" ||
+      videoDetail.value?.type === "image"
+        ? videoDetail.value.type
+        : ((typeof videoDetail.value?.type === "string" && videoDetail.value.type === "local"
+            ? "video"
+            : "none") as "bilibili" | "video" | "image" | "none"),
     url: videoDetail.value?.url || "",
     title: videoDetail.value?.title ? t(videoDetail.value.title) : detail.value?.title || "",
     thumbnailUrl: videoThumbnail.value,
@@ -114,5 +117,4 @@ function goTo(targetSlug: string | null): void {
     router.push(localizePath(`/applications/${targetSlug}`));
   }
 }
-
 </script>

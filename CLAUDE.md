@@ -3,6 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 # 语言与思考规则
+
 你必须在进行任何内部思考、推理、分析、规划、工具调用前的“内心独白”时，**全部使用中文**。
 你的最终回答自然也使用中文。
 无论遇到什么问题，思考过程不得使用英文或其他语言。

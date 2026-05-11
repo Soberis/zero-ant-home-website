@@ -17,11 +17,7 @@
           </div>
 
           <div class="hero-promises">
-            <article
-              v-for="stat in heroStats"
-              :key="stat.label"
-              class="hero-promise"
-            >
+            <article v-for="stat in heroStats" :key="stat.label" class="hero-promise">
               <div class="hero-promise-head">
                 <span class="hero-promise-value">{{ stat.value }}</span>
                 <span class="hero-promise-unit">+</span>
@@ -45,7 +41,19 @@
               <span class="career-path-title">{{ path.title }}</span>
               <p class="career-path-desc">{{ path.description }}</p>
             </div>
-            <svg class="career-path-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg
+              class="career-path-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
           </a>
         </div>
       </div>
@@ -60,11 +68,7 @@
         </div>
 
         <div class="benefits-grid">
-          <article
-            v-for="benefit in benefits"
-            :key="benefit.id"
-            class="benefit-card"
-          >
+          <article v-for="benefit in benefits" :key="benefit.id" class="benefit-card">
             <span class="benefit-index">{{ formatIndex(benefit.id) }}</span>
             <h3 class="benefit-title">{{ benefit.title }}</h3>
             <p class="benefit-description">{{ benefit.description }}</p>
@@ -82,11 +86,7 @@
         </div>
 
         <div class="positions-list">
-          <article
-            v-for="position in positions"
-            :key="position.id"
-            class="position-card"
-          >
+          <article v-for="position in positions" :key="position.id" class="position-card">
             <div class="position-header">
               <div class="position-heading">
                 <h3 class="position-title">{{ position.title }}</h3>
@@ -116,9 +116,25 @@
             </div>
 
             <div class="position-actions">
-              <button class="btn btn-primary apply-btn" type="button" @click="applyForPosition(position)">
+              <button
+                class="btn btn-primary apply-btn"
+                type="button"
+                @click="applyForPosition(position)"
+              >
                 {{ $t("careers.applyNow") }}
-                <svg class="apply-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <svg
+                  class="apply-btn-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
               </button>
             </div>
           </article>
@@ -132,7 +148,9 @@
           <div class="contact-copy">
             <div class="detail-section__header contact-header">
               <h2 class="detail-section__title">
-                <span class="title-main text-display-large">{{ $t("careers.contactUsTitle") }}</span>
+                <span class="title-main text-display-large">{{
+                  $t("careers.contactUsTitle")
+                }}</span>
               </h2>
             </div>
             <p class="contact-description">
@@ -147,7 +165,9 @@
             </div>
             <div class="contact-card">
               <span class="contact-label">{{ $t("careers.email") }}</span>
-              <a class="contact-value" :href="`mailto:${$t('contacts.hrEmail')}`">{{ $t("contacts.hrEmail") }}</a>
+              <a class="contact-value" :href="`mailto:${$t('contacts.hrEmail')}`">{{
+                $t("contacts.hrEmail")
+              }}</a>
             </div>
           </div>
         </div>
@@ -159,7 +179,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { useScrollRevealList } from '@/composables/useScrollReveal';
+import { useScrollRevealList } from "@/composables/useScrollReveal";
 import { normalizeCollection } from "@/composables/useProductDetailData";
 import { scrollToSection } from "@/utils/scroll";
 
@@ -290,7 +310,6 @@ const positions = computed<Position[]>(() => [
   },
 ]);
 
-
 function openMailto(subject?: string): void {
   const mailSubject = subject ? encodeURIComponent(subject) : "";
   const query = mailSubject ? `?subject=${mailSubject}` : "";
@@ -336,7 +355,8 @@ function applyForPosition(position: Position): void {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr)
+  grid-template-columns:
+    minmax(0, 1fr)
     minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
@@ -472,7 +492,9 @@ function applyForPosition(position: Position): void {
   align-items: center;
   padding: 22px 0;
   text-decoration: none;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .career-path + .career-path {
@@ -567,7 +589,7 @@ function applyForPosition(position: Position): void {
   padding: 24px 0 24px 40px;
 }
 
-.benefit-card:nth-last-child(-n+2) {
+.benefit-card:nth-last-child(-n + 2) {
   border-bottom: none;
 }
 
@@ -625,7 +647,10 @@ function applyForPosition(position: Position): void {
   border-radius: 16px;
   background: var(--section-card-surface);
   padding: 32px;
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .position-card:hover {
@@ -633,7 +658,6 @@ function applyForPosition(position: Position): void {
   border-color: rgba(26, 58, 143, 0.12);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
 }
-
 
 .position-header {
   display: flex;
@@ -802,7 +826,7 @@ span.contact-value {
     border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
-  .benefit-card:nth-last-child(-n+2) {
+  .benefit-card:nth-last-child(-n + 2) {
     border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
@@ -868,4 +892,3 @@ span.contact-value {
   }
 }
 </style>
-

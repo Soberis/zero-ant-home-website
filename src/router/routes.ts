@@ -1,9 +1,5 @@
 import type { RouteLocation, RouteRecordRaw } from "vue-router";
-import {
-  getLocaleFromPath,
-  getLocalizedRoutePath,
-  withLocalePrefix,
-} from "@/utils/localeRoute";
+import { getLocaleFromPath, getLocalizedRoutePath, withLocalePrefix } from "@/utils/localeRoute";
 
 // 核心页面直接导入（首屏关键路径）
 import Home from "@/views/Home.vue";

@@ -9,17 +9,11 @@ import {
 } from "./seo-helpers";
 
 export function getCareerStructuredJobs(baseUrl: string): StructuredData[] {
-  const jobKeys = [
-    "softwareEngineer",
-    "robotSystemsEngineer",
-    "electricalEngineer",
-  ] as const;
+  const jobKeys = ["softwareEngineer", "robotSystemsEngineer", "electricalEngineer"] as const;
 
   return jobKeys.map((jobKey) => {
     const title = safeTranslate(`careers.positions.${jobKey}.title`);
-    const requirements = safeTranslateArray(
-      `careers.positions.${jobKey}.requirements`
-    );
+    const requirements = safeTranslateArray(`careers.positions.${jobKey}.requirements`);
     const qualifications = requirements.join("；");
 
     return {
@@ -145,10 +139,22 @@ export function getSolutionsStructuredData(
   const pageDescription = safeTranslate("seo.solutions.description");
   const siteName = safeTranslate("seo.siteName");
   const faqEntries = [
-    { question: safeTranslate("seo.structuredData.solutionsFaq.q1"), answer: safeTranslate("seo.structuredData.solutionsFaq.a1") },
-    { question: safeTranslate("seo.structuredData.solutionsFaq.q2"), answer: safeTranslate("seo.structuredData.solutionsFaq.a2") },
-    { question: safeTranslate("seo.structuredData.solutionsFaq.q3"), answer: safeTranslate("seo.structuredData.solutionsFaq.a3") },
-    { question: safeTranslate("seo.structuredData.solutionsFaq.q4"), answer: safeTranslate("seo.structuredData.solutionsFaq.a4") },
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q1"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a1"),
+    },
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q2"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a2"),
+    },
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q3"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a3"),
+    },
+    {
+      question: safeTranslate("seo.structuredData.solutionsFaq.q4"),
+      answer: safeTranslate("seo.structuredData.solutionsFaq.a4"),
+    },
   ];
 
   const collectionPage: StructuredData = {
@@ -177,13 +183,17 @@ export function getSolutionsStructuredData(
         {
           "@type": "Service",
           name: safeTranslate("seo.structuredData.solutions.mobileCollaboration.name"),
-          description: safeTranslate("seo.structuredData.solutions.mobileCollaboration.description"),
+          description: safeTranslate(
+            "seo.structuredData.solutions.mobileCollaboration.description"
+          ),
           provider: { "@type": "Organization", name: getCompanyName() },
         },
         {
           "@type": "Service",
           name: safeTranslate("seo.structuredData.solutions.embodiedDevelopment.name"),
-          description: safeTranslate("seo.structuredData.solutions.embodiedDevelopment.description"),
+          description: safeTranslate(
+            "seo.structuredData.solutions.embodiedDevelopment.description"
+          ),
           provider: { "@type": "Organization", name: getCompanyName() },
         },
       ],

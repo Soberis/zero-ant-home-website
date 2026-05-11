@@ -158,7 +158,8 @@
   --texture-dot-sm: radial-gradient(circle, rgba(15, 23, 42, 0.05) 0.5px, transparent 0.5px);
   --texture-dot-md: radial-gradient(circle, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
   --texture-dot-lg: radial-gradient(circle, rgba(15, 23, 42, 0.035) 1.5px, transparent 1.5px);
-  --texture-grid: linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+  --texture-grid:
+    linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
 }
 /* ================================================================
@@ -170,7 +171,9 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: "Geist Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:
+    "Geist Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   overflow-x: hidden;
   font-size: 16px;
   line-height: 1.6;
@@ -243,7 +246,9 @@ a:hover {
   white-space: nowrap;
   word-break: keep-all;
   text-decoration: none;
-  transition: color var(--transition-fast), background-color var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 .ui-jump-link:hover,
 .ui-jump-link.is-active {
@@ -262,7 +267,9 @@ a:hover {
   white-space: nowrap;
   word-break: keep-all;
   text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 .ui-action-link:hover {
   color: var(--brand-primary, var(--color-primary));
@@ -488,7 +495,12 @@ small {
   border: 1px solid transparent;
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: background-color var(--transition-normal), border-color var(--transition-normal), color var(--transition-normal), box-shadow var(--transition-normal), transform var(--transition-normal);
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal),
+    color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal);
   white-space: nowrap;
   font-family: inherit;
 }
@@ -562,7 +574,9 @@ small {
   border-radius: var(--radius-md);
   padding: var(--space-lg);
   box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+  transition:
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal);
 }
 .card:hover {
   box-shadow: var(--shadow-md);
@@ -586,7 +600,11 @@ small {
   color: inherit;
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background-color 0.4s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease,
+    background-color 0.4s ease;
 }
 .ui-card:hover {
   transform: translateY(-2px);
@@ -615,7 +633,9 @@ small {
   padding: 12px 8px;
   border-radius: var(--radius-sm);
   background: #ffffff;
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
 .ui-card--product:hover .ui-card__visual {
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.025);
@@ -722,7 +742,9 @@ small {
 .ui-card--video:focus-visible {
   outline: none;
   border-color: var(--brand-focus-ring, rgba(26, 58, 143, 0.28));
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05), 0 0 0 3px var(--brand-focus-outline, rgba(26, 58, 143, 0.14));
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.05),
+    0 0 0 3px var(--brand-focus-outline, rgba(26, 58, 143, 0.14));
 }
 /* 视频卡片 — 媒体区 */
 .ui-card--video .ui-card__visual {
@@ -833,7 +855,12 @@ small {
   }
 }
 .skeleton {
-  background: linear-gradient(90deg, rgba(229, 231, 235, 0.5) 25%, rgba(243, 244, 246, 0.8) 37%, rgba(229, 231, 235, 0.5) 63%);
+  background: linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 0.5) 25%,
+    rgba(243, 244, 246, 0.8) 37%,
+    rgba(229, 231, 235, 0.5) 63%
+  );
   background-size: 400% 100%;
   animation: skeleton-loading 1.4s ease infinite;
   border-radius: var(--radius-sm);
@@ -846,7 +873,9 @@ small {
 .reveal-ready {
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-ready.revealed {
   opacity: 1;
@@ -856,7 +885,9 @@ small {
 .reveal-stagger > .reveal-item {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition:
+    opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .reveal-stagger.revealed > .reveal-item {
   opacity: 1;

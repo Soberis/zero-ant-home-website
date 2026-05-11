@@ -7,7 +7,7 @@ import {
 } from "../../scripts/generate-site-artifacts.mjs";
 
 const BASE_HTML =
-  "<!doctype html><html lang=\"zh\"><head><title></title></head><body><div id=\"app\"></div></body></html>";
+  '<!doctype html><html lang="zh"><head><title></title></head><body><div id="app"></div></body></html>';
 
 type StaticPage = ReturnType<typeof buildPageDefinitions>[number];
 
@@ -27,10 +27,7 @@ describe("generate-site-artifacts", () => {
   let pages: StaticPage[] = [];
 
   beforeAll(async () => {
-    const [{ messages, data }, seoConfigs] = await Promise.all([
-      loadData(),
-      loadSeoConfigs(),
-    ]);
+    const [{ messages, data }, seoConfigs] = await Promise.all([loadData(), loadSeoConfigs()]);
 
     pages = buildPageDefinitions(messages, data, () => "", seoConfigs);
   });

@@ -14,13 +14,16 @@
       >
         <div class="sidebar-icon">
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20">
-            <path fill="currentColor" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+            <path
+              fill="currentColor"
+              d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"
+            />
           </svg>
         </div>
         <div class="sidebar-popup">
           <div class="popup-content">
             <div class="popup-title">{{ t("common.cta.serviceHotline") }}</div>
-            <div class="popup-desc tel-value">{{ t('footer.telValue') }}</div>
+            <div class="popup-desc tel-value">{{ t("footer.telValue") }}</div>
           </div>
         </div>
       </a>
@@ -33,7 +36,10 @@
       >
         <div class="sidebar-icon">
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20">
-            <path fill="currentColor" d="M8.25 15.5c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm7.5 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm5.75-5.5c0 3.87-3.69 7.08-8.25 7.08-1.52 0-2.95-.36-4.18-1-.53.4-1.15.8-1.78 1.12-.55.28-.9.41-1.16.48-.19.05-.33.05-.41-.01-.07-.06-.11-.2-.11-.32 0-.15.02-.38.07-.65.04-.26.11-.57.19-.88-1.34-1.3-2.12-3.04-2.12-4.82 0-3.87 3.69-7.08 8.25-7.08s8.25 3.21 8.25 7.08z"/>
+            <path
+              fill="currentColor"
+              d="M8.25 15.5c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm7.5 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm5.75-5.5c0 3.87-3.69 7.08-8.25 7.08-1.52 0-2.95-.36-4.18-1-.53.4-1.15.8-1.78 1.12-.55.28-.9.41-1.16.48-.19.05-.33.05-.41-.01-.07-.06-.11-.2-.11-.32 0-.15.02-.38.07-.65.04-.26.11-.57.19-.88-1.34-1.3-2.12-3.04-2.12-4.82 0-3.87 3.69-7.08 8.25-7.08s8.25 3.21 8.25 7.08z"
+            />
           </svg>
         </div>
         <div class="sidebar-popup qrcode-popup">
@@ -63,7 +69,10 @@
       >
         <div class="sidebar-icon">
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20">
-            <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            <path
+              fill="currentColor"
+              d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+            />
           </svg>
         </div>
         <div class="sidebar-popup qrcode-popup">
@@ -104,11 +113,11 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import wxworkQrcode from '@/assets/images/qrcodes/wxwork.webp';
-import taobaoQrcode from '@/assets/images/qrcodes/taobao.png';
-import { useLocalizedPath } from '@/composables/useLocalizedPath';
-import { scheduleScrollToTop } from '@/utils/scroll';
+import { useI18n } from "vue-i18n";
+import wxworkQrcode from "@/assets/images/qrcodes/wxwork.webp";
+import taobaoQrcode from "@/assets/images/qrcodes/taobao.png";
+import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import { scheduleScrollToTop } from "@/utils/scroll";
 
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
@@ -117,7 +126,6 @@ defineProps<{
   visible: boolean;
   showBackToTop?: boolean;
 }>();
-
 </script>
 
 <style scoped>
@@ -211,7 +219,8 @@ defineProps<{
   white-space: nowrap;
 }
 
-.link-popup .popup-content, .group:first-child .popup-content {
+.link-popup .popup-content,
+.group:first-child .popup-content {
   align-items: flex-start;
   padding: 14px 20px;
 }
@@ -248,7 +257,9 @@ defineProps<{
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-enter-from,
@@ -307,7 +318,7 @@ defineProps<{
     border-radius: 18px;
     padding: 6px 0;
   }
-  
+
   .sidebar-item {
     width: 44px;
     height: 44px;
@@ -327,7 +338,7 @@ defineProps<{
     width: 20px;
     height: 20px;
   }
-  
+
   .sidebar-popup {
     display: none;
   }
