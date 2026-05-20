@@ -63,6 +63,7 @@
     "vue-tsc": "^3.2.7"
   },
   "resolutions": {
+    "typescript-eslint/**/brace-expansion": "5.0.6",
     "vue-tsc": "^3.2.7",
     "vite": "^6.4.2"
   }

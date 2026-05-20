@@ -105,7 +105,7 @@
               <div class="features-grid">
                 <article v-for="(feature, idx) in productFeatures" :key="idx" class="feature-card">
                   <div class="feature-card__content">
-                    <span class="feature-card__index">{{ String(idx + 1).padStart(2, "0") }}</span>
+                    <span class="feature-card__index">{{ formatIndex(idx + 1) }}</span>
                     <h3 class="feature-card__title">
                       {{ typeof feature === "string" ? feature : feature.title || "" }}
                     </h3>
@@ -272,6 +272,7 @@ import { computed, nextTick, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { sanitizeHtmlAllowList } from "@/utils/security";
+import { formatIndex } from "@/utils/format";
 import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import VideoCard from "@/components/common/VideoCard.vue";
 import UiBreadcrumb from "@/components/common/UiBreadcrumb.vue";

@@ -44,24 +44,24 @@
 
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <h1
-            class="text-display-hero hero-title"
-            style="transition-delay: 0.15s"
-            v-html="t('home.hero.title')"
-          ></h1>
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <div
-            class="hero-product-name"
-            style="transition-delay: 0.28s"
-            v-html="t('home.hero.panelLabel')"
-          ></div>
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <p
-            class="text-body-large hero-description"
-            style="transition-delay: 0.42s"
-            v-html="t('home.hero.description')"
-          ></p>
+          <h1 class="text-display-hero hero-title" style="transition-delay: 0.15s">
+            <template v-for="(part, index) in heroTitleParts" :key="`title-${index}`">
+              <br v-if="index > 0" class="hero-br" />
+              {{ part }}
+            </template>
+          </h1>
+          <div class="hero-product-name" style="transition-delay: 0.28s">
+            <template v-for="(part, index) in heroPanelLabelParts" :key="`panel-${index}`">
+              <br v-if="index > 0" class="hero-br" />
+              {{ part }}
+            </template>
+          </div>
+          <p class="text-body-large hero-description" style="transition-delay: 0.42s">
+            <template v-for="(part, index) in heroDescriptionParts" :key="`desc-${index}`">
+              <br v-if="index > 0" class="hero-br" />
+              {{ part }}
+            </template>
+          </p>
           <div
             class="hero-actions"
             style="transition-delay: 0.55s"
@@ -90,6 +90,9 @@ import {
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
 
+const heroBreakPattern = /<br\s+class=["']hero-br["']\s*\/?>/gi;
+const splitHeroText = (value: string) => value.split(heroBreakPattern);
+
 // Responsive srcset 供 <source> 使用（浏览器按设备/网络自动选最佳尺寸）
 const heroDesktopEntry = getResponsiveHeroImage("homeDesktop");
 const heroMobileEntry = getResponsiveHeroImage("homeMobile");
@@ -107,6 +110,9 @@ const heroImgFallback = getLargestResponsiveImage(heroDesktopEntry);
 const productCenterRoute = computed(() =>
   localizeTo({ path: "/products", hash: "#products-page-top" })
 );
+const heroTitleParts = computed(() => splitHeroText(t("home.hero.title")));
+const heroPanelLabelParts = computed(() => splitHeroText(t("home.hero.panelLabel")));
+const heroDescriptionParts = computed(() => splitHeroText(t("home.hero.description")));
 
 const entered = ref(false);
 
