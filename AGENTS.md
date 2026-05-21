@@ -20,7 +20,7 @@
 - 需要 PR/MR、CI、review 时可用对应 Git 平台工具或 CLI，但先确认当前目录有 Git 元数据、远端和评审环境；没有证据时不要编造分支、提交、PR/MR。
 - 需要最新外部信息时再联网；OpenAI / Codex 相关问题只参考官方文档并注明来源。
 - automations 只用于用户明确要求的定时检查、提醒、持续跟进或安全的只读后台任务，不替代当前本地验证。
-- 自动化和后台任务不能无人值守触发真实硬件动作；涉及机器人、电机、夹爪、PLC、EtherCAT、CAN 等，只能做只读检查、日志分析或明确安全的验证。
+- 自动化和后台任务不能无人值守触发真实硬件动作；涉及机器人、电机、夹爪、PLC、EtherCAT、CAN 等，只能做只读检查、日志分析，或不输出真实动作、不改变 IO/设备状态、不驱动执行器的验证。
 
 ## 项目事实
 
@@ -47,7 +47,7 @@
 - `yarn smoke`：检查已构建的 `dist/`，必须在 `yarn build` 后运行。
 - `yarn test:node`：Node 端测试。
 - `yarn validate`：仓库脚本门禁，实际顺序是 lint、type-check、build、smoke。
-- `yarn audit`：中等级别及以上依赖审计。
+- `yarn audit --level moderate` 或 `yarn run audit`：中等级别及以上依赖审计。
 
 ## 不要手改的生成物
 
@@ -91,7 +91,7 @@
 - 文档或极小样式改动：检查 diff，必要时跑 `yarn lint`。
 - TypeScript、路由、i18n、数据结构改动：跑 `yarn type-check` 和相关 `yarn test:node`。
 - 路由、SEO、图片、构建脚本、部署相关改动：跑 `yarn build` 后跑 `yarn smoke`。
-- 依赖或安全相关改动：补 `yarn audit`。
+- 依赖或安全相关改动：补 `yarn audit --level moderate` 或 `yarn run audit`。
 - 收口前的完整人工链路优先为：`yarn lint` -> `yarn type-check` -> `yarn build` -> `yarn smoke` -> `yarn test:node`。
 
 验证失败时直接说明失败命令、关键错误和下一步；不要包装成成功。
