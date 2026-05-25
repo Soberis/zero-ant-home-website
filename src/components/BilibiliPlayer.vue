@@ -417,7 +417,12 @@ onUnmounted(() => {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: all 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s,
+    color 0.2s,
+    transform 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;

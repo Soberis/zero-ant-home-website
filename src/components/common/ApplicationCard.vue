@@ -3,7 +3,6 @@
     class="app-card-item ui-card ui-card--application"
     :to="props.slug ? localizePath(`/applications/${props.slug}`) : localizePath('/solutions')"
   >
-    <div class="app-card-bg"></div>
     <div class="app-card-inner">
       <!-- eslint-disable-next-line vue/no-v-html -- 本地静态 SVG 字面量，非用户输入 -->
       <div class="app-icon ui-card__icon" v-html="props.svg"></div>
@@ -50,10 +49,6 @@ const { localizePath } = useLocalizedPath();
   height: 100%;
   overflow: hidden;
   z-index: 1;
-}
-
-.app-card-bg {
-  /* 保留装饰背景层 */
 }
 
 .app-card-inner {

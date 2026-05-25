@@ -3,32 +3,31 @@
   <div class="home-page">
     <HeroCarousel />
 
-    <main class="home-main">
-      <section ref="productsRef" class="home-section home-section--products reveal-ready">
+    <div class="home-main">
+      <section class="home-section home-section--products">
         <CoreProducts />
       </section>
 
-      <section ref="appsRef" class="home-section home-section--applications reveal-ready">
+      <section class="home-section home-section--applications">
         <IndustryApplications />
       </section>
 
-      <section ref="videosRef" class="home-section home-section--videos reveal-ready">
+      <section class="home-section home-section--videos">
         <VideoCases />
       </section>
 
-      <section ref="partnersRef" class="home-section home-section--partners reveal-ready">
+      <section class="home-section home-section--partners">
         <Partners />
       </section>
-    </main>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref } from "vue";
+import { defineAsyncComponent } from "vue";
 import HeroCarousel from "@/components/business/HeroCarousel.vue";
 import SectionError from "@/components/common/SectionError.vue";
 import SectionSkeleton from "@/components/common/SectionSkeleton.vue";
-import { useScrollRevealList } from "@/composables/useScrollReveal";
 
 // 首页下半屏内容异步加载，先把首屏路径跑轻
 const CoreProducts = defineAsyncComponent({
@@ -63,12 +62,6 @@ const Partners = defineAsyncComponent({
   timeout: 8000,
 });
 
-const productsRef = ref<HTMLElement | null>(null);
-const appsRef = ref<HTMLElement | null>(null);
-const videosRef = ref<HTMLElement | null>(null);
-const partnersRef = ref<HTMLElement | null>(null);
-
-useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 </script>
 
 <style scoped>
@@ -95,16 +88,6 @@ useScrollRevealList([productsRef, appsRef, videosRef, partnersRef]);
 
 .home-section--applications {
   background: var(--brand-surface-panel);
-}
-
-.home-section--applications::before,
-.home-section--partners::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.03) 0.5px, transparent 0.5px);
-  background-size: 16px 16px;
 }
 
 .home-section--videos {

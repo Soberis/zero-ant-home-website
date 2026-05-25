@@ -545,7 +545,10 @@ const goBack = () => {
   font-weight: 600;
   line-height: 1.5;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .product-hero__back-link:hover {
@@ -1004,7 +1007,10 @@ const goBack = () => {
   border: 1px solid rgba(15, 23, 42, 0.1);
   color: var(--color-text);
   text-decoration: none;
-  transition: all 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .product-footer-cta__ghost-btn:hover {

@@ -784,7 +784,9 @@ span.contact-value {
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: all 0.24s ease;
+  transition:
+    opacity 0.24s ease,
+    transform 0.24s ease;
 }
 
 .fade-slide-enter-from,

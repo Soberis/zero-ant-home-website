@@ -1,7 +1,8 @@
 import { createApp, nextTick, watch } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
-import i18n, { initI18n } from "@/config/i18n";
+import i18n, { ensureBaseLocale, initI18n } from "@/config/i18n";
+import type { SupportedLocale } from "@/config/i18n";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 
 // Fonts — only critical weights block rendering (Geist: body+nav, Outfit: hero headings)
@@ -112,6 +113,18 @@ if (typeof window !== "undefined") {
         requestId === routeSEORequestId && router.currentRoute.value.fullPath === targetFullPath;
 
       void nextTick().then(async () => {
+        if (!isCurrentRouteSEO()) {
+          return;
+        }
+
+        try {
+          await ensureBaseLocale(i18n.global.locale.value as SupportedLocale);
+        } catch (error) {
+          if (import.meta.env.DEV) {
+            console.warn("设置 SEO 前加载基础文案失败:", error);
+          }
+        }
+
         if (!isCurrentRouteSEO()) {
           return;
         }

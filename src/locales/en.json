@@ -84,7 +84,7 @@
     },
     "coreProducts": {
       "title": "Product Center",
-      "description": "Browse R / M / MR, embodied platforms, controller hardware, and accessories first, then enter the product center for model-level products and specs",
+      "description": "Browse the four core R / D&T / M / MR families first, then enter the product center for complete models, development platforms, and extensions",
       "enter": "Enter Product Center",
       "cardAction": "View family",
       "families": {

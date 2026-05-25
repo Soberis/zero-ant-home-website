@@ -25,12 +25,12 @@
       </router-link>
     </div>
 
-    <div ref="familyGridRef" class="family-grid reveal-stagger">
+    <div class="family-grid">
       <router-link
         v-for="family in productFamilies"
         :key="family.key"
         :to="localizeTo({ path: '/products', hash: `#${family.key}` })"
-        class="family-card ui-card ui-card--product reveal-item"
+        class="family-card ui-card ui-card--product"
       >
         <div class="family-card__visual ui-card__visual">
           <picture v-if="family.responsiveSrcSet" class="family-card__picture">
@@ -89,10 +89,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
-import { useScrollReveal } from "@/composables/useScrollReveal";
 import { getProductCenterCardById } from "@/data/product-center";
 import {
   buildResponsiveSrcSet,
@@ -119,15 +117,11 @@ const { localizeTo } = useLocalizedPath();
 const familyImageSizes =
   "(max-width: 640px) calc(100vw - 72px), (max-width: 960px) calc((100vw - 88px) / 2), (max-width: 1280px) calc((100vw - 128px) / 3), 300px";
 
-const familyGridRef = ref<HTMLElement | null>(null);
-useScrollReveal(familyGridRef);
-
 const rawProductFamilies = [
   {
     key: "r-series",
     responsiveKey: "za-r3-x",
     titleKey: "home.coreProducts.families.rSeries.title",
-    descriptionKey: "home.coreProducts.families.rSeries.description",
     image: getOptimizedImage("za-r3-x"),
     imageSize: getProductImageSize("za-r3-x"),
     models: ["ZA-R3", "ZA-R3X", "ZA-R3M(L/R)"],
@@ -136,7 +130,6 @@ const rawProductFamilies = [
     key: "dt-series",
     responsiveKey: "za-r3t",
     titleKey: "home.coreProducts.families.dtSeries.title",
-    descriptionKey: "home.coreProducts.families.dtSeries.description",
     image: getOptimizedImage("za-r3t"),
     imageSize: getProductImageSize("za-r3t"),
     models: ["ZA-R3D6", "ZA-R3T"],
@@ -145,7 +138,6 @@ const rawProductFamilies = [
     key: "m-series",
     responsiveKey: "za-m135",
     titleKey: "home.coreProducts.families.mSeries.title",
-    descriptionKey: "home.coreProducts.families.mSeries.description",
     image: getOptimizedImage("za-m135"),
     imageSize: getProductImageSize("za-m135"),
     models: ["ZA-M75", "ZA-M135"],
@@ -154,37 +146,9 @@ const rawProductFamilies = [
     key: "mr-series",
     responsiveKey: "za-mr3t",
     titleKey: "home.coreProducts.families.mrSeries.title",
-    descriptionKey: "home.coreProducts.families.mrSeries.description",
     image: getOptimizedImage("za-mr3t"),
     imageSize: getProductImageSize("za-mr3t"),
     models: ["ZA-MR3M", "ZA-MR3T"],
-  },
-  {
-    key: "embodied-platforms",
-    responsiveKey: "za-rmvr",
-    titleKey: "home.coreProducts.families.embodied.title",
-    descriptionKey: "home.coreProducts.families.embodied.description",
-    image: getOptimizedImage("za-rmvr"),
-    imageSize: getProductImageSize("za-rmvr"),
-    models: ["ZA-RMVR", "ZA-RMPS", "ZA-RDP"],
-  },
-  {
-    key: "controller",
-    responsiveKey: "za-zg100",
-    titleKey: "home.coreProducts.families.controller.title",
-    descriptionKey: "home.coreProducts.families.controller.description",
-    image: getOptimizedImage("za-zg100"),
-    imageSize: getProductImageSize("za-zg100"),
-    models: ["ZA-ZG100"],
-  },
-  {
-    key: "accessories",
-    responsiveKey: "rotating-platform",
-    titleKey: "home.coreProducts.families.accessories.title",
-    descriptionKey: "home.coreProducts.families.accessories.description",
-    image: getOptimizedImage("rotating-platform"),
-    imageSize: getProductImageSize("rotating-platform"),
-    models: ["地轨平台", "旋转平台"],
   },
 ] as const;
 

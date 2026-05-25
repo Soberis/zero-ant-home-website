@@ -308,7 +308,10 @@ const coreValues = computed(() => [
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 16px;
   padding: 32px;
-  transition: all var(--transition-smooth);
+  transition:
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    transform var(--transition-smooth);
 }
 
 .culture-item:hover {
@@ -546,7 +549,11 @@ const coreValues = computed(() => [
   background: var(--section-card-surface);
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 12px;
-  transition: all var(--transition-smooth);
+  transition:
+    background-color var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    transform var(--transition-smooth);
 }
 
 .stat-card:hover {
@@ -711,7 +718,9 @@ const coreValues = computed(() => [
   flex-direction: column;
   gap: 16px;
   /* background/border is set in top block */
-  transition: all var(--transition-smooth);
+  transition:
+    box-shadow var(--transition-smooth),
+    transform var(--transition-smooth);
 }
 
 .value-card:hover {

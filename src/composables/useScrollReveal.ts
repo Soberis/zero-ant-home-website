@@ -17,7 +17,6 @@ interface ScrollRevealOptions {
  * 2. setup 中调用 useScrollReveal(elementRef)
  * 3. 元素进入视口时自动获得 .revealed class，CSS 负责动画
  *
- * 支持 stagger：给容器加 class="reveal-stagger"，子元素加 class="reveal-item"
  */
 export function useScrollReveal(
   target: Ref<HTMLElement | null>,

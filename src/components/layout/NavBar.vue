@@ -207,7 +207,11 @@ onUnmounted(() => {
   z-index: 1000;
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--brand-border-subtle);
-  transition: all var(--transition-smooth);
+  transition:
+    background-color var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    backdrop-filter var(--transition-smooth);
 }
 
 .header.is-scrolled {
