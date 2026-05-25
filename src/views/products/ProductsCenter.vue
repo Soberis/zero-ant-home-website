@@ -136,7 +136,7 @@ function getCardSrcset(cardId: string, format: ResponsiveImageFormat): string {
   return cache.get(format)!;
 }
 
-const activeFamilyId = ref("");
+const activeFamilyId = ref(productCenterFamilies[0]?.id ?? "");
 const filterInnerRef = ref<HTMLElement | null>(null);
 const filterLinkRefs = new Map<string, HTMLElement>();
 let familyObserver: IntersectionObserver | null = null;
@@ -284,8 +284,6 @@ const pageContent = computed(() => ({
 .product-center-filter__link {
   min-width: 80px;
 }
-
-/* active link state could be handled with JS, but for anchor links a soft hover is good enough for now. */
 
 .product-family {
   position: relative;
