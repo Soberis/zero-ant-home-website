@@ -509,7 +509,8 @@ onUnmounted(() => {
   box-shadow: none;
 }
 
-.nav-item:hover .dropdown {
+.nav-item:hover .dropdown,
+.nav-item:focus-within .dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -782,7 +783,7 @@ onUnmounted(() => {
   }
 
   .language-btn {
-    min-height: 36px;
+    min-height: 44px;
     min-width: 52px;
     padding: 6px 10px;
     font-size: 11px;
@@ -794,8 +795,8 @@ onUnmounted(() => {
   }
 
   .hamburger-menu {
-    width: 28px;
-    height: 28px;
+    width: 44px;
+    height: 44px;
     margin-left: 12px;
   }
 
@@ -825,15 +826,15 @@ onUnmounted(() => {
   }
 
   .language-btn {
-    min-height: 34px;
+    min-height: 44px;
     min-width: 48px;
     padding: 5px 8px;
     font-size: 10px;
   }
 
   .hamburger-menu {
-    width: 26px;
-    height: 26px;
+    width: 44px;
+    height: 44px;
     margin-left: 8px;
   }
 
@@ -863,8 +864,8 @@ onUnmounted(() => {
   }
 
   .language-btn {
-    min-height: 30px;
-    min-width: 42px;
+    min-height: 44px;
+    min-width: 44px;
     padding: 4px 6px;
     font-size: 9px;
   }
@@ -874,8 +875,8 @@ onUnmounted(() => {
   }
 
   .hamburger-menu {
-    width: 24px;
-    height: 24px;
+    width: 44px;
+    height: 44px;
     margin-left: 6px;
   }
 

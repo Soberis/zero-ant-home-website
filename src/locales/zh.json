@@ -33,7 +33,8 @@
   },
   "common": {
     "a11y": {
-      "skipToContent": "跳到主要内容"
+      "skipToContent": "跳到主要内容",
+      "closeDialog": "关闭弹窗"
     },
     "cta": {
       "viewDetails": "查看详情",

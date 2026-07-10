@@ -95,7 +95,7 @@
   --brand-border-subtle: rgba(15, 23, 42, 0.08);
   --brand-border-strong: rgba(15, 23, 42, 0.12);
   --brand-accent-soft: rgba(26, 58, 143, 0.06);
-  --brand-focus-ring: rgba(26, 58, 143, 0.28);
+  --brand-focus-ring: var(--color-primary);
   --brand-focus-outline: rgba(26, 58, 143, 0.14);
   --brand-shadow-card: 0 12px 28px rgba(15, 23, 42, 0.05);
   /* ── 圆角（3 档 + 胶囊） ── */

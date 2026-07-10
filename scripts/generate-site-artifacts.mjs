@@ -12,7 +12,6 @@ const localeDir = path.join(projectRoot, "src", "locales");
 const sourceDir = path.join(projectRoot, "src", "data");
 const responsiveManifestPath = path.join(sourceDir, "responsive-images.generated.json");
 const siteUrl = (process.env.VITE_SITE_URL || "https://zeroant.com").replace(/\/+$/, "");
-const buildDate = new Date().toISOString().slice(0, 10);
 const DEFAULT_SHARE_IMAGE = `${siteUrl}/og-image.webp`;
 const IMAGE_FILE_EXTENSIONS = new Set([
   ".png",
@@ -56,6 +55,15 @@ function escapeHtml(value = "") {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+const HERO_BREAK_PATTERN = /<br\s+class=["']hero-br["']\s*\/?>/gi;
+
+function renderHeroText(value = "") {
+  return String(value)
+    .split(HERO_BREAK_PATTERN)
+    .map((part) => escapeHtml(part))
+    .join('<br class="hero-br" />');
 }
 
 function stripHtml(value = "") {
@@ -699,16 +707,22 @@ function renderHead(html, page) {
 
   nextHtml = nextHtml.replace(/\s*<meta[^>]+property="og:locale:alternate"[^>]*>/gi, "");
   nextHtml = nextHtml.replace(/\s*<link[^>]+rel="alternate"[^>]*>/gi, "");
-  nextHtml = nextHtml.replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/gi, "");
+  nextHtml = nextHtml.replace(
+    /\s*<script[^>]+type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
+    ""
+  );
 
   const alternateLinks = getAlternates(page.path)
-    .map((item) => `    <link rel="alternate" hreflang="${item.hreflang}" href="${item.href}" />`)
+    .map(
+      (item) =>
+        `    <link rel="alternate" hreflang="${item.hreflang}" href="${item.href}" data-seo-managed="true" />`
+    )
     .join("\n");
 
   const seoExtras = [
-    `    <meta property="og:locale:alternate" content="${alternateOgLocale}" />`,
+    `    <meta property="og:locale:alternate" content="${alternateOgLocale}" data-seo-managed="true" />`,
     alternateLinks,
-    `    <script type="application/ld+json">${JSON.stringify(page.structuredData)}</script>`,
+    `    <script type="application/ld+json" data-seo-managed="structured-data">${JSON.stringify(page.structuredData)}</script>`,
   ].join("\n");
 
   nextHtml = nextHtml.replace("</head>", `${seoExtras}\n  </head>`);
@@ -741,8 +755,8 @@ function buildPageContent(page, messages, data) {
         .map((item) => escapeHtml(getMessage(messages, item.titleKey)));
 
       return renderStaticShell(
-        escapeHtml(getMessage(messages, "home.hero.title")),
-        escapeHtml(getMessage(messages, "home.hero.description")),
+        renderHeroText(getMessage(messages, "home.hero.title")),
+        renderHeroText(getMessage(messages, "home.hero.description")),
         [
           renderGridSection(
             escapeHtml(getMessage(messages, "home.coreProducts.title")),
@@ -1220,7 +1234,6 @@ function buildSitemapXml(entries) {
       return [
         "  <url>",
         `    <loc>${location}</loc>`,
-        `    <lastmod>${buildDate}</lastmod>`,
         "    <changefreq>weekly</changefreq>",
         `    <priority>${priority}</priority>`,
         "  </url>",

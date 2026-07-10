@@ -33,7 +33,8 @@
   },
   "common": {
     "a11y": {
-      "skipToContent": "Skip to main content"
+      "skipToContent": "Skip to main content",
+      "closeDialog": "Close dialog"
     },
     "cta": {
       "viewDetails": "View Details",

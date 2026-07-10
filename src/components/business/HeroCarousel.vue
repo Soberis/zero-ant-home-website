@@ -31,7 +31,7 @@
           />
           <img
             :src="heroImgFallback"
-            :alt="t('home.hero.title')"
+            :alt="heroAltText"
             class="hero-image"
             width="1600"
             height="2844"
@@ -111,6 +111,7 @@ const productCenterRoute = computed(() =>
   localizeTo({ path: "/products", hash: "#products-page-top" })
 );
 const heroTitleParts = computed(() => splitHeroText(t("home.hero.title")));
+const heroAltText = computed(() => heroTitleParts.value.join(" "));
 const heroPanelLabelParts = computed(() => splitHeroText(t("home.hero.panelLabel")));
 const heroDescriptionParts = computed(() => splitHeroText(t("home.hero.description")));
 

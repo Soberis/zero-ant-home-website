@@ -1309,7 +1309,7 @@ watch(
 
 .direction-card__visual-title {
   margin: 0;
-  color: rgba(15, 23, 42, 0.56);
+  color: var(--brand-text-subtle);
   font-size: 0.84rem;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -1480,7 +1480,7 @@ watch(
 
 .more-panel__guide {
   margin-top: 8px;
-  color: rgba(15, 23, 42, 0.58);
+  color: var(--brand-text-subtle);
   font-size: 0.92rem;
   line-height: 1.65;
 }

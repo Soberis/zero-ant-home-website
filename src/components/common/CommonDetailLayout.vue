@@ -104,8 +104,13 @@
 
     <div class="content-wrapper">
       <div class="title-row">
-        <h2 class="detail-title">{{ title }}</h2>
-        <button type="button" class="btn btn-secondary contact-cta" @click="showContact = true">
+        <h1 class="detail-title">{{ title }}</h1>
+        <button
+          ref="contactTriggerRef"
+          type="button"
+          class="btn btn-secondary contact-cta"
+          @click="showContact = true"
+        >
           {{ t("common.cta.contactTeam") }}
           <svg viewBox="0 0 24 24" width="15" height="15">
             <path
@@ -160,8 +165,13 @@
         @click.self="showContact = false"
       >
         <div ref="dialogRef" class="contact-dialog">
-          <button type="button" class="contact-close-x" @click="showContact = false">
-            <svg viewBox="0 0 24 24" width="24" height="24">
+          <button
+            type="button"
+            class="contact-close-x"
+            :aria-label="t('common.a11y.closeDialog')"
+            @click="showContact = false"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
               <path
                 fill="currentColor"
                 d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
@@ -235,6 +245,7 @@ const { t } = useI18n();
 const showContact = ref<boolean>(false);
 const videoStarted = ref<boolean>(false);
 const dialogRef = ref<HTMLDivElement | null>(null);
+const contactTriggerRef = ref<HTMLButtonElement | null>(null);
 
 const thumbnailUrl = computed(
   () =>
@@ -320,6 +331,8 @@ watch(showContact, (open) => {
       const closeBtn = dialogRef.value?.querySelector<HTMLButtonElement>(".contact-close-x");
       closeBtn?.focus();
     });
+  } else {
+    nextTick(() => contactTriggerRef.value?.focus());
   }
 });
 
@@ -565,7 +578,7 @@ onUnmounted(() => {
   position: absolute;
   right: 18px;
   top: 18px;
-  color: #94a3b8;
+  color: var(--color-text-secondary);
   background: rgba(241, 245, 249, 0.8);
   border: none;
   border-radius: 50%;

@@ -12,7 +12,7 @@ const BASE_HTML =
 type StaticPage = ReturnType<typeof buildPageDefinitions>[number];
 
 function getStructuredDataEntries(html: string) {
-  const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  const match = html.match(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i);
   const parsed = JSON.parse(match?.[1] || "null");
   return Array.isArray(parsed) ? parsed : [parsed];
 }
@@ -64,7 +64,7 @@ describe("generate-site-artifacts", () => {
       /<meta property="og:locale" content="(zh_CN|en_US)"/i,
       /<link rel="alternate" hreflang="zh-CN"/i,
       /<link rel="alternate" hreflang="en-US"/i,
-      /<script type="application\/ld\+json">/i,
+      /<script[^>]+type="application\/ld\+json"[^>]*>/i,
     ];
 
     for (const page of pages) {
@@ -75,6 +75,24 @@ describe("generate-site-artifacts", () => {
         assertMatches(html, label, pattern);
       }
     }
+  });
+
+  test("每个静态页面都只有一个 H1，且首页换行标签不会被转义成文本", () => {
+    for (const page of pages) {
+      const html = renderPageHtml(BASE_HTML, page);
+      const h1Count = (html.match(/<h1\b/gi) || []).length;
+
+      expect(h1Count, `${page.locale}:${page.path}`).toBe(1);
+      expect(html, `${page.locale}:${page.path}`).not.toMatch(/&lt;br\b/i);
+    }
+  });
+
+  test("运行时管理的 SEO 标签在静态产物中已标记", () => {
+    const homePage = pages.find((page) => page.path === "/" && page.locale === "zh");
+    const html = renderPageHtml(BASE_HTML, homePage as StaticPage);
+
+    expect(html.match(/data-seo-managed="true"/g)?.length).toBe(4);
+    expect(html).toContain('data-seo-managed="structured-data"');
   });
 
   test("产品详情页会输出 OG 图片尺寸", () => {

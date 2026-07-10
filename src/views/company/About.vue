@@ -806,7 +806,7 @@ const coreValues = computed(() => [
 
 .contact-label {
   display: block;
-  color: rgba(15, 23, 42, 0.5);
+  color: var(--brand-text-subtle);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.06em;

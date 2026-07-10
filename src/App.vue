@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="page">
+  <div class="page">
     <!-- 跳过导航，直达主内容 -->
     <a href="#main-content" class="skip-to-content">{{ $t("common.a11y.skipToContent") }}</a>
     <!-- 导航栏 -->
@@ -83,19 +83,13 @@ body {
   overflow-x: hidden;
 }
 
-#app {
+.page {
   width: 100%;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
 .main-content {

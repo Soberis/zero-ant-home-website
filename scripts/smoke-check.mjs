@@ -146,6 +146,30 @@ async function checkNginxFallbackPolicy() {
       !content.includes("try_files $uri $uri/ /index.html;"),
       "[smoke] Nginx should not fall back unknown routes to index.html"
     );
+    assert(
+      content.includes("frame-ancestors 'self'"),
+      "[smoke] Nginx CSP should restrict frame ancestors"
+    );
+    assert(
+      content.includes('add_header X-Content-Type-Options "nosniff" always;'),
+      "[smoke] Nginx should prevent MIME sniffing"
+    );
+    assert(
+      /location\s+~\*[^{}]+{[\s\S]*?expires\s+1y;/m.test(content),
+      "[smoke] Nginx should cache versioned static assets"
+    );
+    assert(
+      /location\s+=\s+\/js\/i18n-lang-fix\.js\s*{\s*expires\s+-1;/m.test(content),
+      "[smoke] Nginx should revalidate the stable i18n bootstrap script"
+    );
+    assert(
+      /location\s+\^~\s+\/responsive\/\s*{\s*expires\s+-1;/m.test(content),
+      "[smoke] Nginx should revalidate stable responsive image URLs"
+    );
+    assert(
+      !/location\s+~\*[^{}]*responsive[^{}]*{\s*expires\s+1y;/m.test(content),
+      "[smoke] Nginx should not long-cache stable responsive image URLs"
+    );
   }
 }
 

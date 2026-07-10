@@ -3,6 +3,7 @@ image: $HARBOR_HOST/$HARBOR_PROJECT/zeroant_homewebsite:latest
 variables:
   NPM_CONFIG_CACHE: .npm
   CI: true
+  VITE_SITE_URL: https://zeroant.com
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}-${CI_PROJECT_ID}
@@ -24,10 +25,12 @@ validate:
       - runner_system_failure
       - stuck_or_timeout_failure
   script:
-    - yarn install --frozen-lockfile --ignore-engines
+    - yarn install --frozen-lockfile
+    - yarn format:check
     - yarn lint
     - yarn type-check
     - yarn test:node
+    - yarn audit
 
 # 构建阶段
 build:
@@ -40,8 +43,9 @@ build:
       - scheduler_failure
       - api_failure
   script:
-    - yarn install --frozen-lockfile --ignore-engines
+    - yarn install --frozen-lockfile
     - yarn build
+    - yarn smoke
   artifacts:
     paths:
       - dist/

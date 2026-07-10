@@ -648,7 +648,7 @@ const goBack = () => {
   margin-top: 0;
   font-size: 0.9rem;
   line-height: 1.5;
-  color: rgba(15, 23, 42, 0.45);
+  color: var(--brand-text-subtle);
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -883,8 +883,9 @@ const goBack = () => {
 }
 
 .download-card:focus-visible {
-  outline: none;
-  border-color: rgba(26, 58, 143, 0.22);
+  outline: 2px solid var(--brand-focus-ring);
+  outline-offset: 3px;
+  border-color: var(--brand-focus-ring);
   box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.12);
 }
 

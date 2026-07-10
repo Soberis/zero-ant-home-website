@@ -61,7 +61,6 @@ const Partners = defineAsyncComponent({
   delay: 200,
   timeout: 8000,
 });
-
 </script>
 
 <style scoped>

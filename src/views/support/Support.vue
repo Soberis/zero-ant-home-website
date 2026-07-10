@@ -668,7 +668,7 @@ function toggleFaq(idx: number): void {
 
 .card-index {
   min-width: 40px;
-  color: rgba(26, 58, 143, 0.45);
+  color: var(--brand-primary);
   font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -697,7 +697,7 @@ function toggleFaq(idx: number): void {
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
-  color: rgba(15, 23, 42, 0.5);
+  color: var(--color-text-secondary);
   transition:
     transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.2s ease;

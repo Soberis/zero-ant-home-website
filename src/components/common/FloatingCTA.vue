@@ -319,43 +319,7 @@ defineProps<{
 
 @media (max-width: 768px) {
   .floating-sidebar {
-    right: 8px;
-    top: auto;
-    bottom: 56px;
-    transform: none;
-    border-radius: 18px;
-    padding: 6px 0;
-  }
-
-  .sidebar-item {
-    width: 44px;
-    height: 44px;
-    margin: 4px 5px;
-  }
-
-  .sidebar-item:hover {
-    transform: none;
-  }
-
-  .sidebar-icon svg {
-    width: 17px;
-    height: 17px;
-  }
-
-  .back-to-top .sidebar-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .sidebar-popup {
     display: none;
-  }
-
-  /* 移动端：电话/微信改为整行可点击链接 */
-  .sidebar-item--phone-mobile,
-  .sidebar-item--wechat-mobile {
-    text-decoration: none;
-    color: var(--color-primary);
   }
 }
 </style>
