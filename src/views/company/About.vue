@@ -3,22 +3,27 @@
   <div class="about-page">
     <section class="about-hero">
       <div class="page-shell hero-shell">
-        <div class="hero-copy">
-          <h1
-            :class="[
-              'hero-title',
-              'text-display-super',
-              { 'hero-title--single-line': locale === 'en' },
-            ]"
-          >
-            {{ $t("slogan") }}
+        <div :class="['hero-copy', { 'hero-copy--en': locale === 'en' }]">
+          <h1 :class="['hero-title', 'text-display-super', { 'hero-title--en': locale === 'en' }]">
+            <span class="hero-title-line hero-title-line--lead">{{ $t("about.hero.line1") }}</span>
+            <span class="hero-title-line hero-title-line--tail">{{ $t("about.hero.line2") }}</span>
           </h1>
-          <p class="hero-sub">{{ $t("slogan2") }}</p>
         </div>
       </div>
     </section>
 
     <main class="about-main">
+      <section id="brand-story" ref="brandStoryRef" class="page-section reveal-ready">
+        <div class="page-shell">
+          <div class="brand-prose">
+            <p class="brand-prose__lead">{{ $t("about.brandStory.para1") }}</p>
+            <p>{{ $t("about.brandStory.para2") }}</p>
+            <p>{{ $t("about.brandStory.para3") }}</p>
+            <p v-if="$t('about.brandStory.para4')">{{ $t("about.brandStory.para4") }}</p>
+          </div>
+        </div>
+      </section>
+
       <section id="company-intro" ref="introRef" class="page-section intro-section reveal-ready">
         <div class="page-shell">
           <div class="detail-section__header">
@@ -29,27 +34,10 @@
 
           <div class="intro-layout">
             <div class="intro-prose">
-              <i18n-t keypath="about.companyIntroDetailed.para1" tag="p" scope="global">
-                <template #org>
-                  <strong>{{ $t("about.richText.org") }}</strong>
-                </template>
-              </i18n-t>
-              <i18n-t keypath="about.companyIntroDetailed.para2" tag="p" scope="global">
-                <template #lab>
-                  <strong>{{ $t("about.richText.lab") }}</strong>
-                </template>
-                <template #airos>
-                  <strong>{{ $t("about.richText.airos") }}</strong>
-                </template>
-              </i18n-t>
-              <i18n-t keypath="about.companyIntroDetailed.para3" tag="p" scope="global">
-                <template #loop>
-                  <strong>{{ $t("about.richText.loop") }}</strong>
-                </template>
-                <template #selfControlled>
-                  <strong>{{ $t("about.richText.selfControlled") }}</strong>
-                </template>
-              </i18n-t>
+              <p>{{ $t("about.companyIntroDetailed.para1") }}</p>
+              <p>{{ $t("about.companyIntroDetailed.para2") }}</p>
+              <p>{{ $t("about.companyIntroDetailed.para3") }}</p>
+              <p>{{ $t("about.companyIntroDetailed.para4") }}</p>
             </div>
 
             <div class="intro-side">
@@ -123,6 +111,21 @@
         </div>
       </section>
 
+      <section id="vision" ref="visionRef" class="page-section reveal-ready">
+        <div class="page-shell">
+          <div class="detail-section__header">
+            <h2 class="detail-section__title">
+              <span class="title-main text-display-large">{{ vision.title }}</span>
+            </h2>
+          </div>
+
+          <div class="vision-statement">
+            <p class="vision-statement__main">{{ vision.desc }}</p>
+            <p class="vision-statement__sub">{{ vision.subDesc }}</p>
+          </div>
+        </div>
+      </section>
+
       <section id="core-values" ref="valuesRef" class="page-section reveal-ready">
         <div class="page-shell">
           <div class="detail-section__header">
@@ -132,8 +135,9 @@
           </div>
 
           <div class="values-grid">
-            <article v-for="value in coreValues" :key="value" class="value-card">
-              <span class="value-text">{{ value }}</span>
+            <article v-for="value in coreValues" :key="value.title" class="value-card">
+              <h3 class="value-title">{{ value.title }}</h3>
+              <p class="value-desc">{{ value.desc }}</p>
             </article>
           </div>
         </div>
@@ -228,14 +232,25 @@ import { formatIndex } from "@/utils/format";
 
 const { t, locale } = useI18n();
 
+const brandStoryRef = ref<HTMLElement | null>(null);
 const introRef = ref<HTMLElement | null>(null);
 const historyRef = ref<HTMLElement | null>(null);
 const honorsRef = ref<HTMLElement | null>(null);
+const visionRef = ref<HTMLElement | null>(null);
 const valuesRef = ref<HTMLElement | null>(null);
 const cultureRef = ref<HTMLElement | null>(null);
 const aboutContactRef = ref<HTMLElement | null>(null);
 
-useScrollRevealList([introRef, historyRef, honorsRef, valuesRef, cultureRef, aboutContactRef]);
+useScrollRevealList([
+  brandStoryRef,
+  introRef,
+  historyRef,
+  honorsRef,
+  visionRef,
+  valuesRef,
+  cultureRef,
+  aboutContactRef,
+]);
 
 const timelineData: ComputedRef<TimelineEvent[]> = computed(() =>
   getTimelineData(t).map((item) => ({ ...item }))
@@ -250,11 +265,29 @@ const teamStats = computed(() => [
   { value: "≥90%", label: t("about.topUniversity") },
 ]);
 
+const vision = computed(() => ({
+  title: t("about.vision.title"),
+  desc: t("about.vision.desc"),
+  subDesc: t("about.vision.subDesc"),
+}));
+
 const coreValues = computed(() => [
-  t("about.coreValues.value1"),
-  t("about.coreValues.value2"),
-  t("about.coreValues.value3"),
-  t("about.coreValues.value4"),
+  {
+    title: t("about.coreValues.item1.title"),
+    desc: t("about.coreValues.item1.desc"),
+  },
+  {
+    title: t("about.coreValues.item2.title"),
+    desc: t("about.coreValues.item2.desc"),
+  },
+  {
+    title: t("about.coreValues.item3.title"),
+    desc: t("about.coreValues.item3.desc"),
+  },
+  {
+    title: t("about.coreValues.item4.title"),
+    desc: t("about.coreValues.item4.desc"),
+  },
 ]);
 </script>
 
@@ -377,32 +410,59 @@ const coreValues = computed(() => [
 }
 
 .hero-copy {
-  max-width: 840px;
+  width: min(100%, 920px);
   margin: 0 auto;
-  padding: 24px 0 48px;
+  padding: clamp(20px, 4vh, 44px) 0 clamp(40px, 8vh, 92px);
   display: grid;
   justify-items: center;
   text-align: center;
+  transform: translateY(clamp(-36px, -3.2vh, -10px));
 }
 
 .hero-title {
-  max-width: 8.6em;
-  margin: 0 0 18px;
-  color: var(--brand-text);
-}
-
-.hero-title--single-line {
-  max-width: none;
-  white-space: nowrap;
-  font-size: clamp(3rem, 5.4vw, 5.3rem);
-}
-
-.hero-sub {
-  max-width: 32em;
+  width: min(100%, 13.6em);
   margin: 0;
-  color: var(--brand-muted);
-  font-size: 1.08rem;
-  line-height: 1.85;
+  color: var(--brand-text);
+  display: grid;
+  gap: clamp(8px, 1.2vh, 14px);
+  justify-items: center;
+  font-size: clamp(2.2rem, 5.2vw, 5.3rem);
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+}
+
+.hero-title-line {
+  display: block;
+  white-space: nowrap;
+  text-wrap: balance;
+}
+
+.hero-title-line--lead {
+  transform: translateX(clamp(-12px, -0.8vw, -4px));
+}
+
+.hero-title-line--tail {
+  transform: translateX(clamp(12px, 2vw, 34px));
+}
+
+.hero-copy--en {
+  width: min(100%, 1020px);
+  transform: translateY(clamp(-24px, -2.3vh, -8px));
+}
+
+.hero-title--en {
+  width: min(100%, 15.2em);
+  font-size: clamp(1.95rem, 4.4vw, 4.4rem);
+  line-height: 1.16;
+  letter-spacing: -0.008em;
+}
+
+.hero-title--en .hero-title-line--lead {
+  transform: translateX(clamp(-6px, -0.5vw, -2px));
+}
+
+.hero-title--en .hero-title-line--tail {
+  transform: translateX(clamp(6px, 1.2vw, 20px));
 }
 
 .about-main > .page-section {
@@ -413,38 +473,50 @@ const coreValues = computed(() => [
   scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
-/* 公司介绍 - 灰色背景，白色卡片 */
+/* 品牌故事 - 灰色背景，白色卡片 */
 .about-main > .page-section:nth-of-type(1) {
   --section-surface: var(--brand-surface-soft);
   --section-card-surface: var(--brand-surface);
 }
 
-/* 发展历史 - 白色背景，灰色卡片 */
+/* 公司介绍 - 白色背景，灰色卡片 */
 .about-main > .page-section:nth-of-type(2) {
   --section-surface: var(--brand-surface);
   --section-card-surface: var(--brand-surface-soft);
 }
 
-/* 成果荣誉 - 灰色背景，白色卡片 */
+/* 发展历史 - 灰色背景，白色卡片 */
 .about-main > .page-section:nth-of-type(3) {
   --section-surface: var(--brand-surface-soft);
   --section-card-surface: var(--brand-surface);
 }
 
-/* 核心价值观 - 白色背景，灰色卡片 */
+/* 成果荣誉 - 白色背景，灰色卡片 */
 .about-main > .page-section:nth-of-type(4) {
   --section-surface: var(--brand-surface);
   --section-card-surface: var(--brand-surface-soft);
 }
 
-/* 企业文化 - 灰色背景，白色卡片 */
+/* 愿景 - 灰色背景，白色卡片 */
 .about-main > .page-section:nth-of-type(5) {
   --section-surface: var(--brand-surface-soft);
   --section-card-surface: var(--brand-surface);
 }
 
-/* 联系我们 - 白色背景，灰色卡片 */
+/* 核心价值观 - 白色背景，灰色卡片 */
 .about-main > .page-section:nth-of-type(6) {
+  --section-surface: var(--brand-surface);
+  --section-card-surface: var(--brand-surface-soft);
+}
+
+/* 企业文化 - 灰色背景，白色卡片 */
+.about-main > .page-section:nth-of-type(7) {
+  --section-surface: var(--brand-surface-soft);
+  --section-card-surface: var(--brand-surface);
+}
+
+/* 联系我们 - 白色背景，灰色卡片 */
+.about-main > .page-section:nth-of-type(8) {
   --section-surface: var(--brand-surface);
   --section-card-surface: var(--brand-surface-soft);
 }
@@ -468,9 +540,29 @@ const coreValues = computed(() => [
   gap: 40px;
 }
 
+.brand-prose {
+  max-width: 72ch;
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+}
+
+.brand-prose p {
+  color: var(--brand-text);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+.brand-prose__lead {
+  font-size: clamp(1.15rem, 1.6vw, 1.28rem);
+  font-weight: 500;
+  color: var(--brand-text);
+  line-height: 1.75;
+}
+
 .intro-prose {
   display: grid;
-  gap: 18px;
 }
 
 .intro-prose p,
@@ -713,10 +805,31 @@ const coreValues = computed(() => [
   gap: 24px;
 }
 
+.vision-statement {
+  display: grid;
+  gap: 14px;
+  text-align: center;
+}
+
+.vision-statement__main {
+  margin: 0;
+  color: var(--brand-text);
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.vision-statement__sub {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
 .value-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   /* background/border is set in top block */
   transition:
     box-shadow var(--transition-smooth),
@@ -728,11 +841,19 @@ const coreValues = computed(() => [
   box-shadow: 0 6px 14px rgba(15, 23, 42, 0.035);
 }
 
-.value-text {
+.value-title {
+  margin: 0;
   color: var(--brand-text);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.45;
+}
+
+.value-desc {
+  margin: 0;
+  color: var(--brand-muted);
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 .culture-list {
@@ -855,10 +976,15 @@ const coreValues = computed(() => [
     gap: 16px;
   }
 
+  .values-principles {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
   .value-card {
     padding: 24px 16px;
-    align-items: center;
-    text-align: center;
   }
 
   .contact-grid {
@@ -882,16 +1008,42 @@ const coreValues = computed(() => [
   }
 
   .hero-copy {
-    padding: 0 0 12px;
+    padding: clamp(10px, 3vh, 24px) 0 20px;
+    transform: translateY(-10px);
+  }
+
+  .hero-copy--en {
+    transform: translateY(-6px);
   }
 
   .hero-title {
     max-width: none;
+    width: min(100%, 13.2em);
+    gap: 10px;
+    font-size: clamp(1.95rem, 6.7vw, 3.75rem);
+    line-height: 1.14;
   }
 
-  .hero-title--single-line {
-    white-space: nowrap;
-    font-size: clamp(2.8rem, 7vw, 4.2rem);
+  .hero-title-line--lead {
+    transform: translateX(clamp(-8px, -0.9vw, -2px));
+  }
+
+  .hero-title-line--tail {
+    transform: translateX(clamp(8px, 1.4vw, 20px));
+  }
+
+  .hero-title--en {
+    width: min(100%, 14.8em);
+    font-size: clamp(1.7rem, 5.4vw, 3.2rem);
+    line-height: 1.18;
+  }
+
+  .hero-title--en .hero-title-line--lead {
+    transform: translateX(clamp(-4px, -0.4vw, -1px));
+  }
+
+  .hero-title--en .hero-title-line--tail {
+    transform: translateX(clamp(4px, 0.9vw, 12px));
   }
 
   .stats-grid {
@@ -924,8 +1076,29 @@ const coreValues = computed(() => [
     min-height: inherit;
   }
 
-  .hero-title--single-line {
-    font-size: clamp(1.45rem, 6.6vw, 2.6rem);
+  .hero-copy {
+    width: 100%;
+    padding: 0 0 16px;
+    transform: none;
+  }
+
+  .hero-title {
+    width: 100%;
+    font-size: clamp(1.58rem, 8.4vw, 2.32rem);
+    line-height: 1.2;
+    letter-spacing: -0.008em;
+    gap: 8px;
+  }
+
+  .hero-title-line {
+    white-space: normal;
+    transform: translateX(0);
+  }
+
+  .hero-title--en {
+    font-size: clamp(1.44rem, 7.2vw, 2rem);
+    line-height: 1.24;
+    letter-spacing: -0.004em;
   }
 
   .timeline-item {

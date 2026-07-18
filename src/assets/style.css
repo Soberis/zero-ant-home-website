@@ -1,6 +1,30 @@
 /* ================================================================
    字体排版系统
    ================================================================ */
+
+/*
+  Font-splicing patch: Geist Sans 没有 unicode-range 声明，
+  会对所有字符抢先渲染，导致全角标点（，。（）：；""）
+  按拉丁字体逻辑渲染、间距显示为半角效果。
+  补一条同名 @font-face，把 CJK 字符与全角标点区间
+  显式指向系统 CJK 字体，优先于 Geist Sans 生效。
+*/
+@font-face {
+  font-family: "Geist Sans";
+  src:
+    local("PingFang SC"),
+    local("Noto Sans SC"),
+    local("Microsoft YaHei UI"),
+    local("Microsoft YaHei");
+  unicode-range:
+    U+2018-2019, U+201C-201D,
+    U+3000-303F,
+    U+4E00-9FFF,
+    U+F900-FAFF,
+    U+FE30-FE4F,
+    U+FF00-FFEF;
+}
+
 /* ── Super 主标题 —— 用于“关于我们”等特殊声明 ── */
 .text-display-super {
   font-family: "Outfit", sans-serif;
