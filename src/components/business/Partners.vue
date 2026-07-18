@@ -13,12 +13,7 @@
           :key="partner.alt + idx"
           class="ecosystem-card"
         >
-          <img
-            :src="partner.src"
-            :alt="partner.alt"
-            :class="partner.class"
-            loading="lazy"
-          />
+          <img :src="partner.src" :alt="partner.alt" :class="partner.class" loading="lazy" />
         </div>
       </div>
     </div>
@@ -31,7 +26,7 @@ import { partners, type Partner } from "@/data/partners";
 const partnersTyped: Partner[] = partners;
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .ecosystem-section {
   position: relative;
   z-index: 1;
@@ -89,7 +84,9 @@ const partnersTyped: Partner[] = partners;
   object-fit: contain;
   display: block;
   opacity: 1;
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  transition:
+    opacity var(--transition-normal),
+    transform var(--transition-normal);
 }
 
 .ecosystem-card:hover img {
@@ -138,8 +135,6 @@ const partnersTyped: Partner[] = partners;
   height: 54px;
   max-width: 95%;
 }
-
-
 
 @media (max-width: 900px) {
   .ecosystem-section {

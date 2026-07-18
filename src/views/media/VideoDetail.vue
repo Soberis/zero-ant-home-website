@@ -36,15 +36,13 @@ const { localizePath } = useLocalizedPath();
 const currentSlug = computed(() => String(route.params.slug || ""));
 
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
-  { label: t('nav.home'), to: localizePath('/') },
-  { label: t('nav.solutions'), to: localizePath('/solutions') },
-  { label: videoInfo.value.title || '', to: localizePath(`/video/${currentSlug.value}`) },
+  { label: t("nav.home"), to: localizePath("/") },
+  { label: t("nav.solutions"), to: localizePath("/solutions") },
+  { label: videoInfo.value.title || "", to: localizePath(`/video/${currentSlug.value}`) },
 ]);
 const isNotFound = computed(() => !videoMap[currentSlug.value]);
 
-const currentIndex = computed(() =>
-  videoCards.findIndex((c) => c.slug === currentSlug.value)
-);
+const currentIndex = computed(() => videoCards.findIndex((c) => c.slug === currentSlug.value));
 const prevSlug = computed(() =>
   currentIndex.value > 0 ? videoCards[currentIndex.value - 1].slug : null
 );
@@ -66,9 +64,7 @@ const defaultVideoInfo: VideoDetail = {
   desc: "",
 };
 
-const rawVideoInfo = computed<VideoDetail>(
-  () => videoMap[currentSlug.value] || defaultVideoInfo
-);
+const rawVideoInfo = computed<VideoDetail>(() => videoMap[currentSlug.value] || defaultVideoInfo);
 
 // 国际化的视频信息
 const videoInfo = computed(
@@ -85,7 +81,10 @@ const descParagraphs = computed(() => {
   if (!text) {
     return [];
   }
-  return text.split(/\n+/).map((block) => block.trim()).filter(Boolean);
+  return text
+    .split(/\n+/)
+    .map((block) => block.trim())
+    .filter(Boolean);
 });
 
 type MediaType = "bilibili" | "video" | "image" | "none";
@@ -106,5 +105,4 @@ const mediaInfo = computed(() => {
     responsiveKey: currentSlug.value,
   };
 });
-
 </script>

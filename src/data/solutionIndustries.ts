@@ -1,9 +1,9 @@
-export type SolutionDirectionKey =
+type SolutionDirectionKey =
   | "lifeScienceAutomation"
   | "smartManufacturingLogistics"
   | "embodiedResearchTeleop";
 
-export interface SolutionDirectionConfig {
+interface SolutionDirectionConfig {
   key: SolutionDirectionKey;
   productSlugs: string[];
   visualProductSlug?: string;
@@ -17,8 +17,6 @@ export const solutionDirections: SolutionDirectionConfig[] = [
   {
     key: "lifeScienceAutomation",
     productSlugs: ["za-r3t", "za-r3d6", "za-zg100"],
-    applicationSlug: "medical-automation",
-    videoSlug: "medical-automation",
     productSectionHash: "#dt-series",
     status: "planning",
   },

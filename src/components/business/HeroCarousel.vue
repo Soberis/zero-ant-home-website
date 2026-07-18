@@ -4,11 +4,24 @@
       <div class="hero-media" :class="{ 'hero-entered': entered }">
         <picture class="hero-picture">
           <source
+            v-if="heroMobileAvifSrcSet"
+            media="(max-width: 900px)"
+            :srcset="heroMobileAvifSrcSet"
+            sizes="100vw"
+            type="image/avif"
+          />
+          <source
             v-if="heroMobileSrcSet"
             media="(max-width: 900px)"
             :srcset="heroMobileSrcSet"
             sizes="100vw"
             type="image/webp"
+          />
+          <source
+            v-if="heroDesktopAvifSrcSet"
+            :srcset="heroDesktopAvifSrcSet"
+            sizes="(max-width: 900px) 100vw, (max-width: 1100px) 54vw, 58vw"
+            type="image/avif"
           />
           <source
             v-if="heroDesktopSrcSet"
@@ -18,7 +31,7 @@
           />
           <img
             :src="heroImgFallback"
-            :alt="t('home.hero.title')"
+            :alt="heroAltText"
             class="hero-image"
             width="1600"
             height="2844"
@@ -31,28 +44,42 @@
 
       <div class="hero-overlay">
         <div class="hero-copy" :class="{ 'hero-entered': entered }">
-          <h1 class="text-display-hero hero-title" style="transition-delay: 0.2s">{{ t('home.hero.title') }}</h1>
-          <div class="hero-product-name" style="transition-delay: 0.25s">
-            {{ t('home.hero.panelLabel') }}
+          <h1 class="text-display-hero hero-title" style="transition-delay: 0.15s">
+            <template v-for="(part, index) in heroTitleParts" :key="`title-${index}`">
+              <br v-if="index > 0" class="hero-br" />
+              {{ part }}
+            </template>
+          </h1>
+          <div class="hero-product-name" style="transition-delay: 0.28s">
+            <template v-for="(part, index) in heroPanelLabelParts" :key="`panel-${index}`">
+              <br v-if="index > 0" class="hero-br" />
+              {{ part }}
+            </template>
           </div>
-          <p class="text-body-large hero-description" style="transition-delay: 0.3s">{{ t('home.hero.description') }}</p>
-          <div class="hero-actions" style="transition-delay: 0.35s" :class="{ 'hero-entered': entered }">
-            <router-link
-              :to="productCenterRoute"
-              class="btn btn-primary"
-            >
-              {{ t('home.hero.primaryCta') }}
+          <p class="text-body-large hero-description" style="transition-delay: 0.42s">
+            <template v-for="(part, index) in heroDescriptionParts" :key="`desc-${index}`">
+              <br v-if="index > 0" class="hero-br" />
+              {{ part }}
+            </template>
+          </p>
+          <div
+            class="hero-actions"
+            style="transition-delay: 0.55s"
+            :class="{ 'hero-entered': entered }"
+          >
+            <router-link :to="productCenterRoute" class="btn btn-primary">
+              {{ t("home.hero.primaryCta") }}
             </router-link>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 import {
   buildResponsiveSrcSet,
@@ -63,19 +90,30 @@ import {
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
 
+const heroBreakPattern = /<br\s+class=["']hero-br["']\s*\/?>/gi;
+const splitHeroText = (value: string) => value.split(heroBreakPattern);
+
 // Responsive srcset 供 <source> 使用（浏览器按设备/网络自动选最佳尺寸）
 const heroDesktopEntry = getResponsiveHeroImage("homeDesktop");
 const heroMobileEntry = getResponsiveHeroImage("homeMobile");
+const heroDesktopAvifEntry = getResponsiveHeroImage("homeDesktop", "avif");
+const heroMobileAvifEntry = getResponsiveHeroImage("homeMobile", "avif");
 const heroDesktopSrcSet = buildResponsiveSrcSet(heroDesktopEntry);
 const heroMobileSrcSet = buildResponsiveSrcSet(heroMobileEntry);
+const heroDesktopAvifSrcSet = buildResponsiveSrcSet(heroDesktopAvifEntry);
+const heroMobileAvifSrcSet = buildResponsiveSrcSet(heroMobileAvifEntry);
 
 // <img> fallback：使用 responsive 图片系统中最大的桌面图，而非 343KB 的静态导入
 // 旧实现 import coverImg 将封面图打进 JS bundle，导致首屏多加载 343KB
 const heroImgFallback = getLargestResponsiveImage(heroDesktopEntry);
 
 const productCenterRoute = computed(() =>
-  localizeTo({ path: '/products', hash: '#products-page-top' })
+  localizeTo({ path: "/products", hash: "#products-page-top" })
 );
+const heroTitleParts = computed(() => splitHeroText(t("home.hero.title")));
+const heroAltText = computed(() => heroTitleParts.value.join(" "));
+const heroPanelLabelParts = computed(() => splitHeroText(t("home.hero.panelLabel")));
+const heroDescriptionParts = computed(() => splitHeroText(t("home.hero.description")));
 
 const entered = ref(false);
 
@@ -95,7 +133,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .hero-carousel {
   position: relative;
   overflow: hidden;
@@ -118,6 +156,25 @@ onUnmounted(() => {
     );
 }
 
+/* 精密点阵纹理叠加 — 延迟入场，与 staggered reveal 同步 */
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.045) 0.5px, transparent 0.5px);
+  background-size: 12px 12px;
+  opacity: 0;
+  animation: texture-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+@keyframes texture-reveal {
+  to {
+    opacity: 0.6;
+  }
+}
+
 .hero-media {
   position: absolute;
   inset: 0;
@@ -130,14 +187,15 @@ onUnmounted(() => {
   padding-right: var(--container-padding-x);
   pointer-events: none;
   opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  transform: translateX(40px) scale(0.94);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
 }
 
 .hero-media.hero-entered {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
 }
 
 .hero-image {
@@ -180,13 +238,18 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   padding: 0 0 20px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero-copy.hero-entered {
+/* 子元素独立入场 — 真正的 staggered reveal */
+.hero-copy > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-copy.hero-entered > * {
   opacity: 1;
   transform: translateY(0);
 }
@@ -197,6 +260,11 @@ onUnmounted(() => {
   color: var(--brand-text, #1a1a2e);
   white-space: normal;
   letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+:deep(.hero-br) {
+  display: block;
 }
 
 .hero-product-name {
@@ -214,6 +282,7 @@ onUnmounted(() => {
   max-width: 24em;
   color: var(--brand-muted, #5a6178);
   line-height: 1.75;
+  text-wrap: pretty;
 }
 
 .hero-actions {
@@ -221,15 +290,6 @@ onUnmounted(() => {
   gap: 16px;
   margin-top: 36px;
   pointer-events: auto;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-actions.hero-entered {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 @media (max-width: 1500px) and (min-width: 901px) {
@@ -316,7 +376,6 @@ onUnmounted(() => {
     inset: 22px -8px 206px;
   }
 
-  
   .hero-description {
     font-size: 0.96rem;
   }
@@ -325,7 +384,8 @@ onUnmounted(() => {
     padding: 72px 16px 22px;
   }
 
-  .hero-copy {
+  :deep(.hero-br) {
+    display: inline;
   }
 }
 
@@ -341,9 +401,6 @@ onUnmounted(() => {
 
   .hero-overlay {
     padding-top: 68px;
-  }
-
-  .hero-copy {
   }
 }
 

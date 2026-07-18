@@ -3,6 +3,7 @@ image: $HARBOR_HOST/$HARBOR_PROJECT/zeroant_homewebsite:latest
 variables:
   NPM_CONFIG_CACHE: .npm
   CI: true
+  VITE_SITE_URL: https://zeroant.com
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}-${CI_PROJECT_ID}
@@ -11,8 +12,25 @@ cache:
     - .npm/
 
 stages:
+  - test
   - build
   - deploy
+
+# 代码质量 + Node 端测试
+validate:
+  stage: test
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+  script:
+    - yarn install --frozen-lockfile
+    - yarn format:check
+    - yarn lint
+    - yarn type-check
+    - yarn test:node
+    - yarn audit
 
 # 构建阶段
 build:
@@ -25,8 +43,9 @@ build:
       - scheduler_failure
       - api_failure
   script:
-    - yarn install
+    - yarn install --frozen-lockfile
     - yarn build
+    - yarn smoke
   artifacts:
     paths:
       - dist/
@@ -41,8 +60,8 @@ deploy_test_server:
   cache:
     key:
       files:
-        - package-lock.json
-      prefix: npm
+        - yarn.lock
+      prefix: yarn
     paths:
       - node_modules/
   before_script:
@@ -56,7 +75,7 @@ deploy_test_server:
   script:
     - echo "Deploying to test server"
     - export SERVER_NAME="test_www.zeroant.com"
-    # 只替换 SERVER_NAME，REWRITE_HTTPS 为空，并删除 443 server 块
+    # 替换 SERVER_NAME，清空 REWRITE_HTTPS 占位符，并删除 443 server 块
     - |
       sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}//g" config/nginx.conf.template | awk '
         BEGIN { block=0; brace=0 }
@@ -92,8 +111,8 @@ deploy_ALI_CLOUD_ECS:
   cache:
     key:
       files:
-        - package-lock.json
-      prefix: npm
+        - yarn.lock
+      prefix: yarn
     paths:
       - node_modules/
   before_script:
@@ -107,9 +126,11 @@ deploy_ALI_CLOUD_ECS:
   script:
     - echo "Deploying to production"
     - export SERVER_NAME="zeroant.com www.zeroant.com"
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g" config/nginx.conf.template > dist/nginx.conf
-    # 替换 SERVER_NAME，并将 {{REWRITE_HTTPS}} 替换为 rewrite 规则
-    - sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}/rewrite ^(.*)$ https:\/\/\$host\$1 permanent;/g" config/nginx.conf.template > dist/nginx.conf
+    # 替换模板占位符，再用 http {} 包裹（生产用 -t -c 需要完整配置）
+    - |
+      echo 'http {' > dist/nginx.conf
+      sed "s/{{SERVER_NAME}}/$SERVER_NAME/g; s/# {{REWRITE_HTTPS}}/return 301 https:\/\/\$host\$request_uri;/" config/nginx.conf.template >> dist/nginx.conf
+      echo '}' >> dist/nginx.conf
     # 部署到阿里云上
     - rsync -avz --delete dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
     - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -t -c /mnt/disk1/zeroant/home_web/nginx.conf"

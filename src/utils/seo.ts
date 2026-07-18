@@ -62,15 +62,9 @@ export function setSEO(meta: SEOMetaData) {
     }
 
     // 更新或创建 meta 标签的通用函数
-    const updateMetaTag = (
-      name: string,
-      content?: string | number,
-      property = false
-    ) => {
+    const updateMetaTag = (name: string, content?: string | number, property = false) => {
       try {
-        const selector = property
-          ? `meta[property="${name}"]`
-          : `meta[name="${name}"]`;
+        const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
         let element = document.querySelector(selector) as HTMLMetaElement;
 
         if (content === undefined || content === null || content === "") {
@@ -162,7 +156,6 @@ export function setSEO(meta: SEOMetaData) {
       link.setAttribute("data-seo-managed", "true");
       document.head.appendChild(link);
     });
-
   } catch (error) {
     if (import.meta.env.DEV) {
       console.warn("设置SEO元数据失败:", error);
@@ -174,9 +167,7 @@ export function setSEO(meta: SEOMetaData) {
  * 生成结构化数据
  * @param data 结构化数据对象或对象数组
  */
-export function setStructuredData(
-  data: StructuredData | StructuredData[]
-) {
+export function setStructuredData(data: StructuredData | StructuredData[]) {
   // 确保在浏览器环境中运行
   if (typeof document === "undefined" || !document.head) {
     if (import.meta.env.DEV) {

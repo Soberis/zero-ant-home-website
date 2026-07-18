@@ -18,11 +18,11 @@ export default defineConfig({
       dts: true, // 生成类型声明文件
     }),
     // Bundle 分析工具（Windows 下也兼容：当脚本为 build:analyze 时启用）
-    ...((process.env.ANALYZE || process.env.npm_lifecycle_event === 'build:analyze')
+    ...(process.env.ANALYZE || process.env.npm_lifecycle_event === "build:analyze"
       ? [
           visualizer({
             filename: "dist/stats.html",
-            open: true,
+            open: process.env.ANALYZE_OPEN === "true",
             gzipSize: true,
             brotliSize: true,
           }),
@@ -43,31 +43,13 @@ export default defineConfig({
       "@": path.resolve(dirname(fileURLToPath(import.meta.url)), "src"),
     },
   },
-  css: {
-    preprocessorOptions: {
-      less: {
-        charset: "utf-8",
-      },
-    },
-  },
   build: {
     // 启用源码映射（可选，生产环境可关闭）
     sourcemap: false,
     // 设置构建目标
     target: "es2022",
-    // 启用压缩
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        // 不使用 drop_console，避免移除 console.warn/error
-        // 仅移除调试用 console 调用，保留 warn/error 便于线上排查
-        pure_funcs: ["console.log", "console.info", "console.debug", "console.trace"],
-        drop_debugger: true, // 移除debugger语句
-      },
-      mangle: {
-        safari10: true, // 解决Safari 10的兼容性问题
-      },
-    },
+    // 启用压缩 (esbuild — 比 terser 快 20-40x)
+    minify: "esbuild",
     rollupOptions: {
       output: {
         // 优化代码分割策略
@@ -76,11 +58,7 @@ export default defineConfig({
           // 反而拖大首页首屏与路由首包。
           if (id.includes("node_modules")) {
             // Vue 核心生态
-            if (
-              id.includes("vue") ||
-              id.includes("vue-router") ||
-              id.includes("vue-i18n")
-            ) {
+            if (id.includes("vue") || id.includes("vue-router") || id.includes("vue-i18n")) {
               return "vue-vendor";
             }
             // 其他第三方库

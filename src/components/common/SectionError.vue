@@ -17,7 +17,7 @@ function reloadPage(): void {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .section-error {
   max-width: var(--container-max-width);
   margin: 0 auto;

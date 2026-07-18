@@ -14,17 +14,9 @@ export interface Application {
 
 /**
  * 行业应用数据列表
- * 仅保留当前产品与视频都能支撑的 6 个核心行业应用场景
+ * 仅保留当前产品与视频都能支撑的 5 个核心行业应用场景
  */
 const applications: Application[] = [
-  // 生命科学自动化
-  {
-    slug: "medical-automation",
-    title: "applications.medical-automation.title",
-    description: "applications.medical-automation.description",
-    video: "medical-automation",
-    svg: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="16" stroke="#14367f" stroke-width="2"/><path d="M24 16v16M16 24h16" stroke="#14367f" stroke-width="2" stroke-linecap="round"/></svg>`,
-  },
   // 智能制造与物流
   {
     slug: "composite-systems",

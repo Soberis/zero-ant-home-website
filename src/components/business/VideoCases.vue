@@ -5,9 +5,18 @@
         <h2 class="home-section-title">{{ t("home.videoCases.title") }}</h2>
         <p class="home-section-description">{{ t("home.videoCases.description") }}</p>
       </div>
-      <router-link :to="localizeTo({ path: '/solutions', hash: '#more-videos' })" class="section-cta ui-action-link">
+      <router-link
+        :to="localizeTo({ path: '/solutions', hash: '#more-videos' })"
+        class="section-cta ui-action-link"
+      >
         <span>{{ t("home.videoCases.exploreAll") }}</span>
-        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          class="cta-arrow"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </router-link>
@@ -61,13 +70,14 @@ const makeVideoItem = (slug: string) => {
   };
 };
 
-const spotlightItems = computed(() =>
-  SPOTLIGHT_SLUGS.map((slug) => makeVideoItem(slug)).filter(Boolean) as Array<{
-    title: string;
-    img: string;
-    slug: string;
-    description: string;
-  }>
+const spotlightItems = computed(
+  () =>
+    SPOTLIGHT_SLUGS.map((slug) => makeVideoItem(slug)).filter(Boolean) as Array<{
+      title: string;
+      img: string;
+      slug: string;
+      description: string;
+    }>
 );
 
 const onHover = (idx: number) => {
@@ -79,7 +89,7 @@ const onLeave = () => {
 };
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .spotlight-section {
   position: relative;
   z-index: 1;

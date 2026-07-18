@@ -25,6 +25,10 @@ function isStaticAssetRequest(request, requestUrl) {
   return STATIC_ASSET_PATH_SEGMENTS.some((segment) => requestUrl.pathname.includes(segment));
 }
 
+function isResponsiveAssetRequest(requestUrl) {
+  return isSameOriginRequest(requestUrl) && requestUrl.pathname.startsWith("/responsive/");
+}
+
 async function cacheStaticAsset(request, response) {
   if (!response || response.status !== 200) {
     return response;
@@ -36,9 +40,7 @@ async function cacheStaticAsset(request, response) {
 }
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS)));
   self.skipWaiting();
 });
 
@@ -48,8 +50,7 @@ self.addEventListener("activate", (event) => {
       Promise.all(
         cacheNames.map((cacheName) => {
           const isLegacyCache = cacheName.startsWith("zeroant-cache");
-          const isStaleStaticCache =
-            cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME;
+          const isStaleStaticCache = cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME;
 
           if (isLegacyCache || isStaleStaticCache) {
             return caches.delete(cacheName);
@@ -71,6 +72,15 @@ self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
   if (!isStaticAssetRequest(event.request, requestUrl)) {
+    return;
+  }
+
+  if (isResponsiveAssetRequest(requestUrl)) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => cacheStaticAsset(event.request, networkResponse))
+        .catch(() => caches.match(event.request))
+    );
     return;
   }
 

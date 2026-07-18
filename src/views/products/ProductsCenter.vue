@@ -1,11 +1,11 @@
 <template>
   <ProductsLayout v-bind="pageContent">
-    <section class="product-center-filter" ref="filterRef">
-      <div class="product-center-filter__inner" ref="filterInnerRef">
+    <section class="product-center-filter">
+      <div ref="filterInnerRef" class="product-center-filter__inner">
         <a
           v-for="family in families"
           :key="family.id"
-          :ref="el => setFilterLinkRef(family.id, el)"
+          :ref="(el) => setFilterLinkRef(family.id, el)"
           :href="`#${family.id}`"
           class="product-center-filter__link ui-jump-link"
           :class="{ 'is-active': activeFamilyId === family.id }"
@@ -15,12 +15,7 @@
       </div>
     </section>
 
-    <section
-      v-for="family in families"
-      :id="family.id"
-      :key="family.id"
-      class="product-family"
-    >
+    <section v-for="family in families" :id="family.id" :key="family.id" class="product-family">
       <div class="product-family__header">
         <div>
           <h2 class="product-family__title">{{ family.title }}</h2>
@@ -31,36 +26,44 @@
       <div class="product-family__grid">
         <router-link
           v-for="card in family.cards"
-          :key="card.id"
           :id="card.id"
+          :key="card.id"
           class="product-card ui-card ui-card--product"
           :to="localizePath(`/products/detail/${card.id}`)"
         >
           <div class="product-card__visual ui-card__visual">
-            <img
-              :src="card.image"
-              :alt="card.title"
-              class="product-card__image ui-card__image"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source
+                v-if="getCardSrcset(card.id, 'avif')"
+                :srcset="getCardSrcset(card.id, 'avif')"
+                type="image/avif"
+              />
+              <source
+                v-if="getCardSrcset(card.id, 'webp')"
+                :srcset="getCardSrcset(card.id, 'webp')"
+                type="image/webp"
+              />
+              <img
+                :src="card.image"
+                :alt="card.title"
+                class="product-card__image ui-card__image"
+                :width="card.imageSize.width"
+                :height="card.imageSize.height"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
 
           <div class="product-card__body">
             <h3 class="product-card__title">{{ card.title }}</h3>
-            <!-- <p class="product-card__summary">{{ card.summary }}</p> -->
-
             <div class="product-card__spec-block">
-              <ul class="product-card__specs">
+              <ul class="product-card__specs-clean">
                 <li v-for="spec in card.primarySpecs" :key="spec">
                   {{ spec }}
                 </li>
               </ul>
             </div>
-
-            <!-- <p v-if="card.secondarySpec" class="product-card__secondary-spec">
-              {{ card.secondarySpec }}
-            </p> -->
 
             <p v-if="card.note" class="product-card__note">
               <span class="product-card__note-label">{{ pageCopy.tipLabel }}</span>
@@ -70,7 +73,13 @@
             <div class="product-card__actions">
               <div class="app-action product-card__detail-link ui-action-link">
                 <span class="action-text">{{ pageCopy.detailAction }}</span>
-                <svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  class="action-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </div>
@@ -102,18 +111,32 @@
 import { computed, ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import { useI18n } from "vue-i18n";
 import ProductsLayout from "@/components/layout/ProductsLayout.vue";
-import {
-  productCenterFamilies,
-} from "@/data/product-center";
+import { productCenterFamilies } from "@/data/product-center";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
+import {
+  getResponsiveProductImage,
+  buildResponsiveSrcSet,
+  DEFAULT_HERO_IMAGE_SIZE,
+} from "@/utils/responsiveImage";
+import type { ResponsiveImageFormat } from "@/utils/responsiveImage";
+import { formatIndex } from "@/utils/format";
 
 const { t } = useI18n();
 const { localizePath } = useLocalizedPath();
 
-// resolveText removed as we now use standard i18n keys
+const cardSrcsetCache = new Map<string, Map<string, string>>();
+function getCardSrcset(cardId: string, format: ResponsiveImageFormat): string {
+  if (!cardSrcsetCache.has(cardId)) {
+    cardSrcsetCache.set(cardId, new Map());
+  }
+  const cache = cardSrcsetCache.get(cardId)!;
+  if (!cache.has(format)) {
+    cache.set(format, buildResponsiveSrcSet(getResponsiveProductImage(cardId, format)));
+  }
+  return cache.get(format)!;
+}
 
-const activeFamilyId = ref("");
-const filterRef = ref<HTMLElement | null>(null);
+const activeFamilyId = ref(productCenterFamilies[0]?.id ?? "");
 const filterInnerRef = ref<HTMLElement | null>(null);
 const filterLinkRefs = new Map<string, HTMLElement>();
 let familyObserver: IntersectionObserver | null = null;
@@ -131,11 +154,12 @@ function scrollFilterToActive(id: string) {
 
   const containerRect = container.getBoundingClientRect();
   const linkRect = linkEl.getBoundingClientRect();
-  const scrollOffset = linkRect.left - containerRect.left - (containerRect.width / 2) + (linkRect.width / 2);
+  const scrollOffset =
+    linkRect.left - containerRect.left - containerRect.width / 2 + linkRect.width / 2;
 
   container.scrollBy({
     left: scrollOffset,
-    behavior: 'smooth',
+    behavior: "smooth",
   });
 }
 
@@ -146,16 +170,19 @@ watch(activeFamilyId, (newId) => {
 });
 
 onMounted(() => {
-  familyObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        activeFamilyId.value = entry.target.id;
-      }
-    });
-  }, {
-    rootMargin: "-20% 0px -60% 0px",
-    threshold: 0
-  });
+  familyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeFamilyId.value = entry.target.id;
+        }
+      });
+    },
+    {
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0,
+    }
+  );
 
   families.value.forEach((family) => {
     const el = document.getElementById(family.id);
@@ -188,30 +215,25 @@ const families = computed(() =>
     cards: family.cards.map((card) => ({
       id: card.id,
       image: card.image,
+      imageSize: card.heroImageSize ?? DEFAULT_HERO_IMAGE_SIZE,
       title: t(card.titleKey),
-      summary: t(card.summaryKey),
       primarySpecs: card.specKeys.slice(0, 3).map((key) => t(key)),
-      secondarySpec: card.specKeys[3] ? t(card.specKeys[3]) : "",
       note: card.noteKey ? t(card.noteKey) : "",
     })),
   }))
 );
 
-const formatMetricCount = (count: number): string => String(count).padStart(2, "0");
-
 const pageMetrics = computed(() => [
   {
-    value: formatMetricCount(families.value.length),
+    value: formatIndex(families.value.length),
     label: t("productsPage.hero.metrics.groups"),
   },
   {
-    value: formatMetricCount(
-      families.value.reduce((sum, family) => sum + family.cards.length, 0)
-    ),
+    value: formatIndex(families.value.reduce((sum, family) => sum + family.cards.length, 0)),
     label: t("productsPage.hero.metrics.products"),
   },
   {
-    value: formatMetricCount(3),
+    value: formatIndex(3),
     label: t("productsPage.hero.metrics.cues"),
   },
 ]);
@@ -238,7 +260,7 @@ const pageContent = computed(() => ({
 }));
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .product-center-filter {
   position: sticky;
   top: calc(var(--nav-height) + 12px);
@@ -262,8 +284,6 @@ const pageContent = computed(() => ({
 .product-center-filter__link {
   min-width: 80px;
 }
-
-/* active link state could be handled with JS, but for anchor links a soft hover is good enough for now. */
 
 .product-family {
   position: relative;
@@ -406,35 +426,20 @@ const pageContent = computed(() => ({
   margin-top: 8px;
 }
 
-.product-card__specs {
+.product-card__specs-clean {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
-.product-card__specs li {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding-left: 12px;
-  color: #344054;
+.product-card__specs-clean li {
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.product-card__specs li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 5px;
-  height: 5px;
-  background: var(--color-primary);
-  border-radius: 50%;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .product-card__secondary-spec {
@@ -555,8 +560,6 @@ const pageContent = computed(() => ({
   .product-card__visual {
     height: 200px;
   }
-
-
 
   .product-center-cta__actions {
     width: 100%;

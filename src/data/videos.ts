@@ -1,22 +1,6 @@
 // 视频数据模块，包含当前素材池中的视频详情映射和视频卡片列表
 
-import agvImg from "@/assets/images/videos/agv-intro.webp";
-import compositeRobotImg from "@/assets/images/videos/composite-robot-transfer.webp";
-import compositeRobotAppImg from "@/assets/images/videos/composite-robot-app.webp";
-import urRobotLLMImg from "@/assets/images/videos/ur-llm-grab.webp";
-import fourAxisRobotFridgeImg from "@/assets/images/videos/four-axis-fridge.webp";
-
-import mobileTransferRobotImg from "@/assets/images/videos/mobile-transfer-robot.webp";
-
-import sketchingRobotImg from "@/assets/images/videos/sketching-robot.webp";
-import mobileRobotChassisImg from "@/assets/images/videos/mobile-robot-chassis.webp";
-import fixedRailTransferRobotImg from "@/assets/images/videos/fixed-rail-transfer-robot.webp";
-
-import zaR3mlDemoImg from "@/assets/images/videos/za-r3ml-demo.jpg";
-import vrTeleopDualArmImg from "@/assets/images/videos/vr-teleop-dual-arm.jpg";
-import vlaDualArmCableGraspingImg from "@/assets/images/videos/vla-dual-arm-cable-grasping.jpg";
-import vlaDualArmDataCollectionImg from "@/assets/images/videos/vla-dual-arm-data-collection.jpg";
-
+import { getLargestResponsiveImage, getResponsiveVideoImage } from "@/utils/responsiveImage";
 // 常量定义
 const BILIBILI_BASE_PARAMS =
   "?spm_id_from=333.1387.homepage.video_card.click&vd_source=7daba5cbb058d519718a2849fb57ed71";
@@ -24,7 +8,7 @@ const BILIBILI_BASE_PARAMS =
 /**
  * 视频类型枚举
  */
-export type VideoType = "bilibili" | "youtube" | "local" | "video" | "image";
+type VideoType = "bilibili" | "youtube" | "local" | "video" | "image";
 
 /**
  * 视频详情接口
@@ -53,21 +37,30 @@ export interface VideoCard {
 /**
  * 视频缩略图映射，供卡片和详情页共用，避免详情页再依赖卡片列表取封面。
  */
+const getRequiredVideoThumbnail = (slug: string): string => {
+  const thumbnail = getLargestResponsiveImage(getResponsiveVideoImage(slug));
+
+  if (!thumbnail) {
+    throw new Error(`[videos] Missing responsive thumbnail for slug: ${slug}`);
+  }
+
+  return thumbnail;
+};
+
 const videoThumbnailMap: Record<string, string> = {
-  // TODO: medical-automation 当前暂借 compositeRobotImg，待有专属医疗素材后替换
-  "medical-automation": compositeRobotImg,
-  "composite-robot-application": compositeRobotAppImg,
-  "agv-product-introduction": agvImg,
-  "ur-robot-llm-motion-capture": urRobotLLMImg,
-  "four-axis-robot-open-fridge": fourAxisRobotFridgeImg,
-  "sketching-robot": sketchingRobotImg,
-  "mobile-transfer-robot": mobileTransferRobotImg,
-  "mobile-robot-chassis": mobileRobotChassisImg,
-  "fixed-rail-transfer-robot": fixedRailTransferRobotImg,
-  "za-r3ml-demo": zaR3mlDemoImg,
-  "vr-teleop-dual-arm": vrTeleopDualArmImg,
-  "vla-dual-arm-cable-grasping": vlaDualArmCableGraspingImg,
-  "vla-dual-arm-data-collection": vlaDualArmDataCollectionImg,
+  "composite-robot-transfer": getRequiredVideoThumbnail("composite-robot-transfer"),
+  "composite-robot-application": getRequiredVideoThumbnail("composite-robot-application"),
+  "agv-product-introduction": getRequiredVideoThumbnail("agv-product-introduction"),
+  "ur-robot-llm-motion-capture": getRequiredVideoThumbnail("ur-robot-llm-motion-capture"),
+  "four-axis-robot-open-fridge": getRequiredVideoThumbnail("four-axis-robot-open-fridge"),
+  "sketching-robot": getRequiredVideoThumbnail("sketching-robot"),
+  "mobile-transfer-robot": getRequiredVideoThumbnail("mobile-transfer-robot"),
+  "mobile-robot-chassis": getRequiredVideoThumbnail("mobile-robot-chassis"),
+  "fixed-rail-transfer-robot": getRequiredVideoThumbnail("fixed-rail-transfer-robot"),
+  "za-r3ml-demo": getRequiredVideoThumbnail("za-r3ml-demo"),
+  "vr-teleop-dual-arm": getRequiredVideoThumbnail("vr-teleop-dual-arm"),
+  "vla-dual-arm-cable-grasping": getRequiredVideoThumbnail("vla-dual-arm-cable-grasping"),
+  "vla-dual-arm-data-collection": getRequiredVideoThumbnail("vla-dual-arm-data-collection"),
 };
 
 /**
@@ -111,14 +104,14 @@ const createVideoCard = (slug: string, title: string): VideoCard => ({
  * 视频详情映射（以 slug 作为 key）
  */
 export const videoMap: Record<string, VideoDetail> = {
-  "medical-automation": {
-    slug: "medical-automation",
+  "composite-robot-transfer": {
+    slug: "composite-robot-transfer",
     type: "bilibili",
     url: `https://www.bilibili.com/video/BV1KKuXzaEG1/${BILIBILI_BASE_PARAMS}`,
-    title: "videos.medical-automation.title",
-    desc: "videos.medical-automation.desc",
-    tags: ["medical-automation", "smart-scheduling", "hospital-logistics"],
-    publishDate: "2024-04-01",
+    title: "videos.composite-robot-transfer.title",
+    desc: "videos.composite-robot-transfer.desc",
+    tags: ["composite-robot", "board-transfer"],
+    publishDate: "2025-07-19",
   },
   "composite-robot-application": {
     slug: "composite-robot-application",
@@ -127,7 +120,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.composite-robot-application.title",
     desc: "videos.composite-robot-application.desc",
     tags: ["composite-robot", "smart-manufacturing", "automated-logistics"],
-    publishDate: "2024-04-15",
+    publishDate: "2025-07-21",
   },
   "agv-product-introduction": {
     slug: "agv-product-introduction",
@@ -137,7 +130,7 @@ export const videoMap: Record<string, VideoDetail> = {
     desc: "videos.agv-product-introduction.desc",
     duration: "5:12",
     tags: ["agv-product", "automated-guidance", "smart-manufacturing"],
-    publishDate: "2024-02-20",
+    publishDate: "2025-07-17",
   },
   "ur-robot-llm-motion-capture": {
     slug: "ur-robot-llm-motion-capture",
@@ -146,7 +139,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.ur-robot-llm-motion-capture.title",
     desc: "videos.ur-robot-llm-motion-capture.desc",
     tags: ["ur-robot", "llm", "motion-capture", "smart-manufacturing"],
-    publishDate: "2024-05-01",
+    publishDate: "2025-07-22",
   },
   "four-axis-robot-open-fridge": {
     slug: "four-axis-robot-open-fridge",
@@ -155,7 +148,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.four-axis-robot-open-fridge.title",
     desc: "videos.four-axis-robot-open-fridge.desc",
     tags: ["4-axis-robot", "automation", "smart-manufacturing", "motion-control"],
-    publishDate: "2024-05-01",
+    publishDate: "2025-07-22",
   },
   "sketching-robot": {
     slug: "sketching-robot",
@@ -164,7 +157,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.sketching-robot.title",
     desc: "videos.sketching-robot.desc",
     tags: ["sketching-robot", "art-creation", "ai-drawing"],
-    publishDate: "2024-12-25",
+    publishDate: "2025-07-29",
   },
   "mobile-transfer-robot": {
     slug: "mobile-transfer-robot",
@@ -173,7 +166,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.mobile-transfer-robot.title",
     desc: "videos.mobile-transfer-robot.desc",
     tags: ["mobile-robot", "automated-transfer", "smart-navigation", "logistics-automation"],
-    publishDate: "2024-05-15",
+    publishDate: "2025-07-23",
   },
   "mobile-robot-chassis": {
     slug: "mobile-robot-chassis",
@@ -182,7 +175,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.mobile-robot-chassis.title",
     desc: "videos.mobile-robot-chassis.desc",
     tags: ["mobile-robot", "robot-chassis", "autonomous-navigation", "smart-mobility"],
-    publishDate: "2024-12-25",
+    publishDate: "2025-07-31",
   },
   "fixed-rail-transfer-robot": {
     slug: "fixed-rail-transfer-robot",
@@ -197,7 +190,7 @@ export const videoMap: Record<string, VideoDetail> = {
       "precision-positioning",
       "logistics-transfer",
     ],
-    publishDate: "2025-01-15",
+    publishDate: "2025-08-06",
   },
   "za-r3ml-demo": {
     slug: "za-r3ml-demo",
@@ -206,7 +199,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.za-r3ml-demo.title",
     desc: "videos.za-r3ml-demo.desc",
     tags: ["za-r3m", "robot-demo", "smart-manufacturing", "automation"],
-    publishDate: "2025-04-15",
+    publishDate: "2026-04-15",
   },
   "vr-teleop-dual-arm": {
     slug: "vr-teleop-dual-arm",
@@ -215,7 +208,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.vr-teleop-dual-arm.title",
     desc: "videos.vr-teleop-dual-arm.desc",
     tags: ["vr-teleoperation", "dual-arm", "embodied-development", "data-collection"],
-    publishDate: "2025-04-13",
+    publishDate: "2026-04-15",
   },
   "vla-dual-arm-cable-grasping": {
     slug: "vla-dual-arm-cable-grasping",
@@ -224,7 +217,7 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.vla-dual-arm-cable-grasping.title",
     desc: "videos.vla-dual-arm-cable-grasping.desc",
     tags: ["vla", "dual-arm", "cable-grasping", "embodied-intelligence"],
-    publishDate: "2025-04-15",
+    publishDate: "2026-04-15",
   },
   "vla-dual-arm-data-collection": {
     slug: "vla-dual-arm-data-collection",
@@ -233,24 +226,24 @@ export const videoMap: Record<string, VideoDetail> = {
     title: "videos.vla-dual-arm-data-collection.title",
     desc: "videos.vla-dual-arm-data-collection.desc",
     tags: ["vla", "dual-arm", "data-collection", "embodied-intelligence"],
-    publishDate: "2025-04-14",
+    publishDate: "2026-04-15",
   },
 };
 
 export const videoCards: VideoCard[] = [
   // 按 publishDate 倒序排列（最新在前）
-  createVideoCard("za-r3ml-demo", "videos.za-r3ml-demo.title"),
+  createVideoCard("vr-teleop-dual-arm", "videos.vr-teleop-dual-arm.title"),
   createVideoCard("vla-dual-arm-cable-grasping", "videos.vla-dual-arm-cable-grasping.title"),
   createVideoCard("vla-dual-arm-data-collection", "videos.vla-dual-arm-data-collection.title"),
-  createVideoCard("vr-teleop-dual-arm", "videos.vr-teleop-dual-arm.title"),
+  createVideoCard("za-r3ml-demo", "videos.za-r3ml-demo.title"),
   createVideoCard("fixed-rail-transfer-robot", "videos.fixed-rail-transfer-robot.title"),
-  createVideoCard("sketching-robot", "videos.sketching-robot.title"),
   createVideoCard("mobile-robot-chassis", "videos.mobile-robot-chassis.title"),
+  createVideoCard("sketching-robot", "videos.sketching-robot.title"),
   createVideoCard("mobile-transfer-robot", "videos.mobile-transfer-robot.title"),
-  createVideoCard("ur-robot-llm-motion-capture", "videos.ur-robot-llm-motion-capture.title"),
   createVideoCard("four-axis-robot-open-fridge", "videos.four-axis-robot-open-fridge.title"),
+  createVideoCard("ur-robot-llm-motion-capture", "videos.ur-robot-llm-motion-capture.title"),
   createVideoCard("composite-robot-application", "videos.composite-robot-application.title"),
-  createVideoCard("medical-automation", "videos.medical-automation.title"),
+  createVideoCard("composite-robot-transfer", "videos.composite-robot-transfer.title"),
   createVideoCard("agv-product-introduction", "videos.agv-product-introduction.title"),
 ].filter((card) => {
   const video = getVideoById(card.slug);

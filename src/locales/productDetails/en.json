@@ -21,7 +21,10 @@
       }
     ],
     "params": [
-      { "key": "SCARA Arm Length", "value": "ZA-R3: 450mm; ZA-R3X: 592mm horizontal reach (plus 160mm gripper)" },
+      {
+        "key": "SCARA Arm Length",
+        "value": "ZA-R3: 450mm; ZA-R3X: 592mm horizontal reach (plus 160mm gripper)"
+      },
       { "key": "Max Rated Payload", "value": "3kg" },
       { "key": "Max Horizontal / Vertical Speed", "value": "1500mm/s / 500mm/s" },
       { "key": "Max Acceleration", "value": "2500mm/s²" },
@@ -35,7 +38,10 @@
       { "key": "Communication Protocol", "value": "EtherCAT" },
       { "key": "Rated Voltage", "value": "DC 48V" },
       { "key": "Rated Power", "value": "800W" },
-      { "key": "Weight (Excl. Gripper)", "value": "400mm Z axis: 24kg / 26kg; 750mm Z axis: 31.5kg / 33.5kg; 1160mm Z axis: 39.5kg / 41.5kg" }
+      {
+        "key": "Weight (Excl. Gripper)",
+        "value": "400mm Z axis: 24kg / 26kg; 750mm Z axis: 31.5kg / 33.5kg; 1160mm Z axis: 39.5kg / 41.5kg"
+      }
     ]
   },
   "za-r3l-m-h": {
@@ -59,7 +65,10 @@
       { "key": "Product Form", "value": "SCARA lift platform" },
       { "key": "Model Tiers", "value": "ZA-R3L / ZA-R3M / ZA-R3H" },
       { "key": "Key Difference", "value": "Column height / Z-axis travel" },
-      { "key": "Selection Cue", "value": "Choose by station height and vertical loading travel first" }
+      {
+        "key": "Selection Cue",
+        "value": "Choose by station height and vertical loading travel first"
+      }
     ]
   },
   "za-r3d6": {
@@ -89,7 +98,10 @@
       { "key": "Weight", "value": "13kg (excluding hand or gripper)" },
       { "key": "Repeatability", "value": "±0.03mm" },
       { "key": "Max Working Radius", "value": "540.5mm (excluding hand or gripper)" },
-      { "key": "Joint Motion Range", "value": "J1±360°, J2±175°, J3±175°, J4±175°, J5±360°, J6±360°" },
+      {
+        "key": "Joint Motion Range",
+        "value": "J1±360°, J2±175°, J3±175°, J4±175°, J5±360°, J6±360°"
+      },
       { "key": "Max Joint Speed", "value": "J1-J6 180°/s" },
       { "key": "Max End-Effector Linear Speed", "value": "1.5m/s (excluding hand or gripper)" },
       { "key": "Interface", "value": "1× Ethernet" },
@@ -130,7 +142,10 @@
       { "key": "Single-Arm Weight", "value": "13.5kg (excluding hand or gripper)" },
       { "key": "Repeatability", "value": "±0.1mm" },
       { "key": "Arm Span", "value": "640mm (excluding hand or gripper)" },
-      { "key": "Joint Motion Range", "value": "J1±180°, J2±115°, J3±180°, J4±115°, J5±180°, J6±180°, J7±90°" },
+      {
+        "key": "Joint Motion Range",
+        "value": "J1±180°, J2±115°, J3±180°, J4±115°, J5±180°, J6±180°, J7±90°"
+      },
       { "key": "Max Joint Speed", "value": "J1-J7 180°/s" },
       { "key": "Lift Axis Travel", "value": "400 / 750 / 1160mm (optional)" },
       { "key": "Lift Axis Speed", "value": "400mm/s" },
@@ -176,14 +191,20 @@
       { "key": "Travel Accuracy", "value": "Straight-line deviation ≤8mm/m" },
       { "key": "Positioning Accuracy", "value": "30mm" },
       { "key": "Map Building", "value": "Up to 200×200m" },
-      { "key": "Obstacle Avoidance", "value": "LiDAR range 0.1~10m, minimum detectable obstacle 100×100×100mm" },
+      {
+        "key": "Obstacle Avoidance",
+        "value": "LiDAR range 0.1~10m, minimum detectable obstacle 100×100×100mm"
+      },
       { "key": "Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" },
       { "key": "Communication Protocol", "value": "CAN" },
       { "key": "Control Method", "value": "Wi-Fi remote control (30±5m range)" },
       { "key": "Weight", "value": "75kg (including battery)" },
       { "key": "Rated Power", "value": "400W" },
       { "key": "Wheel Configuration", "value": "2 differential wheels, 4 caster wheels" },
-      { "key": "Battery", "value": "48V@20AH ternary lithium battery; max output 800W; rated charging voltage/current 54.6V@5A" },
+      {
+        "key": "Battery",
+        "value": "48V@20AH ternary lithium battery; max output 800W; rated charging voltage/current 54.6V@5A"
+      },
       { "key": "Runtime", "value": "10h" },
       { "key": "Charging", "value": "Manual charger; automatic charging dock optional" }
     ]
@@ -220,14 +241,20 @@
       { "key": "Travel Accuracy", "value": "Straight-line deviation ≤8mm/m" },
       { "key": "Positioning Accuracy", "value": "30mm" },
       { "key": "Map Building", "value": "Up to 200×200m" },
-      { "key": "Obstacle Avoidance", "value": "LiDAR range 0.1~10m, minimum detectable obstacle 100×100×100mm" },
+      {
+        "key": "Obstacle Avoidance",
+        "value": "LiDAR range 0.1~10m, minimum detectable obstacle 100×100×100mm"
+      },
       { "key": "Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" },
       { "key": "Communication Protocol", "value": "CAN" },
       { "key": "Control Method", "value": "Wi-Fi remote control (30±5m range)" },
       { "key": "Weight", "value": "65kg (including battery)" },
       { "key": "Rated Power", "value": "400W" },
       { "key": "Wheel Configuration", "value": "2 differential wheels, 4 caster wheels" },
-      { "key": "Battery", "value": "48V@30AH ternary lithium battery; max output 1200W; rated charging voltage/current 54.6V@10A" },
+      {
+        "key": "Battery",
+        "value": "48V@30AH ternary lithium battery; max output 1200W; rated charging voltage/current 54.6V@10A"
+      },
       { "key": "Runtime", "value": "10h" },
       { "key": "Charging", "value": "Manual charger; automatic charging dock optional" }
     ]
@@ -260,7 +287,10 @@
       { "key": "Runtime", "value": "6h" },
       { "key": "Lift Travel", "value": "750mm" },
       { "key": "Charging Supply", "value": "DC 48V (charging dock optional)" },
-      { "key": "Safety Protection", "value": "Laser scanning avoidance, vision avoidance, emergency stop" },
+      {
+        "key": "Safety Protection",
+        "value": "Laser scanning avoidance, vision avoidance, emergency stop"
+      },
       { "key": "External Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" }
     ]
   },
@@ -292,7 +322,10 @@
       { "key": "Runtime", "value": "5h" },
       { "key": "Lift Travel", "value": "750mm" },
       { "key": "Charging Supply", "value": "DC 48V (charging dock optional)" },
-      { "key": "Safety Protection", "value": "Laser scanning avoidance, vision avoidance, emergency stop" },
+      {
+        "key": "Safety Protection",
+        "value": "Laser scanning avoidance, vision avoidance, emergency stop"
+      },
       { "key": "External Interface", "value": "1× HDMI, 2× USB3.0, 1× Fast Ethernet" }
     ]
   },
@@ -322,9 +355,15 @@
       { "key": "Working Radius", "value": "640mm" },
       { "key": "Runtime", "value": "5h" },
       { "key": "Charging Supply", "value": "DC 48V (charging dock optional)" },
-      { "key": "External Interface", "value": "1× Gigabit Ethernet, 1× USB3.0; 10 digital inputs, 10 digital outputs (PNP)" },
+      {
+        "key": "External Interface",
+        "value": "1× Gigabit Ethernet, 1× USB3.0; 10 digital inputs, 10 digital outputs (PNP)"
+      },
       { "key": "Safety Protection", "value": "Collision detection" },
-      { "key": "Configuration", "value": "1× ZA-MR3T embodied dual-arm robot, 2× RH56DFTP dexterous hands, 1× Meta Quest VR headset, 2× controllers" }
+      {
+        "key": "Configuration",
+        "value": "1× ZA-MR3T embodied dual-arm robot, 2× RH56DFTP dexterous hands, 1× Meta Quest VR headset, 2× controllers"
+      }
     ]
   },
   "za-rmps": {
@@ -345,16 +384,25 @@
       }
     ],
     "params": [
-      { "key": "Product Name", "value": "Embodied Dual-Arm Master-Slave Teleoperation Development Platform" },
+      {
+        "key": "Product Name",
+        "value": "Embodied Dual-Arm Master-Slave Teleoperation Development Platform"
+      },
       { "key": "Model", "value": "ZA-RMPS" },
       { "key": "Platform Dimensions", "value": "1000(L)×1000(W)×850(H)mm (folded)" },
       { "key": "Rated Payload", "value": "Single-arm 1kg, dual-arm 2kg" },
       { "key": "Operating Voltage", "value": "DC 48V" },
       { "key": "Master/Slave Arm DOF", "value": "7" },
       { "key": "Working Radius", "value": "640mm" },
-      { "key": "External Interface", "value": "1× Gigabit Ethernet, 1× USB3.0; 10 digital inputs, 10 digital outputs (PNP)" },
+      {
+        "key": "External Interface",
+        "value": "1× Gigabit Ethernet, 1× USB3.0; 10 digital inputs, 10 digital outputs (PNP)"
+      },
       { "key": "Safety Protection", "value": "Collision detection" },
-      { "key": "Configuration", "value": "2× zero-drift robot arms, 2× RH56DFTP dexterous hands, 2× Eyou robot arms, 1× platform" }
+      {
+        "key": "Configuration",
+        "value": "2× zero-drift robot arms, 2× RH56DFTP dexterous hands, 2× Eyou robot arms, 1× platform"
+      }
     ]
   },
   "za-rdp": {
@@ -382,7 +430,10 @@
       { "key": "Weight", "value": "26kg" },
       { "key": "Repeatability", "value": "±0.03mm" },
       { "key": "Working Radius", "value": "540.5mm (excluding pen module)" },
-      { "key": "Joint Motion Range", "value": "J1±360°, J2±175°, J3±175°, J4±175°, J5±360°, J6±360°" },
+      {
+        "key": "Joint Motion Range",
+        "value": "J1±360°, J2±175°, J3±175°, J4±175°, J5±360°, J6±360°"
+      },
       { "key": "Max Joint Speed", "value": "J1-J6 180°/s" },
       { "key": "Max End-Effector Linear Speed", "value": "1.5m/s (excluding hand or gripper)" },
       { "key": "Interface", "value": "1× Ethernet" },
@@ -391,7 +442,10 @@
       { "key": "Average Power", "value": "150W" },
       { "key": "Peak Power", "value": "750W" },
       { "key": "Safety Protection", "value": "Collision detection" },
-      { "key": "Configuration", "value": "1× ZA-R3D6 6-axis robotic arm, 1× pen module, 1× drawing board, 1× optical platform" }
+      {
+        "key": "Configuration",
+        "value": "1× ZA-R3D6 6-axis robotic arm, 1× pen module, 1× drawing board, 1× optical platform"
+      }
     ]
   },
   "za-zg100": {
@@ -505,8 +559,14 @@
       { "key": "Base Combination", "value": "ZA-R3M + Rail Platform" },
       { "key": "Category", "value": "R-series linked variant" },
       { "key": "Linked Module", "value": "Rail Platform" },
-      { "key": "Typical Scenario", "value": "Cross-station linear pick-and-place and linked transfer" },
-      { "key": "Selection Focus", "value": "Rail Platform travel, takt time, and overall footprint" }
+      {
+        "key": "Typical Scenario",
+        "value": "Cross-station linear pick-and-place and linked transfer"
+      },
+      {
+        "key": "Selection Focus",
+        "value": "Rail Platform travel, takt time, and overall footprint"
+      }
     ]
   },
   "za-r3m-right": {

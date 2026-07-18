@@ -15,7 +15,19 @@
                 :class="`btn-${action.variant ?? 'primary'}`"
               >
                 <span>{{ action.label }}</span>
-                <svg v-if="action.variant === 'primary' || !action.variant" class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <svg
+                  v-if="action.variant === 'primary' || !action.variant"
+                  class="btn-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
               </a>
 
               <router-link
@@ -141,7 +153,7 @@ const isHashLink = (to: string): boolean => to.startsWith("#");
 const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim());
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .products-shell {
   --products-surface: var(--brand-surface-frosted-strong);
   --products-surface-strong: var(--brand-surface);
@@ -180,7 +192,8 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 .products-hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr)
+  grid-template-columns:
+    minmax(0, 1fr)
     minmax(var(--compact-hero-side-column-min), var(--compact-hero-side-column-max));
   gap: 48px;
   align-items: start;
@@ -259,7 +272,10 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
   border: 1px solid rgba(15, 23, 42, 0.12);
   font-weight: 600;
   font-size: 0.92rem;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
     background-color 0.25s ease;
 }
 
@@ -326,10 +342,10 @@ const isNumericMetricValue = (value: string): boolean => /^\d+$/.test(value.trim
 }
 
 .products-hero__metric--numeric .products-hero__metric-value {
-  font-size: var(--compact-hero-kpi-value-size);
-  line-height: var(--compact-hero-kpi-value-line-height);
-  letter-spacing: var(--compact-hero-kpi-value-letter-spacing);
-  color: var(--products-title); /* 改回深色，保持全站一致 */
+  font-size: clamp(3rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--products-title);
 }
 
 .products-hero__metric--text .products-hero__metric-value {

@@ -1,6 +1,6 @@
-import { onMounted, onUnmounted, type Ref } from 'vue';
+import { onMounted, onUnmounted, type Ref } from "vue";
 
-export interface ScrollRevealOptions {
+interface ScrollRevealOptions {
   /** IntersectionObserver threshold (0-1), default 0.15 */
   threshold?: number;
   /** Root margin, default '0px 0px -60px 0px' to trigger slightly before fully in view */
@@ -17,35 +17,30 @@ export interface ScrollRevealOptions {
  * 2. setup 中调用 useScrollReveal(elementRef)
  * 3. 元素进入视口时自动获得 .revealed class，CSS 负责动画
  *
- * 支持 stagger：给容器加 class="reveal-stagger"，子元素加 class="reveal-item"
  */
 export function useScrollReveal(
   target: Ref<HTMLElement | null>,
-  options: ScrollRevealOptions = {},
+  options: ScrollRevealOptions = {}
 ): void {
-  const {
-    threshold = 0.15,
-    rootMargin = '0px 0px -60px 0px',
-    once = true,
-  } = options;
+  const { threshold = 0.15, rootMargin = "0px 0px -60px 0px", once = true } = options;
 
   let observer: IntersectionObserver | null = null;
 
   const revealImmediately = (element: HTMLElement) => {
-    element.classList.add('revealed');
+    element.classList.add("revealed");
   };
 
   onMounted(() => {
     const element = target.value;
     if (!element) return;
 
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
       revealImmediately(element);
       return;
     }
 
     // 尊重用户减少动画偏好
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
       revealImmediately(element);
       return;
     }
@@ -55,14 +50,14 @@ export function useScrollReveal(
         (entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
+              entry.target.classList.add("revealed");
               if (once && observer) {
                 observer.unobserve(entry.target);
               }
             }
           }
         },
-        { threshold, rootMargin },
+        { threshold, rootMargin }
       );
 
       observer.observe(element);
@@ -83,7 +78,7 @@ export function useScrollReveal(
  */
 export function useScrollRevealList(
   targets: Ref<HTMLElement | null>[],
-  options: ScrollRevealOptions = {},
+  options: ScrollRevealOptions = {}
 ): void {
   for (const target of targets) {
     useScrollReveal(target, options);

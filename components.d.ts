@@ -17,6 +17,7 @@ declare module 'vue' {
     HeroCarousel: typeof import('./src/components/business/HeroCarousel.vue')['default']
     IndustryApplications: typeof import('./src/components/business/IndustryApplications.vue')['default']
     NavBar: typeof import('./src/components/layout/NavBar.vue')['default']
+    NavMobileMenu: typeof import('./src/components/layout/NavMobileMenu.vue')['default']
     Partners: typeof import('./src/components/business/Partners.vue')['default']
     ProductsLayout: typeof import('./src/components/layout/ProductsLayout.vue')['default']
     RouteNotFoundState: typeof import('./src/components/common/RouteNotFoundState.vue')['default']

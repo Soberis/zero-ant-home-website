@@ -25,9 +25,7 @@ function forceScrollToTop(): void {
   document.body.scrollTop = 0;
 }
 
-export function scheduleScrollToTop(
-  options: ScheduleScrollToTopOptions = {}
-): void {
+export function scheduleScrollToTop(options: ScheduleScrollToTopOptions = {}): void {
   const { afterTransition = false } = options;
 
   forceScrollToTop();
@@ -47,4 +45,10 @@ export function scheduleScrollToTop(
   window.setTimeout(() => {
     forceScrollToTop();
   }, PAGE_TRANSITION_DELAY_MS);
+}
+
+export function scrollToSection(id: string): void {
+  const element = document.getElementById(id);
+  if (!element) return;
+  element.scrollIntoView({ behavior: "smooth", block: "start" });
 }

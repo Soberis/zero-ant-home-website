@@ -41,9 +41,7 @@ const localizedTarget = computed(() => localizeTo(props.to));
   align-items: center;
   justify-content: center;
   padding: 48px 24px 96px;
-  background:
-    radial-gradient(circle at top, rgba(20, 54, 127, 0.08), transparent 38%),
-    #ffffff;
+  background: radial-gradient(circle at top, rgba(20, 54, 127, 0.08), transparent 38%), #ffffff;
 }
 
 .route-not-found__card {

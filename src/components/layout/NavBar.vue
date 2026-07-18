@@ -3,7 +3,11 @@
     <nav class="nav-container" :aria-label="$t('nav.primaryNavigation')">
       <div class="logo">
         <img :src="logoUrl" width="50" height="50" :alt="$t('logoAlt')" decoding="async" />
-        <router-link :to="localizePath('/')" class="logo-text" @click="handleTopNavClick('/', $event)">
+        <router-link
+          :to="localizePath('/')"
+          class="logo-text"
+          @click="handleTopNavClick('/', $event)"
+        >
           {{ $t("logoText") }}
         </router-link>
       </div>
@@ -16,7 +20,7 @@
             class="nav-item"
             :class="{ 'has-dropdown': item.children }"
           >
-              <router-link
+            <router-link
               :to="localizePath(item.to)"
               class="nav-link"
               :class="{ active: isTopNavActive(item.to) }"
@@ -49,8 +53,8 @@
           <button
             type="button"
             class="language-btn"
-            @click="switchLanguage()"
             :aria-label="locale === 'zh' ? 'Switch to English' : '切换至中文'"
+            @click="switchLanguage()"
           >
             <span class="lang-text">{{ locale === "zh" ? "EN" : "中文" }}</span>
           </button>
@@ -62,7 +66,7 @@
           :aria-label="$t('nav.toggleMenu') || 'Toggle navigation menu'"
           :aria-expanded="isMobileMenuOpen ? 'true' : 'false'"
           aria-controls="mobile-nav-panel"
-          @click="toggleMobileMenu"
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
         >
           <span class="hamburger-line" aria-hidden="true"></span>
           <span class="hamburger-line" aria-hidden="true"></span>
@@ -71,65 +75,11 @@
       </div>
     </nav>
     <!-- 移动端导航菜单 -->
-    <div
-      class="mobile-nav"
-      :class="{ open: isMobileMenuOpen }"
-      id="mobile-nav-panel"
-      :aria-label="$t('nav.mobileMenu')"
-      :aria-hidden="!isMobileMenuOpen"
-      @click="handleBackgroundClick"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div class="mobile-nav-content">
-        <ul class="mobile-nav-links">
-          <li v-for="item in topNavItems" :key="item.to" class="mobile-nav-item">
-            <div class="mobile-nav-row">
-              <router-link
-                :to="localizePath(item.to)"
-                class="mobile-nav-link"
-                :class="{ active: isTopNavActive(item.to) }"
-                :aria-current="isTopNavActive(item.to) ? 'page' : undefined"
-                @click="handleTopNavClick(item.to, $event, true)"
-              >
-                {{ $t(item.label) }}
-              </router-link>
-              <button
-                v-if="item.children"
-                type="button"
-                class="mobile-nav-expand"
-                :class="{ 'is-open': openMobileSubmenu === item.to }"
-                :aria-expanded="openMobileSubmenu === item.to"
-                :aria-controls="getMobileSubmenuId(item.to)"
-                :aria-label="getMobileSubmenuLabel(item)"
-                @click="toggleMobileSubmenu(item.to)"
-              >
-                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </button>
-            </div>
-            <transition name="mobile-submenu">
-              <ul
-                v-if="item.children && openMobileSubmenu === item.to"
-                :id="getMobileSubmenuId(item.to)"
-                class="mobile-submenu"
-              >
-                <li v-for="child in item.children" :key="child.hash">
-                  <router-link
-                    :to="localizeTo({ path: item.to, hash: child.hash })"
-                    class="mobile-submenu-link"
-                    @click="closeMobileMenu"
-                  >
-                    {{ $t(child.label) }}
-                  </router-link>
-                </li>
-              </ul>
-            </transition>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <NavMobileMenu
+      :is-open="isMobileMenuOpen"
+      :top-nav-items="topNavItems"
+      @close="isMobileMenuOpen = false"
+    />
   </header>
 </template>
 
@@ -138,17 +88,15 @@ import { nextTick, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import logoUrl from "@/assets/zeroant_logo.webp";
-import { ensureProductDetailLocale } from "@/config/i18n";
+import { ensureBaseLocale, ensureProductDetailLocale } from "@/config/i18n";
+import type { SupportedLocale } from "@/config/i18n";
 import { topNavItems } from "@/data/navigation";
-import type { NavigationItem } from "@/data/navigation";
+import NavMobileMenu from "@/components/layout/NavMobileMenu.vue";
 // 语言切换时保持滚动位置 — 与 router/scrollBehavior 联动，
 // 详见 router/scrollBehavior.ts 的 preservedScroll 处理
 import { preserveScrollForNextNavigation } from "@/router";
 import { scheduleScrollToTop } from "@/utils/scroll";
-import {
-  localizeFullPath,
-  stripLocalePrefix,
-} from "@/utils/localeRoute";
+import { localizeFullPath, isPathActive } from "@/utils/localeRoute";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
 // 滚动状态
@@ -165,65 +113,17 @@ const handleScroll = () => {
   }
 };
 
-// 桌面断点变化处理，避免菜单在放大到桌面端后残留打开状态
-let desktopBreakpointQuery: MediaQueryList | null = null;
-const handleDesktopBreakpointChange = (event: MediaQueryListEvent) => {
-  if (event.matches && isMobileMenuOpen.value) {
-    closeMobileMenu();
-  }
-};
-
 // 移动端菜单状态
 const isMobileMenuOpen = ref(false);
-const openMobileSubmenu = ref<string | null>(null);
 const route = useRoute();
 const router = useRouter();
 const { localizePath, localizeTo } = useLocalizedPath();
 
-// 防抖锁
-let toggleLock = false;
-
-
-// 切换移动端菜单
-function toggleMobileMenu() {
-  if (toggleLock) return;
-  toggleLock = true;
-  isMobileMenuOpen.value = !isMobileMenuOpen.value;
-  // 防止背景滚动
-  if (isMobileMenuOpen.value) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
-  window.setTimeout(() => (toggleLock = false), 350);
+function isTopNavActive(to: string): boolean {
+  return isPathActive(route.path, to);
 }
 
-// 关闭移动端菜单
-function closeMobileMenu() {
-  isMobileMenuOpen.value = false;
-  openMobileSubmenu.value = null;
-  document.body.style.overflow = "";
-}
-
-function toggleMobileSubmenu(itemTo: string) {
-  openMobileSubmenu.value = openMobileSubmenu.value === itemTo ? null : itemTo;
-}
-
-function getMobileSubmenuId(itemTo: string): string {
-  return `mobile-submenu-${itemTo.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "root"}`;
-}
-
-function getMobileSubmenuLabel(item: NavigationItem): string {
-  const actionKey =
-    openMobileSubmenu.value === item.to ? "nav.collapseSubmenu" : "nav.expandSubmenu";
-  return `${t(actionKey)}：${t(item.label)}`;
-}
-
-async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = false): Promise<void> {
-  if (closeMenu) {
-    closeMobileMenu();
-  }
-
+async function handleTopNavClick(to: string, event: MouseEvent): Promise<void> {
   if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
     return;
   }
@@ -241,35 +141,14 @@ async function handleTopNavClick(to: string, event: MouseEvent, closeMenu = fals
   await nextTick();
 }
 
-function isTopNavActive(to: string): boolean {
-  const currentPath = stripLocalePrefix(route.path);
-
-  if (to === "/") {
-    return currentPath === "/";
-  }
-
-  return currentPath === to || currentPath.startsWith(`${to}/`);
-}
-
-
-// 点击背景关闭菜单
-function handleBackgroundClick(event: Event): void {
-  const target = event.target as HTMLElement;
-  if (target.classList.contains("mobile-nav")) {
-    closeMobileMenu();
-  }
-}
-
-// 顶部导航项已从 @/data/navigation 统一导入
-
-const { locale, t } = useI18n();
+const { locale } = useI18n();
 
 function isProductDetailRoute() {
   return route.name === "ProductDetail";
 }
 
 async function switchLanguage() {
-  const targetLocale = locale.value === "zh" ? "en" : "zh";
+  const targetLocale: SupportedLocale = locale.value === "zh" ? "en" : "zh";
   const preservedScrollPosition = {
     left: window.scrollX,
     top: Math.max(
@@ -278,6 +157,15 @@ async function switchLanguage() {
       document.body?.scrollTop ?? 0
     ),
   };
+
+  try {
+    await ensureBaseLocale(targetLocale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn("切换语言前加载基础文案失败:", error);
+    }
+    return;
+  }
 
   if (isProductDetailRoute()) {
     try {
@@ -289,49 +177,28 @@ async function switchLanguage() {
     }
   }
 
-  closeMobileMenu();
+  isMobileMenuOpen.value = false;
   preserveScrollForNextNavigation(preservedScrollPosition);
   await router.push(localizeFullPath(route.fullPath, targetLocale));
 }
 
-// 捕获阶段 Esc 处理（优先关闭移动菜单，避免触发全局返回）
-const onKeydownCapture = (e: KeyboardEvent) => {
-  if (e.key === 'Escape' && isMobileMenuOpen.value) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    closeMobileMenu();
-  }
-};
-
 onMounted(() => {
-  // 监听滚动
   window.addEventListener("scroll", handleScroll);
-  desktopBreakpointQuery = window.matchMedia("(min-width: 951px)");
-  desktopBreakpointQuery.addEventListener("change", handleDesktopBreakpointChange);
-
-  // 捕获阶段监听 Esc，优先关闭移动菜单，避免触发全局返回
-  document.addEventListener('keydown', onKeydownCapture, true);
 });
 
 onUnmounted(() => {
-  // 清理body样式
-  document.body.style.overflow = "";
-  
-  // 清理事件监听
   window.removeEventListener("scroll", handleScroll);
-  desktopBreakpointQuery?.removeEventListener("change", handleDesktopBreakpointChange);
-  document.removeEventListener('keydown', onKeydownCapture, true);
 });
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .header {
   --nav-text-color: var(--brand-text);
   --nav-accent-color: var(--brand-primary);
   --nav-logo-text-color: var(--brand-text);
   --nav-accent-surface: var(--brand-accent-soft);
-  --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%)
-    saturate(1827%) hue-rotate(208deg) brightness(83%) contrast(98%);
+  --nav-brand-filter: brightness(0) saturate(100%) invert(16%) sepia(65%) saturate(1827%)
+    hue-rotate(208deg) brightness(83%) contrast(98%);
   background-color: var(--brand-surface-frosted);
   position: fixed;
   top: 0;
@@ -340,30 +207,34 @@ onUnmounted(() => {
   z-index: 1000;
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--brand-border-subtle);
-  transition: all var(--transition-smooth);
+  transition:
+    background-color var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    backdrop-filter var(--transition-smooth);
+}
 
-  &.is-scrolled {
-    background-color: var(--brand-surface-frosted-strong);
-    box-shadow: var(--shadow-sm);
-    border-bottom-color: var(--brand-border-strong);
-    
-    .nav-container {
-      height: 72px;
-    }
-    
-    .logo {
-      transform: none;
-      margin-left: 0;
-    }
+.header.is-scrolled {
+  background-color: var(--brand-surface-frosted-strong);
+  box-shadow: var(--shadow-sm);
+  border-bottom-color: var(--brand-border-strong);
+}
 
-    .dropdown {
-      top: 72px;
-    }
-    
-    .logo-text {
-      font-size: 22px;
-    }
-  }
+.header.is-scrolled .nav-container {
+  height: 72px;
+}
+
+.header.is-scrolled .logo {
+  transform: none;
+  margin-left: 0;
+}
+
+.header.is-scrolled .dropdown {
+  top: 72px;
+}
+
+.header.is-scrolled .logo-text {
+  font-size: 22px;
 }
 
 .nav-container {
@@ -409,7 +280,7 @@ onUnmounted(() => {
   color: var(--nav-logo-text-color);
   text-decoration: none;
   font-family: "Outfit", sans-serif;
-  font-weight: 700; // 更具建筑感的细体/黑体切换
+  font-weight: 700; /* 更具建筑感的细体/黑体切换 */
   padding: 12px 0;
   position: relative;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -499,7 +370,9 @@ onUnmounted(() => {
 
 .dropdown-icon {
   color: var(--nav-text-color);
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
   transform: rotate(0deg);
 }
 
@@ -547,9 +420,10 @@ onUnmounted(() => {
   transform: translateY(-8px);
   background: var(--brand-surface);
   width: 100%;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
   border-radius: 0;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -627,10 +501,6 @@ onUnmounted(() => {
   text-decoration: none;
 }
 
-.dropdown-item::before {
-  display: none;
-}
-
 .dropdown-item:hover {
   background: var(--brand-surface-panel);
   color: var(--nav-accent-color);
@@ -639,7 +509,8 @@ onUnmounted(() => {
   box-shadow: none;
 }
 
-.nav-item:hover .dropdown {
+.nav-item:hover .dropdown,
+.nav-item:focus-within .dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -835,226 +706,6 @@ onUnmounted(() => {
   transform: rotate(-45deg) translate(5.5px, -5.5px);
 }
 
-.mobile-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(15, 23, 42, 0.32);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mobile-nav.open {
-  opacity: 1;
-  visibility: visible;
-  touch-action: none; // 禁止背景滚动
-}
-
-.mobile-nav-content {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 300px;
-  height: 100svh;
-  background: var(--brand-surface);
-  box-shadow: -8px 0 24px rgba(15, 23, 42, 0.08);
-  transform: translateX(100%);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  padding-top: 80px;
-  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  border-left: 1px solid rgba(26, 58, 143, 0.06);
-}
-
-.mobile-nav.open .mobile-nav-content {
-  transform: translateX(0);
-}
-
-.mobile-nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 20px 0;
-}
-
-.mobile-nav-item {
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-  transform: translateX(20px);
-  transition:
-    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mobile-nav.open .mobile-nav-item {
-  opacity: 1;
-  transform: translateX(0);
-  .generate-delays(10);
-}
-
-.generate-delays(@n, @i: 1) when (@i =< @n) {
-  &:nth-child(@{i}) {
-    transition-delay: (@i * 0.05s);
-  }
-  .generate-delays(@n, (@i + 1));
-}
-
-.mobile-nav-link {
-  display: block;
-  padding: 18px 32px;
-  color: var(--nav-text-color);
-  text-decoration: none;
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  transition:
-    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    padding-left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-}
-
-.mobile-nav-link::after {
-  content: "";
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 0;
-  height: 1px;
-  background: rgba(15, 23, 42, 0.06);
-}
-
-.mobile-nav-link:hover {
-  background: rgba(26, 58, 143, 0.03);
-  padding-left: 36px;
-  color: var(--nav-accent-color);
-}
-
-.mobile-nav-link.active {
-  color: var(--nav-accent-color);
-  background: rgba(26, 58, 143, 0.05);
-  font-weight: 600;
-}
-
-/* 移动端子菜单行布局 */
-.mobile-nav-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mobile-nav-row .mobile-nav-link {
-  flex: 1;
-  min-width: 0;
-}
-
-/* 子菜单展开按钮 */
-.mobile-nav-expand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  margin-right: 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--nav-text-color);
-  border-radius: 8px;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  flex-shrink: 0;
-}
-
-.mobile-nav-expand:hover {
-  background: rgba(26, 58, 143, 0.05);
-  color: var(--nav-accent-color);
-}
-
-.mobile-nav-expand.is-open {
-  color: var(--nav-accent-color);
-  transform: rotate(180deg);
-}
-
-/* 子菜单列表 */
-.mobile-submenu {
-  list-style: none;
-  margin: 0;
-  padding: 0 0 8px 0;
-  background: rgba(15, 23, 42, 0.02);
-}
-
-.mobile-submenu-link {
-  display: block;
-  padding: 14px 32px 14px 48px;
-  color: var(--nav-text-color);
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    padding-left 0.2s ease;
-  position: relative;
-}
-
-.mobile-submenu-link::before {
-  content: "";
-  position: absolute;
-  left: 36px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.2);
-  transition: background 0.2s ease;
-}
-
-.mobile-submenu-link:hover {
-  background: rgba(26, 58, 143, 0.03);
-  color: var(--nav-accent-color);
-  padding-left: 54px;
-}
-
-.mobile-submenu-link:hover::before {
-  background: var(--nav-accent-color);
-}
-
-/* 子菜单过渡动画 */
-.mobile-submenu-enter-active {
-  transition:
-    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mobile-submenu-leave-active {
-  transition:
-    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mobile-submenu-enter-from {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-.mobile-submenu-leave-to {
-  opacity: 0;
-  transform: translateY(-4px);
-}
-
 @media (max-width: 950px) {
   .desktop-nav {
     display: none;
@@ -1132,7 +783,7 @@ onUnmounted(() => {
   }
 
   .language-btn {
-    min-height: 36px;
+    min-height: 44px;
     min-width: 52px;
     padding: 6px 10px;
     font-size: 11px;
@@ -1144,8 +795,8 @@ onUnmounted(() => {
   }
 
   .hamburger-menu {
-    width: 28px;
-    height: 28px;
+    width: 44px;
+    height: 44px;
     margin-left: 12px;
   }
 
@@ -1153,12 +804,6 @@ onUnmounted(() => {
     width: 20px;
     height: 2px;
     margin: 2px 0;
-  }
-
-  .mobile-nav-content {
-    width: 260px;
-    padding-top: 70px;
-    background: var(--brand-surface);
   }
 }
 
@@ -1181,15 +826,15 @@ onUnmounted(() => {
   }
 
   .language-btn {
-    min-height: 34px;
+    min-height: 44px;
     min-width: 48px;
     padding: 5px 8px;
     font-size: 10px;
   }
 
   .hamburger-menu {
-    width: 26px;
-    height: 26px;
+    width: 44px;
+    height: 44px;
     margin-left: 8px;
   }
 
@@ -1197,17 +842,6 @@ onUnmounted(() => {
     width: 18px;
     height: 2px;
     margin: 2px 0;
-  }
-
-  .mobile-nav-content {
-    width: 240px;
-    padding-top: 65px;
-    background: var(--brand-surface);
-  }
-
-  .mobile-nav-link {
-    padding: 14px 20px;
-    font-size: 15px;
   }
 }
 
@@ -1230,8 +864,8 @@ onUnmounted(() => {
   }
 
   .language-btn {
-    min-height: 30px;
-    min-width: 42px;
+    min-height: 44px;
+    min-width: 44px;
     padding: 4px 6px;
     font-size: 9px;
   }
@@ -1241,8 +875,8 @@ onUnmounted(() => {
   }
 
   .hamburger-menu {
-    width: 24px;
-    height: 24px;
+    width: 44px;
+    height: 44px;
     margin-left: 6px;
   }
 
@@ -1250,17 +884,6 @@ onUnmounted(() => {
     width: 16px;
     height: 2px;
     margin: 1.5px 0;
-  }
-
-  .mobile-nav-content {
-    width: 220px;
-    padding-top: 60px;
-    background: var(--brand-surface);
-  }
-
-  .mobile-nav-link {
-    padding: 12px 16px;
-    font-size: 14px;
   }
 }
 

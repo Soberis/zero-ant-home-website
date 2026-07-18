@@ -3,6 +3,7 @@ dist-ssr
 node_modules
 output
 public/responsive
+src/data/responsive-images.generated.json
 .agents
 .tasks
 .workbuddy

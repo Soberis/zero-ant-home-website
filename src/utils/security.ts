@@ -26,10 +26,30 @@ function sanitizeInput(input: string): string {
  * 允许有限标签的 HTML 清洗（默认仅保留基础排版标签）
  * @param input HTML 字符串
  * @param allowedTags 允许的标签名列表（小写）
+ * @note 基于 DOMParser 实现，仅处理 <body> 内的节点；<head> 中的内容（如 <meta>、<script>）
+ *       不会出现在最终输出中，因为返回值取自 doc.body.innerHTML。若未来改为返回完整
+ *       文档 HTML，需同步遍历 doc.head.querySelectorAll("*") 进行清洗。
  */
 export function sanitizeHtmlAllowList(
   input: string,
-  allowedTags: string[] = ["p", "br", "b", "strong", "em", "i", "ul", "ol", "li", "h1", "h2", "h3", "h4", "a", "span", "div"]
+  allowedTags: string[] = [
+    "p",
+    "br",
+    "b",
+    "strong",
+    "em",
+    "i",
+    "ul",
+    "ol",
+    "li",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "a",
+    "span",
+    "div",
+  ]
 ): string {
   if (typeof input !== "string") {
     return "";
@@ -43,7 +63,18 @@ export function sanitizeHtmlAllowList(
     const parser = new DOMParser();
     const doc = parser.parseFromString(input, "text/html");
     const nodes = Array.from(doc.body.querySelectorAll("*"));
-    const allowedAttributes = ["class", "style", "target", "rel", "alt", "title", "href", "src", "id", "name"];
+    const allowedAttributes = [
+      "class",
+      "style",
+      "target",
+      "rel",
+      "alt",
+      "title",
+      "href",
+      "src",
+      "id",
+      "name",
+    ];
 
     nodes.forEach((node) => {
       const tag = node.tagName.toLowerCase();
@@ -72,11 +103,8 @@ export function sanitizeHtmlAllowList(
             href.startsWith("https://") ||
             href.startsWith("mailto:") ||
             href.startsWith("tel:");
-          const isRelative =
-            href.startsWith("/") ||
-            href.startsWith("#") ||
-            href.startsWith("?");
-            
+          const isRelative = href.startsWith("/") || href.startsWith("#") || href.startsWith("?");
+
           if (!isAllowedProtocol && !isRelative) {
             // 非白名单协议或非相对路径的 href 移除
             node.removeAttribute(attr.name);

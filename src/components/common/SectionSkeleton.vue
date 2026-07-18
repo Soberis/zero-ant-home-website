@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped>
 .section-skeleton {
   max-width: var(--container-max-width);
   margin: 0 auto;
@@ -64,8 +64,12 @@
 }
 
 @keyframes skeleton-loading {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media screen and (max-width: 991px) {

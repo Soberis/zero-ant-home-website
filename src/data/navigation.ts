@@ -54,7 +54,7 @@ export const topNavItems: readonly NavigationItem[] = [
   { to: "/about", label: "nav.about", children: aboutNav },
 ];
 
-export interface FooterNavSection {
+interface FooterNavSection {
   title: string;
   to: string;
   items: readonly { hash: string; label: string }[];

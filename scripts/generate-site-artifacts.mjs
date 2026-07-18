@@ -1,6 +1,8 @@
 import { promises as fs } from "node:fs";
+import vm from "node:vm";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import ts from "typescript";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -8,9 +10,9 @@ const projectRoot = path.resolve(__dirname, "..");
 const distDir = path.join(projectRoot, "dist");
 const localeDir = path.join(projectRoot, "src", "locales");
 const sourceDir = path.join(projectRoot, "src", "data");
+const responsiveManifestPath = path.join(sourceDir, "responsive-images.generated.json");
 const siteUrl = (process.env.VITE_SITE_URL || "https://zeroant.com").replace(/\/+$/, "");
-const buildDate = new Date().toISOString().slice(0, 10);
-const DEFAULT_SHARE_IMAGE = `${siteUrl}/logo.webp`;
+const DEFAULT_SHARE_IMAGE = `${siteUrl}/og-image.webp`;
 const IMAGE_FILE_EXTENSIONS = new Set([
   ".png",
   ".jpg",
@@ -31,11 +33,7 @@ const HOME_FAMILY_KEYS = [
   "accessories",
 ];
 
-const SOLUTION_GROUP_KEYS = [
-  "precisionWorkcell",
-  "mobileCollaboration",
-  "embodiedDevelopment",
-];
+const SOLUTION_GROUP_KEYS = ["precisionWorkcell", "mobileCollaboration", "embodiedDevelopment"];
 
 const SUPPORT_FAQ_KEYS = ["navigation", "development", "customization"];
 
@@ -48,11 +46,7 @@ const CAREER_BENEFIT_KEYS = [
   "socialValue",
 ];
 
-const CAREER_POSITION_KEYS = [
-  "softwareEngineer",
-  "robotSystemsEngineer",
-  "electricalEngineer",
-];
+const CAREER_POSITION_KEYS = ["softwareEngineer", "robotSystemsEngineer", "electricalEngineer"];
 
 function escapeHtml(value = "") {
   return String(value)
@@ -63,8 +57,20 @@ function escapeHtml(value = "") {
     .replace(/'/g, "&#39;");
 }
 
+const HERO_BREAK_PATTERN = /<br\s+class=["']hero-br["']\s*\/?>/gi;
+
+function renderHeroText(value = "") {
+  return String(value)
+    .split(HERO_BREAK_PATTERN)
+    .map((part) => escapeHtml(part))
+    .join('<br class="hero-br" />');
+}
+
 function stripHtml(value = "") {
-  return String(value).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return String(value)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function getMessage(messages, key) {
@@ -79,11 +85,15 @@ function getMessage(messages, key) {
     current = current[segment];
   }
 
-  if (typeof current === "string" && current.startsWith("@:")) {
+  if (typeof current !== "string") return current;
+
+  // @:xxx 链接解析 — 与 vue-i18n linked message 行为一致
+  if (current.startsWith("@:")) {
     return getMessage(messages, current.slice(2));
   }
 
-  return current;
+  // {'@'} → @ — 与 vue-i18n 命名插值渲染行为一致
+  return current.replaceAll("{'@'}", "@");
 }
 
 function withLocalePath(routePath, locale) {
@@ -102,135 +112,144 @@ function getAlternates(routePath) {
   ];
 }
 
-function uniqueMatches(source, regex) {
-  const values = new Set();
-  let match = regex.exec(source);
-
-  while (match) {
-    values.add(match[1]);
-    match = regex.exec(source);
-  }
-
-  return Array.from(values);
-}
-
 function escapeRegExp(value = "") {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function parseAssetImports(source) {
-  const imports = {};
-  const regex = /import\s+([A-Za-z_$][\w$]*)\s+from\s+["'](@\/[^"']+)["']/g;
-  let match = regex.exec(source);
-
-  while (match) {
-    imports[match[1]] = match[2].replace(/^@\//, "src/");
-    match = regex.exec(source);
+function buildLargestResponsiveImagePath(entry) {
+  if (!entry || !Array.isArray(entry.widths) || entry.widths.length === 0) {
+    return "";
   }
 
-  return imports;
+  const largestWidth = entry.widths[entry.widths.length - 1];
+  return `${entry.basePath}-${largestWidth}.${entry.format}`;
 }
 
-function parseProductFamilies(source) {
-  const families = [];
-  const regex = /id:\s*"([^"]+)",\s*titleKey:\s*"([^"]+)",\s*introKey:\s*"([^"]+)"/g;
-  let match = regex.exec(source);
+const transpiledModuleCache = new Map();
 
-  while (match) {
-    families.push({
-      id: match[1],
-      titleKey: match[2],
-      introKey: match[3],
-    });
-    match = regex.exec(source);
-  }
+function createResponsiveImageRuntime(responsiveManifest = {}) {
+  const products = responsiveManifest.products || {};
+  const videos = responsiveManifest.videos || {};
 
-  return families;
+  return {
+    getLargestResponsiveImage: buildLargestResponsiveImagePath,
+    getResponsiveProductImage(slug) {
+      return products[slug] || null;
+    },
+    getResponsiveVideoImage(slug) {
+      return videos[slug] || null;
+    },
+  };
 }
 
-function parseProductCards(source, assetImports = {}) {
-  const cards = [];
-  const regex =
-    /\{\s*id:\s*"([^"]+)",\s*image:\s*([A-Za-z_$][\w$]*),[\s\S]*?titleKey:\s*"([^"]+)",\s*summaryKey:\s*"([^"]+)",\s*specKeys:\s*\[([\s\S]*?)\](?:,\s*noteKey:\s*"([^"]+)")?/g;
-  let match = regex.exec(source);
-
-  while (match) {
-    cards.push({
-      id: match[1],
-      imageSource: assetImports[match[2]] || "",
-      titleKey: match[3],
-      summaryKey: match[4],
-      specKeys: uniqueMatches(match[5], /"([^"]+)"/g),
-      noteKey: match[6] || "",
-    });
-    match = regex.exec(source);
+async function loadTsModule(modulePath, { dependencies = {} } = {}) {
+  if (transpiledModuleCache.has(modulePath)) {
+    return transpiledModuleCache.get(modulePath);
   }
 
-  return cards;
+  const source = await fs.readFile(modulePath, "utf8");
+  const sanitizedSource = source.replace(/import\.meta\.env\.DEV/g, "false");
+  const transpiled = ts.transpileModule(sanitizedSource, {
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2020,
+      resolveJsonModule: true,
+      esModuleInterop: true,
+    },
+    fileName: modulePath,
+  });
+
+  const module = { exports: {} };
+  const dirname = path.dirname(modulePath);
+  const localRequire = (specifier) => {
+    if (specifier in dependencies) {
+      return dependencies[specifier];
+    }
+
+    throw new Error(
+      `[generate-site-artifacts] Unsupported import "${specifier}" while loading ${path.relative(projectRoot, modulePath)}`
+    );
+  };
+
+  vm.runInNewContext(
+    transpiled.outputText,
+    {
+      module,
+      exports: module.exports,
+      require: localRequire,
+      __dirname: dirname,
+      __filename: modulePath,
+      console,
+      process,
+    },
+    {
+      filename: modulePath,
+    }
+  );
+
+  transpiledModuleCache.set(modulePath, module.exports);
+  return module.exports;
 }
 
-function parseApplications(source) {
-  const items = [];
-  const regex =
-    /slug:\s*"([^"]+)",\s*title:\s*"([^"]+)",\s*description:\s*"([^"]+)"/g;
-  let match = regex.exec(source);
+export async function loadSeoConfigs() {
+  const seoModule = await loadTsModule(path.join(projectRoot, "src", "utils", "seo.ts"));
 
-  while (match) {
-    items.push({
-      slug: match[1],
-      titleKey: match[2],
-      descriptionKey: match[3],
-    });
-    match = regex.exec(source);
+  if (typeof seoModule.getSeoConfigs !== "function") {
+    throw new Error("[generate-site-artifacts] Failed to load getSeoConfigs from src/utils/seo.ts");
   }
 
-  return items;
+  return seoModule.getSeoConfigs();
 }
 
-function parseVideoThumbnailMap(source, assetImports = {}) {
-  const thumbnailMap = {};
-  const mapAnchor = source.indexOf("const videoThumbnailMap");
-
-  if (mapAnchor < 0) {
-    return thumbnailMap;
-  }
-
-  const mapStart = source.indexOf("{", mapAnchor);
-  const mapEnd = source.indexOf("};", mapStart);
-
-  if (mapStart < 0 || mapEnd < 0) {
-    return thumbnailMap;
-  }
-
-  const mapSource = source.slice(mapStart + 1, mapEnd);
-  const regex = /"([^"]+)":\s*([A-Za-z_$][\w$]*)/g;
-  let match = regex.exec(mapSource);
-
-  while (match) {
-    thumbnailMap[match[1]] = assetImports[match[2]] || "";
-    match = regex.exec(mapSource);
-  }
-
-  return thumbnailMap;
+function normalizeProductFamilies(productFamilies = []) {
+  return productFamilies.map((family) => ({
+    id: family.id,
+    titleKey: family.titleKey,
+    introKey: family.introKey,
+  }));
 }
 
-function parseVideoEntries(source, videoThumbnailMap = {}) {
-  const items = [];
-  const regex =
-    /"([^"]+)":\s*{\s*slug:\s*"([^"]+)",[\s\S]*?title:\s*"([^"]+)",\s*desc:\s*"([^"]+)"/g;
-  let match = regex.exec(source);
+function normalizeProductCards(productCards = []) {
+  return productCards.map((item) => ({
+    id: item.card.id,
+    imageSource: item.card.image || "",
+    heroImageSize: item.card.heroImageSize,
+    titleKey: item.card.titleKey,
+    summaryKey: item.card.summaryKey,
+    specKeys: item.card.specKeys || [],
+    noteKey: item.card.noteKey || "",
+  }));
+}
 
-  while (match) {
-    items.push({
-      slug: match[2],
-      titleKey: match[3],
-      descriptionKey: match[4],
-      imageSource: videoThumbnailMap[match[2]] || "",
-    });
-    match = regex.exec(source);
+function normalizeApplications(applications = []) {
+  return applications.map((item) => ({
+    slug: item.slug,
+    titleKey: item.title,
+    descriptionKey: item.description,
+  }));
+}
+
+function normalizeVideos(videoMap = {}, getVideoThumbnailById) {
+  return Object.values(videoMap).map((video) => ({
+    slug: video.slug,
+    titleKey: video.title,
+    descriptionKey: video.desc,
+    imageSource: getVideoThumbnailById(video.slug) || "",
+  }));
+}
+
+function assertEntriesHaveImages(label, items, keyField) {
+  if (items.length === 0) {
+    throw new Error(`[generate-site-artifacts] No ${label} entries parsed`);
   }
 
-  return items;
+  const missingKeys = items.filter((item) => !item.imageSource).map((item) => item[keyField]);
+
+  if (missingKeys.length > 0) {
+    throw new Error(
+      `[generate-site-artifacts] Missing responsive images for ${label}: ${missingKeys.join(", ")}`
+    );
+  }
 }
 
 function renderStaticShell(title, description, sections) {
@@ -434,10 +453,16 @@ function getStructuredData(page, messages) {
 
   switch (page.routeKey) {
     case "products":
-      return {
-        ...common,
-        "@type": "CollectionPage",
-      };
+      return [
+        {
+          ...common,
+          "@type": "CollectionPage",
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.products"), path: "/products" },
+        ]),
+      ];
     case "productDetail":
       return [
         {
@@ -473,10 +498,7 @@ function getStructuredData(page, messages) {
             itemListElement: SOLUTION_GROUP_KEYS.map((key) => ({
               "@type": "Service",
               name: getMessage(messages, `seo.structuredData.solutions.${key}.name`),
-              description: getMessage(
-                messages,
-                `seo.structuredData.solutions.${key}.description`
-              ),
+              description: getMessage(messages, `seo.structuredData.solutions.${key}.description`),
               provider: {
                 "@type": "Organization",
                 name: siteName,
@@ -492,13 +514,14 @@ function getStructuredData(page, messages) {
             name: getMessage(messages, `seo.structuredData.solutionsFaq.${key}`),
             acceptedAnswer: {
               "@type": "Answer",
-              text: getMessage(
-                messages,
-                `seo.structuredData.solutionsFaq.a${key.slice(1)}`
-              ),
+              text: getMessage(messages, `seo.structuredData.solutionsFaq.a${key.slice(1)}`),
             },
           })),
         },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.solutions"), path: "/solutions" },
+        ]),
       ];
     case "applicationDetail":
       return [
@@ -544,28 +567,46 @@ function getStructuredData(page, messages) {
         ]),
       ];
     case "support":
-      return {
-        ...common,
-        "@type": "FAQPage",
-        mainEntity: SUPPORT_FAQ_KEYS.map((key) => ({
-          "@type": "Question",
-          name: getMessage(messages, `supportPage.faqs.${key}.question`),
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: getMessage(messages, `supportPage.faqs.${key}.answer`),
-          },
-        })),
-      };
+      return [
+        {
+          ...common,
+          "@type": "FAQPage",
+          mainEntity: SUPPORT_FAQ_KEYS.map((key) => ({
+            "@type": "Question",
+            name: getMessage(messages, `supportPage.faqs.${key}.question`),
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: getMessage(messages, `supportPage.faqs.${key}.answer`),
+            },
+          })),
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.support"), path: "/support" },
+        ]),
+      ];
     case "careers":
-      return {
-        ...common,
-        "@type": "CollectionPage",
-      };
+      return [
+        {
+          ...common,
+          "@type": "CollectionPage",
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.careers"), path: "/careers" },
+        ]),
+      ];
     case "about":
-      return {
-        ...common,
-        "@type": "AboutPage",
-      };
+      return [
+        {
+          ...common,
+          "@type": "AboutPage",
+        },
+        buildBreadcrumbList(page.locale, [
+          { name: getMessage(messages, "nav.home"), path: "/" },
+          { name: getMessage(messages, "nav.about"), path: "/about" },
+        ]),
+      ];
     default:
       return {
         ...common,
@@ -598,16 +639,43 @@ function renderHead(html, page) {
   };
 
   replaceOrInsert(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
-  replaceOrInsert(/<meta[^>]+name="description"[^>]*>/i, `<meta name="description" content="${description}" />`);
-  replaceOrInsert(/<meta[^>]+name="keywords"[^>]*>/i, `<meta name="keywords" content="${keywords}" />`);
-  replaceOrInsert(/<meta[^>]+name="robots"[^>]*>/i, `<meta name="robots" content="index, follow" />`);
+  replaceOrInsert(
+    /<meta[^>]+name="description"[^>]*>/i,
+    `<meta name="description" content="${description}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+name="keywords"[^>]*>/i,
+    `<meta name="keywords" content="${keywords}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+name="robots"[^>]*>/i,
+    `<meta name="robots" content="index, follow" />`
+  );
   replaceOrInsert(/<link[^>]+rel="canonical"[^>]*>/i, `<link rel="canonical" href="${pageUrl}" />`);
-  replaceOrInsert(/<meta[^>]+property="og:title"[^>]*>/i, `<meta property="og:title" content="${title}" />`);
-  replaceOrInsert(/<meta[^>]+property="og:description"[^>]*>/i, `<meta property="og:description" content="${description}" />`);
-  replaceOrInsert(/<meta[^>]+property="og:url"[^>]*>/i, `<meta property="og:url" content="${pageUrl}" />`);
-  replaceOrInsert(/<meta[^>]+property="og:type"[^>]*>/i, `<meta property="og:type" content="${page.ogType}" />`);
-  replaceOrInsert(/<meta[^>]+property="og:site_name"[^>]*>/i, `<meta property="og:site_name" content="${escapeHtml(page.siteName)}" />`);
-  replaceOrInsert(/<meta[^>]+property="og:image"[^>]*>/i, `<meta property="og:image" content="${shareImage}" />`);
+  replaceOrInsert(
+    /<meta[^>]+property="og:title"[^>]*>/i,
+    `<meta property="og:title" content="${title}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+property="og:description"[^>]*>/i,
+    `<meta property="og:description" content="${description}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+property="og:url"[^>]*>/i,
+    `<meta property="og:url" content="${pageUrl}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+property="og:type"[^>]*>/i,
+    `<meta property="og:type" content="${page.ogType}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+property="og:site_name"[^>]*>/i,
+    `<meta property="og:site_name" content="${escapeHtml(page.siteName)}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+property="og:image"[^>]*>/i,
+    `<meta property="og:image" content="${shareImage}" />`
+  );
   replaceOrInsert(
     /<meta[^>]+property="og:image:width"[^>]*>/i,
     page.ogImageWidth ? `<meta property="og:image:width" content="${page.ogImageWidth}" />` : ""
@@ -616,27 +684,45 @@ function renderHead(html, page) {
     /<meta[^>]+property="og:image:height"[^>]*>/i,
     page.ogImageHeight ? `<meta property="og:image:height" content="${page.ogImageHeight}" />` : ""
   );
-  replaceOrInsert(/<meta[^>]+property="og:locale"[^>]*>/i, `<meta property="og:locale" content="${ogLocale}" />`);
-  replaceOrInsert(/<meta[^>]+name="twitter:card"[^>]*>/i, `<meta name="twitter:card" content="summary_large_image" />`);
-  replaceOrInsert(/<meta[^>]+name="twitter:title"[^>]*>/i, `<meta name="twitter:title" content="${title}" />`);
-  replaceOrInsert(/<meta[^>]+name="twitter:description"[^>]*>/i, `<meta name="twitter:description" content="${description}" />`);
-  replaceOrInsert(/<meta[^>]+name="twitter:image"[^>]*>/i, `<meta name="twitter:image" content="${twitterImage}" />`);
+  replaceOrInsert(
+    /<meta[^>]+property="og:locale"[^>]*>/i,
+    `<meta property="og:locale" content="${ogLocale}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+name="twitter:card"[^>]*>/i,
+    `<meta name="twitter:card" content="summary_large_image" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+name="twitter:title"[^>]*>/i,
+    `<meta name="twitter:title" content="${title}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+name="twitter:description"[^>]*>/i,
+    `<meta name="twitter:description" content="${description}" />`
+  );
+  replaceOrInsert(
+    /<meta[^>]+name="twitter:image"[^>]*>/i,
+    `<meta name="twitter:image" content="${twitterImage}" />`
+  );
 
   nextHtml = nextHtml.replace(/\s*<meta[^>]+property="og:locale:alternate"[^>]*>/gi, "");
   nextHtml = nextHtml.replace(/\s*<link[^>]+rel="alternate"[^>]*>/gi, "");
-  nextHtml = nextHtml.replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/gi, "");
+  nextHtml = nextHtml.replace(
+    /\s*<script[^>]+type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
+    ""
+  );
 
   const alternateLinks = getAlternates(page.path)
     .map(
       (item) =>
-        `    <link rel="alternate" hreflang="${item.hreflang}" href="${item.href}" />`
+        `    <link rel="alternate" hreflang="${item.hreflang}" href="${item.href}" data-seo-managed="true" />`
     )
     .join("\n");
 
   const seoExtras = [
-    `    <meta property="og:locale:alternate" content="${alternateOgLocale}" />`,
+    `    <meta property="og:locale:alternate" content="${alternateOgLocale}" data-seo-managed="true" />`,
     alternateLinks,
-    `    <script type="application/ld+json">${JSON.stringify(page.structuredData)}</script>`,
+    `    <script type="application/ld+json" data-seo-managed="structured-data">${JSON.stringify(page.structuredData)}</script>`,
   ].join("\n");
 
   nextHtml = nextHtml.replace("</head>", `${seoExtras}\n  </head>`);
@@ -664,13 +750,13 @@ function buildPageContent(page, messages, data) {
         title: escapeHtml(getMessage(messages, item.titleKey)),
         description: escapeHtml(getMessage(messages, item.descriptionKey)),
       }));
-      const videoItems = data.videos.slice(0, 6).map((item) =>
-        escapeHtml(getMessage(messages, item.titleKey))
-      );
+      const videoItems = data.videos
+        .slice(0, 6)
+        .map((item) => escapeHtml(getMessage(messages, item.titleKey)));
 
       return renderStaticShell(
-        escapeHtml(getMessage(messages, "home.hero.title")),
-        escapeHtml(getMessage(messages, "home.hero.description")),
+        renderHeroText(getMessage(messages, "home.hero.title")),
+        renderHeroText(getMessage(messages, "home.hero.description")),
         [
           renderGridSection(
             escapeHtml(getMessage(messages, "home.coreProducts.title")),
@@ -705,24 +791,18 @@ function buildPageContent(page, messages, data) {
             escapeHtml(getMessage(messages, "productsPage.overview.description")),
             familyCards
           ),
-          renderListSection(
-            escapeHtml(getMessage(messages, "productsPage.guide.title")),
-            "",
-            [
-              escapeHtml(getMessage(messages, "productsPage.guide.items.family.description")),
-              escapeHtml(getMessage(messages, "productsPage.guide.items.difference.description")),
-              escapeHtml(getMessage(messages, "productsPage.guide.items.accessories.description")),
-            ]
-          ),
+          renderListSection(escapeHtml(getMessage(messages, "productsPage.guide.title")), "", [
+            escapeHtml(getMessage(messages, "productsPage.guide.items.family.description")),
+            escapeHtml(getMessage(messages, "productsPage.guide.items.difference.description")),
+            escapeHtml(getMessage(messages, "productsPage.guide.items.accessories.description")),
+          ]),
         ]
       );
     }
     case "solutions": {
       const solutionCards = SOLUTION_GROUP_KEYS.map((key) => ({
         title: escapeHtml(getMessage(messages, `solutionsPage.industries.${key}.title`)),
-        description: escapeHtml(
-          getMessage(messages, `solutionsPage.industries.${key}.summary`)
-        ),
+        description: escapeHtml(getMessage(messages, `solutionsPage.industries.${key}.summary`)),
       }));
 
       return renderStaticShell(
@@ -738,7 +818,9 @@ function buildPageContent(page, messages, data) {
             escapeHtml(getMessage(messages, "solutionsPage.delivery.title")),
             escapeHtml(getMessage(messages, "solutionsPage.delivery.description")),
             [
-              escapeHtml(getMessage(messages, "solutionsPage.delivery.steps.discovery.description")),
+              escapeHtml(
+                getMessage(messages, "solutionsPage.delivery.steps.discovery.description")
+              ),
               escapeHtml(getMessage(messages, "solutionsPage.delivery.steps.design.description")),
               escapeHtml(getMessage(messages, "solutionsPage.delivery.steps.deliver.description")),
             ]
@@ -766,9 +848,7 @@ function buildPageContent(page, messages, data) {
             "",
             ["downloads", "faq", "contact"].map((key) => ({
               title: escapeHtml(getMessage(messages, `supportPage.paths.${key}.title`)),
-              description: escapeHtml(
-                getMessage(messages, `supportPage.paths.${key}.description`)
-              ),
+              description: escapeHtml(getMessage(messages, `supportPage.paths.${key}.description`)),
             }))
           ),
           renderGridSection(
@@ -776,9 +856,7 @@ function buildPageContent(page, messages, data) {
             escapeHtml(getMessage(messages, "supportPage.faqIntro")),
             SUPPORT_FAQ_KEYS.map((key) => ({
               title: escapeHtml(getMessage(messages, `supportPage.faqs.${key}.question`)),
-              description: escapeHtml(
-                getMessage(messages, `supportPage.faqs.${key}.answer`)
-              ),
+              description: escapeHtml(getMessage(messages, `supportPage.faqs.${key}.answer`)),
             }))
           ),
           renderListSection(
@@ -789,7 +867,7 @@ function buildPageContent(page, messages, data) {
                 getMessage(messages, "footer.telValue")
               )}`,
               `${escapeHtml(getMessage(messages, "contacts.email"))}: ${escapeHtml(
-                String(getMessage(messages, "footer.emailValue")).replace("{'@'}", "@")
+                getMessage(messages, "contacts.supportEmail")
               )}`,
               `${escapeHtml(getMessage(messages, "contacts.address"))}: ${escapeHtml(
                 getMessage(messages, "footer.address")
@@ -819,19 +897,15 @@ function buildPageContent(page, messages, data) {
               description: "",
             }))
           ),
-          renderListSection(
-            escapeHtml(getMessage(messages, "nav.contact")),
-            "",
-            [
-              `${escapeHtml(getMessage(messages, "contacts.phone"))}: ${escapeHtml(
-                getMessage(messages, "footer.telValue")
-              )}`,
-              `${escapeHtml(getMessage(messages, "contacts.email"))}: liqingfeng@zeroant.com`,
-              `${escapeHtml(getMessage(messages, "contacts.address"))}: ${escapeHtml(
-                getMessage(messages, "footer.address")
-              )}`,
-            ]
-          ),
+          renderListSection(escapeHtml(getMessage(messages, "nav.contact")), "", [
+            `${escapeHtml(getMessage(messages, "contacts.phone"))}: ${escapeHtml(
+              getMessage(messages, "footer.telValue")
+            )}`,
+            `${escapeHtml(getMessage(messages, "contacts.email"))}: ${escapeHtml(getMessage(messages, "contacts.supportEmail"))}`,
+            `${escapeHtml(getMessage(messages, "contacts.address"))}: ${escapeHtml(
+              getMessage(messages, "footer.address")
+            )}`,
+          ]),
         ]
       );
     }
@@ -845,9 +919,7 @@ function buildPageContent(page, messages, data) {
             "",
             CAREER_BENEFIT_KEYS.map((key) => ({
               title: escapeHtml(getMessage(messages, `careers.benefits.${key}.title`)),
-              description: escapeHtml(
-                getMessage(messages, `careers.benefits.${key}.description`)
-              ),
+              description: escapeHtml(getMessage(messages, `careers.benefits.${key}.description`)),
             }))
           ),
           renderGridSection(
@@ -869,7 +941,7 @@ function buildPageContent(page, messages, data) {
               `${escapeHtml(getMessage(messages, "careers.workLocation"))}: ${escapeHtml(
                 getMessage(messages, "careers.hangzhou")
               )}`,
-              `${escapeHtml(getMessage(messages, "careers.email"))}: hr@zeroant.com`,
+              `${escapeHtml(getMessage(messages, "careers.email"))}: ${escapeHtml(getMessage(messages, "contacts.hrEmail"))}`,
             ]
           ),
         ]
@@ -904,19 +976,11 @@ function buildPageContent(page, messages, data) {
         }
       }
 
-      return renderStaticShell(
-        escapeHtml(page.title),
-        escapeHtml(page.description),
-        sections
-      );
+      return renderStaticShell(escapeHtml(page.title), escapeHtml(page.description), sections);
     }
     case "applicationDetail":
     case "videoDetail":
-      return renderStaticShell(
-        escapeHtml(page.title),
-        escapeHtml(page.description),
-        []
-      );
+      return renderStaticShell(escapeHtml(page.title), escapeHtml(page.description), []);
     default:
       return renderStaticShell(
         escapeHtml(getMessage(messages, "seo.home.title")),
@@ -926,14 +990,24 @@ function buildPageContent(page, messages, data) {
   }
 }
 
-function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
+function getSeoConfigField(messages, seoConfigs, seoKey, field) {
+  const messageKey = seoConfigs?.[seoKey]?.[field];
+
+  if (typeof messageKey === "string") {
+    return getMessage(messages, messageKey);
+  }
+
+  return getMessage(messages, `seo.home.${field}`);
+}
+
+export function buildPageDefinitions(messages, data, resolveBuiltAssetPath, seoConfigs) {
   const topLevelPages = [
-    { routeKey: "home", path: "/", ogType: "website" },
-    { routeKey: "products", path: "/products", ogType: "website" },
-    { routeKey: "solutions", path: "/solutions", ogType: "website" },
-    { routeKey: "support", path: "/support", ogType: "website" },
-    { routeKey: "about", path: "/about", ogType: "website" },
-    { routeKey: "careers", path: "/careers", ogType: "website" },
+    { routeKey: "home", seoKey: "home", path: "/", ogType: "website" },
+    { routeKey: "products", seoKey: "products", path: "/products", ogType: "website" },
+    { routeKey: "solutions", seoKey: "solutions", path: "/solutions", ogType: "website" },
+    { routeKey: "support", seoKey: "support", path: "/support", ogType: "website" },
+    { routeKey: "about", seoKey: "about", path: "/about", ogType: "website" },
+    { routeKey: "careers", seoKey: "careers", path: "/careers", ogType: "website" },
   ];
 
   const productDetailPages = data.productCards.map((item) => ({
@@ -942,6 +1016,7 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
     ogType: "product",
     itemId: item.id,
     imageSource: item.imageSource,
+    heroImageSize: item.heroImageSize,
     titleKey: item.titleKey,
     descriptionKey: item.summaryKey,
     specKeys: item.specKeys,
@@ -974,20 +1049,19 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
       const localeMessages = messages[locale];
       const title = page.titleKey
         ? stripHtml(getMessage(localeMessages, page.titleKey))
-        : getMessage(localeMessages, `seo.${page.routeKey}.title`) ||
-          getMessage(localeMessages, "seo.home.title");
+        : getSeoConfigField(localeMessages, seoConfigs, page.seoKey, "title");
       const description = page.descriptionKey
         ? stripHtml(getMessage(localeMessages, page.descriptionKey))
-        : getMessage(localeMessages, `seo.${page.routeKey}.description`) ||
-          getMessage(localeMessages, "seo.home.description");
+        : getSeoConfigField(localeMessages, seoConfigs, page.seoKey, "description");
       const defaultKeywords =
-        getMessage(localeMessages, "seo.home.keywords") || "ZeroAnt Technology";
+        getSeoConfigField(localeMessages, seoConfigs, "home", "keywords") || "ZeroAnt Technology";
       const keywords =
         page.routeKey === "productDetail" ||
         page.routeKey === "applicationDetail" ||
         page.routeKey === "videoDetail"
           ? `${title}, ${defaultKeywords}`
-          : getMessage(localeMessages, `seo.${page.routeKey}.keywords`) || defaultKeywords;
+          : getSeoConfigField(localeMessages, seoConfigs, page.seoKey, "keywords") ||
+            defaultKeywords;
 
       const localizedPage = {
         ...page,
@@ -998,15 +1072,24 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
         siteName: getMessage(localeMessages, "seo.siteName") || "ZeroAnt Technology",
       };
       const resolvedImagePath = localizedPage.imageSource
-        ? resolveBuiltAssetPath(localizedPage.imageSource)
+        ? localizedPage.imageSource.startsWith("/")
+          ? localizedPage.imageSource
+          : resolveBuiltAssetPath(localizedPage.imageSource)
         : "";
-      const shareImage = resolvedImagePath
-        ? `${siteUrl}${resolvedImagePath}`
-        : DEFAULT_SHARE_IMAGE;
+      const shareImage = resolvedImagePath ? `${siteUrl}${resolvedImagePath}` : DEFAULT_SHARE_IMAGE;
+      const responsiveImageDimensions =
+        localizedPage.routeKey === "productDetail"
+          ? getResponsiveImageDimensions(
+              resolvedImagePath || localizedPage.imageSource,
+              localizedPage.heroImageSize
+            )
+          : {};
       localizedPage.ogImage = shareImage;
       localizedPage.twitterImage = shareImage;
-      localizedPage.ogImageWidth = resolvedImagePath ? undefined : 1200;
-      localizedPage.ogImageHeight = resolvedImagePath ? undefined : 630;
+      localizedPage.ogImageWidth =
+        responsiveImageDimensions.width ?? (resolvedImagePath ? undefined : 1200);
+      localizedPage.ogImageHeight =
+        responsiveImageDimensions.height ?? (resolvedImagePath ? undefined : 630);
 
       return {
         ...localizedPage,
@@ -1017,18 +1100,34 @@ function buildPageDefinitions(messages, data, resolveBuiltAssetPath) {
   );
 }
 
-async function loadData() {
-  const [zhMessages, enMessages, productSource, applicationSource, videoSource] =
-    await Promise.all([
-      fs.readFile(path.join(localeDir, "zh.json"), "utf8").then(JSON.parse),
-      fs.readFile(path.join(localeDir, "en.json"), "utf8").then(JSON.parse),
-      fs.readFile(path.join(sourceDir, "product-center.ts"), "utf8"),
-      fs.readFile(path.join(sourceDir, "applications.ts"), "utf8"),
-      fs.readFile(path.join(sourceDir, "videos.ts"), "utf8"),
-    ]);
-  const productAssetImports = parseAssetImports(productSource);
-  const videoAssetImports = parseAssetImports(videoSource);
-  const videoThumbnailMap = parseVideoThumbnailMap(videoSource, videoAssetImports);
+export async function loadData() {
+  const [zhMessages, enMessages, responsiveManifest] = await Promise.all([
+    fs.readFile(path.join(localeDir, "zh.json"), "utf8").then(JSON.parse),
+    fs.readFile(path.join(localeDir, "en.json"), "utf8").then(JSON.parse),
+    fs.readFile(responsiveManifestPath, "utf8").then(JSON.parse),
+  ]);
+  const responsiveRuntime = createResponsiveImageRuntime(responsiveManifest);
+  const [productModule, applicationsModule, videoModule] = await Promise.all([
+    loadTsModule(path.join(sourceDir, "product-center.ts"), {
+      dependencies: {
+        "@/utils/responsiveImage": responsiveRuntime,
+      },
+    }),
+    loadTsModule(path.join(sourceDir, "applications.ts")),
+    loadTsModule(path.join(sourceDir, "videos.ts"), {
+      dependencies: {
+        "@/utils/responsiveImage": responsiveRuntime,
+      },
+    }),
+  ]);
+
+  const productFamilies = normalizeProductFamilies(productModule.productCenterFamilies);
+  const productCards = normalizeProductCards(productModule.productCenterCards);
+  const applications = normalizeApplications(applicationsModule.default || []);
+  const videos = normalizeVideos(videoModule.videoMap, videoModule.getVideoThumbnailById);
+
+  assertEntriesHaveImages("product cards", productCards, "id");
+  assertEntriesHaveImages("videos", videos, "slug");
 
   return {
     messages: {
@@ -1036,11 +1135,31 @@ async function loadData() {
       en: enMessages,
     },
     data: {
-      productFamilies: parseProductFamilies(productSource),
-      productCards: parseProductCards(productSource, productAssetImports),
-      applications: parseApplications(applicationSource),
-      videos: parseVideoEntries(videoSource, videoThumbnailMap),
+      productFamilies,
+      productCards,
+      applications,
+      videos,
     },
+  };
+}
+
+function getResponsiveImageDimensions(imagePath, originalSize) {
+  const responsiveWidthMatch = String(imagePath).match(/-(\d+)\.(?:avif|webp|png|jpe?g|gif|svg)$/i);
+  const targetWidth = Number(responsiveWidthMatch?.[1]);
+
+  if (
+    !targetWidth ||
+    !originalSize?.width ||
+    !originalSize.height ||
+    originalSize.width <= 0 ||
+    originalSize.height <= 0
+  ) {
+    return {};
+  }
+
+  return {
+    width: targetWidth,
+    height: Math.round((targetWidth * originalSize.height) / originalSize.width),
   };
 }
 
@@ -1066,7 +1185,7 @@ async function collectBuiltAssetPublicPaths(currentDir = distDir) {
   return assetPaths;
 }
 
-async function createBuiltAssetResolver() {
+export async function createBuiltAssetResolver() {
   const assetPaths = await collectBuiltAssetPublicPaths();
 
   return (sourceAssetPath = "") => {
@@ -1086,41 +1205,37 @@ async function createBuiltAssetResolver() {
       "i"
     );
 
-    return (
-      assetPaths.find((publicPath) =>
-        filePattern.test(path.posix.basename(publicPath))
-      ) || ""
-    );
+    return assetPaths.find((publicPath) => filePattern.test(path.posix.basename(publicPath))) || "";
   };
+}
+
+export function renderPageHtml(baseHtml, page) {
+  const withHead = renderHead(baseHtml, page);
+  return renderBody(withHead, page.bodyHtml);
 }
 
 async function writePrerenderedPages(baseHtml, pages) {
   for (const page of pages) {
-    const withHead = renderHead(baseHtml, page);
-    const finalHtml = renderBody(withHead, page.bodyHtml);
+    const finalHtml = renderPageHtml(baseHtml, page);
     const outputDir =
       page.path === "/" && page.locale === "zh"
         ? distDir
-        : path.join(
-            distDir,
-            withLocalePath(page.path, page.locale).replace(/^\/+/, "")
-          );
+        : path.join(distDir, withLocalePath(page.path, page.locale).replace(/^\/+/, ""));
 
     await fs.mkdir(outputDir, { recursive: true });
     await fs.writeFile(path.join(outputDir, "index.html"), finalHtml, "utf8");
   }
 }
 
-function buildSitemapXml(paths) {
-  const urls = paths
-    .map((routePath) => {
-      const location = `${siteUrl}${routePath}`;
+function buildSitemapXml(entries) {
+  const urls = entries
+    .map(({ path, priority }) => {
+      const location = `${siteUrl}${path}`;
       return [
         "  <url>",
         `    <loc>${location}</loc>`,
-        `    <lastmod>${buildDate}</lastmod>`,
         "    <changefreq>weekly</changefreq>",
-        "    <priority>0.8</priority>",
+        `    <priority>${priority}</priority>`,
         "  </url>",
       ].join("\n");
     })
@@ -1136,46 +1251,58 @@ function buildSitemapXml(paths) {
 }
 
 async function writeSitemap(data) {
-  const localeVariants = (routePath) => [withLocalePath(routePath, "zh"), withLocalePath(routePath, "en")];
-  const pagePaths = [
-    "/",
-    "/products",
-    "/solutions",
-    "/support",
-    "/about",
-    "/careers",
-  ].flatMap(localeVariants);
-  const productPaths = data.productCards.flatMap((item) =>
-    localeVariants(`/products/detail/${item.id}`)
+  const localeVariants = (routePath) => [
+    withLocalePath(routePath, "zh"),
+    withLocalePath(routePath, "en"),
+  ];
+  const entry = (path, priority) => ({ path, priority });
+
+  // 首页优先级 1.0，顶层页面 0.8，详情页 0.6
+  const pageEntries = [
+    entry("/", "1.0"),
+    entry("/products", "0.8"),
+    entry("/solutions", "0.8"),
+    entry("/support", "0.8"),
+    entry("/about", "0.8"),
+    entry("/careers", "0.8"),
+  ].flatMap((e) => localeVariants(e.path).map((p) => ({ path: p, priority: e.priority })));
+  const productEntries = data.productCards.flatMap((item) =>
+    localeVariants(`/products/detail/${item.id}`).map((p) => ({ path: p, priority: "0.6" }))
   );
-  const applicationPaths = data.applications.flatMap((item) =>
-    localeVariants(`/applications/${item.slug}`)
+  const applicationEntries = data.applications.flatMap((item) =>
+    localeVariants(`/applications/${item.slug}`).map((p) => ({ path: p, priority: "0.6" }))
   );
-  const videoPaths = data.videos.flatMap((item) =>
-    localeVariants(`/video/${item.slug}`)
+  const videoEntries = data.videos.flatMap((item) =>
+    localeVariants(`/video/${item.slug}`).map((p) => ({ path: p, priority: "0.6" }))
   );
   const sitemapXml = buildSitemapXml([
-    ...pagePaths,
-    ...productPaths,
-    ...applicationPaths,
-    ...videoPaths,
+    ...pageEntries,
+    ...productEntries,
+    ...applicationEntries,
+    ...videoEntries,
   ]);
 
   await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml, "utf8");
 }
 
-async function run() {
+export async function generateSiteArtifacts() {
   const indexPath = path.join(distDir, "index.html");
   const baseHtml = await fs.readFile(indexPath, "utf8");
-  const { messages, data } = await loadData();
+  const [seoConfigs, { messages, data }] = await Promise.all([loadSeoConfigs(), loadData()]);
   const resolveBuiltAssetPath = await createBuiltAssetResolver();
-  const pages = buildPageDefinitions(messages, data, resolveBuiltAssetPath);
+  const pages = buildPageDefinitions(messages, data, resolveBuiltAssetPath, seoConfigs);
 
   await writePrerenderedPages(baseHtml, pages);
   await writeSitemap(data);
 }
 
-run().catch((error) => {
-  console.error("[generate-site-artifacts] failed:", error);
-  process.exitCode = 1;
-});
+const isDirectExecution =
+  typeof process.argv[1] === "string" &&
+  pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url;
+
+if (isDirectExecution) {
+  generateSiteArtifacts().catch((error) => {
+    console.error("[generate-site-artifacts] failed:", error);
+    process.exitCode = 1;
+  });
+}

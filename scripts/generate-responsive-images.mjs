@@ -8,6 +8,10 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const publicDir = path.join(projectRoot, "public");
 const sourceDir = path.join(projectRoot, "src", "data");
+const srcRootDir = path.join(projectRoot, "src");
+const sourceMapPath = path.join(sourceDir, "responsive-image-sources.json");
+const productCenterSourcePath = path.join(sourceDir, "product-center.ts");
+const videoSourcePath = path.join(sourceDir, "videos.ts");
 const generatedManifestPath = path.join(
   projectRoot,
   "src",
@@ -15,16 +19,25 @@ const generatedManifestPath = path.join(
   "responsive-images.generated.json"
 );
 const responsivePublicDir = path.join(publicDir, "responsive");
-const OUTPUT_FORMAT = "webp";
+const OUTPUT_FORMATS = {
+  webp: {
+    quality: 82,
+    effort: 4,
+  },
+  avif: {
+    quality: 60,
+    effort: 6,
+  },
+};
 
 const HERO_VARIANTS = {
   homeDesktop: {
-    source: "src/assets/images/product/封面.webp",
+    source: "src/assets/images/product/ZA-MR3T.webp",
     outputBase: "hero/home-desktop",
     widths: [960, 1600],
   },
   homeMobile: {
-    source: "src/assets/images/product/封面-mobile.webp",
+    source: "src/assets/images/product/ZA-MR3T.webp",
     outputBase: "hero/home-mobile",
     widths: [480, 900],
   },
@@ -32,129 +45,8 @@ const HERO_VARIANTS = {
 
 const PRODUCT_TARGET_WIDTHS = [480, 760, 1200];
 const VIDEO_TARGET_WIDTHS = [480, 854, 1280];
-
-function parseAssetImports(source) {
-  const imports = {};
-  const regex = /import\s+([A-Za-z_$][\w$]*)\s+from\s+["'](@\/[^"']+)["']/g;
-  let match = regex.exec(source);
-
-  while (match) {
-    imports[match[1]] = match[2].replace(/^@\//, "src/");
-    match = regex.exec(source);
-  }
-
-  return imports;
-}
-
-function extractTopLevelObjectBlocks(source, arrayLabel) {
-  const blocks = [];
-  let searchStart = 0;
-
-  while (searchStart < source.length) {
-    const labelIndex = source.indexOf(arrayLabel, searchStart);
-
-    if (labelIndex < 0) {
-      break;
-    }
-
-    const arrayStart = source.indexOf("[", labelIndex);
-
-    if (arrayStart < 0) {
-      throw new Error(`[generate-responsive-images] Missing array start for ${arrayLabel}`);
-    }
-
-    let bracketDepth = 0;
-    let braceDepth = 0;
-    let objectStart = -1;
-    let foundArrayEnd = false;
-
-    for (let index = arrayStart; index < source.length; index += 1) {
-      const char = source[index];
-
-      if (char === "[") {
-        bracketDepth += 1;
-      } else if (char === "]") {
-        bracketDepth -= 1;
-
-        if (bracketDepth === 0) {
-          searchStart = index + 1;
-          foundArrayEnd = true;
-          break;
-        }
-      } else if (char === "{" && bracketDepth > 0) {
-        braceDepth += 1;
-
-        if (braceDepth === 1) {
-          objectStart = index;
-        }
-      } else if (char === "}" && braceDepth > 0) {
-        braceDepth -= 1;
-
-        if (braceDepth === 0 && objectStart >= 0) {
-          blocks.push(source.slice(objectStart, index + 1));
-          objectStart = -1;
-        }
-      }
-    }
-
-    if (!foundArrayEnd) {
-      throw new Error(`[generate-responsive-images] Unbalanced array block for ${arrayLabel}`);
-    }
-  }
-
-  return blocks;
-}
-
-function parseProductImageEntries(source, assetImports = {}) {
-  const items = {};
-  const productBlocks = extractTopLevelObjectBlocks(source, "cards:");
-
-  for (const block of productBlocks) {
-    const idMatch = block.match(/id:\s*"([^"]+)"/);
-    const imageMatch = block.match(/image:\s*([A-Za-z_$][\w$]*)/);
-
-    if (!idMatch || !imageMatch) {
-      continue;
-    }
-
-    items[idMatch[1]] = assetImports[imageMatch[1]] || "";
-  }
-
-  return {
-    items,
-    expectedCount: productBlocks.length,
-  };
-}
-
-function parseVideoThumbnailMap(source, assetImports = {}) {
-  const thumbnailMap = {};
-  const mapAnchor = source.indexOf("const videoThumbnailMap");
-
-  if (mapAnchor < 0) {
-    throw new Error("[generate-responsive-images] Cannot find videoThumbnailMap in videos.ts");
-  }
-
-  const mapStart = source.indexOf("{", mapAnchor);
-  const mapEnd = source.indexOf("};", mapStart);
-
-  if (mapStart < 0 || mapEnd < 0) {
-    throw new Error("[generate-responsive-images] videoThumbnailMap block is malformed");
-  }
-
-  const mapSource = source.slice(mapStart + 1, mapEnd);
-  const regex = /"([^"]+)":\s*([A-Za-z_$][\w$]*)/g;
-  let match = regex.exec(mapSource);
-
-  while (match) {
-    thumbnailMap[match[1]] = assetImports[match[2]] || "";
-    match = regex.exec(mapSource);
-  }
-
-  return {
-    items: thumbnailMap,
-    expectedCount: (mapSource.match(/"[^"]+"\s*:/g) || []).length,
-  };
-}
+const SHOWCASE_TARGET_WIDTHS = [640, 960, 1400];
+const SOURCE_USAGE_FILE_EXTENSIONS = new Set([".ts", ".vue"]);
 
 function selectWidths(originalWidth, desiredWidths) {
   if (!originalWidth || originalWidth <= 0) {
@@ -188,7 +80,7 @@ async function pathExists(targetPath) {
   }
 }
 
-function buildResponsiveOutputFilePath(outputBase, width, format = OUTPUT_FORMAT) {
+function buildResponsiveOutputFilePath(outputBase, width, format) {
   return path.join(responsivePublicDir, `${outputBase}-${width}.${format}`);
 }
 
@@ -209,6 +101,30 @@ async function walkResponsiveFiles(targetDir) {
     }
 
     if (entry.isFile()) {
+      files.push(entryPath);
+    }
+  }
+
+  return files;
+}
+
+async function walkSourceFiles(targetDir) {
+  if (!(await pathExists(targetDir))) {
+    return [];
+  }
+
+  const entries = await fs.readdir(targetDir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const entryPath = path.join(targetDir, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...(await walkSourceFiles(entryPath)));
+      continue;
+    }
+
+    if (entry.isFile() && SOURCE_USAGE_FILE_EXTENSIONS.has(path.extname(entry.name))) {
       files.push(entryPath);
     }
   }
@@ -304,10 +220,6 @@ async function assertResolvedSources(label, entries) {
 }
 
 function assertParsedCount(label, actualCount, expectedCount) {
-  if (expectedCount <= 0) {
-    throw new Error(`[generate-responsive-images] No ${label} entries found`);
-  }
-
   if (actualCount !== expectedCount) {
     throw new Error(
       `[generate-responsive-images] Parsed ${actualCount} ${label} entries, expected ${expectedCount}`
@@ -315,7 +227,104 @@ function assertParsedCount(label, actualCount, expectedCount) {
   }
 }
 
-async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths) {
+function createEmptyManifest() {
+  return {
+    hero: {},
+    heroAvif: {},
+    products: {},
+    productsAvif: {},
+    videos: {},
+    videosAvif: {},
+    showcase: {},
+    showcaseAvif: {},
+  };
+}
+
+function collectLiteralArguments(source, regex) {
+  const values = new Set();
+  let match = regex.exec(source);
+
+  while (match) {
+    values.add(match[1]);
+    match = regex.exec(source);
+  }
+
+  return Array.from(values).sort((left, right) => left.localeCompare(right));
+}
+
+async function collectShowcaseUsageKeys() {
+  const sourceFiles = await walkSourceFiles(srcRootDir);
+  const showcaseKeys = new Set();
+
+  for (const filePath of sourceFiles) {
+    const source = await fs.readFile(filePath, "utf8");
+    const keys = collectLiteralArguments(source, /getResponsiveShowcaseImage\("([^"]+)"\)/g);
+
+    for (const key of keys) {
+      showcaseKeys.add(key);
+    }
+  }
+
+  return Array.from(showcaseKeys).sort((left, right) => left.localeCompare(right));
+}
+
+async function loadExpectedSourceUsage() {
+  const [productSource, videoSource, showcase] = await Promise.all([
+    fs.readFile(productCenterSourcePath, "utf8"),
+    fs.readFile(videoSourcePath, "utf8"),
+    collectShowcaseUsageKeys(),
+  ]);
+
+  return {
+    products: collectLiteralArguments(productSource, /getRequiredProductCenterImage\("([^"]+)"\)/g),
+    videos: collectLiteralArguments(videoSource, /getRequiredVideoThumbnail\("([^"]+)"\)/g),
+    showcase,
+  };
+}
+
+function assertUsageReferencesFound(label, keys, { allowEmpty = false } = {}) {
+  if (!allowEmpty && keys.length === 0) {
+    throw new Error(`[generate-responsive-images] No ${label} responsive image references found`);
+  }
+}
+
+function assertSourceCoverage(label, entries, requiredKeys) {
+  const configuredKeys = Object.keys(entries).sort((left, right) => left.localeCompare(right));
+  const missingKeys = requiredKeys.filter((key) => !(key in entries));
+
+  if (missingKeys.length) {
+    throw new Error(
+      `[generate-responsive-images] Missing ${label} source entries: ${missingKeys.join(", ")}`
+    );
+  }
+
+  const requiredKeySet = new Set(requiredKeys);
+  const unusedKeys = configuredKeys.filter((key) => !requiredKeySet.has(key));
+
+  if (unusedKeys.length) {
+    console.warn(
+      `[generate-responsive-images] Unused ${label} source entries: ${unusedKeys.join(", ")}`
+    );
+  }
+}
+
+function applyOutputFormat(image, format) {
+  if (format === "avif") {
+    return image.avif(OUTPUT_FORMATS.avif);
+  }
+
+  return image.webp(OUTPUT_FORMATS.webp);
+}
+
+function getManifestGroupKey(group, format) {
+  if (format === "avif") {
+    return `${group}Avif`;
+  }
+
+  return group;
+}
+
+async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths, format) {
   const absoluteSourcePath = path.join(projectRoot, sourcePath);
   const sourceStat = await fs.stat(absoluteSourcePath);
   const image = sharp(absoluteSourcePath, { failOn: "none" }).rotate();
@@ -325,7 +334,7 @@ async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths) 
 
   let needsGeneration = false;
   for (const width of widths) {
-    const outputFilePath = buildResponsiveOutputFilePath(outputBase, width);
+    const outputFilePath = buildResponsiveOutputFilePath(outputBase, width, format);
     try {
       const outStat = await fs.stat(outputFilePath);
       if (sourceStat.mtimeMs > outStat.mtimeMs) {
@@ -340,112 +349,131 @@ async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths) 
 
   if (needsGeneration) {
     for (const width of widths) {
-      const outputFilePath = buildResponsiveOutputFilePath(outputBase, width);
+      const outputFilePath = buildResponsiveOutputFilePath(outputBase, width, format);
 
       await ensureDirectory(outputFilePath);
-      await image
-        .clone()
-        .resize({
+      await applyOutputFormat(
+        image.clone().resize({
           width,
           fit: "inside",
           withoutEnlargement: true,
-        })
-        .webp({
-          quality: 82,
-          effort: 4,
-        })
-        .toFile(outputFilePath);
+        }),
+        format
+      ).toFile(outputFilePath);
     }
   }
 
   return {
     basePath: publicBasePath,
-    format: OUTPUT_FORMAT,
+    format,
     widths,
   };
 }
 
 async function loadSourceData() {
-  const [productSource, videoSource] = await Promise.all([
-    fs.readFile(path.join(sourceDir, "product-center.ts"), "utf8"),
-    fs.readFile(path.join(sourceDir, "videos.ts"), "utf8"),
-  ]);
-
-  const productImports = parseAssetImports(productSource);
-  const videoImports = parseAssetImports(videoSource);
-  const parsedProducts = parseProductImageEntries(productSource, productImports);
-  const parsedVideos = parseVideoThumbnailMap(videoSource, videoImports);
+  const sourceMap = JSON.parse(await fs.readFile(sourceMapPath, "utf8"));
 
   return {
-    products: parsedProducts.items,
-    videos: parsedVideos.items,
-    expectedProductCount: parsedProducts.expectedCount,
-    expectedVideoCount: parsedVideos.expectedCount,
+    products: sourceMap.products || {},
+    videos: sourceMap.videos || {},
+    showcase: sourceMap.showcase || {},
   };
 }
 
 async function run() {
-  const {
-    products,
-    videos,
-    expectedProductCount,
-    expectedVideoCount,
-  } = await loadSourceData();
-  const manifest = {
-    hero: {},
-    products: {},
-    videos: {},
-  };
+  const expectedUsage = await loadExpectedSourceUsage();
+  const { products, videos, showcase } = await loadSourceData();
+  const manifest = createEmptyManifest();
 
   await Promise.all([
     assertHeroSources(),
     assertResolvedSources("product", products),
     assertResolvedSources("video", videos),
+    assertResolvedSources("showcase", showcase),
   ]);
-  assertParsedCount("product", Object.keys(products).length, expectedProductCount);
-  assertParsedCount("video thumbnail", Object.keys(videos).length, expectedVideoCount);
+  assertUsageReferencesFound("product", expectedUsage.products);
+  assertUsageReferencesFound("video thumbnail", expectedUsage.videos);
+  assertUsageReferencesFound("showcase", expectedUsage.showcase, { allowEmpty: true });
+  assertSourceCoverage("product", products, expectedUsage.products);
+  assertSourceCoverage("video thumbnail", videos, expectedUsage.videos);
+  assertSourceCoverage("showcase", showcase, expectedUsage.showcase);
 
-  for (const [key, variant] of Object.entries(HERO_VARIANTS)) {
-    manifest.hero[key] = await generateResponsiveVariant(
-      variant.source,
-      variant.outputBase,
-      variant.widths
-    );
-  }
+  for (const format of Object.keys(OUTPUT_FORMATS)) {
+    const heroGroupKey = getManifestGroupKey("hero", format);
+    const productGroupKey = getManifestGroupKey("products", format);
+    const videoGroupKey = getManifestGroupKey("videos", format);
+    const showcaseGroupKey = getManifestGroupKey("showcase", format);
 
-  for (const [slug, source] of Object.entries(products)) {
-    manifest.products[slug] = await generateResponsiveVariant(
-      source,
-      `products/${slug}`,
-      PRODUCT_TARGET_WIDTHS
-    );
-  }
+    for (const [key, variant] of Object.entries(HERO_VARIANTS)) {
+      manifest[heroGroupKey][key] = await generateResponsiveVariant(
+        variant.source,
+        variant.outputBase,
+        variant.widths,
+        format
+      );
+    }
 
-  for (const [slug, source] of Object.entries(videos)) {
-    manifest.videos[slug] = await generateResponsiveVariant(
-      source,
-      `videos/${slug}`,
-      VIDEO_TARGET_WIDTHS
-    );
+    for (const [slug, source] of Object.entries(products)) {
+      manifest[productGroupKey][slug] = await generateResponsiveVariant(
+        source,
+        `products/${slug}`,
+        PRODUCT_TARGET_WIDTHS,
+        format
+      );
+    }
+
+    for (const [slug, source] of Object.entries(videos)) {
+      manifest[videoGroupKey][slug] = await generateResponsiveVariant(
+        source,
+        `videos/${slug}`,
+        VIDEO_TARGET_WIDTHS,
+        format
+      );
+    }
+
+    for (const [key, source] of Object.entries(showcase)) {
+      manifest[showcaseGroupKey][key] = await generateResponsiveVariant(
+        source,
+        `showcase/${key}`,
+        SHOWCASE_TARGET_WIDTHS,
+        format
+      );
+    }
   }
 
   assertParsedCount(
     "generated product",
     Object.keys(manifest.products).length,
-    expectedProductCount
+    Object.keys(products).length
   );
   assertParsedCount(
     "generated video",
     Object.keys(manifest.videos).length,
-    expectedVideoCount
+    Object.keys(videos).length
+  );
+  assertParsedCount(
+    "generated showcase",
+    Object.keys(manifest.showcase).length,
+    Object.keys(showcase).length
+  );
+  assertParsedCount(
+    "generated AVIF product",
+    Object.keys(manifest.productsAvif).length,
+    Object.keys(products).length
+  );
+  assertParsedCount(
+    "generated AVIF video",
+    Object.keys(manifest.videosAvif).length,
+    Object.keys(videos).length
+  );
+  assertParsedCount(
+    "generated AVIF showcase",
+    Object.keys(manifest.showcaseAvif).length,
+    Object.keys(showcase).length
   );
   await removeOrphanResponsiveFiles(manifest);
 
-  await fs.writeFile(
-    generatedManifestPath,
-    `${JSON.stringify(manifest, null, 2)}\n`,
-    "utf8"
-  );
+  await fs.writeFile(generatedManifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 }
 
 run().catch((error) => {

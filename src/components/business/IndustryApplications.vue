@@ -2,12 +2,21 @@
   <section id="industry-applications" class="industry-apps">
     <div class="section-heading-row">
       <div class="section-heading">
-        <h2 class="home-section-title">{{ t('home.industryApplications.title') }}</h2>
-        <p class="home-section-description">{{ t('home.industryApplications.description') }}</p>
+        <h2 class="home-section-title">{{ t("home.industryApplications.title") }}</h2>
+        <p class="home-section-description">{{ t("home.industryApplications.description") }}</p>
       </div>
-      <router-link :to="localizeTo({ path: '/solutions', hash: '#more-applications' })" class="section-cta ui-action-link">
-        <span>{{ t('home.industryApplications.exploreAll') }}</span>
-        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <router-link
+        :to="localizeTo({ path: '/solutions', hash: '#more-applications' })"
+        class="section-cta ui-action-link"
+      >
+        <span>{{ t("home.industryApplications.exploreAll") }}</span>
+        <svg
+          class="cta-arrow"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </router-link>
@@ -26,28 +35,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import applications from '@/data/applications';
-import ApplicationCard from '@/components/common/ApplicationCard.vue';
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+import applications from "@/data/applications";
+import ApplicationCard from "@/components/common/ApplicationCard.vue";
 import { useLocalizedPath } from "@/composables/useLocalizedPath";
 
-const FEATURED_SLUGS = [
-  'medical-automation',
-  'composite-systems',
-  'ai-robotics',
-];
+const FEATURED_SLUGS = ["composite-systems", "fixed-rail-transfer", "ai-robotics"];
 
 const { t } = useI18n();
 const { localizeTo } = useLocalizedPath();
 
 const featuredApps = computed(() =>
-  FEATURED_SLUGS.map((slug) => applications.find((app) => app.slug === slug))
-    .filter((app): app is (typeof applications)[number] => Boolean(app))
+  FEATURED_SLUGS.map((slug) => applications.find((app) => app.slug === slug)).filter(
+    (app): app is (typeof applications)[number] => Boolean(app)
+  )
 );
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .industry-apps {
   position: relative;
   z-index: 1;
