@@ -133,7 +133,9 @@ deploy_ALI_CLOUD_ECS:
       echo '}' >> dist/nginx.conf
     # 部署到阿里云上
     - rsync -avz --delete dist/ root@${ALI_CLOUD_ECS_DEPLOY_SERVER}:/mnt/disk1/zeroant/home_web/
-    - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -t -c /mnt/disk1/zeroant/home_web/nginx.conf"
+    # 预检查需与线上实际生效的配置文件保持一致的 conf_prefix（该文件 include 了刚部署的 nginx.conf），
+    # 否则 ssl_certificate 等相对路径会按 /mnt/disk1/zeroant/home_web/ 解析，实际证书却在 /usr/local/nginx/conf/cert/ 下
+    - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf"
     - ssh root@${ALI_CLOUD_ECS_DEPLOY_SERVER} "/usr/local/nginx/sbin/nginx -s reload"
   # 仅仅在打指定标签的时候进行部署
   rules:
