@@ -335,15 +335,31 @@ onUnmounted(() => {
     min-height: calc(100svh - var(--nav-height));
   }
 
+  /* 移动端改为正常文档流纵向堆叠（图片在上、文案在下），避免文案高度不确定
+     时与图片绝对定位重叠 —— 中文长标题+描述实测高度常超出固定预留区域 */
+  .hero-stage {
+    display: flex;
+    flex-direction: column;
+  }
+
   .hero-media {
-    inset: 12px 0 164px;
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    height: min(48vh, 420px);
+    margin: 12px 0 0;
     padding-right: 0;
     justify-content: center;
   }
 
   .hero-overlay {
-    padding: 84px var(--container-padding-x) 28px;
-    justify-content: flex-end;
+    position: relative;
+    inset: auto;
+    flex: 1 1 auto;
+    padding: 24px var(--container-padding-x) 40px;
+    justify-content: flex-start;
   }
 
   .hero-copy {
@@ -363,6 +379,7 @@ onUnmounted(() => {
 
   .hero-picture {
     width: 100%;
+    height: 100%;
   }
 }
 
@@ -373,7 +390,7 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 22px -8px 206px;
+    height: min(42vh, 340px);
   }
 
   .hero-description {
@@ -381,7 +398,7 @@ onUnmounted(() => {
   }
 
   .hero-overlay {
-    padding: 72px 16px 22px;
+    padding: 20px 16px 24px;
   }
 
   :deep(.hero-br) {
@@ -396,11 +413,7 @@ onUnmounted(() => {
   }
 
   .hero-media {
-    inset: 12px -18px 188px;
-  }
-
-  .hero-overlay {
-    padding-top: 68px;
+    height: min(38vh, 300px);
   }
 }
 

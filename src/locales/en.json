@@ -356,17 +356,17 @@
     },
     "brandStory": {
       "title": "Why ZeroAnt",
-      "para1": "In nature, ants are the most inconspicuous yet extraordinary workers. Small and resilient, they carry weights far exceeding their own body weight, building a vast and orderly world through day-to-day diligent collaboration.",
-      "para2": "The name \"ZeroAnt\" stems from this profound respect and inspiration. We aspire to become the new \"worker ants\" of the digital era—starting from the smallest details, using technology as our antennae to delve into the dangerous and heavy environments that deter others.",
-      "para3": "Unlike biological ants, ZeroAnt Robotics possesses embodied intelligent silicon bodies and AI minds. We transform cutting-edge robotics into accessible tools to replace humans in hazardous, highly polluting, and repetitive tasks.",
-      "para4": "We firmly believe that the ultimate destination of technology is not cold machines, but empathy for humanity. Every technological evolution of ZeroAnt Robotics is dedicated to liberating people from monotony and danger. Perhaps one day, our technology will truly reduce all occupational hazards and repetitive labor to \"zero,\" returning precious time and life to humanity, making a flourishing life a daily reality for everyone."
+      "para1": "In nature, ants are the most unremarkable yet extraordinary workers. Small and resilient, they carry loads far beyond their own weight and, through daily hard work and cooperation, build a vast and orderly world. The character \"zero\" — whether as a mathematical symbol or a philosophical concept — represents both a starting point and infinite possibility.",
+      "para2": "We named our company ZeroAnt based on this respect and inspiration. In the age of intelligence, we hope to follow the ant’s example: focus on the smallest details and delve into the dangerous, heavy tasks that others avoid. Unlike ordinary biological ants, ZeroAnt possesses silicon bodies with embodied intelligence and AI-driven minds. We turn cutting-edge robotics into capable tools that replace human labor in hazardous, high-pollution, and highly repetitive work.",
+      "para3": "We believe that the true purpose of technology is not cold machines, but care for people. Every step of ZeroAnt’s technological evolution is meant to free people from monotony and danger. Perhaps one day, ZeroAnt’s technology will truly bring all occupational harm and repetitive labor to \"zero,\" returning precious time and life to humanity and making a better life part of everyday life for everyone.",
+      "para4": ""
     },
     "companyIntroDetailed": {
-      "para1": "ZeroAnt Robotics (Hangzhou ZeroAnt Technology Co., Ltd.) is a deep-tech enterprise focusing on full-system intelligent robot solutions, founded and incubated by a leading research team from the Beihang University Hangzhou Innovation Institute. Committed to becoming a pioneer in intelligent industrial infrastructure, the company is dedicated to driving industrial intelligence upgrades through fully independent and controllable robotic technologies.",
-      "para2": "On the R&D Front: ZeroAnt Robotics has independently built its core underlying system—the Intelligent Robot Operating System (AiROS). The company has successfully overcome key industry bottlenecks, including high-speed and high-precision robotic arm control, 3D spatial semantic perception, centimeter-level positioning and navigation, and multi-agent collaborative scheduling, establishing a robust barrier of \"full-stack software ecosystem + modular hardware platform\".",
-      "para3": "On the Product Application Front: The company has launched core products such as sterile environment collaborative robots, embodied intelligent mobile platforms, and clean wafer handling systems. Currently, these \"intelligent worker ants\" have successfully entered high-barrier, state-of-the-art scenarios such as biological breeding and semiconductor wafer manufacturing, delivering tangible value to customers.",
-      "para4": "Relying on regular cooperation mechanisms established with multiple top-tier research institutions in China, ZeroAnt Robotics has formed an efficient \"industry-university-research-application\" closed-loop innovation ecosystem. Looking ahead, we will continue to uphold the philosophy of technology for good, advancing the R&D and industrialization of robotic systems to redefine productivity through science and technology.",
-      "financingDesc": "The team is currently in the angel round financing stage. If you are interested in the team or have cooperation intentions, please contact us by email. Startup teams value time, no casual inquiries please!",
+      "para1": "Hangzhou ZeroAnt Technology Co., Ltd. was founded by the research team incubated by the Hangzhou Innovation Institute of Beihang University. The company is committed to driving industrial intelligent transformation through fully autonomous and controllable robotics technologies.",
+      "para2": "On the R&D front, ZeroAnt has independently built its core underlying system — the Intelligent Robot Operating System (AiROS) — and successfully overcome key technological bottlenecks such as high-speed, high-precision robotic arm control, 3D spatial semantic perception, centimeter-level positioning and navigation, and multi-robot collaborative scheduling, establishing a technological moat built on a full-stack software ecosystem and modular hardware platform.",
+      "para3": "On the product application side, the company has launched a series of core products including sterile-environment collaborative robots, embodied intelligent mobile platforms, and cleanroom wafer transfer systems. These \"smart worker ants\" have already entered demanding, high-precision sectors such as biological breeding and semiconductor wafer manufacturing, creating substantial value for customers.",
+      "para4": "Supported by long-term partnership mechanisms with several leading research institutions in China, ZeroAnt has built an efficient industry–university–research–application closed-loop innovation system. In the future, ZeroAnt will continue to advocate technology for the greater good, advancing robotics system R&D and industrial deployment to redefine productivity through technology.",
+      "financingDesc": "The team is currently in the angel-round financing stage. If you are interested in the team or have cooperation intentions, please contact us by email. Startup teams value time, and we kindly ask that only serious inquiries be sent.",
       "emailTips": "Contact email:"
     },
     "richText": {
@@ -417,11 +417,11 @@
       "title": "@:common.terms.coreValues",
       "item1": {
         "title": "Integrity & Honesty",
-        "desc": "Upholding ethical baselines, doing what is right, and speaking with sincerity."
+        "desc": "Upholding principles, doing the right thing, and speaking honestly."
       },
       "item2": {
         "title": "Pragmatic Application",
-        "desc": "Focusing on real-world needs; solving practical problems with knowledge and technology."
+        "desc": "Focusing on real needs and solving practical problems with knowledge and technology."
       },
       "item3": {
         "title": "Agile Iteration",
@@ -429,15 +429,15 @@
       },
       "item4": {
         "title": "Collaborative Synergy",
-        "desc": "Uniting strength like ants, moving forward together to empower our team and customers."
+        "desc": "Working together like ants, moving forward as one to create value for the team and our customers."
       }
     },
     "enterpriseCulture": {
-      "description": "ZeroAnt Technology builds an open and collaborative engineering culture with {coreConcept} as its core concept:",
-      "item1": "Deeply cultivating fundamental technologies, ten years to forge a sword, creating core systems",
-      "item2": "Focusing on industrial pain points, reshaping production processes with robotics technology",
-      "item3": "Partnering with universities and research institutes to create a closed-loop innovation system of industry-university-research-application",
-      "item4": "Making a little progress every day, continuously iterating knowledge systems"
+      "description": "ZeroAnt builds an open, collaborative engineering culture centered on {coreConcept}:",
+      "item1": "Deeply cultivating fundamental technologies, honing core systems over time",
+      "item2": "Focusing on industrial pain points and reshaping production processes through robotics technology",
+      "item3": "Partnering with universities and research institutes to build an industry-university-research-application closed-loop innovation system",
+      "item4": "Making steady progress every day and continuously iterating our knowledge system"
     }
   },
   "videos": {
