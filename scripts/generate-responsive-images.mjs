@@ -1,4 +1,5 @@
 import { promises as fs } from "node:fs";
+import crypto from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -19,6 +20,7 @@ const generatedManifestPath = path.join(
   "responsive-images.generated.json"
 );
 const responsivePublicDir = path.join(publicDir, "responsive");
+const responsiveCachePath = path.join(responsivePublicDir, ".cache.json");
 const OUTPUT_FORMATS = {
   webp: {
     quality: 82,
@@ -155,6 +157,7 @@ async function removeEmptyDirectories(targetDir) {
 
 function collectExpectedResponsiveFiles(manifest) {
   const expectedFiles = new Set();
+  expectedFiles.add(responsiveCachePath);
 
   for (const entryGroup of Object.values(manifest)) {
     for (const entry of Object.values(entryGroup)) {
@@ -329,26 +332,73 @@ const stats = {
   skipped: 0,
 };
 
+let cacheData = {};
+const validCacheKeys = new Set();
+const sourceHashCache = new Map();
+
+async function loadCacheData() {
+  try {
+    const raw = await fs.readFile(responsiveCachePath, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
+async function saveCacheData() {
+  try {
+    for (const key of Object.keys(cacheData)) {
+      if (!validCacheKeys.has(key)) {
+        delete cacheData[key];
+      }
+    }
+    await ensureDirectory(responsiveCachePath);
+    await fs.writeFile(responsiveCachePath, `${JSON.stringify(cacheData, null, 2)}\n`, "utf8");
+  } catch (error) {
+    console.warn("[generate-responsive-images] Warning: Failed to save cache metadata:", error);
+  }
+}
+
+async function getSourceHash(absoluteSourcePath) {
+  if (sourceHashCache.has(absoluteSourcePath)) {
+    return sourceHashCache.get(absoluteSourcePath);
+  }
+  const buffer = await fs.readFile(absoluteSourcePath);
+  const hash = crypto.createHash("md5").update(buffer).digest("hex").slice(0, 16);
+  sourceHashCache.set(absoluteSourcePath, hash);
+  return hash;
+}
+
 async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths, format) {
   const absoluteSourcePath = path.join(projectRoot, sourcePath);
-  const sourceStat = await fs.stat(absoluteSourcePath);
   const image = sharp(absoluteSourcePath, { failOn: "none" }).rotate();
   const metadata = await image.metadata();
   const widths = selectWidths(metadata.width, desiredWidths);
   const publicBasePath = `/responsive/${outputBase}`;
 
-  let needsGeneration = false;
-  for (const width of widths) {
-    const outputFilePath = buildResponsiveOutputFilePath(outputBase, width, format);
-    try {
-      const outStat = await fs.stat(outputFilePath);
-      if (sourceStat.mtimeMs > outStat.mtimeMs) {
+  const cacheKey = `${outputBase}.${format}`;
+  validCacheKeys.add(cacheKey);
+
+  const sourceHash = await getSourceHash(absoluteSourcePath);
+  const formatOptions = OUTPUT_FORMATS[format] || {};
+  const currentFingerprint = `${sourceHash}:${format}:${JSON.stringify(formatOptions)}:${widths.join(",")}`;
+  const cachedFingerprint = cacheData[cacheKey];
+
+  let needsGeneration = cachedFingerprint !== currentFingerprint;
+
+  if (!needsGeneration) {
+    for (const width of widths) {
+      const outputFilePath = buildResponsiveOutputFilePath(outputBase, width, format);
+      try {
+        const stat = await fs.stat(outputFilePath);
+        if (stat.size === 0) {
+          needsGeneration = true;
+          break;
+        }
+      } catch {
         needsGeneration = true;
         break;
       }
-    } catch {
-      needsGeneration = true;
-      break;
     }
   }
 
@@ -370,6 +420,7 @@ async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths, 
       ).toFile(outputFilePath);
     }
     stats.generated += 1;
+    cacheData[cacheKey] = currentFingerprint;
   } else {
     stats.skipped += 1;
   }
@@ -392,6 +443,7 @@ async function loadSourceData() {
 }
 
 async function run() {
+  cacheData = await loadCacheData();
   const expectedUsage = await loadExpectedSourceUsage();
   const { products, videos, showcase } = await loadSourceData();
   const manifest = createEmptyManifest();
@@ -487,6 +539,7 @@ async function run() {
     Object.keys(showcase).length
   );
   await removeOrphanResponsiveFiles(manifest);
+  await saveCacheData();
 
   await fs.writeFile(generatedManifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
   console.log(
