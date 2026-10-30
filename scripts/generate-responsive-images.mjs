@@ -324,6 +324,11 @@ function getManifestGroupKey(group, format) {
   return group;
 }
 
+const stats = {
+  generated: 0,
+  skipped: 0,
+};
+
 async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths, format) {
   const absoluteSourcePath = path.join(projectRoot, sourcePath);
   const sourceStat = await fs.stat(absoluteSourcePath);
@@ -348,6 +353,9 @@ async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths, 
   }
 
   if (needsGeneration) {
+    console.log(
+      `[generate-responsive-images] Generating ${format.toUpperCase()}: ${outputBase} (${widths.join(", ")}px)`
+    );
     for (const width of widths) {
       const outputFilePath = buildResponsiveOutputFilePath(outputBase, width, format);
 
@@ -361,6 +369,9 @@ async function generateResponsiveVariant(sourcePath, outputBase, desiredWidths, 
         format
       ).toFile(outputFilePath);
     }
+    stats.generated += 1;
+  } else {
+    stats.skipped += 1;
   }
 
   return {
@@ -384,6 +395,10 @@ async function run() {
   const expectedUsage = await loadExpectedSourceUsage();
   const { products, videos, showcase } = await loadSourceData();
   const manifest = createEmptyManifest();
+
+  console.log(
+    `[generate-responsive-images] Checking responsive assets (${Object.keys(products).length} products, ${Object.keys(videos).length} videos, ${Object.keys(showcase).length} showcase)...`
+  );
 
   await Promise.all([
     assertHeroSources(),
@@ -474,6 +489,9 @@ async function run() {
   await removeOrphanResponsiveFiles(manifest);
 
   await fs.writeFile(generatedManifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  console.log(
+    `[generate-responsive-images] Completed. Generated: ${stats.generated}, Cached/Skipped: ${stats.skipped}.`
+  );
 }
 
 run().catch((error) => {
