@@ -1,4 +1,5 @@
 {
   "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true
+  "files.trimFinalNewlines": true,
+  "i18n-ally.localesPaths": ["src/locales"]
 }

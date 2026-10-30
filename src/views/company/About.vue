@@ -437,14 +437,6 @@ const coreValues = computed(() => [
   text-wrap: balance;
 }
 
-.hero-title-line--lead {
-  transform: translateX(clamp(-12px, -0.8vw, -4px));
-}
-
-.hero-title-line--tail {
-  transform: translateX(clamp(12px, 2vw, 34px));
-}
-
 .hero-copy--en {
   width: min(100%, 1020px);
   transform: translateY(clamp(-24px, -2.3vh, -8px));
@@ -457,19 +449,11 @@ const coreValues = computed(() => [
   letter-spacing: -0.008em;
 }
 
-.hero-title--en .hero-title-line--lead {
-  transform: translateX(clamp(-6px, -0.5vw, -2px));
-}
-
-.hero-title--en .hero-title-line--tail {
-  transform: translateX(clamp(6px, 1.2vw, 20px));
-}
-
 .about-main > .page-section {
   --section-surface: var(--brand-surface);
   --section-card-surface: var(--brand-surface-soft);
   background-color: var(--section-surface);
-  padding: 88px 0;
+  padding: var(--section-padding-y, 88px) 0;
   scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
@@ -1024,30 +1008,19 @@ const coreValues = computed(() => [
     line-height: 1.14;
   }
 
-  .hero-title-line--lead {
-    transform: translateX(clamp(-8px, -0.9vw, -2px));
-  }
-
-  .hero-title-line--tail {
-    transform: translateX(clamp(8px, 1.4vw, 20px));
-  }
-
   .hero-title--en {
     width: min(100%, 14.8em);
     font-size: clamp(1.7rem, 5.4vw, 3.2rem);
     line-height: 1.18;
   }
 
-  .hero-title--en .hero-title-line--lead {
-    transform: translateX(clamp(-4px, -0.4vw, -1px));
-  }
-
-  .hero-title--en .hero-title-line--tail {
-    transform: translateX(clamp(4px, 0.9vw, 12px));
-  }
-
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 20px 16px;
   }
 
   .honor-grid,
@@ -1084,7 +1057,7 @@ const coreValues = computed(() => [
 
   .hero-title {
     width: 100%;
-    font-size: clamp(1.58rem, 8.4vw, 2.32rem);
+    font-size: clamp(1.36rem, 7.2vw, 2.05rem);
     line-height: 1.2;
     letter-spacing: -0.008em;
     gap: 8px;
@@ -1103,6 +1076,20 @@ const coreValues = computed(() => [
 
   .timeline-item {
     gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card {
+    padding: 16px 12px;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
   }
 }
 </style>
